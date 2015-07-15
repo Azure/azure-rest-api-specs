@@ -11,15 +11,22 @@ The structure of the directory should strictly follow these rules:
 - The forth level must be the specifications
 
 The structure should appear like so:
-/Resource.Provider
-  /2014-01-01
-    /swagger
-      /service.json
-      /service.yaml
-  /2014-12-31
-    /swagger
-      /service.json
-      /service.yaml
+```bash
+.
+├── Microsoft.Compute
+│   ├── 2014-01-01
+│   │   └── swagger
+│   │       ├── service.json
+│   │       └── service.yaml
+│   ├── 2014-12-31
+│   │   └── swagger
+│   └── README.md
+├── Microsoft.Network
+├── Microsoft.Resources
+├── Microsoft.Storage
+├── Microsoft.Web
+└── README.md
+```
 
 At this point, the specifications are expected to be in swagger format.
 
