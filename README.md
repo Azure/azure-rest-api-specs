@@ -64,3 +64,7 @@ Always write a clear log message for your commits. One-line messages are fine fo
     $ git commit -m "A brief summary of the commit
     >
     > A paragraph describing what changed and its impact."
+    
+Please be kind with your pull requests and ensure you keeping them as focused and cohesive as possible. Keep your pull
+request free of merge commits, code review fixes and anything that may take away from the essence of your contribution.
+Use the git tools you have available to you, such as amend, rebase, etc.
