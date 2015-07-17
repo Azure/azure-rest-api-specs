@@ -5,27 +5,44 @@ This repository is the canonical source for REST API specifications for Microsof
 ## Directory Structure
 
 The structure of the directory should strictly follow these rules:
-- The top level folder must be the resource provider name
-- The second level must be the API versions for the resource provider
+- The top level folder must be the service name
+- The second level must be the API versions
 - The third level must be the format of the specification
 - The forth level must be the specifications
 
 The structure should appear like so:
 ```bash
 .
-├── Microsoft.Compute
-│   ├── 2014-01-01
-│   │   └── swagger
-│   │       ├── service.json
-│   │       └── service.yaml
-│   ├── 2014-12-31
-│   │   └── swagger
-│   └── README.md
-├── Microsoft.Network
-├── Microsoft.Resources
-├── Microsoft.Storage
-├── Microsoft.Web
-└── README.md
+├── arm-authorization
+│   └── 2015-01-01
+│       └── swagger
+│           └── authorization.json
+├── arm-compute
+│   └── 2015-06-15
+│       └── swagger
+│           └── service.json
+├── arm-features
+│   └── 2014-08-01-preview
+│       └── swagger
+│           └── features.json
+├── arm-network
+│   └── 2015-05-01-preview
+│       └── swagger
+│           └── service.json
+├── arm-resources
+│   └── 2014-04-01-preview
+│       └── swagger
+│           └── service.json
+├── arm-storage
+│   └── 2015-05-01-preview
+│       └── swagger
+│           └── service.json
+├── arm-subscriptions
+│   └── 2014-04-01-preview
+│       └── swagger
+│           └── service.json
+├── arm-web
+└── readme.md
 ```
 
 At this point, the specifications are expected to be in swagger format.
@@ -47,3 +64,7 @@ Always write a clear log message for your commits. One-line messages are fine fo
     $ git commit -m "A brief summary of the commit
     >
     > A paragraph describing what changed and its impact."
+    
+Please be kind with your pull requests and ensure you keeping them as focused and cohesive as possible. Keep your pull
+request free of merge commits, code review fixes and anything that may take away from the essence of your contribution.
+Use the git tools you have available to you, such as amend, rebase, etc.
