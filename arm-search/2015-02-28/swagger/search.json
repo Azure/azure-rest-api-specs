@@ -2,6 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "SearchManagementClient",
+    "description": "Client that can be used to manage Azure Search services and API keys.",
     "version": "2015-02-28"
   },
   "host": "management.azure.com",
@@ -24,6 +25,9 @@
         ],
         "operationId": "AdminKeys_List",
         "description": "Returns the primary and secondary API keys for the given Azure Search service.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn832685.aspx"
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -63,6 +67,9 @@
         ],
         "operationId": "QueryKeys_List",
         "description": "Returns the list of query API keys for the given Azure Search service.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn832701.aspx"
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -102,6 +109,9 @@
         ],
         "operationId": "Services_CreateOrUpdate",
         "description": "Creates or updates a Search service in the given resource group. If the Search service already exists, all properties will be updated with the given values.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn832687.aspx"
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -154,6 +164,9 @@
         ],
         "operationId": "Services_Delete",
         "description": "Deletes a Search service in the given resource group, along with its associated resources.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn832692.aspx"
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -196,6 +209,9 @@
         ],
         "operationId": "Services_List",
         "description": "Returns a list of all Search services in the given resource group.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn832688.aspx"
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -364,6 +380,9 @@
     "SearchServiceResource": {
       "properties": {
         "name": {
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
+          },
           "type": "string",
           "description": "Gets or sets the name of the Search service."
         },
