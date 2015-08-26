@@ -2106,9 +2106,15 @@
             "type": "string"
           },
           {
+            "name": "details",
+            "in": "query",
+            "description": "Include instance details",
+            "type": "boolean"
+          },
+          {
             "name": "$filter",
             "in": "query",
-            "description": "name.value eq 'BytesSent' or name.value eq BytesReceived.",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string"
           },
           {
@@ -2206,7 +2212,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "name.value eq 'BytesSent' or name.value eq BytesReceived.",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string"
           },
           {
@@ -2281,7 +2287,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "name.value eq 'BytesSent' or name.value eq BytesReceived.",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string"
           },
           {
@@ -2337,9 +2343,15 @@
             "type": "string"
           },
           {
+            "name": "details",
+            "in": "query",
+            "description": "Include instance details",
+            "type": "boolean"
+          },
+          {
             "name": "$filter",
             "in": "query",
-            "description": "name.value eq 'BytesSent' or name.value eq BytesReceived.",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string"
           },
           {
@@ -3080,9 +3092,15 @@
             "type": "string"
           },
           {
+            "name": "details",
+            "in": "query",
+            "description": "Include instance details",
+            "type": "boolean"
+          },
+          {
             "name": "$filter",
             "in": "query",
-            "description": "name.value eq 'BytesSent' or name.value eq BytesReceived.",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string"
           },
           {
@@ -3199,6 +3217,12 @@
             "description": "Name of instance in the multiRole pool",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "details",
+            "in": "query",
+            "description": "Include instance details",
+            "type": "boolean"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -3992,9 +4016,15 @@
             "type": "string"
           },
           {
+            "name": "details",
+            "in": "query",
+            "description": "If true, metrics are broken down per App Service Plan instance",
+            "type": "boolean"
+          },
+          {
             "name": "$filter",
             "in": "query",
-            "description": "name.value eq 'BytesSent' or name.value eq BytesReceived.",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string"
           },
           {
@@ -4043,9 +4073,15 @@
             "type": "string"
           },
           {
+            "name": "details",
+            "in": "query",
+            "description": "If true, metrics are broken down per App Service Plan instance",
+            "type": "boolean"
+          },
+          {
             "name": "$filter",
             "in": "query",
-            "description": "name.value eq 'BytesSent' or name.value eq BytesReceived.",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string"
           },
           {
@@ -4156,13 +4192,13 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/webhostingplans/{name}/virtualNetworkConnections": {
       "get": {
         "tags": [
           "ServerFarms"
         ],
         "summary": "Gets list of vnets associated with App Service Plan",
-        "operationId": "ServerFarms_GetVnetsForServerFarm",
+        "operationId": "ServerFarms_GetVnetsForWebHostingPlan",
         "consumes": [],
         "produces": [
           "application/json",
@@ -4206,13 +4242,13 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/webhostingplans/{name}/virtualNetworkConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkConnections": {
       "get": {
         "tags": [
           "ServerFarms"
         ],
         "summary": "Gets list of vnets associated with App Service Plan",
-        "operationId": "ServerFarms_GetVnetsForWebHostingPlan",
+        "operationId": "ServerFarms_GetVnetsForServerFarm",
         "consumes": [],
         "produces": [
           "application/json",
@@ -4479,291 +4515,6 @@
                 "$ref": "#/definitions/VnetRoute"
               }
             }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkConnections/{vnetName}/routes/{routeName}": {
-      "get": {
-        "tags": [
-          "ServerFarms"
-        ],
-        "summary": "Gets a specific route associated with a vnet, in an app service plan",
-        "operationId": "ServerFarms_GetRouteForVnet",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of App Service Plan",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "Name of virtual network",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the virtual network route",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VnetRoute"
-              }
-            }
-          },
-          "404": {
-            "description": "Specified route does not exist"
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "ServerFarms"
-        ],
-        "summary": "Creates a new route or updates an existing route for a vnet in an app service plan.",
-        "operationId": "ServerFarms_CreateOrUpdateVnetRoute",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of App Service Plan",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "Name of virtual network",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the virtual network route",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "route",
-            "in": "body",
-            "description": "The route object",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VnetRoute"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VnetRoute"
-            }
-          },
-          "400": {
-            "description": "Invalid request. Ensure that required parameters are given, and that addresses and address spaces are valid"
-          },
-          "404": {
-            "description": "Route not found. This will only occur when using the PATCH verb."
-          }
-        },
-        "deprecated": false
-      },
-      "delete": {
-        "tags": [
-          "ServerFarms"
-        ],
-        "summary": "Deletes an existing route for a vnet in an app service plan.",
-        "operationId": "ServerFarms_DeleteVnetRoute",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of App Service Plan",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "Name of virtual network",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the virtual network route",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          },
-          "404": {
-            "description": "Specified route does not exist."
-          }
-        },
-        "deprecated": false
-      },
-      "patch": {
-        "tags": [
-          "ServerFarms"
-        ],
-        "summary": "Creates a new route or updates an existing route for a vnet in an app service plan.",
-        "operationId": "ServerFarms_UpdateVnetRoute",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of App Service Plan",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "Name of virtual network",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the virtual network route",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "route",
-            "in": "body",
-            "description": "The route object",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VnetRoute"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VnetRoute"
-            }
-          },
-          "400": {
-            "description": "Invalid request. Ensure that required parameters are given, and that addresses and address spaces are valid"
-          },
-          "404": {
-            "description": "Route not found. This will only occur when using the PATCH verb."
           }
         },
         "deprecated": false
@@ -5054,6 +4805,291 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkConnections/{vnetName}/routes/{routeName}": {
+      "get": {
+        "tags": [
+          "ServerFarms"
+        ],
+        "summary": "Gets a specific route associated with a vnet, in an app service plan",
+        "operationId": "ServerFarms_GetRouteForVnet",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of App Service Plan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of virtual network",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the virtual network route",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VnetRoute"
+              }
+            }
+          },
+          "404": {
+            "description": "Specified route does not exist"
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "ServerFarms"
+        ],
+        "summary": "Creates a new route or updates an existing route for a vnet in an app service plan.",
+        "operationId": "ServerFarms_CreateOrUpdateVnetRoute",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of App Service Plan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of virtual network",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the virtual network route",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "route",
+            "in": "body",
+            "description": "The route object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VnetRoute"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VnetRoute"
+            }
+          },
+          "400": {
+            "description": "Invalid request. Ensure that required parameters are given, and that addresses and address spaces are valid"
+          },
+          "404": {
+            "description": "Route not found. This will only occur when using the PATCH verb."
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "ServerFarms"
+        ],
+        "summary": "Deletes an existing route for a vnet in an app service plan.",
+        "operationId": "ServerFarms_DeleteVnetRoute",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of App Service Plan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of virtual network",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the virtual network route",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          },
+          "404": {
+            "description": "Specified route does not exist."
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "ServerFarms"
+        ],
+        "summary": "Creates a new route or updates an existing route for a vnet in an app service plan.",
+        "operationId": "ServerFarms_UpdateVnetRoute",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of App Service Plan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of virtual network",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the virtual network route",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "route",
+            "in": "body",
+            "description": "The route object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VnetRoute"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VnetRoute"
+            }
+          },
+          "400": {
+            "description": "Invalid request. Ensure that required parameters are given, and that addresses and address spaces are valid"
+          },
+          "404": {
+            "description": "Route not found. This will only occur when using the PATCH verb."
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/webhostingplans/{name}/sites": {
       "get": {
         "tags": [
@@ -5182,13 +5218,13 @@
         "x-ms-pageable": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/workers/{workerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/webhostingplans/{name}/workers/{workerName}": {
       "post": {
         "tags": [
           "ServerFarms"
         ],
         "summary": "Submit a reboot request for a worker machine in the specified server farm",
-        "operationId": "ServerFarms_RebootWorkerForServerFarm",
+        "operationId": "ServerFarms_RebootWorkerForWebHostingPlan",
         "consumes": [],
         "produces": [
           "application/json",
@@ -5236,13 +5272,13 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/webhostingplans/{name}/workers/{workerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/workers/{workerName}": {
       "post": {
         "tags": [
           "ServerFarms"
         ],
         "summary": "Submit a reboot request for a worker machine in the specified server farm",
-        "operationId": "ServerFarms_RebootWorkerForWebHostingPlan",
+        "operationId": "ServerFarms_RebootWorkerForServerFarm",
         "consumes": [],
         "produces": [
           "application/json",
@@ -5343,13 +5379,13 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/operationresults/{operationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/webhostingplans/{name}/operationresults/{operationId}": {
       "get": {
         "tags": [
           "ServerFarms"
         ],
         "summary": "Gets a server farm operation",
-        "operationId": "ServerFarms_GetServerFarmOperation",
+        "operationId": "ServerFarms_GetWebHostingPlanOperation",
         "consumes": [],
         "produces": [
           "application/json",
@@ -5397,13 +5433,13 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/webhostingplans/{name}/operationresults/{operationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/operationresults/{operationId}": {
       "get": {
         "tags": [
           "ServerFarms"
         ],
         "summary": "Gets a server farm operation",
-        "operationId": "ServerFarms_GetWebHostingPlanOperation",
+        "operationId": "ServerFarms_GetServerFarmOperation",
         "consumes": [],
         "produces": [
           "application/json",
@@ -5932,6 +5968,68 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/recover": {
+      "post": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Recovers a deleted web app",
+        "operationId": "Sites_RecoverSite",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "snapshot",
+            "in": "body",
+            "description": "Snapshot data used for web app recovery. Snapshot information can be obtained by call GetDeletedSites API.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CsmSiteRecoveryEntity"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/recover": {
       "post": {
         "tags": [
@@ -5982,68 +6080,6 @@
             "description": "Name of web app slot. If not specified then will default to production slot.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/recover": {
-      "post": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Recovers a deleted web app",
-        "operationId": "Sites_RecoverSite",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "snapshot",
-            "in": "body",
-            "description": "Snapshot data used for web app recovery. Snapshot information can be obtained by call GetDeletedSites API.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CsmSiteRecoveryEntity"
-            }
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -6462,51 +6498,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hostNameBindings": {
-      "get": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Get web app hostname bindings",
-        "operationId": "Sites_GetSiteHostNameBindings",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HostNameBindingCollection"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/hostNameBindings": {
       "get": {
         "tags": [
@@ -6538,6 +6529,51 @@
             "name": "slot",
             "in": "path",
             "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HostNameBindingCollection"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hostNameBindings": {
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Get web app hostname bindings",
+        "operationId": "Sites_GetSiteHostNameBindings",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
             "required": true,
             "type": "string"
           },
@@ -6922,6 +6958,169 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/web": {
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Gets the configuration of the web app",
+        "operationId": "Sites_GetSiteConfig",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteConfig"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Update the configuration of web app",
+        "operationId": "Sites_CreateOrUpdateSiteConfig",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteConfig",
+            "in": "body",
+            "description": "Request body that contains the configuraiton setting for the web app",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteConfig"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteConfig"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Update the configuration of web app",
+        "operationId": "Sites_UpdateSiteConfig",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteConfig",
+            "in": "body",
+            "description": "Request body that contains the configuraiton setting for the web app",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteConfig"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteConfig"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/web": {
       "get": {
         "tags": [
@@ -7087,169 +7286,6 @@
             "description": "Name of web app slot. If not specified then will default to production slot.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SiteConfig"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/web": {
-      "get": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Gets the configuration of the web app",
-        "operationId": "Sites_GetSiteConfig",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SiteConfig"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Update the configuration of web app",
-        "operationId": "Sites_CreateOrUpdateSiteConfig",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteConfig",
-            "in": "body",
-            "description": "Request body that contains the configuraiton setting for the web app",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SiteConfig"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SiteConfig"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "patch": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Update the configuration of web app",
-        "operationId": "Sites_UpdateSiteConfig",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteConfig",
-            "in": "body",
-            "description": "Request body that contains the configuraiton setting for the web app",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SiteConfig"
-            }
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -7941,6 +7977,53 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/connectionstrings/list": {
+      "post": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Gets the connection strings associated with web app",
+        "operationId": "Sites_ListSiteConnectionStrings",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectionStringDictionary"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/connectionstrings/list": {
       "post": {
         "tags": [
@@ -7974,53 +8057,6 @@
             "name": "slot",
             "in": "path",
             "description": "Name of web app slot. If not specified then will default to production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ConnectionStringDictionary"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/connectionstrings/list": {
-      "post": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Gets the connection strings associated with web app",
-        "operationId": "Sites_ListSiteConnectionStrings",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
             "required": true,
             "type": "string"
           },
@@ -8169,6 +8205,54 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/publishingcredentials/list": {
+      "post": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Gets the web app publishing credentials",
+        "operationId": "Sites_ListSitePublishingCredentials",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/publishingcredentials/list": {
       "post": {
         "tags": [
@@ -8224,13 +8308,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/publishingcredentials/list": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/metadata/list": {
       "post": {
         "tags": [
           "Sites"
         ],
-        "summary": "Gets the web app publishing credentials",
-        "operationId": "Sites_ListSitePublishingCredentials",
+        "summary": "Gets the web app meta data.",
+        "operationId": "Sites_ListSiteMetadata",
         "consumes": [],
         "produces": [
           "application/json",
@@ -8264,12 +8348,11 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/StringDictionary"
             }
           }
         },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
+        "deprecated": false
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/metadata/list": {
@@ -8305,53 +8388,6 @@
             "name": "slot",
             "in": "path",
             "description": "Name of web app slot. If not specified then will default to production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/StringDictionary"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/metadata/list": {
-      "post": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Gets the web app meta data.",
-        "operationId": "Sites_ListSiteMetadata",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
             "required": true,
             "type": "string"
           },
@@ -8500,6 +8536,111 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/logs": {
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Gets the web app logs configuration",
+        "operationId": "Sites_GetSiteLogsConfig",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteLogsConfig"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Updates the meta data for web app",
+        "operationId": "Sites_UpdateSiteLogsConfig",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteLogsConfig",
+            "in": "body",
+            "description": "Site logs configuration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteLogsConfig"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteLogsConfig"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/logs": {
       "get": {
         "tags": [
@@ -8619,13 +8760,12 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/logs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/premieraddons": {
       "get": {
         "tags": [
           "Sites"
         ],
-        "summary": "Gets the web app logs configuration",
-        "operationId": "Sites_GetSiteLogsConfig",
+        "operationId": "Sites_ListSitePremierAddOns",
         "consumes": [],
         "produces": [
           "application/json",
@@ -8637,14 +8777,12 @@
           {
             "name": "resourceGroupName",
             "in": "path",
-            "description": "Name of resource group",
             "required": true,
             "type": "string"
           },
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
             "required": true,
             "type": "string"
           },
@@ -8659,65 +8797,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SiteLogsConfig"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Updates the meta data for web app",
-        "operationId": "Sites_UpdateSiteLogsConfig",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteLogsConfig",
-            "in": "body",
-            "description": "Site logs configuration",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SiteLogsConfig"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SiteLogsConfig"
+              "$ref": "#/definitions/Object"
             }
           }
         },
@@ -8774,12 +8854,12 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/premieraddons": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/premieraddons/{premierAddOnName}": {
       "get": {
         "tags": [
           "Sites"
         ],
-        "operationId": "Sites_ListSitePremierAddOns",
+        "operationId": "Sites_GetSitePremierAddOn",
         "consumes": [],
         "produces": [
           "application/json",
@@ -8796,6 +8876,120 @@
           },
           {
             "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "premierAddOnName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Sites"
+        ],
+        "operationId": "Sites_AddSitePremierAddOn",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "premierAddOnName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "premierAddOn",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PremierAddOnRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Sites"
+        ],
+        "operationId": "Sites_DeleteSitePremierAddOn",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "premierAddOnName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -8972,164 +9166,6 @@
           },
           {
             "name": "slot",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/premieraddons/{premierAddOnName}": {
-      "get": {
-        "tags": [
-          "Sites"
-        ],
-        "operationId": "Sites_GetSitePremierAddOn",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "premierAddOnName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "Sites"
-        ],
-        "operationId": "Sites_AddSitePremierAddOn",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "premierAddOnName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "premierAddOn",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PremierAddOnRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "delete": {
-        "tags": [
-          "Sites"
-        ],
-        "operationId": "Sites_DeleteSitePremierAddOn",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "premierAddOnName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -9600,66 +9636,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/restore/discover": {
-      "put": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Discovers existing web app backups that can be restored",
-        "operationId": "Sites_DiscoverSiteRestore",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Information on restore request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RestoreRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RestoreRequest"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/restore/discover": {
       "put": {
         "tags": [
@@ -9727,17 +9703,23 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/restore": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/restore/discover": {
+      "put": {
         "tags": [
           "Sites"
         ],
-        "summary": "Lists all available backups for web app",
-        "operationId": "Sites_ListSiteSlotBackups",
-        "consumes": [],
+        "summary": "Discovers existing web app backups that can be restored",
+        "operationId": "Sites_DiscoverSiteRestore",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
         "produces": [
           "application/json",
-          "text/json"
+          "text/json",
+          "application/xml",
+          "text/xml"
         ],
         "parameters": [
           {
@@ -9755,11 +9737,13 @@
             "type": "string"
           },
           {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of web app slot. If not specified then will default to production slot.",
+            "name": "request",
+            "in": "body",
+            "description": "Information on restore request",
             "required": true,
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/RestoreRequest"
+            }
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -9772,7 +9756,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BackupItemCollection"
+              "$ref": "#/definitions/RestoreRequest"
             }
           }
         },
@@ -9824,19 +9808,17 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/backups/{backupId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/restore": {
       "get": {
         "tags": [
           "Sites"
         ],
-        "summary": "Gets status on a web app backup that may be in progress",
-        "operationId": "Sites_GetSiteBackupStatus",
+        "summary": "Lists all available backups for web app",
+        "operationId": "Sites_ListSiteSlotBackups",
         "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -9854,9 +9836,9 @@
             "type": "string"
           },
           {
-            "name": "backupId",
+            "name": "slot",
             "in": "path",
-            "description": "Id of backup",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
             "required": true,
             "type": "string"
           },
@@ -9871,7 +9853,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BackupItem"
+              "$ref": "#/definitions/BackupItemCollection"
             }
           }
         },
@@ -9939,6 +9921,60 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/backups/{backupId}": {
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Gets status on a web app backup that may be in progress",
+        "operationId": "Sites_GetSiteBackupStatus",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupId",
+            "in": "path",
+            "description": "Id of backup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupItem"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/usages": {
       "get": {
         "tags": [
@@ -9969,7 +10005,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Return only usages specified in the filter. Filter is specified by using OData syntax. Example: $filter=name.value eq 'BytesSent' or name.value eq BytesReceived.",
+            "description": "Return only usages specified in the filter. Filter is specified by using OData syntax. Example: $filter=Filter for resource metrics. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string"
           },
           {
@@ -10027,7 +10063,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Return only usages specified in the filter. Filter is specified by using OData syntax. Example: $filter=name.value eq 'BytesSent' or name.value eq BytesReceived.",
+            "description": "Return only usages specified in the filter. Filter is specified by using OData syntax. Example: $filter=Filter for resource metrics. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string"
           },
           {
@@ -10076,9 +10112,15 @@
             "type": "string"
           },
           {
+            "name": "details",
+            "in": "query",
+            "description": "If true, metric details are included in response",
+            "type": "boolean"
+          },
+          {
             "name": "$filter",
             "in": "query",
-            "description": "name.value eq 'BytesSent' or name.value eq BytesReceived.",
+            "description": "Filter for resource metrics. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string"
           },
           {
@@ -10134,9 +10176,15 @@
             "type": "string"
           },
           {
+            "name": "details",
+            "in": "query",
+            "description": "If true, metric details are included in response",
+            "type": "boolean"
+          },
+          {
             "name": "$filter",
             "in": "query",
-            "description": "name.value eq 'BytesSent' or name.value eq BytesReceived.",
+            "description": "Filter for resource metrics. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string"
           },
           {
@@ -10385,65 +10433,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/restart": {
-      "post": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Restarts web app",
-        "operationId": "Sites_RestartSite",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "softRestart",
-            "in": "query",
-            "description": "Soft restart applies the configuration settings and restarts the app if necessary. Hard restart always restarts and reprovisions the app",
-            "type": "boolean"
-          },
-          {
-            "name": "synchronous",
-            "in": "query",
-            "description": "If true then the API will block until the app has been restarted",
-            "type": "boolean"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/restart": {
       "post": {
         "tags": [
@@ -10477,6 +10466,65 @@
             "name": "slot",
             "in": "path",
             "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "softRestart",
+            "in": "query",
+            "description": "Soft restart applies the configuration settings and restarts the app if necessary. Hard restart always restarts and reprovisions the app",
+            "type": "boolean"
+          },
+          {
+            "name": "synchronous",
+            "in": "query",
+            "description": "If true then the API will block until the app has been restarted",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/restart": {
+      "post": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Restarts web app",
+        "operationId": "Sites_RestartSite",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
             "required": true,
             "type": "string"
           },
@@ -10611,6 +10659,53 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/stop": {
+      "post": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Stops web app",
+        "operationId": "Sites_StopSite",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/stop": {
       "post": {
         "tags": [
@@ -10644,53 +10739,6 @@
             "name": "slot",
             "in": "path",
             "description": "Name of web app slot. If not specified then will default to production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/stop": {
-      "post": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Stops web app",
-        "operationId": "Sites_StopSite",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
             "required": true,
             "type": "string"
           },
@@ -10901,6 +10949,242 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hybridconnection/{entityName}": {
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Retrieves a Biztalk Hybrid Connection identified by its entity name.",
+        "operationId": "Sites_GetSiteRelayServiceConnection",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "The name by which the Hybrid Connection is identified",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RelayServiceConnectionEntity"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Creates a new association to a Biztalk Hybrid Connection, or updates an existing one.",
+        "operationId": "Sites_CreateOrUpdateSiteRelayServiceConnection",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "The name by which the Hybrid Connection is identified",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "The details of the Hybrid Connection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RelayServiceConnectionEntity"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RelayServiceConnectionEntity"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Removes the association to a Biztalk Hybrid Connection, identified by its entity name.",
+        "operationId": "Sites_DeleteSiteRelayServiceConnection",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "The name by which the Hybrid Connection is identified",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Creates a new association to a Biztalk Hybrid Connection, or updates an existing one.",
+        "operationId": "Sites_UpdateSiteRelayServiceConnection",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "The name by which the Hybrid Connection is identified",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "The details of the Hybrid Connection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RelayServiceConnectionEntity"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RelayServiceConnectionEntity"
             }
           }
         },
@@ -11171,13 +11455,13 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hybridconnection/{entityName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/hybridconnection": {
       "get": {
         "tags": [
           "Sites"
         ],
-        "summary": "Retrieves a Biztalk Hybrid Connection identified by its entity name.",
-        "operationId": "Sites_GetSiteRelayServiceConnection",
+        "summary": "Retrieves all Biztalk Hybrid Connections associated with this web app.",
+        "operationId": "Sites_ListSiteSlotRelayServiceConnections",
         "consumes": [],
         "produces": [
           "application/json",
@@ -11201,193 +11485,11 @@
             "type": "string"
           },
           {
-            "name": "entityName",
+            "name": "slot",
             "in": "path",
-            "description": "The name by which the Hybrid Connection is identified",
+            "description": "The name of the slot for the web app.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RelayServiceConnectionEntity"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Creates a new association to a Biztalk Hybrid Connection, or updates an existing one.",
-        "operationId": "Sites_CreateOrUpdateSiteRelayServiceConnection",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The resource group name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "entityName",
-            "in": "path",
-            "description": "The name by which the Hybrid Connection is identified",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionEnvelope",
-            "in": "body",
-            "description": "The details of the Hybrid Connection",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RelayServiceConnectionEntity"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RelayServiceConnectionEntity"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "delete": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Removes the association to a Biztalk Hybrid Connection, identified by its entity name.",
-        "operationId": "Sites_DeleteSiteRelayServiceConnection",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The resource group name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "entityName",
-            "in": "path",
-            "description": "The name by which the Hybrid Connection is identified",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "patch": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Creates a new association to a Biztalk Hybrid Connection, or updates an existing one.",
-        "operationId": "Sites_UpdateSiteRelayServiceConnection",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The resource group name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "entityName",
-            "in": "path",
-            "description": "The name by which the Hybrid Connection is identified",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionEnvelope",
-            "in": "body",
-            "description": "The details of the Hybrid Connection",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RelayServiceConnectionEntity"
-            }
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -11433,60 +11535,6 @@
             "name": "name",
             "in": "path",
             "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RelayServiceConnectionEntity"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/hybridconnection": {
-      "get": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Retrieves all Biztalk Hybrid Connections associated with this web app.",
-        "operationId": "Sites_ListSiteSlotRelayServiceConnections",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The resource group name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "The name of the slot for the web app.",
             "required": true,
             "type": "string"
           },
@@ -11945,6 +11993,242 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/virtualNetworkConnections/{vnetName}": {
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Retrieves a specific Virtual Network Connection associated with this web app.",
+        "operationId": "Sites_GetSiteVNETConnection",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "The name of the Virtual Network",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VnetInfo"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Adds a Virtual Network Connection or updates it's properties.",
+        "operationId": "Sites_CreateOrUpdateSiteVNETConnection",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "The name of the Virtual Network",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "The properties of this Virtual Network Connection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VnetInfo"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VnetInfo"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Removes the specified Virtual Network Connection association from this web app.",
+        "operationId": "Sites_DeleteSiteVNETConnection",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "The name of the Virtual Network",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Adds a Virtual Network Connection or updates it's properties.",
+        "operationId": "Sites_UpdateSiteVNETConnection",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "The name of the Virtual Network",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "The properties of this Virtual Network Connection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VnetInfo"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VnetInfo"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/virtualNetworkConnections/{vnetName}": {
       "get": {
         "tags": [
@@ -12209,292 +12493,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/virtualNetworkConnections/{vnetName}": {
-      "get": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Retrieves a specific Virtual Network Connection associated with this web app.",
-        "operationId": "Sites_GetSiteVNETConnection",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The resource group name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "The name of the Virtual Network",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VnetInfo"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Adds a Virtual Network Connection or updates it's properties.",
-        "operationId": "Sites_CreateOrUpdateSiteVNETConnection",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The resource group name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "The name of the Virtual Network",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionEnvelope",
-            "in": "body",
-            "description": "The properties of this Virtual Network Connection",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VnetInfo"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VnetInfo"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "delete": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Removes the specified Virtual Network Connection association from this web app.",
-        "operationId": "Sites_DeleteSiteVNETConnection",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The resource group name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "The name of the Virtual Network",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "patch": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Adds a Virtual Network Connection or updates it's properties.",
-        "operationId": "Sites_UpdateSiteVNETConnection",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The resource group name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "The name of the Virtual Network",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionEnvelope",
-            "in": "body",
-            "description": "The properties of this Virtual Network Connection",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VnetInfo"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VnetInfo"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/virtualNetworkConnections": {
-      "get": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Retrieves a list of all Virtual Network Connections associated with this web app.",
-        "operationId": "Sites_GetSiteVNETConnections",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The resource group name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VnetInfo"
-              }
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/virtualNetworkConnections": {
       "get": {
         "tags": [
@@ -12552,13 +12550,13 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkFeatures/{view}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/virtualNetworkConnections": {
       "get": {
         "tags": [
           "Sites"
         ],
-        "summary": "Retrieves a view of all network features in use on this web app.",
-        "operationId": "Sites_GetSiteNetworkFeatures",
+        "summary": "Retrieves a list of all Virtual Network Connections associated with this web app.",
+        "operationId": "Sites_GetSiteVNETConnections",
         "consumes": [],
         "produces": [
           "application/json",
@@ -12582,13 +12580,6 @@
             "type": "string"
           },
           {
-            "name": "view",
-            "in": "path",
-            "description": "The type of view. This can either be \"summary\" or \"detailed\".",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -12599,11 +12590,11 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/NetworkFeatures"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VnetInfo"
+              }
             }
-          },
-          "404": {
-            "description": "The requested view does not exist."
           }
         },
         "deprecated": false
@@ -12673,6 +12664,117 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkFeatures/{view}": {
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Retrieves a view of all network features in use on this web app.",
+        "operationId": "Sites_GetSiteNetworkFeatures",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "view",
+            "in": "path",
+            "description": "The type of view. This can either be \"summary\" or \"detailed\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkFeatures"
+            }
+          },
+          "404": {
+            "description": "The requested view does not exist."
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/operationresults/{operationId}": {
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Gets the operation for a web app",
+        "operationId": "Sites_GetSiteOperation",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Id of an operation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/operationresults/{operationId}": {
       "get": {
         "tags": [
@@ -12713,60 +12815,6 @@
             "name": "slot",
             "in": "path",
             "description": "Name of web app slot. If not specified then will default to production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/operationresults/{operationId}": {
-      "get": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Gets the operation for a web app",
-        "operationId": "Sites_GetSiteOperation",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "Id of an operation",
             "required": true,
             "type": "string"
           },
@@ -12931,6 +12979,66 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slotsdiffs": {
+      "post": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Get the difference in configuration settings between two web app slots",
+        "operationId": "Sites_GetSlotsDifferencesFromProduction",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slotSwapEntity",
+            "in": "body",
+            "description": "Request body that contains the target slot name",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CsmSlotEntity"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SlotDifferenceCollection"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/slotsdiffs": {
       "post": {
         "tags": [
@@ -12998,128 +13106,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slotsdiffs": {
-      "post": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Get the difference in configuration settings between two web app slots",
-        "operationId": "Sites_GetSlotsDifferencesFromProduction",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slotSwapEntity",
-            "in": "body",
-            "description": "Request body that contains the target slot name",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CsmSlotEntity"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SlotDifferenceCollection"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/applySlotConfig": {
-      "post": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Applies the configuration settings from the target slot onto the current slot",
-        "operationId": "Sites_ApplySlotConfigToProduction",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slotSwapEntity",
-            "in": "body",
-            "description": "Request body that contains the target slot name. Settings from that slot will be applied on the source slot",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CsmSlotEntity"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/applySlotConfig": {
       "post": {
         "tags": [
@@ -13170,6 +13156,68 @@
             "description": "Name of the source slot. Settings from the target slot will be applied onto this slot",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/applySlotConfig": {
+      "post": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Applies the configuration settings from the target slot onto the current slot",
+        "operationId": "Sites_ApplySlotConfigToProduction",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slotSwapEntity",
+            "in": "body",
+            "description": "Request body that contains the target slot name. Settings from that slot will be applied on the source slot",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CsmSlotEntity"
+            }
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -13837,13 +13885,11 @@
       ],
       "properties": {
         "properties": {
-          "required": [
-            "name"
-          ],
           "properties": {
             "name": {
               "description": "Name used to locate CSR object",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "distinguishedName": {
               "description": "Distinguished name of certificate to be created",
@@ -14284,9 +14330,6 @@
       ],
       "properties": {
         "properties": {
-          "required": [
-            "name"
-          ],
           "properties": {
             "serverFarmId": {
               "format": "int32",
@@ -14296,7 +14339,8 @@
             },
             "name": {
               "description": "Name for the App Service Plan",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "status": {
               "description": "App Service Plan Status",
