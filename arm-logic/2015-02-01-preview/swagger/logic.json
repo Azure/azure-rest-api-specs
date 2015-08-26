@@ -1823,6 +1823,16 @@
                     "readOnly": true,
                     "description": "Gets the status."
                 },
+                "code": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Gets the code."
+                },
+                "error": {
+                    "$ref": "#/definitions/Object",
+                    "readOnly": true,
+                    "description": "Gets the error."
+                },
                 "correlationId": {
                     "type": "string",
                     "readOnly": true,
@@ -1842,7 +1852,7 @@
                     "type": "object",
                     "readOnly": true,
                     "additionalProperties": {
-                        "$ref": "#/definitions/WorkflowParameter"
+                        "$ref": "#/definitions/WorkflowOutputParameter"
                     },
                     "description": "Gets the outputs."
                 }
@@ -2099,6 +2109,21 @@
                     "description": "Gets or sets the metadata."
                 }
             }
+        },
+        "WorkflowOutputParameter": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/Object",
+                    "readOnly": true,
+                    "description": "Gets the error."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "WorkflowParameter"
+                }
+            ]
         },
         "RegenerateSecretKeyParameters": {
             "type": "object",
