@@ -10005,7 +10005,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Return only usages specified in the filter. Filter is specified by using OData syntax. Example: $filter=Filter for resource metrics. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "description": "Return only usages specified in the filter. Filter is specified by using OData syntax. Example: $filter=Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string"
           },
           {
@@ -10063,7 +10063,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Return only usages specified in the filter. Filter is specified by using OData syntax. Example: $filter=Filter for resource metrics. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "description": "Return only usages specified in the filter. Filter is specified by using OData syntax. Example: $filter=Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string"
           },
           {
@@ -10120,7 +10120,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Filter for resource metrics. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string"
           },
           {
@@ -10184,7 +10184,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Filter for resource metrics. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string"
           },
           {
@@ -13712,21 +13712,18 @@
           "properties": {
             "friendlyName": {
               "description": "Friendly name of the certificate",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "subjectName": {
               "description": "Subject name of the certificate",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "hostNames": {
               "description": "Host names the certificate applies to",
               "type": "array",
               "items": {
                 "type": "string"
-              },
-              "readOnly": true
+              }
             },
             "pfxBlob": {
               "description": "Pfx blob",
@@ -13734,30 +13731,25 @@
             },
             "siteName": {
               "description": "App name",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "selfLink": {
               "description": "Self link",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "issuer": {
               "description": "Certificate issuer",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "issueDate": {
               "format": "date-time",
               "description": "Certificate issue Date",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "expirationDate": {
               "format": "date-time",
               "description": "Certificate expriration date",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "password": {
               "description": "Certificate password",
@@ -13769,8 +13761,7 @@
             },
             "valid": {
               "description": "Is the certificate valid?",
-              "type": "boolean",
-              "readOnly": true
+              "type": "boolean"
             },
             "cerBlob": {
               "description": "Raw bytes of .cer file",
@@ -13778,23 +13769,11 @@
             },
             "publicKeyHash": {
               "description": "Public key hash",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "hostingEnvironmentProfile": {
               "$ref": "#/definitions/HostingEnvironmentProfile",
               "description": "Specification for the hosting environment (App Service Environment) to use for the certificate"
-            },
-            "name": {
-              "description": "Resource name of the certificate",
-              "type": "string"
-            },
-            "tags": {
-              "description": "Tags on the certificate",
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
             }
           }
         }
@@ -13888,8 +13867,7 @@
           "properties": {
             "name": {
               "description": "Name used to locate CSR object",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "distinguishedName": {
               "description": "Distinguished name of certificate to be created",
@@ -13897,8 +13875,7 @@
             },
             "csrString": {
               "description": "Actual CSR string created",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "pfxBlob": {
               "description": "PFX certifcate of created certificate",
@@ -14331,16 +14308,9 @@
       "properties": {
         "properties": {
           "properties": {
-            "serverFarmId": {
-              "format": "int32",
-              "description": "App Service Plan ARM resource ID",
-              "type": "integer",
-              "readOnly": true
-            },
             "name": {
               "description": "Name for the App Service Plan",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "status": {
               "description": "App Service Plan Status",
@@ -14358,8 +14328,7 @@
             },
             "adminSiteName": {
               "description": "App Service Plan administration site",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "hostingEnvironmentProfile": {
               "$ref": "#/definitions/HostingEnvironmentProfile",
@@ -14368,8 +14337,7 @@
             "maximumNumberOfWorkers": {
               "format": "int32",
               "description": "Maximum number of instances that can be assigned to this App Service Plan",
-              "type": "integer",
-              "readOnly": true
+              "type": "integer"
             },
             "geoRegion": {
               "description": "Geographical location for the App Service Plan",
@@ -14378,21 +14346,12 @@
             },
             "perSiteScaling": {
               "description": "If True apps assigned to this App Service Plan can be scaled independently\r\n            If False apps assigned to this App Service Plan will scale to all instances of the plan",
-              "type": "boolean",
-              "readOnly": true
+              "type": "boolean"
             },
             "numberOfSites": {
               "format": "int32",
               "description": "Number of web apps assigned to this App Service Plan",
               "type": "integer",
-              "readOnly": true
-            },
-            "tags": {
-              "description": "Collection of tags assigned to the App Service Plan",
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              },
               "readOnly": true
             },
             "resourceGroup": {
@@ -14449,7 +14408,8 @@
               "type": "array",
               "items": {
                 "type": "string"
-              }
+              },
+              "readOnly": true
             },
             "repositorySiteName": {
               "description": "Name of repository site",
@@ -14467,8 +14427,7 @@
             },
             "enabled": {
               "description": "True if the site is enabled; otherwise, false. Setting this  value to false disables the site (takes the site off line).",
-              "type": "boolean",
-              "readOnly": true
+              "type": "boolean"
             },
             "enabledHostNames": {
               "description": "Hostnames for the web app that are enabled. Hostnames need to be assigned and enabled. If some hostnames are assigned but not enabled\r\n            the app is not served on those hostnames",
@@ -14524,8 +14483,7 @@
             },
             "scmSiteAlsoStopped": {
               "description": "If set indicates whether to stop SCM (KUDU) site when the web app is stopped. Default is false.",
-              "type": "boolean",
-              "readOnly": true
+              "type": "boolean"
             },
             "targetSwapSlot": {
               "description": "Read-only property that specifies which slot this app will swap into",
@@ -14557,7 +14515,8 @@
               "type": "array",
               "items": {
                 "type": "string"
-              }
+              },
+              "readOnly": true
             },
             "outboundIpAddresses": {
               "description": "List of comma separated IP addresses that this web app uses for outbound connections. Those can be used when configuring firewall rules for databases accessed by this web app.",
@@ -14875,10 +14834,6 @@
         "trafficManagerProfileName": {
           "description": "Name of traffic manager profile to create. This is only needed if traffic manager profile does not already exist",
           "type": "string"
-        },
-        "ignoreQuotas": {
-          "description": "Whether quotas should be ignored.",
-          "type": "boolean"
         }
       }
     },
@@ -16398,8 +16353,7 @@
             "deletedTimestamp": {
               "format": "date-time",
               "description": "Time when the site was deleted",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "name": {
               "description": "Name of web app",
@@ -16415,7 +16369,8 @@
               "type": "array",
               "items": {
                 "type": "string"
-              }
+              },
+              "readOnly": true
             },
             "repositorySiteName": {
               "description": "Name of repository site",
@@ -16433,8 +16388,7 @@
             },
             "enabled": {
               "description": "True if the site is enabled; otherwise, false. Setting this  value to false disables the site (takes the site off line).",
-              "type": "boolean",
-              "readOnly": true
+              "type": "boolean"
             },
             "enabledHostNames": {
               "description": "Hostnames for the web app that are enabled. Hostnames need to be assigned and enabled. If some hostnames are assigned but not enabled\r\n            the app is not served on those hostnames",
@@ -16490,8 +16444,7 @@
             },
             "scmSiteAlsoStopped": {
               "description": "If set indicates whether to stop SCM (KUDU) site when the web app is stopped. Default is false.",
-              "type": "boolean",
-              "readOnly": true
+              "type": "boolean"
             },
             "targetSwapSlot": {
               "description": "Read-only property that specifies which slot this app will swap into",
@@ -16523,7 +16476,8 @@
               "type": "array",
               "items": {
                 "type": "string"
-              }
+              },
+              "readOnly": true
             },
             "outboundIpAddresses": {
               "description": "List of comma separated IP addresses that this web app uses for outbound connections. Those can be used when configuring firewall rules for databases accessed by this web app.",
