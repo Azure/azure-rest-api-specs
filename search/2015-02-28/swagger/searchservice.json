@@ -1,0 +1,1554 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SearchServiceClient",
+    "description": "Client that can be used to manage and query indexes and documents on an Azure Search service.",
+    "version": "2015-02-28"
+  },
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "paths": {
+    "/datasources('{name}')": {
+      "put": {
+        "tags": [
+          "DataSources"
+        ],
+        "operationId": "DataSources_CreateOrUpdate",
+        "description": "Creates a new Azure Search datasource or updates a datasource if it already exists.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946900.aspx"
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The definition of the datasource to create or update."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          }
+        }
+      }
+    },
+    "/datasources('{dataSourceName}')": {
+      "delete": {
+        "tags": [
+          "DataSources"
+        ],
+        "operationId": "DataSources_Delete",
+        "description": "Deletes an Azure Search datasource.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946881.aspx"
+        },
+        "parameters": [
+          {
+            "name": "dataSourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the datasource to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DataSources"
+        ],
+        "operationId": "DataSources_Get",
+        "description": "Retrieves a datasource definition from Azure Search.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946893.aspx"
+        },
+        "parameters": [
+          {
+            "name": "dataSourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the datasource to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          }
+        }
+      }
+    },
+    "/datasources": {
+      "get": {
+        "tags": [
+          "DataSources"
+        ],
+        "operationId": "DataSources_List",
+        "description": "Lists all datasources available for an Azure Search service.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946878.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataSourceListResult"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "DataSources"
+        ],
+        "operationId": "DataSources_Create",
+        "description": "Creates a new Azure Search datasource.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946876.aspx"
+        },
+        "parameters": [
+          {
+            "name": "dataSource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSourceCreateOrUpdateParameters"
+            },
+            "description": "The definition of the datasource to create."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          }
+        }
+      }
+    },
+    "/indexers('{name}')": {
+      "put": {
+        "tags": [
+          "Indexers"
+        ],
+        "operationId": "Indexers_CreateOrUpdate",
+        "description": "Creates a new Azure Search indexer or updates an indexer if it already exists.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946899.aspx"
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The definition of the indexer to create or update."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Indexer"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Indexer"
+            }
+          }
+        }
+      }
+    },
+    "/indexers('{indexerName}')/search.reset": {
+      "post": {
+        "tags": [
+          "Indexers"
+        ],
+        "operationId": "Indexers_Reset",
+        "description": "Resets the change tracking state associated with an Azure Search indexer.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946897.aspx"
+        },
+        "parameters": [
+          {
+            "name": "indexerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the indexer to reset."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/indexers('{indexerName}')/search.run": {
+      "post": {
+        "tags": [
+          "Indexers"
+        ],
+        "operationId": "Indexers_Run",
+        "description": "Runs an Azure Search indexer on-demand.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946885.aspx"
+        },
+        "parameters": [
+          {
+            "name": "indexerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the indexer to run."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/indexers('{indexerName}')": {
+      "delete": {
+        "tags": [
+          "Indexers"
+        ],
+        "operationId": "Indexers_Delete",
+        "description": "Deletes an Azure Search indexer.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946898.aspx"
+        },
+        "parameters": [
+          {
+            "name": "indexerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the indexer to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Indexers"
+        ],
+        "operationId": "Indexers_Get",
+        "description": "Retrieves an indexer definition from Azure Search.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946874.aspx"
+        },
+        "parameters": [
+          {
+            "name": "indexerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the indexer to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Indexer"
+            }
+          }
+        }
+      }
+    },
+    "/indexers": {
+      "get": {
+        "tags": [
+          "Indexers"
+        ],
+        "operationId": "Indexers_List",
+        "description": "Lists all datasources available for an Azure Search service.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946883.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/IndexerListResult"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Indexers"
+        ],
+        "operationId": "Indexers_Create",
+        "description": "Creates a new Azure Search indexer.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946899.aspx"
+        },
+        "parameters": [
+          {
+            "name": "indexer",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IndexerCreateOrUpdateParameters"
+            },
+            "description": "The definition of the indexer to create."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Indexer"
+            }
+          }
+        }
+      }
+    },
+    "/indexers('{indexerName}')/search.status": {
+      "get": {
+        "tags": [
+          "Indexers"
+        ],
+        "operationId": "Indexers_GetStatus",
+        "description": "Returns the current status and execution history of an indexer.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946884.aspx"
+        },
+        "parameters": [
+          {
+            "name": "indexerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the indexer for which to retrieve status."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/IndexerExecutionInfo"
+            }
+          }
+        }
+      }
+    },
+    "/indexes": {
+      "post": {
+        "tags": [
+          "Indexes"
+        ],
+        "operationId": "Indexes_Create",
+        "description": "Creates a new Azure Search index.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn798941.aspx"
+        },
+        "parameters": [
+          {
+            "name": "index",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IndexCreateOrUpdateParameters"
+            },
+            "description": "The definition of the index to create."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Index"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Indexes"
+        ],
+        "operationId": "Indexes_List",
+        "description": "Lists all indexes available for an Azure Search service.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn798923.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/IndexListResult"
+            }
+          }
+        }
+      }
+    },
+    "/indexes('{name}')": {
+      "put": {
+        "tags": [
+          "Indexes"
+        ],
+        "operationId": "Indexes_CreateOrUpdate",
+        "description": "Creates a new Azure Search index or updates an index if it already exists.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn800964.aspx"
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The definition of the index to create or update."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Index"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Index"
+            }
+          }
+        }
+      }
+    },
+    "/indexes('{indexName}')": {
+      "delete": {
+        "tags": [
+          "Indexes"
+        ],
+        "operationId": "Indexes_Delete",
+        "description": "Deletes an Azure Search index and all the documents it contains.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn798926.aspx"
+        },
+        "parameters": [
+          {
+            "name": "indexName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the index to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Indexes"
+        ],
+        "operationId": "Indexes_Get",
+        "description": "Retrieves an index definition from Azure Search.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn798939.aspx"
+        },
+        "parameters": [
+          {
+            "name": "indexName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the index to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Index"
+            }
+          }
+        }
+      }
+    },
+    "/indexes('{indexName}')/search.stats": {
+      "get": {
+        "tags": [
+          "Indexes"
+        ],
+        "operationId": "Indexes_GetStatistics",
+        "description": "Returns statistics for the given index, including a document count and storage usage.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn798942.aspx"
+        },
+        "parameters": [
+          {
+            "name": "indexName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the index for which to retrieve statistics."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/IndexGetStatisticsResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IndexResult": {
+      "properties": {}
+    },
+    "DocumentIndexResult": {
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IndexResult"
+          },
+          "description": "Gets the list of status information for each document in the indexing request."
+        },
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "Continue",
+            "SwitchingProtocols",
+            "OK",
+            "Created",
+            "Accepted",
+            "NonAuthoritativeInformation",
+            "NoContent",
+            "ResetContent",
+            "PartialContent",
+            "MultipleChoices",
+            "Ambiguous",
+            "MovedPermanently",
+            "Moved",
+            "Found",
+            "Redirect",
+            "SeeOther",
+            "RedirectMethod",
+            "NotModified",
+            "UseProxy",
+            "Unused",
+            "TemporaryRedirect",
+            "RedirectKeepVerb",
+            "BadRequest",
+            "Unauthorized",
+            "PaymentRequired",
+            "Forbidden",
+            "NotFound",
+            "MethodNotAllowed",
+            "NotAcceptable",
+            "ProxyAuthenticationRequired",
+            "RequestTimeout",
+            "Conflict",
+            "Gone",
+            "LengthRequired",
+            "PreconditionFailed",
+            "RequestEntityTooLarge",
+            "RequestUriTooLong",
+            "UnsupportedMediaType",
+            "RequestedRangeNotSatisfiable",
+            "ExpectationFailed",
+            "UpgradeRequired",
+            "InternalServerError",
+            "NotImplemented",
+            "BadGateway",
+            "ServiceUnavailable",
+            "GatewayTimeout",
+            "HttpVersionNotSupported"
+          ],
+          "x-ms-enum": "HttpStatusCode"
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "description": "Response containing the status of operations for all documents in the indexing request."
+    },
+    "SearchParameters": {
+      "properties": {
+        "filter": {
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn798921.aspx"
+          },
+          "type": "string",
+          "description": "Gets or sets the OData $filter expression to apply to the search query."
+        },
+        "highlightFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting."
+        },
+        "highlightPostTag": {
+          "type": "string",
+          "description": "Gets or sets a string tag that is appended to hit highlights. Must be set with HighlightPreTag. Default is &lt;/em&gt;."
+        },
+        "highlightPreTag": {
+          "type": "string",
+          "description": "Gets or sets a string tag that is prepended to hit highlights. Must be set with HighlightPostTag. Default is &lt;em&gt;."
+        },
+        "includeTotalResultCount": {
+          "type": "boolean",
+          "description": "Gets or sets a value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation."
+        },
+        "minimumCoverage": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets a number between 0 and 100 indicating the percentage of the index that must be covered by a search query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 100."
+        },
+        "orderBy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to the geo.distance() function. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 Orderby clauses."
+        },
+        "scoringParameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name:value. For example, if the scoring profile defines a function with a parameter called 'mylocation' the parameter string would be \"mylocation:-122.2,44.8\"(without the quotes)."
+        },
+        "scoringProfile": {
+          "type": "string",
+          "description": "Gets or sets the name of a scoring profile to evaluate match scores for matching documents in order to sort the results."
+        },
+        "searchFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the list of field names to include in the full-text search."
+        },
+        "searchMode": {
+          "type": "string",
+          "description": "Gets or sets a value that specifies whether any or all of the search terms must be matched in order to count the document as a match.",
+          "enum": [
+            "any",
+            "all"
+          ],
+          "x-ms-enum": "SearchMode"
+        },
+        "select": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included."
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use Skip due to this limitation, consider using OrderBy on a totally-ordered key and Filter with a range query instead."
+        },
+        "top": {
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/en-us/library/azure/dn798927.aspx"
+          },
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of search results to retrieve. This can be used in conjunction with Skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be passed to ContinueSearch to retrieve the next page of results. See DocumentSearchResponse.ContinuationToken for more information."
+        }
+      },
+      "description": "Parameters for filtering, sorting, faceting, paging, and other search query behaviors."
+    },
+    "SuggestParameters": {
+      "properties": {
+        "filter": {
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn798921.aspx"
+          },
+          "type": "string",
+          "description": "Gets or sets the OData $filter expression to apply to the suggestions query."
+        },
+        "highlightPostTag": {
+          "type": "string",
+          "description": "Gets or sets a string tag that is appended to hit highlights. Must be set with HighlightPreTag. If omitted, hit highlighting of suggestions is disabled."
+        },
+        "highlightPreTag": {
+          "type": "string",
+          "description": "Gets or sets a string tag that is prepended to hit highlights. Must be set with HighlightPostTag. If omitted, hit highlighting of suggestions is disabled."
+        },
+        "minimumCoverage": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets a number between 0 and 100 indicating the percentage of the index that must be covered by a suggestion query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80."
+        },
+        "orderBy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to the geo.distance() function. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 Orderby clauses."
+        },
+        "searchFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the list of field names to consider when querying for suggestions."
+        },
+        "select": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of suggestions to retrieve. This must be a value between 1 and 100. The default is to 5."
+        },
+        "useFuzzyMatching": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether to use fuzzy matching for the suggestion query. Default is false. when set to true, the query will find suggestions even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios it comes at a performance cost as fuzzy suggestion searches are slower and consume more resources."
+        }
+      },
+      "description": "Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors."
+    },
+    "DataSourceCredentials": {
+      "properties": {
+        "connectionString": {
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn946876.aspx"
+          },
+          "type": "string",
+          "description": "Gets or sets the connection string for the datasource."
+        }
+      },
+      "description": "Represents credentials that can be used to connect to a datasource."
+    },
+    "DataContainer": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the table or view (for Azure SQL data source) or collection (for DocumentDB data source) that will be indexed."
+        },
+        "query": {
+          "type": "string",
+          "description": "Gets or sets a query that is applied to this data container. Only supported by DocumentDb datasources."
+        }
+      },
+      "description": "Represents information about the entity (such as Azure SQL table or DocumentDb collection) that will be indexed."
+    },
+    "DataChangeDetectionPolicy": {
+      "properties": {},
+      "description": "Abstract base class for data change detection policies."
+    },
+    "DataDeletionDetectionPolicy": {
+      "properties": {},
+      "description": "Abstract base class for data deletion detection policies."
+    },
+    "DataSource": {
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
+          },
+          "type": "string",
+          "description": "Gets or sets the name of the datasource."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the datasource."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the type of the datasource."
+        },
+        "credentials": {
+          "$ref": "#/definitions/DataSourceCredentials",
+          "description": "Gets or sets credentials for the datasource."
+        },
+        "container": {
+          "$ref": "#/definitions/DataContainer",
+          "description": "Gets or sets the data container for the datasource."
+        },
+        "dataChangeDetectionPolicy": {
+          "$ref": "#/definitions/DataChangeDetectionPolicy",
+          "description": "Gets or sets the data change detection policy for the datasource."
+        },
+        "dataDeletionDetectionPolicy": {
+          "$ref": "#/definitions/DataDeletionDetectionPolicy",
+          "description": "Gets or sets the data deletion detection policy for the datasource."
+        }
+      },
+      "description": "Represents a datasource definition in Azure Search, which can be used to configure an indexer."
+    },
+    "DataSourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSource"
+          },
+          "description": "Gets the datasources in the Search service."
+        }
+      },
+      "description": "Response from a List Datasources request. If successful, it includes the full definitions of all datasources."
+    },
+    "DataSourceCreateOrUpdateParameters": {
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
+          },
+          "type": "string",
+          "description": "Gets or sets the name of the datasource."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the datasource."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the type of the datasource."
+        },
+        "credentials": {
+          "$ref": "#/definitions/DataSourceCredentials",
+          "description": "Gets or sets credentials for the datasource."
+        },
+        "container": {
+          "$ref": "#/definitions/DataContainer",
+          "description": "Gets or sets the data container for the datasource."
+        },
+        "dataChangeDetectionPolicy": {
+          "$ref": "#/definitions/DataChangeDetectionPolicy",
+          "description": "Gets or sets the data change detection policy for the datasource."
+        },
+        "dataDeletionDetectionPolicy": {
+          "$ref": "#/definitions/DataDeletionDetectionPolicy",
+          "description": "Gets or sets the data deletion detection policy for the datasource."
+        }
+      },
+      "description": "Represents a datasource definition in Azure Search, which can be used to configure an indexer."
+    },
+    "IndexingSchedule": {
+      "properties": {
+        "interval": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the interval of time between indexer executions."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the time when an indexer should start running."
+        }
+      },
+      "description": "Represents a schedule for indexer execution."
+    },
+    "IndexingParameters": {
+      "properties": {
+        "maxFailedItems": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the maximum number of items that can fail indexing for indexer execution to still be considered successful. -1 means no limit. Default is 0."
+        },
+        "maxFailedItemsPerBatch": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the maximum number of items in a single batch that can fail indexing for the batch to still be considered successful. -1 means no limit. Default is 0."
+        },
+        "base64EncodeKeys": {
+          "type": "boolean",
+          "description": "Gets or sets whether indexer will base64-encode all values that are inserted into key field of the target index. This is needed if keys can contain characters that are invalid in keys (such as dot '.'). Default is false."
+        }
+      },
+      "description": "Represents parameters for indexer execution."
+    },
+    "Indexer": {
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
+          },
+          "type": "string",
+          "description": "Gets or sets the name of the indexer."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the indexer."
+        },
+        "dataSourceName": {
+          "type": "string",
+          "description": "Gets or sets the name of the datasource from which this indexer reads data."
+        },
+        "targetIndexName": {
+          "type": "string",
+          "description": "Gets or sets the name of the index to which this indexer writes data."
+        },
+        "schedule": {
+          "$ref": "#/definitions/IndexingSchedule",
+          "description": "Gets or sets the schedule for this indexer."
+        },
+        "parameters": {
+          "$ref": "#/definitions/IndexingParameters",
+          "description": "Gets or sets parameters for indexer execution."
+        }
+      },
+      "externalDocs": {
+        "url": "https://msdn.microsoft.com/library/azure/dn946891.aspx"
+      },
+      "description": "Represents an Azure Search indexer."
+    },
+    "IndexerListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Indexer"
+          },
+          "description": "Gets the indexers in the Search service."
+        }
+      },
+      "description": "Response from a List Indexers request. If successful, it includes the full definitions of all indexers."
+    },
+    "IndexerCreateOrUpdateParameters": {
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
+          },
+          "type": "string",
+          "description": "Gets or sets the name of the indexer."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the indexer."
+        },
+        "dataSourceName": {
+          "type": "string",
+          "description": "Gets or sets the name of the datasource from which this indexer reads data."
+        },
+        "targetIndexName": {
+          "type": "string",
+          "description": "Gets or sets the name of the index to which this indexer writes data."
+        },
+        "schedule": {
+          "$ref": "#/definitions/IndexingSchedule",
+          "description": "Gets or sets the schedule for this indexer."
+        },
+        "parameters": {
+          "$ref": "#/definitions/IndexingParameters",
+          "description": "Gets or sets parameters for indexer execution."
+        }
+      },
+      "externalDocs": {
+        "url": "https://msdn.microsoft.com/library/azure/dn946891.aspx"
+      },
+      "description": "Represents an Azure Search indexer."
+    },
+    "ItemError": {
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Gets the key of the item for which indexing failed."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Gets the message describing the error that occurred while attempting to index the item."
+        }
+      },
+      "description": "Represents an item- or document-level indexing error."
+    },
+    "IndexerExecutionResult": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Gets the outcome of this indexer execution.",
+          "enum": [
+            "transientFailure",
+            "success",
+            "inProgress",
+            "reset"
+          ],
+          "x-ms-enum": "IndexerExecutionStatus"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Gets the error message indicating the top-level error, if any."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the start time of this indexer execution."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the end time of this indexer execution, if the execution has already completed."
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemError"
+          },
+          "description": "Gets the item-level indexing errors"
+        },
+        "itemsProcessed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed."
+        },
+        "itemsFailed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the number of items that failed to be indexed during this indexer execution."
+        },
+        "initialTrackingState": {
+          "type": "string",
+          "description": "Change tracking state with which an indexer execution started."
+        },
+        "finalTrackingState": {
+          "type": "string",
+          "description": "Change tracking state with which an indexer execution finished."
+        }
+      },
+      "description": "Represents result of an individual indexer execution."
+    },
+    "IndexerExecutionInfo": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Overall indexer status.",
+          "enum": [
+            "unknown",
+            "error",
+            "running"
+          ],
+          "x-ms-enum": "IndexerStatus"
+        },
+        "lastResult": {
+          "$ref": "#/definitions/IndexerExecutionResult",
+          "description": "The result of the most recent or an in-progress indexer execution."
+        },
+        "executionHistory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IndexerExecutionResult"
+          },
+          "description": "History of the recent indexer executions, sorted in reverse chronological order."
+        }
+      },
+      "description": "Represents the current status and execution history of an indexer."
+    },
+    "Field": {
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
+          },
+          "type": "string",
+          "description": "Gets or sets the name of the field."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the data type of the field."
+        },
+        "key": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether the field is the key of the index. Valid only for string fields. Every index must have exactly one key field."
+        },
+        "searchable": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether the field is included in full-text searches. Valid only forstring or string collection fields. Default is false."
+        },
+        "filterable": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether the field can be used in filter expressions. Default is false."
+        },
+        "sortable": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether the field can be used in orderby expressions. Not valid for string collection fields. Default is false."
+        },
+        "facetable": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether it is possible to facet on this field. Not valid for geo-point fields. Default is false."
+        },
+        "retrievable": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether the field can be returned in a search result. Default is true."
+        },
+        "analyzer": {
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn879793.aspx"
+          },
+          "type": "string",
+          "description": "Name of the text analyzer to use."
+        }
+      },
+      "externalDocs": {
+        "url": "https://msdn.microsoft.com/library/azure/dn798941.aspx"
+      },
+      "description": "Represents a field in an index definition in Azure Search, which describes the name, data type, and search behavior of a field."
+    },
+    "TextWeights": {
+      "properties": {
+        "weights": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "format": "double"
+          },
+          "description": "Gets the dictionary of per-field weights to boost document scoring. The keys are field names and the values are the weights for each field."
+        }
+      },
+      "description": "Defines weights on index fields for which matches should boost scoring in search queries."
+    },
+    "ScoringFunction": {
+      "properties": {
+        "fieldName": {
+          "type": "string",
+          "description": "Gets or sets the name of the field used as input to the scoring function."
+        },
+        "boost": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets a multiplier for the raw score. Must be a positive number not equal to 1.0."
+        },
+        "interpolation": {
+          "type": "string",
+          "description": "Gets or sets a value indicating how boosting will be interpolated across document scores; defaults to \"Linear\".",
+          "enum": [
+            "linear",
+            "constant",
+            "quadratic",
+            "logarithmic"
+          ],
+          "x-ms-enum": "ScoringFunctionInterpolation"
+        }
+      },
+      "externalDocs": {
+        "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
+      },
+      "description": "Abstract base class for functions that can modify document scores during ranking."
+    },
+    "ScoringProfile": {
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
+          },
+          "type": "string",
+          "description": "Gets or sets the name of the scoring profile."
+        },
+        "text": {
+          "$ref": "#/definitions/TextWeights",
+          "description": "Gets or sets parameters that boost scoring based on text matches in certain index fields."
+        },
+        "functions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScoringFunction"
+          },
+          "description": "Gets the collection of functions that influence the scoring of documents."
+        },
+        "functionAggregation": {
+          "type": "string",
+          "description": "Gets or sets a value indicating how the results of individual scoring functions should be combined. Defaults to \"Sum\". Ignored if there are no scoring functions.",
+          "enum": [
+            "sum",
+            "average",
+            "minimum",
+            "maximum",
+            "firstMatching"
+          ],
+          "x-ms-enum": "ScoringFunctionAggregation"
+        }
+      },
+      "externalDocs": {
+        "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
+      },
+      "description": "Defines parameters for an Azure Search index that influence scoring in search queries."
+    },
+    "CorsOptions": {
+      "properties": {
+        "allowedOrigins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets the list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended)."
+        },
+        "maxAgeInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the duration for which browsers should cache CORS preflight responses. Defaults to 5 mintues."
+        }
+      },
+      "externalDocs": {
+        "url": "https://msdn.microsoft.com/library/azure/dn798941.aspx"
+      },
+      "description": "Defines options to control Cross-Origin Resource Sharing (CORS) for an index."
+    },
+    "Suggester": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the suggester."
+        },
+        "searchMode": {
+          "type": "string",
+          "description": "Gets or sets a value indicating the capabilities of the suggester.",
+          "enum": [
+            "analyzingInfixMatching"
+          ],
+          "x-ms-enum": "SuggesterSearchMode"
+        },
+        "sourceFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets the list of field names to which the suggester applies. Each field must be searchable."
+        }
+      },
+      "description": "Defines how the Suggest API should apply to a group of fields in the index."
+    },
+    "IndexCreateOrUpdateParameters": {
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
+          },
+          "type": "string",
+          "description": "Gets or sets the name of the index."
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Field"
+          },
+          "description": "Gets or sets the fields of the index."
+        },
+        "scoringProfiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScoringProfile"
+          },
+          "description": "Gets or sets the scoring profiles for the index."
+        },
+        "defaultScoringProfile": {
+          "type": "string",
+          "description": "Gets or sets the name of the scoring profile to use if none is specified in the query. If this property is not set and no scoring profile is specified in the query, then default scoring (tf-idf) will be used."
+        },
+        "corsOptions": {
+          "$ref": "#/definitions/CorsOptions",
+          "description": "Gets or sets options to control Cross-Origin Resource Sharing (CORS) for the index."
+        },
+        "suggesters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Suggester"
+          },
+          "description": "Gets or sets the suggesters for the index."
+        }
+      },
+      "description": "Represents an index definition in Azure Search, which describes the fields and search behavior of an index."
+    },
+    "Index": {
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
+          },
+          "type": "string",
+          "description": "Gets or sets the name of the index."
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Field"
+          },
+          "description": "Gets or sets the fields of the index."
+        },
+        "scoringProfiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScoringProfile"
+          },
+          "description": "Gets or sets the scoring profiles for the index."
+        },
+        "defaultScoringProfile": {
+          "type": "string",
+          "description": "Gets or sets the name of the scoring profile to use if none is specified in the query. If this property is not set and no scoring profile is specified in the query, then default scoring (tf-idf) will be used."
+        },
+        "corsOptions": {
+          "$ref": "#/definitions/CorsOptions",
+          "description": "Gets or sets options to control Cross-Origin Resource Sharing (CORS) for the index."
+        },
+        "suggesters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Suggester"
+          },
+          "description": "Gets or sets the suggesters for the index."
+        }
+      },
+      "description": "Represents an index definition in Azure Search, which describes the fields and search behavior of an index."
+    },
+    "IndexGetStatisticsResult": {
+      "properties": {
+        "documentCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets the number of documents in the index."
+        },
+        "storageSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets the amount of storage in bytes consumed by the index."
+        }
+      },
+      "description": "Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date."
+    },
+    "IndexListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Index"
+          },
+          "description": "Gets the indexes in the Search service."
+        }
+      },
+      "description": "Response from a List Indexes request. If successful, it includes the full definitions of all indexes."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-external": true
+    },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
+      "x-ms-external": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}
