@@ -1745,8 +1745,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HostingEnvironment"
+            }
+          },
           "202": {
-            "description": "Asynchronous operation in progress",
+            "description": "Operation is in progress",
             "schema": {
               "$ref": "#/definitions/HostingEnvironment"
             }
@@ -1806,8 +1812,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          },
           "202": {
-            "description": "Asynchronous operation in progress",
+            "description": "Operation is in progress",
             "schema": {
               "$ref": "#/definitions/Object"
             }
@@ -2906,8 +2918,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkerPool"
+            }
+          },
           "202": {
-            "description": "Asynchronous operation in progress",
+            "description": "Operation is in progress",
             "schema": {
               "$ref": "#/definitions/WorkerPool"
             }
@@ -3080,8 +3098,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkerPool"
+            }
+          },
           "202": {
-            "description": "Asynchronous operation in progress",
+            "description": "Operation is in progress",
             "schema": {
               "$ref": "#/definitions/WorkerPool"
             }
@@ -3440,6 +3464,12 @@
             "schema": {
               "$ref": "#/definitions/SiteCollection"
             }
+          },
+          "202": {
+            "description": "Operation is in progress",
+            "schema": {
+              "$ref": "#/definitions/SiteCollection"
+            }
           }
         },
         "deprecated": false,
@@ -3483,6 +3513,12 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteCollection"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress",
             "schema": {
               "$ref": "#/definitions/SiteCollection"
             }
@@ -5771,6 +5807,12 @@
             "schema": {
               "$ref": "#/definitions/Site"
             }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress",
+            "schema": {
+              "$ref": "#/definitions/Site"
+            }
           }
         },
         "deprecated": false,
@@ -5987,6 +6029,12 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Site"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress",
             "schema": {
               "$ref": "#/definitions/Site"
             }
@@ -7954,6 +8002,66 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/appsettings": {
+      "put": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Updates the application settings of web app",
+        "operationId": "Sites_UpdateSiteAppSettings",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appSettings",
+            "in": "body",
+            "description": "Application settings of web app",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StringDictionary"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StringDictionary"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/appsettings": {
       "put": {
         "tags": [
@@ -8021,18 +8129,14 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/appsettings": {
-      "put": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/connectionstrings/list": {
+      "post": {
         "tags": [
           "Sites"
         ],
-        "summary": "Updates the application settings of web app",
-        "operationId": "Sites_UpdateSiteAppSettings",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
+        "summary": "Gets the connection strings associated with web app",
+        "operationId": "Sites_ListSiteConnectionStrings",
+        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -8055,15 +8159,6 @@
             "type": "string"
           },
           {
-            "name": "appSettings",
-            "in": "body",
-            "description": "Application settings of web app",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StringDictionary"
-            }
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -8074,7 +8169,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StringDictionary"
+              "$ref": "#/definitions/ConnectionStringDictionary"
             }
           }
         },
@@ -8114,53 +8209,6 @@
             "name": "slot",
             "in": "path",
             "description": "Name of web app slot. If not specified then will default to production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ConnectionStringDictionary"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/connectionstrings/list": {
-      "post": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Gets the connection strings associated with web app",
-        "operationId": "Sites_ListSiteConnectionStrings",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
             "required": true,
             "type": "string"
           },
@@ -8353,8 +8401,7 @@
             }
           }
         },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
+        "deprecated": false
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/publishingcredentials/list": {
@@ -8408,8 +8455,54 @@
             }
           }
         },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/metadata/list": {
+      "post": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Gets the web app meta data.",
+        "operationId": "Sites_ListSiteMetadata",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StringDictionary"
+            }
+          }
+        },
+        "deprecated": false
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/metadata/list": {
@@ -8445,53 +8538,6 @@
             "name": "slot",
             "in": "path",
             "description": "Name of web app slot. If not specified then will default to production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/StringDictionary"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/metadata/list": {
-      "post": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Gets the web app meta data.",
-        "operationId": "Sites_ListSiteMetadata",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
             "required": true,
             "type": "string"
           },
@@ -10238,7 +10284,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/MetricResponseCollection"
+              "type": "file"
             }
           }
         },
@@ -10302,7 +10348,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/MetricResponseCollection"
+              "type": "file"
             }
           }
         },
@@ -10468,7 +10514,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "file"
             }
           }
         },
@@ -10530,7 +10576,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "file"
             }
           }
         },
@@ -13482,7 +13528,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SlotConfigNames"
+              "$ref": "#/definitions/SlotConfigNamesResource"
             }
           }
         },
@@ -13526,7 +13572,7 @@
             "description": "Request body containing the names of application settings and connection strings",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SlotConfigNames"
+              "$ref": "#/definitions/SlotConfigNamesResource"
             }
           },
           {
@@ -13540,7 +13586,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SlotConfigNames"
+              "$ref": "#/definitions/SlotConfigNamesResource"
             }
           }
         },
@@ -17525,8 +17571,8 @@
         }
       }
     },
-    "SlotConfigNames": {
-      "description": "Class containing names for connection strings and application settings to be marked as sticky to the slot \r\n            and not moved during swap operation\r\n            This is valid for all deployment slots under the site",
+    "SlotConfigNamesResource": {
+      "description": "Slot Config names azure resource",
       "type": "object",
       "allOf": [
         {
@@ -17550,6 +17596,26 @@
                 "type": "string"
               }
             }
+          }
+        }
+      }
+    },
+    "SlotConfigNames": {
+      "description": "Class containing names for connection strings and application settings to be marked as sticky to the slot \r\n            and not moved during swap operation\r\n            This is valid for all deployment slots under the site",
+      "type": "object",
+      "properties": {
+        "connectionStringNames": {
+          "description": "List of connection string names",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "appSettingNames": {
+          "description": "List of application settings names",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
