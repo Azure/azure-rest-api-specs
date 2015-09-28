@@ -6,12 +6,10 @@
     "version": "2015-02-28"
   },
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json;odata.metadata=none"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "paths": {
     "/docs/$count": {
@@ -27,9 +25,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -56,65 +51,29 @@
             "$ref": "#/definitions/IndexResult"
           },
           "description": "Gets the list of status information for each document in the indexing request."
-        },
-        "statusCode": {
-          "type": "string",
-          "enum": [
-            "Continue",
-            "SwitchingProtocols",
-            "OK",
-            "Created",
-            "Accepted",
-            "NonAuthoritativeInformation",
-            "NoContent",
-            "ResetContent",
-            "PartialContent",
-            "MultipleChoices",
-            "Ambiguous",
-            "MovedPermanently",
-            "Moved",
-            "Found",
-            "Redirect",
-            "SeeOther",
-            "RedirectMethod",
-            "NotModified",
-            "UseProxy",
-            "Unused",
-            "TemporaryRedirect",
-            "RedirectKeepVerb",
-            "BadRequest",
-            "Unauthorized",
-            "PaymentRequired",
-            "Forbidden",
-            "NotFound",
-            "MethodNotAllowed",
-            "NotAcceptable",
-            "ProxyAuthenticationRequired",
-            "RequestTimeout",
-            "Conflict",
-            "Gone",
-            "LengthRequired",
-            "PreconditionFailed",
-            "RequestEntityTooLarge",
-            "RequestUriTooLong",
-            "UnsupportedMediaType",
-            "RequestedRangeNotSatisfiable",
-            "ExpectationFailed",
-            "UpgradeRequired",
-            "InternalServerError",
-            "NotImplemented",
-            "BadGateway",
-            "ServiceUnavailable",
-            "GatewayTimeout",
-            "HttpVersionNotSupported"
-          ],
-          "x-ms-enum": "HttpStatusCode"
-        },
-        "requestId": {
-          "type": "string"
         }
       },
       "description": "Response containing the status of operations for all documents in the indexing request."
+    },
+    "IndexActionType": {
+      "type": "string",
+      "enum": [
+        "upload",
+        "merge",
+        "mergeOrUpload",
+        "delete"
+      ],
+      "x-ms-enum": "IndexActionType",
+      "description": "Specifies the operation to perform on a document in an indexing batch."
+    },
+    "SearchMode": {
+      "type": "string",
+      "enum": [
+        "any",
+        "all"
+      ],
+      "x-ms-enum": "SearchMode",
+      "description": "Specifies whether any or all of the search terms must be matched in order to count the document as a match."
     },
     "SearchParameters": {
       "properties": {
@@ -175,13 +134,8 @@
           "description": "Gets or sets the list of field names to include in the full-text search."
         },
         "searchMode": {
-          "type": "string",
+          "$ref": "#/definitions/SearchMode",
           "description": "Gets or sets a value that specifies whether any or all of the search terms must be matched in order to count the document as a match.",
-          "enum": [
-            "any",
-            "all"
-          ],
-          "x-ms-enum": "SearchMode"
         },
         "select": {
           "type": "array",
@@ -260,59 +214,9 @@
         }
       },
       "description": "Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors."
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-external": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
-      "x-ms-external": true
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
