@@ -3338,13 +3338,13 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/webhostingplans": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/serverfarms": {
       "get": {
         "tags": [
           "HostingEnvironments"
         ],
         "summary": "Get all serverfarms (App Service Plans) on the hostingEnvironment (App Service Environment).",
-        "operationId": "HostingEnvironments_GetHostingEnvironmentWebHostingPlans",
+        "operationId": "HostingEnvironments_GetHostingEnvironmentServerFarms",
         "consumes": [],
         "produces": [
           "application/json",
@@ -3383,13 +3383,13 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/serverfarms": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/webhostingplans": {
       "get": {
         "tags": [
           "HostingEnvironments"
         ],
         "summary": "Get all serverfarms (App Service Plans) on the hostingEnvironment (App Service Environment).",
-        "operationId": "HostingEnvironments_GetHostingEnvironmentServerFarms",
+        "operationId": "HostingEnvironments_GetHostingEnvironmentWebHostingPlans",
         "consumes": [],
         "produces": [
           "application/json",
@@ -5355,291 +5355,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkConnections/{vnetName}/routes/{routeName}": {
-      "get": {
-        "tags": [
-          "ServerFarms"
-        ],
-        "summary": "Gets a specific route associated with a vnet, in an app service plan",
-        "operationId": "ServerFarms_GetRouteForVnet",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of App Service Plan",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "Name of virtual network",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the virtual network route",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VnetRoute"
-              }
-            }
-          },
-          "404": {
-            "description": "Specified route does not exist"
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "ServerFarms"
-        ],
-        "summary": "Creates a new route or updates an existing route for a vnet in an app service plan.",
-        "operationId": "ServerFarms_CreateOrUpdateVnetRoute",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of App Service Plan",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "Name of virtual network",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the virtual network route",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "route",
-            "in": "body",
-            "description": "The route object",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VnetRoute"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VnetRoute"
-            }
-          },
-          "400": {
-            "description": "Invalid request. Ensure that required parameters are given, and that addresses and address spaces are valid"
-          },
-          "404": {
-            "description": "Route not found. This will only occur when using the PATCH verb."
-          }
-        },
-        "deprecated": false
-      },
-      "delete": {
-        "tags": [
-          "ServerFarms"
-        ],
-        "summary": "Deletes an existing route for a vnet in an app service plan.",
-        "operationId": "ServerFarms_DeleteVnetRoute",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of App Service Plan",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "Name of virtual network",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the virtual network route",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          },
-          "404": {
-            "description": "Specified route does not exist."
-          }
-        },
-        "deprecated": false
-      },
-      "patch": {
-        "tags": [
-          "ServerFarms"
-        ],
-        "summary": "Creates a new route or updates an existing route for a vnet in an app service plan.",
-        "operationId": "ServerFarms_UpdateVnetRoute",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of App Service Plan",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "Name of virtual network",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the virtual network route",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "route",
-            "in": "body",
-            "description": "The route object",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VnetRoute"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VnetRoute"
-            }
-          },
-          "400": {
-            "description": "Invalid request. Ensure that required parameters are given, and that addresses and address spaces are valid"
-          },
-          "404": {
-            "description": "Route not found. This will only occur when using the PATCH verb."
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/webhostingplans/{name}/virtualNetworkConnections/{vnetName}/routes/{routeName}": {
       "get": {
         "tags": [
@@ -5852,6 +5567,291 @@
         ],
         "summary": "Creates a new route or updates an existing route for a vnet in an app service plan.",
         "operationId": "ServerFarms_UpdateWebHostingPlanVnetRoute",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of App Service Plan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of virtual network",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the virtual network route",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "route",
+            "in": "body",
+            "description": "The route object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VnetRoute"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VnetRoute"
+            }
+          },
+          "400": {
+            "description": "Invalid request. Ensure that required parameters are given, and that addresses and address spaces are valid"
+          },
+          "404": {
+            "description": "Route not found. This will only occur when using the PATCH verb."
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkConnections/{vnetName}/routes/{routeName}": {
+      "get": {
+        "tags": [
+          "ServerFarms"
+        ],
+        "summary": "Gets a specific route associated with a vnet, in an app service plan",
+        "operationId": "ServerFarms_GetRouteForVnet",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of App Service Plan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of virtual network",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the virtual network route",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VnetRoute"
+              }
+            }
+          },
+          "404": {
+            "description": "Specified route does not exist"
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "ServerFarms"
+        ],
+        "summary": "Creates a new route or updates an existing route for a vnet in an app service plan.",
+        "operationId": "ServerFarms_CreateOrUpdateVnetRoute",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of App Service Plan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of virtual network",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the virtual network route",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "route",
+            "in": "body",
+            "description": "The route object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VnetRoute"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VnetRoute"
+            }
+          },
+          "400": {
+            "description": "Invalid request. Ensure that required parameters are given, and that addresses and address spaces are valid"
+          },
+          "404": {
+            "description": "Route not found. This will only occur when using the PATCH verb."
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "ServerFarms"
+        ],
+        "summary": "Deletes an existing route for a vnet in an app service plan.",
+        "operationId": "ServerFarms_DeleteVnetRoute",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of App Service Plan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of virtual network",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the virtual network route",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          },
+          "404": {
+            "description": "Specified route does not exist."
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "ServerFarms"
+        ],
+        "summary": "Creates a new route or updates an existing route for a vnet in an app service plan.",
+        "operationId": "ServerFarms_UpdateVnetRoute",
         "consumes": [
           "application/json",
           "text/json",
@@ -17642,6 +17642,20 @@
         "resourceId": {
           "description": "Metric resource Id",
           "type": "string"
+        },
+        "metricValues": {
+          "description": "Metric values",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceMetricValue"
+          }
+        },
+        "properties": {
+          "description": "Properties",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -17656,6 +17670,48 @@
         "localizedValue": {
           "description": "Localized metric name value",
           "type": "string"
+        }
+      }
+    },
+    "ResourceMetricValue": {
+      "description": "Value of resource metric",
+      "type": "object",
+      "properties": {
+        "timeStamp": {
+          "description": "Value timestamp",
+          "type": "string"
+        },
+        "average": {
+          "format": "float",
+          "description": "Value average",
+          "type": "number"
+        },
+        "minimum": {
+          "format": "float",
+          "description": "Value minimum",
+          "type": "number"
+        },
+        "maximum": {
+          "format": "float",
+          "description": "Value maximum",
+          "type": "number"
+        },
+        "total": {
+          "format": "float",
+          "description": "Value total",
+          "type": "number"
+        },
+        "count": {
+          "format": "float",
+          "description": "Value count",
+          "type": "number"
+        },
+        "properties": {
+          "description": "Value properties",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
