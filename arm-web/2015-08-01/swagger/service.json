@@ -17652,9 +17652,9 @@
         },
         "properties": {
           "description": "Properties",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair[String,String]"
           }
         }
       }
@@ -17705,13 +17705,19 @@
           "format": "float",
           "description": "Value count",
           "type": "number"
+        }
+      }
+    },
+    "KeyValuePair[String,String]": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "readOnly": true
         },
-        "properties": {
-          "description": "Value properties",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "value": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
