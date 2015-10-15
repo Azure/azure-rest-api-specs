@@ -1385,6 +1385,11 @@
         "WorkflowProperties": {
             "type": "object",
             "properties": {
+                "provisioningState": {
+                    "$ref": "#/definitions/WorkflowProvisioningState",
+                    "readOnly": true,
+                    "description": "Gets the provisioning state."
+                },
                 "createdTime": {
                     "type": "string",
                     "format": "date-time",
@@ -1611,6 +1616,11 @@
         "WorkflowTriggerProperties": {
             "type": "object",
             "properties": {
+                "provisioningState": {
+                    "$ref": "#/definitions/WorkflowTriggerProvisioningState",
+                    "readOnly": true,
+                    "description": "Gets the provisioning state."
+                },
                 "createdTime": {
                     "type": "string",
                     "format": "date-time",
@@ -2259,6 +2269,25 @@
                     "description": "Gets the error."
                 }
             }
+        },
+        "WorkflowTriggerProvisioningState": {
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "Creating",
+                "Succeeded",
+                "Updating"
+            ],
+            "x-ms-enum": "WorkflowTriggerProvisioningState"
+        },
+        "WorkflowProvisioningState": { 
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "Moving",
+                "Succeeded"
+            ],
+            "x-ms-enum": "WorkflowProvisioningState"
         }
     },
     "parameters": {
