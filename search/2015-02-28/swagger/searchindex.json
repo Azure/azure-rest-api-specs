@@ -41,11 +41,21 @@
   },
   "definitions": {
     "IndexResult": {
-      "properties": {}
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Gets the key of a document that was in the indexing request."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Gets the error message explaining why the indexing operation failed for the document identified by Key; null if Succeeded is true."
+        }
+      },
+      "description": "Status of an indexing operation for a single document."
     },
     "DocumentIndexResult": {
       "properties": {
-        "results": {
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/IndexResult"

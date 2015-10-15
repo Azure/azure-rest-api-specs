@@ -476,6 +476,13 @@
         },
         "parameters": [
           {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Selects which properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -775,6 +782,7 @@
       "properties": {
         "interval": {
           "type": "string",
+          "format": "duration",
           "description": "Gets or sets the interval of time between indexer executions."
         },
         "startTime": {
@@ -966,30 +974,6 @@
           "type": "string",
           "description": "Gets or sets the data type of the field."
         },
-        "key": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether the field is the key of the index. Valid only for string fields. Every index must have exactly one key field."
-        },
-        "searchable": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether the field is included in full-text searches. Valid only forstring or string collection fields. Default is false."
-        },
-        "filterable": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether the field can be used in filter expressions. Default is false."
-        },
-        "sortable": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether the field can be used in orderby expressions. Not valid for string collection fields. Default is false."
-        },
-        "facetable": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether it is possible to facet on this field. Not valid for geo-point fields. Default is false."
-        },
-        "retrievable": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether the field can be returned in a search result. Default is true."
-        },
         "analyzer": {
           "externalDocs": {
             "url": "https://msdn.microsoft.com/library/azure/dn879793.aspx"
@@ -1100,6 +1084,7 @@
       "properties": {
         "boostingDuration": {
           "type": "string",
+          "format": "duration",
           "description": "Gets or sets the expiration period after which boosting will stop for a particular document."
         }
       },
@@ -1341,13 +1326,13 @@
       "description": "Response from a List Indexes request. If successful, it includes the full definitions of all indexes."
     }
   },
-    "parameters": {
-      "ApiVersionParameter": {
-        "name": "api-version",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "description": "Client Api Version."
-      }
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
     }
   }
+}
