@@ -60,12 +60,12 @@
             "x-ms-enum": "RecordType"
           },
           {
-              "name": "relativeRecordSetName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "description": "The name of the RecordSet, relative to the name of the zone.",
-              "x-ms-skip-url-encoding": true
+            "name": "relativeRecordSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the RecordSet, relative to the name of the zone.",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "If-Match",
@@ -95,7 +95,17 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RecordSet"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -158,7 +168,11 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
       },
       "get": {
         "tags": [
@@ -215,7 +229,14 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RecordSet"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnszones/{zoneName}/{recordType}": {
@@ -373,7 +394,7 @@
             "name": "If-Match",
             "in": "header",
             "type": "string",
-            "description": "The etag of RecordSet."
+            "description": "The etag of Zone."
           },
           {
             "name": "If-None-Match",
@@ -397,7 +418,17 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Zone"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -433,7 +464,11 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
       },
       "get": {
         "tags": [
@@ -463,7 +498,14 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Zone"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnszones": {
