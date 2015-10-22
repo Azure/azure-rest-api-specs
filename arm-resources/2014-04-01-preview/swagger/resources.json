@@ -1446,7 +1446,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "Resource"
         }
       ],
       "description": "Resource information."
@@ -1804,7 +1804,10 @@
           "enum": [
             "Incremental"
           ],
-          "x-ms-enum": "DeploymentMode"
+          "x-ms-enum": {
+            "name": "DeploymentMode",
+            "modelAsString": "False"
+          }
         }
       },
       "description": "Deployment properties."
@@ -1953,7 +1956,10 @@
           "enum": [
             "Incremental"
           ],
-          "x-ms-enum": "DeploymentMode"
+          "x-ms-enum": {
+            "name": "DeploymentMode",
+            "modelAsString": "False"
+          }
         }
       },
       "description": "Deployment properties with additional details."
@@ -2036,7 +2042,7 @@
       "required": [
         "location"
       ],
-      "x-ms-external": true
+      "x-ms-azure-resource": true
     },
     "SubResource": {
       "properties": {
@@ -2045,7 +2051,7 @@
           "description": "Resource Id"
         }
       },
-      "x-ms-external": true
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {

@@ -48,10 +48,10 @@
           }
         ],
         "responses": {
-          "202": {
+          "204": {
             "description": ""
           },
-          "204": {
+          "202": {
             "description": ""
           },
           "200": {
@@ -277,546 +277,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": ""
-          },
-          "202": {
-            "description": ""
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/": {
-      "delete": {
-        "tags": [
-          "ExpressRouteCircuits"
-        ],
-        "operationId": "ExpressRouteCircuits_Delete",
-        "description": "The delete ExpressRouteCircuit operation deletes the specified ExpressRouteCircuit.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the express route Circuit."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          },
-          "204": {
-            "description": ""
-          },
-          "202": {
-            "description": ""
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "get": {
-        "tags": [
-          "ExpressRouteCircuits"
-        ],
-        "operationId": "ExpressRouteCircuits_Get",
-        "description": "The Get ExpressRouteCircuit operation retreives information about the specified ExpressRouteCircuit.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the circuit."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuit"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "ExpressRouteCircuits"
-        ],
-        "operationId": "ExpressRouteCircuits_CreateOrUpdate",
-        "description": "The Put ExpressRouteCircuit operation creates/updates a ExpressRouteCircuit",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the circuit."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuit"
-            },
-            "description": "Parameters supplied to the create/delete ExpressRouteCircuit operation"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuit"
-            }
-          },
-          "201": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuit"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}arpTable": {
-      "get": {
-        "tags": [
-          "ExpressRouteCircuits"
-        ],
-        "operationId": "ExpressRouteCircuits_ListArpTable",
-        "description": "The ListArpTable from ExpressRouteCircuit opertion retrieves the currently advertised arp table associated with the ExpressRouteCircuits in a resource group.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the circuit."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitsArpTableListResult"
-            }
-          }
-        },
-        "x-ms-pageable": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}routesTable": {
-      "get": {
-        "tags": [
-          "ExpressRouteCircuits"
-        ],
-        "operationId": "ExpressRouteCircuits_ListRoutesTable",
-        "description": "The ListRoutesTable from ExpressRouteCircuit opertion retrieves the currently advertised routes table associated with the ExpressRouteCircuits in a resource group.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the circuit."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableListResult"
-            }
-          }
-        },
-        "x-ms-pageable": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}stats": {
-      "get": {
-        "tags": [
-          "ExpressRouteCircuits"
-        ],
-        "operationId": "ExpressRouteCircuits_ListStats",
-        "description": "The Liststats ExpressRouteCircuit opertion retrieves all the stats from a ExpressRouteCircuits in a resource group.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the loadBalancer."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitsStatsListResult"
-            }
-          }
-        },
-        "x-ms-pageable": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits": {
-      "get": {
-        "tags": [
-          "ExpressRouteCircuits"
-        ],
-        "operationId": "ExpressRouteCircuits_List",
-        "description": "The List ExpressRouteCircuit opertion retrieves all the ExpressRouteCircuits in a resource group.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitListResult"
-            }
-          }
-        },
-        "x-ms-pageable": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteCircuits": {
-      "get": {
-        "tags": [
-          "ExpressRouteCircuits"
-        ],
-        "operationId": "ExpressRouteCircuits_ListAll",
-        "description": "The List ExpressRouteCircuit opertion retrieves all the ExpressRouteCircuits in a subscription.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitListResult"
-            }
-          }
-        },
-        "x-ms-pageable": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteServiceProviders": {
-      "get": {
-        "tags": [
-          "ExpressRouteServiceProviders"
-        ],
-        "operationId": "ExpressRouteServiceProviders_List",
-        "description": "The List ExpressRouteServiceProvider opertion retrieves all the available ExpressRouteServiceProviders.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteServiceProviderListResult"
-            }
-          }
-        },
-        "x-ms-pageable": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}": {
-      "delete": {
-        "tags": [
-          "ExpressRouteCircuitPeerings"
-        ],
-        "operationId": "ExpressRouteCircuitPeerings_Delete",
-        "description": "The delete peering operation deletes the specified peering from the ExpressRouteCircuit.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the express route circuit."
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the peering."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
           "202": {
             "description": ""
           },
           "200": {
             "description": ""
-          },
-          "204": {
-            "description": ""
           }
         },
         "x-ms-long-running-operation": true
-      },
-      "get": {
-        "tags": [
-          "ExpressRouteCircuitPeerings"
-        ],
-        "operationId": "ExpressRouteCircuitPeerings_Get",
-        "description": "The GET peering operation retrieves the specified authorization from the ExpressRouteCircuit.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the express route circuit."
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the peering."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitPeering"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "ExpressRouteCircuitPeerings"
-        ],
-        "operationId": "ExpressRouteCircuitPeerings_CreateOrUpdate",
-        "description": "The Put Pering operation creates/updates an peering in the specified ExpressRouteCircuits",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the express route circuit."
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the peering."
-          },
-          {
-            "name": "peeringParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitPeering"
-            },
-            "description": "Parameters supplied to the create/update ExpressRouteCircuit Peering operation"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitPeering"
-            }
-          },
-          "201": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitPeering"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings": {
-      "get": {
-        "tags": [
-          "ExpressRouteCircuitPeerings"
-        ],
-        "operationId": "ExpressRouteCircuitPeerings_List",
-        "description": "The List peering operation retrieves all the peerings in an ExpressRouteCircuit.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the curcuit."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitPeeringListResult"
-            }
-          }
-        },
-        "x-ms-pageable": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}": {
@@ -852,10 +320,10 @@
           "200": {
             "description": ""
           },
-          "202": {
+          "204": {
             "description": ""
           },
-          "204": {
+          "202": {
             "description": ""
           }
         },
@@ -1133,13 +601,13 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": ""
+          },
           "204": {
             "description": ""
           },
           "200": {
-            "description": ""
-          },
-          "202": {
             "description": ""
           }
         },
@@ -1209,10 +677,10 @@
           }
         ],
         "responses": {
-          "204": {
+          "200": {
             "description": ""
           },
-          "200": {
+          "204": {
             "description": ""
           },
           "202": {
@@ -1296,13 +764,13 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/NetworkInterface"
             }
           },
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/NetworkInterface"
@@ -1310,99 +778,6 @@
           }
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/networkInterfaces": {
-      "get": {
-        "tags": [
-          "NetworkInterfaces"
-        ],
-        "operationId": "NetworkInterfaces_ListVirtualMachineScaleSetNetworkInterfaces",
-        "description": "The list network interface operation retrieves information about all network interfaces in a virtual machine scale set.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "virtualMachineScaleSetName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the virtual machine scale set."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/NetworkInterfaceListResult"
-            }
-          }
-        },
-        "x-ms-pageable": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}": {
-      "get": {
-        "tags": [
-          "NetworkInterfaces"
-        ],
-        "operationId": "NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface",
-        "description": "The Get ntework interface operation retreives information about the specified network interface in a virtual machine scale set.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "virtualMachineScaleSetName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the virtual machine scale set."
-          },
-          {
-            "name": "virtualmachineIndex",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The virtual machine index."
-          },
-          {
-            "name": "networkInterfaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the network interface."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/NetworkInterface"
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkInterfaces": {
@@ -1464,198 +839,6 @@
         "x-ms-pageable": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeTables/{routeTableName}": {
-      "delete": {
-        "tags": [
-          "RouteTables"
-        ],
-        "operationId": "RouteTables_Delete",
-        "description": "The Delete RouteTable operation deletes the specifed Route Table",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "routeTableName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the route table."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": ""
-          },
-          "202": {
-            "description": ""
-          },
-          "200": {
-            "description": ""
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "get": {
-        "tags": [
-          "RouteTables"
-        ],
-        "operationId": "RouteTables_Get",
-        "description": "The Get RouteTables operation retrieves information about the specified route table.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "routeTableName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the route table."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/RouteTable"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "RouteTables"
-        ],
-        "operationId": "RouteTables_CreateOrUpdate",
-        "description": "The Put RouteTable operation creates/updates a route tablein the specified resource group.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "routeTableName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the route table."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RouteTable"
-            },
-            "description": "Parameters supplied to the create/update Route Table operation"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/RouteTable"
-            }
-          },
-          "201": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/RouteTable"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeTables": {
-      "get": {
-        "tags": [
-          "RouteTables"
-        ],
-        "operationId": "RouteTables_List",
-        "description": "The list RouteTables returns all route tables in a resource group",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/RouteTableListResult"
-            }
-          }
-        },
-        "x-ms-pageable": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/routeTables": {
-      "get": {
-        "tags": [
-          "RouteTables"
-        ],
-        "operationId": "RouteTables_ListAll",
-        "description": "The list RouteTables returns all route tables in a subscription",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/RouteTableListResult"
-            }
-          }
-        },
-        "x-ms-pageable": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}": {
       "delete": {
         "tags": [
@@ -1686,13 +869,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": ""
-          },
           "204": {
             "description": ""
           },
           "202": {
+            "description": ""
+          },
+          "200": {
             "description": ""
           }
         },
@@ -1773,13 +956,13 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/NetworkSecurityGroup"
             }
           },
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/NetworkSecurityGroup"
@@ -1878,10 +1061,10 @@
           }
         ],
         "responses": {
-          "204": {
+          "202": {
             "description": ""
           },
-          "202": {
+          "204": {
             "description": ""
           },
           "200": {
@@ -1965,13 +1148,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/PublicIpAddress"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/PublicIpAddress"
@@ -2040,200 +1223,6 @@
         "x-ms-pageable": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeTables/{routeTableName}/routes/{routeName}": {
-      "delete": {
-        "tags": [
-          "Routes"
-        ],
-        "operationId": "Routes_Delete",
-        "description": "The delete route operation deletes the specified route from a route table.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "routeTableName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the route table."
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the route."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": ""
-          },
-          "200": {
-            "description": ""
-          },
-          "204": {
-            "description": ""
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "get": {
-        "tags": [
-          "Routes"
-        ],
-        "operationId": "Routes_Get",
-        "description": "The Get route operation retreives information about the specified route from the route table.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "routeTableName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the route table."
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the route."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Route"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Routes"
-        ],
-        "operationId": "Routes_CreateOrUpdate",
-        "description": "The Put route operation creates/updates a route in the specified route table",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "routeTableName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the route table."
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the route."
-          },
-          {
-            "name": "routeParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Route"
-            },
-            "description": "Parameters supplied to the create/update routeoperation"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Route"
-            }
-          },
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Route"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeTables/{routeTableName}/routes": {
-      "get": {
-        "tags": [
-          "Routes"
-        ],
-        "operationId": "Routes_List",
-        "description": "The List network security rule opertion retrieves all the routes in a route table.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "routeTableName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the route table."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/RouteListResult"
-            }
-          }
-        },
-        "x-ms-pageable": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}/securityRules/{securityRuleName}": {
       "delete": {
         "tags": [
@@ -2271,13 +1260,13 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": ""
-          },
           "202": {
             "description": ""
           },
           "200": {
+            "description": ""
+          },
+          "204": {
             "description": ""
           }
         },
@@ -2372,13 +1361,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/SecurityRule"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/SecurityRule"
@@ -2428,200 +1417,6 @@
         "x-ms-pageable": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}": {
-      "delete": {
-        "tags": [
-          "ExpressRouteCircuitAuthorizations"
-        ],
-        "operationId": "ExpressRouteCircuitAuthorizations_Delete",
-        "description": "The delete authorization operation deletes the specified authorization from the specified ExpressRouteCircuit.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the express route circuit."
-          },
-          {
-            "name": "authorizationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the authorization."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": ""
-          },
-          "202": {
-            "description": ""
-          },
-          "200": {
-            "description": ""
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "get": {
-        "tags": [
-          "ExpressRouteCircuitAuthorizations"
-        ],
-        "operationId": "ExpressRouteCircuitAuthorizations_Get",
-        "description": "The GET authorization operation retrieves the specified authorization from the specified ExpressRouteCircuit.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the express route circuit."
-          },
-          {
-            "name": "authorizationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the authorization."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "ExpressRouteCircuitAuthorizations"
-        ],
-        "operationId": "ExpressRouteCircuitAuthorizations_CreateOrUpdate",
-        "description": "The Put Authorization operation creates/updates an authorization in thespecified ExpressRouteCircuits",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the express route circuit."
-          },
-          {
-            "name": "authorizationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the authorization."
-          },
-          {
-            "name": "authorizationParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
-            },
-            "description": "Parameters supplied to the create/update ExpressRouteCircuitAuthorization operation"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
-            }
-          },
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations": {
-      "get": {
-        "tags": [
-          "ExpressRouteCircuitAuthorizations"
-        ],
-        "operationId": "ExpressRouteCircuitAuthorizations_List",
-        "description": "The List authorization operation retrieves all the authorizations in an ExpressRouteCircuit.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the curcuit."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/AuthorizationListResult"
-            }
-          }
-        },
-        "x-ms-pageable": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks/{virtualNetworkName}/subnets/{subnetName}": {
       "delete": {
         "tags": [
@@ -2659,13 +1454,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": ""
-          },
           "204": {
             "description": ""
           },
           "202": {
+            "description": ""
+          },
+          "200": {
             "description": ""
           }
         },
@@ -2970,10 +1765,10 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": ""
           },
-          "200": {
+          "202": {
             "description": ""
           },
           "204": {
@@ -2983,7 +1778,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{connectionSharedKeyName}/sharedkey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey": {
       "get": {
         "tags": [
           "VirtualNetworkGatewayConnections"
@@ -2999,7 +1794,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "connectionSharedKeyName",
+            "name": "virtualNetworkGatewayConnectionName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -3016,10 +1811,63 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/ConnectionSharedKeyResult"
+              "$ref": "#/definitions/ConnectionSharedKey"
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "operationId": "VirtualNetworkGatewayConnections_SetSharedKey",
+        "description": "The Put VirtualNetworkGatewayConnectionSharedKey operation sets the virtual network gateway connection shared key for passed virtual network gateway connection in the specified resource group through Network resource provider.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The virtual network gateway connection name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
+            },
+            "description": "Parameters supplied to the Begin Set Virtual Network Gateway conection Shared key operation throughNetwork resource provider."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections": {
@@ -3094,69 +1942,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": ""
-          },
           "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/ConnectionResetSharedKey"
             }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey": {
-      "put": {
-        "tags": [
-          "VirtualNetworkGatewayConnections"
-        ],
-        "operationId": "VirtualNetworkGatewayConnections_SetSharedKey",
-        "description": "The Put VirtualNetworkGatewayConnectionSharedKey operation sets the virtual network gateway connection shared key for passed virtual network gateway connection in the specified resource group through Network resource provider.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
           },
-          {
-            "name": "virtualNetworkGatewayConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The virtual network gateway connection name."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConnectionSharedKey"
-            },
-            "description": "Parameters supplied to the Begin Set Virtual Network Gateway conection Shared key operation throughNetwork resource provider."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ConnectionSharedKey"
-            }
-          },
-          "201": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ConnectionSharedKey"
-            }
+          "202": {
+            "description": ""
           }
         },
         "x-ms-long-running-operation": true
@@ -3287,10 +2080,10 @@
           "202": {
             "description": ""
           },
-          "204": {
+          "200": {
             "description": ""
           },
-          "200": {
+          "204": {
             "description": ""
           }
         },
@@ -3369,14 +2162,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": ""
+          },
           "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkGateway"
             }
-          },
-          "202": {
-            "description": ""
           }
         },
         "x-ms-long-running-operation": true
@@ -3415,10 +2208,10 @@
           "200": {
             "description": ""
           },
-          "202": {
+          "204": {
             "description": ""
           },
-          "204": {
+          "202": {
             "description": ""
           }
         },
@@ -3499,13 +2292,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualNetwork"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualNetwork"
@@ -3622,7 +2415,9 @@
             "Standard_Medium",
             "Standard_Large"
           ],
-          "x-ms-enum": "ApplicationGatewaySkuName"
+          "x-ms-enum": {
+            "name": "ApplicationGatewaySkuName"
+          }
         },
         "tier": {
           "type": "string",
@@ -3630,7 +2425,9 @@
           "enum": [
             "Standard"
           ],
-          "x-ms-enum": "ApplicationGatewayTier"
+          "x-ms-enum": {
+            "name": "ApplicationGatewayTier"
+          }
         },
         "capacity": {
           "type": "integer",
@@ -3640,7 +2437,7 @@
       },
       "description": "SKU of application gateway"
     },
-    "ApplicationGatewayIPConfigurationPropertiesFormat": {
+    "ApplicationGatewayIpConfigurationPropertiesFormat": {
       "properties": {
         "subnet": {
           "$ref": "#/definitions/SubResource",
@@ -3653,10 +2450,10 @@
       },
       "description": "Properties of IP configuration of application gateway"
     },
-    "ApplicationGatewayIPConfiguration": {
+    "ApplicationGatewayIpConfiguration": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ApplicationGatewayIPConfigurationPropertiesFormat"
+          "$ref": "#/definitions/ApplicationGatewayIpConfigurationPropertiesFormat"
         },
         "name": {
           "type": "string",
@@ -3669,7 +2466,7 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "IP configuration of application gateway"
@@ -3711,12 +2508,12 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "SSL certificates of application gateway"
     },
-    "ApplicationGatewayFrontendIPConfigurationPropertiesFormat": {
+    "ApplicationGatewayFrontendIpConfigurationPropertiesFormat": {
       "properties": {
         "privateIPAddress": {
           "type": "string",
@@ -3729,7 +2526,9 @@
             "Static",
             "Dynamic"
           ],
-          "x-ms-enum": "IpAllocationMethod"
+          "x-ms-enum": {
+            "name": "IpAllocationMethod"
+          }
         },
         "subnet": {
           "$ref": "#/definitions/SubResource",
@@ -3746,10 +2545,10 @@
       },
       "description": "Properties of Frontend IP configuration of application gateway"
     },
-    "ApplicationGatewayFrontendIPConfiguration": {
+    "ApplicationGatewayFrontendIpConfiguration": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ApplicationGatewayFrontendIPConfigurationPropertiesFormat"
+          "$ref": "#/definitions/ApplicationGatewayFrontendIpConfigurationPropertiesFormat"
         },
         "name": {
           "type": "string",
@@ -3762,7 +2561,7 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Frontend IP configuration of application gateway"
@@ -3797,7 +2596,7 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Frontend Port of application gateway"
@@ -3817,12 +2616,12 @@
     },
     "ApplicationGatewayBackendAddressPoolPropertiesFormat": {
       "properties": {
-        "backendIPConfigurations": {
+        "backendIpConfigurations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
           },
-          "description": "Gets or sets backendIPConfiguration of application gateway "
+          "description": "Gets or sets backendIpConfiguration of application gateway "
         },
         "backendAddresses": {
           "type": "array",
@@ -3854,7 +2653,7 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Backend Address Pool of application gateway"
@@ -3873,7 +2672,9 @@
             "Http",
             "Https"
           ],
-          "x-ms-enum": "ApplicationGatewayProtocol"
+          "x-ms-enum": {
+            "name": "ApplicationGatewayProtocol"
+          }
         },
         "cookieBasedAffinity": {
           "type": "string",
@@ -3882,7 +2683,9 @@
             "Enabled",
             "Disabled"
           ],
-          "x-ms-enum": "ApplicationGatewayCookieBasedAffinity"
+          "x-ms-enum": {
+            "name": "ApplicationGatewayCookieBasedAffinity"
+          }
         },
         "provisioningState": {
           "type": "string",
@@ -3907,14 +2710,14 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Backend address pool settings of application gateway"
     },
     "ApplicationGatewayHttpListenerPropertiesFormat": {
       "properties": {
-        "frontendIPConfiguration": {
+        "frontendIpConfiguration": {
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets frontend IP configuration resource of application gateway "
         },
@@ -3929,7 +2732,9 @@
             "Http",
             "Https"
           ],
-          "x-ms-enum": "ApplicationGatewayProtocol"
+          "x-ms-enum": {
+            "name": "ApplicationGatewayProtocol"
+          }
         },
         "sslCertificate": {
           "$ref": "#/definitions/SubResource",
@@ -3958,7 +2763,7 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Http listener of application gateway"
@@ -3971,7 +2776,9 @@
           "enum": [
             "Basic"
           ],
-          "x-ms-enum": "ApplicationGatewayRequestRoutingRuleType"
+          "x-ms-enum": {
+            "name": "ApplicationGatewayRequestRoutingRuleType"
+          }
         },
         "backendAddressPool": {
           "$ref": "#/definitions/SubResource",
@@ -4008,7 +2815,7 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Request routing rule of application gateway"
@@ -4028,12 +2835,14 @@
             "Running",
             "Stopping"
           ],
-          "x-ms-enum": "ApplicationGatewayOperationalState"
+          "x-ms-enum": {
+            "name": "ApplicationGatewayOperationalState"
+          }
         },
-        "gatewayIPConfigurations": {
+        "gatewayIpConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ApplicationGatewayIPConfiguration"
+            "$ref": "#/definitions/ApplicationGatewayIpConfiguration"
           },
           "description": "Gets or sets subnets of application gateway resource"
         },
@@ -4044,10 +2853,10 @@
           },
           "description": "Gets or sets ssl certificates of application gateway resource"
         },
-        "frontendIPConfigurations": {
+        "frontendIpConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ApplicationGatewayFrontendIPConfiguration"
+            "$ref": "#/definitions/ApplicationGatewayFrontendIpConfiguration"
           },
           "description": "Gets or sets frontend IP addresses of application gateway resource"
         },
@@ -4085,10 +2894,6 @@
             "$ref": "#/definitions/ApplicationGatewayRequestRoutingRule"
           },
           "description": "Gets or sets request routing rules of application gateway resource"
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "Gets or sets resource guid property of the ApplicationGateway resource"
         },
         "provisioningState": {
           "type": "string",
@@ -4130,497 +2935,6 @@
       },
       "description": "Response for ListLoadBalancers Api service call"
     },
-    "ExpressRouteCircuitSku": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets name of the sku."
-        },
-        "tier": {
-          "type": "string",
-          "description": "Gets or sets tier of the sku.",
-          "enum": [
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": "ExpressRouteCircuitSkuTier"
-        },
-        "family": {
-          "type": "string",
-          "description": "Gets or sets family of the sku.",
-          "enum": [
-            "UnlimitedData",
-            "MeteredData"
-          ],
-          "x-ms-enum": "ExpressRouteCircuitSkuFamily"
-        }
-      },
-      "description": "Contains sku in an ExpressRouteCircuit"
-    },
-    "AuthorizationPropertiesFormat": {
-      "properties": {
-        "authorizationKey": {
-          "type": "string",
-          "description": "Gets or sets the authorization key"
-        },
-        "authorizationUseStatus": {
-          "type": "string",
-          "description": "Gets or sets AuthorizationUseStatus",
-          "enum": [
-            "Available",
-            "InUse"
-          ],
-          "x-ms-enum": "AuthorizationUseStatus"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
-        }
-      }
-    },
-    "ExpressRouteCircuitAuthorization": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AuthorizationPropertiesFormat"
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "SubResource"
-        }
-      ],
-      "description": "Authorization in a ExpressRouteCircuit resource"
-    },
-    "ExpressRouteCircuitPeeringConfig": {
-      "properties": {
-        "advertisedPublicPrefixes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Gets or sets the reference of AdvertisedPublicPrefixes"
-        },
-        "advertisedPublicPrefixesState": {
-          "type": "string",
-          "description": "Gets or sets AdvertisedPublicPrefixState of the Peering resource ",
-          "enum": [
-            "NotConfigured",
-            "Configuring",
-            "Configured",
-            "ValidationNeeded"
-          ],
-          "x-ms-enum": "ExpressRouteCircuitPeeringAdvertisedPublicPrefixState"
-        },
-        "customerASN": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or Sets CustomerAsn of the peering."
-        },
-        "routingRegistryName": {
-          "type": "string",
-          "description": "Gets or Sets RoutingRegistryName of the config."
-        }
-      },
-      "description": "Specfies the peering config"
-    },
-    "ExpressRouteCircuitStats": {
-      "properties": {
-        "bytesIn": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets BytesIn of the peering."
-        },
-        "bytesOut": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets BytesOut of the peering."
-        }
-      },
-      "description": "Contains Stats associated with the peering"
-    },
-    "ExpressRouteCircuitPeeringPropertiesFormat": {
-      "properties": {
-        "peeringType": {
-          "type": "string",
-          "description": "Gets or sets PeeringType",
-          "enum": [
-            "AzurePublicPeering",
-            "AzurePrivatePeering",
-            "MicrosoftPeering"
-          ],
-          "x-ms-enum": "ExpressRouteCircuitPeeringType"
-        },
-        "state": {
-          "type": "string",
-          "description": "Gets or sets state of Peering",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "x-ms-enum": "ExpressRouteCircuitPeeringState"
-        },
-        "azureASN": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the azure ASN"
-        },
-        "peerASN": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the peer ASN"
-        },
-        "primaryPeerAddressPrefix": {
-          "type": "string",
-          "description": "Gets or sets the primary address prefix"
-        },
-        "secondaryPeerAddressPrefix": {
-          "type": "string",
-          "description": "Gets or sets the secondary address prefix"
-        },
-        "primaryAzurePort": {
-          "type": "string",
-          "description": "Gets or sets the primary port"
-        },
-        "secondaryAzurePort": {
-          "type": "string",
-          "description": "Gets or sets the secondary port"
-        },
-        "sharedKey": {
-          "type": "string",
-          "description": "Gets or sets the shared key"
-        },
-        "vlanId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the vlan id"
-        },
-        "microsoftPeeringConfig": {
-          "$ref": "#/definitions/ExpressRouteCircuitPeeringConfig",
-          "description": "Gets or sets the mircosoft peering config"
-        },
-        "stats": {
-          "$ref": "#/definitions/ExpressRouteCircuitStats",
-          "description": "Gets or peering stats"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
-        }
-      }
-    },
-    "ExpressRouteCircuitPeering": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ExpressRouteCircuitPeeringPropertiesFormat"
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "SubResource"
-        }
-      ],
-      "description": "Peering in a ExpressRouteCircuit resource"
-    },
-    "ExpressRouteCircuitServiceProviderProperties": {
-      "properties": {
-        "serviceProviderName": {
-          "type": "string",
-          "description": "Gets or sets serviceProviderName."
-        },
-        "peeringLocation": {
-          "type": "string",
-          "description": "Gets or sets peering location."
-        },
-        "bandwidthInMbps": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets BandwidthInMbps."
-        }
-      },
-      "description": "Contains ServiceProviderProperties in an ExpressRouteCircuit"
-    },
-    "ExpressRouteCircuitPropertiesFormat": {
-      "properties": {
-        "circuitProvisioningState": {
-          "type": "string",
-          "description": "Gets or sets CircuitProvisioningState state of the resource "
-        },
-        "serviceProviderProvisioningState": {
-          "type": "string",
-          "description": "Gets or sets ServiceProviderProvisioningState state of the resource ",
-          "enum": [
-            "NotProvisioned",
-            "Provisioning",
-            "Provisioned",
-            "Deprovisioning"
-          ],
-          "x-ms-enum": "ServiceProviderProvisioningState"
-        },
-        "authorizations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
-          },
-          "description": "Gets or sets list of authorizations"
-        },
-        "peerings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitPeering"
-          },
-          "description": "Gets or sets list of peerings"
-        },
-        "serviceKey": {
-          "type": "string",
-          "description": "Gets or sets ServiceKey"
-        },
-        "serviceProviderNotes": {
-          "type": "string",
-          "description": "Gets or sets ServiceProviderNotes"
-        },
-        "serviceProviderProperties": {
-          "$ref": "#/definitions/ExpressRouteCircuitServiceProviderProperties",
-          "description": "Gets or sets ServiceProviderProperties"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
-        }
-      },
-      "description": "Properties of ExpressRouteCircuit"
-    },
-    "ExpressRouteCircuit": {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/ExpressRouteCircuitSku",
-          "description": "Gets or sets sku"
-        },
-        "properties": {
-          "$ref": "#/definitions/ExpressRouteCircuitPropertiesFormat"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Gets a unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "ExpressRouteCircuit resource"
-    },
-    "ExpressRouteCircuitArpTable": {
-      "properties": {
-        "ipAddress": {
-          "type": "string",
-          "description": "Gets ipAddress."
-        },
-        "macAddress": {
-          "type": "string",
-          "description": "Gets macAddress."
-        }
-      },
-      "description": "The arp table associated with the ExpressRouteCircuit"
-    },
-    "ExpressRouteCircuitsArpTableListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitArpTable"
-          },
-          "description": "Gets List of ArpTable"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next set of results."
-        }
-      },
-      "description": "Response for ListArpTable associated with the Express Route Circuits Api"
-    },
-    "ExpressRouteCircuitRoutesTable": {
-      "properties": {
-        "addressPrefix": {
-          "type": "string",
-          "description": "Gets AddressPrefix."
-        },
-        "nextHopType": {
-          "type": "string",
-          "description": "Gets NextHopType.",
-          "enum": [
-            "VirtualNetworkGateway",
-            "VnetLocal",
-            "Internet",
-            "VirtualAppliance",
-            "None"
-          ],
-          "x-ms-enum": "RouteNextHopType"
-        },
-        "nextHopIP": {
-          "type": "string",
-          "description": "Gets NextHopIP."
-        },
-        "asPath": {
-          "type": "string",
-          "description": "Gets AsPath."
-        }
-      },
-      "description": "The routes table associated with the ExpressRouteCircuit"
-    },
-    "ExpressRouteCircuitsRoutesTableListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitRoutesTable"
-          },
-          "description": "Gets List of RoutesTable"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next set of results."
-        }
-      },
-      "description": "Response for ListRoutesTable associated with the Express Route Circuits Api"
-    },
-    "ExpressRouteCircuitsStatsListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitStats"
-          },
-          "description": "Gets List of Stats"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next set of results."
-        }
-      },
-      "description": "Response for ListStats from Express Route Circuits Api service call"
-    },
-    "ExpressRouteCircuitListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuit"
-          },
-          "description": "Gets a list of ExpressRouteCircuits in a resource group"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next set of results."
-        }
-      },
-      "description": "Response for ListExpressRouteCircuit Api service call"
-    },
-    "ExpressRouteServiceProviderBandwidthsOffered": {
-      "properties": {
-        "offerName": {
-          "type": "string",
-          "description": "Gets the OfferName"
-        },
-        "valueInMbps": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets the ValueInMbps."
-        }
-      },
-      "description": "Contains Bandwidths offered in ExpressRouteServiceProviders"
-    },
-    "ExpressRouteServiceProviderPropertiesFormat": {
-      "properties": {
-        "peeringLocations": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Gets or list of peering locations"
-        },
-        "bandwidthsOffered": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteServiceProviderBandwidthsOffered"
-          },
-          "description": "Gets or bandwidths offered"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Gets or sets Provisioning state of the resource "
-        }
-      },
-      "description": "Properties of ExpressRouteServiceProvider"
-    },
-    "ExpressRouteServiceProvider": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the ID of the resource."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "Gets or sets the type of the resource."
-        },
-        "properties": {
-          "$ref": "#/definitions/ExpressRouteServiceProviderPropertiesFormat"
-        }
-      },
-      "description": "ExpressRouteResourceProvider object"
-    },
-    "ExpressRouteServiceProviderListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteServiceProvider"
-          },
-          "description": "Gets List of ExpressRouteResourceProvider"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next set of results."
-        }
-      },
-      "description": "Response for ListExpressRouteServiceProvider Api service call"
-    },
-    "ExpressRouteCircuitPeeringListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitPeering"
-          },
-          "description": "Gets the peerings in an express route circuit"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next set of results."
-        }
-      },
-      "description": "Response for ListPeering Api service callRetrieves all Peerings that belongs to an ExpressRouteCircuit"
-    },
     "FrontendIpConfigurationPropertiesFormat": {
       "properties": {
         "privateIPAddress": {
@@ -4634,7 +2948,9 @@
             "Static",
             "Dynamic"
           ],
-          "x-ms-enum": "IpAllocationMethod"
+          "x-ms-enum": {
+            "name": "IpAllocationMethod"
+          }
         },
         "subnet": {
           "$ref": "#/definitions/SubResource",
@@ -4650,20 +2966,6 @@
             "$ref": "#/definitions/SubResource"
           },
           "description": "Read only.Inbound rules URIs that use this frontend IP"
-        },
-        "inboundNatPools": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
-          "description": "Read only.Inbound pools URIs that use this frontend IP"
-        },
-        "outboundNatRules": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
-          "description": "Read only.Outbound rules URIs that use this frontend IP"
         },
         "loadBalancingRules": {
           "type": "array",
@@ -4695,7 +2997,7 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Frontend IP address of the load balancer"
@@ -4715,10 +3017,6 @@
             "$ref": "#/definitions/SubResource"
           },
           "description": "Gets Load Balancing rules that use this Backend Address Pool"
-        },
-        "outboundNatRule": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Gets outbound rules that use this Backend Address Pool"
         },
         "provisioningState": {
           "type": "string",
@@ -4743,7 +3041,7 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Pool of backend IP addresseses"
@@ -4769,7 +3067,9 @@
             "Udp",
             "Tcp"
           ],
-          "x-ms-enum": "TransportProtocol"
+          "x-ms-enum": {
+            "name": "TransportProtocol"
+          }
         },
         "loadDistribution": {
           "type": "string",
@@ -4779,7 +3079,9 @@
             "SourceIP",
             "SourceIPProtocol"
           ],
-          "x-ms-enum": "LoadDistribution"
+          "x-ms-enum": {
+            "name": "LoadDistribution"
+          }
         },
         "frontendPort": {
           "type": "integer",
@@ -4823,7 +3125,7 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Rules of the load balancer"
@@ -4844,7 +3146,9 @@
             "Http",
             "Tcp"
           ],
-          "x-ms-enum": "ProbeProtocol"
+          "x-ms-enum": {
+            "name": "ProbeProtocol"
+          }
         },
         "port": {
           "type": "integer",
@@ -4887,7 +3191,7 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Load balancer Probe"
@@ -4909,7 +3213,9 @@
             "Udp",
             "Tcp"
           ],
-          "x-ms-enum": "TransportProtocol"
+          "x-ms-enum": {
+            "name": "TransportProtocol"
+          }
         },
         "frontendPort": {
           "type": "integer",
@@ -4953,114 +3259,10 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Inbound NAT rule of the loadbalancer"
-    },
-    "InboundNatPoolPropertiesFormat": {
-      "properties": {
-        "frontendIPConfiguration": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets a reference to frontend IP Addresses"
-        },
-        "protocol": {
-          "type": "string",
-          "description": "Gets or sets the transport potocol for the external endpoint. Possible values are Udp or Tcp",
-          "enum": [
-            "Udp",
-            "Tcp"
-          ],
-          "x-ms-enum": "TransportProtocol"
-        },
-        "frontendPortRangeStart": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the starting port range for the NAT pool. You can spcify any port number you choose, but the port numbers specified for each role in the service must be unique. Possible values range between 1 and 65535, inclusive"
-        },
-        "frontendPortRangeEnd": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the ending port range for the NAT pool. You can spcify any port number you choose, but the port numbers specified for each role in the service must be unique. Possible values range between 1 and 65535, inclusive"
-        },
-        "backendPort": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets a port used for internal connections on the endpoint. The localPort attribute maps the eternal port of the endpoint to an internal port on a role. This is useful in scenarios where a role must communicate to an internal compotnent on a port that is different from the one that is exposed externally. If not specified, the value of localPort is the same as the port attribute. Set the value of localPort to '*' to automatically assign an unallocated port that is discoverable using the runtime API"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
-        }
-      },
-      "description": "Properties of Inbound NAT pool"
-    },
-    "InboundNatPool": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/InboundNatPoolPropertiesFormat"
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "SubResource"
-        }
-      ],
-      "description": "Inbound NAT pool of the loadbalancer"
-    },
-    "OutboundNatRulePropertiesFormat": {
-      "properties": {
-        "allocatedOutboundPorts": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of outbound ports to be used for SNAT"
-        },
-        "frontendIPConfigurations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
-          "description": "Gets or sets Frontend IP addresses of the load balancer"
-        },
-        "backendAddressPool": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets a reference to a pool of DIPs. Outbound traffic is randomly load balanced across IPs in the backend IPs"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
-        }
-      },
-      "description": "Outbound NAT pool of the loadbalancer"
-    },
-    "OutboundNatRule": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/OutboundNatRulePropertiesFormat"
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "SubResource"
-        }
-      ],
-      "description": "Outbound NAT pool of the loadbalancer"
     },
     "LoadBalancerPropertiesFormat": {
       "properties": {
@@ -5098,24 +3300,6 @@
             "$ref": "#/definitions/InboundNatRule"
           },
           "description": "Gets or sets list of inbound rules"
-        },
-        "inboundNatPools": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InboundNatPool"
-          },
-          "description": "Gets or sets inbound NAT pools"
-        },
-        "outboundNatRules": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OutboundNatRule"
-          },
-          "description": "Gets or sets outbound NAT rules"
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "Gets or sets resource guid property of the Load balancer resource"
         },
         "provisioningState": {
           "type": "string",
@@ -5179,10 +3363,6 @@
           "type": "string",
           "description": "IP address of local network gateway."
         },
-        "resourceGuid": {
-          "type": "string",
-          "description": "Gets or sets resource guid property of the LocalNetworkGateway resource"
-        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the LocalNetworkGateway resource Updating/Deleting/Failed"
@@ -5236,7 +3416,9 @@
             "Static",
             "Dynamic"
           ],
-          "x-ms-enum": "IpAllocationMethod"
+          "x-ms-enum": {
+            "name": "IpAllocationMethod"
+          }
         },
         "subnet": {
           "$ref": "#/definitions/SubResource",
@@ -5283,7 +3465,7 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "IPConfiguration in a NetworkInterface"
@@ -5344,14 +3526,6 @@
           "type": "boolean",
           "description": "Gets whether this is a primary NIC on a virtual machine"
         },
-        "enableIPForwarding": {
-          "type": "boolean",
-          "description": "Gets or sets whether IPForwarding is enabled on the NIC"
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "Gets or sets resource guid property of the network interface resource"
-        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
@@ -5392,112 +3566,6 @@
       },
       "description": "Response for ListNetworkInterface Api service call"
     },
-    "RoutePropertiesFormat": {
-      "properties": {
-        "addressPrefix": {
-          "type": "string",
-          "description": "Gets or sets the destination CIDR to which the route applies."
-        },
-        "nextHopType": {
-          "type": "string",
-          "description": "Gets or sets the type of Azure hop the packet should be sent to.",
-          "enum": [
-            "VirtualNetworkGateway",
-            "VnetLocal",
-            "Internet",
-            "VirtualAppliance",
-            "None"
-          ],
-          "x-ms-enum": "RouteNextHopType"
-        },
-        "nextHopIpAddress": {
-          "type": "string",
-          "description": "Gets or sets the IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance."
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Gets or sets Provisioning state of the resource Updating/Deleting/Failed"
-        }
-      },
-      "description": "Route resource"
-    },
-    "Route": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RoutePropertiesFormat"
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "SubResource"
-        }
-      ],
-      "description": "Route resource"
-    },
-    "RouteTablePropertiesFormat": {
-      "properties": {
-        "routes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Route"
-          },
-          "description": "Gets or sets Routes in a Route Table"
-        },
-        "subnets": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
-          "description": "Gets collection of references to subnets"
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Gets or sets Provisioning state of the resource Updating/Deleting/Failed"
-        }
-      },
-      "description": "Route Table resource"
-    },
-    "RouteTable": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RouteTablePropertiesFormat"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Gets a unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "RouteTable resource"
-    },
-    "RouteTableListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RouteTable"
-          },
-          "description": "Gets List of RouteTables in a resource group"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next set of results."
-        }
-      },
-      "description": "Response for ListRouteTable Api servive call"
-    },
     "SecurityRulePropertiesFormat": {
       "properties": {
         "description": {
@@ -5512,7 +3580,9 @@
             "Udp",
             "*"
           ],
-          "x-ms-enum": "SecurityRuleProtocol"
+          "x-ms-enum": {
+            "name": "SecurityRuleProtocol"
+          }
         },
         "sourcePortRange": {
           "type": "string",
@@ -5537,7 +3607,9 @@
             "Allow",
             "Deny"
           ],
-          "x-ms-enum": "SecurityRuleAccess"
+          "x-ms-enum": {
+            "name": "SecurityRuleAccess"
+          }
         },
         "priority": {
           "type": "integer",
@@ -5551,7 +3623,9 @@
             "Inbound",
             "Outbound"
           ],
-          "x-ms-enum": "SecurityRuleDirection"
+          "x-ms-enum": {
+            "name": "SecurityRuleDirection"
+          }
         },
         "provisioningState": {
           "type": "string",
@@ -5575,7 +3649,7 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Network security rule"
@@ -5609,10 +3683,6 @@
             "$ref": "#/definitions/SubResource"
           },
           "description": "Gets collection of references to subnets"
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "Gets or sets resource guid property of the network security group resource"
         },
         "provisioningState": {
           "type": "string",
@@ -5680,7 +3750,9 @@
             "Static",
             "Dynamic"
           ],
-          "x-ms-enum": "IpAllocationMethod"
+          "x-ms-enum": {
+            "name": "IpAllocationMethod"
+          }
         },
         "ipConfiguration": {
           "$ref": "#/definitions/SubResource",
@@ -5698,10 +3770,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Gets or sets the Idletimeout of the public IP address"
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "Gets or sets resource guid property of the PublicIP resource"
         },
         "provisioningState": {
           "type": "string",
@@ -5743,22 +3811,6 @@
       },
       "description": "Response for ListPublicIpAddresses Api service call"
     },
-    "RouteListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Route"
-          },
-          "description": "Gets List of Routes in a resource group"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next set of results."
-        }
-      },
-      "description": "Response for ListRoute Api servive call"
-    },
     "SecurityRuleListResult": {
       "properties": {
         "value": {
@@ -5775,22 +3827,6 @@
       },
       "description": "Response for ListSecurityRule Api service callRetrieves all security rules that belongs to a network security group"
     },
-    "AuthorizationListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
-          },
-          "description": "Gets the authorizations in an ExpressRoute Circuit"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next set of results."
-        }
-      },
-      "description": "Response for ListAuthorizations Api service callRetrieves all authorizations that belongs to an ExpressRouteCircuit"
-    },
     "SubnetPropertiesFormat": {
       "properties": {
         "addressPrefix": {
@@ -5800,10 +3836,6 @@
         "networkSecurityGroup": {
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets the reference of the NetworkSecurityGroup resource"
-        },
-        "routeTable": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets the reference of the RouteTable resource"
         },
         "ipConfigurations": {
           "type": "array",
@@ -5834,7 +3866,7 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Subnet in a VirtualNework resource"
@@ -5876,7 +3908,9 @@
           "enum": [
             "Count"
           ],
-          "x-ms-enum": "UsageUnit"
+          "x-ms-enum": {
+            "name": "UsageUnit"
+          }
         },
         "currentValue": {
           "type": "integer",
@@ -5907,7 +3941,7 @@
       },
       "description": "The List Usages operation response."
     },
-    "VirtualNetworkGatewayIpConfiguration": {
+    "VirtualNetworkGatewayIpConfigurationPropertiesFormat": {
       "properties": {
         "privateIPAddress": {
           "type": "string",
@@ -5920,7 +3954,9 @@
             "Static",
             "Dynamic"
           ],
-          "x-ms-enum": "IpAllocationMethod"
+          "x-ms-enum": {
+            "name": "IpAllocationMethod"
+          }
         },
         "subnet": {
           "$ref": "#/definitions/SubResource",
@@ -5933,6 +3969,14 @@
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of VirtualNetworkGatewayIPConfiguration"
+    },
+    "VirtualNetworkGatewayIpConfiguration": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkGatewayIpConfigurationPropertiesFormat"
         },
         "name": {
           "type": "string",
@@ -5945,12 +3989,12 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "IpConfiguration for Virtual network gateway"
     },
-    "VirtualNetworkGateway": {
+    "VirtualNetworkGatewayPropertiesFormat": {
       "properties": {
         "ipConfigurations": {
           "type": "array",
@@ -5963,10 +4007,11 @@
           "type": "string",
           "description": "The type of this virtual network gateway.",
           "enum": [
-            "Vpn",
-            "ExpressRoute"
+            "Vpn"
           ],
-          "x-ms-enum": "VirtualNetworkGatewayType"
+          "x-ms-enum": {
+            "name": "VirtualNetworkGatewayType"
+          }
         },
         "vpnType": {
           "type": "string",
@@ -5975,7 +4020,9 @@
             "PolicyBased",
             "RouteBased"
           ],
-          "x-ms-enum": "VpnType"
+          "x-ms-enum": {
+            "name": "VpnType"
+          }
         },
         "enableBgp": {
           "type": "boolean",
@@ -5984,10 +4031,14 @@
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the VirtualNetworkGateway resource Updating/Deleting/Failed"
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "Gets or sets resource guid property of the VirtualNetworkGateway resource"
+        }
+      },
+      "description": "VirtualNeworkGateay properties"
+    },
+    "VirtualNetworkGateway": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkGatewayPropertiesFormat"
         },
         "etag": {
           "type": "string",
@@ -6021,7 +4072,9 @@
             "ExpressRoute",
             "VPNClient"
           ],
-          "x-ms-enum": "VirtualNetworkGatewayConnectionType"
+          "x-ms-enum": {
+            "name": "VirtualNetworkGatewayConnectionType"
+          }
         },
         "routingWeight": {
           "type": "integer",
@@ -6031,14 +4084,6 @@
         "sharedKey": {
           "type": "string",
           "description": "The Ipsec share key."
-        },
-        "peer": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The reference to peerings resource."
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "Gets or sets resource guid property of the VirtualNetworkGatewayConnection resource"
         },
         "provisioningState": {
           "type": "string",
@@ -6064,14 +4109,14 @@
       ],
       "description": "A common class for general resource information"
     },
-    "ConnectionSharedKeyResult": {
+    "ConnectionSharedKey": {
       "properties": {
         "value": {
           "type": "string",
           "description": "The virtual network connection shared key value"
         }
       },
-      "description": "Response for CheckConnectionSharedKey Api servive call"
+      "description": "Response for GetConnectionSharedKey Api servive call"
     },
     "VirtualNetworkGatewayConnectionListResult": {
       "properties": {
@@ -6105,23 +4150,6 @@
           "$ref": "#/definitions/ConnectionResetSharedKeyPropertiesFormat"
         }
       }
-    },
-    "ConnectionSharedKeyPropertiesFormat": {
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The virtual network connection shared key value"
-        }
-      },
-      "description": "VirtualNeworkGatewayConnectionSharedKey properties"
-    },
-    "ConnectionSharedKey": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ConnectionSharedKeyPropertiesFormat"
-        }
-      },
-      "description": "Response for GetConnectionSharedKey Api servive call"
     },
     "VirtualNetworkGatewayListResult": {
       "properties": {
@@ -6167,10 +4195,6 @@
             "$ref": "#/definitions/Subnet"
           },
           "description": "Gets or sets List of subnets in a VirtualNetwork"
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "Gets or sets resource guid property of the VirtualNetwork resource"
         },
         "provisioningState": {
           "type": "string",
@@ -6265,7 +4289,9 @@
             "Succeeded",
             "Failed"
           ],
-          "x-ms-enum": "NetworkOperationStatus"
+          "x-ms-enum": {
+            "name": "OperationStatus"
+          }
         },
         "error": {
           "$ref": "#/definitions/Error"
@@ -6305,7 +4331,7 @@
       "required": [
         "location"
       ],
-      "x-ms-external": true
+      "x-ms-azure-resource": true
     },
     "SubResource": {
       "properties": {
@@ -6314,7 +4340,7 @@
           "description": "Resource Id"
         }
       },
-      "x-ms-external": true
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {

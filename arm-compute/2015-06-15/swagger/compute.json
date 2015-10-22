@@ -2,6 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ComputeManagementClient",
+    "description": "The Compute Management Client.",
     "version": "2015-06-15"
   },
   "host": "management.azure.com",
@@ -1331,7 +1332,9 @@
             "Warning",
             "Error"
           ],
-          "x-ms-enum": "StatusLevelTypes"
+          "x-ms-enum": {
+            "name": "StatusLevelTypes"
+          }
         },
         "displayStatus": {
           "type": "string",
@@ -1475,7 +1478,9 @@
             "Windows",
             "Linux"
           ],
-          "x-ms-enum": "OperatingSystemTypes"
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes"
+          }
         }
       },
       "description": "Contains the os disk image information."
@@ -1530,7 +1535,7 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Describes a Virtual Machine Image."
@@ -1555,7 +1560,7 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Virtual machine image resource information."
@@ -1608,7 +1613,7 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Describes a Virtual Machine Extension Image."
@@ -1715,7 +1720,10 @@
           "enum": [
             "Count"
           ],
-          "x-ms-enum": "UsageUnit"
+          "x-ms-enum": {
+            "name": "UsageUnit",
+            "modelAsString": "False"
+          }
         },
         "currentValue": {
           "type": "integer",
@@ -1845,7 +1853,10 @@
             "Succeeded",
             "Preempted"
           ],
-          "x-ms-enum": "ComputeOperationStatus"
+          "x-ms-enum": {
+            "name": "ComputeOperationStatus",
+            "modelAsString": "False"
+          }
         },
         "startTime": {
           "type": "string",
@@ -1909,36 +1920,15 @@
             "Standard_A7",
             "Standard_A8",
             "Standard_A9",
-            "Standard_A10",
-            "Standard_A11",
-            "Standard_D1",
-            "Standard_D2",
-            "Standard_D3",
-            "Standard_D4",
-            "Standard_DS1",
-            "Standard_DS2",
-            "Standard_DS3",
-            "Standard_DS4",
-            "Standard_D11",
-            "Standard_D12",
-            "Standard_D13",
-            "Standard_D14",
-            "Standard_DS11",
-            "Standard_DS12",
-            "Standard_DS13",
-            "Standard_DS14",
             "Standard_G1",
             "Standard_G2",
             "Standard_G3",
             "Standard_G4",
-            "Standard_G5",
-            "Standard_GS1",
-            "Standard_GS2",
-            "Standard_GS3",
-            "Standard_GS4",
-            "Standard_GS5"
+            "Standard_G5"
           ],
-          "x-ms-enum": "VirtualMachineSizeTypes"
+          "x-ms-enum": {
+            "name": "VirtualMachineSizeTypes"
+          }
         }
       },
       "description": "Describes a hardware profile."
@@ -1982,7 +1972,9 @@
             "Windows",
             "Linux"
           ],
-          "x-ms-enum": "OperatingSystemTypes"
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes"
+          }
         },
         "name": {
           "type": "string",
@@ -2004,7 +1996,9 @@
             "ReadOnly",
             "ReadWrite"
           ],
-          "x-ms-enum": "CachingTypes"
+          "x-ms-enum": {
+            "name": "CachingTypes"
+          }
         },
         "createOption": {
           "type": "string",
@@ -2014,7 +2008,9 @@
             "empty",
             "attach"
           ],
-          "x-ms-enum": "DiskCreateOptionTypes"
+          "x-ms-enum": {
+            "name": "DiskCreateOptionTypes"
+          }
         }
       },
       "description": "Describes an Operating System disk."
@@ -2051,7 +2047,9 @@
             "ReadOnly",
             "ReadWrite"
           ],
-          "x-ms-enum": "CachingTypes"
+          "x-ms-enum": {
+            "name": "CachingTypes"
+          }
         },
         "createOption": {
           "type": "string",
@@ -2061,7 +2059,9 @@
             "empty",
             "attach"
           ],
-          "x-ms-enum": "DiskCreateOptionTypes"
+          "x-ms-enum": {
+            "name": "DiskCreateOptionTypes"
+          }
         }
       },
       "description": "Describes a data disk."
@@ -2094,7 +2094,9 @@
           "enum": [
             "oobeSystem"
           ],
-          "x-ms-enum": "PassNames"
+          "x-ms-enum": {
+            "name": "PassNames"
+          }
         },
         "componentName": {
           "type": "string",
@@ -2102,7 +2104,9 @@
           "enum": [
             "Microsoft-Windows-Shell-Setup"
           ],
-          "x-ms-enum": "ComponentNames"
+          "x-ms-enum": {
+            "name": "ComponentNames"
+          }
         },
         "settingName": {
           "type": "string",
@@ -2111,7 +2115,9 @@
             "AutoLogon",
             "FirstLogonCommands"
           ],
-          "x-ms-enum": "SettingNames"
+          "x-ms-enum": {
+            "name": "SettingNames"
+          }
         },
         "content": {
           "type": "string",
@@ -2129,7 +2135,9 @@
             "Http",
             "Https"
           ],
-          "x-ms-enum": "ProtocolTypes"
+          "x-ms-enum": {
+            "name": "ProtocolTypes"
+          }
         },
         "certificateUrl": {
           "type": "string",
@@ -2298,7 +2306,7 @@
       },
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Describes a network interface reference."
@@ -2502,7 +2510,10 @@
             "Succeeded",
             "Failed"
           ],
-          "x-ms-enum": "OperationStatus"
+          "x-ms-enum": {
+            "name": "OperationStatus",
+            "modelAsString": "False"
+          }
         },
         "startTime": {
           "type": "string",
@@ -2553,7 +2564,7 @@
       "required": [
         "location"
       ],
-      "x-ms-external": true
+      "x-ms-azure-resource": true
     },
     "SubResource": {
       "properties": {
@@ -2562,7 +2573,7 @@
           "description": "Resource Id"
         }
       },
-      "x-ms-external": true
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {

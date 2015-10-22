@@ -2,6 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "StorageManagementClient",
+    "description": "The Storage Management Client.",
     "version": "2015-05-01-preview"
   },
   "host": "management.azure.com",
@@ -284,7 +285,8 @@
               "$ref": "#/definitions/StorageAccountListResult"
             }
           }
-        }
+        },
+        "x-ms-pageable": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts": {
@@ -316,7 +318,8 @@
               "$ref": "#/definitions/StorageAccountListResult"
             }
           }
-        }
+        },
+        "x-ms-pageable": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey": {
@@ -417,7 +420,10 @@
             "AccountNameInvalid",
             "AlreadyExists"
           ],
-          "x-ms-enum": "Reason"
+          "x-ms-enum": {
+            "name": "Reason",
+            "modelAsString": "False"
+          }
         },
         "message": {
           "type": "string",
@@ -438,7 +444,10 @@
             "Standard_RAGRS",
             "Premium_LRS"
           ],
-          "x-ms-enum": "AccountType"
+          "x-ms-enum": {
+            "name": "AccountType",
+            "modelAsString": "False"
+          }
         }
       }
     },
@@ -492,10 +501,13 @@
           "description": "Gets the status of the storage account at the time the operation was called.",
           "enum": [
             "Creating",
-            "ResolvingDns",
+            "ResolvingDNS",
             "Succeeded"
           ],
-          "x-ms-enum": "ProvisioningState"
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": "False"
+          }
         },
         "accountType": {
           "type": "string",
@@ -507,7 +519,10 @@
             "Standard_RAGRS",
             "Premium_LRS"
           ],
-          "x-ms-enum": "AccountType"
+          "x-ms-enum": {
+            "name": "AccountType",
+            "modelAsString": "False"
+          }
         },
         "primaryEndpoints": {
           "$ref": "#/definitions/Endpoints",
@@ -524,7 +539,10 @@
             "Available",
             "Unavailable"
           ],
-          "x-ms-enum": "AccountStatus"
+          "x-ms-enum": {
+            "name": "AccountStatus",
+            "modelAsString": "False"
+          }
         },
         "lastGeoFailoverTime": {
           "type": "string",
@@ -542,7 +560,10 @@
             "Available",
             "Unavailable"
           ],
-          "x-ms-enum": "AccountStatus"
+          "x-ms-enum": {
+            "name": "AccountStatus",
+            "modelAsString": "False"
+          }
         },
         "creationTime": {
           "type": "string",
@@ -593,6 +614,10 @@
             "$ref": "#/definitions/StorageAccount"
           },
           "description": "Gets the list of storage accounts and their properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the link to the next set of results. Currently this will always be empty as the API does not support pagination."
         }
       },
       "description": "The list storage accounts operation response."
@@ -609,7 +634,10 @@
             "Standard_RAGRS",
             "Premium_LRS"
           ],
-          "x-ms-enum": "AccountType"
+          "x-ms-enum": {
+            "name": "AccountType",
+            "modelAsString": "False"
+          }
         },
         "customDomain": {
           "$ref": "#/definitions/CustomDomain",
@@ -638,7 +666,10 @@
             "key1",
             "key2"
           ],
-          "x-ms-enum": "KeyName"
+          "x-ms-enum": {
+            "name": "KeyName",
+            "modelAsString": "False"
+          }
         }
       }
     },
@@ -668,7 +699,10 @@
             "CountsPerSecond",
             "BytesPerSecond"
           ],
-          "x-ms-enum": "UsageUnit"
+          "x-ms-enum": {
+            "name": "UsageUnit",
+            "modelAsString": "False"
+          }
         },
         "currentValue": {
           "type": "integer",
@@ -731,7 +765,7 @@
       "required": [
         "location"
       ],
-      "x-ms-external": true
+      "x-ms-azure-resource": true
     },
     "SubResource": {
       "properties": {
@@ -740,7 +774,7 @@
           "description": "Resource Id"
         }
       },
-      "x-ms-external": true
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
