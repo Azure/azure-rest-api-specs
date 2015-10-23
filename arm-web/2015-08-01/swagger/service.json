@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2015-08-01",
-    "title": "Microsoft Azure Websites ARM API",
+    "title": "WebSite Management Client",
     "description": "Use these APIs to manage Azure Websites resources through the Azure Resource Manager. All task operations conform to the HTTP/1.1 protocol specification and each operation returns an x-ms-request-id header that can be used to obtain information about the request. You must make sure that requests made to these resources are secure. For more information, see <a href=\"https://msdn.microsoft.com/en-us/library/azure/dn790557.aspx\">Authenticating Azure Resource Manager requests.</a>"
   },
   "host": "management.azure.com",
@@ -6252,7 +6252,7 @@
           }
         },
         "deprecated": false,
-        "x-ms-pageable": true
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/webhostingplans/{name}/sites": {
@@ -6316,7 +6316,7 @@
           }
         },
         "deprecated": false,
-        "x-ms-pageable": true
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/workers/{workerName}": {
@@ -15299,7 +15299,7 @@
                 "Unknown"
               ],
               "type": "string",
-              "x-ms-enum": "KeyVaultSecretStatus"
+              "x-ms-enum": { "name": "KeyVaultSecretStatus", "modelAsString": "False" }
             },
             "thumbprint": {
               "description": "Thumbprint of the certificate stored in KeyVault",
@@ -15383,7 +15383,7 @@
                 "StandardDomainValidatedWildCardSsl"
               ],
               "type": "string",
-              "x-ms-enum": "CertificateProductType"
+              "x-ms-enum": { "name": "CertificateProductType", "modelAsString": "False" }
             },
             "status": {
               "description": "Current order status",
@@ -15400,7 +15400,7 @@
                 "NotSubmitted"
               ],
               "type": "string",
-              "x-ms-enum": "CertificateOrderStatus"
+              "x-ms-enum": { "name": "CertificateOrderStatus", "modelAsString": "False" }
             },
             "signedCertificate": {
               "description": "Signed certificate",
@@ -15429,7 +15429,7 @@
                 "Renew"
               ],
               "type": "string",
-              "x-ms-enum": "CertificateAction"
+              "x-ms-enum": { "name": "CertificateAction", "modelAsString": "False" }
             },
             "keyVaultCsmId": {
               "description": "Key Vault Csm resource Id",
@@ -15750,7 +15750,7 @@
                 "JsonConverterFailed"
               ],
               "type": "string",
-              "x-ms-enum": "DomainStatus"
+              "x-ms-enum": { "name": "DomainStatus", "modelAsString": "False" }
             },
             "nameServers": {
               "description": "Name servers",
@@ -15869,7 +15869,7 @@
             "TrafficManager"
           ],
           "type": "string",
-          "x-ms-enum": "AzureResourceType"
+          "x-ms-enum": { "name": "AzureResourceType", "modelAsString": "False" }
         },
         "customHostNameDnsRecordType": {
           "description": "Type of the Dns record",
@@ -15878,7 +15878,7 @@
             "A"
           ],
           "type": "string",
-          "x-ms-enum": "CustomHostNameDnsRecordType"
+          "x-ms-enum": { "name": "CustomHostNameDnsRecordType", "modelAsString": "False" }
         },
         "hostNameType": {
           "description": "Type of the hostname",
@@ -15887,7 +15887,7 @@
             "Managed"
           ],
           "type": "string",
-          "x-ms-enum": "HostNameType"
+          "x-ms-enum": { "name": "HostNameType", "modelAsString": "False" }
         }
       }
     },
@@ -16074,7 +16074,7 @@
               ],
               "type": "string",
               "readOnly": true,
-              "x-ms-enum": "StatusOptions"
+              "x-ms-enum": { "name": "StatusOptions", "modelAsString": "False" }
             },
             "subscription": {
               "description": "App Service Plan Subscription",
@@ -16183,7 +16183,7 @@
               ],
               "type": "string",
               "readOnly": true,
-              "x-ms-enum": "UsageState"
+              "x-ms-enum": { "name": "UsageState", "modelAsString": "False" }
             },
             "enabled": {
               "description": "True if the site is enabled; otherwise, false. Setting this  value to false disables the site (takes the site off line).",
@@ -16206,7 +16206,7 @@
               ],
               "type": "string",
               "readOnly": true,
-              "x-ms-enum": "SiteAvailabilityState"
+              "x-ms-enum": { "name": "SiteAvailabilityState", "modelAsString": "False" }
             },
             "hostNameSslStates": {
               "description": "Hostname SSL states are  used to manage the SSL bindings for site's hostnames.",
@@ -16326,7 +16326,7 @@
             "IpBasedEnabled"
           ],
           "type": "string",
-          "x-ms-enum": "SslState"
+          "x-ms-enum": { "name": "SslState", "modelAsString": "False" }
         },
         "virtualIP": {
           "description": "Virtual IP address assigned to the host name if IP based SSL is enabled",
@@ -16486,7 +16486,7 @@
                 "Classic"
               ],
               "type": "string",
-              "x-ms-enum": "ManagedPipelineMode"
+              "x-ms-enum": { "name": "ManagedPipelineMode", "modelAsString": "False" }
             },
             "virtualApplications": {
               "description": "Virtual applications",
@@ -16505,7 +16505,7 @@
                 "RequestHash"
               ],
               "type": "string",
-              "x-ms-enum": "SiteLoadBalancing"
+              "x-ms-enum": { "name": "SiteLoadBalancing", "modelAsString": "False" }
             },
             "experiments": {
               "$ref": "#/definitions/Experiments",
@@ -16634,7 +16634,7 @@
             "Custom"
           ],
           "type": "string",
-          "x-ms-enum": "DatabaseServerType"
+          "x-ms-enum": { "name": "DatabaseServerType", "modelAsString": "False" }
         }
       }
     },
@@ -16849,7 +16849,7 @@
             "CustomAction"
           ],
           "type": "string",
-          "x-ms-enum": "AutoHealActionType"
+          "x-ms-enum": { "name": "AutoHealActionType", "modelAsString": "False" }
         },
         "customAction": {
           "$ref": "#/definitions/AutoHealCustomAction",
@@ -16983,7 +16983,7 @@
                 "Deleting"
               ],
               "type": "string",
-              "x-ms-enum": "HostingEnvironmentStatus"
+              "x-ms-enum": { "name": "HostingEnvironmentStatus", "modelAsString": "False" }
             },
             "vnetName": {
               "description": "Name of the hostingEnvironment's (App Service Environment) virtual network",
@@ -17009,7 +17009,7 @@
                 "Publishing"
               ],
               "type": "string",
-              "x-ms-enum": "InternalLoadBalancingMode"
+              "x-ms-enum": { "name": "InternalLoadBalancingMode", "modelAsString": "False" }
             },
             "multiSize": {
               "description": "Front-end VM size, e.g. \"Medium\", \"Large\"",
@@ -17164,7 +17164,7 @@
                 "Dedicated"
               ],
               "type": "string",
-              "x-ms-enum": "ComputeModeOptions"
+              "x-ms-enum": { "name": "ComputeModeOptions", "modelAsString": "False" }
             },
             "workerSize": {
               "description": "VM size of the worker pool instances",
@@ -17242,7 +17242,7 @@
             "Dedicated"
           ],
           "type": "string",
-          "x-ms-enum": "ComputeModeOptions"
+          "x-ms-enum": { "name": "ComputeModeOptions", "modelAsString": "False" }
         },
         "workerSize": {
           "description": "Size of the machines",
@@ -17252,7 +17252,7 @@
             "Large"
           ],
           "type": "string",
-          "x-ms-enum": "WorkerSizeOptions"
+          "x-ms-enum": { "name": "WorkerSizeOptions", "modelAsString": "False" }
         },
         "workerSizeId": {
           "format": "int32",
@@ -17282,7 +17282,7 @@
             "Deny"
           ],
           "type": "string",
-          "x-ms-enum": "AccessControlEntryAction"
+          "x-ms-enum": { "name": "AccessControlEntryAction", "modelAsString": "False" }
         },
         "description": {
           "type": "string"
@@ -17406,7 +17406,7 @@
                 "JsonConverterFailed"
               ],
               "type": "string",
-              "x-ms-enum": "DomainStatus"
+              "x-ms-enum": { "name": "DomainStatus", "modelAsString": "False" }
             },
             "nameServers": {
               "description": "Name servers",
@@ -17486,7 +17486,7 @@
             "SoftDeleted"
           ],
           "type": "string",
-          "x-ms-enum": "DomainType"
+          "x-ms-enum": { "name": "DomainType", "modelAsString": "False" }
         }
       }
     },
@@ -17916,7 +17916,7 @@
                 "Dedicated"
               ],
               "type": "string",
-              "x-ms-enum": "ComputeModeOptions"
+              "x-ms-enum": { "name": "ComputeModeOptions", "modelAsString": "False" }
             },
             "siteMode": {
               "description": "SiteMode used for this usage",
@@ -18230,7 +18230,7 @@
               ],
               "type": "string",
               "readOnly": true,
-              "x-ms-enum": "UsageState"
+              "x-ms-enum": { "name": "UsageState", "modelAsString": "False" }
             },
             "enabled": {
               "description": "True if the site is enabled; otherwise, false. Setting this  value to false disables the site (takes the site off line).",
@@ -18253,7 +18253,7 @@
               ],
               "type": "string",
               "readOnly": true,
-              "x-ms-enum": "SiteAvailabilityState"
+              "x-ms-enum": { "name": "SiteAvailabilityState", "modelAsString": "False" }
             },
             "hostNameSslStates": {
               "description": "Hostname SSL states are  used to manage the SSL bindings for site's hostnames.",
@@ -18418,7 +18418,7 @@
                 "TrafficManager"
               ],
               "type": "string",
-              "x-ms-enum": "AzureResourceType"
+              "x-ms-enum": { "name": "AzureResourceType", "modelAsString": "False" }
             },
             "customHostNameDnsRecordType": {
               "description": "Custom DNS record type",
@@ -18427,7 +18427,7 @@
                 "A"
               ],
               "type": "string",
-              "x-ms-enum": "CustomHostNameDnsRecordType"
+              "x-ms-enum": { "name": "CustomHostNameDnsRecordType", "modelAsString": "False" }
             },
             "hostNameType": {
               "description": "Host name type",
@@ -18436,7 +18436,7 @@
                 "Managed"
               ],
               "type": "string",
-              "x-ms-enum": "HostNameType"
+              "x-ms-enum": { "name": "HostNameType", "modelAsString": "False" }
             }
           }
         }
@@ -18533,7 +18533,7 @@
             "Custom"
           ],
           "type": "string",
-          "x-ms-enum": "DatabaseServerType"
+          "x-ms-enum": { "name": "DatabaseServerType", "modelAsString": "False" }
         }
       }
     },
@@ -18624,7 +18624,7 @@
             "Error"
           ],
           "type": "string",
-          "x-ms-enum": "LogLevel"
+          "x-ms-enum": { "name": "LogLevel", "modelAsString": "False" }
         }
       }
     },
@@ -18642,7 +18642,7 @@
             "Error"
           ],
           "type": "string",
-          "x-ms-enum": "LogLevel"
+          "x-ms-enum": { "name": "LogLevel", "modelAsString": "False" }
         },
         "sasUrl": {
           "description": "SAS url to an azure table with add/query/delete permissions",
@@ -18664,7 +18664,7 @@
             "Error"
           ],
           "type": "string",
-          "x-ms-enum": "LogLevel"
+          "x-ms-enum": { "name": "LogLevel", "modelAsString": "False" }
         },
         "sasUrl": {
           "description": "SAS url to a azure blob container with read/write/list/delete permissions",
@@ -18789,7 +18789,7 @@
                 "Relocation"
               ],
               "type": "string",
-              "x-ms-enum": "BackupRestoreOperationType"
+              "x-ms-enum": { "name": "BackupRestoreOperationType", "modelAsString": "False" }
             }
           }
         }
@@ -18814,7 +18814,7 @@
             "Hour"
           ],
           "type": "string",
-          "x-ms-enum": "FrequencyUnit"
+          "x-ms-enum": { "name": "FrequencyUnit", "modelAsString": "False" }
         },
         "keepAtLeastOneBackup": {
           "description": "True if the retention policy should always keep at least one backup in the storage account, regardless how old it is; false otherwise.",
@@ -18896,7 +18896,7 @@
                 "PartiallySucceeded"
               ],
               "type": "string",
-              "x-ms-enum": "BackupItemStatus"
+              "x-ms-enum": { "name": "BackupItemStatus", "modelAsString": "False" }
             },
             "sizeInBytes": {
               "format": "int64",
@@ -18995,7 +18995,7 @@
                 "Relocation"
               ],
               "type": "string",
-              "x-ms-enum": "BackupRestoreOperationType"
+              "x-ms-enum": { "name": "BackupRestoreOperationType", "modelAsString": "False" }
             },
             "adjustConnectionStrings": {
               "description": "Gets or sets a flag showing if SiteConfig.ConnectionStrings should be set in new site",
@@ -19344,7 +19344,7 @@
           }
         }
       },
-      "x-ms-external": true
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
