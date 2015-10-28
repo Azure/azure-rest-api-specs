@@ -17,6 +17,35 @@
     "text/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/locations": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_ListLocations",
+        "description": "Gets a list of the subscription locations.",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of the subscription"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/LocationListResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}": {
       "get": {
         "tags": [
@@ -142,6 +171,47 @@
         }
       },
       "description": "Resource group filter."
+    },
+    "Location": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the ID of the resource (/subscriptions/SubscriptionId)."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Gets or sets the subscription Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the location name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the display name of the location"
+        },
+        "latitude": {
+          "type": "string",
+          "description": "Gets or sets the latitude of the location"
+        },
+        "longitude": {
+          "type": "string",
+          "description": "Gets or sets the longitude of the location"
+        }
+      },
+      "description": "Location information."
+    },
+    "LocationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Location"
+          },
+          "description": "Gets the locations."
+        }
+      },
+      "description": "Location list operation response."
     },
     "Subscription": {
       "properties": {
