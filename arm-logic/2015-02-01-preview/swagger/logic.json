@@ -55,7 +55,7 @@
                         }
                     }
                 },
-                "x-ms-pageable": true,
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
                 "x-ms-odata": "#/definitions/WorkflowFilter"
             }
         },
@@ -104,7 +104,7 @@
                         }
                     }
                 },
-                "x-ms-pageable": true,
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
                 "x-ms-odata": "#/definitions/WorkflowFilter"
             }
         },
@@ -539,7 +539,7 @@
                         }
                     }
                 },
-                "x-ms-pageable": true
+                "x-ms-pageable": { "nextLinkName": "nextLink" }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/accessKeys/{accessKeyName}": {
@@ -844,7 +844,7 @@
                         }
                     }
                 },
-                "x-ms-pageable": true,
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
                 "x-ms-odata": "#/definitions/WorkflowTriggerFilter"
             }
         },
@@ -989,7 +989,7 @@
                         }
                     }
                 },
-                "x-ms-pageable": true
+                "x-ms-pageable": { "nextLinkName": "nextLink" }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/histories/{historyName}": {
@@ -1097,7 +1097,7 @@
                         }
                     }
                 },
-                "x-ms-pageable": true,
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
                 "x-ms-odata": "#/definitions/WorkflowRunFilter"
             }
         },
@@ -1249,7 +1249,7 @@
                         }
                     }
                 },
-                "x-ms-pageable": true,
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
                 "x-ms-odata": "#/definitions/WorkflowRunActionFilter"
             }
         },
@@ -1334,7 +1334,7 @@
                     "description": "Gets or sets the resource tags."
                 }
             },
-            "x-ms-external": true
+            "x-ms-azure-resource": true
         },
         "SubResource": {
             "properties": {
@@ -1343,7 +1343,7 @@
                     "description": "Gets or sets the resource id."
                 }
             },
-            "x-ms-external": true
+            "x-ms-azure-resource": true
         },
         "Object": {
             "type": "object",
@@ -1999,7 +1999,7 @@
                 "Standard",
                 "Premium"
             ],
-            "x-ms-enum": "SkuName"
+            "x-ms-enum": { "name": "SkuName", "modelAsString": "False" }
         },
         "WorkflowState": {
             "type": "string",
@@ -2010,7 +2010,7 @@
                 "Deleted",
                 "Suspended"
             ],
-            "x-ms-enum": "WorkflowState"
+            "x-ms-enum": { "name": "WorkflowState", "modelAsString": "False" }
         },
         "WorkflowStatus": {
             "type": "string",
@@ -2025,7 +2025,7 @@
                 "Cancelled",
                 "Failed"
             ],
-            "x-ms-enum": "WorkflowStatus"
+            "x-ms-enum": { "name": "WorkflowStatus", "modelAsString": "False" }
         },
         "ParameterType": {
             "type": "string",
@@ -2040,7 +2040,7 @@
                 "Object",
                 "SecureObject"
             ],
-            "x-ms-enum": "ParameterType"
+            "x-ms-enum": { "name": "ParameterType", "modelAsString": "False" }
         },
         "KeyType": {
             "type": "string",
@@ -2049,7 +2049,7 @@
                 "Primary",
                 "Secondary"
             ],
-            "x-ms-enum": "KeyType"
+            "x-ms-enum": { "name": "KeyType", "modelAsString": "False" }
         },
         "Sku": {
             "type": "object",
@@ -2183,7 +2183,7 @@
                 "Month",
                 "Year"
             ],
-            "x-ms-enum": "RecurrenceFrequency"
+            "x-ms-enum": { "name": "RecurrenceFrequency", "modelAsString": "False" }
         },
         "WorkflowTriggerRecurrence": {
             "type": "object",
@@ -2278,7 +2278,7 @@
                 "Succeeded",
                 "Updating"
             ],
-            "x-ms-enum": "WorkflowTriggerProvisioningState"
+            "x-ms-enum": { "name": "WorkflowTriggerProvisioningState", "modelAsString": "False" }
         },
         "WorkflowProvisioningState": { 
             "type": "string",
@@ -2287,7 +2287,7 @@
                 "Moving",
                 "Succeeded"
             ],
-            "x-ms-enum": "WorkflowProvisioningState"
+            "x-ms-enum": { "name": "WorkflowProvisioningState", "modelAsString": "False" }
         }
     },
     "parameters": {

@@ -768,7 +768,7 @@
                         "Suspended",
                         "Deleted"
                     ],
-                    "x-ms-enum": "JobCollectionState"
+                    "x-ms-enum": { "name": "JobCollectionState", "modelAsString": "False" }
                 },
                 "quota": {
                     "$ref": "#/definitions/JobCollectionQuota",
@@ -786,7 +786,7 @@
                         "Free",
                         "Premium"
                     ],
-                    "x-ms-enum": "SkuDefinition"
+                    "x-ms-enum": { "name": "SkuDefinition", "modelAsString": "False" }
                 }
             }
         },
@@ -853,7 +853,7 @@
                         "Faulted",
                         "Completed"
                     ],
-                    "x-ms-enum": "JobState"
+                    "x-ms-enum": { "name": "JobState", "modelAsString": "False" }
                 },
                 "status": {
                     "$ref": "#/definitions/JobStatus",
@@ -914,7 +914,7 @@
                         "MainAction",
                         "ErrorAction"
                     ],
-                    "x-ms-enum": "JobHistoryActionName"
+                    "x-ms-enum": { "name": "JobHistoryActionName", "modelAsString": "False" }
                 },
                 "status": {
                     "type": "string",
@@ -927,7 +927,7 @@
                         "CallbackNotFound",
                         "Postponed"
                     ],
-                    "x-ms-enum": "JobExecutionStatus"
+                    "x-ms-enum": { "name": "JobExecutionStatus", "modelAsString": "False" }
                 },
                 "message": {
                     "type": "string",
@@ -956,7 +956,7 @@
                         "Https",
                         "StorageQueue"
                     ],
-                    "x-ms-enum": "JobActionType"
+                    "x-ms-enum": { "name": "JobActionType", "modelAsString": "False" }
                 },
                 "request": {
                     "$ref": "#/definitions/HttpRequest",
@@ -986,7 +986,7 @@
                         "Https",
                         "StorageQueue"
                     ],
-                    "x-ms-enum": "JobActionType"
+                    "x-ms-enum": { "name": "JobActionType", "modelAsString": "False" }
                 },
                 "request": {
                     "$ref": "#/definitions/HttpRequest",
@@ -1112,7 +1112,7 @@
                         "ActiveDirectoryOAuth",
                         "Basic"
                     ],
-                    "x-ms-enum": "HttpAuthenticationType"
+                    "x-ms-enum": { "name": "HttpAuthenticationType", "modelAsString": "False" }
                 }
             }
         },
@@ -1145,10 +1145,11 @@
                         "None",
                         "Fixed"
                     ],
-                    "x-ms-enum": "RetryType"
+                    "x-ms-enum": { "name": "RetryType", "modelAsString": "False" }
                 },
                 "retryInterval": {
-                    "type": "integer",
+                    "type": "string",
+                    "format": "duration",
                     "description": "Gets or sets the retry interval between retries."
                 },
                 "retryCount": {
@@ -1169,7 +1170,7 @@
                         "Week",
                         "Month"
                     ],
-                    "x-ms-enum": "RecurrenceFrequency"
+                    "x-ms-enum": { "name": "RecurrenceFrequency", "modelAsString": "False" }
                 },
                 "interval": {
                     "type": "integer",
@@ -1189,7 +1190,7 @@
                         "Week",
                         "Month"
                     ],
-                    "x-ms-enum": "RecurrenceFrequency"
+                    "x-ms-enum": { "name": "RecurrenceFrequency", "modelAsString": "False" }
                 },
                 "interval": {
                     "type": "integer",
@@ -1224,7 +1225,7 @@
                             "Saturday",
                             "Sunday"
                         ],
-                        "x-ms-enum": "DayOfWeek"
+                        "x-ms-enum": { "name": "DayOfWeek", "modelAsString": "False" }
                     },
                     "description": "Gets or sets the days of the week that the job should execute on."
                 },
@@ -1272,7 +1273,7 @@
                         "Saturday",
                         "Sunday"
                     ],
-                    "x-ms-enum": "JobScheduleDay"
+                    "x-ms-enum": { "name": "JobScheduleDay", "modelAsString": "False" }
                 },
                 "Occurrence": {
                     "type": "integer",

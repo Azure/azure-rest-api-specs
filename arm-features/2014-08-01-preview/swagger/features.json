@@ -40,7 +40,9 @@
             }
           }
         },
-        "x-ms-pageable": true
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features": {
@@ -73,7 +75,9 @@
             }
           }
         },
-        "x-ms-pageable": true
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features/{featureName}": {
@@ -273,7 +277,7 @@
       "required": [
         "location"
       ],
-      "x-ms-external": true
+      "x-ms-azure-resource": true
     },
     "SubResource": {
       "properties": {
@@ -282,7 +286,7 @@
           "description": "Resource Id"
         }
       },
-      "x-ms-external": true
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {

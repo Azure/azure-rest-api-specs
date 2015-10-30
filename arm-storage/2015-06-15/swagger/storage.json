@@ -3,7 +3,7 @@
   "info": {
     "title": "StorageManagementClient",
     "description": "The Storage Management Client.",
-    "version": "2015-05-01-preview"
+    "version": "2015-06-15"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -33,7 +33,7 @@
             "schema": {
               "$ref": "#/definitions/StorageAccountCheckNameAvailabilityParameters"
             },
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  "
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -65,7 +65,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group within the user’s subscription."
+            "description": "The name of the resource group within the user's subscription."
           },
           {
             "name": "accountName",
@@ -115,7 +115,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group within the user’s subscription."
+            "description": "The name of the resource group within the user's subscription."
           },
           {
             "name": "accountName",
@@ -152,7 +152,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group within the user’s subscription."
+            "description": "The name of the resource group within the user's subscription."
           },
           {
             "name": "accountName",
@@ -182,14 +182,14 @@
           "StorageAccounts"
         ],
         "operationId": "StorageAccounts_Update",
-        "description": "Updates the account type or tags for a storage account. It can also be used to add a custom domain (note that custom domains cannot be added via the Create operation). Only one custom domain is supported per storage account. This API can only be used to update one of tags, accountType, or customDomain per call. To update multiple of these properties, call the API multiple times with one change per call. This call does not change the storage keys for the account. If you want to change storage account keys, use the RegenerateKey operation. The location and name of the storage account cannot be changed after creation.",
+        "description": "Updates the account type or tags for a storage account. It can also be used to add a custom domain (note that custom domains cannot be added via the Create operation). Only one custom domain is supported per storage account. In order to replace a custom domain, the old value must be cleared before a new value may be set. To clear a custom domain, simply update the custom domain with empty string. Then call update again with the new cutsom domain name. The update API can only be used to update one of tags, accountType, or customDomain per call. To update multiple of these properties, call the API multiple times with one change per call. This call does not change the storage keys for the account. If you want to change storage account keys, use the RegenerateKey operation. The location and name of the storage account cannot be changed after creation.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group within the user’s subscription."
+            "description": "The name of the resource group within the user's subscription."
           },
           {
             "name": "accountName",
@@ -285,9 +285,6 @@
               "$ref": "#/definitions/StorageAccountListResult"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -304,7 +301,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group within the user’s subscription."
+            "description": "The name of the resource group within the user's subscription."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -320,9 +317,6 @@
               "$ref": "#/definitions/StorageAccountListResult"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -339,7 +333,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group within the user’s subscription."
+            "description": "The name of the resource group within the user's subscription."
           },
           {
             "name": "accountName",
@@ -355,7 +349,7 @@
             "schema": {
               "$ref": "#/definitions/StorageAccountRegenerateKeyParameters"
             },
-            "description": "Specifies name of the key which should be regenerated."
+            "description": "Specifies name of the key which should be regenerated. key1 or key2 for the default keys"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -383,7 +377,10 @@
         "description": "Gets the current usage count and the limit for the resources under the subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -481,6 +478,10 @@
         "table": {
           "type": "string",
           "description": "Gets the table endpoint."
+        },
+        "file": {
+          "type": "string",
+          "description": "Gets the file endpoint."
         }
       },
       "description": "The URIs that are used to perform a retrieval of a public blob, queue or table object."
@@ -618,10 +619,6 @@
             "$ref": "#/definitions/StorageAccount"
           },
           "description": "Gets the list of storage accounts and their properties."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the link to the next set of results. Currently this will always be empty as the API does not support pagination."
         }
       },
       "description": "The list storage accounts operation response."
@@ -665,15 +662,7 @@
     "StorageAccountRegenerateKeyParameters": {
       "properties": {
         "keyName": {
-          "type": "string",
-          "enum": [
-            "key1",
-            "key2"
-          ],
-          "x-ms-enum": {
-            "name": "KeyName",
-            "modelAsString": "False"
-          }
+          "type": "string"
         }
       }
     },

@@ -17,6 +17,390 @@
     "text/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/{deploymentName}": {
+      "delete": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_Delete",
+        "description": "Begin deleting deployment.To determine whether the operation has finished processing the request, call GetLongRunningOperationStatus.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive."
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the deployment to be deleted."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "head": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_CheckExistence",
+        "description": "Checks whether deployment exists.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group to check. The name is case insensitive."
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the deployment."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_CreateOrUpdate",
+        "description": "Create a named template deployment using a template.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive."
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the deployment."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "description": "Additional parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtended"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtended"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_Get",
+        "description": "Get a deployment.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group to get. The name is case insensitive."
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the deployment."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtended"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/{deploymentName}/cancel": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_Cancel",
+        "description": "Cancel a currently running template deployment.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive."
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the deployment."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.resources/deployments/{deploymentName}/validate": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_Validate",
+        "description": "Validate a deployment template.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive."
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the deployment."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "description": "Deployment to validate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/": {
+      "get": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_List",
+        "description": "Get a list of deployments.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group to filter by. The name is case insensitive."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Query parameters. If null is passed returns all deployments."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DeploymentListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/DeploymentExtendedFilter"
+      }
+    },
+    "/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}": {
+      "get": {
+        "tags": [
+          "ProviderOperationsMetadata"
+        ],
+        "operationId": "ProviderOperationsMetadata_Get",
+        "description": "Gets provider operations metadata",
+        "parameters": [
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Namespace of the resource provider."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "resourceTypes"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProviderOperationsMetadata"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/providerOperations": {
+      "get": {
+        "tags": [
+          "ProviderOperationsMetadata"
+        ],
+        "operationId": "ProviderOperationsMetadata_List",
+        "description": "Gets provider operations metadata list",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "resourceTypes"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProviderOperationsMetadataListResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/unregister": {
       "post": {
         "tags": [
@@ -112,7 +496,9 @@
             }
           }
         },
-        "x-ms-pageable": true
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}": {
@@ -192,7 +578,9 @@
             }
           }
         },
-        "x-ms-pageable": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-odata": "#/definitions/GenericResourceFilter"
       }
     },
@@ -269,12 +657,8 @@
             "schema": {
               "$ref": "#/definitions/ResourceGroup"
             }
-          },
-          "202": {
-            "description": ""
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "tags": [
@@ -415,7 +799,9 @@
             }
           }
         },
-        "x-ms-pageable": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-odata": "#/definitions/ResourceGroupFilter"
       }
     },
@@ -425,7 +811,7 @@
           "Resources"
         ],
         "operationId": "Resources_MoveResources",
-        "description": "Move resources within or across subscriptions.",
+        "description": "Begin moving resources.To determine whether the operation has finished processing the request, call GetLongRunningOperationStatus.",
         "parameters": [
           {
             "name": "sourceResourceGroupName",
@@ -453,8 +839,12 @@
         "responses": {
           "202": {
             "description": ""
+          },
+          "204": {
+            "description": ""
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resources": {
@@ -495,7 +885,9 @@
             }
           }
         },
-        "x-ms-pageable": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-odata": "#/definitions/GenericResourceFilter"
       }
     },
@@ -699,17 +1091,13 @@
               "$ref": "#/definitions/GenericResource"
             }
           },
-          "202": {
-            "description": ""
-          },
           "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/GenericResource"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "get": {
         "tags": [
@@ -954,7 +1342,9 @@
             }
           }
         },
-        "x-ms-pageable": true
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/{deploymentName}/operations/{operationId}": {
@@ -1048,7 +1438,9 @@
             }
           }
         },
-        "x-ms-pageable": true
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/providers/{resourceProviderNamespace}/operations": {
@@ -1091,236 +1483,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/{deploymentName}/cancel": {
-      "post": {
-        "tags": [
-          "Deployments"
-        ],
-        "operationId": "Deployments_Cancel",
-        "description": "Cancel a currently running template deployment.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group. The name is case insensitive."
-          },
-          {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.resources/deployments/{deploymentName}/validate": {
-      "post": {
-        "tags": [
-          "Deployments"
-        ],
-        "operationId": "Deployments_Validate",
-        "description": "Validate a deployment template.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group. The name is case insensitive."
-          },
-          {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Deployment"
-            },
-            "description": "Deployment to validate."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
-            }
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/{deploymentName}": {
-      "put": {
-        "tags": [
-          "Deployments"
-        ],
-        "operationId": "Deployments_CreateOrUpdate",
-        "description": "Create a named template deployment using a template.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group. The name is case insensitive."
-          },
-          {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Deployment"
-            },
-            "description": "Additional parameters supplied to the operation."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/DeploymentExtended"
-            }
-          },
-          "201": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/DeploymentExtended"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Deployments"
-        ],
-        "operationId": "Deployments_Get",
-        "description": "Get a deployment.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group to get. The name is case insensitive."
-          },
-          {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/DeploymentExtended"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/": {
-      "get": {
-        "tags": [
-          "Deployments"
-        ],
-        "operationId": "Deployments_List",
-        "description": "Get a list of deployments.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group to filter by. The name is case insensitive."
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation."
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Query parameters. If null is passed returns all deployments."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/DeploymentListResult"
-            }
-          }
-        },
-        "x-ms-pageable": true,
-        "x-ms-odata": "#/definitions/DeploymentExtendedFilter"
-      }
     }
   },
   "definitions": {
@@ -1362,6 +1524,113 @@
         }
       },
       "description": "Resource group filter."
+    },
+    "TemplateLink": {
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "URI referencing the template."
+        },
+        "contentVersion": {
+          "type": "string",
+          "description": "If included it must match the ContentVersion in the template."
+        }
+      },
+      "description": "Entity representing the reference to the template."
+    },
+    "ParametersLink": {
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "URI referencing the template."
+        },
+        "contentVersion": {
+          "type": "string",
+          "description": "If included it must match the ContentVersion in the template."
+        }
+      },
+      "description": "Entity representing the reference to the deployment paramaters."
+    },
+    "DeploymentProperties": {
+      "properties": {
+        "template": {
+          "type": "object",
+          "description": "Gets or sets the template content. Use only one of Template or TemplateLink."
+        },
+        "templateLink": {
+          "$ref": "#/definitions/TemplateLink",
+          "description": "Gets or sets the URI referencing the template. Use only one of Template or TemplateLink."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Deployment parameters. Use only one of Parameters or ParametersLink."
+        },
+        "parametersLink": {
+          "$ref": "#/definitions/ParametersLink",
+          "description": "Gets or sets the URI referencing the parameters. Use only one of Parameters or ParametersLink."
+        },
+        "mode": {
+          "type": "string",
+          "description": "Gets or sets the deployment mode.",
+          "enum": [
+            "Incremental",
+            "Complete"
+          ],
+          "x-ms-enum": {
+            "name": "DeploymentMode",
+            "modelAsString": "False"
+          }
+        }
+      },
+      "description": "Deployment properties."
+    },
+    "Deployment": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentProperties",
+          "description": "Gets or sets the deployment properties."
+        }
+      },
+      "description": "Deployment operation parameters."
+    },
+    "ResourceManagementError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Gets or sets the error code returned from the server."
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets or sets the error message returned from the server."
+        },
+        "target": {
+          "type": "string",
+          "description": "Gets or sets the target of the error."
+        }
+      }
+    },
+    "ResourceManagementErrorWithDetails": {
+      "properties": {
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceManagementError"
+          },
+          "description": "Gets or sets validation error."
+        },
+        "code": {
+          "type": "string",
+          "description": "Gets or sets the error code returned from the server."
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets or sets the error message returned from the server."
+        },
+        "target": {
+          "type": "string",
+          "description": "Gets or sets the target of the error."
+        }
+      }
     },
     "ProviderResourceType": {
       "properties": {
@@ -1417,6 +1686,249 @@
       },
       "description": "Resource provider information."
     },
+    "BasicDependency": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the ID of the dependency."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Gets or sets the dependency resource type."
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "Gets or sets the dependency resource name."
+        }
+      },
+      "description": "Deployment dependency information."
+    },
+    "Dependency": {
+      "properties": {
+        "dependsOn": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BasicDependency"
+          },
+          "description": "Gets the list of dependencies."
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the ID of the dependency."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Gets or sets the dependency resource type."
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "Gets or sets the dependency resource name."
+        }
+      },
+      "description": "Deployment dependency information."
+    },
+    "DeploymentPropertiesExtended": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets the state of the provisioning."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Gets or sets the correlation ID of the deployment."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the timestamp of the template deployment."
+        },
+        "outputs": {
+          "type": "object",
+          "description": "Gets or sets key/value pairs that represent deploymentoutput."
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Provider"
+          },
+          "description": "Gets the list of resource providers needed for the deployment."
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dependency"
+          },
+          "description": "Gets the list of deployment dependencies."
+        },
+        "template": {
+          "type": "object",
+          "description": "Gets or sets the template content. Use only one of Template or TemplateLink."
+        },
+        "templateLink": {
+          "$ref": "#/definitions/TemplateLink",
+          "description": "Gets or sets the URI referencing the template. Use only one of Template or TemplateLink."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Deployment parameters. Use only one of Parameters or ParametersLink."
+        },
+        "parametersLink": {
+          "$ref": "#/definitions/ParametersLink",
+          "description": "Gets or sets the URI referencing the parameters. Use only one of Parameters or ParametersLink."
+        },
+        "mode": {
+          "type": "string",
+          "description": "Gets or sets the deployment mode.",
+          "enum": [
+            "Incremental",
+            "Complete"
+          ],
+          "x-ms-enum": {
+            "name": "DeploymentMode",
+            "modelAsString": "False"
+          }
+        }
+      },
+      "description": "Deployment properties with additional details."
+    },
+    "DeploymentValidateResult": {
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ResourceManagementErrorWithDetails",
+          "description": "Gets or sets validation error."
+        },
+        "properties": {
+          "$ref": "#/definitions/DeploymentPropertiesExtended",
+          "description": "Gets or sets the template deployment properties."
+        }
+      },
+      "description": "Information from validate template deployment response."
+    },
+    "DeploymentExtended": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the ID of the deployment."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the deployment."
+        },
+        "properties": {
+          "$ref": "#/definitions/DeploymentPropertiesExtended",
+          "description": "Gets or sets deployment properties."
+        }
+      },
+      "description": "Deployment information."
+    },
+    "DeploymentListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentExtended"
+          },
+          "description": "Gets or sets the list of deployments."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the URL to get the next set of results."
+        }
+      },
+      "description": "List of deployments."
+    },
+    "Operation": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the operation name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the operation display name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the operation description"
+        },
+        "origin": {
+          "type": "string",
+          "description": "Gets or sets the operation origin"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Gets or sets the operation properties"
+        }
+      },
+      "description": "Operation"
+    },
+    "ResourceType": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the resource type name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the resource type display name"
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "Gets or sets the resource type operations"
+        }
+      },
+      "description": "Resource Type"
+    },
+    "ProviderOperationsMetadata": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the provider id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the provider name"
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the provider type"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the provider display name"
+        },
+        "resourceTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceType"
+          },
+          "description": "Gets or sets the provider resource types"
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "Gets or sets the provider operations"
+        }
+      },
+      "description": "Provider Operations metadata"
+    },
+    "ProviderOperationsMetadataListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProviderOperationsMetadata"
+          },
+          "description": "Gets or sets the list of providers."
+        }
+      },
+      "description": "Provider operations metadata list"
+    },
     "ProviderListResult": {
       "properties": {
         "value": {
@@ -1446,7 +1958,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "Resource"
         }
       ],
       "description": "Resource information."
@@ -1488,16 +2000,6 @@
       },
       "description": "List of resource groups."
     },
-    "ResourceGroupProperties": {
-      "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Gets resource group provisioning state."
-        }
-      },
-      "description": "The resource group properties."
-    },
     "ResourceGroup": {
       "properties": {
         "id": {
@@ -1525,6 +2027,16 @@
         }
       },
       "description": "Resource group information."
+    },
+    "ResourceGroupProperties": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets resource group provisioning state."
+        }
+      },
+      "description": "The resource group properties."
     },
     "ResourceGroupListResult": {
       "properties": {
@@ -1754,256 +2266,6 @@
       },
       "description": "List of resource provider operations."
     },
-    "TemplateLink": {
-      "properties": {
-        "uri": {
-          "type": "string",
-          "description": "URI referencing the template."
-        },
-        "contentVersion": {
-          "type": "string",
-          "description": "If included it must match the ContentVersion in the template."
-        }
-      },
-      "description": "Entity representing the reference to the template."
-    },
-    "ParametersLink": {
-      "properties": {
-        "uri": {
-          "type": "string",
-          "description": "URI referencing the template."
-        },
-        "contentVersion": {
-          "type": "string",
-          "description": "If included it must match the ContentVersion in the template."
-        }
-      },
-      "description": "Entity representing the reference to the deployment paramaters."
-    },
-    "DeploymentProperties": {
-      "properties": {
-        "template": {
-          "type": "object",
-          "description": "Gets or sets the template content. Use only one of Template or TemplateLink."
-        },
-        "templateLink": {
-          "$ref": "#/definitions/TemplateLink",
-          "description": "Gets or sets the URI referencing the template. Use only one of Template or TemplateLink."
-        },
-        "parameters": {
-          "type": "object",
-          "description": "Deployment parameters. Use only one of Parameters or ParametersLink."
-        },
-        "parametersLink": {
-          "$ref": "#/definitions/ParametersLink",
-          "description": "Gets or sets the URI referencing the parameters. Use only one of Parameters or ParametersLink."
-        },
-        "mode": {
-          "type": "string",
-          "description": "Gets or sets the deployment mode.",
-          "enum": [
-            "Incremental"
-          ],
-          "x-ms-enum": "DeploymentMode"
-        }
-      },
-      "description": "Deployment properties."
-    },
-    "Deployment": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DeploymentProperties",
-          "description": "Gets or sets the deployment properties."
-        }
-      },
-      "description": "Deployment operation parameters."
-    },
-    "ResourceManagementError": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Gets or sets the error code returned from the server."
-        },
-        "message": {
-          "type": "string",
-          "description": "Gets or sets the error message returned from the server."
-        },
-        "target": {
-          "type": "string",
-          "description": "Gets or sets the target of the error."
-        }
-      }
-    },
-    "ResourceManagementErrorWithDetails": {
-      "properties": {
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceManagementError"
-          },
-          "description": "Gets or sets validation error."
-        },
-        "code": {
-          "type": "string",
-          "description": "Gets or sets the error code returned from the server."
-        },
-        "message": {
-          "type": "string",
-          "description": "Gets or sets the error message returned from the server."
-        },
-        "target": {
-          "type": "string",
-          "description": "Gets or sets the target of the error."
-        }
-      }
-    },
-    "BasicDependency": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the ID of the dependency."
-        },
-        "resourceType": {
-          "type": "string",
-          "description": "Gets or sets the dependency resource type."
-        },
-        "resourceName": {
-          "type": "string",
-          "description": "Gets or sets the dependency resource name."
-        }
-      },
-      "description": "Deployment dependency information."
-    },
-    "Dependency": {
-      "properties": {
-        "dependsOn": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BasicDependency"
-          },
-          "description": "Gets the list of dependencies."
-        },
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the ID of the dependency."
-        },
-        "resourceType": {
-          "type": "string",
-          "description": "Gets or sets the dependency resource type."
-        },
-        "resourceName": {
-          "type": "string",
-          "description": "Gets or sets the dependency resource name."
-        }
-      },
-      "description": "Deployment dependency information."
-    },
-    "DeploymentPropertiesExtended": {
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "description": "Gets or sets the state of the provisioning."
-        },
-        "correlationId": {
-          "type": "string",
-          "description": "Gets or sets the correlation ID of the deployment."
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the timestamp of the template deployment."
-        },
-        "outputs": {
-          "type": "object",
-          "description": "Gets or sets key/value pairs that represent deploymentoutput."
-        },
-        "providers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Provider"
-          },
-          "description": "Gets the list of resource providers needed for the deployment."
-        },
-        "dependencies": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Dependency"
-          },
-          "description": "Gets the list of deployment dependencies."
-        },
-        "template": {
-          "type": "object",
-          "description": "Gets or sets the template content. Use only one of Template or TemplateLink."
-        },
-        "templateLink": {
-          "$ref": "#/definitions/TemplateLink",
-          "description": "Gets or sets the URI referencing the template. Use only one of Template or TemplateLink."
-        },
-        "parameters": {
-          "type": "object",
-          "description": "Deployment parameters. Use only one of Parameters or ParametersLink."
-        },
-        "parametersLink": {
-          "$ref": "#/definitions/ParametersLink",
-          "description": "Gets or sets the URI referencing the parameters. Use only one of Parameters or ParametersLink."
-        },
-        "mode": {
-          "type": "string",
-          "description": "Gets or sets the deployment mode.",
-          "enum": [
-            "Incremental"
-          ],
-          "x-ms-enum": "DeploymentMode"
-        }
-      },
-      "description": "Deployment properties with additional details."
-    },
-    "DeploymentValidateResult": {
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ResourceManagementErrorWithDetails",
-          "description": "Gets or sets validation error."
-        },
-        "properties": {
-          "$ref": "#/definitions/DeploymentPropertiesExtended",
-          "description": "Gets or sets the template deployment properties."
-        }
-      },
-      "description": "Information from validate template deployment response."
-    },
-    "DeploymentExtended": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the ID of the deployment."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the deployment."
-        },
-        "properties": {
-          "$ref": "#/definitions/DeploymentPropertiesExtended",
-          "description": "Gets or sets deployment properties."
-        }
-      },
-      "description": "Deployment information."
-    },
-    "DeploymentListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeploymentExtended"
-          },
-          "description": "Gets or sets the list of deployments."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
-        }
-      },
-      "description": "List of deployments."
-    },
     "Resource": {
       "properties": {
         "id": {
@@ -2036,7 +2298,7 @@
       "required": [
         "location"
       ],
-      "x-ms-external": true
+      "x-ms-azure-resource": true
     },
     "SubResource": {
       "properties": {
@@ -2045,7 +2307,7 @@
           "description": "Resource Id"
         }
       },
-      "x-ms-external": true
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
