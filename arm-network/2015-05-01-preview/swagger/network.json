@@ -2928,7 +2928,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The location upon which resource usage is queried."
+            "description": "The location upon which resource usage is queried.",
+            "pattern": "^[-\\w\\._]+$"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2944,6 +2945,9 @@
               "$ref": "#/definitions/UsagesListResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -4635,6 +4639,9 @@
           "description": "Gets AsPath."
         }
       },
+      "required": [
+        "nextHopType"
+      ],
       "description": "The routes table associated with the ExpressRouteCircuit"
     },
     "ExpressRouteCircuitsRoutesTableListResult": {
@@ -4967,6 +4974,12 @@
           "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
+      "required": [
+        "backendAddressPool",
+        "protocol",
+        "frontendPort",
+        "enableFloatingIP"
+      ],
       "description": "Properties of the load balancer"
     },
     "LoadBalancingRule": {
@@ -5034,7 +5047,11 @@
           "type": "string",
           "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
-      }
+      },
+      "required": [
+        "protocol",
+        "port"
+      ]
     },
     "Probe": {
       "properties": {
@@ -5103,6 +5120,11 @@
           "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
+      "required": [
+        "protocol",
+        "frontendPort",
+        "enableFloatingIP"
+      ],
       "description": "Properties of Inbound NAT rule"
     },
     "InboundNatRule": {
@@ -5164,6 +5186,12 @@
           "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
+      "required": [
+        "protocol",
+        "frontendPortRangeStart",
+        "frontendPortRangeEnd",
+        "backendPort"
+      ],
       "description": "Properties of Inbound NAT pool"
     },
     "InboundNatPool": {
@@ -5210,6 +5238,10 @@
           "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
+      "required": [
+        "allocatedOutboundPorts",
+        "backendAddressPool"
+      ],
       "description": "Outbound NAT pool of the loadbalancer"
     },
     "OutboundNatRule": {
@@ -5596,6 +5628,9 @@
           "description": "Gets or sets Provisioning state of the resource Updating/Deleting/Failed"
         }
       },
+      "required": [
+        "nextHopType"
+      ],
       "description": "Route resource"
     },
     "Route": {
@@ -5743,7 +5778,14 @@
           "type": "string",
           "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
-      }
+      },
+      "required": [
+        "protocol",
+        "sourceAddressPrefix",
+        "destinationAddressPrefix",
+        "access",
+        "direction"
+      ]
     },
     "SecurityRule": {
       "properties": {
@@ -5897,6 +5939,9 @@
           "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
+      "required": [
+        "publicIPAllocationMethod"
+      ],
       "description": "PublicIpAddress properties"
     },
     "PublicIpAddress": {
@@ -6005,7 +6050,10 @@
           "type": "string",
           "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
-      }
+      },
+      "required": [
+        "addressPrefix"
+      ]
     },
     "Subnet": {
       "properties": {
@@ -6085,6 +6133,12 @@
           "description": "Gets or sets the name of the type of usage."
         }
       },
+      "required": [
+        "unit",
+        "currentValue",
+        "limit",
+        "name"
+      ],
       "description": "Describes Network Resource Usage."
     },
     "UsagesListResult": {

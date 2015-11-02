@@ -475,7 +475,10 @@
             "modelAsString": "False"
           }
         }
-      }
+      },
+      "required": [
+        "accountType"
+      ]
     },
     "StorageAccountCreateParameters": {
       "properties": {
@@ -522,6 +525,9 @@
           "description": "Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates"
         }
       },
+      "required": [
+        "name"
+      ],
       "description": "The custom domain assigned to this storage account. This can be set via Update."
     },
     "StorageAccountProperties": {
@@ -740,6 +746,12 @@
           "description": "Gets the name of the type of usage."
         }
       },
+      "required": [
+        "unit",
+        "currentValue",
+        "limit",
+        "name"
+      ],
       "description": "Describes Storage Resource Usage."
     },
     "UsageListResult": {
