@@ -1201,6 +1201,7 @@
 
     "definitions": {
         "Resource": {
+		  "x-ms-azure-resource": true,
           "properties": {
             "id": {
               "readOnly": true,
@@ -1216,9 +1217,19 @@
               "readOnly": true,
               "type": "string",
               "description": "Resource type"
-            }
-          },
-          "x-ms-azure-resource": true
+            },
+			"tags": {
+				"type": "object",
+				"additionalProperties": {
+				"type": "string"
+				},
+				"description": "Resource Tags"
+			},
+			"location": {
+				"type": "string",
+				"description": "Resource Location"
+			}
+          }          
         },
         "Location": {
             "properties": {
@@ -1234,7 +1245,6 @@
             "description": "Location entity for given tenant."
         },
         "LocationProperties": {
-            "type": "object",
             "required": [ "hostName" ],
             "properties": {
                 "hostName": {
@@ -1243,7 +1253,6 @@
             }
         },
         "Error": {
-            "type": "object",
             "required": [
                 "code",
                 "message"
@@ -1258,7 +1267,6 @@
             }
         },
         "LocationCollection": {
-            "type": "object",
             "required": [ "value" ],
             "properties": {
                 "value": {
@@ -1273,7 +1281,6 @@
             }
         },		
         "GroupsCollection": {
-            "type": "object",
             "required": [ "value" ],
             "properties": {
                 "value": {
@@ -1288,7 +1295,6 @@
             }
         },
         "Group": {
-            "type": "object",
             "properties": {
                 "properties": {
                     "$ref": "#/definitions/GroupProperties"
@@ -1302,7 +1308,6 @@
             "description": "Group entity for Intune MAM."
         },
         "GroupProperties": {
-            "type": "object",
             "required": [
                 "friendlyName",
                 "platform"
@@ -1314,7 +1319,6 @@
 			}
 		},
         "ApplicationCollection": {
-            "type": "object",
             "required": [ "value" ],
             "properties": {
                 "value": {
@@ -1329,7 +1333,6 @@
             }
         },
         "Application": {
-            "type": "object",
             "properties": {
                 "properties": {
                     "$ref": "#/definitions/ApplicationProperties"
@@ -1343,7 +1346,6 @@
             "description": "Application entity for Intune MAM."
         },
         "ApplicationProperties": {
-            "type": "object",
             "required": [
                 "friendlyName",
                 "platform"
@@ -1367,7 +1369,6 @@
             }
         },
         "IOSMAMPolicyCollection": {
-            "type": "object",
             "required": [ "value" ],
             "properties": {
                 "value": {
@@ -1382,7 +1383,6 @@
             }
         },
         "AndroidMAMPolicyCollection": {
-            "type": "object",
             "required": [ "value" ],
             "properties": {
                 "value": {
@@ -1397,7 +1397,6 @@
             }
         },
         "iOSMAMPolicy": {
-            "type": "object",
             "properties": {
                 "properties": {
                     "$ref": "#/definitions/iOSMAMPolicyProperties"
@@ -1411,7 +1410,6 @@
             "description": "iOS Policy entity for Intune MAM."
         },
 		"iOSMAMPolicyRequestBody": {
-            "type": "object",
             "properties": {
                 "properties": {
                     "$ref": "#/definitions/iOSMAMPolicyProperties"
@@ -1420,7 +1418,6 @@
             "description": "iOS Policy request body parameters for Intune MAM."
         },
         "AndroidMAMPolicy": {
-            "type": "object",
             "properties": {
                 "properties": {
                     "$ref": "#/definitions/AndroidMAMPolicyProperties"
@@ -1434,7 +1431,6 @@
             "description": "Android Policy entity for Intune MAM."
         },
         "AndroidMAMPolicyRequestBody": {
-            "type": "object",
             "properties": {
                 "properties": {
                     "$ref": "#/definitions/AndroidMAMPolicyProperties"
@@ -1443,7 +1439,6 @@
             "description": "Android Policy request body for Intune MAM."
         },
         "MAMPolicyAppIdOrGroupIdPayload": {
-            "type": "object",			
             "properties": {
                 "properties": {
                     "$ref": "#/definitions/MAMPolicyAppOrGroupIdProperties"
@@ -1451,8 +1446,7 @@
             },
             "description": "MAM Policy request body for properties Intune MAM."
         },
-        "MAMPolicyAppOrGroupIdProperties": {
-            "type": "object",
+        "MAMPolicyAppOrGroupIdProperties": {            
 			"required": [
                 "url"
             ],
@@ -1462,12 +1456,12 @@
                 }
             },
             "description": "Android Policy request body for Intune MAM."
-        },			
-        "MAMPolicyProperties": {
-            "type": "object",
+        },	
+		
+        "MAMPolicyProperties": {            
             "required": [
                 "friendlyName"
-            ],
+            ],			
             "properties": {
                 "friendlyName": {
                     "type": "string"
@@ -1588,62 +1582,66 @@
             }
 
         },
-        "iOSMAMPolicyProperties": {
-            "type": "object",
-            "properties": {
-                "fileEncryptionLevel": {
-                    "type": "string",
-                    "default": "deviceLocked",
-                    "enum": [
-                        "deviceLocked",
-                        "deviceLockedExceptFilesOpen",
-                        "afterDeviceRestart",
-                        "useDeviceSettings"
-                    ]
-                },
-                "touchId": {
-                    "type": "string",
-                    "default": "enable",
-                    "enum": [
-                        "enable",
-                        "disable"
-                    ]
-                }
-            },
-            "allOf": [
+
+        "iOSMAMPolicyProperties": {            
+			"allOf": [
                 {
-                    "$ref": "#/definitions/MAMPolicyProperties"
-                }
+                  "$ref": "#/definitions/MAMPolicyProperties"
+                },
+				{
+					"properties": {
+						"fileEncryptionLevel": {
+							"type": "string",
+							"default": "deviceLocked",
+							"enum": [
+								"deviceLocked",
+								"deviceLockedExceptFilesOpen",
+								"afterDeviceRestart",
+								"useDeviceSettings"
+							]
+						},
+						"touchId": {
+							"type": "string",
+							"default": "enable",
+							"enum": [
+								"enable",
+								"disable"
+							]
+						}
+					}
+				}
             ],
             "description": "Intune MAM iOS Policy Properties."
         },
-        "AndroidMAMPolicyProperties": {
-            "type": "object",
-            "properties": {
-                "screenCapture": {
-                    "type": "string",
-                    "default": "allow",
-                    "enum": [
-                        "allow",
-                        "block"
-                    ]
-                },
-                "fileEncryption": {
-                    "type": "string",
-                    "default": "required",
-                    "enum": [
-                        "required",
-                        "notRequired"
-                    ]
-                }
-            },
-            "allOf": [
+
+		"AndroidMAMPolicyProperties": {            
+			"allOf": [
                 {
-                    "$ref": "#/definitions/MAMPolicyProperties"
-                }
+                  "$ref": "#/definitions/MAMPolicyProperties"
+                },
+				{
+					"properties": {
+						"screenCapture": {
+							"type": "string",
+							"default": "allow",
+							"enum": [
+								"allow",
+								"block"
+							]
+						},
+						"fileEncryption": {
+							"type": "string",
+							"default": "required",
+							"enum": [
+								"required",
+								"notRequired"
+							]
+						}
+					}
+				}
             ],
             "description": "Intune MAM iOS Policy Properties."
-        }
+        }		
     },
     "parameters": {
         "ApiVersionParameter": {
