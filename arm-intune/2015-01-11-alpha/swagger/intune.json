@@ -11,8 +11,7 @@
   "produces": [ "application/json" ],
   "paths": {
     "/providers/Microsoft.Intune/locations": {
-      "get": {
-		"x-ms-pageable": true,
+      "get": {		
         "description": "Returns location for user tenant.",
         "operationId": "GetLocations",
         "parameters": [
@@ -33,7 +32,10 @@
             "$ref": "#/definitions/Error"
           }
         }
-      }
+      },
+	  "x-ms-pageable": {
+		"nextLinkName": "nextlink"
+	  }
     }
 	},
     "/providers/Microsoft.Intune/locations/hostName": {
@@ -64,8 +66,7 @@
     },
     "/providers/Microsoft.Intune/locations/{hostName}/apps": {
       "get": {
-        "description": "Returns Intune Manageable apps.",
-		"x-ms-pageable": true,
+        "description": "Returns Intune Manageable apps.",		
         "operationId": "GetApps",
         "produces": [ "application/json" ],
         "parameters": [
@@ -114,13 +115,15 @@
               "$ref": "#/definitions/Error"
             }
           }
-        }
+        },
+		"x-ms-pageable": {
+		"nextLinkName": "nextlink"
+		}
       }
     },
     "/providers/Microsoft.Intune/locations/{hostName}/iosPolicies": {
       "get": {
-        "description": "Returns Intune iOSPolicies.",
-		"x-ms-pageable": true,
+        "description": "Returns Intune iOSPolicies.",		
         "operationId": "Ios_GetMAMPolicies",
         "produces": [ "application/json" ],
         "parameters": [
@@ -169,13 +172,15 @@
               "$ref": "#/definitions/Error"
             }
           }
-        }
+        },
+		"x-ms-pageable": {
+		"nextLinkName": "nextlink"
+		}
       }
     },
     "/providers/Microsoft.Intune/locations/{hostName}/androidPolicies": {
       "get": {
-        "description": "Returns Intune Android policies.",
-		"x-ms-pageable": true,
+        "description": "Returns Intune Android policies.",		
         "operationId": "Android_GetMAMPolicies",
         "produces": [ "application/json" ],
         "parameters": [
@@ -224,7 +229,10 @@
               "$ref": "#/definitions/Error"
             }
           }
-        }
+        },
+		"x-ms-pageable": {
+		"nextLinkName": "nextlink"
+		}
       }
     },
     "/providers/Microsoft.Intune/locations/{hostName}/iosPolicies/{policyId}": {
@@ -594,8 +602,7 @@
     },
     "/providers/Microsoft.Intune/locations/{hostName}/iosPolicies/{policyId}/apps": {
       "get": {
-        "description": "Get apps for an iOSMAMPolicy.",
-		"x-ms-pageable": true,
+        "description": "Get apps for an iOSMAMPolicy.",		
         "operationId": "Ios_GetAppForMAMPolicy",
         "produces": [ "application/json" ],
         "parameters": [
@@ -651,13 +658,15 @@
               "$ref": "#/definitions/Error"
             }
           }
-        }
+        },
+		"x-ms-pageable": {
+		"nextLinkName": "nextlink"
+		}
       }
     },
     "/providers/Microsoft.Intune/locations/{hostName}/AndroidPolicies/{policyId}/apps": {
       "get": {
-        "description": "Get apps for an AndroidMAMPolicy.",
-		"x-ms-pageable": true,
+        "description": "Get apps for an AndroidMAMPolicy.",		
         "operationId": "Android_GetAppForMAMPolicy",
         "produces": [ "application/json" ],
         "parameters": [
@@ -713,7 +722,10 @@
               "$ref": "#/definitions/Error"
             }
           }
-        }
+        },
+		"x-ms-pageable": {
+		"nextLinkName": "nextlink"
+		}
       }
     },
     "/providers/Microsoft.Intune/locations/{hostName}/iosPolicies/{policyId}/apps/{appId}": {
@@ -921,8 +933,7 @@
     },
     "/providers/Microsoft.Intune/locations/{hostName}/iosPolicies/{policyId}/groups": {
       "get": {
-        "description": "Returns groups for a given iOSMAMPolicy.",
-		"x-ms-pageable": true,
+        "description": "Returns groups for a given iOSMAMPolicy.",		
         "operationId": "Ios_GetGroupsForMAMPolicy",
         "produces": [ "application/json" ],
         "parameters": [
@@ -957,13 +968,15 @@
               "$ref": "#/definitions/Error"
             }
           }
-        }
+        },
+		"x-ms-pageable": {
+		"nextLinkName": "nextlink"
+		}
       }
     },
     "/providers/Microsoft.Intune/locations/{hostName}/androidPolicies/{policyId}/groups": {
       "get": {
-        "description": "Returns groups for a given AndroidMAMPolicy.",
-		"x-ms-pageable": true,
+        "description": "Returns groups for a given AndroidMAMPolicy.",		
         "operationId": "Android_GetGroupsForMAMPolicy",
         "produces": [ "application/json" ],
         "parameters": [
@@ -998,7 +1011,10 @@
               "$ref": "#/definitions/Error"
             }
           }
-        }
+        },
+		"x-ms-pageable": {
+		"nextLinkName": "nextlink"
+		}
       }
     },
     "/providers/Microsoft.Intune/locations/{hostName}/iosPolicies/{policyId}/groups/{groupId}": {
