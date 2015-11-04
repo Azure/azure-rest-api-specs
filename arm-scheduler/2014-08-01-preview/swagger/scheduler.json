@@ -39,7 +39,8 @@
                             "$ref": "#/definitions/JobCollectionListResult"
                         }
                     }
-                }
+                },
+                "x-ms-pageable": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scheduler/jobCollections": {
@@ -71,7 +72,8 @@
                             "$ref": "#/definitions/JobCollectionListResult"
                         }
                     }
-                }
+                },
+                "x-ms-pageable": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scheduler/jobCollections/{jobCollectionName}": {
@@ -609,7 +611,8 @@
                             "$ref": "#/definitions/JobListResult"
                         }
                     }
-                }
+                },
+                "x-ms-pageable": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scheduler/jobCollections/{jobCollectionName}/jobs/{jobName}/history": {
@@ -669,7 +672,8 @@
                             "$ref": "#/definitions/JobHistoryListResult"
                         }
                     }
-                }
+                },
+                "x-ms-pageable": true
             }
         }
     },
@@ -725,7 +729,7 @@
                 "id": {
                     "type": "string",
                     "readOnly": true,
-                    "description": "Gets the job collection identifier."
+                    "description": "Gets the job collection resource identifier."
                 },
                 "type": {
                     "type": "string",
@@ -734,7 +738,7 @@
                 },
                 "name": {
                     "type": "string",
-                    "description": "Gets or sets the job collection name."
+                    "description": "Gets or sets the job collection resource name."
                 },
                 "location": {
                     "type": "string",
@@ -811,7 +815,7 @@
                 "id": {
                     "type": "string",
                     "readOnly": true,
-                    "description": "Gets the job identifier."
+                    "description": "Gets the job resource identifier."
                 },
                 "type": {
                     "type": "string",
@@ -821,7 +825,7 @@
                 "name": {
                     "type": "string",
                     "readOnly": true,
-                    "description": "Gets the job name."
+                    "description": "Gets the job resource name."
                 },
                 "properties": {
                     "$ref": "#/definitions/JobProperties",
@@ -954,7 +958,9 @@
                     "enum": [
                         "Http",
                         "Https",
-                        "StorageQueue"
+                        "StorageQueue",
+                        "ServiceBusQueue",
+                        "ServiceBusTopic"
                     ],
                     "x-ms-enum": { "name": "JobActionType", "modelAsString": "False" }
                 },
@@ -965,6 +971,14 @@
                 "queueMessage": {
                     "$ref": "#/definitions/StorageQueueMessage",
                     "description": "Gets or sets the storage queue message."
+                },
+                "serviceBusQueueMessage": {
+                    "$ref": "#/definitions/ServiceBusQueueMessage",
+                    "description": "Gets or sets the service bus queue message."
+                },
+                "serviceBusTopicMessage": {
+                    "$ref": "#/definitions/ServiceBusTopicMessage",
+                    "description": "Gets or sets the service bus topic message."
                 },
                 "retryPolicy": {
                     "$ref": "#/definitions/RetryPolicy",
@@ -984,7 +998,9 @@
                     "enum": [
                         "Http",
                         "Https",
-                        "StorageQueue"
+                        "StorageQueue",
+                        "ServiceBusQueue",
+                        "ServiceBusTopic"
                     ],
                     "x-ms-enum": { "name": "JobActionType", "modelAsString": "False" }
                 },
@@ -995,6 +1011,14 @@
                 "queueMessage": {
                     "$ref": "#/definitions/StorageQueueMessage",
                     "description": "Gets or sets the storage queue message."
+                },
+                "serviceBusQueueMessage": {
+                    "$ref": "#/definitions/ServiceBusQueueMessage",
+                    "description": "Gets or sets the service bus queue message."
+                },
+                "serviceBusTopicMessage": {
+                    "$ref": "#/definitions/ServiceBusTopicMessage",
+                    "description": "Gets or sets the service bus topic message."
                 },
                 "retryPolicy": {
                     "$ref": "#/definitions/RetryPolicy",
@@ -1010,7 +1034,7 @@
                 },
                 "uri": {
                     "type": "string",
-                    "description": "Gets or sets the Uri for the request."
+                    "description": "Gets or sets the Uri."
                 },
                 "method": {
                     "type": "string",
@@ -1025,7 +1049,7 @@
                     "additionalProperties": {
                         "type": "string"
                     },
-                    "description": "Gets or sets the headers for the request."
+                    "description": "Gets or sets the headers."
                 }
             }
         },
@@ -1120,19 +1144,161 @@
             "properties": {
                 "storageAccount": {
                     "type": "string",
-                    "description": "Gets or sets the Storage Account Name for the request."
+                    "description": "Gets or sets the storage account name."
                 },
                 "queueName": {
                     "type": "string",
-                    "description": "Gets or sets the Queue Name for the request."
+                    "description": "Gets or sets the queue name."
                 },
                 "sasToken": {
                     "type": "string",
-                    "description": "Gets or sets the SAS Key for the request."
+                    "description": "Gets or sets the SAS key."
                 },
                 "message": {
                     "type": "string",
-                    "description": "Gets or sets the message for the request."
+                    "description": "Gets or sets the message."
+                }
+            }
+        },
+        "ServiceBusQueueMessage": {
+            "properties": {
+                "queueName": {
+                    "type": "string",
+                    "description": "Gets or sets the queue name."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ServiceBusMessage"
+                }
+            ]
+        },
+        "ServiceBusTopicMessage": {
+            "properties": {
+                "topicPath": {
+                    "type": "string",
+                    "description": "Gets or sets the topic path."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ServiceBusMessage"
+                }
+            ]
+        },
+        "ServiceBusMessage": {
+            "properties": {
+                "authentication": {
+                    "$ref": "#/definitions/ServiceBusAuthentication",
+                    "description": "Gets or sets the authentication."
+                },
+                "brokeredMessageProperties": {
+                    "$ref": "#/definitions/ServiceBusBrokeredMessageProperties",
+                    "description": "Gets or sets the brokered message properties."
+                },
+                "customMessageProperties": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the custom message properties."
+                },
+                "message": {
+                    "type": "string",
+                    "description": "Gets or sets the message."
+                },
+                "namespace": {
+                    "type": "string",
+                    "description": "Gets or sets the namespace."
+                },
+                "transportType": {
+                    "type": "string",
+                    "description": "Gets or sets the transport type.",
+                    "enum": [
+                        "NotSpecified",
+                        "NetMessaging",
+                        "AMQP"
+                    ],
+                    "x-ms-enum": { "name": "ServiceBusTransportType", "modelAsString": "False" }
+                }
+            }
+        },
+        "ServiceBusAuthentication": {
+            "properties": {
+                "sasKey": {
+                    "type": "string",
+                    "description": "Gets or sets the SAS key."
+                },
+                "sasKeyName": {
+                    "type": "string",
+                    "description": "Gets or sets the SAS key name."
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Gets or sets the authentication type.",
+                    "enum": [
+                        "NotSpecified",
+                        "SharedAccessKey"
+                    ],
+                    "x-ms-enum": { "name": "ServiceBusAuthenticationType", "modelAsString": "False" }
+                }
+            }
+        },
+        "ServiceBusBrokeredMessageProperties": {
+            "properties": {
+                "contentType": {
+                    "type": "string",
+                    "description": "Gets or sets the content type."
+                },
+                "correlationId": {
+                    "type": "string",
+                    "description": "Gets or sets the correlation id."
+                },
+                "forcePersistence": {
+                    "type": "boolean",
+                    "description": "Gets or sets the force persistence."
+                },
+                "label": {
+                    "type": "string",
+                    "description": "Gets or sets the label."
+                },
+                "messageId": {
+                    "type": "string",
+                    "description": "Gets or sets the message id."
+                },
+                "partitionKey": {
+                    "type": "string",
+                    "description": "Gets or sets the partition key."
+                },
+                "replyTo": {
+                    "type": "string",
+                    "description": "Gets or sets the reply to."
+                },
+                "replyToSessionId": {
+                    "type": "string",
+                    "description": "Gets or sets the reply to session id."
+                },
+                "scheduledEnqueueTimeUtc": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Gets or sets the scheduled enqueue time UTC."
+                },
+                "sessionId": {
+                    "type": "string",
+                    "description": "Gets or sets the session id."
+                },
+                "timeToLive": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Gets or sets the time to live."
+                },
+                "to": {
+                    "type": "string",
+                    "description": "Gets or sets the to."
+                },
+                "viaPartitionKey": {
+                    "type": "string",
+                    "description": "Gets or sets the via partition key."
                 }
             }
         },
@@ -1209,6 +1375,18 @@
                     "$ref": "#/definitions/JobRecurrenceSchedule"
                 }
             }
+        },
+        "RecurrenceFrequency": {
+            "type": "string",
+            "description": "Gets or sets the frequency of recurrence (minute, hour, day, week, month).",
+            "enum": [
+                "Minute",
+                "Hour",
+                "Day",
+                "Week",
+                "Month"
+            ],
+            "x-ms-enum": { "name": "RecurrenceFrequency", "modelAsString": "False" }
         },
         "JobRecurrenceSchedule": {
             "properties": {
