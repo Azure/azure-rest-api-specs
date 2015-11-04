@@ -180,7 +180,7 @@
           }
         },
         "x-ms-pageable": {
-          "path": "nextLink"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -303,6 +303,11 @@
           "description": "What size of redis cache to deploy. Valid values: for C family (0, 1, 2, 3, 4, 5, 6), for P family (1, 2, 3, 4)"
         }
       },
+      "required": [
+        "name",
+        "family",
+        "capacity"
+      ],
       "description": "Sku parameters supplied to the create redis operation."
     },
     "RedisProperties": {
@@ -351,6 +356,9 @@
           "description": "Required when deploying a redis cache inside an existing Azure Virtual Network."
         }
       },
+      "required": [
+        "sku"
+      ],
       "description": "Parameters supplied to CreateOrUpdate redis operation."
     },
     "RedisCreateOrUpdateParameters": {
@@ -360,6 +368,9 @@
           "description": "Redis cache properties."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -448,6 +459,9 @@
           "description": "Required when deploying a redis cache inside an existing Azure Virtual Network."
         }
       },
+      "required": [
+        "sku"
+      ],
       "description": "Properties generated only in response to CreateOrUpdate redis operation."
     },
     "RedisResourceWithAccessKey": {
@@ -528,6 +542,9 @@
           "description": "Required when deploying a redis cache inside an existing Azure Virtual Network."
         }
       },
+      "required": [
+        "sku"
+      ],
       "description": "Parameters describing a redis instance"
     },
     "RedisResource": {
@@ -588,6 +605,9 @@
           }
         }
       },
+      "required": [
+        "keyType"
+      ],
       "description": "Specifies which redis access keys to reset."
     },
     "Resource": {
