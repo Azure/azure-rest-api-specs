@@ -48,13 +48,13 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": ""
+          },
           "204": {
             "description": ""
           },
           "202": {
-            "description": ""
-          },
-          "200": {
             "description": ""
           }
         },
@@ -281,10 +281,10 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": ""
           },
-          "200": {
+          "202": {
             "description": ""
           }
         },
@@ -321,10 +321,10 @@
           }
         ],
         "responses": {
-          "204": {
+          "202": {
             "description": ""
           },
-          "202": {
+          "204": {
             "description": ""
           },
           "200": {
@@ -408,13 +408,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuit"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuit"
@@ -954,13 +954,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/LoadBalancer"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/LoadBalancer"
@@ -1072,13 +1072,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/LocalNetworkGateway"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/LocalNetworkGateway"
@@ -1155,13 +1155,13 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": ""
+          },
           "204": {
             "description": ""
           },
           "202": {
-            "description": ""
-          },
-          "200": {
             "description": ""
           }
         },
@@ -1233,10 +1233,10 @@
           }
         ],
         "responses": {
-          "204": {
+          "202": {
             "description": ""
           },
-          "202": {
+          "204": {
             "description": ""
           },
           "200": {
@@ -1965,13 +1965,13 @@
           }
         ],
         "responses": {
-          "204": {
+          "200": {
             "description": ""
           },
           "202": {
             "description": ""
           },
-          "200": {
+          "204": {
             "description": ""
           }
         },
@@ -2168,13 +2168,13 @@
           }
         ],
         "responses": {
-          "204": {
+          "200": {
             "description": ""
           },
           "202": {
             "description": ""
           },
-          "200": {
+          "204": {
             "description": ""
           }
         },
@@ -2269,13 +2269,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/Route"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/Route"
@@ -2364,13 +2364,13 @@
           }
         ],
         "responses": {
-          "204": {
+          "200": {
             "description": ""
           },
           "202": {
             "description": ""
           },
-          "200": {
+          "204": {
             "description": ""
           }
         },
@@ -2465,13 +2465,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/SecurityRule"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/SecurityRule"
@@ -2661,13 +2661,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
@@ -2756,13 +2756,13 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": ""
-          },
           "202": {
             "description": ""
           },
           "200": {
+            "description": ""
+          },
+          "204": {
             "description": ""
           }
         },
@@ -2857,13 +2857,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/Subnet"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/Subnet"
@@ -2990,13 +2990,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkGatewayConnection"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkGatewayConnection"
@@ -3086,7 +3086,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{connectionSharedKeyName}/sharedkey": {
       "get": {
         "tags": [
           "VirtualNetworkGatewayConnections"
@@ -3102,7 +3102,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "virtualNetworkGatewayConnectionName",
+            "name": "connectionSharedKeyName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -3119,63 +3119,10 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/ConnectionSharedKey"
+              "$ref": "#/definitions/ConnectionSharedKeyResult"
             }
           }
         }
-      },
-      "put": {
-        "tags": [
-          "VirtualNetworkGatewayConnections"
-        ],
-        "operationId": "VirtualNetworkGatewayConnections_SetSharedKey",
-        "description": "The Put VirtualNetworkGatewayConnectionSharedKey operation sets the virtual network gateway connection shared key for passed virtual network gateway connection in the specified resource group through Network resource provider.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "virtualNetworkGatewayConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The virtual network gateway connection name."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConnectionSharedKey"
-            },
-            "description": "Parameters supplied to the Begin Set Virtual Network Gateway conection Shared key operation throughNetwork resource provider."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ConnectionSharedKey"
-            }
-          },
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ConnectionSharedKey"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections": {
@@ -3259,6 +3206,61 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/ConnectionResetSharedKey"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey": {
+      "put": {
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "operationId": "VirtualNetworkGatewayConnections_SetSharedKey",
+        "description": "The Put VirtualNetworkGatewayConnectionSharedKey operation sets the virtual network gateway connection shared key for passed virtual network gateway connection in the specified resource group through Network resource provider.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The virtual network gateway connection name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
+            },
+            "description": "Parameters supplied to the Begin Set Virtual Network Gateway conection Shared key operation throughNetwork resource provider."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
             }
           }
         },
@@ -3387,13 +3389,13 @@
           }
         ],
         "responses": {
-          "204": {
+          "200": {
             "description": ""
           },
           "202": {
             "description": ""
           },
-          "200": {
+          "204": {
             "description": ""
           }
         },
@@ -3474,14 +3476,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": ""
-          },
           "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkGateway"
             }
+          },
+          "202": {
+            "description": ""
           }
         },
         "x-ms-long-running-operation": true
@@ -3517,13 +3519,13 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": ""
+          },
           "204": {
             "description": ""
           },
           "202": {
-            "description": ""
-          },
-          "200": {
             "description": ""
           }
         },
@@ -4150,6 +4152,7 @@
           "description": "Gets or sets sku of application gateway resource"
         },
         "operationalState": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets operational state of application gateway resource",
           "enum": [
@@ -6153,7 +6156,7 @@
       },
       "description": "The List Usages operation response."
     },
-    "VirtualNetworkGatewayIpConfigurationPropertiesFormat": {
+    "VirtualNetworkGatewayIpConfiguration": {
       "properties": {
         "privateIPAddress": {
           "type": "string",
@@ -6182,14 +6185,6 @@
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
-        }
-      },
-      "description": "Properties of VirtualNetworkGatewayIPConfiguration"
-    },
-    "VirtualNetworkGatewayIpConfiguration": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/VirtualNetworkGatewayIpConfigurationPropertiesFormat"
         },
         "name": {
           "type": "string",
@@ -6207,7 +6202,7 @@
       ],
       "description": "IpConfiguration for Virtual network gateway"
     },
-    "VirtualNetworkGatewayPropertiesFormat": {
+    "VirtualNetworkGateway": {
       "properties": {
         "ipConfigurations": {
           "type": "array",
@@ -6244,21 +6239,17 @@
           "type": "boolean",
           "description": "EnableBgp Flag"
         },
-        "resourceGuid": {
-          "type": "string",
-          "description": "Gets or sets resource guid property of the VirtualNetworkGateway resource"
+        "gatewayDefaultSite": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets the reference of the LocalNetworkGateway resource which represents Local network site having default routes. Assign Null value in case of removing existing default site setting."
         },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the VirtualNetworkGateway resource Updating/Deleting/Failed"
-        }
-      },
-      "description": "VirtualNeworkGateay properties"
-    },
-    "VirtualNetworkGateway": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/VirtualNetworkGatewayPropertiesFormat"
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Gets or sets resource guid property of the VirtualNetworkGateway resource"
         },
         "etag": {
           "type": "string",
@@ -6306,6 +6297,30 @@
           "type": "string",
           "description": "The Ipsec share key."
         },
+        "connectionStatus": {
+          "type": "string",
+          "description": "Virtual network Gateway connection status",
+          "enum": [
+            "Unknown",
+            "Connecting",
+            "Connected",
+            "NotConnected"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkGatewayConnectionStatus",
+            "modelAsString": "True"
+          }
+        },
+        "egressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The Egress Bytes Transferred in this connection"
+        },
+        "ingressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The Ingress Bytes Transferred in this connection"
+        },
         "peer": {
           "$ref": "#/definitions/SubResource",
           "description": "The reference to peerings resource."
@@ -6338,14 +6353,14 @@
       ],
       "description": "A common class for general resource information"
     },
-    "ConnectionSharedKey": {
+    "ConnectionSharedKeyResult": {
       "properties": {
         "value": {
           "type": "string",
           "description": "The virtual network connection shared key value"
         }
       },
-      "description": "Response for GetConnectionSharedKey Api servive call"
+      "description": "Response for CheckConnectionSharedKey Api servive call"
     },
     "VirtualNetworkGatewayConnectionListResult": {
       "properties": {
@@ -6363,22 +6378,23 @@
       },
       "description": "Response for ListVirtualNetworkGatewayConnections Api service call"
     },
-    "ConnectionResetSharedKeyPropertiesFormat": {
+    "ConnectionResetSharedKey": {
       "properties": {
         "keyLength": {
           "type": "integer",
           "format": "int64",
           "description": "The virtual network connection reset shared key length"
         }
-      },
-      "description": "VirtualNeworkGatewayConnectionResetSharedKey properties"
-    },
-    "ConnectionResetSharedKey": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ConnectionResetSharedKeyPropertiesFormat"
-        }
       }
+    },
+    "ConnectionSharedKey": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The virtual network connection shared key value"
+        }
+      },
+      "description": "Response for GetConnectionSharedKey Api servive call"
     },
     "VirtualNetworkGatewayListResult": {
       "properties": {
