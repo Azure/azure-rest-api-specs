@@ -1,0 +1,673 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "RedisManagementClient",
+    "description": ".Net client wrapper for the REST API for Azure Redis Cache Management Service",
+    "version": "2015-08-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}": {
+      "put": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_CreateOrUpdate",
+        "description": "Create a redis cache, or replace (overwrite/recreate, with potential downtime) an existing cache",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisCreateOrUpdateParameters"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate redis operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RedisResourceWithAccessKey"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RedisResourceWithAccessKey"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_Delete",
+        "description": "Deletes a redis cache. This operation takes a while to complete.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "202": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_Get",
+        "description": "Gets a redis cache (resource description).",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RedisResource"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/": {
+      "get": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_List",
+        "description": "Gets all redis caches in a resource group (if provided) otherwise all in subscription.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RedisListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/listKeys": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_ListKeys",
+        "description": "Retrieve a redis cache's access keys. This operation requires write permission to the cache resource.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RedisListKeysResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/regenerateKey": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_RegenerateKey",
+        "description": "Regenerate redis cache's access keys. This operation requires write permission to the cache resource.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisRegenerateKeyParameters"
+            },
+            "description": "Specifies which key to reset."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "What type of redis cache to deploy. Valid values: (Basic, Standard, Premium)",
+          "enum": [
+            "Basic",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": "True"
+          }
+        },
+        "family": {
+          "type": "string",
+          "description": "Which family to use. Valid values: (C, P)",
+          "enum": [
+            "C",
+            "P"
+          ],
+          "x-ms-enum": {
+            "name": "SkuFamily",
+            "modelAsString": "True"
+          }
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "What size of redis cache to deploy. Valid values: for C family (0, 1, 2, 3, 4, 5, 6), for P family (1, 2, 3, 4)"
+        }
+      },
+      "required": [
+        "name",
+        "family",
+        "capacity"
+      ],
+      "description": "Sku parameters supplied to the create redis operation."
+    },
+    "RedisProperties": {
+      "properties": {
+        "redisVersion": {
+          "type": "string",
+          "description": "RedisVersion parameter has been deprecated. As such, it is no longer necessary to provide this parameter and any value specified is ignored."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "What sku of redis cache to deploy."
+        },
+        "redisConfiguration": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "All Redis Settings. Few possible keys: <para>rdb-backup-enabled</para><para>rdb-storage-connection-string</para><para>rdb-backup-frequency</para><para>maxmemory-delta</para><para>maxmemory-policy</para><para>notify-keyspace-events</para><para>maxmemory-samples</para><para>slowlog-log-slower-than</para><para>slowlog-max-len</para><para>list-max-ziplist-entries</para><para>list-max-ziplist-value</para><para>hash-max-ziplist-entries</para><para>hash-max-ziplist-value</para><para>set-max-intset-entries</para><para>zset-max-ziplist-entries</para><para>zset-max-ziplist-value etc.</para>"
+        },
+        "enableNonSslPort": {
+          "type": "boolean",
+          "description": "If the value is true, then the non-ssl redis server port (6379) will be enabled."
+        },
+        "tenantSettings": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "tenantSettings"
+        },
+        "shardCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of shards to be created on a Premium Cluster Cache."
+        },
+        "virtualNetwork": {
+          "type": "string",
+          "description": "The exact ARM resource ID of the virtual network to deploy the redis cache in. Example format: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.ClassicNetwork/VirtualNetworks/vnet1"
+        },
+        "subnet": {
+          "type": "string",
+          "description": "Required when deploying a redis cache inside an existing Azure Virtual Network."
+        },
+        "staticIP": {
+          "type": "string",
+          "description": "Required when deploying a redis cache inside an existing Azure Virtual Network."
+        }
+      },
+      "required": [
+        "sku"
+      ],
+      "description": "Parameters supplied to CreateOrUpdate redis operation."
+    },
+    "RedisCreateOrUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RedisProperties",
+          "description": "Redis cache properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Parameters supplied to the CreateOrUpdate Redis operation."
+    },
+    "RedisAccessKeys": {
+      "properties": {
+        "primaryKey": {
+          "type": "string",
+          "description": "The current primary key that clients can use to authenticate with redis cache."
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "The current secondary key that clients can use to authenticate with redis cache."
+        }
+      },
+      "description": "Redis cache access keys."
+    },
+    "RedisReadablePropertiesWithAccessKey": {
+      "properties": {
+        "accessKeys": {
+          "$ref": "#/definitions/RedisAccessKeys",
+          "description": "Redis cache access keys."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Redis instance provisioning status"
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Redis host name"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Redis non-ssl port"
+        },
+        "sslPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Redis ssl port"
+        },
+        "redisVersion": {
+          "type": "string",
+          "description": "RedisVersion parameter has been deprecated. As such, it is no longer necessary to provide this parameter and any value specified is ignored."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "What sku of redis cache to deploy."
+        },
+        "redisConfiguration": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "All Redis Settings. Few possible keys: <para>rdb-backup-enabled</para><para>rdb-storage-connection-string</para><para>rdb-backup-frequency</para><para>maxmemory-delta</para><para>maxmemory-policy</para><para>notify-keyspace-events</para><para>maxmemory-samples</para><para>slowlog-log-slower-than</para><para>slowlog-max-len</para><para>list-max-ziplist-entries</para><para>list-max-ziplist-value</para><para>hash-max-ziplist-entries</para><para>hash-max-ziplist-value</para><para>set-max-intset-entries</para><para>zset-max-ziplist-entries</para><para>zset-max-ziplist-value etc.</para>"
+        },
+        "enableNonSslPort": {
+          "type": "boolean",
+          "description": "If the value is true, then the non-ssl redis server port (6379) will be enabled."
+        },
+        "tenantSettings": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "tenantSettings"
+        },
+        "shardCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of shards to be created on a Premium Cluster Cache."
+        },
+        "virtualNetwork": {
+          "type": "string",
+          "description": "The exact ARM resource ID of the virtual network to deploy the redis cache in. Example format: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.ClassicNetwork/VirtualNetworks/vnet1"
+        },
+        "subnet": {
+          "type": "string",
+          "description": "Required when deploying a redis cache inside an existing Azure Virtual Network."
+        },
+        "staticIP": {
+          "type": "string",
+          "description": "Required when deploying a redis cache inside an existing Azure Virtual Network."
+        }
+      },
+      "required": [
+        "sku"
+      ],
+      "description": "Properties generated only in response to CreateOrUpdate redis operation."
+    },
+    "RedisResourceWithAccessKey": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RedisReadablePropertiesWithAccessKey",
+          "description": "Redis cache properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "A redis item in CreateOrUpdate Operation response."
+    },
+    "RedisReadableProperties": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Redis instance provisioning status"
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Redis host name"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Redis non-ssl port"
+        },
+        "sslPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Redis ssl port"
+        },
+        "redisVersion": {
+          "type": "string",
+          "description": "RedisVersion parameter has been deprecated. As such, it is no longer necessary to provide this parameter and any value specified is ignored."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "What sku of redis cache to deploy."
+        },
+        "redisConfiguration": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "All Redis Settings. Few possible keys: <para>rdb-backup-enabled</para><para>rdb-storage-connection-string</para><para>rdb-backup-frequency</para><para>maxmemory-delta</para><para>maxmemory-policy</para><para>notify-keyspace-events</para><para>maxmemory-samples</para><para>slowlog-log-slower-than</para><para>slowlog-max-len</para><para>list-max-ziplist-entries</para><para>list-max-ziplist-value</para><para>hash-max-ziplist-entries</para><para>hash-max-ziplist-value</para><para>set-max-intset-entries</para><para>zset-max-ziplist-entries</para><para>zset-max-ziplist-value etc.</para>"
+        },
+        "enableNonSslPort": {
+          "type": "boolean",
+          "description": "If the value is true, then the non-ssl redis server port (6379) will be enabled."
+        },
+        "tenantSettings": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "tenantSettings"
+        },
+        "shardCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of shards to be created on a Premium Cluster Cache."
+        },
+        "virtualNetwork": {
+          "type": "string",
+          "description": "The exact ARM resource ID of the virtual network to deploy the redis cache in. Example format: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.ClassicNetwork/VirtualNetworks/vnet1"
+        },
+        "subnet": {
+          "type": "string",
+          "description": "Required when deploying a redis cache inside an existing Azure Virtual Network."
+        },
+        "staticIP": {
+          "type": "string",
+          "description": "Required when deploying a redis cache inside an existing Azure Virtual Network."
+        }
+      },
+      "required": [
+        "sku"
+      ],
+      "description": "Parameters describing a redis instance"
+    },
+    "RedisResource": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RedisReadableProperties",
+          "description": "Redis cache properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "A single redis item in List or Get Operation."
+    },
+    "RedisListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisResource"
+          },
+          "description": "Results of the list operation"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link for next set of locations."
+        }
+      },
+      "description": "The response of list redis operation."
+    },
+    "RedisListKeysResult": {
+      "properties": {
+        "primaryKey": {
+          "type": "string",
+          "description": "The current primary key that clients can use to authenticate with redis cache."
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "The current secondary key that clients can use to authenticate with redis cache."
+        }
+      },
+      "description": "The response of redis list keys operation."
+    },
+    "RedisRegenerateKeyParameters": {
+      "properties": {
+        "keyType": {
+          "type": "string",
+          "description": "Which redis access key to reset",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "x-ms-enum": {
+            "name": "RedisKeyType",
+            "modelAsString": "False"
+          }
+        }
+      },
+      "required": [
+        "keyType"
+      ],
+      "description": "Specifies which redis access keys to reset."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}
