@@ -4150,6 +4150,7 @@
           "description": "Gets or sets sku of application gateway resource"
         },
         "operationalState": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets operational state of application gateway resource",
           "enum": [
@@ -6244,6 +6245,10 @@
           "type": "boolean",
           "description": "EnableBgp Flag"
         },
+        "gatewayDefaultSite": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets the reference of the LocalNetworkGateway resource which represents Local network site having default routes. Assign Null value in case of removing existing default site setting."
+        },
         "resourceGuid": {
           "type": "string",
           "description": "Gets or sets resource guid property of the VirtualNetworkGateway resource"
@@ -6306,6 +6311,30 @@
           "type": "string",
           "description": "The Ipsec share key."
         },
+        "connectionStatus": {
+          "type": "string",
+          "description": "Virtual network Gateway connection status",
+          "enum": [
+            "Unknown",
+            "Connecting",
+            "Connected",
+            "NotConnected"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkGatewayConnectionStatus",
+            "modelAsString": "True"
+          }
+        },
+        "egressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The Egress Bytes Transferred in this connection"
+        },
+        "ingressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The Ingress Bytes Transferred in this connection"
+        },
         "peer": {
           "$ref": "#/definitions/SubResource",
           "description": "The reference to peerings resource."
@@ -6363,20 +6392,12 @@
       },
       "description": "Response for ListVirtualNetworkGatewayConnections Api service call"
     },
-    "ConnectionResetSharedKeyPropertiesFormat": {
+    "ConnectionResetSharedKey": {
       "properties": {
         "keyLength": {
           "type": "integer",
           "format": "int64",
           "description": "The virtual network connection reset shared key length"
-        }
-      },
-      "description": "VirtualNeworkGatewayConnectionResetSharedKey properties"
-    },
-    "ConnectionResetSharedKey": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ConnectionResetSharedKeyPropertiesFormat"
         }
       }
     },
