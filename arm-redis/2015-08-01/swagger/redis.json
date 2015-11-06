@@ -150,20 +150,48 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/": {
+        "get": {
+            "tags": [
+                "Redis"
+            ],
+            "operationId": "Redis_ListByResourceGroup",
+            "description": "Gets all redis caches in a resource group.",
+            "parameters": [
+                {
+                    "name": "resourceGroupName",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The name of the resource group."
+                },
+                {
+                    "$ref": "#/parameters/ApiVersionParameter"
+                },
+                {
+                    "$ref": "#/parameters/SubscriptionIdParameter"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "",
+                    "schema": {
+                        "$ref": "#/definitions/RedisListResult"
+                    }
+                }
+            },
+            "x-ms-pageable": {
+                "nextLinkName": "nextLink"
+            }
+        }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/Redis/": {
       "get": {
         "tags": [
           "Redis"
         ],
         "operationId": "Redis_List",
-        "description": "Gets all redis caches in a resource group (if provided) otherwise all in subscription.",
+        "description": "Gets all redis caches in the specified subscription.",
         "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
