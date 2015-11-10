@@ -135,13 +135,13 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/ApplicationGateway"
             }
           },
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/ApplicationGateway"
@@ -151,70 +151,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "{id}": {
-      "get": {
-        "tags": [
-          "ApplicationGateways"
-        ],
-        "operationId": "ApplicationGateways_GetById",
-        "description": "The Get applicationgateway operation retreives information about the specified applicationgateway.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The id of the resource."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ApplicationGateway"
-            }
-          }
-        }
-      }
-    },
-	    "{id}": {
-      "get": {
-        "tags": [
-          "VirtualNetworks"
-        ],
-        "operationId": "VirtualNetworks_GetById",
-        "description": "The Get applicationgateway operation retreives information about the specified applicationgateway.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The id of the resource."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/VirtualNetwork"
-            }
-          }
-        }
-      }
-	  },	
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways": {
       "get": {
         "tags": [
@@ -345,10 +281,10 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": ""
           },
-          "200": {
+          "202": {
             "description": ""
           }
         },
@@ -392,13 +328,13 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": ""
+          },
           "200": {
             "description": ""
           },
           "204": {
-            "description": ""
-          },
-          "202": {
             "description": ""
           }
         },
@@ -588,13 +524,13 @@
           }
         ],
         "responses": {
-          "204": {
+          "200": {
             "description": ""
           },
           "202": {
             "description": ""
           },
-          "200": {
+          "204": {
             "description": ""
           }
         },
@@ -780,10 +716,10 @@
           "204": {
             "description": ""
           },
-          "200": {
+          "202": {
             "description": ""
           },
-          "202": {
+          "200": {
             "description": ""
           }
         },
@@ -864,13 +800,13 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuit"
             }
           },
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuit"
@@ -880,7 +816,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}arpTable": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/arpTable": {
       "get": {
         "tags": [
           "ExpressRouteCircuits"
@@ -922,7 +858,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}routesTable": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/routesTable": {
       "get": {
         "tags": [
           "ExpressRouteCircuits"
@@ -964,7 +900,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}stats": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/stats": {
       "get": {
         "tags": [
           "ExpressRouteCircuits"
@@ -1214,13 +1150,13 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/LoadBalancer"
             }
           },
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/LoadBalancer"
@@ -1332,13 +1268,13 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/LocalNetworkGateway"
             }
           },
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/LocalNetworkGateway"
@@ -1418,10 +1354,10 @@
           "204": {
             "description": ""
           },
-          "202": {
+          "200": {
             "description": ""
           },
-          "200": {
+          "202": {
             "description": ""
           }
         },
@@ -1833,13 +1769,13 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": ""
-          },
           "202": {
             "description": ""
           },
           "200": {
+            "description": ""
+          },
+          "204": {
             "description": ""
           }
         },
@@ -2032,10 +1968,10 @@
           "204": {
             "description": ""
           },
-          "200": {
+          "202": {
             "description": ""
           },
-          "202": {
+          "200": {
             "description": ""
           }
         },
@@ -2225,10 +2161,10 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": ""
           },
-          "204": {
+          "200": {
             "description": ""
           },
           "202": {
@@ -2428,10 +2364,10 @@
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": ""
           },
-          "202": {
+          "200": {
             "description": ""
           },
           "204": {
@@ -2725,13 +2661,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/SecurityRule"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/SecurityRule"
@@ -3054,13 +2990,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkGatewayConnection"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkGatewayConnection"
@@ -3263,14 +3199,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": ""
-          },
           "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/ConnectionResetSharedKey"
             }
+          },
+          "202": {
+            "description": ""
           }
         },
         "x-ms-long-running-operation": true
@@ -3315,13 +3251,13 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/ConnectionSharedKey"
             }
           },
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/ConnectionSharedKey"
@@ -3453,13 +3389,13 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": ""
+          },
           "202": {
             "description": ""
           },
           "200": {
-            "description": ""
-          },
-          "204": {
             "description": ""
           }
         },
@@ -3540,14 +3476,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": ""
+          },
           "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkGateway"
             }
-          },
-          "202": {
-            "description": ""
           }
         },
         "x-ms-long-running-operation": true
@@ -3583,10 +3519,10 @@
           }
         ],
         "responses": {
-          "204": {
+          "202": {
             "description": ""
           },
-          "202": {
+          "204": {
             "description": ""
           },
           "200": {
@@ -3911,7 +3847,7 @@
             "Dynamic"
           ],
           "x-ms-enum": {
-            "name": "IpAllocationMethod",
+            "name": "IPAllocationMethod",
             "modelAsString": "True"
           }
         },
@@ -4866,30 +4802,6 @@
     },
     "FrontendIPConfigurationPropertiesFormat": {
       "properties": {
-        "privateIPAddress": {
-          "type": "string",
-          "description": "Gets or sets the IP address of the Load Balancer.This is only specified if a specific private IP address shall be allocated from the subnet specified in subnetRef"
-        },
-        "privateIPAllocationMethod": {
-          "type": "string",
-          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic)",
-          "enum": [
-            "Static",
-            "Dynamic"
-          ],
-          "x-ms-enum": {
-            "name": "IpAllocationMethod",
-            "modelAsString": "True"
-          }
-        },
-        "subnet": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets the reference of the subnet resource.A subnet from wher the load balancer gets its private frontend address "
-        },
-        "publicIPAddress": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets the reference of the PublicIP resource"
-        },
         "inboundNatRules": {
           "type": "array",
           "items": {
@@ -4917,6 +4829,30 @@
             "$ref": "#/definitions/SubResource"
           },
           "description": "Gets Load Balancing rules URIs that use this frontend IP"
+        },
+        "privateIPAddress": {
+          "type": "string",
+          "description": "Gets or sets the privateIPAddress of the IP Configuration"
+        },
+        "privateIPAllocationMethod": {
+          "type": "string",
+          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic)",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "x-ms-enum": {
+            "name": "IPAllocationMethod",
+            "modelAsString": "True"
+          }
+        },
+        "subnet": {
+          "$ref": "#/definitions/Subnet",
+          "description": "Gets or sets the reference of the subnet resource"
+        },
+        "publicIPAddress": {
+          "$ref": "#/definitions/PublicIPAddress",
+          "description": "Gets or sets the reference of the PublicIP resource"
         },
         "provisioningState": {
           "type": "string",
@@ -4951,7 +4887,7 @@
         "backendIPConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "#/definitions/NetworkInterfaceIPConfiguration"
           },
           "description": "Gets collection of references to IPs defined in NICs"
         },
@@ -5164,7 +5100,7 @@
           "description": "Gets or sets a reference to frontend IP Addresses"
         },
         "backendIPConfiguration": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "#/definitions/NetworkInterfaceIPConfiguration",
           "description": "Gets or sets a reference to a private ip address defined on a NetworkInterface of a VM. Traffic sent to frontendPort of each of the frontendIPConfigurations is forwarded to the backed IP"
         },
         "protocol": {
@@ -5511,47 +5447,34 @@
     },
     "NetworkInterfaceIPConfigurationPropertiesFormat": {
       "properties": {
-        "privateIPAddress": {
-          "type": "string",
-          "description": "Gets or sets the privateIPAddress of the Network Interface IP Configuration"
-        },
-        "privateIPAllocationMethod": {
-          "type": "string",
-          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic)",
-          "enum": [
-            "Static",
-            "Dynamic"
-          ],
-          "x-ms-enum": {
-            "name": "IpAllocationMethod",
-            "modelAsString": "True"
-          }
-        },
-        "subnet": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets the reference of the subnet resource"
-        },
-        "publicIPAddress": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets the reference of the PublicIP resource"
-        },
         "loadBalancerBackendAddressPools": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "#/definitions/BackendAddressPool"
           },
           "description": "Gets or sets the reference of LoadBalancerBackendAddressPool resource"
         },
         "loadBalancerInboundNatRules": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "#/definitions/InboundNatRule"
           },
           "description": "Gets or sets list of references of LoadBalancerInboundNatRules"
         },
+        "privateIPAddress": {
+          "type": "string"
+        },
+        "privateIPAllocationMethod": {
+          "type": "string"
+        },
+        "subnet": {
+          "$ref": "#/definitions/Subnet"
+        },
+        "publicIPAddress": {
+          "$ref": "#/definitions/PublicIPAddress"
+        },
         "provisioningState": {
-          "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "type": "string"
         }
       },
       "description": "Properties of IPConfiguration"
@@ -5611,7 +5534,7 @@
           "description": "Gets or sets the reference of a VirtualMachine"
         },
         "networkSecurityGroup": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "#/definitions/NetworkSecurityGroup",
           "description": "Gets or sets the reference of the NetworkSecurityGroup resource"
         },
         "ipConfigurations": {
@@ -5798,14 +5721,14 @@
         "networkInterfaces": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "#/definitions/NetworkInterface"
           },
           "description": "Gets collection of references to Network Interfaces"
         },
         "subnets": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "#/definitions/Subnet"
           },
           "description": "Gets collection of references to subnets"
         },
@@ -5880,12 +5803,12 @@
             "Dynamic"
           ],
           "x-ms-enum": {
-            "name": "IpAllocationMethod",
+            "name": "IPAllocationMethod",
             "modelAsString": "True"
           }
         },
         "ipConfiguration": {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/IPConfiguration"
         },
         "dnsSettings": {
           "$ref": "#/definitions/PublicIPAddressDnsSettings",
@@ -6014,7 +5937,7 @@
         "subnets": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "#/definitions/Subnet"
           },
           "description": "Gets collection of references to subnets"
         },
@@ -6090,6 +6013,60 @@
       },
       "description": "Response for ListSecurityRule Api service callRetrieves all security rules that belongs to a network security group"
     },
+    "IPConfigurationPropertiesFormat": {
+      "properties": {
+        "privateIPAddress": {
+          "type": "string",
+          "description": "Gets or sets the privateIPAddress of the IP Configuration"
+        },
+        "privateIPAllocationMethod": {
+          "type": "string",
+          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic)",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "x-ms-enum": {
+            "name": "IPAllocationMethod",
+            "modelAsString": "True"
+          }
+        },
+        "subnet": {
+          "$ref": "#/definitions/Subnet",
+          "description": "Gets or sets the reference of the subnet resource"
+        },
+        "publicIPAddress": {
+          "$ref": "#/definitions/PublicIPAddress",
+          "description": "Gets or sets the reference of the PublicIP resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of IPConfiguration"
+    },
+    "IPConfiguration": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IPConfigurationPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "IPConfiguration"
+    },
     "SubnetPropertiesFormat": {
       "properties": {
         "addressPrefix": {
@@ -6097,17 +6074,17 @@
           "description": "Gets or sets Address prefix for the subnet."
         },
         "networkSecurityGroup": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "#/definitions/NetworkSecurityGroup",
           "description": "Gets or sets the reference of the NetworkSecurityGroup resource"
         },
         "routeTable": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "#/definitions/RouteTable",
           "description": "Gets or sets the reference of the RouteTable resource"
         },
         "ipConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "#/definitions/IPConfiguration"
           },
           "description": "Gets array of references to the network interface IP configurations using subnet"
         },
@@ -6218,11 +6195,11 @@
       },
       "description": "The List Usages operation response."
     },
-    "VirtualNetworkGatewayIpConfigurationPropertiesFormat": {
+    "VirtualNetworkGatewayIPConfigurationPropertiesFormat": {
       "properties": {
         "privateIPAddress": {
           "type": "string",
-          "description": "Gets or sets the privateIPAddress of the Network Interface IP Configuration"
+          "description": "Gets or sets the privateIPAddress of the IP Configuration"
         },
         "privateIPAllocationMethod": {
           "type": "string",
@@ -6232,7 +6209,7 @@
             "Dynamic"
           ],
           "x-ms-enum": {
-            "name": "IpAllocationMethod",
+            "name": "IPAllocationMethod",
             "modelAsString": "True"
           }
         },
@@ -6251,10 +6228,10 @@
       },
       "description": "Properties of VirtualNetworkGatewayIPConfiguration"
     },
-    "VirtualNetworkGatewayIpConfiguration": {
+    "VirtualNetworkGatewayIPConfiguration": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/VirtualNetworkGatewayIpConfigurationPropertiesFormat"
+          "$ref": "#/definitions/VirtualNetworkGatewayIPConfigurationPropertiesFormat"
         },
         "name": {
           "type": "string",
@@ -6277,7 +6254,7 @@
         "ipConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VirtualNetworkGatewayIpConfiguration"
+            "$ref": "#/definitions/VirtualNetworkGatewayIPConfiguration"
           },
           "description": "IpConfigurations for Virtual network gateway."
         },
