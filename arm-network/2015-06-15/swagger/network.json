@@ -1060,9 +1060,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ExpandParameter"
           }
         ],
         "responses": {
@@ -1104,6 +1101,13 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+			"in": "query",
+			"required": false,
+			"type": "string",
+			"description": "expand references resources."
           }
         ],
         "responses": {
@@ -1472,7 +1476,11 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ExpandParameter"
+            "name": "$expand",
+			"in": "query",
+			"required": false,
+			"type": "string",
+			"description": "expand references resources."
           }
         ],
         "responses": {
@@ -1672,7 +1680,11 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ExpandParameter"
+            "name": "$expand",
+			"in": "query",
+			"required": false,
+			"type": "string",
+			"description": "expand references resources."
           }
         ],
         "responses": {
@@ -1818,7 +1830,11 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ExpandParameter"
+            "name": "$expand",
+			"in": "query",
+			"required": false,
+			"type": "string",
+			"description": "expand references resources."
           }
         ],
         "responses": {
@@ -2017,7 +2033,11 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ExpandParameter"
+            "name": "$expand",
+			"in": "query",
+			"required": false,
+			"type": "string",
+			"description": "expand references resources."
           }
         ],
         "responses": {
@@ -2173,9 +2193,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ExpandParameter"
           }
         ],
         "responses": {
@@ -2217,6 +2234,13 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+			"in": "query",
+			"required": false,
+			"type": "string",
+			"description": "expand references resources."
           }
         ],
         "responses": {
@@ -2771,9 +2795,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ExpandParameter"
           }
         ],
         "responses": {
@@ -2822,6 +2843,13 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+			"in": "query",
+			"required": false,
+			"type": "string",
+			"description": "expand references resources."
           }
         ],
         "responses": {
@@ -3580,7 +3608,11 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ExpandParameter"
+            "name": "$expand",
+			"in": "query",
+			"required": false,
+			"type": "string",
+			"description": "expand references resources."
           }
         ],
         "responses": {
@@ -6186,7 +6218,7 @@
         },
         "currentValue": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Gets or sets the current value of the usage."
         },
         "limit": {
@@ -6656,9 +6688,6 @@
           "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true
     },
     "SubResource": {
@@ -6685,13 +6714,6 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
-    },
-	"ExpandParameter": {
-      "name": "$expand",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "expand references resources."
     }
   }
 }
