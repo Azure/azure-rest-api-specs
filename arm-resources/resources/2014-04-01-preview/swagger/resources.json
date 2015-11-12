@@ -147,7 +147,7 @@
             }
           }
         },
-		"x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true
       },
       "get": {
         "tags": [
@@ -1508,9 +1508,488 @@
           "nextLinkName": null
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}providers/Microsoft.Authorization/policyAssignments": {
+      "get": {
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "operationId": "PolicyAssignments_ListForResource",
+        "description": "Gets policy assignments of the resource.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource provider."
+          },
+          {
+            "name": "parentResourcePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parent resource path."
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource type."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource name."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignmentListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/policyAssignments": {
+      "get": {
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "operationId": "PolicyAssignments_ListForResourceGroup",
+        "description": "Gets policy assignments of the resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource group name."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignmentListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}": {
+      "delete": {
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "operationId": "PolicyAssignments_Delete",
+        "description": "Delete policy assignment.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Scope.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "policyAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Policy assignment name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignment"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "operationId": "PolicyAssignments_Create",
+        "description": "Create policy assignment.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Scope.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "policyAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Policy assignment name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignmentCreateParameters"
+            },
+            "description": "Policy assignment."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignment"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "operationId": "PolicyAssignments_Get",
+        "description": "Get single policy assignment.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Scope.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "policyAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Policy assignment name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignment"
+            }
+          }
+        }
+      }
+    },
+    "/{policyAssignmentId}": {
+      "delete": {
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "operationId": "PolicyAssignments_DeleteById",
+        "description": "Delete policy assignment.",
+        "parameters": [
+          {
+            "name": "policyAssignmentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Policy assignment Id",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignment"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "operationId": "PolicyAssignments_CreateById",
+        "description": "Create policy assignment by Id.",
+        "parameters": [
+          {
+            "name": "policyAssignmentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Policy assignment Id",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignmentCreateParameters"
+            },
+            "description": "Policy assignment."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignment"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "operationId": "PolicyAssignments_GetById",
+        "description": "Get single policy assignment.",
+        "parameters": [
+          {
+            "name": "policyAssignmentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Policy assignment Id",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignment"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyAssignments": {
+      "get": {
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "operationId": "PolicyAssignments_List",
+        "description": "Gets policy assignments of the subscription.",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignmentListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/policyAssignments": {
+      "get": {
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "operationId": "PolicyAssignments_ListForScope",
+        "description": "Gets policy assignments of the scope.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Scope.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignmentListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
+    "PolicyAssignmentProperties": {
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "Gets or sets the policy assignment scope."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the policy assignment display name."
+        },
+        "policyDefinitionId": {
+          "type": "string",
+          "description": "Gets or sets the policy definition Id."
+        }
+      },
+      "description": "Policy Assignment properties."
+    },
+    "PolicyAssignment": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PolicyAssignmentProperties",
+          "description": "Gets or sets the policy assignment properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the policy assignment name."
+        }
+      },
+      "description": "Policy assignment.",
+      "x-ms-azure-resource": true
+    },
+    "PolicyAssignmentListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyAssignment"
+          },
+          "description": "Policy assignment list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the URL to get the next set of policy assignment results."
+        }
+      },
+      "description": "Policy assignment list operation result."
+    },
+    "PolicyAssignmentCreateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PolicyAssignmentProperties",
+          "description": "Gets or sets policy assignment properties."
+        }
+      },
+      "description": "Policy assignment create parameters."
+    },
     "DeploymentExtendedFilter": {
       "properties": {
         "provisioningState": {
