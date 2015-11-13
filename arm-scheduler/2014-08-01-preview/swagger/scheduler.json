@@ -602,6 +602,13 @@
                         "required": false,
                         "type": "integer",
                         "description": "The (0-based) index of the job history list from which to begin requesting entries."
+                    },
+                    {
+                        "name": "$filter",
+                        "description": "The filter to apply on the job state.",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -612,7 +619,8 @@
                         }
                     }
                 },
-                "x-ms-pageable": { "nextLinkName": "nextLink" }
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
+                "x-ms-odata": "#/definitions/JobStateFilter"
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scheduler/jobCollections/{jobCollectionName}/jobs/{jobName}/history": {
@@ -663,6 +671,13 @@
                         "required": false,
                         "type": "integer",
                         "description": "The (0-based) index of the job history list from which to begin requesting entries."
+                    },
+                    {
+                        "name": "$filter",
+                        "description": "The filter to apply on the job state.",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -673,7 +688,8 @@
                         }
                     }
                 },
-                "x-ms-pageable": { "nextLinkName": "nextLink" }
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
+                "x-ms-odata": "#/definitions/JobHistoryFilter"
             }
         }
     },
@@ -849,15 +865,8 @@
                     "description": "Gets or sets the job recurrence."
                 },
                 "state": {
-                    "type": "string",
-                    "description": "Gets or set the job state.",
-                    "enum": [
-                        "Enabled",
-                        "Disabled",
-                        "Faulted",
-                        "Completed"
-                    ],
-                    "x-ms-enum": { "name": "JobState", "modelAsString": "False" }
+                    "$ref": "#/definitions/JobState",
+                    "description": "Gets or set the job state."
                 },
                 "status": {
                     "$ref": "#/definitions/JobStatus",
@@ -921,17 +930,9 @@
                     "x-ms-enum": { "name": "JobHistoryActionName", "modelAsString": "False" }
                 },
                 "status": {
-                    "type": "string",
+                    "$ref": "#/definitions/JobExecutionStatus",
                     "readOnly": true,
-                    "description": "Gets the job history status.",
-                    "enum": [
-                        "Completed",
-                        "Failed",
-                        "Cancelled",
-                        "CallbackNotFound",
-                        "Postponed"
-                    ],
-                    "x-ms-enum": { "name": "JobExecutionStatus", "modelAsString": "False" }
+                    "description": "Gets the job history status."
                 },
                 "message": {
                     "type": "string",
@@ -1028,7 +1029,7 @@
         },
         "HttpRequest": {
             "properties": {
-                "httpAuthentication": {
+                "authentication": {
                     "$ref": "#/definitions/HttpAuthentication",
                     "description": "Gets or sets the http authentication."
                 },
@@ -1458,6 +1459,45 @@
                     "description": "Gets or sets the occurrence. Must be between -5 and 5."
                 }
             }
+        },
+        "JobStateFilter": {
+            "type": "object",
+            "properties": {
+                "state": {
+                    "$ref": "#/definitions/JobState",
+                    "description": "Gets or sets the job state."
+                }
+            }
+        },
+        "JobState": {
+            "type": "string",
+            "description": "Gets or set the job state.",
+            "enum": [
+                "Enabled",
+                "Disabled",
+                "Faulted",
+                "Completed"
+            ],
+            "x-ms-enum": { "name": "JobState", "modelAsString": "False" }
+        },
+        "JobHistoryFilter": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/JobExecutionStatus",
+                    "description": "Gets or sets the job execution status."
+                }
+            }
+        },
+        "JobExecutionStatus": {
+            "type": "string",
+            "description": "Gets the job execution status.",
+            "enum": [
+                "Completed",
+                "Failed",
+                "Postponed"
+            ],
+            "x-ms-enum": { "name": "JobExecutionStatus", "modelAsString": "False" }
         },
         "JobStatus": {
             "properties": {
