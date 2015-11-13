@@ -9,15 +9,13 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/{deploymentName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}": {
       "delete": {
         "tags": [
           "Deployments"
@@ -188,7 +186,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/{deploymentName}/cancel": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/cancel": {
       "post": {
         "tags": [
           "Deployments"
@@ -225,7 +223,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.resources/deployments/{deploymentName}/validate": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/validate": {
       "post": {
         "tags": [
           "Deployments"
@@ -280,7 +278,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/": {
       "get": {
         "tags": [
           "Deployments"
@@ -329,86 +327,6 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-odata": "#/definitions/DeploymentExtendedFilter"
-      }
-    },
-    "/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}": {
-      "get": {
-        "tags": [
-          "ProviderOperationsMetadata"
-        ],
-        "operationId": "ProviderOperationsMetadata_Get",
-        "description": "Gets provider operations metadata",
-        "parameters": [
-          {
-            "name": "resourceProviderNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Namespace of the resource provider."
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "resourceTypes"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ProviderOperationsMetadata"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Authorization/providerOperations": {
-      "get": {
-        "tags": [
-          "ProviderOperationsMetadata"
-        ],
-        "operationId": "ProviderOperationsMetadata_List",
-        "description": "Gets provider operations metadata list",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "resourceTypes"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ProviderOperationsMetadataListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/unregister": {
@@ -2486,99 +2404,7 @@
         }
       },
       "description": "List of deployments."
-    },
-    "Operation": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the operation name"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Gets or sets the operation display name"
-        },
-        "description": {
-          "type": "string",
-          "description": "Gets or sets the operation description"
-        },
-        "origin": {
-          "type": "string",
-          "description": "Gets or sets the operation origin"
-        },
-        "properties": {
-          "type": "object",
-          "description": "Gets or sets the operation properties"
-        }
-      },
-      "description": "Operation"
-    },
-    "ResourceType": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the resource type name"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Gets or sets the resource type display name"
-        },
-        "operations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "Gets or sets the resource type operations"
-        }
-      },
-      "description": "Resource Type"
-    },
-    "ProviderOperationsMetadata": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the provider id."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the provider name"
-        },
-        "type": {
-          "type": "string",
-          "description": "Gets or sets the provider type"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Gets or sets the provider display name"
-        },
-        "resourceTypes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceType"
-          },
-          "description": "Gets or sets the provider resource types"
-        },
-        "operations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "Gets or sets the provider operations"
-        }
-      },
-      "description": "Provider Operations metadata"
-    },
-    "ProviderOperationsMetadataListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ProviderOperationsMetadata"
-          },
-          "description": "Gets or sets the list of providers."
-        }
-      },
-      "description": "Provider operations metadata list"
-    },
+    },     
     "ProviderListResult": {
       "properties": {
         "value": {
