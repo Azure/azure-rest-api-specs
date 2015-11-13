@@ -395,10 +395,7 @@
         "description": "Gets the current usage count and the limit for the resources under the subscription.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -482,15 +479,25 @@
     },
     "StorageAccountCreateParameters": {
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
         "properties": {
           "$ref": "#/definitions/StorageAccountPropertiesCreateParameters"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
+      "required": [
+        "location"
       ],
+      "x-ms-azure-resource": true,
       "description": "The parameters to provide for the account."
     },
     "Endpoints": {
@@ -679,15 +686,18 @@
     },
     "StorageAccountUpdateParameters": {
       "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
         "properties": {
           "$ref": "#/definitions/StorageAccountPropertiesUpdateParameters"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
+      "x-ms-azure-resource": true,
       "description": "The parameters to update on the account."
     },
     "StorageAccountRegenerateKeyParameters": {
@@ -793,18 +803,6 @@
             "type": "string"
           },
           "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
         }
       },
       "x-ms-azure-resource": true

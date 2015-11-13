@@ -1,0 +1,1044 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AuthorizationManagementClient",
+    "version": "2015-07-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/classicAdministrators": {
+      "get": {
+        "tags": [
+          "ClassicAdministrators"
+        ],
+        "operationId": "ClassicAdministrators_List",
+        "description": "Gets a list of classic administrators for the subscription.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ClassicAdministratorListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Authorization/permissions": {
+      "get": {
+        "tags": [
+          "Permissions"
+        ],
+        "operationId": "Permissions_ListForResourceGroup",
+        "description": "Gets a resource group permissions.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the resource group to get the permissions for.The name is case insensitive."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PermissionGetResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/permissions": {
+      "get": {
+        "tags": [
+          "Permissions"
+        ],
+        "operationId": "Permissions_ListForResource",
+        "description": "Gets a resource permissions.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive."
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource"
+          },
+          {
+            "name": "parentResourcePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PermissionGetResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}providers/Microsoft.Authorization/roleAssignments": {
+      "get": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_ListForResource",
+        "description": "Gets role assignments of the resource.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource identity."
+          },
+          {
+            "name": "parentResourcePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource identity.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource identity.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource identity."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/roleAssignments": {
+      "get": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_ListForResourceGroup",
+        "description": "Gets role assignments of the resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource group name."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}": {
+      "delete": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_Delete",
+        "description": "Delete role assignment.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Scope.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Role assignment name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_Create",
+        "description": "Create role assignment.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Scope.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Role assignment name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentCreateParameters"
+            },
+            "description": "Role assignment."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_Get",
+        "description": "Get single role assignment.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Scope.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Role assignment name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          }
+        }
+      }
+    },
+    "/{roleAssignmentId}": {
+      "delete": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_DeleteById",
+        "description": "Delete role assignment.",
+        "parameters": [
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Role assignment Id",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_CreateById",
+        "description": "Create role assignment by Id.",
+        "parameters": [
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Role assignment Id",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentCreateParameters"
+            },
+            "description": "Role assignment."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_GetById",
+        "description": "Get single role assignment.",
+        "parameters": [
+          {
+            "name": "roleAssignmentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Role assignment Id",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignments": {
+      "get": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_List",
+        "description": "Gets role assignments of the subscription.",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleAssignments": {
+      "get": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_ListForScope",
+        "description": "Gets role assignments of the scope.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Scope.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId}": {
+      "delete": {
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "operationId": "RoleDefinitions_Delete",
+        "description": "Deletes the role definition.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Scope",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Role definition id."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "operationId": "RoleDefinitions_CreateOrUpdate",
+        "description": "Creates or updates a role definition.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Scope",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Role definition id."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleDefinitionCreateOrUpdateParameters"
+            },
+            "description": "Role definition."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId}": {
+      "get": {
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "operationId": "RoleDefinitions_Get",
+        "description": "Get role definition by name (GUID).",
+        "parameters": [
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Role definition Id"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          }
+        }
+      }
+    },
+    "/{roleDefinitionId}": {
+      "get": {
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "operationId": "RoleDefinitions_GetById",
+        "description": "Get role definition by name (GUID).",
+        "parameters": [
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Fully qualified role definition Id",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleDefinitions": {
+      "get": {
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "operationId": "RoleDefinitions_List",
+        "description": "Get all role definitions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinitionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ClassicAdministratorProperties": {
+      "properties": {
+        "emailAddress": {
+          "type": "string",
+          "description": "Gets or sets the email address"
+        },
+        "role": {
+          "type": "string",
+          "description": "Gets or sets the role"
+        }
+      },
+      "description": "Classic Administrator properties."
+    },
+    "ClassicAdministrator": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the classic administrator id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the classic administrator name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the classic administrator type."
+        },
+        "properties": {
+          "$ref": "#/definitions/ClassicAdministratorProperties",
+          "description": "Gets or sets the classic administrator properties."
+        }
+      },
+      "description": "Classic Administrators"
+    },
+    "ClassicAdministratorListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClassicAdministrator"
+          },
+          "description": "Gets or sets ClassicAdministrators."
+        }
+      },
+      "description": "ClassicAdministrator list result information."
+    },
+    "Permission": {
+      "properties": {
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Role definition allowed actions."
+        },
+        "notActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Role definition denied actions."
+        }
+      },
+      "description": "Role definition permissions."
+    },
+    "PermissionGetResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Permission"
+          },
+          "description": "Gets or sets permissions."
+        }
+      },
+      "description": "Permissions information."
+    },
+    "RoleAssignmentPropertiesWithScope": {
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "Gets or sets role assignment scope."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "Gets or sets role definition id."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "Gets or sets principal Id."
+        }
+      },
+      "description": "Role assignment properties with scope."
+    },
+    "RoleAssignment": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets role assignment id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets role assignment name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets role assignment type."
+        },
+        "properties": {
+          "$ref": "#/definitions/RoleAssignmentPropertiesWithScope",
+          "description": "Gets or sets role assignment properties."
+        }
+      },
+      "description": "Role Assignments"
+    },
+    "RoleAssignmentListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleAssignment"
+          },
+          "description": "Role assignment list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the URL to get the next set of role assignment results."
+        }
+      },
+      "description": "Role assignment list operation result."
+    },
+    "RoleAssignmentProperties": {
+      "properties": {
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "Gets or sets role definition id."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "Gets or sets principal Id."
+        }
+      },
+      "description": "Role assignment properties."
+    },
+    "RoleAssignmentCreateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleAssignmentProperties",
+          "description": "Gets or sets role assignment properties."
+        }
+      },
+      "description": "Role assignment create parameters."
+    },
+    "RoleDefinitionProperties": {
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "Gets or sets role name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets role definition description."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets role type."
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Permission"
+          },
+          "description": "Gets or sets role definition permissions."
+        },
+        "assignableScopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets role definition assignable scopes."
+        }
+      },
+      "description": "Role definition properties."
+    },
+    "RoleDefinition": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets role definition id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets role definition name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets role definition type."
+        },
+        "properties": {
+          "$ref": "#/definitions/RoleDefinitionProperties",
+          "description": "Gets or sets role definition properties."
+        }
+      },
+      "description": "Role definition."
+    },
+    "RoleDefinitionCreateOrUpdateParameters": {
+      "properties": {
+        "RoleDefinition": {
+          "$ref": "#/definitions/RoleDefinition",
+          "description": "Gets or sets role definition properties."
+        }
+      },
+      "description": "Role definition create or update parameters."
+    },
+    "RoleDefinitionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleDefinition"
+          },
+          "description": "Role definition list."
+        }
+      },
+      "description": "Role definition list operation result."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}

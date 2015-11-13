@@ -146,7 +146,8 @@
               "$ref": "#/definitions/DeploymentExtended"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "get": {
         "tags": [
@@ -1507,9 +1508,138 @@
           "nextLinkName": null
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policydefinitions/{policyDefinitionName}": {
+      "put": {
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "operationId": "PolicyDefinitions_CreateOrUpdate",
+        "description": "Create or update policy definition.",
+        "parameters": [
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The policy definition name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinition"
+            },
+            "description": "The policy definition properties"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinition"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "operationId": "PolicyDefinitions_Get",
+        "description": "Gets policy definition.",
+        "parameters": [
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The policy definition name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinition"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "operationId": "PolicyDefinitions_Delete",
+        "description": "Deletes policy definition.",
+        "parameters": [
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The policy definition name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "PolicyDefinitionProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the policy definition description."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the policy definition display name."
+        },
+        "policyRule": {
+          "type": "object",
+          "description": "The policy rule json."
+        }
+      },
+      "description": "Policy definition properties."
+    },
+    "PolicyDefinition": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PolicyDefinitionProperties",
+          "description": "Gets or sets the policy definition properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the policy definition name."
+        }
+      },
+      "description": "Policy definition.",
+      "x-ms-azure-resource": true
+      },
     "DeploymentExtendedFilter": {
       "properties": {
         "provisioningState": {
@@ -2363,20 +2493,20 @@
       "x-ms-azure-resource": true
     }
   },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
+    "parameters": {
+      "SubscriptionIdParameter": {
+        "name": "subscriptionId",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      },
+      "ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "type": "string",
+        "description": "Client Api Version."
+      }
     }
   }
-}
