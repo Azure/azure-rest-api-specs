@@ -895,18 +895,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/DataChangeDetectionPolicy"
-        },
-        {
-          "properties": {
-            "highWaterMarkColumnName": {
-              "type": "string",
-              "description": "Gets or sets the name of the high water mark column."
-            }
-          },
-          "required": [
-            "highWaterMarkColumnName"
-          ]
         }
+      ],
+      "properties": {
+        "highWaterMarkColumnName": {
+          "type": "string",
+          "description": "Gets or sets the name of the high water mark column."
+        }
+      },
+      "required": [
+        "highWaterMarkColumnName"
       ]
     },
     "SqlIntegratedChangeTrackingPolicy": {
@@ -936,20 +934,18 @@
       "allOf": [
         {
           "$ref": "#/definitions/DataDeletionDetectionPolicy"
-        },
-        {
-          "properties": {
-            "softDeleteColumnName": {
-              "type": "string",
-              "description": "Gets or sets the name of the column to use for soft-deletion detection."
-            },
-            "softDeleteMarkerValue": {
-              "type": "string",
-              "description": "Gets or sets the marker value that indentifies an item as deleted."
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "softDeleteColumnName": {
+          "type": "string",
+          "description": "Gets or sets the name of the column to use for soft-deletion detection."
+        },
+        "softDeleteMarkerValue": {
+          "type": "string",
+          "description": "Gets or sets the marker value that indentifies an item as deleted."
+        }
+      }
     },
     "DataSource": {
       "properties": {
@@ -1308,18 +1304,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/ScoringFunction"
-        },
-        {
-          "properties": {
-            "distance": {
-              "$ref": "#/definitions/DistanceScoringParameters",
-              "description": "Gets parameter values for the distance scoring function."
-            }
-          },
-          "required": [
-            "distance"
-          ]
         }
+      ],
+      "properties": {
+        "distance": {
+          "$ref": "#/definitions/DistanceScoringParameters",
+          "description": "Gets parameter values for the distance scoring function."
+        }
+      },
+      "required": [
+        "distance"
       ],
       "externalDocs": {
         "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
@@ -1348,18 +1342,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/ScoringFunction"
-        },
-        {
-          "properties": {
-            "freshness": {
-              "$ref": "#/definitions/FreshnessScoringParameters",
-              "description": "Gets parameter values for the freshness scoring function."
-            }
-          },
-          "required": [
-            "freshness"
-          ]
         }
+      ],
+      "properties": {
+        "freshness": {
+          "$ref": "#/definitions/FreshnessScoringParameters",
+          "description": "Gets parameter values for the freshness scoring function."
+        }
+      },
+      "required": [
+        "freshness"
       ],
       "externalDocs": {
         "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
@@ -1384,18 +1376,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/ScoringFunction"
-        },
-        {
-          "properties": {
-            "magnitude": {
-              "$ref": "#/definitions/MagnitudeScoringParameters",
-              "description": "Gets parameter values for the magnitude scoring function."
-            }
-          },
-          "required": [
-            "magnitude"
-          ]
         }
+      ],
+      "properties": {
+        "magnitude": {
+          "$ref": "#/definitions/MagnitudeScoringParameters",
+          "description": "Gets parameter values for the magnitude scoring function."
+        }
+      },
+      "required": [
+        "magnitude"
       ],
       "externalDocs": {
         "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
@@ -1429,18 +1419,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/ScoringFunction"
-        },
-        {
-          "properties": {
-            "tag": {
-              "$ref": "#/definitions/TagScoringParameters",
-              "description": "Gets parameter values for the tag scoring function."
-            }
-          },
-          "required": [
-            "tag"
-          ]
         }
+      ],
+      "properties": {
+        "tag": {
+          "$ref": "#/definitions/TagScoringParameters",
+          "description": "Gets parameter values for the tag scoring function."
+        }
+      },
+      "required": [
+        "tag"
       ],
       "externalDocs": {
         "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
