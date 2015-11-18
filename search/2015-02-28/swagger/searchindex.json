@@ -64,7 +64,8 @@
           "description": "Gets the error message explaining why the indexing operation failed for the document identified by Key; null if Succeeded is true."
         }
       },
-      "description": "Status of an indexing operation for a single document."
+      "description": "Status of an indexing operation for a single document.",
+      "x-ms-external": true
     },
     "DocumentIndexResult": {
       "properties": {
@@ -77,7 +78,8 @@
           "description": "Gets the list of status information for each document in the indexing request."
         }
       },
-      "description": "Response containing the status of operations for all documents in the indexing request."
+      "description": "Response containing the status of operations for all documents in the indexing request.",
+      "x-ms-external": true
     },
     "IndexActionType": {
       "type": "string",
@@ -182,7 +184,8 @@
           "description": "Gets or sets the number of search results to retrieve. This can be used in conjunction with Skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be passed to ContinueSearch to retrieve the next page of results. See DocumentSearchResponse.ContinuationToken for more information."
         }
       },
-      "description": "Parameters for filtering, sorting, faceting, paging, and other search query behaviors."
+      "description": "Parameters for filtering, sorting, faceting, paging, and other search query behaviors.",
+      "x-ms-external": true
     },
     "SuggestParameters": {
       "properties": {
@@ -237,7 +240,8 @@
           "description": "Gets or sets a value indicating whether to use fuzzy matching for the suggestion query. Default is false. when set to true, the query will find suggestions even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios it comes at a performance cost as fuzzy suggestion searches are slower and consume more resources."
         }
       },
-      "description": "Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors."
+      "description": "Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors.",
+      "x-ms-external": true
     }
   },
   "parameters": {
