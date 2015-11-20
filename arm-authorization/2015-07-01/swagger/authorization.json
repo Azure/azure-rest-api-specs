@@ -17,86 +17,6 @@
     "text/json"
   ],
   "paths": {
-    "/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}": {
-      "get": {
-        "tags": [
-          "ProviderOperationsMetadata"
-        ],
-        "operationId": "ProviderOperationsMetadata_Get",
-        "description": "Gets provider operations metadata",
-        "parameters": [
-          {
-            "name": "resourceProviderNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Namespace of the resource provider."
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "resourceTypes"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ProviderOperationsMetadata"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Authorization/providerOperations": {
-      "get": {
-        "tags": [
-          "ProviderOperationsMetadata"
-        ],
-        "operationId": "ProviderOperationsMetadata_List",
-        "description": "Gets provider operations metadata list",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "resourceTypes"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ProviderOperationsMetadataListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/classicAdministrators": {
       "get": {
         "tags": [
@@ -278,8 +198,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation.",
-            "x-ms-skip-url-encoding": true
+            "description": "The filter to apply on the operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -298,7 +217,8 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
+        },
+        "x-ms-odata": "#/definitions/RoleAssignment"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/roleAssignments": {
@@ -321,8 +241,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation.",
-            "x-ms-skip-url-encoding": true
+            "description": "The filter to apply on the operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -341,7 +260,8 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
+        },
+        "x-ms-odata": "#/definitions/RoleAssignment"
       }
     },
     "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}": {
@@ -586,8 +506,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation.",
-            "x-ms-skip-url-encoding": true
+            "description": "The filter to apply on the operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -606,7 +525,8 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
+        },
+        "x-ms-odata": "#/definitions/RoleAssignment"
       }
     },
     "/{scope}/providers/Microsoft.Authorization/roleAssignments": {
@@ -630,8 +550,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation.",
-            "x-ms-skip-url-encoding": true
+            "description": "The filter to apply on the operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -650,7 +569,8 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
+        },
+        "x-ms-odata": "#/definitions/RoleAssignment"
       }
     },
     "/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId}": {
@@ -811,8 +731,15 @@
           "RoleDefinitions"
         ],
         "operationId": "RoleDefinitions_List",
-        "description": "Get all role definitions.",
+        "description": "Get role definitions.",
         "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -830,7 +757,8 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }
+        },
+        "x-ms-odata": "#/definitions/RoleDefinition"
       }
     }
   },
@@ -1103,98 +1031,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "ProviderOperationsMetadata": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the provider id."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the provider name"
-        },
-        "type": {
-          "type": "string",
-          "description": "Gets or sets the provider type"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Gets or sets the provider display name"
-        },
-        "resourceTypes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceType"
-          },
-          "description": "Gets or sets the provider resource types"
-        },
-        "operations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "Gets or sets the provider operations"
-        }
-      },
-      "description": "Provider Operations metadata"
-    },
-    "ProviderOperationsMetadataListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ProviderOperationsMetadata"
-          },
-          "description": "Gets or sets the list of providers."
-        }
-      },
-      "description": "Provider operations metadata list"
-    },
-    "Operation": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the operation name"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Gets or sets the operation display name"
-        },
-        "description": {
-          "type": "string",
-          "description": "Gets or sets the operation description"
-        },
-        "origin": {
-          "type": "string",
-          "description": "Gets or sets the operation origin"
-        },
-        "properties": {
-          "type": "object",
-          "description": "Gets or sets the operation properties"
-        }
-      },
-      "description": "Operation"
-    },
-    "ResourceType": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the resource type name"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Gets or sets the resource type display name"
-        },
-        "operations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "Gets or sets the resource type operations"
-        }
-      },
-      "description": "Resource Type"
     }
   },
   "parameters": {
