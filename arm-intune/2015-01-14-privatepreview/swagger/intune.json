@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2015-01-11-alpha",
+    "version": "2015-01-14-privatepreview",
     "title": "IntuneResourceManagementClient",
     "description": "Microsoft.Intune Resource provider Api features in the swagger-2.0 specification"
   },
@@ -1219,9 +1219,231 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Intune/locations/{hostName}/users/{userName}/devices": {
+      "get": {
+        "description": "Get devices for a user.",
+        "operationId": "GetUserDevices",
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "hostName",
+            "in": "path",
+            "description": "Location hostName for the tenant",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userName",
+            "in": "path",
+            "description": "user unique Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "select specific fields in entity."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "devices as collection response",
+            "schema": {
+              "$ref": "#/definitions/DeviceCollection"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextlink"
+        }
+      }
+    },
+    "/providers/Microsoft.Intune/locations/{hostName}/users/{userName}/devices/{deviceName}": {
+      "get": {
+        "description": "Get a unique device for a user.",
+        "operationId": "GetUserDeviceByDeviceName",
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+
+            "name": "hostName",
+            "in": "path",
+            "description": "Location hostName for the tenant",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userName",
+            "in": "path",
+            "description": "unique user name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "device name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "select specific fields in entity."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Device entity.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Intune/locations/{hostName}/users/{userName}/devices/{deviceName}/wipe": {
+      "post": {
+        "description": "Wipe a device for a user.",
+        "operationId": "WipeUserDevice",
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "hostName",
+            "in": "path",
+            "description": "Location hostName for the tenant",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userName",
+            "in": "path",
+            "description": "unique user name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "device name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Wipe operation result.",
+            "schema": {
+              "$ref": "#/definitions/WipeDeviceOperationResult"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Intune/locations/{hostName}/operationResults": {
+      "get": {
+        "description": "Returns operationResults.",
+        "operationId": "GetOperationResults",
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "hostName",
+            "in": "path",
+            "description": "Location hostName for the tenant",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "select specific fields in entity."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "applications as collection response",
+            "schema": {
+              "$ref": "#/definitions/OperationResultCollection"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextlink"
+        }
+      }
     }
   },
-
   "definitions": {
     "Resource": {
       "x-ms-azure-resource": true,
@@ -1474,7 +1696,6 @@
       },
       "description": "Android Policy request body for Intune MAM."
     },
-
     "MAMPolicyProperties": {
       "required": [
         "friendlyName"
@@ -1599,7 +1820,6 @@
       }
 
     },
-
     "iOSMAMPolicyProperties": {
       "allOf": [
         {
@@ -1628,7 +1848,6 @@
       },
       "description": "Intune MAM iOS Policy Properties."
     },
-
     "AndroidMAMPolicyProperties": {
       "allOf": [
         {
@@ -1654,15 +1873,164 @@
         }
       },
       "description": "Intune MAM iOS Policy Properties."
+    },
+    "DeviceCollection": {
+      "required": [ "value" ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Device"
+          }
+        },
+        "nextlink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
+        }
+      }
+    },
+    "Device": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Device entity for Intune."
+    },
+    "DeviceProperties": {
+      "required": [
+        "userId",
+        "friendlyName",
+        "platform",
+        "platformVersion",
+        "deviceType"
+      ],
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "friendlyName": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "platformVersion": {
+          "type": "string"
+        },
+        "deviceType": {
+          "type": "string"
+        }
+      }
+    },
+    "WipeDeviceOperationResult": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WipeDeviceOperationResultProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Device entity for Intune."
+    },
+    "WipeDeviceOperationResultProperties": {
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationResultCollection": {
+      "required": [ "value" ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResult"
+          }
+        },
+        "nextlink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
+        }
+      }
+    },
+    "OperationResult": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OperationResultProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "OperationResult entity for Intune."
+    },
+    "OperationResultProperties": {
+      "required": [
+        "userId",
+        "friendlyName",
+        "platform",
+        "operationMetadata"
+      ],
+      "properties": {
+        "friendlyName": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "lastModifiedTime": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "operationMetadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/operationMetadataProperties"
+          }
+        }
+      }
+    },
+    "operationMetadataProperties": {
+      "required": [
+        "name",
+        "value"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
     }
   },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Service Api Version."
+ "parameters": {
+  "ApiVersionParameter": {
+   "name": "api-version",
+   "in": "query",
+   "required": true,
+   "type": "string",
+   "description": "Service Api Version."
     }
   }
 }
