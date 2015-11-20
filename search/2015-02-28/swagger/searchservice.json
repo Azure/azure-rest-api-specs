@@ -1094,10 +1094,12 @@
       "properties": {
         "key": {
           "type": "string",
+          "readOnly": true,
           "description": "Gets the key of the item for which indexing failed."
         },
         "errorMessage": {
           "type": "string",
+          "readOnly": true,
           "description": "Gets the message describing the error that occurred while attempting to index the item."
         }
       },
@@ -1301,7 +1303,8 @@
       "externalDocs": {
         "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
       },
-      "description": "Abstract base class for functions that can modify document scores during ranking."
+      "description": "Abstract base class for functions that can modify document scores during ranking.",
+      "x-ms-external": true
     },
     "DistanceScoringFunction": {
       "x-ms-discriminator-value": "distance",
@@ -1340,7 +1343,8 @@
       "required": [
         "referencePointParameter", "boostingDistance"
       ],
-      "description": "Provides parameter values to a distance scoring function."
+      "description": "Provides parameter values to a distance scoring function.",
+      "x-ms-external": true
     },
     "FreshnessScoringFunction": {
       "x-ms-discriminator-value": "freshness",
@@ -1375,7 +1379,8 @@
       "required": [
         "boostingDuration"
       ],
-      "description": "Provides parameter values to a freshness scoring function."
+      "description": "Provides parameter values to a freshness scoring function.",
+      "x-ms-external": true
     },
     "MagnitudeScoringFunction": {
       "x-ms-discriminator-value": "magnitude",
@@ -1557,7 +1562,8 @@
       "required": [
         "name", "searchMode", "sourceFields"
       ],
-      "description": "Defines how the Suggest API should apply to a group of fields in the index."
+      "description": "Defines how the Suggest API should apply to a group of fields in the index.",
+      "x-ms-external": true
     },
     "SuggesterSearchMode": {
       "type": "string",
