@@ -274,11 +274,28 @@
             "description": "Resource identity."
           },
           {
-            "name": "$filter",
+            "name": "atScope",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "if true atScope() method will be used in filtering",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "principalId",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "assignedTo",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -297,8 +314,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/RoleAssignment"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/roleAssignments": {
@@ -317,11 +333,28 @@
             "description": "Resource group name."
           },
           {
-            "name": "$filter",
+            "name": "atScope",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "if true atScope() method will be used in filtering",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "principalId",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "assignedTo",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -340,8 +373,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/RoleAssignment"
+        }
       }
     },
     "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}": {
@@ -582,11 +614,28 @@
         "description": "Gets role assignments of the subscription.",
         "parameters": [
           {
-            "name": "$filter",
+            "name": "atScope",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "if true atScope() method will be used in filtering",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "principalId",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "assignedTo",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -605,8 +654,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/RoleAssignment"
+        }
       }
     },
     "/{scope}/providers/Microsoft.Authorization/roleAssignments": {
@@ -626,11 +674,28 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "$filter",
+            "name": "atScope",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "if true atScope() method will be used in filtering",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "principalId",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "assignedTo",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -649,8 +714,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/RoleAssignment"
+        }
       }
     },
     "/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId}": {
