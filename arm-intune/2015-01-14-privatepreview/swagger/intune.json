@@ -235,10 +235,10 @@
         }
       }
     },
-    "/providers/Microsoft.Intune/locations/{hostName}/iosPolicies/{policyId}": {
+    "/providers/Microsoft.Intune/locations/{hostName}/iosPolicies/{policyName}": {
       "get": {
         "description": "Returns Intune iOS policies.",
-        "operationId": "Ios_GetMAMPolicyById",
+        "operationId": "Ios_GetMAMPolicyByName",
         "produces": [ "application/json" ],
         "parameters": [
           {
@@ -250,9 +250,9 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
-            "description": "policy unique Id",
+            "description": "Unique name for the policy",
             "required": true,
             "type": "string"
           },
@@ -296,9 +296,9 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
-            "description": "policy unique Id",
+            "description": "Unique name for the policy",
             "required": true,
             "type": "string"
           },
@@ -344,9 +344,9 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
-            "description": "policy unique Id",
+            "description": "Unique name for the policy",
             "required": true,
             "type": "string"
           },
@@ -392,9 +392,9 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
-            "description": "policy unique Id",
+            "description": "Unique name for the policy",
             "required": true,
             "type": "string"
           },
@@ -418,10 +418,10 @@
         }
       }
     },
-    "/providers/Microsoft.Intune/locations/{hostName}/androidPolicies/{policyId}": {
+    "/providers/Microsoft.Intune/locations/{hostName}/androidPolicies/{policyName}": {
       "get": {
-        "description": "Returns AndroidMAMPolicy with given Id.",
-        "operationId": "Android_GetMAMPolicyById",
+        "description": "Returns AndroidMAMPolicy with given name.",
+        "operationId": "Android_GetMAMPolicyByName",
         "produces": [ "application/json" ],
         "parameters": [
           {
@@ -433,9 +433,9 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
-            "description": "policy unique Id",
+            "description": "Unique name for the policy",
             "required": true,
             "type": "string"
           },
@@ -479,9 +479,9 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
-            "description": "policy unique Id",
+            "description": "Unique name for the policy",
             "required": true,
             "type": "string"
           },
@@ -527,9 +527,9 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
-            "description": "policy unique Id",
+            "description": "Unique name for the policy",
             "required": true,
             "type": "string"
           },
@@ -574,9 +574,9 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
-            "description": "policy unique Id",
+            "description": "Unique name for the policy",
             "required": true,
             "type": "string"
           },
@@ -600,7 +600,7 @@
         }
       }
     },
-    "/providers/Microsoft.Intune/locations/{hostName}/iosPolicies/{policyId}/apps": {
+    "/providers/Microsoft.Intune/locations/{hostName}/iosPolicies/{policyName}/apps": {
       "get": {
         "description": "Get apps for an iOSMAMPolicy.",
         "operationId": "Ios_GetAppForMAMPolicy",
@@ -614,9 +614,9 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
-            "description": "policy unique Id",
+            "description": "Unique name for the policy",
             "required": true,
             "type": "string"
           },
@@ -664,7 +664,7 @@
         }
       }
     },
-    "/providers/Microsoft.Intune/locations/{hostName}/AndroidPolicies/{policyId}/apps": {
+    "/providers/Microsoft.Intune/locations/{hostName}/AndroidPolicies/{policyName}/apps": {
       "get": {
         "description": "Get apps for an AndroidMAMPolicy.",
         "operationId": "Android_GetAppForMAMPolicy",
@@ -678,9 +678,9 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
-            "description": "policy unique Id",
+            "description": "Unique name for the policy",
             "required": true,
             "type": "string"
           },
@@ -728,7 +728,7 @@
         }
       }
     },
-    "/providers/Microsoft.Intune/locations/{hostName}/iosPolicies/{policyId}/apps/{appId}": {
+    "/providers/Microsoft.Intune/locations/{hostName}/iosPolicies/{policyName}/apps/{appName}": {
       "put": {
         "description": "Add app to an iOSMAMPolicy.",
         "operationId": "Ios_AddAppForMAMPolicy",
@@ -742,16 +742,16 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
-            "description": "policy unique Id",
+            "description": "Unique name for the policy",
             "required": true,
             "type": "string"
           },
           {
-            "name": "appId",
+            "name": "appName",
             "in": "path",
-            "description": "application unique Id",
+            "description": "application unique Name",
             "required": true,
             "type": "string"
           },
@@ -796,16 +796,16 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
-            "description": "policy unique Id",
+            "description": "Unique name for the policy",
             "required": true,
             "type": "string"
           },
           {
-            "name": "appId",
+            "name": "appName",
             "in": "path",
-            "description": "application unique Id",
+            "description": "application unique Name",
             "required": true,
             "type": "string"
           },
@@ -829,10 +829,10 @@
         }
       }
     },
-    "/providers/Microsoft.Intune/locations/{hostName}/androidPolicies/{policyId}/apps/{appId}": {
+    "/providers/Microsoft.Intune/locations/{hostName}/androidPolicies/{policyName}/apps/{appName}": {
       "put": {
         "description": "Add app to an AndroidMAMPolicy.",
-        "operationId": "Android_AddAppForPolicy",
+        "operationId": "Android_AddAppForMAMPolicy",
         "produces": [ "application/json" ],
         "parameters": [
           {
@@ -843,16 +843,16 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
-            "description": "policy unique Id",
+            "description": "Unique name for the policy",
             "required": true,
             "type": "string"
           },
           {
-            "name": "appId",
+            "name": "appName",
             "in": "path",
-            "description": "application unique Id",
+            "description": "application unique Name",
             "required": true,
             "type": "string"
           },
@@ -898,16 +898,16 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
-            "description": "policy unique Id",
+            "description": "Unique name for the policy",
             "required": true,
             "type": "string"
           },
           {
-            "name": "appId",
+            "name": "appName",
             "in": "path",
-            "description": "application unique Id",
+            "description": "application unique Name",
             "required": true,
             "type": "string"
           },
@@ -931,7 +931,7 @@
         }
       }
     },
-    "/providers/Microsoft.Intune/locations/{hostName}/iosPolicies/{policyId}/groups": {
+    "/providers/Microsoft.Intune/locations/{hostName}/iosPolicies/{policyName}/groups": {
       "get": {
         "description": "Returns groups for a given iOSMAMPolicy.",
         "operationId": "Ios_GetGroupsForMAMPolicy",
@@ -945,7 +945,7 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
             "description": "policy name for the tenant",
             "required": true,
@@ -974,7 +974,7 @@
         }
       }
     },
-    "/providers/Microsoft.Intune/locations/{hostName}/androidPolicies/{policyId}/groups": {
+    "/providers/Microsoft.Intune/locations/{hostName}/androidPolicies/{policyName}/groups": {
       "get": {
         "description": "Returns groups for a given AndroidMAMPolicy.",
         "operationId": "Android_GetGroupsForMAMPolicy",
@@ -988,7 +988,7 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
             "description": "policy name for the tenant",
             "required": true,
@@ -1017,7 +1017,7 @@
         }
       }
     },
-    "/providers/Microsoft.Intune/locations/{hostName}/iosPolicies/{policyId}/groups/{groupId}": {
+    "/providers/Microsoft.Intune/locations/{hostName}/iosPolicies/{policyName}/groups/{groupId}": {
       "put": {
         "description": "Add group to an iOSMAMPolicy.",
         "operationId": "Ios_AddGroupForMAMPolicy",
@@ -1031,9 +1031,9 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
-            "description": "policy unique Id",
+            "description": "Unique name for the policy",
             "required": true,
             "type": "string"
           },
@@ -1085,16 +1085,16 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
-            "description": "policy unique Id",
+            "description": "Unique name for the policy",
             "required": true,
             "type": "string"
           },
           {
             "name": "groupId",
             "in": "path",
-            "description": "application unique Id",
+            "description": "application unique Name",
             "required": true,
             "type": "string"
           },
@@ -1118,7 +1118,7 @@
         }
       }
     },
-    "/providers/Microsoft.Intune/locations/{hostName}/androidPolicies/{policyId}/groups/{groupId}": {
+    "/providers/Microsoft.Intune/locations/{hostName}/androidPolicies/{policyName}/groups/{groupId}": {
       "put": {
         "description": "Add group to an AndroidMAMPolicy.",
         "operationId": "Android_AddGroupForMAMPolicy",
@@ -1132,9 +1132,9 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
-            "description": "policy unique Id",
+            "description": "Unique name for the policy",
             "required": true,
             "type": "string"
           },
@@ -1187,16 +1187,16 @@
             "type": "string"
           },
           {
-            "name": "policyId",
+            "name": "policyName",
             "in": "path",
-            "description": "policy unique Id",
+            "description": "Unique name for the policy",
             "required": true,
             "type": "string"
           },
           {
             "name": "groupId",
             "in": "path",
-            "description": "application unique Id",
+            "description": "application unique Name",
             "required": true,
             "type": "string"
           },
@@ -1223,7 +1223,7 @@
     "/providers/Microsoft.Intune/locations/{hostName}/users/{userName}/devices": {
       "get": {
         "description": "Get devices for a user.",
-        "operationId": "GetUserDevices",
+        "operationId": "GetMAMUserDevices",
         "produces": [ "application/json" ],
         "parameters": [
           {
@@ -1236,7 +1236,7 @@
           {
             "name": "userName",
             "in": "path",
-            "description": "user unique Id",
+            "description": "user unique Name",
             "required": true,
             "type": "string"
           },
@@ -1287,7 +1287,7 @@
     "/providers/Microsoft.Intune/locations/{hostName}/users/{userName}/devices/{deviceName}": {
       "get": {
         "description": "Get a unique device for a user.",
-        "operationId": "GetUserDeviceByDeviceName",
+        "operationId": "GetMAMUserDeviceByDeviceName",
         "produces": [ "application/json" ],
         "parameters": [
           {
@@ -1342,7 +1342,7 @@
     "/providers/Microsoft.Intune/locations/{hostName}/users/{userName}/devices/{deviceName}/wipe": {
       "post": {
         "description": "Wipe a device for a user.",
-        "operationId": "WipeUserDevice",
+        "operationId": "WipeMAMUserDevice",
         "produces": [ "application/json" ],
         "parameters": [
           {
@@ -1446,7 +1446,7 @@
     "/providers/Microsoft.Intune/locations/{hostName}/statuses/default": {
       "get": {
         "description": "Returns Intune Tenant level statuses.",
-        "operationId": "GetDefaultStatuses",
+        "operationId": "GetMAMStatuses",
         "produces": [ "application/json" ],
         "parameters": [
           {
@@ -1482,7 +1482,7 @@
 	  "/providers/Microsoft.Intune/locations/{hostName}/flaggedUsers": {
       "get": {
         "description": "Returns Intune flagged user collection",
-        "operationId": "GetFlaggedUsers",
+        "operationId": "GetMAMFlaggedUsers",
         "produces": [ "application/json" ],
         "parameters": [
           {
@@ -1539,7 +1539,7 @@
 	  "/providers/Microsoft.Intune/locations/{hostName}/flaggedUsers/{userName}": {
       "get": {
         "description": "Returns Intune flagged user details",
-        "operationId": "GetFlaggedUserByName",
+        "operationId": "GetMAMFlaggedUserByName",
         "produces": [ "application/json" ],
         "parameters": [
           {
@@ -1589,7 +1589,7 @@
 	  "/providers/Microsoft.Intune/locations/{hostName}/flaggedUsers/{userName}/flaggedEnrolledApps": {
       "get": {
         "description": "Returns Intune flagged enrolled app collection for the User",
-        "operationId": "GetUserFlaggedEnrolledApps",
+        "operationId": "GetMAMUserFlaggedEnrolledApps",
         "produces": [ "application/json" ],
         "parameters": [
           {
