@@ -2288,11 +2288,6 @@
 				}
 			}
 		},
-		"nextlink": {
-      "readOnly": true,
-      "type": "string",
-      "description": "Gets the URL to get the next set of results."
-      },
      "description": "Flagged user collection for the given tenant."
 	  },	
 	  "FlaggedUser":{
@@ -2322,20 +2317,15 @@
     },
    	"FlaggedEnrolledAppCollection": {
 		"required":["value"],
-		"properties":{
-			"value":{
-				"type":"array",
-				"items":{
-					"$ref": "#/definitions/FlaggedEnrolledApp"
-				}
-			}
-		},
-		"nextlink": {
-        "readOnly": true,
-        "type": "string",
-        "description": "Gets the URL to get the next set of results."
-        },
-     "description": "Flagged Enrolled App collection for the given tenant."
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FlaggedEnrolledApp"
+          }
+        }
+      },
+      "description": "Flagged Enrolled App collection for the given tenant."
 	},	
 	  "FlaggedEnrolledApp":{
 		  "properties":{
