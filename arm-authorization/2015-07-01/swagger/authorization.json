@@ -274,7 +274,23 @@
             "description": "Resource identity."
           },
           {
-            "name": "$filter",
+            "name": "atScope",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "if true atScope() method will be used in filtering",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "principalId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "assignedTo",
             "in": "query",
             "required": false,
             "type": "string",
@@ -317,7 +333,23 @@
             "description": "Resource group name."
           },
           {
-            "name": "$filter",
+            "name": "atScope",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "if true atScope() method will be used in filtering",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "principalId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "assignedTo",
             "in": "query",
             "required": false,
             "type": "string",
@@ -582,7 +614,23 @@
         "description": "Gets role assignments of the subscription.",
         "parameters": [
           {
-            "name": "$filter",
+            "name": "atScope",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "if true atScope() method will be used in filtering",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "principalId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "assignedTo",
             "in": "query",
             "required": false,
             "type": "string",
@@ -626,7 +674,23 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "$filter",
+            "name": "atScope",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "if true atScope() method will be used in filtering",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "principalId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "assignedTo",
             "in": "query",
             "required": false,
             "type": "string",
@@ -811,8 +875,15 @@
           "RoleDefinitions"
         ],
         "operationId": "RoleDefinitions_List",
-        "description": "Get all role definitions.",
+        "description": "Get role definitions.",
         "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -830,7 +901,8 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }
+        },
+        "x-ms-odata": "#/definitions/RoleDefinition"
       }
     }
   },
@@ -1135,8 +1207,8 @@
             "$ref": "#/definitions/Operation"
           },
           "description": "Gets or sets the provider operations"
-        }
-      },
+    }
+  },
       "description": "Provider Operations metadata"
     },
     "ProviderOperationsMetadataListResult": {
