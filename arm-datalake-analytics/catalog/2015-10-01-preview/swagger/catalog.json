@@ -1,0 +1,2745 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DataLakeAnalyticsCatalogManagementClient",
+    "description": "Creates an Azure Data Lake Analytics catalog management client.",
+    "version": "2015-10-01-preview"
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json",
+    "application/octet-stream"
+  ],
+  "produces": [
+    "application/json",
+    "text/json",
+    "application/octet-stream"
+  ],
+  "paths": {
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/secrets/{secretName}": {
+      "put": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_CreateSecret",
+        "description": "Creates the specified secret for use with external data sources in the specified database",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to create the secret in."
+          },
+          {
+            "name": "secretName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parameters required to create the secret (name and password)"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataLakeAnalyticsCatalogSecretCreateOrUpdateParameters"
+            },
+            "description": "The parameters required to create the secret (name and password)"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlSecret"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_UpdateSecret",
+        "description": "Modifies the specified secret for use with external data sources in the specified database",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to modify the secret in."
+          },
+          {
+            "name": "secretName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parameters required to modify the secret (name and password)"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataLakeAnalyticsCatalogSecretCreateOrUpdateParameters"
+            },
+            "description": "The parameters required to modify the secret (name and password)"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlSecret"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetSecret",
+        "description": "Gets the specified secret in the specified database",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to get the secret from."
+          },
+          {
+            "name": "secretName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the secret to get"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlSecret"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_DeleteSecret",
+        "description": "Deletes the specified secret in the specified database",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to delete the secret from."
+          },
+          {
+            "name": "secretName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the secret to delete"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/externaldatasources/{externalDataSourceName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetExternalDataSource",
+        "description": "Retrieves the specified external data source from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the external Data Source in."
+          },
+          {
+            "name": "externalDataSourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the external Data Source to find."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlExternalDataSource"
+            }
+          }
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/externaldatasources": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListExternalDataSources",
+        "description": "Retrieves the list of external data sources from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the external Data Source in."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlExternalDataSourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/credentials/{credentialName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetCredential",
+        "description": "Retrieves the specified credential from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the schema in."
+          },
+          {
+            "name": "credentialName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the credential to find."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlCredential"
+            }
+          }
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/credentials": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListCredentials",
+        "description": "Retrieves the list of credentials from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the schema in."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlCredentialList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/procedures/{procedureName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetProcedure",
+        "description": "Retrieves the specified procedure from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the procedure in."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema to find the procedure in."
+          },
+          {
+            "name": "procedureName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the procedure to find."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlProcedure"
+            }
+          }
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/procedures": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListProcedures",
+        "description": "Retrieves the list of procedures from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the procedures in."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema to find the procedures in."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlProcedureList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetTable",
+        "description": "Retrieves the specified table from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the table in."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema to find the table in."
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table to find."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlTable"
+            }
+          }
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListTables",
+        "description": "Retrieves the list of tables from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the tables in."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema to find the tables in."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlTableList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/views/{viewName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetView",
+        "description": "Retrieves the specified view from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the view in."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema to find the view in."
+          },
+          {
+            "name": "viewName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the view to find."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlView"
+            }
+          }
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/views": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListViews",
+        "description": "Retrieves the list of views from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the views in."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema to find the views in."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlViewList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/statistics/{statisticsName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetTableStatistic",
+        "description": "Retrieves the specified table from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the statistics in."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema to find the statistics in."
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table to find the statistics in."
+          },
+          {
+            "name": "statisticsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table statistics to find."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlTableStatistics"
+            }
+          }
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/statistics": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListTableStatistics",
+        "description": "Retrieves the list of tables from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the statistics in."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema to find the statistics in."
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table to find the statistics in."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlTableStatisticsList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/types": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListTypes",
+        "description": "Retrieves the list of catalog types within the specified database and schema for the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the types in."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema to find the types in."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Query parameters. If null is passed returns all catalog type items."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Query parameters. If null is passed returns all catalog type items."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Query parameters. If null is passed returns all catalog type items."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Query parameters. If null is passed returns all catalog type items."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlTypeList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlType"
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tablevaluedfunctions/{tableValuedFunctionName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetTableValuedFunction",
+        "description": "Retrieves the specified table valued function from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the table valued function in."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema to find the table valued function in."
+          },
+          {
+            "name": "tableValuedFunctionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the tableValuedFunction to find."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlTableValuedFunction"
+            }
+          }
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tablevaluedfunctions": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListTableValuedFunctions",
+        "description": "Retrieves the list of table valued functions from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the table valued functions in."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema to find the table valued functions in."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlTableValuedFunctionList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/assemblies/{assemblyName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetAssembly",
+        "description": "Retrieves the specified assembly from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the assembly in."
+          },
+          {
+            "name": "assemblyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assembly to find."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlAssembly"
+            }
+          }
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/assemblies": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListAssemblies",
+        "description": "Retrieves the list of assemblies from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the assembly in."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlAssemblyList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetSchema",
+        "description": "Retrieves the specified schema from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the schema in."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema to find."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlSchema"
+            }
+          }
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListSchemas",
+        "description": "Retrieves the list of schemas from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to find the schema in."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlSchemaList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetDatabase",
+        "description": "Retrieves the specified database from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path to the file to create."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlDatabase"
+            }
+          }
+        }
+      }
+    },
+    "/{accountName}.{catalogServiceUri}/catalog/usql/databases": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListDatabases",
+        "description": "Retrieves the list of databases from the current Data Lake Analytics catalog",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/catalogServiceUriInPathParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlDatabaseList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DataLakeAnalyticsCatalogSecretCreateOrUpdateParameters": {
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "Gets or sets the password for the secret to pass in"
+        },
+        "uri": {
+          "type": "string",
+          "description": "Gets or sets the URI identifier for the secret in the format <hostname>:<port>"
+        }
+      },
+      "required": [
+        "password"
+      ],
+      "description": "DataLakeAnalytics DataLakeAnalyticsAccount information."
+    },
+    "USqlSecret": {
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Gets or sets the name of the database."
+        },
+        "secretName": {
+          "type": "string",
+          "description": "Gets or sets the name of the secret."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time of the credential object. This is the only information returned about a secret from a GET."
+        },
+        "uri": {
+          "type": "string",
+          "description": "Gets or sets the URI identifier for the secret in the format <hostname>:<port>"
+        },
+        "password": {
+          "type": "string",
+          "description": "Gets or sets the password for the secret to pass in"
+        },
+        "computeAccountName": {
+          "type": "string",
+          "description": "Gets or sets the name of the Data Lake Analytics account."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the catalog item."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL secret item."
+    },
+    "USqlExternalDataSource": {
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Gets or sets the name of the database."
+        },
+        "externalDataSourceName": {
+          "type": "string",
+          "description": "Gets or sets the name of the external data source."
+        },
+        "provider": {
+          "type": "string",
+          "description": "Gets or sets the name of the provider for the external data source."
+        },
+        "providerString": {
+          "type": "string",
+          "description": "Gets or sets the name of the provider string for the external data source."
+        },
+        "pushdownTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the list of types to push down from the external data source."
+        },
+        "computeAccountName": {
+          "type": "string",
+          "description": "Gets or sets the name of the Data Lake Analytics account."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the catalog item."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL external datasource item."
+    },
+    "USqlExternalDataSourceList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlExternalDataSource"
+          },
+          "description": "Gets or sets the list of external data sources in the database"
+        },
+        "itemType": {
+          "type": "string",
+          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
+          "enum": [
+            "usqlDatabase",
+            "usqlSchema",
+            "usqlAssembly",
+            "usqlTable",
+            "uSqlView",
+            "uSqlProcedure",
+            "uSqlCredential",
+            "usqlTableValuedFunction",
+            "usqlTableStatistics",
+            "usqlSecret",
+            "usqlExternalDataSource",
+            "usqlType"
+          ],
+          "x-ms-enum": {
+            "name": "CatalogItemType",
+            "modelAsString": "True"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the count of items in the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the link to the next page of results."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL external datasource item list."
+    },
+    "USqlCredential": {
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Gets or sets the name of the database the credential is in."
+        },
+        "identity": {
+          "type": "string",
+          "description": "Gets or sets the name of the secret associated with the credential."
+        },
+        "credentialName": {
+          "type": "string",
+          "description": "Gets or sets the name of the credential."
+        },
+        "userName": {
+          "type": "string",
+          "description": "Gets or sets the user name associated with the credential."
+        },
+        "computeAccountName": {
+          "type": "string",
+          "description": "Gets or sets the name of the Data Lake Analytics account."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the catalog item."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL credential item."
+    },
+    "USqlCredentialList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlCredential"
+          },
+          "description": "Gets or sets the list of credentials in the database"
+        },
+        "itemType": {
+          "type": "string",
+          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
+          "enum": [
+            "usqlDatabase",
+            "usqlSchema",
+            "usqlAssembly",
+            "usqlTable",
+            "uSqlView",
+            "uSqlProcedure",
+            "uSqlCredential",
+            "usqlTableValuedFunction",
+            "usqlTableStatistics",
+            "usqlSecret",
+            "usqlExternalDataSource",
+            "usqlType"
+          ],
+          "x-ms-enum": {
+            "name": "CatalogItemType",
+            "modelAsString": "True"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the count of items in the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the link to the next page of results."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL credential item list."
+    },
+    "USqlProcedure": {
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Gets or sets the name of the database."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "Gets or sets the name of the schema associated with this procedure and database."
+        },
+        "procName": {
+          "type": "string",
+          "description": "Gets or sets the name of the procedure."
+        },
+        "definition": {
+          "type": "string",
+          "description": "Gets or sets the defined query of the procedure."
+        },
+        "computeAccountName": {
+          "type": "string",
+          "description": "Gets or sets the name of the Data Lake Analytics account."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the catalog item."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL procedure item."
+    },
+    "USqlProcedureList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlProcedure"
+          },
+          "description": "Gets or sets the list of procedure in the database and schema combination"
+        },
+        "itemType": {
+          "type": "string",
+          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
+          "enum": [
+            "usqlDatabase",
+            "usqlSchema",
+            "usqlAssembly",
+            "usqlTable",
+            "uSqlView",
+            "uSqlProcedure",
+            "uSqlCredential",
+            "usqlTableValuedFunction",
+            "usqlTableStatistics",
+            "usqlSecret",
+            "usqlExternalDataSource",
+            "usqlType"
+          ],
+          "x-ms-enum": {
+            "name": "CatalogItemType",
+            "modelAsString": "True"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the count of items in the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the link to the next page of results."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL procedure item list."
+    },
+    "USqlTableColumn": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the column in the table."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the object type of the specified column (such as System.String)."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table column item."
+    },
+    "USqlDirectedColumn": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the index in the table."
+        },
+        "descending": {
+          "type": "boolean",
+          "description": "Gets or sets the switch indicating if the index is descending or not."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL directed column item."
+    },
+    "USqlDistributionInfo": {
+      "properties": {
+        "type": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the type of this distribution."
+        },
+        "keys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlDirectedColumn"
+          },
+          "description": "Gets or sets the list of directed columns in the distribution"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the count of indices using this distribution."
+        },
+        "dynamicCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the dynamic count of indices using this distribution."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL distribution information object."
+    },
+    "USqlIndex": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the index in the table."
+        },
+        "indexKeys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlDirectedColumn"
+          },
+          "description": "Gets or sets the list of directed columns in the index"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the list of columns in the index"
+        },
+        "distributionInfo": {
+          "$ref": "#/definitions/USqlDistributionInfo",
+          "description": "Gets or sets the distributions info of the index"
+        },
+        "partitionFunction": {
+          "type": "string",
+          "description": "Gets or sets partition function ID for the index."
+        },
+        "partitionKeyList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the list of partion keys in the index"
+        },
+        "streamNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the list of full paths to the streams that contain this index in the DataLake account."
+        },
+        "isColumnstore": {
+          "type": "boolean",
+          "description": "Gets or sets the switch indicating if this index is a columnstore index."
+        },
+        "indexId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the ID of this index within the table."
+        },
+        "isUnique": {
+          "type": "boolean",
+          "description": "Gets or sets the switch indicating if this index is a unique index."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table index item."
+    },
+    "DdlName": {
+      "properties": {
+        "firstPart": {
+          "type": "string",
+          "description": "Gets or sets the name of the table associated with this database and schema."
+        },
+        "secondPart": {
+          "type": "string",
+          "description": "Gets or sets the name of the table associated with this database and schema."
+        },
+        "thirdPart": {
+          "type": "string",
+          "description": "Gets or sets the name of the table associated with this database and schema."
+        },
+        "server": {
+          "type": "string",
+          "description": "Gets or sets the name of the table associated with this database and schema."
+        }
+      },
+      "description": "A Data Lake Analytics DDL name item."
+    },
+    "EntityId": {
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/DdlName",
+          "description": "Gets or sets the name of the external table associated with this database, schema and table."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the external data source."
+        }
+      },
+      "description": "A Data Lake Analytics catalog entity identifier object."
+    },
+    "ExternalTable": {
+      "properties": {
+        "tableName": {
+          "type": "string",
+          "description": "Gets or sets the name of the table associated with this database and schema."
+        },
+        "dataSource": {
+          "$ref": "#/definitions/EntityId",
+          "description": "Gets or sets the data source associated with this external table."
+        }
+      },
+      "description": "A Data Lake Analytics catalog external table item."
+    },
+    "USqlTable": {
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Gets or sets the name of the database."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "Gets or sets the name of the schema associated with this table and database."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "Gets or sets the name of the table."
+        },
+        "columnList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlTableColumn"
+          },
+          "description": "Gets or sets the list of columns in this table"
+        },
+        "indexList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlIndex"
+          },
+          "description": "Gets or sets the list of indices in this table"
+        },
+        "partitionKeyList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the list of partition keys in the table"
+        },
+        "externalTable": {
+          "$ref": "#/definitions/ExternalTable",
+          "description": "Gets or sets the external table associated with the table."
+        },
+        "computeAccountName": {
+          "type": "string",
+          "description": "Gets or sets the name of the Data Lake Analytics account."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the catalog item."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table item."
+    },
+    "USqlTableList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlTable"
+          },
+          "description": "Gets or sets the list of tables in the database and schema combination"
+        },
+        "itemType": {
+          "type": "string",
+          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
+          "enum": [
+            "usqlDatabase",
+            "usqlSchema",
+            "usqlAssembly",
+            "usqlTable",
+            "uSqlView",
+            "uSqlProcedure",
+            "uSqlCredential",
+            "usqlTableValuedFunction",
+            "usqlTableStatistics",
+            "usqlSecret",
+            "usqlExternalDataSource",
+            "usqlType"
+          ],
+          "x-ms-enum": {
+            "name": "CatalogItemType",
+            "modelAsString": "True"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the count of items in the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the link to the next page of results."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table item list."
+    },
+    "USqlView": {
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Gets or sets the name of the database."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "Gets or sets the name of the schema associated with this view and database."
+        },
+        "viewName": {
+          "type": "string",
+          "description": "Gets or sets the name of the view."
+        },
+        "definition": {
+          "type": "string",
+          "description": "Gets or sets the defined query of the view."
+        },
+        "computeAccountName": {
+          "type": "string",
+          "description": "Gets or sets the name of the Data Lake Analytics account."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the catalog item."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL view item."
+    },
+    "USqlViewList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlView"
+          },
+          "description": "Gets or sets the list of view in the database and schema combination"
+        },
+        "itemType": {
+          "type": "string",
+          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
+          "enum": [
+            "usqlDatabase",
+            "usqlSchema",
+            "usqlAssembly",
+            "usqlTable",
+            "uSqlView",
+            "uSqlProcedure",
+            "uSqlCredential",
+            "usqlTableValuedFunction",
+            "usqlTableStatistics",
+            "usqlSecret",
+            "usqlExternalDataSource",
+            "usqlType"
+          ],
+          "x-ms-enum": {
+            "name": "CatalogItemType",
+            "modelAsString": "True"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the count of items in the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the link to the next page of results."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL view item list."
+    },
+    "USqlTableStatistics": {
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Gets or sets the name of the database."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "Gets or sets the name of the schema associated with this table and database."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "Gets or sets the name of the table."
+        },
+        "statisticsName": {
+          "type": "string",
+          "description": "Gets or sets the name of the table statistics."
+        },
+        "userStatName": {
+          "type": "string",
+          "description": "Gets or sets the name of the user statistics."
+        },
+        "statDataPath": {
+          "type": "string",
+          "description": "Gets or sets the path to the statistics data."
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time of the statistics."
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last time the statistics were updated."
+        },
+        "isUserCreated": {
+          "type": "boolean",
+          "description": "Gets or sets the switch indicating if these statistics are user created."
+        },
+        "isAutoCreated": {
+          "type": "boolean",
+          "description": "Gets or sets the switch indicating if these statistics are automatically created."
+        },
+        "hasFilter": {
+          "type": "boolean",
+          "description": "Gets or sets the switch indicating if these statistics have a filter."
+        },
+        "filterDefinition": {
+          "type": "string",
+          "description": "Gets or sets the filter definition for the statistics."
+        },
+        "colNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the list of column names associated with these statistics."
+        },
+        "computeAccountName": {
+          "type": "string",
+          "description": "Gets or sets the name of the Data Lake Analytics account."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the catalog item."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table statistics item."
+    },
+    "USqlTableStatisticsList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlTableStatistics"
+          },
+          "description": "Gets or sets the list of table statistics in the database, schema and table combination"
+        },
+        "itemType": {
+          "type": "string",
+          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
+          "enum": [
+            "usqlDatabase",
+            "usqlSchema",
+            "usqlAssembly",
+            "usqlTable",
+            "uSqlView",
+            "uSqlProcedure",
+            "uSqlCredential",
+            "usqlTableValuedFunction",
+            "usqlTableStatistics",
+            "usqlSecret",
+            "usqlExternalDataSource",
+            "usqlType"
+          ],
+          "x-ms-enum": {
+            "name": "CatalogItemType",
+            "modelAsString": "True"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the count of items in the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the link to the next page of results."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table statistics item list."
+    },
+    "USqlType": {
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Gets or sets the name of the database."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "Gets or sets the name of the schema associated with this table and database."
+        },
+        "typeName": {
+          "type": "string",
+          "description": "Gets or sets the name of type for this type."
+        },
+        "typeFamily": {
+          "type": "string",
+          "description": "Gets or sets the type family for this type."
+        },
+        "cSharpName": {
+          "type": "string",
+          "description": "Gets or sets the C# name for this type."
+        },
+        "fullCSharpName": {
+          "type": "string",
+          "description": "Gets or sets the fully qualified C# name for this type."
+        },
+        "systemTypeId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the system type ID for this type."
+        },
+        "userTypeId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the user type ID for this type."
+        },
+        "schemaId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the schema ID for this type."
+        },
+        "principalId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the principal ID for this type."
+        },
+        "isNullable": {
+          "type": "boolean",
+          "description": "Gets or sets the the switch indicating if this type is nullable."
+        },
+        "isUserDefined": {
+          "type": "boolean",
+          "description": "Gets or sets the the switch indicating if this type is user defined."
+        },
+        "isAssemblyType": {
+          "type": "boolean",
+          "description": "Gets or sets the the switch indicating if this type is an assembly type."
+        },
+        "isTableType": {
+          "type": "boolean",
+          "description": "Gets or sets the the switch indicating if this type is a table type."
+        },
+        "isComplexType": {
+          "type": "boolean",
+          "description": "Gets or sets the the switch indicating if this type is a complex type."
+        },
+        "computeAccountName": {
+          "type": "string",
+          "description": "Gets or sets the name of the Data Lake Analytics account."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the catalog item."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL type item."
+    },
+    "USqlTypeList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlType"
+          },
+          "description": "Gets or sets the list of types in the database and schema combination"
+        },
+        "itemType": {
+          "type": "string",
+          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
+          "enum": [
+            "usqlDatabase",
+            "usqlSchema",
+            "usqlAssembly",
+            "usqlTable",
+            "uSqlView",
+            "uSqlProcedure",
+            "uSqlCredential",
+            "usqlTableValuedFunction",
+            "usqlTableStatistics",
+            "usqlSecret",
+            "usqlExternalDataSource",
+            "usqlType"
+          ],
+          "x-ms-enum": {
+            "name": "CatalogItemType",
+            "modelAsString": "True"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the count of items in the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the link to the next page of results."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL type item list."
+    },
+    "USqlTableValuedFunction": {
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Gets or sets the name of the database."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "Gets or sets the name of the schema associated with this database."
+        },
+        "tvfName": {
+          "type": "string",
+          "description": "Gets or sets the name of the table valued function."
+        },
+        "definition": {
+          "type": "string",
+          "description": "Gets or sets the definition of the table valued function."
+        },
+        "computeAccountName": {
+          "type": "string",
+          "description": "Gets or sets the name of the Data Lake Analytics account."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the catalog item."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table valued function item."
+    },
+    "USqlTableValuedFunctionList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlTableValuedFunction"
+          },
+          "description": "Gets or sets the list of table valued functions in the database and schema combination"
+        },
+        "itemType": {
+          "type": "string",
+          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
+          "enum": [
+            "usqlDatabase",
+            "usqlSchema",
+            "usqlAssembly",
+            "usqlTable",
+            "uSqlView",
+            "uSqlProcedure",
+            "uSqlCredential",
+            "usqlTableValuedFunction",
+            "usqlTableStatistics",
+            "usqlSecret",
+            "usqlExternalDataSource",
+            "usqlType"
+          ],
+          "x-ms-enum": {
+            "name": "CatalogItemType",
+            "modelAsString": "True"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the count of items in the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the link to the next page of results."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table valued function item list."
+    },
+    "USqlAssemblyFileInfo": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the assembly file type.",
+          "enum": [
+            "Assembly",
+            "Resource"
+          ],
+          "x-ms-enum": {
+            "name": "FileType",
+            "modelAsString": "False"
+          }
+        },
+        "originalPath": {
+          "type": "string",
+          "description": "Gets or sets the the original path to the assembly file."
+        },
+        "contentPath": {
+          "type": "string",
+          "description": "Gets or sets the the content path to the assembly file."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL assembly file information item."
+    },
+    "USqlAssemblyDependencyInfo": {
+      "properties": {
+        "entityId": {
+          "$ref": "#/definitions/EntityId",
+          "description": "Gets or sets the EntityId of the dependency."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL dependency information item."
+    },
+    "USqlAssembly": {
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Gets or sets the name of the database."
+        },
+        "assemblyName": {
+          "type": "string",
+          "description": "Gets or sets the name of the assembly."
+        },
+        "clrName": {
+          "type": "string",
+          "description": "Gets or sets the name of the CLR."
+        },
+        "isVisible": {
+          "type": "boolean",
+          "description": "Gets or sets the switch indicating if this assembly is visible or not."
+        },
+        "isUserDefined": {
+          "type": "boolean",
+          "description": "Gets or sets the switch indicating if this assembly is user defined or not."
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlAssemblyFileInfo"
+          },
+          "description": "Gets or sets the list of files associated with the assembly"
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlAssemblyDependencyInfo"
+          },
+          "description": "Gets or sets the list of dependencies associated with the assembly"
+        },
+        "computeAccountName": {
+          "type": "string",
+          "description": "Gets or sets the name of the Data Lake Analytics account."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the catalog item."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL Assembly."
+    },
+    "USqlAssemblyClr": {
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Gets or sets the name of the database."
+        },
+        "assemblyClrName": {
+          "type": "string",
+          "description": "Gets or sets the name of the assembly."
+        },
+        "clrName": {
+          "type": "string",
+          "description": "Gets or sets the name of the CLR."
+        },
+        "computeAccountName": {
+          "type": "string",
+          "description": "Gets or sets the name of the Data Lake Analytics account."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the catalog item."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL assembly CLR item."
+    },
+    "USqlAssemblyList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlAssemblyClr"
+          },
+          "description": "Gets or sets the list of assemblies in the database"
+        },
+        "itemType": {
+          "type": "string",
+          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
+          "enum": [
+            "usqlDatabase",
+            "usqlSchema",
+            "usqlAssembly",
+            "usqlTable",
+            "uSqlView",
+            "uSqlProcedure",
+            "uSqlCredential",
+            "usqlTableValuedFunction",
+            "usqlTableStatistics",
+            "usqlSecret",
+            "usqlExternalDataSource",
+            "usqlType"
+          ],
+          "x-ms-enum": {
+            "name": "CatalogItemType",
+            "modelAsString": "True"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the count of items in the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the link to the next page of results."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL assembly CLR item list."
+    },
+    "USqlSchema": {
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Gets or sets the name of the database."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "Gets or sets the name of the schema."
+        },
+        "computeAccountName": {
+          "type": "string",
+          "description": "Gets or sets the name of the Data Lake Analytics account."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the catalog item."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL schema item."
+    },
+    "USqlSchemaList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlSchema"
+          },
+          "description": "Gets or sets the list of schemas in the database"
+        },
+        "itemType": {
+          "type": "string",
+          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
+          "enum": [
+            "usqlDatabase",
+            "usqlSchema",
+            "usqlAssembly",
+            "usqlTable",
+            "uSqlView",
+            "uSqlProcedure",
+            "uSqlCredential",
+            "usqlTableValuedFunction",
+            "usqlTableStatistics",
+            "usqlSecret",
+            "usqlExternalDataSource",
+            "usqlType"
+          ],
+          "x-ms-enum": {
+            "name": "CatalogItemType",
+            "modelAsString": "True"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the count of items in the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the link to the next page of results."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL schema item list."
+    },
+    "USqlDatabase": {
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Gets or sets the name of the database."
+        },
+        "computeAccountName": {
+          "type": "string",
+          "description": "Gets or sets the name of the Data Lake Analytics account."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the catalog item."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL database item."
+    },
+    "USqlDatabaseList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlDatabase"
+          },
+          "description": "Gets or sets the list of databases"
+        },
+        "itemType": {
+          "type": "string",
+          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
+          "enum": [
+            "usqlDatabase",
+            "usqlSchema",
+            "usqlAssembly",
+            "usqlTable",
+            "uSqlView",
+            "uSqlProcedure",
+            "uSqlCredential",
+            "usqlTableValuedFunction",
+            "usqlTableStatistics",
+            "usqlSecret",
+            "usqlExternalDataSource",
+            "usqlType"
+          ],
+          "x-ms-enum": {
+            "name": "CatalogItemType",
+            "modelAsString": "True"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the count of items in the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the link to the next page of results."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL database item list."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "header",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "catalogServiceUriInPathParameter": {
+      "name": "catalogServiceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets the URI used as the base for all cloud service requests."
+    }
+  }
+}

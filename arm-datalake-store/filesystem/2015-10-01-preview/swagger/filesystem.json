@@ -1,0 +1,1214 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DataLakeStoreFileSystemManagementClient",
+    "description": "Creates a Data Lake Store filesystem management client.",
+    "version": "2015-10-01-preview"
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json",
+    "application/octet-stream"
+  ],
+  "produces": [
+    "application/json",
+    "text/json",
+    "application/octet-stream"
+  ],
+  "paths": {
+    "/{accountName}.{dataLakeServiceUri}/WebHdfsExt/{filePath}": {
+      "post": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_ConcurrentAppend",
+        "description": "Appends to the file specified. This method supports multiple concurrent appends to the file. NOTE: that concurrent append and serial append CANNOT be used interchangeably. Once a file has been appended to using either one, it can only be appended to using that type of append.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the data lake account that the file lives in."
+          },
+          {
+            "name": "filePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path to the file to append to using concurrent append."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "concurrentappend"
+          },
+          {
+            "name": "streamContents",
+            "in": "body",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            },
+            "required": true,
+            "description": "The file contents to include when appending to the file."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/dataLakeServiceUriInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{accountName}.{dataLakeServiceUri}/webhdfs/v1/{path}": {
+      "get": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_CheckAccess",
+        "description": "Checks if the specified access is available at the given path.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path to the file or folder to check access for."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "CHECKACCESS"
+          },
+          {
+            "name": "fsaction",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "File system operation read/write/execute in string form, matching regex pattern '[rwx-]{3}'"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          
+          {
+            "$ref": "#/parameters/dataLakeServiceUriInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_Mkdirs",
+        "description": "Creates a directory.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path to the directory to create."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "MKDIRS"
+          },
+          {
+            "name": "permission",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The optional permissions to set on the directories"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          
+          {
+            "$ref": "#/parameters/dataLakeServiceUriInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/FileOperationResultResult"
+            }
+          }
+        }
+      }
+    },
+    "/{accountName}.{dataLakeServiceUri}/webhdfs/v1/{destinationPath}": {
+      "post": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_Concat",
+        "description": "Concatenates the list of files into the target file.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "destinationPath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path to the destination file resulting from the concatenation."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "CONCAT"
+          },
+          {
+            "name": "sources",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "A list of comma seperated absolute FileSystem paths without scheme and authority"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          
+          {
+            "$ref": "#/parameters/dataLakeServiceUriInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{accountName}.{dataLakeServiceUri}/webhdfs/v1/{filePath}": {
+      "post": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_BeginAppend",
+        "description": "Initiates a file append request, resulting in a return of the data node location that will service the request.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store account to append to the file in"
+          },
+          {
+            "name": "filePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path to the file to append to."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "APPEND"
+          },
+          {
+            "name": "buffersize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The optional buffer size to use when appending data"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/dataLakeServiceUriInPath"
+          }
+        ],
+        "responses": {
+          "307": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/FileCreateOpenAndAppendResult"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_DirectAppend",
+        "description": "Directly appends to a file with the specified content, without requiring a redirect. This API is NOT webhdfs compliant. It should be used only by tools that do not rely on webhdfs interoperability.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store account to append to the file in"
+          },
+          {
+            "name": "filePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path to the file to append to."
+          },
+          {
+            "name": "streamContents",
+            "in": "body",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            },
+            "required": true,
+            "description": "The file contents to include when appending to the file."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "APPEND"
+          },
+          {
+            "name": "buffersize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The optional buffer size to use when appending data"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          
+          {
+            "$ref": "#/parameters/dataLakeServiceUriInPath"
+          }
+        ],
+        "responses": {
+          "307": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/FileCreateOpenAndAppendResult"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_BeginCreate",
+        "description": "Initiates a file creation request, resulting in a return of the data node location that will service the request.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store account to create the file in"
+          },
+          {
+            "name": "filePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path to the file to create."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "CREATE"
+          },
+          {
+            "name": "buffersize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The size of the buffer used in transferring data."
+          },
+          {
+            "name": "overwrite",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The indication of if the file should be overwritten."
+          },
+          {
+            "name": "blocksize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The block size of a file, in bytes."
+          },
+          {
+            "name": "replication",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int16",
+            "description": "The number of replications of a file."
+          },
+          {
+            "name": "permission",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The permissions of a file or directory."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          
+          {
+            "$ref": "#/parameters/dataLakeServiceUriInPath"
+          }
+        ],
+        "responses": {
+          "307": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/FileCreateOpenAndAppendResult"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_DirectCreate",
+        "description": "Directly creates a file with the specified content, without requiring a redirect. This API is NOT webhdfs compliant. It should be used only by tools that do not rely on webhdfs interoperability.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store account to create the file in"
+          },
+          {
+            "name": "filePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path to the file to create."
+          },
+          {
+            "name": "streamContents",
+            "in": "body",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            },
+            "required": true,
+            "description": "The file contents to include when creating the file. This parameter is required, however it can be an empty stream. Just not null."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "CREATE"
+          },
+          {
+            "name": "write",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "default": true
+          },
+          {
+            "name": "buffersize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The size of the buffer used in transferring data."
+          },
+          {
+            "name": "overwrite",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The indication of if the file should be overwritten."
+          },
+          {
+            "name": "blocksize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The block size of a file, in bytes."
+          },
+          {
+            "name": "replication",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int16",
+            "description": "The number of replications of a file."
+          },
+          {
+            "name": "permission",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The permissions of a file or directory."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/dataLakeServiceUriInPath"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_BeginOpen",
+        "description": "Initiates a file open (read) request, resulting in a return of the data node location that will service the request.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the data lake account that the file lives in."
+          },
+          {
+            "name": "filePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path to the file to open."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "open"
+          },
+          {
+            "name": "length",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "buffersize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          
+          {
+            "$ref": "#/parameters/dataLakeServiceUriInPath"
+          }
+        ],
+        "responses": {
+          "307": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/FileCreateOpenAndAppendResult"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_DirectOpen",
+        "description": "Directly opens and reads from the specified file, without requiring a redirect. This API is NOT webhdfs compliant. It should be used only by tools that do not rely on webhdfs interoperability.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the data lake account that the file lives in."
+          },
+          {
+            "name": "filePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path to the file to open."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "open"
+          },
+          {
+            "name": "length",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "buffersize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          
+          {
+            "$ref": "#/parameters/dataLakeServiceUriInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": 
+            {
+              "type": "file"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_Delete",
+        "description": "Deletes the requested file or folder, optionally recursively.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "filePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path to the file or folder to delete."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "DELETE"
+          },
+          {
+            "name": "recursive",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The optional switch indicating if the delete should be recursive"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          
+          {
+            "$ref": "#/parameters/dataLakeServiceUriInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/FileOperationResultResult"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_RemoveAcl",
+        "description": "Removes the existing ACL on a file or folder.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "filePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path to the directory or file to remove ACL on."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "REMOVEACL"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          
+          {
+            "$ref": "#/parameters/dataLakeServiceUriInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_GetAclStatus",
+        "description": "Gets ACL entries on a file or folder.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "filePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path to the directory or file to get ACLs on."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "GETACLSTATUS"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          
+          {
+            "$ref": "#/parameters/dataLakeServiceUriInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AclStatusResult"
+            }
+          }
+        }
+      }
+    },
+    "/{fileAppendRequestLink}": {
+      "post": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_Append",
+        "description": "Appends to the file specified in the link that was returned from BeginAppend.",
+        "parameters": [
+          {
+            "name": "fileAppendRequestLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The link to the file to append to including all required parameters.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "streamContents",
+            "in": "body",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            },
+            "required": true,
+            "description": "The file contents to include when appending to the file."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{accountName}.{dataLakeServiceUri}/webhdfs/v1/{sourcePath}": {
+      "put": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_SetTimes",
+        "description": "Sets the access or modification time on a file or folder.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "sourcePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path to the directory or file to set permissions on."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "SETTIMES"
+          },
+          {
+            "name": "modificationtime",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The modification time of a file/directory. If -1 remains unchanged"
+          },
+          {
+            "name": "accesstime",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The access time of a file/directory. If -1 remains unchanged"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          
+          {
+            "$ref": "#/parameters/dataLakeServiceUriInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{accountName}.{dataLakeServiceUri}/webhdfs/v1/": {
+      "get": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_GetHomeDirectory",
+        "description": "Get the home directory for the specified account.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "GETHOMEDIRECTORY"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          
+          {
+            "$ref": "#/parameters/dataLakeServiceUriInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/HomeDirectoryResult"
+            }
+          }
+        }
+      }
+    },
+    "/{fileCreateRequestLink}": {
+      "put": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_Create",
+        "description": "Creates the file specified in the link that was returned from BeginCreate.",
+        "parameters": [
+          {
+            "name": "fileCreateRequestLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The link to the file to create including all required parameters.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "streamContents",
+            "in": "body",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            },
+            "required": true,
+            "description": "The file contents to include when creating the file. This parameter is required, however it can be an empty stream. Just not null."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{fileOpenRequestLink}": {
+      "get": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_Open",
+        "description": "Gets the data associated with the file handle requested.",
+        "parameters": [
+          {
+            "name": "fileOpenRequestLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The link to the file to open including all required parameters.",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": 
+            {
+              "type": "file"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FileOperationResultResult": {
+      "properties": {
+        "boolean": {
+          "type": "boolean",
+          "description": "Gets or sets the result of the operation or request"
+        }
+      },
+      "description": "The result of the request or operation."
+    },
+    "AclStatus": {
+      "properties": {
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the list of ACLSpec entries on a file or folder."
+        },
+        "group": {
+          "type": "string",
+          "description": "Gets or sets the group owner."
+        },
+        "owner": {
+          "type": "string",
+          "description": "Gets or sets the user who is the owner."
+        },
+        "stickyBit": {
+          "type": "boolean",
+          "description": "Gets or sets the indicator of whether the sticky bit is on or off."
+        }
+      },
+      "description": "Data Lake ACL status information"
+    },
+    "AclStatusResult": {
+      "properties": {
+        "AclStatus": {
+          "$ref": "#/definitions/AclStatus",
+          "description": "Gets or sets the AclStatus object for a given folder or file"
+        }
+      },
+      "description": "Data Lake Store filesystem Acl information."
+    },
+    "HomeDirectoryResult": {
+      "properties": {
+        "Path": {
+          "type": "string",
+          "description": "Gets or sets the file path to the home directory"
+        }
+      },
+      "description": "Data Lake Store filesystem home path response."
+    },
+    "ContentSummary": {
+      "properties": {
+        "directoryCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the number of directories."
+        },
+        "fileCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the number of files."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the number of bytes used by the contet."
+        },
+        "quota": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the namespace quota of this directory."
+        },
+        "spaceConsumed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the disk space consumed by the content."
+        },
+        "spaceQuota": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the disk space quota."
+        }
+      },
+      "description": "Data Lake content summary information"
+    },
+    "ContentSummaryResult": {
+      "properties": {
+        "ContentSummary": {
+          "$ref": "#/definitions/ContentSummary",
+          "description": "Gets or sets the content summary for the specified path"
+        }
+      },
+      "description": "Data Lake Store filesystem content summary information response."
+    },
+    "FileStatusProperties": {
+      "properties": {
+        "accessTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the last access time."
+        },
+        "blockSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the block size for the file."
+        },
+        "childrenNum": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the number of children in the directory."
+        },
+        "fileId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the file identifier."
+        },
+        "group": {
+          "type": "string",
+          "description": "Gets or sets the group owner."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the number of bytes in a file."
+        },
+        "modificationTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the modification time."
+        },
+        "owner": {
+          "type": "string",
+          "description": "Gets or sets the user who is the owner."
+        },
+        "pathSuffix": {
+          "type": "string",
+          "description": "Gets or sets the path suffix."
+        },
+        "permission": {
+          "type": "string",
+          "description": "Gets or sets the permission represented as an octal string."
+        },
+        "replication": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of replications of a file."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the type of the path object.",
+          "enum": [
+            "FILE",
+            "DIRECTORY"
+          ],
+          "x-ms-enum": {
+            "name": "FileType",
+            "modelAsString": "False"
+          }
+        }
+      },
+      "description": "Data Lake file status properties information"
+    },
+    "FileStatuses": {
+      "properties": {
+        "FileStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileStatusProperties"
+          },
+          "description": "Gets or sets the object containing the list of properties of the files."
+        }
+      },
+      "description": "Data Lake file status list information"
+    },
+    "FileStatusesResult": {
+      "properties": {
+        "FileStatuses": {
+          "$ref": "#/definitions/FileStatuses",
+          "description": "Gets or sets the object representing the list of file statuses"
+        }
+      },
+      "description": "Data Lake Store filesystem file status list information response."
+    },
+    "FileStatusResult": {
+      "properties": {
+        "FileStatus": {
+          "$ref": "#/definitions/FileStatusProperties",
+          "description": "Gets or sets the file status object associated with the specified file path"
+        }
+      },
+      "description": "Data Lake Store filesystem file status information response."
+    },
+    "FileCreateOpenAndAppendResult": {
+      "properties": {
+        "Location": {
+          "type": "string",
+          "description": "Gets or sets the redirect URI location with any necessary parameters"
+        }
+      },
+      "description": "The response recieved after the BeginOpen, BeginCreate and BeginAppend requests."
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "dataLakeServiceUriInPath": {
+      "name": "dataLakeServiceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets the URI used as the base for all cloud service requests."
+    }
+  }
+}
