@@ -244,6 +244,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": ""
+          },
           "202": {
             "description": ""
           }
@@ -4066,6 +4069,15 @@
             "modelAsString": "True"
           }
         },
+        "requestTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets request timeout"
+        },
+        "probe": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets probe resource of application gateway "
+        },		
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
@@ -4116,10 +4128,18 @@
             "modelAsString": "True"
           }
         },
+        "hostName": {
+          "type": "string",
+          "description": "Gets or sets the host name of http listener "
+        },		
         "sslCertificate": {
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets ssl certificate resource of application gateway "
         },
+        "requireServerNameIndication": {
+          "type": "string",
+          "description": "Gets or sets the requireServerNameIndication of http listener "
+        },			
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the http listener resource Updating/Deleting/Failed"
@@ -4148,13 +4168,124 @@
       ],
       "description": "Http listener of application gateway"
     },
+    "ApplicationGatewayPathRulePropertiesFormat": {
+      "properties": {
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the path rules of URL path map"
+        },
+        "backendAddressPool": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets backend address pool resource of URL path map "
+        },
+        "backendHttpSettings": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets backend http settings resource of URL path map "
+        },         		
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets path rule of URL path map resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of probe of application gateway"
+    },	
+    "ApplicationGatewayPathRule": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayPathRulePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "Path rule of URL path map of application gateway"
+    },		
+    "ApplicationGatewayProbePropertiesFormat": {
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": "Gets or sets the protocol",
+          "enum": [
+            "Http",
+            "Https"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayProtocol",
+            "modelAsString": "True"
+          }
+        },
+        "host": {
+          "type": "string",
+          "description": "Gets or sets the host to send probe to "
+        },
+        "path": {
+          "type": "string",
+          "description": "Gets or sets the relative path of probe "
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets probing interval in seconds "
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets probing timeout in seconds "
+        },
+        "unhealthyThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets probing unhealthy threshold "
+        },			
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of probe of application gateway"
+    },	
+    "ApplicationGatewayProbe": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayProbePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "Probe of application gateway"
+    },	
     "ApplicationGatewayRequestRoutingRulePropertiesFormat": {
       "properties": {
         "ruleType": {
           "type": "string",
           "description": "Gets or sets the rule type",
           "enum": [
-            "Basic"
+            "Basic",
+			"PathBasedRouting"
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayRequestRoutingRuleType",
@@ -4173,6 +4304,10 @@
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets http listener resource of application gateway "
         },
+        "urlPathMap": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets url path map resource of application gateway "
+        },		
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the request routing rule resource Updating/Deleting/Failed"
@@ -4249,7 +4384,14 @@
             "$ref": "#/definitions/ApplicationGatewayFrontendPort"
           },
           "description": "Gets or sets frontend ports of application gateway resource"
-        },
+        },        
+        "probes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayProbe"
+          },
+          "description": "Gets or sets probes of application gateway resource"
+        },		
         "backendAddressPools": {
           "type": "array",
           "items": {
@@ -4271,6 +4413,13 @@
           },
           "description": "Gets or sets HTTP listeners of application gateway resource"
         },
+        "urlPathMaps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayUrlPathMap"
+          },
+          "description": "Gets or sets URL path map of application gateway resource"
+        },		
         "requestRoutingRules": {
           "type": "array",
           "items": {
@@ -4321,7 +4470,52 @@
         }
       },
       "description": "Response for ListLoadBalancers Api service call"
-    },
+    },	
+    "ApplicationGatewayUrlPathMapPropertiesFormat": {
+      "properties": {
+        "defaultBackendAddressPool": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets default backend address pool resource of URL path map "
+        },
+        "defaultBackendHttpSettings": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets default backend http settings resource of URL path map "
+        },
+        "pathRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayPathRule"
+          },
+          "description": "Gets or sets path rule of URL path map resource"
+        }, 		
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of probe of application gateway"
+    },	
+    "ApplicationGatewayUrlPathMap": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayUrlPathMapPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "UrlPathMap of application gateway"
+    },	
     "AuthorizationPropertiesFormat": {
       "properties": {
         "authorizationKey": {
