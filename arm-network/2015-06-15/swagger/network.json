@@ -1107,10 +1107,10 @@
           },
           {
             "name": "$expand",
-			"in": "query",
-			"required": false,
-			"type": "string",
-			"description": "expand references resources."
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "expand references resources."
           }
         ],
         "responses": {
@@ -1480,10 +1480,10 @@
           },
           {
             "name": "$expand",
-			"in": "query",
-			"required": false,
-			"type": "string",
-			"description": "expand references resources."
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "expand references resources."
           }
         ],
         "responses": {
@@ -1684,10 +1684,10 @@
           },
           {
             "name": "$expand",
-			"in": "query",
-			"required": false,
-			"type": "string",
-			"description": "expand references resources."
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "expand references resources."
           }
         ],
         "responses": {
@@ -1834,10 +1834,10 @@
           },
           {
             "name": "$expand",
-			"in": "query",
-			"required": false,
-			"type": "string",
-			"description": "expand references resources."
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "expand references resources."
           }
         ],
         "responses": {
@@ -2037,10 +2037,10 @@
           },
           {
             "name": "$expand",
-			"in": "query",
-			"required": false,
-			"type": "string",
-			"description": "expand references resources."
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "expand references resources."
           }
         ],
         "responses": {
@@ -2240,10 +2240,10 @@
           },
           {
             "name": "$expand",
-			"in": "query",
-			"required": false,
-			"type": "string",
-			"description": "expand references resources."
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "expand references resources."
           }
         ],
         "responses": {
@@ -2849,10 +2849,10 @@
           },
           {
             "name": "$expand",
-			"in": "query",
-			"required": false,
-			"type": "string",
-			"description": "expand references resources."
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "expand references resources."
           }
         ],
         "responses": {
@@ -3495,7 +3495,7 @@
           "VirtualNetworkGateways"
         ],
         "operationId": "VirtualNetworkGateways_Reset",
-        "description": "The Reset VirtualNetworkGateway operation resets the primary of the virtual network gatewayin the specified resource group through Network resource provider.",
+        "description": "The Reset VirtualNetworkGateway operation resets the primary of the virtual network gateway in the specified resource group through Network resource provider.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -3539,6 +3539,54 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworkgateways/{virtualNetworkGatewayName}/generatevpnclientpackage": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_Generatevpnclientpackage",
+        "description": "The Generatevpnclientpackage operation generates Vpn client package for P2S client of the virtual network gateway in the specified resource group through Network resource provider.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnClientParameters"
+            },
+            "description": "Parameters supplied to the Begin Generating  Virtual Network Gateway Vpn client package operation through Network resource provider."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Vpn client package url",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks/{virtualNetworkName}": {
@@ -3612,10 +3660,10 @@
           },
           {
             "name": "$expand",
-			"in": "query",
-			"required": false,
-			"type": "string",
-			"description": "expand references resources."
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "expand references resources."
           }
         ],
         "responses": {
@@ -5486,7 +5534,7 @@
     },
     "OutboundNatRulePropertiesFormat": {
       "properties": {
-        "allocatedOutboundPorts": {
+        "allocatedOutboundPort": {
           "type": "integer",
           "format": "int32",
           "description": "Gets or sets the number of outbound ports to be used for SNAT"
@@ -6540,6 +6588,14 @@
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets the reference of the LocalNetworkGateway resource which represents Local network site having default routes. Assign Null value in case of removing existing default site setting."
         },
+        "sku": {
+          "$ref": "#/definitions/VirtualNetworkGatewaySku",
+          "description": "Gets or sets the reference of the VirtualNetworkGatewaySku resource which represents the sku selected for Virtual network gateway."
+        },
+        "vpnClientConfiguration": {
+          "$ref": "#/definitions/VpnClientConfiguration",
+          "description": "Gets or sets the reference of the VpnClientConfiguration resource which represents the P2S VpnClient configurations."
+        },
         "resourceGuid": {
           "type": "string",
           "description": "Gets or sets resource guid property of the VirtualNetworkGateway resource"
@@ -6568,8 +6624,88 @@
       ],
       "description": "A common class for general resource information"
     },
+    "VpnClientConfiguration": {
+      "properties": {
+        "vpnClientAddressPool": {
+          "$ref": "#/definitions/AddressSpace",
+          "description": "Gets or sets the reference of the Address space resource which represents Address space for P2S VpnClient."
+        },
+        "vpnClientRootCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnClientRootCertificate"
+          },
+          "description": "VpnClientRootCertificate for Virtual network gateway."
+        },
+        "vpnClientRevokedCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnClientRevokedCertificate"
+          },
+          "description": "VpnClientRevokedCertificate for Virtual network gateway."
+        }
+      },
+      "description": "VpnClientConfiguration for P2S client"
+    },
+    "VirtualNetworkGatewaySku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gateway sku name -Basic/HighPerformance/Standard",
+          "enum": [
+            "Basic",
+            "HighPerformance",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkGatewaySkuName",
+            "modelAsString": "True"
+          }
+        },
+        "tier": {
+          "type": "string",
+          "description": "Gateway sku tier -Basic/HighPerformance/Standard",
+          "enum": [
+            "Basic",
+            "HighPerformance",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkGatewaySkuTier",
+            "modelAsString": "True"
+          }
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The capacity"
+        }
+      },
+      "description": "VirtualNetworkGatewaySku details"
+    },
+    "VpnClientParameters": {
+      "properties": {
+        "ProcessorArchitecture": {
+          "type": "string",
+          "description": "VPN client Processor Architecture -Amd64/X86",
+          "enum": [
+            "Amd64",
+            "X86"
+          ],
+          "x-ms-enum": {
+            "name": "Architecture",
+            "modelAsString": "True"
+          }
+        }
+      },
+      "description": "VpnClientParameters"
+    },
     "VirtualNetworkGatewayConnectionPropertiesFormat": {
       "properties": {
+        "authorizationKey": {
+          "type": "string",
+          "description": "The authorizationKey."
+        },
         "virtualNetworkGateway1": {
           "$ref": "#/definitions/VirtualNetworkGateway"
         },
@@ -6657,6 +6793,74 @@
         }
       ],
       "description": "A common class for general resource information"
+    },
+    "VpnClientRevokedCertificatePropertiesFormat": {
+      "properties": {
+        "thumbprint": {
+          "type": "string",
+          "description": "Gets or sets the revoked Vpn client certificate thumbprint"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the VPN client revoked certificate resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of the revoked VPN client certificate of virtual network gateway"
+    },
+    "VpnClientRevokedCertificate": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnClientRevokedCertificatePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "VPN client revoked certificate of virtual network gateway"
+    },
+    "VpnClientRootCertificatePropertiesFormat": {
+      "properties": {
+        "publicCertData": {
+          "type": "string",
+          "description": "Gets or sets the certificate public data"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the VPN client root certificate resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of SSL certificates of application gateway"
+    },
+    "VpnClientRootCertificate": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnClientRootCertificatePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "VPN client root certificate of virtual network gateway"
     },
     "ConnectionSharedKeyResult": {
       "properties": {
