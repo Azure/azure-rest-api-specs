@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "SqlManagementClient",
-    "description": "The Windows Azure SQL Database management API provides a RESTful set of web services that interact with Windows Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases and servers.",
+    "description": "The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete Databases, Servers and related resources.",
     "version": "2015-05-01"
   },
   "host": "management.azure.com",
@@ -27,20 +27,6 @@
         "description": "Creates or updates an Azure SQL Server security alert policy.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Resource Group to which the server belongs."
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure SQL Server."
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -58,10 +44,16 @@
         ],
         "responses": {
           "200": {
-            "description": ""
-          },
+            "description": "The Server Threat Detection Policy",
+            "schema": {
+              "$ref": "#/definitions/ServerSecurityAlertPolicy"
+			}
+          }
           "201": {
-            "description": ""
+            "description": "The Server Threat Detection Policy"
+          }
+		  "400": {
+            "description": "Resource was not found"
           }
         }
       },
@@ -73,20 +65,6 @@
         "description": "Returns an Azure SQL Server security alert policy.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Resource Group to which the server belongs."
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure SQL Server."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -95,10 +73,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The Server Threat Detection Policy",
             "schema": {
               "$ref": "#/definitions/ServerSecurityAlertPolicy"
             }
+          }
+		  "400": {
+            "description": "Resource was not found"
           }
         }
       }
@@ -110,22 +91,22 @@
         "state": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the state of the Azure SQL Security alert policy."
+          "description": "The state of the Azure SQL Security alert policy."
         },
         "disabledAlerts": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the disable alerts of the Azure SQL Security alert policy."
+          "description": "The disable alerts of the Azure SQL Security alert policy."
         },
         "emailAddresses": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the list of email addresses to send the alert."
+          "description": "The list of email addresses to send the alert."
         },
         "emailAccountAdmins": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets whether to email the azure account admins."
+          "description": "Value that indicated whether to email the azure account admins."
         }
       },
       "description": "Represents the properties of an Azure SQL Security alert policy."
@@ -149,11 +130,6 @@
           "description": "Represents the properties of the resource."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "description": "Represents an Azure SQL Server Security Alert Policy."
     },
     "Resource": {
@@ -206,7 +182,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Thw subscription credentials which uniquely identify Microsoft Azure subscription."
     },
     "ApiVersionParameter": {
       "name": "api-version",
@@ -214,6 +190,20 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
-    }
+    },
+	"ResourceGroupName": {
+		"name": "resourceGroupName",
+		"in": "path",
+		"required": true,
+		"type": "string",
+		"description": "The name of the Resource Group to which the server belongs."
+	},
+	"ServerName": {
+		"name": "serverName",
+		"in": "path",
+		"required": true,
+		"type": "string",
+		"description": "The name of the Azure SQL Server."
+	}  
   }
 }
