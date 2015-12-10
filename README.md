@@ -57,6 +57,12 @@ If you are interested in generating code from these specifications, please check
 
 Please contribute to services you know and love. The curation of these specifications will ensure that we have great documentation and even better client library support for our Azure Services. If you have any questions, please reach out to the autoresteng dl.
 
+### How to validate your swagger
+* [You can use this json schema validator](https://json-schema-validator.herokuapp.com/)
+  * In the upper left box, paste the [swagger schema from here](https://github.com/swagger-api/swagger-spec/blob/master/schemas/v2.0/schema.json)
+  * In the lower left box paste your swagger json
+  * Upon clicking the validate button you should either see errors or success.
+
 ### Submitting changes
 
 Please send a [GitHub Pull Request to Azure REST API Specs](https://github.com/azure/azure-rest-api-specs/pull/new/master) with a clear list of what you've done (read more about [pull requests](http://help.github.com/pull-requests/)). When you send a pull request, we will love you forever if you include additions to the documentation for your given service. We can always use more documentation and beautiful markdown. Please follow make sure all of your commits are atomic (one feature per commit).
