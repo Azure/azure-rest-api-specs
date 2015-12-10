@@ -60,8 +60,8 @@ Please contribute to services you know and love. The curation of these specifica
 ### How to validate your swagger
 * [You can use this json schema validator](https://json-schema-validator.herokuapp.com/)
   * In the upper left box, paste the [swagger schema from here](https://github.com/swagger-api/swagger-spec/blob/master/schemas/v2.0/schema.json)
-  * In the lower left box paste your swagger json
-  * Upon clicking the validate button you should either see errors or success.
+  * In the lower left box, paste your swagger json
+  * Upon clicking the validate button, you should either see errors or success.
 
 ### Submitting changes
 
