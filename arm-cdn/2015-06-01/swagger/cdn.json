@@ -46,7 +46,9 @@
                         }
                     }
                 },
-                "deprecated": false
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}": {
@@ -85,8 +87,7 @@
                             "$ref": "#/definitions/Profile"
                         }
                     }
-                },
-                "deprecated": false
+                }
             },
             "put": {
                 "tags": [
@@ -142,7 +143,7 @@
                         "description": "Profile already exists and resource is not in a terminal state"
                     }
                 },
-                "deprecated": false
+                "x-ms-long-running-operation": true
             },
             "patch": {
                 "tags": [
@@ -163,9 +164,11 @@
                         "in": "body",
                         "description": "Profile tags to update",
                         "required": true,
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string"
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
                         }
                     },
                     {
@@ -192,8 +195,7 @@
                     "409": {
                         "description": "Profile already exists and resource is not in a terminal state"
                     }
-                },
-                "deprecated": false
+                }
             },
             "delete": {
                 "tags": [
@@ -234,7 +236,7 @@
                         "description": "Profile already exists and resource is not in a terminal state"
                     }
                 },
-                "deprecated": false
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/generateSsoUri": {
@@ -273,8 +275,7 @@
                             "$ref": "#/definitions/SsoUri"
                         }
                     }
-                },
-                "deprecated": false
+                }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints": {
@@ -314,7 +315,9 @@
                         }
                     }
                 },
-                "deprecated": false
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}": {
@@ -360,8 +363,7 @@
                             "$ref": "#/definitions/Endpoint"
                         }
                     }
-                },
-                "deprecated": false
+                }
             },
             "put": {
                 "tags": [
@@ -424,7 +426,7 @@
                         "description": "Endpoint already exists and resource is not in a terminal state"
                     }
                 },
-                "deprecated": false
+                "x-ms-long-running-operation": true
             },
             "patch": {
                 "tags": [
@@ -480,8 +482,7 @@
                     "409": {
                         "description": "Endpoint already exists and resource is not in a terminal state"
                     }
-                },
-                "deprecated": false
+                }
             },
             "delete": {
                 "tags": [
@@ -529,7 +530,7 @@
                         "description": "Endpoint already exists and resource is not in a terminal state"
                     }
                 },
-                "deprecated": false
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}/Start": {
@@ -573,7 +574,7 @@
                         "description": "Accepted and the operation will complete asynchronously"
                     }
                 },
-                "deprecated": false
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}/Stop": {
@@ -617,7 +618,7 @@
                         "description": "Accepted and the operation will complete asynchronously"
                     }
                 },
-                "deprecated": false
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}/Purge": {
@@ -673,7 +674,7 @@
                         "description": "Accepted and the operation will complete asynchronously"
                     }
                 },
-                "deprecated": false
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}/Load": {
@@ -729,7 +730,7 @@
                         "description": "Accepted and the operation will complete asynchronously"
                     }
                 },
-                "deprecated": false
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}/ValidateCustomDomain": {
@@ -784,8 +785,7 @@
                             "$ref": "#/definitions/ValidateCustomDomainOutput"
                         }
                     }
-                },
-                "deprecated": false
+                }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}/origins": {
@@ -832,7 +832,9 @@
                         }
                     }
                 },
-                "deprecated": false
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}/origins/{originName}": {
@@ -885,8 +887,7 @@
                             "$ref": "#/definitions/Origin"
                         }
                     }
-                },
-                "deprecated": false
+                }
             },
             "put": {
                 "tags": [
@@ -956,7 +957,7 @@
                         "description": "Origin already exists and resource is not in a terminal state"
                     }
                 },
-                "deprecated": false
+                "x-ms-long-running-operation": true
             },
             "patch": {
                 "tags": [
@@ -1016,8 +1017,7 @@
                             "$ref": "#/definitions/Origin"
                         }
                     }
-                },
-                "deprecated": false
+                }
             },
             "delete": {
                 "tags": [
@@ -1075,10 +1075,10 @@
                         "description": "Origin already exists and resource is not in a terminal state"
                     }
                 },
-                "deprecated": false
+                "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{ProfileName}/endpoints/{endpointName}/CustomDomains": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}/CustomDomains": {
             "get": {
                 "tags": [
                     "CustomDomains"
@@ -1122,10 +1122,12 @@
                         }
                     }
                 },
-                "deprecated": false
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{ProfileName}/endpoints/{endpointName}/CustomDomains/{customDomainName}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}/CustomDomains/{customDomainName}": {
             "get": {
                 "tags": [
                     "CustomDomains"
@@ -1175,8 +1177,7 @@
                             "$ref": "#/definitions/CustomDomain"
                         }
                     }
-                },
-                "deprecated": false
+                }
             },
             "put": {
                 "tags": [
@@ -1193,11 +1194,13 @@
                         "type": "string"
                     },
                     {
-                        "name": "customDomainHostName",
+                        "name": "customDomainProperties",
                         "in": "body",
-                        "description": "The host name of the custom domain",
+                        "description": "Custom domain properties",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "$ref": "#/definitions/CustomDomainParameters"
+                        }
                     },
                     {
                         "name": "endpointName",
@@ -1244,7 +1247,7 @@
                         "description": "CustomDomain already exists and resource is not in a terminal state"
                     }
                 },
-                "deprecated": false
+                "x-ms-long-running-operation": true
             },
             "patch": {
                 "tags": [
@@ -1260,12 +1263,14 @@
                         "required": true,
                         "type": "string"
                     },
-                                        {
-                        "name": "customDomainHostName",
+                    {
+                        "name": "customDomainProperties",
                         "in": "body",
-                        "description": "The host name of the custom domain",
+                        "description": "Custom domain properties",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "$ref": "#/definitions/CustomDomainParameters"
+                        }
                     },
                     {
                         "name": "endpointName",
@@ -1302,8 +1307,7 @@
                             "$ref": "#/definitions/CustomDomain"
                         }
                     }
-                },
-                "deprecated": false
+                }
             },
             "delete": {
                 "tags": [
@@ -1361,7 +1365,7 @@
                         "description": "CustomDomain already exists and resource is not in a terminal state"
                     }
                 },
-                "deprecated": false
+                "x-ms-long-running-operation": true
             }
         },
         "/providers/Microsoft.Cdn/checkNameAvailability": {
@@ -1392,8 +1396,7 @@
                             "$ref": "#/definitions/CheckNameAvailabilityOutput"
                         }
                     }
-                },
-                "deprecated": false
+                }
             }
         },
         "/providers/Microsoft.Cdn/operations": {
@@ -1416,7 +1419,9 @@
                         }
                     }
                 },
-                "deprecated": false
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
             }
         }
     },
@@ -1824,21 +1829,25 @@
         "OriginParameters": {
             "description": "Origin properties required for origin creation or update",
             "type": "object",
-            "required": [
-                "hostName"
-            ],
             "properties": {
-                "hostName": {
-                    "description": "The host name of the origin",
-                    "type": "string"
-                },
-                "httpPort": {
-                    "description": "The value of the http port, must be between 1 and 65535",
-                    "type": "integer"
-                },
-                "httpsPort": {
-                    "description": "The value of the https port, must be between 1 and 65535",
-                    "type": "integer"
+                "properties": {
+                    "required": [
+                        "hostName"
+                    ],
+                    "properties": {
+                        "hostName": {
+                            "description": "The host name of the origin",
+                            "type": "string"
+                        },
+                        "httpPort": {
+                            "description": "The value of the http port, must be between 1 and 65535",
+                            "type": "integer"
+                        },
+                        "httpsPort": {
+                            "description": "The value of the https port, must be between 1 and 65535",
+                            "type": "integer"
+                        }
+                    }
                 }
             }
         },
@@ -1888,6 +1897,23 @@
                         "provisioningState": {
                             "description": "Provisioning status of the custom domain",
                             "$ref": "#/definitions/ProvisioningState"
+                        }
+                    }
+                }
+            }
+        },
+        "CustomDomainParameters": {
+            "description": "CustomDomain properties required for custom domain creation or update",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "required": [
+                        "hostName"
+                    ],
+                    "properties": {
+                        "hostName": {
+                            "description": "The host name of the custom domain",
+                            "type": "string"
                         }
                     }
                 }
@@ -2099,20 +2125,20 @@
             }
         }
     },
-    "parameters": {
-        "subscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Azure Subscription ID",
-            "required": true,
-            "type": "string"
-        },
-        "apiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Version of the API to be used with the client request, current version is 2015-06-01"
+        "parameters": {
+            "subscriptionIdParameter": {
+                "name": "subscriptionId",
+                "in": "path",
+                "description": "Azure Subscription ID",
+                "required": true,
+                "type": "string"
+            },
+            "apiVersionParameter": {
+                "name": "api-version",
+                "in": "query",
+                "required": true,
+                "type": "string",
+                "description": "Version of the API to be used with the client request, current version is 2015-06-01"
+            }
         }
     }
-}
