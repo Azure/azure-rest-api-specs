@@ -5,6 +5,7 @@
     "description": "Creates an Azure Data Lake Analytics job management client.",
     "version": "2015-10-01-preview"
   },
+  "host": "accountname.jobserviceuri",
   "schemes": [
     "https"
   ],
@@ -19,7 +20,7 @@
     "application/octet-stream"
   ],
   "paths": {
-    "/{accountName}.{jobServiceUri}/Jobs/{jobIdentity}/GetStatistics": {
+    "/Jobs/{jobIdentity}/GetStatistics": {
       "post": {
         "tags": [
           "Jobs"
@@ -27,8 +28,9 @@
         "operationId": "Jobs_GetStatistics",
         "description": "Gets the job statistics object specified by the job ID.",
         "parameters": [
+          
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -40,13 +42,6 @@
             "required": true,
             "type": "string",
             "description": "JobInfo ID."
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -68,7 +63,7 @@
         }
       }
     },
-    "/{accountName}.{jobServiceUri}/Jobs/{jobIdentity}/GetDebugDataPath": {
+    "/Jobs/{jobIdentity}/GetDebugDataPath": {
       "post": {
         "tags": [
           "Jobs"
@@ -76,8 +71,9 @@
         "operationId": "Jobs_GetDebugDataPath",
         "description": "Gets the U-SQL job debug data information specified by the job ID.",
         "parameters": [
+          
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -89,13 +85,6 @@
             "required": true,
             "type": "string",
             "description": "JobInfo ID."
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -117,7 +106,7 @@
         }
       }
     },
-    "/{accountName}.{jobServiceUri}/BuildJob": {
+    "/BuildJob": {
       "post": {
         "tags": [
           "Jobs"
@@ -125,26 +114,20 @@
         "operationId": "Jobs_Build",
         "description": "Builds (compiles) the specified job in the specified Data Lake Analytics account for job correctness and validation.",
         "parameters": [
+          
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the Data Lake Analytics account to build the job for"
           },
           {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JobInfoBuildOrCreateParameters"
+              "$ref": "#/definitions/JobInformation"
             },
             "description": "The parameters to build a job, which simulates submission."
           },
@@ -168,7 +151,7 @@
         }
       }
     },
-    "/{accountName}.{jobServiceUri}/Jobs/{jobId}": {
+    "/Jobs/{jobId}": {
       "put": {
         "tags": [
           "Jobs"
@@ -176,8 +159,9 @@
         "operationId": "Jobs_Create",
         "description": "Submits the specified job to the specified Data Lake Analytics account for computation.",
         "parameters": [
+          
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -191,18 +175,11 @@
             "description": "The parameters to submit a job."
           },
           {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JobInfoBuildOrCreateParameters"
+              "$ref": "#/definitions/JobInformation"
             },
             "description": "The parameters to submit a job."
           },
@@ -226,7 +203,7 @@
         }
       }
     },
-    "/{accountName}.{jobServiceUri}/Jobs/{jobIdentity}/CancelJob": {
+    "/Jobs/{jobIdentity}/CancelJob": {
       "post": {
         "tags": [
           "Jobs"
@@ -234,8 +211,9 @@
         "operationId": "Jobs_Cancel",
         "description": "Cancels the running job specified by the job ID.",
         "parameters": [
+          
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -247,13 +225,6 @@
             "required": true,
             "type": "string",
             "description": "JobInfo ID to cancel."
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -272,7 +243,7 @@
         }
       }
     },
-    "/{accountName}.{jobServiceUri}/Jobs/{jobIdentity}": {
+    "/Jobs/{jobIdentity}": {
       "get": {
         "tags": [
           "Jobs"
@@ -280,8 +251,9 @@
         "operationId": "Jobs_Get",
         "description": "Gets the JobInfo object specified by the job ID.",
         "parameters": [
+          
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -293,13 +265,6 @@
             "required": true,
             "type": "string",
             "description": "JobInfo ID."
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -321,7 +286,7 @@
         }
       }
     },
-    "/{accountName}.{jobServiceUri}/Jobs": {
+    "/Jobs": {
       "get": {
         "tags": [
           "Jobs"
@@ -329,8 +294,9 @@
         "operationId": "Jobs_List",
         "description": "Gets the first page of the Data Lake Analytics JobInformation objects within the specified resource group with a link to the next page, if any.",
         "parameters": [
+          
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -341,7 +307,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "Gets or sets OData filter. Optional."
           },
           {
             "name": "$top",
@@ -349,7 +315,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Query parameters. If null is passed returns all JobInfo items."
+            "description": "Gets or sets the number of items to return. Optional."
           },
           {
             "name": "$skip",
@@ -357,28 +323,49 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Query parameters. If null is passed returns all JobInfo items."
+            "description": "Gets or sets the number of items to skip over before returning elements. Optional."
           },
           {
-            "name": "$orderby",
+            "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Query parameters. If null is passed returns all JobInfo items."
+            "description": "Gets or sets OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Query parameters. If null is passed returns all JobInfo items."
+            "description": "Gets or sets OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
           },
           {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Gets or sets the OrderBy clause. One or more comma-separated expressions with an optional “asc” (the default) or “desc” depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Gets or sets a Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets a free form search. A free-text search expression to match for whether a particular entry should be included in the feed, e.g. Categories?$search=blue OR green. Optional."
+          },
+          {
+            "name": "$format",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets the return format. Return the response in particular formatxii without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -569,6 +556,155 @@
       },
       "description": "The Data Lake Analytics U-SQL job state audit records for tracking the lifecycle of a job."
     },
+    "JobResource": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the resource."
+        },
+        "resourcePath": {
+          "type": "string",
+          "description": "Gets or sets the path to the resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the job resource type.",
+          "enum": [
+            "VertexResource",
+            "StatisticsResource"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": "True"
+          }
+        }
+      },
+      "description": "The Data Lake Analytics U-SQL job resources."
+    },
+    "USql": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobProperties"
+        }
+      ],
+      "properties": {
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobResource"
+          },
+          "description": "Gets or sets the list of resources that are required by the job"
+        },
+        "statistics": {
+          "$ref": "#/definitions/JobStatistics",
+          "description": "Gets or sets the job specific statistics."
+        },
+        "debugData": {
+          "$ref": "#/definitions/JobDataPath",
+          "description": "Gets or sets the job specific debug data locations."
+        },
+        "algebraFilePath": {
+          "type": "string",
+          "description": "Gets or sets the U-SQL algebra file path after the job has completed"
+        },
+        "totalCompilationTime": {
+          "type": "string",
+          "description": "Gets or sets the total time this job spent compiling. This value should not be set by the user and will be ignored if it is."
+        },
+        "totalPauseTime": {
+          "type": "string",
+          "description": "Gets or sets the total time this job spent paused. This value should not be set by the user and will be ignored if it is."
+        },
+        "totalQueuedTime": {
+          "type": "string",
+          "description": "Gets or sets the total time this job spent queued. This value should not be set by the user and will be ignored if it is."
+        },
+        "totalRunningTime": {
+          "type": "string",
+          "description": "Gets or sets the total time this job spent executing. This value should not be set by the user and will be ignored if it is."
+        },
+        "rootProcessNodeId": {
+          "type": "string",
+          "description": "Gets or sets the ID used to identify the job manager coordinating job execution. This value should not be set by the user and will be ignored if it is."
+        },
+        "yarnApplicationId": {
+          "type": "string",
+          "description": "Gets or sets the ID used to identify the yarn application executing the job. This value should not be set by the user and will be ignored if it is."
+        },
+        "yarnApplicationTimeStamp": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the timestamp (in ticks) for the yarn application executing the job. This value should not be set by the user and will be ignored if it is."
+        },
+        "compileMode": {
+          "type": "string",
+          "description": "Gets or sets the compile mode for the job.",
+          "enum": [
+            "Semantic",
+            "Full",
+            "SingleBox"
+          ],
+          "x-ms-enum": {
+            "name": "CompileMode",
+            "modelAsString": "True"
+          }
+        }
+      }
+    },
+    "HiveJobStatementInfo": {
+      "properties": {
+        "logLocation": {
+          "type": "string",
+          "description": "Gets or sets the log location for this statement."
+        },
+        "resultPreviewLocation": {
+          "type": "string",
+          "description": "Gets or sets the result preview location for this statement."
+        },
+        "resultLocation": {
+          "type": "string",
+          "description": "Gets or sets the result location for this statement."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Gets or sets the error message for this statement."
+        }
+      }
+    },
+    "Hive": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobProperties"
+        }
+      ],
+      "properties": {
+        "statementInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HiveJobStatementInfo"
+          },
+          "description": "Gets or sets the statement information for each statement in the script"
+        },
+        "logsLocation": {
+          "type": "string",
+          "description": "Gets or sets the Hive logs location"
+        },
+        "warehouseLocation": {
+          "type": "string",
+          "description": "Gets or sets the runtime version of the U-SQL engine to use"
+        },
+        "statementCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of statements that will be run based on the script"
+        },
+        "executedStatementCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of statements that have been run based on the script"
+        }
+      }
+    },
     "JobProperties": {
       "properties": {
         "runtimeVersion": {
@@ -592,8 +728,10 @@
           }
         }
       },
+      "discriminator": "type",
       "required": [
-        "script"
+        "script",
+        "type"
       ],
       "description": "The common Data Lake Analytics job properties."
     },
@@ -706,15 +844,6 @@
       ],
       "description": "The common Data Lake Analytics job information properties."
     },
-    "JobInfoBuildOrCreateParameters": {
-      "properties": {
-        "Job": {
-          "$ref": "#/definitions/JobInformation",
-          "description": "Gets or sets a job information object."
-        }
-      },
-      "description": "Data Lake Analytics job information parameters for building and submitting jobs."
-    },
     "JobInfoListResult": {
       "properties": {
         "value": {
@@ -796,10 +925,11 @@
       "description": "Client Api Version."
     },
     "jobServiceUriInPathParameter": {
-      "name": "jobServiceUri",
+      "name": "jobserviceuri",
       "in": "path",
       "required": true,
       "type": "string",
+      "default": "\"azuredatalakeanalytics.net\"",
       "description": "Gets the URI used as the base for all cloud service requests."
     }
   }

@@ -212,14 +212,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Parameters supplied to the create firewall rule operation."
+            "description": "The new of the firewall rule to create or update."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataLakeStoreFirewallRuleCreateOrUpdateParameters"
+              "$ref": "#/definitions/FirewallRule"
             },
             "description": "Parameters supplied to the create firewall rule operation."
           },
@@ -260,14 +260,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Parameters supplied to the create Data Lake Store account operation."
+            "description": "The name of the Data Lake Store account to create."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataLakeStoreAccountCreateOrUpdateParameters"
+              "$ref": "#/definitions/DataLakeStoreAccount"
             },
             "description": "Parameters supplied to the create Data Lake Store account operation."
           },
@@ -280,10 +280,16 @@
         ],
         "responses": {
           "201": {
-            "description": ""
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreAccount"
+            }
           },
           "200": {
-            "description": ""
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreAccount"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -307,14 +313,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Parameters supplied to the update Data Lake Store account operation."
+            "description": "The name of the Data Lake Store account to update."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataLakeStoreAccountCreateOrUpdateParameters"
+              "$ref": "#/definitions/DataLakeStoreAccount"
             },
             "description": "Parameters supplied to the update Data Lake Store account operation."
           },
@@ -327,10 +333,16 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreAccount"
+            }
           },
           "201": {
-            "description": ""
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreAccount"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -439,7 +451,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "Gets or sets OData filter. Optional."
           },
           {
             "name": "$top",
@@ -447,7 +459,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Query parameters. If null is passed returns all Data Lake Store account items."
+            "description": "Gets or sets the number of items to return. Optional."
           },
           {
             "name": "$skip",
@@ -455,49 +467,49 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Query parameters. If null is passed returns all Data Lake Store account items."
+            "description": "Gets or sets the number of items to skip over before returning elements. Optional."
           },
           {
             "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Query parameters. If null is passed returns all Data Lake Store account items."
+            "description": "Gets or sets OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Query parameters. If null is passed returns all Data Lake Store account items."
+            "description": "Gets or sets OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
           },
           {
             "name": "$orderby",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Query parameters. If null is passed returns all Data Lake Store account items."
+            "description": "Gets or sets the OrderBy clause. One or more comma-separated expressions with an optional “asc” (the default) or “desc” depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
           },
           {
             "name": "$count",
             "in": "query",
             "required": false,
             "type": "boolean",
-            "description": "Query parameters. If null is passed returns all Data Lake Store account items."
+            "description": "Gets or sets a Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
           },
           {
             "name": "$search",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Query parameters. If null is passed returns all Data Lake Store account items."
+            "description": "Gets or sets a free form search. A free-text search expression to match for whether a particular entry should be included in the feed, e.g. Categories?$search=blue OR green. Optional."
           },
           {
             "name": "$format",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Query parameters. If null is passed returns all Data Lake Store account items."
+            "description": "Gets or sets the return format. Return the response in particular formatxii without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -580,18 +592,6 @@
         }
       },
       "description": "Data Lake firewall rule list information."
-    },
-    "DataLakeStoreFirewallRuleCreateOrUpdateParameters": {
-      "properties": {
-        "FirewallRule": {
-          "$ref": "#/definitions/FirewallRule",
-          "description": "Gets or sets the firewall rules that are being added or updated."
-        }
-      },
-      "required": [
-        "FirewallRule"
-      ],
-      "description": "Data Lake Store firewall rule parameters for creation and updates to the firewall rules."
     },
     "DataLakeStoreAccountProperties": {
       "properties": {
@@ -680,18 +680,6 @@
         }
       },
       "description": "Data Lake Store account information"
-    },
-    "DataLakeStoreAccountCreateOrUpdateParameters": {
-      "properties": {
-        "DataLakeStoreAccount": {
-          "$ref": "#/definitions/DataLakeStoreAccount",
-          "description": "Gets or sets the account object that is being created or updated."
-        }
-      },
-      "required": [
-        "DataLakeStoreAccount"
-      ],
-      "description": "Data Lake Store Account parameters for creation and update of a Data Lake Store account."
     },
     "DataLakeStoreAccountListResult": {
       "properties": {

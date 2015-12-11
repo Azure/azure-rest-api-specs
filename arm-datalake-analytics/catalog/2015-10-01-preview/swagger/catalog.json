@@ -5,6 +5,7 @@
     "description": "Creates an Azure Data Lake Analytics catalog management client.",
     "version": "2015-10-01-preview"
   },
+  "host": "accountname.catalogserviceuri",
   "schemes": [
     "https"
   ],
@@ -19,7 +20,7 @@
     "application/octet-stream"
   ],
   "paths": {
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/secrets/{secretName}": {
+    "/catalog/usql/databases/{databaseName}/secrets/{secretName}": {
       "put": {
         "tags": [
           "Catalog"
@@ -28,7 +29,7 @@
         "description": "Creates the specified secret for use with external data sources in the specified database",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -48,13 +49,7 @@
             "type": "string",
             "description": "The parameters required to create the secret (name and password)"
           },
-          {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
-          },
+          
           {
             "name": "parameters",
             "in": "body",
@@ -91,7 +86,7 @@
         "description": "Modifies the specified secret for use with external data sources in the specified database",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -111,13 +106,7 @@
             "type": "string",
             "description": "The parameters required to modify the secret (name and password)"
           },
-          {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
-          },
+          
           {
             "name": "parameters",
             "in": "body",
@@ -154,7 +143,7 @@
         "description": "Gets the specified secret in the specified database",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -174,13 +163,7 @@
             "type": "string",
             "description": "The name of the secret to get"
           },
-          {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
-          },
+          
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -208,7 +191,7 @@
         "description": "Deletes the specified secret in the specified database",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -228,13 +211,7 @@
             "type": "string",
             "description": "The name of the secret to delete"
           },
-          {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
-          },
+          
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -252,7 +229,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/externaldatasources/{externalDataSourceName}": {
+    "/catalog/usql/databases/{databaseName}/externaldatasources/{externalDataSourceName}": {
       "get": {
         "tags": [
           "Catalog"
@@ -261,7 +238,7 @@
         "description": "Retrieves the specified external data source from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -281,13 +258,7 @@
             "type": "string",
             "description": "The name of the external Data Source to find."
           },
-          {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
-          },
+          
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -308,7 +279,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/externaldatasources": {
+    "/catalog/usql/databases/{databaseName}/externaldatasources": {
       "get": {
         "tags": [
           "Catalog"
@@ -317,7 +288,7 @@
         "description": "Retrieves the list of external data sources from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -330,12 +301,57 @@
             "type": "string",
             "description": "The name of the database to find the external Data Source in."
           },
+          
           {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
+            "name": "$filter",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+            "description": "Gets or sets OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets the OrderBy clause. One or more comma-separated expressions with an optional “asc” (the default) or “desc” depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Gets or sets a Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -360,7 +376,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/credentials/{credentialName}": {
+    "/catalog/usql/databases/{databaseName}/credentials/{credentialName}": {
       "get": {
         "tags": [
           "Catalog"
@@ -369,7 +385,7 @@
         "description": "Retrieves the specified credential from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -389,13 +405,7 @@
             "type": "string",
             "description": "The name of the credential to find."
           },
-          {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
-          },
+          
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -416,7 +426,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/credentials": {
+    "/catalog/usql/databases/{databaseName}/credentials": {
       "get": {
         "tags": [
           "Catalog"
@@ -425,7 +435,7 @@
         "description": "Retrieves the list of credentials from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -438,12 +448,57 @@
             "type": "string",
             "description": "The name of the database to find the schema in."
           },
+          
           {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
+            "name": "$filter",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+            "description": "Gets or sets OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets the OrderBy clause. One or more comma-separated expressions with an optional “asc” (the default) or “desc” depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Gets or sets a Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -468,7 +523,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/procedures/{procedureName}": {
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/procedures/{procedureName}": {
       "get": {
         "tags": [
           "Catalog"
@@ -477,7 +532,7 @@
         "description": "Retrieves the specified procedure from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -504,13 +559,7 @@
             "type": "string",
             "description": "The name of the procedure to find."
           },
-          {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
-          },
+          
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -531,7 +580,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/procedures": {
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/procedures": {
       "get": {
         "tags": [
           "Catalog"
@@ -540,7 +589,7 @@
         "description": "Retrieves the list of procedures from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -560,12 +609,57 @@
             "type": "string",
             "description": "The name of the schema to find the procedures in."
           },
+          
           {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
+            "name": "$filter",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+            "description": "Gets or sets OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets the OrderBy clause. One or more comma-separated expressions with an optional “asc” (the default) or “desc” depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Gets or sets a Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -590,7 +684,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}": {
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}": {
       "get": {
         "tags": [
           "Catalog"
@@ -599,7 +693,7 @@
         "description": "Retrieves the specified table from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -626,13 +720,7 @@
             "type": "string",
             "description": "The name of the table to find."
           },
-          {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
-          },
+          
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -653,7 +741,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables": {
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables": {
       "get": {
         "tags": [
           "Catalog"
@@ -662,7 +750,7 @@
         "description": "Retrieves the list of tables from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -682,12 +770,57 @@
             "type": "string",
             "description": "The name of the schema to find the tables in."
           },
+          
           {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
+            "name": "$filter",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+            "description": "Gets or sets OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets the OrderBy clause. One or more comma-separated expressions with an optional “asc” (the default) or “desc” depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Gets or sets a Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -712,7 +845,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/views/{viewName}": {
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/views/{viewName}": {
       "get": {
         "tags": [
           "Catalog"
@@ -721,7 +854,7 @@
         "description": "Retrieves the specified view from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -748,13 +881,7 @@
             "type": "string",
             "description": "The name of the view to find."
           },
-          {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
-          },
+          
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -775,7 +902,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/views": {
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/views": {
       "get": {
         "tags": [
           "Catalog"
@@ -784,7 +911,7 @@
         "description": "Retrieves the list of views from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -804,12 +931,57 @@
             "type": "string",
             "description": "The name of the schema to find the views in."
           },
+          
           {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
+            "name": "$filter",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+            "description": "Gets or sets OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets the OrderBy clause. One or more comma-separated expressions with an optional “asc” (the default) or “desc” depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Gets or sets a Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -834,7 +1006,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/statistics/{statisticsName}": {
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/statistics/{statisticsName}": {
       "get": {
         "tags": [
           "Catalog"
@@ -843,7 +1015,7 @@
         "description": "Retrieves the specified table from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -877,13 +1049,7 @@
             "type": "string",
             "description": "The name of the table statistics to find."
           },
-          {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
-          },
+          
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -904,7 +1070,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/statistics": {
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/statistics": {
       "get": {
         "tags": [
           "Catalog"
@@ -913,7 +1079,7 @@
         "description": "Retrieves the list of tables from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -940,12 +1106,57 @@
             "type": "string",
             "description": "The name of the table to find the statistics in."
           },
+          
           {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
+            "name": "$filter",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+            "description": "Gets or sets OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets the OrderBy clause. One or more comma-separated expressions with an optional “asc” (the default) or “desc” depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Gets or sets a Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -970,7 +1181,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/types": {
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/types": {
       "get": {
         "tags": [
           "Catalog"
@@ -979,7 +1190,7 @@
         "description": "Retrieves the list of catalog types within the specified database and schema for the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1004,7 +1215,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "Gets or sets OData filter. Optional."
           },
           {
             "name": "$top",
@@ -1012,7 +1223,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Query parameters. If null is passed returns all catalog type items."
+            "description": "Gets or sets the number of items to return. Optional."
           },
           {
             "name": "$skip",
@@ -1020,29 +1231,37 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Query parameters. If null is passed returns all catalog type items."
+            "description": "Gets or sets the number of items to skip over before returning elements. Optional."
           },
           {
-            "name": "$orderby",
+            "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Query parameters. If null is passed returns all catalog type items."
+            "description": "Gets or sets OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Query parameters. If null is passed returns all catalog type items."
+            "description": "Gets or sets OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
           },
           {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+            "description": "Gets or sets the OrderBy clause. One or more comma-separated expressions with an optional “asc” (the default) or “desc” depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
           },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Gets or sets a Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -1067,7 +1286,7 @@
         "x-ms-odata": "#/definitions/USqlType"
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tablevaluedfunctions/{tableValuedFunctionName}": {
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tablevaluedfunctions/{tableValuedFunctionName}": {
       "get": {
         "tags": [
           "Catalog"
@@ -1076,7 +1295,7 @@
         "description": "Retrieves the specified table valued function from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1103,13 +1322,7 @@
             "type": "string",
             "description": "The name of the tableValuedFunction to find."
           },
-          {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
-          },
+          
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -1130,7 +1343,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tablevaluedfunctions": {
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tablevaluedfunctions": {
       "get": {
         "tags": [
           "Catalog"
@@ -1139,7 +1352,7 @@
         "description": "Retrieves the list of table valued functions from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1159,12 +1372,57 @@
             "type": "string",
             "description": "The name of the schema to find the table valued functions in."
           },
+          
           {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
+            "name": "$filter",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+            "description": "Gets or sets OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets the OrderBy clause. One or more comma-separated expressions with an optional “asc” (the default) or “desc” depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Gets or sets a Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1189,7 +1447,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/assemblies/{assemblyName}": {
+    "/catalog/usql/databases/{databaseName}/assemblies/{assemblyName}": {
       "get": {
         "tags": [
           "Catalog"
@@ -1198,7 +1456,7 @@
         "description": "Retrieves the specified assembly from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1218,13 +1476,7 @@
             "type": "string",
             "description": "The name of the assembly to find."
           },
-          {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
-          },
+          
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -1245,7 +1497,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/assemblies": {
+    "/catalog/usql/databases/{databaseName}/assemblies": {
       "get": {
         "tags": [
           "Catalog"
@@ -1254,7 +1506,7 @@
         "description": "Retrieves the list of assemblies from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1267,12 +1519,57 @@
             "type": "string",
             "description": "The name of the database to find the assembly in."
           },
+          
           {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
+            "name": "$filter",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+            "description": "Gets or sets OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets the OrderBy clause. One or more comma-separated expressions with an optional “asc” (the default) or “desc” depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Gets or sets a Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1297,7 +1594,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas/{schemaName}": {
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}": {
       "get": {
         "tags": [
           "Catalog"
@@ -1306,7 +1603,7 @@
         "description": "Retrieves the specified schema from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1326,13 +1623,7 @@
             "type": "string",
             "description": "The name of the schema to find."
           },
-          {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
-          },
+          
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -1353,7 +1644,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}/schemas": {
+    "/catalog/usql/databases/{databaseName}/schemas": {
       "get": {
         "tags": [
           "Catalog"
@@ -1362,7 +1653,7 @@
         "description": "Retrieves the list of schemas from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1375,12 +1666,57 @@
             "type": "string",
             "description": "The name of the database to find the schema in."
           },
+          
           {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
+            "name": "$filter",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+            "description": "Gets or sets OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets the OrderBy clause. One or more comma-separated expressions with an optional “asc” (the default) or “desc” depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Gets or sets a Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1405,7 +1741,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases/{databaseName}": {
+    "/catalog/usql/databases/{databaseName}": {
       "get": {
         "tags": [
           "Catalog"
@@ -1414,7 +1750,7 @@
         "description": "Retrieves the specified database from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1427,13 +1763,7 @@
             "type": "string",
             "description": "The path to the file to create."
           },
-          {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
-          },
+          
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -1454,7 +1784,7 @@
         }
       }
     },
-    "/{accountName}.{catalogServiceUri}/catalog/usql/databases": {
+    "/catalog/usql/databases": {
       "get": {
         "tags": [
           "Catalog"
@@ -1463,18 +1793,63 @@
         "description": "Retrieves the list of databases from the current Data Lake Analytics catalog",
         "parameters": [
           {
-            "name": "accountName",
+            "name": "accountname",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the account to use"
           },
+          
           {
-            "name": "resourceGroupName",
-            "in": "header",
-            "required": true,
+            "name": "$filter",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "description": "The name of the resourceGroup the Data Lake Analytics account is in"
+            "description": "Gets or sets OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets the OrderBy clause. One or more comma-separated expressions with an optional “asc” (the default) or “desc” depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Gets or sets a Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2735,10 +3110,11 @@
       "description": "Client Api Version."
     },
     "catalogServiceUriInPathParameter": {
-      "name": "catalogServiceUri",
+      "name": "catalogserviceuri",
       "in": "path",
       "required": true,
       "type": "string",
+      "default": "\"azuredatalakeanalytics.net\"",
       "description": "Gets the URI used as the base for all cloud service requests."
     }
   }
