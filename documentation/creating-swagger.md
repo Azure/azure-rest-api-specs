@@ -387,7 +387,7 @@ theResource.Location = "North US";
 theResource.Foo.Name = "fooB";
 theResource.Foo.Capacity = 100;
 ```
-### When will AutoRest flatten resources
+### When will AutoRest flatten resources?
 If any model or its parent is marked with an extension `"x-ms-azure-resource" : true`, then AutoRest will flatten the 
 Resource-specific properties by one level for that model.
 
@@ -497,11 +497,13 @@ Swagger as the list of items and the `nextLink`. Tag the operation as `x-ms-page
 methods for navigating between pages.
 
 #### x-ms-pageable extension definition
-```json
+```
 {
   "x-ms-pageable" : {
-    "nextLinkName": "Specify the name of the property that provides the nextLink. If your model does not have the nextLink property then specify null.",
-    "itemName": "Specify the name of the property that provides the collection of pageable items. It is optional. Default value is 'value'." 
+    "nextLinkName": "Specify the name of the property that provides the nextLink. 
+                     If your model does not have the nextLink property then specify null.",
+    "itemName": "Specify the name of the property that provides the collection 
+                 of pageable items. It is optional. Default value is 'value'." 
   }
 }
 ```
