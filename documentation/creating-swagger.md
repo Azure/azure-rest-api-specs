@@ -11,6 +11,7 @@ supports Swagger version 2.0. The version of Swagger being used must be included
 {
   "swagger": "2.0"
   ...
+}
 ```
 
 ## Info Object
@@ -19,6 +20,7 @@ The **title** field is used as the name of the generated client.
 ```json
 "info": {
   "title": "MyClientName",
+}
 ```
 
 ```
@@ -43,6 +45,7 @@ The host field specifies the baseURI. (everything after the protocol and before 
 {
   "swagger": "2.0",
   "host": "management.azure.com"
+}
 ```
 
 ## Schemes
@@ -55,6 +58,8 @@ The schemes field is an array of transfer protocols that can be used by individu
     "https",
     "http"
   ]
+  . . .
+}
 ```
 
 ## Consumes / Produces
@@ -69,6 +74,8 @@ be overridden by individual operations. AutoRest supports JSON payloads.
   "produces": [
     "application/json"
   ]
+  . . .
+}
 ```
 
 ## Paths
@@ -381,9 +388,8 @@ theResource.Foo.Name = "fooB";
 theResource.Foo.Capacity = 100;
 ```
 ### When will AutoRest flatten resources
-In the Swagger spec when either or all of the below mentioned conditions are specified, AutoRest will flatten resources.
-- any model in the "definitions" section is having an `allOf` on "Resource" or an `allOf` on a child of "Resource".
-- an extension `"x-ms-azure-resource" : true` is specified on the model definition
+If any model or its parent is marked with an extension `"x-ms-azure-resource" : true`, then AutoRest will flatten the 
+Resource-specific properties by one level for that model.
 
 ### x-ms-azure-resource
 In using Swagger to describe Azure Resource Manager operations, types are identified as Resources by declaring that a type 
@@ -481,14 +487,24 @@ as the string expected by the REST API.
 
 ### modelAsString
 - true
-  - When set to true the Enum will be modeled as a string. No Validation will happen.
+  - When set to true the `enum` will be modeled as a `string`. No validation will happen.
 - false
-  - When set to false, it will be modeled as a C# Enum. Validation will happen.
+  - When set to false, it will be modeled as an `enum` if that language supports enums. Validation will happen, irrespective of support of enums in that language.
 
 ## Paging with x-ms-pageable
 The REST API guidelines define a common pattern for paging through lists of data. The operation response is modeled in 
 Swagger as the list of items and the `nextLink`. Tag the operation as `x-ms-pageable` and the generated code will include 
 methods for navigating between pages.
+
+#### x-ms-pageable extension definition
+```json
+{
+  "x-ms-pageable" : {
+    "nextLinkName": "Specify the name of the property that provides the nextLink. If your model does not have the nextLink property then specify null.",
+    "itemName": "Specify the name of the property that provides the collection of pageable items. It is optional. Default value is 'value'." 
+  }
+}
+```
 #### x-ms-pageable operation definition
 ```json
 "paths": {
