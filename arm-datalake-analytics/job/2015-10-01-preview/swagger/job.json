@@ -706,6 +706,11 @@
       }
     },
     "JobProperties": {
+      "discriminator": "type",
+      "required": [
+        "script",
+        "type"
+      ],
       "properties": {
         "runtimeVersion": {
           "type": "string",
@@ -724,15 +729,10 @@
           ],
           "x-ms-enum": {
             "name": "JobType",
-            "modelAsString": "True"
+            "modelAsString": "False"
           }
         }
       },
-      "discriminator": "type",
-      "required": [
-        "script",
-        "type"
-      ],
       "description": "The common Data Lake Analytics job properties."
     },
     "JobInformation": {
@@ -754,7 +754,7 @@
           ],
           "x-ms-enum": {
             "name": "JobType",
-            "modelAsString": "True"
+            "modelAsString": "False"
           }
         },
         "submitter": {

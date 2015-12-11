@@ -139,7 +139,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StorageAccountProperties"
+              "$ref": "#/definitions/AddStorageAccountParameters"
             },
             "description": "The parameters containing the access key and suffix to update the storage account with."
           },
@@ -189,7 +189,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StorageAccountProperties"
+              "$ref": "#/definitions/AddStorageAccountParameters"
             },
             "description": "The parameters containing the access key and optional suffix for the Azure Storage Account."
           },
@@ -548,7 +548,7 @@
             "in": "body",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/DataLakeStoreAccountProperties"
+              "$ref": "#/definitions/AddDataLakeStoreParameters"
             },
             "description": "The parameters containing the optional properties associated with the named Data Lake account."
           },
@@ -1316,6 +1316,24 @@
         }
       },
       "description": "The account specific properties that are associated with an underlying Data Lake Analytics account."
+    },
+    "AddDataLakeStoreParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataLakeStoreAccountProperties",
+          "description": "Gets or sets the properties for the Data Lake Store account being added."
+        }
+      },
+      "description": "Additional Data Lake Store parameters."
+    },
+    "AddStorageAccountParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageAccountProperties",
+          "description": "Gets or sets the properties for the Azure Storage account being added."
+        }
+      },
+      "description": "Additional Azure Storage account parameters."
     },
     "DataLakeAnalyticsAccount": {
       "properties": {
