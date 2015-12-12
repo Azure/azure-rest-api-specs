@@ -606,7 +606,50 @@ prevent the automatic encoding behavior.
 ```
 
 ## Enable Asynchronous Operations with x-ms-long-running-operation<a name="longrunning"></a>
->TODO: x-ms-long-running-operation
+Some requests like creating/deleting a resource cannot be carried out immediately. In such a situation, the server 
+sends a 201 (Created) or 202 (Accepted) and provides a link to monitor the status of the request. When such an operation 
+is marked with extension `"x-ms-long-running-operation": true,` in Swagger, the generated code will know how to fetch 
+the link to monitor the status. It will keep on polling at regular intervals till the request reaches one of the 
+terminal states`Succeeded|Failed|Canceled`.
+```json
+"paths": {
+  "/products/{name}": {
+    "put": {
+      "operationId": "products_create",
+      "x-ms-long-running-operation": true,
+      "description": "A pageable list of Products.",
+      "parameters": [
+        {
+          "name": "name",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the Product."
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ProductCreateParameters"
+          },
+          "description": "The parameters to provide for the created product."
+        }
+      ],
+      "responses": {
+        "200": {
+          "schema": {
+            "$ref": "#/definitions/Product"
+          }
+        },
+        "202": {
+          "description": ""
+        }
+      }
+    }
+  }
+}
+```
 
 ##Global parameters<a name="globalParam"></a>
 Swagger allows for parameters to be defined separately from the operation where they are used. By convention, AutoRest 
