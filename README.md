@@ -53,6 +53,13 @@ At this point, the specifications are expected to be in swagger format.
 ## Creating the Swagger Specification for Azure
 This [document](./documentation/creating-swagger.md) will help you understand how AutoRest converts Swagger in to code.
 
+## Manually validating your Swagger
+- Please use [this](https://json-schema-validator.herokuapp.com/) json schema validator
+- In the upper left box, paste the swagger schema from [here](https://github.com/swagger-api/swagger-spec/blob/master/schemas/v2.0/schema.json)
+- In the lower left box paste your swagger json
+- Upon clicking the validate button you should either see errors or success.
+
+
 ## Generating Code from Specifications
 
 If you are interested in generating code from these specifications, please check out [AutoRest](https://github.com/azure/autorest). There you will find the code generator as well as instructions on how to use it.
