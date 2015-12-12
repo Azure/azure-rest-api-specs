@@ -22,7 +22,7 @@ be found at [Swagger RESTful API Documentation Specification](Swagger-spec2.0).
 8. [Defining Model Types](#DefiningModel)
   1. [Model Inheritance](#ModelInheritance)
   2. [Polymorphic Response Models](#PolymorphicResponse)
-9. [ResourceFlattening](#ResourceFlattening))
+9. [ResourceFlattening](#ResourceFlattening)
   1. [Conditions](#Conditions)
   2. [x-ms-azure-resource](#x-ms-azure-resource)
 10. [Enums with x-ms-enum](#Enum-x-ms-enum)
