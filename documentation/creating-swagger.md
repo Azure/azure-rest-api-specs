@@ -3,7 +3,40 @@ AutoRest is a tool for generating HTTP client libraries from Swagger files. This
 and extensions used by AutoRest in processing Swagger to produce client libraries. The Swagger specification can 
 be found at [Swagger RESTful API Documentation Specification](Swagger-spec2.0).
 
-## Swagger
+1. [Swagger](#Swagger)
+2. [Info Object](#InfoObject)
+3. [Host](#Host)
+4. [Schemes](#Schemes)
+5. [Consumes / Produces](#ConsumesProduces)
+6. [Paths](#Paths)
+7. [Path Item](#PathItem)
+  1. [Operation and OperationId](#OperationOperationId)
+  2. [Parameters](#Parameters)
+    1. [Path Parameters](#PathParameters)
+    2. [Query Parameters](#QueryParameters)
+    3. [Body Parameters](#BodyParameters)
+    4. [Header Parameters](#HeaderParameters)
+    5. [FormData Parameters](#FormDataParameters)
+  3. [Responses](#Responses)
+    1. [Default Response](#DefaultResponse)
+8. [Defining Model Types](#DefiningModel)
+  1. [Model Inheritance](#ModelInheritance)
+  2. [Polymorphic Response Models](#PolymorphicResponse)
+9. [ResourceFlattening](#ResourceFlattening))
+  1. [Conditions](#Conditions)
+  2. [x-ms-azure-resource](#x-ms-azure-resource)
+10. [Enums with x-ms-enum](#Enum-x-ms-enum)
+  1. [Structure](#enum-structure)
+  2. [Understanding modelAsString](#modelAsString)
+11. [Paging with x-ms-pageable](#Paging-x-ms-pageable)
+  1. [Structure](#paging-structure)
+  2. [Pageable Operation](#pageOperation)
+  3. [Pageable Model](#pageModel)
+12. [URL Encoding](#UrlEncoding)
+13. [Long Running operation](#longrunning)
+14. [Global parameters](#globalParam)
+
+## Swagger<a name="Swagger"></a>
 In this document, references to the 'spec' or to the 'swagger' refer to an instance of a Swagger file. AutoRest 
 supports Swagger version 2.0. The version of Swagger being used must be included in the spec.
 
@@ -14,7 +47,7 @@ supports Swagger version 2.0. The version of Swagger being used must be included
 }
 ```
 
-## Info Object
+## Info Object<a name="InfoObject"></a>
 Each spec includes an "info object."
 The **title** field is used as the name of the generated client.
 ```json
@@ -39,7 +72,7 @@ value for Azure clients where api-version is passed in the querystring.
 ```
 https://management.azure.com/...?api-version="2014-04-01-preview"
 ```
-## Host
+## Host<a name="Host"></a>
 The host field specifies the baseURI. (everything after the protocol and before the path).
 ``` json
 {
@@ -48,7 +81,7 @@ The host field specifies the baseURI. (everything after the protocol and before 
 }
 ```
 
-## Schemes
+## Schemes<a name="Schemes"></a>
 The schemes field is an array of transfer protocols that can be used by individual operations. AutoRest supports 
 *http* and *https*. The generated client uses the first scheme from the array.
 ```json
@@ -62,7 +95,7 @@ The schemes field is an array of transfer protocols that can be used by individu
 }
 ```
 
-## Consumes / Produces
+## Consumes / Produces<a name="ConsumesProduces"></a>
 The *consumes* and *produces* fields declare the mime-types supported by the API. The root-level definition can 
 be overridden by individual operations. AutoRest supports JSON payloads.
 ```json
@@ -78,7 +111,7 @@ be overridden by individual operations. AutoRest supports JSON payloads.
 }
 ```
 
-## Paths
+## Paths<a name="Paths"></a>
 The paths object defines the relative paths of API endpoints (appended to the baseURI to invoke operations).
 ```json
 "swagger": "2.0",
@@ -97,7 +130,7 @@ https://management.azure.com/tenants?api-version=2014-04-01-preview
 OR
 https://management.azure.com/subscriptions?api-version=2014-04-01-preview
 ```
-## Path Item
+## Path Item<a name="PathItem"></a>
 Each path item in the spec defines the operations available at that endpoint. The individual operations are 
 identified by the HTTP operation (sometimes referred to as HTTP verbs). AutoRest supports: **head**, **get**, 
 **put**, **post**, **delete** and **patch**.
@@ -113,7 +146,7 @@ identified by the HTTP operation (sometimes referred to as HTTP verbs). AutoRest
       "put": {
       ...
 ```
-### Operation and OperationId
+### Operation and OperationId<a name="OperationOperationId"></a>
 Every operation must have a unique operationId. The operationId is used to determine the generated method name.
 ```json
 "paths": {
@@ -177,12 +210,12 @@ public static partial class UsersExtensions
 }
 ```
 
-### Parameters
+### Parameters<a name="Parameters"></a>
 Each operation defines the parameters that must be supplied. An operation may not require any parameters. A parameter 
 defines a name, description, schema, what request element it is `in` (AutoRest supports parameters in the **path**, **query**, 
 **header**, and **body** of the request) and whether or not is it `required`.
 
-#### Path Parameters
+#### Path Parameters<a name="PathParameters"></a>
 The value of path parameters are replaced in the templated URL path at the position specified by the name. Parameters that 
 are `in` the `path` must have a `true` value for the `required` field. In this example, the `{userId}` in this operation 
 is populated with the value of userId provided in the client method.
@@ -211,7 +244,7 @@ var user = client.Users.GetById(userId);
 ```
 >https://{host}/{basePath}/users/abcxyz
 
-#### Query Parameters
+#### Query Parameters<a name="QueryParameters"></a>
 Query parameters are appended to the request URI. They can be specified as required or optional.
 ```json
 "paths": {
@@ -233,7 +266,7 @@ Query parameters are appended to the request URI. They can be specified as requi
 ```
 The user doesn't need to know where the parameter is placed. Doc comments surface the required/optional distinction.
 
-####Body Parameters
+####Body Parameters<a name="BodyParameters"></a>
 Body parameters include schema for the payload. In this example, the schema element is a `$ref` to the type details 
 in the `#/definitions` section of the spec. More on the `#/definitions` later.
 ```json
@@ -254,13 +287,13 @@ in the `#/definitions` section of the spec. More on the `#/definitions` later.
       ...
 ```
 
-#### Header Parameters
+#### Header Parameters<a name="HeaderParameters"></a>
 >TODO: Header parameters
 
-#### FormData Parameters
+#### FormData Parameters<a name="FormDataParameters"></a>
 >Note: FormData parameters are not currently supported by AutoRest.
 
-### Responses
+### Responses<a name="Responses"></a>
 Each operation defines the possible responses by HTTP status code:
 ```json
 "/users/{userId}": {
@@ -277,18 +310,18 @@ Each operation defines the possible responses by HTTP status code:
 }
 ```
 
-#### Default Response
+#### Default Response<a name="DefaultResponse"></a>
 Swagger allows for specifying a `default` response. AutoRest treats the `default` response as defining an error 
 response status code unless `default` is the only status code defined. The reason for imposing this convention is 
 to produce higher quality API signatures. The return type of the generated API is determined by finding a common 
 base type of the success responses. In practice, if the default is considered as a potential success defintion, 
 the common ancestor of success responses and error responses ends up being Object.
 
-## Defining Model Types
+## Defining Model Types<a name="DefiningModel"></a>
 The request body and response definitions become simple model types in the generated code. The models include 
 basic validation methods, but are generally stateless serialization definitions.
 
-### Model Inheritance
+### Model Inheritance<a name="ModelInheritance"></a>
 Swagger schema allows for specifying that one type is `allOf` other types, meaning that the entire specification of 
 the referenced schema applies is included in the new schema. By convention, if a schema has an 'allOf' that references 
 only one other schema, AutoRest treats this reference as an indication that the `allOf` schema represents a base 
@@ -326,7 +359,7 @@ type being extended. In this example, the generated code would include a `Dog` m
 }
 ```
 
-### Polymorphic Response Models
+### Polymorphic Response Models<a name="PolymorphicResponse"></a>
 Besides using `allOf` to define inheritance, model definitions can indicate that the payload will include a `discriminator` 
 to disambiguate polymorphic payloads. The discriminator field allows the deserializer to resolve into an instance of a more 
 specific type. Suppose the Dog and Cat type are `allOf` Pet and an operation will return a Dog or a Cat. If the Pet definition 
@@ -351,7 +384,7 @@ will indicate Pet. At runtime, the returned object is an instance of the more sp
 ```
 
 
-## Defining Azure Resource Types with x-ms-azure-resource (Resource Flattening)
+## Defining Azure Resource Types with x-ms-azure-resource (Resource Flattening)<a name="ResourceFlattening"></a>
 Azure Resource Manager brings a common pattern that is leveraged to provide a more consistent programming model for users. 
 Resource types all have a common set of Resource properties: id, name, location, tags...
 In a resource payload, the common properties are at the top-level and the resource-specific properties are nested within 
@@ -387,11 +420,11 @@ theResource.Location = "North US";
 theResource.Foo.Name = "fooB";
 theResource.Foo.Capacity = 100;
 ```
-### When will AutoRest flatten resources?
+### When will AutoRest flatten resources?<a name="Conditions"></a>
 If any model or its parent is marked with an extension `"x-ms-azure-resource" : true`, then AutoRest will flatten the 
 Resource-specific properties by one level for that model.
 
-### x-ms-azure-resource
+### x-ms-azure-resource<a name="x-ms-azure-resource"></a>
 In using Swagger to describe Azure Resource Manager operations, types are identified as Resources by declaring that a type 
 is "allOf" the common `Resource` type. That common `Resource` type includes the `x-ms-azure-resource` Swagger extension.
 ```json
@@ -456,7 +489,7 @@ resource properties is included inline, AutoRest still needs to generate a type 
   }
 }
 ```
-## Enums with x-ms-enum
+## Enums with x-ms-enum<a name="Enum-x-ms-enum"></a>
 Enum definitions in Swagger indicate that only a particular set of values may be used for a property or parameter. When 
 the property is represented on the wire as a string, it would be  a natural choice to represent the property type in C# 
 as an enum. However, not all enumeration values should necessarily be represented as C# enums - there are additional 
@@ -485,19 +518,28 @@ as the string expected by the REST API.
   }
 ```
 
-### modelAsString
-- true
-  - When set to true the `enum` will be modeled as a `string`. No validation will happen.
-- false
-  - When set to false, it will be modeled as an `enum` if that language supports enums. Validation will happen, irrespective of support of enums in that language.
+### x-ms-enum extension structure <a name="enum-structure"></a>
+```
+{
+  "x-ms-enum": {
+    "name" : "Specify the name for the Enum."
+    "modelAsString": "true/false."
+  }
+}
+```
+### modelAsString<a name="modelAsString"></a>
+- **true**
+  - When set to `true` the `enum` will be modeled as a `string`. No validation will happen.
+- **false**
+  - When set to `false`, it will be modeled as an `enum` if that language supports enums. Validation will happen, irrespective of support of enums in that language.
 
-## Paging with x-ms-pageable
+## Paging with x-ms-pageable<a name="Paging-x-ms-pageable"></a>
 The REST API guidelines define a common pattern for paging through lists of data. The operation response is modeled in 
 Swagger as the list of items and the `nextLink`. Tag the operation as `x-ms-pageable` and the generated code will include 
 methods for navigating between pages.
 
-#### x-ms-pageable extension definition
-```
+#### x-ms-pageable extension structure<a name="paging-structure"></a>
+```json
 {
   "x-ms-pageable" : {
     "nextLinkName": "Specify the name of the property that provides the nextLink. 
@@ -507,7 +549,7 @@ methods for navigating between pages.
   }
 }
 ```
-#### x-ms-pageable operation definition
+#### x-ms-pageable operation definition<a name="pageOperation"></a>
 ```json
 "paths": {
   "/products": {
@@ -528,7 +570,7 @@ methods for navigating between pages.
   }
 }
 ```
-#### x-ms-pageable model definition
+#### x-ms-pageable model definition<a name="pageModel"></a>
 ```json
 "ProductListResult": {
   "properties": {
@@ -545,7 +587,7 @@ methods for navigating between pages.
 }
 ```
 
-## Control URL encoding with x-ms-skip-url-encoding
+## Control URL encoding with x-ms-skip-url-encoding<a name="UrlEncoding"></a>
 By default, `path` parameters will be URL-encoded automatically. This is a good default choice for user-provided values. 
 This is not a good choice when the parameter is provided from a source where the value is known to be URL-encoded. 
 The URL encoding is *NOT* an idempotent operation. For example, the percent character "%" is URL-encoded as "%25". If the 
@@ -563,10 +605,10 @@ prevent the automatic encoding behavior.
 ]
 ```
 
-## Enable Asynchronous Operations with x-ms-long-running-operation
+## Enable Asynchronous Operations with x-ms-long-running-operation<a name="longrunning"></a>
 >TODO: x-ms-long-running-operation
 
-##Global parameters
+##Global parameters<a name="globalParam"></a>
 Swagger allows for parameters to be defined separately from the operation where they are used. By convention, AutoRest 
 treats global parameter definitions as Client properties. For example, almost all Azure Resource Manager APIs require 
 `subscriptionId` and `api-version`. These are defined as global parameters and become properties of the client.
