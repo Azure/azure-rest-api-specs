@@ -19,6 +19,7 @@ be found at [Swagger RESTful API Documentation Specification](Swagger-spec2.0).
     5. [FormData Parameters](#FormDataParameters)
   3. [Responses](#Responses)
     1. [Default Response](#DefaultResponse)
+    2. [Negative Responses](#NegativeResponses)
 8. [Defining Model Types](#DefiningModel)
   1. [Model Inheritance](#ModelInheritance)
   2. [Polymorphic Response Models](#PolymorphicResponse)
@@ -317,6 +318,40 @@ to produce higher quality API signatures. The return type of the generated API i
 base type of the success responses. In practice, if the default is considered as a potential success defintion, 
 the common ancestor of success responses and error responses ends up being Object.
 
+### Negative Responses<a name="NegativeResponses"></a>
+You can describe all the valid HTTP Response status codes in the responses section of an operation. AutoRest generated code will deserialize the response for all the described response status codes. If a response status code is not defined then generated code will align to thedefault response (Default is always treated as an Exception). For example: If you want to specifically handle `404` in different way and **not throw an exception**, then you should describe the `404` response status code possibly with a schema. In that case, AutoRest generated code will deserialize the 404 response status code as defined in Swaggger and not throw an exception.
+```json
+"/users/{userId}": {
+  "get": {
+    "operationId": "users_getUserById",
+    "responses": {
+      "200": {
+        "schema": {
+          "$ref": "#/definitions/user"
+        }
+      },
+      "400": {
+        "description": "Bad Request. ResponseBody will be deserialized as per the Error definition 
+                        mentioned in schema. Exception will not be thrown."
+        "schema": {
+          "$ref": "#/definitions/Error"
+        }
+      },
+      "404": {
+        "description": "Resource Not Found, ResponseBody will be null as there is no schema definition.
+                        Exception will not be thrown."
+      },
+      "default": {
+        "description": "Default Response. It will be deserialized as per the Error defintion 
+                        specified in the schema. Exception will be thrown."
+        "schema": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    }
+  }
+}
+```
 ## Defining Model Types<a name="DefiningModel"></a>
 The request body and response definitions become simple model types in the generated code. The models include 
 basic validation methods, but are generally stateless serialization definitions.
