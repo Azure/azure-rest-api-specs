@@ -326,24 +326,25 @@ You can describe all the [possible HTTP Response status codes](http://www.w3.org
     "operationId": "users_getUserById",
     "responses": {
       "200": {
+       "description": "Provides User Information.",
         "schema": {
           "$ref": "#/definitions/user"
         }
       },
       "400": {
         "description": "Bad Request. ResponseBody will be deserialized as per the Error definition 
-                        mentioned in schema. Exception will not be thrown."
+                        mentioned in schema. Exception will not be thrown.",
         "schema": {
           "$ref": "#/definitions/Error"
         }
       },
       "404": {
         "description": "Resource Not Found, ResponseBody will be null as there is no schema definition.
-                        Exception will not be thrown."
+                        Exception will not be thrown.",
       },
       "default": {
         "description": "Default Response. It will be deserialized as per the Error defintion 
-                        specified in the schema. Exception will be thrown."
+                        specified in the schema. Exception will be thrown.",
         "schema": {
           "$ref": "#/definitions/Error"
         }
