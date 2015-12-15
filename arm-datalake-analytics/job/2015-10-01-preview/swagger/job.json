@@ -581,7 +581,8 @@
       },
       "description": "The Data Lake Analytics U-SQL job resources."
     },
-    "USql": {
+    "USqlProperties": {
+      "x-ms-discriminator-value": "USql",
       "allOf": [
         {
           "$ref": "#/definitions/JobProperties"
@@ -671,7 +672,8 @@
         }
       }
     },
-    "Hive": {
+    "HiveProperties": {
+      "x-ms-discriminator-value": "Hive",
       "allOf": [
         {
           "$ref": "#/definitions/JobProperties"
@@ -723,14 +725,6 @@
         "type": {
           "type": "string",
           "description": "Gets or sets the job type of the current job (i.e. Hive or U-SQL).",
-          "enum": [
-            "USql",
-            "Hive"
-          ],
-          "x-ms-enum": {
-            "name": "JobType",
-            "modelAsString": "False"
-          }
         }
       },
       "description": "The common Data Lake Analytics job properties."
