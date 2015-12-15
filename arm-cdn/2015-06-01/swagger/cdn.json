@@ -22,7 +22,7 @@
           "Profiles"
         ],
         "summary": "Lists the CDN Profiles within a resource group",
-        "operationId": "Profiles_ListProfiles",
+        "operationId": "Profiles_ListByResourceGroup",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -44,6 +44,12 @@
             "schema": {
               "$ref": "#/definitions/ProfileListResult"
             }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -57,7 +63,7 @@
           "Profiles"
         ],
         "summary": "Gets a CDN profile with the specified parameters",
-        "operationId": "Profiles_GetProfile",
+        "operationId": "Profiles_Get",
         "parameters": [
           {
             "name": "profileName",
@@ -86,6 +92,12 @@
             "schema": {
               "$ref": "#/definitions/Profile"
             }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -94,7 +106,7 @@
           "Profiles"
         ],
         "summary": "Creates a new CDN Profile with the specified parameters",
-        "operationId": "Profile_CreateProfile",
+        "operationId": "Profile_Create",
         "parameters": [
           {
             "name": "profileName",
@@ -139,8 +151,11 @@
               "$ref": "#/definitions/Profile"
             }
           },
-          "409": {
-            "description": "Profile already exists and resource is not in a terminal state"
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -150,7 +165,7 @@
           "Profiles"
         ],
         "summary": "Updates an existing CDN Profile with the specified parameters",
-        "operationId": "Profile_UpdateProfile",
+        "operationId": "Profile_Update",
         "parameters": [
           {
             "name": "profileName",
@@ -192,8 +207,11 @@
               "$ref": "#/definitions/Profile"
             }
           },
-          "409": {
-            "description": "Profile already exists and resource is not in a terminal state"
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -202,7 +220,7 @@
           "Profiles"
         ],
         "summary": "Deletes an existing CDN Profile with the specified parameters. Deleting a profile will result in the deletion of all sub resources including endpoints, origins and CustomDomains",
-        "operationId": "Profile_DeleteProfile",
+        "operationId": "Profile_DeleteIfExists",
         "parameters": [
           {
             "name": "profileName",
@@ -232,8 +250,11 @@
           "204": {
             "description": "No Content"
           },
-          "409": {
-            "description": "Profile already exists and resource is not in a terminal state"
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -274,6 +295,12 @@
             "schema": {
               "$ref": "#/definitions/SsoUri"
             }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -284,7 +311,7 @@
           "Endpoints"
         ],
         "summary": "Lists existing CDN endpoints within a profile",
-        "operationId": "Endpoints_ListEndpoints",
+        "operationId": "Endpoints_ListByProfile",
         "parameters": [
           {
             "name": "profileName",
@@ -313,6 +340,12 @@
             "schema": {
               "$ref": "#/definitions/EndpointListResult"
             }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -326,7 +359,7 @@
           "Endpoints"
         ],
         "summary": "Gets an existing CDN endpoint with the specified parameters",
-        "operationId": "Endpoints_GetEndpoint",
+        "operationId": "Endpoints_Get",
         "parameters": [
           {
             "name": "endpointName",
@@ -362,6 +395,12 @@
             "schema": {
               "$ref": "#/definitions/Endpoint"
             }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -370,7 +409,7 @@
           "Endpoints"
         ],
         "summary": "Creates a new CDN endpoint with the specified parameters",
-        "operationId": "Endpoints_CreateEndpoint",
+        "operationId": "Endpoints_Create",
         "parameters": [
           {
             "name": "endpointName",
@@ -422,8 +461,11 @@
               "$ref": "#/definitions/Profile"
             }
           },
-          "409": {
-            "description": "Endpoint already exists and resource is not in a terminal state"
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -433,7 +475,7 @@
           "Endpoints"
         ],
         "summary": "Updates an existing CDN endpoint with the specified parameters. Only tags and OriginHostHeader can be updated after creating an endpoint. To update origins, use the Update Origin operation. To update custom domains, use the Update Custom Domain operation.",
-        "operationId": "Endpoints_UpdateEndpoint",
+        "operationId": "Endpoints_Update",
         "parameters": [
           {
             "name": "endpointName",
@@ -479,8 +521,11 @@
               "$ref": "#/definitions/Endpoint"
             }
           },
-          "409": {
-            "description": "Endpoint already exists and resource is not in a terminal state"
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -489,7 +534,7 @@
           "Endpoints"
         ],
         "summary": "deletes an existing CDN endpoint with the specified parameters",
-        "operationId": "Endpoints_DeleteEndpoint",
+        "operationId": "Endpoints_DeleteIfExists",
         "parameters": [
           {
             "name": "endpointName",
@@ -526,8 +571,11 @@
           "204": {
             "description": "No Content"
           },
-          "409": {
-            "description": "Endpoint already exists and resource is not in a terminal state"
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -539,7 +587,7 @@
           "Endpoints"
         ],
         "summary": "Starts an existing stopped CDN endpoint",
-        "operationId": "Endpoints_StartEndpoint",
+        "operationId": "Endpoints_Start",
         "parameters": [
           {
             "name": "endpointName",
@@ -572,6 +620,12 @@
         "responses": {
           "202": {
             "description": "Accepted and the operation will complete asynchronously"
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -583,7 +637,7 @@
           "Endpoints"
         ],
         "summary": "Stops an existing running CDN endpoint",
-        "operationId": "Endpoints_StopEndpoint",
+        "operationId": "Endpoints_Stop",
         "parameters": [
           {
             "name": "endpointName",
@@ -616,6 +670,12 @@
         "responses": {
           "202": {
             "description": "Accepted and the operation will complete asynchronously"
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -627,7 +687,7 @@
           "Endpoints"
         ],
         "summary": "Forcibly purges CDN endpoint content",
-        "operationId": "Endpoints_PurgeEndpointContent",
+        "operationId": "Endpoints_PurgeContent",
         "parameters": [
           {
             "name": "endpointName",
@@ -672,6 +732,12 @@
         "responses": {
           "202": {
             "description": "Accepted and the operation will complete asynchronously"
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -683,7 +749,7 @@
           "Endpoints"
         ],
         "summary": "Forcibly pre-loads CDN endpoint content",
-        "operationId": "Endpoints_LoadEndpointContent",
+        "operationId": "Endpoints_LoadContent",
         "parameters": [
           {
             "name": "endpointName",
@@ -728,6 +794,12 @@
         "responses": {
           "202": {
             "description": "Accepted and the operation will complete asynchronously"
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -784,6 +856,12 @@
             "schema": {
               "$ref": "#/definitions/ValidateCustomDomainOutput"
             }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -794,7 +872,7 @@
           "Origins"
         ],
         "summary": "Lists the existing CDN Origins within an Endpoint",
-        "operationId": "Origins_ListOrigins",
+        "operationId": "Origins_ListByEndpoint",
         "parameters": [
           {
             "name": "endpointName",
@@ -830,6 +908,12 @@
             "schema": {
               "$ref": "#/definitions/OriginListResult"
             }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -843,7 +927,7 @@
           "Origins"
         ],
         "summary": "Gets an existing CDN Origin within an Endpoint",
-        "operationId": "Origins_GetOrigin",
+        "operationId": "Origins_Get",
         "parameters": [
           {
             "name": "originName",
@@ -886,6 +970,12 @@
             "schema": {
               "$ref": "#/definitions/Origin"
             }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -894,7 +984,7 @@
           "Origins"
         ],
         "summary": "Creates a new CDN Origin within an Endpoint",
-        "operationId": "Origins_CreateOrigin",
+        "operationId": "Origins_Create",
         "parameters": [
           {
             "name": "originName",
@@ -953,8 +1043,11 @@
               "$ref": "#/definitions/Origin"
             }
           },
-          "409": {
-            "description": "Origin already exists and resource is not in a terminal state"
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -964,7 +1057,7 @@
           "Origins"
         ],
         "summary": "Updates an existing CDN Origin within an Endpoint",
-        "operationId": "Origins_UpdateOrigin",
+        "operationId": "Origins_Update",
         "parameters": [
           {
             "name": "originName",
@@ -1016,6 +1109,12 @@
             "schema": {
               "$ref": "#/definitions/Origin"
             }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1024,7 +1123,7 @@
           "Origins"
         ],
         "summary": "Deletes an existing CDN Origin within an Endpoint",
-        "operationId": "Origins_DeleteOrigin",
+        "operationId": "Origins_DeleteIfExists",
         "parameters": [
           {
             "name": "originName",
@@ -1071,8 +1170,11 @@
           "204": {
             "description": "No Content"
           },
-          "409": {
-            "description": "Origin already exists and resource is not in a terminal state"
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -1084,7 +1186,7 @@
           "CustomDomains"
         ],
         "summary": "Lists the existing CDN Custom Domains within an Endpoint",
-        "operationId": "CustomDomains_ListCustomDomains",
+        "operationId": "CustomDomains_ListByEndpoint",
         "parameters": [
           {
             "name": "endpointName",
@@ -1120,6 +1222,12 @@
             "schema": {
               "$ref": "#/definitions/CustomDomainListResult"
             }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1133,7 +1241,7 @@
           "CustomDomains"
         ],
         "summary": "Gets an existing CDN Custom Domain within an Endpoint",
-        "operationId": "CustomDomains_GetCustomDomain",
+        "operationId": "CustomDomains_Get",
         "parameters": [
           {
             "name": "customDomainName",
@@ -1176,6 +1284,12 @@
             "schema": {
               "$ref": "#/definitions/CustomDomain"
             }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1184,7 +1298,7 @@
           "CustomDomains"
         ],
         "summary": "Creates a new CDN Custom Domain within an Endpoint",
-        "operationId": "CustomDomains_CreateCustomDomain",
+        "operationId": "CustomDomains_Create",
         "parameters": [
           {
             "name": "customDomainName",
@@ -1243,8 +1357,11 @@
               "$ref": "#/definitions/CustomDomain"
             }
           },
-          "409": {
-            "description": "CustomDomain already exists and resource is not in a terminal state"
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -1254,7 +1371,7 @@
           "CustomDomains"
         ],
         "summary": "Updates an existing CDN Custom Domain within an Endpoint",
-        "operationId": "CustomDomains_UpdateCustomDomain",
+        "operationId": "CustomDomains_Update",
         "parameters": [
           {
             "name": "customDomainName",
@@ -1306,6 +1423,12 @@
             "schema": {
               "$ref": "#/definitions/CustomDomain"
             }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1314,7 +1437,7 @@
           "CustomDomains"
         ],
         "summary": "Deletes an existing CDN Custom Domain within an Endpoint",
-        "operationId": "CustomDomains_DeleteCustomDomain",
+        "operationId": "CustomDomains_DeleteIfExists",
         "parameters": [
           {
             "name": "customDomainName",
@@ -1361,8 +1484,11 @@
           "204": {
             "description": "No Content"
           },
-          "409": {
-            "description": "CustomDomain already exists and resource is not in a terminal state"
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -1395,6 +1521,12 @@
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityOutput"
             }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1405,7 +1537,7 @@
           "Operations"
         ],
         "summary": "Lists all of the available CDN REST API operations",
-        "operationId": "Operations_ListOperations",
+        "operationId": "Operations_List",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1416,6 +1548,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2079,6 +2217,19 @@
             "name": "SkuName",
             "modelAsString": "False"
           }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed",
+          "type": "string"
         }
       }
     }
