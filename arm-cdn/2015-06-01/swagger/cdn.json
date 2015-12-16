@@ -106,7 +106,7 @@
           "Profiles"
         ],
         "summary": "Creates a new CDN Profile with the specified parameters",
-        "operationId": "Profile_Create",
+        "operationId": "Profiles_CreateOrUpdate",
         "parameters": [
           {
             "name": "profileName",
@@ -165,7 +165,7 @@
           "Profiles"
         ],
         "summary": "Updates an existing CDN Profile with the specified parameters",
-        "operationId": "Profile_Update",
+        "operationId": "Profiles_Update",
         "parameters": [
           {
             "name": "profileName",
@@ -220,7 +220,7 @@
           "Profiles"
         ],
         "summary": "Deletes an existing CDN Profile with the specified parameters. Deleting a profile will result in the deletion of all sub resources including endpoints, origins and CustomDomains",
-        "operationId": "Profile_DeleteIfExists",
+        "operationId": "Profiles_DeleteIfExists",
         "parameters": [
           {
             "name": "profileName",
@@ -260,7 +260,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/generateSsoUri": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/generateSsoUri": {
       "post": {
         "tags": [
           "Profiles"
@@ -305,7 +305,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints": {
       "get": {
         "tags": [
           "Endpoints"
@@ -353,7 +353,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}": {
       "get": {
         "tags": [
           "Endpoints"
@@ -409,7 +409,7 @@
           "Endpoints"
         ],
         "summary": "Creates a new CDN endpoint with the specified parameters",
-        "operationId": "Endpoints_Create",
+        "operationId": "Endpoints_CreateOrUpdate",
         "parameters": [
           {
             "name": "endpointName",
@@ -581,7 +581,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}/Start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/start": {
       "post": {
         "tags": [
           "Endpoints"
@@ -631,7 +631,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}/Stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/stop": {
       "post": {
         "tags": [
           "Endpoints"
@@ -681,7 +681,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}/Purge": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/purge": {
       "post": {
         "tags": [
           "Endpoints"
@@ -743,7 +743,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}/Load": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/load": {
       "post": {
         "tags": [
           "Endpoints"
@@ -805,7 +805,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}/ValidateCustomDomain": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/validateCustomDomain": {
       "post": {
         "tags": [
           "Endpoints"
@@ -866,7 +866,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}/origins": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/origins": {
       "get": {
         "tags": [
           "Origins"
@@ -921,7 +921,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}/origins/{originName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/origins/{originName}": {
       "get": {
         "tags": [
           "Origins"
@@ -984,7 +984,7 @@
           "Origins"
         ],
         "summary": "Creates a new CDN Origin within an Endpoint",
-        "operationId": "Origins_Create",
+        "operationId": "Origins_CreateOrUpdate",
         "parameters": [
           {
             "name": "originName",
@@ -1180,7 +1180,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}/CustomDomains": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains": {
       "get": {
         "tags": [
           "CustomDomains"
@@ -1235,7 +1235,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/Profiles/{profileName}/endpoints/{endpointName}/CustomDomains/{customDomainName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains/{customDomainName}": {
       "get": {
         "tags": [
           "CustomDomains"
@@ -1298,7 +1298,7 @@
           "CustomDomains"
         ],
         "summary": "Creates a new CDN Custom Domain within an Endpoint",
-        "operationId": "CustomDomains_Create",
+        "operationId": "CustomDomains_CreateOrUpdate",
         "parameters": [
           {
             "name": "customDomainName",
