@@ -1,0 +1,848 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DataLakeStoreManagementClient",
+    "description": "Creates a Data Lake Store account management client.",
+    "version": "2015-10-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json",
+    "application/octet-stream"
+  ],
+  "produces": [
+    "application/json",
+    "text/json",
+    "application/octet-stream"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules/{firewallRuleName}": {
+      "delete": {
+        "tags": [
+          "DataLakeStoreAccount"
+        ],
+        "operationId": "DataLakeStoreAccount_DeleteFirewallRule",
+        "description": "Deletes the specified firewall rule from the specified Data Lake Store account",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to delete the firewall rule from"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule to delete"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DataLakeStoreAccount"
+        ],
+        "operationId": "DataLakeStoreAccount_GetFirewallRule",
+        "description": "Gets the specified Data Lake firewall rules.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group the account is in."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to get the firewall rules from"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the name of the firewall rule to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules": {
+      "get": {
+        "tags": [
+          "DataLakeStoreAccount"
+        ],
+        "operationId": "DataLakeStoreAccount_ListFirewallRules",
+        "description": "Lists the Data Lake firewall rules objects within the specified Data Lake Store account.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to get the firewall rules from"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreFirewallRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{nextLink}": {
+      "get": {
+        "tags": [
+          "DataLakeStoreAccount"
+        ],
+        "operationId": "DataLakeStoreAccount_FirewallRulesListNext",
+        "description": "Gets the next page of the Data Lake firewall rule objects within the specified account, if any.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The url to the next firewall rule page.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreFirewallRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules/{name}": {
+      "put": {
+        "tags": [
+          "DataLakeStoreAccount"
+        ],
+        "operationId": "DataLakeStoreAccount_CreateOrUpdateFirewallRule",
+        "description": "Creates or updates the specified Data Lake Store account with the specified firewall rules.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group the account is in."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to add the firewall rule to"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The new of the firewall rule to create or update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            },
+            "description": "Parameters supplied to the create firewall rule operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{name}": {
+      "put": {
+        "tags": [
+          "DataLakeStoreAccount"
+        ],
+        "operationId": "DataLakeStoreAccount_Create",
+        "description": "Creates the specified Data Lake Store account.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group the account will be associated with."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store account to create."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreAccount"
+            },
+            "description": "Parameters supplied to the create Data Lake Store account operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreAccount"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreAccount"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "DataLakeStoreAccount"
+        ],
+        "operationId": "DataLakeStoreAccount_Update",
+        "description": "Updates the Data Lake Store account object specified by the account name with the contents of the account object.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store account to update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreAccount"
+            },
+            "description": "Parameters supplied to the update Data Lake Store account operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreAccount"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreAccount"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}": {
+      "delete": {
+        "tags": [
+          "DataLakeStoreAccount"
+        ],
+        "operationId": "DataLakeStoreAccount_Delete",
+        "description": "Deletes the Data Lake Store account object specified by the account name.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to delete"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          },
+          "202": {
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "DataLakeStoreAccount"
+        ],
+        "operationId": "DataLakeStoreAccount_Get",
+        "description": "Gets the Data Lake Store account object specified by the account name.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to retrieve"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreAccount"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts": {
+      "get": {
+        "tags": [
+          "DataLakeStoreAccount"
+        ],
+        "operationId": "DataLakeStoreAccount_List",
+        "description": "Lists the Data Lake Store account objects within the subscription or within a specific resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets the OrderBy clause. One or more comma-separated expressions with an optional “asc” (the default) or “desc” depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Gets or sets a Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets a free form search. A free-text search expression to match for whether a particular entry should be included in the feed, e.g. Categories?$search=blue OR green. Optional."
+          },
+          {
+            "name": "$format",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets the return format. Return the response in particular formatxii without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreAccountListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/DataLakeStoreAccount"
+      }
+    }
+  },
+  "definitions": {
+    "FirewallRuleProperties": {
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "Gets or sets the start IP address for the firewall rule."
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "Gets or sets the end IP address for the firewall rule."
+        }
+      },
+      "description": "Data Lake firewall rule properties information"
+    },
+    "FirewallRule": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the Firewall Rule's name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the namespace and type of the Firewall Rule."
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the Firewall Rule's subscription ID."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the Firewall Rule's regional location."
+        },
+        "properties": {
+          "$ref": "#/definitions/FirewallRuleProperties",
+          "description": "Gets or sets the properties defined by Data Lake all properties are specific to each resource provider."
+        }
+      },
+      "description": "Data Lake firewall rule information"
+    },
+    "DataLakeStoreFirewallRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          },
+          "description": "Gets or set the results of the list operation"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the link (url) to the next page of results."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the total count of results that are available, but might not be returned in the current page."
+        }
+      },
+      "description": "Data Lake firewall rule list information."
+    },
+    "DataLakeStoreAccountProperties": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the status of the Data Lake Store account while being provisioned.",
+          "enum": [
+            "Failed",
+            "Creating",
+            "Running",
+            "Succeeded",
+            "Patching",
+            "Suspending",
+            "Resuming",
+            "Deleting",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "DataLakeStoreAccountStatus",
+            "modelAsString": "False"
+          }
+        },
+        "state": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the status of the Data Lake Account after provisioning has completed.",
+          "enum": [
+            "active",
+            "suspended"
+          ],
+          "x-ms-enum": {
+            "name": "DataLakeStoreAccountState",
+            "modelAsString": "False"
+          }
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the account creation time."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the account last modified time."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Gets or sets the gateway host."
+        },
+        "defaultGroup": {
+          "type": "string",
+          "description": "Gets or sets the default owner group for all new folders and files created in the DataLake."
+        }
+      },
+      "description": "Data Lake Store account properties information"
+    },
+    "DataLakeStoreAccount": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the account regional location."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the account name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the namespace and type of the account."
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the account subscription ID."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the value of custom properties."
+        },
+        "properties": {
+          "$ref": "#/definitions/DataLakeStoreAccountProperties",
+          "description": "Gets or sets the properties defined by Data Lake all properties are specific to each resource provider."
+        }
+      },
+      "description": "Data Lake Store account information"
+    },
+    "DataLakeStoreAccountListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataLakeStoreAccount"
+          },
+          "description": "Gets or set the results of the list operation"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the link (url) to the next page of results."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the total count of results that are available, but might not be returned in the current page."
+        }
+      },
+      "description": "Data Lake Store account list information response."
+    },
+    "ErrorDetails": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Gets or sets the HTTP status code or error code associated with this error"
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets or sets the error message localized based on Accept-Language"
+        },
+        "target": {
+          "type": "string",
+          "description": "Gets or sets the target of the particular error (for example, the name of the property in error)."
+        }
+      },
+      "description": "Data Lake error details information"
+    },
+    "InnerError": {
+      "properties": {
+        "trace": {
+          "type": "string",
+          "description": "Gets or sets the stack trace for the error"
+        },
+        "context": {
+          "type": "string",
+          "description": "Gets or sets the context for the error message"
+        }
+      },
+      "description": "Data Lake inner error information"
+    },
+    "Error": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Gets or sets the HTTP status code or error code associated with this error"
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets or sets the error message to display."
+        },
+        "target": {
+          "type": "string",
+          "description": "Gets or sets the target of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          },
+          "description": "Gets or sets the list of error details"
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerError",
+          "description": "Gets or sets the inner exceptions or errors, if any"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "description": "Data Lake error information"
+    },
+    "AzureAsyncOperationResult": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Gets or sets the status of the AzureAsuncOperation",
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "OperationStatus",
+            "modelAsString": "False"
+          }
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      },
+      "description": "The response body contains the status of the specified asynchronous operation, indicating whether it has succeeded, is inprogress, or has failed. Note that this status is distinct from the HTTP status code returned for the Get Operation Status operation itself. If the asynchronous operation succeeded, the response body includes the HTTP status code for the successful request. If the asynchronous operation failed, the response body includes the HTTP status code for the failed request and error information regarding the failure."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}
