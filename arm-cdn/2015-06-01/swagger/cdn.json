@@ -106,7 +106,7 @@
           "Profiles"
         ],
         "summary": "Creates a new CDN Profile with the specified parameters",
-        "operationId": "Profiles_CreateOrUpdate",
+        "operationId": "Profiles_Create",
         "parameters": [
           {
             "name": "profileName",
@@ -175,15 +175,12 @@
             "type": "string"
           },
           {
-            "name": "tags",
+            "name": "profileProperties",
             "in": "body",
-            "description": "Profile tags to update",
+            "description": "Profile properties needed for update",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/ProfileUpdateParameters"
             }
           },
           {
@@ -201,8 +198,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
+          "202": {
+            "description": "Accepted and  the operation will complete asynchronously",
             "schema": {
               "$ref": "#/definitions/Profile"
             }
@@ -409,7 +406,7 @@
           "Endpoints"
         ],
         "summary": "Creates a new CDN endpoint with the specified parameters",
-        "operationId": "Endpoints_CreateOrUpdate",
+        "operationId": "Endpoints_Create",
         "parameters": [
           {
             "name": "endpointName",
@@ -515,8 +512,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Accepted",
+          "202": {
+            "description": "Accepted and  the operation will complete asynchronously",
             "schema": {
               "$ref": "#/definitions/Endpoint"
             }
@@ -702,10 +699,7 @@
             "description": "The path to the content to be purged. Path can describe a file or directory.",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/PurgeParameters"
             }
           },
           {
@@ -764,10 +758,7 @@
             "description": "The path to the content to be loaded. Path should describe a file.",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/LoadParameters"
             }
           },
           {
@@ -984,7 +975,7 @@
           "Origins"
         ],
         "summary": "Creates a new CDN Origin within an Endpoint",
-        "operationId": "Origins_CreateOrUpdate",
+        "operationId": "Origins_Create",
         "parameters": [
           {
             "name": "originName",
@@ -1298,7 +1289,7 @@
           "CustomDomains"
         ],
         "summary": "Creates a new CDN Custom Domain within an Endpoint",
-        "operationId": "CustomDomains_CreateOrUpdate",
+        "operationId": "CustomDomains_Create",
         "parameters": [
           {
             "name": "customDomainName",
@@ -1620,8 +1611,7 @@
       "type": "object",
       "description": "Profile properties required for profile creation",
       "required": [
-        "location",
-        "tags"
+        "location"
       ],
       "properties": {
         "location": {
@@ -1651,6 +1641,23 @@
           "$ref": "#/definitions/Sku"
         }
       }
+    },
+    "ProfileUpdateParameters": {
+      "type": "object",
+      "description": "Profile properties required for profile update",
+      "required": [
+        "tags"
+      ],
+      "properties": {
+        "tags": {
+          "description": "Profile tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
     },
     "SsoUri": {
       "description": "Sso uri required to login to third party web portal",
@@ -1768,8 +1775,7 @@
       "type": "object",
       "description": "Endpoint properties required for new endpoint creation",
       "required": [
-        "location",
-        "tags"
+        "location"
       ],
       "properties": {
         "location": {
@@ -1869,10 +1875,64 @@
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/OriginParameters"
+          "$ref": "#/definitions/DeepCreatedOriginProperties"
         }
       },
       "x-ms-azure-resource": true
+    },
+    "DeepCreatedOriginProperties": {
+      "description": "Properties of deep created origin on a CDN endpoint",
+      "type": "object",
+      "required": [
+        "hostName"
+      ],
+      "properties": {
+        "hostName": {
+          "description": "The host name of the origin",
+          "type": "string"
+        },
+        "httpPort": {
+          "description": "The value of the http port, must be between 1 and 65535",
+          "type": "integer"
+        },
+        "httpsPort": {
+          "description": "The value of the https port, must be between 1 and 65535",
+          "type": "integer"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PurgeParameters": {
+      "type": "object",
+      "description": "Parameters required for endpoint purge",
+      "required": [
+        "contentPaths"
+      ],
+      "properties": {
+        "contentPaths": {
+          "description": "The path to the content to be purged, can describe a file path or a wild card directory.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LoadParameters": {
+      "type": "object",
+      "description": "Parameters required for endpoint load",
+      "required": [
+        "contentPaths"
+      ],
+      "properties": {
+        "contentPaths": {
+          "description": "The path to the content to be loaded, should describe a file path.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "Origin": {
       "description": "CDN Origin is the source of the content being delivered via CDN. When the edge nodes represented by an Endpoint do not have the requested content cached, they attempt to fetch it from one or more of the configured Origins.",
@@ -1926,8 +1986,16 @@
       }
     },
     "OriginParameters": {
-      "description": "Origin properties required for origin creation or update",
       "type": "object",
+      "description": "Origin properties needed for origin creation or update",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OriginPropertiesParameters"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "OriginPropertiesParameters": {
       "required": [
         "hostName"
       ],
@@ -1944,8 +2012,7 @@
           "description": "The value of the https port, must be between 1 and 65535",
           "type": "integer"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "OriginListResult": {
       "properties": {
@@ -2004,6 +2071,14 @@
     "CustomDomainParameters": {
       "description": "CustomDomain properties required for custom domain creation or update",
       "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CustomDomainPropertiesParameters"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "CustomDomainPropertiesParameters": {
       "required": [
         "hostName"
       ],
@@ -2012,8 +2087,7 @@
           "description": "The host name of the custom domain",
           "type": "string"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "CustomDomainListResult": {
       "properties": {
