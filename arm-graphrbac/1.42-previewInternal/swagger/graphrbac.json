@@ -207,9 +207,6 @@
               "$ref": "#/definitions/GetObjectsResult"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "odata.nextLink"
         }
       }
     },
@@ -409,9 +406,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "odata.nextLink"
-        },
         "x-ms-odata": "#/definitions/ADGroup"
       }
     },
@@ -448,9 +442,6 @@
               "$ref": "#/definitions/GetObjectsResult"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "odata.nextLink"
         }
       }
     },
@@ -532,9 +523,6 @@
               "$ref": "#/definitions/GroupGetMemberGroupsResult"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -605,9 +593,6 @@
               "$ref": "#/definitions/ServicePrincipalListResult"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "odata.nextLink"
         },
         "x-ms-odata": "#/definitions/ServicePrincipal"
       }
@@ -786,9 +771,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "odata.nextLink"
-        },
         "x-ms-odata": "#/definitions/User"
       }
     },
@@ -873,9 +855,188 @@
               "$ref": "#/definitions/UserGetMemberGroupsResult"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/{tenantID}/{nextLink}?Objects_GetObjectsByObjectIdsNext": {
+      "post": {
+        "tags": [
+          "Objects"
+        ],
+        "operationId": "Objects_GetObjectsByObjectIdsNext",
+        "description": "Gets AD group membership by provided AD object Ids",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetObjectsResult"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?Group_ListNext": {
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Group_ListNext",
+        "description": "Gets list of groups for the current tenant.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GroupListResult"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?Group_GetGroupMembersNext": {
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Group_GetGroupMembersNext",
+        "description": "Gets the members of a group.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetObjectsResult"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?ServicePrincipal_ListNext": {
+      "get": {
+        "tags": [
+          "ServicePrincipal"
+        ],
+        "operationId": "ServicePrincipal_ListNext",
+        "description": "Gets list of service principals from the current tenant.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ServicePrincipalListResult"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?User_ListNext": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "User_ListNext",
+        "description": "Gets list of users for the current tenant.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UserListResult"
+            }
+          }
         }
       }
     }
