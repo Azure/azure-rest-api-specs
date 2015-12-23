@@ -209,7 +209,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "odata.nextLink"
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Objects_GetObjectsByObjectIdsNext"
         }
       }
     },
@@ -410,7 +411,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "odata.nextLink"
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Group_ListNext"
         },
         "x-ms-odata": "#/definitions/ADGroup"
       }
@@ -450,7 +452,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "odata.nextLink"
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Group_GetGroupMembersNext"
         }
       }
     },
@@ -534,7 +537,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
@@ -607,7 +610,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "odata.nextLink"
+          "nextLinkName": "odata.nextLink",
+          "operationName": "ServicePrincipal_ListNext"
         },
         "x-ms-odata": "#/definitions/ServicePrincipal"
       }
@@ -787,7 +791,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "odata.nextLink"
+          "nextLinkName": "odata.nextLink",
+          "operationName": "User_ListNext"
         },
         "x-ms-odata": "#/definitions/User"
       }
@@ -875,7 +880,209 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/{tenantID}/{nextLink}?Objects_GetObjectsByObjectIdsNext": {
+      "post": {
+        "tags": [
+          "Objects"
+        ],
+        "operationId": "Objects_GetObjectsByObjectIdsNext",
+        "description": "Gets AD group membership by provided AD object Ids",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetObjectsResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Objects_GetObjectsByObjectIdsNext"
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?Group_ListNext": {
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Group_ListNext",
+        "description": "Gets list of groups for the current tenant.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GroupListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Group_ListNext"
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?Group_GetGroupMembersNext": {
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Group_GetGroupMembersNext",
+        "description": "Gets the members of a group.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetObjectsResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Group_GetGroupMembersNext"
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?ServicePrincipal_ListNext": {
+      "get": {
+        "tags": [
+          "ServicePrincipal"
+        ],
+        "operationId": "ServicePrincipal_ListNext",
+        "description": "Gets list of service principals from the current tenant.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ServicePrincipalListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "ServicePrincipal_ListNext"
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?User_ListNext": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "User_ListNext",
+        "description": "Gets list of users for the current tenant.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UserListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "User_ListNext"
         }
       }
     }
