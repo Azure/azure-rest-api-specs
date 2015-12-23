@@ -353,6 +353,34 @@ You can describe all the [possible HTTP Response status codes](http://www.w3.org
   }
 }
 ```
+### Custom Paths<a name="CustomPaths"></a>
+Swagger 2.0 has a built-in limitation on paths. Only one operation can be mapped to a path and http method. There are some APIs, however, where multiple distinct operations are mapped to the same path and same http method. For example `GET /mypath/query-drive?op=file` and `GET /mypath/query-drive?op=folder` may return two different model types (stream in the first example and JSON model representing Folder in the second). Since Swagger does not treat query parameters as part of the path the above 2 operations may not co-exist in the standard "paths" element.
+
+To overcome this limitation an "x-ms-paths" extension was introduced parallel to "paths". Urls under "x-ms-paths" are allowed to have query parameters for disambiguation, however they are removed during model parsing.
+
+```json
+"paths":{
+   "/pets": {
+        "get": {
+            "parameters": [
+                {
+                     "name": "name",
+                     "required": true
+                }
+            ]
+        }
+   }
+},
+"x-ms-paths":{   
+   "/pets?color={color}": {
+        "get": {}
+   },
+}
+
+```
+
+Please note, that the use of "x-ms-paths" should be minimized to the above scenarios. Since any metadata inside the extension is not part of the default swagger specification, it will not be available to non-AutoRest tools.
+
 ## Defining Model Types<a name="DefiningModel"></a>
 The request body and response definitions become simple model types in the generated code. The models include 
 basic validation methods, but are generally stateless serialization definitions.
@@ -581,7 +609,8 @@ methods for navigating between pages.
     "nextLinkName": "Specify the name of the property that provides the nextLink. 
                      If your model does not have the nextLink property then specify null.",
     "itemName": "Specify the name of the property that provides the collection 
-                 of pageable items. It is optional. Default value is 'value'." 
+                 of pageable items. It is optional. Default value is 'value'.",
+    "operationName": "Specify the name of the Next operation. It is optional. Default value is 'XXXNext' where XXX is the name of the operation." 
   }
 }
 ```
