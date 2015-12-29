@@ -5437,11 +5437,6 @@
           "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
-      "required": [
-        "protocol",
-        "frontendPort",
-        "enableFloatingIP"
-      ],
       "description": "Properties of Inbound NAT rule"
     },
     "InboundNatRule": {
@@ -5534,7 +5529,7 @@
     },
     "OutboundNatRulePropertiesFormat": {
       "properties": {
-        "allocatedOutboundPort": {
+        "allocatedOutboundPorts": {
           "type": "integer",
           "format": "int32",
           "description": "Gets or sets the number of outbound ports to be used for SNAT"
@@ -5556,7 +5551,6 @@
         }
       },
       "required": [
-        "allocatedOutboundPorts",
         "backendAddressPool"
       ],
       "description": "Outbound NAT pool of the loadbalancer"
@@ -6129,9 +6123,6 @@
           "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
-      "required": [
-        "publicIPAllocationMethod"
-      ],
       "description": "PublicIpAddress properties"
     },
     "PublicIPAddress": {
@@ -6390,10 +6381,7 @@
           "type": "string",
           "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
-      },
-      "required": [
-        "addressPrefix"
-      ]
+      }
     },
     "Subnet": {
       "properties": {
