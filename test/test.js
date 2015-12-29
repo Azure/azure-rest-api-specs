@@ -42,7 +42,7 @@ describe('Azure Swagger Schema Validation', function() {
         var valid = validator.validate(JSON.parse(data), extensionSwaggerSchema);
         if (!valid) {
             var error = validator.getLastErrors();
-            throw new Error("ZSchema failed: " + JSON.stringify(error, null, "\t"));
+            throw new Error("Schema validation failed: " + JSON.stringify(error, null, "\t"));
         }
         assert(valid == true);
         done();
