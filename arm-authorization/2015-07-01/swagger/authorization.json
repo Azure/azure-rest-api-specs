@@ -44,7 +44,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -79,7 +79,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -144,7 +144,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -224,7 +224,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -753,11 +753,11 @@
             "description": "Role definition id."
           },
           {
-            "name": "parameters",
+            "name": "roleDefinition",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RoleDefinitionCreateOrUpdateParameters"
+              "$ref": "#/definitions/RoleDefinition"
             },
             "description": "Role definition."
           },
@@ -850,9 +850,9 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/RoleDefinition"
+        "x-ms-odata": "#/definitions/RoleDefinitionFilter"
       }
     }
   },
@@ -865,6 +865,15 @@
         }
       },
       "description": "Role Assignments filter"
+    },
+    "RoleDefinitionFilter": {
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "Returns role definition with the specific name."
+        }
+      },
+      "description": "Role Definitions filter"
     },
     "ClassicAdministratorProperties": {
       "properties": {
@@ -1162,15 +1171,6 @@
         }
       },
       "description": "Role definition."
-    },
-    "RoleDefinitionCreateOrUpdateParameters": {
-      "properties": {
-        "RoleDefinition": {
-          "$ref": "#/definitions/RoleDefinition",
-          "description": "Gets or sets role definition properties."
-        }
-      },
-      "description": "Role definition create or update parameters."
     },
     "RoleDefinitionListResult": {
       "properties": {

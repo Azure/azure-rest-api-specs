@@ -1423,7 +1423,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1592,7 +1592,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2127,7 +2127,7 @@
           ],
           "x-ms-enum": {
             "name": "DeploymentMode",
-            "modelAsString": "False"
+            "modelAsString": false
           }
         }
       },
@@ -2170,20 +2170,13 @@
             "$ref": "#/definitions/ResourceManagementError"
           },
           "description": "Gets or sets validation error."
-        },
-        "code": {
-          "type": "string",
-          "description": "Gets or sets the error code returned from the server."
-        },
-        "message": {
-          "type": "string",
-          "description": "Gets or sets the error message returned from the server."
-        },
-        "target": {
-          "type": "string",
-          "description": "Gets or sets the target of the error."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceManagementError"
+        }
+      ],
       "required": [
         "code",
         "message"
@@ -2342,7 +2335,7 @@
           ],
           "x-ms-enum": {
             "name": "DeploymentMode",
-            "modelAsString": "False"
+            "modelAsString": false
           }
         }
       },
