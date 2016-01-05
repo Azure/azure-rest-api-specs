@@ -244,6 +244,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": ""
+          },
           "202": {
             "description": ""
           }
@@ -2996,7 +2999,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3583,7 +3586,7 @@
               "type": "string"
             }
           }
-        }        
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks/{virtualNetworkName}": {
@@ -3839,7 +3842,7 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewaySkuName",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "tier": {
@@ -3850,7 +3853,7 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayTier",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "capacity": {
@@ -3952,7 +3955,7 @@
           ],
           "x-ms-enum": {
             "name": "IPAllocationMethod",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "subnet": {
@@ -4099,7 +4102,7 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayProtocol",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "cookieBasedAffinity": {
@@ -4111,9 +4114,18 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayCookieBasedAffinity",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
+        "requestTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets request timeout"
+        },
+        "probe": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets probe resource of application gateway "
+        },		
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
@@ -4161,13 +4173,21 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayProtocol",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
+        "hostName": {
+          "type": "string",
+          "description": "Gets or sets the host name of http listener "
+        },		
         "sslCertificate": {
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets ssl certificate resource of application gateway "
         },
+        "requireServerNameIndication": {
+          "type": "string",
+          "description": "Gets or sets the requireServerNameIndication of http listener "
+        },			
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the http listener resource Updating/Deleting/Failed"
@@ -4196,17 +4216,128 @@
       ],
       "description": "Http listener of application gateway"
     },
+    "ApplicationGatewayPathRulePropertiesFormat": {
+      "properties": {
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the path rules of URL path map"
+        },
+        "backendAddressPool": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets backend address pool resource of URL path map "
+        },
+        "backendHttpSettings": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets backend http settings resource of URL path map "
+        },         		
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets path rule of URL path map resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of probe of application gateway"
+    },	
+    "ApplicationGatewayPathRule": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayPathRulePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "Path rule of URL path map of application gateway"
+    },		
+    "ApplicationGatewayProbePropertiesFormat": {
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": "Gets or sets the protocol",
+          "enum": [
+            "Http",
+            "Https"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayProtocol",
+            "modelAsString": true
+          }
+        },
+        "host": {
+          "type": "string",
+          "description": "Gets or sets the host to send probe to "
+        },
+        "path": {
+          "type": "string",
+          "description": "Gets or sets the relative path of probe "
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets probing interval in seconds "
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets probing timeout in seconds "
+        },
+        "unhealthyThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets probing unhealthy threshold "
+        },			
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of probe of application gateway"
+    },	
+    "ApplicationGatewayProbe": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayProbePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "Probe of application gateway"
+    },	
     "ApplicationGatewayRequestRoutingRulePropertiesFormat": {
       "properties": {
         "ruleType": {
           "type": "string",
           "description": "Gets or sets the rule type",
           "enum": [
-            "Basic"
+            "Basic",
+			"PathBasedRouting"
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayRequestRoutingRuleType",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "backendAddressPool": {
@@ -4221,6 +4352,10 @@
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets http listener resource of application gateway "
         },
+        "urlPathMap": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets url path map resource of application gateway "
+        },		
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the request routing rule resource Updating/Deleting/Failed"
@@ -4267,7 +4402,7 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayOperationalState",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "gatewayIPConfigurations": {
@@ -4297,7 +4432,14 @@
             "$ref": "#/definitions/ApplicationGatewayFrontendPort"
           },
           "description": "Gets or sets frontend ports of application gateway resource"
-        },
+        },        
+        "probes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayProbe"
+          },
+          "description": "Gets or sets probes of application gateway resource"
+        },		
         "backendAddressPools": {
           "type": "array",
           "items": {
@@ -4319,6 +4461,13 @@
           },
           "description": "Gets or sets HTTP listeners of application gateway resource"
         },
+        "urlPathMaps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayUrlPathMap"
+          },
+          "description": "Gets or sets URL path map of application gateway resource"
+        },		
         "requestRoutingRules": {
           "type": "array",
           "items": {
@@ -4369,7 +4518,52 @@
         }
       },
       "description": "Response for ListLoadBalancers Api service call"
-    },
+    },	
+    "ApplicationGatewayUrlPathMapPropertiesFormat": {
+      "properties": {
+        "defaultBackendAddressPool": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets default backend address pool resource of URL path map "
+        },
+        "defaultBackendHttpSettings": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets default backend http settings resource of URL path map "
+        },
+        "pathRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayPathRule"
+          },
+          "description": "Gets or sets path rule of URL path map resource"
+        }, 		
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of probe of application gateway"
+    },	
+    "ApplicationGatewayUrlPathMap": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayUrlPathMapPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "UrlPathMap of application gateway"
+    },	
     "AuthorizationPropertiesFormat": {
       "properties": {
         "authorizationKey": {
@@ -4385,7 +4579,7 @@
           ],
           "x-ms-enum": {
             "name": "AuthorizationUseStatus",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "provisioningState": {
@@ -4451,7 +4645,7 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitPeeringAdvertisedPublicPrefixState",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "customerASN": {
@@ -4493,7 +4687,7 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitPeeringType",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "state": {
@@ -4505,7 +4699,7 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitPeeringState",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "azureASN": {
@@ -4609,7 +4803,7 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitSkuTier",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "family": {
@@ -4621,7 +4815,7 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitSkuFamily",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         }
       },
@@ -4662,7 +4856,7 @@
           ],
           "x-ms-enum": {
             "name": "ServiceProviderProvisioningState",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "authorizations": {
@@ -4766,7 +4960,7 @@
           ],
           "x-ms-enum": {
             "name": "RouteNextHopType",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "nextHopIP": {
@@ -4947,7 +5141,7 @@
           ],
           "x-ms-enum": {
             "name": "IPAllocationMethod",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "subnet": {
@@ -5057,7 +5251,7 @@
           ],
           "x-ms-enum": {
             "name": "TransportProtocol",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "loadDistribution": {
@@ -5070,7 +5264,7 @@
           ],
           "x-ms-enum": {
             "name": "LoadDistribution",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "frontendPort": {
@@ -5144,7 +5338,7 @@
           ],
           "x-ms-enum": {
             "name": "ProbeProtocol",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "port": {
@@ -5216,7 +5410,7 @@
           ],
           "x-ms-enum": {
             "name": "TransportProtocol",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "frontendPort": {
@@ -5243,11 +5437,6 @@
           "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
-      "required": [
-        "protocol",
-        "frontendPort",
-        "enableFloatingIP"
-      ],
       "description": "Properties of Inbound NAT rule"
     },
     "InboundNatRule": {
@@ -5286,7 +5475,7 @@
           ],
           "x-ms-enum": {
             "name": "TransportProtocol",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "frontendPortRangeStart": {
@@ -5362,7 +5551,6 @@
         }
       },
       "required": [
-        "allocatedOutboundPorts",
         "backendAddressPool"
       ],
       "description": "Outbound NAT pool of the loadbalancer"
@@ -5724,35 +5912,35 @@
           ],
           "x-ms-enum": {
             "name": "SecurityRuleProtocol",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "sourcePortRange": {
           "type": "string",
-          "description": "Gets or sets Source Port or Range. Integer or range between 0 and 65535. Asterix “*” can also be used to match all ports."
+          "description": "Gets or sets Source Port or Range. Integer or range between 0 and 65535. Asterix '*' can also be used to match all ports."
         },
         "destinationPortRange": {
           "type": "string",
-          "description": "Gets or sets Destination Port or Range. Integer or range between 0 and 65535. Asterix “*” can also be used to match all ports."
+          "description": "Gets or sets Destination Port or Range. Integer or range between 0 and 65535. Asterix '*' can also be used to match all ports."
         },
         "sourceAddressPrefix": {
           "type": "string",
-          "description": "Gets or sets source address prefix. CIDR or source IP range. Asterix “*” can also be used to match all source IPs. Default tags such as ‘VirtualNetwork’, ‘AzureLoadBalancer’ and ‘Internet’ can also be used. If this is an ingress rule, specifies where network traffic originates from. "
+          "description": "Gets or sets source address prefix. CIDR or source IP range. Asterix '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used. If this is an ingress rule, specifies where network traffic originates from. "
         },
         "destinationAddressPrefix": {
           "type": "string",
-          "description": "Gets or sets destination address prefix. CIDR or source IP range. Asterix “*” can also be used to match all source IPs. Default tags such as ‘VirtualNetwork’, ‘AzureLoadBalancer’ and ‘Internet’ can also be used. "
+          "description": "Gets or sets destination address prefix. CIDR or source IP range. Asterix '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used. "
         },
         "access": {
           "type": "string",
-          "description": "Gets or sets network traffic is allowed or denied. Possible values are “Allow” and “Deny”",
+          "description": "Gets or sets network traffic is allowed or denied. Possible values are 'Allow' and 'Deny'",
           "enum": [
             "Allow",
             "Deny"
           ],
           "x-ms-enum": {
             "name": "SecurityRuleAccess",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "priority": {
@@ -5769,7 +5957,7 @@
           ],
           "x-ms-enum": {
             "name": "SecurityRuleDirection",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "provisioningState": {
@@ -5908,7 +6096,7 @@
           ],
           "x-ms-enum": {
             "name": "IPAllocationMethod",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "ipConfiguration": {
@@ -5935,9 +6123,6 @@
           "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
-      "required": [
-        "publicIPAllocationMethod"
-      ],
       "description": "PublicIpAddress properties"
     },
     "PublicIPAddress": {
@@ -5991,7 +6176,7 @@
           ],
           "x-ms-enum": {
             "name": "RouteNextHopType",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "nextHopIpAddress": {
@@ -6132,7 +6317,7 @@
           ],
           "x-ms-enum": {
             "name": "IPAllocationMethod",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "subnet": {
@@ -6196,10 +6381,7 @@
           "type": "string",
           "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
-      },
-      "required": [
-        "addressPrefix"
-      ]
+      }
     },
     "Subnet": {
       "properties": {
@@ -6261,7 +6443,7 @@
           ],
           "x-ms-enum": {
             "name": "UsageUnit",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "currentValue": {
@@ -6314,7 +6496,7 @@
           ],
           "x-ms-enum": {
             "name": "IPAllocationMethod",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "subnet": {
@@ -6371,7 +6553,7 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewayType",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "vpnType": {
@@ -6383,7 +6565,7 @@
           ],
           "x-ms-enum": {
             "name": "VpnType",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "enableBgp": {
@@ -6465,7 +6647,7 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewaySkuName",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "tier": {
@@ -6478,7 +6660,7 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewaySkuTier",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "capacity": {
@@ -6499,8 +6681,8 @@
             "X86"
           ],
           "x-ms-enum": {
-            "name": "Architecture",
-            "modelAsString": "True"
+            "name": "ProcessorArchitecture",
+            "modelAsString": true
           }
         }
       },
@@ -6508,6 +6690,10 @@
     },
     "VirtualNetworkGatewayConnectionPropertiesFormat": {
       "properties": {
+        "authorizationKey": {
+          "type": "string",
+          "description": "The authorizationKey."
+        },
         "virtualNetworkGateway1": {
           "$ref": "#/definitions/VirtualNetworkGateway"
         },
@@ -6528,7 +6714,7 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewayConnectionType",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "routingWeight": {
@@ -6551,7 +6737,7 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewayConnectionStatus",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "egressBytesTransferred": {
@@ -6851,7 +7037,7 @@
           ],
           "x-ms-enum": {
             "name": "NetworkOperationStatus",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "error": {
