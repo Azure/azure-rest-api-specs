@@ -25,6 +25,9 @@
         "tags": [
           "FileSystem"
         ],
+        "consumes": [
+          "application/octet-stream"
+        ],
         "operationId": "FileSystem_ConcurrentAppend",
         "description": "Appends to the file specified. This method supports multiple concurrent appends to the file. NOTE: that concurrent append and serial append CANNOT be used interchangeably. Once a file has been appended to using either one, it can only be appended to using that type of append.",
         "parameters": [
@@ -247,6 +250,9 @@
       "post": {
         "tags": [
           "FileSystem"
+        ],
+        "consumes": [
+          "application/octet-stream"
         ],
         "operationId": "FileSystem_MsConcat",
         "description": "Concatenates the list of files into the target file. This API is NOT webhdfs compliant, however supports a much larger list of files in the concatenate list.",
@@ -482,6 +488,9 @@
         "tags": [
           "FileSystem"
         ],
+        "consumes": [
+          "application/octet-stream"
+        ],
         "operationId": "FileSystem_DirectAppend",
         "description": "Directly appends to a file with the specified content, without requiring a redirect. This API is NOT webhdfs compliant. It should be used only by tools that do not rely on webhdfs interoperability.",
         "parameters": [
@@ -553,6 +562,9 @@
       "put": {
         "tags": [
           "FileSystem"
+        ],
+        "consumes": [
+          "application/octet-stream"
         ],
         "operationId": "FileSystem_DirectCreate",
         "description": "Directly creates a file with the specified content, without requiring a redirect. This API is NOT webhdfs compliant. It should be used only by tools that do not rely on webhdfs interoperability.",
@@ -1621,6 +1633,9 @@
         "tags": [
           "FileSystem"
         ],
+        "consumes": [
+          "application/octet-stream"
+        ],
         "operationId": "FileSystem_Append",
         "description": "Appends to the file specified in the link that was returned from BeginAppend.",
         "parameters": [
@@ -1762,6 +1777,9 @@
       "put": {
         "tags": [
           "FileSystem"
+        ],
+        "consumes": [
+          "application/octet-stream"
         ],
         "operationId": "FileSystem_Create",
         "description": "Creates the file specified in the link that was returned from BeginCreate.",
