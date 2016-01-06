@@ -3,7 +3,7 @@
   "info": {
     "title": "DataLakeAnalyticsJobManagementClient",
     "description": "Creates an Azure Data Lake Analytics job management client.",
-    "version": "2015-10-01-preview"
+    "version": "2015-11-01-preview"
   },
   "host": "accountname.jobserviceuri",
   "schemes": [
@@ -729,6 +729,135 @@
       },
       "description": "The common Data Lake Analytics job properties."
     },
+    "JobErrorDetails": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the error message description"
+        },
+        "details": {
+          "type": "string",
+          "description": "Gets or sets the details of the error message."
+        },
+        "endOffset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the end offset in the job where the error was found."
+        },
+        "errorId": {
+          "type": "string",
+          "description": "Gets or sets the specific identifier for the type of error encountered in the job."
+        },
+        "filePath": {
+          "type": "string",
+          "description": "Gets or sets the path to any supplemental error files, if any."
+        },
+        "helpLink": {
+          "type": "string",
+          "description": "Gets or sets the link to MSDN or Azure help for this type of error, if any."
+        },
+        "internalDiagnostics": {
+          "type": "string",
+          "description": "Gets or sets the internal diagnostic stack trace if the user requesting the job error details has sufficient permissions it will be retrieved, otherwise it will be empty."
+        },
+        "lineNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the specific line number in the job where the error occured."
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets or sets the user friendly error message for the failure."
+        },
+        "resolution": {
+          "type": "string",
+          "description": "Gets or sets the recommended resolution for the failure, if any."
+        },
+        "InnerError": {
+          "$ref": "#/definitions/JobInnerError",
+          "description": "Gets or sets the inner error of this specific job error message, if any."
+        },
+        "severity": {
+          "type": "string",
+          "description": "Gets or sets the severity level of the failure.",
+          "enum": [
+            "Warning",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "SeverityTypes",
+            "modelAsString": true
+          }
+        },
+        "source": {
+          "type": "string",
+          "description": "Gets or sets the ultimate source of the failure (usually either SYSTEM or USER)."
+        },
+        "startOffset": {
+          "type": "string",
+          "description": "Gets or sets the end offset in the job where the error was found"
+        }
+      },
+      "description": "The Data Lake Analytics job error details."
+    },
+    "JobInnerError": {
+      "properties": {
+        "diagnosticCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the diagnostic error code."
+        },
+        "severity": {
+          "type": "string",
+          "description": "Gets or sets the severity level of the failure.",
+          "enum": [
+            "Warning",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "SeverityTypes",
+            "modelAsString": true
+          }
+        },
+        "details": {
+          "type": "string",
+          "description": "Gets or sets the details of the error message."
+        },
+        "component": {
+          "type": "string",
+          "description": "Gets or sets the component that failed."
+        },
+        "errorId": {
+          "type": "string",
+          "description": "Gets or sets the specific identifier for the type of error encountered in the job."
+        },
+        "helpLink": {
+          "type": "string",
+          "description": "Gets or sets the link to MSDN or Azure help for this type of error, if any."
+        },
+        "internalDiagnostics": {
+          "type": "string",
+          "description": "Gets or sets the internal diagnostic stack trace if the user requesting the job error details has sufficient permissions it will be retrieved, otherwise it will be empty."
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets or sets the user friendly error message for the failure."
+        },
+        "resolution": {
+          "type": "string",
+          "description": "Gets or sets the recommended resolution for the failure, if any."
+        },
+        "source": {
+          "type": "string",
+          "description": "Gets or sets the ultimate source of the failure (usually either SYSTEM or USER)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the error message description"
+        }
+      },
+      "description": "The Data Lake Analytics job error details."
+    },
     "JobInformation": {
       "properties": {
         "jobId": {
@@ -756,7 +885,10 @@
           "description": "Gets or sets the user or account that submitted the job."
         },
         "errorMessage": {
-          "type": "string",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobErrorDetails"
+          },
           "description": "Gets or sets the error message details for the job, if it failed."
         },
         "degreeOfParallelism": {

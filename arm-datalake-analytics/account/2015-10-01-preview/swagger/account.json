@@ -60,7 +60,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/StorageAccount"
+              "$ref": "#/definitions/StorageAccountInfo"
             }
           }
         }
@@ -469,7 +469,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/DataLakeStoreAccount"
+              "$ref": "#/definitions/DataLakeStoreAccountInfo"
             }
           }
         }
@@ -671,7 +671,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/StorageAccount"
+        "x-ms-odata": "#/definitions/StorageAccountInfo"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/DataLakeStoreAccounts/": {
@@ -779,7 +779,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/DataLakeStoreAccount"
+        "x-ms-odata": "#/definitions/DataLakeStoreAccountInfo"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts": {
@@ -1089,7 +1089,7 @@
       },
       "description": "Azure Storage account properties information."
     },
-    "StorageAccount": {
+    "StorageAccountInfo": {
       "properties": {
         "name": {
           "type": "string",
@@ -1173,7 +1173,7 @@
       },
       "description": "The SAS response that contains the storage account, container and associated SAS token for connection use."
     },
-    "DataLakeStoreAccountProperties": {
+    "DataLakeStoreAccountInfoProperties": {
       "properties": {
         "suffix": {
           "type": "string",
@@ -1182,14 +1182,14 @@
       },
       "description": "Data Lake Store account properties information."
     },
-    "DataLakeStoreAccount": {
+    "DataLakeStoreAccountInfo": {
       "properties": {
         "name": {
           "type": "string",
           "description": "Gets or sets the account name of the Data Lake Store account."
         },
         "properties": {
-          "$ref": "#/definitions/DataLakeStoreAccountProperties",
+          "$ref": "#/definitions/DataLakeStoreAccountInfoProperties",
           "description": "Gets or sets the properties associated with this Data Lake Store account."
         }
       },
@@ -1200,7 +1200,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StorageAccount"
+            "$ref": "#/definitions/StorageAccountInfo"
           },
           "description": "Gets or set the results of the list operation"
         },
@@ -1221,7 +1221,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DataLakeStoreAccount"
+            "$ref": "#/definitions/DataLakeStoreAccountInfo"
           },
           "description": "Gets or set the results of the list operation"
         },
@@ -1289,14 +1289,14 @@
         "dataLakeStoreAccounts": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DataLakeStoreAccount"
+            "$ref": "#/definitions/DataLakeStoreAccountInfo"
           },
           "description": "Gets or sets the list of Data Lake storage accounts associated with this account."
         },
         "storageAccounts": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StorageAccount"
+            "$ref": "#/definitions/StorageAccountInfo"
           },
           "description": "Gets or sets the list of Azure Blob storage accounts associated with this account."
         },
@@ -1320,7 +1320,7 @@
     "AddDataLakeStoreParameters": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DataLakeStoreAccountProperties",
+          "$ref": "#/definitions/DataLakeStoreAccountInfoProperties",
           "description": "Gets or sets the properties for the Data Lake Store account being added."
         }
       },
