@@ -5039,8 +5039,20 @@
       },
       "description": "Contains Bandwidths offered in ExpressRouteServiceProviders"
     },
-    "ExpressRouteServiceProviderPropertiesFormat": {
+    "ExpressRouteServiceProvider": {
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the ID of the resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the type of the resource."
+        },
         "peeringLocations": {
           "type": "array",
           "items": {
@@ -5058,26 +5070,6 @@
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the resource "
-        }
-      },
-      "description": "Properties of ExpressRouteServiceProvider"
-    },
-    "ExpressRouteServiceProvider": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the ID of the resource."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "Gets or sets the type of the resource."
-        },
-        "properties": {
-          "$ref": "#/definitions/ExpressRouteServiceProviderPropertiesFormat"
         }
       },
       "description": "ExpressRouteResourceProvider object"
