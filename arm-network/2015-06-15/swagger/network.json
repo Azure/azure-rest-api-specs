@@ -5757,7 +5757,16 @@
           "type": "string"
         },
         "privateIPAllocationMethod": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic)",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "x-ms-enum": {
+            "name": "IPAllocationMethod",
+            "modelAsString": true
+          }
         },
         "subnet": {
           "$ref": "#/definitions/Subnet"
