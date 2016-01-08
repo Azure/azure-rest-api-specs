@@ -703,7 +703,16 @@
     "StorageAccountRegenerateKeyParameters": {
       "properties": {
         "keyName": {
-          "type": "string"
+          "type": "string",
+          "description": "Specifies name of the key which should be regenerated: key1 or key2.",
+          "enum": [
+            "key1",
+            "key2"
+          ],
+          "x-ms-enum": {
+            "name": "KeyName",
+            "modelAsString": false
+          }
         }
       },
       "required": [
