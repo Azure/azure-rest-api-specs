@@ -5064,22 +5064,15 @@
     },
     "ExpressRouteServiceProvider": {
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the ID of the resource."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "Gets or sets the type of the resource."
-        },
         "properties": {
           "$ref": "#/definitions/ExpressRouteServiceProviderPropertiesFormat"
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "description": "ExpressRouteResourceProvider object"
     },
     "ExpressRouteServiceProviderListResult": {
