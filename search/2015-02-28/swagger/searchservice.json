@@ -6,7 +6,7 @@
     "version": "2015-02-28"
   },
   "consumes": [
-    "application/json;odata.metadata=none"
+    "application/json"
   ],
   "produces": [
     "application/json"
@@ -22,7 +22,6 @@
         "externalDocs": {
           "url": "https://msdn.microsoft.com/library/azure/dn946900.aspx"
         },
-        "consumes": [ "application/json;odata.metadata=minimal" ],
         "parameters": [
           {
             "name": "dataSourceName",
@@ -197,7 +196,6 @@
         "externalDocs": {
           "url": "https://msdn.microsoft.com/library/azure/dn946876.aspx"
         },
-        "consumes": [ "application/json;odata.metadata=minimal" ],
         "parameters": [
           {
             "name": "dataSource",
@@ -1276,7 +1274,8 @@
       "required": [
         "weights"
       ],
-      "description": "Defines weights on index fields for which matches should boost scoring in search queries."
+      "description": "Defines weights on index fields for which matches should boost scoring in search queries.",
+      "x-ms-external": true
     },
     "ScoringFunction": {
       "discriminator": "type",
