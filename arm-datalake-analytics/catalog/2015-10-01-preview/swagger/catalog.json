@@ -1893,6 +1893,11 @@
       "description": "DataLakeAnalytics DataLakeAnalyticsAccount information."
     },
     "USqlSecret": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
       "properties": {
         "databaseName": {
           "type": "string",
@@ -1914,19 +1919,16 @@
         "password": {
           "type": "string",
           "description": "Gets or sets the password for the secret to pass in"
-        },
-        "computeAccountName": {
-          "type": "string",
-          "description": "Gets or sets the name of the Data Lake Analytics account."
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets or sets the version of the catalog item."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL secret item."
     },
     "USqlExternalDataSource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
       "properties": {
         "databaseName": {
           "type": "string",
@@ -1950,19 +1952,16 @@
             "type": "string"
           },
           "description": "Gets or sets the list of types to push down from the external data source."
-        },
-        "computeAccountName": {
-          "type": "string",
-          "description": "Gets or sets the name of the Data Lake Analytics account."
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets or sets the version of the catalog item."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL external datasource item."
     },
     "USqlExternalDataSourceList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -1970,42 +1969,16 @@
             "$ref": "#/definitions/USqlExternalDataSource"
           },
           "description": "Gets or sets the list of external data sources in the database"
-        },
-        "itemType": {
-          "type": "string",
-          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
-          "enum": [
-            "usqlDatabase",
-            "usqlSchema",
-            "usqlAssembly",
-            "usqlTable",
-            "uSqlView",
-            "uSqlProcedure",
-            "uSqlCredential",
-            "usqlTableValuedFunction",
-            "usqlTableStatistics",
-            "usqlSecret",
-            "usqlExternalDataSource",
-            "usqlType"
-          ],
-          "x-ms-enum": {
-            "name": "CatalogItemType",
-            "modelAsString": true
-          }
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the count of items in the list."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the link to the next page of results."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL external datasource item list."
     },
     "USqlCredential": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
       "properties": {
         "databaseName": {
           "type": "string",
@@ -2022,19 +1995,16 @@
         "userName": {
           "type": "string",
           "description": "Gets or sets the user name associated with the credential."
-        },
-        "computeAccountName": {
-          "type": "string",
-          "description": "Gets or sets the name of the Data Lake Analytics account."
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets or sets the version of the catalog item."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL credential item."
     },
     "USqlCredentialList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -2042,42 +2012,16 @@
             "$ref": "#/definitions/USqlCredential"
           },
           "description": "Gets or sets the list of credentials in the database"
-        },
-        "itemType": {
-          "type": "string",
-          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
-          "enum": [
-            "usqlDatabase",
-            "usqlSchema",
-            "usqlAssembly",
-            "usqlTable",
-            "uSqlView",
-            "uSqlProcedure",
-            "uSqlCredential",
-            "usqlTableValuedFunction",
-            "usqlTableStatistics",
-            "usqlSecret",
-            "usqlExternalDataSource",
-            "usqlType"
-          ],
-          "x-ms-enum": {
-            "name": "CatalogItemType",
-            "modelAsString": true
-          }
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the count of items in the list."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the link to the next page of results."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL credential item list."
     },
     "USqlProcedure": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
       "properties": {
         "databaseName": {
           "type": "string",
@@ -2094,19 +2038,16 @@
         "definition": {
           "type": "string",
           "description": "Gets or sets the defined query of the procedure."
-        },
-        "computeAccountName": {
-          "type": "string",
-          "description": "Gets or sets the name of the Data Lake Analytics account."
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets or sets the version of the catalog item."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL procedure item."
     },
     "USqlProcedureList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -2114,37 +2055,6 @@
             "$ref": "#/definitions/USqlProcedure"
           },
           "description": "Gets or sets the list of procedure in the database and schema combination"
-        },
-        "itemType": {
-          "type": "string",
-          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
-          "enum": [
-            "usqlDatabase",
-            "usqlSchema",
-            "usqlAssembly",
-            "usqlTable",
-            "uSqlView",
-            "uSqlProcedure",
-            "uSqlCredential",
-            "usqlTableValuedFunction",
-            "usqlTableStatistics",
-            "usqlSecret",
-            "usqlExternalDataSource",
-            "usqlType"
-          ],
-          "x-ms-enum": {
-            "name": "CatalogItemType",
-            "modelAsString": true
-          }
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the count of items in the list."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the link to the next page of results."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL procedure item list."
@@ -2308,6 +2218,11 @@
       "description": "A Data Lake Analytics catalog external table item."
     },
     "USqlTable": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
       "properties": {
         "databaseName": {
           "type": "string",
@@ -2345,19 +2260,16 @@
         "externalTable": {
           "$ref": "#/definitions/ExternalTable",
           "description": "Gets or sets the external table associated with the table."
-        },
-        "computeAccountName": {
-          "type": "string",
-          "description": "Gets or sets the name of the Data Lake Analytics account."
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets or sets the version of the catalog item."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL table item."
     },
     "USqlTableList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -2365,37 +2277,6 @@
             "$ref": "#/definitions/USqlTable"
           },
           "description": "Gets or sets the list of tables in the database and schema combination"
-        },
-        "itemType": {
-          "type": "string",
-          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
-          "enum": [
-            "usqlDatabase",
-            "usqlSchema",
-            "usqlAssembly",
-            "usqlTable",
-            "uSqlView",
-            "uSqlProcedure",
-            "uSqlCredential",
-            "usqlTableValuedFunction",
-            "usqlTableStatistics",
-            "usqlSecret",
-            "usqlExternalDataSource",
-            "usqlType"
-          ],
-          "x-ms-enum": {
-            "name": "CatalogItemType",
-            "modelAsString": true
-          }
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the count of items in the list."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the link to the next page of results."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL table item list."
@@ -2417,19 +2298,16 @@
         "definition": {
           "type": "string",
           "description": "Gets or sets the defined query of the view."
-        },
-        "computeAccountName": {
-          "type": "string",
-          "description": "Gets or sets the name of the Data Lake Analytics account."
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets or sets the version of the catalog item."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL view item."
     },
     "USqlViewList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -2437,42 +2315,16 @@
             "$ref": "#/definitions/USqlView"
           },
           "description": "Gets or sets the list of view in the database and schema combination"
-        },
-        "itemType": {
-          "type": "string",
-          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
-          "enum": [
-            "usqlDatabase",
-            "usqlSchema",
-            "usqlAssembly",
-            "usqlTable",
-            "uSqlView",
-            "uSqlProcedure",
-            "uSqlCredential",
-            "usqlTableValuedFunction",
-            "usqlTableStatistics",
-            "usqlSecret",
-            "usqlExternalDataSource",
-            "usqlType"
-          ],
-          "x-ms-enum": {
-            "name": "CatalogItemType",
-            "modelAsString": true
-          }
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the count of items in the list."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the link to the next page of results."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL view item list."
     },
     "USqlTableStatistics": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
       "properties": {
         "databaseName": {
           "type": "string",
@@ -2530,19 +2382,16 @@
             "type": "string"
           },
           "description": "Gets or sets the list of column names associated with these statistics."
-        },
-        "computeAccountName": {
-          "type": "string",
-          "description": "Gets or sets the name of the Data Lake Analytics account."
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets or sets the version of the catalog item."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL table statistics item."
     },
     "USqlTableStatisticsList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -2550,42 +2399,16 @@
             "$ref": "#/definitions/USqlTableStatistics"
           },
           "description": "Gets or sets the list of table statistics in the database, schema and table combination"
-        },
-        "itemType": {
-          "type": "string",
-          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
-          "enum": [
-            "usqlDatabase",
-            "usqlSchema",
-            "usqlAssembly",
-            "usqlTable",
-            "uSqlView",
-            "uSqlProcedure",
-            "uSqlCredential",
-            "usqlTableValuedFunction",
-            "usqlTableStatistics",
-            "usqlSecret",
-            "usqlExternalDataSource",
-            "usqlType"
-          ],
-          "x-ms-enum": {
-            "name": "CatalogItemType",
-            "modelAsString": true
-          }
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the count of items in the list."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the link to the next page of results."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL table statistics item list."
     },
     "USqlType": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
       "properties": {
         "databaseName": {
           "type": "string",
@@ -2650,19 +2473,16 @@
         "isComplexType": {
           "type": "boolean",
           "description": "Gets or sets the the switch indicating if this type is a complex type."
-        },
-        "computeAccountName": {
-          "type": "string",
-          "description": "Gets or sets the name of the Data Lake Analytics account."
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets or sets the version of the catalog item."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL type item."
     },
     "USqlTypeList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -2670,42 +2490,16 @@
             "$ref": "#/definitions/USqlType"
           },
           "description": "Gets or sets the list of types in the database and schema combination"
-        },
-        "itemType": {
-          "type": "string",
-          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
-          "enum": [
-            "usqlDatabase",
-            "usqlSchema",
-            "usqlAssembly",
-            "usqlTable",
-            "uSqlView",
-            "uSqlProcedure",
-            "uSqlCredential",
-            "usqlTableValuedFunction",
-            "usqlTableStatistics",
-            "usqlSecret",
-            "usqlExternalDataSource",
-            "usqlType"
-          ],
-          "x-ms-enum": {
-            "name": "CatalogItemType",
-            "modelAsString": true
-          }
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the count of items in the list."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the link to the next page of results."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL type item list."
     },
     "USqlTableValuedFunction": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
       "properties": {
         "databaseName": {
           "type": "string",
@@ -2722,19 +2516,16 @@
         "definition": {
           "type": "string",
           "description": "Gets or sets the definition of the table valued function."
-        },
-        "computeAccountName": {
-          "type": "string",
-          "description": "Gets or sets the name of the Data Lake Analytics account."
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets or sets the version of the catalog item."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL table valued function item."
     },
     "USqlTableValuedFunctionList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -2742,37 +2533,6 @@
             "$ref": "#/definitions/USqlTableValuedFunction"
           },
           "description": "Gets or sets the list of table valued functions in the database and schema combination"
-        },
-        "itemType": {
-          "type": "string",
-          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
-          "enum": [
-            "usqlDatabase",
-            "usqlSchema",
-            "usqlAssembly",
-            "usqlTable",
-            "uSqlView",
-            "uSqlProcedure",
-            "uSqlCredential",
-            "usqlTableValuedFunction",
-            "usqlTableStatistics",
-            "usqlSecret",
-            "usqlExternalDataSource",
-            "usqlType"
-          ],
-          "x-ms-enum": {
-            "name": "CatalogItemType",
-            "modelAsString": true
-          }
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the count of items in the list."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the link to the next page of results."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL table valued function item list."
@@ -2812,6 +2572,11 @@
       "description": "A Data Lake Analytics catalog U-SQL dependency information item."
     },
     "USqlAssembly": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
       "properties": {
         "databaseName": {
           "type": "string",
@@ -2846,19 +2611,16 @@
             "$ref": "#/definitions/USqlAssemblyDependencyInfo"
           },
           "description": "Gets or sets the list of dependencies associated with the assembly"
-        },
-        "computeAccountName": {
-          "type": "string",
-          "description": "Gets or sets the name of the Data Lake Analytics account."
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets or sets the version of the catalog item."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL Assembly."
     },
     "USqlAssemblyClr": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
       "properties": {
         "databaseName": {
           "type": "string",
@@ -2871,19 +2633,16 @@
         "clrName": {
           "type": "string",
           "description": "Gets or sets the name of the CLR."
-        },
-        "computeAccountName": {
-          "type": "string",
-          "description": "Gets or sets the name of the Data Lake Analytics account."
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets or sets the version of the catalog item."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL assembly CLR item."
     },
     "USqlAssemblyList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -2891,42 +2650,16 @@
             "$ref": "#/definitions/USqlAssemblyClr"
           },
           "description": "Gets or sets the list of assemblies in the database"
-        },
-        "itemType": {
-          "type": "string",
-          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
-          "enum": [
-            "usqlDatabase",
-            "usqlSchema",
-            "usqlAssembly",
-            "usqlTable",
-            "uSqlView",
-            "uSqlProcedure",
-            "uSqlCredential",
-            "usqlTableValuedFunction",
-            "usqlTableStatistics",
-            "usqlSecret",
-            "usqlExternalDataSource",
-            "usqlType"
-          ],
-          "x-ms-enum": {
-            "name": "CatalogItemType",
-            "modelAsString": true
-          }
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the count of items in the list."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the link to the next page of results."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL assembly CLR item list."
     },
     "USqlSchema": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
       "properties": {
         "databaseName": {
           "type": "string",
@@ -2935,19 +2668,16 @@
         "schemaName": {
           "type": "string",
           "description": "Gets or sets the name of the schema."
-        },
-        "computeAccountName": {
-          "type": "string",
-          "description": "Gets or sets the name of the Data Lake Analytics account."
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets or sets the version of the catalog item."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL schema item."
     },
     "USqlSchemaList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -2955,47 +2685,43 @@
             "$ref": "#/definitions/USqlSchema"
           },
           "description": "Gets or sets the list of schemas in the database"
-        },
-        "itemType": {
-          "type": "string",
-          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
-          "enum": [
-            "usqlDatabase",
-            "usqlSchema",
-            "usqlAssembly",
-            "usqlTable",
-            "uSqlView",
-            "uSqlProcedure",
-            "uSqlCredential",
-            "usqlTableValuedFunction",
-            "usqlTableStatistics",
-            "usqlSecret",
-            "usqlExternalDataSource",
-            "usqlType"
-          ],
-          "x-ms-enum": {
-            "name": "CatalogItemType",
-            "modelAsString": true
-          }
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the count of items in the list."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the link to the next page of results."
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL schema item list."
     },
     "USqlDatabase": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
       "properties": {
         "databaseName": {
           "type": "string",
           "description": "Gets or sets the name of the database."
-        },
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL database item."
+    },
+    "USqlDatabaseList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlDatabase"
+          },
+          "description": "Gets or sets the list of databases"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL database item list."
+    },
+    "CatalogItem": {
+      "properties": {
         "computeAccountName": {
           "type": "string",
           "description": "Gets or sets the name of the Data Lake Analytics account."
@@ -3005,39 +2731,10 @@
           "description": "Gets or sets the version of the catalog item."
         }
       },
-      "description": "A Data Lake Analytics catalog U-SQL database item."
+      "description": "A Data Lake Analytics catalog item."
     },
-    "USqlDatabaseList": {
+    "CatalogItemList": {
       "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/USqlDatabase"
-          },
-          "description": "Gets or sets the list of databases"
-        },
-        "itemType": {
-          "type": "string",
-          "description": "Gets or sets the job type of the current job (i.e. Hive or USql).",
-          "enum": [
-            "usqlDatabase",
-            "usqlSchema",
-            "usqlAssembly",
-            "usqlTable",
-            "uSqlView",
-            "uSqlProcedure",
-            "uSqlCredential",
-            "usqlTableValuedFunction",
-            "usqlTableStatistics",
-            "usqlSecret",
-            "usqlExternalDataSource",
-            "usqlType"
-          ],
-          "x-ms-enum": {
-            "name": "CatalogItemType",
-            "modelAsString": true
-          }
-        },
         "count": {
           "type": "integer",
           "format": "int32",
@@ -3048,7 +2745,7 @@
           "description": "Gets or sets the link to the next page of results."
         }
       },
-      "description": "A Data Lake Analytics catalog U-SQL database item list."
+      "description": "A Data Lake Analytics catalog item list."
     },
     "Resource": {
       "properties": {
