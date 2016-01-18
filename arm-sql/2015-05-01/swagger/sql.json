@@ -20,10 +20,11 @@
     "paths": {
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/securityAlertPolicies/Default": {
             "put": {
+			    "x-ms-long-running-operation": true,
                 "tags": [
                     "SecurityAlertPolicy"
                 ],
-                "operationId": "SecurityAlertPolicy_CreateOrUpdateServerSecurityAlertPolicy",
+                "operationId": "SecurityAlertPolicy_CreateOrUpdateServerPolicy",
                 "description": "Creates or updates an Azure SQL Server security alert policy.",
                 "parameters": [
                     {
@@ -35,17 +36,25 @@
                         },
                         "description": "The required parameters for creating or updating a Azure SQL Server security alert policy."
                     },
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the Resource Group to which the server belongs."
+					},
+					{
+						"name": "serverName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the Azure SQL Server."
+					}, 
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ServerNameParameter"
                     }
                 ],
                 "responses": {
@@ -56,13 +65,10 @@
                         }
                     },
                     "201": {
-                        "description": "The Server Threat Detection Policy"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "404": {
-                        "description": "Resource was not found"
+                        "description": "The Server Threat Detection Policy",
+						"schema": {
+                            "$ref": "#/definitions/ServerSecurityAlertPolicy"
+                        }
                     }
                 }
             },
@@ -70,21 +76,29 @@
                 "tags": [
                     "SecurityAlertPolicy"
                 ],
-                "operationId": "SecurityAlertPolicy_GetServerSecurityAlertPolicy",
+                "operationId": "SecurityAlertPolicy_GetServerPolicy",
                 "description": "Returns an Azure SQL Server security alert policy.",
                 "parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the Resource Group to which the server belongs."
+					},
+					{
+						"name": "serverName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the Azure SQL Server."
+					}, 
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ServerNameParameter"
-                    }
                 ],
                 "responses": {
                     "200": {
@@ -92,12 +106,6 @@
                         "schema": {
                             "$ref": "#/definitions/ServerSecurityAlertPolicy"
                         }
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "404": {
-                        "description": "Resource was not found"
                     }
                 }
             }
@@ -208,20 +216,6 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
-    },
-    "ResourceGroupNameParameter": {
-        "name": "resourceGroupName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The name of the Resource Group to which the server belongs."
-    },
-    "ServerNameParameter": {
-        "name": "serverName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The name of the Azure SQL Server."
-    }  
+    }
   }
 }
