@@ -25,6 +25,9 @@
         "tags": [
           "FileSystem"
         ],
+        "consumes": [
+          "application/octet-stream"
+        ],
         "operationId": "FileSystem_ConcurrentAppend",
         "description": "Appends to the file specified. This method supports multiple concurrent appends to the file. NOTE: that concurrent append and serial append CANNOT be used interchangeably. Once a file has been appended to using either one, it can only be appended to using that type of append.",
         "parameters": [
@@ -247,6 +250,9 @@
       "post": {
         "tags": [
           "FileSystem"
+        ],
+        "consumes": [
+          "application/octet-stream"
         ],
         "operationId": "FileSystem_MsConcat",
         "description": "Concatenates the list of files into the target file. This API is NOT webhdfs compliant, however supports a much larger list of files in the concatenate list.",
@@ -482,7 +488,10 @@
         "tags": [
           "FileSystem"
         ],
-        "operationId": "FileSystem_DirectAppend",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "operationId": "FileSystem_Append",
         "description": "Directly appends to a file with the specified content, without requiring a redirect. This API is NOT webhdfs compliant. It should be used only by tools that do not rely on webhdfs interoperability.",
         "parameters": [
           {
@@ -554,7 +563,10 @@
         "tags": [
           "FileSystem"
         ],
-        "operationId": "FileSystem_DirectCreate",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "operationId": "FileSystem_Create",
         "description": "Directly creates a file with the specified content, without requiring a redirect. This API is NOT webhdfs compliant. It should be used only by tools that do not rely on webhdfs interoperability.",
         "parameters": [
           {
@@ -655,7 +667,7 @@
         "tags": [
           "FileSystem"
         ],
-        "operationId": "FileSystem_DirectOpen",
+        "operationId": "FileSystem_Open",
         "description": "Directly opens and reads from the specified file, without requiring a redirect. This API is NOT webhdfs compliant. It should be used only by tools that do not rely on webhdfs interoperability.",
         "parameters": [
           {
@@ -725,8 +737,7 @@
             "description": "",
             "schema": 
             {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             }
           }
         }
@@ -1043,228 +1054,6 @@
       }
     },
     "/webhdfs/v1/{filePath}": {
-      "post": {
-        "tags": [
-          "FileSystem"
-        ],
-        "operationId": "FileSystem_BeginAppend",
-        "description": "Initiates a file append request, resulting in a return of the data node location that will service the request.",
-        "parameters": [
-          {
-            "name": "filePath",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The path to the file to append to."
-          },
-          {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to append to the file in"
-          },
-          {
-            "name": "buffersize",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64",
-            "description": "The optional buffer size to use when appending data"
-          },
-          {
-            "name": "op",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "APPEND"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
-          }
-        ],
-        "responses": {
-          "307": {
-            "description": "",
-            "headers": {
-              "location": { 
-                "description": "The location of the file to be appended to",
-                "type": "string"
-              } 
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "FileSystem"
-        ],
-        "operationId": "FileSystem_BeginCreate",
-        "description": "Initiates a file creation request, resulting in a return of the data node location that will service the request.",
-        "parameters": [
-          {
-            "name": "filePath",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The path to the file to create."
-          },
-          {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to create the file in"
-          },
-          {
-            "name": "buffersize",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64",
-            "description": "The size of the buffer used in transferring data."
-          },
-          {
-            "name": "overwrite",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "The indication of if the file should be overwritten."
-          },
-          {
-            "name": "blocksize",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64",
-            "description": "The block size of a file, in bytes."
-          },
-          {
-            "name": "replication",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int16",
-            "description": "The number of replications of a file."
-          },
-          {
-            "name": "permission",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The permissions of a file or directory."
-          },
-          {
-            "name": "op",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "CREATE"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
-          }
-        ],
-        "responses": {
-          "307": {
-            "description": "",
-            "headers": {
-              "location": { 
-                "description": "The location of the file to be created",
-                "type": "string"
-              } 
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "FileSystem"
-        ],
-        "operationId": "FileSystem_BeginOpen",
-        "description": "Initiates a file open (read) request, resulting in a return of the data node location that will service the request.",
-        "parameters": [
-          {
-            "name": "filePath",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The path to the file to open."
-          },
-          {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the data lake account that the file lives in."
-          },
-          {
-            "name": "length",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "buffersize",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "op",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "OPEN"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
-          }
-        ],
-        "responses": {
-          "307": {
-            "description": "",
-            "headers": {
-              "location": { 
-                "description": "The location of the file to be opened",
-                "type": "string"
-              } 
-            }
-          }
-        }
-      },
       "delete": {
         "tags": [
           "FileSystem"
@@ -1616,40 +1405,6 @@
         }
       }
     },
-    "/{fileAppendRequestLink}": {
-      "post": {
-        "tags": [
-          "FileSystem"
-        ],
-        "operationId": "FileSystem_Append",
-        "description": "Appends to the file specified in the link that was returned from BeginAppend.",
-        "parameters": [
-          {
-            "name": "fileAppendRequestLink",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The link to the file to append to including all required parameters.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "streamContents",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "format": "file"
-            },
-            "required": true,
-            "description": "The file contents to include when appending to the file."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/webhdfs/v1/{sourcePath}": {
       "put": {
         "tags": [
@@ -1753,69 +1508,6 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/HomeDirectoryResult"
-            }
-          }
-        }
-      }
-    },
-    "/{fileCreateRequestLink}": {
-      "put": {
-        "tags": [
-          "FileSystem"
-        ],
-        "operationId": "FileSystem_Create",
-        "description": "Creates the file specified in the link that was returned from BeginCreate.",
-        "parameters": [
-          {
-            "name": "fileCreateRequestLink",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The link to the file to create including all required parameters.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "streamContents",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "format": "file"
-            },
-            "required": false,
-            "description": "The file contents to include when creating the file. This parameter is not required, and if not passed results an empty file."
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/{fileOpenRequestLink}": {
-      "get": {
-        "tags": [
-          "FileSystem"
-        ],
-        "operationId": "FileSystem_Open",
-        "description": "Gets the data associated with the file handle requested.",
-        "parameters": [
-          {
-            "name": "fileOpenRequestLink",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The link to the file to open including all required parameters.",
-            "x-ms-skip-url-encoding": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": 
-            {
-              "type": "string",
-              "format": "byte"
             }
           }
         }
