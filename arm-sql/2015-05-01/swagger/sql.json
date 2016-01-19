@@ -20,7 +20,7 @@
     "paths": {
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/securityAlertPolicies/Default": {
             "put": {
-			    "x-ms-long-running-operation": true,
+                "x-ms-long-running-operation": true,
                 "tags": [
                     "SecurityAlertPolicy"
                 ],
@@ -36,20 +36,20 @@
                         },
                         "description": "The required parameters for creating or updating a Azure SQL Server security alert policy."
                     },
-					{
-						"name": "resourceGroupName",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"description": "The name of the Resource Group to which the server belongs."
-					},
-					{
-						"name": "serverName",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"description": "The name of the Azure SQL Server."
-					}, 
+                    {
+                      "name": "resourceGroupName",
+                      "in": "path",
+                      "required": true,
+                      "type": "string",
+                      "description": "The name of the Resource Group to which the server belongs."
+                    },
+                    {
+                      "name": "serverName",
+                      "in": "path",
+                      "required": true,
+                      "type": "string",
+                      "description": "The name of the Azure SQL Server."
+                    }, 
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
@@ -66,7 +66,7 @@
                     },
                     "201": {
                         "description": "The Server Threat Detection Policy",
-						"schema": {
+                        "schema": {
                             "$ref": "#/definitions/ServerSecurityAlertPolicy"
                         }
                     }
@@ -79,26 +79,26 @@
                 "operationId": "SecurityAlertPolicy_GetServerPolicy",
                 "description": "Returns an Azure SQL Server security alert policy.",
                 "parameters": [
-					{
-						"name": "resourceGroupName",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"description": "The name of the Resource Group to which the server belongs."
-					},
-					{
-						"name": "serverName",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"description": "The name of the Azure SQL Server."
-					}, 
+                    {
+                      "name": "resourceGroupName",
+                      "in": "path",
+                      "required": true,
+                      "type": "string",
+                      "description": "The name of the Resource Group to which the server belongs."
+                    },
+                    {
+                      "name": "serverName",
+                      "in": "path",
+                      "required": true,
+                      "type": "string",
+                      "description": "The name of the Azure SQL Server."
+                    }, 
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -138,20 +138,20 @@
       "description": "Represents the properties of an Azure SQL Security alert policy."
     },
     "ServerSecurityAlertPolicyCreateOrUpdateParameters": {
-      	"x-ms-azure-resource": true,
-		"properties": { 
-			"properties": {
-			  "$ref": "#/definitions/ServerSecurityAlertPolicyProperties",
-			  "description": "Properties of the request."
-			}
-		},
+      "x-ms-azure-resource": true,
+      "properties": { 
+        "properties": {
+          "$ref": "#/definitions/ServerSecurityAlertPolicyProperties",
+          "description": "Properties of the request."
+        }
+      },
       "required": [
-        "properties"
-      ],
+          "properties"
+        ],
       "description": "Create or update server security alert policy parameters."
     },
     "ServerSecurityAlertPolicy": {
-	  "x-ms-azure-resource": true,
+      "x-ms-azure-resource": true,
       "properties": {
         "properties": {
           "$ref": "#/definitions/ServerSecurityAlertPolicyProperties",
