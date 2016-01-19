@@ -138,7 +138,8 @@
       "description": "Represents the properties of an Azure SQL Security alert policy."
     },
     "ServerSecurityAlertPolicyCreateOrUpdateParameters": {
-      "properties": {
+      	"x-ms-azure-resource": true,
+		"properties": {
         "properties": {
           "$ref": "#/definitions/ServerSecurityAlertPolicyProperties",
           "description": "Properties of the request."
@@ -147,9 +148,11 @@
       "required": [
         "properties"
       ],
+	  "x-ms-azure-resource": true,
       "description": "Create or update server security alert policy parameters."
     },
     "ServerSecurityAlertPolicy": {
+	  "x-ms-azure-resource": true,
       "properties": {
         "properties": {
           "$ref": "#/definitions/ServerSecurityAlertPolicyProperties",
@@ -190,15 +193,6 @@
       "required": [
         "location"
       ],
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
       "x-ms-azure-resource": true
     }
   },
