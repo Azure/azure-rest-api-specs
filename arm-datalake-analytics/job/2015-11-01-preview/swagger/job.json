@@ -3,7 +3,8 @@
   "info": {
     "title": "DataLakeAnalyticsJobManagementClient",
     "description": "Creates an Azure Data Lake Analytics job management client.",
-    "version": "2015-11-01-preview"
+    "version": "2015-11-01-preview",
+    "internalConstructors": true
   },
   "host": "accountname.jobserviceuri",
   "schemes": [
@@ -344,7 +345,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets the OrderBy clause. One or more comma-separated expressions with an optional “asc” (the default) or “desc” depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+            "description": "Gets or sets the OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
           },
           {
             "name": "$count",
@@ -1055,7 +1056,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "default": "\"azuredatalakeanalytics.net\"",
+      "default": "azuredatalakeanalytics.net",
       "description": "Gets the URI used as the base for all cloud service requests."
     }
   }
