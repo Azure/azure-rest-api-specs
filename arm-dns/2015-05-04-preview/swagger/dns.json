@@ -86,7 +86,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RecordSetCreateOrUpdateParameters"
+              "$ref": "#/definitions/RecordSet"
             },
             "description": "Parameters supplied to the CreateOrUpdate operation."
           },
@@ -419,7 +419,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ZoneCreateOrUpdateParameters"
+              "$ref": "#/definitions/Zone"
             },
             "description": "Parameters supplied to the CreateOrUpdate operation."
           },
@@ -833,15 +833,6 @@
       ],
       "description": "Describes a DNS RecordSet (a set of DNS records with the same name and type)."
     },
-    "RecordSetCreateOrUpdateParameters": {
-      "properties": {
-        "RecordSet": {
-          "$ref": "#/definitions/RecordSet",
-          "description": "Gets or sets information about the RecordSet being created or updated."
-        }
-      },
-      "description": "Parameters supplied to create or update a RecordSet."
-    },
     "RecordSetListResult": {
       "properties": {
         "value": {
@@ -890,15 +881,6 @@
         }
       ],
       "description": "Describes a DNS zone."
-    },
-    "ZoneCreateOrUpdateParameters": {
-      "properties": {
-        "Zone": {
-          "$ref": "#/definitions/Zone",
-          "description": "Gets or sets information about the zone being created or updated."
-        }
-      },
-      "description": "Parameters supplied to create a zone."
     },
     "ZoneListResult": {
       "properties": {
