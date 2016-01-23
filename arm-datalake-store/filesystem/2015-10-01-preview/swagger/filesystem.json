@@ -57,6 +57,15 @@
             "description": "The file contents to include when appending to the file."
           },
           {
+            "name": "appendMode",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AppendMode"
+            },
+            "description": "Indicates the concurrent append call should create the file if it doesn't exist or just open the existing file for append"
+          },
+          {
             "name": "op",
             "in": "query",
             "required": false,
@@ -1516,6 +1525,15 @@
     }
   },
   "definitions": {
+    "AppendMode": {
+      "enum": [
+            "autocreate"
+          ],
+          "x-ms-enum": {
+            "name": "AppendMode",
+            "modelAsString": true
+          }
+    },
     "FileOperationResult": {
       "properties": {
         "boolean": {
