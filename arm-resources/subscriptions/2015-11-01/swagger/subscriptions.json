@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "FeatureClient",
-    "version": "2014-08-01-preview"
+    "title": "SubscriptionClient",
+    "version": "2015-11-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -17,26 +17,30 @@
     "text/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Features/features": {
+    "/subscriptions/{subscriptionId}/locations": {
       "get": {
         "tags": [
-          "Features"
+          "Subscriptions"
         ],
-        "operationId": "Features_ListAll",
-        "description": "Gets a list of previewed features for all the providers in the current subscription.",
+        "operationId": "Subscriptions_ListLocations",
+        "description": "Gets a list of the subscription locations.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of the subscription"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/FeatureOperationsListResult"
+              "$ref": "#/definitions/LocationListResult"
             }
           }
         },
@@ -45,33 +49,52 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features": {
+    "/subscriptions/{subscriptionId}": {
       "get": {
         "tags": [
-          "Features"
+          "Subscriptions"
         ],
-        "operationId": "Features_List",
-        "description": "Gets a list of previewed features of a resource provider.",
+        "operationId": "Subscriptions_Get",
+        "description": "Gets details about particular subscription.",
         "parameters": [
           {
-            "name": "resourceProviderNamespace",
+            "name": "subscriptionId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace of the resource provider."
+            "description": "Id of the subscription."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/FeatureOperationsListResult"
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_List",
+        "description": "Gets a list of the subscriptionIds.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionListResult"
             }
           }
         },
@@ -80,81 +103,28 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features/{featureName}": {
+    "/tenants": {
       "get": {
         "tags": [
-          "Features"
+          "Tenants"
         ],
-        "operationId": "Features_Get",
-        "description": "Get all features under the subscription.",
+        "operationId": "Tenants_List",
+        "description": "Gets a list of the tenantIds.",
         "parameters": [
           {
-            "name": "resourceProviderNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Namespace of the resource provider."
-          },
-          {
-            "name": "featureName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Previewed feature name in the resource provider."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/FeatureResult"
+              "$ref": "#/definitions/TenantListResult"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features/{featureName}/register": {
-      "post": {
-        "tags": [
-          "Features"
-        ],
-        "operationId": "Features_Register",
-        "description": "Registers for a previewed feature of a resource provider.",
-        "parameters": [
-          {
-            "name": "resourceProviderNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Namespace of the resource provider."
-          },
-          {
-            "name": "featureName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Previewed feature name in the resource provider."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/FeatureResult"
-            }
-          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -199,51 +169,118 @@
       },
       "description": "Resource group filter."
     },
-    "FeatureProperties": {
+    "Location": {
       "properties": {
-        "state": {
-          "type": "string",
-          "description": "Gets or sets the state of the previewed feature."
-        }
-      },
-      "description": "Previewed feature information."
-    },
-    "FeatureResult": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the feature."
-        },
-        "properties": {
-          "$ref": "#/definitions/FeatureProperties",
-          "description": "Gets or sets the properties of the previewed feature."
-        },
         "id": {
           "type": "string",
-          "description": "Gets or sets the Id of the feature."
+          "description": "Gets or sets the ID of the resource (/subscriptions/SubscriptionId)."
         },
-        "type": {
+        "subscriptionId": {
           "type": "string",
-          "description": "Gets or sets the type of the feature."
+          "description": "Gets or sets the subscription Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the location name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the display name of the location"
+        },
+        "latitude": {
+          "type": "string",
+          "description": "Gets or sets the latitude of the location"
+        },
+        "longitude": {
+          "type": "string",
+          "description": "Gets or sets the longitude of the location"
         }
       },
-      "description": "Previewed feature information."
+      "description": "Location information."
     },
-    "FeatureOperationsListResult": {
+    "LocationListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FeatureResult"
+            "$ref": "#/definitions/Location"
           },
-          "description": "Gets or sets the list of Features."
+          "description": "Gets the locations."
+        }
+      },
+      "description": "Location list operation response."
+    },
+    "Subscription": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the ID of the resource (/subscriptions/SubscriptionId)."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Gets or sets the subscription Id."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the subscription display name"
+        },
+        "state": {
+          "type": "string",
+          "description": "Gets or sets the subscription state"
+        }
+      },
+      "description": "Subscription information."
+    },
+    "SubscriptionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subscription"
+          },
+          "description": "Gets or sets subscriptions."
         },
         "nextLink": {
           "type": "string",
           "description": "Gets or sets the URL to get the next set of results."
         }
       },
-      "description": "List of previewed features."
+      "required": [
+        "nextLink"
+      ],
+      "description": "Subscription list operation response."
+    },
+    "TenantIdDescription": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets Id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Gets or sets tenantId"
+        }
+      },
+      "description": "Tenant Id information"
+    },
+    "TenantListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TenantIdDescription"
+          },
+          "description": "Gets or sets tenant Ids."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the URL to get the next set of results."
+        }
+      },
+      "required": [
+        "nextLink"
+      ],
+      "description": "Tenant Ids information."
     },
     "Resource": {
       "properties": {
