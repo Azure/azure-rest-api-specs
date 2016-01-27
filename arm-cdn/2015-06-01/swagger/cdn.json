@@ -1613,26 +1613,16 @@
     "ProfileCreateParameters": {
       "type": "object",
       "description": "Profile properties required for profile creation",
-      "required": [
-        "location"
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
       ],
       "properties": {
-        "location": {
-          "description": "Profile location",
-          "type": "string"
-        },
-        "tags": {
-          "description": "Profile tags",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/ProfilePropertiesCreateParameters"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "ProfilePropertiesCreateParameters": {
       "required": [
@@ -1651,6 +1641,11 @@
       "required": [
         "tags"
       ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "tags": {
           "description": "Profile tags",
@@ -1659,8 +1654,7 @@
             "type": "string"
           }
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "SsoUri": {
       "description": "Sso uri required to login to third party web portal",
@@ -1768,30 +1762,25 @@
     "EndpointCreateParameters": {
       "type": "object",
       "description": "Endpoint properties required for new endpoint creation",
-      "required": [
-        "location"
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
       ],
       "properties": {
-        "location": {
-          "description": "Endpoint location",
-          "type": "string"
-        },
-        "tags": {
-          "description": "Endpoint tags",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/EndpointPropertiesCreateUpdateParameters"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "EndpointUpdateParameters": {
       "type": "object",
       "description": "Endpoint properties required for new endpoint creation",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "tags": {
           "description": "Endpoint tags",
@@ -1803,8 +1792,7 @@
         "properties": {
           "$ref": "#/definitions/EndpointPropertiesCreateUpdateParameters"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "EndpointPropertiesCreateUpdateParameters": {
       "properties": {
@@ -1855,6 +1843,11 @@
         "name"
       ],
       "properties": {
+        "id": {
+          "description": "Resource ID",
+          "type": "string",
+          "readOnly": true
+        },
         "name": {
           "description": "Origin name",
           "type": "string"
@@ -1884,8 +1877,7 @@
           "description": "The value of the https port, must be between 1 and 65535",
           "type": "integer"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "PurgeParameters": {
       "type": "object",
@@ -1973,12 +1965,16 @@
     "OriginParameters": {
       "type": "object",
       "description": "Origin properties needed for origin creation or update",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/OriginPropertiesParameters"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "OriginPropertiesParameters": {
       "required": [
@@ -2056,12 +2052,16 @@
     "CustomDomainParameters": {
       "description": "CustomDomain properties required for custom domain creation or update",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/CustomDomainPropertiesParameters"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "CustomDomainPropertiesParameters": {
       "required": [
