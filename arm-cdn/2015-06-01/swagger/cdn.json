@@ -16,6 +16,40 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/profiles": {
+      "get": {
+        "tags": [
+          "Profiles"
+        ],
+        "summary": "Lists the CDN Profiles within an Azure subscitption",
+        "operationId": "Profiles_ListBySubscriptionId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProfileListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles": {
       "get": {
         "tags": [
@@ -455,7 +489,7 @@
           "202": {
             "description": "Accepted and  the operation will complete asynchronously",
             "schema": {
-              "$ref": "#/definitions/Profile"
+              "$ref": "#/definitions/Endpoint"
             }
           },
           "default": {
