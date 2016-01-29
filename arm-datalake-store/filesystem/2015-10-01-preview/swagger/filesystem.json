@@ -24,6 +24,55 @@
   ],
   "paths": {
     "/WebHdfsExt/{filePath}": {
+      "get": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_GetFileInfo",
+        "description": "Get the file information object used to check file expiration time for the specified by the file path.",
+        "parameters": [
+          {
+            "name": "filePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path to the file to retrieve expiration information for."
+          },
+          {
+            "name": "accountname",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the account to use"
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
+            "default": "GETFILEINFO"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          
+          {
+            "$ref": "#/parameters/dataLakeServiceUriInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/FileInfoResult"
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "FileSystem"
@@ -79,6 +128,76 @@
             "type": "string",
             "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
             "default": "CONCURRENTAPPEND"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/dataLakeServiceUriInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_SetFileExpiry",
+        "description": "Sets or removes the expiration time on the specified file. This operation can only be executed against files. Folders are not supported.",
+        "parameters": [
+          {
+            "name": "filePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path to the file to set or removes the expiration time on."
+          },
+          {
+            "name": "accountname",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the data lake account that the file lives in."
+          },
+          {
+            "name": "expiryOption",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "NeverExpire",
+              "RelativeToNow",
+              "RelativeToCreationDate",
+              "Absolute"
+            ],
+            "x-ms-enum": {
+              "name": "ExpiryOptionType",
+              "modelAsString": false
+            },
+            "description": "Indicates the type of expiration to use for the file: 1. NeverExpire: ExpireTime is ignored. 2. RelativeToNow: ExpireTime is an integer in seconds. 3. RelativeToCreationDate: ExpireTime is an integer in seconds. 4. Absolute: ExpireTime is an integer in seconds, a unix timestamp relative to 1/1/1970 00:00:00"
+          },
+          {
+            "name": "expireTime",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The time, in seconds, that the file will expire relative to the expiry option that was set."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
+            "default": "SETEXPIRY"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1635,7 +1754,7 @@
         "accessTime": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the last access time."
+          "description": "Gets or sets the last access time as ticks since the epoch."
         },
         "blockSize": {
           "type": "integer",
@@ -1664,7 +1783,7 @@
         "modificationTime": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the modification time."
+          "description": "Gets or sets the modification time as ticks since the epoch."
         },
         "owner": {
           "type": "string",
@@ -1698,6 +1817,40 @@
       },
       "description": "Data Lake file status properties information"
     },
+    "FileInfoProperties": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the file identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the file name."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the number of bytes in a file."
+        },
+        "modificationTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the modification time as ticks since the epoch."
+        },
+        "creationTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the creation time as ticks since the epoch."
+        },
+        "expirationTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the expiration time, if any, as ticks since the epoch. If this is set to 0 or DateTime.MaxValue there is no expiration."
+        }
+      },
+      "description": "Data Lake file information properties"
+    },
     "FileStatuses": {
       "properties": {
         "FileStatus": {
@@ -1727,6 +1880,15 @@
         }
       },
       "description": "Data Lake Store filesystem file status information response."
+    },
+    "FileInfoResult": {
+      "properties": {
+        "FileInfo": {
+          "$ref": "#/definitions/FileInfoProperties",
+          "description": "Gets or sets the file information object associated with the specified file path"
+        }
+      },
+      "description": "Data Lake Store filesystem file information response used with file expiration."
     },
     "FileCreateOpenAndAppendResult": {
       "properties": {
