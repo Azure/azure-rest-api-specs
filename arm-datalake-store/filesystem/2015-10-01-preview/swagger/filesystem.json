@@ -229,8 +229,11 @@
             "name": "sources",
             "in": "query",
             "required": false,
-            "type": "string",
-            "description": "A list of comma seperated absolute FileSystem paths without scheme and authority"
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+            "description": "A list of absolute File System paths without scheme and authority"
           },
           {
             "name": "op",
