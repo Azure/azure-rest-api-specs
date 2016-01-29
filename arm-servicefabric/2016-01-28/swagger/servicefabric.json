@@ -43,7 +43,6 @@
             "in": "body",
             "description": "",
             "required": true,
-            "type": "object",
             "schema": {
               "properties": {
                 "SourceId": {
@@ -155,8 +154,8 @@
         "responses": {
           "200": {
             "description": "Node",
-            "type": "object",
             "schema": {
+              "type": "object",
               "$ref": "#/definitions/Node"
             }
           }
@@ -194,8 +193,9 @@
         ],
         "responses": {
           "200": {
-            "description": "object",
+            "description": "Node health",
             "schema": {
+              "type": "object",
               "$ref": "#/definitions/NodeHealth"
             }
           }
@@ -658,7 +658,6 @@
             "in": "body",
             "description": "",
             "required": true,
-            "type": "object",
             "schema": {
               "properties": {
                 "SourceId": {
@@ -730,7 +729,6 @@
             "in": "body",
             "description": "",
             "required": true,
-            "type": "object",
             "schema": {
               "properties": {
                 "SourceId": {
@@ -809,7 +807,6 @@
             "in": "body",
             "description": "",
             "required": true,
-            "type": "object",
             "schema": {
               "properties": {
                 "SourceId": {
@@ -1412,7 +1409,6 @@
             "in": "body",
             "description": "",
             "required": true,
-            "type": "object",
             "schema": {
               "properties": {
                 "SourceId": {
@@ -1545,7 +1541,6 @@
             "in": "body",
             "description": "",
             "required": true,
-            "type": "object",
             "schema": {
               "properties": {
                 "SourceId": {
@@ -1799,11 +1794,17 @@
         ],
         "parameters": [
           {
+            "name": "partitionId",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
             "name": "partitionHealthReport",
             "in": "body",
             "description": "",
             "required": true,
-            "type": "object",
             "schema": {
               "properties": {
                 "SourceId": {
@@ -1921,7 +1922,6 @@
             "in": "body",
             "description": "",
             "required": true,
-            "type": "object",
             "schema": {
               "properties": {
                 "SourceId": {
