@@ -16,6 +16,40 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/profiles": {
+      "get": {
+        "tags": [
+          "Profiles"
+        ],
+        "summary": "Lists the CDN Profiles within an Azure subscitption",
+        "operationId": "Profiles_ListBySubscriptionId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProfileListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles": {
       "get": {
         "tags": [
@@ -455,7 +489,7 @@
           "202": {
             "description": "Accepted and  the operation will complete asynchronously",
             "schema": {
-              "$ref": "#/definitions/Profile"
+              "$ref": "#/definitions/Endpoint"
             }
           },
           "default": {
@@ -1722,16 +1756,7 @@
         },
         "queryStringCachingBehavior": {
           "description": "Defines the query string caching behavior",
-          "enum": [
-            "IgnoreQueryString",
-            "BypassCaching",
-            "UseQueryString"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "QueryStringCachingBehavior",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/QueryStringCachingBehavior"
         },
         "origins": {
           "description": "The set of origins of the CDN endpoint. When multiple origins exist, the first origin will be used as primary and rest will be used as failover options.",
@@ -1845,17 +1870,8 @@
           "type": "boolean"
         },
         "queryStringCachingBehavior": {
-          "description": "Sets query string caching behavior",
-          "enum": [
-            "IgnoreQueryString",
-            "BypassCaching",
-            "UseQueryString"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "QueryStringCachingBehavior",
-            "modelAsString": false
-          }
+          "description": "Defines the query string caching behavior",
+          "$ref": "#/definitions/QueryStringCachingBehavior"
         },
         "origins": {
           "description": " The set of origins of the CDN endpoint. When multiple origins exist, the first origin will be used as primary and rest will be used as failover options.",
@@ -2276,6 +2292,20 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ProvisioningState",
+        "modelAsString": false
+      }
+    },
+    "QueryStringCachingBehavior": {
+      "description": "Defines the query string caching behavior",
+      "enum": [
+        "IgnoreQueryString",
+        "BypassCaching",
+        "UseQueryString",
+        "NotSet"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "QueryStringCachingBehavior",
         "modelAsString": false
       }
     },
