@@ -1,0 +1,3775 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceFabricClient",
+    "version": "1.0.0"
+  },
+  "host": "localhost:19007",
+  "paths": {
+    "/$/GetClusterManifest": {
+      "get": {
+        "operationId": "GetClusterManifest",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cluster manifest",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/$/ReportClusterHealth": {
+      "post": {
+        "operationId": "SendClusterHealthReport",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "clusterHealthReport",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "properties": {
+                "SourceId": {
+                  "type": "string"
+                },
+                "Property": {
+                  "type": "string"
+                },
+                "HealthState": {
+                  "type": "integer"
+                },
+                "Description": {
+                  "type": "string"
+                },
+                "TimeToLiveInMilliSeconds": {
+                  "type": "string"
+                },
+                "SequenceNumber": {
+                  "type": "string"
+                },
+                "RemoveWhenExpired": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cluster health report",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes": {
+      "get": {
+        "operationId": "GetNodeList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "continuation-token",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Node array",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Node"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}": {
+      "get": {
+        "operationId": "GetNode",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "continuation-token",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Node",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/Node"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetHealth": {
+      "get": {
+        "operationId": "GetNodeHealth",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "EventsHealthStateFilter",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "object",
+            "schema": {
+              "$ref": "#/definitions/NodeHealth"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications": {
+      "get": {
+        "operationId": "GetDeployedApplicationList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployed application list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DeployedApplication"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications/{applicationName}": {
+      "get": {
+        "operationId": "GetDeployedApplication",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployed application",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/DeployedApplication"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetHealth": {
+      "get": {
+        "operationId": "GetDeployedApplicationHealth",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "EventsHealthStateFilter",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "DeployedServicePackagesHealthStateFilter",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployed application health",
+            "schema": {
+              "$ref": "#/definitions/DeployedApplicationHealth"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetLoadInformation": {
+      "get": {
+        "operationId": "GetNodeLoadInformation",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Node load information",
+            "schema": {
+              "$ref": "#/definitions/NodeLoadInformation"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetCodePackages": {
+      "get": {
+        "operationId": "GetDeployedCodePackage",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployed code package",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DeployedCodePackage"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetReplicas": {
+      "get": {
+        "operationId": "GetDeployedReplica",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployed replica",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DeployedReplica"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetPartitions/{partitionName}/$/GetReplicas/{replicaId}/$/GetDetail": {
+      "get": {
+        "operationId": "GetDeployedReplicaDetail",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "partitionName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "replicaId",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployed replica detail",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/DeployedReplicaDetail"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetServicePackages": {
+      "get": {
+        "operationId": "GetDeployedServicePackage",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployed service package",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DeployedServicePackage"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetServicePackages/{servicePackageName}/$/GetHealth": {
+      "get": {
+        "operationId": "GetDeployedServicePackageHealth",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "servicePackageName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "EventsHealthStateFilter",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployed service package health",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/DeployedServicePackageHealth"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetServiceTypes": {
+      "get": {
+        "operationId": "GetDeployedServiceType",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployed service type",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/DeployedServiceType"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/ReportHealth": {
+      "post": {
+        "operationId": "SendNodeHealthReport",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "nodeHealthReport",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "properties": {
+                "SourceId": {
+                  "type": "string"
+                },
+                "Property": {
+                  "type": "string"
+                },
+                "HealthState": {
+                  "type": "integer"
+                },
+                "Description": {
+                  "type": "string"
+                },
+                "TimeToLiveInMilliSeconds": {
+                  "type": "string"
+                },
+                "SequenceNumber": {
+                  "type": "string"
+                },
+                "RemoveWhenExpired": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Node health report",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/ReportHealth": {
+      "post": {
+        "operationId": "SendDeployedApplicationHealthReport",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "deployedApplicationHealthReport",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "properties": {
+                "SourceId": {
+                  "type": "string"
+                },
+                "Property": {
+                  "type": "string"
+                },
+                "HealthState": {
+                  "type": "integer"
+                },
+                "Description": {
+                  "type": "string"
+                },
+                "TimeToLiveInMilliSeconds": {
+                  "type": "string"
+                },
+                "SequenceNumber": {
+                  "type": "string"
+                },
+                "RemoveWhenExpired": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployed application health report",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetServicePackages/{serviceManifestName}/$/ReportHealth": {
+      "post": {
+        "operationId": "SendDeployedServicePackageHealthReport",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceManifestName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "deployedServicePackageHealthReport",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "properties": {
+                "SourceId": {
+                  "type": "string"
+                },
+                "Property": {
+                  "type": "string"
+                },
+                "HealthState": {
+                  "type": "integer"
+                },
+                "Description": {
+                  "type": "string"
+                },
+                "TimeToLiveInMilliSeconds": {
+                  "type": "string"
+                },
+                "SequenceNumber": {
+                  "type": "string"
+                },
+                "RemoveWhenExpired": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployed service package health report",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/ApplicationTypes": {
+      "get": {
+        "operationId": "GetApplicationTypeList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Application type",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/ApplicationType"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ApplicationTypes/{applicationTypeName}": {
+      "get": {
+        "operationId": "GetApplicationType",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationTypeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Application type",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/ApplicationType"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ApplicationTypes/{applicationTypeName}/$/GetServiceManifest": {
+      "get": {
+        "operationId": "GetServiceManifest",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationTypeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "ApplicationTypeVersion",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ServiceManifestName",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service manifest",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ServiceManifest"
+            }
+          }
+        }
+      }
+    },
+    "/ApplicationTypes/{applicationTypeName}/$/GetServiceTypes": {
+      "get": {
+        "operationId": "GetServiceType",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationTypeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "ApplicationTypeVersion",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service type",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/ServiceType"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ApplicationTypes/{applicationTypeName}/$/GetApplicationManifest": {
+      "get": {
+        "operationId": "GetApplicationManifest",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationTypeName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "ApplicationTypeVersion",
+            "in": "query",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "continuation-token",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Application manifest",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ApplicationManifest"
+            }
+          }
+        }
+      }
+    },
+    "/Applications": {
+      "get": {
+        "operationId": "GetApplicationList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "continuation-token",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Application",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/Application"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}": {
+      "get": {
+        "operationId": "GetApplication",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "continuation-token",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Application",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Application"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServices": {
+      "get": {
+        "operationId": "GetServiceList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/Service"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServices/{serviceName}": {
+      "get": {
+        "operationId": "GetService",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Service"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServices/{serviceName}/$/GetServiceGroupDescription": {
+      "get": {
+        "operationId": "GetServiceGroupDescription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service group description",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ServiceGroupDescription"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServices/{serviceName}/$/GetServiceGroupMembers": {
+      "get": {
+        "operationId": "GetServiceGroupMember",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service group description",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ServiceGroupMember"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetHealth": {
+      "get": {
+        "operationId": "GetApplicationHealth",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "EventsHealthStateFilter",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "DeployedApplicationsHealthStateFilter",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "ServicesHealthStateFilter",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "continuation-token",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Application health",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ApplicationHealth"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetUpgradeProgress": {
+      "get": {
+        "operationId": "GetApplicationUpgrade",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Application upgrade",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ApplicationUpgrade"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/ReportHealth": {
+      "post": {
+        "operationId": "SendApplicationHealthReport",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "applicationHealthReport",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "properties": {
+                "SourceId": {
+                  "type": "string"
+                },
+                "Property": {
+                  "type": "string"
+                },
+                "HealthState": {
+                  "type": "integer"
+                },
+                "Description": {
+                  "type": "string"
+                },
+                "TimeToLiveInMilliSeconds": {
+                  "type": "string"
+                },
+                "SequenceNumber": {
+                  "type": "string"
+                },
+                "RemoveWhenExpired": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Application health report",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Services/{serviceName}/$/GetDescription": {
+      "get": {
+        "operationId": "GetServiceDescription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service description",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ServiceDescription"
+            }
+          }
+        }
+      }
+    },
+    "/Services/{serviceName}/$/GetHealth": {
+      "get": {
+        "operationId": "GetServiceHealth",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service health",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ServiceHealth"
+            }
+          }
+        }
+      }
+    },
+    "/Services/{serviceName}/$/ReportHealth": {
+      "post": {
+        "operationId": "SendServiceHealth",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceHealthReport",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "properties": {
+                "SourceId": {
+                  "type": "string"
+                },
+                "Property": {
+                  "type": "string"
+                },
+                "HealthState": {
+                  "type": "integer"
+                },
+                "Description": {
+                  "type": "string"
+                },
+                "TimeToLiveInMilliSeconds": {
+                  "type": "string"
+                },
+                "SequenceNumber": {
+                  "type": "string"
+                },
+                "RemoveWhenExpired": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service health",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Services/{serviceName}/$/GetPartitions": {
+      "get": {
+        "operationId": "GetPartitionList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Partitions",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/Partition"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Services/{serviceName}/$/GetPartitions/{partitionId}": {
+      "get": {
+        "operationId": "GetPartition",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Partitions",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Partition"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/GetReplicas": {
+      "get": {
+        "operationId": "GetReplicaList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Replica",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/Replica"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/GetReplicas/{replicaId}": {
+      "get": {
+        "operationId": "GetReplica",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "replicaId",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Replica",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Replica"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/GetHealth": {
+      "get": {
+        "operationId": "GetPartitionHealth",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "EventsHealthStateFilter",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "ReplicasHealthStateFilter",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Partition health",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/PartitionHealth"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/ReportHealth": {
+      "post": {
+        "operationId": "SendPartitionHealthReport",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionHealthReport",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "properties": {
+                "SourceId": {
+                  "type": "string"
+                },
+                "Property": {
+                  "type": "string"
+                },
+                "HealthState": {
+                  "type": "integer"
+                },
+                "Description": {
+                  "type": "string"
+                },
+                "TimeToLiveInMilliSeconds": {
+                  "type": "string"
+                },
+                "SequenceNumber": {
+                  "type": "string"
+                },
+                "RemoveWhenExpired": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Partition health report",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/GetReplicas/{replicaId}/$/GetHealth": {
+      "get": {
+        "operationId": "GetReplicaHealth",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "replicaId",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "EventsHealthStateFilter",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Replica health",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ReplicaHealth"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/GetReplicas/{replicaId}/$/ReportHealth": {
+      "post": {
+        "operationId": "SendReplicaHealth",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "replicaId",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "replicaHealthReport",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "properties": {
+                "SourceId": {
+                  "type": "string"
+                },
+                "Property": {
+                  "type": "string"
+                },
+                "HealthState": {
+                  "type": "integer"
+                },
+                "Description": {
+                  "type": "string"
+                },
+                "TimeToLiveInMilliSeconds": {
+                  "type": "string"
+                },
+                "SequenceNumber": {
+                  "type": "string"
+                },
+                "RemoveWhenExpired": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Replica health",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/GetLoadInformation": {
+      "get": {
+        "operationId": "GetPartitionLoadInformation",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Partition load information",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/PartitionLoadInformation"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/GetReplicas/{replicaId}/$/GetLoadInformation": {
+      "get": {
+        "operationId": "GetReplicaLoadInformation",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "replicaId",
+            "in": "path",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Replica load information",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ReplicaLoadInformation"
+            }
+          }
+        }
+      }
+    },
+    "/$/GetLoadInformation": {
+      "get": {
+        "operationId": "GetClusterLoadInformation",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Load information",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ClusterLoadInformation"
+            }
+          }
+        }
+      }
+    },
+    "/$/GetClusterHealth": {
+      "get": {
+        "operationId": "GetClusterHealth",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "EventsHealthStateFilter",
+            "in": "query",
+            "description": "",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "NodesHealthStateFilter",
+            "in": "query",
+            "description": "",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ApplicationsHealthStateFilter",
+            "in": "query",
+            "description": "",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cluster health",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ClusterHealth"
+            }
+          }
+        }
+      }
+    },
+    "/$/GetUpgradeProgress": {
+      "get": {
+        "operationId": "GetUpgradeProgress",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Upgrade progress",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Node": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "IpAddressOrFQDN": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "string"
+        },
+        "CodeVersion": {
+          "type": "string"
+        },
+        "ConfigVersion": {
+          "type": "string"
+        },
+        "NodeStatus": {
+          "type": "integer"
+        },
+        "NodeUpTimeInSeconds": {
+          "type": "string"
+        },
+        "HealthState": {
+          "type": "integer"
+        },
+        "IsSeedNode": {
+          "type": "boolean"
+        },
+        "UpgradeDomain": {
+          "type": "string"
+        },
+        "FaultDomain": {
+          "type": "string"
+        },
+        "Id": {
+          "type": "object",
+          "properties": {
+            "Id": {
+              "type": "string"
+            }
+          }
+        },
+        "InstanceId": {
+          "type": "string"
+        },
+        "NodeDeactivationInfo": {
+          "type": "object",
+          "properties": {
+            "NodeDeactivationIntent": {
+              "type": "integer"
+              },
+            "NodeDeactivationStatus": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "HealthEvent": {
+      "type": "object",
+      "properties": {
+        "SourceId": {
+          "type": "string"
+        },
+        "Property": {
+          "type": "string"
+        },
+        "HealthState": {
+          "type": "integer"
+        },
+        "TimeToLiveInMilliSeconds": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "SequenceNumber": {
+          "type": "string"
+        },
+        "RemoveWhenExpired": {
+          "type": "boolean"
+        },
+        "SourceUtcTimestamp": {
+          "type": "string"
+        },
+        "LastModifiedUtcTimestamp": {
+          "type": "string"
+        },
+        "IsExpired": {
+          "type": "boolean"
+        },
+        "LastOkTransitionAt": {
+          "type": "string"
+        },
+        "LastWarningTransitionAt": {
+          "type": "string"
+        },
+        "LastErrorTransitionAt": {
+          "type": "string"
+        }
+      }
+    },
+    "HealthEvaluation": {
+      "type": "object",
+      "discriminator": "Kind",
+      "properties": {
+        "Kind": {
+          "type": "integer"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "AggregatedHealthState": {
+          "type": "integer"
+        }
+      }
+    },
+    "UnhealthyEvaluation": {
+      "type": "object",
+      "properties": {
+        "HealthEvaluation": {
+          "type": "object",
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      }
+    },
+    "EventHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "1",
+      "properties": {
+        "UnhealthyEvent": {
+          "type": "object",
+          "$ref": "#/definitions/HealthEvent"
+        },
+        "ConsiderWarningAsError": {
+          "type": "boolean"
+        }
+      }
+    },
+    "PartitionsHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "2",
+      "properties": {
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUnhealthyPartitionsPerService": {
+          "type": "integer"
+        }
+      }
+    },
+    "ReplicasHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "3",
+      "properties": {
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUnhealthyPartitionsPerService": {
+          "type": "integer"
+        }
+      }
+    },
+    "DeployedServicePackagesHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "4",
+      "properties": {
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "DeployedApplicationsHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "5",
+      "properties": {
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUnhealthyDeployedApplications": {
+          "type": "integer"
+        }
+      }
+    },
+    "ServicesHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "6",
+      "properties": {
+        "ServiceTypeName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUnhealthyServices": {
+          "type": "integer"
+        }
+      }
+    },
+    "NodesHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "7",
+      "properties": {
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUnhealthyNodes": {
+          "type": "integer"
+        }
+      }
+    },
+    "ApplicationsHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "8",
+      "properties": {
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUnhealthyApplications": {
+          "type": "integer"
+        }
+      }
+    },
+    "UpgradeDomainNodesHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "9",
+      "properties": {
+        "UpgradeDomainName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUnhealthyNodes": {
+          "type": "integer"
+        }
+      }
+    },
+    "UpgradeDomainDeployedApplicationsHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "10",
+      "properties": {
+        "UpgradeDomainName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUnhealthyDeployedApplications": {
+          "type": "integer"
+        }
+      }
+    },
+    "SystemApplicationHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "11",
+      "properties": {
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        }
+      }
+    },
+    "PartitionHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "12",
+      "properties": {
+        "PartitionId": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        }
+      }
+    },
+    "ReplicaHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "13",
+      "properties": {
+        "PartitionId": {
+          "type": "string"
+        },
+        "ReplicaOrInstanceId": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        }
+      }
+    },
+    "DeployedServicePackageHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "14",
+      "properties": {
+        "ApplicationName": {
+          "type": "string"
+        },
+        "NodeName": {
+          "type": "string"
+        },
+        "ServiceManifestName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        }
+      }
+    },
+    "DeployedApplicationHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "15",
+      "properties": {
+        "ApplicationName": {
+          "type": "string"
+        },
+        "NodeName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        }
+      }
+    },
+    "ServiceHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "16",
+      "properties": {
+        "ServiceName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        }
+      }
+    },
+    "NodeHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "17",
+      "properties": {
+        "NodeName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        }
+      }
+    },
+    "ApplicationHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "18",
+      "properties": {
+        "ServiceName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        }
+      }
+    },
+    "DeltaNodesCheckHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "19",
+      "properties": {
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "BaselineErrorCount": {
+          "type": "integer"
+        },
+        "BaselineTotalCount": {
+          "type": "integer"
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentDeltaUnhealthyNodes": {
+          "type": "integer"
+        }
+      }
+    },
+    "UpgradeDomainDeltaNodesCheckHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "20",
+      "properties": {
+        "UpgradeDomainName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "BaselineErrorCount": {
+          "type": "integer"
+        },
+        "BaselineTotalCount": {
+          "type": "integer"
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUpgradeDomainDeltaUnhealthyNodes": {
+          "type": "integer"
+        }
+      }
+    },
+    "ApplicationTypeHealthEvaluation": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
+      "x-ms-discriminator-value": "21",
+      "properties": {
+        "ApplicationTypeName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUnhealthyApplications": {
+          "type": "integer"
+        }
+      }
+    },
+    "NodeHealth": {
+      "type": "object",
+      "properties": {
+        "HealthEvents": {
+          "type": "object",
+          "$ref": "#/definitions/HealthEvent"
+        },
+        "AggregatedHealthState": {
+          "type": "integer"
+        },
+        "Name": {
+          "type": "string"
+        }
+      }
+    },
+    "DeployedApplication": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "TypeName": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "integer"
+        },
+        "WorkDirectory": {
+          "type": "string"
+        },
+        "LogDirectory": {
+          "type": "string"
+        },
+        "TempDirectory": {
+          "type": "string"
+        }
+      }
+    },
+    "DeployedServicePackageHealthState": {
+      "type": "object",
+      "properties": {
+        "ApplicationName": {
+          "type": "string"
+        },
+        "ServiceManifestName": {
+          "type": "string"
+        },
+        "NodeName": {
+          "type": "string"
+        },
+        "AggregatedHealthState": {
+          "type": "integer"
+        }
+      }
+    },
+    "DeployedApplicationHealth": {
+      "type": "object",
+      "properties": {
+        "HealthEvents": {
+          "type": "object",
+          "$ref": "#/definitions/HealthEvent"
+        },
+        "AggregatedHealthState": {
+          "type": "integer"
+        },
+        "UnhealthyEvaluations": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "NodeName": {
+          "type": "string"
+        },
+        "DeployedServicePackageHealthStates": {
+          "type": "object",
+          "$ref": "#/definitions/DeployedServicePackageHealthState"
+        }
+      }
+    },
+    "NodeLoadMetricInformation": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "NodeCapacity": {
+          "type": "string"
+        },
+        "NodeLoad": {
+          "type": "string"
+        },
+        "NodeRemainingCapacity": {
+          "type": "string"
+        },
+        "IsCapacityViolation": {
+          "type": "boolean"
+        },
+        "NodeBufferedCapacity": {
+          "type": "string"
+        },
+        "NodeRemainingBufferedCapacity": {
+          "type": "string"
+        }
+      }
+    },
+    "NodeLoadInformation": {
+      "type": "object",
+      "properties": {
+        "NodeName": {
+          "type": "string"
+        },
+        "NodeLoadMetricInformation": {
+          "type": "object",
+          "$ref": "#/definitions/NodeLoadMetricInformation"
+        }
+      }
+    },
+    "CodePackageEntryPointStatistics": {
+      "type": "object",
+      "properties": {
+        "LastExitCode": {
+          "type": "integer"
+        },
+        "LastActivationTime": {
+          "type": "string"
+        },
+        "LastExitTime": {
+          "type": "string"
+        },
+        "LastSuccessfulActivationTime": {
+          "type": "string"
+        },
+        "LastSuccessfulExitTime": {
+          "type": "string"
+        },
+        "ActivationFailureCount": {
+          "type": "integer"
+        },
+        "ContinuousActivationFailureCount": {
+          "type": "integer"
+        },
+        "ExitFailureCount": {
+          "type": "integer"
+        },
+        "ContinuousExitFailureCount": {
+          "type": "integer"
+        },
+        "ActivationCount": {
+          "type": "integer"
+        },
+        "ExitCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "EntryPoint": {
+      "type": "object",
+      "properties": {
+        "EntryPointLocation": {
+          "type": "integer"
+        },
+        "ProcessId": {
+          "type": "integer"
+        },
+        "RunAsUserName": {
+          "type": "integer"
+        },
+        "NextActivationTime": {
+          "type": "integer"
+        },
+        "Status": {
+          "type": "integer"
+        },
+        "CodePackageEntryPointStatistics": {
+          "type": "object",
+          "$ref": "#/definitions/CodePackageEntryPointStatistics"
+        }
+      }
+    },
+    "DeployedCodePackage": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Version": {
+          "type": "string"
+        },
+        "ServiceManifestName": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "RunFrequencyInterval": {
+          "type": "string"
+        },
+        "SetupEntryPoint": {
+          "type": "object",
+          "$ref": "#/definitions/EntryPoint"
+        },
+        "MainEntryPoint": {
+          "type": "object",
+          "$ref": "#/definitions/EntryPoint"
+        },
+        "HasSetupEntryPoint": {
+          "type": "boolean"
+        }
+      }
+    },
+    "DeployedReplica": {
+      "type": "object",
+      "properties": {
+        "ServiceKind": {
+          "type": "integer"
+        },
+        "ServiceName": {
+          "type": "string"
+        },
+        "ServiceTypeName": {
+          "type": "string"
+        },
+        "ServiceManifestVersion": {
+          "type": "string"
+        },
+        "ServiceManifestName": {
+          "type": "string"
+        },
+        "CodePackageName": {
+          "type": "string"
+        },
+        "PartitionId": {
+          "type": "string"
+        },
+        "ReplicaId": {
+          "type": "string"
+        },
+        "ReplicaRole": {
+          "type": "string"
+        },
+        "ReplicaStatus": {
+          "type": "string"
+        },
+        "Address": {
+          "type": "string"
+        }
+      }
+    },
+    "DeployedReplicaDetail": {
+      "type": "object",
+      "properties": {
+        "ServiceKind": {
+          "type": "integer"
+        },
+        "ServiceName": {
+          "type": "string"
+        },
+        "PartitionId": {
+          "type": "string"
+        },
+        "CurrentServiceOperation": {
+          "type": "integer"
+        },
+        "CurrentServiceOperationStartTimeUtc": {
+          "type": "string"
+        },
+        "ReplicaId": {
+          "type": "string"
+        },
+        "ReadStatus": {
+          "type": "integer"
+        },
+        "WriteStatus": {
+          "type": "integer"
+        },
+        "ReplicatorStatus": {
+          "type": "object",
+          "properties": {
+            "Kind": {
+              "type": "integer"
+            },
+            "ReplicationQueueStatus": {
+              "type": "object",
+              "properties": {
+                "QueueUtilizationPercentage": {
+                  "type": "string"
+                },
+                "QueueMemorySize": {
+                  "type": "string"
+                },
+                "FirstSequenceNumber": {
+                  "type": "string"
+                },
+                "CompletedSequenceNumber": {
+                  "type": "string"
+                },
+                "CommittedSequenceNumber": {
+                  "type": "string"
+                },
+                "LastSequenceNumber": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "DeployedServicePackage": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Version": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "integer"
+        }
+      }
+    },
+    "DeployedServicePackageHealth": {
+      "type": "object",
+      "properties": {
+        "ApplicationName": {
+          "type": "string"
+        },
+        "ServiceManifestName": {
+          "type": "string"
+        },
+        "NodeName": {
+          "type": "string"
+        },
+        "HealthEvents": {
+          "type": "object",
+          "$ref": "#/definitions/HealthEvent"
+        },
+        "AggregatedHealthState": {
+          "type": "integer"
+        }
+      }
+    },
+    "DeployedServiceType": {
+      "type": "object",
+      "properties": {
+        "ServiceTypeName": {
+          "type": "string"
+        },
+        "CodePackageName": {
+          "type": "string"
+        },
+        "ServiceManifestName": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "integer"
+        }
+      }
+    },
+    "ApplicationType": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Version": {
+          "type": "string"
+        },
+        "DefaultParameterList": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Key": {
+                "type": "string"
+              },
+              "Value": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ServiceManifest": {
+      "type": "object",
+      "properties": {
+        "Manifest": {
+          "type": "string"
+        }
+      }
+    },
+    "ServiceType": {
+      "type": "object",
+      "properties": {
+        "ServiceTypeDescription": {
+          "type": "object",
+          "properties": {
+            "IsStateful": {
+              "type": "boolean"
+            },
+            "ServiceTypeName": {
+              "type": "string"
+            },
+            "PlacementConstraints": {
+              "type": "string"
+            },
+            "HasPersistedState": {
+              "type": "boolean"
+            }
+          }
+        },
+        "ServiceManifestVersion": {
+          "type": "string"
+        },
+        "ServiceManifestName": {
+          "type": "string"
+        },
+        "IsServiceGroup": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Application": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "TypeName": {
+          "type": "string"
+        },
+        "TypeVersion": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "integer"
+        },
+        "Parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Key": {
+                "type": "string"
+              },
+              "Value": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "HealthState": {
+          "type": "integer"
+        }
+      }
+    },
+    "ApplicationManifest": {
+      "type": "object",
+      "properties": {
+        "Manifest": {
+          "type": "string"
+        }
+      }
+    },
+    "Service": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "ServiceKind": {
+          "type": "integer"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "TypeName": {
+          "type": "string"
+        },
+        "ManifestVersion": {
+          "type": "string"
+        },
+        "HasPersistedState": {
+          "type": "boolean"
+        },
+        "HealthState": {
+          "type": "integer"
+        },
+        "ServiceStatus": {
+          "type": "integer"
+        },
+        "IsServiceGroup": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ServiceGroupMemberDescription": {
+      "type": "object",
+      "properties": {
+        "ServiceName": {
+          "type": "string"
+        },
+        "ServiceTypeName": {
+          "type": "string"
+        },
+        "ServiceKind": {
+          "type": "integer"
+        }
+      }
+    },
+    "ServiceGroupDescription": {
+      "type": "object",
+      "properties": {
+        "ServiceKind": {
+          "type": "integer"
+        },
+        "ApplicationName": {
+          "type": "string"
+        },
+        "ServiceName": {
+          "type": "string"
+        },
+        "ServiceTypeName": {
+          "type": "string"
+        },
+        "PartitionDescription": {
+          "type": "object",
+          "properties": {
+            "PartitionScheme": {
+              "type": "integer"
+            }
+          }
+        },
+        "InstanceCount": {
+          "type": "integer"
+        },
+        "PlacementConstraints": {
+          "type": "string"
+        },
+        "Flags": {
+          "type": "integer"
+        },
+        "DefaultMoveCost": {
+          "type": "integer"
+        },
+        "IsDefaultMoveCostSpecified": {
+          "type": "boolean"
+        },
+        "ServiceGroupMemberDescription": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ServiceGroupMemberDescription"
+          }
+        }
+      }
+    },
+    "ServiceGroupMember": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "ServiceGroupMemberDescription": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ServiceGroupMemberDescription"
+          }
+        }
+      }
+    },
+    "ApplicationHealth": {
+      "type": "object",
+      "properties": {
+        "HealthEvents": {
+          "type": "object",
+          "$ref": "#/definitions/HealthEvent"
+        },
+        "AggregatedHealthState": {
+          "type": "integer"
+        },
+        "UnhealthyEvaluations": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "ServiceHealthStates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ServiceName": {
+                "type": "string"
+              },
+              "AggregatedHealthState": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "DeployedApplicationHealthStates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ApplicationName": {
+                "type": "string"
+              },
+              "NodeName": {
+                "type": "string"
+              },
+              "AggregatedHealthState": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ApplicationUpgrade": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "TypeName": {
+          "type": "string"
+        },
+        "TargetApplicationTypeVersion": {
+          "type": "string"
+        },
+        "UpgradeDomains": {
+          "type": "string"
+        },
+        "UpgradeState": {
+          "type": "integer"
+        },
+        "NextUpgradeDomain": {
+          "type": "string"
+        },
+        "RollingUpgradeMode": {
+          "type": "integer"
+        },
+        "UpgradeDurationInMilliseconds": {
+          "type": "string"
+        },
+        "UpgradeDomainDurationInMilliseconds": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "string"
+        },
+        "CurrentUpgradeDomainProgress": {
+          "type": "object",
+          "properties": {
+            "DomainName": {
+              "type": "string"
+            },
+            "NodeUpgradeProgressList": {
+              "type": "string"
+            }
+          }
+        },
+        "StartTimestampUtc": {
+          "type": "string"
+        },
+        "FailureTimestampUtc": {
+          "type": "string"
+        },
+        "FailureReason": {
+          "type": "integer"
+        },
+        "DeployedApplicationHealthStates": {
+          "type": "object",
+          "properties": {
+            "DomainName": {
+              "type": "string"
+            },
+            "NodeUpgradeProgressList": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ServiceDescription": {
+      "type": "object",
+      "properties": {
+        "ServiceKind": {
+          "type": "integer"
+        },
+        "ApplicationName": {
+          "type": "string"
+        },
+        "ServiceName": {
+          "type": "string"
+        },
+        "ServiceTypeName": {
+          "type": "string"
+        },
+        "PartitionDescription": {
+          "type": "object",
+          "properties": {
+            "PartitionScheme": {
+              "type": "integer"
+            }
+          }
+        },
+        "TargetReplicaSetSize": {
+          "type": "integer"
+        },
+        "MinReplicaSetSize": {
+          "type": "integer"
+        },
+        "HasPersistedState": {
+          "type": "boolean"
+        },
+        "PlacementConstraints": {
+          "type": "string"
+        },
+        "Flags": {
+          "type": "integer"
+        },
+        "ReplicaRestartWaitDurationSeconds": {
+          "type": "integer"
+        },
+        "QuorumLossWaitDurationSeconds": {
+          "type": "integer"
+        },
+        "StandByReplicaKeepDurationSeconds": {
+          "type": "integer"
+        },
+        "DefaultMoveCost": {
+          "type": "integer"
+        },
+        "IsDefaultMoveCostSpecified": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ServiceHealth": {
+      "type": "object",
+      "properties": {
+        "HealthEvents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HealthEvent"
+          }
+        },
+        "AggregatedHealthState": {
+          "type": "integer"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "PartitionHealthStates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "PartitionId": {
+                "type": "string"
+              },
+              "AggregatedHealthState": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Partition": {
+      "type": "object",
+      "properties": {
+        "ServiceKind": {
+          "type": "integer"
+        },
+        "PartitionInformation": {
+          "type": "object",
+          "properties": {
+            "ServicePartitionKind": {
+              "type": "integer"
+            },
+            "Id": {
+              "type": "string"
+            }
+          }
+        },
+        "TargetReplicaSetSize": {
+          "type": "integer"
+        },
+        "MinReplicaSetSize": {
+          "type": "integer"
+        },
+        "HealthState": {
+          "type": "integer"
+        },
+        "PartitionStatus": {
+          "type": "integer"
+        },
+        "CurrentConfigurationEpoch": {
+          "type": "object",
+          "properties": {
+            "ConfigurationVersion": {
+              "type": "string"
+            },
+            "DataLossVersion": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "Replica": {
+      "type": "object",
+      "properties": {
+        "ServiceKind": {
+          "type": "integer"
+        },
+        "ReplicaId": {
+          "type": "string"
+        },
+        "ReplicaRole": {
+          "type": "integer"
+        },
+        "ReplicaStatus": {
+          "type": "integer"
+        },
+        "HealthState": {
+          "type": "integer"
+        },
+        "Address": {
+          "type": "string"
+        },
+        "NodeName": {
+          "type": "string"
+        },
+        "LastInBuildDurationInSeconds": {
+          "type": "string"
+        }
+      }
+    },
+    "PartitionHealth": {
+      "type": "object",
+      "properties": {
+        "HealthEvents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HealthEvent"
+          }
+        },
+        "AggregatedHealthState": {
+          "type": "integer"
+        },
+        "PartitionId": {
+          "type": "string"
+        },
+        "ReplicaHealthStates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "HealthEvents": {
+                "type": "integer"
+              },
+              "PartitionId": {
+                "type": "string"
+              },
+              "ReplicaId": {
+                "type": "string"
+              },
+              "AggregatedHealthState": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ReplicaHealth": {
+      "type": "object",
+      "properties": {
+        "ServiceKind": {
+          "type": "integer"
+        },
+        "PartitionId": {
+          "type": "string"
+        },
+        "ReplicaId": {
+          "type": "string"
+        },
+        "HealthEvents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HealthEvent"
+          }
+        },
+        "AggregatedHealthState": {
+          "type": "integer"
+        }
+      }
+    },
+    "PartitionLoadInformation": {
+      "type": "object",
+      "properties": {
+        "PartitionId": {
+          "type": "string"
+        }
+      }
+    },
+    "ReplicaLoadInformation": {
+      "type": "object",
+      "properties": {
+        "PartitionId": {
+          "type": "string"
+        },
+        "ReplicaOrInstanceId": {
+          "type": "string"
+        }
+      }
+    },
+    "LoadMetricInformation": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "IsBalancedBefore": {
+          "type": "boolean"
+        },
+        "IsBalancedAfter": {
+          "type": "boolean"
+        },
+        "DeviationBefore": {
+          "type": "integer"
+        },
+        "DeviationAfter": {
+          "type": "integer"
+        },
+        "BalancingThreshold": {
+          "type": "integer"
+        },
+        "Action": {
+          "type": "string"
+        },
+        "ActivityThreshold": {
+          "type": "integer"
+        },
+        "ClusterCapacity": {
+          "type": "string"
+        },
+        "ClusterLoad": {
+          "type": "string"
+        },
+        "RemainingUnbufferedCapacity": {
+          "type": "string"
+        },
+        "NodeBufferPercentage": {
+          "type": "integer"
+        },
+        "BufferedCapacity": {
+          "type": "string"
+        },
+        "RemainingBufferedCapacity": {
+          "type": "string"
+        },
+        "IsClusterCapacityViolation": {
+          "type": "boolean"
+        },
+        "MinNodeLoadValue": {
+          "type": "string"
+        },
+        "MinNodeLoadId": {
+          "type": "object",
+          "properties": {
+            "Id": {
+              "type": "string"
+            }
+          }
+        },
+        "MaxNodeLoadValue": {
+          "type": "string"
+        },
+        "MaxNodeLoadId": {
+          "type": "object",
+          "properties": {
+            "Id": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ClusterLoadInformation": {
+      "type": "object",
+      "properties": {
+        "LastBalancingStartTimeUtc": {
+          "type": "string"
+        },
+        "LastBalancingEndTimeUtc": {
+          "type": "string"
+        },
+        "LoadMetricInformation": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/LoadMetricInformation"
+          }
+        }
+      }
+    },
+    "ClusterHealth": {
+      "type": "object",
+      "properties": {
+        "HealthEvents": {
+          "type": "object",
+          "$ref": "#/definitions/HealthEvent"
+        },
+        "AggregatedHealthState": {
+          "type": "integer"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "NodeHealthStates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Name": {
+                "type": "string"
+              },
+              "Id": {
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "AggregatedHealthState": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "ApplicationHealthState": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Name": {
+                "type": "string"
+              },
+              "AggregatedHealthState": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
