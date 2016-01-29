@@ -62,8 +62,13 @@
             "name": "appendMode",
             "in": "query",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/AppendMode"
+            "type": "string",
+            "enum": [
+              "autocreate"
+            ],
+            "x-ms-enum": {
+              "name": "AppendModeType",
+              "modelAsString": false
             },
             "description": "Indicates the concurrent append call should create the file if it doesn't exist or just open the existing file for append"
           },
@@ -228,14 +233,12 @@
           {
             "name": "sources",
             "in": "query",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
             },
-            "description": "A list of absolute File System paths without scheme and authority"
+            "description": "A list of comma seperated absolute FileSystem paths without scheme and authority"
           },
           {
             "name": "op",
@@ -1532,15 +1535,6 @@
     }
   },
   "definitions": {
-    "AppendMode": {
-      "enum": [
-            "autocreate"
-          ],
-          "x-ms-enum": {
-            "name": "AppendMode",
-            "modelAsString": true
-          }
-    },
     "FileOperationResult": {
       "properties": {
         "boolean": {
