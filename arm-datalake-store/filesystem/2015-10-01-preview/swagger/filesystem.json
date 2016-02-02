@@ -460,7 +460,7 @@
           "FileSystem"
         ],
         "operationId": "FileSystem_ListFileStatus",
-        "description": "Get the list of file status objects specified by the file path.",
+        "description": "Get the list of file status objects specified by the file path, with optional pagination parameters",
         "parameters": [
           {
             "name": "listFilePath",
@@ -477,7 +477,7 @@
             "description": "The name of the account to use"
           },
           {
-            "name": "$top",
+            "name": "listSize",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -485,12 +485,18 @@
             "description": "Gets or sets the number of items to return. Optional."
           },
           {
-            "name": "$skip",
+            "name": "listAfter",
             "in": "query",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Gets or sets the number of items to skip over before returning elements. Optional."
+            "type": "string",
+            "description": "Gets or sets the item or lexographical index to begin returning results after. For example, with a file list of 'a','b','d' a listAfter='b' will return 'd' and a listAfter='c' will also return 'd'. Optional."
+          },
+          {
+            "name": "listBefore",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets the item or lexographical index to begin returning results before. For example, with a file list of 'a','b','d' a listBefore='d' will return 'a','b' and a listBefore='c' will also return 'a','b'. Optional."
           },
           {
             "name": "op",
@@ -498,7 +504,7 @@
             "required": false,
             "type": "string",
             "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "LISTSTATUS"
+            "default": "MSLISTSTATUS"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
