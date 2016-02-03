@@ -24,7 +24,7 @@
                 "tags": [
                     "SecurityAlertPolicy"
                 ],
-                "operationId": "SecurityAlertPolicy_CreateOrUpdateServerPolicy",
+                "operationId": "SecurityAlertPolicy_CreateOrUpdate",
                 "description": "Creates or updates an Azure SQL Server security alert policy.",
                 "parameters": [
                     {
@@ -76,7 +76,7 @@
                 "tags": [
                     "SecurityAlertPolicy"
                 ],
-                "operationId": "SecurityAlertPolicy_GetServerPolicy",
+                "operationId": "SecurityAlertPolicy_Get",
                 "description": "Returns an Azure SQL Server security alert policy.",
                 "parameters": [
                     {
@@ -117,7 +117,16 @@
         "state": {
           "readOnly": true,
           "type": "string",
-          "description": "The state of the Azure SQL Security alert policy (New, Enabled or Disabled)."
+          "description": "The state of the Azure SQL Security alert policy (New, Enabled or Disabled).",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "New"
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": false
+          }
         },
         "disabledAlerts": {
           "readOnly": true,
@@ -132,7 +141,15 @@
         "emailAccountAdmins": {
           "readOnly": true,
           "type": "string",
-          "description": "Value that indicated whether to email the azure account admins."
+          "description": "Value that indicated whether to email the azure account admins.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EmailAccountAdmins",
+            "modelAsString": false
+          }
         }
       },
       "description": "Represents the properties of an Azure SQL Security alert policy."
@@ -158,6 +175,11 @@
           "description": "Represents the properties of the resource."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "description": "Represents an Azure SQL Server Security Alert Policy."
     },
     "Resource": {
