@@ -16,167 +16,15 @@
         "application/json"
     ],
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices": {
-            "get": {
-                "tags": [
-                    "Device"
-                ],
-                "operationId": "Devices_QueryDevice",
-                "description": "Query the information associated to the devices running an application.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AppCollectionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AppNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "name": "$top",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "description": "Number of devices to return with each call. Defaults to 100 and cannot return more. Passing a greater value is ignored.\nThe response contains a `nextLink` property describing the URI path to get the next page of results if not all results could be returned at once."
-                    },
-                    {
-                        "name": "$select",
-                        "in": "query",
-                        "required": false,
-                        "type": "string",
-                        "description": "By default all `meta` and `appInfo` properties are returned, this property is used to restrict the output to the desired properties.\nIt also excludes all devices from the output that have none of the selected properties.\nIn other terms, only devices having at least one of the selected property being set is part of the results.\nExamples:\n- `$select=appInfo` : select all devices having at least 1 appInfo, return them all and don’t return any meta property.\n- `$select=meta` : return only meta properties in the output.\n- `$select=appInfo,meta/firstSeen,meta/lastSeen` : return all `appInfo`, plus meta object containing only firstSeen and lastSeen properties.\nThe format is thus a comma separated list of properties to select.\nUse `appInfo` to select all appInfo properties, `meta` to select all meta properties.\nUse `appInfo/{key}` and `meta/{key}` to select specific appInfo and meta properties."
-                    },
-                    {
-                        "name": "$filter",
-                        "in": "query",
-                        "required": false,
-                        "type": "string",
-                        "description": "Filter can be used to reduce the number of results.\nFilter is a boolean expression that can look like the following examples:\n* `$filter=deviceId gt 'abcdef0123456789abcdef0123456789'`\n* `$filter=lastModified le 1447284263690L`\n* `$filter=(deviceId ge 'abcdef0123456789abcdef0123456789') and (deviceId lt 'bacdef0123456789abcdef0123456789') and (lastModified gt 1447284263690L)`\nThe first example is used automatically for paging when returning the `nextLink` property.\nThe filter expression is a combination of checks on some properties that can be compared to their value.\nThe available operators are:\n* `gt`  : greater than * `ge`  : greater than or equals * `lt`  : less than * `le`  : less than or equals * `and` : to add multiple checks (all checks must pass), optional parentheses can be used.\nThe properties that can be used in the expression are the following:\n* `deviceId {operator} '{deviceIdValue}'` : a lexicographical comparison is made on the deviceId value, use single quotes for the value. * `lastModified {operator} {number}L` : returns only meta properties or appInfo properties whose last value modification timestamp compared to the specified value is matching (value is milliseconds since January 1st, 1970 UTC).\nPlease note the `L` character after the number of milliseconds, its required when the number of milliseconds exceeds `2^31 - 1` (which is always the case for recent timestamps).\nUsing `lastModified` excludes all devices from the output that have no property matching the timestamp criteria, like `$select`.\nPlease note that the internal value of `lastModified` timestamp for a given property is never part of the results."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "If successful, the response has a 200 status code and a JSON object describing a collection of devices in the body.",
-                        "schema": {
-                            "$ref": "#/definitions/DevicesQueryResult"
-                        }
-                    },
-                    "default": {
-                        "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.",
-                        "schema": {
-                            "$ref": "#/definitions/ApiError"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/{deviceid}": {
-            "get": {
-                "tags": [
-                    "Device"
-                ],
-                "operationId": "Devices_GetByDeviceId",
-                "description": "Get the information associated to a device running an application.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AppCollectionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AppNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "name": "deviceid",
-                        "in": "path",
-                        "description": "Device identifier.",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success, device is returned.",
-                        "schema": {
-                            "$ref": "#/definitions/Device"
-                        }
-                    },
-                    "default": {
-                        "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n* `404`: Device not found.\n",
-                        "schema": {
-                            "$ref": "#/definitions/ApiError"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/users/{userid}": {
-            "get": {
-                "tags": [
-                    "Device"
-                ],
-                "operationId": "Devices_GetByUserId",
-                "description": "Get the information associated to a device running an application using the `userId`.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AppCollectionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AppNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "name": "userid",
-                        "in": "path",
-                        "description": "User identifier.",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success, device is returned.",
-                        "schema": {
-                            "$ref": "#/definitions/Device"
-                        }
-                    },
-                    "default": {
-                        "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n* `404`: User not found.\n",
-                        "schema": {
-                            "$ref": "#/definitions/ApiError"
-                        }
-                    }
-                }
-            }
-        },
         "/subscriptions/{subscriptionId}/providers/Microsoft.MobileEngagement/appCollections": {
             "get": {
                 "tags": [
                     "AppCollections",
                     "List"
                 ],
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                },
                 "operationId": "AppCollections_List",
                 "description": "Lists app collections in a subscription.",
                 "parameters": [
@@ -205,6 +53,13 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps": {
             "get": {
+                "tags": [
+                    "Apps",
+                    "List"
+                ],
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                },
                 "operationId": "Apps_List",
                 "description": "Lists apps in an appCollection.",
                 "parameters": [
@@ -270,8 +125,8 @@
         },
         "/subscriptions/{subscriptionId}/providers/Microsoft.MobileEngagement/checkAppCollectionNameAvailability": {
             "post": {
-                "operationId": "CheckAppCollectionNameAvailability",
-                "description": "Checks DNS availability of a name in the Engagement domain.",
+                "operationId": "AppCollections_CheckNameAvailability",
+                "description": "Checks availability of an app collection name in the Engagement domain.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -310,6 +165,9 @@
                     "Campaign",
                     "List"
                 ],
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                },
                 "operationId": "Campaigns_List",
                 "description": "Get the list of campaigns.",
                 "parameters": [
@@ -339,6 +197,10 @@
                             "dataPushes",
                             "nativePushes"
                         ],
+                        "x-ms-enum": {
+                            "name": "CampaignKinds",
+                            "modelAsString": true
+                        },
                         "description": "Campaign kind."
                     },
                     {
@@ -353,28 +215,28 @@
                         "in": "query",
                         "required": false,
                         "type": "integer",
-                        "description": "Control paging of campaigns, number of campaigns to return with each call. It returns all campaigns by default.\nWhen specifying $top parameter, the response contains a `nextLink` property describing the path to get the next page if there are more results."
+                        "description": "Control paging of campaigns, number of campaigns to return with each call. It returns all campaigns by default. When specifying $top parameter, the response contains a `nextLink` property describing the path to get the next page if there are more results."
                     },
                     {
                         "name": "$filter",
                         "in": "query",
                         "required": false,
                         "type": "string",
-                        "description": "Filter can be used to restrict the results to campaigns matching a specific state.\nThe syntax is `$filter=state eq 'draft'`.\nValid state values are: draft, scheduled, in-progress, and finished.\nOnly the eq operator and the state property are supported."
+                        "description": "Filter can be used to restrict the results to campaigns matching a specific state. The syntax is `$filter=state eq 'draft'`. Valid state values are: draft, scheduled, in-progress, and finished. Only the eq operator and the state property are supported."
                     },
                     {
                         "name": "$orderby",
                         "in": "query",
                         "required": false,
                         "type": "string",
-                        "description": "Sort results by an expression which looks like `$orderby=id asc` (this example is actually the default behavior).\nThe syntax is orderby={property} {direction} or just orderby={property}.\nThe available sorting properties are id, name, state, activatedDate, and finishedDate.\nThe available directions are asc (for ascending order) and desc (for descending order).\nWhen not specified the asc direction is used.\nOnly one property at a time can be used for sorting."
+                        "description": "Sort results by an expression which looks like `$orderby=id asc` (this example is actually the default behavior). The syntax is orderby={property} {direction} or just orderby={property}. The available sorting properties are id, name, state, activatedDate, and finishedDate. The available directions are asc (for ascending order) and desc (for descending order). When not specified the asc direction is used. Only one property at a time can be used for sorting."
                     },
                     {
                         "name": "$search",
                         "in": "query",
                         "required": false,
                         "type": "string",
-                        "description": "Restrict results to campaigns matching the optional `search` expression.\nThis currently performs the search based on the name on the campaign only, case insensitive.\nIf the campaign contains the value of the `search` parameter anywhere in the name, it matches."
+                        "description": "Restrict results to campaigns matching the optional `search` expression. This currently performs the search based on the name on the campaign only, case insensitive. If the campaign contains the value of the `search` parameter anywhere in the name, it matches."
                     }
                 ],
                 "responses": {
@@ -423,6 +285,10 @@
                             "dataPushes",
                             "nativePushes"
                         ],
+                        "x-ms-enum": {
+                            "name": "CampaignKinds",
+                            "modelAsString": true
+                        },
                         "description": "Campaign kind."
                     },
                     {
@@ -497,6 +363,10 @@
                             "dataPushes",
                             "nativePushes"
                         ],
+                        "x-ms-enum": {
+                            "name": "CampaignKinds",
+                            "modelAsString": true
+                        },
                         "description": "Campaign kind."
                     },
                     {
@@ -541,6 +411,10 @@
                             "dataPushes",
                             "nativePushes"
                         ],
+                        "x-ms-enum": {
+                            "name": "CampaignKinds",
+                            "modelAsString": true
+                        },
                         "description": "Campaign kind."
                     },
                     {
@@ -594,6 +468,10 @@
                             "dataPushes",
                             "nativePushes"
                         ],
+                        "x-ms-enum": {
+                            "name": "CampaignKinds",
+                            "modelAsString": true
+                        },
                         "description": "Campaign kind."
                     },
                     {
@@ -649,6 +527,10 @@
                             "dataPushes",
                             "nativePushes"
                         ],
+                        "x-ms-enum": {
+                            "name": "CampaignKinds",
+                            "modelAsString": true
+                        },
                         "description": "Campaign kind."
                     },
                     {
@@ -710,6 +592,10 @@
                             "dataPushes",
                             "nativePushes"
                         ],
+                        "x-ms-enum": {
+                            "name": "CampaignKinds",
+                            "modelAsString": true
+                        },
                         "description": "Campaign kind."
                     },
                     {
@@ -783,6 +669,10 @@
                             "dataPushes",
                             "nativePushes"
                         ],
+                        "x-ms-enum": {
+                            "name": "CampaignKinds",
+                            "modelAsString": true
+                        },
                         "description": "Campaign kind."
                     },
                     {
@@ -843,6 +733,10 @@
                             "dataPushes",
                             "nativePushes"
                         ],
+                        "x-ms-enum": {
+                            "name": "CampaignKinds",
+                            "modelAsString": true
+                        },
                         "description": "Campaign kind."
                     },
                     {
@@ -904,6 +798,10 @@
                             "dataPushes",
                             "nativePushes"
                         ],
+                        "x-ms-enum": {
+                            "name": "CampaignKinds",
+                            "modelAsString": true
+                        },
                         "description": "Campaign kind."
                     },
                     {
@@ -968,6 +866,10 @@
                             "dataPushes",
                             "nativePushes"
                         ],
+                        "x-ms-enum": {
+                            "name": "CampaignKinds",
+                            "modelAsString": true
+                        },
                         "description": "Campaign kind."
                     },
                     {
@@ -995,7 +897,7 @@
                         }
                     },
                     "default": {
-                        "description": "* `400`: Invalid parameters or application is disabled or campaign not in `in progress` state or `pushMode` is not `manual`.\n* `401`: Authentication error.\n* `404`: Campaign not found.\n* `413`: Too many device identifiers (current limit is 1000), or request body too large.\n",
+                        "description": "* `400`: Invalid parameters or application is disabled or campaign not in `in progress` state or `pushMode` is not `manual`. * `401`: Authentication error.\n* `404`: Campaign not found.\n* `413`: Too many device identifiers (current limit is 1000), or request body too large.\n",
                         "schema": {
                             "$ref": "#/definitions/ApiError"
                         }
@@ -1039,6 +941,10 @@
                             "dataPushes",
                             "nativePushes"
                         ],
+                        "x-ms-enum": {
+                            "name": "CampaignKinds",
+                            "modelAsString": true
+                        },
                         "description": "Campaign kind."
                     },
                     {
@@ -1097,6 +1003,10 @@
                             "dataPushes",
                             "nativePushes"
                         ],
+                        "x-ms-enum": {
+                            "name": "CampaignKinds",
+                            "modelAsString": true
+                        },
                         "description": "Campaign kind."
                     },
                     {
@@ -1126,13 +1036,171 @@
                 }
             }
         },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices": {
+            "get": {
+                "tags": [
+                    "Device"
+                ],
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                },
+                "operationId": "Devices_List",
+                "description": "Query the information associated to the devices running an application.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AppCollectionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AppNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "Number of devices to return with each call. Defaults to 100 and cannot return more. Passing a greater value is ignored. The response contains a `nextLink` property describing the URI path to get the next page of results if not all results could be returned at once."
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "By default all `meta` and `appInfo` properties are returned, this property is used to restrict the output to the desired properties. It also excludes all devices from the output that have none of the selected properties. In other terms, only devices having at least one of the selected property being set is part of the results. Examples: - `$select=appInfo` : select all devices having at least 1 appInfo, return them all and don’t return any meta property. - `$select=meta` : return only meta properties in the output. - `$select=appInfo,meta/firstSeen,meta/lastSeen` : return all `appInfo`, plus meta object containing only firstSeen and lastSeen properties. The format is thus a comma separated list of properties to select. Use `appInfo` to select all appInfo properties, `meta` to select all meta properties. Use `appInfo/{key}` and `meta/{key}` to select specific appInfo and meta properties."
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "Filter can be used to reduce the number of results. Filter is a boolean expression that can look like the following examples: * `$filter=deviceId gt 'abcdef0123456789abcdef0123456789'` * `$filter=lastModified le 1447284263690L` * `$filter=(deviceId ge 'abcdef0123456789abcdef0123456789') and (deviceId lt 'bacdef0123456789abcdef0123456789') and (lastModified gt 1447284263690L)` The first example is used automatically for paging when returning the `nextLink` property. The filter expression is a combination of checks on some properties that can be compared to their value. The available operators are: * `gt`  : greater than * `ge`  : greater than or equals * `lt`  : less than * `le`  : less than or equals * `and` : to add multiple checks (all checks must pass), optional parentheses can be used. The properties that can be used in the expression are the following: * `deviceId {operator} '{deviceIdValue}'` : a lexicographical comparison is made on the deviceId value, use single quotes for the value. * `lastModified {operator} {number}L` : returns only meta properties or appInfo properties whose last value modification timestamp compared to the specified value is matching (value is milliseconds since January 1st, 1970 UTC). Please note the `L` character after the number of milliseconds, its required when the number of milliseconds exceeds `2^31 - 1` (which is always the case for recent timestamps). Using `lastModified` excludes all devices from the output that have no property matching the timestamp criteria, like `$select`. Please note that the internal value of `lastModified` timestamp for a given property is never part of the results."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "If successful, the response has a 200 status code and a JSON object describing a collection of devices in the body.",
+                        "schema": {
+                            "$ref": "#/definitions/DevicesQueryResult"
+                        }
+                    },
+                    "default": {
+                        "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/{deviceId}": {
+            "get": {
+                "tags": [
+                    "Device"
+                ],
+                "operationId": "Devices_GetByDeviceId",
+                "description": "Get the information associated to a device running an application.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AppCollectionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AppNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "deviceId",
+                        "in": "path",
+                        "description": "Device identifier.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success, device is returned.",
+                        "schema": {
+                            "$ref": "#/definitions/Device"
+                        }
+                    },
+                    "default": {
+                        "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n* `404`: Device not found.\n",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/users/{userId}": {
+            "get": {
+                "tags": [
+                    "Device"
+                ],
+                "operationId": "Devices_GetByUserId",
+                "description": "Get the information associated to a device running an application using the user identifier.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AppCollectionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AppNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "User identifier.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success, device is returned.",
+                        "schema": {
+                            "$ref": "#/definitions/Device"
+                        }
+                    },
+                    "default": {
+                        "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n* `404`: User not found.\n",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/tag": {
             "post": {
                 "tags": [
                     "Device"
                 ],
                 "operationId": "Devices_TagByDeviceId",
-                "description": "Update the tags registered for a set of devices running an application.\nUpdates are performed asynchronously, meaning that a few seconds are needed before the modifications appear in the results of the Get device command.\n",
+                "description": "Update the tags registered for a set of devices running an application. Updates are performed asynchronously, meaning that a few seconds are needed before the modifications appear in the results of the Get device command.\n",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1180,7 +1248,7 @@
                     "Device"
                 ],
                 "operationId": "Devices_TagByUserId",
-                "description": "Update the tags registered for a set of users running an application.\nUpdates are performed asynchronously, meaning that a few seconds are needed before the modifications appear in the results of the Get device command.\n",
+                "description": "Update the tags registered for a set of users running an application. Updates are performed asynchronously, meaning that a few seconds are needed before the modifications appear in the results of the Get device command.\n",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1315,7 +1383,7 @@
                         "Succeeded"
                     ],
                     "x-ms-enum": {
-                        "name": "ProvisioningState",
+                        "name": "ProvisioningStates",
                         "modelAsString": true
                     }
                 }
@@ -1422,11 +1490,11 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "Device identifiers to push as a JSON array of strings.\nNote that if you want to push the same campaign several times to the same device, you need to make several API calls.\n"
+                    "description": "Device identifiers to push as a JSON array of strings. Note that if you want to push the same campaign several times to the same device, you need to make several API calls.\n"
                 },
                 "data": {
                     "$ref": "#/definitions/Campaign",
-                    "description": "Alternative campaign's content to use instead of the referenced campaign.\nAll campaign's properties can be overridden except for the following: `name`, `manualPush`, `audience`, `startTime` and `timezone`.\n`endTime` can be overridden while keeping original `timezone` parameter. The effect is to change the client side expiration of the received campaign for the specific devices.\nIf your campaign is a *poll*, the provided data should contain the same number of questions and choices that the one you created with the create command.\nPlease note that all the push messages created using this parameter will expire after 4 weeks at maximum (`endTime` property of the campaign will be used if lower than 4 weeks in the future)."
+                    "description": "Alternative campaign's content to use instead of the referenced campaign. All campaign's properties can be overridden except for the following: `name`, `manualPush`, `audience`, `startTime` and `timezone`. `endTime` can be overridden while keeping original `timezone` parameter. The effect is to change the client side expiration of the received campaign for the specific devices. If your campaign is a *poll*, the provided data should contain the same number of questions and choices that the one you created with the create command. Please note that all the push messages created using this parameter will expire after 4 weeks at maximum (`endTime` property of the campaign will be used if lower than 4 weeks in the future)."
                 }
             }
         },
@@ -1434,14 +1502,18 @@
             "properties": {
                 "state": {
                     "type": "string",
-                    "description": "New state of the campaign, or 'queued' when testing a campaign.",
+                    "description": "State of the campaign, or 'queued' when testing a campaign.",
                     "enum": [
                         "draft",
                         "scheduled",
                         "in-progress",
                         "finished",
                         "queued"
-                    ]
+                    ],
+                    "x-ms-enum": {
+                        "name": "CampaignStates",
+                        "modelAsString": true
+                    }
                 }
             }
         },
@@ -1462,7 +1534,7 @@
             "properties": {
                 "bigText": {
                     "type": "string",
-                    "description": "Android 4.1+ only.\nMulti line message shown in expanded notifications on Android 4.1+ devices.\nThe `notificationType` property must be set to `system`.\n",
+                    "description": "Android 4.1+ only. Multi line message shown in expanded notifications on Android 4.1+ devices. The `notificationType` property must be set to `system`.\n",
                     "maxLength": 4000
                 },
                 "bigPicture": {
@@ -1472,11 +1544,11 @@
                 },
                 "sound": {
                     "type": "string",
-                    "description": "iOS only.\nThe name of a sound file in the application bundle.\nThe sound in this file is played as an alert.\nIf the sound file doesn’t exist or default is specified as the value, the default alert sound is played.\nThe audio must be in one of the audio data formats that are compatible with system sounds.\nThe `deliveryTime` property must be set to `any` or `background`.\n"
+                    "description": "iOS only. The name of a sound file in the application bundle. The sound in this file is played as an alert. If the sound file doesn’t exist or default is specified as the value, the default alert sound is played. The audio must be in one of the audio data formats that are compatible with system sounds. The `deliveryTime` property must be set to `any` or `background`.\n"
                 },
                 "actionText": {
                     "type": "string",
-                    "description": "The action text is the title of the right button of the alert or the value of the unlock slider, where the value replaces 'unlock' in 'slide to unlock'.\n'View' (localized to the preferred language) is used as the default value.\nThe `deliveryTime` property must be set to `any` or `background`.\n"
+                    "description": "The action text is the title of the right button of the alert or the value of the unlock slider, where the value replaces 'unlock' in 'slide to unlock'. 'View' (localized to the preferred language) is used as the default value. The `deliveryTime` property must be set to `any` or `background`.\n"
                 }
             }
         },
@@ -1565,7 +1637,7 @@
                 "notificationImage": {
                     "type": "string",
                     "format": "byte",
-                    "description": "Optional image encoded in base 64.\nUsually included in the right part of in app notifications (or as a banner if there is neither text nor content icon).\nFor Android system notifications, the image is used as the large icon (displayed only on Android 3+).\n",
+                    "description": "Optional image encoded in base 64. Usually included in the right part of in app notifications (or as a banner if there is neither text nor content icon). For Android system notifications, the image is used as the large icon (displayed only on Android 3+).\n",
                     "maxLength": 65535
                 },
                 "notificationOptions": {
@@ -1615,8 +1687,9 @@
                 "type"
             ]
         },
-        "carrier-name": {
+        "CarrierNameCriterion": {
             "description": "Used to target devices based on their carrier name.",
+            "x-ms-discriminator-value": "carrier-name",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -1632,8 +1705,9 @@
                 }
             ]
         },
-        "carrier-country": {
+        "CarrierCountryCriterion": {
             "description": "Used to target devices based on their carrier country.",
+            "x-ms-discriminator-value": "carrier-country",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -1649,8 +1723,9 @@
                 }
             ]
         },
-        "firmware-version": {
+        "FirmwareVersionCriterion": {
             "description": "Used to target devices based on their firmware version.",
+            "x-ms-discriminator-value": "firmware-version",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -1666,8 +1741,9 @@
                 }
             ]
         },
-        "device-manufacturer": {
+        "DeviceManufacturerCriterion": {
             "description": "Used to target devices based on the device manufacturer.",
+            "x-ms-discriminator-value": "device-manufacturer",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -1683,8 +1759,9 @@
                 }
             ]
         },
-        "device-model": {
+        "DeviceModelCriterion": {
             "description": "Used to target devices based on the device model.",
+            "x-ms-discriminator-value": "device-model",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -1700,8 +1777,9 @@
                 }
             ]
         },
-        "application-version": {
+        "ApplicationVersionCriterion": {
             "description": "Used to target devices based on the version of the application they are using.",
+            "x-ms-discriminator-value": "application-version",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -1717,8 +1795,9 @@
                 }
             ]
         },
-        "network-type": {
+        "NetworkTypeCriterion": {
             "description": "Used to target devices based their network type.",
+            "x-ms-discriminator-value": "network-type",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -1734,8 +1813,9 @@
                 }
             ]
         },
-        "language": {
+        "LanguageCriterion": {
             "description": "Used to target devices based on the language of their device.",
+            "x-ms-discriminator-value": "language",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -1751,8 +1831,9 @@
                 }
             ]
         },
-        "screen-size": {
+        "ScreenSizeCriterion": {
             "description": "Used to target devices based on the screen resolution of their device.",
+            "x-ms-discriminator-value": "screen-size",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -1768,8 +1849,9 @@
                 }
             ]
         },
-        "location": {
+        "LocationCriterion": {
             "description": "Used to target devices based on their last know area.",
+            "x-ms-discriminator-value": "location",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -1796,8 +1878,9 @@
                 }
             ]
         },
-        "geo-fencing": {
+        "GeoFencingCriterion": {
             "description": "Used to target devices based on a specific region. A center point (defined by a latitude and longitude) and a radius form the boundary for the region. This criterion will be met when the user crosses the boundaries of the region.\n",
+            "x-ms-discriminator-value": "geo-fencing",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -1825,8 +1908,9 @@
                 }
             ]
         },
-        "announcement-feedback": {
+        "AnnouncementFeedbackCriterion": {
             "description": "Used to target devices who received an announcement.",
+            "x-ms-discriminator-value": "announcement-feedback",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -1846,14 +1930,19 @@
                                 "replied",
                                 "actioned",
                                 "exited"
-                            ]
+                            ],
+                            "x-ms-enum": {
+                                "name": "CampaignFeedbacks",
+                                "modelAsString": true
+                            }
                         }
                     }
                 }
             ]
         },
-        "poll-feedback": {
+        "PollFeedbackCriterion": {
             "description": "Used to target devices who received a poll.",
+            "x-ms-discriminator-value": "poll-feedback",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -1873,14 +1962,19 @@
                                 "replied",
                                 "actioned",
                                 "exited"
-                            ]
+                            ],
+                            "x-ms-enum": {
+                                "name": "CampaignFeedbacks",
+                                "modelAsString": true
+                            }
                         }
                     }
                 }
             ]
         },
-        "poll-answer-feedback": {
+        "PollAnswerFeedbackCriterion": {
             "description": "Used to target devices who answered X to a given question.",
+            "x-ms-discriminator-value": "poll-answer-feedback",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -1900,8 +1994,9 @@
                 }
             ]
         },
-        "datapush-feedback": {
+        "DatapushFeedbackCriterion": {
             "description": "Used to target devices who received a data push.",
+            "x-ms-discriminator-value": "datapush-feedback",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -1921,14 +2016,19 @@
                                 "replied",
                                 "actioned",
                                 "exited"
-                            ]
+                            ],
+                            "x-ms-enum": {
+                                "name": "CampaignFeedbacks",
+                                "modelAsString": true
+                            }
                         }
                     }
                 }
             ]
         },
-        "segment": {
+        "SegmentCriterion": {
             "description": "Target devices based on an existing segment.",
+            "x-ms-discriminator-value": "segment",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -1948,141 +2048,9 @@
                 }
             ]
         },
-        "Filter": {
-            "type": "object",
-            "discriminator": "type",
-            "properties": {
-                "type": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "type"
-            ]
-        },
-        "engage-subset": {
-            "description": "Send only to a maximum of max users.",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Filter"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "max": {
-                            "type": "integer",
-                            "description": "An integer value representing the maximum users that should be pushed."
-                        }
-                    }
-                }
-            ]
-        },
-        "engage-old-users": {
-            "description": "Send only to users whose first app use is more than {threshold} days old.",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Filter"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "threshold": {
-                            "type": "integer",
-                            "description": "An integer value representing the threshold to apply on this filter."
-                        }
-                    }
-                }
-            ]
-        },
-        "engage-new-users": {
-            "description": "Send only to users whose first app use is less than {threshold} days old.",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Filter"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "threshold": {
-                            "type": "integer",
-                            "description": "An integer value representing the threshold to apply on this filter."
-                        }
-                    }
-                }
-            ]
-        },
-        "engage-active-users": {
-            "description": "Send only to users who have used the app in the last {threshold} days.",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Filter"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "threshold": {
-                            "type": "integer",
-                            "description": "An integer value representing the threshold to apply on this filter."
-                        }
-                    }
-                }
-            ]
-        },
-        "engage-idle-users": {
-            "description": "Send only to users who haven't used the app in the last {threshold} days.",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Filter"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "threshold": {
-                            "type": "integer",
-                            "description": "An integer value representing the threshold to apply on this filter."
-                        }
-                    }
-                }
-            ]
-        },
-        "native-push-enabled": {
-            "description": "Engage only users with native push enabled.",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Filter"
-                }
-            ]
-        },
-        "push-quota": {
-            "description": "Engage only users for whom the push quota is not reached.",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Filter"
-                }
-            ]
-        },
-        "app-info": {
-            "description": "Send only to users who have some app info set. This is a special filter that is automatically added if your campaign contains appInfo parameters. It is not intended to be public and should not be used as it could be removed or replaced by the API.\n",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Filter"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "appInfo": {
-                            "type": "array",
-                            "description": "An array containing all the required appInfo.",
-                            "items": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                }
-            ]
-        },
-        "string-tag": {
+        "StringTagCriterion": {
             "description": "Target devices based on a string tag value.",
+            "x-ms-discriminator-value": "string-tag",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -2102,8 +2070,9 @@
                 }
             ]
         },
-        "date-tag": {
+        "DateTagCriterion": {
             "description": "Target devices based on a date tag value.",
+            "x-ms-discriminator-value": "date-tag",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -2117,7 +2086,8 @@
                         },
                         "value": {
                             "type": "string",
-                            "description": "It can be either:\n* an absolute date using CCYY-MM-DD format (e.g. 1969-12-07 stands for 7 Dec 1969). * an offset in days relative to the current day (`TODAY` + `value`).\n"
+                            "format": "date",
+                            "description": "It can be either: * an absolute date using yyyy-MM-dd format (e.g. 1969-12-07 stands for 7 Dec 1969). * an offset in days relative to the current day (`TODAY` + `value`).\n"
                         },
                         "op": {
                             "type": "string",
@@ -2128,14 +2098,19 @@
                                 "GT",
                                 "LE",
                                 "GE"
-                            ]
+                            ],
+                            "x-ms-enum": {
+                                "name": "AudienceOperators",
+                                "modelAsString": true
+                            }
                         }
                     }
                 }
             ]
         },
-        "integer-tag": {
+        "IntegerTagCriterion": {
             "description": "Target devices based on an integer tag value.",
+            "x-ms-discriminator-value": "integer-tag",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -2160,14 +2135,19 @@
                                 "GT",
                                 "LE",
                                 "GE"
-                            ]
+                            ],
+                            "x-ms-enum": {
+                                "name": "AudienceOperators",
+                                "modelAsString": true
+                            }
                         }
                     }
                 }
             ]
         },
-        "boolean-tag": {
+        "BooleanTagCriterion": {
             "description": "Target devices based on a boolean tag value.",
+            "x-ms-discriminator-value": "boolean-tag",
             "allOf": [
                 {
                     "$ref": "#/definitions/Criterion"
@@ -2187,6 +2167,147 @@
                 }
             ]
         },
+        "Filter": {
+            "type": "object",
+            "discriminator": "type",
+            "properties": {
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "EngageSubsetFilter": {
+            "description": "Send only to a maximum of max users.",
+            "x-ms-discriminator-value": "engage-subset",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Filter"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "max": {
+                            "type": "integer",
+                            "description": "An integer value representing the maximum users that should be pushed."
+                        }
+                    }
+                }
+            ]
+        },
+        "EngageOldUsersFilter": {
+            "description": "Send only to users whose first app use is more than {threshold} days old.",
+            "x-ms-discriminator-value": "engage-old-users",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Filter"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "threshold": {
+                            "type": "integer",
+                            "description": "An integer value representing the threshold to apply on this filter."
+                        }
+                    }
+                }
+            ]
+        },
+        "EngageNewUsersFilter": {
+            "description": "Send only to users whose first app use is less than {threshold} days old.",
+            "x-ms-discriminator-value": "engage-new-users",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Filter"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "threshold": {
+                            "type": "integer",
+                            "description": "An integer value representing the threshold to apply on this filter."
+                        }
+                    }
+                }
+            ]
+        },
+        "EngageActiveUsersFilter": {
+            "description": "Send only to users who have used the app in the last {threshold} days.",
+            "x-ms-discriminator-value": "engage-active-users",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Filter"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "threshold": {
+                            "type": "integer",
+                            "description": "An integer value representing the threshold to apply on this filter."
+                        }
+                    }
+                }
+            ]
+        },
+        "EngageIdleUsersFilter": {
+            "description": "Send only to users who haven't used the app in the last {threshold} days.",
+            "x-ms-discriminator-value": "engage-idle-users",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Filter"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "threshold": {
+                            "type": "integer",
+                            "description": "An integer value representing the threshold to apply on this filter."
+                        }
+                    }
+                }
+            ]
+        },
+        "NativePushEnabledFilter": {
+            "description": "Engage only users with native push enabled.",
+            "x-ms-discriminator-value": "native-push-enabled",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Filter"
+                }
+            ]
+        },
+        "PushQuotaFilter": {
+            "description": "Engage only users for whom the push quota is not reached.",
+            "x-ms-discriminator-value": "push-quota",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Filter"
+                }
+            ]
+        },
+        "AppInfoFilter": {
+            "description": "Send only to users who have some app info set. This is a special filter that is automatically added if your campaign contains appInfo parameters. It is not intended to be public and should not be used as it could be removed or replaced by the API.\n",
+            "x-ms-discriminator-value": "app-info",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Filter"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "appInfo": {
+                            "type": "array",
+                            "description": "An array containing all the required appInfo.",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
         "Campaign": {
             "properties": {
                 "name": {
@@ -2196,11 +2317,11 @@
                 },
                 "audience": {
                     "type": "object",
-                    "description": "Specify which users will be targeted by this campaign. By default, all users will be targeted.\nIf you set `pushMode` property to `manual`, the only thing you can specify in the audience is the push quota filter.\nAn audience is a boolean expression made of criteria (variables) operators (`not`, `and` or `or`) and parenthesis. Additionally, a set of filters can be added to an audience.\n65535 bytes max as per JSON encoding.\n",
+                    "description": "Specify which users will be targeted by this campaign. By default, all users will be targeted. If you set `pushMode` property to `manual`, the only thing you can specify in the audience is the push quota filter. An audience is a boolean expression made of criteria (variables) operators (`not`, `and` or `or`) and parenthesis. Additionally, a set of filters can be added to an audience. 65535 bytes max as per JSON encoding.\n",
                     "properties": {
                         "expression": {
                             "type": "string",
-                            "description": "Boolean expression made of criteria (variables) operators (`not`, `and` or `or`) and parenthesis.\nCriterion names in the audience expression must start with a capital letter and can only contain alphanumeric (A-Z,a-z,0-9) and underscore (_) characters.\n"
+                            "description": "Boolean expression made of criteria (variables) operators (`not`, `and` or `or`) and parenthesis. Criterion names in the audience expression must start with a capital letter and can only contain alphanumeric (A-Z,a-z,0-9) and underscore (_) characters.\n"
                         },
                         "criteria": {
                             "description": "Criteria by name.",
@@ -2225,59 +2346,75 @@
                 },
                 "pushMode": {
                     "type": "string",
-                    "description": "Announcements/polls only.\nDefines how the campaign is pushed. Valid values are:\n* `real-time`: Never ending campaign, the campaign will be delivered  to your existing users and also to your new users.\n* `one-shot`: In this mode, the campaign will be delivered only to your existing users (campaign will stop after that).\n* `manual`: In this mode, the campaign will not be pushed automatically to devices.\nYou will have to use the Push campaign command to push the campaign to your end-users.\nCampaigns can be pushed multiple times to the same device.\n",
+                    "description": "Announcements/polls only. Defines how the campaign is pushed. Valid values are: * `real-time`: Never ending campaign, the campaign will be delivered  to your existing users and also to your new users. * `one-shot`: In this mode, the campaign will be delivered only to your existing users (campaign will stop after that). * `manual`: In this mode, the campaign will not be pushed automatically to devices. You will have to use the Push campaign command to push the campaign to your end-users. Campaigns can be pushed multiple times to the same device.\n",
                     "enum": [
                         "real-time",
                         "one-shot",
                         "manual"
                     ],
+                    "x-ms-enum": {
+                        "name": "PushModes",
+                        "modelAsString": true
+                    },
                     "default": "real-time"
                 },
                 "type": {
                     "type": "string",
-                    "description": "Applicable only to announcements and data pushes.\nType of announcement. Valid values are:\n* `text/plain`: Text-only announcement: `body` property should only contain plain text.\n* `text/html`: HTML announcement: `body` attribute can contain HTML code.\n* `only_notif`: Notification-only announcement. With this kind of announcements, the `body`, `title`, `actionButtonText` and `exitButtonText` are ignored.\nType of data push. Valid values are:\n* `text/plain`: Text only data push: `body` property must be plain text.\n* `text/base64`: Base 64 data push: `body` property must be encoded in base 64.\n",
+                    "description": "Applicable only to announcements and data pushes. Type of announcement. Valid values are: * `text/plain`: Text-only announcement: `body` property should only contain plain text. * `text/html`: HTML announcement: `body` attribute can contain HTML code. * `only_notif`: Notification-only announcement. With this kind of announcements, the `body`, `title`, `actionButtonText` and `exitButtonText` are ignored. Type of data push. Valid values are: * `text/plain`: Text only data push: `body` property must be plain text. * `text/base64`: Base 64 data push: `body` property must be encoded in base 64.\n",
                     "enum": [
                         "text/plain",
                         "text/html",
                         "only_notif",
                         "text/base64"
-                    ]
+                    ],
+                    "x-ms-enum": {
+                        "name": "CampaignTypes",
+                        "modelAsString": true
+                    }
                 },
                 "deliveryTime": {
                     "type": "string",
-                    "description": "Announcements/polls only.\nDefines when the campaign should be delivered. Valid values are:\n* `any`: Campaign will be delivered as soon as possible.\n* `background`: iOS only. Campaign will be only delivered when the application is in background (out of app).\n* `session`: Campaign will be delivered when the application is running.\n",
+                    "description": "Announcements/polls only. Defines when the campaign should be delivered. Valid values are: * `any`: Campaign will be delivered as soon as possible. * `background`: iOS only. Campaign will be only delivered when the application is in background (out of app). * `session`: Campaign will be delivered when the application is running.\n",
                     "enum": [
                         "any",
                         "background",
                         "session"
-                    ]
+                    ],
+                    "x-ms-enum": {
+                        "name": "DeliveryTimes",
+                        "modelAsString": true
+                    }
                 },
                 "deliveryActivities": {
                     "type": "array",
-                    "description": "Announcements/polls only.\nArray containing the list of activities in which the campaign can be delivered.\ndeliveryTime must be set to session.\nIf the platform is iOS, this option can also be set if deliveryTime is set to any.\nIn that case, if the campaign is received when the application is launched, it will be delivered only in the specified list of activities.\n",
+                    "description": "Announcements/polls only. Array containing the list of activities in which the campaign can be delivered. deliveryTime must be set to session. If the platform is iOS, this option can also be set if deliveryTime is set to any. In that case, if the campaign is received when the application is launched, it will be delivered only in the specified list of activities.\n",
                     "items": {
                         "type": "string"
                     }
                 },
                 "startTime": {
                     "type": "string",
-                    "description": "The date at which the campaign should be started.\nThe date shall conform to the following format: `yyyy-MM-dd HH:mm'Z'`.\n* If you set pushMode property to manual, this attribute will be ignored.\n* If you set pushMode property to one-shot, then the timezone attribute must be specified.\nExample: `2011-11-21 15:23Z`\n"
+                    "description": "The date at which the campaign should be started. The date shall conform to the following format: `yyyy-MM-dd HH:mm'Z'`. * If you set pushMode property to manual, this attribute will be ignored. * If you set pushMode property to one-shot, then the timezone attribute must be specified. Example: `2011-11-21 15:23Z`\n"
                 },
                 "endTime": {
                     "type": "string",
-                    "description": "The date at which the campaign should be finished.\nThe date shall conform to the following format: `yyyy-MM-dd HH:mm'Z'`.\nExample: `2011-11-21 15:23Z`\n"
+                    "description": "The date at which the campaign should be finished. The date shall conform to the following format: `yyyy-MM-dd HH:mm'Z'`. Example: `2011-11-21 15:23Z`\n"
                 },
                 "timezone": {
                     "type": "string",
-                    "description": "The id of the time zone to use for the startTime and endTime dates.\nIf not provided, the two date attributes will be expressed using the device timezone.\nExample: America/Los_Angeles\n"
+                    "description": "The id of the time zone to use for the startTime and endTime dates. If not provided, the two date attributes will be expressed using the device timezone. Example: America/Los_Angeles\n"
                 },
                 "notificationType": {
                     "type": "string",
-                    "description": "Android only.\nDefines how the notification should be displayed. Valid values are:\n* `system`: Display the notification using a standard system notification.\n* `popup`: Display the notification using a in-app banner notification.\n",
+                    "description": "Android only. Defines how the notification should be displayed. Valid values are: * `system`: Display the notification using a standard system notification. * `popup`: Display the notification using a in-app banner notification.\n",
                     "enum": [
                         "system",
                         "popup"
                     ],
+                    "x-ms-enum": {
+                        "name": "NotificationTypes",
+                        "modelAsString": true
+                    },
                     "default": "popup"
                 },
                 "notificationIcon": {
@@ -2297,17 +2434,17 @@
                 },
                 "notificationSound": {
                     "type": "boolean",
-                    "description": "* `Android`: A flag indicating whether or not you want the system notification to make a sound. The `notificationType` property must be set to `system`.\n* `iOS`: A flag indicating whether or not you want the native Apple Push notification to make a sound. The `deliveryTime` property must be set to `any` or `background`. This will play the 'default' sound. If you want to play a custom sound, see the `notificationOptions` property.\n* `Windows`: A flag indicating whether or not you want the native Windows Notification Service to make a sound. The `deliveryTime` property must be set to `any`.\n",
+                    "description": "* `Android`: A flag indicating whether or not you want the system notification to make a sound. The `notificationType` property must be set to `system`. * `iOS`: A flag indicating whether or not you want the native Apple Push notification to make a sound. The `deliveryTime` property must be set to `any` or `background`. This will play the 'default' sound. If you want to play a custom sound, see the `notificationOptions` property. * `Windows`: A flag indicating whether or not you want the native Windows Notification Service to make a sound. The `deliveryTime` property must be set to `any`.\n",
                     "default": false
                 },
                 "notificationBadge": {
                     "type": "boolean",
-                    "description": "A flag indicating whether or not you want the native Apple Push notification to update the badge icon to the number of unread messages.\nThe `deliveryTime` property must be set to `any` or `background`.\n",
+                    "description": "A flag indicating whether or not you want the native Apple Push notification to update the badge icon to the number of unread messages. The `deliveryTime` property must be set to `any` or `background`.\n",
                     "default": false
                 },
                 "localization": {
                     "type": "object",
-                    "description": "Reach campaigns can be localized using an optional JSON object. The JSON key is a two-character language code as specified by the ISO 639-1 standard.\nThe corresponding value is an object containing the localizable properties.\n",
+                    "description": "Reach campaigns can be localized using an optional JSON object. The JSON key is a two-character language code as specified by the ISO 639-1 standard. The corresponding value is an object containing the localizable properties.\n",
                     "additionalProperties": {
                         "$ref": "#/definitions/CampaignLocalization"
                     }
@@ -2328,69 +2465,71 @@
         },
         "CampaignListResult": {
             "properties": {
-                "id": {
-                    "type": "integer",
-                    "description": "Unique identifier of the campaign."
-                },
                 "name": {
                     "type": "string",
                     "description": "Name of the campaign."
                 },
-                "state": {
-                    "type": "string",
-                    "description": "The current state of the campaign.",
-                    "enum": [
-                        "draft",
-                        "scheduled",
-                        "in-progress",
-                        "finished"
-                    ]
-                },
                 "activatedDate": {
                     "type": "string",
-                    "description": "The date at which the campaign was activated (Not present if not yet activated).\nThe date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
+                    "format": "date-time",
+                    "description": "The date at which the campaign was activated (Not present if not yet activated). The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
                 },
                 "finishedDate": {
                     "type": "string",
-                    "description": "The date at which the campaign was finished (Not present if not yet finished).\nThe date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
+                    "format": "date-time",
+                    "description": "The date at which the campaign was finished (Not present if not yet finished). The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
                 },
-                "startDate": {
+                "startTime": {
                     "type": "string",
+                    "format": "date-time",
                     "description": "The date at which the campaign should be started if specified. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard. Applicable only to announcements and polls.\n"
                 },
-                "endDate": {
+                "endTime": {
                     "type": "string",
+                    "format": "date-time",
                     "description": "The date at which the campaign should be finished if specified. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard. Applicable only to announcements and polls.\n"
                 },
                 "timezone": {
                     "type": "string",
                     "description": "The id of the time zone to use for the `startTime` and `endTime` dates. If not provided, the two date attributes are referencing to the device timezone. Applicable only to announcements and polls.\n"
                 }
-            }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/CampaignStateResult"
+                }
+            ]
         },
         "CampaignResult": {
             "properties": {
                 "id": {
                     "type": "integer",
-                    "description": "Unique identifier of the campaign."
+                    "description": "Campaign identifier."
                 },
                 "state": {
                     "type": "string",
-                    "description": "The current state of the campaign.",
+                    "description": "State of the campaign, or 'queued' when testing a campaign.",
                     "enum": [
                         "draft",
                         "scheduled",
                         "in-progress",
-                        "finished"
-                    ]
+                        "finished",
+                        "queued"
+                    ],
+                    "x-ms-enum": {
+                        "name": "CampaignStates",
+                        "modelAsString": true
+                    }
                 },
                 "activatedDate": {
                     "type": "string",
-                    "description": "The date at which the campaign was activated (Not present if not yet activated).\nThe date conforms to the following format: yyyy-MM-dd HH:mm'Z' as specified by the ISO 8601 standard.\n"
+                    "format": "date-time",
+                    "description": "The date at which the campaign was activated (Not present if not yet activated). The date conforms to the following format: yyyy-MM-dd HH:mm'Z' as specified by the ISO 8601 standard.\n"
                 },
                 "finishedDate": {
                     "type": "string",
-                    "description": "The date at which the campaign was finished (Not present if not yet finished).\nThe date conforms to the following format: yyyy-MM-dd HH:mm'Z' as specified by the ISO 8601 standard.\n"
+                    "format": "date-time",
+                    "description": "The date at which the campaign was finished (Not present if not yet finished). The date conforms to the following format: yyyy-MM-dd HH:mm'Z' as specified by the ISO 8601 standard.\n"
                 }
             },
             "allOf": [
@@ -2403,7 +2542,7 @@
             "properties": {
                 "invalidDeviceIds": {
                     "type": "array",
-                    "description": "A JSON array containing all identifiers that have been rejected.\nA device can be rejected for the following reasons:\n* The device hasn’t reported any session yet. * The device is over quota (if a push quota filter is applied on your campaign).\nPlease note that if the request parameters are valid but all the specified devices are rejected, the status code is still `200` with a response including all the devices as being rejected.\n",
+                    "description": "A JSON array containing all identifiers that have been rejected. A device can be rejected for the following reasons: * The device hasn’t reported any session yet. * The device is over quota (if a push quota filter is applied on your campaign). Please note that if the request parameters are valid but all the specified devices are rejected, the status code is still `200` with a response including all the devices as being rejected.\n",
                     "items": {
                         "type": "string"
                     }
@@ -2679,7 +2818,7 @@
             ],
             "properties": {
                 "tags": {
-                    "description": "A JSON object describing the set of tags to record for a set of users.\nEach key is a device/user identifier, each value is itself a key/value set: the tags to set for the specified device/user identifier.\n",
+                    "description": "A JSON object describing the set of tags to record for a set of users. Each key is a device/user identifier, each value is itself a key/value set: the tags to set for the specified device/user identifier.\n",
                     "additionalProperties": {
                         "type": "object",
                         "additionalProperties": {
@@ -2701,7 +2840,7 @@
             "properties": {
                 "invalidIds": {
                     "type": "array",
-                    "description": "A JSON array containing all identifiers that have been rejected.\nPlease note that if the request parameters are valid but all the specified devices are rejected, the status code is still `200` with a response including all the devices as being rejected.\n",
+                    "description": "A JSON array containing all identifiers that have been rejected. Please note that if the request parameters are valid but all the specified devices are rejected, the status code is still `200` with a response including all the devices as being rejected.\n",
                     "items": {
                         "type": "string"
                     }
@@ -2722,9 +2861,6 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "enum": [
-                "2014-12-01"
-            ],
             "description": "Client Api Version."
         },
         "ResourceGroupNameParameter": {
