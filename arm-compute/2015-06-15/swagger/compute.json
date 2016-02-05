@@ -173,7 +173,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
@@ -215,7 +215,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
@@ -421,13 +421,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualMachineExtension"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualMachineExtension"
@@ -472,13 +472,13 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": ""
           },
           "204": {
             "description": ""
           },
-          "200": {
+          "202": {
             "description": ""
           }
         },
@@ -517,7 +517,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation."
+            "description": "Name of the property to expand. Allowed value is null or 'instanceView'."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -816,7 +816,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
@@ -852,7 +852,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
@@ -895,14 +895,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": ""
+          },
           "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualMachineCaptureResult"
             }
-          },
-          "202": {
-            "description": ""
           }
         },
         "x-ms-long-running-operation": true
@@ -947,13 +947,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualMachine"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualMachine"
@@ -994,10 +994,10 @@
           "200": {
             "description": ""
           },
-          "202": {
+          "204": {
             "description": ""
           },
-          "204": {
+          "202": {
             "description": ""
           }
         },
@@ -1029,7 +1029,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation."
+            "description": "Name of the property to expand. Allowed value is null or 'instanceView'."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1222,7 +1222,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
@@ -1376,13 +1376,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSet"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSet"
@@ -1468,13 +1468,13 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": ""
-          },
           "200": {
             "description": ""
           },
           "204": {
+            "description": ""
+          },
+          "202": {
             "description": ""
           }
         },
@@ -1634,7 +1634,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
@@ -1704,7 +1704,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
@@ -2117,7 +2117,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation."
+            "description": "The list parameters."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2135,7 +2135,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         },
         "x-ms-odata": "#/definitions/VirtualMachineScaleSetVM"
       }
@@ -2290,7 +2290,7 @@
           ],
           "x-ms-enum": {
             "name": "StatusLevelTypes",
-            "modelAsString": true
+            "modelAsString": "True"
           }
         },
         "displayStatus": {
@@ -2614,7 +2614,7 @@
           ],
           "x-ms-enum": {
             "name": "OperatingSystemTypes",
-            "modelAsString": true
+            "modelAsString": "True"
           }
         }
       },
@@ -2709,7 +2709,7 @@
           ],
           "x-ms-enum": {
             "name": "UsageUnit",
-            "modelAsString": false
+            "modelAsString": "False"
           }
         },
         "currentValue": {
@@ -2873,7 +2873,7 @@
           ],
           "x-ms-enum": {
             "name": "VirtualMachineSizeTypes",
-            "modelAsString": true
+            "modelAsString": "True"
           }
         }
       },
@@ -2970,7 +2970,7 @@
           ],
           "x-ms-enum": {
             "name": "OperatingSystemTypes",
-            "modelAsString": true
+            "modelAsString": "True"
           }
         },
         "encryptionSettings": {
@@ -2999,7 +2999,7 @@
           ],
           "x-ms-enum": {
             "name": "CachingTypes",
-            "modelAsString": true
+            "modelAsString": "True"
           }
         },
         "createOption": {
@@ -3012,7 +3012,7 @@
           ],
           "x-ms-enum": {
             "name": "DiskCreateOptionTypes",
-            "modelAsString": true
+            "modelAsString": "True"
           }
         },
         "diskSizeGB": {
@@ -3057,7 +3057,7 @@
           ],
           "x-ms-enum": {
             "name": "CachingTypes",
-            "modelAsString": true
+            "modelAsString": "True"
           }
         },
         "createOption": {
@@ -3070,7 +3070,7 @@
           ],
           "x-ms-enum": {
             "name": "DiskCreateOptionTypes",
-            "modelAsString": true
+            "modelAsString": "True"
           }
         },
         "diskSizeGB": {
@@ -3117,7 +3117,7 @@
           ],
           "x-ms-enum": {
             "name": "PassNames",
-            "modelAsString": true
+            "modelAsString": "True"
           }
         },
         "componentName": {
@@ -3128,7 +3128,7 @@
           ],
           "x-ms-enum": {
             "name": "ComponentNames",
-            "modelAsString": true
+            "modelAsString": "True"
           }
         },
         "settingName": {
@@ -3140,7 +3140,7 @@
           ],
           "x-ms-enum": {
             "name": "SettingNames",
-            "modelAsString": true
+            "modelAsString": "True"
           }
         },
         "content": {
@@ -3161,7 +3161,7 @@
           ],
           "x-ms-enum": {
             "name": "ProtocolTypes",
-            "modelAsString": true
+            "modelAsString": "True"
           }
         },
         "certificateUrl": {
@@ -3521,6 +3521,10 @@
           "$ref": "#/definitions/VirtualMachineInstanceView",
           "readOnly": true,
           "description": "Gets the virtual machine instance view."
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "Gets or sets the license type, which is for bring your own license scenario."
         }
       },
       "description": "Describes the properties of a Virtual Machine."
@@ -3595,7 +3599,7 @@
           ],
           "x-ms-enum": {
             "name": "UpgradeMode",
-            "modelAsString": true
+            "modelAsString": "True"
           }
         }
       },
@@ -3653,7 +3657,7 @@
           ],
           "x-ms-enum": {
             "name": "CachingTypes",
-            "modelAsString": true
+            "modelAsString": "True"
           }
         },
         "createOption": {
@@ -3666,7 +3670,7 @@
           ],
           "x-ms-enum": {
             "name": "DiskCreateOptionTypes",
-            "modelAsString": true
+            "modelAsString": "True"
           }
         },
         "osType": {
@@ -3678,7 +3682,7 @@
           ],
           "x-ms-enum": {
             "name": "OperatingSystemTypes",
-            "modelAsString": true
+            "modelAsString": "True"
           }
         },
         "image": {
@@ -4086,7 +4090,7 @@
           ],
           "x-ms-enum": {
             "name": "VirtualMachineScaleSetSkuScaleType",
-            "modelAsString": true
+            "modelAsString": "True"
           }
         }
       },
@@ -4164,6 +4168,10 @@
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets the provisioning state, which only appears in the response."
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "Gets or sets the license type, which is for bring your own license scenario."
         }
       },
       "description": "Describes the properties of a virtual machine scale set virtual machine."
@@ -4337,7 +4345,7 @@
           ],
           "x-ms-enum": {
             "name": "OperationStatus",
-            "modelAsString": false
+            "modelAsString": "False"
           }
         },
         "startTime": {
@@ -4388,7 +4396,7 @@
           ],
           "x-ms-enum": {
             "name": "ComputeOperationStatus",
-            "modelAsString": false
+            "modelAsString": "False"
           }
         },
         "startTime": {
