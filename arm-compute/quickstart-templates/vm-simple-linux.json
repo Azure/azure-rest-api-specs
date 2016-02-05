@@ -5,7 +5,7 @@
     "adminUsername": {
       "type": "string",
       "metadata": {
-        "description": "Username for the Virtual Machine."
+        "description": "User name for the Virtual Machine."
       }
     },
     "adminPassword": {
@@ -20,27 +20,26 @@
         "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
       }
     },
-    "windowsOSVersion": {
+    "osVersion": {
       "type": "string",
-      "defaultValue": "2012-R2-Datacenter",
+      "defaultValue": "14.04.2-LTS",
       "allowedValues": [
-        "2008-R2-SP1",
-        "2012-Datacenter",
-        "2012-R2-Datacenter"
+        "12.04.5-LTS",
+        "14.04.2-LTS",
+        "15.10"
       ],
       "metadata": {
-        "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version. Allowed values: 2008-R2-SP1, 2012-Datacenter, 2012-R2-Datacenter."
+        "description": "The Ubuntu version for the VM. This will pick a fully patched image of this given Ubuntu version. Allowed values: 12.04.5-LTS, 14.04.2-LTS, 15.10."
       }
     }
   },
   "variables": {
-    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'sawinvm')]",
-    "sizeOfDiskInGB": "100",
-    "dataDisk1VhdName": "datadisk1",
+    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'salinuxvm')]",
     "location": "[resourceGroup().location]",
-    "imagePublisher": "MicrosoftWindowsServer",
-    "imageOffer": "WindowsServer",
-    "OSDiskName": "osdiskforwindowssimple",
+    "dataDisk1VhdName": "datadisk1",
+    "imagePublisher": "Canonical",
+    "imageOffer": "UbuntuServer",
+    "OSDiskName": "osdiskforlinuxsimple",
     "nicName": "myVMNic",
     "addressPrefix": "10.0.0.0/16",
     "subnetName": "Subnet",
@@ -49,7 +48,7 @@
     "publicIPAddressName": "myPublicIP",
     "publicIPAddressType": "Dynamic",
     "vmStorageAccountContainerName": "vhds",
-    "vmName": "MyWindowsVM",
+    "vmName": "MyUbuntuVM",
     "vmSize": "Standard_D1",
     "virtualNetworkName": "MyVNET",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
@@ -147,7 +146,7 @@
           "imageReference": {
             "publisher": "[variables('imagePublisher')]",
             "offer": "[variables('imageOffer')]",
-            "sku": "[parameters('windowsOSVersion')]",
+            "sku": "[parameters('osVersion')]",
             "version": "latest"
           },
           "osDisk": {
@@ -161,7 +160,7 @@
           "dataDisks": [
             {
               "name": "datadisk1",
-              "diskSizeGB": "[variables('sizeOfDiskInGB')]",
+              "diskSizeGB": "100",
               "lun": 0,
               "vhd": {
                 "uri": "[concat('http://',variables('storageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('dataDisk1VhdName'),'.vhd')]"
@@ -179,8 +178,8 @@
         },
         "diagnosticsProfile": {
           "bootDiagnostics": {
-            "enabled": "true",
-            "storageUri": "[concat('http://',variables('storageAccountName'),'.blob.core.windows.net')]"
+             "enabled": "true",
+             "storageUri": "[concat('http://',variables('storageAccountName'),'.blob.core.windows.net')]"
           }
         }
       }
