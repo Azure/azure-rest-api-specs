@@ -768,4 +768,4 @@ If an operation requires that a parameter is exposed as a method parameter, it i
 
 TODO: naming standards for operations Create, CreateOrUpdate, Update (respect etag), Get, List, Delete, Patch
 TODO: patch => no validate
-[Swagger-spec2.0]:https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md
+[Swagger-spec2.0]:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
