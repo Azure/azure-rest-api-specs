@@ -52,7 +52,7 @@
             "type": "string",
             "enum": [
               "GETFILEINFO"
-            ]
+            ],
             "description": "The constant value for the operation."
           },
           {
@@ -1259,68 +1259,6 @@
         }
       }
     },
-      "put": {
-        "tags": [
-          "FileSystem"
-        ],
-        "operationId": "FileSystem_CreateSymLink",
-        "description": "Creates a symbolic link.",
-        "parameters": [
-          {
-            "name": "symLinkFilePath",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The path to the directory or file to create a symlink of."
-          },
-          {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the account to use"
-          },
-          {
-            "name": "destination",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The path to create the symlink at"
-          },
-          {
-            "name": "createParent",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "default": "false",
-            "description": "If the parent directories do not exist, indicates if they should be created."
-          },
-          {
-            "name": "op",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The constant value for the operation.",
-            "default": "CREATESYMLINK"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/webhdfs/v1/{renameFilePath}": {
       "put": {
         "tags": [
@@ -1491,62 +1429,6 @@
         "responses": {
           "200": {
             "description": ""
-          }
-        }
-      }
-    },
-      "put": {
-        "tags": [
-          "FileSystem"
-        ],
-        "operationId": "FileSystem_SetReplication",
-        "description": "Sets the value of the replication factor.",
-        "parameters": [
-          {
-            "name": "setReplicationFilePath",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The path to the directory or file to create a replication of."
-          },
-          {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the account to use"
-          },
-          {
-            "name": "replication",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "description": "The number of replications of a file."
-          },
-          {
-            "name": "op",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The constant value for the operation.",
-            "default": "SETREPLICATION"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/FileOperationResult"
-            }
           }
         }
       }
