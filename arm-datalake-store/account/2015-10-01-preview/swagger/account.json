@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DataLakeStoreManagementClient",
-    "description": "Creates a Data Lake Store account management client.",
+    "description": "Creates an Azure Data Lake Store account management client.",
     "version": "2015-10-01-preview",
     "x-ms-code-generation-settings": {
       "internalConstructors": true
@@ -36,21 +36,21 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "The name of the Azure resource group that contains the Data Lake Store account."
           },
           {
             "name": "accountName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the account to delete the firewall rule from"
+            "description": "The name of the Data Lake Store account from which to delete the firewall rule."
           },
           {
             "name": "firewallRuleName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the firewall rule to delete"
+            "description": "The name of the firewall rule to delete."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -73,28 +73,28 @@
           "DataLakeStoreAccount"
         ],
         "operationId": "DataLakeStoreAccount_GetFirewallRule",
-        "description": "Gets the specified Data Lake firewall rules.",
+        "description": "Gets the specified Data Lake Store firewall rule.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group the account is in."
+            "description": "The name of the Azure resource group that contains the Data Lake Store account."
           },
           {
             "name": "accountName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the account to get the firewall rules from"
+            "description": "The name of the Data Lake Store account from which to get the firewall rule."
           },
           {
             "name": "firewallRuleName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "the name of the firewall rule to retrieve."
+            "description": "The name of the firewall rule to retrieve."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -119,21 +119,21 @@
           "DataLakeStoreAccount"
         ],
         "operationId": "DataLakeStoreAccount_ListFirewallRules",
-        "description": "Lists the Data Lake firewall rules objects within the specified Data Lake Store account.",
+        "description": "Lists the Data Lake Store firewall rules within the specified Data Lake Store account.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "The name of the Azure resource group that contains the Data Lake Store account."
           },
           {
             "name": "accountName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the account to get the firewall rules from"
+            "description": "The name of the Data Lake Store account from which to get the firewall rules."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -161,14 +161,14 @@
           "DataLakeStoreAccount"
         ],
         "operationId": "DataLakeStoreAccount_FirewallRulesListNext",
-        "description": "Gets the next page of the Data Lake firewall rule objects within the specified account, if any.",
+        "description": "Gets the next page of the Data Lake Store firewall rule objects within the specified account, if any.",
         "parameters": [
           {
             "name": "nextLink",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The url to the next firewall rule page.",
+            "description": "The URL to the next page of the firewall rules list.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -201,21 +201,21 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group the account is in."
+            "description": "The name of the Azure resource group that contains the Data Lake Store account."
           },
           {
             "name": "accountName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the account to add the firewall rule to"
+            "description": "The name of the Data Lake Store account to which to add the firewall rule."
           },
           {
             "name": "name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The new of the firewall rule to create or update."
+            "description": "The name of the firewall rule to create or update."
           },
           {
             "name": "parameters",
@@ -224,7 +224,7 @@
             "schema": {
               "$ref": "#/definitions/FirewallRule"
             },
-            "description": "Parameters supplied to the create firewall rule operation."
+            "description": "Parameters supplied to create the create firewall rule."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -256,7 +256,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group the account will be associated with."
+            "description": "The name of the Azure resource group that contains the Data Lake Store account."
           },
           {
             "name": "name",
@@ -272,7 +272,7 @@
             "schema": {
               "$ref": "#/definitions/DataLakeStoreAccount"
             },
-            "description": "Parameters supplied to the create Data Lake Store account operation."
+            "description": "Parameters supplied to create the Data Lake Store account."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -302,14 +302,14 @@
           "DataLakeStoreAccount"
         ],
         "operationId": "DataLakeStoreAccount_Update",
-        "description": "Updates the Data Lake Store account object specified by the account name with the contents of the account object.",
+        "description": "Updates the specified Data Lake Store account information.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "The name of the Azure resource group that contains the Data Lake Store account."
           },
           {
             "name": "name",
@@ -325,7 +325,7 @@
             "schema": {
               "$ref": "#/definitions/DataLakeStoreAccount"
             },
-            "description": "Parameters supplied to the update Data Lake Store account operation."
+            "description": "Parameters supplied to update the Data Lake Store account."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -357,21 +357,21 @@
           "DataLakeStoreAccount"
         ],
         "operationId": "DataLakeStoreAccount_Delete",
-        "description": "Deletes the Data Lake Store account object specified by the account name.",
+        "description": "Deletes the specified Data Lake Store account.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "The name of the Azure resource group that contains the Data Lake Store account."
           },
           {
             "name": "accountName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the account to delete"
+            "description": "The name of the Data Lake Store account to delete."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -401,21 +401,21 @@
           "DataLakeStoreAccount"
         ],
         "operationId": "DataLakeStoreAccount_Get",
-        "description": "Gets the Data Lake Store account object specified by the account name.",
+        "description": "Gets the specified Data Lake Store account.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "The name of the Azure resource group that contains the Data Lake Store account."
           },
           {
             "name": "accountName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the account to retrieve"
+            "description": "The name of the Data Lake Store account to retrieve."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -440,14 +440,14 @@
           "DataLakeStoreAccount"
         ],
         "operationId": "DataLakeStoreAccount_ListByResourceGroup",
-        "description": "Lists the Data Lake Store account objects within a specific resource group. This includes a link to the next page, if any.",
+        "description": "Lists the Data Lake Store accounts within a specific resource group. The response includes a link to the next page of results, if any.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "The name of the Azure resource group that contains the Data Lake Store account(s)."
           },
           {
             "name": "$filter",
@@ -541,7 +541,7 @@
           "DataLakeStoreAccount"
         ],
         "operationId": "DataLakeStoreAccount_List",
-        "description": "Lists the Data Lake Store account objects within the subscription. This includes a link to the next page, if any.",
+        "description": "Lists the Data Lake Store accounts within the subscription. The response includes a link to the next page of results, if any.",
         "parameters": [
           {
             "name": "$filter",
@@ -642,32 +642,32 @@
           "description": "Gets or sets the end IP address for the firewall rule."
         }
       },
-      "description": "Data Lake firewall rule properties information"
+      "description": "Data Lake Store firewall rule properties information"
     },
     "FirewallRule": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the Firewall Rule's name."
+          "description": "Gets or sets the firewall rule's name."
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the namespace and type of the Firewall Rule."
+          "description": "Gets or sets the namespace and type of the firewall Rule."
         },
         "id": {
           "type": "string",
-          "description": "Gets or sets the Firewall Rule's subscription ID."
+          "description": "Gets or sets the firewall rule's subscription ID."
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the Firewall Rule's regional location."
+          "description": "Gets or sets the firewall rule's regional location."
         },
         "properties": {
           "$ref": "#/definitions/FirewallRuleProperties",
-          "description": "Gets or sets the properties defined by Data Lake all properties are specific to each resource provider."
+          "description": "Gets or sets the properties of the firewall rule."
         }
       },
-      "description": "Data Lake firewall rule information"
+      "description": "Data Lake Store firewall rule information"
     },
     "DataLakeStoreFirewallRuleListResult": {
       "properties": {
@@ -688,7 +688,7 @@
           "description": "Gets or sets the total count of results that are available, but might not be returned in the current page."
         }
       },
-      "description": "Data Lake firewall rule list information."
+      "description": "Data Lake Store firewall rule list information."
     },
     "DataLakeStoreAccountProperties": {
       "properties": {
@@ -715,7 +715,7 @@
         "state": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the status of the Data Lake Account after provisioning has completed.",
+          "description": "Gets the status of the Data Lake Store account after provisioning has completed.",
           "enum": [
             "active",
             "suspended"
@@ -741,7 +741,7 @@
         },
         "defaultGroup": {
           "type": "string",
-          "description": "Gets or sets the default owner group for all new folders and files created in the DataLake."
+          "description": "Gets or sets the default owner group for all new folders and files created in the Data Lake Store account."
         }
       },
       "description": "Data Lake Store account properties information"
@@ -773,7 +773,7 @@
         },
         "properties": {
           "$ref": "#/definitions/DataLakeStoreAccountProperties",
-          "description": "Gets or sets the properties defined by Data Lake all properties are specific to each resource provider."
+          "description": "Gets or sets the Data Lake Store account properties."
         }
       },
       "description": "Data Lake Store account information"
@@ -814,7 +814,7 @@
           "description": "Gets or sets the target of the particular error (for example, the name of the property in error)."
         }
       },
-      "description": "Data Lake error details information"
+      "description": "Data Lake Store error details information"
     },
     "InnerError": {
       "properties": {
@@ -827,7 +827,7 @@
           "description": "Gets or sets the context for the error message"
         }
       },
-      "description": "Data Lake inner error information"
+      "description": "Data Lake Store inner error information"
     },
     "Error": {
       "properties": {
@@ -859,7 +859,7 @@
         "code",
         "message"
       ],
-      "description": "Data Lake error information"
+      "description": "Data Lake Store error information"
     },
     "AzureAsyncOperationResult": {
       "properties": {
@@ -880,7 +880,7 @@
           "$ref": "#/definitions/Error"
         }
       },
-      "description": "The response body contains the status of the specified asynchronous operation, indicating whether it has succeeded, is inprogress, or has failed. Note that this status is distinct from the HTTP status code returned for the Get Operation Status operation itself. If the asynchronous operation succeeded, the response body includes the HTTP status code for the successful request. If the asynchronous operation failed, the response body includes the HTTP status code for the failed request and error information regarding the failure."
+      "description": "The response body contains the status of the specified asynchronous operation, indicating whether it has succeeded, is in progress, or has failed. Note that this status is distinct from the HTTP status code returned for the Get Operation Status operation itself. If the asynchronous operation succeeded, the response body includes the HTTP status code for the successful request. If the asynchronous operation failed, the response body includes the HTTP status code for the failed request and error information regarding the failure."
     },
     "Resource": {
       "properties": {
