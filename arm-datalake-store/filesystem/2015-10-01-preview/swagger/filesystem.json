@@ -48,10 +48,12 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "GETFILEINFO"
+            "enum": [
+              "GETFILEINFO"
+            ]
+            "description": "The constant value for the operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -124,10 +126,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "CONCURRENTAPPEND"
+            "description": "The constant value for the operation.",
+            "enum":["CONCURRENTAPPEND"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -194,10 +196,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "SETEXPIRY"
+            "description": "The constant value for the operation.",
+            "enum": ["SETEXPIRY"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -248,10 +250,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "CHECKACCESS"
+            "description": "The constant value for the operation.",
+            "enum": ["CHECKACCESS"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -301,10 +303,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "MKDIRS"
+            "description": "The constant value for the operation.",
+            "enum": ["MKDIRS"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -363,10 +365,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "CONCAT"
+            "description": "The constant value for the operation.",
+            "enum": ["CONCAT"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -431,10 +433,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "MSCONCAT"
+            "description": "The constant value for the operation.",
+            "enum": ["MSCONCAT"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -501,10 +503,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "MSLISTSTATUS"
+            "description": "The constant value for the operation.",
+            "enum": ["MSLISTSTATUS"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -552,10 +554,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "GETCONTENTSUMMARY"
+            "description": "The constant value for the operation.",
+            "enum": ["GETCONTENTSUMMARY"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -603,10 +605,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "GETFILESTATUS"
+            "description": "The constant value for the operation.",
+            "enum": ["GETFILESTATUS"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -675,18 +677,18 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "APPEND"
+            "description": "The constant value for the operation.",
+            "enum": ["APPEND"]
           },
           {
             "name": "append",
             "in": "query",
-            "required": false,
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "type": "boolean",
-            "default": "true"
+            "required": true,
+            "description": "The constant value for the operation.",
+            "type": "string",
+            "enum": ["true"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -780,18 +782,18 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "CREATE"
+            "description": "The constant value for the operation.",
+            "enum": ["CREATE"]
           },
           {
             "name": "write",
             "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "true"
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": ["true"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -854,18 +856,18 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "OPEN"
+            "description": "The constant value for the operation.",
+            "enum": ["OPEN"]
           },
           {
             "name": "read",
             "in": "query",
-            "required": false,
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "type": "boolean",
-            "default": "true"
+            "required": true,
+            "description": "The constant value for the operation.",
+            "type": "string",
+            "enum": ["true"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -921,10 +923,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "SETACL"
+            "description": "The constant value for the operation.",
+            "enum": ["SETACL"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -976,10 +978,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "MODIFYACLENTRIES"
+            "description": "The constant value for the operation.",
+            "default": ["MODIFYACLENTRIES"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1031,10 +1033,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "REMOVEACLENTRIES"
+            "description": "The constant value for the operation.",
+            "enum": ["REMOVEACLENTRIES"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1079,10 +1081,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "REMOVEDEFAULTACL"
+            "description": "The constant value for the operation.",
+            "enum": ["REMOVEDEFAULTACL"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1127,10 +1129,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "REMOVEACL"
+            "description": "The constant value for the operation.",
+            "enum": ["REMOVEACL"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1173,10 +1175,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "GETACLSTATUS"
+            "description": "The constant value for the operation.",
+            "enum": ["GETACLSTATUS"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1231,10 +1233,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "DELETE"
+            "description": "The constant value for the operation.",
+            "enum": ["DELETE"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1257,7 +1259,6 @@
         }
       }
     },
-    "/webhdfs/v1/{symLinkFilePath}": {
       "put": {
         "tags": [
           "FileSystem"
@@ -1299,7 +1300,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
+            "description": "The constant value for the operation.",
             "default": "CREATESYMLINK"
           },
           {
@@ -1352,10 +1353,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "RENAME"
+            "description": "The constant value for the operation.",
+            "enum": ["RENAME"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1417,10 +1418,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "SETOWNER"
+            "description": "The constant value for the operation.",
+            "enum": ["SETOWNER"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1472,10 +1473,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "SETPERMISSION"
+            "description": "The constant value for the operation.",
+            "enum": ["SETPERMISSION"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1494,7 +1495,6 @@
         }
       }
     },
-    "/webhdfs/v1/{setReplicationFilePath}": {
       "put": {
         "tags": [
           "FileSystem"
@@ -1528,7 +1528,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
+            "description": "The constant value for the operation.",
             "default": "SETREPLICATION"
           },
           {
@@ -1592,10 +1592,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "SETTIMES"
+            "description": "The constant value for the operation.",
+            "enum": ["SETTIMES"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1633,10 +1633,10 @@
           {
             "name": "op",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "description": "This is the REQUIRED value for this parameter and method combination. Changing the value will result in unexpected behavior, please do not do so.",
-            "default": "GETHOMEDIRECTORY"
+            "description": "The constant value for the operation.",
+            "enum": ["GETHOMEDIRECTORY"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1895,15 +1895,6 @@
         }
       },
       "description": "Data Lake Store filesystem file information response used with file expiration."
-    },
-    "FileCreateOpenAndAppendResult": {
-      "properties": {
-        "Location": {
-          "type": "string",
-          "description": "Gets or sets the redirect URI location with any necessary parameters"
-        }
-      },
-      "description": "The response recieved after the BeginOpen, BeginCreate and BeginAppend requests."
     }
   },
   "parameters": {
