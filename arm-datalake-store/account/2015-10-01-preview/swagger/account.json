@@ -161,7 +161,7 @@
           "DataLakeStoreAccount"
         ],
         "operationId": "DataLakeStoreAccount_FirewallRulesListNext",
-        "description": "Gets the next page of the Data Lake Store firewall rule objects within the specified account, if any.",
+        "description": "Gets the next page of Data Lake Store firewall rules, if any, for the specified account. The response includes a link to the next page of results, if any.",
         "parameters": [
           {
             "name": "nextLink",
@@ -194,7 +194,7 @@
           "DataLakeStoreAccount"
         ],
         "operationId": "DataLakeStoreAccount_CreateOrUpdateFirewallRule",
-        "description": "Creates or updates the specified Data Lake Store account with the specified firewall rules.",
+        "description": "Creates or updates the specified firewall rule.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -454,7 +454,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets OData filter. Optional."
+            "description": "OData filter. Optional."
           },
           {
             "name": "$top",
@@ -462,7 +462,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Gets or sets the number of items to return. Optional."
+            "description": "The number of items to return. Optional."
           },
           {
             "name": "$skip",
@@ -470,49 +470,49 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Gets or sets the number of items to skip over before returning elements. Optional."
+            "description": "The number of items to skip over before returning elements. Optional."
           },
           {
             "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
+            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
           },
           {
             "name": "$orderby",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets the OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
           },
           {
             "name": "$count",
             "in": "query",
             "required": false,
             "type": "boolean",
-            "description": "Gets or sets a Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+            "description": "A Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
           },
           {
             "name": "$search",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets a free form search. A free-text search expression to match for whether a particular entry should be included in the feed, e.g. Categories?$search=blue OR green. Optional."
+            "description": "A free form search. A free-text search expression to match for whether a particular entry should be included in the feed, e.g. Categories?$search=blue OR green. Optional."
           },
           {
             "name": "$format",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets the return format. Return the response in particular formatxii without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional."
+            "description": "The desired return format. Return the response in particular formatxii without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -548,7 +548,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets OData filter. Optional."
+            "description": "OData filter. Optional."
           },
           {
             "name": "$top",
@@ -556,7 +556,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Gets or sets the number of items to return. Optional."
+            "description": "The number of items to return. Optional."
           },
           {
             "name": "$skip",
@@ -564,49 +564,49 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Gets or sets the number of items to skip over before returning elements. Optional."
+            "description": "The number of items to skip over before returning elements. Optional."
           },
           {
             "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
+            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
           },
           {
             "name": "$orderby",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets the OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
           },
           {
             "name": "$count",
             "in": "query",
             "required": false,
             "type": "boolean",
-            "description": "Gets or sets a Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
           },
           {
             "name": "$search",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets a free form search. A free-text search expression to match for whether a particular entry should be included in the feed, e.g. Categories?$search=blue OR green. Optional."
+            "description": "A free form search. A free-text search expression to match for whether a particular entry should be included in the feed, e.g. Categories?$search=blue OR green. Optional."
           },
           {
             "name": "$format",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets the return format. Return the response in particular formatxii without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional."
+            "description": "The desired return format. Return the response in particular formatxii without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
