@@ -4,7 +4,7 @@
     "title": "ServiceFabricClient",
     "version": "1.0.0"
   },
-  "host": "localhost:19007",
+  "host": "localhost:10710",
   "paths": {
     "/$/GetClusterManifest": {
       "get": {
@@ -14,16 +14,12 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Cluster manifest",
+            "description": "The cluster manifest",
             "schema": {
               "type": "string"
             }
@@ -41,9 +37,10 @@
           {
             "name": "clusterHealthReport",
             "in": "body",
-            "description": "",
+            "description": "The report of the cluster health",
             "required": true,
             "schema": {
+              "type": "object",
               "properties": {
                 "SourceId": {
                   "type": "string"
@@ -70,16 +67,12 @@
             }
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Cluster health report",
+            "description": "The cluster health report",
             "schema": {
               "type": "string"
             }
@@ -95,23 +88,19 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           },
           {
             "name": "continuation-token",
             "in": "query",
-            "description": "",
+            "description": "The token of the continuation",
             "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Node array",
+            "description": "The node array",
             "schema": {
               "type": "array",
               "items": {
@@ -132,31 +121,125 @@
           {
             "name": "nodeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the node",
             "type": "string",
             "required": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           },
           {
             "name": "continuation-token",
             "in": "query",
-            "description": "",
+            "description": "The token of the continuation",
             "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Node",
+            "description": "The node",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/Node"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/Activate": {
+      "post": {
+        "operationId": "EnableNode",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The node",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/Deactivate": {
+      "post": {
+        "operationId": "DisableNode",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "disableNode",
+            "in": "body",
+            "description": "The node of the disable",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "DeactivationIntent": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The node",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/RemoveNodeState": {
+      "post": {
+        "operationId": "RemoveNodeState",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The node state",
+            "schema": {
+              "type": "string"
             }
           }
         }
@@ -172,28 +255,24 @@
           {
             "name": "nodeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the node",
             "type": "string",
             "required": true
           },
           {
             "name": "EventsHealthStateFilter",
             "in": "query",
-            "description": "",
+            "description": "The filter of the events health state",
             "required": false,
             "type": "string"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Node health",
+            "description": "The node health",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/NodeHealth"
@@ -212,21 +291,17 @@
           {
             "name": "nodeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the node",
             "type": "string",
             "required": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Deployed application list",
+            "description": "The deployed application list",
             "schema": {
               "type": "array",
               "items": {
@@ -247,28 +322,24 @@
           {
             "name": "nodeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the node",
             "type": "string",
             "required": true
           },
           {
             "name": "applicationName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application",
             "type": "string",
             "required": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Deployed application",
+            "description": "The deployed application",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/DeployedApplication"
@@ -287,14 +358,14 @@
           {
             "name": "nodeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the node",
             "type": "string",
             "required": true
           },
           {
             "name": "applicationName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
@@ -302,28 +373,24 @@
           {
             "name": "EventsHealthStateFilter",
             "in": "query",
-            "description": "",
+            "description": "The filter of the events health state",
             "required": false,
             "type": "string"
           },
           {
             "name": "DeployedServicePackagesHealthStateFilter",
             "in": "query",
-            "description": "",
+            "description": "The filter of the deployed service packages health state",
             "required": false,
             "type": "string"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Deployed application health",
+            "description": "The deployed application health",
             "schema": {
               "$ref": "#/definitions/DeployedApplicationHealth"
             }
@@ -341,21 +408,17 @@
           {
             "name": "nodeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the node",
             "type": "string",
             "required": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Node load information",
+            "description": "The node load information",
             "schema": {
               "$ref": "#/definitions/NodeLoadInformation"
             }
@@ -373,29 +436,25 @@
           {
             "name": "nodeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the node",
             "type": "string",
             "required": true
           },
           {
             "name": "applicationName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Deployed code package",
+            "description": "The deployed code package",
             "schema": {
               "type": "array",
               "items": {
@@ -416,29 +475,25 @@
           {
             "name": "nodeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the node",
             "type": "string",
             "required": true
           },
           {
             "name": "applicationName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Deployed replica",
+            "description": "The deployed replica",
             "schema": {
               "type": "array",
               "items": {
@@ -459,14 +514,14 @@
           {
             "name": "nodeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the node",
             "type": "string",
             "required": true
           },
           {
             "name": "partitionName",
             "in": "path",
-            "description": "",
+            "description": "The name of the partition",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
@@ -474,21 +529,17 @@
           {
             "name": "replicaId",
             "in": "path",
-            "description": "",
+            "description": "The id of the replica",
             "type": "string",
             "required": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Deployed replica detail",
+            "description": "The deployed replica detail",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/DeployedReplicaDetail"
@@ -507,29 +558,25 @@
           {
             "name": "nodeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the node",
             "type": "string",
             "required": true
           },
           {
             "name": "applicationName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Deployed service package",
+            "description": "The deployed service package",
             "schema": {
               "type": "array",
               "items": {
@@ -550,14 +597,14 @@
           {
             "name": "nodeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the node",
             "type": "string",
             "required": true
           },
           {
             "name": "applicationName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
@@ -565,28 +612,24 @@
           {
             "name": "servicePackageName",
             "in": "path",
-            "description": "",
+            "description": "The name of the service package",
             "type": "string",
             "required": true
           },
           {
             "name": "EventsHealthStateFilter",
             "in": "query",
-            "description": "",
+            "description": "The filter of the events health state",
             "required": false,
             "type": "string"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Deployed service package health",
+            "description": "The deployed service package health",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/DeployedServicePackageHealth"
@@ -605,29 +648,25 @@
           {
             "name": "nodeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the node",
             "type": "string",
             "required": true
           },
           {
             "name": "applicationName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Deployed service type",
+            "description": "The deployed service type",
             "schema": {
               "type": "array",
               "items": {
@@ -649,16 +688,17 @@
           {
             "name": "nodeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the node",
             "type": "string",
             "required": true
           },
           {
             "name": "nodeHealthReport",
             "in": "body",
-            "description": "",
+            "description": "The report of the node health",
             "required": true,
             "schema": {
+              "type": "object",
               "properties": {
                 "SourceId": {
                   "type": "string"
@@ -685,16 +725,12 @@
             }
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Node health report",
+            "description": "The node health report",
             "schema": {
               "type": "string"
             }
@@ -712,14 +748,14 @@
           {
             "name": "nodeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the node",
             "type": "string",
             "required": true
           },
           {
             "name": "applicationName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
@@ -727,9 +763,10 @@
           {
             "name": "deployedApplicationHealthReport",
             "in": "body",
-            "description": "",
+            "description": "The report of the deployed application health",
             "required": true,
             "schema": {
+              "type": "object",
               "properties": {
                 "SourceId": {
                   "type": "string"
@@ -756,16 +793,12 @@
             }
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Deployed application health report",
+            "description": "The deployed application health report",
             "schema": {
               "type": "string"
             }
@@ -783,14 +816,14 @@
           {
             "name": "nodeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the node",
             "type": "string",
             "required": true
           },
           {
             "name": "applicationName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
@@ -798,16 +831,17 @@
           {
             "name": "serviceManifestName",
             "in": "path",
-            "description": "",
+            "description": "The name of the service manifest",
             "type": "string",
             "required": true
           },
           {
             "name": "deployedServicePackageHealthReport",
             "in": "body",
-            "description": "",
+            "description": "The report of the deployed service package health",
             "required": true,
             "schema": {
+              "type": "object",
               "properties": {
                 "SourceId": {
                   "type": "string"
@@ -834,16 +868,12 @@
             }
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Deployed service package health report",
+            "description": "The deployed service package health report",
             "schema": {
               "type": "string"
             }
@@ -859,16 +889,12 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Application type",
+            "description": "The application type",
             "schema": {
               "type": "array",
               "items": {
@@ -890,21 +916,17 @@
           {
             "name": "applicationTypeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application type",
             "type": "string",
             "required": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Application type",
+            "description": "The application type",
             "schema": {
               "type": "array",
               "items": {
@@ -926,35 +948,31 @@
           {
             "name": "applicationTypeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application type",
             "type": "string",
             "required": true
           },
           {
             "name": "ApplicationTypeVersion",
             "in": "query",
-            "description": "",
+            "description": "The version of the application type",
             "required": true,
             "type": "string"
           },
           {
             "name": "ServiceManifestName",
             "in": "query",
-            "description": "",
+            "description": "The name of the service manifest",
             "required": true,
             "type": "string"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Service manifest",
+            "description": "The service manifest",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/ServiceManifest"
@@ -973,28 +991,24 @@
           {
             "name": "applicationTypeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application type",
             "type": "string",
             "required": true
           },
           {
             "name": "ApplicationTypeVersion",
             "in": "query",
-            "description": "",
+            "description": "The version of the application type",
             "required": true,
             "type": "string"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Service type",
+            "description": "The service type",
             "schema": {
               "type": "array",
               "items": {
@@ -1016,38 +1030,111 @@
           {
             "name": "applicationTypeName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application type",
             "type": "string",
             "required": true
           },
           {
             "name": "ApplicationTypeVersion",
             "in": "query",
-            "description": "",
+            "description": "The version of the application type",
             "type": "string",
             "required": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           },
           {
             "name": "continuation-token",
             "in": "query",
-            "description": "",
+            "description": "The token of the continuation",
             "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Application manifest",
+            "description": "The application manifest",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/ApplicationManifest"
+            }
+          }
+        }
+      }
+    },
+    "/ApplicationTypes/$/Provision": {
+      "post": {
+        "operationId": "RegisterApplicationType",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "RegisterApplicationType",
+            "in": "body",
+            "description": "The type of the register application",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ApplicationTypeBuildPath": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The application type",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/ApplicationTypes/{applicationTypeName}/$/Unprovision": {
+      "post": {
+        "operationId": "UnregisterApplicationType",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationTypeName",
+            "in": "path",
+            "description": "The name of the application type",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "UnregisterApplicationType",
+            "in": "body",
+            "description": "The type of the unregister application",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ApplicationTypeVersion": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The application type",
+            "schema": {
+              "type": "string"
             }
           }
         }
@@ -1061,23 +1148,19 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           },
           {
             "name": "continuation-token",
             "in": "query",
-            "description": "",
+            "description": "The token of the continuation",
             "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Application",
+            "description": "The application",
             "schema": {
               "type": "array",
               "items": {
@@ -1099,29 +1182,25 @@
           {
             "name": "applicationName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           },
           {
             "name": "continuation-token",
             "in": "query",
-            "description": "",
+            "description": "The token of the continuation",
             "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Application",
+            "description": "The application",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/Application"
@@ -1140,22 +1219,18 @@
           {
             "name": "applicationName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Service",
+            "description": "The service",
             "schema": {
               "type": "array",
               "items": {
@@ -1177,7 +1252,7 @@
           {
             "name": "applicationName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
@@ -1185,22 +1260,18 @@
           {
             "name": "serviceName",
             "in": "path",
-            "description": "",
+            "description": "The name of the service",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Service",
+            "description": "The service",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/Service"
@@ -1219,7 +1290,7 @@
           {
             "name": "applicationName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
@@ -1227,22 +1298,18 @@
           {
             "name": "serviceName",
             "in": "path",
-            "description": "",
+            "description": "The name of the service",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Service group description",
+            "description": "The service group description",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/ServiceGroupDescription"
@@ -1261,7 +1328,7 @@
           {
             "name": "applicationName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
@@ -1269,22 +1336,18 @@
           {
             "name": "serviceName",
             "in": "path",
-            "description": "",
+            "description": "The name of the service",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Service group description",
+            "description": "The service group description",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/ServiceGroupMember"
@@ -1303,7 +1366,7 @@
           {
             "name": "applicationName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
@@ -1311,42 +1374,38 @@
           {
             "name": "EventsHealthStateFilter",
             "in": "query",
-            "description": "",
+            "description": "The filter of the events health state",
             "required": false,
             "type": "string"
           },
           {
             "name": "DeployedApplicationsHealthStateFilter",
             "in": "query",
-            "description": "",
+            "description": "The filter of the deployed application health state",
             "required": false,
             "type": "string"
           },
           {
             "name": "ServicesHealthStateFilter",
             "in": "query",
-            "description": "",
+            "description": "The filter of the services health state",
             "required": false,
             "type": "string"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           },
           {
             "name": "continuation-token",
             "in": "query",
-            "description": "",
+            "description": "The token of the continuation",
             "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Application health",
+            "description": "The application health",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/ApplicationHealth"
@@ -1365,22 +1424,18 @@
           {
             "name": "applicationName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Application upgrade",
+            "description": "The application upgrade",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/ApplicationUpgrade"
@@ -1399,7 +1454,7 @@
           {
             "name": "applicationName",
             "in": "path",
-            "description": "",
+            "description": "The name of the application",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
@@ -1407,9 +1462,10 @@
           {
             "name": "applicationHealthReport",
             "in": "body",
-            "description": "",
+            "description": "The report of the application health",
             "required": true,
             "schema": {
+              "type": "object",
               "properties": {
                 "SourceId": {
                   "type": "string"
@@ -1436,16 +1492,539 @@
             }
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Application health report",
+            "description": "The application health report",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/$/Create": {
+      "post": {
+        "operationId": "NewApplication",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationDescription",
+            "in": "body",
+            "description": "The description of the application",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationDescription"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The application description",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServices/$/Create": {
+      "post": {
+        "operationId": "NewService",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceDescription",
+            "in": "body",
+            "description": "The description of the service",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceDescription"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service description",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServices/$/CreateFromTemplate": {
+      "post": {
+        "operationId": "NewServiceFromTemplate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceDescriptionTemplate",
+            "in": "body",
+            "description": "The template of the service description",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ServiceName": {
+                  "type": "string"
+                },
+                "ServiceTypeName": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service description template",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServices/$/CreateServiceGroup": {
+      "post": {
+        "operationId": "NewServiceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the service group",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceGroupDescription",
+            "in": "body",
+            "description": "The description of the service group",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceGroupDescription"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The service description",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServiceGroups/$/CreateServiceGroupFromTemplate": {
+      "post": {
+        "operationId": "NewServiceGroupFromTemplate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceDescriptionTemplate",
+            "in": "body",
+            "description": "The template of the service description",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ServiceName": {
+                  "type": "string"
+                },
+                "ServiceTypeName": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service group description template",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServices/{serviceName}/$/UpdateServiceGroup": {
+      "post": {
+        "operationId": "UpdateServiceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceGroupUpdateDescription",
+            "in": "body",
+            "description": "The description of the service group update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceGroupUpdateDescription"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service group update description",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/Delete": {
+      "post": {
+        "operationId": "RemoveApplication",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/Upgrade": {
+      "post": {
+        "operationId": "StartApplicationUpgrade",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "startApplicationUpgradeDescription",
+            "in": "body",
+            "description": "The description of the start application upgrade",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/StartApplicationUpgradeDescription"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The start application upgrade",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/UpdateUpgrade": {
+      "post": {
+        "operationId": "UpdateApplicationUpgrade",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "updateApplicationUpgradeDescription",
+            "in": "body",
+            "description": "The description of the application upgrade",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/UpdateApplicationUpgradeDescription"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The update application upgrade",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/MoveNextUpgradeDomain": {
+      "post": {
+        "operationId": "ResumeApplicationUpgrade",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resumeApplicationUpgrade",
+            "in": "body",
+            "description": "The upgrade of the resume application",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "UpgradeDomainName": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resume application upgrade",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/RollbackUpgrade": {
+      "post": {
+        "operationId": "StartApplicationUpgradeRollback",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The application upgrade rollback",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Services/{serviceName}/$/Update": {
+      "post": {
+        "operationId": "UpdateService",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceUpdateDescription",
+            "in": "body",
+            "description": "The description of the service update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceUpdateDescription"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service update description",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Services/{serviceName}/$/Delete": {
+      "post": {
+        "operationId": "RemoveService",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServiceGroups/{serviceName}/$/Delete": {
+      "post": {
+        "operationId": "RemoveServiceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service",
             "schema": {
               "type": "string"
             }
@@ -1463,25 +2042,72 @@
           {
             "name": "serviceName",
             "in": "path",
-            "description": "",
+            "description": "The name of the service",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Service description",
+            "description": "The service description",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/ServiceDescription"
+            }
+          }
+        }
+      }
+    },
+    "/Services/{serviceName}/$/ResolvePartition": {
+      "post": {
+        "operationId": "ResolveService",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "PartitionKeyType",
+            "in": "query",
+            "description": "The type of the partition key",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "PartitionKeyValue",
+            "in": "query",
+            "description": "The value of the partition key",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "PreviousRspVersion",
+            "in": "query",
+            "description": "The version of the previous rsp",
+            "type": "string",
+            "required": false
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The partition",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ResolvedServicePartition"
             }
           }
         }
@@ -1497,22 +2123,18 @@
           {
             "name": "serviceName",
             "in": "path",
-            "description": "",
+            "description": "The name of the service",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Service health",
+            "description": "The service health",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/ServiceHealth"
@@ -1531,7 +2153,7 @@
           {
             "name": "serviceName",
             "in": "path",
-            "description": "",
+            "description": "The name of the service",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
@@ -1539,9 +2161,10 @@
           {
             "name": "serviceHealthReport",
             "in": "body",
-            "description": "",
+            "description": "The report of the service health",
             "required": true,
             "schema": {
+              "type": "object",
               "properties": {
                 "SourceId": {
                   "type": "string"
@@ -1568,16 +2191,12 @@
             }
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Service health",
+            "description": "The service health",
             "schema": {
               "type": "string"
             }
@@ -1595,22 +2214,18 @@
           {
             "name": "serviceName",
             "in": "path",
-            "description": "",
+            "description": "The name of the service",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Partitions",
+            "description": "The partitions",
             "schema": {
               "type": "array",
               "items": {
@@ -1632,7 +2247,7 @@
           {
             "name": "serviceName",
             "in": "path",
-            "description": "",
+            "description": "The name of the service",
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
@@ -1640,21 +2255,17 @@
           {
             "name": "partitionId",
             "in": "path",
-            "description": "",
+            "description": "The id of the partition",
             "type": "string",
             "required": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Partitions",
+            "description": "The partitions",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/Partition"
@@ -1673,21 +2284,17 @@
           {
             "name": "partitionId",
             "in": "path",
-            "description": "",
+            "description": "The id of the partition",
             "type": "string",
             "required": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Replica",
+            "description": "The replica",
             "schema": {
               "type": "array",
               "items": {
@@ -1709,28 +2316,24 @@
           {
             "name": "partitionId",
             "in": "path",
-            "description": "",
+            "description": "The id of the partition",
             "type": "string",
             "required": true
           },
           {
             "name": "replicaId",
             "in": "path",
-            "description": "",
+            "description": "The id of the replica",
             "type": "string",
             "required": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Replica",
+            "description": "The replica",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/Replica"
@@ -1749,35 +2352,31 @@
           {
             "name": "partitionId",
             "in": "path",
-            "description": "",
+            "description": "The id of the partition",
             "type": "string",
             "required": true
           },
           {
             "name": "EventsHealthStateFilter",
             "in": "query",
-            "description": "",
+            "description": "The filter of the events health state",
             "required": false,
             "type": "string"
           },
           {
             "name": "ReplicasHealthStateFilter",
             "in": "query",
-            "description": "",
+            "description": "The filter of the replicas health state",
             "required": false,
             "type": "string"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Partition health",
+            "description": "The partition health",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/PartitionHealth"
@@ -1796,16 +2395,17 @@
           {
             "name": "partitionId",
             "in": "path",
-            "description": "",
+            "description": "The id of the partition",
             "type": "string",
             "required": true
           },
           {
             "name": "partitionHealthReport",
             "in": "body",
-            "description": "",
+            "description": "The report of the partition health",
             "required": true,
             "schema": {
+              "type": "object",
               "properties": {
                 "SourceId": {
                   "type": "string"
@@ -1832,16 +2432,12 @@
             }
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Partition health report",
+            "description": "The partition health report",
             "schema": {
               "type": "string"
             }
@@ -1859,35 +2455,31 @@
           {
             "name": "partitionId",
             "in": "path",
-            "description": "",
+            "description": "The id of the partition",
             "type": "string",
             "required": true
           },
           {
             "name": "replicaId",
             "in": "path",
-            "description": "",
+            "description": "The id of the replica",
             "type": "string",
             "required": true
           },
           {
             "name": "EventsHealthStateFilter",
             "in": "query",
-            "description": "",
+            "description": "The filter of the events health state",
             "required": false,
             "type": "string"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Replica health",
+            "description": "The replica health",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/ReplicaHealth"
@@ -1906,23 +2498,24 @@
           {
             "name": "partitionId",
             "in": "path",
-            "description": "",
+            "description": "The id of the partition",
             "type": "string",
             "required": true
           },
           {
             "name": "replicaId",
             "in": "path",
-            "description": "",
+            "description": "The id of the replica",
             "type": "string",
             "required": true
           },
           {
             "name": "replicaHealthReport",
             "in": "body",
-            "description": "",
+            "description": "The report of the replica health",
             "required": true,
             "schema": {
+              "type": "object",
               "properties": {
                 "SourceId": {
                   "type": "string"
@@ -1949,16 +2542,12 @@
             }
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Replica health",
+            "description": "The replica health",
             "schema": {
               "type": "string"
             }
@@ -1976,21 +2565,17 @@
           {
             "name": "partitionId",
             "in": "path",
-            "description": "",
+            "description": "The id of the partition",
             "type": "string",
             "required": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Partition load information",
+            "description": "The partition load information",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/PartitionLoadInformation"
@@ -2009,28 +2594,24 @@
           {
             "name": "partitionId",
             "in": "path",
-            "description": "",
+            "description": "The id of the partition",
             "type": "string",
             "required": true
           },
           {
             "name": "replicaId",
             "in": "path",
-            "description": "",
+            "description": "The id of the replica",
             "type": "string",
             "required": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Replica load information",
+            "description": "The replica load information",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/ReplicaLoadInformation"
@@ -2047,16 +2628,12 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Load information",
+            "description": "The load information",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/ClusterLoadInformation"
@@ -2075,35 +2652,31 @@
           {
             "name": "EventsHealthStateFilter",
             "in": "query",
-            "description": "",
+            "description": "The filter of the events health state",
             "type": "string",
             "required": false
           },
           {
             "name": "NodesHealthStateFilter",
             "in": "query",
-            "description": "",
+            "description": "The filter of the nodes health state",
             "type": "string",
             "required": false
           },
           {
             "name": "ApplicationsHealthStateFilter",
             "in": "query",
-            "description": "",
+            "description": "The filter of the applications health state",
             "type": "string",
             "required": false
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Cluster health",
+            "description": "The cluster health",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/ClusterHealth"
@@ -2120,16 +2693,12 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "Upgrade progress",
+            "description": "The upgrade progress",
             "schema": {
               "type": "string"
             }
@@ -3155,6 +3724,34 @@
         }
       }
     },
+    "ApplicationDescription": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "TypeName": {
+          "type": "string"
+        },
+        "TypeVersion": {
+          "type": "string"
+        },
+        "ParameterList": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Key": {
+                "type": "string"
+              },
+              "Value": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
     "ApplicationManifest": {
       "type": "object",
       "properties": {
@@ -3211,9 +3808,13 @@
     },
     "ServiceGroupDescription": {
       "type": "object",
+      "discriminator": "ServiceKindEnum",
       "properties": {
         "ServiceKind": {
           "type": "integer"
+        },
+        "ServiceKindEnum": {
+          "type": "string"
         },
         "ApplicationName": {
           "type": "string"
@@ -3229,11 +3830,23 @@
           "properties": {
             "PartitionScheme": {
               "type": "integer"
+            },
+            "Count": {
+              "type": "integer"
+            },
+            "Names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "LowKey": {
+              "type": "string"
+            },
+            "HighKey": {
+              "type": "string"
             }
           }
-        },
-        "InstanceCount": {
-          "type": "integer"
         },
         "PlacementConstraints": {
           "type": "string"
@@ -3241,18 +3854,51 @@
         "Flags": {
           "type": "integer"
         },
-        "DefaultMoveCost": {
-          "type": "integer"
-        },
-        "IsDefaultMoveCostSpecified": {
-          "type": "boolean"
-        },
         "ServiceGroupMemberDescription": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/ServiceGroupMemberDescription"
           }
+        }
+      }
+    },
+    "StatelessServiceGroupDescription": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/ServiceGroupDescription"}],
+      "properties": {
+        "InstanceCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatefulServiceGroupDescription": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/ServiceGroupDescription"}],
+      "properties": {
+        "TargetReplicaSetSize": {
+          "type": "integer"
+        },
+        "MinReplicaSetSize": {
+          "type": "integer"
+        },
+        "HasPersistedState": {
+          "type": "boolean"
+        },
+        "ReplicaRestartWaitDurationSeconds": {
+          "type": "integer"
+        },
+        "QuorumLossWaitDurationSeconds": {
+          "type": "integer"
+        },
+        "StandByReplicaKeepDurationSeconds": {
+          "type": "integer"
+        },
+        "DefaultMoveCost": {
+          "type": "integer"
+        },
+        "IsDefaultMoveCostSpecified": {
+          "type": "boolean"
         }
       }
     },
@@ -3388,9 +4034,13 @@
     },
     "ServiceDescription": {
       "type": "object",
+      "discriminator": "ServiceKindEnum",
       "properties": {
         "ServiceKind": {
           "type": "integer"
+        },
+        "ServiceKindEnum": {
+          "type": "string"
         },
         "ApplicationName": {
           "type": "string"
@@ -3406,9 +4056,45 @@
           "properties": {
             "PartitionScheme": {
               "type": "integer"
+            },
+            "Count": {
+              "type": "integer"
+            },
+            "Names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "LowKey": {
+              "type": "string"
+            },
+            "HighKey": {
+              "type": "string"
             }
           }
         },
+        "PlacementConstraints": {
+          "type": "string"
+        },
+        "Flags": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatelessServiceDescription": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/ServiceDescription"}],
+      "properties": {
+        "InstanceCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatefulServiceDescription": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/ServiceDescription"}],
+      "properties": {
         "TargetReplicaSetSize": {
           "type": "integer"
         },
@@ -3417,12 +4103,6 @@
         },
         "HasPersistedState": {
           "type": "boolean"
-        },
-        "PlacementConstraints": {
-          "type": "string"
-        },
-        "Flags": {
-          "type": "integer"
         },
         "ReplicaRestartWaitDurationSeconds": {
           "type": "integer"
@@ -3438,6 +4118,96 @@
         },
         "IsDefaultMoveCostSpecified": {
           "type": "boolean"
+        }
+      }
+    },
+    "ServiceUpdateDescription": {
+      "type": "object",
+      "discriminator": "ServiceKindEnum",
+      "properties": {
+        "ServiceKind": {
+          "type": "integer"
+        },
+        "ServiceKindEnum": {
+          "type": "string"
+        },
+        "Flags": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatelessServiceUpdateDescription": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/ServiceUpdateDescription"}],
+      "properties": {
+        "InstanceCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatefulServiceUpdateDescription": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/ServiceUpdateDescription"}],
+      "properties": {
+        "TargetReplicaSetSize": {
+          "type": "integer"
+        },
+        "MinReplicaSetSize": {
+          "type": "integer"
+        },
+        "ReplicaRestartWaitDurationInMilliseconds": {
+          "type": "integer"
+        },
+        "QuorumLossWaitDurationInMilliseconds": {
+          "type": "integer"
+        },
+        "StandByReplicaKeepDurationInMilliseconds": {
+          "type": "integer"
+        }
+      }
+    },
+    "ServiceGroupUpdateDescription": {
+      "type": "object",
+      "discriminator": "ServiceKindEnum",
+      "properties": {
+        "ServiceKind": {
+          "type": "integer"
+        },
+        "ServiceKindEnum": {
+          "type": "string"
+        },
+        "Flags": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatelessServiceGroupUpdateDescription": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/ServiceGroupUpdateDescription"}],
+      "properties": {
+        "InstanceCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatefulServiceGroupUpdateDescription": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/ServiceGroupUpdateDescription"}],
+      "properties": {
+        "TargetReplicaSetSize": {
+          "type": "integer"
+        },
+        "MinReplicaSetSize": {
+          "type": "integer"
+        },
+        "ReplicaRestartWaitDurationInMilliseconds": {
+          "type": "integer"
+        },
+        "QuorumLossWaitDurationInMilliseconds": {
+          "type": "integer"
+        },
+        "StandByReplicaKeepDurationInMilliseconds": {
+          "type": "integer"
         }
       }
     },
@@ -3769,6 +4539,183 @@
           }
         }
       }
+    },
+    "MonitoringPolicy": {
+      "type": "object",
+      "properties": {
+        "FailureAction": {
+          "type": "integer"
+        },
+        "HealthCheckWaitDurationInMilliseconds": {
+          "type": "string"
+        },
+        "HealthCheckStableDurationInMilliseconds": {
+          "type": "string"
+        },
+        "HealthCheckRetryTimeoutInMilliseconds": {
+          "type": "string"
+        },
+        "UpgradeTimeoutInMilliseconds": {
+          "type": "string"
+        },
+        "UpgradeDomainTimeoutInMilliseconds": {
+          "type": "string"
+        }
+      }
+    },
+    "ApplicationHealthPolicy": {
+      "type": "object",
+      "properties": {
+        "ConsiderWarningAsError": {
+          "type": "boolean"
+        },
+        "MaxPercentUnhealthyDeployedApplications": {
+          "type": "integer"
+        },
+        "DefaultServiceTypeHealthPolicy": {
+          "type": "object",
+          "properties": {
+            "MaxPercentUnhealthyServices": {
+              "type": "integer"
+            },
+            "MaxPercentUnhealthyPartitionsPerService": {
+              "type": "integer"
+            },
+            "MaxPercentUnhealthyReplicasPerPartition": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "StartApplicationUpgradeDescription": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "TargetApplicationTypeVersion": {
+          "type": "string"
+        },
+        "Parameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "UpgradeKind": {
+          "type": "integer"
+        },
+        "RollingUpgradeMode": {
+          "type": "integer"
+        },
+        "UpgradeReplicaSetCheckTimeoutInSeconds": {
+          "type": "integer"
+        },
+        "ForceRestart": {
+          "type": "boolean"
+        },
+        "MonitoringPolicy": {
+          "type": "object",
+          "$ref": "#/definitions/MonitoringPolicy"
+        },
+        "ApplicationHealthPolicy": {
+          "type": "object",
+          "$ref": "#/definitions/ApplicationHealthPolicy"
+        }
+      }
+    },
+    "UpdateApplicationUpgradeDescription": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "UpgradeKind": {
+          "type": "integer"
+        },
+        "UpdateDescription": {
+          "type": "object",
+          "properties": {
+            "RollingUpgradeMode": {
+              "type": "integer"
+            },
+            "ForceRestart": {
+              "type": "boolean"
+            },
+            "FailureAction": {
+              "type": "integer"
+            },
+            "UpgradeReplicaSetCheckTimeoutInSeconds": {
+              "type": "integer"
+            },
+            "HealthCheckWaitDurationInMilliseconds": {
+              "type": "string"
+            },
+            "HealthCheckStableDurationInMilliseconds": {
+              "type": "string"
+            },
+            "HealthCheckRetryTimeoutInMilliseconds": {
+              "type": "string"
+            },
+            "UpgradeTimeoutInMilliseconds": {
+              "type": "string"
+            },
+            "UpgradeDomainTimeoutInMilliseconds": {
+              "type": "string"
+            }
+          }
+        },
+        "ApplicationHealthPolicy": {
+          "type": "object",
+          "$ref": "#/definitions/ApplicationHealthPolicy"
+        }
+      }
+    },
+    "ResolvedServicePartition": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "PartitionInformation": {
+          "type": "object",
+          "properties": {
+            "ServicePartitionKind": {
+              "type": "integer"
+            },
+            "Id": {
+              "type": "string"
+            }
+          }
+        },
+        "Endpoints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Kind": {
+                "type": "integer"
+              },
+              "Address": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "Version": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The version of the api",
+      "required": true,
+      "type": "string"
     }
   }
 }
