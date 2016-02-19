@@ -2274,6 +2274,93 @@
         }
       }
     },
+    "/Services/{serviceName}/$/GetPartitions/$/Recover": {
+      "post": {
+        "operationId": "RepairPartitionList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The repair partition",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/Recover": {
+      "post": {
+        "operationId": "RepairPartition",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "The id of the partition",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The repair partition",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/ResetLoad": {
+      "post": {
+        "operationId": "ResetPartitionLoad",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "The id of the partition",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The reset partition load",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
     "/Partitions/{partitionId}/$/GetReplicas": {
       "get": {
         "operationId": "GetReplicaList",
