@@ -8,7 +8,22 @@
       "internalConstructors": true
     }
   },
-  "host": "accountname.datalakeserviceuri",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{accountName}.{adlsFileSystemDnsSuffix}",
+    "parameters": [
+      {
+        "name": "accountName",
+        "description": "The Azure Data Lake Store account to execute filesystem operations on.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      },
+      {
+        "$ref": "#/parameters/adlsFilesystemDnsSuffixInPath"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],
@@ -39,13 +54,6 @@
             "description": "The Data Lake Store path (starting with '/') of the file for which you want the file expiration information."
           },
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
-          },
-          {
             "name": "op",
             "in": "query",
             "required": true,
@@ -60,10 +68,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -93,7 +97,7 @@
             "description": "The Data Lake Store path (starting with '/') of the file to which to append using concurrent append."
           },
           {
-            "name": "accountname",
+            "name": "accountName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -136,9 +140,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -160,13 +161,6 @@
             "required": true,
             "type": "string",
             "description": "The Data Lake Store path (starting with '/') of the file on which to set or remove the expiration time."
-          },
-          {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
           },
           {
             "name": "expiryOption",
@@ -206,9 +200,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -234,13 +225,6 @@
             "description": "The Data Lake Store path (starting with '/') of the file or directory for which to check access."
           },
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
-          },
-          {
             "name": "fsaction",
             "in": "query",
             "required": false,
@@ -260,10 +244,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -287,13 +267,6 @@
             "description": "The Data Lake Store path (starting with '/') of the directory to create."
           },
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
-          },
-          {
             "name": "permission",
             "in": "query",
             "required": false,
@@ -313,10 +286,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -345,13 +314,6 @@
             "description": "The Data Lake Store path (starting with '/') of the destination file resulting from the concatenation."
           },
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
-          },
-          {
             "name": "sources",
             "in": "query",
             "required": true,
@@ -375,10 +337,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -405,13 +363,6 @@
             "required": true,
             "type": "string",
             "description": "The Data Lake Store path (starting with '/') of the destination file resulting from the concatenation."
-          },
-          {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
           },
           {
             "name": "deletesourcedirectory",
@@ -443,10 +394,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -470,13 +417,6 @@
             "required": true,
             "type": "string",
             "description": "The Data Lake Store path (starting with '/') of the directory to list."
-          },
-          {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
           },
           {
             "name": "listSize",
@@ -513,10 +453,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -545,13 +481,6 @@
             "description": "The Data Lake Store path (starting with '/') of the file for which to retrieve the summary."
           },
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
-          },
-          {
             "name": "op",
             "in": "query",
             "required": true,
@@ -564,10 +493,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -596,13 +521,6 @@
             "description": "The Data Lake Store path (starting with '/') of the file or directory for which to retrieve the status."
           },
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
-          },
-          {
             "name": "op",
             "in": "query",
             "required": true,
@@ -615,10 +533,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -648,13 +562,6 @@
             "required": true,
             "type": "string",
             "description": "The Data Lake Store path (starting with '/') of the file to which to append."
-          },
-          {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
           },
           {
             "name": "streamContents",
@@ -695,10 +602,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -723,13 +626,6 @@
             "required": true,
             "type": "string",
             "description": "The Data Lake Store path (starting with '/') of the file to create."
-          },
-          {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
           },
           {
             "name": "streamContents",
@@ -800,9 +696,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -824,13 +717,6 @@
             "required": true,
             "type": "string",
             "description": "The Data Lake Store path (starting with '/') of the file to open."
-          },
-          {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
           },
           {
             "name": "length",
@@ -874,10 +760,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -907,13 +789,6 @@
             "description": "The Data Lake Store path (starting with '/') of the file or directory on which to set the ACL."
           },
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
-          },
-          {
             "name": "aclspec",
             "in": "query",
             "required": true,
@@ -933,10 +808,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -962,13 +833,6 @@
             "description": "The Data Lake Store path (starting with '/') of the file or directory with the ACL being modified."
           },
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
-          },
-          {
             "name": "aclspec",
             "in": "query",
             "required": true,
@@ -981,17 +845,13 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "default": ["MODIFYACLENTRIES"]
+            "enum": ["MODIFYACLENTRIES"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -1017,13 +877,6 @@
             "description": "The Data Lake Store path (starting with '/') of the file or directory with the ACL being removed."
           },
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
-          },
-          {
             "name": "aclspec",
             "in": "query",
             "required": true,
@@ -1043,10 +896,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -1072,13 +921,6 @@
             "description": "The Data Lake Store path (starting with '/') of the directory with the default ACL being removed."
           },
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
-          },
-          {
             "name": "op",
             "in": "query",
             "required": true,
@@ -1091,10 +933,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -1120,13 +958,6 @@
             "description": "The Data Lake Store path (starting with '/') of the file or directory with the ACL being removed."
           },
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
-          },
-          {
             "name": "op",
             "in": "query",
             "required": true,
@@ -1139,10 +970,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -1166,13 +993,6 @@
             "description": "The Data Lake Store path (starting with '/') of the file or directory for which to get the ACL."
           },
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
-          },
-          {
             "name": "op",
             "in": "query",
             "required": true,
@@ -1185,10 +1005,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -1217,13 +1033,6 @@
             "description": "The Data Lake Store path (starting with '/') of the file or directory to delete."
           },
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
-          },
-          {
             "name": "recursive",
             "in": "query",
             "required": false,
@@ -1243,10 +1052,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -1275,13 +1080,6 @@
             "description": "The Data Lake Store path (starting with '/') of the file or directory to move/rename."
           },
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
-          },
-          {
             "name": "destination",
             "in": "query",
             "required": true,
@@ -1301,10 +1099,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -1333,13 +1127,6 @@
             "description": "The Data Lake Store path (starting with '/') of the file or directory for which to set the owner."
           },
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
-          },
-          {
             "name": "owner",
             "in": "query",
             "required": false,
@@ -1366,10 +1153,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -1395,13 +1178,6 @@
             "description": "The Data Lake Store path (starting with '/') of the file or directory for which to set the permission."
           },
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
-          },
-          {
             "name": "permission",
             "in": "query",
             "required": false,
@@ -1421,9 +1197,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -1447,13 +1220,6 @@
             "required": true,
             "type": "string",
             "description": "The Data Lake Store path (starting with '/') of the file or directory for which to set the modification time."
-          },
-          {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
           },
           {
             "name": "modificationtime",
@@ -1484,10 +1250,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -1506,7 +1268,7 @@
         "description": "Get the home directory for the specified account.",
         "parameters": [
           {
-            "name": "accountname",
+            "name": "accountName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1525,10 +1287,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          
-          {
-            "$ref": "#/parameters/dataLakeServiceUriInPath"
           }
         ],
         "responses": {
@@ -1794,12 +1552,13 @@
       "type": "string",
       "description": "Client Api Version."
     },
-    "dataLakeServiceUriInPath": {
-      "name": "datalakeserviceuri",
+    "adlsFilesystemDnsSuffixInPath": {
+      "name": "adlsFileSystemDnsSuffix",
       "in": "path",
       "required": true,
       "type": "string",
       "default": "azuredatalakestore.net",
+      "x-ms-skip-url-encoding": true,
       "description": "Gets the URI used as the base for all cloud service requests."
     }
   }

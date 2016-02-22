@@ -8,7 +8,22 @@
       "internalConstructors": true
     }
   },
-  "host": "accountname.jobserviceuri",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{accountName}.{adlaJobDnsSuffix}",
+    "parameters": [
+      {
+        "name": "accountName",
+        "description": "The Azure Data Lake Analytics account to execute job operations on.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      },
+      {
+        "$ref": "#/parameters/adlaJobDnsSuffixInPath"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],
@@ -33,13 +48,6 @@
         "parameters": [
           
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account."
-          },
-          {
             "name": "jobIdentity",
             "in": "path",
             "required": true,
@@ -51,9 +59,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/jobServiceUriInPathParameter"
           }
         ],
         "responses": {
@@ -76,13 +81,6 @@
         "parameters": [
           
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account."
-          },
-          {
             "name": "jobIdentity",
             "in": "path",
             "required": true,
@@ -94,9 +92,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/jobServiceUriInPathParameter"
           }
         ],
         "responses": {
@@ -117,14 +112,6 @@
         "operationId": "Job_Build",
         "description": "Builds (compiles) the specified job in the specified Data Lake Analytics account for job correctness and validation.",
         "parameters": [
-          
-          {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account."
-          },
           {
             "name": "parameters",
             "in": "body",
@@ -139,9 +126,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/jobServiceUriInPathParameter"
           }
         ],
         "responses": {
@@ -162,14 +146,6 @@
         "operationId": "Job_Create",
         "description": "Submits a job to the specified Data Lake Analytics account.",
         "parameters": [
-          
-          {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account."
-          },
           {
             "name": "jobId",
             "in": "path",
@@ -191,9 +167,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/jobServiceUriInPathParameter"
           }
         ],
         "responses": {
@@ -214,14 +187,6 @@
         "operationId": "Job_Cancel",
         "description": "Cancels the running job specified by the job ID.",
         "parameters": [
-          
-          {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account."
-          },
           {
             "name": "jobIdentity",
             "in": "path",
@@ -234,9 +199,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/jobServiceUriInPathParameter"
           }
         ],
         "responses": {
@@ -256,13 +218,6 @@
         "parameters": [
           
           {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account."
-          },
-          {
             "name": "jobIdentity",
             "in": "path",
             "required": true,
@@ -274,9 +229,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/jobServiceUriInPathParameter"
           }
         ],
         "responses": {
@@ -298,13 +250,6 @@
         "description": "Lists the jobs, if any, associated with the specified Data Lake Analytics account. The response includes a link to the next page of results, if any.",
         "parameters": [
           
-          {
-            "name": "accountname",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account."
-          },
           {
             "name": "$filter",
             "in": "query",
@@ -375,9 +320,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/jobServiceUriInPathParameter"
           }
         ],
         "responses": {
@@ -1053,13 +995,14 @@
       "type": "string",
       "description": "Client Api Version."
     },
-    "jobServiceUriInPathParameter": {
-      "name": "jobserviceuri",
+    "adlaJobDnsSuffixInPath": {
+      "name": "adlaJobDnsSuffix",
       "in": "path",
       "required": true,
       "type": "string",
       "default": "azuredatalakeanalytics.net",
-      "description": "Gets the URI used as the base for all cloud service requests."
+      "x-ms-skip-url-encoding": true,
+      "description": "Gets the DNS suffix used as the base for all Azure Data Lake Analytics Job service requests."
     }
   }
 }
