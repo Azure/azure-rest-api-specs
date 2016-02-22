@@ -97,13 +97,6 @@
             "description": "The Data Lake Store path (starting with '/') of the file to which to append using concurrent append."
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account that the file lives in."
-          },
-          {
             "name": "streamContents",
             "in": "body",
             "schema": {
@@ -265,13 +258,6 @@
             "required": true,
             "type": "string",
             "description": "The Data Lake Store path (starting with '/') of the directory to create."
-          },
-          {
-            "name": "permission",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The optional permission to set on the directory."
           },
           {
             "name": "op",
@@ -574,14 +560,6 @@
             "description": "The file contents to include when appending to the file."
           },
           {
-            "name": "buffersize",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64",
-            "description": "The optional buffer size to use when appending data"
-          },
-          {
             "name": "op",
             "in": "query",
             "required": true,
@@ -638,42 +616,11 @@
             "description": "The file contents to include when creating the file. This parameter is optional, resulting in an empty file if not specified."
           },
           {
-            "name": "buffersize",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64",
-            "description": "The size of the buffer used in transferring data."
-          },
-          {
             "name": "overwrite",
             "in": "query",
             "required": false,
             "type": "boolean",
             "description": "The indication of if the file should be overwritten."
-          },
-          {
-            "name": "blocksize",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64",
-            "description": "The block size of a file, in bytes."
-          },
-          {
-            "name": "replication",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int16",
-            "description": "The number of replications of a file."
-          },
-          {
-            "name": "permission",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The permissions of a file or directory."
           },
           {
             "name": "op",
@@ -727,13 +674,6 @@
           },
           {
             "name": "offset",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "buffersize",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -890,43 +830,6 @@
             "type": "string",
             "description": "The constant value for the operation.",
             "enum": ["REMOVEACLENTRIES"]
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/webhdfs/v1/{removeDefaultAclFilePath}": {
-      "put": {
-        "tags": [
-          "FileSystem"
-        ],
-        "operationId": "FileSystem_RemoveDefaultAcl",
-        "description": "Removes default Access Control List (ACL) entries of the specified directory.",
-        "parameters": [
-          {
-            "name": "removeDefaultAclFilePath",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Data Lake Store path (starting with '/') of the directory with the default ACL being removed."
-          },
-          {
-            "name": "op",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The constant value for the operation.",
-            "enum": ["REMOVEDEFAULTACL"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1206,59 +1109,6 @@
         }
       }
     },
-    "/webhdfs/v1/{sourcePath}": {
-      "put": {
-        "tags": [
-          "FileSystem"
-        ],
-        "operationId": "FileSystem_SetTimes",
-        "description": "Sets the access or modification time on a file or directory.",
-        "parameters": [
-          {
-            "name": "sourcePath",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Data Lake Store path (starting with '/') of the file or directory for which to set the modification time."
-          },
-          {
-            "name": "modificationtime",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64",
-            "description": "The modification time of the file or directory. If -1, this property remains unchanged"
-          },
-          {
-            "name": "accesstime",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64",
-            "description": "The access time of the file or directory. If -1, this property remains unchanged"
-          },
-          {
-            "name": "op",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The constant value for the operation.",
-            "enum": ["SETTIMES"]
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/webhdfs/v1/": {
       "get": {
         "tags": [
@@ -1267,13 +1117,6 @@
         "operationId": "FileSystem_GetHomeDirectory",
         "description": "Get the home directory for the specified account.",
         "parameters": [
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to use."
-          },
           {
             "name": "op",
             "in": "query",
@@ -1369,20 +1212,10 @@
           "format": "int64",
           "description": "Gets or sets the number of bytes used by the contet."
         },
-        "quota": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets or sets the namespace quota of this directory."
-        },
         "spaceConsumed": {
           "type": "integer",
           "format": "int64",
           "description": "Gets or sets the disk space consumed by the content."
-        },
-        "spaceQuota": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets or sets the disk space quota."
         }
       },
       "description": "Data Lake Store content summary information"
@@ -1413,11 +1246,6 @@
           "format": "int64",
           "description": "Gets or sets the number of children in the directory."
         },
-        "fileId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets or sets the file identifier."
-        },
         "group": {
           "type": "string",
           "description": "Gets or sets the group owner."
@@ -1443,11 +1271,6 @@
         "permission": {
           "type": "string",
           "description": "Gets or sets the permission represented as an string."
-        },
-        "replication": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of replications of a file."
         },
         "type": {
           "type": "string",
