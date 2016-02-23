@@ -1008,39 +1008,6 @@
           }
         }
       }
-    },
-    "/webhdfs/v1/": {
-      "get": {
-        "tags": [
-          "FileSystem"
-        ],
-        "operationId": "FileSystem_GetHomeDirectory",
-        "description": "Get the home directory for the specified account.",
-        "parameters": [
-          {
-            "name": "op",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The constant value for the operation.",
-            "enum": ["GETHOMEDIRECTORY"]
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/HomeDirectoryResult"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
