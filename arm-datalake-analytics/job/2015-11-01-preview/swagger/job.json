@@ -342,102 +342,122 @@
       "properties": {
         "dataRead": {
           "type": "integer",
+          "readOnly": true,
           "format": "int64",
-          "description": "Gets or sets the amount of data read, in bytes."
+          "description": "Gets the amount of data read, in bytes."
         },
         "dataReadCrossPod": {
           "type": "integer",
+          "readOnly": true,
           "format": "int64",
-          "description": "Gets or sets the amount of data read across multiple pods, in bytes."
+          "description": "Gets the amount of data read across multiple pods, in bytes."
         },
         "dataReadIntraPod": {
           "type": "integer",
+          "readOnly": true,
           "format": "int64",
-          "description": "Gets or sets the amount of data read in one pod, in bytes."
+          "description": "Gets the amount of data read in one pod, in bytes."
         },
         "dataToRead": {
           "type": "integer",
+          "readOnly": true,
           "format": "int64",
-          "description": "Gets or sets the amount of data remaining to be read, in bytes."
+          "description": "Gets the amount of data remaining to be read, in bytes."
         },
         "dataWritten": {
           "type": "integer",
+          "readOnly": true,
           "format": "int64",
-          "description": "Gets or sets the amount of data written, in bytes."
+          "description": "Gets the amount of data written, in bytes."
         },
         "duplicateDiscardCount": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
-          "description": "Gets or sets the number of duplicates that were discarded."
+          "description": "Gets the number of duplicates that were discarded."
         },
         "failedCount": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
-          "description": "Gets or sets the number of failures that occured in this stage."
+          "description": "Gets the number of failures that occured in this stage."
         },
         "maxVertexDataRead": {
           "type": "integer",
+          "readOnly": true,
           "format": "int64",
-          "description": "Gets or sets the maximum amount of data read in a single vertex, in bytes."
+          "description": "Gets the maximum amount of data read in a single vertex, in bytes."
         },
         "minVertexDataRead": {
           "type": "integer",
+          "readOnly": true,
           "format": "int64",
-          "description": "Gets or sets the minimum amount of data read in a single vertex, in bytes."
+          "description": "Gets the minimum amount of data read in a single vertex, in bytes."
         },
         "readFailureCount": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
-          "description": "Gets or sets the number of read failures in this stage."
+          "description": "Gets the number of read failures in this stage."
         },
         "revocationCount": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
-          "description": "Gets or sets the number of vertices that were revoked during this stage."
+          "description": "Gets the number of vertices that were revoked during this stage."
         },
         "runningCount": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
-          "description": "Gets or sets the number of currently running vertices in this stage."
+          "description": "Gets the number of currently running vertices in this stage."
         },
         "scheduledCount": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
-          "description": "Gets or sets the number of currently scheduled vertices in this stage"
+          "description": "Gets the number of currently scheduled vertices in this stage"
         },
         "stageName": {
           "type": "string",
-          "description": "Gets or sets the name of this stage in job execution."
+          "readOnly": true,
+          "description": "Gets the name of this stage in job execution."
         },
         "succeededCount": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
-          "description": "Gets or sets the number of vertices that succeeded in this stage."
+          "description": "Gets the number of vertices that succeeded in this stage."
         },
         "tempDataWritten": {
           "type": "integer",
+          "readOnly": true,
           "format": "int64",
-          "description": "Gets or sets the amount of temporary data written, in bytes."
+          "description": "Gets the amount of temporary data written, in bytes."
         },
         "totalCount": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
-          "description": "Gets or sets the total vertex count for this stage."
+          "description": "Gets the total vertex count for this stage."
         },
         "totalFailedTime": {
           "type": "integer",
+          "readOnly": true,
           "format": "int64",
-          "description": "Gets or sets the amount of time that failed vertices took up in this stage."
+          "description": "Gets the amount of time that failed vertices took up in this stage."
         },
         "totalProgress": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
-          "description": "Gets or sets the current progress of this stage, as a percentage."
+          "description": "Gets the current progress of this stage, as a percentage."
         },
         "totalSucceededTime": {
           "type": "integer",
+          "readOnly": true,
           "format": "int64",
-          "description": "Gets or sets the amount of time all successful vertices took in this stage."
+          "description": "Gets the amount of time all successful vertices took in this stage."
         }
       },
       "description": "The Data Lake Analytics U-SQL job statistics vertex stage information."
@@ -446,15 +466,17 @@
       "properties": {
         "lastUpdateTimeUtc": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
-          "description": "Gets or sets the last update time for the statistics."
+          "description": "Gets the last update time for the statistics."
         },
         "stages": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/JobStatisticsVertexStage"
           },
-          "description": "Gets or sets the list of stages for the job."
+          "description": "Gets the list of stages for the job."
         }
       },
       "description": "The Data Lake Analytics U-SQL job execution statistics."
@@ -463,18 +485,21 @@
       "properties": {
         "jobId": {
           "type": "string",
-          "description": "Gets or sets the id of the job this data is for."
+          "readOnly": true,
+          "description": "Gets the id of the job this data is for."
         },
         "command": {
           "type": "string",
-          "description": "Gets or sets the command that this job data relates to."
+          "readOnly": true,
+          "description": "Gets the command that this job data relates to."
         },
         "paths": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the list of paths to all of the job data."
+          "description": "Gets the list of paths to all of the job data."
         }
       },
       "description": "A Data Lake Analytics U-SQL job data path item."
@@ -483,20 +508,24 @@
       "properties": {
         "newState": {
           "type": "string",
-          "description": "Gets or sets the new state the job is in."
+          "readOnly": true,
+          "description": "Gets the new state the job is in."
         },
         "timeStamp": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
-          "description": "Gets or sets the time stamp that the state change took place."
+          "description": "Gets the time stamp that the state change took place."
         },
         "requestedByUser": {
           "type": "string",
-          "description": "Gets or sets the user who requests the change."
+          "readOnly": true,
+          "description": "Gets the user who requests the change."
         },
         "details": {
           "type": "string",
-          "description": "Gets or sets  the details of the audit log."
+          "readOnly": true,
+          "description": "Gets  the details of the audit log."
         }
       },
       "description": "The Data Lake Analytics U-SQL job state audit records for tracking the lifecycle of a job."
@@ -505,7 +534,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the resource."
+          "description": "Gets or set the name of the resource."
         },
         "resourcePath": {
           "type": "string",
@@ -526,7 +555,7 @@
       },
       "description": "The Data Lake Analytics U-SQL job resources."
     },
-    "USqlProperties": {
+    "USqlJobProperties": {
       "x-ms-discriminator-value": "USql",
       "allOf": [
         {
@@ -543,44 +572,54 @@
         },
         "statistics": {
           "$ref": "#/definitions/JobStatistics",
+          "readOnly": true,
           "description": "Gets or sets the job specific statistics."
         },
         "debugData": {
           "$ref": "#/definitions/JobDataPath",
-          "description": "Gets or sets the job specific debug data locations."
+          "readOnly": true,
+          "description": "Gets the job specific debug data locations."
         },
         "algebraFilePath": {
           "type": "string",
-          "description": "Gets or sets the U-SQL algebra file path after the job has completed"
+          "readOnly": true,
+          "description": "Gets the U-SQL algebra file path after the job has completed"
         },
         "totalCompilationTime": {
           "type": "string",
-          "description": "Gets or sets the total time this job spent compiling. This value should not be set by the user and will be ignored if it is."
+          "readOnly": true,
+          "description": "Gets the total time this job spent compiling. This value should not be set by the user and will be ignored if it is."
         },
         "totalPauseTime": {
           "type": "string",
-          "description": "Gets or sets the total time this job spent paused. This value should not be set by the user and will be ignored if it is."
+          "readOnly": true,
+          "description": "Gets the total time this job spent paused. This value should not be set by the user and will be ignored if it is."
         },
         "totalQueuedTime": {
           "type": "string",
-          "description": "Gets or sets the total time this job spent queued. This value should not be set by the user and will be ignored if it is."
+          "readOnly": true,
+          "description": "Gets the total time this job spent queued. This value should not be set by the user and will be ignored if it is."
         },
         "totalRunningTime": {
           "type": "string",
-          "description": "Gets or sets the total time this job spent executing. This value should not be set by the user and will be ignored if it is."
+          "readOnly": true,
+          "description": "Gets the total time this job spent executing. This value should not be set by the user and will be ignored if it is."
         },
         "rootProcessNodeId": {
           "type": "string",
-          "description": "Gets or sets the ID used to identify the job manager coordinating job execution. This value should not be set by the user and will be ignored if it is."
+          "readOnly": true,
+          "description": "Gets the ID used to identify the job manager coordinating job execution. This value should not be set by the user and will be ignored if it is."
         },
         "yarnApplicationId": {
           "type": "string",
-          "description": "Gets or sets the ID used to identify the yarn application executing the job. This value should not be set by the user and will be ignored if it is."
+          "readOnly": true,
+          "description": "Gets the ID used to identify the yarn application executing the job. This value should not be set by the user and will be ignored if it is."
         },
         "yarnApplicationTimeStamp": {
           "type": "integer",
+          "readOnly": true,
           "format": "int64",
-          "description": "Gets or sets the timestamp (in ticks) for the yarn application executing the job. This value should not be set by the user and will be ignored if it is."
+          "description": "Gets the timestamp (in ticks) for the yarn application executing the job. This value should not be set by the user and will be ignored if it is."
         },
         "compileMode": {
           "type": "string",
@@ -617,7 +656,7 @@
         }
       }
     },
-    "HiveProperties": {
+    "HiveJobProperties": {
       "x-ms-discriminator-value": "Hive",
       "allOf": [
         {
@@ -678,53 +717,65 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "Gets or sets the error message description"
+          "readOnly": true,
+          "description": "Gets the error message description"
         },
         "details": {
           "type": "string",
-          "description": "Gets or sets the details of the error message."
+          "readOnly": true,
+          "description": "Gets the details of the error message."
         },
         "endOffset": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
-          "description": "Gets or sets the end offset in the job where the error was found."
+          "description": "Gets the end offset in the job where the error was found."
         },
         "errorId": {
           "type": "string",
-          "description": "Gets or sets the specific identifier for the type of error encountered in the job."
+          "readOnly": true,
+          "description": "Gets the specific identifier for the type of error encountered in the job."
         },
         "filePath": {
           "type": "string",
-          "description": "Gets or sets the path to any supplemental error files, if any."
+          "readOnly": true,
+          "description": "Gets the path to any supplemental error files, if any."
         },
         "helpLink": {
           "type": "string",
-          "description": "Gets or sets the link to MSDN or Azure help for this type of error, if any."
+          "readOnly": true,
+          "description": "Gets the link to MSDN or Azure help for this type of error, if any."
         },
         "internalDiagnostics": {
           "type": "string",
-          "description": "Gets or sets the internal diagnostic stack trace if the user requesting the job error details has sufficient permissions it will be retrieved, otherwise it will be empty."
+          "readOnly": true,
+          "description": "Gets the internal diagnostic stack trace if the user requesting the job error details has sufficient permissions it will be retrieved, otherwise it will be empty."
         },
         "lineNumber": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
-          "description": "Gets or sets the specific line number in the job where the error occured."
+          "description": "Gets the specific line number in the job where the error occured."
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the user friendly error message for the failure."
+          "readOnly": true,
+          "description": "Gets the user friendly error message for the failure."
         },
         "resolution": {
           "type": "string",
-          "description": "Gets or sets the recommended resolution for the failure, if any."
+          "readOnly": true,
+          "description": "Gets the recommended resolution for the failure, if any."
         },
         "InnerError": {
           "$ref": "#/definitions/JobInnerError",
-          "description": "Gets or sets the inner error of this specific job error message, if any."
+          "readOnly": true,
+          "description": "Gets the inner error of this specific job error message, if any."
         },
         "severity": {
           "type": "string",
-          "description": "Gets or sets the severity level of the failure.",
+          "readOnly": true,
+          "description": "Gets the severity level of the failure.",
           "enum": [
             "Warning",
             "Error"
@@ -736,11 +787,13 @@
         },
         "source": {
           "type": "string",
-          "description": "Gets or sets the ultimate source of the failure (usually either SYSTEM or USER)."
+          "readOnly": true,
+          "description": "Gets the ultimate source of the failure (usually either SYSTEM or USER)."
         },
         "startOffset": {
           "type": "string",
-          "description": "Gets or sets the end offset in the job where the error was found"
+          "readOnly": true,
+          "description": "Gets the end offset in the job where the error was found"
         }
       },
       "description": "The Data Lake Analytics job error details."
@@ -749,12 +802,14 @@
       "properties": {
         "diagnosticCode": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
-          "description": "Gets or sets the diagnostic error code."
+          "description": "Gets the diagnostic error code."
         },
         "severity": {
           "type": "string",
-          "description": "Gets or sets the severity level of the failure.",
+          "readOnly": true,
+          "description": "Gets the severity level of the failure.",
           "enum": [
             "Warning",
             "Error"
@@ -766,44 +821,57 @@
         },
         "details": {
           "type": "string",
-          "description": "Gets or sets the details of the error message."
+          "readOnly": true,
+          "description": "Gets the details of the error message."
         },
         "component": {
           "type": "string",
-          "description": "Gets or sets the component that failed."
+          "readOnly": true,
+          "description": "Gets the component that failed."
         },
         "errorId": {
           "type": "string",
-          "description": "Gets or sets the specific identifier for the type of error encountered in the job."
+          "readOnly": true,
+          "description": "Gets the specific identifier for the type of error encountered in the job."
         },
         "helpLink": {
           "type": "string",
-          "description": "Gets or sets the link to MSDN or Azure help for this type of error, if any."
+          "readOnly": true,
+          "description": "Gets the link to MSDN or Azure help for this type of error, if any."
         },
         "internalDiagnostics": {
           "type": "string",
-          "description": "Gets or sets the internal diagnostic stack trace if the user requesting the job error details has sufficient permissions it will be retrieved, otherwise it will be empty."
+          "readOnly": true,
+          "description": "Gets the internal diagnostic stack trace if the user requesting the job error details has sufficient permissions it will be retrieved, otherwise it will be empty."
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the user friendly error message for the failure."
+          "readOnly": true,
+          "description": "Gets the user friendly error message for the failure."
         },
         "resolution": {
           "type": "string",
-          "description": "Gets or sets the recommended resolution for the failure, if any."
+          "readOnly": true,
+          "description": "Gets the recommended resolution for the failure, if any."
         },
         "source": {
           "type": "string",
-          "description": "Gets or sets the ultimate source of the failure (usually either SYSTEM or USER)."
+          "readOnly": true,
+          "description": "Gets the ultimate source of the failure (usually either SYSTEM or USER)."
         },
         "description": {
           "type": "string",
-          "description": "Gets or sets the error message description"
+          "readOnly": true,
+          "description": "Gets the error message description"
         }
       },
       "description": "The Data Lake Analytics job error details."
     },
     "JobInformation": {
+      "required": [
+        "name",
+        "properties"
+      ],
       "properties": {
         "jobId": {
           "type": "string",
@@ -831,10 +899,11 @@
         },
         "errorMessage": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/JobErrorDetails"
           },
-          "description": "Gets or sets the error message details for the job, if the job failed."
+          "description": "Gets the error message details for the job, if the job failed."
         },
         "degreeOfParallelism": {
           "type": "integer",
@@ -848,22 +917,26 @@
         },
         "submitTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
-          "description": "Gets or sets the time the job was submitted to the service."
+          "description": "Gets the time the job was submitted to the service."
         },
         "startTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
-          "description": "Gets or sets the start time of the job."
+          "description": "Gets the start time of the job."
         },
         "endTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
-          "description": "Gets or sets the completion time of the job."
+          "description": "Gets the completion time of the job."
         },
         "state": {
           "type": "string",
-          "description": "Gets or sets the job state. When the job is in the Ended state, refer to Result and ErrorMessage for details.",
+          "readOnly": true,
+          "description": "Gets the job state. When the job is in the Ended state, refer to Result and ErrorMessage for details.",
           "enum": [
             "Accepted",
             "Compiling",
@@ -883,7 +956,8 @@
         },
         "result": {
           "type": "string",
-          "description": "Gets or sets the result of job execution or the current result of the running job.",
+          "readOnly": true,
+          "description": "Gets the result of job execution or the current result of the running job.",
           "enum": [
             "None",
             "Succeeded",
@@ -897,10 +971,11 @@
         },
         "stateAuditRecords": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/JobStateAuditRecord"
           },
-          "description": "Gets or sets the job state audit records, indicating when various operations have been performed on this job."
+          "description": "Gets the job state audit records, indicating when various operations have been performed on this job."
         },
         "properties": {
           "$ref": "#/definitions/JobProperties",
@@ -919,19 +994,22 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/JobInformation"
           },
-          "description": "Gets or sets the list of jobInfo items."
+          "description": "Gets the list of jobInfo items."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the link (url) to the next page of results."
+          "readOnly": true,
+          "description": "Gets the link (url) to the next page of results."
         },
         "count": {
           "type": "integer",
+          "readOnly": true,
           "format": "int64",
-          "description": "Gets or sets the total count of results that are available, but might not be returned in the current page."
+          "description": "Gets the total count of results that are available, but might not be returned in the current page."
         }
       },
       "description": "List of jobInfo items."

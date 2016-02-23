@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "DataLakeStoreManagementClient",
+    "title": "DataLakeStoreAccountManagementClient",
     "description": "Creates an Azure Data Lake Store account management client.",
     "version": "2015-10-01-preview",
     "x-ms-code-generation-settings": {
@@ -26,9 +26,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules/{firewallRuleName}": {
       "delete": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_DeleteFirewallRule",
+        "operationId": "Account_DeleteFirewallRule",
         "description": "Deletes the specified firewall rule from the specified Data Lake Store account",
         "parameters": [
           {
@@ -70,9 +70,9 @@
       },
       "get": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_GetFirewallRule",
+        "operationId": "Account_GetFirewallRule",
         "description": "Gets the specified Data Lake Store firewall rule.",
         "parameters": [
           {
@@ -116,9 +116,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules": {
       "get": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_ListFirewallRules",
+        "operationId": "Account_ListFirewallRules",
         "description": "Lists the Data Lake Store firewall rules within the specified Data Lake Store account.",
         "parameters": [
           {
@@ -158,9 +158,9 @@
     "/{nextLink}": {
       "get": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_FirewallRulesListNext",
+        "operationId": "Account_FirewallRulesListNext",
         "description": "Gets the next page of Data Lake Store firewall rules, if any, for the specified account. The response includes a link to the next page of results, if any.",
         "parameters": [
           {
@@ -191,9 +191,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules/{name}": {
       "put": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_CreateOrUpdateFirewallRule",
+        "operationId": "Account_CreateOrUpdateFirewallRule",
         "description": "Creates or updates the specified firewall rule.",
         "parameters": [
           {
@@ -246,9 +246,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{name}": {
       "put": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_Create",
+        "operationId": "Account_Create",
         "description": "Creates the specified Data Lake Store account.",
         "parameters": [
           {
@@ -299,9 +299,9 @@
       },
       "patch": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_Update",
+        "operationId": "Account_Update",
         "description": "Updates the specified Data Lake Store account information.",
         "parameters": [
           {
@@ -354,9 +354,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}": {
       "delete": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_Delete",
+        "operationId": "Account_Delete",
         "description": "Deletes the specified Data Lake Store account.",
         "parameters": [
           {
@@ -398,9 +398,9 @@
       },
       "get": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_Get",
+        "operationId": "Account_Get",
         "description": "Gets the specified Data Lake Store account.",
         "parameters": [
           {
@@ -437,9 +437,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts": {
       "get": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_ListByResourceGroup",
+        "operationId": "Account_ListByResourceGroup",
         "description": "Lists the Data Lake Store accounts within a specific resource group. The response includes a link to the next page of results, if any.",
         "parameters": [
           {
@@ -538,9 +538,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeStore/accounts": {
       "get": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_List",
+        "operationId": "Account_List",
         "description": "Lists the Data Lake Store accounts within the subscription. The response includes a link to the next page of results, if any.",
         "parameters": [
           {
@@ -652,7 +652,8 @@
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the namespace and type of the firewall Rule."
+          "readOnly": true,
+          "description": "Gets the namespace and type of the firewall Rule."
         },
         "id": {
           "type": "string",
@@ -673,19 +674,22 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/FirewallRule"
           },
-          "description": "Gets or set the results of the list operation"
+          "description": "Gets the results of the list operation"
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the link (url) to the next page of results."
+          "readOnly": true,
+          "description": "Gets the link (url) to the next page of results."
         },
         "count": {
           "type": "integer",
+          "readOnly": true,
           "format": "int64",
-          "description": "Gets or sets the total count of results that are available, but might not be returned in the current page."
+          "description": "Gets the total count of results that are available, but might not be returned in the current page."
         }
       },
       "description": "Data Lake Store firewall rule list information."
@@ -727,13 +731,15 @@
         },
         "creationTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
-          "description": "Gets or sets the account creation time."
+          "description": "Gets the account creation time."
         },
         "lastModifiedTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
-          "description": "Gets or sets the account last modified time."
+          "description": "Gets the account last modified time."
         },
         "endpoint": {
           "type": "string",
@@ -758,11 +764,13 @@
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the namespace and type of the account."
+          "readOnly": true,
+          "description": "Gets the namespace and type of the account."
         },
         "id": {
           "type": "string",
-          "description": "Gets or sets the account subscription ID."
+          "readOnly": true,
+          "description": "Gets the account subscription ID."
         },
         "tags": {
           "type": "object",
@@ -782,19 +790,22 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/DataLakeStoreAccount"
           },
-          "description": "Gets or set the results of the list operation"
+          "description": "Gets the results of the list operation"
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the link (url) to the next page of results."
+          "readOnly": true,
+          "description": "Gets the link (url) to the next page of results."
         },
         "count": {
           "type": "integer",
+          "readOnly": true,
           "format": "int64",
-          "description": "Gets or sets the total count of results that are available, but might not be returned in the current page."
+          "description": "Gets the total count of results that are available, but might not be returned in the current page."
         }
       },
       "description": "Data Lake Store account list information response."
@@ -803,15 +814,18 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Gets or sets the HTTP status code or error code associated with this error"
+          "readOnly": true,
+          "description": "Gets the HTTP status code or error code associated with this error"
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the error message localized based on Accept-Language"
+          "readOnly": true,
+          "description": "Gets the error message localized based on Accept-Language"
         },
         "target": {
           "type": "string",
-          "description": "Gets or sets the target of the particular error (for example, the name of the property in error)."
+          "readOnly": true,
+          "description": "Gets the target of the particular error (for example, the name of the property in error)."
         }
       },
       "description": "Data Lake Store error details information"
@@ -820,11 +834,13 @@
       "properties": {
         "trace": {
           "type": "string",
-          "description": "Gets or sets the stack trace for the error"
+          "readOnly": true,
+          "description": "Gets the stack trace for the error"
         },
         "context": {
           "type": "string",
-          "description": "Gets or sets the context for the error message"
+          "readOnly": true,
+          "description": "Gets the context for the error message"
         }
       },
       "description": "Data Lake Store inner error information"
@@ -833,39 +849,41 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Gets or sets the HTTP status code or error code associated with this error"
+          "readOnly": true,
+          "description": "Gets the HTTP status code or error code associated with this error"
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the error message to display."
+          "readOnly": true,
+          "description": "Gets the error message to display."
         },
         "target": {
           "type": "string",
-          "description": "Gets or sets the target of the error."
+          "readOnly": true,
+          "description": "Gets the target of the error."
         },
         "details": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/ErrorDetails"
           },
-          "description": "Gets or sets the list of error details"
+          "description": "Gets the list of error details"
         },
         "innerError": {
           "$ref": "#/definitions/InnerError",
-          "description": "Gets or sets the inner exceptions or errors, if any"
+          "readOnly": true,
+          "description": "Gets the inner exceptions or errors, if any"
         }
       },
-      "required": [
-        "code",
-        "message"
-      ],
       "description": "Data Lake Store error information"
     },
     "AzureAsyncOperationResult": {
       "properties": {
         "status": {
           "type": "string",
-          "description": "Gets or sets the status of the AzureAsuncOperation",
+          "readOnly": true,
+          "description": "Gets the status of the AzureAsuncOperation",
           "enum": [
             "InProgress",
             "Succeeded",
@@ -877,6 +895,7 @@
           }
         },
         "error": {
+          "readOnly": true,
           "$ref": "#/definitions/Error"
         }
       },

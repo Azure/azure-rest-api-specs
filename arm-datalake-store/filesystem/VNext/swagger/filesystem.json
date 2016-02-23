@@ -39,6 +39,46 @@
   ],
   "paths": {
     "/WebHdfsExt/{filePath}": {
+      "get": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_GetFileInfo",
+        "description": "Gets the file information object containing the expiration time for the file at the file path.",
+        "parameters": [
+          {
+            "name": "filePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Data Lake Store path (starting with '/') of the file for which you want the file expiration information."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "GETFILEINFO"
+            ],
+            "description": "The constant value for the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/FileInfoResult"
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "FileSystem"
@@ -87,6 +127,66 @@
             "type": "string",
             "description": "The constant value for the operation.",
             "enum":["CONCURRENTAPPEND"]
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_SetFileExpiry",
+        "description": "Sets or removes the expiration time on the specified file. This operation can only be executed against files. Folders are not supported.",
+        "parameters": [
+          {
+            "name": "filePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Data Lake Store path (starting with '/') of the file on which to set or remove the expiration time."
+          },
+          {
+            "name": "expiryOption",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "NeverExpire",
+              "RelativeToNow",
+              "RelativeToCreationDate",
+              "Absolute"
+            ],
+            "x-ms-enum": {
+              "name": "ExpiryOptionType",
+              "modelAsString": false
+            },
+            "description": "Indicates the type of expiration to use for the file: 1. NeverExpire: ExpireTime is ignored. 2. RelativeToNow: ExpireTime is an integer in milliseconds representing the expiration date relative to when file expiration is updated. 3. RelativeToCreationDate: ExpireTime is an integer in milliseconds representing the expiration date relative to file creation. 4. Absolute: ExpireTime is an integer in milliseconds, as a Unix timestamp relative to 1/1/1970 00:00:00."
+          },
+          {
+            "name": "expireTime",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The time that the file will expire, corresponding to the ExpiryOption that was set."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": ["SETEXPIRY"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1194,6 +1294,45 @@
       },
       "description": "Data Lake Store file or directory information."
     },
+    "FileInfoProperties": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the file unique identifier (as a GUID)."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the file name."
+        },
+        "length": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "Gets the number of bytes in a file."
+        },
+        "modificationTime": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "Gets the modification time as ticks since the epoch."
+        },
+        "creationTime": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "Gets the creation time as ticks since the epoch."
+        },
+        "expirationTime": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "Gets the expiration time, if any, as ticks since the epoch. If this is set to 0 or DateTime.MaxValue there is no expiration."
+        }
+      },
+      "description": "Data Lake Store file information."
+    },
     "FileStatuses": {
       "properties": {
         "FileStatus": {
@@ -1226,6 +1365,16 @@
         }
       },
       "description": "Data Lake Store filesystem file status information response."
+    },
+    "FileInfoResult": {
+      "properties": {
+        "FileInfo": {
+          "$ref": "#/definitions/FileInfoProperties",
+          "readOnly": true,
+          "description": "Gets the file information object associated with the specified file path."
+        }
+      },
+      "description": "Data Lake Store filesystem file information response used with file expiration."
     }
   },
   "parameters": {
