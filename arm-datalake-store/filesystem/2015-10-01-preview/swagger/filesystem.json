@@ -305,34 +305,12 @@
             "description": "The Data Lake Store path (starting with '/') of the directory to list."
           },
           {
-            "name": "listSize",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Gets or sets the number of items to return. Optional."
-          },
-          {
-            "name": "listAfter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Gets or sets the item or lexographical index after which to begin returning results. For example, a file list of 'a','b','d' and listAfter='b' will return 'd', and a listAfter='c' will also return 'd'. Optional."
-          },
-          {
-            "name": "listBefore",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Gets or sets the item or lexographical index before which to begin returning results. For example, a file list of 'a','b','d' and listBefore='d' will return 'a','b', and a listBefore='c' will also return 'a','b'. Optional."
-          },
-          {
             "name": "op",
             "in": "query",
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["MSLISTSTATUS"]
+            "enum": ["LISTSTATUS"]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
