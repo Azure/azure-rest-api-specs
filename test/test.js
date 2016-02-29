@@ -4,7 +4,8 @@ glob = require('glob'),
 path = require('path'),
 _ = require('lodash'),
 z = require('z-schema'),
-request = require("request")
+request = require('request'),
+util = require('util');
 
 var extensionSwaggerSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json";
 var swaggerSchemaUrl = "http://json.schemastore.org/swagger-2.0";
@@ -36,6 +37,11 @@ describe('Azure Swagger Schema Validation', function() {
       fs.readFile(swagger, 'utf8', function(err, data){
         if(err) { done(err); }
         
+        var parsedData = JSON.parse(data);
+        if (parsedData.documents && util.isArray(parsedData.documents)) {
+          console.log(util.format('Skipping the test for \'%s\' document as it seems to be a composite swagger doc.', swagger));
+          done();
+        }
         var validator = new z();
         validator.setRemoteReference(schemaUrl, schema4);
         validator.setRemoteReference(swaggerSchemaUrl, swaggerSchema);
