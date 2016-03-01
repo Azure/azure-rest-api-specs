@@ -244,7 +244,8 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -546,6 +547,12 @@
           }
         ],
         "responses": {
+		  "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          },
           "202": {
             "description": "Accepted and  the operation will complete asynchronously",
             "schema": {
@@ -558,7 +565,8 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -1147,7 +1155,8 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -1818,7 +1827,7 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/EndpointPropertiesCreateUpdateParameters"
+          "$ref": "#/definitions/EndpointPropertiesCreateParameters"
         }
       },
       "x-ms-azure-resource": true
@@ -1835,12 +1844,15 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/EndpointPropertiesCreateUpdateParameters"
+          "$ref": "#/definitions/EndpointPropertiesUpdateParameters"
         }
       },
       "x-ms-azure-resource": true
     },
-    "EndpointPropertiesCreateUpdateParameters": {
+    "EndpointPropertiesCreateParameters": {
+	  "required": [
+        "origins"
+      ],
       "properties": {
         "originHostHeader": {
           "description": "The host header CDN provider will send along with content requests to origins. The default value would be the host name of the origin.",
@@ -1873,7 +1885,49 @@
           "description": "Defines the query string caching behavior",
           "$ref": "#/definitions/QueryStringCachingBehavior"
         },
-        "origins": {
+		"origins": {
+          "description": " The set of origins of the CDN endpoint. When multiple origins exist, the first origin will be used as primary and rest will be used as failover options.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeepCreatedOrigin"
+          }
+        }
+      }
+    },
+	"EndpointPropertiesUpdateParameters": {
+      "properties": {
+        "originHostHeader": {
+          "description": "The host header CDN provider will send along with content requests to origins. The default value would be the host name of the origin.",
+          "type": "string"
+        },
+        "originPath": {
+          "description": "The path used for origin requests",
+          "type": "string"
+        },
+        "contentTypesToCompress": {
+          "description": "List of content types on which compression will be applied. The value for the elements should be Internet media type.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isCompressionEnabled": {
+          "description": "Indicates whether the compression is enabled. Default value is false. If compression is enabled, the content transferred from cdn endpoint to end user will be compressed. The requested content must be larger than 1 byte and smaller than 1 MB.",
+          "type": "boolean"
+        },
+        "isHttpAllowed": {
+          "description": "Indicates whether http traffic is allowed on the endpoint. Default value is true. At least one protocol (http or https) must be allowed.",
+          "type": "boolean"
+        },
+        "isHttpsAllowed": {
+          "description": "Indicates whether https traffic is allowed on the endpoint. Default value is true. At least one protocol (http or https) must be allowed.",
+          "type": "boolean"
+        },
+        "queryStringCachingBehavior": {
+          "description": "Defines the query string caching behavior",
+          "$ref": "#/definitions/QueryStringCachingBehavior"
+        },
+		"origins": {
           "description": " The set of origins of the CDN endpoint. When multiple origins exist, the first origin will be used as primary and rest will be used as failover options.",
           "type": "array",
           "items": {
