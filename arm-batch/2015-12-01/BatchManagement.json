@@ -28,6 +28,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the resource group that contains the new Batch account."
           },
           {
@@ -35,6 +36,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
             "description": "A name for the Batch account which must be unique within Azure. Batch account names must be between 3 and 24 characters in length and must use only numbers and lower-case letters. This name is used as part of the DNS name that is used to access the batch service in the region in which the account is created. For example: http://AccountName.batch.core.windows.net/."
           },
           {
@@ -78,6 +82,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the resource group that contains the Batch account."
           },
           {
@@ -85,6 +90,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
             "description": "The name of the account."
           },
           {
@@ -124,6 +132,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the resource group that contains the Batch account to be deleted."
           },
           {
@@ -131,6 +140,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
             "description": "The name of the account to be deleted."
           },
           {
@@ -165,6 +177,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the resource group that contains the Batch account."
           },
           {
@@ -172,6 +185,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
             "description": "The name of the account."
           },
           {
@@ -219,19 +235,48 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/batchAccounts": {
       "get": {
         "tags": [
           "Account"
         ],
         "operationId": "Account_List",
-        "description": "The List operation gets information about the Batch accounts associated either with the subscription if no resource group is specified or within the specified resource group.",
+        "description": "The List operation gets information about the Batch accounts associated with the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BatchAccountListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "Account_ListResourceGroup",
+        "description": "The List operation gets information about the Batch accounts associated the specified resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "An optional argument which specifies the name of the resource group that constrains the set of accounts that are returned."
           },
           {
@@ -267,6 +312,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the resource group that contains the Batch account."
           },
           {
@@ -274,6 +320,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
             "description": "The name of the Batch account."
           },
           {
@@ -303,6 +352,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the resource group that contains the Batch account."
           },
           {
@@ -310,6 +360,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
             "description": "The name of the account."
           },
           {
@@ -351,6 +404,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the resource group that contains the Batch account."
           },
           {
@@ -358,6 +412,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
             "description": "The name of the account."
           },
           {
@@ -390,6 +447,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the resource group that contains the Batch account."
           },
           {
@@ -397,6 +455,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
             "description": "The name of the Batch account."
           },
           {
@@ -449,6 +510,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the resource group that contains the Batch account."
           },
           {
@@ -456,6 +518,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
             "description": "The name of the Batch account."
           },
           {
@@ -499,6 +564,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the resource group that contains the Batch account."
           },
           {
@@ -506,6 +572,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
             "description": "The name of the Batch account."
           },
           {
@@ -540,6 +609,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the resource group that contains the Batch account."
           },
           {
@@ -547,6 +617,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
             "description": "The name of the Batch account."
           },
           {
@@ -584,6 +657,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the resource group that contains the Batch account."
           },
           {
@@ -591,6 +665,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
             "description": "The name of the Batch account."
           },
           {
@@ -636,6 +713,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the resource group that contains the Batch account."
           },
           {
@@ -643,6 +721,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
             "description": "The name of the Batch account."
           },
           {
@@ -687,6 +768,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the resource group that contains the Batch account."
           },
           {
@@ -694,6 +776,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
             "description": "The name of the Batch account."
           },
           {
@@ -735,6 +820,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the resource group that contains the Batch account."
           },
           {
@@ -742,6 +828,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
             "description": "The name of the Batch account."
           },
           {
@@ -788,6 +877,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the resource group that contains the Batch account."
           },
           {
@@ -795,6 +885,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
             "description": "The name of the Batch account."
           },
           {
@@ -866,6 +959,7 @@
           "description": "Gets or sets the resource id of the storage account to be used for auto storage."
         }
       },
+      "required": [ "storageAccountId" ],
       "description": "Gets or sets properties relating to auto storage."
     },
     "AccountBaseProperties": {
@@ -909,6 +1003,7 @@
           "description": "Gets or sets the UTC time at which storage keys were last synced to the Batch account."
         }
       },
+      "required": [ "storageAccountId", "lastKeySync" ],
       "description": "Contains information about the auto storage associated with a Batch account."
     },
     "AccountProperties": {
@@ -1053,6 +1148,7 @@
           }
         }
       },
+      "required": [ "keyName" ],
       "description": "Parameters supplied to the RegenerateKey operation."
     },
     "BatchAccountRegenerateKeyResult": {
@@ -1088,6 +1184,7 @@
           "description": "Gets or sets the format of the application package binary file."
         }
       },
+      "required": [ "format" ],
       "description": "Parameters for an ApplicationOperations.ActivateApplicationPackage request."
     },
     "AddApplicationParameters": {
