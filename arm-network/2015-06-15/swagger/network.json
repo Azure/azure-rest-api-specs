@@ -5670,6 +5670,24 @@
       },
       "description": "AddressSpace contains an array of IP address ranges that can be used by subnets"
     },
+    "BgpSettings": {
+      "properties": {
+        "asn": {
+	  "type": "integer",
+	  "format": "int64",
+	  "description": "Gets or sets this BGP speaker's ASN"
+	},
+	"bgpPeeringAddress": {
+	  "type": "string",
+	  "description": "Gets or sets the BGP peering address and BGP identifier of this BGP speaker"
+	},
+	"peerWeight": {
+	  "type": "integer",
+	  "format": "int32",
+	  "description": "Gets or sets the weight added to routes learned from this BGP speaker"
+	}
+      }
+    },
     "LocalNetworkGatewayPropertiesFormat": {
       "properties": {
         "localNetworkAddressSpace": {
@@ -5680,6 +5698,10 @@
           "type": "string",
           "description": "IP address of local network gateway."
         },
+	"bgpSettings": {
+	  "$ref": "#/definitions/BgpSettings",
+	  "description": "Local network gateway's BGP speaker settings"
+	},
         "resourceGuid": {
           "type": "string",
           "description": "Gets or sets resource guid property of the LocalNetworkGateway resource"
@@ -6580,6 +6602,10 @@
           "$ref": "#/definitions/VpnClientConfiguration",
           "description": "Gets or sets the reference of the VpnClientConfiguration resource which represents the P2S VpnClient configurations."
         },
+        "bgpSettings": {
+	  "$ref": "#/definitions/BgpSettings",
+	  "description": "Virtual network gateway's BGP speaker settings"
+	},
         "resourceGuid": {
           "type": "string",
           "description": "Gets or sets resource guid property of the VirtualNetworkGateway resource"
@@ -6749,6 +6775,10 @@
         "peer": {
           "$ref": "#/definitions/SubResource",
           "description": "The reference to peerings resource."
+        },
+	"enableBgp": {
+          "type": "boolean",
+          "description": "EnableBgp Flag"
         },
         "resourceGuid": {
           "type": "string",
