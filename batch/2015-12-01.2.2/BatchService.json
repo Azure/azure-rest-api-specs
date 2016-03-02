@@ -218,17 +218,17 @@
             }
           }
         }
-      },
+      }
     },
     "/poolusagemetrics": {
       "get": {
         "tags": [
-          "Accounts"
+          "Pools"
         ],
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         },
-        "operationId": "Account_ListPoolUsageMetrics",
+        "operationId": "Pool_ListPoolUsageMetrics",
         "description": "Lists the usage metrics, aggregated by pool across individual time intervals, for the specified account.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -346,7 +346,7 @@
             },
             "description": "",
             "schema": {
-              "$ref": "#/definitions/AccountListPoolUsageMetricsResult"
+              "$ref": "#/definitions/PoolListPoolUsageMetricsResult"
             }
           },
           "default": {
@@ -361,9 +361,9 @@
     "/lifetimepoolstats": {
       "get": {
         "tags": [
-          "Accounts"
+          "Pools"
         ],
-        "operationId": "Account_GetAllPoolsLifetimeStatistics",
+        "operationId": "Pool_GetAllPoolsLifetimeStatistics",
         "description": "Gets lifetime summary statistics for all of the pools in the specified account. Statistics are aggregated across all pools that have ever existed in the account, from account creation to the last update time of the statistics.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -454,9 +454,9 @@
     "/lifetimejobstats": {
       "get": {
         "tags": [
-          "Accounts"
+          "Jobs"
         ],
-        "operationId": "Account_GetAllJobsLifetimeStatistics",
+        "operationId": "Job_GetAllJobsLifetimeStatistics",
         "description": "Gets lifetime summary statistics for all of the jobs in the specified account. Statistics are aggregated across all jobs that have ever existed in the account, from account creation to the last update time of the statistics.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -2064,7 +2064,7 @@
                 "description": "Gets the content of the Last-Modified HTTP response header.",
                 "type": "string",
                 "format": "date-time-rfc1123"
-              },
+              }
             },
             "description": "",
             "schema": {
@@ -2201,7 +2201,7 @@
                 "description": "Gets the content of the Last-Modified HTTP response header.",
                 "type": "string",
                 "format": "date-time-rfc1123"
-              },
+              }
             },
             "description": "",
             "schema": {
@@ -9168,7 +9168,7 @@
       },
       "description": "Usage metrics for a pool across an aggregation interval."
     },
-    "AccountListPoolUsageMetricsResult": {
+    "PoolListPoolUsageMetricsResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -9428,8 +9428,7 @@
           "enum": [
             "active",
             "deleting",
-            "deletefailed",
-            "unmapped"
+            "deletefailed"
           ],
           "x-ms-enum": {"name": "CertificateState" }
         },
@@ -9444,8 +9443,7 @@
           "enum": [
             "active",
             "deleting",
-            "deletefailed",
-            "unmapped"
+            "deletefailed"
           ],
           "x-ms-enum": { "name": "CertificateState" }
         },
@@ -9474,7 +9472,7 @@
         "version": {
           "type": "string",
           "description": "Gets or sets the application package version. If not specified, the default is used."
-        },
+        }
       },
       "required": ["applicationId"],
       "description": "A reference to an application package to be installed on compute nodes in a pool."
@@ -10237,8 +10235,7 @@
             "completed",
             "disabled",
             "terminating",
-            "deleting",
-            "unmapped"
+            "deleting"
           ],
           "x-ms-enum": { "name": "JobScheduleState" }
         },
@@ -10255,8 +10252,7 @@
             "completed",
             "disabled",
             "terminating",
-            "deleting",
-            "unmapped"
+            "deleting"
           ],
           "x-ms-enum": { "name": "JobScheduleState" }
         },
@@ -10435,8 +10431,7 @@
             "enabling",
             "terminating",
             "completed",
-            "deleting",
-            "unmapped"
+            "deleting"
           ],
           "x-ms-enum": { "name": "JobState" }
         },
@@ -10455,8 +10450,7 @@
             "enabling",
             "terminating",
             "completed",
-            "deleting",
-            "unmapped"
+            "deleting"
           ],
           "x-ms-enum": { "name": "JobState" }
         },
@@ -10563,6 +10557,10 @@
             "$ref": "#/definitions/MetadataItem"
           },
           "description": "Gets or sets a list of name-value pairs associated with the job as metadata."
+        },
+        "usesTaskDependencies": {
+          "type": "boolean",
+          "description": "Gets or sets the flag that determines if this job will use tasks with dependencies."
         }
       },
       "required": ["id", "poolInfo"],
@@ -10631,8 +10629,7 @@
           "description": "Gets or sets the current running state of the Job Preparation task on the compute node.",
           "enum": [
             "running",
-            "completed",
-            "unmapped"
+            "completed"
           ],
           "x-ms-enum": { "name": "JobPreparationTaskState" }
         },
@@ -10683,8 +10680,7 @@
           "description": "Gets or sets the current running state of the Job Release task on the compute node.",
           "enum": [
             "running",
-            "completed",
-            "unmapped"
+            "completed"
           ],
           "x-ms-enum": { "name": "JobReleaseTaskState" }
         },
@@ -10841,8 +10837,7 @@
           "enum": [
             "active",
             "deleting",
-            "upgrading",
-            "unmapped"
+            "upgrading"
           ],
           "x-ms-enum": { "name": "PoolState" }
         },
@@ -10857,8 +10852,7 @@
           "enum": [
             "steady",
             "resizing",
-            "stopping",
-            "unmapped"
+            "stopping"
           ],
           "x-ms-enum": { "name": "AllocationState" }
         },
@@ -11261,7 +11255,7 @@
             "$ref": "#/definitions/TaskIdRange"
           },
           "description": "Gets or sets the list of task ranges that must complete before this task can be scheduled."
-        },
+        }
       },
       "description": "Specifies any dependencies of a task.  Any task that is explicitly specified or within a dependency range must complete before the dependant task will be scheduled."
     },
@@ -11278,7 +11272,7 @@
           "description": "Gets or sets the last task id in the range."
         }
       },
-      "required": ["start", "end"],
+      "required": ["start", "end"]
     },
     "CloudTask": {
       "properties": {
@@ -11315,8 +11309,7 @@
             "active",
             "preparing",
             "running",
-            "completed",
-            "unmapped"
+            "completed"
           ],
           "x-ms-enum": { "name": "TaskState" }
         },
@@ -11332,8 +11325,7 @@
             "active",
             "preparing",
             "running",
-            "completed",
-            "unmapped"
+            "completed"
           ],
           "x-ms-enum": { "name": "TaskState" }
         },
@@ -11484,8 +11476,7 @@
             "active",
             "preparing",
             "running",
-            "completed",
-            "unmapped"
+            "completed"
           ],
           "x-ms-enum": { "name": "TaskState" }
         },
@@ -11501,8 +11492,7 @@
             "active",
             "preparing",
             "running",
-            "completed",
-            "unmapped"
+            "completed"
           ],
           "x-ms-enum": { "name": "TaskState" }
         },
@@ -11568,8 +11558,7 @@
             "active",
             "preparing",
             "running",
-            "completed",
-            "unmapped"
+            "completed"
           ],
           "x-ms-enum": { "name": "TaskState" }
         },
@@ -11587,8 +11576,7 @@
           "description": "Gets or sets the state of the start task on the compute node.",
           "enum": [
             "running",
-            "completed",
-            "unmapped"
+            "completed"
           ],
           "x-ms-enum": { "name": "StartTaskState" }
         },
@@ -11669,8 +11657,7 @@
             "starttaskfailed",
             "unknown",
             "leavingpool",
-            "offline",
-            "unmapped"
+            "offline"
           ],
           "x-ms-enum": { "name": "ComputeNodeState" }
         },
@@ -11679,10 +11666,9 @@
           "description": "Gets or sets whether the compute node should be available for task scheduling.",
           "enum": [
             "enabled",
-            "disabled",
-            "unmapped"
+            "disabled"
           ],
-		  "x-ms-enum": { "name": "SchedulingState" }
+        "x-ms-enum": { "name": "SchedulingState" }
         },
         "stateTransitionTime": {
           "type": "string",
