@@ -22,7 +22,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Application_Create",
+        "operationId": "ApplicationOperations_Create",
         "description": "Create a new application. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx",
         "parameters": [
           {
@@ -54,7 +54,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Application_List",
+        "operationId": "ApplicationOperations_List",
         "description": "Lists applications by filter parameters. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx",
         "parameters": [
           {
@@ -79,7 +79,10 @@
             }
           }
         },
-        "x-ms-odata": "#/definitions/ApplicationFilter"
+        "x-ms-odata": "#/definitions/ApplicationFilter",
+		"x-ms-pageable": {
+          "nextLinkName": null
+        }
       }
     },
     "/{tenantID}/applications/{applicationObjectId}": {
@@ -87,7 +90,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Application_Delete",
+        "operationId": "ApplicationOperations_Delete",
         "description": "Delete an application. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx",
         "parameters": [
           {
@@ -115,7 +118,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Application_Get",
+        "operationId": "ApplicationOperations_Get",
         "description": "Get an application by object Id. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx",
         "parameters": [
           {
@@ -146,7 +149,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Application_Patch",
+        "operationId": "ApplicationOperations_Patch",
         "description": "Update existing application. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx",
         "parameters": [
           {
@@ -185,7 +188,7 @@
         "tags": [
           "Objects"
         ],
-        "operationId": "Objects_GetCurrentUser",
+        "operationId": "ObjectOperations_GetCurrentUser",
         "description": "Gets the details for current logged in user",
         "parameters": [
           {
@@ -210,7 +213,7 @@
         "tags": [
           "Objects"
         ],
-        "operationId": "Objects_GetObjectsByObjectIds",
+        "operationId": "ObjectOperations_GetObjectsByObjectIds",
         "description": "Gets AD group membership by provided AD object Ids",
         "parameters": [
           {
@@ -239,7 +242,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "Objects_GetObjectsByObjectIdsNext"
+          "operationName": "ObjectOperations_GetObjectsByObjectIdsNext"
         }
       }
     },
@@ -248,7 +251,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "Group_RemoveMember",
+        "operationId": "GroupOperations_RemoveMember",
         "description": "Remove a memeber from a group. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151607.aspx",
         "parameters": [
           {
@@ -286,7 +289,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "Group_AddMember",
+        "operationId": "GroupOperations_AddMember",
         "description": "Add a memeber to a group. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx",
         "parameters": [
           {
@@ -325,7 +328,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "Group_Delete",
+        "operationId": "GroupOperations_Delete",
         "description": "Delete a group in the directory. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx",
         "parameters": [
           {
@@ -355,7 +358,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "Group_Create",
+        "operationId": "GroupOperations_Create",
         "description": "Create a group in the directory. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx",
         "parameters": [
           {
@@ -387,7 +390,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "Group_List",
+        "operationId": "GroupOperations_List",
         "description": "Gets list of groups for the current tenant.",
         "parameters": [
           {
@@ -414,7 +417,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "Group_ListNext"
+          "operationName": "GroupOperations_ListNext"
         },
         "x-ms-odata": "#/definitions/ADGroup"
       }
@@ -424,7 +427,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "Group_GetGroupMembers",
+        "operationId": "GroupOperations_GetGroupMembers",
         "description": "Gets the members of a group.",
         "parameters": [
           {
@@ -452,7 +455,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "Group_GetGroupMembersNext"
+          "operationName": "GroupOperations_GetGroupMembersNext"
         }
       }
     },
@@ -461,7 +464,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "Group_Get",
+        "operationId": "GroupOperations_Get",
         "description": "Gets group information from the directory.",
         "parameters": [
           {
@@ -494,7 +497,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "Group_GetMemberGroups",
+        "operationId": "GroupOperations_GetMemberGroups",
         "description": "Gets a collection that contains the Object IDs of the groups of which the group is a member.",
         "parameters": [
           {
@@ -539,7 +542,7 @@
         "tags": [
           "ServicePrincipal"
         ],
-        "operationId": "ServicePrincipal_Create",
+        "operationId": "ServicePrincipalOperations_Create",
         "description": "Creates a service principal in the  directory.",
         "parameters": [
           {
@@ -571,7 +574,7 @@
         "tags": [
           "ServicePrincipal"
         ],
-        "operationId": "ServicePrincipal_List",
+        "operationId": "ServicePrincipalOperations_List",
         "description": "Gets list of service principals from the current tenant.",
         "parameters": [
           {
@@ -598,7 +601,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "ServicePrincipal_ListNext"
+          "operationName": "ServicePrincipalOperations_ListNext"
         },
         "x-ms-odata": "#/definitions/ServicePrincipal"
       }
@@ -608,7 +611,7 @@
         "tags": [
           "ServicePrincipal"
         ],
-        "operationId": "ServicePrincipal_Delete",
+        "operationId": "ServicePrincipalOperations_Delete",
         "description": "Deletes service principal from the directory.",
         "parameters": [
           {
@@ -636,7 +639,7 @@
         "tags": [
           "ServicePrincipal"
         ],
-        "operationId": "ServicePrincipal_Get",
+        "operationId": "ServicePrincipalOperations_Get",
         "description": "Gets service principal information from the directory.",
         "parameters": [
           {
@@ -669,7 +672,7 @@
         "tags": [
           "User"
         ],
-        "operationId": "User_Delete",
+        "operationId": "UserOperations_Delete",
         "description": "Delete a user. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx",
         "parameters": [
           {
@@ -699,7 +702,7 @@
         "tags": [
           "User"
         ],
-        "operationId": "User_Create",
+        "operationId": "UserOperations_Create",
         "description": "Create a new user. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx",
         "parameters": [
           {
@@ -731,7 +734,7 @@
         "tags": [
           "User"
         ],
-        "operationId": "User_List",
+        "operationId": "UserOperations_List",
         "description": "Gets list of users for the current tenant.",
         "parameters": [
           {
@@ -758,7 +761,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "User_ListNext"
+          "operationName": "UserOperations_ListNext"
         },
         "x-ms-odata": "#/definitions/User"
       }
@@ -768,7 +771,7 @@
         "tags": [
           "User"
         ],
-        "operationId": "User_Get",
+        "operationId": "UserOperations_Get",
         "description": "Gets user information from the directory. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx",
         "parameters": [
           {
@@ -801,7 +804,7 @@
         "tags": [
           "User"
         ],
-        "operationId": "User_GetMemberGroups",
+        "operationId": "UserOperations_GetMemberGroups",
         "description": "Gets a collection that contains the Object IDs of the groups of which the user is a member.",
         "parameters": [
           {
@@ -843,12 +846,12 @@
     }
   },
   "x-ms-paths": {
-    "/{tenantID}/{nextLink}?Objects_GetObjectsByObjectIdsNext": {
+    "/{tenantID}/{nextLink}?ObjectOperations_GetObjectsByObjectIdsNext": {
       "post": {
         "tags": [
           "Objects"
         ],
-        "operationId": "Objects_GetObjectsByObjectIdsNext",
+        "operationId": "ObjectOperations_GetObjectsByObjectIdsNext",
         "description": "Gets AD group membership by provided AD object Ids",
         "parameters": [
           {
@@ -876,16 +879,16 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "Objects_GetObjectsByObjectIdsNext"
+          "operationName": "ObjectOperations_GetObjectsByObjectIdsNext"
         }
       }
     },
-    "/{tenantID}/{nextLink}?Group_ListNext": {
+    "/{tenantID}/{nextLink}?GroupOperations_ListNext": {
       "get": {
         "tags": [
           "Group"
         ],
-        "operationId": "Group_ListNext",
+        "operationId": "GroupOperations_ListNext",
         "description": "Gets list of groups for the current tenant.",
         "parameters": [
           {
@@ -913,16 +916,16 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "Group_ListNext"
+          "operationName": "GroupOperations_ListNext"
         }
       }
     },
-    "/{tenantID}/{nextLink}?Group_GetGroupMembersNext": {
+    "/{tenantID}/{nextLink}?GroupOperations_GetGroupMembersNext": {
       "get": {
         "tags": [
           "Group"
         ],
-        "operationId": "Group_GetGroupMembersNext",
+        "operationId": "GroupOperations_GetGroupMembersNext",
         "description": "Gets the members of a group.",
         "parameters": [
           {
@@ -950,16 +953,16 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "Group_GetGroupMembersNext"
+          "operationName": "GroupOperations_GetGroupMembersNext"
         }
       }
     },
-    "/{tenantID}/{nextLink}?ServicePrincipal_ListNext": {
+    "/{tenantID}/{nextLink}?ServicePrincipalOperations_ListNext": {
       "get": {
         "tags": [
           "ServicePrincipal"
         ],
-        "operationId": "ServicePrincipal_ListNext",
+        "operationId": "ServicePrincipalOperations_ListNext",
         "description": "Gets list of service principals from the current tenant.",
         "parameters": [
           {
@@ -987,16 +990,16 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "ServicePrincipal_ListNext"
+          "operationName": "ServicePrincipalOperations_ListNext"
         }
       }
     },
-    "/{tenantID}/{nextLink}?User_ListNext": {
+    "/{tenantID}/{nextLink}?UserOperations_ListNext": {
       "get": {
         "tags": [
           "User"
         ],
-        "operationId": "User_ListNext",
+        "operationId": "UserOperations_ListNext",
         "description": "Gets list of users for the current tenant.",
         "parameters": [
           {
@@ -1024,7 +1027,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "User_ListNext"
+          "operationName": "UserOperations_ListNext"
         }
       }
     }
