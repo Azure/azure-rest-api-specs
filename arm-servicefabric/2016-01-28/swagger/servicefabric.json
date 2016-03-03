@@ -1386,21 +1386,7 @@
             "type": "string"
           },
           {
-            "name": "ServicesHealthStateFilter",
-            "in": "query",
-            "description": "The filter of the services health state",
-            "required": false,
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "continuation-token",
-            "in": "query",
-            "description": "The token of the continuation",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1526,7 +1512,19 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The application description",
+            "schema": {
+              "type": "string"
+            }
+          },
           "201": {
+            "description": "The application description",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
             "description": "The application description",
             "schema": {
               "type": "string"
@@ -1565,6 +1563,18 @@
         ],
         "responses": {
           "200": {
+            "description": "The service description",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "The service description",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
             "description": "The service description",
             "schema": {
               "type": "string"
@@ -1615,6 +1625,18 @@
             "schema": {
               "type": "string"
             }
+          },
+          "201": {
+            "description": "The service description template",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
+            "description": "The service description template",
+            "schema": {
+              "type": "string"
+            }
           }
         }
       }
@@ -1648,6 +1670,18 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The service description",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "The service description",
+            "schema": {
+              "type": "string"
+            }
+          },
           "202": {
             "description": "The service description",
             "schema": {
@@ -1695,6 +1729,18 @@
         ],
         "responses": {
           "200": {
+            "description": "The service group description template",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "The service group description template",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
             "description": "The service group description template",
             "schema": {
               "type": "string"
@@ -2063,7 +2109,7 @@
       }
     },
     "/Services/{serviceName}/$/ResolvePartition": {
-      "post": {
+      "get": {
         "operationId": "ResolveService",
         "produces": [
           "application/json"
@@ -2081,7 +2127,7 @@
             "name": "PartitionKeyType",
             "in": "query",
             "description": "The type of the partition key",
-            "type": "string",
+            "type": "integer",
             "required": false
           },
           {
@@ -2787,7 +2833,8 @@
           "200": {
             "description": "The upgrade progress",
             "schema": {
-              "type": "string"
+              "type": "object",
+              "$ref": "#/definitions/ClusterUpgradeProgress"
             }
           }
         }
@@ -2902,6 +2949,7 @@
     "HealthEvaluation": {
       "type": "object",
       "discriminator": "Kind",
+      "required": ["Kind"],
       "properties": {
         "Kind": {
           "type": "integer"
@@ -3350,8 +3398,11 @@
       "type": "object",
       "properties": {
         "HealthEvents": {
-          "type": "object",
-          "$ref": "#/definitions/HealthEvent"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HealthEvent"
+          }
         },
         "AggregatedHealthState": {
           "type": "integer"
@@ -3408,8 +3459,11 @@
       "type": "object",
       "properties": {
         "HealthEvents": {
-          "type": "object",
-          "$ref": "#/definitions/HealthEvent"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HealthEvent"
+          }
         },
         "AggregatedHealthState": {
           "type": "integer"
@@ -3584,6 +3638,9 @@
         "PartitionId": {
           "type": "string"
         },
+        "InstanceId": {
+          "type": "string"
+        },
         "ReplicaId": {
           "type": "string"
         },
@@ -3591,7 +3648,7 @@
           "type": "string"
         },
         "ReplicaStatus": {
-          "type": "string"
+          "type": "integer"
         },
         "Address": {
           "type": "string"
@@ -3613,7 +3670,13 @@
         "CurrentServiceOperation": {
           "type": "integer"
         },
+        "CurrentReplicatorOperation": {
+          "type": "integer"
+        },
         "CurrentServiceOperationStartTimeUtc": {
+          "type": "string"
+        },
+        "InstanceId": {
           "type": "string"
         },
         "ReplicaId": {
@@ -3685,8 +3748,11 @@
           "type": "string"
         },
         "HealthEvents": {
-          "type": "object",
-          "$ref": "#/definitions/HealthEvent"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HealthEvent"
+          }
         },
         "AggregatedHealthState": {
           "type": "integer"
@@ -3879,6 +3945,29 @@
         }
       }
     },
+    "PartitionDescription": {
+      "type": "object",
+      "properties": {
+        "PartitionScheme": {
+          "type": "integer"
+        },
+        "Count": {
+          "type": "integer"
+        },
+        "Names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "LowKey": {
+          "type": "string"
+        },
+        "HighKey": {
+          "type": "string"
+        }
+      }
+    },
     "ServiceGroupMemberDescription": {
       "type": "object",
       "properties": {
@@ -3895,13 +3984,11 @@
     },
     "ServiceGroupDescription": {
       "type": "object",
-      "discriminator": "ServiceKindEnum",
+      "discriminator": "ServiceKind",
+      "required": ["ServiceKind"],
       "properties": {
         "ServiceKind": {
           "type": "integer"
-        },
-        "ServiceKindEnum": {
-          "type": "string"
         },
         "ApplicationName": {
           "type": "string"
@@ -3914,26 +4001,7 @@
         },
         "PartitionDescription": {
           "type": "object",
-          "properties": {
-            "PartitionScheme": {
-              "type": "integer"
-            },
-            "Count": {
-              "type": "integer"
-            },
-            "Names": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "LowKey": {
-              "type": "string"
-            },
-            "HighKey": {
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/PartitionDescription"
         },
         "PlacementConstraints": {
           "type": "string"
@@ -3953,6 +4021,7 @@
     "StatelessServiceGroupDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceGroupDescription"}],
+      "x-ms-discriminator-value": "1",
       "properties": {
         "InstanceCount": {
           "type": "integer"
@@ -3962,6 +4031,7 @@
     "StatefulServiceGroupDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceGroupDescription"}],
+      "x-ms-discriminator-value": "2",
       "properties": {
         "TargetReplicaSetSize": {
           "type": "integer"
@@ -4008,8 +4078,11 @@
       "type": "object",
       "properties": {
         "HealthEvents": {
-          "type": "object",
-          "$ref": "#/definitions/HealthEvent"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HealthEvent"
+          }
         },
         "AggregatedHealthState": {
           "type": "integer"
@@ -4121,13 +4194,11 @@
     },
     "ServiceDescription": {
       "type": "object",
-      "discriminator": "ServiceKindEnum",
+      "discriminator": "ServiceKind",
+      "required": ["ServiceKind"],
       "properties": {
         "ServiceKind": {
           "type": "integer"
-        },
-        "ServiceKindEnum": {
-          "type": "string"
         },
         "ApplicationName": {
           "type": "string"
@@ -4140,26 +4211,7 @@
         },
         "PartitionDescription": {
           "type": "object",
-          "properties": {
-            "PartitionScheme": {
-              "type": "integer"
-            },
-            "Count": {
-              "type": "integer"
-            },
-            "Names": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "LowKey": {
-              "type": "string"
-            },
-            "HighKey": {
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/PartitionDescription"
         },
         "PlacementConstraints": {
           "type": "string"
@@ -4172,6 +4224,7 @@
     "StatelessServiceDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceDescription"}],
+      "x-ms-discriminator-value": "1",
       "properties": {
         "InstanceCount": {
           "type": "integer"
@@ -4181,6 +4234,7 @@
     "StatefulServiceDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceDescription"}],
+      "x-ms-discriminator-value": "2",
       "properties": {
         "TargetReplicaSetSize": {
           "type": "integer"
@@ -4210,13 +4264,11 @@
     },
     "ServiceUpdateDescription": {
       "type": "object",
-      "discriminator": "ServiceKindEnum",
+      "discriminator": "ServiceKind",
+      "required": ["ServiceKind"],
       "properties": {
         "ServiceKind": {
           "type": "integer"
-        },
-        "ServiceKindEnum": {
-          "type": "string"
         },
         "Flags": {
           "type": "integer"
@@ -4226,6 +4278,7 @@
     "StatelessServiceUpdateDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceUpdateDescription"}],
+      "x-ms-discriminator-value": "1",
       "properties": {
         "InstanceCount": {
           "type": "integer"
@@ -4235,6 +4288,7 @@
     "StatefulServiceUpdateDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceUpdateDescription"}],
+      "x-ms-discriminator-value": "2",
       "properties": {
         "TargetReplicaSetSize": {
           "type": "integer"
@@ -4255,13 +4309,11 @@
     },
     "ServiceGroupUpdateDescription": {
       "type": "object",
-      "discriminator": "ServiceKindEnum",
+      "discriminator": "ServiceKind",
+      "required": ["ServiceKind"],
       "properties": {
         "ServiceKind": {
           "type": "integer"
-        },
-        "ServiceKindEnum": {
-          "type": "string"
         },
         "Flags": {
           "type": "integer"
@@ -4271,6 +4323,7 @@
     "StatelessServiceGroupUpdateDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceGroupUpdateDescription"}],
+      "x-ms-discriminator-value": "1",
       "properties": {
         "InstanceCount": {
           "type": "integer"
@@ -4280,6 +4333,7 @@
     "StatefulServiceGroupUpdateDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceGroupUpdateDescription"}],
+      "x-ms-discriminator-value": "2",
       "properties": {
         "TargetReplicaSetSize": {
           "type": "integer"
@@ -4330,6 +4384,29 @@
         }
       }
     },
+    "PartitionInformation": {
+      "type": "object",
+      "properties": {
+        "ServicePartitionKind": {
+          "type": "integer"
+        },
+        "Id": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "LowKey": {
+          "type": "string"
+        },
+        "HighKey": {
+          "type": "string"
+        }
+      }
+    },
     "Partition": {
       "type": "object",
       "properties": {
@@ -4338,14 +4415,7 @@
         },
         "PartitionInformation": {
           "type": "object",
-          "properties": {
-            "ServicePartitionKind": {
-              "type": "integer"
-            },
-            "Id": {
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/PartitionInformation"
         },
         "TargetReplicaSetSize": {
           "type": "integer"
@@ -4377,6 +4447,9 @@
       "properties": {
         "ServiceKind": {
           "type": "integer"
+        },
+        "InstanceId": {
+          "type": "string"
         },
         "ReplicaId": {
           "type": "string"
@@ -4468,6 +4541,18 @@
       "properties": {
         "PartitionId": {
           "type": "string"
+        },
+        "PrimaryLoadMetricReports": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "SecondaryLoadMetricReports": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -4479,6 +4564,12 @@
         },
         "ReplicaOrInstanceId": {
           "type": "string"
+        },
+        "ReportedLoad": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -4576,8 +4667,11 @@
       "type": "object",
       "properties": {
         "HealthEvents": {
-          "type": "object",
-          "$ref": "#/definitions/HealthEvent"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HealthEvent"
+          }
         },
         "AggregatedHealthState": {
           "type": "integer"
@@ -4767,14 +4861,7 @@
         },
         "PartitionInformation": {
           "type": "object",
-          "properties": {
-            "ServicePartitionKind": {
-              "type": "integer"
-            },
-            "Id": {
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/PartitionInformation"
         },
         "Endpoints": {
           "type": "array",
@@ -4792,6 +4879,76 @@
         },
         "Version": {
           "type": "string"
+        }
+      }
+    },
+    "ClusterUpgradeProgress": {
+      "type": "object",
+      "properties": {
+        "CodeVersion": {
+          "type": "string"
+        },
+        "ConfigVersion": {
+          "type": "string"
+        },
+        "UpgradeDomains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "UpgradeState": {
+          "type": "integer"
+        },
+        "NextUpgradeDomain": {
+          "type": "string"
+        },
+        "RollingUpgradeMode": {
+          "type": "integer"
+        },
+        "UpgradeDurationInMilliseconds": {
+          "type": "string"
+        },
+        "UpgradeDomainDurationInMilliseconds": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "CurrentUpgradeDomainProgress": {
+          "type": "object",
+          "properties": {
+            "DomainName": {
+              "type": "string"
+            },
+            "NodeUpgradeProgressList": {
+              "type": "string"
+            }
+          }
+        },
+        "StartTimestampUtc": {
+          "type": "string"
+        },
+        "FailureTimestampUtc": {
+          "type": "string"
+        },
+        "FailureReason": {
+          "type": "integer"
+        },
+        "UpgradeDomainProgressAtFailure": {
+          "type": "object",
+          "properties": {
+            "DomainName": {
+              "type": "string"
+            },
+            "NodeUpgradeProgressList": {
+              "type": "string"
+            }
+          }
         }
       }
     }
