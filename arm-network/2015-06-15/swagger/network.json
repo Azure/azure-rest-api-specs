@@ -819,8 +819,8 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/arpTable": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/arpTables/{devicePath}": {
+      "post": {
         "tags": [
           "ExpressRouteCircuits"
         ],
@@ -842,6 +842,20 @@
             "description": "The name of the circuit."
           },
           {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the peering."
+          },
+          {
+            "name": "devicePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path of the device."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -854,15 +868,16 @@
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuitsArpTableListResult"
             }
+          },
+          "202": {
+            "description": ""
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/routesTable": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routesTable/{devicePath}": {
+      "post": {
         "tags": [
           "ExpressRouteCircuits"
         ],
@@ -884,6 +899,20 @@
             "description": "The name of the circuit."
           },
           {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the peering."
+          },
+          {
+            "name": "devicePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path of the device."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -896,11 +925,69 @@
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableListResult"
             }
+          },
+          "202": {
+            "description": ""
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}": {
+      "post": {
+        "tags": [
+          "ExpressRouteCircuits"
+        ],
+        "operationId": "ExpressRouteCircuits_ListRoutesTableSummary",
+        "description": "The ListRoutesTable from ExpressRouteCircuit opertion retrieves the currently advertised routes table associated with the ExpressRouteCircuits in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the circuit."
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the peering."
+          },
+          {
+            "name": "devicePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path of the device."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableSummaryListResult"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/stats": {
@@ -923,7 +1010,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the loadBalancer."
+            "description": "The name of the circuit."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -936,7 +1023,56 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitsStatsListResult"
+              "$ref": "#/definitions/ExpressRouteCircuitStats"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/stats": {
+      "get": {
+        "tags": [
+          "ExpressRouteCircuits"
+        ],
+        "operationId": "ExpressRouteCircuits_ListPeeringStats",
+        "description": "The Liststats ExpressRouteCircuit opertion retrieves all the stats from a ExpressRouteCircuits in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the circuit."
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the peering."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitStats"
             }
           }
         },
@@ -4125,7 +4261,7 @@
         "probe": {
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets probe resource of application gateway "
-        },		
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
@@ -4179,7 +4315,7 @@
         "hostName": {
           "type": "string",
           "description": "Gets or sets the host name of http listener "
-        },		
+        },
         "sslCertificate": {
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets ssl certificate resource of application gateway "
@@ -4187,7 +4323,7 @@
         "requireServerNameIndication": {
           "type": "string",
           "description": "Gets or sets the requireServerNameIndication of http listener "
-        },			
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the http listener resource Updating/Deleting/Failed"
@@ -4232,14 +4368,14 @@
         "backendHttpSettings": {
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets backend http settings resource of URL path map "
-        },         		
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets path rule of URL path map resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of probe of application gateway"
-    },	
+    },
     "ApplicationGatewayPathRule": {
       "properties": {
         "properties": {
@@ -4260,7 +4396,7 @@
         }
       ],
       "description": "Path rule of URL path map of application gateway"
-    },		
+    },
     "ApplicationGatewayProbePropertiesFormat": {
       "properties": {
         "protocol": {
@@ -4297,14 +4433,14 @@
           "type": "integer",
           "format": "int32",
           "description": "Gets or sets probing unhealthy threshold "
-        },			
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of probe of application gateway"
-    },	
+    },
     "ApplicationGatewayProbe": {
       "properties": {
         "properties": {
@@ -4325,7 +4461,7 @@
         }
       ],
       "description": "Probe of application gateway"
-    },	
+    },
     "ApplicationGatewayRequestRoutingRulePropertiesFormat": {
       "properties": {
         "ruleType": {
@@ -4333,7 +4469,7 @@
           "description": "Gets or sets the rule type",
           "enum": [
             "Basic",
-			"PathBasedRouting"
+            "PathBasedRouting"
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayRequestRoutingRuleType",
@@ -4355,7 +4491,7 @@
         "urlPathMap": {
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets url path map resource of application gateway "
-        },		
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the request routing rule resource Updating/Deleting/Failed"
@@ -4432,14 +4568,14 @@
             "$ref": "#/definitions/ApplicationGatewayFrontendPort"
           },
           "description": "Gets or sets frontend ports of application gateway resource"
-        },        
+        },
         "probes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayProbe"
           },
           "description": "Gets or sets probes of application gateway resource"
-        },		
+        },
         "backendAddressPools": {
           "type": "array",
           "items": {
@@ -4467,7 +4603,7 @@
             "$ref": "#/definitions/ApplicationGatewayUrlPathMap"
           },
           "description": "Gets or sets URL path map of application gateway resource"
-        },		
+        },
         "requestRoutingRules": {
           "type": "array",
           "items": {
@@ -4518,7 +4654,7 @@
         }
       },
       "description": "Response for ListLoadBalancers Api service call"
-    },	
+    },
     "ApplicationGatewayUrlPathMapPropertiesFormat": {
       "properties": {
         "defaultBackendAddressPool": {
@@ -4535,14 +4671,14 @@
             "$ref": "#/definitions/ApplicationGatewayPathRule"
           },
           "description": "Gets or sets path rule of URL path map resource"
-        }, 		
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of probe of application gateway"
-    },	
+    },
     "ApplicationGatewayUrlPathMap": {
       "properties": {
         "properties": {
@@ -4563,7 +4699,7 @@
         }
       ],
       "description": "UrlPathMap of application gateway"
-    },	
+    },
     "AuthorizationPropertiesFormat": {
       "properties": {
         "authorizationKey": {
@@ -4662,12 +4798,22 @@
     },
     "ExpressRouteCircuitStats": {
       "properties": {
-        "bytesIn": {
+        "primarybytesIn": {
           "type": "integer",
           "format": "int32",
           "description": "Gets BytesIn of the peering."
         },
-        "bytesOut": {
+        "primarybytesOut": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets BytesOut of the peering."
+        },
+        "secondarybytesIn": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets BytesIn of the peering."
+        },
+        "secondarybytesOut": {
           "type": "integer",
           "format": "int32",
           "description": "Gets BytesOut of the peering."
@@ -4915,6 +5061,15 @@
     },
     "ExpressRouteCircuitArpTable": {
       "properties": {
+        "age": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Age."
+        },
+        "interface": {
+          "type": "string",
+          "description": "Interface."
+        },
         "ipAddress": {
           "type": "string",
           "description": "Gets ipAddress."
@@ -4944,32 +5099,26 @@
     },
     "ExpressRouteCircuitRoutesTable": {
       "properties": {
-        "addressPrefix": {
+        "network": {
           "type": "string",
-          "description": "Gets AddressPrefix."
+          "description": "network."
         },
-        "nextHopType": {
+        "nextHop": {
           "type": "string",
-          "description": "Gets NextHopType.",
-          "enum": [
-            "VirtualNetworkGateway",
-            "VnetLocal",
-            "Internet",
-            "VirtualAppliance",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "RouteNextHopType",
-            "modelAsString": true
-          }
+          "description": "nextHop"
         },
-        "nextHopIP": {
+        "locPrf": {
           "type": "string",
-          "description": "Gets NextHopIP."
+          "description": "locPrf."
         },
-        "asPath": {
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "weight."
+        },
+        "path": {
           "type": "string",
-          "description": "Gets AsPath."
+          "description": "path ."
         }
       },
       "required": [
@@ -4983,6 +5132,52 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExpressRouteCircuitRoutesTable"
+          },
+          "description": "Gets List of RoutesTable"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListRoutesTable associated with the Express Route Circuits Api"
+    },
+    "ExpressRouteCircuitRoutesTableSummary": {
+      "properties": {
+        "neighbor": {
+          "type": "string",
+          "description": "Neighbor."
+        },
+        "v": {
+          "type": "integer",
+          "format": "int32",
+          "description": "V."
+        },
+        "as": {
+          "type": "integer",
+          "format": "int32",
+          "description": "AS."
+        },
+        "upDown": {
+          "type": "string",
+          "description": "upDown."
+        },
+        "statePfxRcd": {
+          "type": "string",
+          "description": "statePfxRcd ."
+        }
+      },
+      "required": [
+        "nextHopType"
+      ],
+      "description": "The routes table associated with the ExpressRouteCircuit"
+    },
+    "ExpressRouteCircuitsRoutesTableSummaryListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitRoutesTableSummary"
           },
           "description": "Gets List of RoutesTable"
         },
@@ -5926,7 +6121,7 @@
         },
         "access": {
           "type": "string",
-          "description": "Gets or sets network traffic is allowed or denied. Possible values are 'Allow' and 'Deny'",
+          "description": "Gets or sets network traffic is allowed or denied. Possible values are 'Allow' and 'Deny",
           "enum": [
             "Allow",
             "Deny"
