@@ -2,7 +2,10 @@
   "swagger": "2.0",
   "info": {
     "title": "BatchManagement",
-    "version": "2015-12-01"
+    "version": "2015-12-01",
+    "x-ms-code-generation-settings": {
+      "name": "BatchManagementClient"
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -202,34 +205,6 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/AccountResource"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/actions": {
-      "post": {
-        "tags": [
-          "Account"
-        ],
-        "operationId": "Account_ListActions",
-        "description": "The ListActions operation gets information about non-standard actions for the provider.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AccountActions"
-              }
             }
           }
         }
@@ -1096,27 +1071,6 @@
         }
       },
       "description": "Parameters supplied to the Update operation."
-    },
-    "AccountActions": {
-      "properties": {
-        "action": {
-          "type": "string",
-          "description": "The action name."
-        },
-        "friendlyName": {
-          "type": "string",
-          "description": "The friendly name of the action."
-        },
-        "friendlyTarget": {
-          "type": "string",
-          "description": "The target of the action."
-        },
-        "friendlyDescription": {
-          "type": "string",
-          "description": "The description of the action."
-        }
-      },
-      "description": "Specialized action for Batch resource provider."
     },
     "BatchAccountListResult": {
       "properties": {
