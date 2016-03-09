@@ -1289,6 +1289,398 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs": {
+            "get": {
+                "tags": [
+                    "Export",
+                    "List"
+                ],
+                "operationId": "Devices_ListExportJobs",
+                "description": "Get the list of export jobs.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AppCollectionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AppNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "$skip",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "Control paging of export jobs, start results at the given offset, defaults to 0 (1st page of data).",
+                        "default": 0,
+                        "minimum": 0
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "Control paging of export jobs, number of export jobs to return with each call. By default, it returns all export jobs with a default paging of 20.\nThe response contains a `nextLink` property describing the path to get the next page if there are more results.\nThe maximum paging limit for $top is 40.",
+                        "default": 20,
+                        "maximum": 40,
+                        "minimum": 1
+                    },
+                    {
+                        "name": "$orderby",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "Sort results by an expression which looks like `$orderby=jobId asc` (default when not specified).\nThe syntax is orderby={property} {direction} or just orderby={property}.\nProperties that can be specified for sorting: jobId, errorDetails, dateCreated, jobStatus, and dateCreated.\nThe available directions are asc (for ascending order) and desc (for descending order).\nWhen not specified the asc direction is used.\nOnly one orderby property can be specified."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success, export jobs are returned as JSON.",
+                        "schema": {
+                            "$ref": "#/definitions/ExportJobListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/historicalExportJobs": {
+            "post": {
+                "tags": [
+                    "Export",
+                    "CRUD"
+                ],
+                "operationId": "Devices_CreateHistoricalExportJob",
+                "description": "Creates a job to export the specified data to a storageUrl.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AppCollectionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AppNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/HistoricalExportJob"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success, export job is returned.",
+                        "schema": {
+                            "$ref": "#/definitions/ExportJobResult"
+                        }
+                    },
+                    "default": {
+                        "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/snaptshotExportJobs": {
+            "post": {
+                "tags": [
+                    "Export",
+                    "CRUD"
+                ],
+                "operationId": "Devices_CreateSnapshotExportJob",
+                "description": "Creates a job to export the specified data to a storageUrl.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AppCollectionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AppNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SnapshotExportJob"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success, export job is returned.",
+                        "schema": {
+                            "$ref": "#/definitions/ExportJobResult"
+                        }
+                    },
+                    "default": {
+                        "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/{id}": {
+            "parameters": [
+                {
+                    "$ref": "#/parameters/SubscriptionIdParameter"
+                },
+                {
+                    "$ref": "#/parameters/ResourceGroupNameParameter"
+                },
+                {
+                    "$ref": "#/parameters/AppCollectionParameter"
+                },
+                {
+                    "$ref": "#/parameters/AppNameParameter"
+                },
+                {
+                    "$ref": "#/parameters/ApiVersionParameter"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Export",
+                    "CRUD"
+                ],
+                "operationId": "Devices_GetExportJob",
+                "description": "The Get export job operation retrieves information about a previously created export job.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "description": "Export job identifier."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success, export job is returned.",
+                        "schema": {
+                            "$ref": "#/definitions/ExportJobResult"
+                        }
+                    },
+                    "default": {
+                        "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n* `404`: Export job not found.\n",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/importJobs": {
+            "get": {
+                "tags": [
+                    "Import",
+                    "List"
+                ],
+                "operationId": "Devices_ListImportJobs",
+                "description": "Get the list of import jobs.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AppCollectionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AppNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "$skip",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "Control paging of import jobs, start results at the given offset, defaults to 0 (1st page of data).",
+                        "default": 0,
+                        "minimum": 0
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "Control paging of import jobs, number of import jobs to return with each call. By default, it returns all import jobs with a default paging of 20.\nThe response contains a `nextLink` property describing the path to get the next page if there are more results.\nThe maximum paging limit for $top is 40.",
+                        "default": 20,
+                        "maximum": 40,
+                        "minimum": 1
+                    },
+                    {
+                        "name": "$orderby",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "Sort results by an expression which looks like `$orderby=jobId asc` (default when not specified).\nThe syntax is orderby={property} {direction} or just orderby={property}.\nProperties that can be specified for sorting: jobId, errorDetails, dateCreated, jobStatus, and dateCreated.\nThe available directions are asc (for ascending order) and desc (for descending order).\nWhen not specified the asc direction is used.\nOnly one orderby property can be specified."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success, import jobs are returned as JSON.",
+                        "schema": {
+                            "$ref": "#/definitions/ImportJobListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            },
+            "post": {
+                "tags": [
+                    "Import",
+                    "CRUD"
+                ],
+                "operationId": "Devices_CreateImportJob",
+                "description": "Creates a job to import the specified data to a storageUrl.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AppCollectionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AppNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ImportJob"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success, import job is returned.",
+                        "schema": {
+                            "$ref": "#/definitions/ImportJobResult"
+                        },
+                        "headers": {
+                            "Location": {
+                                "type": "string",
+                                "description": "URL path to get the created import job."
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/importJobs/{id}": {
+            "parameters": [
+                {
+                    "$ref": "#/parameters/SubscriptionIdParameter"
+                },
+                {
+                    "$ref": "#/parameters/ResourceGroupNameParameter"
+                },
+                {
+                    "$ref": "#/parameters/AppCollectionParameter"
+                },
+                {
+                    "$ref": "#/parameters/AppNameParameter"
+                },
+                {
+                    "$ref": "#/parameters/ApiVersionParameter"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Import",
+                    "CRUD"
+                ],
+                "operationId": "Devices_GetImportJob",
+                "description": "The Get import job operation retrieves information about a previously created import job.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "description": "Import job identifier."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success, import job is returned.",
+                        "schema": {
+                            "$ref": "#/definitions/ImportJobResult"
+                        }
+                    },
+                    "default": {
+                        "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n* `404`: Import job not found.\n",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -2848,6 +3240,197 @@
                     }
                 }
             }
+        },
+        "HistoricalExportJob": {
+            "properties": {
+                "startDate": {
+                    "type": "string",
+                    "description": "The date at which the export should be started from. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
+                },
+                "endDate": {
+                    "type": "string",
+                    "description": "The date at which the export should export data to. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
+                },
+                "historicalDataType": {
+                    "type": "string",
+                    "description": "The type of data to export.",
+                    "enum": [
+                        "Activity",
+                        "Crash",
+                        "Error",
+                        "Event",
+                        "Job",
+                        "Session"
+                    ],
+                    "x-ms-enum": {
+                        "name": "HistoricalDataTypes",
+                        "modelAsString": true
+                    }
+                },
+                "storageUrl": {
+                    "type": "string",
+                    "description": "A shared Access Signature (SAS) Storage URI where the job results will be placed."
+                }
+            }
+        },
+        "SnapshotExportJob": {
+            "properties": {
+                "snapshotDataType": {
+                    "type": "string",
+                    "description": "The type of data to export.",
+                    "enum": [
+                        "AppInfo",
+                        "Token"
+                    ],
+                    "x-ms-enum": {
+                        "name": "SnapshotDataTypes",
+                        "modelAsString": true
+                    }
+                },
+                "storageUrl": {
+                    "type": "string",
+                    "description": "A shared Access Signature (SAS) Storage URI where the job results will be placed."
+                }
+            }
+        },
+        "ExportJobListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ExportJobResult"
+                    },
+                    "description": "The list of export jobs."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "When the results are paged, the nextLink is the URI for the next page of results. This property is empty when there are no additional pages."
+                }
+            },
+            "description": "Gets a paged list of ExportJobs."
+        },
+        "ExportJobResult": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "Unique identifier of the export job."
+                },
+                "state": {
+                    "type": "string",
+                    "description": "The current state of the export job.",
+                    "enum": [
+                        "Queued",
+                        "Started",
+                        "Succeeded",
+                        "Failed"
+                    ],
+                    "x-ms-enum": {
+                        "name": "JobStates",
+                        "modelAsString": true
+                    }
+                },
+                "dateCreated": {
+                    "type": "string",
+                    "description": "The date at which the export job was created.\nThe date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
+                },
+                "dateCompleted": {
+                    "type": "string",
+                    "description": "The date at which the export job completed (Not present if not yet completed).\nThe date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
+                },
+                "startDate": {
+                    "type": "string",
+                    "description": "The date at which the export should be started from. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
+                },
+                "endDate": {
+                    "type": "string",
+                    "description": "The date at which the export should export data to. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
+                },
+                "exportDataType": {
+                    "type": "string",
+                    "description": "The type of data to export.",
+                    "enum": [
+                        "Activity",
+                        "AppInfo",
+                        "Crash",
+                        "Error",
+                        "Event",
+                        "Job",
+                        "Session",
+                        "Token"
+                    ],
+                    "x-ms-enum": {
+                        "name": "ExportDataTypes",
+                        "modelAsString": true
+                    }
+                },
+                "errorDetails": {
+                    "type": "string",
+                    "description": "Details of errors encountered during the export, if any."
+                }
+            }
+        },
+        "ImportJob": {
+            "properties": {
+                "storageUrl": {
+                    "type": "string",
+                    "description": "A shared Access Signature (SAS) Storage URI where the job results will be retrieved from."
+                }
+            }
+        },
+        "ImportJobListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ImportJobResult"
+                    },
+                    "description": "The list of import jobs."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "When the results are paged, the nextLink is the URI for the next page of results. This property is empty when there are no additional pages."
+                }
+            },
+            "description": "Gets a paged list of ImportJobs."
+        },
+        "ImportJobResult": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier of the import job."
+                },
+                "state": {
+                    "type": "string",
+                    "description": "The current state of the import job.",
+                    "enum": [
+                        "Queued",
+                        "Started",
+                        "Succeeded",
+                        "Failed"
+                    ],
+                    "x-ms-enum": {
+                        "name": "JobStates",
+                        "modelAsString": true
+                    }
+                },
+                "dateCreated": {
+                    "type": "string",
+                    "description": "The date at which the import job was created.\nThe date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
+                },
+                "dateCompleted": {
+                    "type": "string",
+                    "description": "The date at which the import job completed (Not present if not yet completed).\nThe date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
+                },
+                "errorDetails": {
+                    "type": "string",
+                    "description": "Details of any errors encountered during the import, if any."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ImportJob"
+                }
+            ]
         }
     },
     "parameters": {
