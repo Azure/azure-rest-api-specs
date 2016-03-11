@@ -69,7 +69,7 @@
               "$ref": "#/definitions/ContainerService"
             }
           },
-		  "202": {
+          "202": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/ContainerService"
@@ -231,7 +231,7 @@
                 "SwarmPreview",
                 "DCOS"
               ],
-			  "x-ms-enum": {
+              "x-ms-enum": {
                 "name": "ContainerServiceOchestratorTypes"
               },
               "description": "Specifies what orchestrator will be used to manage container cluster resources."
@@ -444,10 +444,10 @@
         },
         "ContainerServiceListResult": {
           "properties": {
-            "properties": {
-              "value": {
-                "type": "array",
-                "items": "#/definitions/ContainerService"
+            "value": {
+              "type": "array",
+              "items": {
+                 "$ref": "#/definitions/ContainerService"
               },
               "description": "Gets or sets the list of container services."
             }
