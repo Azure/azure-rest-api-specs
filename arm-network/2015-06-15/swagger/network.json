@@ -4119,7 +4119,7 @@
         "probe": {
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets probe resource of application gateway "
-        },		
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
@@ -4173,7 +4173,7 @@
         "hostName": {
           "type": "string",
           "description": "Gets or sets the host name of http listener "
-        },		
+        },
         "sslCertificate": {
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets ssl certificate resource of application gateway "
@@ -4181,7 +4181,7 @@
         "requireServerNameIndication": {
           "type": "boolean",
           "description": "Gets or sets the requireServerNameIndication of http listener "
-        },			
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the http listener resource Updating/Deleting/Failed"
@@ -4226,14 +4226,14 @@
         "backendHttpSettings": {
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets backend http settings resource of URL path map "
-        },         		
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets path rule of URL path map resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of probe of application gateway"
-    },	
+    },
     "ApplicationGatewayPathRule": {
       "properties": {
         "properties": {
@@ -4254,7 +4254,7 @@
         }
       ],
       "description": "Path rule of URL path map of application gateway"
-    },		
+    },
     "ApplicationGatewayProbePropertiesFormat": {
       "properties": {
         "protocol": {
@@ -4291,14 +4291,14 @@
           "type": "integer",
           "format": "int32",
           "description": "Gets or sets probing unhealthy threshold "
-        },			
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of probe of application gateway"
-    },	
+    },
     "ApplicationGatewayProbe": {
       "properties": {
         "properties": {
@@ -4319,7 +4319,7 @@
         }
       ],
       "description": "Probe of application gateway"
-    },	
+    },
     "ApplicationGatewayRequestRoutingRulePropertiesFormat": {
       "properties": {
         "ruleType": {
@@ -4327,7 +4327,7 @@
           "description": "Gets or sets the rule type",
           "enum": [
             "Basic",
-			"PathBasedRouting"
+            "PathBasedRouting"
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayRequestRoutingRuleType",
@@ -4349,7 +4349,7 @@
         "urlPathMap": {
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets url path map resource of application gateway "
-        },		
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the request routing rule resource Updating/Deleting/Failed"
@@ -4426,14 +4426,14 @@
             "$ref": "#/definitions/ApplicationGatewayFrontendPort"
           },
           "description": "Gets or sets frontend ports of application gateway resource"
-        },        
+        },
         "probes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayProbe"
           },
           "description": "Gets or sets probes of application gateway resource"
-        },		
+        },
         "backendAddressPools": {
           "type": "array",
           "items": {
@@ -4461,7 +4461,7 @@
             "$ref": "#/definitions/ApplicationGatewayUrlPathMap"
           },
           "description": "Gets or sets URL path map of application gateway resource"
-        },		
+        },
         "requestRoutingRules": {
           "type": "array",
           "items": {
@@ -4512,7 +4512,7 @@
         }
       },
       "description": "Response for ListLoadBalancers Api service call"
-    },	
+    },
     "ApplicationGatewayUrlPathMapPropertiesFormat": {
       "properties": {
         "defaultBackendAddressPool": {
@@ -4529,14 +4529,14 @@
             "$ref": "#/definitions/ApplicationGatewayPathRule"
           },
           "description": "Gets or sets path rule of URL path map resource"
-        }, 		
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of probe of application gateway"
-    },	
+    },
     "ApplicationGatewayUrlPathMap": {
       "properties": {
         "properties": {
@@ -4557,7 +4557,7 @@
         }
       ],
       "description": "UrlPathMap of application gateway"
-    },	
+    },
     "AuthorizationPropertiesFormat": {
       "properties": {
         "authorizationKey": {
@@ -5673,19 +5673,19 @@
     "BgpSettings": {
       "properties": {
         "asn": {
-	  "type": "integer",
-	  "format": "int64",
-	  "description": "Gets or sets this BGP speaker's ASN"
-	},
-	"bgpPeeringAddress": {
-	  "type": "string",
-	  "description": "Gets or sets the BGP peering address and BGP identifier of this BGP speaker"
-	},
-	"peerWeight": {
-	  "type": "integer",
-	  "format": "int32",
-	  "description": "Gets or sets the weight added to routes learned from this BGP speaker"
-	}
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets this BGP speaker's ASN"
+        },
+        "bgpPeeringAddress": {
+          "type": "string",
+          "description": "Gets or sets the BGP peering address and BGP identifier of this BGP speaker"
+        },
+        "peerWeight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the weight added to routes learned from this BGP speaker"
+        }
       }
     },
     "LocalNetworkGatewayPropertiesFormat": {
@@ -5698,10 +5698,10 @@
           "type": "string",
           "description": "IP address of local network gateway."
         },
-	"bgpSettings": {
-	  "$ref": "#/definitions/BgpSettings",
-	  "description": "Local network gateway's BGP speaker settings"
-	},
+        "bgpSettings": {
+          "$ref": "#/definitions/BgpSettings",
+          "description": "Local network gateway's BGP speaker settings"
+        },
         "resourceGuid": {
           "type": "string",
           "description": "Gets or sets resource guid property of the LocalNetworkGateway resource"
@@ -6603,9 +6603,9 @@
           "description": "Gets or sets the reference of the VpnClientConfiguration resource which represents the P2S VpnClient configurations."
         },
         "bgpSettings": {
-	  "$ref": "#/definitions/BgpSettings",
-	  "description": "Virtual network gateway's BGP speaker settings"
-	},
+          "$ref": "#/definitions/BgpSettings",
+          "description": "Virtual network gateway's BGP speaker settings"
+        },
         "resourceGuid": {
           "type": "string",
           "description": "Gets or sets resource guid property of the VirtualNetworkGateway resource"
@@ -6776,7 +6776,7 @@
           "$ref": "#/definitions/SubResource",
           "description": "The reference to peerings resource."
         },
-	"enableBgp": {
+        "enableBgp": {
           "type": "boolean",
           "description": "EnableBgp Flag"
         },
