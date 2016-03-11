@@ -171,6 +171,9 @@
               "$ref": "#/definitions/AvailabilitySetListResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -210,6 +213,9 @@
               "$ref": "#/definitions/VirtualMachineSizeListResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -841,6 +847,9 @@
               "$ref": "#/definitions/VirtualMachineSizeListResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -1015,11 +1024,12 @@
             "required": false,
             "type": "string",
             "description": "The expand expression to apply on the operation.",
-			"enum": [
+            "enum": [
               "instanceView"
             ],
-			"x-ms-enum": {
-              "name": "InstanceViewTypes"
+            "x-ms-enum": {
+              "name": "InstanceViewTypes",
+              "modelAsString": false
             }
           },
           {
@@ -1141,6 +1151,9 @@
               "$ref": "#/definitions/VirtualMachineListResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -1208,6 +1221,9 @@
               "$ref": "#/definitions/VirtualMachineSizeListResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -2392,7 +2408,8 @@
             "Error"
           ],
           "x-ms-enum": {
-            "name": "StatusLevelTypes"
+            "name": "StatusLevelTypes",
+            "modelAsString": false
           }
         },
         "displayStatus": {
@@ -2625,12 +2642,12 @@
         "forceUpdateTag": {
           "type": "string",
           "description": "Gets or sets how the extension handler should be forced to update even if the extension configuration has not changed.",
-		  "enum": [
+          "enum": [
             "RerunExtension"
           ],
-		  "x-ms-enum": {
+          "x-ms-enum": {
             "name": "ForceUpdateTagTypes",
-			"modelAsString": true
+            "modelAsString": false
           }
         },
         "publisher": {
@@ -2714,7 +2731,8 @@
             "Linux"
           ],
           "x-ms-enum": {
-            "name": "OperatingSystemTypes"
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
           }
         }
       },
@@ -3057,7 +3075,8 @@
             "Linux"
           ],
           "x-ms-enum": {
-            "name": "OperatingSystemTypes"
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
           }
         },
         "encryptionSettings": {
@@ -3085,7 +3104,8 @@
             "ReadWrite"
           ],
           "x-ms-enum": {
-            "name": "CachingTypes"
+            "name": "CachingTypes",
+            "modelAsString": false
           }
         },
         "createOption": {
@@ -3097,7 +3117,8 @@
             "attach"
           ],
           "x-ms-enum": {
-            "name": "DiskCreateOptionTypes"
+            "name": "DiskCreateOptionTypes",
+            "modelAsString": false
           }
         },
         "diskSizeGB": {
@@ -3141,7 +3162,8 @@
             "ReadWrite"
           ],
           "x-ms-enum": {
-            "name": "CachingTypes"
+            "name": "CachingTypes",
+            "modelAsString": false
           }
         },
         "createOption": {
@@ -3153,7 +3175,8 @@
             "attach"
           ],
           "x-ms-enum": {
-            "name": "DiskCreateOptionTypes"
+            "name": "DiskCreateOptionTypes",
+            "modelAsString": false
           }
         },
         "diskSizeGB": {
@@ -3200,7 +3223,7 @@
           ],
           "x-ms-enum": {
             "name": "PassNames",
-			"modelAsString": true
+            "modelAsString": false
           }
         },
         "componentName": {
@@ -3211,7 +3234,7 @@
           ],
           "x-ms-enum": {
             "name": "ComponentNames",
-			"modelAsString": true
+            "modelAsString": false
           }
         },
         "settingName": {
@@ -3222,7 +3245,8 @@
             "FirstLogonCommands"
           ],
           "x-ms-enum": {
-            "name": "SettingNames"
+            "name": "SettingNames",
+            "modelAsString": false
           }
         },
         "content": {
@@ -3242,7 +3266,8 @@
             "Https"
           ],
           "x-ms-enum": {
-            "name": "ProtocolTypes"
+            "name": "ProtocolTypes",
+            "modelAsString": false
           }
         },
         "certificateUrl": {
@@ -3681,7 +3706,8 @@
             "Manual"
           ],
           "x-ms-enum": {
-            "name": "UpgradeMode"
+            "name": "UpgradeMode",
+            "modelAsString": false
           }
         }
       },
@@ -3738,7 +3764,8 @@
             "ReadWrite"
           ],
           "x-ms-enum": {
-            "name": "CachingTypes"
+            "name": "CachingTypes",
+            "modelAsString": false
           }
         },
         "createOption": {
@@ -3750,7 +3777,8 @@
             "attach"
           ],
           "x-ms-enum": {
-            "name": "DiskCreateOptionTypes"
+            "name": "DiskCreateOptionTypes",
+            "modelAsString": false
           }
         },
         "osType": {
@@ -3761,7 +3789,8 @@
             "Linux"
           ],
           "x-ms-enum": {
-            "name": "OperatingSystemTypes"
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
           }
         },
         "image": {
@@ -4183,7 +4212,8 @@
             "None"
           ],
           "x-ms-enum": {
-            "name": "VirtualMachineScaleSetSkuScaleType"
+            "name": "VirtualMachineScaleSetSkuScaleType",
+            "modelAsString": false
           }
         }
       },
