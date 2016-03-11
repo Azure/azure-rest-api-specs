@@ -3680,12 +3680,38 @@
       ],
       "description": "Describes a Virtual Machine."
     },
+    "VirtualMachineListItem": {
+      "properties": {
+        "plan": {
+          "$ref": "#/definitions/Plan",
+          "description": "Gets or sets the purchase plan when deploying virtual machine from VM Marketplace images."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineProperties"
+        },
+        "resources": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Gets the list of sub resources associated with the virtual machine."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Describes a Virtual Machine."
+    },
     "VirtualMachineListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VirtualMachine"
+            "$ref": "#/definitions/VirtualMachineListItem"
           },
           "description": "Gets or sets the list of virtual machines."
         },
