@@ -171,9 +171,6 @@
               "$ref": "#/definitions/AvailabilitySetListResult"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -183,7 +180,7 @@
           "AvailabilitySets"
         ],
         "operationId": "AvailabilitySets_ListAvailableSizes",
-        "description": "Lists virtual-machine-sizes available to be used for an availability set.",
+        "description": "Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -213,9 +210,6 @@
               "$ref": "#/definitions/VirtualMachineSizeListResult"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -301,7 +295,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
+                "$ref": "#/definitions/VirtualMachineExtensionImage"
               }
             }
           }
@@ -367,12 +361,12 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
+                "$ref": "#/definitions/VirtualMachineExtensionImage"
               }
             }
           }
         },
-        "x-ms-odata": "#/definitions/VirtualMachineImageResource"
+        "x-ms-odata": "#/definitions/VirtualMachineExtensionImage"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}": {
@@ -472,9 +466,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": ""
-          },
           "202": {
             "description": ""
           },
@@ -826,7 +817,7 @@
           "VirtualMachineSizes"
         ],
         "operationId": "VirtualMachineSizes_List",
-        "description": "Lists virtual-machine-sizes available in a location for a subscription.",
+        "description": "Lists all available virtual machine sizes for a subscription in a location.",
         "parameters": [
           {
             "name": "location",
@@ -850,9 +841,6 @@
               "$ref": "#/definitions/VirtualMachineSizeListResult"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -862,7 +850,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Capture",
-        "description": "Captures the VM by copying VirtualHardDisks of the VM and outputs a template that can be used to create similar VMs.",
+        "description": "Captures the VM by copying virtual hard disks of the VM and outputs a template that can be used to create similar VMs.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -991,9 +979,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": ""
-          },
           "202": {
             "description": ""
           },
@@ -1029,7 +1014,13 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation."
+            "description": "The expand expression to apply on the operation.",
+			"enum": [
+              "instanceView"
+            ],
+			"x-ms-enum": {
+              "name": "InstanceViewTypes"
+            }
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1150,9 +1141,6 @@
               "$ref": "#/definitions/VirtualMachineListResult"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1190,7 +1178,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_ListAvailableSizes",
-        "description": "Lists virtual-machine-sizes available to be used for a virtual machine.",
+        "description": "Lists all available virtual machine sizes it can be resized to for a virtual machine.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1220,9 +1208,6 @@
               "$ref": "#/definitions/VirtualMachineSizeListResult"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2396,7 +2381,7 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Gets or sets the status Code."
+          "description": "Gets the status Code."
         },
         "level": {
           "type": "string",
@@ -2407,8 +2392,7 @@
             "Error"
           ],
           "x-ms-enum": {
-            "name": "StatusLevelTypes",
-            "modelAsString": true
+            "name": "StatusLevelTypes"
           }
         },
         "displayStatus": {
@@ -2417,7 +2401,7 @@
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the optional detailed Message, including for alerts and error messages."
+          "description": "Gets or sets the detailed Message, including for alerts and error messages."
         },
         "time": {
           "type": "string",
@@ -2563,21 +2547,6 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineExtensionImageProperties"
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets the tags attached to the resource."
         }
       },
       "required": [
@@ -2586,7 +2555,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Describes a Virtual Machine Extension Image."
@@ -2653,6 +2622,17 @@
     },
     "VirtualMachineExtensionProperties": {
       "properties": {
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "Gets or sets how the extension handler should be forced to update even if the extension configuration has not changed.",
+		  "enum": [
+            "RerunExtension"
+          ],
+		  "x-ms-enum": {
+            "name": "ForceUpdateTagTypes",
+			"modelAsString": true
+          }
+        },
         "publisher": {
           "type": "string",
           "description": "Gets or sets the name of the extension handler publisher."
@@ -2668,10 +2648,6 @@
         "autoUpgradeMinorVersion": {
           "type": "boolean",
           "description": "Gets or sets whether the extension handler should be automatically upgraded across minor versions."
-        },
-        "forceUpdateTag": {
-          "type": "string",
-          "description": "Gets or sets whether the extension handler should be forced to re-run even if the extension configuration has not changed."
         },
         "settings": {
           "type": "object",
@@ -2738,8 +2714,7 @@
             "Linux"
           ],
           "x-ms-enum": {
-            "name": "OperatingSystemTypes",
-            "modelAsString": true
+            "name": "OperatingSystemTypes"
           }
         }
       },
@@ -2781,21 +2756,6 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineImageProperties"
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets the tags attached to the resource."
         }
       },
       "required": [
@@ -2804,7 +2764,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/VirtualMachineImageResource"
         }
       ],
       "description": "Describes a Virtual Machine Image."
@@ -3067,6 +3027,10 @@
         "keyEncryptionKey": {
           "$ref": "#/definitions/KeyVaultKeyReference",
           "description": "Gets or sets the key encryption key which is KeyVault Key."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Gets or sets whether disk encryption should be enabled on the Virtual Machine."
         }
       },
       "required": [
@@ -3093,8 +3057,7 @@
             "Linux"
           ],
           "x-ms-enum": {
-            "name": "OperatingSystemTypes",
-            "modelAsString": true
+            "name": "OperatingSystemTypes"
           }
         },
         "encryptionSettings": {
@@ -3122,8 +3085,7 @@
             "ReadWrite"
           ],
           "x-ms-enum": {
-            "name": "CachingTypes",
-            "modelAsString": true
+            "name": "CachingTypes"
           }
         },
         "createOption": {
@@ -3135,8 +3097,7 @@
             "attach"
           ],
           "x-ms-enum": {
-            "name": "DiskCreateOptionTypes",
-            "modelAsString": true
+            "name": "DiskCreateOptionTypes"
           }
         },
         "diskSizeGB": {
@@ -3180,8 +3141,7 @@
             "ReadWrite"
           ],
           "x-ms-enum": {
-            "name": "CachingTypes",
-            "modelAsString": true
+            "name": "CachingTypes"
           }
         },
         "createOption": {
@@ -3193,8 +3153,7 @@
             "attach"
           ],
           "x-ms-enum": {
-            "name": "DiskCreateOptionTypes",
-            "modelAsString": true
+            "name": "DiskCreateOptionTypes"
           }
         },
         "diskSizeGB": {
@@ -3241,7 +3200,7 @@
           ],
           "x-ms-enum": {
             "name": "PassNames",
-            "modelAsString": true
+			"modelAsString": true
           }
         },
         "componentName": {
@@ -3252,7 +3211,7 @@
           ],
           "x-ms-enum": {
             "name": "ComponentNames",
-            "modelAsString": true
+			"modelAsString": true
           }
         },
         "settingName": {
@@ -3263,8 +3222,7 @@
             "FirstLogonCommands"
           ],
           "x-ms-enum": {
-            "name": "SettingNames",
-            "modelAsString": true
+            "name": "SettingNames"
           }
         },
         "content": {
@@ -3284,8 +3242,7 @@
             "Https"
           ],
           "x-ms-enum": {
-            "name": "ProtocolTypes",
-            "modelAsString": true
+            "name": "ProtocolTypes"
           }
         },
         "certificateUrl": {
@@ -3477,7 +3434,7 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Gets or sets whether VM Agent should be provisioned on the Virtual Machine."
+          "description": "Gets or sets whether boot diagnostics should be enabled on the Virtual Machine."
         },
         "storageUri": {
           "type": "string",
@@ -3724,8 +3681,7 @@
             "Manual"
           ],
           "x-ms-enum": {
-            "name": "UpgradeMode",
-            "modelAsString": true
+            "name": "UpgradeMode"
           }
         }
       },
@@ -3782,8 +3738,7 @@
             "ReadWrite"
           ],
           "x-ms-enum": {
-            "name": "CachingTypes",
-            "modelAsString": true
+            "name": "CachingTypes"
           }
         },
         "createOption": {
@@ -3795,8 +3750,7 @@
             "attach"
           ],
           "x-ms-enum": {
-            "name": "DiskCreateOptionTypes",
-            "modelAsString": true
+            "name": "DiskCreateOptionTypes"
           }
         },
         "osType": {
@@ -3807,8 +3761,7 @@
             "Linux"
           ],
           "x-ms-enum": {
-            "name": "OperatingSystemTypes",
-            "modelAsString": true
+            "name": "OperatingSystemTypes"
           }
         },
         "image": {
@@ -3846,7 +3799,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the relative URL in the previous Service Management API's namespace. For Example: /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/..."
+          "description": "Gets or sets ARM resource id in the form of /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/..."
         }
       },
       "description": "The API entity reference."
@@ -4048,6 +4001,10 @@
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets the provisioning state, which only appears in the response."
+        },
+        "overProvision": {
+          "type": "boolean",
+          "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -4226,8 +4183,7 @@
             "None"
           ],
           "x-ms-enum": {
-            "name": "VirtualMachineScaleSetSkuScaleType",
-            "modelAsString": true
+            "name": "VirtualMachineScaleSetSkuScaleType"
           }
         }
       },
@@ -4467,47 +4423,6 @@
       },
       "description": "Api error."
     },
-    "DeleteOperationResult": {
-      "properties": {
-        "operationId": {
-          "type": "string",
-          "description": "Gets the operation identifier."
-        },
-        "status": {
-          "type": "string",
-          "description": "Gets the operation status.",
-          "enum": [
-            "InProgress",
-            "Succeeded",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "OperationStatus",
-            "modelAsString": false
-          }
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets the operation start time"
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets the operation end time"
-        },
-        "error": {
-          "$ref": "#/definitions/ApiError",
-          "description": "Gets or sets the operation error if any occurred"
-        }
-      },
-      "required": [
-        "operationId",
-        "status",
-        "startTime"
-      ],
-      "description": "The compute long running operation response."
-    },
     "ComputeLongRunningOperationProperties": {
       "properties": {
         "output": {
@@ -4516,46 +4431,6 @@
         }
       },
       "description": "Compute-specific operation properties, including output"
-    },
-    "ComputeLongRunningOperationResult": {
-      "properties": {
-        "operationId": {
-          "type": "string",
-          "description": "Gets the operation identifier."
-        },
-        "status": {
-          "type": "string",
-          "description": "Gets the operation status.",
-          "enum": [
-            "InProgress",
-            "Failed",
-            "Succeeded",
-            "Preempted"
-          ],
-          "x-ms-enum": {
-            "name": "ComputeOperationStatus",
-            "modelAsString": false
-          }
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets the operation start time"
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets the operation end time"
-        },
-        "properties": {
-          "$ref": "#/definitions/ComputeLongRunningOperationProperties"
-        },
-        "error": {
-          "$ref": "#/definitions/ApiError",
-          "description": "Gets the operation error, if any occurred."
-        }
-      },
-      "description": "The Compute service response for long-running operations."
     },
     "Resource": {
       "properties": {
