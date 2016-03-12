@@ -1296,7 +1296,7 @@
                     "Export",
                     "List"
                 ],
-                "operationId": "Devices_ListExportJobs",
+                "operationId": "ExportJobs_List",
                 "description": "Get the list of export jobs.",
                 "parameters": [
                     {
@@ -1366,7 +1366,7 @@
                     "Export",
                     "CRUD"
                 ],
-                "operationId": "Devices_CreateHistoricalExportJob",
+                "operationId": "ExportJobs_CreateHistorical",
                 "description": "Creates a job to export the specified data to a storageUrl.",
                 "parameters": [
                     {
@@ -1394,7 +1394,7 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "202": {
                         "description": "Success, export job is returned.",
                         "schema": {
                             "$ref": "#/definitions/ExportJobResult"
@@ -1409,13 +1409,13 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/snaptshotExportJobs": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/snapshotExportJobs": {
             "post": {
                 "tags": [
                     "Export",
                     "CRUD"
                 ],
-                "operationId": "Devices_CreateSnapshotExportJob",
+                "operationId": "ExportJobs_CreateSnapshot",
                 "description": "Creates a job to export the specified data to a storageUrl.",
                 "parameters": [
                     {
@@ -1443,7 +1443,7 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "202": {
                         "description": "Success, export job is returned.",
                         "schema": {
                             "$ref": "#/definitions/ExportJobResult"
@@ -1481,14 +1481,14 @@
                     "Export",
                     "CRUD"
                 ],
-                "operationId": "Devices_GetExportJob",
+                "operationId": "ExportJobs_Get",
                 "description": "The Get export job operation retrieves information about a previously created export job.",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
                         "required": true,
-                        "type": "integer",
+                        "type": "string",
                         "description": "Export job identifier."
                     }
                 ],
@@ -1514,7 +1514,7 @@
                     "Import",
                     "List"
                 ],
-                "operationId": "Devices_ListImportJobs",
+                "operationId": "ImportJobs_List",
                 "description": "Get the list of import jobs.",
                 "parameters": [
                     {
@@ -1582,7 +1582,7 @@
                     "Import",
                     "CRUD"
                 ],
-                "operationId": "Devices_CreateImportJob",
+                "operationId": "ImportJobs_Create",
                 "description": "Creates a job to import the specified data to a storageUrl.",
                 "parameters": [
                     {
@@ -1610,7 +1610,7 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "202": {
                         "description": "Success, import job is returned.",
                         "schema": {
                             "$ref": "#/definitions/ImportJobResult"
@@ -1628,8 +1628,7 @@
                             "$ref": "#/definitions/ApiError"
                         }
                     }
-                },
-                "x-ms-long-running-operation": true
+                }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/importJobs/{id}": {
@@ -1655,14 +1654,14 @@
                     "Import",
                     "CRUD"
                 ],
-                "operationId": "Devices_GetImportJob",
+                "operationId": "ImportJobs_Get",
                 "description": "The Get import job operation retrieves information about a previously created import job.",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
                         "required": true,
-                        "type": "integer",
+                        "type": "string",
                         "description": "Import job identifier."
                     }
                 ],
@@ -1912,6 +1911,9 @@
             }
         },
         "CampaignStateResult": {
+            "required": [
+                "id"
+            ],
             "properties": {
                 "id": {
                     "type": "integer",
@@ -3245,10 +3247,12 @@
             "properties": {
                 "startDate": {
                     "type": "string",
+                    "format": "date-time",
                     "description": "The date at which the export should be started from. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
                 },
                 "endDate": {
                     "type": "string",
+                    "format": "date-time",
                     "description": "The date at which the export should export data to. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
                 },
                 "historicalDataType": {
@@ -3312,7 +3316,7 @@
         "ExportJobResult": {
             "properties": {
                 "id": {
-                    "type": "integer",
+                    "type": "string",
                     "description": "Unique identifier of the export job."
                 },
                 "state": {
@@ -3331,18 +3335,22 @@
                 },
                 "dateCreated": {
                     "type": "string",
+                    "format": "date-time",
                     "description": "The date at which the export job was created.\nThe date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
                 },
                 "dateCompleted": {
                     "type": "string",
+                    "format": "date-time",
                     "description": "The date at which the export job completed (Not present if not yet completed).\nThe date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
                 },
                 "startDate": {
                     "type": "string",
+                    "format": "date-time",
                     "description": "The date at which the export should be started from. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
                 },
                 "endDate": {
                     "type": "string",
+                    "format": "date-time",
                     "description": "The date at which the export should export data to. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
                 },
                 "exportDataType": {
@@ -3415,10 +3423,12 @@
                 },
                 "dateCreated": {
                     "type": "string",
+                    "format": "date-time",
                     "description": "The date at which the import job was created.\nThe date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
                 },
                 "dateCompleted": {
                     "type": "string",
+                    "format": "date-time",
                     "description": "The date at which the import job completed (Not present if not yet completed).\nThe date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
                 },
                 "errorDetails": {
