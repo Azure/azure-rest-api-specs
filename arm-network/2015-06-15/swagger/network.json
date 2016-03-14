@@ -3874,6 +3874,7 @@
     "ApplicationGatewayIPConfiguration": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayIPConfigurationPropertiesFormat"
         },
         "name": {
@@ -3916,6 +3917,7 @@
     "ApplicationGatewaySslCertificate": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewaySslCertificatePropertiesFormat"
         },
         "name": {
@@ -3970,6 +3972,7 @@
     "ApplicationGatewayFrontendIPConfiguration": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayFrontendIPConfigurationPropertiesFormat"
         },
         "name": {
@@ -4005,6 +4008,7 @@
     "ApplicationGatewayFrontendPort": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayFrontendPortPropertiesFormat"
         },
         "name": {
@@ -4062,6 +4066,7 @@
     "ApplicationGatewayBackendAddressPool": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat"
         },
         "name": {
@@ -4119,7 +4124,7 @@
         "probe": {
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets probe resource of application gateway "
-        },		
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
@@ -4130,6 +4135,7 @@
     "ApplicationGatewayBackendHttpSettings": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayBackendHttpSettingsPropertiesFormat"
         },
         "name": {
@@ -4173,7 +4179,7 @@
         "hostName": {
           "type": "string",
           "description": "Gets or sets the host name of http listener "
-        },		
+        },
         "sslCertificate": {
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets ssl certificate resource of application gateway "
@@ -4181,7 +4187,7 @@
         "requireServerNameIndication": {
           "type": "boolean",
           "description": "Gets or sets the requireServerNameIndication of http listener "
-        },			
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the http listener resource Updating/Deleting/Failed"
@@ -4192,6 +4198,7 @@
     "ApplicationGatewayHttpListener": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat"
         },
         "name": {
@@ -4226,17 +4233,18 @@
         "backendHttpSettings": {
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets backend http settings resource of URL path map "
-        },         		
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets path rule of URL path map resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of probe of application gateway"
-    },	
+    },
     "ApplicationGatewayPathRule": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayPathRulePropertiesFormat"
         },
         "name": {
@@ -4254,7 +4262,7 @@
         }
       ],
       "description": "Path rule of URL path map of application gateway"
-    },		
+    },
     "ApplicationGatewayProbePropertiesFormat": {
       "properties": {
         "protocol": {
@@ -4291,17 +4299,18 @@
           "type": "integer",
           "format": "int32",
           "description": "Gets or sets probing unhealthy threshold "
-        },			
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of probe of application gateway"
-    },	
+    },
     "ApplicationGatewayProbe": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayProbePropertiesFormat"
         },
         "name": {
@@ -4319,7 +4328,7 @@
         }
       ],
       "description": "Probe of application gateway"
-    },	
+    },
     "ApplicationGatewayRequestRoutingRulePropertiesFormat": {
       "properties": {
         "ruleType": {
@@ -4327,7 +4336,7 @@
           "description": "Gets or sets the rule type",
           "enum": [
             "Basic",
-			"PathBasedRouting"
+            "PathBasedRouting"
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayRequestRoutingRuleType",
@@ -4349,7 +4358,7 @@
         "urlPathMap": {
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets url path map resource of application gateway "
-        },		
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the request routing rule resource Updating/Deleting/Failed"
@@ -4360,6 +4369,7 @@
     "ApplicationGatewayRequestRoutingRule": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayRequestRoutingRulePropertiesFormat"
         },
         "name": {
@@ -4426,14 +4436,14 @@
             "$ref": "#/definitions/ApplicationGatewayFrontendPort"
           },
           "description": "Gets or sets frontend ports of application gateway resource"
-        },        
+        },
         "probes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayProbe"
           },
           "description": "Gets or sets probes of application gateway resource"
-        },		
+        },
         "backendAddressPools": {
           "type": "array",
           "items": {
@@ -4461,7 +4471,7 @@
             "$ref": "#/definitions/ApplicationGatewayUrlPathMap"
           },
           "description": "Gets or sets URL path map of application gateway resource"
-        },		
+        },
         "requestRoutingRules": {
           "type": "array",
           "items": {
@@ -4483,6 +4493,7 @@
     "ApplicationGateway": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayPropertiesFormat"
         },
         "etag": {
@@ -4512,7 +4523,7 @@
         }
       },
       "description": "Response for ListLoadBalancers Api service call"
-    },	
+    },
     "ApplicationGatewayUrlPathMapPropertiesFormat": {
       "properties": {
         "defaultBackendAddressPool": {
@@ -4529,17 +4540,18 @@
             "$ref": "#/definitions/ApplicationGatewayPathRule"
           },
           "description": "Gets or sets path rule of URL path map resource"
-        }, 		
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of probe of application gateway"
-    },	
+    },
     "ApplicationGatewayUrlPathMap": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayUrlPathMapPropertiesFormat"
         },
         "name": {
@@ -4557,7 +4569,7 @@
         }
       ],
       "description": "UrlPathMap of application gateway"
-    },	
+    },
     "AuthorizationPropertiesFormat": {
       "properties": {
         "authorizationKey": {
@@ -4585,6 +4597,7 @@
     "ExpressRouteCircuitAuthorization": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/AuthorizationPropertiesFormat"
         },
         "name": {
@@ -4748,6 +4761,7 @@
     "ExpressRouteCircuitPeering": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ExpressRouteCircuitPeeringPropertiesFormat"
         },
         "name": {
@@ -4893,6 +4907,7 @@
           "description": "Gets or sets sku"
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ExpressRouteCircuitPropertiesFormat"
         },
         "etag": {
@@ -5059,6 +5074,7 @@
     "ExpressRouteServiceProvider": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ExpressRouteServiceProviderPropertiesFormat"
         }
       },
@@ -5149,6 +5165,7 @@
     "FrontendIPConfiguration": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/FrontendIPConfigurationPropertiesFormat"
         },
         "name": {
@@ -5197,6 +5214,7 @@
     "BackendAddressPool": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/BackendAddressPoolPropertiesFormat"
         },
         "name": {
@@ -5279,16 +5297,15 @@
         }
       },
       "required": [
-        "backendAddressPool",
         "protocol",
-        "frontendPort",
-        "enableFloatingIP"
+        "frontendPort"
       ],
       "description": "Properties of the load balancer"
     },
     "LoadBalancingRule": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/LoadBalancingRulePropertiesFormat"
         },
         "name": {
@@ -5360,6 +5377,7 @@
     "Probe": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProbePropertiesFormat"
         },
         "name": {
@@ -5429,6 +5447,7 @@
     "InboundNatRule": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/InboundNatRulePropertiesFormat"
         },
         "name": {
@@ -5496,6 +5515,7 @@
     "InboundNatPool": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/InboundNatPoolPropertiesFormat"
         },
         "name": {
@@ -5545,6 +5565,7 @@
     "OutboundNatRule": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/OutboundNatRulePropertiesFormat"
         },
         "name": {
@@ -5628,6 +5649,7 @@
     "LoadBalancer": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/LoadBalancerPropertiesFormat"
         },
         "etag": {
@@ -5670,6 +5692,24 @@
       },
       "description": "AddressSpace contains an array of IP address ranges that can be used by subnets"
     },
+    "BgpSettings": {
+      "properties": {
+        "asn": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets this BGP speaker's ASN"
+        },
+        "bgpPeeringAddress": {
+          "type": "string",
+          "description": "Gets or sets the BGP peering address and BGP identifier of this BGP speaker"
+        },
+        "peerWeight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the weight added to routes learned from this BGP speaker"
+        }
+      }
+    },
     "LocalNetworkGatewayPropertiesFormat": {
       "properties": {
         "localNetworkAddressSpace": {
@@ -5679,6 +5719,10 @@
         "gatewayIpAddress": {
           "type": "string",
           "description": "IP address of local network gateway."
+        },
+        "bgpSettings": {
+          "$ref": "#/definitions/BgpSettings",
+          "description": "Local network gateway's BGP speaker settings"
         },
         "resourceGuid": {
           "type": "string",
@@ -5694,6 +5738,7 @@
     "LocalNetworkGateway": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/LocalNetworkGatewayPropertiesFormat"
         },
         "etag": {
@@ -5770,6 +5815,7 @@
     "NetworkInterfaceIPConfiguration": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/NetworkInterfaceIPConfigurationPropertiesFormat"
         },
         "name": {
@@ -5862,6 +5908,7 @@
     "NetworkInterface": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/NetworkInterfacePropertiesFormat"
         },
         "etag": {
@@ -5972,6 +6019,7 @@
     "SecurityRule": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/SecurityRulePropertiesFormat"
         },
         "name": {
@@ -6034,6 +6082,7 @@
     "NetworkSecurityGroup": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/NetworkSecurityGroupPropertiesFormat"
         },
         "etag": {
@@ -6124,6 +6173,7 @@
     "PublicIPAddress": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/PublicIPAddressPropertiesFormat"
         },
         "etag": {
@@ -6192,6 +6242,7 @@
     "Route": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/RoutePropertiesFormat"
         },
         "name": {
@@ -6236,6 +6287,7 @@
     "RouteTable": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/RouteTablePropertiesFormat"
         },
         "etag": {
@@ -6334,6 +6386,7 @@
     "IPConfiguration": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/IPConfigurationPropertiesFormat"
         },
         "name": {
@@ -6382,6 +6435,7 @@
     "Subnet": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/SubnetPropertiesFormat"
         },
         "name": {
@@ -6513,6 +6567,7 @@
     "VirtualNetworkGatewayIPConfiguration": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualNetworkGatewayIPConfigurationPropertiesFormat"
         },
         "name": {
@@ -6580,6 +6635,10 @@
           "$ref": "#/definitions/VpnClientConfiguration",
           "description": "Gets or sets the reference of the VpnClientConfiguration resource which represents the P2S VpnClient configurations."
         },
+        "bgpSettings": {
+          "$ref": "#/definitions/BgpSettings",
+          "description": "Virtual network gateway's BGP speaker settings"
+        },
         "resourceGuid": {
           "type": "string",
           "description": "Gets or sets resource guid property of the VirtualNetworkGateway resource"
@@ -6594,6 +6653,7 @@
     "VirtualNetworkGateway": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualNetworkGatewayPropertiesFormat"
         },
         "etag": {
@@ -6750,6 +6810,10 @@
           "$ref": "#/definitions/SubResource",
           "description": "The reference to peerings resource."
         },
+        "enableBgp": {
+          "type": "boolean",
+          "description": "EnableBgp Flag"
+        },
         "resourceGuid": {
           "type": "string",
           "description": "Gets or sets resource guid property of the VirtualNetworkGatewayConnection resource"
@@ -6764,6 +6828,7 @@
     "VirtualNetworkGatewayConnection": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualNetworkGatewayConnectionPropertiesFormat"
         },
         "etag": {
@@ -6794,6 +6859,7 @@
     "VpnClientRevokedCertificate": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VpnClientRevokedCertificatePropertiesFormat"
         },
         "name": {
@@ -6828,6 +6894,7 @@
     "VpnClientRootCertificate": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VpnClientRootCertificatePropertiesFormat"
         },
         "name": {
@@ -6947,6 +7014,7 @@
     "VirtualNetwork": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualNetworkPropertiesFormat"
         },
         "etag": {
