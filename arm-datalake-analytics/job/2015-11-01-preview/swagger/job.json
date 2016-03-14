@@ -5,6 +5,7 @@
     "description": "Creates an Azure Data Lake Analytics job client.",
     "version": "2015-11-01-preview",
     "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true,
       "internalConstructors": true
     }
   },
@@ -442,9 +443,9 @@
           "description": "Gets the total vertex count for this stage."
         },
         "totalFailedTime": {
-          "type": "integer",
+          "type": "string",
           "readOnly": true,
-          "format": "int64",
+          "format": "non-iso-duration",
           "description": "Gets the amount of time that failed vertices took up in this stage."
         },
         "totalProgress": {
@@ -454,9 +455,9 @@
           "description": "Gets the current progress of this stage, as a percentage."
         },
         "totalSucceededTime": {
-          "type": "integer",
+          "type": "string",
           "readOnly": true,
-          "format": "int64",
+          "format": "non-iso-duration",
           "description": "Gets the amount of time all successful vertices took in this stage."
         }
       },
@@ -585,21 +586,25 @@
         },
         "totalCompilationTime": {
           "type": "string",
+          "format": "non-iso-duration",
           "readOnly": true,
           "description": "Gets the total time this job spent compiling. This value should not be set by the user and will be ignored if it is."
         },
         "totalPauseTime": {
           "type": "string",
+          "format": "non-iso-duration",
           "readOnly": true,
           "description": "Gets the total time this job spent paused. This value should not be set by the user and will be ignored if it is."
         },
         "totalQueuedTime": {
           "type": "string",
+          "format": "non-iso-duration",
           "readOnly": true,
           "description": "Gets the total time this job spent queued. This value should not be set by the user and will be ignored if it is."
         },
         "totalRunningTime": {
           "type": "string",
+          "format": "non-iso-duration",
           "readOnly": true,
           "description": "Gets the total time this job spent executing. This value should not be set by the user and will be ignored if it is."
         },
