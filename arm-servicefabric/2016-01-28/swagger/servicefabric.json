@@ -2974,7 +2974,7 @@
     "EventHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "1",
+      "x-ms-discriminator-value": "EventHealthEvaluation",
       "properties": {
         "UnhealthyEvent": {
           "type": "object",
@@ -2988,7 +2988,7 @@
     "PartitionsHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "2",
+      "x-ms-discriminator-value": "PartitionsHealthEvaluation",
       "properties": {
         "UnhealthyEvaluations": {
           "type": "array",
@@ -3008,7 +3008,7 @@
     "ReplicasHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "3",
+      "x-ms-discriminator-value": "ReplicasHealthEvaluation",
       "properties": {
         "UnhealthyEvaluations": {
           "type": "array",
@@ -3028,7 +3028,7 @@
     "DeployedServicePackagesHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "4",
+      "x-ms-discriminator-value": "DeployedServicePackagesHealthEvaluation",
       "properties": {
         "UnhealthyEvaluations": {
           "type": "array",
@@ -3045,7 +3045,7 @@
     "DeployedApplicationsHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "5",
+      "x-ms-discriminator-value": "DeployedApplicationsHealthEvaluation",
       "properties": {
         "UnhealthyEvaluations": {
           "type": "array",
@@ -3065,7 +3065,7 @@
     "ServicesHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "6",
+      "x-ms-discriminator-value": "ServicesHealthEvaluation",
       "properties": {
         "ServiceTypeName": {
           "type": "string"
@@ -3088,7 +3088,7 @@
     "NodesHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "7",
+      "x-ms-discriminator-value": "NodesHealthEvaluation",
       "properties": {
         "UnhealthyEvaluations": {
           "type": "array",
@@ -3108,7 +3108,7 @@
     "ApplicationsHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "8",
+      "x-ms-discriminator-value": "ApplicationsHealthEvaluation",
       "properties": {
         "UnhealthyEvaluations": {
           "type": "array",
@@ -3128,7 +3128,7 @@
     "UpgradeDomainNodesHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "9",
+      "x-ms-discriminator-value": "SystemApplicationHealthEvaluation",
       "properties": {
         "UpgradeDomainName": {
           "type": "string"
@@ -3151,7 +3151,7 @@
     "UpgradeDomainDeployedApplicationsHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "10",
+      "x-ms-discriminator-value": "UDDeployedApplicationsHealthEvaluation",
       "properties": {
         "UpgradeDomainName": {
           "type": "string"
@@ -3174,7 +3174,7 @@
     "SystemApplicationHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "11",
+      "x-ms-discriminator-value": "UDNodesHealthEvaluation",
       "properties": {
         "UnhealthyEvaluations": {
           "type": "array",
@@ -3188,7 +3188,7 @@
     "PartitionHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "12",
+      "x-ms-discriminator-value": "PartitionHealthEvaluation",
       "properties": {
         "PartitionId": {
           "type": "string"
@@ -3205,7 +3205,7 @@
     "ReplicaHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "13",
+      "x-ms-discriminator-value": "ReplicaHealthEvaluation",
       "properties": {
         "PartitionId": {
           "type": "string"
@@ -3225,7 +3225,7 @@
     "DeployedServicePackageHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "14",
+      "x-ms-discriminator-value": "DeployedServicePackageHealthEvaluation",
       "properties": {
         "ApplicationName": {
           "type": "string"
@@ -3248,7 +3248,7 @@
     "DeployedApplicationHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "15",
+      "x-ms-discriminator-value": "DeployedApplicationHealthEvaluation",
       "properties": {
         "ApplicationName": {
           "type": "string"
@@ -3268,7 +3268,7 @@
     "ServiceHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "16",
+      "x-ms-discriminator-value": "ServiceHealthEvaluation",
       "properties": {
         "ServiceName": {
           "type": "string"
@@ -3285,7 +3285,7 @@
     "NodeHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "17",
+      "x-ms-discriminator-value": "NodeHealthEvaluation",
       "properties": {
         "NodeName": {
           "type": "string"
@@ -3302,7 +3302,7 @@
     "ApplicationHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "18",
+      "x-ms-discriminator-value": "ApplicationHealthEvaluation",
       "properties": {
         "ServiceName": {
           "type": "string"
@@ -3319,7 +3319,7 @@
     "DeltaNodesCheckHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "19",
+      "x-ms-discriminator-value": "HealthEvaluationKindDeltaNodesCheck",
       "properties": {
         "UnhealthyEvaluations": {
           "type": "array",
@@ -3345,7 +3345,7 @@
     "UpgradeDomainDeltaNodesCheckHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "20",
+      "x-ms-discriminator-value": "HealthEvaluationKindUpgradeDomainDeltaNodesCheck",
       "properties": {
         "UpgradeDomainName": {
           "type": "string"
@@ -3374,7 +3374,7 @@
     "ApplicationTypeHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "21",
+      "x-ms-discriminator-value": "ApplicationTypeApplicationsHealthEvaluation",
       "properties": {
         "ApplicationTypeName": {
           "type": "string"
@@ -4021,7 +4021,7 @@
     "StatelessServiceGroupDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceGroupDescription"}],
-      "x-ms-discriminator-value": "1",
+      "x-ms-discriminator-value": "FABRIC_SERVICE_KIND_STATELESS",
       "properties": {
         "InstanceCount": {
           "type": "integer"
@@ -4031,7 +4031,7 @@
     "StatefulServiceGroupDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceGroupDescription"}],
-      "x-ms-discriminator-value": "2",
+      "x-ms-discriminator-value": "FABRIC_SERVICE_KIND_STATEFUL",
       "properties": {
         "TargetReplicaSetSize": {
           "type": "integer"
@@ -4224,7 +4224,7 @@
     "StatelessServiceDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceDescription"}],
-      "x-ms-discriminator-value": "1",
+      "x-ms-discriminator-value": "FABRIC_SERVICE_KIND_STATELESS",
       "properties": {
         "InstanceCount": {
           "type": "integer"
@@ -4234,7 +4234,7 @@
     "StatefulServiceDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceDescription"}],
-      "x-ms-discriminator-value": "2",
+      "x-ms-discriminator-value": "FABRIC_SERVICE_KIND_STATEFUL",
       "properties": {
         "TargetReplicaSetSize": {
           "type": "integer"
@@ -4278,7 +4278,7 @@
     "StatelessServiceUpdateDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceUpdateDescription"}],
-      "x-ms-discriminator-value": "1",
+      "x-ms-discriminator-value": "FABRIC_SERVICE_KIND_STATELESS",
       "properties": {
         "InstanceCount": {
           "type": "integer"
@@ -4288,7 +4288,7 @@
     "StatefulServiceUpdateDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceUpdateDescription"}],
-      "x-ms-discriminator-value": "2",
+      "x-ms-discriminator-value": "FABRIC_SERVICE_KIND_STATEFUL",
       "properties": {
         "TargetReplicaSetSize": {
           "type": "integer"
@@ -4323,7 +4323,7 @@
     "StatelessServiceGroupUpdateDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceGroupUpdateDescription"}],
-      "x-ms-discriminator-value": "1",
+      "x-ms-discriminator-value": "FABRIC_SERVICE_KIND_STATELESS",
       "properties": {
         "InstanceCount": {
           "type": "integer"
@@ -4333,7 +4333,7 @@
     "StatefulServiceGroupUpdateDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceGroupUpdateDescription"}],
-      "x-ms-discriminator-value": "2",
+      "x-ms-discriminator-value": "FABRIC_SERVICE_KIND_STATEFUL",
       "properties": {
         "TargetReplicaSetSize": {
           "type": "integer"
