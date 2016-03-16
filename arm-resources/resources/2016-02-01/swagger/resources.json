@@ -21,7 +21,7 @@
           "Deployments"
         ],
         "operationId": "Deployments_Delete",
-        "description": "Begin deleting deployment.To determine whether the operation has finished processing the request, call GetLongRunningOperationStatus.",
+        "description": "Delete deployment.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -254,6 +254,52 @@
               "$ref": "#/definitions/Deployment"
             },
             "description": "Deployment to validate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/exportTemplate": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_ExportTemplate",
+        "description": "Exports a deployment template.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the deployment."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -595,7 +641,7 @@
           "ResourceGroups"
         ],
         "operationId": "ResourceGroups_Delete",
-        "description": "Begin deleting resource group.To determine whether the operation has finished processing the request, call GetLongRunningOperationStatus.",
+        "description": "Delete resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -744,7 +790,7 @@
           "Resources"
         ],
         "operationId": "Resources_MoveResources",
-        "description": "Begin moving resources.To determine whether the operation has finished processing the request, call GetLongRunningOperationStatus.",
+        "description": "Move resources from one resource group to another. The resources being moved should all be in the same resource group.",
         "parameters": [
           {
             "name": "sourceResourceGroupName",
@@ -1093,12 +1139,6 @@
         ],
         "responses": {
           "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/GenericResource"
-            }
-          },
-          "204": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/GenericResource"
@@ -2129,6 +2169,7 @@
           }
         },
         "debugSetting": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/DebugSetting",
           "description": "Gets or sets the debug setting of the deployment."
         }
