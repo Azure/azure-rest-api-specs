@@ -3128,7 +3128,7 @@
     "UpgradeDomainNodesHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "SystemApplicationHealthEvaluation",
+      "x-ms-discriminator-value": "UDNodesHealthEvaluation",
       "properties": {
         "UpgradeDomainName": {
           "type": "string"
@@ -3174,7 +3174,7 @@
     "SystemApplicationHealthEvaluation": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/HealthEvaluation"}],
-      "x-ms-discriminator-value": "UDNodesHealthEvaluation",
+      "x-ms-discriminator-value": "SystemApplicationHealthEvaluation",
       "properties": {
         "UnhealthyEvaluations": {
           "type": "array",
