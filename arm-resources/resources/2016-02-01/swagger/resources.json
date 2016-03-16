@@ -312,13 +312,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
-            }
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentExportResult"
             }
           }
         }
@@ -2192,6 +2186,14 @@
         }
       },
       "description": "Deployment operation parameters."
+    },
+    "DeploymentExportResult": {
+      "properties": {
+        "template": {
+          "type": "object",
+          "description": "Gets or sets the template content."
+        }
+      }
     },
     "ResourceManagementError": {
       "properties": {
