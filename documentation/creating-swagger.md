@@ -1,7 +1,7 @@
 # AutoRest Swagger
 AutoRest is a tool for generating HTTP client libraries from Swagger files. This document explains the conventions 
 and extensions used by AutoRest in processing Swagger to produce client libraries. The Swagger specification can 
-be found at [Swagger RESTful API Documentation Specification](Swagger-spec2.0).
+be found at [Swagger RESTful API Documentation Specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md).
 
 1. [Swagger](#Swagger)
 2. [Info Object](#InfoObject)
@@ -768,4 +768,4 @@ If an operation requires that a parameter is exposed as a method parameter, it i
 
 TODO: naming standards for operations Create, CreateOrUpdate, Update (respect etag), Get, List, Delete, Patch
 TODO: patch => no validate
-[Swagger-spec2.0]:https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md
+[Swagger-spec2.0]:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md

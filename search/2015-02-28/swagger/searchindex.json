@@ -101,6 +101,15 @@
       "x-ms-enum": { "name": "SearchMode" },
       "description": "Specifies whether any or all of the search terms must be matched in order to count the document as a match."
     },
+    "QueryType": {
+      "type": "string",
+      "enum": [
+        "simple",
+        "full"
+      ],
+      "x-ms-enum": { "name": "QueryType" },
+      "description": "Specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax."
+    },
     "SearchParameters": {
       "properties": {
         "filter": {
@@ -140,6 +149,10 @@
             "type": "string"
           },
           "description": "Gets or sets the list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to the geo.distance() function. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 Orderby clauses."
+        },
+        "queryType": {
+          "$ref": "#/definitions/QueryType",
+          "description": "Gets or sets a value that specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax."
         },
         "scoringParameters": {
           "type": "array",

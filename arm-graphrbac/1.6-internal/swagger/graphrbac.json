@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "GraphRbacManagementClient",
-    "version": "1.42-previewInternal"
+    "version": "1.6-internal"
   },
   "host": "graph.windows.net",
   "schemes": [
@@ -22,11 +22,8 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Application_Create",
-        "description": "Create a new application.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx"
-        },
+        "operationId": "ApplicationOperations_Create",
+        "description": "Create a new application. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx",
         "parameters": [
           {
             "name": "parameters",
@@ -39,9 +36,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -60,24 +54,18 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Application_List",
-        "description": "Lists applications by filter parameters.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx"
-        },
+        "operationId": "ApplicationOperations_List",
+        "description": "Lists applications by filter parameters. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx",
         "parameters": [
           {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filters to apply on the operarion"
+            "description": "The filters to apply on the operation"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -91,7 +79,10 @@
             }
           }
         },
-        "x-ms-odata": "#/definitions/ApplicationFilter"
+        "x-ms-odata": "#/definitions/ApplicationFilter",
+		"x-ms-pageable": {
+          "nextLinkName": null
+        }
       }
     },
     "/{tenantID}/applications/{applicationObjectId}": {
@@ -99,11 +90,8 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Application_Delete",
-        "description": "Delete an application.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx"
-        },
+        "operationId": "ApplicationOperations_Delete",
+        "description": "Delete an application. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx",
         "parameters": [
           {
             "name": "applicationObjectId",
@@ -115,9 +103,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -133,11 +118,8 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Application_Get",
-        "description": "Get an application by object Id.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx"
-        },
+        "operationId": "ApplicationOperations_Get",
+        "description": "Get an application by object Id. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx",
         "parameters": [
           {
             "name": "applicationObjectId",
@@ -149,9 +131,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -170,11 +149,8 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Application_Update",
-        "description": "Update existing application.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx"
-        },
+        "operationId": "ApplicationOperations_Patch",
+        "description": "Update existing application. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx",
         "parameters": [
           {
             "name": "applicationObjectId",
@@ -197,9 +173,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -215,14 +188,11 @@
         "tags": [
           "Objects"
         ],
-        "operationId": "Objects_GetCurrentUser",
+        "operationId": "ObjectOperations_GetCurrentUser",
         "description": "Gets the details for current logged in user",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -243,7 +213,7 @@
         "tags": [
           "Objects"
         ],
-        "operationId": "Objects_GetObjectsByObjectIds",
+        "operationId": "ObjectOperations_GetObjectsByObjectIds",
         "description": "Gets AD group membership by provided AD object Ids",
         "parameters": [
           {
@@ -259,9 +229,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -275,7 +242,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "Objects_GetObjectsByObjectIdsNext"
+          "operationName": "ObjectOperations_GetObjectsByObjectIdsNext"
         }
       }
     },
@@ -284,11 +251,8 @@
         "tags": [
           "Group"
         ],
-        "operationId": "Group_RemoveMember",
-        "description": "Remove a memeber from a group",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/azure/dn151607.aspx"
-        },
+        "operationId": "GroupOperations_RemoveMember",
+        "description": "Remove a memeber from a group. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151607.aspx",
         "parameters": [
           {
             "name": "groupObjectId",
@@ -310,9 +274,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -328,11 +289,8 @@
         "tags": [
           "Group"
         ],
-        "operationId": "Group_AddMember",
-        "description": "Add a memeber to a group. ",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/azure/dn151600.aspx"
-        },
+        "operationId": "GroupOperations_AddMember",
+        "description": "Add a memeber to a group. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx",
         "parameters": [
           {
             "name": "groupObjectId",
@@ -355,9 +313,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -373,11 +328,8 @@
         "tags": [
           "Group"
         ],
-        "operationId": "Group_Delete",
-        "description": "Delete a group in the directory.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/azure/dn151608.aspx"
-        },
+        "operationId": "GroupOperations_Delete",
+        "description": "Delete a group in the directory. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx",
         "parameters": [
           {
             "name": "groupObjectId",
@@ -389,9 +341,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -409,11 +358,8 @@
         "tags": [
           "Group"
         ],
-        "operationId": "Group_Create",
-        "description": "Create a group in the directory.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/azure/dn151614.aspx"
-        },
+        "operationId": "GroupOperations_Create",
+        "description": "Create a group in the directory. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx",
         "parameters": [
           {
             "name": "parameters",
@@ -426,9 +372,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -447,7 +390,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "Group_List",
+        "operationId": "GroupOperations_List",
         "description": "Gets list of groups for the current tenant.",
         "parameters": [
           {
@@ -459,9 +402,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -477,7 +417,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "Group_ListNext"
+          "operationName": "GroupOperations_ListNext"
         },
         "x-ms-odata": "#/definitions/ADGroup"
       }
@@ -487,7 +427,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "Group_GetGroupMembers",
+        "operationId": "GroupOperations_GetGroupMembers",
         "description": "Gets the members of a group.",
         "parameters": [
           {
@@ -500,9 +440,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -518,7 +455,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "Group_GetGroupMembersNext"
+          "operationName": "GroupOperations_GetGroupMembersNext"
         }
       }
     },
@@ -527,7 +464,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "Group_Get",
+        "operationId": "GroupOperations_Get",
         "description": "Gets group information from the directory.",
         "parameters": [
           {
@@ -540,9 +477,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -563,7 +497,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "Group_GetMemberGroups",
+        "operationId": "GroupOperations_GetMemberGroups",
         "description": "Gets a collection that contains the Object IDs of the groups of which the group is a member.",
         "parameters": [
           {
@@ -587,9 +521,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -611,7 +542,7 @@
         "tags": [
           "ServicePrincipal"
         ],
-        "operationId": "ServicePrincipal_Create",
+        "operationId": "ServicePrincipalOperations_Create",
         "description": "Creates a service principal in the  directory.",
         "parameters": [
           {
@@ -625,9 +556,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -646,7 +574,7 @@
         "tags": [
           "ServicePrincipal"
         ],
-        "operationId": "ServicePrincipal_List",
+        "operationId": "ServicePrincipalOperations_List",
         "description": "Gets list of service principals from the current tenant.",
         "parameters": [
           {
@@ -658,9 +586,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -676,7 +601,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "ServicePrincipal_ListNext"
+          "operationName": "ServicePrincipalOperations_ListNext"
         },
         "x-ms-odata": "#/definitions/ServicePrincipal"
       }
@@ -686,7 +611,7 @@
         "tags": [
           "ServicePrincipal"
         ],
-        "operationId": "ServicePrincipal_Delete",
+        "operationId": "ServicePrincipalOperations_Delete",
         "description": "Deletes service principal from the directory.",
         "parameters": [
           {
@@ -699,9 +624,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -717,7 +639,7 @@
         "tags": [
           "ServicePrincipal"
         ],
-        "operationId": "ServicePrincipal_Get",
+        "operationId": "ServicePrincipalOperations_Get",
         "description": "Gets service principal information from the directory.",
         "parameters": [
           {
@@ -730,9 +652,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -753,11 +672,8 @@
         "tags": [
           "User"
         ],
-        "operationId": "User_Delete",
-        "description": "Delete a user.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx"
-        },
+        "operationId": "UserOperations_Delete",
+        "description": "Delete a user. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx",
         "parameters": [
           {
             "name": "user",
@@ -769,9 +685,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -789,11 +702,8 @@
         "tags": [
           "User"
         ],
-        "operationId": "User_Create",
-        "description": "Create a new user.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/azure/dn130117.aspx"
-        },
+        "operationId": "UserOperations_Create",
+        "description": "Create a new user. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx",
         "parameters": [
           {
             "name": "parameters",
@@ -806,9 +716,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -827,7 +734,7 @@
         "tags": [
           "User"
         ],
-        "operationId": "User_List",
+        "operationId": "UserOperations_List",
         "description": "Gets list of users for the current tenant.",
         "parameters": [
           {
@@ -839,9 +746,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -857,7 +761,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "User_ListNext"
+          "operationName": "UserOperations_ListNext"
         },
         "x-ms-odata": "#/definitions/User"
       }
@@ -867,11 +771,8 @@
         "tags": [
           "User"
         ],
-        "operationId": "User_Get",
-        "description": "Gets user information from the directory.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/azure/dn151678.aspx"
-        },
+        "operationId": "UserOperations_Get",
+        "description": "Gets user information from the directory. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx",
         "parameters": [
           {
             "name": "upnOrObjectId",
@@ -883,9 +784,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -906,7 +804,7 @@
         "tags": [
           "User"
         ],
-        "operationId": "User_GetMemberGroups",
+        "operationId": "UserOperations_GetMemberGroups",
         "description": "Gets a collection that contains the Object IDs of the groups of which the user is a member.",
         "parameters": [
           {
@@ -930,9 +828,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -951,12 +846,12 @@
     }
   },
   "x-ms-paths": {
-    "/{tenantID}/{nextLink}?Objects_GetObjectsByObjectIdsNext": {
+    "/{tenantID}/{nextLink}?ObjectOperations_GetObjectsByObjectIdsNext": {
       "post": {
         "tags": [
           "Objects"
         ],
-        "operationId": "Objects_GetObjectsByObjectIdsNext",
+        "operationId": "ObjectOperations_GetObjectsByObjectIdsNext",
         "description": "Gets AD group membership by provided AD object Ids",
         "parameters": [
           {
@@ -969,9 +864,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -987,16 +879,16 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "Objects_GetObjectsByObjectIdsNext"
+          "operationName": "ObjectOperations_GetObjectsByObjectIdsNext"
         }
       }
     },
-    "/{tenantID}/{nextLink}?Group_ListNext": {
+    "/{tenantID}/{nextLink}?GroupOperations_ListNext": {
       "get": {
         "tags": [
           "Group"
         ],
-        "operationId": "Group_ListNext",
+        "operationId": "GroupOperations_ListNext",
         "description": "Gets list of groups for the current tenant.",
         "parameters": [
           {
@@ -1009,9 +901,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -1027,16 +916,16 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "Group_ListNext"
+          "operationName": "GroupOperations_ListNext"
         }
       }
     },
-    "/{tenantID}/{nextLink}?Group_GetGroupMembersNext": {
+    "/{tenantID}/{nextLink}?GroupOperations_GetGroupMembersNext": {
       "get": {
         "tags": [
           "Group"
         ],
-        "operationId": "Group_GetGroupMembersNext",
+        "operationId": "GroupOperations_GetGroupMembersNext",
         "description": "Gets the members of a group.",
         "parameters": [
           {
@@ -1049,9 +938,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -1067,16 +953,16 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "Group_GetGroupMembersNext"
+          "operationName": "GroupOperations_GetGroupMembersNext"
         }
       }
     },
-    "/{tenantID}/{nextLink}?ServicePrincipal_ListNext": {
+    "/{tenantID}/{nextLink}?ServicePrincipalOperations_ListNext": {
       "get": {
         "tags": [
           "ServicePrincipal"
         ],
-        "operationId": "ServicePrincipal_ListNext",
+        "operationId": "ServicePrincipalOperations_ListNext",
         "description": "Gets list of service principals from the current tenant.",
         "parameters": [
           {
@@ -1089,9 +975,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -1107,16 +990,16 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "ServicePrincipal_ListNext"
+          "operationName": "ServicePrincipalOperations_ListNext"
         }
       }
     },
-    "/{tenantID}/{nextLink}?User_ListNext": {
+    "/{tenantID}/{nextLink}?UserOperations_ListNext": {
       "get": {
         "tags": [
           "User"
         ],
-        "operationId": "User_ListNext",
+        "operationId": "UserOperations_ListNext",
         "description": "Gets list of users for the current tenant.",
         "parameters": [
           {
@@ -1129,9 +1012,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -1147,7 +1027,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "User_ListNext"
+          "operationName": "UserOperations_ListNext"
         }
       }
     }
@@ -1706,13 +1586,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
