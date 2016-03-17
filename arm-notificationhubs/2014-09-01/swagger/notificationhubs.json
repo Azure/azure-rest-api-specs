@@ -588,8 +588,8 @@
         "tags": [
           "NotificationHubs"
         ],
-        "operationId": "NotificationHubs_Create",
-        "description": "Creates a new NotificationHub in a namespace.",
+        "operationId": "NotificationHubs_CreateOrUpdate",
+        "description": "Creates/Update a NotificationHub in a namespace.",
         "externalDocs": {
           "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj856303.aspx"
         },
@@ -616,13 +616,19 @@
             "description": "The notification hub name."
           },
           {
+            "name": "If-Match",
+            "in": "header",
+            "type": "string",
+            "description": "A notificationHub can be updated if this header is set to *. "
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NotificationHubCreateOrUpdateParameters"
             },
-            "description": "Parameters supplied to the create a Namespace Resource."
+            "description": "Parameters supplied to the create/update a NotificatioHub Resource."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1108,7 +1114,7 @@
           },
           "description": "Gets or sets tags."
         },
-        "isAvailiable": {
+        "isAvailable": {
           "type": "boolean",
           "description": "Gets or sets true if the name is available and can be used to create new Namespace/NotificationHub. Otherwise false."
         }
@@ -1143,7 +1149,7 @@
           },
           "description": "Gets or sets tags"
         },
-        "isAvailiable": {
+        "isAvailable": {
           "type": "boolean",
           "description": "Gets or sets true if the name is available and can be used to create new Namespace/NotificationHub. Otherwise false."
         }
