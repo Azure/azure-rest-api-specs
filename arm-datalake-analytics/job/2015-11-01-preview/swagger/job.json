@@ -53,6 +53,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "format": "uuid",
             "description": "JobInfo ID."
           },
           {
@@ -86,6 +87,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "format": "uuid",
             "description": "JobInfo ID."
           },
           {
@@ -139,47 +141,6 @@
         }
       }
     },
-    "/Jobs/{jobId}": {
-      "put": {
-        "tags": [
-          "Job"
-        ],
-        "operationId": "Job_Create",
-        "description": "Submits a job to the specified Data Lake Analytics account.",
-        "parameters": [
-          {
-            "name": "jobId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The job ID (a GUID) for the job being submitted."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/JobInformation"
-            },
-            "description": "The parameters to submit a job."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/JobInformation"
-            }
-          }
-        }
-      }
-    },
     "/Jobs/{jobIdentity}/CancelJob": {
       "post": {
         "tags": [
@@ -193,6 +154,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "format": "uuid",
             "description": "JobInfo ID to cancel."
           },
           {
@@ -223,7 +185,48 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "format": "uuid",
             "description": "JobInfo ID."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/JobInformation"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_Create",
+        "description": "Submits a job to the specified Data Lake Analytics account.",
+        "parameters": [
+          {
+            "name": "jobIdentity",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "The job ID (a GUID) for the job being submitted."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobInformation"
+            },
+            "description": "The parameters to submit a job."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -293,7 +296,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
           },
           {
             "name": "$count",
@@ -486,6 +489,7 @@
       "properties": {
         "jobId": {
           "type": "string",
+          "format": "uuid",
           "readOnly": true,
           "description": "Gets the id of the job this data is for."
         },
@@ -875,6 +879,7 @@
       "properties": {
         "jobId": {
           "type": "string",
+          "format": "uuid",
           "description": "Gets or sets the job's unique identifier (a GUID)."
         },
         "name": {
