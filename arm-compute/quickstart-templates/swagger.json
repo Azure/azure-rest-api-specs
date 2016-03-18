@@ -41,7 +41,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/Deployment"
             },
@@ -74,6 +74,7 @@
   },
   "definitions": {
     "TemplateLink": {
+      "required": [ "uri" ],
       "properties": {
         "uri": {
           "type": "string",
@@ -81,18 +82,17 @@
           "enum": [ "https://raw.githubusercontent.com/stankovski/azure-rest-api-specs/master/arm-compute/quickstart-templates/vm-simple-linux.json" ]
         }
       },
-      "required": [
-        "uri"
-      ],
       "description": "Entity representing the reference to the template."
     },
     "DeploymentProperties": {
+      "required" : [ "templateLink", "mode" ],
       "properties": {
         "templateLink": {
           "$ref": "#/definitions/TemplateLink",
           "description": "Gets or sets the URI referencing the template. Use only one of Template or TemplateLink."
         },
         "parameters": {
+          "x-ms-client-flatten": true,
           "description": "Deployment parameters. Use only one of Parameters or ParametersLink.",
           "$ref": "#/definitions/DeploymentParameters"
         },
@@ -110,6 +110,7 @@
     "Deployment": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/DeploymentProperties",
           "description": "Gets or sets the deployment properties."
         }
@@ -119,6 +120,7 @@
     "DeploymentParameters": {
       "properties": {
         "adminUsername": {
+          "x-ms-client-flatten": true,
           "type": "object",
           "required": [ "value" ],
           "properties": {
@@ -129,6 +131,7 @@
           }
         },
         "adminPassword": {
+          "x-ms-client-flatten": true,
           "type": "object",
           "required": [ "value" ],
           "properties": {
@@ -140,6 +143,7 @@
           }
         },
         "dnsLabelPrefix": {
+          "x-ms-client-flatten": true,
           "type": "object",
           "required": [ "value" ],
           "properties": {
@@ -150,6 +154,7 @@
           }
         },
         "osVersion": {
+          "x-ms-client-flatten": true,
           "type": "object",
           "required": [ "value" ],
           "properties": {
