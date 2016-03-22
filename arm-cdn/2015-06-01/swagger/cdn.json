@@ -250,6 +250,12 @@
           }
         ],
         "responses": {
+		  "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
@@ -676,7 +682,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+			"schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
           },
           "default": {
             "description": "CDN error response describing why the operation failed.",
@@ -726,7 +735,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+			"schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
           },
           "default": {
             "description": "CDN error response describing why the operation failed.",
