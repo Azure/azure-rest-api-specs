@@ -1,950 +1,799 @@
 {
-    "swagger": "2.0",
-    "host": "management.azure.com",
-    "info": {
-        "title": "Machine Learning Web Services Management Client APIs",
-        "description": "These APIs allows end users to operate on Web Services in Azure ML. They support the following operations:<ul><li>Create a Web Service</li><li>Get a Web Service</li><li>Patch a Web Service</li><li>Delete a Web Service</li><li>Get All Web Services in a Resource Group </li><li>Get All Web Services in a Subscription</li><li>Get Web Services Keys</li><li>Check Name Availability</li><li>Get All Available Operations</li></ul>",
-        "version": "2016-04-01-privatepreview"
-    },
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json",
-        "text/json"
-    ],
-    "produces": [
-        "application/json",
-        "text/json"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}": {
-            "put": {
-                "operationId": "CreateOrUpdateWebService",
-                "description": "Create a new Web Service or update an existing one.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/WebServiceNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/APIVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/CreateOrUpdateWebServiceRequestPayloadSchema"
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "$ref": "#/definitions/WebService"
-                        }
-                    }
-                }
-            },
-            "get": {
-                "operationId": "GetWebService",
-                "description": "Retrieve a Web Service information by its name",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/WebServiceNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/APIVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/WebService"
-                        }
-                    }
-                }
-            },
-            "patch": {
-                "operationId": "PatchWebService",
-                "description": "Patch an existing Web Service",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/WebServiceNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/APIVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/PatchWebServiceRequestPayloadSchema"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/WebService"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "operationId": "DeleteWebService",
-                "description": "Delete an existing Web Service",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/WebServiceNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/APIVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "204": {
-                        "description": "No-Content. The Web Service is not found."
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}/keys": {
-            "get": {
-                "operationId": "GetWebServiceKeys",
-                "description": "Get the primary and secondary keys of a particular Web Service",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/WebServiceNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/APIVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/WebServiceKeys"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices": {
-            "get": {
-                "operationId": "GetWebServicesInResourceGroup",
-                "description": "Retrieve all Web Services' information in a given Resource Group",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/APIVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "value": {
-                                    "type": "array",
-                                    "description": "The list of Web Services",
-                                    "items": {
-                                        "$ref": "#/definitions/WebService"
-                                    }
-                                },
-                                "nextLink": {
-                                    "type": "string",
-                                    "description": "[TODO] Next Link"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearning/webServices": {
-            "get": {
-                "operationId": "GetWebServicesInSubscription",
-                "description": "Get all Web Services' information in current Azure subscription",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/APIVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "value": {
-                                    "type": "array",
-                                    "description": "List of Web Services",
-                                    "items": {
-                                        "$ref": "#/definitions/WebService"
-                                    }
-                                },
-                                "nextLink": {
-                                    "type": "string",
-                                    "description": "[TODO] Next Link"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/providers/Microsoft/MachineLearning/checkNameAvailability": {
-            "post": {
-                "operationId": "CheckNameAvaliability",
-                "description": "Check the Web Service Name is valid and not in use",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/APIVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/CheckNameAvailabilitySchema"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/CheckNameResult"
-                        }
-                    }
-                }
-            }
-        },
-        "/providers/Microsoft.MachineLearning/operations": {
-            "get": {
-                "operationId": "GetOperations",
-                "description": "Get all available operations of a Web Service",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/APIVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "value": {
-                                    "type": "array",
-                                    "description": "List of Operations",
-                                    "items": {
-                                        "$ref": "#/definitions/OperationSchema"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "parameters": {
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
-            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-            "in": "path",
-            "type": "string",
-            "required": true
-        },
-        "ResourceGroupNameParameter": {
-            "name": "resourceGroupName",
-            "description": "The name of the resource group within the user's subscription.",
-            "in": "path",
-            "type": "string",
-            "required": true
-        },
-        "WebServiceNameParameter": {
-            "name": "webServiceName",
-            "description": "The Web Service name which you want to reach.",
-            "in": "path",
-            "type": "string",
-            "required": true
-        },
-        "APIVersionParameter": {
-            "in": "query",
-            "name": "api-version",
-            "type": "string",
-            "description": "Client Api Version.",
-            "required": true,
-            "enum": [ "2016-02-01-preview" ]
-        },
-        "CreateOrUpdateWebServiceRequestPayloadSchema": {
-            "in": "body",
-            "name": "createOrUpdatePayload",
-            "description": "The payload to create or update a Web Service",
-            "required": true,
+  "swagger": "2.0",
+  "info": {
+    "title": "Machine Learning Web Services Management Client APIs",
+    "description": "These APIs allows end users to operate on Web Services in Azure ML. They support the following operations:<ul><li>Create a Web Service</li><li>Get a Web Service</li><li>Patch a Web Service</li><li>Delete a Web Service</li><li>Get All Web Services in a Resource Group </li><li>Get All Web Services in a Subscription</li><li>Get Web Services Keys</li><li>Check Name Availability</li><li>Get All Available Operations</li></ul>",
+    "version": "2016-04-01-privatepreview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}": {
+      "put": {
+        "operationId": "CreateOrUpdateWebService",
+        "description": "Create a new Web Service or update an existing one.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CreateOrUpdateWebServiceRequestPayloadSchema"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
             "schema": {
-                "$ref": "#/definitions/WebService"
+              "$ref": "#/definitions/WebService"
             }
-        },
-        "PatchWebServiceRequestPayloadSchema": {
-            "in": "body",
-            "name": "patchPayload",
-            "description": "[TODO] Patch Web Service Request Payload. It indicates all fields could be pacthed.",
-            "required": true,
-            "schema": {
-                "type": "object",
-                "title": "patchPayload",
-                "properties": {
-                    "tags": {
-                        "$ref": "#/definitions/Tags"
-                    },
-                    "properties": {
-                        "type": "object",
-                        "properties": {
-                            "description": {
-                                "type": "string",
-                                "description": "The description of the Web Service"
-                            },
-                            "keys": {
-                                "$ref": "#/definitions/WebServiceKeys"
-                            },
-                            "realtimeConfiguration": {
-                                "$ref": "#/definitions/RealtimeConfiguration"
-                            },
-                            "diagnostics": {
-                                "$ref": "#/definitions/Diagnostics"
-                            }
-                        }
-                    },
-                    "sku": {
-                        "type": "object",
-                        "description": "[TODO] SKU",
-                        "properties": {
-                            "name": {
-                                "type": "string",
-                                "description": "[TODO] Name"
-                            },
-                            "tier": {
-                                "type": "string",
-                                "description": "[TODO] Tier"
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "CheckNameAvailabilitySchema": {
-            "in": "body",
-            "name": "checkNameAvailabilityPayload",
-            "description": "The payload to check name availability",
-            "required": true,
-            "schema": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "The Web Service Name"
-                    },
-                    "type": {
-                        "type": "string",
-                        "description": "The Web Service Type"
-                    }
-                }
-            }
+          }
         }
+      },
+      "get": {
+        "operationId": "GetWebService",
+        "description": "Retrieve a Web Service information by its name",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebService"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "PatchWebService",
+        "description": "Patch an existing Web Service",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PatchWebServiceRequestPayloadSchema"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebService"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteWebService",
+        "description": "Delete an existing Web Service",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No-Content. The Web Service is not found."
+          }
+        }
+      }
     },
-    "definitions": {
-        "WebService": {
-            "type": "object",
-            "title": "[TODO] The Web Service Object",
-            "properties": {
-                "location": {
-                    "type": "string",
-                    "description": "The Azure region where the web service is deployed."
-                },
-                "tags": {
-                    "$ref": "#/definitions/Tags"
-                },
-                "properties": {
-                    "$ref": "#/definitions/WebServiceProperties"
-                }
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}/keys": {
+      "get": {
+        "operationId": "GetWebServiceKeys",
+        "description": "Get the primary and secondary keys of a particular Web Service",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebServiceKeys"
             }
-        },
-        "WebServiceProperties": {
-            "type": "object",
-            "description": "The definition of the web service being deployed.",
-            "required": [
-                "packageType"
-            ],
-            "discriminator": "packageType",
-            "properties": {
-                "description": {
-                    "type": "string",
-                    "description": "The description the Web Service"
-                },
-                "keys": {
-                    "$ref": "#/definitions/WebServiceKeys"
-                },
-                "operationModes": {
-                    "type": "array",
-                    "description": "[TODO] Operation Modes",
-                    "items": {
-                        "type": "string",
-                        "description": "[TODO] Operation Mode"
-                    }
-                },
-                "realtimeConfiguration": {
-                    "$ref": "#/definitions/RealtimeConfiguration"
-                },
-                "batchConfiguration": {
-                    "$ref": "#/definitions/BatchConfiguration"
-                },
-                "readOnly": {
-                    "type": "boolean",
-                    "description": "True, if the Web Service should be read-only; False, otherwise"
-                },
-                "diagnostics": {
-                    "$ref": "#/definitions/Diagnostics"
-                },
-                "storageAccount": {
-                    "$ref": "#/definitions/StorageAccount"
-                },
-                "machineLearningWorkspace": {
-                    "$ref": "#/definitions/MachineLearningWorkspace"
-                },
-                "input": {
-                    "$ref": "#/definitions/ModuleInterface"
-                },
-                "output": {
-                    "$ref": "#/definitions/ModuleInterface"
-                },
-                "assets": {
-                    "$ref": "#/definitions/AssetProperties"
-                },
-                "parameters": {
-                    "type": "object",
-                    "description": "[TODO] Parameters of module package",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "packageType": {
-                    "type": "string",
-                    "description": "[TODO] Module package type",
-                    "enum": [
-                        "Code",
-                        "Graph"
-                    ]
-                }
-            }
-        },
-        "WebServicePropertiesForGraph": {
-            "description": "[TODO] Payload for Graph package",
-            "x-ms-discriminator-value": "Graph",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/WebServiceProperties"
-                }
-            ],
-            "properties": {
-                "package": {
-                    "type": "object",
-                    "description": "[TODO] Graph Package",
-                    "properties": {
-                        "nodes": {
-                            "type": "object",
-                            "description": "[TODO] Graph nodes collection",
-                            "additionalProperties": {
-                                "$ref": "#/definitions/GraphNode"
-                            }
-                        },
-                        "edges": {
-                            "type": "array",
-                            "description": "[TODO] List of Graph Edges",
-                            "items": {
-                                "$ref": "#/definitions/GraphEdge"
-                            }
-                        },
-                        "graphParameters": {
-                            "type": "object",
-                            "description": "[TODO] Graph parameter collection",
-                            "additionalProperties": {
-                                "$ref": "#/definitions/GraphParameter"
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "WebServicePropertiesForCode": {
-            "description": "[TODO] Payload for Code package",
-            "x-ms-discriminator-value": "Code",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/WebServiceProperties"
-                }
-            ],
-            "properties": {
-                "package": {
-                    "type": "object",
-                    "description": "[TODO] Code Package",
-                    "properties": {
-                        "language": {
-                            "type": "string",
-                            "description": "[TODO] The language of source code",
-                            "enum": [
-                                "Python-2.7",
-                                "R-3.1"
-                            ]
-                        },
-                        "sourceCode": {
-                            "type": "string",
-                            "description": "[TODO] The source code"
-                        },
-                        "zipFileAssetId": {
-                            "type": "string",
-                            "description": "[TODO] Zip file's Asset ID"
-                        }
-                    }
-                }
-            }
-        },
-        "GraphNode": {
-            "type": "object",
-            "description": "[TODO] Graph Node",
-            "properties": {
-                "assetId": {
-                    "type": "string",
-                    "description": "[TODO] Asset ID"
-                },
-                "inputId": {
-                    "type": "string",
-                    "description": "[TODO] Input ID"
-                },
-                "outputId": {
-                    "type": "string",
-                    "description": "[TODO] Output ID"
-                },
-                "parameters": {
-                    "type": "object",
-                    "description": "[TODO] Node Parameters",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                }
-            }
-        },
-        "GraphEdge": {
-            "type": "object",
-            "description": "[TODO] Graph edge",
-            "properties": {
-                "sourceNode": {
-                    "type": "string",
-                    "description": "[TODO] Edge source"
-                },
-                "sourceOutputPort": {
-                    "type": "string",
-                    "description": "[TODO] Source node output port"
-                },
-                "targetNode": {
-                    "type": "string",
-                    "description": "[TODO] Edge target"
-                },
-                "targetInputPort": {
-                    "type": "string",
-                    "description": "[TODO] Target node input port"
-                }
-            }
-        },
-        "GraphParameter": {
-            "type": "object",
-            "description": "[TODO] Graph Parameter",
-            "properties": {
-                "description": {
-                    "type": "string",
-                    "description": "[TODO] Description of this Graph parameter"
-                },
-                "defaultValue": {
-                    "type": "string",
-                    "description": "[TODO] The default value of this parameter. Could be null"
-                },
-                "links": {
-                    "type": "array",
-                    "description": "[TODO] Links of this parameter",
-                    "items": {
-                        "$ref": "#/definitions/GraphParameterLink"
-                    }
-                }
-            }
-        },
-        "GraphParameterLink": {
-            "type": "object",
-            "description": "[TODO] The link in Graph Paramter",
-            "properties": {
-                "nodeId": {
-                    "type": "string",
-                    "description": "[TODO] The node ID"
-                },
-                "parameterId": {
-                    "type": "string",
-                    "description": "[TODO] The parameter ID"
-                }
-            }
-        },
-        "OperationSchema": {
-            "type": "object",
-            "description": "[TODO] The Web Service Operation Description",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "The operation name"
-                },
-                "display": {
-                    "type": "object",
-                    "description": "[TODO] Display",
-                    "properties": {
-                        "provider": {
-                            "type": "string",
-                            "description": "[TODO] Provider",
-                            "default": "Machine Learning"
-                        },
-                        "resource": {
-                            "type": "string",
-                            "description": "[TODO] Resource",
-                            "default": "Web Service"
-                        },
-                        "operation": {
-                            "type": "string",
-                            "description": "[TODO] Operation"
-                        },
-                        "description": {
-                            "type": "string",
-                            "description": "[TODO] Description"
-                        }
-                    }
-                },
-                "origin": {
-                    "type": "string",
-                    "description": "[TODO] Origin",
-                    "enum": [
-                        "user",
-                        "system",
-                        "user, system"
-                    ]
-                }
-            }
-        },
-        "Tags": {
-            "type": "object",
-            "description": "The tags associated with this web service.",
-            "properties": {
-                "Experiement Location": {
-                    "type": "string",
-                    "description": "[TODO] Experiement Run Location"
-                }
-            }
-        },
-        "RealtimeConfiguration": {
-            "type": "object",
-            "description": "Configuration settings for RRS",
-            "properties": {
-                "maxConcurrentCalls": {
-                    "type": "integer",
-                    "description": "[TODO] Max Concurrent Calls"
-                },
-                "maxMemoryInMB": {
-                    "type": "integer",
-                    "description": "[TODO] Max Memory in MB"
-                },
-                "maxDurationInSeconds": {
-                    "type": "integer",
-                    "description": "[TODO] Max Duration in Seconds"
-                }
-            }
-        },
-        "BatchConfiguration": {
-            "type": "object",
-            "description": "[TODO] Batch Configuration",
-            "properties": {
-                "JobDriver": {
-                    "type": "string",
-                    "description": "[TODO] version, optional, etc."
-                },
-                "Cluster": {
-                    "$ref": "#/definitions/ClusterDefinition"
-                }
-            }
-        },
-        "ClusterDefinition": {
-            "type": "object",
-            "description": "[TODO] Properties of GraphSharp",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "ARM HDI cluster ID"
-                }
-            }
-        },
-        "Diagnostics": {
-            "type": "object",
-            "description": "The Diagnostics Settings",
-            "properties": {
-                "level": {
-                    "type": "string",
-                    "description": "Trace Level: None, Error, All"
-                },
-                "expiry": {
-                    "type": "string",
-                    "description": "[TODO] Expiry"
-                }
-            }
-        },
-        "StorageAccount": {
-            "type": "object",
-            "description": "[TODO] The Storage Account used in GraphSharp",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "[TODO] The Storage Account ID"
-                }
-            }
-        },
-        "MachineLearningWorkspace": {
-            "type": "object",
-            "description": "[TODO] The Machine Learning Workspace",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "[TODO] The Workspace ID"
-                }
-            }
-        },
-        "WebServiceKeys": {
-            "type": "object",
-            "description": "Web Service Keys",
-            "properties": {
-                "prmiary": {
-                    "type": "string",
-                    "description": "The Primary Key"
-                },
-                "secondary": {
-                    "type": "string",
-                    "description": "The Secondary Key"
-                }
-            }
-        },
-        "CheckNameResult": {
-            "type": "object",
-            "properties": {
-                "nameAvaliable": {
-                    "type": "boolean",
-                    "description": "True, if the name is available; False, otherwise"
-                },
-                "reason": {
-                    "type": "string",
-                    "description": "The reason why if it is not available",
-                    "enum": [
-                        "Invalid",
-                        "AlreadyExists"
-                    ]
-                },
-                "message": {
-                    "type": "string",
-                    "description": ": The message from the server"
-                }
-            }
-        },
-        "ModuleInterface": {
-            "type": "object",
-            "properties": {
-                "title": {
-                    "type": "string",
-                    "description": "[TODO] Interface Title"
-                },
-                "description": {
-                    "type": "string",
-                    "description": "[TODO] Description of the Interface"
-                },
-                "type": {
-                    "type": "string",
-                    "description": "[TODO] Interface properties' type. Always use 'object' here.",
-                    "default": "object"
-                },
-                "properties": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/definitions/AfxDataTable"
-                    }
-                }
-            }
-        },
-        "AssetProperties": {
-            "type": "object",
-            "additionalProperties": {
-                "$ref": "#/definitions/AssetItem"
-            }
-        },
-        "AfxDataTable": {
-            "type": "object",
-            "description": "[TODO] Afx data table",
-            "properties": {
-                "title": {
-                    "type": "string",
-                    "description": "[TODO] Table title"
-                },
-                "description": {
-                    "type": "string",
-                    "description": "[TODO] Table description"
-                },
-                "type": {
-                    "type": "string",
-                    "description": "[TODO] Table properties' type. Always use 'object' here.",
-                    "default": "object"
-                },
-                "properties": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/definitions/AfxDataTableColumn"
-                    }
-                }
-            }
-        },
-        "AfxDataTableColumn": {
-            "type": "object",
-            "description": "[TODO] Afx data table column",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "description": "[TODO] Data type"
-                },
-                "format": {
-                    "type": "string",
-                    "description": "[TODO] Data format"
-                },
-                "enum": {
-                    "type": "array",
-                    "description": "[TODO] Options",
-                    "items": {
-                        "$ref": "#/definitions/AfxDataTableColumnEnum"
-                    }
-                },
-                "x-ms-isnullable": {
-                    "type": "boolean",
-                    "description": "[TODO] Is nullable"
-                },
-                "x-ms-isordered": {
-                    "type": "boolean",
-                    "description": "[TODO] Is enum in order"
-                }
-            }
-        },
-        "AfxDataTableColumnEnum": {
-            "type": "string",
-            "description": "[TODO] Enum item"
-        },
-        "AssetItem": {
-            "type": "object",
-            "description": "[TODO] Asset Name",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "Module friendly name"
-                },
-                "type": {
-                    "type": "string",
-                    "description": "Module type",
-                    "default": "module"
-                },
-                "location": {
-                    "$ref": "#/definitions/AssetLocation"
-                },
-                "inputPorts": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/definitions/AssetPort"
-                    }
-                },
-                "outputPorts": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/definitions/AssetPort"
-                    }
-                },
-                "metadata": {
-                    "$ref": "#/definitions/AssetMetaData"
-                }
-            }
-        },
-        "AssetLocation": {
-            "type": "object",
-            "description": "[TODO] Asset Location",
-            "properties": {
-                "uri": {
-                    "type": "string",
-                    "description": "[TODO] Location URI, https:// OR aml:// OR idv :// OR hdfs://",
-                    "format": "url"
-                },
-                "credentials": {
-                    "type": "string",
-                    "description": "[TODO] null if in BYOS / SAS token / connection string / user asset partition key (when in graphSharp)/ etc."
-                }
-            }
-        },
-        "AssetPort": {
-            "type": "object",
-            "description": "[TODO] Asset Port",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "description": "[TODO] dataset or zip"
-                }
-            }
-        },
-        "AssetMetaData": {
-            "type": "object",
-            "description": "[TODO] Asset Meta Data",
-            "additionalProperties": {
-                "type": "string",
-                "description": "[TODO] Meta data value"
-            }
+          }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices": {
+      "get": {
+        "operationId": "GetWebServicesInResourceGroup",
+        "description": "Retrieve all Web Services' information in a given Resource Group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PaginatedWebServicesList"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearning/webServices": {
+      "get": {
+        "operationId": "GetWebServicesInSubscription",
+        "description": "Get all Web Services' information in current Azure subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PaginatedWebServicesList"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft/MachineLearning/checkNameAvailability": {
+      "post": {
+        "operationId": "CheckNameAvaliability",
+        "description": "Check the Web Service Name is valid and not in use",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CheckNameAvailabilitySchema"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.MachineLearning/operations": {
+      "get": {
+        "operationId": "GetOperations",
+        "description": "Get all available operations of a Web Service",
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "List of Operations",
+                  "items": {
+                    "$ref": "#/definitions/OperationSchema"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "in": "path",
+      "type": "string",
+      "required": true
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "description": "The name of the resource group within the user's subscription.",
+      "in": "path",
+      "type": "string",
+      "required": true
+    },
+    "WebServiceNameParameter": {
+      "name": "webServiceName",
+      "description": "The Web Service name which you want to reach.",
+      "in": "path",
+      "type": "string",
+      "required": true
+    },
+    "APIVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "type": "string",
+      "description": "Client Api Version.",
+      "required": true,
+      "enum": [ "2016-02-01-preview" ]
+    },
+    "CreateOrUpdateWebServiceRequestPayloadSchema": {
+      "in": "body",
+      "name": "createOrUpdatePayload",
+      "description": "The payload to create or update a Web Service",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/WebService"
+      }
+    },
+    "PatchWebServiceRequestPayloadSchema": {
+      "in": "body",
+      "name": "patchPayload",
+      "description": "[TODO] Patch Web Service Request Payload. It indicates all fields could be pacthed.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/WebService"
+      }
+    },
+    "CheckNameAvailabilitySchema": {
+      "in": "body",
+      "name": "checkNameAvailabilityPayload",
+      "description": "The payload to check name availability",
+      "required": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The Web Service Name"
+          },
+          "type": {
+            "type": "string",
+            "description": "The Web Service Type"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WebService": {
+      "type": "object",
+      "title": "[TODO] The Web Service Object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebServiceProperties"
+        }
+      }
+    },
+    "WebServiceProperties": {
+      "type": "object",
+      "description": "The definition of the web service being deployed.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description the web service"
+        },
+        "createdOn": {
+          "type": "string",
+          "description": "The moment of time the web service was created.",
+          "format": "date-time"
+        },
+        "modifiedOn": {
+          "type": "string",
+          "description": "The last moment of time the web service was last modified.",
+          "format": "date-time"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "[TODO] web service's provisioning state",
+          "enum": [
+            "Unknown",
+            "Provisioning"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "keys": {
+          "$ref": "#/definitions/WebServiceKeys"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "description": "True, if the Web Service should be read-only; False, otherwise"
+        },
+        "swaggerUri": {
+          "type": "string",
+          "description": "The uri for the swagger spec associated with this web service"
+        },
+        "realtimeConfiguration": {
+          "$ref": "#/definitions/RealtimeConfiguration"
+        },
+        "diagnostics": {
+          "$ref": "#/definitions/DiagnosticsConfiguration"
+        },
+        "storageAccount": {
+          "$ref": "#/definitions/StorageAccount"
+        },
+        "machineLearningWorkspace": {
+          "$ref": "#/definitions/MachineLearningWorkspace"
+        },
+        "commitmentPlan": {
+          "$ref": "#/definitions/CommitmentPlan"
+        },
+        "input": {
+          "type": "string",
+          "description": "[TODO] The web service's input schema defined as a JSON object."
+        },
+        "output": {
+          "type": "string",
+          "description": "[TODO] The web service's output schema defined as a JSON object."
+        },
+        "assets": {
+          "$ref": "#/definitions/AssetProperties"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "[TODO] Parameters of module package",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "packageType": {
+          "type": "string",
+          "description": "[TODO] Module package type",
+          "enum": [
+            "Code",
+            "Graph"
+          ]
+        },
+        "package": {
+          "type": "string",
+          "description": "[TODO] The web service's package defined as a JSON object."
+        }
+      },
+      "required": [
+        "packageType"
+      ]
+    },
+    "WebServiceKeys": {
+      "type": "object",
+      "description": "Web Service Keys",
+      "properties": {
+        "primary": {
+          "type": "string",
+          "description": "The Primary Key"
+        },
+        "secondary": {
+          "type": "string",
+          "description": "The Secondary Key"
+        }
+      }
+    },
+    "PaginatedWebServicesList": {
+      "type": "object",
+      "description": "[TODO] Paginated list of web services",
+      "properties": {
+        "values": {
+          "type": "array",
+          "description": "List of Web Services",
+          "items": {
+            "$ref": "#/definitions/WebService"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "[TODO] Next Link"
+        }
+      }
+    },
+    "GraphNode": {
+      "type": "object",
+      "description": "[TODO] Graph Node",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "[TODO] Asset ID"
+        },
+        "inputId": {
+          "type": "string",
+          "description": "[TODO] Input ID"
+        },
+        "outputId": {
+          "type": "string",
+          "description": "[TODO] Output ID"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "[TODO] Node Parameters",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GraphEdge": {
+      "type": "object",
+      "description": "[TODO] Graph edge",
+      "properties": {
+        "sourceNode": {
+          "type": "string",
+          "description": "[TODO] Edge source"
+        },
+        "sourceOutputPort": {
+          "type": "string",
+          "description": "[TODO] Source node output port"
+        },
+        "targetNode": {
+          "type": "string",
+          "description": "[TODO] Edge target"
+        },
+        "targetInputPort": {
+          "type": "string",
+          "description": "[TODO] Target node input port"
+        }
+      }
+    },
+    "GraphParameter": {
+      "type": "object",
+      "description": "[TODO] Graph Parameter",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "[TODO] Description of this Graph parameter"
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "[TODO] The default value of this parameter. Could be null"
+        },
+        "links": {
+          "type": "array",
+          "description": "[TODO] Links of this parameter",
+          "items": {
+            "$ref": "#/definitions/GraphParameterLink"
+          }
+        }
+      }
+    },
+    "GraphParameterLink": {
+      "type": "object",
+      "description": "[TODO] The link in Graph Paramter",
+      "properties": {
+        "nodeId": {
+          "type": "string",
+          "description": "[TODO] The node ID"
+        },
+        "parameterId": {
+          "type": "string",
+          "description": "[TODO] The parameter ID"
+        }
+      }
+    },
+    "OperationSchema": {
+      "type": "object",
+      "description": "[TODO] The Web Service Operation Description",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The operation name"
+        },
+        "display": {
+          "type": "object",
+          "description": "[TODO] Display",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "[TODO] Provider",
+              "default": "Machine Learning"
+            },
+            "resource": {
+              "type": "string",
+              "description": "[TODO] Resource",
+              "default": "Web Service"
+            },
+            "operation": {
+              "type": "string",
+              "description": "[TODO] Operation"
+            },
+            "description": {
+              "type": "string",
+              "description": "[TODO] Description"
+            }
+          }
+        },
+        "origin": {
+          "type": "string",
+          "description": "[TODO] Origin",
+          "enum": [
+            "user",
+            "system",
+            "user, system"
+          ]
+        }
+      }
+    },
+    "RealtimeConfiguration": {
+      "type": "object",
+      "description": "Configuration settings for RRS",
+      "properties": {
+        "maxConcurrentCalls": {
+          "type": "integer",
+          "description": "[TODO] Max Concurrent Calls"
+        }
+      }
+    },
+    "DiagnosticsConfiguration": {
+      "type": "object",
+      "description": "The Diagnostics Settings",
+      "properties": {
+        "level": {
+          "type": "string",
+          "description": "Trace Level: None, Error, All",
+          "enum": [
+            "None",
+            "Error",
+            "All"
+          ]
+        },
+        "expiry": {
+          "type": "string",
+          "description": "[TODO] Expiry"
+        }
+      }
+    },
+    "StorageAccount": {
+      "type": "object",
+      "description": "[TODO] The Storage Account used in GraphSharp",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "[TODO] The storage account's Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "[TODO] The storage account's name"
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "[TODO] The storage account's primary key"
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "[TODO] The storage account's secondary key"
+        }
+      }
+    },
+    "MachineLearningWorkspace": {
+      "type": "object",
+      "description": "[TODO] The machine learning workspace",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "[TODO] The Workspace ID"
+        }
+      }
+    },
+    "CommitmentPlan": {
+      "type": "object",
+      "description": "[TODO] The commitment plan associated with this web service",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "[TODO] The plan's ID"
+        }
+      }
+    },
+    "AssetProperties": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/AssetItem"
+      }
+    },
+    "AssetItem": {
+      "type": "object",
+      "description": "[TODO] Service asset details",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Module friendly name"
+        },
+        "type": {
+          "type": "string",
+          "description": "Module type",
+          "default": "module"
+        },
+        "location": {
+          "$ref": "#/definitions/AssetLocation"
+        },
+        "inputPorts": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AssetPort"
+          }
+        },
+        "outputPorts": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AssetPort"
+          }
+        },
+        "parameters": {
+          "$ref": "#/definitions/AssetParameters"
+        },
+        "metadata": {
+          "$ref": "#/definitions/AssetMetadata"
+        }
+      }
+    },
+    "AssetLocation": {
+      "type": "object",
+      "description": "[TODO] Asset Location",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "[TODO] Location URI, https:// OR aml:// OR idv :// OR hdfs://",
+          "format": "url"
+        },
+        "credentials": {
+          "type": "string",
+          "description": "[TODO] null if in BYOS / SAS token / connection string / user asset partition key (when in graphSharp)/ etc."
+        }
+      }
+    },
+    "AssetPort": {
+      "type": "object",
+      "description": "[TODO] Asset Port",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "[TODO] dataset or zip"
+        }
+      }
+    },
+    "AssetParameters": {
+      "type": "object",
+      "description": "[TODO] Asset parameters",
+      "additionalProperties": {
+        "type": "string",
+        "description": "[TODO] Parameter value"
+      }
+    },
+    "AssetMetadata": {
+      "type": "object",
+      "description": "[TODO] Asset metadata",
+      "additionalProperties": {
+        "type": "string",
+        "description": "[TODO] Metadata value"
+      }
+    },
+    "Resource": {
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "description": "Resource Id",
+          "type": "string"
+        },
+        "name": {
+          "description": "Resource Name",
+          "type": "string"
+        },
+        "location": {
+          "description": "Resource Location",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "CheckNameResult": {
+      "type": "object",
+      "properties": {
+        "nameAvaliable": {
+          "type": "boolean",
+          "description": "True, if the name is available; False, otherwise"
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason why if it is not available",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "description": ": The message from the server"
+        }
+      }
+    }
+  }
 }
