@@ -814,6 +814,8 @@
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuit"
             }
+          }    "ExpressRouteCircuitStats": {
+
           }
         },
         "x-ms-long-running-operation": true
@@ -4667,14 +4669,24 @@
       },
       "description": "Specfies the peering config"
     },
-    "ExpressRouteCircuitStats": {
+   "ExpressRouteCircuitStats": {
       "properties": {
-        "bytesIn": {
+        "primarybytesIn": {
           "type": "integer",
           "format": "int32",
           "description": "Gets BytesIn of the peering."
         },
-        "bytesOut": {
+        "primarybytesOut": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets BytesOut of the peering."
+        },
+        "secondarybytesIn": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets BytesIn of the peering."
+        },
+        "secondarybytesOut": {
           "type": "integer",
           "format": "int32",
           "description": "Gets BytesOut of the peering."
@@ -4928,6 +4940,15 @@
     },
     "ExpressRouteCircuitArpTable": {
       "properties": {
+        "age": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Age."
+        },
+        "interface": {
+          "type": "string",
+          "description": "Interface."
+        },
         "ipAddress": {
           "type": "string",
           "description": "Gets ipAddress."
@@ -4957,32 +4978,26 @@
     },
     "ExpressRouteCircuitRoutesTable": {
       "properties": {
-        "addressPrefix": {
+        "network": {
           "type": "string",
-          "description": "Gets AddressPrefix."
+          "description": "network."
         },
-        "nextHopType": {
+        "nextHop": {
           "type": "string",
-          "description": "Gets NextHopType.",
-          "enum": [
-            "VirtualNetworkGateway",
-            "VnetLocal",
-            "Internet",
-            "VirtualAppliance",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "RouteNextHopType",
-            "modelAsString": true
-          }
+          "description": "nextHop"
         },
-        "nextHopIP": {
+        "locPrf": {
           "type": "string",
-          "description": "Gets NextHopIP."
+          "description": "locPrf."
         },
-        "asPath": {
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "weight."
+        },
+        "path": {
           "type": "string",
-          "description": "Gets AsPath."
+          "description": "path ."
         }
       },
       "required": [
@@ -4996,6 +5011,52 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExpressRouteCircuitRoutesTable"
+          },
+          "description": "Gets List of RoutesTable"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListRoutesTable associated with the Express Route Circuits Api"
+    },
+    "ExpressRouteCircuitRoutesTableSummary": {
+      "properties": {
+        "neighbor": {
+          "type": "string",
+          "description": "Neighbor."
+        },
+        "v": {
+          "type": "integer",
+          "format": "int32",
+          "description": "V."
+        },
+        "as": {
+          "type": "integer",
+          "format": "int32",
+          "description": "AS."
+        },
+        "upDown": {
+          "type": "string",
+          "description": "upDown."
+        },
+        "statePfxRcd": {
+          "type": "string",
+          "description": "statePfxRcd ."
+        }
+      },
+      "required": [
+        "nextHopType"
+      ],
+      "description": "The routes table associated with the ExpressRouteCircuit"
+    },
+    "ExpressRouteCircuitsRoutesTableSummaryListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitRoutesTableSummary"
           },
           "description": "Gets List of RoutesTable"
         },
