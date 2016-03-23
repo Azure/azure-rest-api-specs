@@ -814,17 +814,15 @@
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuit"
             }
-          }    "ExpressRouteCircuitStats": {
-
           }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/arpTable": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/arpTables/{devicePath}": {
+      "post": {
         "tags": [
-          "ExpressRouteCircuits"
+          "ExpressRouteCircuitArpTable"
         ],
         "operationId": "ExpressRouteCircuits_ListArpTable",
         "description": "The ListArpTable from ExpressRouteCircuit opertion retrieves the currently advertised arp table associated with the ExpressRouteCircuits in a resource group.",
@@ -844,6 +842,20 @@
             "description": "The name of the circuit."
           },
           {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the peering."
+          },
+          {
+            "name": "devicePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path of the device."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -856,20 +868,135 @@
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuitsArpTableListResult"
             }
+          },
+          "202": {
+            "description": ""
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/routesTable": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routesTable/{devicePath}": {
+      "post": {
         "tags": [
-          "ExpressRouteCircuits"
+          "ExpressRouteCircuitRoutesTable"
         ],
         "operationId": "ExpressRouteCircuits_ListRoutesTable",
         "description": "The ListRoutesTable from ExpressRouteCircuit opertion retrieves the currently advertised routes table associated with the ExpressRouteCircuits in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the circuit."
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the peering."
+          },
+          {
+            "name": "devicePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path of the device."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableListResult"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}": {
+      "post": {
+        "tags": [
+          "ExpressRouteCircuitRoutesTableSummary"
+        ],
+        "operationId": "ExpressRouteCircuits_ListRoutesTableSummary",
+        "description": "The ListRoutesTable from ExpressRouteCircuit opertion retrieves the currently advertised routes table associated with the ExpressRouteCircuits in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the circuit."
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the peering."
+          },
+          {
+            "name": "devicePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The path of the device."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableSummaryListResult"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/stats": {
+      "get": {
+        "tags": [
+          "ExpressRouteCircuitStats"
+        ],
+        "operationId": "ExpressRouteCircuits_ListStats",
+        "description": "The Liststats ExpressRouteCircuit opertion retrieves all the stats from a ExpressRouteCircuits in a resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -896,7 +1023,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableListResult"
+              "$ref": "#/definitions/ExpressRouteCircuitStats"
             }
           }
         },
@@ -905,12 +1032,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/stats": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/stats": {
       "get": {
         "tags": [
-          "ExpressRouteCircuits"
+          "ExpressRouteCircuitStats"
         ],
-        "operationId": "ExpressRouteCircuits_ListStats",
+        "operationId": "ExpressRouteCircuits_ListPeeringStats",
         "description": "The Liststats ExpressRouteCircuit opertion retrieves all the stats from a ExpressRouteCircuits in a resource group.",
         "parameters": [
           {
@@ -925,7 +1052,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the loadBalancer."
+            "description": "The name of the circuit."
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the peering."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -938,7 +1072,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitsStatsListResult"
+              "$ref": "#/definitions/ExpressRouteCircuitStats"
             }
           }
         },
