@@ -819,10 +819,10 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/arpTables/{devicePath}": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/arpTable": {
+      "get": {
         "tags": [
-          "ExpressRouteCircuitArpTable"
+          "ExpressRouteCircuits"
         ],
         "operationId": "ExpressRouteCircuits_ListArpTable",
         "description": "The ListArpTable from ExpressRouteCircuit opertion retrieves the currently advertised arp table associated with the ExpressRouteCircuits in a resource group.",
@@ -842,20 +842,6 @@
             "description": "The name of the circuit."
           },
           {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the peering."
-          },
-          {
-            "name": "devicePath",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The path of the device."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -868,18 +854,17 @@
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuitsArpTableListResult"
             }
-          },
-          "202": {
-            "description": ""
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routesTable/{devicePath}": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/routesTable": {
+      "get": {
         "tags": [
-          "ExpressRouteCircuitRoutesTable"
+          "ExpressRouteCircuits"
         ],
         "operationId": "ExpressRouteCircuits_ListRoutesTable",
         "description": "The ListRoutesTable from ExpressRouteCircuit opertion retrieves the currently advertised routes table associated with the ExpressRouteCircuits in a resource group.",
@@ -899,20 +884,6 @@
             "description": "The name of the circuit."
           },
           {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the peering."
-          },
-          {
-            "name": "devicePath",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The path of the device."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -925,75 +896,17 @@
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableListResult"
             }
-          },
-          "202": {
-            "description": ""
           }
         },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}": {
-      "post": {
-        "tags": [
-          "ExpressRouteCircuitRoutesTableSummary"
-        ],
-        "operationId": "ExpressRouteCircuits_ListRoutesTableSummary",
-        "description": "The ListRoutesTable from ExpressRouteCircuit opertion retrieves the currently advertised routes table associated with the ExpressRouteCircuits in a resource group.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the circuit."
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the peering."
-          },
-          {
-            "name": "devicePath",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The path of the device."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableSummaryListResult"
-            }
-          },
-          "202": {
-            "description": ""
-          }
-        },
-        "x-ms-long-running-operation": true
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/stats": {
       "get": {
         "tags": [
-          "ExpressRouteCircuitStats"
+          "ExpressRouteCircuits"
         ],
         "operationId": "ExpressRouteCircuits_ListStats",
         "description": "The Liststats ExpressRouteCircuit opertion retrieves all the stats from a ExpressRouteCircuits in a resource group.",
@@ -1010,7 +923,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the circuit."
+            "description": "The name of the loadBalancer."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1023,56 +936,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitStats"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/stats": {
-      "get": {
-        "tags": [
-          "ExpressRouteCircuitStats"
-        ],
-        "operationId": "ExpressRouteCircuits_ListPeeringStats",
-        "description": "The Liststats ExpressRouteCircuit opertion retrieves all the stats from a ExpressRouteCircuits in a resource group.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "circuitName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the circuit."
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the peering."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCircuitStats"
+              "$ref": "#/definitions/ExpressRouteCircuitsStatsListResult"
             }
           }
         },
@@ -4805,22 +4669,12 @@
     },
     "ExpressRouteCircuitStats": {
       "properties": {
-        "primarybytesIn": {
+        "bytesIn": {
           "type": "integer",
           "format": "int32",
           "description": "Gets BytesIn of the peering."
         },
-        "primarybytesOut": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets BytesOut of the peering."
-        },
-        "secondarybytesIn": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets BytesIn of the peering."
-        },
-        "secondarybytesOut": {
+        "bytesOut": {
           "type": "integer",
           "format": "int32",
           "description": "Gets BytesOut of the peering."
@@ -4995,10 +4849,6 @@
     },
     "ExpressRouteCircuitPropertiesFormat": {
       "properties": {
-        "allowClassicOperations": {
-          "type": "boolean",
-          "description": "allow classic operations"
-        },
         "circuitProvisioningState": {
           "type": "string",
           "description": "Gets or sets CircuitProvisioningState state of the resource "
@@ -5074,15 +4924,6 @@
     },
     "ExpressRouteCircuitArpTable": {
       "properties": {
-        "age": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Age."
-        },
-        "interface": {
-          "type": "string",
-          "description": "Interface."
-        },
         "ipAddress": {
           "type": "string",
           "description": "Gets ipAddress."
@@ -5112,26 +4953,32 @@
     },
     "ExpressRouteCircuitRoutesTable": {
       "properties": {
-        "network": {
+        "addressPrefix": {
           "type": "string",
-          "description": "network."
+          "description": "Gets AddressPrefix."
         },
-        "nextHop": {
+        "nextHopType": {
           "type": "string",
-          "description": "nextHop"
+          "description": "Gets NextHopType.",
+          "enum": [
+            "VirtualNetworkGateway",
+            "VnetLocal",
+            "Internet",
+            "VirtualAppliance",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "RouteNextHopType",
+            "modelAsString": true
+          }
         },
-        "locPrf": {
+        "nextHopIP": {
           "type": "string",
-          "description": "locPrf."
+          "description": "Gets NextHopIP."
         },
-        "weight": {
-          "type": "integer",
-          "format": "int32",
-          "description": "weight."
-        },
-        "path": {
+        "asPath": {
           "type": "string",
-          "description": "path ."
+          "description": "Gets AsPath."
         }
       },
       "required": [
@@ -5145,52 +4992,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExpressRouteCircuitRoutesTable"
-          },
-          "description": "Gets List of RoutesTable"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next set of results."
-        }
-      },
-      "description": "Response for ListRoutesTable associated with the Express Route Circuits Api"
-    },
-    "ExpressRouteCircuitRoutesTableSummary": {
-      "properties": {
-        "neighbor": {
-          "type": "string",
-          "description": "Neighbor."
-        },
-        "v": {
-          "type": "integer",
-          "format": "int32",
-          "description": "V."
-        },
-        "as": {
-          "type": "integer",
-          "format": "int32",
-          "description": "AS."
-        },
-        "upDown": {
-          "type": "string",
-          "description": "upDown."
-        },
-        "statePfxRcd": {
-          "type": "string",
-          "description": "statePfxRcd ."
-        }
-      },
-      "required": [
-        "nextHopType"
-      ],
-      "description": "The routes table associated with the ExpressRouteCircuit"
-    },
-    "ExpressRouteCircuitsRoutesTableSummaryListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitRoutesTableSummary"
           },
           "description": "Gets List of RoutesTable"
         },
@@ -6175,7 +5976,7 @@
         },
         "access": {
           "type": "string",
-          "description": "Gets or sets network traffic is allowed or denied. Possible values are 'Allow' and 'Deny",
+          "description": "Gets or sets network traffic is allowed or denied. Possible values are 'Allow' and 'Deny'",
           "enum": [
             "Allow",
             "Deny"
