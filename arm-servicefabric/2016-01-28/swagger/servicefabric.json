@@ -61,7 +61,7 @@
                   "type": "string"
                 },
                 "RemoveWhenExpired": {
-                  "type": "string"
+                  "type": "boolean"
                 }
               }
             }
@@ -719,7 +719,7 @@
                   "type": "string"
                 },
                 "RemoveWhenExpired": {
-                  "type": "string"
+                  "type": "boolean"
                 }
               }
             }
@@ -787,7 +787,7 @@
                   "type": "string"
                 },
                 "RemoveWhenExpired": {
-                  "type": "string"
+                  "type": "boolean"
                 }
               }
             }
@@ -862,7 +862,7 @@
                   "type": "string"
                 },
                 "RemoveWhenExpired": {
-                  "type": "string"
+                  "type": "boolean"
                 }
               }
             }
@@ -1472,7 +1472,7 @@
                   "type": "string"
                 },
                 "RemoveWhenExpired": {
-                  "type": "string"
+                  "type": "boolean"
                 }
               }
             }
@@ -1555,7 +1555,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ServiceDescription"
-            }
+            },
+            "_comment": "Duplicate models of ServiceDescription and CreateServiceDescription"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1663,7 +1664,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ServiceGroupDescription"
-            }
+            },
+            "_comment": "Duplicate models of ServiceDescription and CreateServiceDescription"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2231,7 +2233,7 @@
                   "type": "string"
                 },
                 "RemoveWhenExpired": {
-                  "type": "string"
+                  "type": "boolean"
                 }
               }
             }
@@ -2559,7 +2561,7 @@
                   "type": "string"
                 },
                 "RemoveWhenExpired": {
-                  "type": "string"
+                  "type": "boolean"
                 }
               }
             }
@@ -2669,7 +2671,7 @@
                   "type": "string"
                 },
                 "RemoveWhenExpired": {
-                  "type": "string"
+                  "type": "boolean"
                 }
               }
             }
@@ -3972,7 +3974,7 @@
       "required": ["ServiceKind"],
       "properties": {
         "ServiceKind": {
-          "type": "integer"
+          "type": "string"
         },
         "ApplicationName": {
           "type": "string"
@@ -3989,6 +3991,18 @@
         },
         "PlacementConstraints": {
           "type": "string"
+        },
+        "CorrelationScheme": {
+          "type": "object",
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "ServiceLoadMetrics": {
+          "type": "object",
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "ServicePlacementPolicies": {
+          "type": "object",
+          "$ref": "#/definitions/ServiceCorrelationDescription"
         },
         "Flags": {
           "type": "integer"
@@ -4016,6 +4030,47 @@
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceGroupDescription"}],
       "x-ms-discriminator-value": "FABRIC_SERVICE_KIND_STATEFUL",
+      "properties": {
+        "TargetReplicaSetSize": {
+          "type": "integer"
+        },
+        "MinReplicaSetSize": {
+          "type": "integer"
+        },
+        "HasPersistedState": {
+          "type": "boolean"
+        },
+        "ReplicaRestartWaitDurationSeconds": {
+          "type": "integer"
+        },
+        "QuorumLossWaitDurationSeconds": {
+          "type": "integer"
+        },
+        "StandByReplicaKeepDurationSeconds": {
+          "type": "integer"
+        },
+        "DefaultMoveCost": {
+          "type": "integer"
+        },
+        "IsDefaultMoveCostSpecified": {
+          "type": "boolean"
+        }
+      }
+    },
+    "StatelessCreateServiceGroupDescription": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/ServiceGroupDescription"}],
+      "x-ms-discriminator-value": "1",
+      "properties": {
+        "InstanceCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatefulCreateServiceGroupDescription": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/ServiceGroupDescription"}],
+      "x-ms-discriminator-value": "2",
       "properties": {
         "TargetReplicaSetSize": {
           "type": "integer"
@@ -4176,13 +4231,49 @@
         }
       }
     },
+    "ServiceCorrelationDescription": {
+      "type": "object",
+      "properties": {
+        "ServiceName": {
+          "type": "string"
+        },
+        "ServiceCorrelationScheme": {
+          "type": "integer"
+        }
+      }
+    },
+    "ServiceLoadMetricDescription": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "ServiceLoadMetricWeight": {
+          "type": "integer"
+        },
+        "PrimaryDefaultLoad": {
+          "type": "integer"
+        },
+        "SecondaryDefaultLoad": {
+          "type": "integer"
+        }
+      }
+    },
+    "ServicePlacementPolicyDescription": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "integer"
+        }
+      }
+    },
     "ServiceDescription": {
       "type": "object",
       "discriminator": "ServiceKind",
       "required": ["ServiceKind"],
       "properties": {
         "ServiceKind": {
-          "type": "integer"
+          "type": "string"
         },
         "ApplicationName": {
           "type": "string"
@@ -4199,6 +4290,18 @@
         },
         "PlacementConstraints": {
           "type": "string"
+        },
+        "CorrelationScheme": {
+          "type": "object",
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "ServiceLoadMetrics": {
+          "type": "object",
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "ServicePlacementPolicies": {
+          "type": "object",
+          "$ref": "#/definitions/ServiceCorrelationDescription"
         },
         "Flags": {
           "type": "integer"
@@ -4246,6 +4349,47 @@
         }
       }
     },
+    "StatelessCreateServiceDescription": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/ServiceDescription"}],
+      "x-ms-discriminator-value": "1",
+      "properties": {
+        "InstanceCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatefulCreateServiceDescription": {
+      "type": "object",
+      "allOf": [{"$ref": "#/definitions/ServiceDescription"}],
+      "x-ms-discriminator-value": "2",
+      "properties": {
+        "TargetReplicaSetSize": {
+          "type": "integer"
+        },
+        "MinReplicaSetSize": {
+          "type": "integer"
+        },
+        "HasPersistedState": {
+          "type": "boolean"
+        },
+        "ReplicaRestartWaitDurationSeconds": {
+          "type": "integer"
+        },
+        "QuorumLossWaitDurationSeconds": {
+          "type": "integer"
+        },
+        "StandByReplicaKeepDurationSeconds": {
+          "type": "integer"
+        },
+        "DefaultMoveCost": {
+          "type": "integer"
+        },
+        "IsDefaultMoveCostSpecified": {
+          "type": "boolean"
+        }
+      }
+    },
     "ServiceUpdateDescription": {
       "type": "object",
       "discriminator": "ServiceKind",
@@ -4262,7 +4406,7 @@
     "StatelessServiceUpdateDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceUpdateDescription"}],
-      "x-ms-discriminator-value": "FABRIC_SERVICE_KIND_STATELESS",
+      "x-ms-discriminator-value": "1",
       "properties": {
         "InstanceCount": {
           "type": "integer"
@@ -4272,7 +4416,7 @@
     "StatefulServiceUpdateDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceUpdateDescription"}],
-      "x-ms-discriminator-value": "FABRIC_SERVICE_KIND_STATEFUL",
+      "x-ms-discriminator-value": "2",
       "properties": {
         "TargetReplicaSetSize": {
           "type": "integer"
@@ -4307,7 +4451,7 @@
     "StatelessServiceGroupUpdateDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceGroupUpdateDescription"}],
-      "x-ms-discriminator-value": "FABRIC_SERVICE_KIND_STATELESS",
+      "x-ms-discriminator-value": "1",
       "properties": {
         "InstanceCount": {
           "type": "integer"
@@ -4317,7 +4461,7 @@
     "StatefulServiceGroupUpdateDescription": {
       "type": "object",
       "allOf": [{"$ref": "#/definitions/ServiceGroupUpdateDescription"}],
-      "x-ms-discriminator-value": "FABRIC_SERVICE_KIND_STATEFUL",
+      "x-ms-discriminator-value": "2",
       "properties": {
         "TargetReplicaSetSize": {
           "type": "integer"
