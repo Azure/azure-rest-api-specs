@@ -27,7 +27,6 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
@@ -953,7 +952,9 @@
           "description": "The resource id of the storage account to be used for auto storage."
         }
       },
-      "required": [ "storageAccountId" ],
+      "required": [
+        "storageAccountId"
+      ],
       "description": "The properties related to auto storage."
     },
     "AccountBaseProperties": {
@@ -998,7 +999,10 @@
           "description": "The UTC time at which storage keys were last synced to the Batch account."
         }
       },
-      "required": [ "storageAccountId", "lastKeySync" ],
+      "required": [
+        "storageAccountId",
+        "lastKeySync"
+      ],
       "description": "Contains information about the auto storage associated with a Batch account."
     },
     "AccountProperties": {
@@ -1107,7 +1111,9 @@
           }
         }
       },
-      "required": [ "keyName" ],
+      "required": [
+        "keyName"
+      ],
       "description": "Parameters supplied to the RegenerateKey operation."
     },
     "BatchAccountRegenerateKeyResult": {
@@ -1143,7 +1149,9 @@
           "description": "The format of the application package binary file."
         }
       },
-      "required": [ "format" ],
+      "required": [
+        "format"
+      ],
       "description": "Parameters for an ApplicationOperations.ActivateApplicationPackage request."
     },
     "AddApplicationParameters": {
