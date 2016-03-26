@@ -16,6 +16,24 @@
     "application/json",
     "text/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/providers/{armNamespace}/operations": {
       "get": {
@@ -45,7 +63,6 @@
         }
       }
     },
-
     "/subscriptions/{subscriptionId}/providers/{armNamespace}/accounts/{subscriptionId}": {
       "get": {
         "tags": [
@@ -77,7 +94,6 @@
         }
       }
     },
-
     "/subscriptions/{subscriptionId}/providers/{armNamespace}/accounts/{subscriptionId}/activateBilling": {
       "post": {
         "tags": [
@@ -106,7 +122,6 @@
         }
       }
     },
-
     "/subscriptions/{subscriptionId}/providers/{armNamespace}/accounts/{subscriptionId}/update": {
       "post": {
         "tags": [
@@ -147,7 +162,6 @@
         }
       }
     },
-
     "/subscriptions/{subscriptionId}/providers/{armNamespace}/templateImages": {
       "get": {
         "tags": [
@@ -175,11 +189,10 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName":  null
+          "nextLinkName": null
         }
       }
     },
-
     "/subscriptions/{subscriptionId}/providers/{armNamespace}/templateImages/{templateImageName}": {
       "get": {
         "tags": [
@@ -217,7 +230,6 @@
         }
       ]
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections": {
       "get": {
         "tags": [
@@ -258,7 +270,6 @@
         }
       ]
     },
-
     "/subscriptions/{subscriptionId}/providers/{armNamespace}/collections": {
       "get": {
         "tags": [
@@ -290,7 +301,6 @@
         }
       }
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}": {
       "get": {
         "tags": [
@@ -321,7 +331,6 @@
           }
         }
       },
-
       "put": {
         "tags": [
           "Collection"
@@ -360,7 +369,6 @@
           }
         }
       },
-
       "delete": {
         "tags": [
           "Collection"
@@ -405,7 +413,6 @@
         }
       ]
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/applications": {
       "get": {
         "tags": [
@@ -453,7 +460,6 @@
         }
       ]
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/applications/{alias}": {
       "get": {
         "tags": [
@@ -484,7 +490,6 @@
           }
         }
       },
-
       "put": {
         "tags": [
           "Collection"
@@ -523,7 +528,6 @@
           }
         }
       },
-
       "delete": {
         "tags": [
           "Collection"
@@ -577,7 +581,6 @@
         }
       ]
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/sessions": {
       "get": {
         "tags": [
@@ -625,7 +628,6 @@
         }
       ]
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/sessions/{userUpn}": {
       "get": {
         "tags": [
@@ -680,7 +682,6 @@
         }
       ]
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/sessions/{userUpn}/disconnect": {
       "post": {
         "tags": [
@@ -733,7 +734,6 @@
         }
       ]
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/sessions/{userUpn}/logoff": {
       "post": {
         "tags": [
@@ -786,7 +786,6 @@
         }
       ]
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/sessions/{userUpn}/sendMessage": {
       "post": {
         "tags": [
@@ -848,7 +847,6 @@
         }
       ]
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/startMenuApps": {
       "get": {
         "tags": [
@@ -879,7 +877,6 @@
           }
         }
       },
-
       "parameters": [
         {
           "name": "collectionName",
@@ -897,7 +894,6 @@
         }
       ]
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/startMenuApps/{applicationId}": {
       "get": {
         "tags": [
@@ -952,7 +948,6 @@
         }
       ]
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/usageDetails": {
       "post": {
         "tags": [
@@ -1010,7 +1005,6 @@
         }
       ]
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/usageSummaries": {
       "get": {
         "tags": [
@@ -1072,7 +1066,6 @@
         }
       ]
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/usageSummaries/{userUpn}": {
       "get": {
         "tags": [
@@ -1141,7 +1134,6 @@
         }
       ]
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/metrics": {
       "get": {
         "tags": [
@@ -1203,7 +1195,6 @@
         }
       ]
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/users": {
       "get": {
         "tags": [
@@ -1251,7 +1242,6 @@
         }
       ]
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/users/{userUpn}": {
       "get": {
         "tags": [
@@ -1282,7 +1272,6 @@
           }
         }
       },
-
       "put": {
         "tags": [
           "Collection"
@@ -1318,11 +1307,9 @@
             "schema": {
               "$ref": "#/definitions/SecurityPrincipalOperationErrorDetails"
             }
-
           }
         }
       },
-
       "delete": {
         "tags": [
           "Collection"
@@ -1358,7 +1345,6 @@
             "schema": {
               "$ref": "#/definitions/SecurityPrincipalOperationErrorDetails"
             }
-
           }
         }
       },

@@ -16,6 +16,24 @@
     "application/json",
     "text/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/{tenantID}/applications": {
       "post": {
@@ -80,7 +98,7 @@
           }
         },
         "x-ms-odata": "#/definitions/ApplicationFilter",
-		"x-ms-pageable": {
+        "x-ms-pageable": {
           "nextLinkName": null
         }
       }
@@ -1156,50 +1174,50 @@
       "description": "Filter parameters for listing applications"
     },
     "Application": {
-        "properties": {
-            "objectId": {
-                "type": "string",
-                "description": "Gets or sets object Id"
-            },
-            "objectType": {
-                "type": "string",
-                "description": "Gets or sets object type"
-            },
-            "appId": {
-                "type": "string",
-                "description": "Gets or sets application Id"
-            },
-            "appPermissions": {
-                "type": "array",
-                "items": {
-                    "type": "string"
-                },
-                "description": "Gets or sets application permissions"
-            },
-            "availableToOtherTenants": {
-                "type": "boolean",
-                "description": "Indicates if the application will be available to other tenants"
-            },
-            "displayName": {
-                "type": "string",
-                "description": "Gets or sets the displayName"
-            },
-            "identifierUris": {
-                "type": "array",
-                "items": {
-                    "type": "string"
-                },
-                "description": "Gets or sets the application identifier Uris"
-            },
-            "replyUrls": {
-                "type": "array",
-                "items": {
-                    "type": "string"
-                },
-                "description": "Gets or sets the application reply Urls"
-            }
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "Gets or sets object Id"
         },
-        "description": "Active Directory user information"
+        "objectType": {
+          "type": "string",
+          "description": "Gets or sets object type"
+        },
+        "appId": {
+          "type": "string",
+          "description": "Gets or sets application Id"
+        },
+        "appPermissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets application permissions"
+        },
+        "availableToOtherTenants": {
+          "type": "boolean",
+          "description": "Indicates if the application will be available to other tenants"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the displayName"
+        },
+        "identifierUris": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the application identifier Uris"
+        },
+        "replyUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the application reply Urls"
+        }
+      },
+      "description": "Active Directory user information"
     },
     "ApplicationListResult": {
       "properties": {
