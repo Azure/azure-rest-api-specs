@@ -17,6 +17,24 @@
     "application/json",
     "text/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}": {
       "put": {
@@ -96,10 +114,10 @@
           }
         ],
         "responses": {
-          "204": {
+          "200": {
             "description": ""
           },
-          "200": {
+          "204": {
             "description": ""
           }
         }
@@ -173,7 +191,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
@@ -183,7 +201,7 @@
           "AvailabilitySets"
         ],
         "operationId": "AvailabilitySets_ListAvailableSizes",
-        "description": "Lists virtual-machine-sizes available to be used for an availability set.",
+        "description": "Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -215,7 +233,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
@@ -301,7 +319,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
+                "$ref": "#/definitions/VirtualMachineExtensionImage"
               }
             }
           }
@@ -349,7 +367,7 @@
             "format": "int32"
           },
           {
-            "name": "$orderBy",
+            "name": "$orderby",
             "in": "query",
             "required": false,
             "type": "string"
@@ -367,12 +385,12 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
+                "$ref": "#/definitions/VirtualMachineExtensionImage"
               }
             }
           }
         },
-        "x-ms-odata": "#/definitions/VirtualMachineImageResource"
+        "x-ms-odata": "#/definitions/VirtualMachineExtensionImage"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}": {
@@ -421,13 +439,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualMachineExtension"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualMachineExtension"
@@ -476,9 +494,6 @@
             "description": ""
           },
           "204": {
-            "description": ""
-          },
-          "200": {
             "description": ""
           }
         },
@@ -826,7 +841,7 @@
           "VirtualMachineSizes"
         ],
         "operationId": "VirtualMachineSizes_List",
-        "description": "Lists virtual-machine-sizes available in a location for a subscription.",
+        "description": "Lists all available virtual machine sizes for a subscription in a location.",
         "parameters": [
           {
             "name": "location",
@@ -852,7 +867,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
@@ -862,7 +877,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Capture",
-        "description": "Captures the VM by copying VirtualHardDisks of the VM and outputs a template that can be used to create similar VMs.",
+        "description": "Captures the VM by copying virtual hard disks of the VM and outputs a template that can be used to create similar VMs.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -947,13 +962,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualMachine"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualMachine"
@@ -991,9 +1006,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": ""
-          },
           "202": {
             "description": ""
           },
@@ -1029,7 +1041,14 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation."
+            "description": "The expand expression to apply on the operation.",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "name": "InstanceViewTypes",
+              "modelAsString": false
+            }
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1152,7 +1171,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
@@ -1190,7 +1209,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_ListAvailableSizes",
-        "description": "Lists virtual-machine-sizes available to be used for a virtual machine.",
+        "description": "Lists all available virtual machine sizes it can be resized to for a virtual machine.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1222,7 +1241,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
@@ -1337,6 +1356,43 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/redeploy": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Redeploy",
+        "description": "The operation to redeploy a virtual machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{name}": {
       "put": {
         "tags": [
@@ -1376,13 +1432,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSet"
             }
           },
-          "200": {
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSet"
@@ -1468,10 +1524,10 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": ""
           },
-          "200": {
+          "202": {
             "description": ""
           },
           "204": {
@@ -1892,6 +1948,87 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_Reimage",
+        "description": "The operation to re-image virtual machines in a virtual machine scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine scale set."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimage": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSetVMs"
+        ],
+        "operationId": "VirtualMachineScaleSetVMs_Reimage",
+        "description": "The operation to re-image a virtual machine scale set instance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance id of the virtual machine."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/deallocate": {
       "post": {
         "tags": [
@@ -1976,10 +2113,10 @@
           "200": {
             "description": ""
           },
-          "204": {
+          "202": {
             "description": ""
           },
-          "202": {
+          "204": {
             "description": ""
           }
         },
@@ -2278,7 +2415,7 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Gets or sets the status Code."
+          "description": "Gets the status Code."
         },
         "level": {
           "type": "string",
@@ -2290,7 +2427,7 @@
           ],
           "x-ms-enum": {
             "name": "StatusLevelTypes",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "displayStatus": {
@@ -2299,7 +2436,7 @@
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the optional detailed Message, including for alerts and error messages."
+          "description": "Gets or sets the detailed Message, including for alerts and error messages."
         },
         "time": {
           "type": "string",
@@ -2341,6 +2478,7 @@
     "AvailabilitySet": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/AvailabilitySetProperties"
         }
       },
@@ -2442,22 +2580,8 @@
     "VirtualMachineExtensionImage": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineExtensionImageProperties"
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets the tags attached to the resource."
         }
       },
       "required": [
@@ -2466,7 +2590,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Describes a Virtual Machine Extension Image."
@@ -2533,6 +2657,17 @@
     },
     "VirtualMachineExtensionProperties": {
       "properties": {
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "Gets or sets how the extension handler should be forced to update even if the extension configuration has not changed.",
+          "enum": [
+            "RerunExtension"
+          ],
+          "x-ms-enum": {
+            "name": "ForceUpdateTagTypes",
+            "modelAsString": false
+          }
+        },
         "publisher": {
           "type": "string",
           "description": "Gets or sets the name of the extension handler publisher."
@@ -2571,6 +2706,7 @@
     "VirtualMachineExtension": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineExtensionProperties"
         }
       },
@@ -2614,7 +2750,7 @@
           ],
           "x-ms-enum": {
             "name": "OperatingSystemTypes",
-            "modelAsString": true
+            "modelAsString": false
           }
         }
       },
@@ -2632,9 +2768,6 @@
           "description": "Gets the LUN number for a data disk.This value is used to identify data disk image inside the VMImage therefore it must be unique for each data disk.The allowed character for the value is digit."
         }
       },
-      "required": [
-        "lun"
-      ],
       "description": "Contains the data disk images information."
     },
     "VirtualMachineImageProperties": {
@@ -2657,22 +2790,8 @@
     "VirtualMachineImage": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineImageProperties"
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets the tags attached to the resource."
         }
       },
       "required": [
@@ -2681,7 +2800,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/VirtualMachineImageResource"
         }
       ],
       "description": "Describes a Virtual Machine Image."
@@ -2781,6 +2900,7 @@
     "VirtualMachineCaptureResult": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineCaptureResultProperties"
         }
       },
@@ -2943,6 +3063,10 @@
         "keyEncryptionKey": {
           "$ref": "#/definitions/KeyVaultKeyReference",
           "description": "Gets or sets the key encryption key which is KeyVault Key."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Gets or sets whether disk encryption should be enabled on the Virtual Machine."
         }
       },
       "required": [
@@ -2970,7 +3094,7 @@
           ],
           "x-ms-enum": {
             "name": "OperatingSystemTypes",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "encryptionSettings": {
@@ -2999,7 +3123,7 @@
           ],
           "x-ms-enum": {
             "name": "CachingTypes",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "createOption": {
@@ -3012,7 +3136,7 @@
           ],
           "x-ms-enum": {
             "name": "DiskCreateOptionTypes",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "diskSizeGB": {
@@ -3057,7 +3181,7 @@
           ],
           "x-ms-enum": {
             "name": "CachingTypes",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "createOption": {
@@ -3070,7 +3194,7 @@
           ],
           "x-ms-enum": {
             "name": "DiskCreateOptionTypes",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "diskSizeGB": {
@@ -3117,7 +3241,7 @@
           ],
           "x-ms-enum": {
             "name": "PassNames",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "componentName": {
@@ -3128,7 +3252,7 @@
           ],
           "x-ms-enum": {
             "name": "ComponentNames",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "settingName": {
@@ -3140,7 +3264,7 @@
           ],
           "x-ms-enum": {
             "name": "SettingNames",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "content": {
@@ -3161,7 +3285,7 @@
           ],
           "x-ms-enum": {
             "name": "ProtocolTypes",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "certificateUrl": {
@@ -3326,6 +3450,7 @@
     "NetworkInterfaceReference": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/NetworkInterfaceReferenceProperties"
         }
       },
@@ -3352,7 +3477,7 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Gets or sets whether VM Agent should be provisioned on the Virtual Machine."
+          "description": "Gets or sets whether boot diagnostics should be enabled on the Virtual Machine."
         },
         "storageUri": {
           "type": "string",
@@ -3464,7 +3589,7 @@
           "items": {
             "$ref": "#/definitions/DiskInstanceView"
           },
-          "description": "Gets or sets the the disks information."
+          "description": "Gets or sets the disks information."
         },
         "extensions": {
           "type": "array",
@@ -3511,7 +3636,7 @@
         },
         "availabilitySet": {
           "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets the reference Id of the availailbity set to which this virtual machine belongs."
+          "description": "Gets or sets the reference Id of the availability set to which this virtual machine belongs."
         },
         "provisioningState": {
           "type": "string",
@@ -3521,6 +3646,10 @@
           "$ref": "#/definitions/VirtualMachineInstanceView",
           "readOnly": true,
           "description": "Gets the virtual machine instance view."
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "Gets or sets the license type, which is for bring your own license scenario."
         }
       },
       "description": "Describes the properties of a Virtual Machine."
@@ -3532,6 +3661,7 @@
           "description": "Gets or sets the purchase plan when deploying virtual machine from VM Marketplace images."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineProperties"
         },
         "resources": {
@@ -3595,7 +3725,7 @@
           ],
           "x-ms-enum": {
             "name": "UpgradeMode",
-            "modelAsString": true
+            "modelAsString": false
           }
         }
       },
@@ -3653,7 +3783,7 @@
           ],
           "x-ms-enum": {
             "name": "CachingTypes",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "createOption": {
@@ -3666,7 +3796,7 @@
           ],
           "x-ms-enum": {
             "name": "DiskCreateOptionTypes",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "osType": {
@@ -3678,7 +3808,7 @@
           ],
           "x-ms-enum": {
             "name": "OperatingSystemTypes",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "image": {
@@ -3716,7 +3846,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the relative URL in the previous Service Management API's namespace. For Example: /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/..."
+          "description": "Gets or sets ARM resource id in the form of /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/..."
         }
       },
       "description": "The API entity reference."
@@ -3733,6 +3863,13 @@
             "$ref": "#/definitions/SubResource"
           },
           "description": "Gets or sets the load balancer backend address pools."
+        },
+        "loadBalancerInboundNatPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Gets or sets the load balancer inbound nat pools."
         }
       },
       "required": [
@@ -3747,6 +3884,7 @@
           "description": "Gets or sets the IP configuration name."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineScaleSetIPConfigurationProperties"
         }
       },
@@ -3786,6 +3924,7 @@
           "description": "Gets or sets the network configuration name."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfigurationProperties"
         }
       },
@@ -3852,6 +3991,7 @@
           "description": "Gets or sets the name of the extension."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineScaleSetExtensionProperties"
         }
       },
@@ -3908,6 +4048,10 @@
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets the provisioning state, which only appears in the response."
+        },
+        "overProvision": {
+          "type": "boolean",
+          "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -3919,6 +4063,7 @@
           "description": "Gets or sets the virtual machine scale set sku."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineScaleSetProperties"
         }
       },
@@ -4086,7 +4231,7 @@
           ],
           "x-ms-enum": {
             "name": "VirtualMachineScaleSetSkuScaleType",
-            "modelAsString": true
+            "modelAsString": false
           }
         }
       },
@@ -4159,11 +4304,15 @@
         },
         "availabilitySet": {
           "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets the reference Id of the availailbity set to which this virtual machine belongs."
+          "description": "Gets or sets the reference Id of the availability set to which this virtual machine belongs."
         },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets the provisioning state, which only appears in the response."
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "Gets or sets the license type, which is for bring your own license scenario."
         }
       },
       "description": "Describes the properties of a virtual machine scale set virtual machine."
@@ -4181,6 +4330,7 @@
           "description": "Gets the virtual machine sku."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineScaleSetVMProperties"
         },
         "plan": {
@@ -4228,7 +4378,7 @@
           "items": {
             "$ref": "#/definitions/DiskInstanceView"
           },
-          "description": "Gets or sets the the disks information."
+          "description": "Gets or sets the disks information."
         },
         "extensions": {
           "type": "array",
@@ -4321,47 +4471,6 @@
       },
       "description": "Api error."
     },
-    "DeleteOperationResult": {
-      "properties": {
-        "operationId": {
-          "type": "string",
-          "description": "Gets the operation identifier."
-        },
-        "status": {
-          "type": "string",
-          "description": "Gets the operation status.",
-          "enum": [
-            "InProgress",
-            "Succeeded",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "OperationStatus",
-            "modelAsString": false
-          }
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets the operation start time"
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets the operation end time"
-        },
-        "error": {
-          "$ref": "#/definitions/ApiError",
-          "description": "Gets or sets the operation error if any occurred"
-        }
-      },
-      "required": [
-        "operationId",
-        "status",
-        "startTime"
-      ],
-      "description": "The compute long running operation response."
-    },
     "ComputeLongRunningOperationProperties": {
       "properties": {
         "output": {
@@ -4370,46 +4479,6 @@
         }
       },
       "description": "Compute-specific operation properties, including output"
-    },
-    "ComputeLongRunningOperationResult": {
-      "properties": {
-        "operationId": {
-          "type": "string",
-          "description": "Gets the operation identifier."
-        },
-        "status": {
-          "type": "string",
-          "description": "Gets the operation status.",
-          "enum": [
-            "InProgress",
-            "Failed",
-            "Succeeded",
-            "Preempted"
-          ],
-          "x-ms-enum": {
-            "name": "ComputeOperationStatus",
-            "modelAsString": false
-          }
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets the operation start time"
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets the operation end time"
-        },
-        "properties": {
-          "$ref": "#/definitions/ComputeLongRunningOperationProperties"
-        },
-        "error": {
-          "$ref": "#/definitions/ApiError",
-          "description": "Gets the operation error, if any occurred."
-        }
-      },
-      "description": "The Compute service response for long-running operations."
     },
     "Resource": {
       "properties": {

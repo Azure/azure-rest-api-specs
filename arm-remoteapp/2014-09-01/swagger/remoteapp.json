@@ -1,0 +1,2884 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "RemoteAppManagementClient",
+    "version": "2014-09-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/{armNamespace}/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_GetAvailable",
+        "description": "Gets the available RemoteApp operations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/OperationInfoList"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{armNamespace}/accounts/{subscriptionId}": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "Account_Get",
+        "description": "Gets the account associated with the subscription id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AccountDetailsWrapperList"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{armNamespace}/accounts/{subscriptionId}/activateBilling": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "Account_ActivateBilling",
+        "description": "Activates billing for the account",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          },
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{armNamespace}/accounts/{subscriptionId}/update": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "Account_Update",
+        "description": "Updates the account PrivacyUrl and WorkspaceName.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "name": "accountInfo",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountDetailsWrapper"
+            },
+            "description": "The new PrivacyUrl and WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AccountDetailsWrapperList"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{armNamespace}/templateImages": {
+      "get": {
+        "tags": [
+          "TemplateImages"
+        ],
+        "operationId": "TemplateImage_List",
+        "description": "Gets available template images in the specified location",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/TemplateImageList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{armNamespace}/templateImages/{templateImageName}": {
+      "get": {
+        "tags": [
+          "TemplateImages"
+        ],
+        "operationId": "TemplateImage_Get",
+        "description": "Gets a template image.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/TemplateImage"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "templateImageName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the template image"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_ListInResourceGroup",
+        "description": "Gets the list of collections details in the resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CollectionListResult"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the resource group"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/providers/{armNamespace}/collections": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_ListInSubscription",
+        "description": "Gets the list of collections details in the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CollectionListResult"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_Get",
+        "description": "Gets the collection details.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Collection"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_CreateOrUpdate",
+        "description": "Create or update a collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "name": "details",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CollectionCreationDetailsWrapper"
+            },
+            "description": "The details of the created or updated collection"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CollectionCreationDetailsWrapper"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_Delete",
+        "description": "Delete the collection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "202": {
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "parameters": [
+        {
+          "name": "collectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The collection name."
+        },
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the resource group"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/applications": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_ListPublishedApps",
+        "description": "Gets the list of published applications in this collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PublishedApplicationDetailsListResult"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "collectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The collection name."
+        },
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the resource group"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/applications/{alias}": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_GetPublishedApp",
+        "description": "Gets the specified published application in this collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PublishedApplicationDetails"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_PublishOrUpdateApplication",
+        "description": "Publishes a new application or updates a previously published application.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "name": "applicationDetails",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationDetails"
+            },
+            "description": "Details of the applicaton to publish or modify"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PublishingOperationResult"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_Unpublish",
+        "description": "Unpublishes published application matching the application alias (short unique name) from the collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PublishingOperationResult"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "collectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The collection name."
+        },
+        {
+          "name": "alias",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The alias for the application."
+        },
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the resource group"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/sessions": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_ListSessions",
+        "description": "Gets a list of sessions on the current collection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SessionList"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "collectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The collection name."
+        },
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the resource group"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/sessions/{userUpn}": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_GetSession",
+        "description": "Gets the specified user's session on the current collection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Session"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "collectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The collection name."
+        },
+        {
+          "name": "userUpn",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The UPN of the user"
+        },
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the resource group"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/sessions/{userUpn}/disconnect": {
+      "post": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_SessionDisconnect",
+        "description": "Disconnects the specified user",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "202": {
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "parameters": [
+        {
+          "name": "collectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The collection name."
+        },
+        {
+          "name": "userUpn",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The UPN of the user"
+        },
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the resource group"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/sessions/{userUpn}/logoff": {
+      "post": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_SessionLogOff",
+        "description": "Logs off the specified user",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          },
+          "200": {
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "parameters": [
+        {
+          "name": "collectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The collection name."
+        },
+        {
+          "name": "userUpn",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The UPN of the user"
+        },
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the resource group"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/sessions/{userUpn}/sendMessage": {
+      "post": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_SessionSendMessage",
+        "description": "Sends a message to the specified user",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "name": "messageDetails",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SessionSendMessageCommandParameter"
+            },
+            "description": "Session message details"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          },
+          "200": {
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "parameters": [
+        {
+          "name": "collectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The collection name."
+        },
+        {
+          "name": "userUpn",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The UPN of the user"
+        },
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the resource group"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/startMenuApps": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_ListStartMenuApps",
+        "description": "Gets the list of applications available in this collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StartMenuApplicationListResult"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "collectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The collection name."
+        },
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the resource group"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/startMenuApps/{applicationId}": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_GetStartMenuApp",
+        "description": "Gets the specified Start Menu application available in this collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of the application."
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StartMenuApplication"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "collectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The collection name."
+        },
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the resource group"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/usageDetails": {
+      "post": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_GetUsageDetails",
+        "description": "Generates a CSV file of collection usage details and returns the URI",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsInfo"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "parameters": [
+        {
+          "name": "collectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The collection name."
+        },
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the resource group"
+        },
+        {
+          "name": "date",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/BillingDate"
+          },
+          "description": "The year and month to get billing for"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/usageSummaries": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_GetUsageSummaryList",
+        "description": "Gets a summary of usage data for all users in the collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "name": "usageMonth",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The requested month for collection usage information"
+          },
+          {
+            "name": "usageYear",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The requested year for collection usage information"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CollectionUsageSummaryList"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "collectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The collection name."
+        },
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the resource group"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/usageSummaries/{userUpn}": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_GetUsageSummary",
+        "description": "Gets a summary of collection usage data for the specified user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "name": "usageMonth",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The requested month for collection usage information"
+          },
+          {
+            "name": "usageYear",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The requested year for collection usage information"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CollectionUsageSummary"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "collectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The collection name."
+        },
+        {
+          "name": "userUpn",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The UPN of the user"
+        },
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the resource group"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/metrics": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_GetMetrics",
+        "description": "Gets the list of collection metric values for specified time window.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "name": "startTimeUtc",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "UTC start time for the time window formatted as 'yyyyMMdd'"
+          },
+          {
+            "name": "endTimeUtc",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "UTC end time for the time window formatted as 'yyyyMMdd'"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CollectionMetricsDetailsWrapper"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "collectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The collection name."
+        },
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the resource group"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/users": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_GetUsers",
+        "description": "Gets a list of all RemoteApp users associated with the given collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SecurityPrincipalList"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "collectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The collection name."
+        },
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the resource group"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/users/{userUpn}": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_GetUser",
+        "description": "Gets a RemoteApp user by their UPN.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SecurityPrincipalInfo"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_AddUser",
+        "description": "Adds a user to the given collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "name": "securityPrincipal",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecurityPrincipal"
+            },
+            "description": "A RemoteApp user to add."
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SecurityPrincipalOperationErrorDetails"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collection"
+        ],
+        "operationId": "Collection_DeleteUser",
+        "description": "Deletes a user from the given collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/armNamespace"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "name": "securityPrincipal",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecurityPrincipal"
+            },
+            "description": "The RemoteApp user to remove."
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SecurityPrincipalOperationErrorDetails"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "collectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The collection name."
+        },
+        {
+          "name": "userUpn",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The UPN of the user"
+        },
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the resource group"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "AccountDetails": {
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "The account subscriptionId"
+        },
+        "workspaceName": {
+          "type": "string",
+          "description": "Name of the workspace"
+        },
+        "maxPublishedAppsPerService": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of apps per collection"
+        },
+        "maxUsersPerService": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of users per collection"
+        },
+        "isDesktopEnabled": {
+          "type": "boolean",
+          "description": "Whether or not desktops are enabled on this account"
+        },
+        "maxServices": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of collections"
+        },
+        "rdWebUrl": {
+          "type": "string",
+          "description": "The URL users can go to to access available apps"
+        },
+        "privacyUrl": {
+          "type": "string",
+          "description": "Admin-defined URL to the privacy statement"
+        },
+        "accountLocation": {
+          "type": "string",
+          "description": "The home location for the account"
+        },
+        "billingState": {
+          "type": "string",
+          "description": "The billing state of the account",
+          "enum": [
+            "Trial",
+            "TrialExpired",
+            "Active",
+            "Inactive",
+            "Preview"
+          ],
+          "x-ms-enum": {
+            "name": "AccountBillingState",
+            "modelAsString": false
+          }
+        },
+        "trialEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Trial end time for the account when in trial billing state"
+        }
+      },
+      "description": "The details of an account."
+    },
+    "AccountDetailsAll": {
+      "properties": {
+        "accountInfo": {
+          "$ref": "#/definitions/AccountDetails",
+          "description": "Account properties"
+        },
+        "billingPlans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingPlan"
+          },
+          "description": "Available billing plans."
+        },
+        "locationList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Location"
+          },
+          "description": "List of locations for creating a collection."
+        }
+      },
+      "description": "A wrapper for account details to be used as a parameter and a response."
+    },
+    "AccountDetailsWrapper": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccountDetailsAll",
+          "description": "Account properties"
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the resource."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL for requesting next page of resources."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Resource"
+        }
+      ],
+      "description": "A wrapper for account details to be used as a parameter"
+    },
+    "AccountDetailsWrapperList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountDetailsWrapper"
+          },
+          "description": "Account properties"
+        }
+      },
+      "description": "A wrapper for account details to be used as a response."
+    },
+    "BillingDate": {
+      "properties": {
+        "month": {
+          "type": "string",
+          "description": "The billing month"
+        },
+        "year": {
+          "type": "string",
+          "description": "The billing year"
+        }
+      },
+      "description": "The input to get usage details."
+    },
+    "BillingPlan": {
+      "properties": {
+        "planId": {
+          "type": "string",
+          "description": "Unique identifier of billing plan."
+        },
+        "planName": {
+          "type": "string",
+          "description": "Short name of billing plan."
+        },
+        "addOns": {
+          "type": "string",
+          "description": "Associated add-ons."
+        },
+        "specCode": {
+          "type": "string",
+          "description": "Unique portal plan identifier"
+        },
+        "specString1": {
+          "type": "string",
+          "description": "Some information displayed about the plan for portal use"
+        },
+        "specString2": {
+          "type": "string",
+          "description": "Some information displayed about the plan for portal use"
+        },
+        "coresPerUser": {
+          "type": "number",
+          "format": "double",
+          "description": "Computing cores per user."
+        },
+        "minimumBilledUserCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum number of user to bill."
+        },
+        "billingMeters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingMeterInformation"
+          },
+          "description": "List of meters for this billing plan"
+        }
+      },
+      "description": "Contains details of a billing plan."
+    },
+    "BillingMeterInformation": {
+      "properties": {
+        "geo": {
+          "type": "string",
+          "description": "geo for the billing meter"
+        },
+        "flatMeterId": {
+          "type": "string",
+          "description": "The MINT ID for the flat rate"
+        },
+        "overageMeterId": {
+          "type": "string",
+          "description": "The MINT ID for the overage rate"
+        },
+        "flatMeterKey": {
+          "type": "string",
+          "description": "Key for the flat meter for the billing system"
+        },
+        "overageMeterKey": {
+          "type": "string",
+          "description": "Key for the flat meter for the billing system"
+        }
+      }
+    },
+    "Location": {
+      "properties": {
+        "locationName": {
+          "type": "string",
+          "description": "The name of the location"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the location"
+        }
+      },
+      "description": "The location a resource can be in."
+    },
+    "ActiveDirectoryConfig": {
+      "properties": {
+        "DomainName": {
+          "type": "string",
+          "description": "The name of the on-premise domain to join the RD Session Host servers to."
+        },
+        "OrganizationalUnit": {
+          "type": "string",
+          "description": "The name of your domain's organizational unit to assign the RD Session Host servers to, e.g. OU=MyOu,DC=MyDomain,DC=ParentDomain,DC=com. Attributes such as OU, DC, etc. must be in uppercase."
+        },
+        "ServiceAccountUserName": {
+          "type": "string",
+          "description": "The user name of a service account that has permission to add computers to the domain. The username must be specified in the UPN or down-level logon name format (user@some.domain or some.domain\\user)."
+        },
+        "ServiceAccountPassword": {
+          "type": "string",
+          "description": "The service account's password."
+        }
+      },
+      "description": "Details of a RemoteApp active directory configuration."
+    },
+    "ApplicationDetails": {
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The application's display name."
+        },
+        "virtualPath": {
+          "type": "string",
+          "description": "Path to the application.  The path should reference default operating system environment variables such as %ProgramFiles%, %ProgramFiles(x86)%, %SystemRoot%, etc. where possible.  For example, use '%SystemRoot%\\notepad.exe' rather than 'C:\\Windows\\notepad.exe'."
+        },
+        "applicationAlias": {
+          "type": "string",
+          "description": "A short unique name for the application."
+        },
+        "availableToUsers": {
+          "type": "boolean",
+          "description": "A flag to denote if the application will be available to end users."
+        },
+        "commandLineArguments": {
+          "type": "string",
+          "description": "Optional command-line arguments to pass to the application."
+        },
+        "iconUri": {
+          "type": "string",
+          "description": "The URI for the application's default icon PNG file."
+        },
+        "status": {
+          "type": "string",
+          "description": "The application status.",
+          "enum": [
+            "Publishing",
+            "Published",
+            "Unpublishing",
+            "Modifying",
+            "Invalid"
+          ],
+          "x-ms-enum": {
+            "name": "AppPublishingStatus",
+            "modelAsString": false
+          }
+        },
+        "iconPngUris": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The available map of icon PNG file URIs for different resolutions (e.g. 16x16, 32x32, 64x64). The key of the map is the first dimension of the PNG resolution."
+        }
+      },
+      "description": "The application details."
+    },
+    "ApplicationDetailsList": {
+      "properties": {
+        "DetailsList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationDetails"
+          },
+          "description": "List of publishing details for remote applications."
+        }
+      },
+      "description": "List of application details used to create or update a collection."
+    },
+    "CollectionMetricsDetailsWrapper": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CollectionMetricsDetails",
+          "description": "Collection usage summary information."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Resource"
+        }
+      ],
+      "description": "Details of collection metrics."
+    },
+    "CollectionMetricsDetails": {
+      "properties": {
+        "overageHours": {
+          "$ref": "#/definitions/CollectionMetrics",
+          "description": "Number of overage hours incurred"
+        },
+        "billedUsers": {
+          "$ref": "#/definitions/CollectionMetrics",
+          "description": "Number of users billed"
+        }
+      }
+    },
+    "CollectionMetrics": {
+      "properties": {
+        "aggregationMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of minutes over which the metric is aggregated"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CollectionMetric"
+          },
+          "description": "Values of metric"
+        }
+      }
+    },
+    "CollectionMetric": {
+      "properties": {
+        "timeCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when the metric value sample was taken"
+        },
+        "total": {
+          "type": "number",
+          "format": "double",
+          "description": "Total number of metric values over the aggregation period"
+        },
+        "minimum": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum value of the metric over the aggregation period"
+        },
+        "maximum": {
+          "type": "number",
+          "format": "double",
+          "description": "Maximum value of the metric over the aggregation period"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of samples taken over the aggregation period"
+        }
+      }
+    },
+    "CollectionCreationDetails": {
+      "properties": {
+        "collectionName": {
+          "type": "string",
+          "description": "The collection's name"
+        },
+        "description": {
+          "type": "string",
+          "description": "A description for the collection"
+        },
+        "templateImageName": {
+          "type": "string",
+          "description": "The name of the template image for the collection"
+        },
+        "sourceImageSasUri": {
+          "type": "string",
+          "description": "SAS URI for an OS image in the VM library"
+        },
+        "vnetName": {
+          "type": "string",
+          "description": "The name of the Vnet for the collection"
+        },
+        "virtualNetworkId": {
+          "type": "string",
+          "description": "The ID of the Vnet for the collection"
+        },
+        "adInfo": {
+          "$ref": "#/definitions/ActiveDirectoryConfig",
+          "description": "The account subscriptionId"
+        },
+        "billingPlanName": {
+          "type": "string",
+          "description": "The plan name associated with this collection."
+        },
+        "customRdpProperty": {
+          "type": "string",
+          "description": "Optional customer-defined RDP properties of the collection."
+        },
+        "readyForPublishing": {
+          "type": "boolean",
+          "description": "A flag denoting if this collection is ready for publishing operations."
+        },
+        "mode": {
+          "type": "string",
+          "description": "The collection mode.",
+          "enum": [
+            "Unassigned",
+            "Apps",
+            "Desktop"
+          ],
+          "x-ms-enum": {
+            "name": "CollectionMode",
+            "modelAsString": false
+          }
+        },
+        "waitBeforeShutdownInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The amount of time to wait, in minutes, before forcing logoff."
+        },
+        "collectionLocation": {
+          "type": "string",
+          "description": "The home location for the account"
+        },
+        "publishedApplications": {
+          "$ref": "#/definitions/ApplicationDetailsList",
+          "description": "A list of details of the published applications"
+        },
+        "allowedPrincipals": {
+          "$ref": "#/definitions/SecurityPrincipalList",
+          "description": "A list of allowed security principals"
+        },
+        "DnsServers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of the DNS Servers."
+        },
+        "subnetName": {
+          "type": "string",
+          "description": "The subnet name of the customer created Azure VNet."
+        },
+        "notDomainJoined": {
+          "type": "boolean",
+          "description": "True if the collection is domain joined, false otherwise"
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "The name of the resource group the collection is in"
+        }
+      },
+      "description": "The details for creating a collection."
+    },
+    "CollectionCreationDetailsWrapper": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CollectionCreationDetails",
+          "description": "Collection creation properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the resource."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL for requesting next page of resources."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Resource"
+        }
+      ],
+      "description": "Details of collection creation operation results."
+    },
+    "CollectionUsageSummaryProperties": {
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "The user's UPN."
+        },
+        "includedUsage": {
+          "type": "number",
+          "format": "double",
+          "description": "The number of hours used which are included in the billing plan's base rate."
+        },
+        "overageUsage": {
+          "type": "number",
+          "format": "double",
+          "description": "The number of hours used beyond the billing plan's included usage, but not exceeding the billing plan's maximum cost."
+        },
+        "waivedUsage": {
+          "type": "number",
+          "format": "double",
+          "description": "The number of hours used beyond the billing plan's maximum cost.  These usage hours are not billed."
+        },
+        "totalUsage": {
+          "type": "number",
+          "format": "double",
+          "description": "The total usage hours by the user."
+        }
+      },
+      "description": "The collection usage billing summary."
+    },
+    "CollectionUsageSummaryListItemProperties": {
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "The user's UPN."
+        },
+        "includedUsage": {
+          "type": "number",
+          "format": "double",
+          "description": "The number of hours used which are included in the billing plan's base rate."
+        },
+        "overageUsage": {
+          "type": "number",
+          "format": "double",
+          "description": "The number of hours used beyond the billing plan's included usage, but not exceeding the billing plan's maximum cost."
+        },
+        "waivedUsage": {
+          "type": "number",
+          "format": "double",
+          "description": "The number of hours used beyond the billing plan's maximum cost.  These usage hours are not billed."
+        },
+        "totalUsage": {
+          "type": "number",
+          "format": "double",
+          "description": "The total usage hours by the user."
+        }
+      },
+      "description": "The collection usage billing summary."
+    },
+    "CollectionUsageSummary": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CollectionUsageSummaryProperties",
+          "description": "Collection usage summary information."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Resource"
+        }
+      ],
+      "description": "Details of usage summary operation results."
+    },
+    "CollectionUsageSummaryList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CollectionUsageSummary"
+          },
+          "description": "A list of usage summary details"
+        }
+      },
+      "description": "A list of usage summary details"
+    },
+    "CollectionProperties": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The collection provisioning state.",
+          "enum": [
+            "Cancelled",
+            "Creating",
+            "Deprovisioning",
+            "Disabling",
+            "Disabled",
+            "Enabling",
+            "Failed",
+            "InProgress",
+            "Provisioning",
+            "Succeeded",
+            "Upgrading"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "collectionName": {
+          "type": "string",
+          "description": "The collection name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the collection."
+        },
+        "templateImageName": {
+          "type": "string",
+          "description": "The name of the template image associated with this collection."
+        },
+        "status": {
+          "type": "string",
+          "description": "The collection status."
+        },
+        "lastErrorCode": {
+          "type": "string",
+          "description": "The last operation error code on this collection."
+        },
+        "virtualNetworkId": {
+          "type": "string",
+          "description": "The ID of the Vnet for this collection."
+        },
+        "vnetName": {
+          "type": "string",
+          "description": "The VNet name associated with this collection."
+        },
+        "adInfo": {
+          "$ref": "#/definitions/ActiveDirectoryConfig",
+          "description": "The domain join details for this collection."
+        },
+        "billingPlanName": {
+          "type": "string",
+          "description": "The plan name associated with this collection."
+        },
+        "customRdpProperty": {
+          "type": "string",
+          "description": "Optional customer-defined RDP properties of the collection."
+        },
+        "readyForPublishing": {
+          "type": "boolean",
+          "description": "A flag denoting if this collection is ready for publishing operations."
+        },
+        "lastModifiedTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC date and time of the last modification of this collection."
+        },
+        "mode": {
+          "type": "string",
+          "description": "The collection mode.",
+          "enum": [
+            "Unassigned",
+            "Apps",
+            "Desktop"
+          ],
+          "x-ms-enum": {
+            "name": "CollectionMode",
+            "modelAsString": false
+          }
+        },
+        "maxSessions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of concurrent users allowed for this collection."
+        },
+        "sessionWarningThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The end-user session limit warning threshold.  Reaching or crossing this threshold will cause a capacity warning message to be shown in the management portal."
+        },
+        "collectionType": {
+          "type": "string",
+          "description": "The type of the collection",
+          "enum": [
+            "Hybrid",
+            "CloudOnly",
+            "HybridWithoutDomain"
+          ],
+          "x-ms-enum": {
+            "name": "RemoteAppCollectionType",
+            "modelAsString": false
+          }
+        },
+        "officeType": {
+          "type": "string",
+          "description": "If the template image for this collection includes Office this will specify the type.",
+          "enum": [
+            "None",
+            "OfficeSAL",
+            "Office365",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "OfficeType",
+            "modelAsString": false
+          }
+        },
+        "trialOnly": {
+          "type": "boolean",
+          "description": "Trial-only collections can be used only during the trial period of your subscription. When the trial expires or you activate your subscription, these collections will be permanently disabled."
+        },
+        "DnsServers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of the DNS Servers."
+        },
+        "subnetName": {
+          "type": "string",
+          "description": "The subnet name of the customer created Azure VNet."
+        },
+        "healthStatus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of collection health status messages"
+        },
+        "diagnosticOperations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiagnosticOp"
+          },
+          "description": "List of diagnostics operations for the collection."
+        },
+        "diagnosticDetails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Details of diagnostics for the collection. Each entry in this list is in the form of Key#Value."
+        }
+      },
+      "description": "The collection details."
+    },
+    "DiagnosticOp": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of diagnostic operation."
+        },
+        "result": {
+          "type": "string",
+          "description": "Result of diagnostic operation. Zero indicates success; other values indicate errors."
+        }
+      },
+      "description": "The application security principal details."
+    },
+    "Collection": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CollectionProperties",
+          "description": "Collection properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the resource."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL for requesting next page of resources."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Resource"
+        }
+      ],
+      "description": "The response for the get collection operation."
+    },
+    "CollectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Collection"
+          },
+          "description": "A list of collection details"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to use for request paging."
+        }
+      },
+      "description": "A list of collection details"
+    },
+    "OperationDisplayInfo": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The name of the resource provider"
+        },
+        "resource": {
+          "type": "string",
+          "description": "The name of the related resource"
+        },
+        "operation": {
+          "type": "string",
+          "description": "The name of the operation"
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the resource"
+        }
+      },
+      "description": "Display information about an operation"
+    },
+    "OperationInfo": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation being performed on this particular object."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayInfo",
+          "description": "Display information about the operation"
+        },
+        "origin": {
+          "type": "string",
+          "description": "The intended executor of the operation."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Information about a particular operation."
+    },
+    "OperationInfoList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationInfo"
+          },
+          "description": "A list of operation details"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to use for request paging."
+        }
+      },
+      "description": "A list of operation details"
+    },
+    "PublishedApplicationDetails": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationDetails",
+          "description": "PublishedApplication properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the resource."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL for requesting next page of resources."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Resource"
+        }
+      ],
+      "description": "Publishing details of remote application."
+    },
+    "PublishedApplicationDetailsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedApplicationDetails"
+          },
+          "description": "PublishedApplication properties."
+        }
+      },
+      "description": "Publishing details of remote application."
+    },
+    "StartMenuApplicationProperties": {
+      "properties": {
+        "commandLineArguments": {
+          "type": "string",
+          "description": "The command line arguments to launch the application."
+        },
+        "iconPngUris": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The available map of icon PNG file URIs for different resolutions (e.g. 16x16, 32x32, 64x64). The key of the map is the first dimension of the PNG resolution."
+        },
+        "iconUri": {
+          "type": "string",
+          "description": "The default URI to the application icon png file."
+        },
+        "startMenuApplicationName": {
+          "type": "string",
+          "description": "The application name."
+        },
+        "startMenuApplicationId": {
+          "type": "string",
+          "description": "The start menu application id."
+        },
+        "virtualPath": {
+          "type": "string",
+          "description": "The application image path on the destination machine specified with environment variables for the drive and known system path."
+        }
+      },
+      "description": "The StartMenuApplication details."
+    },
+    "StartMenuApplication": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StartMenuApplicationProperties",
+          "description": "StartMenuApplication properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the resource."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL for requesting next page of resources."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Resource"
+        }
+      ],
+      "description": "Definition containing details of Start Menu applications."
+    },
+    "StartMenuApplicationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StartMenuApplication"
+          },
+          "description": "StartMenuApplication properties."
+        }
+      },
+      "description": "Definition containing details of Start Menu applications."
+    },
+    "PublishingDetails": {
+      "properties": {
+        "applicationAlias": {
+          "type": "string",
+          "description": "The application alias."
+        },
+        "applicationVirtualPath": {
+          "type": "string",
+          "description": "The application virtual path with respect to local machine."
+        },
+        "success": {
+          "type": "boolean",
+          "description": "Whether operation was successful."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message with respect to operation result."
+        }
+      },
+      "description": "Result of the operation"
+    },
+    "PublishingOperationResult": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PublishingDetails",
+          "description": "PublishingOperation properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the resource."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL for requesting next page of resources."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Resource"
+        }
+      ],
+      "description": "Details of publishing / unpublishing operation results."
+    },
+    "SecurityPrincipal": {
+      "properties": {
+        "securityPrincipalType": {
+          "type": "string",
+          "description": "The security principal type.",
+          "enum": [
+            "User",
+            "Group"
+          ],
+          "x-ms-enum": {
+            "name": "PrincipalType",
+            "modelAsString": false
+          }
+        },
+        "userIdType": {
+          "type": "string",
+          "description": "The security principal provider type.",
+          "enum": [
+            "OrgId",
+            "MicrosoftAccount"
+          ],
+          "x-ms-enum": {
+            "name": "PrincipalProviderType",
+            "modelAsString": false
+          }
+        },
+        "upn": {
+          "type": "string",
+          "description": "The security principal UPN."
+        },
+        "aadObjectId": {
+          "type": "string",
+          "description": "For OrgId principals, the principal's Azure ActiveDirectory object ID"
+        },
+        "description": {
+          "type": "string",
+          "description": "The security principal description."
+        }
+      },
+      "description": "The application security principal details."
+    },
+    "SecurityPrincipalList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityPrincipalInfo"
+          }
+        }
+      },
+      "description": "The list of security principals."
+    },
+    "SecurityPrincipalInfoProperties": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The user consent status.",
+          "enum": [
+            "Unknown",
+            "NotFound",
+            "Pending",
+            "Accepted",
+            "Rejected",
+            "Ignored"
+          ],
+          "x-ms-enum": {
+            "name": "ConsentStatus",
+            "modelAsString": false
+          }
+        },
+        "user": {
+          "$ref": "#/definitions/SecurityPrincipal",
+          "description": "The security principal information."
+        }
+      },
+      "description": "Contains a security principal and that principal's consent status for this collection."
+    },
+    "SecurityPrincipalInfo": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityPrincipalInfoProperties",
+          "description": "SecurityPrincipalInfo properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the resource."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL for requesting next page of resources."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Resource"
+        }
+      ],
+      "description": "Contains details about the security principal and that principal's consent status for this collection."
+    },
+    "SessionProperties": {
+      "properties": {
+        "logonTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time the session started"
+        },
+        "userUpn": {
+          "type": "string",
+          "description": "The Upn of the currently active user"
+        },
+        "state": {
+          "type": "string",
+          "description": "The session state. Possible values are 'Active', 'Disconnected', 'NoSession', 'Unknown'",
+          "enum": [
+            "Active",
+            "Connected",
+            "Disconnected",
+            "NoSession",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "SessionState",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "The details of a session."
+    },
+    "Session": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SessionProperties",
+          "description": "A RemoteApp session"
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Resource"
+        }
+      ],
+      "description": "The wrapper for the session object"
+    },
+    "SessionList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Session"
+          },
+          "description": "A list of sessions"
+        }
+      },
+      "description": "The response for the get session list operation."
+    },
+    "SessionSendMessageCommandParameter": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Message to send to the specified user."
+        }
+      },
+      "description": "Parameter definition for session commands."
+    },
+    "SecurityPrincipalListParameter": {
+      "properties": {
+        "SecurityPrincipals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityPrincipal"
+          },
+          "description": "The list of security principals."
+        }
+      },
+      "description": "The list of security principals."
+    },
+    "SecurityPrincipalErrorDetails": {
+      "properties": {
+        "securityPrincipal": {
+          "type": "string",
+          "description": "The security principal name."
+        },
+        "error": {
+          "type": "string",
+          "description": "The security principal operation result error code, if any.",
+          "enum": [
+            "CouldNotBeResolved",
+            "NotFound",
+            "AlreadyExists",
+            "NotSupported",
+            "NotDirsynced",
+            "AssignedToAnotherCollection"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityPrincipalOperationError",
+            "modelAsString": false
+          }
+        },
+        "errorDetails": {
+          "type": "string",
+          "description": "Additional details about the error code, if available."
+        }
+      },
+      "description": "The security principal which failed this operation and the error."
+    },
+    "SecurityPrincipalOperationErrorDetails": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityPrincipalErrorDetails",
+          "description": "Security principal error details properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the resource."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL for requesting next page of resources."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Resource"
+        }
+      ],
+      "description": "Operational results of adding or removing a security principal."
+    },
+    "TemplateImageProperties": {
+      "properties": {
+        "templateImageName": {
+          "type": "string",
+          "description": "The friendly name for the image"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The image size in bytes"
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the template image",
+          "enum": [
+            "UploadPending",
+            "UploadInProgress",
+            "UploadComplete",
+            "UploadFailed",
+            "ImportInProgress",
+            "ImportFailed",
+            "ImportComplete",
+            "ValidationFailed",
+            "Ready",
+            "Corrupted",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "TemplateImageStatus",
+            "modelAsString": false
+          }
+        },
+        "locationList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of locations where the image can be used"
+        },
+        "templateImageType": {
+          "type": "string",
+          "description": "The type of the template image.",
+          "enum": [
+            "CustomerImage",
+            "MicrosoftImage",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "TemplateImageType",
+            "modelAsString": false
+          }
+        },
+        "trialOnly": {
+          "type": "boolean",
+          "description": "A TrialOnly platform template image may be used only during a subscription's RemoteApp trial period. Once billing is activated, a collection using a TrialOnly template image will be permanently disabled."
+        },
+        "officeType": {
+          "type": "string",
+          "description": "If the template image for this collection includes Office this will specify the type.",
+          "enum": [
+            "None",
+            "OfficeSAL",
+            "Office365",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "OfficeType",
+            "modelAsString": false
+          }
+        },
+        "numberOfLinkedCollections": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of collections linked to the template image."
+        },
+        "uploadCompleteTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the template image upload was completed."
+        }
+      },
+      "description": "Details of a template image"
+    },
+    "TemplateImage": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TemplateImageProperties",
+          "description": "A template image"
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Resource"
+        }
+      ],
+      "description": "The wrapper for the template image object"
+    },
+    "TemplateImageList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TemplateImage"
+          },
+          "description": "A list of template images"
+        }
+      },
+      "description": "The response for the get template images operation."
+    },
+    "UsageDetailsInfo": {
+      "properties": {
+        "extraData": {
+          "type": "string",
+          "description": "URI for the CSV file"
+        },
+        "resultId": {
+          "type": "string",
+          "description": "ID of the CSV file creation operation"
+        }
+      },
+      "description": "URI information about the usage details CSV file"
+    },
+    "VmDetailProperties": {
+      "properties": {
+        "virtualMachineName": {
+          "type": "string",
+          "description": "The virtual machine name."
+        },
+        "loggedOnUserUpn": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of the users logged onto this virtual machine."
+        }
+      },
+      "description": "The virtual machine details."
+    },
+    "VmDetails": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VmDetailProperties",
+          "description": "VmDetails properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the resource."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL for requesting next page of resources."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Resource"
+        }
+      ],
+      "description": "The response for the get virtual machine operation."
+    },
+    "VirtualMachineDetailsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmDetails"
+          },
+          "description": "A list of virtual machine details"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to use for request paging."
+        }
+      },
+      "description": "A list of virtual machine details"
+    },
+    "VmCommandDetailsWrapper": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VmCommandDetailsAll",
+          "description": "Virtual machine properties"
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the resource."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL for requesting next page of resources."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Resource"
+        }
+      ],
+      "description": "A wrapper for virtual machine command details to be used as a parameter"
+    },
+    "VmCommandDetailsAll": {
+      "properties": {
+        "logoffMessage": {
+          "type": "string",
+          "description": "Message to display to the user."
+        },
+        "logoffWaitTimeInSeconds": {
+          "type": "integer",
+          "description": "Time to wait before restarting the virtual machine."
+        }
+      },
+      "description": "The virtual machine details."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "apiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "A Microsoft Azure subscription ID."
+    },
+    "armNamespace": {
+      "name": "armNamespace",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Azure Resource Manager namespace for RemoteApp service environments."
+    }
+  }
+}

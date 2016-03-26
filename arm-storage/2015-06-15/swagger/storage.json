@@ -17,6 +17,24 @@
     "application/json",
     "text/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": {
       "post": {
@@ -491,6 +509,7 @@
           "description": "Resource tags"
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageAccountPropertiesCreateParameters"
         }
       },
@@ -626,6 +645,7 @@
     "StorageAccount": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageAccountProperties"
         }
       },
@@ -694,6 +714,7 @@
           "description": "Resource tags"
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageAccountPropertiesUpdateParameters"
         }
       },
