@@ -345,6 +345,10 @@
     "WebServiceProperties": {
       "type": "object",
       "description": "The definition of the web service being deployed.",
+      "required": [
+        "packageType"
+      ],
+      "discriminator": "packageType",
       "properties": {
         "description": {
           "type": "string",
@@ -399,12 +403,10 @@
           "$ref": "#/definitions/CommitmentPlan"
         },
         "input": {
-          "type": "string",
-          "description": "[TODO] The web service's input schema defined as a JSON object."
+          "$ref": "#/definitions/ModuleInterfaceSchema"
         },
         "output": {
-          "type": "string",
-          "description": "[TODO] The web service's output schema defined as a JSON object."
+          "$ref": "#/definitions/ModuleInterfaceSchema"
         },
         "assets": {
           "$ref": "#/definitions/AssetProperties"
@@ -423,15 +425,79 @@
             "Code",
             "Graph"
           ]
-        },
-        "package": {
-          "type": "string",
-          "description": "[TODO] The web service's package defined as a JSON object."
         }
-      },
-      "required": [
-        "packageType"
-      ]
+      }
+    },
+    "WebServicePropertiesForGraph": {
+      "description": "[TODO] Payload for Graph package",
+      "x-ms-discriminator-value": "Graph",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WebServiceProperties"
+        }
+      ],
+      "properties": {
+        "package": {
+          "type": "object",
+          "description": "[TODO] Graph Package",
+          "properties": {
+            "nodes": {
+              "type": "array",
+              "description": "[TODO] Graph nodes collection",
+              "items": {
+                "$ref": "#/definitions/GraphNodeKeyPair"
+              }
+            },
+            "edges": {
+              "type": "array",
+              "description": "[TODO] List of Graph Edges",
+              "items": {
+                "$ref": "#/definitions/GraphEdge"
+              }
+            },
+            "graphParameters": {
+              "type": "array",
+              "description": "[TODO] Graph parameter collection",
+              "items": {
+                "$ref": "#/definitions/GraphParameterKeyPair"
+              }
+            }
+          }
+        }
+      }
+    },
+    "WebServicePropertiesForCode": {
+      "description": "[TODO] Payload for Code package",
+      "x-ms-discriminator-value": "Code",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WebServiceProperties"
+        }
+      ],
+      "properties": {
+        "package": {
+          "type": "object",
+          "description": "[TODO] Code Package",
+          "properties": {
+            "language": {
+              "type": "string",
+              "description": "[TODO] The language of source code",
+              "enum": [
+                "Python-2.7",
+                "R-3.1"
+              ]
+            },
+            "sourceCode": {
+              "type": "string",
+              "description": "[TODO] The source code"
+            },
+            "zipFileAssetId": {
+              "type": "string",
+              "description": "[TODO] Zip file's Asset ID"
+            }
+          }
+        }
+      }
     },
     "WebServiceKeys": {
       "type": "object",
@@ -461,88 +527,6 @@
         "nextLink": {
           "type": "string",
           "description": "[TODO] Next Link"
-        }
-      }
-    },
-    "GraphNode": {
-      "type": "object",
-      "description": "[TODO] Graph Node",
-      "properties": {
-        "assetId": {
-          "type": "string",
-          "description": "[TODO] Asset ID"
-        },
-        "inputId": {
-          "type": "string",
-          "description": "[TODO] Input ID"
-        },
-        "outputId": {
-          "type": "string",
-          "description": "[TODO] Output ID"
-        },
-        "parameters": {
-          "type": "object",
-          "description": "[TODO] Node Parameters",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "GraphEdge": {
-      "type": "object",
-      "description": "[TODO] Graph edge",
-      "properties": {
-        "sourceNode": {
-          "type": "string",
-          "description": "[TODO] Edge source"
-        },
-        "sourceOutputPort": {
-          "type": "string",
-          "description": "[TODO] Source node output port"
-        },
-        "targetNode": {
-          "type": "string",
-          "description": "[TODO] Edge target"
-        },
-        "targetInputPort": {
-          "type": "string",
-          "description": "[TODO] Target node input port"
-        }
-      }
-    },
-    "GraphParameter": {
-      "type": "object",
-      "description": "[TODO] Graph Parameter",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "[TODO] Description of this Graph parameter"
-        },
-        "defaultValue": {
-          "type": "string",
-          "description": "[TODO] The default value of this parameter. Could be null"
-        },
-        "links": {
-          "type": "array",
-          "description": "[TODO] Links of this parameter",
-          "items": {
-            "$ref": "#/definitions/GraphParameterLink"
-          }
-        }
-      }
-    },
-    "GraphParameterLink": {
-      "type": "object",
-      "description": "[TODO] The link in Graph Paramter",
-      "properties": {
-        "nodeId": {
-          "type": "string",
-          "description": "[TODO] The node ID"
-        },
-        "parameterId": {
-          "type": "string",
-          "description": "[TODO] The parameter ID"
         }
       }
     },
@@ -660,6 +644,117 @@
         }
       }
     },
+    "ModuleInterfaceSchema": {
+      "type": "object",
+      "description": "[TODO] The swagger schema describing the service's input.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "[TODO] Interface title"
+        },
+        "description": {
+          "type": "string",
+          "description": "[TODO] Description of the interface"
+        },
+        "format": {
+          "type": "string",
+          "description": "[TODO] Format of the interface"
+        },
+        "type": {
+          "type": "string",
+          "description": "[TODO] Interface properties' type. Always use 'object' here.",
+          "default": "object"
+        },
+        "properties": {
+          "type": "array",
+          "description":  "[TODO]",
+          "items": {
+            "$ref": "#/definitions/DataTableKeyValuePair"
+          }
+        }
+      }
+    },
+    "DataTableSchema": {
+      "type": "object",
+      "description": "[TODO] schema for a data table",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "[TODO] Table title"
+        },
+        "description": {
+          "type": "string",
+          "description": "[TODO] Table description"
+        },
+        "type": {
+          "type": "string",
+          "description": "[TODO] Table properties' type. Always use 'object' here.",
+          "default": "object"
+        },
+        "format": {
+          "type": "string",
+          "description": "[TODO] Table format"
+        },
+        "properties": {
+          "type": "array",
+          "description": "The set of columns within the data table",
+          "items": {
+            "$ref": "#/definitions/DataTableColumnKeyPair"
+          }
+        }
+      }
+    },
+    "DataTableKeyValuePair": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/DataTableSchema"
+        }
+      }
+    },
+    "DataTableColumnSchema": {
+      "type": "object",
+      "description": "[TODO] input column.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "[TODO] Data type"
+        },
+        "format": {
+          "type": "string",
+          "description": "[TODO] Data format"
+        },
+        "enum": {
+          "type": "array",
+          "description": "[TODO] Options",
+          "items": {
+            "type": "object"
+          }
+        },
+        "x-ms-isnullable": {
+          "type": "boolean",
+          "description": "[TODO] Is nullable"
+        },
+        "x-ms-isordered": {
+          "type": "boolean",
+          "description": "[TODO] Is enum in order"
+        }
+      }
+    },
+    "DataTableColumnKeyPair": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/DataTableColumnSchema"
+        }
+      }
+    },
     "AssetProperties": {
       "type": "object",
       "additionalProperties": {
@@ -743,6 +838,117 @@
         "description": "[TODO] Metadata value"
       }
     },
+    "GraphNode": {
+      "type": "object",
+      "description": "[TODO] Graph Node",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "[TODO] Asset ID"
+        },
+        "inputId": {
+          "type": "string",
+          "description": "[TODO] Input ID"
+        },
+        "outputId": {
+          "type": "string",
+          "description": "[TODO] Output ID"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "[TODO] Node Parameters",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GraphNodeKeyPair": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/GraphNode"
+        }
+      }
+    },
+    "GraphEdge": {
+      "type": "object",
+      "description": "[TODO] Graph edge",
+      "properties": {
+        "sourceNodeId": {
+          "type": "string",
+          "description": "[TODO] Edge source"
+        },
+        "sourceOutputPortId": {
+          "type": "string",
+          "description": "[TODO] Source node output port id"
+        },
+        "targetNodeId": {
+          "type": "string",
+          "description": "[TODO] Edge target"
+        },
+        "targetInputPortId": {
+          "type": "string",
+          "description": "[TODO] Target node input port id"
+        }
+      }
+    },
+    "GraphParameter": {
+      "type": "object",
+      "description": "[TODO] Graph Parameters",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "[TODO] Description of this Graph parameter"
+        },
+        "links": {
+          "type": "array",
+          "description": "[TODO] Links of this parameter",
+          "items": {
+            "$ref": "#/definitions/GraphParameterLink"
+          }
+        },
+        "parameterRules": {
+          "type": "array",
+          "description": "[TODO] Rules for this parameter",
+          "items": {
+            "$ref": "#/definitions/GraphParameterRule"
+          }
+        }
+      }
+    },
+    "GraphParameterLink": {
+      "type": "object",
+      "description": "[TODO] The link in graph parameter",
+      "properties": {
+        "nodeId": {
+          "type": "string",
+          "description": "[TODO] The node ID"
+        },
+        "parameterKey": {
+          "type": "string",
+          "description": "[TODO] The parameter key"
+        }
+      }
+    },
+    "GraphParameterRule": {
+      "type": "object",
+      "description": "[TODO] A rule for a graph parameter"
+    },
+    "GraphParameterKeyPair": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/GraphParameter"
+        }
+      }
+    },
     "Resource": {
       "required": [
         "location"
@@ -771,8 +977,7 @@
             "type": "string"
           }
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "CheckNameResult": {
       "type": "object",
