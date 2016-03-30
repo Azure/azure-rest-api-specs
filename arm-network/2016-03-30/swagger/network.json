@@ -17,6 +17,24 @@
     "application/json",
     "text/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}": {
       "delete": {
@@ -995,7 +1013,7 @@
         "tags": [
           "ExpressRouteCircuitStats"
         ],
-        "operationId": "ExpressRouteCircuits_ListStats",
+        "operationId": "ExpressRouteCircuits_GetStats",
         "description": "The Liststats ExpressRouteCircuit opertion retrieves all the stats from a ExpressRouteCircuits in a resource group.",
         "parameters": [
           {
@@ -1026,9 +1044,6 @@
               "$ref": "#/definitions/ExpressRouteCircuitStats"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1037,7 +1052,7 @@
         "tags": [
           "ExpressRouteCircuitStats"
         ],
-        "operationId": "ExpressRouteCircuits_ListPeeringStats",
+        "operationId": "ExpressRouteCircuits_GetPeeringStats",
         "description": "The Liststats ExpressRouteCircuit opertion retrieves all the stats from a ExpressRouteCircuits in a resource group.",
         "parameters": [
           {
@@ -1075,9 +1090,6 @@
               "$ref": "#/definitions/ExpressRouteCircuitStats"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4803,7 +4815,7 @@
       },
       "description": "Specfies the peering config"
     },
-   "ExpressRouteCircuitStats": {
+    "ExpressRouteCircuitStats": {
       "properties": {
         "primarybytesIn": {
           "type": "integer",
@@ -5164,20 +5176,20 @@
         "v": {
           "type": "integer",
           "format": "int32",
-          "description": "V."
+          "description": "BGP version number spoken to the neighbor."
         },
         "as": {
           "type": "integer",
           "format": "int32",
-          "description": "AS."
+          "description": "Autonomous system number."
         },
         "upDown": {
           "type": "string",
-          "description": "upDown."
+          "description": "The length of time that the BGP session has been in the Established state, or the current status if not in the Established state."
         },
         "statePfxRcd": {
           "type": "string",
-          "description": "statePfxRcd ."
+          "description": "Current state of the BGP session, and the number of prefixes that have been received from a neighbor or peer group."
         }
       },
       "required": [
@@ -5200,22 +5212,6 @@
         }
       },
       "description": "Response for ListRoutesTable associated with the Express Route Circuits Api"
-    },
-    "ExpressRouteCircuitsStatsListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitStats"
-          },
-          "description": "Gets List of Stats"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next set of results."
-        }
-      },
-      "description": "Response for ListStats from Express Route Circuits Api service call"
     },
     "ExpressRouteCircuitListResult": {
       "properties": {
