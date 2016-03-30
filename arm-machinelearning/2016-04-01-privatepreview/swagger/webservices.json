@@ -383,32 +383,40 @@
           "type": "boolean",
           "description": "True, if the Web Service should be read-only; False, otherwise"
         },
-        "swaggerUri": {
+        "swaggerLocation": {
           "type": "string",
           "description": "The uri for the swagger spec associated with this web service"
         },
         "realtimeConfiguration": {
+          "description": "[TODO] Realtime configuration",
           "$ref": "#/definitions/RealtimeConfiguration"
         },
         "diagnostics": {
+          "description": "[TODO] Diagnostics settings",
           "$ref": "#/definitions/DiagnosticsConfiguration"
         },
         "storageAccount": {
+          "description": "[TODO] BYOS description",
           "$ref": "#/definitions/StorageAccount"
         },
         "machineLearningWorkspace": {
+          "description": "[TODO] Service workspace data",
           "$ref": "#/definitions/MachineLearningWorkspace"
         },
         "commitmentPlan": {
+          "description": "[TODO] Service commitment plan data",
           "$ref": "#/definitions/CommitmentPlan"
         },
         "input": {
-          "$ref": "#/definitions/ModuleInterfaceSchema"
+          "description": "[TODO] Service input definition",
+          "$ref": "#/definitions/ServiceInputOutputSpecification"
         },
         "output": {
-          "$ref": "#/definitions/ModuleInterfaceSchema"
+          "description": "[TODO] Service output definition",
+          "$ref": "#/definitions/ServiceInputOutputSpecification"
         },
         "assets": {
+          "description": "[TODO] Service assets",
           "$ref": "#/definitions/AssetProperties"
         },
         "parameters": {
@@ -424,7 +432,11 @@
           "enum": [
             "Code",
             "Graph"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "PackageType",
+            "modelAsString": false
+          }
         }
       }
     },
@@ -442,10 +454,10 @@
           "description": "[TODO] Graph Package",
           "properties": {
             "nodes": {
-              "type": "array",
+              "type": "object",
               "description": "[TODO] Graph nodes collection",
-              "items": {
-                "$ref": "#/definitions/GraphNodeKeyPair"
+              "additionalProperties": {
+                "$ref": "#/definitions/GraphNode"
               }
             },
             "edges": {
@@ -456,10 +468,10 @@
               }
             },
             "graphParameters": {
-              "type": "array",
+              "type": "object",
               "description": "[TODO] Graph parameter collection",
-              "items": {
-                "$ref": "#/definitions/GraphParameterKeyPair"
+              "additionalProperties": {
+                "$ref": "#/definitions/GraphParameter"
               }
             }
           }
@@ -594,11 +606,16 @@
             "None",
             "Error",
             "All"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "DiagnosticsLevel",
+            "modelAsString": false
+          }
         },
         "expiry": {
           "type": "string",
-          "description": "[TODO] Expiry"
+          "description": "[TODO] Expiry date",
+          "format": "date-time"
         }
       }
     },
@@ -606,10 +623,6 @@
       "type": "object",
       "description": "[TODO] The Storage Account used in GraphSharp",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "[TODO] The storage account's Id"
-        },
         "name": {
           "type": "string",
           "description": "[TODO] The storage account's name"
@@ -644,7 +657,7 @@
         }
       }
     },
-    "ModuleInterfaceSchema": {
+    "ServiceInputOutputSpecification": {
       "type": "object",
       "description": "[TODO] The swagger schema describing the service's input.",
       "properties": {
@@ -656,25 +669,21 @@
           "type": "string",
           "description": "[TODO] Description of the interface"
         },
-        "format": {
-          "type": "string",
-          "description": "[TODO] Format of the interface"
-        },
         "type": {
           "type": "string",
           "description": "[TODO] Interface properties' type. Always use 'object' here.",
           "default": "object"
         },
         "properties": {
-          "type": "array",
-          "description":  "[TODO]",
-          "items": {
-            "$ref": "#/definitions/DataTableKeyValuePair"
+          "type": "object",
+          "description": "[TODO]",
+          "additionalProperties": {
+            "$ref": "#/definitions/TableSpecification"
           }
         }
       }
     },
-    "DataTableSchema": {
+    "TableSpecification": {
       "type": "object",
       "description": "[TODO] schema for a data table",
       "properties": {
@@ -691,31 +700,16 @@
           "description": "[TODO] Table properties' type. Always use 'object' here.",
           "default": "object"
         },
-        "format": {
-          "type": "string",
-          "description": "[TODO] Table format"
-        },
         "properties": {
-          "type": "array",
+          "type": "object",
           "description": "The set of columns within the data table",
-          "items": {
-            "$ref": "#/definitions/DataTableColumnKeyPair"
+          "additionalProperties": {
+            "$ref": "#/definitions/ColumnSpecification"
           }
         }
       }
     },
-    "DataTableKeyValuePair": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string"
-        },
-        "value": {
-          "$ref": "#/definitions/DataTableSchema"
-        }
-      }
-    },
-    "DataTableColumnSchema": {
+    "ColumnSpecification": {
       "type": "object",
       "description": "[TODO] input column.",
       "properties": {
@@ -744,17 +738,6 @@
         }
       }
     },
-    "DataTableColumnKeyPair": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string"
-        },
-        "value": {
-          "$ref": "#/definitions/DataTableColumnSchema"
-        }
-      }
-    },
     "AssetProperties": {
       "type": "object",
       "additionalProperties": {
@@ -780,20 +763,14 @@
         "inputPorts": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/AssetPort"
+            "$ref": "#/definitions/InputPort"
           }
         },
         "outputPorts": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/AssetPort"
+            "$ref": "#/definitions/OutputPort"
           }
-        },
-        "parameters": {
-          "$ref": "#/definitions/AssetParameters"
-        },
-        "metadata": {
-          "$ref": "#/definitions/AssetMetadata"
         }
       }
     },
@@ -812,9 +789,9 @@
         }
       }
     },
-    "AssetPort": {
+    "InputPort": {
       "type": "object",
-      "description": "[TODO] Asset Port",
+      "description": "[TODO] Asset input port",
       "properties": {
         "type": {
           "type": "string",
@@ -822,20 +799,14 @@
         }
       }
     },
-    "AssetParameters": {
+    "OutputPort": {
       "type": "object",
-      "description": "[TODO] Asset parameters",
-      "additionalProperties": {
-        "type": "string",
-        "description": "[TODO] Parameter value"
-      }
-    },
-    "AssetMetadata": {
-      "type": "object",
-      "description": "[TODO] Asset metadata",
-      "additionalProperties": {
-        "type": "string",
-        "description": "[TODO] Metadata value"
+      "description": "[TODO] Asset output port",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "[TODO] dataset or zip"
+        }
       }
     },
     "GraphNode": {
@@ -863,17 +834,6 @@
         }
       }
     },
-    "GraphNodeKeyPair": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string"
-        },
-        "value": {
-          "$ref": "#/definitions/GraphNode"
-        }
-      }
-    },
     "GraphEdge": {
       "type": "object",
       "description": "[TODO] Graph edge",
@@ -882,7 +842,7 @@
           "type": "string",
           "description": "[TODO] Edge source"
         },
-        "sourceOutputPortId": {
+        "sourcePortId": {
           "type": "string",
           "description": "[TODO] Source node output port id"
         },
@@ -890,7 +850,7 @@
           "type": "string",
           "description": "[TODO] Edge target"
         },
-        "targetInputPortId": {
+        "targetPortId": {
           "type": "string",
           "description": "[TODO] Target node input port id"
         }
@@ -910,13 +870,6 @@
           "items": {
             "$ref": "#/definitions/GraphParameterLink"
           }
-        },
-        "parameterRules": {
-          "type": "array",
-          "description": "[TODO] Rules for this parameter",
-          "items": {
-            "$ref": "#/definitions/GraphParameterRule"
-          }
         }
       }
     },
@@ -933,22 +886,7 @@
           "description": "[TODO] The parameter key"
         }
       }
-    },
-    "GraphParameterRule": {
-      "type": "object",
-      "description": "[TODO] A rule for a graph parameter"
-    },
-    "GraphParameterKeyPair": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string"
-        },
-        "value": {
-          "$ref": "#/definitions/GraphParameter"
-        }
-      }
-    },
+    },    
     "Resource": {
       "required": [
         "location"
