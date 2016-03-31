@@ -33,20 +33,33 @@
             "$ref": "#/parameters/WebServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "in": "body",
+            "name": "createOrUpdatePayload",
+            "description": "The payload to create or update a Web Service",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebService"
+            }
           },
           {
-            "$ref": "#/parameters/CreateOrUpdateWebServiceRequestPayloadSchema"
+            "$ref": "#/parameters/APIVersionParameter"
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebService"
+            }
+          },
           "201": {
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/WebService"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true        
       },
       "get": {
         "operationId": "GetWebService",
@@ -88,10 +101,16 @@
             "$ref": "#/parameters/WebServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "in": "body",
+            "name": "patchPayload",
+            "description": "[TODO] Patch Web Service Request Payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebService"
+            }
           },
           {
-            "$ref": "#/parameters/PatchWebServiceRequestPayloadSchema"
+            "$ref": "#/parameters/APIVersionParameter"
           }
         ],
         "responses": {
@@ -101,7 +120,8 @@
               "$ref": "#/definitions/WebService"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "DeleteWebService",
@@ -127,7 +147,8 @@
           "204": {
             "description": "No-Content. The Web Service is not found."
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}/keys": {
@@ -288,25 +309,7 @@
       "description": "Client Api Version.",
       "required": true,
       "enum": [ "2016-02-01-preview" ]
-    },
-    "CreateOrUpdateWebServiceRequestPayloadSchema": {
-      "in": "body",
-      "name": "createOrUpdatePayload",
-      "description": "The payload to create or update a Web Service",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/WebService"
-      }
-    },
-    "PatchWebServiceRequestPayloadSchema": {
-      "in": "body",
-      "name": "patchPayload",
-      "description": "[TODO] Patch Web Service Request Payload. It indicates all fields could be pacthed.",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/WebService"
-      }
-    },
+    },    
     "CheckNameAvailabilitySchema": {
       "in": "body",
       "name": "checkNameAvailabilityPayload",
@@ -357,12 +360,14 @@
         "createdOn": {
           "type": "string",
           "description": "The moment of time the web service was created.",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
         "modifiedOn": {
           "type": "string",
           "description": "The last moment of time the web service was last modified.",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
         "provisioningState": {
           "type": "string",
@@ -371,6 +376,7 @@
             "Unknown",
             "Provisioning"
           ],
+          "readOnly": true,
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": false
@@ -385,7 +391,8 @@
         },
         "swaggerLocation": {
           "type": "string",
-          "description": "The uri for the swagger spec associated with this web service"
+          "description": "The uri for the swagger spec associated with this web service",
+          "readOnly": true
         },
         "realtimeConfiguration": {
           "description": "[TODO] Realtime configuration",
@@ -433,6 +440,7 @@
             "Code",
             "Graph"
           ],
+          "readOnly": true,
           "x-ms-enum": {
             "name": "PackageType",
             "modelAsString": false
