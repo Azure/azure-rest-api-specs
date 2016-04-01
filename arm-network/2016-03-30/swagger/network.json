@@ -4193,9 +4193,9 @@
         "backendIPConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "#/definitions/NetworkInterfaceIPConfiguration"
           },
-          "description": "Gets or sets backendIPConfiguration of application gateway "
+          "description": "Gets collection of references to IPs defined in NICs"
         },
         "backendAddresses": {
           "type": "array",
@@ -5966,6 +5966,13 @@
     },
     "NetworkInterfaceIPConfigurationPropertiesFormat": {
       "properties": {
+        "applicationGatewayBackendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendAddressPool"
+          },
+          "description": "Gets or sets the reference of ApplicationGatewayBackendAddressPool resource"
+        },      
         "loadBalancerBackendAddressPools": {
           "type": "array",
           "items": {
