@@ -17,6 +17,24 @@
     "application/json",
     "text/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}": {
       "put": {
@@ -2641,14 +2659,7 @@
       "properties": {
         "forceUpdateTag": {
           "type": "string",
-          "description": "Gets or sets how the extension handler should be forced to update even if the extension configuration has not changed.",
-          "enum": [
-            "RerunExtension"
-          ],
-          "x-ms-enum": {
-            "name": "ForceUpdateTagTypes",
-            "modelAsString": false
-          }
+          "description": "Gets or sets how the extension handler should be forced to update even if the extension configuration has not changed."
         },
         "publisher": {
           "type": "string",
@@ -3836,6 +3847,13 @@
           "$ref": "#/definitions/ApiEntityReference",
           "description": "Gets or sets the subnet."
         },
+        "applicationGatewayBackendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Gets or sets the application gateway backend address pools."
+        },        
         "loadBalancerBackendAddressPools": {
           "type": "array",
           "items": {

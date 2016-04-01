@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ResourceManagementClient",
-    "version": "2015-11-01"
+    "version": "2016-02-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -39,7 +39,7 @@
           "Deployments"
         ],
         "operationId": "Deployments_Delete",
-        "description": "Begin deleting deployment.To determine whether the operation has finished processing the request, call GetLongRunningOperationStatus.",
+        "description": "Delete deployment.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -291,6 +291,46 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/DeploymentValidateResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/exportTemplate": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_ExportTemplate",
+        "description": "Exports a deployment template.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the deployment."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExportResult"
             }
           }
         }
@@ -613,7 +653,7 @@
           "ResourceGroups"
         ],
         "operationId": "ResourceGroups_Delete",
-        "description": "Begin deleting resource group.To determine whether the operation has finished processing the request, call GetLongRunningOperationStatus.",
+        "description": "Delete resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -712,6 +752,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/exportTemplate": {
+      "post": {
+        "tags": [
+          "ResourceGroups"
+        ],
+        "operationId": "ResourceGroups_ExportTemplate",
+        "description": "Captures the specified resource group as a template.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group to be created or updated.",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportTemplateRequest"
+            },
+            "description": "Parameters supplied to the export template resource group operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ResourceGroupExportResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourcegroups": {
       "get": {
         "tags": [
@@ -762,7 +844,7 @@
           "Resources"
         ],
         "operationId": "Resources_MoveResources",
-        "description": "Begin moving resources.To determine whether the operation has finished processing the request, call GetLongRunningOperationStatus.",
+        "description": "Move resources from one resource group to another. The resources being moved should all be in the same resource group.",
         "parameters": [
           {
             "name": "sourceResourceGroupName",
@@ -1111,12 +1193,6 @@
         ],
         "responses": {
           "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/GenericResource"
-            }
-          },
-          "204": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/GenericResource"
@@ -2145,9 +2221,22 @@
             "name": "DeploymentMode",
             "modelAsString": false
           }
+        },
+        "debugSetting": {
+          "$ref": "#/definitions/DebugSetting",
+          "description": "Gets or sets the debug setting of the deployment."
         }
       },
       "description": "Deployment properties."
+    },
+    "DebugSetting": {
+      "properties": {
+        "detailLevel": {
+          "x-ms-client-flatten": true,
+          "type": "string",
+          "description": "Gets or sets the debug detail level."
+        }
+      }
     },
     "Deployment": {
       "properties": {
@@ -2157,6 +2246,14 @@
         }
       },
       "description": "Deployment operation parameters."
+    },
+    "DeploymentExportResult": {
+      "properties": {
+        "template": {
+          "type": "object",
+          "description": "Gets or sets the template content."
+        }
+      }
     },
     "ResourceManagementError": {
       "properties": {
@@ -2353,6 +2450,10 @@
             "name": "DeploymentMode",
             "modelAsString": false
           }
+        },
+        "debugSetting": {
+          "$ref": "#/definitions/DebugSetting",
+          "description": "Gets or sets the debug setting of the deployment."
         }
       },
       "description": "Deployment properties with additional details."
@@ -2556,6 +2657,22 @@
       },
       "description": "Parameters of move resources."
     },
+    "ExportTemplateRequest": {
+      "properties": {
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the ids of the resources. The only supported string currently is '*' (all resources). Future api updates will support exporting specific resources."
+        },
+        "options": {
+          "type": "string",
+          "description": "The export template options. Supported values include 'IncludeParameterDefaultValue', 'IncludeComments' or 'IncludeParameterDefaultValue, IncludeComments"
+        }
+      },
+      "description": "Export resource group template request parameters."
+    },
     "TagCount": {
       "properties": {
         "type": {
@@ -2646,6 +2763,14 @@
       },
       "description": "Target resource."
     },
+    "HttpMessage": {
+      "properties": {
+        "content": {
+          "type": "object",
+          "description": "Gets or sets HTTP message content."
+        }
+      }
+    },
     "DeploymentOperationProperties": {
       "properties": {
         "provisioningState": {
@@ -2656,6 +2781,10 @@
           "type": "string",
           "format": "date-time",
           "description": "Gets or sets the date and time of the operation."
+        },
+        "serviceRequestId": {
+          "type": "string",
+          "description": "Gets or sets deployment operation service request id."
         },
         "statusCode": {
           "type": "string",
@@ -2668,6 +2797,14 @@
         "targetResource": {
           "$ref": "#/definitions/TargetResource",
           "description": "Gets or sets the target resource."
+        },
+        "request": {
+          "$ref": "#/definitions/HttpMessage",
+          "description": "Gets or sets the HTTP request message."
+        },
+        "response": {
+          "$ref": "#/definitions/HttpMessage",
+          "description": "Gets or sets the HTTP response message."
         }
       },
       "description": "Deployment operation properties."
@@ -2797,6 +2934,18 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "ResourceGroupExportResult": {
+      "properties": {
+        "template": {
+          "type": "object",
+          "description": "Gets or sets the template content."
+        },
+        "error": {
+          "$ref": "#/definitions/ResourceManagementErrorWithDetails",
+          "description": "Gets or sets the error."
+        }
+      }
     }
   },
   "parameters": {
