@@ -313,49 +313,6 @@
         "x-ms-odata": "#/definitions/PolicyAssignment"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/policyassignments": {
-      "get": {
-        "tags": [
-          "PolicyAssignment"
-        ],
-        "operationId": "PolicyAssignment_ListForResourceGroup",
-        "description": "Gets policy assignments of the resource group.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource group name."
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/PolicyAssignmentListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/{policyAssignmentId}": {
       "delete": {
         "tags": [
