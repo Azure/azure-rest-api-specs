@@ -141,11 +141,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "No-Content. The Web Service is not found."
+          "202": {
+            "description":  "Async delete operation was accepted."
           }
         },
         "x-ms-long-running-operation": true
@@ -192,6 +189,9 @@
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PaginationSkipToken"
           }
         ],
         "responses": {
@@ -214,6 +214,9 @@
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PaginationSkipToken"
           }
         ],
         "responses": {
@@ -307,9 +310,8 @@
       "name": "api-version",
       "type": "string",
       "description": "Client Api Version.",
-      "required": true,
-      "enum": [ "2016-02-01-preview" ]
-    },    
+      "required": true      
+    },
     "CheckNameAvailabilitySchema": {
       "in": "body",
       "name": "checkNameAvailabilityPayload",
@@ -328,6 +330,13 @@
           }
         }
       }
+    },
+    "PaginationSkipToken": {
+      "in": "query",
+      "name": "$skiptoken",
+      "type": "string",
+      "description": "Continuation token for pagination.",
+      "required": false
     }
   },
   "definitions": {
