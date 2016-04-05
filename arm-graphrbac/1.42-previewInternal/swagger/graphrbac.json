@@ -16,6 +16,24 @@
     "application/json",
     "text/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/{tenantID}/applications": {
       "post": {
@@ -41,9 +59,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -55,6 +70,40 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Application_List",
+        "description": "Lists applications by filter parameters.",
+        "externalDocs": {
+          "url": "http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx"
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filters to apply on the operarion"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationListResult"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/ApplicationFilter"
       }
     },
     "/{tenantID}/applications/{applicationObjectId}": {
@@ -78,9 +127,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -112,9 +158,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -160,15 +203,37 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
           "204": {
             "description": ""
+          }
+        }
+      }
+    },
+    "/{tenantID}/me": {
+      "get": {
+        "tags": [
+          "Objects"
+        ],
+        "operationId": "Objects_GetCurrentUser",
+        "description": "Gets the details for current logged in user",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AADObject"
+            }
           }
         }
       }
@@ -192,9 +257,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -245,9 +307,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -290,9 +349,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -324,9 +380,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -363,9 +416,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -394,9 +444,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -437,9 +484,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -475,9 +519,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -522,9 +563,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -562,9 +600,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -593,9 +628,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -636,9 +668,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -665,9 +694,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -706,9 +732,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -743,9 +766,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -774,9 +794,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -818,9 +835,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -865,9 +879,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -904,9 +915,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -946,9 +954,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -984,9 +989,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -1026,9 +1028,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/tenantIDInPath"
           }
         ],
@@ -1064,9 +1063,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/tenantIDInPath"
@@ -1193,6 +1189,23 @@
       ],
       "description": "Request parameters for create a new application"
     },
+    "ApplicationFilter": {
+      "properties": {
+        "displayNameStartsWith": {
+          "type": "string",
+          "description": "Application display name starts with"
+        },
+        "appId": {
+          "type": "string",
+          "description": "ApplicationId"
+        },
+        "identifierUri": {
+          "type": "string",
+          "description": "Identifier Uri"
+        }
+      },
+      "description": "Filter parameters for listing applications"
+    },
     "Application": {
       "properties": {
         "objectId": {
@@ -1217,9 +1230,39 @@
         "availableToOtherTenants": {
           "type": "boolean",
           "description": "Indicates if the application will be available to other tenants"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the displayName"
+        },
+        "identifierUris": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the application identifier Uris"
+        },
+        "replyUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the application reply Urls"
         }
       },
       "description": "Active Directory user information"
+    },
+    "ApplicationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          },
+          "description": "Application list."
+        }
+      },
+      "description": "Role assignment list operation result."
     },
     "GetObjectsParameters": {
       "properties": {
@@ -1287,6 +1330,10 @@
             "type": "string"
           },
           "description": "Gets or sets the list of service principal names."
+        },
+        "userType": {
+          "type": "string",
+          "description": "Gets or sets the user type"
         }
       },
       "description": "Active Directory object information"
@@ -1587,59 +1634,9 @@
         }
       },
       "description": "Server response for Get tenant users API call"
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",

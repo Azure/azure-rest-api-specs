@@ -1,0 +1,291 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SubscriptionClient",
+    "version": "2015-11-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/locations": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_ListLocations",
+        "description": "Gets a list of the subscription locations.",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of the subscription"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/LocationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_Get",
+        "description": "Gets details about particular subscription.",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of the subscription."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_List",
+        "description": "Gets a list of the subscriptionIds.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/tenants": {
+      "get": {
+        "tags": [
+          "Tenants"
+        ],
+        "operationId": "Tenants_List",
+        "description": "Gets a list of the tenantIds.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/TenantListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Location": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the ID of the resource (/subscriptions/SubscriptionId)."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Gets or sets the subscription Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the location name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the display name of the location"
+        },
+        "latitude": {
+          "type": "string",
+          "description": "Gets or sets the latitude of the location"
+        },
+        "longitude": {
+          "type": "string",
+          "description": "Gets or sets the longitude of the location"
+        }
+      },
+      "description": "Location information."
+    },
+    "LocationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Location"
+          },
+          "description": "Gets the locations."
+        }
+      },
+      "description": "Location list operation response."
+    },
+    "Subscription": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the ID of the resource (/subscriptions/SubscriptionId)."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Gets or sets the subscription Id."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the subscription display name"
+        },
+        "state": {
+          "type": "string",
+          "description": "Gets or sets the subscription state"
+        },
+        "subscriptionPolicies": {
+          "$ref": "#/definitions/SubscriptionPolicies",
+          "description": "Gets or sets the subscription policies."
+        }
+      },
+      "description": "Subscription information."
+    },
+    "SubscriptionPolicies": {
+      "properties": {
+        "locationPlacementId": {
+          "type": "string",
+          "description": "Gets or sets the subscription location placement Id."
+        },
+        "quotaId": {
+          "type": "string",
+          "description": "Gets or sets the subscription quota Id."
+        }
+      },
+      "description": "Subscription policies."
+    },
+    "SubscriptionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subscription"
+          },
+          "description": "Gets or sets subscriptions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the URL to get the next set of results."
+        }
+      },
+      "required": [
+        "nextLink"
+      ],
+      "description": "Subscription list operation response."
+    },
+    "TenantIdDescription": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets Id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Gets or sets tenantId"
+        }
+      },
+      "description": "Tenant Id information"
+    },
+    "TenantListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TenantIdDescription"
+          },
+          "description": "Gets or sets tenant Ids."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the URL to get the next set of results."
+        }
+      },
+      "required": [
+        "nextLink"
+      ],
+      "description": "Tenant Ids information."
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}
