@@ -545,7 +545,8 @@
           "format": "int64",
           "description": "Gets or sets the minimum number of endpoints that must be available in the child profile in order for the parent profile to be considered available. Only applicable to endpoint of type 'NestedEndpoints'."
         }
-      }
+      },
+      "description": "Class respresenting a Traffic Manager endpoint properties."
     },
     "Endpoint": {
       "properties": {
@@ -646,13 +647,15 @@
           },
           "description": "Gets or sets the list of endpoints in the Traffic Manager profile."
         }
-      }
+      },
+      "description": "Class representing the Traffic Manager profile properties."
     },
     "Profile": {
-      "x-ms-azure-resource": true,
       "properties": {
+        "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProfileProperties"
+        }
       },
       "allOf": [
         {
