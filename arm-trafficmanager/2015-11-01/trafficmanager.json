@@ -233,10 +233,7 @@
         ],
         "responses": {
           "200": { 
-             "description": "", 
-             "schema": { 
-               "$ref": "#/definitions/Endpoint" 
-             } 
+             "description": ""
           } 
         }
       }
@@ -511,6 +508,45 @@
     }
   },
   "definitions": {
+    "EndpointProperties": {
+      "properties": {
+        "targetResourceId": {
+          "type": "string",
+          "description": "Gets or sets the Azure Resource URI of the of the endpoint.  Not applicable to endpoints of type 'ExternalEndpoints'."
+        },
+        "target": {
+          "type": "string",
+          "description": "Gets or sets the fully-qualified DNS name of the endpoint.  Traffic Manager returns this value in DNS responses to direct traffic to this endpoint."
+        },
+        "endpointStatus": {
+          "type": "string",
+          "description": "Gets or sets the status of the endpoint..  If the endpoint is Enabled, it is probed for endpoint health and is included in the traffic routing method.  Possible values are 'Enabled' and 'Disabled'."
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the weight of this endpoint when using the 'Weighted' traffic routing method. Possible values are from 1 to 1000."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the priority of this endpoint when using the ‘Priority’ traffic routing method. Possible values are from 1 to 1000, lower values represent higher priority. This is an optional parameter.  If specified, it must be specified on all endpoints, and no two endpoints can share the same priority value."
+        },
+        "endpointLocation": {
+          "type": "string",
+          "description": "Specifies the location of the external or nested endpoints when using the ‘Performance’ traffic routing method."
+        },
+        "endpointMonitorStatus": {
+          "type": "string",
+          "description": "Gets or sets the monitoring status of the endpoint."
+        },
+        "minChildEndpoints": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the minimum number of endpoints that must be available in the child profile in order for the parent profile to be considered available. Only applicable to endpoint of type 'NestedEndpoints'."
+        }
+      }
+    },
     "Endpoint": {
       "properties": {
         "id": {
@@ -527,41 +563,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "targetResourceId": {
-            "type": "string",
-            "description": "Gets or sets the Azure Resource URI of the of the endpoint.  Not applicable to endpoints of type 'ExternalEndpoints'."
-		      },
-          "target": {
-            "type": "string",
-            "description": "Gets or sets the fully-qualified DNS name of the endpoint.  Traffic Manager returns this value in DNS responses to direct traffic to this endpoint."
-          },
-          "endpointStatus": {
-            "type": "string",
-            "description": "Gets or sets the status of the endpoint..  If the endpoint is Enabled, it is probed for endpoint health and is included in the traffic routing method.  Possible values are 'Enabled' and 'Disabled'."
-          },
-          "weight": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Gets or sets the weight of this endpoint when using the 'Weighted' traffic routing method. Possible values are from 1 to 1000."
-          },
-          "priority": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Gets or sets the priority of this endpoint when using the ‘Priority’ traffic routing method. Possible values are from 1 to 1000, lower values represent higher priority. This is an optional parameter.  If specified, it must be specified on all endpoints, and no two endpoints can share the same priority value."
-          },
-          "endpointLocation": {
-            "type": "string",
-            "description": "Specifies the location of the external or nested endpoints when using the ‘Performance’ traffic routing method."
-          },
-          "endpointMonitorStatus": {
-            "type": "string",
-            "description": "Gets or sets the monitoring status of the endpoint."
-          },
-          "minChildEndpoints": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Gets or sets the minimum number of endpoints that must be available in the child profile in order for the parent profile to be considered available. Only applicable to endpoint of type 'NestedEndpoints'."
-          }
+          "$ref": "#/definitions/EndpointProperties"
         }
       },
       "description": "Class respresenting a Traffic Manager endpoint."
@@ -620,9 +622,7 @@
       "description": "Class containing endpoint monitoring settings in a Traffic Manager profile."
     },
     "Profile": {
-      "x-ms-azure-resource": true,
       "properties": {
-        "x-ms-client-flatten": true,
         "profileStatus": {
           "type": "string",
           "description": "Gets or sets the status of the Traffic Manager profile.  Possible values are 'Enabled' and 'Disabled'."
@@ -656,7 +656,6 @@
     },
     "TrafficManagerNameAvailability": {
       "properties": {
-        "x-ms-client-flatten": true,
         "name": {
           "type": "string",
           "description": "The relative name."
