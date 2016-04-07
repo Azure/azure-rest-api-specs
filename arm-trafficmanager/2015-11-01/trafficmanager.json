@@ -651,8 +651,8 @@
     "Profile": {
       "x-ms-azure-resource": true,
       "properties": {
-        "x-ms-client-flatten": true,
-        "$ref": "#/definitions/ProfileProperties"
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProfileProperties"
       },
       "allOf": [
         {
@@ -661,7 +661,7 @@
       ],
       "description": "Class representing a Traffic Manager profile."
     },
-    "TrafficManagerNameAvailabilityProperties": {
+    "TrafficManagerNameAvailability": {
       "properties": {
         "name": {
           "type": "string",
@@ -683,12 +683,6 @@
           "type": "string",
           "description": "Descriptive message that explains why the name is not available, when applicable."
         }
-      }
-    },
-    "TrafficManagerNameAvailability": {
-      "properties": {
-        "x-ms-client-flatten": true,
-        "$ref": "#/definitions/TrafficManagerNameAvailabilityProperties"
       },
       "description": "Class representing a Traffic Manager Name Availability response."
     },
