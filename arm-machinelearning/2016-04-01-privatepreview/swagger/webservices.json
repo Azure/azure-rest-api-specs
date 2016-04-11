@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Machine Learning Web Services Management Client APIs",
-    "description": "These APIs allows end users to operate on Web Services in Azure ML. They support the following operations:<ul><li>Create a Web Service</li><li>Get a Web Service</li><li>Patch a Web Service</li><li>Delete a Web Service</li><li>Get All Web Services in a Resource Group </li><li>Get All Web Services in a Subscription</li><li>Get Web Services Keys</li><li>Check Name Availability</li><li>Get All Available Operations</li></ul>",
+    "description": "[TODO] These APIs allows end users to operate on Web Services in Azure ML. They support the following operations:<ul><li>Create a web service</li><li>Get a web service</li><li>Patch a web service</li><li>Delete a web service</li><li>Get All Web Services in a Resource Group </li><li>Get All Web Services in a Subscription</li><li>Get Web Services Keys</li><li>Check Name Availability</li><li>Get All Available Operations</li></ul>",
     "version": "2016-04-01-privatepreview"
   },
   "host": "management.azure.com",
@@ -21,7 +21,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}": {
       "put": {
         "operationId": "CreateOrUpdateWebService",
-        "description": "Create a new Web Service or update an existing one.",
+        "description": "Create a new Azure ML web service or update an existing one.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -35,7 +35,7 @@
           {
             "in": "body",
             "name": "createOrUpdatePayload",
-            "description": "The payload to create or update a Web Service",
+            "description": "The payload to create or update the Azure ML web service.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/WebService"
@@ -59,11 +59,11 @@
             }
           }
         },
-        "x-ms-long-running-operation": true        
+        "x-ms-long-running-operation": true
       },
       "get": {
         "operationId": "GetWebService",
-        "description": "Retrieve a Web Service information by its name",
+        "description": "Retrieve an Azure ML web service definition by its subscription, resource group and name.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -89,7 +89,7 @@
       },
       "patch": {
         "operationId": "PatchWebService",
-        "description": "Patch an existing Web Service",
+        "description": "Patch an existing Azure ML web service.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -103,7 +103,7 @@
           {
             "in": "body",
             "name": "patchPayload",
-            "description": "[TODO] Patch Web Service Request Payload.",
+            "description": "The payload to patch the Azure ML with.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/WebService"
@@ -125,7 +125,7 @@
       },
       "delete": {
         "operationId": "DeleteWebService",
-        "description": "Delete an existing Web Service",
+        "description": "Remove an existing Azure ML web service.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -142,7 +142,7 @@
         ],
         "responses": {
           "202": {
-            "description":  "Async delete operation was accepted."
+            "description": "Async delete operation was accepted."
           }
         },
         "x-ms-long-running-operation": true
@@ -151,7 +151,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}/keys": {
       "get": {
         "operationId": "GetWebServiceKeys",
-        "description": "Get the primary and secondary keys of a particular Web Service",
+        "description": "Get the primary and secondary access keys of a particular Azure ML web service",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -179,7 +179,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices": {
       "get": {
         "operationId": "GetWebServicesInResourceGroup",
-        "description": "Retrieve all Web Services' information in a given Resource Group",
+        "description": "Retrieve all Azure ML web services in a given resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -207,7 +207,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearning/webServices": {
       "get": {
         "operationId": "GetWebServicesInSubscription",
-        "description": "Get all Web Services' information in current Azure subscription",
+        "description": "Retrieve all Azure ML web services in the current Azure subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -228,36 +228,11 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft/MachineLearning/checkNameAvailability": {
-      "post": {
-        "operationId": "CheckNameAvaliability",
-        "description": "Check the Web Service Name is valid and not in use",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/CheckNameAvailabilitySchema"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CheckNameResult"
-            }
-          }
-        }
-      }
-    },
+    },    
     "/providers/Microsoft.MachineLearning/operations": {
       "get": {
         "operationId": "GetOperations",
-        "description": "Get all available operations of a Web Service",
+        "description": "Get all available operations for the Microsoft.MachineLearning provider.",
         "parameters": [
           {
             "$ref": "#/parameters/APIVersionParameter"
@@ -286,7 +261,7 @@
   "parameters": {
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "description": "Id of the Microsoft Azure subscription on which to perform ARM operations. The subscription ID forms part of the URI for every service call.",
       "in": "path",
       "type": "string",
       "required": true
@@ -300,7 +275,7 @@
     },
     "WebServiceNameParameter": {
       "name": "webServiceName",
-      "description": "The Web Service name which you want to reach.",
+      "description": "The Azure ML web service name which you want to reach.",
       "in": "path",
       "type": "string",
       "required": true
@@ -309,27 +284,8 @@
       "in": "query",
       "name": "api-version",
       "type": "string",
-      "description": "Client Api Version.",
+      "description": "The versiong of the Microsoft.MachineLearning resource provider API to be used.",
       "required": true      
-    },
-    "CheckNameAvailabilitySchema": {
-      "in": "body",
-      "name": "checkNameAvailabilityPayload",
-      "description": "The payload to check name availability",
-      "required": true,
-      "schema": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The Web Service Name"
-          },
-          "type": {
-            "type": "string",
-            "description": "The Web Service Type"
-          }
-        }
-      }
     },
     "PaginationSkipToken": {
       "in": "query",
@@ -342,7 +298,7 @@
   "definitions": {
     "WebService": {
       "type": "object",
-      "title": "[TODO] The Web Service Object",
+      "title": "[TODO] Instance of an Azure ML web service resource.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -356,7 +312,7 @@
     },
     "WebServiceProperties": {
       "type": "object",
-      "description": "The definition of the web service being deployed.",
+      "description": "The set of properties specific to the Azure ML web service resource.",
       "required": [
         "packageType"
       ],
@@ -364,23 +320,23 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "The description the web service"
+          "description": "The description the Azure ML web service"
         },
         "createdOn": {
           "type": "string",
-          "description": "The moment of time the web service was created.",
+          "description": "The moment of time the Azure ML web service was created.",
           "format": "date-time",
           "readOnly": true
         },
         "modifiedOn": {
           "type": "string",
-          "description": "The last moment of time the web service was last modified.",
+          "description": "The moment of time the web service was last modified.",
           "format": "date-time",
           "readOnly": true
         },
         "provisioningState": {
           "type": "string",
-          "description": "[TODO] web service's provisioning state",
+          "description": "The web service resource's provisioning state.",
           "enum": [
             "Unknown",
             "Provisioning",
@@ -399,11 +355,11 @@
         },
         "readOnly": {
           "type": "boolean",
-          "description": "True, if the Web Service should be read-only; False, otherwise"
+          "description": "True, if the web service should be read-only; False, otherwise"
         },
         "swaggerLocation": {
           "type": "string",
-          "description": "The uri for the swagger spec associated with this web service",
+          "description": "The uri for the swagger spec associated with this Azure ML web service.",
           "readOnly": true
         },
         "realtimeConfiguration": {
@@ -533,7 +489,7 @@
     },
     "WebServiceKeys": {
       "type": "object",
-      "description": "Web Service Keys",
+      "description": "web service Keys",
       "properties": {
         "primary": {
           "type": "string",
@@ -559,49 +515,6 @@
         "nextLink": {
           "type": "string",
           "description": "[TODO] Next Link"
-        }
-      }
-    },
-    "OperationSchema": {
-      "type": "object",
-      "description": "[TODO] The Web Service Operation Description",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The operation name"
-        },
-        "display": {
-          "type": "object",
-          "description": "[TODO] Display",
-          "properties": {
-            "provider": {
-              "type": "string",
-              "description": "[TODO] Provider",
-              "default": "Machine Learning"
-            },
-            "resource": {
-              "type": "string",
-              "description": "[TODO] Resource",
-              "default": "Web Service"
-            },
-            "operation": {
-              "type": "string",
-              "description": "[TODO] Operation"
-            },
-            "description": {
-              "type": "string",
-              "description": "[TODO] Description"
-            }
-          }
-        },
-        "origin": {
-          "type": "string",
-          "description": "[TODO] Origin",
-          "enum": [
-            "user",
-            "system",
-            "user, system"
-          ]
         }
       }
     },
@@ -882,7 +795,29 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "[TODO] Description of this Graph parameter"
+          "description": "Description for this graph parameter."
+        },
+        "type": {
+          "type": "string",
+          "description": "Graph parameter's type.",
+          "enum": [
+            "String",
+            "Int",
+            "Float",
+            "Enumerated",
+            "Script",
+            "Mode",
+            "Credential",
+            "Boolean",
+            "Double",
+            "ColumnPicker",
+            "ParameterRange",
+            "DataGatewayName"
+          ],          
+          "x-ms-enum": {
+            "name": "ParameterType",
+            "modelAsString": false
+          }
         },
         "links": {
           "type": "array",
@@ -906,7 +841,7 @@
           "description": "[TODO] The parameter key"
         }
       }
-    },    
+    },
     "Resource": {
       "required": [
         "location"
@@ -937,24 +872,46 @@
         }
       }
     },
-    "CheckNameResult": {
+    "OperationSchema": {
       "type": "object",
+      "description": "[TODO] The web service Operation Description",
       "properties": {
-        "nameAvaliable": {
-          "type": "boolean",
-          "description": "True, if the name is available; False, otherwise"
-        },
-        "reason": {
+        "name": {
           "type": "string",
-          "description": "The reason why if it is not available",
+          "description": "The operation name"
+        },
+        "display": {
+          "type": "object",
+          "description": "[TODO] Display",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "[TODO] Provider",
+              "default": "Machine Learning"
+            },
+            "resource": {
+              "type": "string",
+              "description": "[TODO] Resource",
+              "default": "web service"
+            },
+            "operation": {
+              "type": "string",
+              "description": "[TODO] Operation"
+            },
+            "description": {
+              "type": "string",
+              "description": "[TODO] Description"
+            }
+          }
+        },
+        "origin": {
+          "type": "string",
+          "description": "[TODO] Origin",
           "enum": [
-            "Invalid",
-            "AlreadyExists"
+            "user",
+            "system",
+            "user, system"
           ]
-        },
-        "message": {
-          "type": "string",
-          "description": ": The message from the server"
         }
       }
     }
