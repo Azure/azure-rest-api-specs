@@ -308,14 +308,11 @@
         ],
         "responses": {
           "200": { 
-             "description": "The list of Traffic Manager profiles within the resource group.",
-             "schema": { 
-               "type": "array", 
-               "items": { 
-                 "$ref": "#/definitions/Profile" 
-               } 
-             }
-          } 
+             "description": "",
+             "schema": {
+               "$ref": "#/definitions/ProfileListResult"
+            }
+          }
         }
       }
     },
@@ -339,13 +336,10 @@
         ],
         "responses": {
           "200": { 
-             "description": "The list of Traffic Manager profiles within the subscription.",
-             "schema": { 
-               "type": "array", 
-               "items": { 
-                 "$ref": "#/definitions/Profile" 
-               } 
-             } 
+             "description": "",
+             "schema": {
+               "$ref": "#/definitions/ProfileListResult"
+            }
           }
         }
       }
@@ -681,6 +675,18 @@
         }
       ],
       "description": "Class representing a Traffic Manager profile."
+    },
+    "ProfileListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Profile"
+          },
+          "description": "Gets the list of Traffic manager profiles."
+        }
+      },
+      "description": "The list Traffic Manager profiles operation response."
     },
     "TrafficManagerNameAvailability": {
       "properties": {
