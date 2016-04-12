@@ -1,27 +1,31 @@
 language: csharp
 sudo: false
 mono:
-  - beta
+- beta
 env:
+  matrix:
   - MODE=syntax
   - MODE=python
   - MODE=node
+  global:
+    secure: bLyFjyAu/c5iqefo9gyFUykG9A+cOjVP3ymt8HldFTMoWKKl0BNr9bPRr0d7b5dB9PT1CfsQAQqbGnNq4ujwW/ilrHDJ27qUN1QoR3e1I0uZ/xAEsH6QMpemGTybp/8TbpWolsXekODnDac3HPtGYggtglRAVSNXrYFr9sH+Nc1V05OipsFUoKg4ZWUEXVkbs9APfwrhQWhFL79UZ+uQa/74vCHB8G+x8rmbxiB/C5fV9hPP5LB7JigSmE+CaaYISHsCr01eFJHkzk1nK5vGr+zZDSEEzZ0iBEtloOwh2awo5nveDEEcBMnzd0EHl/nSfM6D7W1/6neKFiErQgLxPBXpGc2PM1XPvWl8LNllZnnZG5HfmBoeWiDhtlGCd32mLMVbDQHGWlZS0jaYjurU4FXcgCYk7Ydf7MU39IwrD355KhYCsh1vvHb8ozZiXh4q3LeTNm6TLsZV7BMocBSyNBfthF/z6lac/hbr39MP7dHuSbRRYQKCYg1lmt4h4Ab42zwCwdGuk7Sgm7G7UlzrCK6b+379sa2qp0HvRBQuVmRRZxXWIX95/jrCvZ8hJL6RwVrwNBJUKXd6JkmxuSR+CrPCFEVilfjeH/cK1vbOgwiKUF/TFiEtTsECC0bkOtauHGwm2uYt7GfI2Jn4rdSyg9euN9qMS7AGNQ+oAxnrI14=
 addons:
   apt:
     sources:
     - deadsnakes
     packages:
-    # packages for python
     - python3.5
 install:
-  - wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py
-  - python3.5 /tmp/get-pip.py --user
-  - pip3.5 install -r ./SwaggerToSdk/requirements.txt --user
-  - . $HOME/.nvm/nvm.sh
-  - nvm install stable
-  - nvm use stable
-  - npm install	
+- wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py
+- python3.5 /tmp/get-pip.py --user
+- pip3.5 install -r ./SwaggerToSdk/requirements.txt --user
+- ". $HOME/.nvm/nvm.sh"
+- nvm install stable
+- nvm use stable
+- npm install
 script:
-  - if [[ $MODE == 'python' ]]; then python3.5 ./SwaggerToSdk/SwaggerToSdk.py AutorestCI/azure-sdk-for-python --pr-repo-id Azure/azure-sdk-for-python -o dev -v; fi
-  - if [[ $MODE == 'node' ]]; then python3.5 ./SwaggerToSdk/SwaggerToSdk.py AutorestCI/azure-sdk-for-node --pr-repo-id Azure/azure-sdk-for-node -o autorest -v; fi
-  - if [[ $MODE == 'syntax' ]]; then npm test; fi
+- if [[ $MODE == 'python' ]]; then python3.5 ./SwaggerToSdk/SwaggerToSdk.py AutorestCI/azure-sdk-for-python
+  --pr-repo-id Azure/azure-sdk-for-python -o dev -v; fi
+- if [[ $MODE == 'node' ]]; then python3.5 ./SwaggerToSdk/SwaggerToSdk.py AutorestCI/azure-sdk-for-node
+  --pr-repo-id Azure/azure-sdk-for-node -o autorest -v; fi
+- if [[ $MODE == 'syntax' ]]; then npm test; fi
