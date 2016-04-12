@@ -9,6 +9,7 @@ import tempfile
 import argparse
 import json
 import zipfile
+import re
 from io import BytesIO
 from pathlib import Path
 from contextlib import contextmanager
@@ -226,11 +227,39 @@ def compute_pr_comment_with_sdk_pr(comment, sdk_fork_id, branch_name):
                                          fork_repo_id=sdk_fork_id)
     return travis_string+' '+comment
 
+def get_pr_from_travis_commit_sha(gh_token):
+    """Try to determine the initial PR using #<number> in the current commit comment.
+    Will check if the found number is really a merged PR"""
+    if not gh_token:
+        return
+    github_con = Github(gh_token)
+    github_repo = github_con.get_repo(os.environ['TRAVIS_REPO_SLUG'])
+
+    local_commit = github_repo.get_commit(os.environ['TRAVIS_COMMIT'])
+    commit_message = local_commit.commit.message
+    issues_in_message = re.findall('#([\\d]+)', commit_message)
+
+    issue_object = None
+    for issue in issues_in_message:
+        try:
+            _LOGGER.info('Check if %s is a PR', issue)
+            issue_object = github_repo.get_pull(int(issue))
+            if not issue_object.is_merged():
+                continue
+            break
+        except Exception as err:
+            pass
+    if not issue_object:
+        _LOGGER.warning('Was not able to found PR commit message')
+    return issue_object
+
 def add_comment_to_initial_pr(gh_token, comment):
     "Add a comment to the initial PR"
     if not gh_token:
         return
     initial_pr = get_pr_object_from_travis(gh_token)
+    if not initial_pr:
+        initial_pr = get_pr_from_travis_commit_sha(gh_token)
     if not initial_pr:
         return
     initial_pr.create_comment(comment)
