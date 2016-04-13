@@ -27,5 +27,19 @@ class TestSwaggerToSDK(unittest.TestCase):
         pr_obj = get_pr_from_travis_commit_sha(GH_TOKEN)
         self.assertIsNone(pr_obj)
 
+    def test_download_autorest(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            exe_path = download_install_autorest(temp_dir)
+            self.assertTrue(exe_path.lower().endswith("autorest.exe"))
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            exe_path = download_install_autorest(temp_dir, "0.16.0-Nightly20160410")
+            self.assertTrue(exe_path.lower().endswith("autorest.exe"))
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            with self.assertRaises(ValueError):
+                exe_path = download_install_autorest(temp_dir, "0.16.0-FakePackage")
+
+
 if __name__ == '__main__':
-    unittest.main()      
+    unittest.main()

@@ -20,7 +20,8 @@ from github import Github, GithubException
 
 _LOGGER = logging.getLogger(__name__)
 
-LATEST_AUTOREST_DOWNLOAD_LINK = "https://www.myget.org/F/autorest/api/v2/package/autorest/"
+LATEST_TAG = 'latest'
+AUTOREST_BASE_DOWNLOAD_LINK = "https://www.myget.org/F/autorest/api/v2/package/autorest/"
 
 CONFIG_FILE = 'swagger_to_sdk_config.json'
 NEEDS_MONO = platform.system() != 'Windows'
@@ -39,10 +40,25 @@ def read_config(sdk_git_folder):
         return json.loads(config_fd.read())
 
 
-def download_install_autorest(output_dir):
+def download_install_autorest(output_dir, autorest_version=LATEST_TAG):
     """Download and install Autorest in the given folder"""
-    _LOGGER.info("Download Autorest from: %s", LATEST_AUTOREST_DOWNLOAD_LINK)
-    downloaded_package = requests.get(LATEST_AUTOREST_DOWNLOAD_LINK)
+    download_link = AUTOREST_BASE_DOWNLOAD_LINK
+    if autorest_version != LATEST_TAG:
+        download_link += autorest_version
+
+    _LOGGER.info("Download Autorest from: %s", download_link)
+    try:
+        downloaded_package = requests.get(download_link)
+    except:
+        msg = "Unable to download Autorest for '{}', " \
+                "please check this link and/or version tag: {}".format(
+                    autorest_version,
+                    download_link
+                )
+        _LOGGER.critical(msg)
+        raise ValueError(msg)
+    if downloaded_package.status_code != 200:
+        raise ValueError(downloaded_package.content.decode())
     _LOGGER.info("Downloaded")
     with zipfile.ZipFile(BytesIO(downloaded_package.content)) as autorest_package:
         autorest_package.extractall(output_dir)
@@ -376,7 +392,7 @@ def build_libraries(gh_token, restapi_git_folder, sdk_git_id, pr_repo_id, messag
         autorest_temp_dir = os.path.join(temp_dir, 'autorest')
         os.mkdir(autorest_temp_dir)
 
-        autorest_exe_path = download_install_autorest(autorest_temp_dir)
+        autorest_exe_path = download_install_autorest(autorest_temp_dir, config["meta"]["autorest"])
 
         for file, conf in config["data"].items():
             _LOGGER.info("Working on %s", file)
