@@ -109,10 +109,8 @@ def update(language, generated_folder, destination_folder):
     """Update data from generated to final folder"""
     if language == 'Python':
         update_python(generated_folder, destination_folder)
-    elif language == 'NodeJS':
-        update_node(generated_folder, destination_folder)
     else:
-        raise ValueError('Unknow language: {}'.format(language))
+        update_generic(generated_folder, destination_folder)
 
 def update_python(generated_folder, destination_folder):
     """Update data from generated to final folder, Python version"""
@@ -131,8 +129,9 @@ def update_python(generated_folder, destination_folder):
     client_generated_path.replace(destination_folder)
 
 
-def update_node(generated_folder, destination_folder):
-    """Update data from generated to final folder, Python version"""
+def update_generic(generated_folder, destination_folder):
+    """Update data from generated to final folder.
+       Generic version which just copy the files"""
     client_generated_path = Path(generated_folder)
     shutil.rmtree(destination_folder)
     client_generated_path.replace(destination_folder)
@@ -365,14 +364,6 @@ def build_libraries(gh_token, restapi_git_folder, sdk_git_id, pr_repo_id, messag
     branch_name = compute_branch_name(branch_name)
     _LOGGER.info('Destination branch for generated code is %s', branch_name)
 
-    # FIXME to be refine
-    if 'python' in sdk_git_id.lower():
-        language = 'Python'
-    elif 'node' in sdk_git_id.lower():
-        language = 'NodeJS'
-    else:
-        raise ValueError('Unable to determine language')
-
     with tempfile.TemporaryDirectory() as temp_dir, \
             manage_sdk_folder(gh_token, temp_dir, sdk_git_id) as sdk_folder:
 
@@ -387,6 +378,7 @@ def build_libraries(gh_token, restapi_git_folder, sdk_git_id, pr_repo_id, messag
         sync_fork(gh_token, sdk_git_id, sdk_repo)
         config = read_config(sdk_repo.working_tree_dir)
 
+        language = config["meta"]["language"]
         hexsha = get_swagger_hexsha(restapi_git_folder)
 
         autorest_temp_dir = os.path.join(temp_dir, 'autorest')
