@@ -317,7 +317,7 @@ def get_full_sdk_id(gh_token, sdk_git_id):
 
 def clone_to_path(gh_token, temp_dir, sdk_git_id):
     """Clone the given repo_id to the 'sdk' folder in given temp_dir"""
-    _LOGGER.info("Clone SDK repository")
+    _LOGGER.info("Clone SDK repository %s", sdk_git_id)
 
     credentials_part = ''
     if gh_token:
@@ -333,7 +333,6 @@ def clone_to_path(gh_token, temp_dir, sdk_git_id):
         credentials=credentials_part,
         sdk_git_id=sdk_git_id
     )
-    _LOGGER.debug("Url: %s", https_authenticated_url)
     sdk_path = os.path.join(temp_dir, 'sdk')
     Repo.clone_from(https_authenticated_url, sdk_path)
     _LOGGER.info("Clone success")
