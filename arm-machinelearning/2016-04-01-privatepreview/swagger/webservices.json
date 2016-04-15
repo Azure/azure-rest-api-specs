@@ -133,7 +133,7 @@
         }
       ]
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}/keys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}/listKeys": {
       "get": {
         "tags": [
           "WebServices"
@@ -311,9 +311,13 @@
         ],
         "discriminator": "packageType",
         "properties": {
+          "title": {
+            "type": "string",
+            "description": "The title the Azure ML web service."
+          },
           "description": {
             "type": "string",
-            "description": "The description the Azure ML web service"
+            "description": "The description the Azure ML web service."
           },
           "createdOn": {
             "type": "string",
@@ -553,14 +557,10 @@
             "type": "string",
             "description": "[TODO] The storage account's name"
           },
-          "primaryKey": {
+          "key": {
             "type": "string",
-            "description": "[TODO] The storage account's primary key"
-          },
-          "secondaryKey": {
-            "type": "string",
-            "description": "[TODO] The storage account's secondary key"
-          }
+            "description": "[TODO] The storage account's active key"
+          }          
         }
       },
       "MachineLearningWorkspace": {
