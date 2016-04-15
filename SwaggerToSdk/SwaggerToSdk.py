@@ -64,18 +64,33 @@ def download_install_autorest(output_dir, autorest_version=LATEST_TAG):
         autorest_package.extractall(output_dir)
     return os.path.join(output_dir, 'tools', 'AutoRest.exe')
 
+def build_autorest_options(language, global_autorest_conf=None, autorest_conf=None):
+    """Build the string of the Autorest options"""
+    if global_autorest_conf is None:
+        global_autorest_conf = {}
+    if autorest_conf is None:
+        autorest_conf = {}
 
-def generate_code(language, swagger_file, output_dir, autorest_exe_path, autorest_conf=''):
+    local_conf = dict(global_autorest_conf)
+    local_conf.update(autorest_conf)
+    if "CodeGenerator" not in local_conf:
+        local_conf["CodeGenerator"] = "Azure.{}".format(language)
+
+    sorted_keys = sorted(list(local_conf.keys())) # To be honest, just to help for tests...
+    return " ".join("-{} {}".format(key, str(local_conf[key])) for key in sorted_keys)
+
+def generate_code(language, swagger_file, output_dir, autorest_exe_path, global_autorest_conf=None, autorest_conf=None):
     """Call the Autorest process with the given parameters"""
     if NEEDS_MONO:
         autorest_exe_path = 'mono ' + autorest_exe_path
-    cmd_line = "{} -AddCredentials true -ft 2 -g Azure.{} " \
-                "-i {} -o {} {}"
+
+    autorest_options = build_autorest_options(language, global_autorest_conf, autorest_conf=None)
+
+    cmd_line = "{} -i {} -o {} {}"
     cmd_line = cmd_line.format(autorest_exe_path,
-                               language,
                                swagger_file,
                                output_dir,
-                               autorest_conf)
+                               autorest_options)
     _LOGGER.debug("Autorest cmd line:\n%s", cmd_line)
 
     try:
@@ -377,13 +392,16 @@ def build_libraries(gh_token, restapi_git_folder, sdk_git_id, pr_repo_id, messag
         sync_fork(gh_token, sdk_git_id, sdk_repo)
         config = read_config(sdk_repo.working_tree_dir)
 
-        language = config["meta"]["language"]
+        meta_conf = config["meta"]
+        language = meta_conf["language"]
         hexsha = get_swagger_hexsha(restapi_git_folder)
+        global_autorest_conf = meta_conf["autorest_options"] if "autorest_options" in meta_conf else {}
+        autorest_version = meta_conf["autorest"] if "autorest" in meta_conf else LATEST_TAG
 
         autorest_temp_dir = os.path.join(temp_dir, 'autorest')
         os.mkdir(autorest_temp_dir)
 
-        autorest_exe_path = download_install_autorest(autorest_temp_dir, config["meta"]["autorest"])
+        autorest_exe_path = download_install_autorest(autorest_temp_dir, autorest_version)
 
         for file, conf in config["data"].items():
             _LOGGER.info("Working on %s", file)
@@ -407,7 +425,7 @@ def build_libraries(gh_token, restapi_git_folder, sdk_git_id, pr_repo_id, messag
             generated_path = os.path.join(temp_dir, os.path.basename(file))
             generate_code(language,
                           swagger_file, generated_path,
-                          autorest_exe_path, autorest_conf)
+                          autorest_exe_path, global_autorest_conf, autorest_conf)
             update(language, generated_path, dest_folder)
 
         if gh_token:

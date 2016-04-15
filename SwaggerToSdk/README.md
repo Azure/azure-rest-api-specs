@@ -56,11 +56,17 @@ This is a configuration which MUST be at the root of the repository you wants to
   "meta": {
     "version":"0.1.0",
     "language": "Python",
-    "autorest": "latest"
+    "autorest": "latest",
+    "autorest_options": {
+        "ft": 2,
+        "AddCredentials": true
+    }
   },
   "data": {
     "arm-authorization/2015-07-01/swagger/authorization.json": {
-      "autorest_options": "-Namespace azure.mgmt.authorization",
+      "autorest_options": {
+        "Namespace" : "azure.mgmt.authorization"
+      },
       "output_dir": "azure-mgmt-authorization/azure/mgmt/authorization"
     },
   }
@@ -80,16 +86,25 @@ The language parameter configure the language you want Autorest to generate. Thi
 - NodeJS
 - Ruby
 
+This will trigger the Azure.<language> autorest code generator. Note that you can override this behaviour by specifying the "CodeGenerator" option in any "autorest_options" field.
+
 ### autorest
-This the version to use from Autorest. Could be "latest" to download the latest nightly build. Could be a string like  '0.16.0-Nightly20160410' to download a specific version
+This the version to use from Autorest. Could be "latest" to download the latest nightly build. Could be a string like  '0.16.0-Nightly20160410' to download a specific version.
+If node is not present, consider "latest".
+
+## autorest_options
+An optional dictionary of options you want to pass to Autorest. This will be passed in any call, but can be override by "autorest_options" in each data.
+You can override the default `Azure.<language>` CodeGenerator parameter here (do NOT use "g" but "CodeGenerator").
+Note that you CAN'T override "-i/-Input" and "-o/-Output" which are filled contextually.
 
 ## Data
 
 It's a dict where keys are swagger path. Value are:
 
 ### autorest_options
-
-The autorest options you wants to append to the autorest command line. Currently the minimal option forced are `-AddCredentials true -ft 2`
+A dictionary of options you want to pass to Autorest. This will override parameter from "autorest_options" in "meta" node.
+You can override the default `Azure.<language>` CodeGenerator parameter here (do NOT use "g" but "CodeGenerator").
+Note that you CAN'T override "-i/-Input" and "-o/-Output" which are filled contextually.
 
 ### output_dir
 
