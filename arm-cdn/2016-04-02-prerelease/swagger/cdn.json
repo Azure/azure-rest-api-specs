@@ -1640,6 +1640,10 @@
         }
       ],
       "properties": {
+	    "sku": {
+          "description": "The SKU (pricing tier) of the CDN profile.",
+          "$ref": "#/definitions/Sku"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProfileProperties"
@@ -1648,10 +1652,6 @@
     },
     "ProfileProperties": {
       "properties": {
-        "sku": {
-          "description": "The SKU (pricing tier) of the CDN profile.",
-          "$ref": "#/definitions/Sku"
-        },
         "resourceState": {
           "description": "Resource status of the profile.",
           "readOnly": true,
@@ -1688,7 +1688,8 @@
       "type": "object",
       "description": "Profile properties required for profile creation.",
       "required": [
-        "location"
+        "location",
+		"sku"
       ],
       "properties": {
         "location": {
@@ -1702,24 +1703,9 @@
             "type": "string"
           }
         },
-        "Sku": {
+        "sku": {
 		  "description": "The SKU (pricing tier) of the CDN profile.",
-		  "type": "object",
-		  "properties": {
-		    "name": {
-			  "description": "Name of the pricing tier",
-			  "enum": [
-			    "Standard_Verizon",
-			    "Premium_Verizon",
-			    "Standard_Akamai"
-			  ],
-			  "type": "string",
-		   	  "x-ms-enum": {
-			    "name": "SkuName",
-			    "modelAsString": false
-			  }
-			}
-		  }
+		  "$ref": "#/definitions/Sku"
 		}
       },
       "x-ms-azure-resource": true
