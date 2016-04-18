@@ -20,7 +20,8 @@ from github import Github, GithubException
 
 _LOGGER = logging.getLogger(__name__)
 
-LATEST_AUTOREST_DOWNLOAD_LINK = "https://www.myget.org/F/autorest/api/v2/package/autorest/"
+LATEST_TAG = 'latest'
+AUTOREST_BASE_DOWNLOAD_LINK = "https://www.myget.org/F/autorest/api/v2/package/autorest/"
 
 CONFIG_FILE = 'swagger_to_sdk_config.json'
 NEEDS_MONO = platform.system() != 'Windows'
@@ -39,27 +40,57 @@ def read_config(sdk_git_folder):
         return json.loads(config_fd.read())
 
 
-def download_install_autorest(output_dir):
+def download_install_autorest(output_dir, autorest_version=LATEST_TAG):
     """Download and install Autorest in the given folder"""
-    _LOGGER.info("Download Autorest from: %s", LATEST_AUTOREST_DOWNLOAD_LINK)
-    downloaded_package = requests.get(LATEST_AUTOREST_DOWNLOAD_LINK)
+    download_link = AUTOREST_BASE_DOWNLOAD_LINK
+    if autorest_version != LATEST_TAG:
+        download_link += autorest_version
+
+    _LOGGER.info("Download Autorest from: %s", download_link)
+    try:
+        downloaded_package = requests.get(download_link)
+    except:
+        msg = "Unable to download Autorest for '{}', " \
+                "please check this link and/or version tag: {}".format(
+                    autorest_version,
+                    download_link
+                )
+        _LOGGER.critical(msg)
+        raise ValueError(msg)
+    if downloaded_package.status_code != 200:
+        raise ValueError(downloaded_package.content.decode())
     _LOGGER.info("Downloaded")
     with zipfile.ZipFile(BytesIO(downloaded_package.content)) as autorest_package:
         autorest_package.extractall(output_dir)
     return os.path.join(output_dir, 'tools', 'AutoRest.exe')
 
+def build_autorest_options(language, global_autorest_conf=None, autorest_conf=None):
+    """Build the string of the Autorest options"""
+    if global_autorest_conf is None:
+        global_autorest_conf = {}
+    if autorest_conf is None:
+        autorest_conf = {}
 
-def generate_code(language, swagger_file, output_dir, autorest_exe_path, autorest_conf=''):
+    local_conf = dict(global_autorest_conf)
+    local_conf.update(autorest_conf)
+    if "CodeGenerator" not in local_conf:
+        local_conf["CodeGenerator"] = "Azure.{}".format(language)
+
+    sorted_keys = sorted(list(local_conf.keys())) # To be honest, just to help for tests...
+    return " ".join("-{} {}".format(key, str(local_conf[key])) for key in sorted_keys)
+
+def generate_code(language, swagger_file, output_dir, autorest_exe_path, global_autorest_conf=None, autorest_conf=None):
     """Call the Autorest process with the given parameters"""
     if NEEDS_MONO:
         autorest_exe_path = 'mono ' + autorest_exe_path
-    cmd_line = "{} -AddCredentials true -ft 2 -g Azure.{} " \
-                "-i {} -o {} {}"
+
+    autorest_options = build_autorest_options(language, global_autorest_conf, autorest_conf=None)
+
+    cmd_line = "{} -i {} -o {} {}"
     cmd_line = cmd_line.format(autorest_exe_path,
-                               language,
                                swagger_file,
                                output_dir,
-                               autorest_conf)
+                               autorest_options)
     _LOGGER.debug("Autorest cmd line:\n%s", cmd_line)
 
     try:
@@ -93,10 +124,8 @@ def update(language, generated_folder, destination_folder):
     """Update data from generated to final folder"""
     if language == 'Python':
         update_python(generated_folder, destination_folder)
-    elif language == 'NodeJS':
-        update_node(generated_folder, destination_folder)
     else:
-        raise ValueError('Unknow language: {}'.format(language))
+        update_generic(generated_folder, destination_folder)
 
 def update_python(generated_folder, destination_folder):
     """Update data from generated to final folder, Python version"""
@@ -115,8 +144,9 @@ def update_python(generated_folder, destination_folder):
     client_generated_path.replace(destination_folder)
 
 
-def update_node(generated_folder, destination_folder):
-    """Update data from generated to final folder, Python version"""
+def update_generic(generated_folder, destination_folder):
+    """Update data from generated to final folder.
+       Generic version which just copy the files"""
     client_generated_path = Path(generated_folder)
     shutil.rmtree(destination_folder)
     client_generated_path.replace(destination_folder)
@@ -302,7 +332,7 @@ def get_full_sdk_id(gh_token, sdk_git_id):
 
 def clone_to_path(gh_token, temp_dir, sdk_git_id):
     """Clone the given repo_id to the 'sdk' folder in given temp_dir"""
-    _LOGGER.info("Clone SDK repository")
+    _LOGGER.info("Clone SDK repository %s", sdk_git_id)
 
     credentials_part = ''
     if gh_token:
@@ -318,7 +348,6 @@ def clone_to_path(gh_token, temp_dir, sdk_git_id):
         credentials=credentials_part,
         sdk_git_id=sdk_git_id
     )
-    _LOGGER.debug("Url: %s", https_authenticated_url)
     sdk_path = os.path.join(temp_dir, 'sdk')
     Repo.clone_from(https_authenticated_url, sdk_path)
     _LOGGER.info("Clone success")
@@ -349,14 +378,6 @@ def build_libraries(gh_token, restapi_git_folder, sdk_git_id, pr_repo_id, messag
     branch_name = compute_branch_name(branch_name)
     _LOGGER.info('Destination branch for generated code is %s', branch_name)
 
-    # FIXME to be refine
-    if 'python' in sdk_git_id.lower():
-        language = 'Python'
-    elif 'node' in sdk_git_id.lower():
-        language = 'NodeJS'
-    else:
-        raise ValueError('Unable to determine language')
-
     with tempfile.TemporaryDirectory() as temp_dir, \
             manage_sdk_folder(gh_token, temp_dir, sdk_git_id) as sdk_folder:
 
@@ -371,12 +392,16 @@ def build_libraries(gh_token, restapi_git_folder, sdk_git_id, pr_repo_id, messag
         sync_fork(gh_token, sdk_git_id, sdk_repo)
         config = read_config(sdk_repo.working_tree_dir)
 
+        meta_conf = config["meta"]
+        language = meta_conf["language"]
         hexsha = get_swagger_hexsha(restapi_git_folder)
+        global_autorest_conf = meta_conf["autorest_options"] if "autorest_options" in meta_conf else {}
+        autorest_version = meta_conf["autorest"] if "autorest" in meta_conf else LATEST_TAG
 
         autorest_temp_dir = os.path.join(temp_dir, 'autorest')
         os.mkdir(autorest_temp_dir)
 
-        autorest_exe_path = download_install_autorest(autorest_temp_dir)
+        autorest_exe_path = download_install_autorest(autorest_temp_dir, autorest_version)
 
         for file, conf in config["data"].items():
             _LOGGER.info("Working on %s", file)
@@ -400,7 +425,7 @@ def build_libraries(gh_token, restapi_git_folder, sdk_git_id, pr_repo_id, messag
             generated_path = os.path.join(temp_dir, os.path.basename(file))
             generate_code(language,
                           swagger_file, generated_path,
-                          autorest_exe_path, autorest_conf)
+                          autorest_exe_path, global_autorest_conf, autorest_conf)
             update(language, generated_path, dest_folder)
 
         if gh_token:
