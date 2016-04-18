@@ -84,7 +84,7 @@ def generate_code(language, swagger_file, output_dir, autorest_exe_path, global_
     if NEEDS_MONO:
         autorest_exe_path = 'mono ' + autorest_exe_path
 
-    autorest_options = build_autorest_options(language, global_autorest_conf, autorest_conf=None)
+    autorest_options = build_autorest_options(language, global_autorest_conf, autorest_conf)
 
     cmd_line = "{} -i {} -o {} {}"
     cmd_line = cmd_line.format(autorest_exe_path,
