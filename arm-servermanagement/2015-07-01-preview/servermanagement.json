@@ -55,17 +55,23 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "gatewayName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The gateway name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The gateway name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     },
                     {
-                        "name": "body",
+                        "name": "GatewayParameters",
                         "x-ms-client-flatten": true,
                         "description": "Parameters supplied to the CreateOrUpdate operation.",
                         "in": "body",
@@ -87,8 +93,15 @@
                         "schema": {
                             "$ref": "#/definitions/GatewayResource"
                         }
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "patch": {
                 "operationId": "Gateway_Update",
@@ -105,17 +118,23 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "gatewayName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The gateway name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The gateway name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     },
                     {
-                        "name": "body",
+                        "name": "GatewayParameters",
                         "x-ms-client-flatten": true,
                         "description": "Parameters supplied to the Update operation.",
                         "in": "body",
@@ -134,6 +153,12 @@
                     },
                     "202": {
                         "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -156,14 +181,20 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "gatewayName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The gateway name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The gateway name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     }
                 ],
                 "responses": {
@@ -172,6 +203,12 @@
                     },
                     "204": {
                         "description": "the resource does not exist and the request is well formed"
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             },
@@ -193,14 +230,20 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "gatewayName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The gateway name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The gateway name (256 characters maximum)",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     },
                     {
                         "name": "$expand",
@@ -222,6 +265,12 @@
                         "description": "the operation completed successfully.",
                         "schema": {
                             "$ref": "#/definitions/GatewayResource"
+                        }
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
                         }
                     }
                 }
@@ -247,6 +296,12 @@
                         "description": "the operation completed successfully.",
                         "schema": {
                             "$ref": "#/definitions/GatewayResources"
+                        }
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
                         }
                     }
                 },
@@ -274,7 +329,10 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     }
                 ],
                 "responses": {
@@ -282,6 +340,12 @@
                         "description": "the operation completed successfully.",
                         "schema": {
                             "$ref": "#/definitions/GatewayResources"
+                        }
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
                         }
                     }
                 },
@@ -309,14 +373,20 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "gatewayName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The gateway name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The gateway name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     }
                 ],
                 "responses": {
@@ -325,6 +395,12 @@
                     },
                     "202": {
                         "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -349,14 +425,20 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "gatewayName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The gateway name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\""
+                        "description": "The gateway name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     }
                 ],
                 "responses": {
@@ -368,6 +450,12 @@
                     },
                     "202": {
                         "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             }
@@ -391,17 +479,23 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "nodeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The node name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The node name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     },
                     {
-                        "name": "body",
+                        "name": "GatewayParameters",
                         "x-ms-client-flatten": true,
                         "description": "Parameters supplied to the CreateOrUpdate operation.",
                         "in": "body",
@@ -426,6 +520,12 @@
                     },
                     "202": {
                         "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -448,17 +548,23 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "nodeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The node name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The node name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     },
                     {
-                        "name": "body",
+                        "name": "NodeParameters",
                         "x-ms-client-flatten": true,
                         "description": "Parameters supplied to the CreateOrUpdate operation.",
                         "in": "body",
@@ -477,8 +583,15 @@
                     },
                     "202": {
                         "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "delete": {
                 "tags": [
@@ -498,14 +611,20 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "nodeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The node name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The node name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     }
                 ],
                 "responses": {
@@ -514,6 +633,12 @@
                     },
                     "204": {
                         "description": "the resource does not exist and the request is well formed"
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             },
@@ -535,14 +660,20 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "nodeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The node name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The node name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     }
                 ],
                 "responses": {
@@ -550,6 +681,12 @@
                         "description": "the object exists and was deleted successfully.",
                         "schema": {
                             "$ref": "#/definitions/NodeResource"
+                        }
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
                         }
                     }
                 }
@@ -575,6 +712,12 @@
                         "description": "the operation completed successfully.",
                         "schema": {
                             "$ref": "#/definitions/NodeResources"
+                        }
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
                         }
                     }
                 },
@@ -602,7 +745,10 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     }
                 ],
                 "responses": {
@@ -610,6 +756,12 @@
                         "description": "the operation completed successfully.",
                         "schema": {
                             "$ref": "#/definitions/NodeResources"
+                        }
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
                         }
                     }
                 },
@@ -637,14 +789,20 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "nodeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The node name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The node name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     },
                     {
                         "name": "session",
@@ -654,7 +812,7 @@
                         "description": "The sessionId from the user"
                     },
                     {
-                        "name": "body",
+                        "name": "SessionParameters",
                         "in": "body",
                         "x-ms-client-flatten": true,
                         "description": "Parameters supplied to the CreateOrUpdate operation.",
@@ -679,6 +837,12 @@
                     },
                     "202": {
                         "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -701,14 +865,20 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "nodeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The node name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The node name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     },
                     {
                         "name": "session",
@@ -724,6 +894,12 @@
                     },
                     "204": {
                         "description": "the resource does not exist and the request is well formed"
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             },
@@ -745,14 +921,20 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "nodeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The node name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The node name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     },
                     {
                         "name": "session",
@@ -767,6 +949,12 @@
                         "description": "The operation completed successfully.",
                         "schema": {
                             "$ref": "#/definitions/SessionResource"
+                        }
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
                         }
                     }
                 }
@@ -791,14 +979,20 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "nodeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The node name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The node name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     },
                     {
                         "name": "session",
@@ -813,6 +1007,12 @@
                         "description": "The operation completed successfully.",
                         "schema": {
                             "$ref": "#/definitions/PowerShellSessionResources"
+                        }
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
                         }
                     }
                 }
@@ -837,14 +1037,20 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "nodeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The node name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The node name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     },
                     {
                         "name": "session",
@@ -870,8 +1076,15 @@
                     },
                     "202": {
                         "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "get": {
                 "tags": [
@@ -891,14 +1104,20 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "nodeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The node name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The node name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     },
                     {
                         "name": "session",
@@ -935,6 +1154,12 @@
                         "schema": {
                             "$ref": "#/definitions/PowerShellCommandResults"
                         }
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             },
@@ -956,14 +1181,20 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "nodeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The node name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The node name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     },
                     {
                         "name": "session",
@@ -989,6 +1220,12 @@
                     },
                     "202": {
                         "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -1013,14 +1250,20 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "nodeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The node name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The node name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     },
                     {
                         "name": "session",
@@ -1037,7 +1280,7 @@
                         "description": "The PowerShell sessionId from the user"
                     },
                     {
-                        "name": "body",
+                        "name": "PowerShellCommandParameters",
                         "x-ms-client-flatten": true,
                         "description": "Parameters supplied to the Invoke PowerShell Command operation.",
                         "in": "body",
@@ -1056,6 +1299,12 @@
                     },
                     "202": {
                         "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -1080,14 +1329,20 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "nodeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The node name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The node name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     },
                     {
                         "name": "session",
@@ -1113,6 +1368,12 @@
                     },
                     "202": {
                         "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -1137,14 +1398,20 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId."
+                        "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "[a-zA-Z0-9]+"
                     },
                     {
                         "name": "nodeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The node name (256 characters maximum). \"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$\"."
+                        "description": "The node name (256 characters maximum).",
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
                     },
                     {
                         "name": "session",
@@ -1161,7 +1428,7 @@
                         "description": "The PowerShell sessionId from the user"
                     },
                     {
-                        "name": "body",
+                        "name": "PowerShellTabCompletionParamters",
                         "x-ms-client-flatten": true,
                         "description": "Parameters supplied to the tab completion call.",
                         "in": "body",
@@ -1176,6 +1443,12 @@
                         "description": "The request was succesfully completed.",
                         "schema": {
                             "$ref": "#/definitions/PowerShellTabCompletionResults"
+                        }
+                    },
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
                         }
                     }
                 }
@@ -1232,10 +1505,12 @@
                     "properties": {
                         "created": {
                             "type": "string",
+                            "format": "date-time",
                             "description": "UTC date and time when gateway was first added to management service"
                         },
                         "updated": {
                             "type": "string",
+                            "format": "date-time",
                             "description": "UTC date and time when node was last updated"
                         },
                         "autoUpgrade": {
@@ -1259,19 +1534,20 @@
                             "items": {
                                 "type": "string"
                             },
-                            "description": "[todo]nodes in the gateway?"
+                            "description": "names of the nodes in the gateway"
                         },
                         "activeMessageCount": {
                             "type": "integer",
-                            "description": "[todo]number of active messages?"
+                            "description": "number of active messages"
                         },
                         "latestPublishedMsiVersion": {
                             "type": "string",
-                            "description": "[todo]last published msi version?"
+                            "description": "last published msi version"
                         },
                         "publishedTimeUtc": {
                             "type": "string",
-                            "description": "[todo] ?"
+                            "format": "date-time",
+                            "description": "the date/time of the last published gateway"
                         },
                         "status": {
                             "$ref": "#/definitions/GatewayStatus"
@@ -1302,18 +1578,21 @@
             "properties": {
                 "availableMemoryMByte": {
                     "type": "number",
-                    "description": "The available memory on the gateway host machine."
+                    "description": "The available memory on the gateway host machine in megabytes."
                 },
                 "gatewayCpuPercent": {
                     "type": "number",
+                    "minimum": 0,
+                    "maximum": 100,
                     "description": "The CPU utilization of the gateway process (numeric value between 0 and 100)."
                 },
                 "gatewayWorkingSetMByte": {
                     "type": "number",
-                    "description": "The working set size of the gateway process."
+                    "description": "The working set size of the gateway process in megabytes."
                 },
                 "statusUpdated": {
                     "type": "string",
+                    "format": "date-time",
                     "description": "UTC date and time when gateway status was last updated"
                 }
             }
@@ -1367,7 +1646,7 @@
             "properties": {
                 "location": {
                     "type": "string",
-                    "description": "location of the resource?"
+                    "description": "location of the resource"
                 },
                 "tags": {
                     "type": "object",
@@ -1379,7 +1658,7 @@
                     "properties": {
                         "autoUpgrade": {
                             "type": "string",
-                            "description": "The autoUpgrade property gives the flexibility to gateway to auto upgrade itself. If properties value not specified, then we assume autoUpgrade = never.",
+                            "description": "The autoUpgrade property gives the flexibility to gateway to auto upgrade itself. If properties value not specified, then we assume autoUpgrade = Off.",
                             "enum": [
                                 "On",
                                 "Off"
@@ -1415,10 +1694,12 @@
                         },
                         "created": {
                             "type": "string",
+                            "format": "date-time",
                             "description": "UTC date and time when node was first added to management service"
                         },
                         "updated": {
                             "type": "string",
+                            "format": "date-time",
                             "description": "UTC date and time when node was last updated."
                         }
                     }
@@ -1470,6 +1751,7 @@
                         },
                         "password": {
                             "type": "string",
+                            "format": "password",
                             "description": "Password associated with user name"
                         }
                     }
@@ -1494,10 +1776,12 @@
                         },
                         "created": {
                             "type": "string",
+                            "format": "date-time",
                             "description": "UTC date and time when node was first added to management service"
                         },
                         "updated": {
                             "type": "string",
+                            "format": "date-time",
                             "description": "UTC date and time when node was last updated."
                         }
                     }
@@ -1516,6 +1800,7 @@
                         },
                         "password": {
                             "type": "string",
+                            "format": "password",
                             "description": "Password associated with user name"
                         }
                     }
@@ -1548,10 +1833,12 @@
                         },
                         "disconnectedOn": {
                             "type": "string",
+                            "format": "date-time",
                             "description": "Timestamp of last time the service disconnected from the runspace."
                         },
                         "expiresOn": {
                             "type": "string",
+                            "format": "date-time",
                             "description": "Timestamp when the runspace expires."
                         },
                         "version": {
@@ -1566,7 +1853,7 @@
             }
         },
         "Version": {
-            "description": "A multipart-numerica version number",
+            "description": "A multipart-numeric version number",
             "properties": {
                 "major": {
                     "type": "integer",
@@ -1650,21 +1937,27 @@
         "PowerShellCommandResult": {
             "properties": {
                 "messageType": {
+                    "description": "the type of message",
                     "type": "integer"
                 },
                 "foregroundColor": {
+                    "description": "the HTML color string representing the foreground color.",
                     "type": "string"
                 },
                 "backgroundColor": {
+                    "description": "the HTML color string representing the background color.",
                     "type": "string"
                 },
                 "value": {
+                    "description": "actual result text from the PowerShell Command",
                     "type": "string"
                 },
                 "prompt": {
+                    "description": "The interactive prompt message",
                     "type": "string"
                 },
                 "exitCode": {
+                    "description": "the exit code from a executable that was called from powershell.",
                     "type": "integer"
                 },
                 "id": {
@@ -1692,15 +1985,19 @@
             "description": "Field description for the implementation of PSHostUserInterface.Prompt",
             "properties": {
                 "name": {
+                    "description": "the name of the prompt",
                     "type": "string"
                 },
                 "label": {
+                    "description": "the label text of the prompt",
                     "type": "string"
                 },
                 "helpMessage": {
+                    "description": "the help message of the prompt",
                     "type": "string"
                 },
                 "promptFieldTypeIsList": {
+                    "description": "when set to 'true' the prompt field type is a list of values",
                     "type": "boolean"
                 },
                 "promptFieldType": {
@@ -1745,6 +2042,21 @@
                     "items": {
                         "type": "string"
                     }
+                }
+            }
+        },
+        "Error": {
+            "description": "Error message",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
                 }
             }
         }
