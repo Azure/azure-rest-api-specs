@@ -11,7 +11,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DevTestLab/labs": {
       "get": {
         "tags": [ "Lab" ],
-        "description": "List Labs.",
+        "description": "List labs.",
         "operationId": "Lab_ListBySubscription",
         "consumes": [ ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -48,7 +48,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/Lab"
       }
@@ -56,7 +57,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs": {
       "get": {
         "tags": [ "Lab" ],
-        "description": "List Labs.",
+        "description": "List labs.",
         "operationId": "Lab_ListByResourceGroup",
         "consumes": [ ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -100,7 +101,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/Lab"
       }
@@ -108,7 +110,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources": {
       "get": {
         "tags": [ "ArtifactSource" ],
-        "description": "List Artifact Sources.",
+        "description": "List artifact sources.",
         "operationId": "ArtifactSource_List",
         "consumes": [ ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -159,7 +161,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/ArtifactSource"
       }
@@ -167,7 +170,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts": {
       "get": {
         "tags": [ "Artifact" ],
-        "description": "List Artifacts.",
+        "description": "List artifacts.",
         "operationId": "Artifact_List",
         "consumes": [ ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -225,7 +228,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/Artifact"
       }
@@ -278,13 +282,14 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts/{name}/generateArmTemplate": {
       "post": {
         "tags": [ "Artifact" ],
-        "description": "Generates an arm template for the given artifact, uploads the required files to a storage account, and validates the generated artifact.",
+        "description": "Generates an ARM template for the given artifact, uploads the required files to a storage account, and validates the generated artifact.",
         "operationId": "Artifact_GenerateArmTemplate",
         "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -335,7 +340,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{name}": {
@@ -379,11 +385,12 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "ArtifactSource" ],
-        "description": "Create artifact source, or replace an existing artifact source.",
+        "description": "Create or replace an existing artifact source.",
         "operationId": "ArtifactSource_CreateOrUpdateResource",
         "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -431,7 +438,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       },
       "delete": {
         "tags": [ "ArtifactSource" ],
@@ -471,11 +479,12 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       },
       "patch": {
         "tags": [ "ArtifactSource" ],
-        "description": "Modify properties of Artifact Sources.",
+        "description": "Modify properties of artifact sources.",
         "operationId": "ArtifactSource_PatchResource",
         "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -519,7 +528,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costs": {
@@ -576,16 +586,17 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/Cost"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costsettings/{name}": {
       "get": {
-        "tags": [ "Costsetting" ],
-        "description": "Get costsetting.",
-        "operationId": "Costsetting_GetResource",
+        "tags": [ "CostSetting" ],
+        "description": "Get cost setting.",
+        "operationId": "CostSetting_GetResource",
         "consumes": [ ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
         "parameters": [
@@ -607,7 +618,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the costsetting.",
+            "description": "The name of the cost setting.",
             "required": true,
             "type": "string"
           },
@@ -622,12 +633,13 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       },
       "put": {
-        "tags": [ "Costsetting" ],
-        "description": "Create costsetting, or replace an existing costsetting.",
-        "operationId": "Costsetting_CreateOrUpdateResource",
+        "tags": [ "CostSetting" ],
+        "description": "Create or replace an existing cost setting.",
+        "operationId": "CostSetting_CreateOrUpdateResource",
         "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
         "parameters": [
@@ -649,7 +661,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the costsetting.",
+            "description": "The name of the cost setting.",
             "required": true,
             "type": "string"
           },
@@ -674,12 +686,13 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       },
       "delete": {
-        "tags": [ "Costsetting" ],
-        "description": "Delete costsetting.",
-        "operationId": "Costsetting_DeleteResource",
+        "tags": [ "CostSetting" ],
+        "description": "Delete cost setting.",
+        "operationId": "CostSetting_DeleteResource",
         "consumes": [ ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
         "parameters": [
@@ -701,7 +714,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the costsetting.",
+            "description": "The name of the cost setting.",
             "required": true,
             "type": "string"
           },
@@ -714,12 +727,13 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       },
       "patch": {
-        "tags": [ "Costsetting" ],
-        "description": "Modify properties of costsettings.",
-        "operationId": "Costsetting_PatchResource",
+        "tags": [ "CostSetting" ],
+        "description": "Modify properties of cost settings.",
+        "operationId": "CostSetting_PatchResource",
         "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
         "parameters": [
@@ -741,7 +755,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the costsetting.",
+            "description": "The name of the cost setting.",
             "required": true,
             "type": "string"
           },
@@ -762,7 +776,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/customimages": {
@@ -819,7 +834,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/CustomImage"
       }
@@ -865,11 +881,12 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "CustomImage" ],
-        "description": "Create custom image, or replace an existing custom image. This operation can take a while to complete.",
+        "description": "Create or replace an existing custom image. This operation can take a while to complete.",
         "operationId": "CustomImage_CreateOrUpdateResource",
         "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -917,7 +934,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -958,14 +976,15 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas": {
       "get": {
         "tags": [ "Formula" ],
-        "description": "List Formulas.",
+        "description": "List formulas.",
         "operationId": "Formula_List",
         "consumes": [ ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -1016,7 +1035,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/Formula"
       }
@@ -1024,7 +1044,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{name}": {
       "get": {
         "tags": [ "Formula" ],
-        "description": "Get Formula.",
+        "description": "Get formula.",
         "operationId": "Formula_GetResource",
         "consumes": [ ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -1062,11 +1082,12 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "Formula" ],
-        "description": "Create Formula, or replace an existing Formula. This operation can take a while to complete.",
+        "description": "Create or replace an existing Formula. This operation can take a while to complete.",
         "operationId": "Formula_CreateOrUpdateResource",
         "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -1114,12 +1135,13 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [ "Formula" ],
-        "description": "Delete Formula.",
+        "description": "Delete formula.",
         "operationId": "Formula_DeleteResource",
         "consumes": [ ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -1155,7 +1177,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/galleryimages": {
@@ -1212,7 +1235,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/GalleryImage"
       }
@@ -1270,7 +1294,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{policySetName}/policies": {
@@ -1334,7 +1359,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/Policy"
       }
@@ -1387,11 +1413,12 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "Policy" ],
-        "description": "Create policy, or replace an existing policy.",
+        "description": "Create or replace an existing policy.",
         "operationId": "Policy_CreateOrUpdateResource",
         "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -1446,7 +1473,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       },
       "delete": {
         "tags": [ "Policy" ],
@@ -1493,7 +1521,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       },
       "patch": {
         "tags": [ "Policy" ],
@@ -1548,7 +1577,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules": {
@@ -1605,7 +1635,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/Schedule"
       }
@@ -1651,11 +1682,12 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "Schedule" ],
-        "description": "Create schedule, or replace an existing schedule. This operation can take a while to complete.",
+        "description": "Create or replace an existing schedule. This operation can take a while to complete.",
         "operationId": "Schedule_CreateOrUpdateResource",
         "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -1703,7 +1735,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -1744,7 +1777,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "patch": {
@@ -1793,7 +1827,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/unattendedtasks": {
@@ -1850,7 +1885,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/UnattendedTask"
       }
@@ -1896,11 +1932,12 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "UnattendedTask" ],
-        "description": "Create unattended task, or replace an existing unattended task. This operation can take a while to complete.",
+        "description": "Create or replace an existing unattended task. This operation can take a while to complete.",
         "operationId": "UnattendedTask_CreateOrUpdateResource",
         "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -1948,7 +1985,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -1989,7 +2027,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       },
       "patch": {
         "tags": [ "UnattendedTask" ],
@@ -2037,7 +2076,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/unattendedtasks/{name}/execute": {
@@ -2079,14 +2119,15 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines": {
       "get": {
         "tags": [ "VirtualMachine" ],
-        "description": "List Virtual Machines.",
+        "description": "List virtual machines.",
         "operationId": "VirtualMachine_List",
         "consumes": [ ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -2137,7 +2178,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/LabVirtualMachine"
       }
@@ -2145,7 +2187,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}": {
       "get": {
         "tags": [ "VirtualMachine" ],
-        "description": "Get Virtual Machine.",
+        "description": "Get virtual machine.",
         "operationId": "VirtualMachine_GetResource",
         "consumes": [ ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -2183,11 +2225,12 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "VirtualMachine" ],
-        "description": "Create Virtual Machine, or replace an existing Virtual Machine. This operation can take a while to complete.",
+        "description": "Create or replace an existing Virtual Machine. This operation can take a while to complete.",
         "operationId": "VirtualMachine_CreateOrUpdateResource",
         "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -2235,12 +2278,13 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [ "VirtualMachine" ],
-        "description": "Delete Virtual Machine. This operation can take a while to complete.",
+        "description": "Delete virtual machine. This operation can take a while to complete.",
         "operationId": "VirtualMachine_DeleteResource",
         "consumes": [ ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -2276,12 +2320,13 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [ "VirtualMachine" ],
-        "description": "Modify properties of Virtual Machines.",
+        "description": "Modify properties of virtual machines.",
         "operationId": "VirtualMachine_PatchResource",
         "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -2325,7 +2370,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/applyArtifacts": {
@@ -2376,56 +2422,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/createTemplate": {
-      "post": {
-        "tags": [ "VirtualMachine" ],
-        "description": "Creates a Lab VM Template, and runs Sysprep on the Lab VM if required This operation can take a while to complete.",
-        "operationId": "VirtualMachine_CreateTemplate",
-        "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
-        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
-        "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "labName",
-            "in": "path",
-            "description": "The name of the lab.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the virtual Machine.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "createVmTemplateActionProperties",
-            "in": "body",
-            "required": true,
-            "schema": { "$ref": "#/definitions/CreateVmTemplateActionProperties" }
-          },
-          { "$ref": "#/parameters/api-version" }
-        ],
-        "responses": {
-          "200": { "description": "OK" },
-          "202": { "description": "Accepted" },
-          "default": {
-            "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
-          }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -2468,7 +2466,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -2511,7 +2510,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -2569,7 +2569,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "x-ms-odata": "#/definitions/VirtualNetwork"
       }
@@ -2615,11 +2616,12 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "VirtualNetwork" ],
-        "description": "Create virtual network, or replace an existing virtual network. This operation can take a while to complete.",
+        "description": "Create or replace an existing virtual network. This operation can take a while to complete.",
         "operationId": "VirtualNetwork_CreateOrUpdateResource",
         "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -2667,7 +2669,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -2708,7 +2711,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "patch": {
@@ -2757,13 +2761,14 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}": {
       "get": {
         "tags": [ "Lab" ],
-        "description": "Get Lab.",
+        "description": "Get lab.",
         "operationId": "Lab_GetResource",
         "consumes": [ ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -2794,11 +2799,12 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       },
       "put": {
         "tags": [ "Lab" ],
-        "description": "Create Lab, or replace an existing Lab. This operation can take a while to complete.",
+        "description": "Create or replace an existing Lab. This operation can take a while to complete.",
         "operationId": "Lab_CreateOrUpdateResource",
         "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -2839,12 +2845,13 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [ "Lab" ],
-        "description": "Delete Lab. This operation can take a while to complete.",
+        "description": "Delete lab. This operation can take a while to complete.",
         "operationId": "Lab_DeleteResource",
         "consumes": [ ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -2873,12 +2880,13 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [ "Lab" ],
-        "description": "Modify properties of Labs.",
+        "description": "Modify properties of labs.",
         "operationId": "Lab_PatchResource",
         "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
         "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
@@ -2915,7 +2923,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/createEnvironment": {
@@ -2956,7 +2965,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-long-running-operation": true
       }
     },
@@ -3000,7 +3010,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ]
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/listVhds": {
@@ -3037,7 +3048,8 @@
             "description": "BadRequest",
             "schema": { "$ref": "#/definitions/CloudError" }
           }
-        },        "security": [ { "oauth2": [ "user_impersonation" ] } ],
+        },
+        "security": [ { "oauth2": [ "user_impersonation" ] } ],
         "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     }
@@ -3051,17 +3063,32 @@
       }
     },
     "Artifact": {
+      "description": "An Azure resource.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ArtifactProperties",
+          "description": "The properties of the resource.",
           "x-ms-client-flatten": true
         },
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "type": { "type": "string" },
-        "location": { "type": "string" },
+        "id": {
+          "description": "The identifier of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the resource.",
+          "type": "string"
+        },
         "tags": {
+          "description": "The tags of the resource.",
           "type": "object",
           "additionalProperties": { "type": "string" }
         }
@@ -3069,60 +3096,111 @@
       "x-ms-azure-resource": true
     },
     "ArtifactDeploymentStatusProperties": {
+      "description": "Properties of an artifact deployment.",
       "type": "object",
       "properties": {
-        "deploymentStatus": { "type": "string" },
+        "deploymentStatus": {
+          "description": "The deployment status of the artifact.",
+          "type": "string"
+        },
         "artifactsApplied": {
           "format": "int32",
+          "description": "The total count of the artifacts that were successfully applied.",
           "type": "integer"
         },
         "totalArtifacts": {
           "format": "int32",
+          "description": "The total count of the artifacts that were tentatively applied.",
           "type": "integer"
         }
       }
     },
     "ArtifactInstallProperties": {
+      "description": "Properties of an artifact.",
       "type": "object",
       "properties": {
-        "artifactId": { "type": "string" },
+        "artifactId": {
+          "description": "The artifact's identifier.",
+          "type": "string"
+        },
         "parameters": {
+          "description": "The parameters of the artifact.",
           "type": "array",
           "items": { "$ref": "#/definitions/ArtifactParameterProperties" }
         }
       }
     },
     "ArtifactParameterProperties": {
+      "description": "Properties of an artifact parameter.",
       "type": "object",
       "properties": {
-        "name": { "type": "string" },
-        "value": { "type": "string" }
+        "name": {
+          "description": "The name of the artifact parameter.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of the artifact parameter.",
+          "type": "string"
+        }
       }
     },
     "ArtifactProperties": {
+      "description": "Properties of an artifact.",
       "type": "object",
       "properties": {
-        "id": { "type": "string" },
-        "title": { "type": "string" },
-        "description": { "type": "string" },
-        "filePath": { "type": "string" },
-        "icon": { "type": "string" },
-        "targetOsType": { "type": "string" },
-        "parameters": { "$ref": "#/definitions/Object" }
+        "title": {
+          "description": "The title of the artifact.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the artifact.",
+          "type": "string"
+        },
+        "filePath": {
+          "description": "The file path of the artifact.",
+          "type": "string"
+        },
+        "icon": {
+          "description": "The icon of the artifact.",
+          "type": "string"
+        },
+        "targetOsType": {
+          "description": "Gets or sets the type of the target os.",
+          "type": "string"
+        },
+        "parameters": {
+          "$ref": "#/definitions/Object",
+          "description": "The parameters of the artifact."
+        }
       }
     },
     "ArtifactSource": {
+      "description": "An Azure resource.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ArtifactSourceProperties",
+          "description": "The properties of the resource.",
           "x-ms-client-flatten": true
         },
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "type": { "type": "string" },
-        "location": { "type": "string" },
+        "id": {
+          "description": "The identifier of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the resource.",
+          "type": "string"
+        },
         "tags": {
+          "description": "The tags of the resource.",
           "type": "object",
           "additionalProperties": { "type": "string" }
         }
@@ -3130,11 +3208,19 @@
       "x-ms-azure-resource": true
     },
     "ArtifactSourceProperties": {
+      "description": "Properties of an artifact source.",
       "type": "object",
       "properties": {
-        "displayName": { "type": "string" },
-        "uri": { "type": "string" },
+        "displayName": {
+          "description": "The display name of the artifact source.",
+          "type": "string"
+        },
+        "uri": {
+          "description": "The URI of the artifact source.",
+          "type": "string"
+        },
         "sourceType": {
+          "description": "The type of the artifact source.",
           "enum": [ "VsoGit", "GitHub" ],
           "type": "string",
           "x-ms-enum": {
@@ -3142,10 +3228,20 @@
             "modelAsString": true
           }
         },
-        "folderPath": { "type": "string" },
-        "branchRef": { "type": "string" },
-        "securityToken": { "type": "string" },
+        "folderPath": {
+          "description": "The folder path of the artifact source.",
+          "type": "string"
+        },
+        "branchRef": {
+          "description": "The branch reference of the artifact source.",
+          "type": "string"
+        },
+        "securityToken": {
+          "description": "The security token of the artifact source.",
+          "type": "string"
+        },
         "status": {
+          "description": "The status of the artifact source.",
           "enum": [ "Enabled", "Disabled" ],
           "type": "string",
           "x-ms-enum": {
@@ -3153,7 +3249,10 @@
             "modelAsString": true
           }
         },
-        "provisioningState": { "type": "string" }
+        "provisioningState": {
+          "description": "The provisioning status of the resource.",
+          "type": "string"
+        }
       }
     },
     "CloudError": {
@@ -3175,17 +3274,32 @@
       "x-ms-external": true
     },
     "Cost": {
+      "description": "An Azure resource.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CostProperties",
+          "description": "The properties of the resource.",
           "x-ms-client-flatten": true
         },
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "type": { "type": "string" },
-        "location": { "type": "string" },
+        "id": {
+          "description": "The identifier of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the resource.",
+          "type": "string"
+        },
         "tags": {
+          "description": "The tags of the resource.",
           "type": "object",
           "additionalProperties": { "type": "string" }
         }
@@ -3193,17 +3307,21 @@
       "x-ms-azure-resource": true
     },
     "CostPerDayProperties": {
+      "description": "The per-day properties of a cost.",
       "type": "object",
       "properties": {
         "date": {
           "format": "date-time",
+          "description": "The date of the cost item.",
           "type": "string"
         },
         "cost": {
           "format": "double",
+          "description": "The cost of the cost item.",
           "type": "number"
         },
         "costType": {
+          "description": "The type of the cost.",
           "enum": [ "Unavailable", "Reported", "Projected" ],
           "type": "string",
           "x-ms-enum": {
@@ -3214,28 +3332,51 @@
       }
     },
     "CostProperties": {
+      "description": "Properties of a cost.",
       "type": "object",
       "properties": {
-        "currencyCode": { "type": "string" },
+        "currencyCode": {
+          "description": "The currency code of the cost.",
+          "type": "string"
+        },
         "costs": {
+          "description": "The per-day costs items of the cost.",
           "type": "array",
           "items": { "$ref": "#/definitions/CostPerDayProperties" }
         },
-        "provisioningState": { "type": "string" }
+        "provisioningState": {
+          "description": "The provisioning status of the resource.",
+          "type": "string"
+        }
       }
     },
     "CostSetting": {
+      "description": "An Azure resource.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CostSettingProperties",
+          "description": "The properties of the resource.",
           "x-ms-client-flatten": true
         },
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "type": { "type": "string" },
-        "location": { "type": "string" },
+        "id": {
+          "description": "The identifier of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the resource.",
+          "type": "string"
+        },
         "tags": {
+          "description": "The tags of the resource.",
           "type": "object",
           "additionalProperties": { "type": "string" }
         }
@@ -3243,9 +3384,11 @@
       "x-ms-azure-resource": true
     },
     "CostSettingProperties": {
+      "description": "Properties of a cost setting.",
       "type": "object",
       "properties": {
         "startDayType": {
+          "description": "The start day type of the cost setting.",
           "enum": [ "CalendarDate", "LabCreationDate" ],
           "type": "string",
           "x-ms-enum": {
@@ -3253,31 +3396,43 @@
             "modelAsString": true
           }
         },
-        "startDay": { "type": "string" },
-        "provisioningState": { "type": "string" }
-      }
-    },
-    "CreateVmTemplateActionProperties": {
-      "type": "object",
-      "properties": {
-        "sysPrep": { "type": "boolean" },
-        "isSysPrepped": { "type": "boolean" },
-        "vmTemplateName": { "type": "string" },
-        "vmTemplateDescription": { "type": "string" }
+        "startDay": {
+          "description": "The start day of the cost setting.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning status of the resource.",
+          "type": "string"
+        }
       }
     },
     "CustomImage": {
+      "description": "An Azure resource.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CustomImageProperties",
+          "description": "The properties of the resource.",
           "x-ms-client-flatten": true
         },
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "type": { "type": "string" },
-        "location": { "type": "string" },
+        "id": {
+          "description": "The identifier of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the resource.",
+          "type": "string"
+        },
         "tags": {
+          "description": "The tags of the resource.",
           "type": "object",
           "additionalProperties": { "type": "string" }
         }
@@ -3285,12 +3440,23 @@
       "x-ms-azure-resource": true
     },
     "CustomImageProperties": {
+      "description": "Properties of a custom image.",
       "type": "object",
       "properties": {
-        "vm": { "$ref": "#/definitions/CustomImagePropertiesFromVm" },
-        "vhd": { "$ref": "#/definitions/CustomImagePropertiesCustom" },
-        "description": { "type": "string" },
+        "vm": {
+          "$ref": "#/definitions/CustomImagePropertiesFromVm",
+          "description": ""
+        },
+        "vhd": {
+          "$ref": "#/definitions/CustomImagePropertiesCustom",
+          "description": "The VHD from which the image is to be created."
+        },
+        "description": {
+          "description": "The description of the custom image.",
+          "type": "string"
+        },
         "osType": {
+          "description": "The OS type of the custom image.",
           "enum": [ "Windows", "Linux", "None" ],
           "type": "string",
           "x-ms-enum": {
@@ -3298,54 +3464,107 @@
             "modelAsString": true
           }
         },
-        "author": { "type": "string" },
-        "creationDate": {
-          "format": "date-time",
+        "author": {
+          "description": "The author of the custom image.",
           "type": "string"
         },
-        "provisioningState": { "type": "string" }
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of the custom image.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning status of the resource.",
+          "type": "string"
+        }
       }
     },
     "CustomImagePropertiesCustom": {
+      "description": "Properties for creating a custom image from a VHD.",
       "type": "object",
       "properties": {
-        "imageName": { "type": "string" },
-        "sysPrep": { "type": "boolean" }
+        "imageName": {
+          "description": "The image name.",
+          "type": "string"
+        },
+        "sysPrep": {
+          "description": "Indicates whether sysprep has been run on the VHD.",
+          "type": "boolean"
+        }
       }
     },
     "CustomImagePropertiesFromVm": {
+      "description": "Properties for creating a custom image from a virtual machine.",
       "type": "object",
       "properties": {
-        "sourceVmId": { "type": "string" },
-        "sysPrep": { "type": "boolean" },
-        "windowsOsInfo": { "$ref": "#/definitions/WindowsOsInfo" },
-        "linuxOsInfo": { "$ref": "#/definitions/LinuxOsInfo" }
+        "sourceVmId": {
+          "description": "The source vm identifier.",
+          "type": "string"
+        },
+        "sysPrep": {
+          "description": "Indicates whether sysprep has been run on the VHD.",
+          "type": "boolean"
+        },
+        "windowsOsInfo": {
+          "$ref": "#/definitions/WindowsOsInfo",
+          "description": "The Windows OS information of the VM."
+        },
+        "linuxOsInfo": {
+          "$ref": "#/definitions/LinuxOsInfo",
+          "description": "The Linux OS information of the VM."
+        }
       }
     },
     "DayDetails": {
+      "description": "Properties of a daily schedule.",
       "type": "object",
       "properties": { "time": { "$ref": "#/definitions/Recurrence" } }
     },
     "EvaluatePoliciesProperties": {
+      "description": "Properties for evaluating a policy set.",
       "type": "object",
       "properties": {
-        "factName": { "type": "string" },
-        "factData": { "type": "string" },
-        "valueOffset": { "type": "string" }
+        "factName": {
+          "description": "The fact name.",
+          "type": "string"
+        },
+        "factData": {
+          "description": "The fact data.",
+          "type": "string"
+        },
+        "valueOffset": {
+          "description": "The value offset.",
+          "type": "string"
+        }
       }
     },
     "Formula": {
+      "description": "An Azure resource.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/FormulaProperties",
+          "description": "The properties of the resource.",
           "x-ms-client-flatten": true
         },
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "type": { "type": "string" },
-        "location": { "type": "string" },
+        "id": {
+          "description": "The identifier of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the resource.",
+          "type": "string"
+        },
         "tags": {
+          "description": "The tags of the resource.",
           "type": "object",
           "additionalProperties": { "type": "string" }
         }
@@ -3353,36 +3572,77 @@
       "x-ms-azure-resource": true
     },
     "FormulaProperties": {
+      "description": "Properties of a formula.",
       "type": "object",
       "properties": {
-        "description": { "type": "string" },
-        "author": { "type": "string" },
-        "osType": { "type": "string" },
-        "creationDate": {
-          "format": "date-time",
+        "description": {
+          "description": "The description of the formula.",
           "type": "string"
         },
-        "formulaContent": { "$ref": "#/definitions/Object" },
-        "vm": { "$ref": "#/definitions/FormulaPropertiesFromVm" },
-        "provisioningState": { "type": "string" }
+        "author": {
+          "description": "The author of the formula.",
+          "type": "string"
+        },
+        "osType": {
+          "description": "The OS type of the formula.",
+          "type": "string"
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of the formula.",
+          "type": "string"
+        },
+        "formulaContent": {
+          "$ref": "#/definitions/Object",
+          "description": "The content of the formula."
+        },
+        "vm": {
+          "$ref": "#/definitions/FormulaPropertiesFromVm",
+          "description": "Information about a VM from which a formula is to be created."
+        },
+        "provisioningState": {
+          "description": "The provisioning status of the resource.",
+          "type": "string"
+        }
       }
     },
     "FormulaPropertiesFromVm": {
+      "description": "Information about a VM from which a formula is to be created.",
       "type": "object",
-      "properties": { "labVmId": { "type": "string" } }
+      "properties": {
+        "labVmId": {
+          "description": "The identifier of the VM from which a formula is to be created.",
+          "type": "string"
+        }
+      }
     },
     "GalleryImage": {
+      "description": "An Azure resource.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GalleryImageProperties",
+          "description": "The properties of the resource.",
           "x-ms-client-flatten": true
         },
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "type": { "type": "string" },
-        "location": { "type": "string" },
+        "id": {
+          "description": "The identifier of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the resource.",
+          "type": "string"
+        },
         "tags": {
+          "description": "The tags of the resource.",
           "type": "object",
           "additionalProperties": { "type": "string" }
         }
@@ -3390,34 +3650,73 @@
       "x-ms-azure-resource": true
     },
     "GalleryImageProperties": {
+      "description": "Properties of a gallery image.",
       "type": "object",
       "properties": {
-        "author": { "type": "string" },
-        "createdDate": {
-          "format": "date-time",
+        "author": {
+          "description": "The author of the gallery image.",
           "type": "string"
         },
-        "description": { "type": "string" },
-        "imageReference": { "$ref": "#/definitions/GalleryImageReference" },
-        "icon": { "type": "string" },
-        "enabled": { "type": "boolean" },
-        "provisioningState": { "type": "string" }
+        "createdDate": {
+          "format": "date-time",
+          "description": "The creation date of the gallery image.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the gallery image.",
+          "type": "string"
+        },
+        "imageReference": {
+          "$ref": "#/definitions/GalleryImageReference",
+          "description": "The image reference of the gallery image."
+        },
+        "icon": {
+          "description": "The icon of the gallery image.",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Indicates whether this gallery image is enabled.",
+          "type": "boolean"
+        },
+        "provisioningState": {
+          "description": "The provisioning status of the resource.",
+          "type": "string"
+        }
       }
     },
     "GalleryImageReference": {
+      "description": "The reference information for an Azure Marketplace image.",
       "type": "object",
       "properties": {
-        "offer": { "type": "string" },
-        "publisher": { "type": "string" },
-        "sku": { "type": "string" },
-        "osType": { "type": "string" },
-        "version": { "type": "string" }
+        "offer": {
+          "description": "The offer of the gallery image.",
+          "type": "string"
+        },
+        "publisher": {
+          "description": "The publisher of the gallery image.",
+          "type": "string"
+        },
+        "sku": {
+          "description": "The SKU of the gallery image.",
+          "type": "string"
+        },
+        "osType": {
+          "description": "The OS type of the gallery image.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of the gallery image.",
+          "type": "string"
+        }
       }
     },
     "GenerateArmTemplateRequest": {
       "type": "object",
       "properties": {
-        "virtualMachineName": { "type": "string" },
+        "virtualMachineName": {
+          "description": "The resource name of the virtual machine",
+          "type": "string"
+        },
         "parameters": {
           "type": "array",
           "items": { "$ref": "#/definitions/ParameterInfo" }
@@ -3426,25 +3725,52 @@
       }
     },
     "GenerateUploadUriParameter": {
+      "description": "Properties for generating an upload URI.",
       "type": "object",
-      "properties": { "blobName": { "type": "string" } }
+      "properties": {
+        "blobName": {
+          "description": "The blob name of the upload URI.",
+          "type": "string"
+        }
+      }
     },
     "HourDetails": {
+      "description": "Properties of an hourly schedule.",
       "type": "object",
-      "properties": { }
+      "properties": {
+        "minute": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
     },
     "Lab": {
+      "description": "An Azure resource.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/LabProperties",
+          "description": "The properties of the resource.",
           "x-ms-client-flatten": true
         },
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "type": { "type": "string" },
-        "location": { "type": "string" },
+        "id": {
+          "description": "The identifier of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the resource.",
+          "type": "string"
+        },
         "tags": {
+          "description": "The tags of the resource.",
           "type": "object",
           "additionalProperties": { "type": "string" }
         }
@@ -3452,16 +3778,28 @@
       "x-ms-azure-resource": true
     },
     "LabProperties": {
+      "description": "Properties of a lab.",
       "type": "object",
       "properties": {
-        "defaultStorageAccount": { "type": "string" },
-        "artifactsStorageAccount": { "type": "string" },
+        "defaultStorageAccount": {
+          "description": "The lab's default storage account.",
+          "type": "string"
+        },
+        "artifactsStorageAccount": {
+          "description": "The artifact storage account of the lab.",
+          "type": "string"
+        },
         "storageAccounts": {
+          "description": "The storage accounts of the lab.",
           "type": "array",
           "items": { "type": "string" }
         },
-        "vaultName": { "type": "string" },
+        "vaultName": {
+          "description": "The name of the key vault of the lab.",
+          "type": "string"
+        },
         "labStorageType": {
+          "description": "The type of the lab storage.",
           "enum": [ "Standard", "Premium" ],
           "type": "string",
           "x-ms-enum": {
@@ -3469,30 +3807,58 @@
             "modelAsString": true
           }
         },
-        "defaultVirtualNetworkId": { "type": "string" },
-        "createdDate": {
-          "format": "date-time",
+        "defaultVirtualNetworkId": {
+          "description": "The default virtual network identifier of the lab.",
           "type": "string"
         },
-        "provisioningState": { "type": "string" }
+        "createdDate": {
+          "format": "date-time",
+          "description": "The creation date of the lab.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning status of the resource.",
+          "type": "string"
+        }
       }
     },
     "LabVhd": {
+      "description": "Properties of a VHD in the lab.",
       "type": "object",
-      "properties": { "id": { "type": "string" } }
+      "properties": {
+        "id": {
+          "description": "The absolute URI of the VHD.",
+          "type": "string"
+        }
+      }
     },
     "LabVirtualMachine": {
+      "description": "An Azure resource.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/VirtualMachineProperties",
+          "description": "The properties of the resource.",
           "x-ms-client-flatten": true
         },
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "type": { "type": "string" },
-        "location": { "type": "string" },
+        "id": {
+          "description": "The identifier of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the resource.",
+          "type": "string"
+        },
         "tags": {
+          "description": "The tags of the resource.",
           "type": "object",
           "additionalProperties": { "type": "string" }
         }
@@ -3500,8 +3866,19 @@
       "x-ms-azure-resource": true
     },
     "LinuxOsInfo": {
+      "description": "Information about a Linux OS.",
       "type": "object",
-      "properties": { "linuxOsState": { "type": "string" } }
+      "properties": {
+        "linuxOsState": {
+          "description": "The state of the Linux OS.",
+          "enum": [ "NonDeprovisioned", "DeprovisionRequested", "DeprovisionApplied" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LinuxOsState",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "Object": {
       "type": "object",
@@ -3515,17 +3892,32 @@
       }
     },
     "Policy": {
+      "description": "An Azure resource.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PolicyProperties",
+          "description": "The properties of the resource.",
           "x-ms-client-flatten": true
         },
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "type": { "type": "string" },
-        "location": { "type": "string" },
+        "id": {
+          "description": "The identifier of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the resource.",
+          "type": "string"
+        },
         "tags": {
+          "description": "The tags of the resource.",
           "type": "object",
           "additionalProperties": { "type": "string" }
         }
@@ -3533,10 +3925,15 @@
       "x-ms-azure-resource": true
     },
     "PolicyProperties": {
+      "description": "Properties of a Policy.",
       "type": "object",
       "properties": {
-        "description": { "type": "string" },
+        "description": {
+          "description": "The description of the policy.",
+          "type": "string"
+        },
         "status": {
+          "description": "The status of the policy.",
           "enum": [ "Enabled", "Disabled" ],
           "type": "string",
           "x-ms-enum": {
@@ -3544,33 +3941,62 @@
             "modelAsString": true
           }
         },
-        "factName": { "type": "string" },
-        "factData": { "type": "string" },
-        "threshold": { "type": "string" },
-        "policyEvaluatorType": { "type": "string" },
-        "provisioningState": { "type": "string" }
+        "factName": {
+          "description": "The fact name of the policy.",
+          "type": "string"
+        },
+        "factData": {
+          "description": "The fact data of the policy.",
+          "type": "string"
+        },
+        "threshold": {
+          "description": "The threshold of the policy.",
+          "type": "string"
+        },
+        "policyEvaluatorType": {
+          "description": "The evaluator type of the policy.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning status of the resource.",
+          "type": "string"
+        }
       }
     },
     "PolicySetResult": {
+      "description": "Result of a policy set evaluation.",
       "type": "object",
       "properties": {
-        "hasError": { "type": "boolean" },
+        "hasError": {
+          "description": "A value indicating whether this policy set evaluation has discovered violations.",
+          "type": "boolean"
+        },
         "policyViolations": {
+          "description": "The list of policy violations.",
           "type": "array",
           "items": { "$ref": "#/definitions/PolicyViolation" }
         }
       }
     },
     "PolicyViolation": {
+      "description": "Policy violation.",
       "type": "object",
       "properties": {
-        "code": { "type": "string" },
-        "message": { "type": "string" }
+        "code": {
+          "description": "The code of the policy violation.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The message of the policy violation.",
+          "type": "string"
+        }
       }
     },
     "Recurrence": {
+      "description": "Daily recurrence.",
       "type": "object",
       "properties": {
+        "timeZone": { "type": "string" },
         "hour": {
           "format": "int32",
           "type": "integer"
@@ -3582,147 +4008,227 @@
       }
     },
     "ResponseWithContinuation[Artifact]": {
+      "description": "The response of a list operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Results of the list operation.",
           "type": "array",
           "items": { "$ref": "#/definitions/Artifact" }
         },
-        "nextLink": { "type": "string" }
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
+        }
       }
     },
     "ResponseWithContinuation[ArtifactSource]": {
+      "description": "The response of a list operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Results of the list operation.",
           "type": "array",
           "items": { "$ref": "#/definitions/ArtifactSource" }
         },
-        "nextLink": { "type": "string" }
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
+        }
       }
     },
     "ResponseWithContinuation[Cost]": {
+      "description": "The response of a list operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Results of the list operation.",
           "type": "array",
           "items": { "$ref": "#/definitions/Cost" }
         },
-        "nextLink": { "type": "string" }
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
+        }
       }
     },
     "ResponseWithContinuation[CustomImage]": {
+      "description": "The response of a list operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Results of the list operation.",
           "type": "array",
           "items": { "$ref": "#/definitions/CustomImage" }
         },
-        "nextLink": { "type": "string" }
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
+        }
       }
     },
     "ResponseWithContinuation[Formula]": {
+      "description": "The response of a list operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Results of the list operation.",
           "type": "array",
           "items": { "$ref": "#/definitions/Formula" }
         },
-        "nextLink": { "type": "string" }
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
+        }
       }
     },
     "ResponseWithContinuation[GalleryImage]": {
+      "description": "The response of a list operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Results of the list operation.",
           "type": "array",
           "items": { "$ref": "#/definitions/GalleryImage" }
         },
-        "nextLink": { "type": "string" }
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
+        }
       }
     },
     "ResponseWithContinuation[Lab]": {
+      "description": "The response of a list operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Results of the list operation.",
           "type": "array",
           "items": { "$ref": "#/definitions/Lab" }
         },
-        "nextLink": { "type": "string" }
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
+        }
       }
     },
     "ResponseWithContinuation[LabVhd]": {
+      "description": "The response of a list operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Results of the list operation.",
           "type": "array",
           "items": { "$ref": "#/definitions/LabVhd" }
         },
-        "nextLink": { "type": "string" }
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
+        }
       }
     },
     "ResponseWithContinuation[LabVirtualMachine]": {
+      "description": "The response of a list operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Results of the list operation.",
           "type": "array",
           "items": { "$ref": "#/definitions/LabVirtualMachine" }
         },
-        "nextLink": { "type": "string" }
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
+        }
       }
     },
     "ResponseWithContinuation[Policy]": {
+      "description": "The response of a list operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Results of the list operation.",
           "type": "array",
           "items": { "$ref": "#/definitions/Policy" }
         },
-        "nextLink": { "type": "string" }
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
+        }
       }
     },
     "ResponseWithContinuation[Schedule]": {
+      "description": "The response of a list operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Results of the list operation.",
           "type": "array",
           "items": { "$ref": "#/definitions/Schedule" }
         },
-        "nextLink": { "type": "string" }
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
+        }
       }
     },
     "ResponseWithContinuation[UnattendedTask]": {
+      "description": "The response of a list operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Results of the list operation.",
           "type": "array",
           "items": { "$ref": "#/definitions/UnattendedTask" }
         },
-        "nextLink": { "type": "string" }
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
+        }
       }
     },
     "ResponseWithContinuation[VirtualNetwork]": {
+      "description": "The response of a list operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Results of the list operation.",
           "type": "array",
           "items": { "$ref": "#/definitions/VirtualNetwork" }
         },
-        "nextLink": { "type": "string" }
+        "nextLink": {
+          "description": "Link for next set of results.",
+          "type": "string"
+        }
       }
     },
     "Schedule": {
+      "description": "An Azure resource.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ScheduleProperties",
+          "description": "The properties of the resource.",
           "x-ms-client-flatten": true
         },
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "type": { "type": "string" },
-        "location": { "type": "string" },
+        "id": {
+          "description": "The identifier of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the resource.",
+          "type": "string"
+        },
         "tags": {
+          "description": "The tags of the resource.",
           "type": "object",
           "additionalProperties": { "type": "string" }
         }
@@ -3730,9 +4236,11 @@
       "x-ms-azure-resource": true
     },
     "ScheduleProperties": {
+      "description": "Properties of a schedule.",
       "type": "object",
       "properties": {
         "status": {
+          "description": "The status of the schedule.",
           "enum": [ "Enabled", "Disabled" ],
           "type": "string",
           "x-ms-enum": {
@@ -3740,11 +4248,26 @@
             "modelAsString": true
           }
         },
-        "taskType": { "type": "string" },
-        "weeklyRecurrence": { "$ref": "#/definitions/WeekDetails" },
-        "dailyRecurrence": { "$ref": "#/definitions/DayDetails" },
-        "hourlyRecurrence": { "$ref": "#/definitions/HourDetails" },
-        "provisioningState": { "type": "string" }
+        "taskType": {
+          "description": "The task type of the schedule.",
+          "type": "string"
+        },
+        "weeklyRecurrence": {
+          "$ref": "#/definitions/WeekDetails",
+          "description": "The weekly recurrence of the schedule."
+        },
+        "dailyRecurrence": {
+          "$ref": "#/definitions/DayDetails",
+          "description": "The daily recurrence of the schedule."
+        },
+        "hourlyRecurrence": {
+          "$ref": "#/definitions/HourDetails",
+          "description": "The hourly recurrence of the schedule."
+        },
+        "provisioningState": {
+          "description": "The provisioning status of the resource.",
+          "type": "string"
+        }
       }
     },
     "Subnet": {
@@ -3763,11 +4286,19 @@
       }
     },
     "SubnetOverride": {
+      "description": "Property overrides on a subnet of a virtual network.",
       "type": "object",
       "properties": {
-        "resourceId": { "type": "string" },
-        "labSubnetName": { "type": "string" },
+        "resourceId": {
+          "description": "The resource identifier of the subnet.",
+          "type": "string"
+        },
+        "labSubnetName": {
+          "description": "The lab subnet name of the subnet.",
+          "type": "string"
+        },
         "useInVmCreationPermission": {
+          "description": "Indicates whether this subnet can be during virtual machine creation.",
           "enum": [ "Default", "Deny", "Allow" ],
           "type": "string",
           "x-ms-enum": {
@@ -3776,6 +4307,7 @@
           }
         },
         "usePublicIpAddressPermission": {
+          "description": "Indicates whether public IP addresses can be assigned to virtual machines on this subnet.",
           "enum": [ "Default", "Deny", "Allow" ],
           "type": "string",
           "x-ms-enum": {
@@ -3805,17 +4337,32 @@
       "properties": { "tenantId": { "type": "string" } }
     },
     "UnattendedTask": {
+      "description": "An Azure resource.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/UnattendedTaskProperties",
+          "description": "The properties of the resource.",
           "x-ms-client-flatten": true
         },
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "type": { "type": "string" },
-        "location": { "type": "string" },
+        "id": {
+          "description": "The identifier of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the resource.",
+          "type": "string"
+        },
         "tags": {
+          "description": "The tags of the resource.",
           "type": "object",
           "additionalProperties": { "type": "string" }
         }
@@ -3823,10 +4370,15 @@
       "x-ms-azure-resource": true
     },
     "UnattendedTaskProperties": {
+      "description": "Properties of an unattended task.",
       "type": "object",
       "properties": {
-        "arguments": { "type": "string" },
+        "arguments": {
+          "description": "The arguments of the unattended task.",
+          "type": "string"
+        },
         "taskType": {
+          "description": "The type of the unattended task.",
           "enum": [ "LabVmsShutdownTask", "LabVmsStartupTask", "LabBillingTask" ],
           "type": "string",
           "x-ms-enum": {
@@ -3834,49 +4386,122 @@
             "modelAsString": true
           }
         },
-        "provisioningState": { "type": "string" }
+        "provisioningState": {
+          "description": "The provisioning status of the resource.",
+          "type": "string"
+        }
       }
     },
     "VirtualMachineProperties": {
+      "description": "Properties of a virtual machine.",
       "type": "object",
       "properties": {
-        "notes": { "type": "string" },
-        "ownerObjectId": { "type": "string" },
-        "computeId": { "type": "string" },
-        "customImageId": { "type": "string" },
-        "osType": { "type": "string" },
-        "size": { "type": "string" },
-        "userName": { "type": "string" },
-        "password": { "type": "string" },
-        "sshKey": { "type": "string" },
-        "isAuthenticationWithSshKey": { "type": "boolean" },
-        "fqdn": { "type": "string" },
-        "labSubnetName": { "type": "string" },
-        "labVirtualNetworkId": { "type": "string" },
-        "disallowPublicIpAddress": { "type": "boolean" },
-        "builtInUserName": { "type": "string" },
-        "builtInPassword": { "type": "string" },
+        "notes": {
+          "description": "The notes of the virtual machine.",
+          "type": "string"
+        },
+        "ownerObjectId": {
+          "description": "The object identifier of the owner of the virtual machine.",
+          "type": "string"
+        },
+        "computeId": {
+          "description": "The resource identifier (Microsof.Compute) of the virtual machine.",
+          "type": "string"
+        },
+        "customImageId": {
+          "description": "The custom image identifier of the virtual machine.",
+          "type": "string"
+        },
+        "osType": {
+          "description": "The OS type of the virtual machine.",
+          "type": "string"
+        },
+        "size": {
+          "description": "The size of the virtual machine.",
+          "type": "string"
+        },
+        "userName": {
+          "description": "The user name of the virtual machine.",
+          "type": "string"
+        },
+        "password": {
+          "description": "The password of the virtual machine administrator.",
+          "type": "string"
+        },
+        "sshKey": {
+          "description": "The SSH key of the virtual machine administrator.",
+          "type": "string"
+        },
+        "isAuthenticationWithSshKey": {
+          "description": "A value indicating whether this virtual machine uses an SSH key for authentication.",
+          "type": "boolean"
+        },
+        "fqdn": {
+          "description": "The fully-qualified domain name of the virtual machine.",
+          "type": "string"
+        },
+        "labSubnetName": {
+          "description": "The lab subnet name of the virtual machine.",
+          "type": "string"
+        },
+        "labVirtualNetworkId": {
+          "description": "The lab virtual network identifier of the virtual machine.",
+          "type": "string"
+        },
+        "disallowPublicIpAddress": {
+          "description": "Indicates whether the virtual machine is to be created without a public IP address.",
+          "type": "boolean"
+        },
+        "builtInPassword": {
+          "description": "The built-in admin password of the virtual machine.",
+          "type": "string"
+        },
         "artifacts": {
+          "description": "The artifacts to be installed on the virtual machine.",
           "type": "array",
           "items": { "$ref": "#/definitions/ArtifactInstallProperties" }
         },
-        "artifactDeploymentStatus": { "$ref": "#/definitions/ArtifactDeploymentStatusProperties" },
-        "galleryImageReference": { "$ref": "#/definitions/GalleryImageReference" },
-        "provisioningState": { "type": "string" }
+        "artifactDeploymentStatus": {
+          "$ref": "#/definitions/ArtifactDeploymentStatusProperties",
+          "description": "The artifact deployment status for the virtual machine."
+        },
+        "galleryImageReference": {
+          "$ref": "#/definitions/GalleryImageReference",
+          "description": "The Microsoft Azure Marketplace image reference of the virtual machine."
+        },
+        "provisioningState": {
+          "description": "The provisioning status of the resource.",
+          "type": "string"
+        }
       }
     },
     "VirtualNetwork": {
+      "description": "An Azure resource.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/VirtualNetworkProperties",
+          "description": "The properties of the resource.",
           "x-ms-client-flatten": true
         },
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "type": { "type": "string" },
-        "location": { "type": "string" },
+        "id": {
+          "description": "The identifier of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the resource.",
+          "type": "string"
+        },
         "tags": {
+          "description": "The tags of the resource.",
           "type": "object",
           "additionalProperties": { "type": "string" }
         }
@@ -3884,13 +4509,16 @@
       "x-ms-azure-resource": true
     },
     "VirtualNetworkProperties": {
+      "description": "Properties of a virtual network.",
       "type": "object",
       "properties": {
         "allowedSubnets": {
+          "description": "The allowed subnets of the virtual network.",
           "type": "array",
           "items": { "$ref": "#/definitions/Subnet" }
         },
         "defaultUseInVmCreationPermission": {
+          "description": "Indicates whether this virtual network can be during virtual machine creation.",
           "enum": [ "Default", "Deny", "Allow" ],
           "type": "string",
           "x-ms-enum": {
@@ -3899,6 +4527,7 @@
           }
         },
         "defaultUsePublicIpAddressPermission": {
+          "description": "Indicates whether public IP addresses can be assigned to virtual machines on this network.",
           "enum": [ "Default", "Deny", "Allow" ],
           "type": "string",
           "x-ms-enum": {
@@ -3906,28 +4535,54 @@
             "modelAsString": true
           }
         },
-        "description": { "type": "string" },
-        "externalProviderResourceId": { "type": "string" },
+        "description": {
+          "description": "The description of the virtual network.",
+          "type": "string"
+        },
+        "externalProviderResourceId": {
+          "description": "The Microsoft.Network resource identifier of the virtual network.",
+          "type": "string"
+        },
         "subnetOverrides": {
+          "description": "The subnet overrides of the virtual network.",
           "type": "array",
           "items": { "$ref": "#/definitions/SubnetOverride" }
         },
-        "provisioningState": { "type": "string" }
+        "provisioningState": {
+          "description": "The provisioning status of the resource.",
+          "type": "string"
+        }
       }
     },
     "WeekDetails": {
+      "description": "Properties of a weekly schedule.",
       "type": "object",
       "properties": {
         "weekdays": {
+          "description": "The days of the week.",
           "type": "array",
           "items": { "type": "string" }
         },
-        "time": { "$ref": "#/definitions/Recurrence" }
+        "time": {
+          "$ref": "#/definitions/Recurrence",
+          "description": "The time of the day."
+        }
       }
     },
     "WindowsOsInfo": {
+      "description": "Information about a Windows OS.",
       "type": "object",
-      "properties": { "windowsOsState": { "type": "string" } }
+      "properties": {
+        "windowsOsState": {
+          "description": "The state of the Windows OS.",
+          "enum": [ "NonSysprepped", "SysprepRequested", "SysprepApplied" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WindowsOsState",
+            "modelAsString": true
+          }
+        }
+      }
     }
   },
   "parameters": {
