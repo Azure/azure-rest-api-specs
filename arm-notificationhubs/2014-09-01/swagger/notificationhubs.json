@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "NotificationHubsManagementClient",
-    "description": ".Net client wrapper for the REST API for Azure NotificationHub Service",
+    "description": "Azure NotificationHub client",
     "version": "2014-09-01"
   },
   "host": "management.azure.com",
@@ -87,7 +87,7 @@
             "schema": {
               "$ref": "#/definitions/NamespaceCreateOrUpdateParameters"
             },
-            "description": "Parameters supplied to the create a Namespace Resource."
+            "description": "Parameters supplied to create a Namespace Resource."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -202,7 +202,7 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_CreateOrUpdateAuthorizationRule",
-        "description": "The create namespace authorization rule operation creates an authorization rule for a namespace",
+        "description": "Creates an authorization rule for a namespace",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -223,7 +223,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace authorizationRuleName name."
+            "description": "Aauthorization Rule Name."
           },
           {
             "name": "parameters",
@@ -255,7 +255,7 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_DeleteAuthorizationRule",
-        "description": "The delete a namespace authorization rule operation ",
+        "description": "Deletes a namespace authorization rule",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -276,7 +276,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace authorizationRuleName name."
+            "description": "Authorization Rule Name."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -299,7 +299,7 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_GetAuthorizationRule",
-        "description": "The get authorization rule operation gets an authorization rule for a namespace by name.",
+        "description": "Gets an authorization rule for a namespace by name.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -313,14 +313,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace to get the authorization rule for."
+            "description": "The namespace name"
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The entity name to get the authorization rule for."
+            "description": "Authorization rule name."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -447,7 +447,7 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_ListAuthorizationRules",
-        "description": "The get authorization rules operation gets the authorization rules for a namespace.",
+        "description": "Gets the authorization rules for a namespace.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -461,7 +461,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace to get the authorization rule for."
+            "description": "The namespace name"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -616,19 +616,13 @@
             "description": "The notification hub name."
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "description": "A notificationHub can be updated if this header is set to *. "
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NotificationHubCreateOrUpdateParameters"
             },
-            "description": "Parameters supplied to the create/update a NotificatioHub Resource."
+            "description": "Parameters supplied to the create/update a NotificationHub Resource."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -744,7 +738,7 @@
           "NotificationHubs"
         ],
         "operationId": "NotificationHubs_CreateOrUpdateAuthorizationRule",
-        "description": "The create NotificationHub authorization rule operation creates an authorization rule for a NotificationHub",
+        "description": "Creates/Updates an authorization rule for a NotificationHub",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -772,7 +766,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace authorizationRuleName name."
+            "description": "Authorization Rule Name."
           },
           {
             "name": "parameters",
@@ -804,7 +798,7 @@
           "NotificationHubs"
         ],
         "operationId": "NotificationHubs_DeleteAuthorizationRule",
-        "description": "The delete a notificationHub authorization rule operation ",
+        "description": "Deletes a notificationHub authorization rule",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -832,7 +826,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace authorizationRuleName name."
+            "description": "Authorization Rule Name."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -855,7 +849,7 @@
           "NotificationHubs"
         ],
         "operationId": "NotificationHubs_GetAuthorizationRule",
-        "description": "The get authorization rule operation gets an authorization rule for a NotificationHub by name.",
+        "description": "Gets an authorization rule for a NotificationHub by name.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -869,7 +863,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace to get the authorization rule for."
+            "description": "The namespace name"
           },
           {
             "name": "notificationHubName",
@@ -883,7 +877,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The entity name to get the authorization rule for."
+            "description": "authorization rule name."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -950,7 +944,7 @@
           "NotificationHubs"
         ],
         "operationId": "NotificationHubs_ListAuthorizationRules",
-        "description": "The get authorization rules operation gets the authorization rules for a NotificationHub.",
+        "description": "Gets the authorization rules for a NotificationHub.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -964,7 +958,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The NotificationHub to get the authorization rule for."
+            "description": "The namespace name"
           },
           {
             "name": "notificationHubName",
@@ -1660,33 +1654,33 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the id of the created NotificatioHub."
+          "description": "Gets or sets the id of the created NotificationHub."
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets datacenter location of the NotificatioHub."
+          "description": "Gets or sets datacenter location of the NotificationHub."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets name of the NotificatioHub."
+          "description": "Gets or sets name of the NotificationHub."
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets resource type of the NotificatioHub."
+          "description": "Gets or sets resource type of the NotificationHub."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets tags of the NotificatioHub."
+          "description": "Gets or sets tags of the NotificationHub."
         },
         "properties": {
           "$ref": "#/definitions/NotificationHubProperties",
-          "description": "Gets or sets properties of the NotificatioHub."
+          "description": "Gets or sets properties of the NotificationHub."
         }
       },
-      "description": "Description of a NotificatioHub Resource."
+      "description": "Description of a NotificationHub Resource."
     },
     "NotificationHubListResult": {
       "properties": {
