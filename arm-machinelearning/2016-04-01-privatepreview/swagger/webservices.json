@@ -289,624 +289,676 @@
     }
   },
   "definitions": {
-      "WebService": {
-        "type": "object",
-        "title": "[TODO] Instance of an Azure ML web service resource.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/Resource"
-          }
-        ],
-        "properties": {
-          "properties": {
-            "$ref": "#/definitions/WebServiceProperties"
-          }
+    "WebService": {
+      "type": "object",
+      "title": "[TODO] Instance of an Azure ML web service resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
         }
-      },
-      "WebServiceProperties": {
-        "type": "object",
-        "description": "The set of properties specific to the Azure ML web service resource.",
-        "required": [
-          "packageType"
-        ],
-        "discriminator": "packageType",
+      ],
+      "properties": {
         "properties": {
-          "title": {
-            "type": "string",
-            "description": "The title the Azure ML web service."
-          },
-          "description": {
-            "type": "string",
-            "description": "The description the Azure ML web service."
-          },
-          "createdOn": {
-            "type": "string",
-            "description": "The moment of time the Azure ML web service was created.",
-            "format": "date-time",
-            "readOnly": true
-          },
-          "modifiedOn": {
-            "type": "string",
-            "description": "The moment of time the web service was last modified.",
-            "format": "date-time",
-            "readOnly": true
-          },
-          "provisioningState": {
-            "type": "string",
-            "description": "The web service resource's provisioning state.",
-            "enum": [
-              "Unknown",
-              "Provisioning",
-              "Succeeded",
-              "Failed",
-              "Canceled"
-            ],
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "ProvisioningState",
-              "modelAsString": false
-            }
-          },
-          "keys": {
-            "$ref": "#/definitions/WebServiceKeys"
-          },
-          "readOnly": {
-            "type": "boolean",
-            "description": "True, if the web service should be read-only; False, otherwise"
-          },
-          "swaggerLocation": {
-            "type": "string",
-            "description": "The uri for the swagger spec associated with this Azure ML web service.",
-            "readOnly": true
-          },
-          "realtimeConfiguration": {
-            "description": "[TODO] Realtime configuration",
-            "$ref": "#/definitions/RealtimeConfiguration"
-          },
-          "diagnostics": {
-            "description": "[TODO] Diagnostics settings",
-            "$ref": "#/definitions/DiagnosticsConfiguration"
-          },
-          "storageAccount": {
-            "description": "[TODO] BYOS description",
-            "$ref": "#/definitions/StorageAccount"
-          },
-          "machineLearningWorkspace": {
-            "description": "[TODO] Service workspace data",
-            "$ref": "#/definitions/MachineLearningWorkspace"
-          },
-          "commitmentPlan": {
-            "description": "[TODO] Service commitment plan data",
-            "$ref": "#/definitions/CommitmentPlan"
-          },
-          "input": {
-            "description": "[TODO] Service input definition",
-            "$ref": "#/definitions/ServiceInputOutputSpecification"
-          },
-          "output": {
-            "description": "[TODO] Service output definition",
-            "$ref": "#/definitions/ServiceInputOutputSpecification"
-          },
-          "assets": {
-            "description": "[TODO] Service assets",
-            "$ref": "#/definitions/AssetProperties"
-          },
-          "parameters": {
-            "type": "object",
-            "description": "[TODO] Parameters of module package",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "packageType": {
-            "type": "string",
-            "description": "[TODO] Module package type",
-            "enum": [
-              "Code",
-              "Graph"
-            ],
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "PackageType",
-              "modelAsString": false
-            }
-          }
+          "$ref": "#/definitions/WebServiceProperties"
         }
-      },
-      "WebServicePropertiesForGraph": {
-        "description": "[TODO] Payload for Graph package",
-        "x-ms-discriminator-value": "Graph",
-        "allOf": [
-          {
-            "$ref": "#/definitions/WebServiceProperties"
+      }
+    },
+    "WebServiceProperties": {
+      "type": "object",
+      "description": "The set of properties specific to the Azure ML web service resource.",
+      "required": [
+        "packageType"
+      ],
+      "discriminator": "packageType",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title the Azure ML web service."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description the Azure ML web service."
+        },
+        "createdOn": {
+          "type": "string",
+          "description": "The moment of time the Azure ML web service was created.",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "modifiedOn": {
+          "type": "string",
+          "description": "The moment of time the web service was last modified.",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The web service resource's provisioning state.",
+          "enum": [
+            "Unknown",
+            "Provisioning",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
           }
-        ],
-        "properties": {
-          "package": {
-            "type": "object",
-            "description": "[TODO] Graph Package",
-            "properties": {
-              "nodes": {
-                "type": "object",
-                "description": "[TODO] Graph nodes collection",
-                "additionalProperties": {
-                  "$ref": "#/definitions/GraphNode"
-                }
-              },
-              "edges": {
-                "type": "array",
-                "description": "[TODO] List of Graph Edges",
-                "items": {
-                  "$ref": "#/definitions/GraphEdge"
-                }
-              },
-              "graphParameters": {
-                "type": "object",
-                "description": "[TODO] Graph parameter collection",
-                "additionalProperties": {
-                  "$ref": "#/definitions/GraphParameter"
-                }
-              }
-            }
-          }
-        }
-      },
-      "WebServicePropertiesForCode": {
-        "description": "[TODO] Payload for Code package",
-        "x-ms-discriminator-value": "Code",
-        "allOf": [
-          {
-            "$ref": "#/definitions/WebServiceProperties"
-          }
-        ],
-        "properties": {
-          "package": {
-            "type": "object",
-            "description": "[TODO] Code Package",
-            "properties": {
-              "language": {
-                "type": "string",
-                "description": "[TODO] The language of source code",
-                "enum": [
-                  "Python-2.7",
-                  "R-3.1"
-                ]
-              },
-              "sourceCode": {
-                "type": "string",
-                "description": "[TODO] The source code"
-              },
-              "zipFileAssetId": {
-                "type": "string",
-                "description": "[TODO] Zip file's Asset ID"
-              }
-            }
-          }
-        }
-      },
-      "WebServiceKeys": {
-        "type": "object",
-        "description": "web service Keys",
-        "properties": {
-          "primary": {
-            "type": "string",
-            "description": "The Primary Key"
-          },
-          "secondary": {
-            "type": "string",
-            "description": "The Secondary Key"
-          }
-        }
-      },
-      "PaginatedWebServicesList": {
-        "type": "object",
-        "description": "[TODO] Paginated list of web services",
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "List of Web Services",
-            "items": {
-              "$ref": "#/definitions/WebService"
-            }
-          },
-          "nextLink": {
-            "type": "string",
-            "description": "[TODO] Next Link"
-          }
-        }
-      },
-      "RealtimeConfiguration": {
-        "type": "object",
-        "description": "Configuration settings for RRS",
-        "properties": {
-          "maxConcurrentCalls": {
-            "type": "integer",
-            "description": "[TODO] Max Concurrent Calls"
-          }
-        }
-      },
-      "DiagnosticsConfiguration": {
-        "type": "object",
-        "description": "The Diagnostics Settings",
-        "properties": {
-          "level": {
-            "type": "string",
-            "description": "Trace Level: None, Error, All",
-            "enum": [
-              "None",
-              "Error",
-              "All"
-            ],
-            "x-ms-enum": {
-              "name": "DiagnosticsLevel",
-              "modelAsString": false
-            }
-          },
-          "expiry": {
-            "type": "string",
-            "description": "[TODO] Expiry date",
-            "format": "date-time"
-          }
-        }
-      },
-      "StorageAccount": {
-        "type": "object",
-        "description": "[TODO] The Storage Account used in GraphSharp",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "[TODO] The storage account's name"
-          },
-          "key": {
-            "type": "string",
-            "description": "[TODO] The storage account's active key"
-          }          
-        }
-      },
-      "MachineLearningWorkspace": {
-        "type": "object",
-        "description": "[TODO] The machine learning workspace",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "[TODO] The Workspace ID"
-          }
-        }
-      },
-      "CommitmentPlan": {
-        "type": "object",
-        "description": "[TODO] The commitment plan associated with this web service",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "[TODO] The plan's ID"
-          }
-        }
-      },
-      "ServiceInputOutputSpecification": {
-        "type": "object",
-        "description": "[TODO] The swagger schema describing the service's input.",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "[TODO] Interface title"
-          },
-          "description": {
-            "type": "string",
-            "description": "[TODO] Description of the interface"
-          },
-          "type": {
-            "type": "string",
-            "description": "[TODO] Interface properties' type. Always use 'object' here.",
-            "default": "object"
-          },
-          "properties": {
-            "type": "object",
-            "description": "[TODO]",
-            "additionalProperties": {
-              "$ref": "#/definitions/TableSpecification"
-            }
-          }
-        }
-      },
-      "TableSpecification": {
-        "type": "object",
-        "description": "[TODO] schema for a data table",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "[TODO] Table title"
-          },
-          "description": {
-            "type": "string",
-            "description": "[TODO] Table description"
-          },
-          "type": {
-            "type": "string",
-            "description": "[TODO] Table properties' type. Always use 'object' here.",
-            "default": "object"
-          },
-          "properties": {
-            "type": "object",
-            "description": "The set of columns within the data table",
-            "additionalProperties": {
-              "$ref": "#/definitions/ColumnSpecification"
-            }
-          }
-        }
-      },
-      "ColumnSpecification": {
-        "type": "object",
-        "description": "[TODO] input column.",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "[TODO] Data type"
-          },
-          "format": {
-            "type": "string",
-            "description": "[TODO] Data format"
-          },
-          "enum": {
-            "type": "array",
-            "description": "[TODO] Options",
-            "items": {
-              "type": "object"
-            }
-          },
-          "x-ms-isnullable": {
-            "type": "boolean",
-            "description": "[TODO] Is nullable"
-          },
-          "x-ms-isordered": {
-            "type": "boolean",
-            "description": "[TODO] Is enum in order"
-          }
-        }
-      },
-      "AssetProperties": {
-        "type": "object",
-        "additionalProperties": {
-          "$ref": "#/definitions/AssetItem"
-        }
-      },
-      "AssetItem": {
-        "type": "object",
-        "description": "[TODO] Service asset details",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Module friendly name"
-          },
-          "type": {
-            "type": "string",
-            "description": "Module type",
-            "default": "module"
-          },
-          "location": {
-            "$ref": "#/definitions/AssetLocation"
-          },
-          "inputPorts": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/definitions/InputPort"
-            }
-          },
-          "outputPorts": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/definitions/OutputPort"
-            }
-          }
-        }
-      },
-      "AssetLocation": {
-        "type": "object",
-        "description": "[TODO] Asset Location",
-        "properties": {
-          "uri": {
-            "type": "string",
-            "description": "[TODO] Location URI, https:// OR aml:// OR idv :// OR hdfs://",
-            "format": "url"
-          },
-          "credentials": {
-            "type": "string",
-            "description": "[TODO] null if in BYOS / SAS token / connection string / user asset partition key (when in graphSharp)/ etc."
-          }
-        }
-      },
-      "InputPort": {
-        "type": "object",
-        "description": "[TODO] Asset input port",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "[TODO] dataset or zip"
-          }
-        }
-      },
-      "OutputPort": {
-        "type": "object",
-        "description": "[TODO] Asset output port",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "[TODO] dataset or zip"
-          }
-        }
-      },
-      "GraphNode": {
-        "type": "object",
-        "description": "[TODO] Graph Node",
-        "properties": {
-          "assetId": {
-            "type": "string",
-            "description": "[TODO] Asset ID"
-          },
-          "inputId": {
-            "type": "string",
-            "description": "[TODO] Input ID"
-          },
-          "outputId": {
-            "type": "string",
-            "description": "[TODO] Output ID"
-          },
-          "parameters": {
-            "type": "object",
-            "description": "[TODO] Node Parameters",
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "GraphEdge": {
-        "type": "object",
-        "description": "[TODO] Graph edge",
-        "properties": {
-          "sourceNodeId": {
-            "type": "string",
-            "description": "[TODO] Edge source"
-          },
-          "sourcePortId": {
-            "type": "string",
-            "description": "[TODO] Source node output port id"
-          },
-          "targetNodeId": {
-            "type": "string",
-            "description": "[TODO] Edge target"
-          },
-          "targetPortId": {
-            "type": "string",
-            "description": "[TODO] Target node input port id"
-          }
-        }
-      },
-      "GraphParameter": {
-        "type": "object",
-        "description": "[TODO] Graph Parameters",
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Description for this graph parameter."
-          },
-          "type": {
-            "type": "string",
-            "description": "Graph parameter's type.",
-            "enum": [
-              "String",
-              "Int",
-              "Float",
-              "Enumerated",
-              "Script",
-              "Mode",
-              "Credential",
-              "Boolean",
-              "Double",
-              "ColumnPicker",
-              "ParameterRange",
-              "DataGatewayName"
-            ],
-            "x-ms-enum": {
-              "name": "ParameterType",
-              "modelAsString": false
-            }
-          },
-          "links": {
-            "type": "array",
-            "description": "[TODO] Links of this parameter",
-            "items": {
-              "$ref": "#/definitions/GraphParameterLink"
-            }
-          }
-        }
-      },
-      "GraphParameterLink": {
-        "type": "object",
-        "description": "[TODO] The link in graph parameter",
-        "properties": {
-          "nodeId": {
-            "type": "string",
-            "description": "[TODO] The node ID"
-          },
-          "parameterKey": {
-            "type": "string",
-            "description": "[TODO] The parameter key"
-          }
-        }
-      },
-      "Resource": {
-        "required": [
-          "location"
-        ],
-        "properties": {
-          "id": {
-            "description": "Resource Id",
+        },
+        "keys": {
+          "$ref": "#/definitions/WebServiceKeys"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "description": "True, if the web service should be read-only; False, otherwise"
+        },
+        "swaggerLocation": {
+          "type": "string",
+          "description": "The uri for the swagger spec associated with this Azure ML web service.",
+          "readOnly": true
+        },
+        "realtimeConfiguration": {
+          "description": "[TODO] Realtime configuration",
+          "$ref": "#/definitions/RealtimeConfiguration"
+        },
+        "diagnostics": {
+          "description": "[TODO] Diagnostics settings",
+          "$ref": "#/definitions/DiagnosticsConfiguration"
+        },
+        "storageAccount": {
+          "description": "[TODO] BYOS description",
+          "$ref": "#/definitions/StorageAccount"
+        },
+        "machineLearningWorkspace": {
+          "description": "[TODO] Service workspace data",
+          "$ref": "#/definitions/MachineLearningWorkspace"
+        },
+        "commitmentPlan": {
+          "description": "[TODO] Service commitment plan data",
+          "$ref": "#/definitions/CommitmentPlan"
+        },
+        "input": {
+          "description": "[TODO] Service input definition",
+          "$ref": "#/definitions/ServiceInputOutputSpecification"
+        },
+        "output": {
+          "description": "[TODO] Service output definition",
+          "$ref": "#/definitions/ServiceInputOutputSpecification"
+        },
+        "assets": {
+          "description": "[TODO] Service assets",
+          "$ref": "#/definitions/AssetProperties"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "[TODO] Parameters of module package",
+          "additionalProperties": {
             "type": "string"
-          },
-          "name": {
-            "description": "Resource Name",
-            "type": "string"
-          },
-          "location": {
-            "description": "Resource Location",
-            "type": "string"
-          },
-          "type": {
-            "description": "Resource type",
-            "type": "string"
-          },
-          "tags": {
-            "description": "Resource tags",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
           }
-        }
-      },
-      "OperationSchema": {
-        "type": "object",
-        "description": "[TODO] The web service Operation Description",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The operation name"
-          },
-          "display": {
-            "type": "object",
-            "description": "[TODO] Display",
-            "properties": {
-              "provider": {
-                "type": "string",
-                "description": "[TODO] Provider",
-                "default": "Machine Learning"
-              },
-              "resource": {
-                "type": "string",
-                "description": "[TODO] Resource",
-                "default": "web service"
-              },
-              "operation": {
-                "type": "string",
-                "description": "[TODO] Operation"
-              },
-              "description": {
-                "type": "string",
-                "description": "[TODO] Description"
-              }
-            }
-          },
-          "origin": {
-            "type": "string",
-            "description": "[TODO] Origin",
-            "enum": [
-              "user",
-              "system",
-              "user, system"
-            ]
+        },
+        "packageType": {
+          "type": "string",
+          "description": "[TODO] Module package type",
+          "enum": [
+            "Code",
+            "Graph"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PackageType",
+            "modelAsString": false
           }
         }
       }
+    },
+    "WebServicePropertiesForGraph": {
+      "description": "[TODO] Payload for Graph package",
+      "x-ms-discriminator-value": "Graph",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WebServiceProperties"
+        }
+      ],
+      "properties": {
+        "package": {
+          "type": "object",
+          "description": "[TODO] Graph Package",
+          "properties": {
+            "nodes": {
+              "type": "object",
+              "description": "[TODO] Graph nodes collection",
+              "additionalProperties": {
+                "$ref": "#/definitions/GraphNode"
+              }
+            },
+            "edges": {
+              "type": "array",
+              "description": "[TODO] List of Graph Edges",
+              "items": {
+                "$ref": "#/definitions/GraphEdge"
+              }
+            },
+            "graphParameters": {
+              "type": "object",
+              "description": "[TODO] Graph parameter collection",
+              "additionalProperties": {
+                "$ref": "#/definitions/GraphParameter"
+              }
+            }
+          }
+        }
+      }
+    },
+    "WebServicePropertiesForCode": {
+      "description": "[TODO] Payload for Code package",
+      "x-ms-discriminator-value": "Code",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WebServiceProperties"
+        }
+      ],
+      "properties": {
+        "package": {
+          "type": "object",
+          "description": "[TODO] Code Package",
+          "properties": {
+            "language": {
+              "type": "string",
+              "description": "[TODO] The language of source code",
+              "enum": [
+                "Python-2.7",
+                "R-3.1"
+              ]
+            },
+            "sourceCode": {
+              "type": "string",
+              "description": "[TODO] The source code"
+            },
+            "zipFileAssetId": {
+              "type": "string",
+              "description": "[TODO] Zip file's Asset ID"
+            }
+          }
+        }
+      }
+    },
+    "WebServiceKeys": {
+      "type": "object",
+      "description": "web service Keys",
+      "properties": {
+        "primary": {
+          "type": "string",
+          "description": "The Primary Key"
+        },
+        "secondary": {
+          "type": "string",
+          "description": "The Secondary Key"
+        }
+      }
+    },
+    "PaginatedWebServicesList": {
+      "type": "object",
+      "description": "[TODO] Paginated list of web services",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Web Services",
+          "items": {
+            "$ref": "#/definitions/WebService"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "[TODO] Next Link"
+        }
+      }
+    },
+    "RealtimeConfiguration": {
+      "type": "object",
+      "description": "Configuration settings for RRS",
+      "properties": {
+        "maxConcurrentCalls": {
+          "type": "integer",
+          "description": "[TODO] Max Concurrent Calls"
+        }
+      }
+    },
+    "DiagnosticsConfiguration": {
+      "type": "object",
+      "description": "The Diagnostics Settings",
+      "properties": {
+        "level": {
+          "type": "string",
+          "description": "Trace Level: None, Error, All",
+          "enum": [
+            "None",
+            "Error",
+            "All"
+          ],
+          "x-ms-enum": {
+            "name": "DiagnosticsLevel",
+            "modelAsString": false
+          }
+        },
+        "expiry": {
+          "type": "string",
+          "description": "[TODO] Expiry date",
+          "format": "date-time"
+        }
+      }
+    },
+    "StorageAccount": {
+      "type": "object",
+      "description": "[TODO] The Storage Account used in GraphSharp",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "[TODO] The storage account's name"
+        },
+        "key": {
+          "type": "string",
+          "description": "[TODO] The storage account's active key"
+        }
+      }
+    },
+    "MachineLearningWorkspace": {
+      "type": "object",
+      "description": "[TODO] The machine learning workspace",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "[TODO] The Workspace ID"
+        }
+      }
+    },
+    "CommitmentPlan": {
+      "type": "object",
+      "description": "[TODO] The commitment plan associated with this web service",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "[TODO] The plan's ID"
+        }
+      }
+    },
+    "ServiceInputOutputSpecification": {
+      "type": "object",
+      "description": "[TODO] The swagger schema describing the service's input.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "[TODO] Interface title"
+        },
+        "description": {
+          "type": "string",
+          "description": "[TODO] Description of the interface"
+        },
+        "type": {
+          "type": "string",
+          "description": "[TODO] Interface properties' type. Always use 'object' here.",
+          "default": "object"
+        },
+        "properties": {
+          "type": "object",
+          "description": "[TODO]",
+          "additionalProperties": {
+            "$ref": "#/definitions/TableSpecification"
+          }
+        }
+      }
+    },
+    "TableSpecification": {
+      "type": "object",
+      "description": "[TODO] schema for a data table",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "[TODO] Table title"
+        },
+        "description": {
+          "type": "string",
+          "description": "[TODO] Table description"
+        },
+        "type": {
+          "type": "string",
+          "description": "[TODO] Table properties' type. Always use 'object' here.",
+          "default": "object"
+        },
+        "properties": {
+          "type": "object",
+          "description": "The set of columns within the data table",
+          "additionalProperties": {
+            "$ref": "#/definitions/ColumnSpecification"
+          }
+        }
+      }
+    },
+    "ColumnSpecification": {
+      "type": "object",
+      "description": "[TODO] input column.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "[TODO] Data type"
+        },
+        "format": {
+          "type": "string",
+          "description": "[TODO] Data format"
+        },
+        "enum": {
+          "type": "array",
+          "description": "[TODO] Options",
+          "items": {
+            "type": "object"
+          }
+        },
+        "x-ms-isnullable": {
+          "type": "boolean",
+          "description": "[TODO] Is nullable"
+        },
+        "x-ms-isordered": {
+          "type": "boolean",
+          "description": "[TODO] Is enum in order"
+        }
+      }
+    },
+    "AssetProperties": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/AssetItem"
+      }
+    },
+    "AssetItem": {
+      "type": "object",
+      "description": "[TODO] Service asset details",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Asset's friendly name"
+        },
+        "type": {
+          "type": "string",
+          "description": "Asset's type",
+          "default": "module"
+        },
+        "location": {
+          "$ref": "#/definitions/AssetLocation"
+        },
+        "inputPorts": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/InputPort"
+          }
+        },
+        "outputPorts": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/OutputPort"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "[TODO] Asset's metadata",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "description": "[TODO] Asset's parameters",
+          "items": {
+            "$ref": "#/definitions/ModuleAssetParameter"
+          }
+        }
+      }
+    },
+    "AssetLocation": {
+      "type": "object",
+      "description": "[TODO] Asset Location",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "[TODO] Location URI, https:// OR aml:// OR idv :// OR hdfs://",
+          "format": "url"
+        },
+        "credentials": {
+          "type": "string",
+          "description": "[TODO] null if in BYOS / SAS token / connection string / user asset partition key (when in graphSharp)/ etc."
+        }
+      }
+    },
+    "ModuleAssetParameter": {
+      "type": "object",
+      "description": "[TODO] Parameter for a custom module asset.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Parameter name."
+        },
+        "parameterType": {
+          "type": "string",
+          "description": "Parameter type."
+        },
+        "modeValuesInfo": {
+          "type": "object",
+          "description": "[TODO] Add meaningful description here",
+          "additionalProperties": {
+            "$ref": "#/definitions/ModeValueInfo"
+          }
+        }
+      }
+    },
+    "ModeValueInfo": {
+      "type": "object",
+      "description": "[TODO] Add meaningful description here.",
+      "properties": {
+        "interfaceString": {
+          "type": "string",
+          "description": "[TODO] Add meaningful description here."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "[TODO] Add meaningful description here.",
+          "items": {
+            "$ref": "#/definitions/ModuleAssetParameter"
+          }
+        }
+      }
+    },
+    "InputPort": {
+      "type": "object",
+      "description": "[TODO] Asset input port",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "[TODO] dataset or zip"
+        }
+      }
+    },
+    "OutputPort": {
+      "type": "object",
+      "description": "[TODO] Asset output port",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "[TODO] dataset or zip"
+        }
+      }
+    },
+    "GraphNode": {
+      "type": "object",
+      "description": "[TODO] Graph Node",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "[TODO] Asset ID"
+        },
+        "inputId": {
+          "type": "string",
+          "description": "[TODO] Input ID"
+        },
+        "outputId": {
+          "type": "string",
+          "description": "[TODO] Output ID"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "[TODO] Node Parameters",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GraphEdge": {
+      "type": "object",
+      "description": "[TODO] Graph edge",
+      "properties": {
+        "sourceNodeId": {
+          "type": "string",
+          "description": "[TODO] Edge source"
+        },
+        "sourcePortId": {
+          "type": "string",
+          "description": "[TODO] Source node output port id"
+        },
+        "targetNodeId": {
+          "type": "string",
+          "description": "[TODO] Edge target"
+        },
+        "targetPortId": {
+          "type": "string",
+          "description": "[TODO] Target node input port id"
+        }
+      }
+    },
+    "GraphParameter": {
+      "type": "object",
+      "description": "[TODO] Graph Parameters",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description for this graph parameter."
+        },
+        "type": {
+          "type": "string",
+          "description": "Graph parameter's type.",
+          "enum": [
+            "String",
+            "Int",
+            "Float",
+            "Enumerated",
+            "Script",
+            "Mode",
+            "Credential",
+            "Boolean",
+            "Double",
+            "ColumnPicker",
+            "ParameterRange",
+            "DataGatewayName"
+          ],
+          "x-ms-enum": {
+            "name": "ParameterType",
+            "modelAsString": false
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "[TODO] Links of this parameter",
+          "items": {
+            "$ref": "#/definitions/GraphParameterLink"
+          }
+        }
+      }
+    },
+    "GraphParameterLink": {
+      "type": "object",
+      "description": "[TODO] The link in graph parameter",
+      "properties": {
+        "nodeId": {
+          "type": "string",
+          "description": "[TODO] The node ID"
+        },
+        "parameterKey": {
+          "type": "string",
+          "description": "[TODO] The parameter key"
+        }
+      }
+    },
+    "Resource": {
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "description": "Resource Id",
+          "type": "string"
+        },
+        "name": {
+          "description": "Resource Name",
+          "type": "string"
+        },
+        "location": {
+          "description": "Resource Location",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OperationSchema": {
+      "type": "object",
+      "description": "[TODO] The web service Operation Description",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The operation name"
+        },
+        "display": {
+          "type": "object",
+          "description": "[TODO] Display",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "[TODO] Provider",
+              "default": "Machine Learning"
+            },
+            "resource": {
+              "type": "string",
+              "description": "[TODO] Resource",
+              "default": "web service"
+            },
+            "operation": {
+              "type": "string",
+              "description": "[TODO] Operation"
+            },
+            "description": {
+              "type": "string",
+              "description": "[TODO] Description"
+            }
+          }
+        },
+        "origin": {
+          "type": "string",
+          "description": "[TODO] Origin",
+          "enum": [
+            "user",
+            "system",
+            "user, system"
+          ]
+        }
+      }
     }
+  }
 }
