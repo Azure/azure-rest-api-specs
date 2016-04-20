@@ -278,7 +278,7 @@
           "CRUD"
         ],
         "operationId": "Campaigns_Create",
-        "description": "Create a Reach campaign (announcement, poll, data push or native push).",
+        "description": "Create a push campaign (announcement, poll, data push or native push).",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -416,7 +416,7 @@
           "CRUD"
         ],
         "operationId": "Campaigns_Update",
-        "description": "Update an existing Reach campaign (announcement, poll, data push or native push).",
+        "description": "Update an existing push campaign (announcement, poll, data push or native push).",
         "parameters": [
           {
             "name": "kind",
@@ -791,7 +791,7 @@
           "Action"
         ],
         "operationId": "Campaigns_Suspend",
-        "description": "Suspend a Reach campaign previously activated by a call to Activate campaign.",
+        "description": "Suspend a push campaign previously activated by a call to Activate campaign.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -996,7 +996,7 @@
           "Action"
         ],
         "operationId": "Campaigns_Finish",
-        "description": "Finish a Reach campaign previously activated by a call to Activate campaign.",
+        "description": "Finish a push campaign previously activated by a call to Activate campaign.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1378,7 +1378,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/historicalExportJobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/historical": {
       "post": {
         "tags": [
           "Export",
@@ -1412,10 +1412,28 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "Success, export job is returned.",
+            "schema": {
+              "$ref": "#/definitions/ExportJobResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL path to get the created export job."
+              }
+            }
+          },
           "202": {
             "description": "Success, export job is returned.",
             "schema": {
               "$ref": "#/definitions/ExportJobResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL path to get the created export job."
+              }
             }
           },
           "default": {
@@ -1427,7 +1445,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/snapshotExportJobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/snapshot": {
       "post": {
         "tags": [
           "Export",
@@ -1461,10 +1479,138 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "Success, export job is returned.",
+            "schema": {
+              "$ref": "#/definitions/ExportJobResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL path to get the created export job."
+              }
+            }
+          },
           "202": {
             "description": "Success, export job is returned.",
             "schema": {
               "$ref": "#/definitions/ExportJobResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL path to get the created export job."
+              }
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/campaignStatsByIds": {
+      "post": {
+        "tags": [
+          "Export",
+          "CRUD"
+        ],
+        "operationId": "ExportJobs_CreateCampaignStatsByIds",
+        "description": "Creates a job to export a push campaign data to a storageUrl.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CampaignStatsByIdsExportJob"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success, export job is returned.",
+            "schema": {
+              "$ref": "#/definitions/ExportJobResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL path to get the created export job."
+              }
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/campaignStatsByPeriod": {
+      "post": {
+        "tags": [
+          "Export",
+          "CRUD"
+        ],
+        "operationId": "ExportJobs_CreateCampaignStatsByPeriod",
+        "description": "Creates a job to export a push campaign data for a period to a storageUrl.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CampaignStatsByPeriodExportJob"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success, export job is returned.",
+            "schema": {
+              "$ref": "#/definitions/ExportJobResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL path to get the created export job."
+              }
             }
           },
           "default": {
@@ -1628,6 +1774,18 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "Success, import job is returned.",
+            "schema": {
+              "$ref": "#/definitions/ImportJobResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL path to get the created import job."
+              }
+            }
+          },
           "202": {
             "description": "Success, import job is returned.",
             "schema": {
@@ -2808,11 +2966,11 @@
         },
         "startTime": {
           "type": "string",
-          "description": "The date at which the campaign should be started. The date shall conform to the following format: `yyyy-MM-dd HH:mm'Z'`. * If you set pushMode property to manual, this attribute will be ignored. * If you set pushMode property to one-shot, then the timezone attribute must be specified. Example: `2011-11-21 15:23Z`\n"
+          "description": "The date at which the campaign should be started. The date shall conform to the following format: `yyyy-MM-ddTHH:mm:ssZ`. * If you set pushMode property to manual, this attribute will be ignored. * If you set pushMode property to one-shot, then the timezone attribute must be specified. Example: `2011-11-21 15:23Z`\n"
         },
         "endTime": {
           "type": "string",
-          "description": "The date at which the campaign should be finished. The date shall conform to the following format: `yyyy-MM-dd HH:mm'Z'`. Example: `2011-11-21 15:23Z`\n"
+          "description": "The date at which the campaign should be finished. The date shall conform to the following format: `yyyy-MM-ddTHH:mm:ssZ`. Example: `2011-11-21 15:23Z`\n"
         },
         "timezone": {
           "type": "string",
@@ -2858,7 +3016,7 @@
         },
         "localization": {
           "type": "object",
-          "description": "Reach campaigns can be localized using an optional JSON object. The JSON key is a two-character language code as specified by the ISO 639-1 standard. The corresponding value is an object containing the localizable properties.\n",
+          "description": "Push campaigns can be localized using an optional JSON object. The JSON key is a two-character language code as specified by the ISO 639-1 standard. The corresponding value is an object containing the localizable properties.\n",
           "additionalProperties": {
             "$ref": "#/definitions/CampaignLocalization"
           }
@@ -2886,22 +3044,22 @@
         "activatedDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The date at which the campaign was activated (Not present if not yet activated). The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
+          "description": "The date at which the campaign was activated (Not present if not yet activated). The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "finishedDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The date at which the campaign was finished (Not present if not yet finished). The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
+          "description": "The date at which the campaign was finished (Not present if not yet finished). The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The date at which the campaign should be started if specified. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard. Applicable only to announcements and polls.\n"
+          "description": "The date at which the campaign should be started if specified. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard. Applicable only to announcements and polls.\n"
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The date at which the campaign should be finished if specified. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard. Applicable only to announcements and polls.\n"
+          "description": "The date at which the campaign should be finished if specified. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard. Applicable only to announcements and polls.\n"
         },
         "timezone": {
           "type": "string",
@@ -2938,12 +3096,12 @@
         "activatedDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The date at which the campaign was activated (Not present if not yet activated). The date conforms to the following format: yyyy-MM-dd HH:mm'Z' as specified by the ISO 8601 standard.\n"
+          "description": "The date at which the campaign was activated (Not present if not yet activated). The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.\n"
         },
         "finishedDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The date at which the campaign was finished (Not present if not yet finished). The date conforms to the following format: yyyy-MM-dd HH:mm'Z' as specified by the ISO 8601 standard.\n"
+          "description": "The date at which the campaign was finished (Not present if not yet finished). The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.\n"
         }
       },
       "allOf": [
@@ -3266,12 +3424,12 @@
         "startDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The date at which the export should be started from. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
+          "description": "The date at which the export should be started from. The date conforms to the ISO 8601 standard.\n"
         },
         "endDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The date at which the export should export data to. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
+          "description": "The date at which the export should export data to. The date conforms to the ISO 8601 standard.\n"
         },
         "historicalDataType": {
           "type": "string",
@@ -3291,7 +3449,7 @@
         },
         "storageUrl": {
           "type": "string",
-          "description": "A shared Access Signature (SAS) Storage URI where the job results will be placed."
+          "description": "A shared Access Signature (SAS) Storage URI where the output will be written."
         }
       }
     },
@@ -3301,7 +3459,7 @@
           "type": "string",
           "description": "The type of data to export.",
           "enum": [
-            "AppInfo",
+            "Tag",
             "Token"
           ],
           "x-ms-enum": {
@@ -3311,7 +3469,48 @@
         },
         "storageUrl": {
           "type": "string",
-          "description": "A shared Access Signature (SAS) Storage URI where the job results will be placed."
+          "description": "A shared Access Signature (SAS) Storage URI where the output will be written."
+        }
+      }
+    },
+    "CampaignStatsByIdsExportJob": {
+      "properties": {
+        "campaignType": {
+          "type": "string",
+          "description": "The push campaign type.\n"
+        },
+        "campaignIds": {
+          "type": "array",
+          "description": "A list of campaign identifiers.\n",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storageUrl": {
+          "type": "string",
+          "description": "A shared Access Signature (SAS) Storage URI where the output will be written."
+        }
+      }
+    },
+    "CampaignStatsByPeriodExportJob": {
+      "properties": {
+        "campaignType": {
+          "type": "string",
+          "description": "The push campaign type.\n"
+        },
+        "campaignWindowStart": {
+          "type": "string",
+          "format": "date-time",
+          "description": "For push exports, the start of the period for inclusion of active campaigns. The date conforms to the ISO8601 format.\n"
+        },
+        "campaignWindowEnd": {
+          "type": "string",
+          "format": "date-time",
+          "description": "For push exports, the end of the period for inclusion of active campaigns. The date conforms to the ISO8601 format.\n"
+        },
+        "storageUrl": {
+          "type": "string",
+          "description": "A shared Access Signature (SAS) Storage URI where the output will be written."
         }
       }
     },
@@ -3354,35 +3553,26 @@
         "dateCreated": {
           "type": "string",
           "format": "date-time",
-          "description": "The date at which the export job was created.\nThe date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
+          "description": "The date at which the export job was created.\nThe date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "dateCompleted": {
           "type": "string",
           "format": "date-time",
-          "description": "The date at which the export job completed (Not present if not yet completed).\nThe date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
-        },
-        "startDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date at which the export should be started from. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
-        },
-        "endDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date at which the export should export data to. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
+          "description": "The date at which the export job completed (Not present if not yet completed).\nThe date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "exportDataType": {
           "type": "string",
           "description": "The type of data to export.",
           "enum": [
             "Activity",
-            "AppInfo",
+            "Tag",
             "Crash",
             "Error",
             "Event",
             "Job",
             "Session",
-            "Token"
+            "Token",
+            "Push"
           ],
           "x-ms-enum": {
             "name": "ExportDataTypes",
@@ -3442,12 +3632,12 @@
         "dateCreated": {
           "type": "string",
           "format": "date-time",
-          "description": "The date at which the import job was created.\nThe date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
+          "description": "The date at which the import job was created.\nThe date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "dateCompleted": {
           "type": "string",
           "format": "date-time",
-          "description": "The date at which the import job completed (Not present if not yet completed).\nThe date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.\n"
+          "description": "The date at which the import job completed (Not present if not yet completed).\nThe date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "errorDetails": {
           "type": "string",
