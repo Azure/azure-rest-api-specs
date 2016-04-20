@@ -631,9 +631,9 @@
     },
     "RedisRebootParameters": {
       "properties": {
-        "RebootType": {
+        "rebootType": {
           "type": "string",
-          "description": "Which redis node(s) to reboot.",
+          "description": "Which redis node(s) to reboot. Depending on this value data loss is possible.",
           "enum": [
             "PrimaryNode",
             "SecondaryNode",
@@ -643,10 +643,15 @@
             "name": "RebootType",
             "modelAsString": false
           }
+        },
+        "shardId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "In case of cluster cache, this specifies shard id which should be rebooted."
         }
       },
       "required": [
-        "RebootType"
+        "rebootType"
       ],
       "description": "Specifies which redis node(s) to reboot."
     }
