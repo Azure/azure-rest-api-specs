@@ -146,7 +146,7 @@
           "Account"
         ],
         "operationId": "Account_Delete",
-        "description": "Asynchronously deletes the specified Batch account.",
+        "description": "The Delete operation removes the specified Batch account.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -262,7 +262,7 @@
           "Account"
         ],
         "operationId": "Account_ListByResourceGroup",
-        "description": "The List operation gets information about the Batch accounts associated the specified resource group.",
+        "description": "The List operation gets information about the Batch accounts associated with the specified resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -924,7 +924,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The desired region for the quota."
+            "description": "The desired region for the quotas."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1062,7 +1062,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "The Batch account information."
+      "description": "Contains information about an Azure Batch account."
     },
     "BatchAccountUpdateParameters": {
       "properties": {
@@ -1073,9 +1073,10 @@
           },
           "description": "The user specified tags associated with the account."
         },
-        "properties": {
-          "$ref": "#/definitions/AccountBaseProperties",
-          "description": "The properties of the account."
+        "autoStorage": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AutoStorageBaseProperties",
+          "description": "The properties related to auto storage."
         }
       },
       "description": "Parameters supplied to the Update operation."
@@ -1374,7 +1375,7 @@
       "required": true,
       "type": "string",
       "description": "Gets subscription credentials which uniquely identify a Microsoft Azure subscription. The subscription id forms part of the URI for every service call."
-    },
+    },  
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
