@@ -29,13 +29,6 @@
         },
         "parameters": [
           {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -49,6 +42,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -59,6 +55,43 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Application_List",
+        "description": "Lists applications by filter parameters.",
+        "externalDocs": {
+          "url": "http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx"
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filters to apply on the operarion"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationListResult"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/ApplicationFilter"
       }
     },
     "/{tenantID}/applications/{applicationObjectId}": {
@@ -73,13 +106,6 @@
         },
         "parameters": [
           {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
-          {
             "name": "applicationObjectId",
             "in": "path",
             "required": true,
@@ -92,6 +118,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -111,13 +140,6 @@
         },
         "parameters": [
           {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
-          {
             "name": "applicationObjectId",
             "in": "path",
             "required": true,
@@ -130,6 +152,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -152,13 +177,6 @@
         },
         "parameters": [
           {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
-          {
             "name": "applicationObjectId",
             "in": "path",
             "required": true,
@@ -180,11 +198,42 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
           "204": {
             "description": ""
+          }
+        }
+      }
+    },
+    "/{tenantID}/me": {
+      "get": {
+        "tags": [
+          "Objects"
+        ],
+        "operationId": "Objects_GetCurrentUser",
+        "description": "Gets the details for current logged in user",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AADObject"
+            }
           }
         }
       }
@@ -198,19 +247,6 @@
         "description": "Gets AD group membership by provided AD object Ids",
         "parameters": [
           {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -220,7 +256,13 @@
             "description": "Objects filtering parameters."
           },
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -232,7 +274,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "odata.nextLink"
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Objects_GetObjectsByObjectIdsNext"
         }
       }
     },
@@ -247,13 +290,6 @@
           "url": "http://msdn.microsoft.com/en-us/library/azure/dn151607.aspx"
         },
         "parameters": [
-          {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
           {
             "name": "groupObjectId",
             "in": "path",
@@ -275,6 +311,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -295,13 +334,6 @@
           "url": "http://msdn.microsoft.com/en-us/library/azure/dn151600.aspx"
         },
         "parameters": [
-          {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
           {
             "name": "groupObjectId",
             "in": "path",
@@ -324,6 +356,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -345,13 +380,6 @@
         },
         "parameters": [
           {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
-          {
             "name": "groupObjectId",
             "in": "path",
             "required": true,
@@ -364,6 +392,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -385,13 +416,6 @@
         },
         "parameters": [
           {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -405,13 +429,16 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Group"
+              "$ref": "#/definitions/ADGroup"
             }
           }
         }
@@ -424,13 +451,6 @@
         "description": "Gets list of groups for the current tenant.",
         "parameters": [
           {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
-          {
             "name": "$filter",
             "in": "query",
             "required": false,
@@ -442,6 +462,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -453,9 +476,10 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "odata.nextLink"
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Group_ListNext"
         },
-        "x-ms-odata": "#/definitions/Group"
+        "x-ms-odata": "#/definitions/ADGroup"
       }
     },
     "/{tenantID}/groups/{objectId}/members": {
@@ -466,13 +490,6 @@
         "operationId": "Group_GetGroupMembers",
         "description": "Gets the members of a group.",
         "parameters": [
-          {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
           {
             "name": "objectId",
             "in": "path",
@@ -486,6 +503,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -497,7 +517,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "odata.nextLink"
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Group_GetGroupMembersNext"
         }
       }
     },
@@ -509,13 +530,6 @@
         "operationId": "Group_Get",
         "description": "Gets group information from the directory.",
         "parameters": [
-          {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
           {
             "name": "objectId",
             "in": "path",
@@ -529,13 +543,16 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Group"
+              "$ref": "#/definitions/ADGroup"
             }
           }
         }
@@ -549,13 +566,6 @@
         "operationId": "Group_GetMemberGroups",
         "description": "Gets a collection that contains the Object IDs of the groups of which the group is a member.",
         "parameters": [
-          {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
           {
             "name": "objectId",
             "in": "path",
@@ -578,6 +588,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -602,13 +615,6 @@
         "description": "Creates a service principal in the  directory.",
         "parameters": [
           {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -622,6 +628,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -641,13 +650,6 @@
         "description": "Gets list of service principals from the current tenant.",
         "parameters": [
           {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
-          {
             "name": "$filter",
             "in": "query",
             "required": false,
@@ -659,6 +661,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -670,7 +675,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "odata.nextLink"
+          "nextLinkName": "odata.nextLink",
+          "operationName": "ServicePrincipal_ListNext"
         },
         "x-ms-odata": "#/definitions/ServicePrincipal"
       }
@@ -684,13 +690,6 @@
         "description": "Deletes service principal from the directory.",
         "parameters": [
           {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
-          {
             "name": "objectId",
             "in": "path",
             "required": true,
@@ -703,6 +702,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -719,13 +721,6 @@
         "description": "Gets service principal information from the directory.",
         "parameters": [
           {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
-          {
             "name": "objectId",
             "in": "path",
             "required": true,
@@ -738,6 +733,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -762,13 +760,6 @@
         },
         "parameters": [
           {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
-          {
             "name": "user",
             "in": "path",
             "required": true,
@@ -781,6 +772,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -802,13 +796,6 @@
         },
         "parameters": [
           {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -822,6 +809,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -841,13 +831,6 @@
         "description": "Gets list of users for the current tenant.",
         "parameters": [
           {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
-          {
             "name": "$filter",
             "in": "query",
             "required": false,
@@ -859,6 +842,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -870,7 +856,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "odata.nextLink"
+          "nextLinkName": "odata.nextLink",
+          "operationName": "User_ListNext"
         },
         "x-ms-odata": "#/definitions/User"
       }
@@ -887,13 +874,6 @@
         },
         "parameters": [
           {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
-          {
             "name": "upnOrObjectId",
             "in": "path",
             "required": true,
@@ -906,6 +886,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -926,13 +909,6 @@
         "operationId": "User_GetMemberGroups",
         "description": "Gets a collection that contains the Object IDs of the groups of which the user is a member.",
         "parameters": [
-          {
-            "name": "tenantID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets or sets the tenant Id."
-          },
           {
             "name": "objectId",
             "in": "path",
@@ -955,6 +931,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
           }
         ],
         "responses": {
@@ -967,6 +946,208 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/{tenantID}/{nextLink}?Objects_GetObjectsByObjectIdsNext": {
+      "post": {
+        "tags": [
+          "Objects"
+        ],
+        "operationId": "Objects_GetObjectsByObjectIdsNext",
+        "description": "Gets AD group membership by provided AD object Ids",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetObjectsResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Objects_GetObjectsByObjectIdsNext"
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?Group_ListNext": {
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Group_ListNext",
+        "description": "Gets list of groups for the current tenant.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GroupListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Group_ListNext"
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?Group_GetGroupMembersNext": {
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Group_GetGroupMembersNext",
+        "description": "Gets the members of a group.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetObjectsResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Group_GetGroupMembersNext"
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?ServicePrincipal_ListNext": {
+      "get": {
+        "tags": [
+          "ServicePrincipal"
+        ],
+        "operationId": "ServicePrincipal_ListNext",
+        "description": "Gets list of service principals from the current tenant.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ServicePrincipalListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "ServicePrincipal_ListNext"
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?User_ListNext": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "User_ListNext",
+        "description": "Gets list of users for the current tenant.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UserListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "User_ListNext"
         }
       }
     }
@@ -1077,33 +1258,80 @@
       ],
       "description": "Request parameters for create a new application"
     },
-    "Application": {
+    "ApplicationFilter": {
       "properties": {
-        "objectId": {
+        "displayNameStartsWith": {
           "type": "string",
-          "description": "Gets or sets object Id"
-        },
-        "objectType": {
-          "type": "string",
-          "description": "Gets or sets object type"
+          "description": "Application display name starts with"
         },
         "appId": {
           "type": "string",
-          "description": "Gets or sets application Id"
+          "description": "ApplicationId"
         },
-        "appPermissions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Gets or sets application permissions"
-        },
-        "availableToOtherTenants": {
-          "type": "boolean",
-          "description": "Indicates if the application will be available to other tenants"
+        "identifierUri": {
+          "type": "string",
+          "description": "Identifier Uri"
         }
       },
-      "description": "Active Directory user information"
+      "description": "Filter parameters for listing applications"
+    },
+    "Application": {
+        "properties": {
+            "objectId": {
+                "type": "string",
+                "description": "Gets or sets object Id"
+            },
+            "objectType": {
+                "type": "string",
+                "description": "Gets or sets object type"
+            },
+            "appId": {
+                "type": "string",
+                "description": "Gets or sets application Id"
+            },
+            "appPermissions": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                },
+                "description": "Gets or sets application permissions"
+            },
+            "availableToOtherTenants": {
+                "type": "boolean",
+                "description": "Indicates if the application will be available to other tenants"
+            },
+            "displayName": {
+                "type": "string",
+                "description": "Gets or sets the displayName"
+            },
+            "identifierUris": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                },
+                "description": "Gets or sets the application identifier Uris"
+            },
+            "replyUrls": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                },
+                "description": "Gets or sets the application reply Urls"
+            }
+        },
+        "description": "Active Directory user information"
+    },
+    "ApplicationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          },
+          "description": "Application list."
+        }
+      },
+      "description": "Role assignment list operation result."
     },
     "GetObjectsParameters": {
       "properties": {
@@ -1171,6 +1399,10 @@
             "type": "string"
           },
           "description": "Gets or sets the list of service principal names."
+        },
+        "userType": {
+          "type": "string",
+          "description": "Gets or sets the user type"
         }
       },
       "description": "Active Directory object information"
@@ -1230,7 +1462,7 @@
       ],
       "description": "Request parameters for create a new group"
     },
-    "Group": {
+    "ADGroup": {
       "properties": {
         "objectId": {
           "type": "string",
@@ -1260,7 +1492,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Group"
+            "$ref": "#/definitions/ADGroup"
           },
           "description": "Gets or sets the list of groups."
         },
@@ -1471,49 +1703,6 @@
         }
       },
       "description": "Server response for Get tenant users API call"
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {
@@ -1530,6 +1719,13 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "tenantIDInPath": {
+      "name": "tenantID",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets or sets the tenant Id."
     }
   }
 }

@@ -39,7 +39,8 @@
                             "$ref": "#/definitions/JobCollectionListResult"
                         }
                     }
-                }
+                },
+                "x-ms-pageable": { "nextLinkName": "nextLink" }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scheduler/jobCollections": {
@@ -71,7 +72,8 @@
                             "$ref": "#/definitions/JobCollectionListResult"
                         }
                     }
-                }
+                },
+                "x-ms-pageable": { "nextLinkName": "nextLink" }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scheduler/jobCollections/{jobCollectionName}": {
@@ -600,6 +602,13 @@
                         "required": false,
                         "type": "integer",
                         "description": "The (0-based) index of the job history list from which to begin requesting entries."
+                    },
+                    {
+                        "name": "$filter",
+                        "description": "The filter to apply on the job state.",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -609,7 +618,9 @@
                             "$ref": "#/definitions/JobListResult"
                         }
                     }
-                }
+                },
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
+                "x-ms-odata": "#/definitions/JobStateFilter"
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scheduler/jobCollections/{jobCollectionName}/jobs/{jobName}/history": {
@@ -660,6 +671,13 @@
                         "required": false,
                         "type": "integer",
                         "description": "The (0-based) index of the job history list from which to begin requesting entries."
+                    },
+                    {
+                        "name": "$filter",
+                        "description": "The filter to apply on the job state.",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -669,7 +687,9 @@
                             "$ref": "#/definitions/JobHistoryListResult"
                         }
                     }
-                }
+                },
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
+                "x-ms-odata": "#/definitions/JobHistoryFilter"
             }
         }
     },
@@ -725,7 +745,7 @@
                 "id": {
                     "type": "string",
                     "readOnly": true,
-                    "description": "Gets the job collection identifier."
+                    "description": "Gets the job collection resource identifier."
                 },
                 "type": {
                     "type": "string",
@@ -734,7 +754,7 @@
                 },
                 "name": {
                     "type": "string",
-                    "description": "Gets or sets the job collection name."
+                    "description": "Gets or sets the job collection resource name."
                 },
                 "location": {
                     "type": "string",
@@ -768,7 +788,7 @@
                         "Suspended",
                         "Deleted"
                     ],
-                    "x-ms-enum": { "name": "JobCollectionState", "modelAsString": "False" }
+                    "x-ms-enum": { "name": "JobCollectionState", "modelAsString": false }
                 },
                 "quota": {
                     "$ref": "#/definitions/JobCollectionQuota",
@@ -786,7 +806,7 @@
                         "Free",
                         "Premium"
                     ],
-                    "x-ms-enum": { "name": "SkuDefinition", "modelAsString": "False" }
+                    "x-ms-enum": { "name": "SkuDefinition", "modelAsString": false }
                 }
             }
         },
@@ -811,7 +831,7 @@
                 "id": {
                     "type": "string",
                     "readOnly": true,
-                    "description": "Gets the job identifier."
+                    "description": "Gets the job resource identifier."
                 },
                 "type": {
                     "type": "string",
@@ -821,7 +841,7 @@
                 "name": {
                     "type": "string",
                     "readOnly": true,
-                    "description": "Gets the job name."
+                    "description": "Gets the job resource name."
                 },
                 "properties": {
                     "$ref": "#/definitions/JobProperties",
@@ -845,15 +865,8 @@
                     "description": "Gets or sets the job recurrence."
                 },
                 "state": {
-                    "type": "string",
-                    "description": "Gets or set the job state.",
-                    "enum": [
-                        "Enabled",
-                        "Disabled",
-                        "Faulted",
-                        "Completed"
-                    ],
-                    "x-ms-enum": { "name": "JobState", "modelAsString": "False" }
+                    "$ref": "#/definitions/JobState",
+                    "description": "Gets or set the job state."
                 },
                 "status": {
                     "$ref": "#/definitions/JobStatus",
@@ -914,20 +927,12 @@
                         "MainAction",
                         "ErrorAction"
                     ],
-                    "x-ms-enum": { "name": "JobHistoryActionName", "modelAsString": "False" }
+                    "x-ms-enum": { "name": "JobHistoryActionName", "modelAsString": false }
                 },
                 "status": {
-                    "type": "string",
+                    "$ref": "#/definitions/JobExecutionStatus",
                     "readOnly": true,
-                    "description": "Gets the job history status.",
-                    "enum": [
-                        "Completed",
-                        "Failed",
-                        "Cancelled",
-                        "CallbackNotFound",
-                        "Postponed"
-                    ],
-                    "x-ms-enum": { "name": "JobExecutionStatus", "modelAsString": "False" }
+                    "description": "Gets the job history status."
                 },
                 "message": {
                     "type": "string",
@@ -954,9 +959,11 @@
                     "enum": [
                         "Http",
                         "Https",
-                        "StorageQueue"
+                        "StorageQueue",
+                        "ServiceBusQueue",
+                        "ServiceBusTopic"
                     ],
-                    "x-ms-enum": { "name": "JobActionType", "modelAsString": "False" }
+                    "x-ms-enum": { "name": "JobActionType", "modelAsString": false }
                 },
                 "request": {
                     "$ref": "#/definitions/HttpRequest",
@@ -965,6 +972,14 @@
                 "queueMessage": {
                     "$ref": "#/definitions/StorageQueueMessage",
                     "description": "Gets or sets the storage queue message."
+                },
+                "serviceBusQueueMessage": {
+                    "$ref": "#/definitions/ServiceBusQueueMessage",
+                    "description": "Gets or sets the service bus queue message."
+                },
+                "serviceBusTopicMessage": {
+                    "$ref": "#/definitions/ServiceBusTopicMessage",
+                    "description": "Gets or sets the service bus topic message."
                 },
                 "retryPolicy": {
                     "$ref": "#/definitions/RetryPolicy",
@@ -984,9 +999,11 @@
                     "enum": [
                         "Http",
                         "Https",
-                        "StorageQueue"
+                        "StorageQueue",
+                        "ServiceBusQueue",
+                        "ServiceBusTopic"
                     ],
-                    "x-ms-enum": { "name": "JobActionType", "modelAsString": "False" }
+                    "x-ms-enum": { "name": "JobActionType", "modelAsString": false }
                 },
                 "request": {
                     "$ref": "#/definitions/HttpRequest",
@@ -996,6 +1013,14 @@
                     "$ref": "#/definitions/StorageQueueMessage",
                     "description": "Gets or sets the storage queue message."
                 },
+                "serviceBusQueueMessage": {
+                    "$ref": "#/definitions/ServiceBusQueueMessage",
+                    "description": "Gets or sets the service bus queue message."
+                },
+                "serviceBusTopicMessage": {
+                    "$ref": "#/definitions/ServiceBusTopicMessage",
+                    "description": "Gets or sets the service bus topic message."
+                },
                 "retryPolicy": {
                     "$ref": "#/definitions/RetryPolicy",
                     "description": "Gets or sets the retry policy."
@@ -1004,13 +1029,13 @@
         },
         "HttpRequest": {
             "properties": {
-                "httpAuthentication": {
+                "authentication": {
                     "$ref": "#/definitions/HttpAuthentication",
                     "description": "Gets or sets the http authentication."
                 },
                 "uri": {
                     "type": "string",
-                    "description": "Gets or sets the Uri for the request."
+                    "description": "Gets or sets the Uri."
                 },
                 "method": {
                     "type": "string",
@@ -1025,7 +1050,7 @@
                     "additionalProperties": {
                         "type": "string"
                     },
-                    "description": "Gets or sets the headers for the request."
+                    "description": "Gets or sets the headers."
                 }
             }
         },
@@ -1112,7 +1137,7 @@
                         "ActiveDirectoryOAuth",
                         "Basic"
                     ],
-                    "x-ms-enum": { "name": "HttpAuthenticationType", "modelAsString": "False" }
+                    "x-ms-enum": { "name": "HttpAuthenticationType", "modelAsString": false }
                 }
             }
         },
@@ -1120,19 +1145,161 @@
             "properties": {
                 "storageAccount": {
                     "type": "string",
-                    "description": "Gets or sets the Storage Account Name for the request."
+                    "description": "Gets or sets the storage account name."
                 },
                 "queueName": {
                     "type": "string",
-                    "description": "Gets or sets the Queue Name for the request."
+                    "description": "Gets or sets the queue name."
                 },
                 "sasToken": {
                     "type": "string",
-                    "description": "Gets or sets the SAS Key for the request."
+                    "description": "Gets or sets the SAS key."
                 },
                 "message": {
                     "type": "string",
-                    "description": "Gets or sets the message for the request."
+                    "description": "Gets or sets the message."
+                }
+            }
+        },
+        "ServiceBusQueueMessage": {
+            "properties": {
+                "queueName": {
+                    "type": "string",
+                    "description": "Gets or sets the queue name."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ServiceBusMessage"
+                }
+            ]
+        },
+        "ServiceBusTopicMessage": {
+            "properties": {
+                "topicPath": {
+                    "type": "string",
+                    "description": "Gets or sets the topic path."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ServiceBusMessage"
+                }
+            ]
+        },
+        "ServiceBusMessage": {
+            "properties": {
+                "authentication": {
+                    "$ref": "#/definitions/ServiceBusAuthentication",
+                    "description": "Gets or sets the authentication."
+                },
+                "brokeredMessageProperties": {
+                    "$ref": "#/definitions/ServiceBusBrokeredMessageProperties",
+                    "description": "Gets or sets the brokered message properties."
+                },
+                "customMessageProperties": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the custom message properties."
+                },
+                "message": {
+                    "type": "string",
+                    "description": "Gets or sets the message."
+                },
+                "namespace": {
+                    "type": "string",
+                    "description": "Gets or sets the namespace."
+                },
+                "transportType": {
+                    "type": "string",
+                    "description": "Gets or sets the transport type.",
+                    "enum": [
+                        "NotSpecified",
+                        "NetMessaging",
+                        "AMQP"
+                    ],
+                    "x-ms-enum": { "name": "ServiceBusTransportType", "modelAsString": false }
+                }
+            }
+        },
+        "ServiceBusAuthentication": {
+            "properties": {
+                "sasKey": {
+                    "type": "string",
+                    "description": "Gets or sets the SAS key."
+                },
+                "sasKeyName": {
+                    "type": "string",
+                    "description": "Gets or sets the SAS key name."
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Gets or sets the authentication type.",
+                    "enum": [
+                        "NotSpecified",
+                        "SharedAccessKey"
+                    ],
+                    "x-ms-enum": { "name": "ServiceBusAuthenticationType", "modelAsString": false }
+                }
+            }
+        },
+        "ServiceBusBrokeredMessageProperties": {
+            "properties": {
+                "contentType": {
+                    "type": "string",
+                    "description": "Gets or sets the content type."
+                },
+                "correlationId": {
+                    "type": "string",
+                    "description": "Gets or sets the correlation id."
+                },
+                "forcePersistence": {
+                    "type": "boolean",
+                    "description": "Gets or sets the force persistence."
+                },
+                "label": {
+                    "type": "string",
+                    "description": "Gets or sets the label."
+                },
+                "messageId": {
+                    "type": "string",
+                    "description": "Gets or sets the message id."
+                },
+                "partitionKey": {
+                    "type": "string",
+                    "description": "Gets or sets the partition key."
+                },
+                "replyTo": {
+                    "type": "string",
+                    "description": "Gets or sets the reply to."
+                },
+                "replyToSessionId": {
+                    "type": "string",
+                    "description": "Gets or sets the reply to session id."
+                },
+                "scheduledEnqueueTimeUtc": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Gets or sets the scheduled enqueue time UTC."
+                },
+                "sessionId": {
+                    "type": "string",
+                    "description": "Gets or sets the session id."
+                },
+                "timeToLive": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Gets or sets the time to live."
+                },
+                "to": {
+                    "type": "string",
+                    "description": "Gets or sets the to."
+                },
+                "viaPartitionKey": {
+                    "type": "string",
+                    "description": "Gets or sets the via partition key."
                 }
             }
         },
@@ -1145,7 +1312,7 @@
                         "None",
                         "Fixed"
                     ],
-                    "x-ms-enum": { "name": "RetryType", "modelAsString": "False" }
+                    "x-ms-enum": { "name": "RetryType", "modelAsString": false }
                 },
                 "retryInterval": {
                     "type": "string",
@@ -1170,7 +1337,7 @@
                         "Week",
                         "Month"
                     ],
-                    "x-ms-enum": { "name": "RecurrenceFrequency", "modelAsString": "False" }
+                    "x-ms-enum": { "name": "RecurrenceFrequency", "modelAsString": false }
                 },
                 "interval": {
                     "type": "integer",
@@ -1190,7 +1357,7 @@
                         "Week",
                         "Month"
                     ],
-                    "x-ms-enum": { "name": "RecurrenceFrequency", "modelAsString": "False" }
+                    "x-ms-enum": { "name": "RecurrenceFrequency", "modelAsString": false }
                 },
                 "interval": {
                     "type": "integer",
@@ -1210,6 +1377,18 @@
                 }
             }
         },
+        "RecurrenceFrequency": {
+            "type": "string",
+            "description": "Gets or sets the frequency of recurrence (minute, hour, day, week, month).",
+            "enum": [
+                "Minute",
+                "Hour",
+                "Day",
+                "Week",
+                "Month"
+            ],
+            "x-ms-enum": { "name": "RecurrenceFrequency", "modelAsString": false }
+        },
         "JobRecurrenceSchedule": {
             "properties": {
                 "weekDays": {
@@ -1225,7 +1404,7 @@
                             "Saturday",
                             "Sunday"
                         ],
-                        "x-ms-enum": { "name": "DayOfWeek", "modelAsString": "False" }
+                        "x-ms-enum": { "name": "DayOfWeek", "modelAsString": false }
                     },
                     "description": "Gets or sets the days of the week that the job should execute on."
                 },
@@ -1273,13 +1452,52 @@
                         "Saturday",
                         "Sunday"
                     ],
-                    "x-ms-enum": { "name": "JobScheduleDay", "modelAsString": "False" }
+                    "x-ms-enum": { "name": "JobScheduleDay", "modelAsString": false }
                 },
                 "Occurrence": {
                     "type": "integer",
                     "description": "Gets or sets the occurrence. Must be between -5 and 5."
                 }
             }
+        },
+        "JobStateFilter": {
+            "type": "object",
+            "properties": {
+                "state": {
+                    "$ref": "#/definitions/JobState",
+                    "description": "Gets or sets the job state."
+                }
+            }
+        },
+        "JobState": {
+            "type": "string",
+            "description": "Gets or set the job state.",
+            "enum": [
+                "Enabled",
+                "Disabled",
+                "Faulted",
+                "Completed"
+            ],
+            "x-ms-enum": { "name": "JobState", "modelAsString": false }
+        },
+        "JobHistoryFilter": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/JobExecutionStatus",
+                    "description": "Gets or sets the job execution status."
+                }
+            }
+        },
+        "JobExecutionStatus": {
+            "type": "string",
+            "description": "Gets the job execution status.",
+            "enum": [
+                "Completed",
+                "Failed",
+                "Postponed"
+            ],
+            "x-ms-enum": { "name": "JobExecutionStatus", "modelAsString": false }
         },
         "JobStatus": {
             "properties": {

@@ -395,10 +395,7 @@
         "description": "Gets the current usage count and the limit for the resources under the subscription.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -448,7 +445,7 @@
           ],
           "x-ms-enum": {
             "name": "Reason",
-            "modelAsString": "False"
+            "modelAsString": false
           }
         },
         "message": {
@@ -472,7 +469,7 @@
           ],
           "x-ms-enum": {
             "name": "AccountType",
-            "modelAsString": "False"
+            "modelAsString": false
           }
         }
       },
@@ -482,15 +479,26 @@
     },
     "StorageAccountCreateParameters": {
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageAccountPropertiesCreateParameters"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
+      "required": [
+        "location"
       ],
+      "x-ms-azure-resource": true,
       "description": "The parameters to provide for the account."
     },
     "Endpoints": {
@@ -542,7 +550,7 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": "False"
+            "modelAsString": false
           }
         },
         "accountType": {
@@ -557,7 +565,7 @@
           ],
           "x-ms-enum": {
             "name": "AccountType",
-            "modelAsString": "False"
+            "modelAsString": false
           }
         },
         "primaryEndpoints": {
@@ -577,7 +585,7 @@
           ],
           "x-ms-enum": {
             "name": "AccountStatus",
-            "modelAsString": "False"
+            "modelAsString": false
           }
         },
         "lastGeoFailoverTime": {
@@ -598,7 +606,7 @@
           ],
           "x-ms-enum": {
             "name": "AccountStatus",
-            "modelAsString": "False"
+            "modelAsString": false
           }
         },
         "creationTime": {
@@ -619,6 +627,7 @@
     "StorageAccount": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageAccountProperties"
         }
       },
@@ -668,7 +677,7 @@
           ],
           "x-ms-enum": {
             "name": "AccountType",
-            "modelAsString": "False"
+            "modelAsString": false
           }
         },
         "customDomain": {
@@ -679,15 +688,19 @@
     },
     "StorageAccountUpdateParameters": {
       "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageAccountPropertiesUpdateParameters"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
+      "x-ms-azure-resource": true,
       "description": "The parameters to update on the account."
     },
     "StorageAccountRegenerateKeyParameters": {
@@ -728,7 +741,7 @@
           ],
           "x-ms-enum": {
             "name": "UsageUnit",
-            "modelAsString": "False"
+            "modelAsString": false
           }
         },
         "currentValue": {
@@ -793,18 +806,6 @@
             "type": "string"
           },
           "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
         }
       },
       "x-ms-azure-resource": true

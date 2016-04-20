@@ -2947,7 +2947,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3733,7 +3733,7 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewaySkuName",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "tier": {
@@ -3744,7 +3744,7 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayTier",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "capacity": {
@@ -3771,6 +3771,7 @@
     "ApplicationGatewayIPConfiguration": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayIPConfigurationPropertiesFormat"
         },
         "name": {
@@ -3813,6 +3814,7 @@
     "ApplicationGatewaySslCertificate": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewaySslCertificatePropertiesFormat"
         },
         "name": {
@@ -3846,7 +3848,7 @@
           ],
           "x-ms-enum": {
             "name": "IpAllocationMethod",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "subnet": {
@@ -3867,6 +3869,7 @@
     "ApplicationGatewayFrontendIPConfiguration": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayFrontendIPConfigurationPropertiesFormat"
         },
         "name": {
@@ -3902,6 +3905,7 @@
     "ApplicationGatewayFrontendPort": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayFrontendPortPropertiesFormat"
         },
         "name": {
@@ -3959,6 +3963,7 @@
     "ApplicationGatewayBackendAddressPool": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat"
         },
         "name": {
@@ -3993,7 +3998,7 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayProtocol",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "cookieBasedAffinity": {
@@ -4005,7 +4010,7 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayCookieBasedAffinity",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "provisioningState": {
@@ -4018,6 +4023,7 @@
     "ApplicationGatewayBackendHttpSettings": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayBackendHttpSettingsPropertiesFormat"
         },
         "name": {
@@ -4055,7 +4061,7 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayProtocol",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "sslCertificate": {
@@ -4072,6 +4078,7 @@
     "ApplicationGatewayHttpListener": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat"
         },
         "name": {
@@ -4100,7 +4107,7 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayRequestRoutingRuleType",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "backendAddressPool": {
@@ -4125,6 +4132,7 @@
     "ApplicationGatewayRequestRoutingRule": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayRequestRoutingRulePropertiesFormat"
         },
         "name": {
@@ -4150,6 +4158,7 @@
           "description": "Gets or sets sku of application gateway resource"
         },
         "operationalState": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets operational state of application gateway resource",
           "enum": [
@@ -4160,7 +4169,7 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayOperationalState",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "gatewayIPConfigurations": {
@@ -4233,6 +4242,7 @@
     "ApplicationGateway": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationGatewayPropertiesFormat"
         },
         "etag": {
@@ -4278,7 +4288,7 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitSkuTier",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "family": {
@@ -4290,7 +4300,7 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitSkuFamily",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         }
       },
@@ -4311,7 +4321,7 @@
           ],
           "x-ms-enum": {
             "name": "AuthorizationUseStatus",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "provisioningState": {
@@ -4323,6 +4333,7 @@
     "ExpressRouteCircuitAuthorization": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/AuthorizationPropertiesFormat"
         },
         "name": {
@@ -4361,7 +4372,7 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitPeeringAdvertisedPublicPrefixState",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "customerASN": {
@@ -4403,7 +4414,7 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitPeeringType",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "state": {
@@ -4415,7 +4426,7 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitPeeringState",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "azureASN": {
@@ -4470,6 +4481,7 @@
     "ExpressRouteCircuitPeering": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ExpressRouteCircuitPeeringPropertiesFormat"
         },
         "name": {
@@ -4523,7 +4535,7 @@
           ],
           "x-ms-enum": {
             "name": "ServiceProviderProvisioningState",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "authorizations": {
@@ -4566,6 +4578,7 @@
           "description": "Gets or sets sku"
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ExpressRouteCircuitPropertiesFormat"
         },
         "etag": {
@@ -4627,7 +4640,7 @@
           ],
           "x-ms-enum": {
             "name": "RouteNextHopType",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "nextHopIP": {
@@ -4796,7 +4809,7 @@
           ],
           "x-ms-enum": {
             "name": "IpAllocationMethod",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "subnet": {
@@ -4845,6 +4858,7 @@
     "FrontendIpConfiguration": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/FrontendIpConfigurationPropertiesFormat"
         },
         "name": {
@@ -4893,6 +4907,7 @@
     "BackendAddressPool": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/BackendAddressPoolPropertiesFormat"
         },
         "name": {
@@ -4934,7 +4949,7 @@
           ],
           "x-ms-enum": {
             "name": "TransportProtocol",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "loadDistribution": {
@@ -4947,7 +4962,7 @@
           ],
           "x-ms-enum": {
             "name": "LoadDistribution",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "frontendPort": {
@@ -4985,6 +5000,7 @@
     "LoadBalancingRule": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/LoadBalancingRulePropertiesFormat"
         },
         "name": {
@@ -5021,7 +5037,7 @@
           ],
           "x-ms-enum": {
             "name": "ProbeProtocol",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "port": {
@@ -5056,6 +5072,7 @@
     "Probe": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProbePropertiesFormat"
         },
         "name": {
@@ -5093,7 +5110,7 @@
           ],
           "x-ms-enum": {
             "name": "TransportProtocol",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "frontendPort": {
@@ -5130,6 +5147,7 @@
     "InboundNatRule": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/InboundNatRulePropertiesFormat"
         },
         "name": {
@@ -5163,7 +5181,7 @@
           ],
           "x-ms-enum": {
             "name": "TransportProtocol",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "frontendPortRangeStart": {
@@ -5197,6 +5215,7 @@
     "InboundNatPool": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/InboundNatPoolPropertiesFormat"
         },
         "name": {
@@ -5247,6 +5266,7 @@
     "OutboundNatRule": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/OutboundNatRulePropertiesFormat"
         },
         "name": {
@@ -5330,6 +5350,7 @@
     "LoadBalancer": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/LoadBalancerPropertiesFormat"
         },
         "etag": {
@@ -5396,6 +5417,7 @@
     "LocalNetworkGateway": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/LocalNetworkGatewayPropertiesFormat"
         },
         "etag": {
@@ -5441,7 +5463,7 @@
           ],
           "x-ms-enum": {
             "name": "IpAllocationMethod",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "subnet": {
@@ -5476,6 +5498,7 @@
     "NetworkInterfaceIpConfiguration": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/NetworkInterfaceIpConfigurationPropertiesFormat"
         },
         "name": {
@@ -5568,6 +5591,7 @@
     "NetworkInterface": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/NetworkInterfacePropertiesFormat"
         },
         "etag": {
@@ -5616,7 +5640,7 @@
           ],
           "x-ms-enum": {
             "name": "RouteNextHopType",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "nextHopIpAddress": {
@@ -5636,6 +5660,7 @@
     "Route": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/RoutePropertiesFormat"
         },
         "name": {
@@ -5680,6 +5705,7 @@
     "RouteTable": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/RouteTablePropertiesFormat"
         },
         "etag": {
@@ -5726,35 +5752,35 @@
           ],
           "x-ms-enum": {
             "name": "SecurityRuleProtocol",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "sourcePortRange": {
           "type": "string",
-          "description": "Gets or sets Source Port or Range. Integer or range between 0 and 65535. Asterix “*” can also be used to match all ports."
+          "description": "Gets or sets Source Port or Range. Integer or range between 0 and 65535. Asterix '*' can also be used to match all ports."
         },
         "destinationPortRange": {
           "type": "string",
-          "description": "Gets or sets Destination Port or Range. Integer or range between 0 and 65535. Asterix “*” can also be used to match all ports."
+          "description": "Gets or sets Destination Port or Range. Integer or range between 0 and 65535. Asterix '*' can also be used to match all ports."
         },
         "sourceAddressPrefix": {
           "type": "string",
-          "description": "Gets or sets source address prefix. CIDR or source IP range. Asterix “*” can also be used to match all source IPs. Default tags such as ‘VirtualNetwork’, ‘AzureLoadBalancer’ and ‘Internet’ can also be used. If this is an ingress rule, specifies where network traffic originates from. "
+          "description": "Gets or sets source address prefix. CIDR or source IP range. Asterix '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used. If this is an ingress rule, specifies where network traffic originates from. "
         },
         "destinationAddressPrefix": {
           "type": "string",
-          "description": "Gets or sets destination address prefix. CIDR or source IP range. Asterix “*” can also be used to match all source IPs. Default tags such as ‘VirtualNetwork’, ‘AzureLoadBalancer’ and ‘Internet’ can also be used. "
+          "description": "Gets or sets destination address prefix. CIDR or source IP range. Asterix '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used. "
         },
         "access": {
           "type": "string",
-          "description": "Gets or sets network traffic is allowed or denied. Possible values are “Allow” and “Deny”",
+          "description": "Gets or sets network traffic is allowed or denied. Possible values are 'Allow' and 'Deny'",
           "enum": [
             "Allow",
             "Deny"
           ],
           "x-ms-enum": {
             "name": "SecurityRuleAccess",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "priority": {
@@ -5771,7 +5797,7 @@
           ],
           "x-ms-enum": {
             "name": "SecurityRuleDirection",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "provisioningState": {
@@ -5790,6 +5816,7 @@
     "SecurityRule": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/SecurityRulePropertiesFormat"
         },
         "name": {
@@ -5852,6 +5879,7 @@
     "NetworkSecurityGroup": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/NetworkSecurityGroupPropertiesFormat"
         },
         "etag": {
@@ -5910,7 +5938,7 @@
           ],
           "x-ms-enum": {
             "name": "IpAllocationMethod",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "ipConfiguration": {
@@ -5947,6 +5975,7 @@
     "PublicIpAddress": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/PublicIpAddressPropertiesFormat"
         },
         "etag": {
@@ -6058,6 +6087,7 @@
     "Subnet": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/SubnetPropertiesFormat"
         },
         "name": {
@@ -6115,7 +6145,7 @@
           ],
           "x-ms-enum": {
             "name": "UsageUnit",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "currentValue": {
@@ -6168,7 +6198,7 @@
           ],
           "x-ms-enum": {
             "name": "IpAllocationMethod",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "subnet": {
@@ -6189,6 +6219,7 @@
     "VirtualNetworkGatewayIpConfiguration": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualNetworkGatewayIpConfigurationPropertiesFormat"
         },
         "name": {
@@ -6225,7 +6256,7 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewayType",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "vpnType": {
@@ -6237,12 +6268,16 @@
           ],
           "x-ms-enum": {
             "name": "VpnType",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "enableBgp": {
           "type": "boolean",
           "description": "EnableBgp Flag"
+        },
+        "gatewayDefaultSite": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets the reference of the LocalNetworkGateway resource which represents Local network site having default routes. Assign Null value in case of removing existing default site setting."
         },
         "resourceGuid": {
           "type": "string",
@@ -6258,6 +6293,7 @@
     "VirtualNetworkGateway": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualNetworkGatewayPropertiesFormat"
         },
         "etag": {
@@ -6294,7 +6330,7 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewayConnectionType",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "routingWeight": {
@@ -6305,6 +6341,30 @@
         "sharedKey": {
           "type": "string",
           "description": "The Ipsec share key."
+        },
+        "connectionStatus": {
+          "type": "string",
+          "description": "Virtual network Gateway connection status",
+          "enum": [
+            "Unknown",
+            "Connecting",
+            "Connected",
+            "NotConnected"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkGatewayConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "egressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The Egress Bytes Transferred in this connection"
+        },
+        "ingressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The Ingress Bytes Transferred in this connection"
         },
         "peer": {
           "$ref": "#/definitions/SubResource",
@@ -6324,6 +6384,7 @@
     "VirtualNetworkGatewayConnection": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualNetworkGatewayConnectionPropertiesFormat"
         },
         "etag": {
@@ -6363,20 +6424,12 @@
       },
       "description": "Response for ListVirtualNetworkGatewayConnections Api service call"
     },
-    "ConnectionResetSharedKeyPropertiesFormat": {
+    "ConnectionResetSharedKey": {
       "properties": {
         "keyLength": {
           "type": "integer",
           "format": "int64",
           "description": "The virtual network connection reset shared key length"
-        }
-      },
-      "description": "VirtualNeworkGatewayConnectionResetSharedKey properties"
-    },
-    "ConnectionResetSharedKey": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ConnectionResetSharedKeyPropertiesFormat"
         }
       }
     },
@@ -6438,6 +6491,7 @@
     "VirtualNetwork": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualNetworkPropertiesFormat"
         },
         "etag": {
@@ -6524,7 +6578,7 @@
           ],
           "x-ms-enum": {
             "name": "NetworkOperationStatus",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "error": {

@@ -1372,6 +1372,7 @@
             "type": "object",
             "properties": {
                 "properties": {
+                    "x-ms-client-flatten": true,
                     "$ref": "#/definitions/WorkflowProperties",
                     "description": "Gets or sets the workflow properties."
                 }
@@ -1470,6 +1471,7 @@
             "type": "object",
             "properties": {
                 "properties": {
+                    "x-ms-client-flatten": true,
                     "$ref": "#/definitions/WorkflowVersionProperties",
                     "description": "Gets or sets the workflow version properties."
                 }
@@ -1538,6 +1540,7 @@
             "type": "object",
             "properties": {
                 "properties": {
+                    "x-ms-client-flatten": true,
                     "$ref": "#/definitions/WorkflowAccessKeyProperties",
                     "description": "Gets or sets the workflow access key properties."
                 },
@@ -1554,7 +1557,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "SubResource"
+                    "$ref": "#/definitions/SubResource"
                 }
             ]
         },
@@ -1593,6 +1596,7 @@
             "type": "object",
             "properties": {
                 "properties": {
+                    "x-ms-client-flatten": true,
                     "$ref": "#/definitions/WorkflowTriggerProperties",
                     "description": "Gets or sets the workflow trigger properties."
                 },
@@ -1609,7 +1613,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "SubResource"
+                    "$ref": "#/definitions/SubResource"
                 }
             ]
         },
@@ -1696,6 +1700,7 @@
             "type": "object",
             "properties": {
                 "properties": {
+                    "x-ms-client-flatten": true,
                     "$ref": "#/definitions/WorkflowTriggerHistoryProperties",
                     "description": "Gets the workflow trigger history properties."
                 },
@@ -1712,7 +1717,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "SubResource"
+                    "$ref": "#/definitions/SubResource"
                 }
             ]
         },
@@ -1793,6 +1798,7 @@
             "type": "object",
             "properties": {
                 "properties": {
+                    "x-ms-client-flatten": true,
                     "$ref": "#/definitions/WorkflowRunProperties",
                     "description": "Gets or sets the workflow run properties."
                 },
@@ -1809,7 +1815,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "SubResource"
+                    "$ref": "#/definitions/SubResource"
                 }
             ]
         },
@@ -1897,6 +1903,7 @@
             "type": "object",
             "properties": {
                 "properties": {
+                    "x-ms-client-flatten": true,
                     "$ref": "#/definitions/WorkflowRunActionProperties",
                     "description": "Gets or sets the workflow run action properties."
                 },
@@ -1913,7 +1920,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "SubResource"
+                    "$ref": "#/definitions/SubResource"
                 }
             ]
         },
@@ -1999,7 +2006,7 @@
                 "Standard",
                 "Premium"
             ],
-            "x-ms-enum": { "name": "SkuName", "modelAsString": "False" }
+            "x-ms-enum": { "name": "SkuName", "modelAsString": false }
         },
         "WorkflowState": {
             "type": "string",
@@ -2010,7 +2017,7 @@
                 "Deleted",
                 "Suspended"
             ],
-            "x-ms-enum": { "name": "WorkflowState", "modelAsString": "False" }
+            "x-ms-enum": { "name": "WorkflowState", "modelAsString": false }
         },
         "WorkflowStatus": {
             "type": "string",
@@ -2023,9 +2030,12 @@
                 "Skipped",
                 "Suspended",
                 "Cancelled",
-                "Failed"
+                "Failed",
+                "Faulted",
+                "TimedOut",
+                "Aborted"
             ],
-            "x-ms-enum": { "name": "WorkflowStatus", "modelAsString": "False" }
+            "x-ms-enum": { "name": "WorkflowStatus", "modelAsString": false }
         },
         "ParameterType": {
             "type": "string",
@@ -2040,7 +2050,7 @@
                 "Object",
                 "SecureObject"
             ],
-            "x-ms-enum": { "name": "ParameterType", "modelAsString": "False" }
+            "x-ms-enum": { "name": "ParameterType", "modelAsString": false }
         },
         "KeyType": {
             "type": "string",
@@ -2049,7 +2059,7 @@
                 "Primary",
                 "Secondary"
             ],
-            "x-ms-enum": { "name": "KeyType", "modelAsString": "False" }
+            "x-ms-enum": { "name": "KeyType", "modelAsString": false }
         },
         "Sku": {
             "type": "object",
@@ -2183,7 +2193,7 @@
                 "Month",
                 "Year"
             ],
-            "x-ms-enum": { "name": "RecurrenceFrequency", "modelAsString": "False" }
+            "x-ms-enum": { "name": "RecurrenceFrequency", "modelAsString": false }
         },
         "WorkflowTriggerRecurrence": {
             "type": "object",
@@ -2278,7 +2288,7 @@
                 "Succeeded",
                 "Updating"
             ],
-            "x-ms-enum": { "name": "WorkflowTriggerProvisioningState", "modelAsString": "False" }
+            "x-ms-enum": { "name": "WorkflowTriggerProvisioningState", "modelAsString": false }
         },
         "WorkflowProvisioningState": { 
             "type": "string",
@@ -2287,7 +2297,7 @@
                 "Moving",
                 "Succeeded"
             ],
-            "x-ms-enum": { "name": "WorkflowProvisioningState", "modelAsString": "False" }
+            "x-ms-enum": { "name": "WorkflowProvisioningState", "modelAsString": false }
         }
     },
     "parameters": {
