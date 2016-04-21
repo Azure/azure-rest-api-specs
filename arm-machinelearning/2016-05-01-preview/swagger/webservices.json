@@ -676,11 +676,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Module friendly name"
+          "description": "Asset's friendly name"
         },
         "type": {
           "type": "string",
-          "description": "Module type",
+          "description": "Asset's type",
           "default": "module"
         },
         "location": {
@@ -697,6 +697,20 @@
           "additionalProperties": {
             "$ref": "#/definitions/OutputPort"
           }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "[TODO] Asset's metadata",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "description": "[TODO] Asset's parameters",
+          "items": {
+            "$ref": "#/definitions/ModuleAssetParameter"
+          }
         }
       }
     },
@@ -712,6 +726,44 @@
         "credentials": {
           "type": "string",
           "description": "[TODO] null if in BYOS / SAS token / connection string / user asset partition key (when in graphSharp)/ etc."
+        }
+      }
+    },
+    "ModuleAssetParameter": {
+      "type": "object",
+      "description": "[TODO] Parameter for a custom module asset.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Parameter name."
+        },
+        "parameterType": {
+          "type": "string",
+          "description": "Parameter type."
+        },
+        "modeValuesInfo": {
+          "type": "object",
+          "description": "[TODO] Add meaningful description here",
+          "additionalProperties": {
+            "$ref": "#/definitions/ModeValueInfo"
+          }
+        }
+      }
+    },
+    "ModeValueInfo": {
+      "type": "object",
+      "description": "[TODO] Add meaningful description here.",
+      "properties": {
+        "interfaceString": {
+          "type": "string",
+          "description": "[TODO] Add meaningful description here."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "[TODO] Add meaningful description here.",
+          "items": {
+            "$ref": "#/definitions/ModuleAssetParameter"
+          }
         }
       }
     },
