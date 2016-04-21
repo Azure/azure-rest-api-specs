@@ -105,7 +105,7 @@
           "RateCard"
         ],
         "operationId": "RateCard_Get",
-        "description": "Enables you to query for the resource/meter metadata and related prices used in a given subscription by Offer ID, Currency, Locale, Region.",
+        "description": "Enables you to query for the resource/meter metadata and related prices used in a given subscription by Offer ID, Currency, Locale and Region.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt219004.aspx"
         },
@@ -154,6 +154,11 @@
     },
     "UsageSample": {
       "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The subscription identifier for the Azure user."
+        },
         "meterId": {
           "type": "string",
           "description": "Unique ID for the resource that was consumed (aka ResourceID)."
@@ -218,6 +223,7 @@
         },
         "properties": {
           "$ref": "#/definitions/UsageSample",
+          "x-ms-client-flatten": true,
           "description": "Usage data."
         }
       },
@@ -240,7 +246,7 @@
       "description": "The Get UsageAggregates operation response."
     },
     "RateCardQueryParameters": {
-      "description": "Parameters that are used in the odata $filter query parameter",
+      "description": "Parameters that are used in the odata $filter query parameter for providing RateCard information.",
       "required": [ "OfferDurableId", "Currency", "Locale", "RegionInfo" ],
       "properties": {
         "OfferDurableId": {
@@ -349,7 +355,7 @@
       }
     },
     "OfferTermInfo": {
-      "description": "Describes the offer.",
+      "description": "Describes the offer term.",
       "properties": {
         "Name": {
           "description": "Name of the offer term. For example: 'Monetary Credit",
@@ -382,49 +388,6 @@
           }
         }
       }
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
-      "x-ms-azure-resource": true
     },
     "ErrorResponse": {
       "description": "Describes ehe format of Error response.",
