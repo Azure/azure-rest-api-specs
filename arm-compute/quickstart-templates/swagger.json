@@ -14,6 +14,24 @@
   "produces": [
     "application/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}": {
       "put": {
@@ -41,7 +59,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/Deployment"
             },
@@ -70,29 +88,36 @@
         },
         "x-ms-long-running-operation": true
       }
-    }  
+    }
   },
   "definitions": {
     "TemplateLink": {
+      "required": [
+        "uri"
+      ],
       "properties": {
         "uri": {
           "type": "string",
           "description": "URI referencing the template.",
-          "enum": [ "https://raw.githubusercontent.com/stankovski/azure-rest-api-specs/master/arm-compute/quickstart-templates/vm-simple-linux.json" ]
+          "enum": [
+            "https://raw.githubusercontent.com/stankovski/azure-rest-api-specs/master/arm-compute/quickstart-templates/vm-simple-linux.json"
+          ]
         }
       },
-      "required": [
-        "uri"
-      ],
       "description": "Entity representing the reference to the template."
     },
     "DeploymentProperties": {
+      "required": [
+        "templateLink",
+        "mode"
+      ],
       "properties": {
         "templateLink": {
           "$ref": "#/definitions/TemplateLink",
           "description": "Gets or sets the URI referencing the template. Use only one of Template or TemplateLink."
         },
         "parameters": {
+          "x-ms-client-flatten": true,
           "description": "Deployment parameters. Use only one of Parameters or ParametersLink.",
           "$ref": "#/definitions/DeploymentParameters"
         },
@@ -104,12 +129,15 @@
           ]
         }
       },
-      "required": [ "mode" ],
+      "required": [
+        "mode"
+      ],
       "description": "Deployment properties."
     },
     "Deployment": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/DeploymentProperties",
           "description": "Gets or sets the deployment properties."
         }
@@ -119,8 +147,11 @@
     "DeploymentParameters": {
       "properties": {
         "adminUsername": {
+          "x-ms-client-flatten": true,
           "type": "object",
-          "required": [ "value" ],
+          "required": [
+            "value"
+          ],
           "properties": {
             "value": {
               "type": "string",
@@ -129,8 +160,11 @@
           }
         },
         "adminPassword": {
+          "x-ms-client-flatten": true,
           "type": "object",
-          "required": [ "value" ],
+          "required": [
+            "value"
+          ],
           "properties": {
             "value": {
               "type": "string",
@@ -140,8 +174,11 @@
           }
         },
         "dnsLabelPrefix": {
+          "x-ms-client-flatten": true,
           "type": "object",
-          "required": [ "value" ],
+          "required": [
+            "value"
+          ],
           "properties": {
             "value": {
               "type": "string",
@@ -150,14 +187,21 @@
           }
         },
         "osVersion": {
+          "x-ms-client-flatten": true,
           "type": "object",
-          "required": [ "value" ],
+          "required": [
+            "value"
+          ],
           "properties": {
             "value": {
               "type": "string",
               "default": "14.04.2-LTS",
               "description": "The OS version for the VM. This will pick a fully patched image of this given OS version.",
-              "enum": [ "12.04.5-LTS", "14.04.2-LTS", "15.10" ]
+              "enum": [
+                "12.04.5-LTS",
+                "14.04.2-LTS",
+                "15.10"
+              ]
             }
           },
           "description": "Deployment operation parameters."

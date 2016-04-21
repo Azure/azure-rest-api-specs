@@ -86,13 +86,22 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum":["CONCURRENTAPPEND"]
+            "enum": [
+              "CONCURRENTAPPEND"
+            ]
+          },
+          {
+            "name": "Transfer-Encoding",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Indicates the data being sent to the server is being streamed in chunks.",
+            "enum": [
+              "chunked"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -130,13 +139,12 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["CHECKACCESS"]
+            "enum": [
+              "CHECKACCESS"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -165,13 +173,12 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["MKDIRS"]
+            "enum": [
+              "MKDIRS"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -190,7 +197,7 @@
           "FileSystem"
         ],
         "operationId": "FileSystem_Concat",
-        "description": "Concatenates the list of source files into the destination file.",
+        "description": "Concatenates the list of source files into the destination file, removing all source files upon success.",
         "parameters": [
           {
             "name": "destinationPath",
@@ -216,13 +223,12 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["CONCAT"]
+            "enum": [
+              "CONCAT"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -241,7 +247,7 @@
           "application/octet-stream"
         ],
         "operationId": "FileSystem_MsConcat",
-        "description": "Concatenates the list of source files into the destination file. This method accepts more source file paths than the Concat method. This method and the parameters it accepts are subject to change for usability in an upcoming version.",
+        "description": "Concatenates the list of source files into the destination file, deleting all source files upon success. This method accepts more source file paths than the Concat method. This method and the parameters it accepts are subject to change for usability in an upcoming version.",
         "parameters": [
           {
             "name": "msConcatDestinationPath",
@@ -251,11 +257,11 @@
             "description": "The Data Lake Store path (starting with '/') of the destination file resulting from the concatenation."
           },
           {
-            "name": "deletesourcedirectory",
+            "name": "deleteSourceDirectory",
             "in": "query",
             "required": false,
             "type": "boolean",
-            "description": "Caution: Setting this parameter to true will delete the parent directory of all source files provided to the MsConcat method."
+            "description": "Indicates that as an optimization instead of deleting each individual source stream, delete the source stream folder if all streams are in the same folder instead. This results in a substantial performance improvement when the only streams in the folder are part of the concatenation operation. WARNING: This includes the deletion of any other files that are not source files. Only set this to true when source files are the only files in the source directory."
           },
           {
             "name": "streamContents",
@@ -273,13 +279,12 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["MSCONCAT"]
+            "enum": [
+              "MSCONCAT"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -290,7 +295,7 @@
       }
     },
     "/webhdfs/v1/{listFilePath}": {
-    "get": {
+      "get": {
         "tags": [
           "FileSystem"
         ],
@@ -305,18 +310,39 @@
             "description": "The Data Lake Store path (starting with '/') of the directory to list."
           },
           {
+            "name": "listSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to return. Optional."
+          },
+          {
+            "name": "listAfter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets the item or lexographical index after which to begin returning results. For example, a file list of 'a','b','d' and listAfter='b' will return 'd', and a listAfter='c' will also return 'd'. Optional."
+          },
+          {
+            "name": "listBefore",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets the item or lexographical index before which to begin returning results. For example, a file list of 'a','b','d' and listBefore='d' will return 'a','b', and a listBefore='c' will also return 'a','b'. Optional."
+          },
+          {
             "name": "op",
             "in": "query",
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["LISTSTATUS"]
+            "enum": [
+              "MSLISTSTATUS"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -350,13 +376,12 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["GETCONTENTSUMMARY"]
+            "enum": [
+              "GETCONTENTSUMMARY"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -390,13 +415,12 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["GETFILESTATUS"]
+            "enum": [
+              "GETFILESTATUS"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -443,7 +467,9 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["APPEND"]
+            "enum": [
+              "APPEND"
+            ]
           },
           {
             "name": "append",
@@ -451,13 +477,22 @@
             "required": true,
             "description": "The constant value for the operation.",
             "type": "string",
-            "enum": ["true"]
+            "enum": [
+              "true"
+            ]
+          },
+          {
+            "name": "Transfer-Encoding",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Indicates the data being sent to the server is being streamed in chunks.",
+            "enum": [
+              "chunked"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -506,7 +541,9 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["CREATE"]
+            "enum": [
+              "CREATE"
+            ]
           },
           {
             "name": "write",
@@ -514,13 +551,22 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["true"]
+            "enum": [
+              "true"
+            ]
+          },
+          {
+            "name": "Transfer-Encoding",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Indicates the data being sent to the server is being streamed in chunks.",
+            "enum": [
+              "chunked"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -563,7 +609,9 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["OPEN"]
+            "enum": [
+              "OPEN"
+            ]
           },
           {
             "name": "read",
@@ -571,20 +619,18 @@
             "required": true,
             "description": "The constant value for the operation.",
             "type": "string",
-            "enum": ["true"]
+            "enum": [
+              "true"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "",
-            "schema": 
-            {
+            "schema": {
               "type": "file"
             }
           }
@@ -619,13 +665,12 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["SETACL"]
+            "enum": [
+              "SETACL"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -663,13 +708,12 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["MODIFYACLENTRIES"]
+            "enum": [
+              "MODIFYACLENTRIES"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -707,13 +751,12 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["REMOVEACLENTRIES"]
+            "enum": [
+              "REMOVEACLENTRIES"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -744,13 +787,12 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["REMOVEACL"]
+            "enum": [
+              "REMOVEACL"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -779,13 +821,12 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["GETACLSTATUS"]
+            "enum": [
+              "GETACLSTATUS"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -826,13 +867,12 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["DELETE"]
+            "enum": [
+              "DELETE"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -873,13 +913,12 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["RENAME"]
+            "enum": [
+              "RENAME"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -927,13 +966,12 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["SETOWNER"]
+            "enum": [
+              "SETOWNER"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -971,13 +1009,12 @@
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
-            "enum": ["SETPERMISSION"]
+            "enum": [
+              "SETPERMISSION"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -993,6 +1030,7 @@
       "properties": {
         "boolean": {
           "type": "boolean",
+          "x-ms-client-name": "operationResult",
           "readOnly": true,
           "description": "Gets the result of the operation or request."
         }
@@ -1128,8 +1166,8 @@
           "readOnly": true,
           "description": "Gets the type of the path object.",
           "enum": [
-            "File",
-            "Directory"
+            "FILE",
+            "DIRECTORY"
           ],
           "x-ms-enum": {
             "name": "FileType",
@@ -1174,13 +1212,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "header",
-      "required": true,
-      "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
