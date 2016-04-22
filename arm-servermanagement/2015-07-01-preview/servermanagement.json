@@ -1205,7 +1205,7 @@
           "200": {
             "description": "The operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PowerShellCommandResults"
+              "$ref": "#/definitions/PowerShellCommandStatus"
             }
           },
           "default": {
@@ -1902,6 +1902,19 @@
               "description": "Name of the runspace"
             }
           }
+        }
+      }
+    },
+    "PowerShellCommandStatus": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PowerShellCommandResults"
         }
       }
     },
