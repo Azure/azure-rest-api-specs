@@ -22,7 +22,7 @@
         "tags": [
           "UsageAggregates"
         ],
-        "operationId": "UsageAggregates_Get",
+        "operationId": "UsageAggregates_List",
         "description": "Query aggregated Azure subscription consumption data for a date range.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/library/azure/1ea5b323-54bb-423d-916f-190de96c6a3c"
@@ -31,7 +31,7 @@
           {
             "name": "reportedstartTime",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
             "format": "date-time",
             "description": "The start of the time range to retrieve data for."
@@ -39,7 +39,7 @@
           {
             "name": "reportedEndTime",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
             "format": "date-time",
             "description": "The end of the time range to retrieve data for."
@@ -56,6 +56,7 @@
             "in": "query",
             "required": false,
             "type": "string",
+            "default": "Daily",
             "description": "Value is either daily (default) or hourly to tell the API how to return the results grouped by day or hour.",
             "enum": [
               "Daily",
@@ -84,7 +85,7 @@
           "200": {
             "description": "Normal response for a successful query. The response body will contain the data that matches the filters specified in the query parameters.",
             "schema": {
-              "$ref": "#/definitions/UsageAggregationGetResult"
+              "$ref": "#/definitions/UsageAggregationListResult"
             }
           },
           "default": {
@@ -105,7 +106,7 @@
           "RateCard"
         ],
         "operationId": "RateCard_Get",
-        "description": "Enables you to query for the resource/meter metadata and related prices used in a given subscription by Offer ID, Currency, Locale and Region.",
+        "description": "Enables you to query for the resource/meter metadata and related prices used in a given subscription by Offer ID, Currency, Locale and Region. The metadata associated with the billing meters, including but not limited to service names, types, resources, units of measure, and regions, is subject to change at any time and without notice. If you intend to use this billing data in an automated fashion, please use the billing meter GUID to uniquely identify each billable item. If the billing meter GUID is scheduled to change due to a new billing model, you will be notified in advance of the change. ",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt219004.aspx"
         },
@@ -115,7 +116,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "The filter to apply on the operation. It ONLY supports the ‘eq’ and ‘and’ logical operators at this time. All the 4 query parameters 'OfferDurableId',  'Currency', 'Locale', 'Region' are required to be a part of the $filter."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -229,7 +230,7 @@
       },
       "description": "Describes the usageAggregation."
     },
-    "UsageAggregationGetResult": {
+    "UsageAggregationListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -356,23 +357,12 @@
     },
     "OfferTermInfo": {
       "description": "Describes the offer term.",
+      "discriminator": "Name",
+      "required": [ "Name" ],
       "properties": {
         "Name": {
-          "description": "Name of the offer term. For example: 'Monetary Credit",
+          "description": "Name of the offer term. For example: 'Monetary Credit', 'Monetary Commitment",
           "type": "string"
-        },
-        "TieredDiscount": {
-          "description": "The list of key/value pairs for the tiered meter rates, in the format 'key':'value' where key = price, and value = the corresponding discount percentage. This field is used only by offer terms of type 'Monetary Commitment'.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "number",
-            "format": "decimal"
-          }
-        },
-        "Credit": {
-          "description": "The amount of credit provided under the terms of the given offer level. This field is used only by offer terms of type 'Monetary Commitment'.",
-          "type": "number",
-          "format": "decimal"
         },
         "EffectiveDate": {
           "description": "Indicates the date from which the meter rate or offer term is effective.",
@@ -385,6 +375,39 @@
           "items": {
             "type": "string",
             "format": "uuid"
+          }
+        }
+      }
+    },
+    "MonetaryCredit": {
+      "x-ms-discriminator-value": "Monetary Credit",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OfferTermInfo"
+        }
+      ],
+      "properties": {
+        "Credit": {
+          "description": "The amount of credit provided under the terms of the given offer level. This field is used only by offer terms of type 'MonetaryCredit'.",
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
+    "MonetaryCommitment": {
+      "x-ms-discriminator-value": "Monetary Commitment",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OfferTermInfo"
+        }
+      ],
+      "properties": {
+        "TieredDiscount": {
+          "description": "The list of key/value pairs for the tiered meter rates, in the format 'key':'value' where key = price, and value = the corresponding discount percentage. This field is used only by offer terms of type 'Monetary Commitment'.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "format": "decimal"
           }
         }
       }
