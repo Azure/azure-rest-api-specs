@@ -412,6 +412,20 @@
         }
       }
     },
+    "RecurringCharge": {
+      "x-ms-discriminator-value": "Recurring Charge",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OfferTermInfo"
+        }
+      ],
+      "properties": {
+        "RecurringCharge": {
+          "description": "The amount of recurring charge as per the offer term.",
+          "type": "integer"
+        }
+      }
+    },
     "ErrorResponse": {
       "description": "Describes ehe format of Error response.",
       "type": "object",
