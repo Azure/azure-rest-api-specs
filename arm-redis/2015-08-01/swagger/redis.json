@@ -316,6 +316,57 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/forceReboot": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_ForceReboot",
+        "description": "Reboot specified redis node(s). This operation requires write permission to the cache resource. There can be potential data loss.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisRebootParameters"
+            },
+            "description": "Specifies which redis node(s) to reboot."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "202": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -595,6 +646,32 @@
         "keyType"
       ],
       "description": "Specifies which redis access keys to reset."
+    },
+    "RedisRebootParameters": {
+      "properties": {
+        "rebootType": {
+          "type": "string",
+          "description": "Which redis node(s) to reboot. Depending on this value data loss is possible.",
+          "enum": [
+            "PrimaryNode",
+            "SecondaryNode",
+            "AllNodes"
+          ],
+          "x-ms-enum": {
+            "name": "RebootType",
+            "modelAsString": false
+          }
+        },
+        "shardId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "In case of cluster cache, this specifies shard id which should be rebooted."
+        }
+      },
+      "required": [
+        "rebootType"
+      ],
+      "description": "Specifies which redis node(s) to reboot."
     }
   },
   "parameters": {
