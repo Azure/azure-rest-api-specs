@@ -1657,7 +1657,7 @@
         }
       }
     },
-    "ResourceManagementError": {
+    "ResourceManagementErrorWithDetails": {
       "properties": {
         "code": {
           "type": "string",
@@ -1670,28 +1670,15 @@
         "target": {
           "type": "string",
           "description": "Gets or sets the target of the error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "ResourceManagementErrorWithDetails": {
-      "properties": {
+        },
         "details": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ResourceManagementError"
+            "$ref": "#/definitions/ResourceManagementErrorWithDetails"
           },
           "description": "Gets or sets validation error."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceManagementError"
-        }
-      ],
       "required": [
         "code",
         "message"
