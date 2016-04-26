@@ -42,7 +42,7 @@
           "Account"
         ],
         "operationId": "Account_Create",
-        "description": "Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Batch Account API.",
+        "description": "Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -50,7 +50,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the new Batch account."
+            "description": "The name of the resource group associated with the new Batch account."
           },
           {
             "name": "accountName",
@@ -60,7 +60,7 @@
             "pattern": "^[-\\w\\._]+$",
             "minLength": 3,
             "maxLength": 24,
-            "description": "A name for the Batch account which must be unique within Azure. Batch account names must be between 3 and 24 characters in length and must use only numbers and lower-case letters. This name is used as part of the DNS name that is used to access the batch service in the region in which the account is created. For example: http://accountname.region.batch.azure.com/."
+            "description": "A name for the Batch account which must be unique within the region. Batch account names must be between 3 and 24 characters in length and must use only numbers and lowercase letters. This name is used as part of the DNS name that is used to access the Batch service in the region in which the account is created. For example: http://accountname.region.batch.azure.com/."
           },
           {
             "name": "parameters",
@@ -104,7 +104,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "description": "The name of the resource group associated with the Batch account."
           },
           {
             "name": "accountName",
@@ -154,7 +154,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account to be deleted."
+            "description": "The name of the resource group associated with the Batch account to be deleted."
           },
           {
             "name": "accountName",
@@ -199,7 +199,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "description": "The name of the resource group associated with the Batch account."
           },
           {
             "name": "accountName",
@@ -306,7 +306,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "description": "The name of the resource group associated with the Batch account."
           },
           {
             "name": "accountName",
@@ -338,7 +338,7 @@
           "Account"
         ],
         "operationId": "Account_RegenerateKey",
-        "description": "Regenerates the specified account key for the given Batch account.",
+        "description": "Regenerates the specified account key for the specified Batch account.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -346,7 +346,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "description": "The name of the resource group associated with the Batch account."
           },
           {
             "name": "accountName",
@@ -390,7 +390,7 @@
           "Account"
         ],
         "operationId": "Account_ListKeys",
-        "description": "Gets the account keys for the given Batch account.",
+        "description": "Gets the account keys for the specified Batch account.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -398,7 +398,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "description": "The name of the resource group associated with the Batch account."
           },
           {
             "name": "accountName",
@@ -441,7 +441,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "description": "The name of the resource group associated with the Batch account."
           },
           {
             "name": "accountName",
@@ -504,7 +504,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "description": "The name of the resource group associated with the Batch account."
           },
           {
             "name": "accountName",
@@ -561,7 +561,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "description": "The name of the resource group associated with the Batch account."
           },
           {
             "name": "accountName",
@@ -606,7 +606,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "description": "The name of the resource group associated with the Batch account."
           },
           {
             "name": "accountName",
@@ -654,7 +654,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "description": "The name of the resource group associated with the Batch account."
           },
           {
             "name": "accountName",
@@ -710,7 +710,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "description": "The name of the resource group associated with the Batch account."
           },
           {
             "name": "accountName",
@@ -757,7 +757,7 @@
           "Application"
         ],
         "operationId": "Application_DeleteApplicationPackage",
-        "description": "Deletes an application package record and the binary file.",
+        "description": "Deletes an application package record and its associated binary file.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -765,7 +765,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "description": "The name of the resource group associated with the Batch account."
           },
           {
             "name": "accountName",
@@ -817,7 +817,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "description": "The name of the resource group associated with the Batch account."
           },
           {
             "name": "accountName",
@@ -874,7 +874,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "description": "The name of the resource group associated with the Batch account."
           },
           {
             "name": "accountName",
@@ -999,7 +999,7 @@
         "lastKeySync": {
           "type": "string",
           "format": "date-time",
-          "description": "The UTC time at which storage keys were last synced to the Batch account."
+          "description": "The UTC time at which storage keys were last synchronized with the Batch account."
         }
       },
       "required": [
@@ -1012,7 +1012,7 @@
       "properties": {
         "accountEndpoint": {
           "type": "string",
-          "description": "The endpoint used by this account to obtain Batch services."
+          "description": "The endpoint used by this account to interact with the Batch services."
         },
         "provisioningState": {
           "type": "string",
@@ -1081,10 +1081,10 @@
           },
           "description": "The user specified tags associated with the account."
         },
-        "autoStorage": {
+        "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AutoStorageBaseProperties",
-          "description": "The properties related to auto storage."
+          "$ref": "#/definitions/AccountBaseProperties",
+          "description": "The properties of the account."
         }
       },
       "description": "Parameters supplied to the Update operation."
@@ -1111,8 +1111,8 @@
           "type": "string",
           "description": "The type of account key to regenerate.",
           "enum": [
-            "PrimaryKey",
-            "SecondaryKey"
+            "Primary",
+            "Secondary"
           ],
           "x-ms-enum": {
             "name": "AccountKeyType",
@@ -1219,7 +1219,7 @@
         },
         "format": {
           "type": "string",
-          "description": "The format of the application package, if known."
+          "description": "The format of the application package, if the package has been activated."
         },
         "lastActivationTime": {
           "type": "string",
@@ -1252,7 +1252,7 @@
         },
         "defaultVersion": {
           "type": "string",
-          "description": "Gets or sets which package to use if a client requests the application but does not specify a version."
+          "description": "The package to use if a client requests the application but does not specify a version."
         }
       },
       "description": "Contains information about an application in a Batch account."
@@ -1349,28 +1349,28 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the id of the resource"
+          "description": "The id of the resource"
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the name of the resource"
+          "description": "The name of the resource"
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the type of the resource"
+          "description": "The type of the resource"
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the location of the resource"
+          "description": "The location of the resource"
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the tags of the resource"
+          "description": "The tags of the resource"
         }
       },
       "x-ms-azure-resource": true
@@ -1383,7 +1383,7 @@
       "required": true,
       "readOnly": true,
       "type": "string",
-      "description": "Gets subscription credentials which uniquely identify a Microsoft Azure subscription. The subscription id forms part of the URI for every service call."
+      "description": "A unique identifier of a Microsoft Azure subscription. The subscription id forms part of the URI for every service call."
     },  
     "ApiVersionParameter": {
       "name": "api-version",
