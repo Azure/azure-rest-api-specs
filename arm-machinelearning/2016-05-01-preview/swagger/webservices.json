@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure ML Web Services Management Client",
-    "description": "These APIs allow end users to operate on Azure Machine Learning Web Services resources. They support the following operations:<ul><li>Create a web service</li><li>Get a web service</li><li>Patch a web service</li><li>Delete a web service</li><li>Get All Web Services in a Resource Group </li><li>Get All Web Services in a Subscription</li><li>Get Web Services Keys</li></ul>",
+    "description": "These APIs allow end users to operate on Azure Machine Learning Web Services resources. They support the following operations:<ul><li>Create or update a web service</li><li>Get a web service</li><li>Patch a web service</li><li>Delete a web service</li><li>Get All Web Services in a Resource Group </li><li>Get All Web Services in a Subscription</li><li>Get Web Services Keys</li></ul>",
     "version": "2016-05-01-preview"
   },
   "host": "management.azure.com",
@@ -743,7 +743,7 @@
     },
     "ModuleAssetParameter": {
       "type": "object",
-      "description": "Parameter for a custom module asset.",
+      "description": "Parameter definition for a module asset.",
       "properties": {
         "name": {
           "type": "string",
@@ -755,7 +755,7 @@
         },
         "modeValuesInfo": {
           "type": "object",
-          "description": "[TODO] Add meaningful description here",
+          "description": "Definitions for nested interface parameters if this is a complex module parameter.",
           "additionalProperties": {
             "$ref": "#/definitions/ModeValueInfo"
           }
@@ -764,15 +764,15 @@
     },
     "ModeValueInfo": {
       "type": "object",
-      "description": "[TODO] Add meaningful description here.",
+      "description": "Nested parameter definition.",
       "properties": {
         "interfaceString": {
           "type": "string",
-          "description": "[TODO] Add meaningful description here."
+          "description": "The interface string name for the nested parameter."
         },
         "parameters": {
           "type": "array",
-          "description": "[TODO] Add meaningful description here.",
+          "description": "The definition of the parameter.",
           "items": {
             "$ref": "#/definitions/ModuleAssetParameter"
           }
