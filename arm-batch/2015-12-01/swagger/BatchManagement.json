@@ -96,7 +96,7 @@
           "Account"
         ],
         "operationId": "Account_Update",
-        "description": "Updates the properties of an existing Batch account in the specified resource group.",
+        "description": "Updates the properties of an existing Batch account.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -191,7 +191,7 @@
           "Account"
         ],
         "operationId": "Account_Get",
-        "description": "Gets detailed information about the specified Batch account.",
+        "description": "Gets information about the specified Batch account.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -297,7 +297,7 @@
         "tags": [
           "Account"
         ],
-        "operationId": "Account_SyncAutoStorageKeys",
+        "operationId": "Account_SynchronizeAutoStorageKeys",
         "description": "Synchronizes access keys for the auto storage account configured for the specified Batch account.",
         "parameters": [
           {
@@ -390,7 +390,7 @@
           "Account"
         ],
         "operationId": "Account_ListKeys",
-        "description": "Gets the account keys for the specified Batch account.",
+        "description": "Lists the account keys for the specified Batch account.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -920,7 +920,7 @@
           "Subscription"
         ],
         "operationId": "Subscription_GetSubscriptionQuotas",
-        "description": "Gets the quotas of the subscription in the Batch service.",
+        "description": "Gets the Batch service quotas for the specified suscription.",
         "parameters": [
           {
             "name": "locationName",
@@ -1282,7 +1282,7 @@
         },
         "format": {
           "type": "string",
-          "description": "The format of the application package, if known."
+          "description": "The format of the application package, if the package is active."
         },
         "storageUrl": {
           "type": "string",
@@ -1325,7 +1325,7 @@
         },
         "defaultVersion": {
           "type": "string",
-          "description": "Gets or sets which package to use if a client requests the application but does not specify a version."
+          "description": "The package to use if a client requests the application but does not specify a version."
         },
         "displayName": {
           "type": "string",
