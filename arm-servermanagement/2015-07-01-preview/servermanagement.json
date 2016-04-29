@@ -1585,7 +1585,7 @@
             "instances": {
               "type": "array",
               "items": {
-                "type": "string"
+                "$ref": "#/definitions/GatewayStatus"
               },
               "description": "names of the nodes in the gateway"
             },
@@ -1601,9 +1601,6 @@
               "type": "string",
               "format": "date-time",
               "description": "the date/time of the last published gateway"
-            },
-            "status": {
-              "$ref": "#/definitions/GatewayStatus"
             }
           }
         }
@@ -1633,11 +1630,39 @@
           "type": "number",
           "description": "The available memory on the gateway host machine in megabytes."
         },
-        "gatewayCpuPercent": {
+        "gatewayCpuUtilizationPercent": {
           "type": "number",
           "minimum": 0,
           "maximum": 100,
           "description": "The CPU utilization of the gateway process (numeric value between 0 and 100)."
+        },
+        "totalCpuUtilizationPercent": {
+          "type": "number",
+          "description": "CPU Utilization of the whole system."
+        },
+        "gatewayVersion": {
+          "type": "string",
+          "description": "The version of the gateway that is installed on the system."
+        },
+        "friendlyOsName": {
+          "type": "string",
+          "description": "The Plaintext description of the OS on the gateway."
+        },
+        "installedDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "logicalProcessorCount": {
+          "type": "integer",
+          "description": "Number of logical processors in the gateway system."
+        },
+        "name": {
+          "type": "string",
+          "description": "The computer name of the gateway system."
+        },
+        "gatewayId": {
+          "type": "string",
+          "description": "the gateway resource id."
         },
         "gatewayWorkingSetMByte": {
           "type": "number",
