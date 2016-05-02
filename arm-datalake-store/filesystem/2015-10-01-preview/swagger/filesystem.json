@@ -91,10 +91,17 @@
             ]
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "Transfer-Encoding",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Indicates the data being sent to the server is being streamed in chunks.",
+            "enum": [
+              "chunked"
+            ]
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -138,9 +145,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -175,9 +179,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -228,9 +229,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -287,9 +285,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -315,20 +310,39 @@
             "description": "The Data Lake Store path (starting with '/') of the directory to list."
           },
           {
+            "name": "listSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Gets or sets the number of items to return. Optional."
+          },
+          {
+            "name": "listAfter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets the item or lexographical index after which to begin returning results. For example, a file list of 'a','b','d' and listAfter='b' will return 'd', and a listAfter='c' will also return 'd'. Optional."
+          },
+          {
+            "name": "listBefore",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Gets or sets the item or lexographical index before which to begin returning results. For example, a file list of 'a','b','d' and listBefore='d' will return 'a','b', and a listBefore='c' will also return 'a','b'. Optional."
+          },
+          {
             "name": "op",
             "in": "query",
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
             "enum": [
-              "LISTSTATUS"
+              "MSLISTSTATUS"
             ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -368,9 +382,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -410,9 +421,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -474,10 +482,17 @@
             ]
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "Transfer-Encoding",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Indicates the data being sent to the server is being streamed in chunks.",
+            "enum": [
+              "chunked"
+            ]
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -541,10 +556,17 @@
             ]
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "Transfer-Encoding",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Indicates the data being sent to the server is being streamed in chunks.",
+            "enum": [
+              "chunked"
+            ]
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -603,9 +625,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -652,9 +671,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -698,9 +714,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -744,9 +757,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -783,9 +793,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -820,9 +827,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -869,9 +873,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -918,9 +919,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -974,9 +972,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1020,9 +1015,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1220,13 +1212,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "header",
-      "required": true,
-      "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",

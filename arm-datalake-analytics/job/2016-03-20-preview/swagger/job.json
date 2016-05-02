@@ -3,7 +3,7 @@
   "info": {
     "title": "DataLakeAnalyticsJobManagementClient",
     "description": "Creates an Azure Data Lake Analytics job client.",
-    "version": "2015-11-01-preview",
+    "version": "2016-03-20-preview",
     "x-ms-code-generation-settings": {
       "useDateTimeOffset": true,
       "internalConstructors": true
@@ -75,7 +75,7 @@
           "Job"
         ],
         "operationId": "Job_GetDebugDataPath",
-        "description": "Gets the U-SQL job debug data information specified by the job ID.",
+        "description": "Gets the job debug data information specified by the job ID.",
         "parameters": [
           {
             "name": "jobIdentity",
@@ -260,7 +260,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
+            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
@@ -423,7 +423,7 @@
         "totalFailedTime": {
           "type": "string",
           "readOnly": true,
-          "format": "non-iso-duration",
+          "format": "duration",
           "description": "Gets the amount of time that failed vertices took up in this stage."
         },
         "totalProgress": {
@@ -435,11 +435,11 @@
         "totalSucceededTime": {
           "type": "string",
           "readOnly": true,
-          "format": "non-iso-duration",
+          "format": "duration",
           "description": "Gets the amount of time all successful vertices took in this stage."
         }
       },
-      "description": "The Data Lake Analytics U-SQL job statistics vertex stage information."
+      "description": "The Data Lake Analytics job statistics vertex stage information."
     },
     "JobStatistics": {
       "properties": {
@@ -458,7 +458,7 @@
           "description": "Gets the list of stages for the job."
         }
       },
-      "description": "The Data Lake Analytics U-SQL job execution statistics."
+      "description": "The Data Lake Analytics job execution statistics."
     },
     "JobDataPath": {
       "properties": {
@@ -482,7 +482,7 @@
           "description": "Gets the list of paths to all of the job data."
         }
       },
-      "description": "A Data Lake Analytics U-SQL job data path item."
+      "description": "A Data Lake Analytics job data path item."
     },
     "JobStateAuditRecord": {
       "properties": {
@@ -508,7 +508,7 @@
           "description": "Gets  the details of the audit log."
         }
       },
-      "description": "The Data Lake Analytics U-SQL job state audit records for tracking the lifecycle of a job."
+      "description": "The Data Lake Analytics job state audit records for tracking the lifecycle of a job."
     },
     "JobResource": {
       "properties": {
@@ -533,7 +533,7 @@
           }
         }
       },
-      "description": "The Data Lake Analytics U-SQL job resources."
+      "description": "The Data Lake Analytics job resources."
     },
     "USqlJobProperties": {
       "x-ms-discriminator-value": "USql",
@@ -561,29 +561,29 @@
         "algebraFilePath": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the U-SQL algebra file path after the job has completed"
+          "description": "Gets the algebra file path after the job has completed"
         },
         "totalCompilationTime": {
           "type": "string",
-          "format": "non-iso-duration",
+          "format": "duration",
           "readOnly": true,
           "description": "Gets the total time this job spent compiling. This value should not be set by the user and will be ignored if it is."
         },
         "totalPauseTime": {
           "type": "string",
-          "format": "non-iso-duration",
+          "format": "duration",
           "readOnly": true,
           "description": "Gets the total time this job spent paused. This value should not be set by the user and will be ignored if it is."
         },
         "totalQueuedTime": {
           "type": "string",
-          "format": "non-iso-duration",
+          "format": "duration",
           "readOnly": true,
           "description": "Gets the total time this job spent queued. This value should not be set by the user and will be ignored if it is."
         },
         "totalRunningTime": {
           "type": "string",
-          "format": "non-iso-duration",
+          "format": "duration",
           "readOnly": true,
           "description": "Gets the total time this job spent executing. This value should not be set by the user and will be ignored if it is."
         },
@@ -659,7 +659,7 @@
         },
         "warehouseLocation": {
           "type": "string",
-          "description": "Gets or sets the runtime version of the U-SQL engine to use"
+          "description": "Gets or sets the location of the Hive warehouse"
         },
         "statementCount": {
           "type": "integer",
@@ -682,11 +682,11 @@
       "properties": {
         "runtimeVersion": {
           "type": "string",
-          "description": "Gets or sets the runtime version of the U-SQL engine to use"
+          "description": "Gets or sets the runtime version of the Data Lake Analytics engine to use for the specific type of job being run."
         },
         "script": {
           "type": "string",
-          "description": "Gets or sets the U-SQL script to run"
+          "description": "Gets or sets the script to run"
         },
         "type": {
           "type": "string",
@@ -760,7 +760,8 @@
           "description": "Gets the severity level of the failure.",
           "enum": [
             "Warning",
-            "Error"
+            "Error",
+            "Info"
           ],
           "x-ms-enum": {
             "name": "SeverityTypes",
@@ -795,7 +796,8 @@
           "description": "Gets the severity level of the failure.",
           "enum": [
             "Warning",
-            "Error"
+            "Error",
+            "Info"
           ],
           "x-ms-enum": {
             "name": "SeverityTypes",
