@@ -704,7 +704,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}": {
       "delete": {
         "tags": [
           "ExpressRouteCircuits"
@@ -4193,9 +4193,9 @@
         "backendIPConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "#/definitions/NetworkInterfaceIPConfiguration"
           },
-          "description": "Gets or sets backendIPConfiguration of application gateway "
+          "description": "Gets collection of references to IPs defined in NICs"
         },
         "backendAddresses": {
           "type": "array",
@@ -4819,22 +4819,22 @@
       "properties": {
         "primarybytesIn": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Gets BytesIn of the peering."
         },
         "primarybytesOut": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Gets BytesOut of the peering."
         },
         "secondarybytesIn": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Gets BytesIn of the peering."
         },
         "secondarybytesOut": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Gets BytesOut of the peering."
         }
       },
@@ -5966,6 +5966,13 @@
     },
     "NetworkInterfaceIPConfigurationPropertiesFormat": {
       "properties": {
+        "applicationGatewayBackendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendAddressPool"
+          },
+          "description": "Gets or sets the reference of ApplicationGatewayBackendAddressPool resource"
+        },
         "loadBalancerBackendAddressPools": {
           "type": "array",
           "items": {
@@ -5992,6 +5999,18 @@
           ],
           "x-ms-enum": {
             "name": "IPAllocationMethod",
+            "modelAsString": true
+          }
+        },
+        "privateIPAddressVersion": {
+          "type": "string",
+          "description": "Gets or sets PrivateIP address version (IPv4/IPv6)",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "x-ms-enum": {
+            "name": "IPVersion",
             "modelAsString": true
           }
         },
@@ -6051,7 +6070,11 @@
         },
         "internalFqdn": {
           "type": "string",
-          "description": "Gets or sets full IDNS name in the form, DnsName.VnetId.ZoneId.TopleveSuffix. This is set when the NIC is associated to a VM"
+          "description": "Gets or sets the internal fqdn."
+        },
+        "internalDomainNameSuffix": {
+          "type": "string",
+          "description": "Gets or sets internal domain name suffix of the NIC."
         }
       },
       "description": "Dns Settings of a network interface"
@@ -6336,6 +6359,18 @@
           ],
           "x-ms-enum": {
             "name": "IPAllocationMethod",
+            "modelAsString": true
+          }
+        },
+        "publicIPAddressVersion": {
+          "type": "string",
+          "description": "Gets or sets PublicIP address version (IPv4/IPv6)",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "x-ms-enum": {
+            "name": "IPVersion",
             "modelAsString": true
           }
         },

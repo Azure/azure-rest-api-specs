@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2015-06-01",
+    "version": "2016-04-02",
     "title": "CdnManagementClient",
     "description": "Use these APIs to manage Azure CDN resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure. For more information, see <a href=\"https://msdn.microsoft.com/en-us/library/azure/dn790557.aspx\">Authenticating Azure Resource Manager requests.</a>"
   },
@@ -168,9 +168,9 @@
             "type": "string"
           },
           {
-            "name": "profileProperties",
-            "in": "body",
             "description": "Profile properties needed for creation.",
+            "in": "body",
+            "name": "profileProperties",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ProfileCreateParameters"
@@ -250,7 +250,7 @@
           }
         ],
         "responses": {
-		  "200": {
+          "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Profile"
@@ -683,7 +683,7 @@
         "responses": {
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
-			"schema": {
+            "schema": {
               "$ref": "#/definitions/Endpoint"
             }
           },
@@ -736,7 +736,7 @@
         "responses": {
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
-			"schema": {
+            "schema": {
               "$ref": "#/definitions/Endpoint"
             }
           },
@@ -1640,6 +1640,10 @@
         }
       ],
       "properties": {
+	    "sku": {
+          "description": "The SKU (pricing tier) of the CDN profile.",
+          "$ref": "#/definitions/Sku"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProfileProperties"
@@ -1648,10 +1652,6 @@
     },
     "ProfileProperties": {
       "properties": {
-        "sku": {
-          "description": "The SKU (pricing tier) of the CDN profile.",
-          "$ref": "#/definitions/Sku"
-        },
         "resourceState": {
           "description": "Resource status of the profile.",
           "readOnly": true,
@@ -1688,7 +1688,8 @@
       "type": "object",
       "description": "Profile properties required for profile creation.",
       "required": [
-        "location"
+        "location",
+        "sku"
       ],
       "properties": {
         "location": {
@@ -1702,23 +1703,12 @@
             "type": "string"
           }
         },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ProfilePropertiesCreateParameters"
-        }
+        "sku": {
+          "description": "The SKU (pricing tier) of the CDN profile.",
+          "$ref": "#/definitions/Sku"
+		}
       },
       "x-ms-azure-resource": true
-    },
-    "ProfilePropertiesCreateParameters": {
-      "required": [
-        "sku"
-      ],
-      "properties": {
-        "sku": {
-          "description": "Profile SKU",
-          "$ref": "#/definitions/Sku"
-        }
-      }
     },
     "ProfileUpdateParameters": {
       "type": "object",
@@ -2398,13 +2388,14 @@
     },
     "Sku": {
       "description": "The SKU (pricing tier) of the CDN profile.",
-      "type": "object",
       "properties": {
         "name": {
           "description": "Name of the pricing tier",
           "enum": [
-            "Standard",
-            "Premium"
+            "Standard_Verizon",
+            "Premium_Verizon",
+            "Custom_Verizon",
+            "Standard_Akamai"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2412,7 +2403,8 @@
             "modelAsString": false
           }
         }
-      }
+      },
+      "type": "object"
     },
     "ErrorResponse": {
       "type": "object",
@@ -2441,7 +2433,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2015-06-01"
+      "description": "Version of the API to be used with the client request. Current version is 2016-04-02"
     }
   }
 }
