@@ -17,17 +17,27 @@
         "text/json"
     ],
     "paths": {
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/managedApis": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/locations/{location}/managedApis": {
             "get": {
                 "tags": [
                     "ManagedApis"
                 ],
+        "summary": "Get Apis",
                 "operationId": "ManagedApis_List",
                 "description": "Gets a list of managed APIs.",
+        "consumes": [ ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
                 "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource Group Name",
+            "required": true,
+            "type": "string"
+          },
                     {
                         "name": "location",
                         "description": "The location.",
@@ -35,32 +45,48 @@
                         "required": true,
                         "type": "string"
                     },
-                    {
-                        "$ref": "#/parameters/api-version"
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ManagedApiListResult"
+              "$ref": "#/definitions/ApisCollection"
                         }
                     }
                 },
+        "deprecated": false,
                 "x-ms-pageable": { "nextLinkName": "nextLink" }
-            }
-        },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/managedApis/{apiName}": {
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/locations/{location}/managedApis/{apiName}": {
             "get": {
                 "tags": [
                     "ManagedApis"
                 ],
+        "summary": "Get Api",
                 "operationId": "ManagedApis_Get",
                 "description": "Gets a managed API.",
+        "consumes": [ ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
                 "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource Group Name",
+            "required": true,
+            "type": "string"
+          },
                     {
                         "name": "location",
                         "description": "The location.",
@@ -72,21 +98,32 @@
                         "name": "apiName",
                         "description": "The managed API name.",
                         "in": "path",
+            "description": "Api Name",
                         "required": true,
                         "type": "string"
                     },
-                    {
-                        "$ref": "#/parameters/api-version"
+          {
+            "name": "export",
+            "in": "query",
+            "description": "flag showing whether to export API definition in format specified by Accept header.",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ManagedApi"
+              "$ref": "#/definitions/ApiEntity"
                         }
                     }
-                }
+        },
+        "deprecated": false
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections": {
@@ -94,21 +131,27 @@
                 "tags": [
                     "Connections"
                 ],
+        "summary": "Get Connections",
                 "operationId": "Connections_List",
                 "description": "Gets a list of connections.",
+        "consumes": [ ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
                 "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource Group Name",
+            "required": true,
+            "type": "string"
+          },
                     {
-                        "$ref": "#/parameters/subscriptionId"
+                        "$ref": "#/parameters/subscriptionIdParameter"
                     },
-                    {
-                        "name": "resourceGroupName",
-                        "description": "The resource group name.",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "$ref": "#/parameters/api-version"
+					{
+                        "$ref": "#/parameters/apiVersionParameter"
                     },
                     {
                         "name": "$top",
@@ -130,7 +173,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ConnectionListResult"
+                            "$ref": "#/definitions/ConnectionCollection"
                         }
                     }
                 },
@@ -147,7 +190,7 @@
                 "description": "Gets a connection.",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/subscriptionId"
+                        "$ref": "#/parameters/subscriptionIdParameter"
                     },
                     {
                         "name": "resourceGroupName",
@@ -164,7 +207,7 @@
                         "type": "string"
                     },
                     {
-                        "$ref": "#/parameters/api-version"
+                        "$ref": "#/parameters/apiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -184,7 +227,7 @@
                 "description": "Creates or updates a connection.",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/subscriptionId"
+                        "$ref": "#/parameters/subscriptionIdParameter"
                     },
                     {
                         "name": "resourceGroupName",
@@ -201,7 +244,7 @@
                         "type": "string"
                     },
                     {
-                        "$ref": "#/parameters/api-version"
+                        "$ref": "#/parameters/apiVersionParameter"
                     },
                     {
                         "name": "connection",
@@ -236,7 +279,7 @@
                 "description": "Deletes a connection.",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/subscriptionId"
+                        "$ref": "#/parameters/subscriptionIdParameter"
                     },
                     {
                         "name": "resourceGroupName",
@@ -253,7 +296,7 @@
                         "type": "string"
                     },
                     {
-                        "$ref": "#/parameters/api-version"
+                        "$ref": "#/parameters/apiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -275,7 +318,7 @@
                 "description": "Lists consent links of a connection.",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/subscriptionId"
+                        "$ref": "#/parameters/subscriptionIdParameter"
                     },
                     {
                         "name": "resourceGroupName",
@@ -292,7 +335,7 @@
                         "type": "string"
                     },
                     {
-                        "$ref": "#/parameters/api-version"
+                        "$ref": "#/parameters/apiVersionParameter"
                     },
                     {
                         "name": "content",
@@ -300,7 +343,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/ListConsentLinksContent"
+                            "$ref": "#/definitions/ConsentLinkInput"
                         }
                     }
                 ],
@@ -308,7 +351,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ListConsentLinksResult"
+                            "$ref": "#/definitions/ConsentLinkPayload"
                         }
                     }
                 }
@@ -323,7 +366,7 @@
                 "description": "Confirms consent code of a connection.",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/subscriptionId"
+                        "$ref": "#/parameters/subscriptionIdParameter"
                     },
                     {
                         "name": "resourceGroupName",
@@ -340,7 +383,7 @@
                         "type": "string"
                     },
                     {
-                        "$ref": "#/parameters/api-version"
+                        "$ref": "#/parameters/apiVersionParameter"
                     },
                     {
                         "name": "content",
@@ -348,7 +391,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/ConfirmConsentCodeContent"
+                            "$ref": "#/definitions/ConfirmConsentCodeInput"
                         }
                     }
                 ],
@@ -371,7 +414,7 @@
                 "description": "Lists connection keys.",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/subscriptionId"
+                        "$ref": "#/parameters/subscriptionIdParameter"
                     },
                     {
                         "name": "resourceGroupName",
@@ -388,7 +431,7 @@
                         "type": "string"
                     },
                     {
-                        "$ref": "#/parameters/api-version"
+                        "$ref": "#/parameters/apiVersionParameter"
                     },
                     {
                         "name": "content",
@@ -396,7 +439,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/ListConnectionKeysContent"
+                            "$ref": "#/definitions/ListConnectionKeysInput"
                         }
                     }
                 ],
@@ -404,7 +447,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ListConnectionKeysResult"
+                            "$ref": "#/definitions/ConnectionSecrets"
                         }
                     }
                 }
@@ -412,254 +455,875 @@
         }
     },
     "definitions": {
-        "Resource": {
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "Gets or sets the resource id."
-                },
-                "name": {
-                    "type": "string",
-                    "description": "Gets the resource name."
-                },
-                "type": {
-                    "type": "string",
-                    "description": "Gets the resource type."
-                },
-                "location": {
-                    "type": "string",
-                    "description": "Gets or sets the resource location."
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Gets or sets the resource tags."
-                }
-            },
-            "x-ms-azure-resource": true
+    "ApisCollection": {
+      "description": "Collection of Apis",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiEntity"
+          }
         },
-        "Object": {
-            "type": "object",
-            "properties": { }
-        },
-        "ResourceReference": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "Gets or sets the resource id."
-                },
-                "name": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "Gets the resource name."
-                },
-                "type": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "Gets the resource type."
-                }
-            }
-        },
-        "ManagedApiListResult": {
-            "type": "object",
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ManagedApi"
-                    },
-                    "description": "Gets or sets the list of managed APIs."
-                },
-                "nextLink": {
-                    "type": "string",
-                    "description": "Gets or sets the URL to get the next set of results."
-                }
-            }
-        },
-        "ManagedApi": {
-            "type": "object",
-            "properties": {
-                "properties": {
-                    "$ref": "#/definitions/ManagedApiProperties",
-                    "description": "Gets or sets the managed API properties."
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ]
-        },
-        "ManagedApiProperties": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "Gets or sets the name."
-                },
-                "connectionParameters": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/definitions/Object"
-                    },
-                    "description": "Gets or sets the connection parameters."
-                },
-                "metadata": {
-                    "$ref": "#/definitions/Object",
-                    "description": "Gets or sets the metadata."
-                },
-                "runtimeUrls": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "Gets or sets the runtime URLs."
-                },
-                "generalInformation": {
-                    "$ref": "#/definitions/ApiGeneralInformation",
-                    "description": "Gets or sets the general information."
-                },
-                "capabilities": {
-                    "$ref": "#/definitions/Object",
-                    "description": "Gets or sets the capabilities."
-                }
-            }
-        },
-        "ApiGeneralInformation": {
-            "type": "object",
-            "properties": {
-                "iconUrl": {
-                    "type": "string",
-                    "description": "Gets or sets the icon URL."
-                },
-                "displayName": {
-                    "type": "string",
-                    "description": "Gets or sets the display name."
-                },
-                "description": {
-                    "type": "string",
-                    "description": "Gets or sets the description."
-                },
-                "termsOfUseUrl": {
-                    "type": "string",
-                    "description": "Gets or sets the terms of use URL."
-                }
-            }
-        },
-        "ConnectionFilter": {
-            "type": "object",
-            "properties": {
-                "location": {
-                    "type": "string",
-                    "description": "Gets or sets the location."
-                },
-                "managedApiName": {
-                    "type": "string",
-                    "description": "Gets or sets the managed API name."
-                }
-            }
-        },
-        "ConnectionListResult": {
-            "type": "object",
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Connection"
-                    },
-                    "description": "Gets or sets the list of connections."
-                },
-                "nextLink": {
-                    "type": "string",
-                    "description": "Gets or sets the URL to get the next set of results."
-                }
-            }
-        },
-        "Connection": {
-            "type": "object",
-            "properties": {
-                "properties": {
-                    "$ref": "#/definitions/ConnectionProperties",
-                    "description": "Gets or sets the connection properties."
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ]
-        },
-        "ConnectionProperties": {
-            "type": "object",
-            "properties": {
-                "displayName": {
-                    "type": "string",
-                    "description": "Gets or sets the display name."
-                },
-                "createdTime": {
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true,
-                    "description": "Gets the created time."
-                },
-                "changedTime": {
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true,
-                    "description": "Gets the changed time."
-                },
-                "parameterValues": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/definitions/Object"
-                    },
-                    "description": "Gets or sets the parameter values."
-                },
-                "customParameterValues": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/definitions/Object"
-                    },
-                    "description": "Gets or sets the custom parameter values."
-                },
-                "nonSecretParameterValues": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/definitions/Object"
-                    },
-                    "description": "Gets or sets the non-secret parameter values."
-                },
-                "statuses": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Object"
-                    },
-                    "description": "Gets or sets the statuses."
-                },
-                "api": {
-                    "$ref": "#/definitions/ResourceReference",
-                    "description": "Gets or sets the managed API reference."
-                }
-            }
+        "nextLink": {
+          "description": "Link to next page of resources",
+          "type": "string"
         }
+      }
     },
-    "parameters": {
-        "subscriptionId": {
-            "name": "subscriptionId",
-            "description": "The subscription id.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-        },
-        "api-version": {
-            "name": "api-version",
-            "description": "The API version.",
-            "in": "query",
-            "required": true,
-            "type": "string"
+    "ApiEntity": {
+      "description": "API Management",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
         }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "name": {
+              "description": "Name of the API\r\n            the URL path of this API when exposed via APIM",
+              "type": "string"
+            },
+            "generalInformation": {
+              "$ref": "#/definitions/GeneralApiInformation",
+              "description": "the URL path of this API when exposed via APIM"
+            },
+            "path": {
+              "description": "the URL path of this API when exposed via APIM",
+              "type": "string"
+            },
+            "runtimeUrls": {
+              "description": "Read only property returning the runtime endpoints where the API can be called",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "protocols": {
+              "description": "Protocols supported by the front end - http/https",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "policies": {
+              "$ref": "#/definitions/ApiPolicies",
+              "description": "Api polcies"
+            },
+            "backendService": {
+              "$ref": "#/definitions/BackendServiceDefinition",
+              "description": "Backend service definition"
+            },
+            "apiDefinitionUrl": {
+              "description": "Api definition Url - url where the swagger can be downloaded from",
+              "type": "string"
+            },
+            "metadata": {
+              "$ref": "#/definitions/Object",
+              "description": "Free form object for the data caller wants to store"
+            },
+            "capabilities": {
+              "description": "Capabilities",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "connectionParameters": {
+              "description": "Connection parameters",
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/ConnectionParameter"
+              }
+            },
+            "createdTime": {
+              "format": "date-time",
+              "description": "Timestamp of the connection creation",
+              "type": "string"
+            },
+            "changedTime": {
+              "format": "date-time",
+              "description": "Timestamp of last connection change.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GeneralApiInformation": {
+      "description": "General API information",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "iconUrl": {
+              "description": "Icon Url",
+              "type": "string"
+            },
+            "displayName": {
+              "description": "Display Name",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description",
+              "type": "string"
+            },
+            "termsOfUseUrl": {
+              "description": "a public accessible url of the Terms Of Use Url of this API",
+              "type": "string"
+            },
+            "connectionDisplayName": {
+              "description": "DefaultConnectionNameTemplate",
+              "type": "string"
+            },
+            "connectionPortalUrl": {
+              "$ref": "#/definitions/Object",
+              "description": "ConnectionPortalUrl"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ApiPolicies": {
+      "description": "Api policies",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "content": {
+              "description": "Content of xml policy",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "BackendServiceDefinition": {
+      "description": "API definitions with backend urls",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "serviceUrl": {
+              "description": "Url from which the swagger payload will be fetched",
+              "type": "string"
+            },
+            "hostingEnvironmentServiceUrls": {
+              "description": "Service Urls per Hosting environment",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HostingEnvironmentServiceDescriptions"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Object": {
+      "type": "object",
+      "properties": {
+
+      }
+    },
+    "ConnectionParameter": {
+      "description": "connection provider parameters",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of the parameter",
+          "enum": [
+            "string",
+            "securestring",
+            "secureobject",
+            "int",
+            "bool",
+            "object",
+            "array",
+            "oauthSetting",
+            "connection"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ConnectionParameterType",
+            "modelAsString": false
+          }
+        },
+        "defaultValue": {
+          "$ref": "#/definitions/Object",
+          "description": "Default parameter value"
+        },
+        "oAuthSettings": {
+          "$ref": "#/definitions/ApiOAuthSettings",
+          "description": "Settings defining OAuth flow for the back end provider"
+        },
+        "uiDefinition": {
+          "$ref": "#/definitions/Object",
+          "description": "UI definitions"
+        }
+      }
+    },
+    "HostingEnvironmentServiceDescriptions": {
+      "description": "Back end service per ASE",
+      "type": "object",
+      "properties": {
+        "hostingEnvironmentId": {
+          "description": "Hosting environment Id",
+          "type": "string"
+        },
+        "hostId": {
+          "description": "Host Id",
+          "type": "string"
+        },
+        "serviceUrl": {
+          "description": "service url to use",
+          "type": "string"
+        },
+        "useInternalRouting": {
+          "description": "When the backend url is in same ASE, for performance reason this flag can be set to true\r\n            If WebApp.DisableHostNames is also set it improves the security by making the back end accesible only \r\n            via API calls\r\n            Note: calls will fail if this option is used but back end is not on the same ASE",
+          "type": "boolean"
+        }
+      }
+    },
+    "ApiOAuthSettings": {
+      "description": "OAuth settings for the conenction provider",
+      "type": "object",
+      "properties": {
+        "identityProvider": {
+          "description": "Identity provider",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "Resource provider client id",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "Client Secret needed for OAuth",
+          "type": "string"
+        },
+        "scopes": {
+          "description": "OAuth scopes",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "redirectUrl": {
+          "description": "Url",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/Object",
+          "description": "Read only properties for this oauth setting."
+        },
+        "customParameters": {
+          "description": "OAuth parameters key is the name of parameter",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ApiOAuthSettingsParameter"
+          }
+        }
+      }
+    },
+    "ApiOAuthSettingsParameter": {
+      "description": "OAuth Settings Parameter",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Value",
+          "type": "string"
+        },
+        "options": {
+          "$ref": "#/definitions/Object",
+          "description": "Read only: Options available to this parameter"
+        },
+        "uiDefinition": {
+          "$ref": "#/definitions/Object",
+          "description": "UI definitions per culture as caller can specify the culture"
+        }
+      }
+    },
+    "ConnectionCollection": {
+      "description": "Collection of conenctions",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Connection"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources",
+          "type": "string"
+        }
+      }
+    },
+    "Connection": {
+      "description": "Api Connection",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "name": {
+              "description": "connection name",
+              "type": "string"
+            },
+            "displayName": {
+              "description": "display name",
+              "type": "string"
+            },
+            "statuses": {
+              "description": "Status of the connection",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ConnectionStatus"
+              }
+            },
+            "customParameterValues": {
+              "description": "Custom login setting values.",
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/ParameterCustomLoginSettingValues"
+              }
+            },
+            "tenantId": {
+              "description": "",
+              "type": "string"
+            },
+            "parameterValues": {
+              "description": "Tokens/Claim",
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/Object"
+              }
+            },
+            "nonSecretParameterValues": {
+              "description": "Tokens/Claim",
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/Object"
+              }
+            },
+            "metadata": {
+              "$ref": "#/definitions/Object",
+              "description": ""
+            },
+            "firstExpirationTime": {
+              "format": "date-time",
+              "description": "Time in UTC when the first expiration of OAuth tokens",
+              "type": "string"
+            },
+            "keywords": {
+              "description": "List of Keywords that tag the acl",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "createdTime": {
+              "format": "date-time",
+              "description": "Timestamp of the connection creation",
+              "type": "string"
+            },
+            "changedTime": {
+              "format": "date-time",
+              "description": "Timestamp of last connection change.",
+              "type": "string"
+            },
+            "api": {
+              "$ref": "#/definitions/ExpandedParent[ApiEntity]",
+              "description": "expanded connection provider name"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ConnectionStatus": {
+      "description": "Connection status",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "status": {
+              "description": "Status",
+              "type": "string"
+            },
+            "target": {
+              "description": "Target of the error",
+              "type": "string"
+            },
+            "error": {
+              "$ref": "#/definitions/ConnectionError",
+              "description": "Error details"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ParameterCustomLoginSettingValues": {
+      "description": "Custom logging setting values",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "customParameters": {
+              "description": "Custom parameters.",
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/CustomLoginSettingValue"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ExpandedParent[ApiEntity]": {
+      "description": "expanded parent object for expansion",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "id": {
+              "description": "Id of connection provider",
+              "type": "string"
+            },
+            "entity": {
+              "$ref": "#/definitions/ResponseMessageEnvelope[ApiEntity]",
+              "description": "Id of connection provider"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ConnectionError": {
+      "description": "Connection error",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "code": {
+              "description": "code of the status",
+              "type": "string"
+            },
+            "message": {
+              "description": "Description of the status",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CustomLoginSettingValue": {
+      "description": "Custom logging setting value",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "option": {
+              "description": "Option selected for this custom login setting value",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ResponseMessageEnvelope[ApiEntity]": {
+      "description": "Message envelope that contains the common Azure resource manager properties and the resource provider specific content",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id. Typically id is populated only for responses to GET requests. Caller is responsible for passing in this\r\n            value for GET requests only.\r\n            For example: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupId}/providers/Microsoft.Web/sites/{sitename}",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of resource",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of resource e.g Microsoft.Web/sites",
+          "type": "string"
+        },
+        "location": {
+          "description": "Geo region resource belongs to e.g. SouthCentralUS, SouthEastAsia",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tags associated with resource",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "plan": {
+          "$ref": "#/definitions/ArmPlan",
+          "description": "Azure resource manager plan"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApiEntity",
+          "description": "Resource specific properties"
+        },
+        "sku": {
+          "$ref": "#/definitions/SkuDescription",
+          "description": "Sku description of the resource"
+        }
+      }
+    },
+    "ArmPlan": {
+      "description": "The plan object in an ARM, represents a marketplace plan",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name",
+          "type": "string"
+        },
+        "publisher": {
+          "description": "The publisher",
+          "type": "string"
+        },
+        "product": {
+          "description": "The product",
+          "type": "string"
+        },
+        "promotionCode": {
+          "description": "The promotion code",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of product",
+          "type": "string"
+        }
+      }
+    },
+    "SkuDescription": {
+      "description": "Describes a sku for a scalable resource",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the resource sku",
+          "type": "string"
+        },
+        "tier": {
+          "description": "Service Tier of the resource sku",
+          "type": "string"
+        },
+        "size": {
+          "description": "Size specifier of the resource sku",
+          "type": "string"
+        },
+        "family": {
+          "description": "Family code of the resource sku",
+          "type": "string"
+        },
+        "capacity": {
+          "format": "int32",
+          "description": "Current number of instances assigned to the resource",
+          "type": "integer"
+        }
+      }
+    },
+    "ConsentLinkInput": {
+      "description": "Connection Constent Link payload",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "parameters": {
+              "description": "Array of links",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ConsentLinkInputParameter"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ConsentLinkInputParameter": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "principalType": {
+          "description": "Principal type",
+          "enum": [
+            "ActiveDirectory",
+            "Connection",
+            "MicrosoftAccount"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrincipalType",
+            "modelAsString": false
+          }
+        },
+        "tenantId": {
+          "description": "Tenant Id",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "AAD OID (user or group) if the principal type is ActiveDirectory.\r\n            MSA PUID if the principal type is MicrosoftAccount.",
+          "type": "string"
+        },
+        "parameterName": {
+          "description": "Name of the parameter in the connection provider's oauthSettings",
+          "type": "string"
+        },
+        "redirectUrl": {
+          "description": "Name of the parameter in the connection provider's oauthSettings",
+          "type": "string"
+        }
+      }
+    },
+	"ConsentLinkPayload": {
+      "description": "Collection of consent links",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConsentLink"
+          }
+        }
+      }
+    },
+    "ConsentLink": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "link": {
+          "description": "Uri for the consent link",
+          "type": "string"
+        },
+        "firstPartyLoginUri": {
+          "description": "Uri for first party login",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Display Name of the parameter in the connection provider's oauthSettings",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the link",
+          "enum": [
+            "Unauthenticated",
+            "Authenticated",
+            "Error"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LinkState",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "ListConnectionKeysInput": {
+      "description": "List Connection Keys Input payload",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "validityTimeSpan": {
+              "description": "time span for how long the keys will be valid",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ConnectionSecrets": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "parameterValues": {
+          "description": "Tokens/Claim",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Object"
+          }
+        },
+        "connectionKey": {
+          "description": "Connection Key",
+          "type": "string"
+        }
+      }
+    },
+    "ConfirmConsentCodeInput": {
+      "description": "Confirm Consent Code Input payload",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "principalType": {
+              "description": "Principal type",
+              "enum": [
+                "ActiveDirectory",
+                "Connection",
+                "MicrosoftAccount"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "PrincipalType",
+                "modelAsString": false
+              }
+            },
+            "tenantId": {
+              "description": "Tenant Id",
+              "type": "string"
+            },
+            "objectId": {
+              "description": "AAD object ID. This is userId",
+              "type": "string"
+            },
+            "code": {
+              "description": "Code that was returned during consent flow",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Resource": {
+      "required": [ "location" ],
+      "properties": {
+        "id": {
+          "description": "Resource Id",
+          "type": "string"
+        },
+        "name": {
+          "description": "Resource Name",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind of resource",
+          "type": "string"
+        },
+        "location": {
+          "description": "Resource Location",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
     }
+  },
+    "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription Id",
+      "required": true,
+      "type": "string"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "API Version",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [ "user_impersonation" ]
+    }
+  ]
 }
