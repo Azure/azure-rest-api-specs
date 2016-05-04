@@ -1,77 +1,66 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "LogicManagementClient",
-        "version": "2015-08-01-preview"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json",
-        "text/json"
-    ],
-    "produces": [
-        "application/json",
-        "text/json"
-    ],
-    "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/locations/{location}/managedApis": {
-            "get": {
-                "tags": [
-                    "ManagedApis"
-                ],
+  "swagger": "2.0",
+  "info": {
+    "title": "LogicManagementClient",
+    "version": "2015-08-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [ "https" ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/managedApis": {
+      "get": {
+        "tags": [ "ManagedApis" ],
         "summary": "Get Apis",
-                "operationId": "ManagedApis_List",
-                "description": "Gets a list of managed APIs.",
+        "operationId": "ManagedApis_List",
+        "description": "Gets a list of managed APIs.",
         "consumes": [ ],
         "produces": [
           "application/json",
           "text/json"
         ],
-                "parameters": [
+        "parameters": [
           {
-            "name": "resourceGroupName",
+            "name": "location",
+            "description": "The location.",
             "in": "path",
-            "description": "Resource Group Name",
             "required": true,
             "type": "string"
           },
-                    {
-                        "name": "location",
-                        "description": "The location.",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
               "$ref": "#/definitions/ApisCollection"
-                        }
-                    }
-                },
+            }
+          }
+        },
         "deprecated": false,
-                "x-ms-pageable": { "nextLinkName": "nextLink" }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/locations/{location}/managedApis/{apiName}": {
-            "get": {
-                "tags": [
-                    "ManagedApis"
-                ],
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/managedApis/{apiName}": {
+      "get": {
+        "tags": [ "ManagedApis" ],
         "summary": "Get Api",
-                "operationId": "ManagedApis_Get",
-                "description": "Gets a managed API.",
+        "operationId": "ManagedApis_Get",
+        "description": "Gets a managed API.",
         "consumes": [ ],
         "produces": [
           "application/json",
@@ -79,29 +68,22 @@
           "application/xml",
           "text/xml"
         ],
-                "parameters": [
+        "parameters": [
           {
-            "name": "resourceGroupName",
+            "name": "location",
+            "description": "The location.",
             "in": "path",
-            "description": "Resource Group Name",
             "required": true,
             "type": "string"
           },
-                    {
-                        "name": "location",
-                        "description": "The location.",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "apiName",
-                        "description": "The managed API name.",
-                        "in": "path",
+          {
+            "name": "apiName",
+            "description": "The managed API name.",
+            "in": "path",
             "description": "Api Name",
-                        "required": true,
-                        "type": "string"
-                    },
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "export",
             "in": "query",
@@ -113,33 +95,31 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
               "$ref": "#/definitions/ApiEntity"
-                        }
-                    }
+            }
+          }
         },
         "deprecated": false
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections": {
-            "get": {
-                "tags": [
-                    "Connections"
-                ],
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections": {
+      "get": {
+        "tags": [ "Connections" ],
         "summary": "Get Connections",
-                "operationId": "Connections_List",
-                "description": "Gets a list of connections.",
+        "operationId": "Connections_List",
+        "description": "Gets a list of connections.",
         "consumes": [ ],
         "produces": [
           "application/json",
           "text/json"
         ],
-                "parameters": [
+        "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
@@ -147,313 +127,304 @@
             "required": true,
             "type": "string"
           },
-                    {
-                        "$ref": "#/parameters/subscriptionIdParameter"
-                    },
-					{
-                        "$ref": "#/parameters/apiVersionParameter"
-                    },
-                    {
-                        "name": "$top",
-                        "description": "The number of items to be included in the result.",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "$filter",
-                        "description": "The filter to apply on the operation.",
-                        "in": "query",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ConnectionCollection"
-                        }
-                    }
-                },
-                "x-ms-pageable": { "nextLinkName": "nextLink" }
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter to apply on the operation.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectionCollection"
             }
+          }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections/{connectionName}": {
-            "get": {
-                "tags": [
-                    "Connections"
-                ],
-                "operationId": "Connections_Get",
-                "description": "Gets a connection.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionIdParameter"
-                    },
-                    {
-                        "name": "resourceGroupName",
-                        "description": "The resource group name.",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "connectionName",
-                        "description": "The connection name.",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Connection"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Connections"
-                ],
-                "operationId": "Connections_CreateOrUpdate",
-                "description": "Creates or updates a connection.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionIdParameter"
-                    },
-                    {
-                        "name": "resourceGroupName",
-                        "description": "The resource group name.",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "connectionName",
-                        "description": "The connection name.",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersionParameter"
-                    },
-                    {
-                        "name": "connection",
-                        "description": "The connection.",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Connection"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Connection"
-                        }
-                    },
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "$ref": "#/definitions/Connection"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Connections"
-                ],
-                "operationId": "Connections_Delete",
-                "description": "Deletes a connection.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionIdParameter"
-                    },
-                    {
-                        "name": "resourceGroupName",
-                        "description": "The resource group name.",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "connectionName",
-                        "description": "The connection name.",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "204": {
-                        "description": "No Content"
-                    }
-                }
-            }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections/{connectionName}/listConsentLinks": {
-            "post": {
-                "tags": [
-                    "Connections"
-                ],
-                "operationId": "Connections_ListConsentLinks",
-                "description": "Lists consent links of a connection.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionIdParameter"
-                    },
-                    {
-                        "name": "resourceGroupName",
-                        "description": "The resource group name.",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "connectionName",
-                        "description": "The connection name.",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersionParameter"
-                    },
-                    {
-                        "name": "content",
-                        "description": "The content.",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ConsentLinkInput"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ConsentLinkPayload"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections/{connectionName}/confirmConsentCode": {
-            "post": {
-                "tags": [
-                    "Connections"
-                ],
-                "operationId": "Connections_ConfirmConsentCode",
-                "description": "Confirms consent code of a connection.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionIdParameter"
-                    },
-                    {
-                        "name": "resourceGroupName",
-                        "description": "The resource group name.",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "connectionName",
-                        "description": "The connection name.",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersionParameter"
-                    },
-                    {
-                        "name": "content",
-                        "description": "The content.",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ConfirmConsentCodeInput"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Connection"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections/{connectionName}/listConnectionKeys": {
-            "post": {
-                "tags": [
-                    "Connections"
-                ],
-                "operationId": "Connections_ListConnectionKeys",
-                "description": "Lists connection keys.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionIdParameter"
-                    },
-                    {
-                        "name": "resourceGroupName",
-                        "description": "The resource group name.",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "connectionName",
-                        "description": "The connection name.",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersionParameter"
-                    },
-                    {
-                        "name": "content",
-                        "description": "The content.",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ListConnectionKeysInput"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ConnectionSecrets"
-                        }
-                    }
-                }
-            }
-        }
+        "x-ms-odata": "#/definitions/Connection"
+      }
     },
-    "definitions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections/{connectionName}": {
+      "get": {
+        "tags": [ "Connections" ],
+        "operationId": "Connections_Get",
+        "description": "Gets a connection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "description": "The connection name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Connection"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [ "Connections" ],
+        "operationId": "Connections_CreateOrUpdate",
+        "description": "Creates or updates a connection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "description": "The connection name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "connection",
+            "description": "The connection.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Connection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Connection"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Connection"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [ "Connections" ],
+        "operationId": "Connections_Delete",
+        "description": "Deletes a connection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "description": "The connection name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections/{connectionName}/listConsentLinks": {
+      "post": {
+        "tags": [ "Connections" ],
+        "operationId": "Connections_ListConsentLinks",
+        "description": "Lists consent links of a connection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "description": "The connection name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "content",
+            "description": "The content.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConsentLinkInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConsentLinkPayload"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections/{connectionName}/confirmConsentCode": {
+      "post": {
+        "tags": [ "Connections" ],
+        "operationId": "Connections_ConfirmConsentCode",
+        "description": "Confirms consent code of a connection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "description": "The connection name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "content",
+            "description": "The content.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfirmConsentCodeInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Connection"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections/{connectionName}/listConnectionKeys": {
+      "post": {
+        "tags": [ "Connections" ],
+        "operationId": "Connections_ListConnectionKeys",
+        "description": "Lists connection keys.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "description": "The connection name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "content",
+            "description": "The content.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListConnectionKeysInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSecrets"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
     "ApisCollection": {
       "description": "Collection of Apis",
       "type": "object",
@@ -1137,7 +1108,7 @@
         }
       }
     },
-	"ConsentLinkPayload": {
+    "ConsentLinkPayload": {
       "description": "Collection of consent links",
       "type": "object",
       "properties": {
@@ -1293,7 +1264,7 @@
       "x-ms-azure-resource": true
     }
   },
-    "parameters": {
+  "parameters": {
     "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
