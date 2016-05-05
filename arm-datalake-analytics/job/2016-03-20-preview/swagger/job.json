@@ -713,28 +713,28 @@
           "description": "Gets the column where the error occured.",
           "type": "integer",
           "format": "int32",
-          "readOnly": "true"
+          "readOnly": true
         },
         "end" : {
           "description": "Gets the ending index of the error.",
           "type": "integer",
           "format": "int32",
-          "readOnly": "true"
+          "readOnly": true
         },
         "lineNumber" : {
           "description": "Gets the line number the error occured on.",
           "type": "integer",
           "format": "int32",
-          "readOnly": "true"
+          "readOnly": true
         },
         "message" : {
           "description": "Gets the error message.",
           "type": "string",
-          "readOnly": "true"
+          "readOnly": true
         },
         "severity" : {
           "description": "Gets the severity of the error.",
-          "readOnly": "true",
+          "readOnly": true,
           "type": "string",
           "enum": [
             "Warning",
@@ -750,7 +750,7 @@
           "description": "Gets the starting index of the error.",
           "type": "integer",
           "format": "int32",
-          "readOnly": "true"
+          "readOnly": true
         }
       }
     },
@@ -1009,6 +1009,17 @@
             "name": "JobResult",
             "modelAsString": false
           }
+        },
+        "logFolder": {
+          "type": "string",
+          "description": "Gets or sets the log folder path to use in the following format: adl://<accountName>.azuredatalakestore.net/system/jobservice/jobs/Usql/2016/03/13/17/18/5fe51957-93bc-4de0-8ddc-c5a4753b068b/logs/."
+        },
+        "logFilePatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },        
+          "description": "Gets or sets the list of log file name patterns to find in the logFolder. '*' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt"
         },
         "stateAuditRecords": {
           "type": "array",
