@@ -17,15 +17,10 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/managedApis": {
       "get": {
-        "tags": [ "ManagedApis" ],
-        "summary": "Get Apis",
+        "tags": [ "Managed Apis" ],
+        "summary": "List managed Apis",
         "operationId": "ManagedApis_List",
         "description": "Gets a list of managed APIs.",
-        "consumes": [ ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "name": "location",
@@ -57,17 +52,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/managedApis/{apiName}": {
       "get": {
-        "tags": [ "ManagedApis" ],
-        "summary": "Get Api",
+        "tags": [ "Managed Apis" ],
+        "summary": "Get managed Api",
         "operationId": "ManagedApis_Get",
         "description": "Gets a managed API.",
-        "consumes": [ ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "name": "location",
@@ -80,7 +68,6 @@
             "name": "apiName",
             "description": "The managed API name.",
             "in": "path",
-            "description": "Api Name",
             "required": true,
             "type": "string"
           },
@@ -114,11 +101,6 @@
         "summary": "Get Connections",
         "operationId": "Connections_List",
         "description": "Gets a list of connections.",
-        "consumes": [ ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "name": "resourceGroupName",
