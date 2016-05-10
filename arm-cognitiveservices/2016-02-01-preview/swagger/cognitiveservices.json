@@ -23,7 +23,7 @@
         "tags": [
           "CognitiveServicesAccounts"
         ],
-        "description": "Accounts is a resource group wide resource type. It holds the keys for developer to access intelligent APIs. It's also the resource type for billing.",
+        "description": "Create Cognitive Services Account. Accounts is a resource group wide resource type. It holds the keys for developer to access intelligent APIs. It's also the resource type for billing.",
         "operationId": "CognitiveServicesAccounts_Create",
         "parameters": [
           {
@@ -40,7 +40,8 @@
             "type": "string",
             "description": "The name of the cognitive services account within the specified resource group. Cognitive Services account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
             "maxLength": 24,
-            "minLength": 3
+            "minLength": 3,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
           },
           {
             "name": "parameters",
@@ -60,19 +61,22 @@
         ],
         "responses": {
           "200": {
-            "description": "If resource is created successfully, the service should return 200 (OK).",
+            "description": "If resource is created successfully or already existed, the service should return 200 (OK).",
             "schema": {
               "$ref": "#/definitions/CognitiveServicesAccount"
             }
           },
           "201": {
-            "description": "If resource is created successfully, the service should return 200 (OK).",
+            "description": "If resource is created successfully, the service should return 201 (OK).",
             "schema": {
               "$ref": "#/definitions/CognitiveServicesAccount"
             }
           },
-          "400": {
-            "description": "If kind or sku.name is invalid, the service should return 400 (Bad Request)."
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -80,7 +84,7 @@
         "tags": [
           "CognitiveServicesAccounts"
         ],
-        "description": "Update tags or SKU.",
+        "description": "Updates a Cognitive Services account",
         "operationId": "CognitiveServicesAccounts_Update",
         "parameters": [
           {
@@ -97,7 +101,8 @@
             "type": "string",
             "description": "The name of the cognitive services account within the specified resource group. Cognitive Services account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
             "maxLength": 24,
-            "minLength": 3
+            "minLength": 3,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
           },
           {
             "name": "parameters",
@@ -124,6 +129,12 @@
           },
           "404": {
             "description": "If the resource group *or* resource does not exist, 404 (NotFound) should be returned."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -131,7 +142,7 @@
         "tags": [
           "CognitiveServicesAccounts"
         ],
-        "description": "Deletes a resource from the resource group. ",
+        "description": "Deletes a Cognitive Services account from the resource group. ",
         "operationId": "CognitiveServicesAccounts_Delete",
         "parameters": [
           {
@@ -148,7 +159,8 @@
             "type": "string",
             "description": "The name of the cognitive services account within the specified resource group. Cognitive Services account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
             "maxLength": 24,
-            "minLength": 3
+            "minLength": 3,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -169,6 +181,12 @@
           },
           "412": {
             "description": "412 (PreconditionFailed) and other normal REST codes are acceptable as long as they match the REST guidelines."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       },
@@ -176,7 +194,7 @@
         "tags": [
           "CognitiveServicesAccounts"
         ],
-        "description": "Returns a resource belonging to a resource group. Resource types can be nested and, if so, must follow the REST guidelines (full details in the nested resource type section). ",
+        "description": "Returns a Cognitive Services account specified by the parameters.",
         "operationId": "CognitiveServicesAccounts_GetProperties",
         "parameters": [
           {
@@ -193,7 +211,8 @@
             "type": "string",
             "description": "The name of the cognitive services account within the specified resource group. Cognitive Services account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
             "maxLength": 24,
-            "minLength": 3
+            "minLength": 3,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -214,6 +233,12 @@
           },
           "404": {
             "description": "If the resource does not exist, 404 (NotFound) should be returned. For other errors (e.g. internal errors) use the appropriate HTTP error code."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -252,6 +277,12 @@
           },
           "404": {
             "description": "If the resource group does not exist, 404 (NotFound) will be returned by the proxy *without* reaching the resource provider. "
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -286,6 +317,12 @@
           },
           "404": {
             "description": "If the subscription does not exist, 404 (NotFound) will be returned by the proxy *without* reaching the resource provider.If the subscription is not registered with the resource provider, it should return a 404 (NotFound) or an empty collection."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -299,6 +336,7 @@
           "CognitiveServicesAccounts"
         ],
         "operationId": "CognitiveServicesAccounts_ListKeys",
+        "description": "Lists the account keys for the specified Cognitive Services account.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -314,7 +352,8 @@
             "type": "string",
             "description": "The name of the cognitive services account within the specified resource group. Congitive Services account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
             "maxLength": 24,
-            "minLength": 3
+            "minLength": 3,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -335,6 +374,12 @@
                 "key2": "xxxxx"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -345,6 +390,7 @@
           "CognitiveServicesAccounts"
         ],
         "operationId": "CognitiveServicesAccounts_RegenerateKey",
+        "description": "Regenerates the specified account key for the specified Cognitive Services account.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -360,7 +406,8 @@
             "type": "string",
             "description": "The name of the cognitive services account within the specified resource group. Cognitive Services account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
             "maxLength": 24,
-            "minLength": 3
+            "minLength": 3,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
           },
           {
             "name": "parameters",
@@ -385,6 +432,12 @@
             "schema": {
               "$ref": "#/definitions/CognitiveServicesAccountKeys"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -394,7 +447,7 @@
         "tags": [
           "CognitiveServicesAccounts"
         ],
-        "description": "In many cases, it is desirable for users to resize an existing resource.  However, only a certain subset of sizes available from a given resource provider may be applicable to a given resource – e.g. an A1 machine may be updatable to other A series VMs, but may not be convertible to D series.  This API exposes the valid SKUs for an existing resource.",
+        "description": "List available SKUs for the requested Cognitive Services account",
         "operationId": "CognitiveServicesAccounts_ListSkus",
         "parameters": [
           {
@@ -411,7 +464,8 @@
             "type": "string",
             "description": "The name of the cognitive services account within the specified resource group. Cognitive Services account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
             "maxLength": 24,
-            "minLength": 3
+            "minLength": 3,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -432,6 +486,12 @@
           },
           "404": {
             "description": "If the resource does not exist, 404 (NotFound) should be returned. For other errors (e.g. internal errors) use the appropriate HTTP error code.  If no skus are valid, return 200 + an empty value array."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -473,6 +533,7 @@
           "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/CognitiveServicesAccountPropertiesCreateParameters"
         }
       },
@@ -541,6 +602,8 @@
       "description": "required empty proprties object"
     },
     "CognitiveServicesAccount": {
+      "description": "Cognitive Services Account is an Azure resource representing the provisioned account, its type, location and SKU.",
+      "type": "object",
       "properties": {
         "etag": {
           "type": "string",
@@ -563,6 +626,7 @@
           "description": "The name of the created account"
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/CognitiveServicesAccountProperties"
         },
         "sku": {
@@ -579,7 +643,8 @@
           "type": "string",
           "description": "Resource type"
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "CognitiveServicesAccountListResult": {
       "properties": {
@@ -664,12 +729,28 @@
       "properties": {
         "resourceType": {
           "type": "string",
-          "description": "Resource Type"
+          "description": "Resource Namespace and Type"
         },
         "sku": {
           "$ref": "#/definitions/Sku"
         }
       }
+    },
+    "Error": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "error message"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     }
   },
   "parameters": {
