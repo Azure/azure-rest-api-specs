@@ -23,7 +23,7 @@
                     "WorkspaceCollections"
                 ],
                 "operationId": "getWorkspaceCollection",
-                "description": "The Get Power BI Workspace Collection operation retrieves an existing Power BI Workspace Collection.",
+                "description": "The **Get Power BI Workspace Collection** operation retrieves an existing Power BI Workspace Collection.",
                 "consumes": [
                     "application/json"
                 ],
@@ -41,7 +41,7 @@
                     {
                         "name": "resourceGroupName",
                         "in": "path",
-                        "description": "The Azure resource group",
+                        "description": "Azure resource group",
                         "required": true,
                         "type": "string"
                     },
@@ -74,10 +74,10 @@
                         "description": "Authentication failed"
                     },
                     "404": {
-                        "description": "Subscription does not exist"
+                        "description": "Subscription, resource group, or workspace collection does not exist"
                     },
                     "408": {
-                        "description": "The operation could not be completed within the permitted time."
+                        "description": "Operation could not be completed within the permitted time"
                     },
                     "503": {
                         "description": "Service unavailable"
@@ -89,7 +89,7 @@
                     "WorkspaceCollections"
                 ],
                 "operationId": "createWorkspaceCollection",
-                "description": "The Create Power BI Workspace Collection operation creates a new Power BI Workspace Collection with the specified properties. A Power BI Workspace Collection contains one or more Power BI Workspaces and can be used to provision keys that provide API access to those Power BI Workspaces.",
+                "description": "The **Create Power BI Workspace Collection** operation creates a new Power BI Workspace Collection with the specified properties. A Power BI Workspace Collection contains one or more Power BI Workspaces and can be used to provision keys that provide API access to those Power BI Workspaces.",
                 "consumes": [
                     "application/json"
                 ],
@@ -107,7 +107,7 @@
                     {
                         "name": "resourceGroupName",
                         "in": "path",
-                        "description": "The Azure resource group",
+                        "description": "Azure resource group",
                         "required": true,
                         "type": "string"
                     },
@@ -149,7 +149,7 @@
                         "description": "Authentication failed"
                     },
                     "408": {
-                        "description": "The operation could not be completed within the permitted time."
+                        "description": "Operation could not be completed within the permitted time"
                     },
                     "503": {
                         "description": "Service unavailable"
@@ -161,7 +161,7 @@
                     "WorkspaceCollections"
                 ],
                 "operationId": "updateWorkspaceCollection",
-                "description": "The Update Power BI Workspace Collection operation updates an existing Power BI Workspace Collection with the specified properties.",
+                "description": "The **Update Power BI Workspace Collection** operation updates an existing Power BI Workspace Collection with the specified properties.",
                 "consumes": [
                     "application/json"
                 ],
@@ -179,7 +179,7 @@
                     {
                         "name": "resourceGroupName",
                         "in": "path",
-                        "description": "The Azure resource group",
+                        "description": "Azure resource group",
                         "required": true,
                         "type": "string"
                     },
@@ -221,13 +221,13 @@
                         "description": "Authentication failed"
                     },
                     "404": {
-                        "description": "Workspace collection not found"
+                        "description": "Subscription, resource group, or workspace collection does not exist"
                     },
                     "408": {
-                        "description": "The operation could not be completed within the permitted time."
+                        "description": "Operation could not be completed within the permitted time"
                     },
                     "409": {
-                        "description": "Conflict"
+                        "description": "Conflicting change"
                     },
                     "503": {
                         "description": "Service unavailable"
@@ -239,7 +239,7 @@
                     "WorkspaceCollections"
                 ],
                 "operationId": "deleteWorkspaceCollection",
-                "description": "The Delete Power BI Workspace Collection operation deletes a Power BI Workspace Collection.",
+                "description": "The **Delete Power BI Workspace Collection** operation deletes a Power BI Workspace Collection.",
                 "consumes": [
                     "application/json"
                 ],
@@ -257,7 +257,7 @@
                     {
                         "name": "resourceGroupName",
                         "in": "path",
-                        "description": "The Azure resource group",
+                        "description": "Azure resource group",
                         "required": true,
                         "type": "string"
                     },
@@ -290,13 +290,10 @@
                         "description": "Authentication failed"
                     },
                     "404": {
-                        "description": "Resource group does not exist"
+                        "description": "Subscription, resource group, or workspace collection does not exist"
                     },
                     "408": {
-                        "description": "The operation could not be completed within the permitted time."
-                    },
-                    "409": {
-                        "description": "Conflict"
+                        "description": "Operation could not be completed within the permitted time"
                     },
                     "503": {
                         "description": "Service unavailable"
@@ -309,8 +306,8 @@
                 "tags": [
                     "WorkspaceCollections"
                 ],
-                "operationId": "checkWorkspaceCollectionAvailability",
-                "description": "The Check Power BI Workspace Collection Name Availability operation checks that the specified Power BI Workspace Collection name is valid and not in use.",
+                "operationId": "checkNameAvailability",
+                "description": "The **Check Power BI Workspace Collection Name Availability** operation checks that the specified Power BI Workspace Collection name is valid and not in use.",
                 "consumes": [
                     "application/json"
                 ],
@@ -351,7 +348,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Workspace collection created successfully",
+                        "description": "Request completed successfully",
                         "schema": {
                             "$ref": "#/definitions/CheckNameResponse"
                         }
@@ -366,7 +363,7 @@
                         "description": "Subscription does not exist"
                     },
                     "408": {
-                        "description": "The operation could not be completed within the permitted time."
+                        "description": "Operation could not be completed within the permitted time"
                     },
                     "503": {
                         "description": "Service unavailable"
@@ -379,8 +376,8 @@
                 "tags": [
                     "WorkspaceCollections"
                 ],
-                "operationId": "getWorkspacesCollectionsByResourceGroup",
-                "description": "The Get Power BI Workspace Collections operation retrieves all existing Power BI Workspace Collections in the specified resource group.",
+                "operationId": "getWorkspacesCollectionsInResourceGroup",
+                "description": "The **Get Power BI Workspace Collections in Resource Group** operation retrieves all existing Power BI Workspace Collections in the specified resource group.",
                 "consumes": [
                     "application/json"
                 ],
@@ -398,7 +395,7 @@
                     {
                         "name": "resourceGroupName",
                         "in": "path",
-                        "description": "The Azure resource group",
+                        "description": "Azure resource group",
                         "required": true,
                         "type": "string"
                     },
@@ -423,8 +420,11 @@
                     "403": {
                         "description": "Authentication failed"
                     },
+                    "404": {
+                        "description": "Resource group does not exist"
+                    },
                     "408": {
-                        "description": "The operation could not be completed within the permitted time."
+                        "description": "Operation could not be completed within the permitted time"
                     },
                     "503": {
                         "description": "Service unavailable"
@@ -437,8 +437,8 @@
                 "tags": [
                     "WorkspaceCollections"
                 ],
-                "operationId": "getWorkspacesCollectionsBySubscription",
-                "description": "The Get Power BI Workspace Collections operation retrieves all existing Power BI Workspace Collections in the specified subscription.",
+                "operationId": "getWorkspacesCollectionsInSubscription",
+                "description": "The **Get Power BI Workspace Collections in Subscription** operation retrieves all existing Power BI Workspace Collections in the specified subscription.",
                 "consumes": [
                     "application/json"
                 ],
@@ -474,8 +474,11 @@
                     "403": {
                         "description": "Authentication failed"
                     },
+                    "404": {
+                        "description": "Subscription does not exist"
+                    },
                     "408": {
-                        "description": "The operation could not be completed within the permitted time."
+                        "description": "Operation could not be completed within the permitted time"
                     },
                     "503": {
                         "description": "Service unavailable"
@@ -489,7 +492,7 @@
                     "WorkspaceCollections"
                 ],
                 "operationId": "getWorkspaceCollectionAccessKeys",
-                "description": "The List Power BI Workspace Collection Keys operation retrieves the primary and secondary access keys for the specified Power BI Workspace Collection.",
+                "description": "The **List Power BI Workspace Collection Keys** operation retrieves the primary and secondary access keys for the specified Power BI Workspace Collection.",
                 "consumes": [
                     "application/json"
                 ],
@@ -507,7 +510,7 @@
                     {
                         "name": "resourceGroupName",
                         "in": "path",
-                        "description": "The Azure resource group",
+                        "description": "Azure resource group",
                         "required": true,
                         "type": "string"
                     },
@@ -539,8 +542,11 @@
                     "403": {
                         "description": "Authentication failed"
                     },
+                    "404": {
+                        "description": "Subscription, resource group, or workspace collection does not exist"
+                    },
                     "408": {
-                        "description": "The operation could not be completed within the permitted time."
+                        "description": "Operation could not be completed within the permitted time"
                     },
                     "503": {
                         "description": "Service unavailable"
@@ -554,7 +560,7 @@
                     "WorkspaceCollections"
                 ],
                 "operationId": "regenerateWorkspaceCollectionAccessKey",
-                "description": "The Regenerate Power BI Workspace Collection Key operation regenerates the primary or secondary access key for the specified Power BI Workspace Collection.",
+                "description": "The **Regenerate Power BI Workspace Collection Key** operation regenerates the primary or secondary access key for the specified Power BI Workspace Collection.",
                 "consumes": [
                     "application/json"
                 ],
@@ -572,7 +578,7 @@
                     {
                         "name": "resourceGroupName",
                         "in": "path",
-                        "description": "The Azure resource group",
+                        "description": "Azure resource group",
                         "required": true,
                         "type": "string"
                     },
@@ -593,7 +599,7 @@
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "Access Key to regenerate",
+                        "description": "Access key to regenerate",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/WorkspaceCollectionAccessKey"
@@ -613,8 +619,11 @@
                     "403": {
                         "description": "Authentication failed"
                     },
+                    "404": {
+                        "description": "Subscription, resource group, or workspace collection does not exist"
+                    },
                     "408": {
-                        "description": "The operation could not be completed within the permitted time."
+                        "description": "Operation could not be completed within the permitted time"
                     },
                     "503": {
                         "description": "Service unavailable"
@@ -628,7 +637,7 @@
                     "Operations"
                 ],
                 "operationId": "getAvailableOperations",
-                "description": "The Get Available Operations operation indicates which operations can be performed by the Power BI Resource Provider.",
+                "description": "The **Get Available Operations** operation indicates which operations can be performed by the Power BI Resource Provider.",
                 "consumes": [
                     "application/json"
                 ],
@@ -658,7 +667,7 @@
                         "description": "Authentication failed"
                     },
                     "408": {
-                        "description": "The operation could not be completed within the permitted time."
+                        "description": "Operation could not be completed within the permitted time"
                     },
                     "503": {
                         "description": "Service unavailable"
@@ -672,7 +681,7 @@
                     "Operations"
                 ],
                 "operationId": "getLongRunningOperationStatus",
-                "description": "The Get Power BI Workspace Collection Long Running Operation Status operation indicates the status for a Power BI Workspace Collection operation (delete, etc.).",
+                "description": "The **Get Power BI Workspace Collection Long Running Operation Status** operation indicates the status for a Power BI Workspace Collection operation (delete, etc.).",
                 "consumes": [
                     "application/json"
                 ],
@@ -726,7 +735,7 @@
                         "description": "Workspace Collection does not exist"
                     },
                     "408": {
-                        "description": "The operation could not be completed within the permitted time."
+                        "description": "Operation could not be completed within the permitted time"
                     },
                     "503": {
                         "description": "Service unavailable"
@@ -740,7 +749,7 @@
                     "Workspaces"
                 ],
                 "operationId": "getWorkspaces",
-                "description": "The Get Power BI Workspaces in Workspace Collection operation retrieves all existing Power BI Workspaces in the specified Workspace Collection.",
+                "description": "The **Get Power BI Workspaces in Workspace Collection** operation retrieves all existing Power BI Workspaces in the specified Workspace Collection.",
                 "consumes": [
                     "application/json"
                 ],
@@ -758,7 +767,7 @@
                     {
                         "name": "resourceGroupName",
                         "in": "path",
-                        "description": "The Azure resource group",
+                        "description": "Azure resource group",
                         "required": true,
                         "type": "string"
                     },
@@ -790,8 +799,11 @@
                     "403": {
                         "description": "Authentication failed"
                     },
+                    "404": {
+                        "description": "Subscription, resource group, or workspace collection does not exist"
+                    },
                     "408": {
-                        "description": "The operation could not be completed within the permitted time."
+                        "description": "Operation could not be completed within the permitted time"
                     },
                     "503": {
                         "description": "Service unavailable"
@@ -805,7 +817,7 @@
                     "WorkspaceCollections"
                 ],
                 "operationId": "migrateWorkspaceCollection",
-                "description": "The Migrate Power BI Workspace Collection operation moves an existing Power BI Workspace Collection to a different resource group and/or subscription.",
+                "description": "The **Migrate Power BI Workspace Collection** operation moves an existing Power BI Workspace Collection to a different resource group and/or subscription.",
                 "consumes": [
                     "application/json"
                 ],
@@ -823,7 +835,7 @@
                     {
                         "name": "resourceGroupName",
                         "in": "path",
-                        "description": "The Azure resource group",
+                        "description": "Azure resource group",
                         "required": true,
                         "type": "string"
                     },
@@ -837,7 +849,7 @@
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "The workspace migration request",
+                        "description": "Workspace migration request",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/MigrateWorkspaceCollectionRequest"
@@ -855,13 +867,13 @@
                         "description": "Authentication failed"
                     },
                     "404": {
-                        "description": "Workspace collection or resource group does not exist"
+                        "description": "Subscription, resource group, or workspace collection does not exist"
                     },
                     "408": {
-                        "description": "The operation could not be completed within the permitted time."
+                        "description": "Operation could not be completed within the permitted time"
                     },
                     "409": {
-                        "description": "Conflict"
+                        "description": "Conflict prevented all resources from migrating successfully"
                     },
                     "503": {
                         "description": "Service unavailable"
@@ -909,11 +921,14 @@
             "properties": {
                 "name": {
                     "description": "SKU name",
-                    "type": "string"
+                    "type": "string",
+                    "enum": ["S1"],
+                    "required": true
                 },
                 "tier": {
                     "description": "SKU tier",
-                    "type": "string"
+                    "type": "string",
+                    "enum": ["Standard"]
                 }
             }
         },
@@ -921,11 +936,11 @@
             "type": "object",
             "properties": {
                 "key1": {
-                    "description": "Access Key 1",
+                    "description": "Access key 1",
                     "type": "string"
                 },
                 "key2": {
-                    "description": "Access Key 2",
+                    "description": "Access key 2",
                     "type": "string"
                 }
             }
@@ -934,8 +949,10 @@
             "type": "object",
             "properties": {
                 "keyName": {
-                    "description": "The key name",
-                    "type": "string"
+                    "description": "Key name",
+                    "type": "string",
+                    "enum": ["key1", "key2"],
+                    "required": true
                 }
             }
         },
@@ -999,7 +1016,7 @@
             "properties": {
                 "location": {
                     "type": "string",
-                    "description": "The Azure location"
+                    "description": "Azure location"
                 },
                 "tags": {
                     "type": "array",
@@ -1031,11 +1048,11 @@
             "properties": {
                 "name": {
                     "type": "string",
-                    "description": "The workspace collection name"
+                    "description": "Workspace collection name"
                 },
                 "type": {
                     "type": "string",
-                    "description": "The resource type",
+                    "description": "Resource type",
                     "default": "Microsoft.PowerBI/workspaceCollections"
                 }
             }
@@ -1062,7 +1079,7 @@
             "properties": {
                 "targetResourceGroup": {
                     "type": "string",
-                    "description": "The name of the resource group that the Power BI Workspace Collections will be migrated to."
+                    "description": "Name of the resource group that the Power BI Workspace Collections will be migrated to."
                 },
                 "resources": {
                     "type": "array",
@@ -1077,7 +1094,7 @@
             "properties": {
                 "name": {
                     "type": "string",
-                    "description": "The operation name"
+                    "description": "Operation name"
                 },
                 "display": {
                     "type": "object",
