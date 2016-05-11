@@ -1351,7 +1351,7 @@
       "description": "Data Lake Store filesystem file status information response."
     },
     "AdlsIllegalArgumentException": {
-      "x-ms-discriminator-value": "IllegalArgumentException",
+      "x-ms-discriminator-value": "RemoteException.IllegalArgumentException",
       "allOf": [ 
         { 
           "$ref":  "#/definitions/AdlsError" 
@@ -1360,7 +1360,7 @@
       "description": "A WebHDFS exception thrown indicating that one more arguments is incorrect. Thrown when a 400 error response code is returned (bad request)."
     },
     "AdlsUnsupportedOperationException": {
-      "x-ms-discriminator-value": "UnsupportedOperationException",
+      "x-ms-discriminator-value": "RemoteException.UnsupportedOperationException",
       "allOf": [ 
         { 
           "$ref":  "#/definitions/AdlsError" 
@@ -1369,7 +1369,7 @@
       "description": "A WebHDFS exception thrown indicating that the requested operation is not supported. Thrown when a 400 error response code is returned (bad request)."
     },
     "AdlsSecurityException": {
-      "x-ms-discriminator-value": "SecurityException",
+      "x-ms-discriminator-value": "RemoteException.SecurityException",
       "allOf": [ 
         { 
           "$ref":  "#/definitions/AdlsError" 
@@ -1378,7 +1378,7 @@
       "description": "A WebHDFS exception thrown indicating that access is denied. Thrown when a 401 error response code is returned (Unauthorized)."
     },
     "AdlsIOException": {
-      "x-ms-discriminator-value": "IOException",
+      "x-ms-discriminator-value": "RemoteException.IOException",
       "allOf": [ 
         { 
           "$ref":  "#/definitions/AdlsError" 
@@ -1387,7 +1387,7 @@
       "description": "A WebHDFS exception thrown indicating there was an IO (read or write) error. Thrown when a 403 error response code is returned (forbidden)."
     },
     "AdlsFileNotFoundException": {
-      "x-ms-discriminator-value": "FileNotFoundException",
+      "x-ms-discriminator-value": "RemoteException.FileNotFoundException",
       "allOf": [ 
         { 
           "$ref":  "#/definitions/AdlsError" 
@@ -1396,7 +1396,7 @@
       "description": "A WebHDFS exception thrown indicating the file or folder could not be found. Thrown when a 404 error response code is returned (not found)."
     },
     "AdlsRuntimeException": {
-      "x-ms-discriminator-value": "RuntimeException",
+      "x-ms-discriminator-value": "RemoteException.RuntimeException",
       "allOf": [ 
         { 
           "$ref":  "#/definitions/AdlsError" 
