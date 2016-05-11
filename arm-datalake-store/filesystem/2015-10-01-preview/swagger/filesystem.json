@@ -1405,12 +1405,12 @@
       "description": "A WebHDFS exception thrown when an unexpected error occurs during an operation. Thrown when a 500 error response code is returned (Internal server error)."
     },
     "AdlsError": {
-      "discriminator": "exception",
+      "discriminator": "RemoteException.exception",
       "required": [
-        "exception"
+        "RemoteException.exception"
       ],
       "properties": {
-        "exception": {
+        "RemoteException.exception": {
           "type": "string",
           "readOnly": true,
           "description": "Gets the class name of the exception thrown, such as 'IllegalArgumentException'."
