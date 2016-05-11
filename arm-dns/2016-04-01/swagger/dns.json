@@ -426,7 +426,9 @@
             }
           }
         },
-        "x-ms-pageable": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-odata": "#/definitions/RecordSet"
       }
     },
@@ -481,7 +483,9 @@
             }
           }
         },
-        "x-ms-pageable": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-odata": "#/definitions/RecordSet"
       }
     },
@@ -490,8 +494,8 @@
         "tags": [
           "Zones"
         ],
-        "operationId": "Zones_Update",
-        "description": "Updates a DNS zone within a resource group.",
+        "operationId": "Zones_CreateOrUpdate",
+        "description": "Creates or Updates a DNS zone within a resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -512,7 +516,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ZoneUpdateParameters"
+              "$ref": "#/definitions/ZoneCreateOrUpdateParameters"
             },
             "description": "Parameters supplied to the CreateOrUpdate operation."
           },
@@ -539,6 +543,12 @@
         ],
         "responses": {
           "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Zone"
+            }
+          },
+          "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/Zone"
@@ -689,8 +699,9 @@
             }
           }
         },
-        "x-ms-pageable": true,
-        "x-ms-odata": "#/definitions/Zone"
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones": {
@@ -730,7 +741,9 @@
             }
           }
         },
-        "x-ms-pageable": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-odata": "#/definitions/Zone"
       }
     }
@@ -861,7 +874,7 @@
           "format": "int64",
           "description": "Gets or sets the expire time for this record."
         },
-        "minimumTTL": {
+        "minimumTtl": {
           "type": "integer",
           "format": "int64",
           "description": "Gets or sets the minimum TTL value for this record."
@@ -878,7 +891,7 @@
           },
           "description": "Gets or sets the metadata attached to the resource."
         },
-        "TTL": {
+        "Ttl": {
           "type": "integer",
           "format": "int64",
           "description": "Gets or sets the TTL of the records in the RecordSet."
@@ -890,53 +903,53 @@
           },
           "description": "Gets or sets the list of A records in the RecordSet."
         },
-        "AAAARecords": {
+        "AaaaRecords": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AaaaRecord"
           },
           "description": "Gets or sets the list of AAAA records in the RecordSet."
         },
-        "MXRecords": {
+        "MxRecords": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MxRecord"
           },
           "description": "Gets or sets the list of MX records in the RecordSet."
         },
-        "NSRecords": {
+        "NsRecords": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/NsRecord"
           },
           "description": "Gets or sets the list of NS records in the RecordSet."
         },
-        "PTRRecords": {
+        "PtrRecords": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PtrRecord"
           },
           "description": "Gets or sets the list of PTR records in the RecordSet."
         },
-        "SRVRecords": {
+        "SrvRecords": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SrvRecord"
           },
           "description": "Gets or sets the list of SRV records in the RecordSet."
         },
-        "TXTRecords": {
+        "TxtRecords": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TxtRecord"
           },
           "description": "Gets or sets the list of TXT records in the RecordSet."
         },
-        "CNAMERecord": {
+        "CnameRecord": {
           "$ref": "#/definitions/CnameRecord",
           "description": "Gets or sets the CNAME record in the RecordSet."
         },
-        "SOARecord": {
+        "SoaRecord": {
           "$ref": "#/definitions/SoaRecord",
           "description": "Gets or sets the SOA record in the RecordSet."
         }
@@ -1024,7 +1037,7 @@
             "type": "string"
           },
           "description": "Gets the name servers populated for this zone. This is a read-only property and any attempt to set this value will be ignored.",
-          "readonly": true
+          "readOnly": true
         }
       },
       "description": "Represents the properties of the zone."
@@ -1042,7 +1055,7 @@
       },
       "allOf": [
         {
-          "$ref": "Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Describes a DNS zone."
@@ -1193,7 +1206,7 @@
       "required": [
         "location"
       ],
-      "x-ms-external": true
+      "x-ms-external": false
     },
     "SubResource": {
       "properties": {
