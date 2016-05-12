@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "RedisManagementClient",
-    "description": ".Net client wrapper for the REST API for Azure Redis Cache Management Service",
+    "description": "REST API for Azure Redis Cache Service",
     "version": "2016-04-01"
   },
   "host": "management.azure.com",
@@ -45,18 +45,10 @@
         "description": "Create a redis cache, or replace (overwrite/recreate, with potential downtime) an existing cache",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the redis cache."
+            "$ref": "#/parameters/RedisCacheNameParameter"
           },
           {
             "name": "parameters",
@@ -97,18 +89,10 @@
         "description": "Deletes a redis cache. This operation takes a while to complete.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the redis cache."
+            "$ref": "#/parameters/RedisCacheNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -121,7 +105,7 @@
           "200": {
             "description": ""
           },
-          "202": {
+          "204": {
             "description": ""
           },
           "404": {
@@ -137,18 +121,10 @@
         "description": "Gets a redis cache (resource description).",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the redis cache."
+            "$ref": "#/parameters/RedisCacheNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -176,11 +152,7 @@
         "description": "Gets all redis caches in a resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -239,18 +211,10 @@
         "description": "Retrieve a redis cache's access keys. This operation requires write permission to the cache resource.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the redis cache."
+            "$ref": "#/parameters/RedisCacheNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -278,18 +242,10 @@
         "description": "Regenerate redis cache's access keys. This operation requires write permission to the cache resource.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the redis cache."
+            "$ref": "#/parameters/RedisCacheNameParameter"
           },
           {
             "name": "parameters",
@@ -326,18 +282,10 @@
         "description": "Reboot specified redis node(s). This operation requires write permission to the cache resource. There can be potential data loss.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the redis cache."
+            "$ref": "#/parameters/RedisCacheNameParameter"
           },
           {
             "name": "parameters",
@@ -445,7 +393,7 @@
         },
         "subnetId": {
           "type": "string",
-          "description": "The exact ARM resource ID of the (virtual network) subnet to deploy the redis cache in. Example format: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1"
+          "description": "The full resource ID of a subnet in a virtual network to deploy the redis cache in. Example format: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1"
         },
         "staticIP": {
           "type": "string",
@@ -671,6 +619,21 @@
     }
   },
   "parameters": {
+    "RedisCacheNameParameter": {
+    {
+       "name": "name",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "The name of the redis cache."
+    },
+    "ResourceGroupNameParameter": {
+       "name": "resourceGroupName",
+       "in": "path",
+       "required": true,
+       "type": "string",
+       "description": "The name of the resource group."
+    },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
