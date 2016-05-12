@@ -1415,25 +1415,15 @@
           "readOnly": true,
           "description": "Gets the class name of the exception thrown, such as 'IllegalArgumentException'."
         },
-        "RemoteException": {
-          "x-ms-client-flatten": true,
-          "properties": {
-            "exception": {
-              "type": "string",
-              "readOnly": true,
-              "description": "Gets the class name of the exception thrown, such as 'IllegalArgumentException'."
-            },
-            "javaClassName": {
-              "type": "string",
-              "readOnly": true,
-              "description": "Gets the full class package name for the exception thrown, such as 'java.lang.IllegalArgumentException'."
-            },
-            "message": {
-              "type": "string",
-              "readOnly": true,
-              "description": "Gets the message associated with the exception that was thrown, such as 'Invalid value for webhdfs parameter \"permission\":...'."
-            }
-          }
+        "javaClassName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the full class package name for the exception thrown, such as 'java.lang.IllegalArgumentException'."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the message associated with the exception that was thrown, such as 'Invalid value for webhdfs parameter \"permission\":...'."
         }
       },
       "description": "Data Lake Store filesystem exception based on the WebHDFS definition for RemoteExceptions."
