@@ -1404,6 +1404,15 @@
       ],
       "description": "A WebHDFS exception thrown when an unexpected error occurs during an operation. Thrown when a 500 error response code is returned (Internal server error)."
     },
+    "AdlsAccessControlException": {
+      "x-ms-discriminator-value": "AccessControlException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown indicating that access is denied due to insufficient permissions. Thrown when a 403 error response code is returned (forbidden)."
+    },
     "AdlsRemoteException": {
       "discriminator": "exception",
       "required": [
