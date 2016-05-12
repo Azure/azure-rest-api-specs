@@ -411,7 +411,7 @@
                     "200": {
                         "description": "Get workspaces response",
                         "schema": {
-                            "$ref": "#/definitions/AzureArray[WorkspaceCollection]"
+                            "$ref": "#/definitions/WorkspaceCollectionList"
                         }
                     },
                     "400": {
@@ -465,7 +465,7 @@
                     "200": {
                         "description": "Get workspaces response",
                         "schema": {
-                            "$ref": "#/definitions/AzureArray[WorkspaceCollection]"
+                            "$ref": "#/definitions/WorkspaceCollectionList"
                         }
                     },
                     "400": {
@@ -657,7 +657,7 @@
                     "200": {
                         "description": "Request completed successfully",
                         "schema": {
-                            "$ref": "#/definitions/AzureArray[Operation]"
+                            "$ref": "#/definitions/OperationList"
                         }
                     },
                     "400": {
@@ -790,7 +790,7 @@
                     "200": {
                         "description": "Get workspaces completed successfully",
                         "schema": {
-                            "$ref": "#/definitions/AzureArray[Workspace]"
+                            "$ref": "#/definitions/WorkspaceList"
                         }
                     },
                     "400": {
@@ -883,7 +883,7 @@
         }
     },
     "definitions": {
-        "AzureArray[WorkspaceCollection]": {
+        "WorkspaceCollectionList": {
             "type": "object",
             "properties": {
                 "value": {
@@ -894,7 +894,7 @@
                 }
             }
         },
-        "AzureArray[Workspace]": {
+        "WorkspaceList": {
             "type": "object",
             "properties": {
                 "value": {
@@ -905,7 +905,7 @@
                 }
             }
         },
-        "AzureArray[Operation]": {
+        "OperationList": {
             "type": "object",
             "properties": {
                 "value": {
@@ -922,13 +922,16 @@
                 "name": {
                     "description": "SKU name",
                     "type": "string",
-                    "enum": ["S1"],
-                    "required": true
+                    "enum": [
+                        "S1"
+                    ]
                 },
                 "tier": {
                     "description": "SKU tier",
                     "type": "string",
-                    "enum": ["Standard"]
+                    "enum": [
+                        "Standard"
+                    ]
                 }
             }
         },
@@ -951,8 +954,10 @@
                 "keyName": {
                     "description": "Key name",
                     "type": "string",
-                    "enum": ["key1", "key2"],
-                    "required": true
+                    "enum": [
+                        "key1",
+                        "key2"
+                    ]
                 }
             }
         },
