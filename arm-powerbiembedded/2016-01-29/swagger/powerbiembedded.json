@@ -1,0 +1,1127 @@
+{
+    "swagger": "2.0",
+    "host": "management.azure.com",
+    "info": {
+        "version": "2016-01-29",
+        "title": "Power BI Embedded Management Client",
+        "description": "Azure Resource Provider for Power BI Embedded"
+    },
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections/{workspaceCollectionName}": {
+            "get": {
+                "tags": [
+                    "WorkspaceCollections"
+                ],
+                "operationId": "getWorkspaceCollection",
+                "description": "The **Get Power BI Workspace Collection** operation retrieves an existing Power BI Workspace Collection.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "description": "Azure subscription id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Azure resource group",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "workspaceCollectionName",
+                        "in": "path",
+                        "description": "Power BI Embedded workspace collection name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "query",
+                        "description": "Azure API version",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Workspace collection created successfully",
+                        "schema": {
+                            "$ref": "#/definitions/WorkspaceCollection"
+                        }
+                    },
+                    "400": {
+                        "description": "Request is not well formed"
+                    },
+                    "403": {
+                        "description": "Authentication failed"
+                    },
+                    "404": {
+                        "description": "Subscription, resource group, or workspace collection does not exist"
+                    },
+                    "408": {
+                        "description": "Operation could not be completed within the permitted time"
+                    },
+                    "503": {
+                        "description": "Service unavailable"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "WorkspaceCollections"
+                ],
+                "operationId": "createWorkspaceCollection",
+                "description": "The **Create Power BI Workspace Collection** operation creates a new Power BI Workspace Collection with the specified properties. A Power BI Workspace Collection contains one or more Power BI Workspaces and can be used to provision keys that provide API access to those Power BI Workspaces.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "description": "Azure subscription id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Azure resource group",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "workspaceCollectionName",
+                        "in": "path",
+                        "description": "Power BI Embedded workspace collection name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "query",
+                        "description": "Azure API version",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Create workspace collection request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateWorkspaceCollectionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Workspace collection created successfully",
+                        "schema": {
+                            "$ref": "#/definitions/WorkspaceCollection"
+                        }
+                    },
+                    "400": {
+                        "description": "Request is not well formed"
+                    },
+                    "403": {
+                        "description": "Authentication failed"
+                    },
+                    "408": {
+                        "description": "Operation could not be completed within the permitted time"
+                    },
+                    "503": {
+                        "description": "Service unavailable"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "WorkspaceCollections"
+                ],
+                "operationId": "updateWorkspaceCollection",
+                "description": "The **Update Power BI Workspace Collection** operation updates an existing Power BI Workspace Collection with the specified properties.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "description": "Azure subscription id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Azure resource group",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "workspaceCollectionName",
+                        "in": "path",
+                        "description": "Power BI Embedded workspace collection name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "query",
+                        "description": "Azure API version",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Update workspace collection request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateWorkspaceCollectionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Workspace collection updated successfully",
+                        "schema": {
+                            "$ref": "#/definitions/WorkspaceCollection"
+                        }
+                    },
+                    "400": {
+                        "description": "Request is not well formed"
+                    },
+                    "403": {
+                        "description": "Authentication failed"
+                    },
+                    "404": {
+                        "description": "Subscription, resource group, or workspace collection does not exist"
+                    },
+                    "408": {
+                        "description": "Operation could not be completed within the permitted time"
+                    },
+                    "409": {
+                        "description": "Conflicting change"
+                    },
+                    "503": {
+                        "description": "Service unavailable"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "WorkspaceCollections"
+                ],
+                "operationId": "deleteWorkspaceCollection",
+                "description": "The **Delete Power BI Workspace Collection** operation deletes a Power BI Workspace Collection.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "description": "Azure subscription id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Azure resource group",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "workspaceCollectionName",
+                        "in": "path",
+                        "description": "Power BI Embedded workspace collection name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "query",
+                        "description": "Azure API version",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Workspace collection deleted successfully"
+                    },
+                    "204": {
+                        "description": "Workspace collection does not exist"
+                    },
+                    "400": {
+                        "description": "Request is not well formed"
+                    },
+                    "403": {
+                        "description": "Authentication failed"
+                    },
+                    "404": {
+                        "description": "Subscription, resource group, or workspace collection does not exist"
+                    },
+                    "408": {
+                        "description": "Operation could not be completed within the permitted time"
+                    },
+                    "503": {
+                        "description": "Service unavailable"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.PowerBI/locations/{location}/checkNameAvailability": {
+            "post": {
+                "tags": [
+                    "WorkspaceCollections"
+                ],
+                "operationId": "checkNameAvailability",
+                "description": "The **Check Power BI Workspace Collection Name Availability** operation checks that the specified Power BI Workspace Collection name is valid and not in use.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "description": "Azure subscription id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "description": "Azure location",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "query",
+                        "description": "Azure API version",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Check name availability request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CheckNameRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request completed successfully",
+                        "schema": {
+                            "$ref": "#/definitions/CheckNameResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Request is not well formed"
+                    },
+                    "403": {
+                        "description": "Authentication failed"
+                    },
+                    "404": {
+                        "description": "Subscription does not exist"
+                    },
+                    "408": {
+                        "description": "Operation could not be completed within the permitted time"
+                    },
+                    "503": {
+                        "description": "Service unavailable"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections": {
+            "get": {
+                "tags": [
+                    "WorkspaceCollections"
+                ],
+                "operationId": "getWorkspacesCollectionsInResourceGroup",
+                "description": "The **Get Power BI Workspace Collections in Resource Group** operation retrieves all existing Power BI Workspace Collections in the specified resource group.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "description": "Azure subscription id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Azure resource group",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "query",
+                        "description": "Azure API version",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get workspaces response",
+                        "schema": {
+                            "$ref": "#/definitions/WorkspaceCollectionList"
+                        }
+                    },
+                    "400": {
+                        "description": "Request is not well formed"
+                    },
+                    "403": {
+                        "description": "Authentication failed"
+                    },
+                    "404": {
+                        "description": "Resource group does not exist"
+                    },
+                    "408": {
+                        "description": "Operation could not be completed within the permitted time"
+                    },
+                    "503": {
+                        "description": "Service unavailable"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.PowerBI/workspaceCollections": {
+            "get": {
+                "tags": [
+                    "WorkspaceCollections"
+                ],
+                "operationId": "getWorkspacesCollectionsInSubscription",
+                "description": "The **Get Power BI Workspace Collections in Subscription** operation retrieves all existing Power BI Workspace Collections in the specified subscription.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "description": "Azure subscription id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "query",
+                        "description": "Azure API version",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get workspaces response",
+                        "schema": {
+                            "$ref": "#/definitions/WorkspaceCollectionList"
+                        }
+                    },
+                    "400": {
+                        "description": "Request is not well formed"
+                    },
+                    "403": {
+                        "description": "Authentication failed"
+                    },
+                    "404": {
+                        "description": "Subscription does not exist"
+                    },
+                    "408": {
+                        "description": "Operation could not be completed within the permitted time"
+                    },
+                    "503": {
+                        "description": "Service unavailable"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections/{workspaceCollectionName}/listKeys": {
+            "post": {
+                "tags": [
+                    "WorkspaceCollections"
+                ],
+                "operationId": "getWorkspaceCollectionAccessKeys",
+                "description": "The **List Power BI Workspace Collection Keys** operation retrieves the primary and secondary access keys for the specified Power BI Workspace Collection.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "description": "Azure subscription id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Azure resource group",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "workspaceCollectionName",
+                        "in": "path",
+                        "description": "Power BI Embedded workspace collection name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "query",
+                        "description": "Azure API version",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get access keys completed successfully",
+                        "schema": {
+                            "$ref": "#/definitions/WorkspaceCollectionAccessKeys"
+                        }
+                    },
+                    "400": {
+                        "description": "Request is not well formed"
+                    },
+                    "403": {
+                        "description": "Authentication failed"
+                    },
+                    "404": {
+                        "description": "Subscription, resource group, or workspace collection does not exist"
+                    },
+                    "408": {
+                        "description": "Operation could not be completed within the permitted time"
+                    },
+                    "503": {
+                        "description": "Service unavailable"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections/{workspaceCollectionName}/regenerateKey": {
+            "post": {
+                "tags": [
+                    "WorkspaceCollections"
+                ],
+                "operationId": "regenerateWorkspaceCollectionAccessKey",
+                "description": "The **Regenerate Power BI Workspace Collection Key** operation regenerates the primary or secondary access key for the specified Power BI Workspace Collection.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "description": "Azure subscription id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Azure resource group",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "workspaceCollectionName",
+                        "in": "path",
+                        "description": "Power BI Embedded workspace collection name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "query",
+                        "description": "Azure API version",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Access key to regenerate",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/WorkspaceCollectionAccessKey"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get access keys completed successfully",
+                        "schema": {
+                            "$ref": "#/definitions/WorkspaceCollectionAccessKeys"
+                        }
+                    },
+                    "400": {
+                        "description": "Request is not well formed"
+                    },
+                    "403": {
+                        "description": "Authentication failed"
+                    },
+                    "404": {
+                        "description": "Subscription, resource group, or workspace collection does not exist"
+                    },
+                    "408": {
+                        "description": "Operation could not be completed within the permitted time"
+                    },
+                    "503": {
+                        "description": "Service unavailable"
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.PowerBI/operations": {
+            "get": {
+                "tags": [
+                    "Operations"
+                ],
+                "operationId": "getAvailableOperations",
+                "description": "The **Get Available Operations** operation indicates which operations can be performed by the Power BI Resource Provider.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "api-version",
+                        "in": "query",
+                        "description": "Azure API version",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request completed successfully",
+                        "schema": {
+                            "$ref": "#/definitions/OperationList"
+                        }
+                    },
+                    "400": {
+                        "description": "Request is not well formed"
+                    },
+                    "403": {
+                        "description": "Authentication failed"
+                    },
+                    "408": {
+                        "description": "Operation could not be completed within the permitted time"
+                    },
+                    "503": {
+                        "description": "Service unavailable"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.PowerBI/locations/{location}/operationresults/{operationId}": {
+            "get": {
+                "tags": [
+                    "Operations"
+                ],
+                "operationId": "getLongRunningOperationStatus",
+                "description": "The **Get Power BI Workspace Collection Long Running Operation Status** operation indicates the status for a Power BI Workspace Collection operation (delete, etc.).",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "description": "Azure subscription id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "description": "Azure location",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "operationId",
+                        "in": "path",
+                        "description": "Unique id for the long running operation",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "query",
+                        "description": "Azure API version",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Power BI Workspace Collection operation is still ongoing."
+                    },
+                    "204": {
+                        "description": "Power BI Workspace Collection operation has finished."
+                    },
+                    "400": {
+                        "description": "Request is not well formed"
+                    },
+                    "403": {
+                        "description": "Authentication failed"
+                    },
+                    "404": {
+                        "description": "Workspace Collection does not exist"
+                    },
+                    "408": {
+                        "description": "Operation could not be completed within the permitted time"
+                    },
+                    "503": {
+                        "description": "Service unavailable"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections/{workspaceCollectionName}/workspaces": {
+            "get": {
+                "tags": [
+                    "Workspaces"
+                ],
+                "operationId": "getWorkspaces",
+                "description": "The **Get Power BI Workspaces in Workspace Collection** operation retrieves all existing Power BI Workspaces in the specified Workspace Collection.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "description": "Azure subscription id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Azure resource group",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "workspaceCollectionName",
+                        "in": "path",
+                        "description": "Power BI Embedded workspace collection name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "query",
+                        "description": "Azure API version",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get workspaces completed successfully",
+                        "schema": {
+                            "$ref": "#/definitions/WorkspaceList"
+                        }
+                    },
+                    "400": {
+                        "description": "Request is not well formed"
+                    },
+                    "403": {
+                        "description": "Authentication failed"
+                    },
+                    "404": {
+                        "description": "Subscription, resource group, or workspace collection does not exist"
+                    },
+                    "408": {
+                        "description": "Operation could not be completed within the permitted time"
+                    },
+                    "503": {
+                        "description": "Service unavailable"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
+            "post": {
+                "tags": [
+                    "WorkspaceCollections"
+                ],
+                "operationId": "migrateWorkspaceCollection",
+                "description": "The **Migrate Power BI Workspace Collection** operation moves an existing Power BI Workspace Collection to a different resource group and/or subscription.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "description": "Azure subscription id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Azure resource group",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "query",
+                        "description": "Azure API version",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Workspace migration request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MigrateWorkspaceCollectionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Migration completed successfully"
+                    },
+                    "400": {
+                        "description": "Request is not well formed"
+                    },
+                    "403": {
+                        "description": "Authentication failed"
+                    },
+                    "404": {
+                        "description": "Subscription, resource group, or workspace collection does not exist"
+                    },
+                    "408": {
+                        "description": "Operation could not be completed within the permitted time"
+                    },
+                    "409": {
+                        "description": "Conflict prevented all resources from migrating successfully"
+                    },
+                    "503": {
+                        "description": "Service unavailable"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "WorkspaceCollectionList": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/WorkspaceCollection"
+                    }
+                }
+            }
+        },
+        "WorkspaceList": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Workspace"
+                    }
+                }
+            }
+        },
+        "OperationList": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Operation"
+                    }
+                }
+            }
+        },
+        "AzureSku": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "SKU name",
+                    "type": "string",
+                    "enum": [
+                        "S1"
+                    ]
+                },
+                "tier": {
+                    "description": "SKU tier",
+                    "type": "string",
+                    "enum": [
+                        "Standard"
+                    ]
+                }
+            }
+        },
+        "WorkspaceCollectionAccessKeys": {
+            "type": "object",
+            "properties": {
+                "key1": {
+                    "description": "Access key 1",
+                    "type": "string"
+                },
+                "key2": {
+                    "description": "Access key 2",
+                    "type": "string"
+                }
+            }
+        },
+        "WorkspaceCollectionAccessKey": {
+            "type": "object",
+            "properties": {
+                "keyName": {
+                    "description": "Key name",
+                    "type": "string",
+                    "enum": [
+                        "key1",
+                        "key2"
+                    ]
+                }
+            }
+        },
+        "Workspace": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "Workspace id",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Workspace name",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Resource type",
+                    "type": "string"
+                },
+                "properties": {
+                    "description": "Property bag",
+                    "type": "object"
+                }
+            }
+        },
+        "WorkspaceCollection": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "Resource id",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Workspace collection name",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Resource type",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "Azure location",
+                    "type": "string"
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                },
+                "sku": {
+                    "$ref": "#/definitions/AzureSku"
+                },
+                "properties": {
+                    "description": "Properties",
+                    "type": "object"
+                }
+            }
+        },
+        "CreateWorkspaceCollectionRequest": {
+            "type": "object",
+            "properties": {
+                "location": {
+                    "type": "string",
+                    "description": "Azure location"
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                },
+                "sku": {
+                    "$ref": "#/definitions/AzureSku"
+                }
+            }
+        },
+        "UpdateWorkspaceCollectionRequest": {
+            "type": "object",
+            "properties": {
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                },
+                "sku": {
+                    "$ref": "#/definitions/AzureSku"
+                }
+            }
+        },
+        "CheckNameRequest": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Workspace collection name"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Resource type",
+                    "default": "Microsoft.PowerBI/workspaceCollections"
+                }
+            }
+        },
+        "CheckNameResponse": {
+            "type": "object",
+            "properties": {
+                "nameAvailable": {
+                    "type": "boolean",
+                    "description": "Specifies a Boolean value that indicates whether the specified Power BI Workspace Collection name is available to use."
+                },
+                "reason": {
+                    "type": "string",
+                    "description": "Specifies the reason that a Power BI Workspace Collection name cannot be used. Property is not set if the specified name is available."
+                },
+                "message": {
+                    "type": "string",
+                    "description": "Indicates why the specified name is unavailable."
+                }
+            }
+        },
+        "MigrateWorkspaceCollectionRequest": {
+            "type": "object",
+            "properties": {
+                "targetResourceGroup": {
+                    "type": "string",
+                    "description": "Name of the resource group that the Power BI Workspace Collections will be migrated to."
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "Operation": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Operation name"
+                },
+                "display": {
+                    "type": "object",
+                    "properties": {
+                        "provider": {
+                            "type": "string"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "operation": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "origin": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
