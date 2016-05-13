@@ -40,6 +40,14 @@
             "description": "The name of the zone without a terminating dot."
           },
           {
+            "name": "relativeRecordSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the RecordSet, relative to the name of the zone.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
             "name": "recordType",
             "in": "path",
             "required": true,
@@ -62,33 +70,25 @@
             }
           },
           {
-            "name": "relativeRecordSetName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the RecordSet, relative to the name of the zone.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RecordSetUpdateParameters"
+              "$ref": "#/definitions/RecordSet"
             },
             "description": "Parameters supplied to the Update operation."
           },
           {
             "name": "IfMatch",
             "in": "header",
-            "required": true,
+            "required": false,
             "type": "string",
             "description": "The etag of Zone."
           },
           {
             "name": "IfNoneMatch",
             "in": "header",
-            "required": true,
+            "required": false,
             "type": "string",
             "description": "Defines the If-None-Match condition. Set to '*' to force Create-If-Not-Exist. Other values will be ignored."
           },
@@ -101,7 +101,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Recordse has been updated successfully",
             "schema": {
               "$ref": "#/definitions/RecordSet"
             }
@@ -130,6 +130,14 @@
             "description": "The name of the zone without a terminating dot."
           },
           {
+            "name": "relativeRecordSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the RecordSet, relative to the name of the zone.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
             "name": "recordType",
             "in": "path",
             "required": true,
@@ -152,33 +160,25 @@
             }
           },
           {
-            "name": "relativeRecordSetName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the RecordSet, relative to the name of the zone.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RecordSetCreateOrUpdateParameters"
+              "$ref": "#/definitions/RecordSet"
             },
             "description": "Parameters supplied to the CreateOrUpdate operation."
           },
           {
             "name": "IfMatch",
             "in": "header",
-            "required": true,
+            "required": false,
             "type": "string",
             "description": "The etag of RecordSet."
           },
           {
             "name": "IfNoneMatch",
             "in": "header",
-            "required": true,
+            "required": false,
             "type": "string",
             "description": "Defines the If-None-Match condition. Set to '*' to force Create-If-Not-Exist. Other values will be ignored."
           },
@@ -191,13 +191,13 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "Record set has been created",
             "schema": {
               "$ref": "#/definitions/RecordSet"
             }
           },
           "200": {
-            "description": "",
+            "description": "Record set has been updated",
             "schema": {
               "$ref": "#/definitions/RecordSet"
             }
@@ -226,6 +226,14 @@
             "description": "The name of the zone without a terminating dot."
           },
           {
+            "name": "relativeRecordSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the RecordSet, relative to the name of the zone.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
             "name": "recordType",
             "in": "path",
             "required": true,
@@ -248,24 +256,16 @@
             }
           },
           {
-            "name": "relativeRecordSetName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the RecordSet, relative to the name of the zone.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
             "name": "IfMatch",
             "in": "header",
-            "required": true,
+            "required": false,
             "type": "string",
             "description": "Defines the If-Match condition. The delete operation will be performed only if the ETag of the zone on the server matches this value."
           },
           {
             "name": "IfNoneMatch",
             "in": "header",
-            "required": true,
+            "required": false,
             "type": "string",
             "description": "Defines the If-None-Match condition. The delete operation will be performed only if the ETag of the zone on the server does not match this value."
           },
@@ -307,6 +307,14 @@
             "description": "The name of the zone without a terminating dot."
           },
           {
+            "name": "relativeRecordSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the RecordSet, relative to the name of the zone.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
             "name": "recordType",
             "in": "path",
             "required": true,
@@ -327,14 +335,6 @@
               "name": "RecordType",
               "modelAsString": false
             }
-          },
-          {
-            "name": "relativeRecordSetName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the RecordSet, relative to the name of the zone.",
-            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -405,13 +405,6 @@
             "description": "Query parameters. If null is passed returns the default number of zones."
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -428,8 +421,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/RecordSet"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnszones/{zoneName}/recordsets": {
@@ -462,13 +454,6 @@
             "description": "Query parameters. If null is passed returns the default number of zones."
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -485,8 +470,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/RecordSet"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnszones/{zoneName}": {
@@ -516,21 +500,21 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ZoneCreateOrUpdateParameters"
+              "$ref": "#/definitions/Zone"
             },
             "description": "Parameters supplied to the CreateOrUpdate operation."
           },
           {
             "name": "IfMatch",
             "in": "header",
-            "required": true,
+            "required": false,
             "type": "string",
             "description": "The etag of Zone."
           },
           {
             "name": "IfNoneMatch",
             "in": "header",
-            "required": true,
+            "required": false,
             "type": "string",
             "description": "Defines the If-None-Match condition. Set to '*' to force Create-If-Not-Exist. Other values will be ignored."
           },
@@ -580,14 +564,14 @@
           {
             "name": "IfMatch",
             "in": "header",
-            "required": true,
+            "required": false,
             "type": "string",
             "description": "Defines the If-Match condition. The delete operation will be performed only if the ETag of the zone on the server matches this value."
           },
           {
             "name": "IfNoneMatch",
             "in": "header",
-            "required": true,
+            "required": false,
             "type": "string",
             "description": "Defines the If-None-Match condition. The delete operation will be performed only if the ETag of the zone on the server does not match this value."
           },
@@ -678,13 +662,6 @@
             "description": "Query parameters. If null is passed returns the default number of zones."
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -720,13 +697,6 @@
             "description": "Query parameters. If null is passed returns the default number of zones."
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -743,8 +713,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/Zone"
+        }
       }
     }
   },
@@ -874,9 +843,10 @@
           "format": "int64",
           "description": "Gets or sets the expire time for this record."
         },
-        "minimumTtl": {
+        "minimumTTL": {
           "type": "integer",
           "format": "int64",
+          "x-ms-client-name": "minimumTtl",
           "description": "Gets or sets the minimum TTL value for this record."
         }
       },
@@ -891,7 +861,7 @@
           },
           "description": "Gets or sets the metadata attached to the resource."
         },
-        "Ttl": {
+        "TTL": {
           "type": "integer",
           "format": "int64",
           "description": "Gets or sets the TTL of the records in the RecordSet."
@@ -903,54 +873,62 @@
           },
           "description": "Gets or sets the list of A records in the RecordSet."
         },
-        "AaaaRecords": {
+        "AAAARecords": {
           "type": "array",
+          "x-ms-client-name": "AaaaRecords",
           "items": {
             "$ref": "#/definitions/AaaaRecord"
           },
           "description": "Gets or sets the list of AAAA records in the RecordSet."
         },
-        "MxRecords": {
+        "MXRecords": {
           "type": "array",
+          "x-ms-client-name": "MxRecords",
           "items": {
             "$ref": "#/definitions/MxRecord"
           },
           "description": "Gets or sets the list of MX records in the RecordSet."
         },
-        "NsRecords": {
+        "NSRecords": {
           "type": "array",
+          "x-ms-client-name": "NsRecords",
           "items": {
             "$ref": "#/definitions/NsRecord"
           },
           "description": "Gets or sets the list of NS records in the RecordSet."
         },
-        "PtrRecords": {
+        "PTRRecords": {
           "type": "array",
+          "x-ms-client-name": "PtrRecords",
           "items": {
             "$ref": "#/definitions/PtrRecord"
           },
           "description": "Gets or sets the list of PTR records in the RecordSet."
         },
-        "SrvRecords": {
+        "SRVRecords": {
           "type": "array",
+          "x-ms-client-name": "SrvRecords",
           "items": {
             "$ref": "#/definitions/SrvRecord"
           },
           "description": "Gets or sets the list of SRV records in the RecordSet."
         },
-        "TxtRecords": {
+        "TXTRecords": {
           "type": "array",
+          "x-ms-client-name": "TxtRecords",
           "items": {
             "$ref": "#/definitions/TxtRecord"
           },
           "description": "Gets or sets the list of TXT records in the RecordSet."
         },
-        "CnameRecord": {
+        "CNAMERecord": {
           "$ref": "#/definitions/CnameRecord",
+          "x-ms-client-name": "CnameRecord",
           "description": "Gets or sets the CNAME record in the RecordSet."
         },
-        "SoaRecord": {
+        "SOARecord": {
           "$ref": "#/definitions/SoaRecord",
+          "x-ms-client-name": "SoaRecord",
           "description": "Gets or sets the SOA record in the RecordSet."
         }
       },
@@ -980,6 +958,7 @@
         },
         "properties": {
           "$ref": "#/definitions/RecordSetProperties",
+          "x-ms-client-flatten": true,
           "description": "Gets or sets the properties of the RecordSet."
         }
       },
@@ -993,15 +972,6 @@
         }
       },
       "description": "Parameters supplied to update a RecordSet."
-    },
-    "RecordSetCreateOrUpdateParameters": {
-      "properties": {
-        "RecordSet": {
-          "$ref": "#/definitions/RecordSet",
-          "description": "Gets or sets information about the RecordSet being created or updated."
-        }
-      },
-      "description": "Parameters supplied to create or update a RecordSet."
     },
     "RecordSetListResult": {
       "properties": {
@@ -1049,6 +1019,7 @@
           "description": "Gets or sets the ETag of the zone that is being updated, as received from a Get operation."
         },
         "properties": {
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/ZoneProperties",
           "description": "Gets or sets the properties of the zone."
         }
@@ -1059,24 +1030,6 @@
         }
       ],
       "description": "Describes a DNS zone."
-    },
-    "ZoneUpdateParameters": {
-      "properties": {
-        "Zone": {
-          "$ref": "#/definitions/Zone",
-          "description": "Gets or sets information about the zone being updated."
-        }
-      },
-      "description": "Parameters supplied to update a zone."
-    },
-    "ZoneCreateOrUpdateParameters": {
-      "properties": {
-        "Zone": {
-          "$ref": "#/definitions/Zone",
-          "description": "Gets or sets information about the zone being created or updated."
-        }
-      },
-      "description": "Parameters supplied to create a zone."
     },
     "ZoneDeleteResult": {
       "properties": {
@@ -1091,10 +1044,10 @@
             "Succeeded",
             "Failed"
           ],
-            "x-ms-enum": {
-              "name": "OperationStatus",
-              "modelAsString": false
-            }
+          "x-ms-enum": {
+            "name": "OperationStatus",
+            "modelAsString": false
+          }
         },
         "statusCode": {
           "type": "string",
@@ -1147,10 +1100,10 @@
             "GatewayTimeout",
             "HttpVersionNotSupported"
           ],
-            "x-ms-enum": {
-              "name": "HtpStatusCode",
-              "modelAsString": false
-            }
+          "x-ms-enum": {
+            "name": "HtpStatusCode",
+            "modelAsString": false
+          }
         },
         "requestId": {
           "type": "string"
@@ -1175,6 +1128,7 @@
       "description": "The response to a Zone List or ListAll operation."
     },
     "Resource": {
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "readOnly": true,
