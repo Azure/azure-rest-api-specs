@@ -856,11 +856,19 @@
         },
         "reason": {
           "type": "string",
-          "description": "Specifies the reason that a Power BI Workspace Collection name cannot be used. Property is not set if the specified name is available."
+          "description": "Reason why the workspace collection name cannot be used.",
+          "enum": [
+            "Unavailable",
+            "Invalid"
+          ],
+          "x-ms-enum": {
+            "name": "CheckNameReason",
+            "modelAsString": true
+          }
         },
         "message": {
           "type": "string",
-          "description": "Indicates why the specified name is unavailable."
+          "description": "Message indicating an unavailable name due to a conflict or a description of the naming rules that are violated."
         }
       }
     },
