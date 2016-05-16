@@ -22,7 +22,7 @@
                 "tags": [
                     "WorkspaceCollections"
                 ],
-                "operationId": "getWorkspaceCollection",
+                "operationId": "WorkspaceCollections_getByName",
                 "description": "The **Get Power BI Workspace Collection** operation retrieves an existing Power BI Workspace Collection.",
                 "consumes": [
                     "application/json"
@@ -67,20 +67,11 @@
                             "$ref": "#/definitions/WorkspaceCollection"
                         }
                     },
-                    "400": {
-                        "description": "Request is not well formed"
-                    },
-                    "403": {
-                        "description": "Authentication failed"
-                    },
-                    "404": {
-                        "description": "Subscription, resource group, or workspace collection does not exist"
-                    },
-                    "408": {
-                        "description": "Operation could not be completed within the permitted time"
-                    },
-                    "503": {
-                        "description": "Service unavailable"
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             },
@@ -88,7 +79,7 @@
                 "tags": [
                     "WorkspaceCollections"
                 ],
-                "operationId": "createWorkspaceCollection",
+                "operationId": "WorkspaceCollection_create",
                 "description": "The **Create Power BI Workspace Collection** operation creates a new Power BI Workspace Collection with the specified properties. A Power BI Workspace Collection contains one or more Power BI Workspaces and can be used to provision keys that provide API access to those Power BI Workspaces.",
                 "consumes": [
                     "application/json"
@@ -142,17 +133,11 @@
                             "$ref": "#/definitions/WorkspaceCollection"
                         }
                     },
-                    "400": {
-                        "description": "Request is not well formed"
-                    },
-                    "403": {
-                        "description": "Authentication failed"
-                    },
-                    "408": {
-                        "description": "Operation could not be completed within the permitted time"
-                    },
-                    "503": {
-                        "description": "Service unavailable"
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             },
@@ -160,7 +145,7 @@
                 "tags": [
                     "WorkspaceCollections"
                 ],
-                "operationId": "updateWorkspaceCollection",
+                "operationId": "WorkspaceCollection_update",
                 "description": "The **Update Power BI Workspace Collection** operation updates an existing Power BI Workspace Collection with the specified properties.",
                 "consumes": [
                     "application/json"
@@ -214,23 +199,11 @@
                             "$ref": "#/definitions/WorkspaceCollection"
                         }
                     },
-                    "400": {
-                        "description": "Request is not well formed"
-                    },
-                    "403": {
-                        "description": "Authentication failed"
-                    },
-                    "404": {
-                        "description": "Subscription, resource group, or workspace collection does not exist"
-                    },
-                    "408": {
-                        "description": "Operation could not be completed within the permitted time"
-                    },
-                    "409": {
-                        "description": "Conflicting change"
-                    },
-                    "503": {
-                        "description": "Service unavailable"
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             },
@@ -238,7 +211,7 @@
                 "tags": [
                     "WorkspaceCollections"
                 ],
-                "operationId": "deleteWorkspaceCollection",
+                "operationId": "WorkspaceCollection_delete",
                 "description": "The **Delete Power BI Workspace Collection** operation deletes a Power BI Workspace Collection.",
                 "consumes": [
                     "application/json"
@@ -280,23 +253,11 @@
                     "202": {
                         "description": "Workspace collection deleted successfully"
                     },
-                    "204": {
-                        "description": "Workspace collection does not exist"
-                    },
-                    "400": {
-                        "description": "Request is not well formed"
-                    },
-                    "403": {
-                        "description": "Authentication failed"
-                    },
-                    "404": {
-                        "description": "Subscription, resource group, or workspace collection does not exist"
-                    },
-                    "408": {
-                        "description": "Operation could not be completed within the permitted time"
-                    },
-                    "503": {
-                        "description": "Service unavailable"
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             }
@@ -306,7 +267,7 @@
                 "tags": [
                     "WorkspaceCollections"
                 ],
-                "operationId": "checkNameAvailability",
+                "operationId": "WorkspaceCollections_checkNameAvailability",
                 "description": "The **Check Power BI Workspace Collection Name Availability** operation checks that the specified Power BI Workspace Collection name is valid and not in use.",
                 "consumes": [
                     "application/json"
@@ -353,20 +314,11 @@
                             "$ref": "#/definitions/CheckNameResponse"
                         }
                     },
-                    "400": {
-                        "description": "Request is not well formed"
-                    },
-                    "403": {
-                        "description": "Authentication failed"
-                    },
-                    "404": {
-                        "description": "Subscription does not exist"
-                    },
-                    "408": {
-                        "description": "Operation could not be completed within the permitted time"
-                    },
-                    "503": {
-                        "description": "Service unavailable"
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             }
@@ -376,7 +328,7 @@
                 "tags": [
                     "WorkspaceCollections"
                 ],
-                "operationId": "getWorkspacesCollectionsInResourceGroup",
+                "operationId": "WorkspaceCollections_listByResourceGroup",
                 "description": "The **Get Power BI Workspace Collections in Resource Group** operation retrieves all existing Power BI Workspace Collections in the specified resource group.",
                 "consumes": [
                     "application/json"
@@ -414,20 +366,11 @@
                             "$ref": "#/definitions/WorkspaceCollectionList"
                         }
                     },
-                    "400": {
-                        "description": "Request is not well formed"
-                    },
-                    "403": {
-                        "description": "Authentication failed"
-                    },
-                    "404": {
-                        "description": "Resource group does not exist"
-                    },
-                    "408": {
-                        "description": "Operation could not be completed within the permitted time"
-                    },
-                    "503": {
-                        "description": "Service unavailable"
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             }
@@ -437,7 +380,7 @@
                 "tags": [
                     "WorkspaceCollections"
                 ],
-                "operationId": "getWorkspacesCollectionsInSubscription",
+                "operationId": "WorkspaceCollections_listBySubscription",
                 "description": "The **Get Power BI Workspace Collections in Subscription** operation retrieves all existing Power BI Workspace Collections in the specified subscription.",
                 "consumes": [
                     "application/json"
@@ -468,20 +411,11 @@
                             "$ref": "#/definitions/WorkspaceCollectionList"
                         }
                     },
-                    "400": {
-                        "description": "Request is not well formed"
-                    },
-                    "403": {
-                        "description": "Authentication failed"
-                    },
-                    "404": {
-                        "description": "Subscription does not exist"
-                    },
-                    "408": {
-                        "description": "Operation could not be completed within the permitted time"
-                    },
-                    "503": {
-                        "description": "Service unavailable"
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             }
@@ -491,7 +425,7 @@
                 "tags": [
                     "WorkspaceCollections"
                 ],
-                "operationId": "getWorkspaceCollectionAccessKeys",
+                "operationId": "WorkspaceCollection_getAccessKeys",
                 "description": "The **List Power BI Workspace Collection Keys** operation retrieves the primary and secondary access keys for the specified Power BI Workspace Collection.",
                 "consumes": [
                     "application/json"
@@ -536,20 +470,11 @@
                             "$ref": "#/definitions/WorkspaceCollectionAccessKeys"
                         }
                     },
-                    "400": {
-                        "description": "Request is not well formed"
-                    },
-                    "403": {
-                        "description": "Authentication failed"
-                    },
-                    "404": {
-                        "description": "Subscription, resource group, or workspace collection does not exist"
-                    },
-                    "408": {
-                        "description": "Operation could not be completed within the permitted time"
-                    },
-                    "503": {
-                        "description": "Service unavailable"
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             }
@@ -559,7 +484,7 @@
                 "tags": [
                     "WorkspaceCollections"
                 ],
-                "operationId": "regenerateWorkspaceCollectionAccessKey",
+                "operationId": "WorkspaceCollection_regenerateKey",
                 "description": "The **Regenerate Power BI Workspace Collection Key** operation regenerates the primary or secondary access key for the specified Power BI Workspace Collection.",
                 "consumes": [
                     "application/json"
@@ -613,20 +538,11 @@
                             "$ref": "#/definitions/WorkspaceCollectionAccessKeys"
                         }
                     },
-                    "400": {
-                        "description": "Request is not well formed"
-                    },
-                    "403": {
-                        "description": "Authentication failed"
-                    },
-                    "404": {
-                        "description": "Subscription, resource group, or workspace collection does not exist"
-                    },
-                    "408": {
-                        "description": "Operation could not be completed within the permitted time"
-                    },
-                    "503": {
-                        "description": "Service unavailable"
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             }
@@ -660,17 +576,11 @@
                             "$ref": "#/definitions/OperationList"
                         }
                     },
-                    "400": {
-                        "description": "Request is not well formed"
-                    },
-                    "403": {
-                        "description": "Authentication failed"
-                    },
-                    "408": {
-                        "description": "Operation could not be completed within the permitted time"
-                    },
-                    "503": {
-                        "description": "Service unavailable"
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             }
@@ -725,20 +635,11 @@
                     "204": {
                         "description": "Power BI Workspace Collection operation has finished."
                     },
-                    "400": {
-                        "description": "Request is not well formed"
-                    },
-                    "403": {
-                        "description": "Authentication failed"
-                    },
-                    "404": {
-                        "description": "Workspace Collection does not exist"
-                    },
-                    "408": {
-                        "description": "Operation could not be completed within the permitted time"
-                    },
-                    "503": {
-                        "description": "Service unavailable"
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             }
@@ -748,7 +649,7 @@
                 "tags": [
                     "Workspaces"
                 ],
-                "operationId": "getWorkspaces",
+                "operationId": "Workspaces_List",
                 "description": "The **Get Power BI Workspaces in Workspace Collection** operation retrieves all existing Power BI Workspaces in the specified Workspace Collection.",
                 "consumes": [
                     "application/json"
@@ -793,20 +694,11 @@
                             "$ref": "#/definitions/WorkspaceList"
                         }
                     },
-                    "400": {
-                        "description": "Request is not well formed"
-                    },
-                    "403": {
-                        "description": "Authentication failed"
-                    },
-                    "404": {
-                        "description": "Subscription, resource group, or workspace collection does not exist"
-                    },
-                    "408": {
-                        "description": "Operation could not be completed within the permitted time"
-                    },
-                    "503": {
-                        "description": "Service unavailable"
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             }
@@ -860,29 +752,51 @@
                     "200": {
                         "description": "Migration completed successfully"
                     },
-                    "400": {
-                        "description": "Request is not well formed"
-                    },
-                    "403": {
-                        "description": "Authentication failed"
-                    },
-                    "404": {
-                        "description": "Subscription, resource group, or workspace collection does not exist"
-                    },
-                    "408": {
-                        "description": "Operation could not be completed within the permitted time"
-                    },
-                    "409": {
-                        "description": "Conflict prevented all resources from migrating successfully"
-                    },
-                    "503": {
-                        "description": "Service unavailable"
+                    "default": {
+                        "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             }
         }
     },
     "definitions": {
+        "Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                },
+                "details": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ErrorDetail" 
+                  }
+                }
+            }
+        },
+        "ErrorDetail": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                }
+            }
+        },
         "WorkspaceCollectionList": {
             "type": "object",
             "properties": {
@@ -1005,7 +919,7 @@
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
-                    },
+                    }
                 },
                 "sku": {
                     "$ref": "#/definitions/AzureSku"
@@ -1027,7 +941,7 @@
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
-                    },
+                    }
                 },
                 "sku": {
                     "$ref": "#/definitions/AzureSku"
@@ -1041,7 +955,7 @@
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
-                    },
+                    }
                 },
                 "sku": {
                     "$ref": "#/definitions/AzureSku"
