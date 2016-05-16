@@ -592,65 +592,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.PowerBI/locations/{location}/operationresults/{operationId}": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "operationId": "getLongRunningOperationStatus",
-        "description": "Indicates the status for a Power BI Workspace Collection operation (delete, etc.).",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Azure subscription id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "description": "Azure location",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "Unique id for the long running operation",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "Azure API version",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Power BI Workspace Collection operation is still ongoing."
-          },
-          "204": {
-            "description": "Power BI Workspace Collection operation has finished."
-          },
-          "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections/{workspaceCollectionName}/workspaces": {
       "get": {
         "x-ms-pageable": {
