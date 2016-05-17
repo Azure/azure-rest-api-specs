@@ -892,27 +892,35 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Operation name"
+          "description": "The name of the operation being performed on this particular object. It should match the action name that appears in RBAC / the event service."
         },
         "display": {
-          "type": "object",
-          "properties": {
-            "provider": {
-              "type": "string"
-            },
-            "resource": {
-              "type": "string"
-            },
-            "operation": {
-              "type": "string"
-            },
-            "description": {
-              "type": "string"
-            },
-            "origin": {
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/Display"
+        }
+      }
+    },
+    "Display": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with “Microsoft” for 1st party services."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The localized friendly form of the resource type related to this action/operation – it should match the public documentation for the resource provider. It should use Title Casing – for examples, please refer to the “name” section."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The localized friendly name for the operation, as it should be shown to the user. It should be concise (to fit in drop downs) but clear (i.e. self-documenting). It should use Title Casing and include the entity/resource to which it applies."
+        },
+        "description": {
+          "type": "string",
+          "description": "The localized friendly description for the operation, as it should be shown to the user. It should be thorough, yet concise – it will be used in tool tips and detailed views."
+        },
+        "origin": {
+          "type": "string",
+          "description": "The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is 'user,system'"
         }
       }
     }
