@@ -691,9 +691,12 @@
     },
     "AzureSku": {
       "type": "object",
+      "required": [
+        "name",
+        "tier"
+      ],
       "properties": {
         "name": {
-          "required": true,
           "description": "SKU name",
           "type": "string",
           "enum": [
@@ -705,7 +708,6 @@
           }
         },
         "tier": {
-          "required": true,
           "description": "SKU tier",
           "type": "string",
           "enum": [
