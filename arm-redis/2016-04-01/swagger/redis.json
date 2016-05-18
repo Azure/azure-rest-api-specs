@@ -45,10 +45,18 @@
         "description": "Create a redis cache, or replace (overwrite/recreate, with potential downtime) an existing cache",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
-            "$ref": "#/parameters/RedisCacheNameParameter"
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
           },
           {
             "name": "parameters",
@@ -89,10 +97,18 @@
         "description": "Deletes a redis cache. This operation takes a while to complete.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
-            "$ref": "#/parameters/RedisCacheNameParameter"
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -118,10 +134,18 @@
         "description": "Gets a redis cache (resource description).",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
-            "$ref": "#/parameters/RedisCacheNameParameter"
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -149,7 +173,11 @@
         "description": "Gets all redis caches in a resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -208,10 +236,18 @@
         "description": "Retrieve a redis cache's access keys. This operation requires write permission to the cache resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
-            "$ref": "#/parameters/RedisCacheNameParameter"
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -239,10 +275,18 @@
         "description": "Regenerate redis cache's access keys. This operation requires write permission to the cache resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
-            "$ref": "#/parameters/RedisCacheNameParameter"
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
           },
           {
             "name": "parameters",
@@ -279,10 +323,18 @@
         "description": "Reboot specified redis node(s). This operation requires write permission to the cache resource. There can be potential data loss.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
           {
-            "$ref": "#/parameters/RedisCacheNameParameter"
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
           },
           {
             "name": "parameters",
@@ -613,20 +665,6 @@
     }
   },
   "parameters": {
-    "RedisCacheNameParameter": {
-       "name": "name",
-       "in": "path",
-       "required": true,
-       "type": "string",
-       "description": "The name of the redis cache."
-    },
-    "ResourceGroupNameParameter": {
-       "name": "resourceGroupName",
-       "in": "path",
-       "required": true,
-       "type": "string",
-       "description": "The name of the resource group."
-    },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
