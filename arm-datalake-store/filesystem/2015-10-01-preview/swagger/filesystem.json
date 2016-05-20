@@ -865,47 +865,6 @@
       }
     },
     "/webhdfs/v1/{aclFilePath}": {
-      "put": {
-        "tags": [
-          "FileSystem"
-        ],
-        "operationId": "FileSystem_RemoveAcl",
-        "description": "Removes the existing Access Control List (ACL) of the specified file or directory.",
-        "parameters": [
-          {
-            "name": "aclFilePath",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Data Lake Store path (starting with '/') of the file or directory with the ACL being removed."
-          },
-          {
-            "name": "op",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The constant value for the operation.",
-            "enum": [
-              "REMOVEACL"
-            ]
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          },
-          "default": {
-            "description": "An unexpected error from the server.",
-            "schema":
-            {
-              "$ref": "#/definitions/AdlsError"
-            }
-          }
-        }
-      },
       "get": {
         "tags": [
           "FileSystem"
