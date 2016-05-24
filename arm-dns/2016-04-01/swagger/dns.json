@@ -79,17 +79,19 @@
             "description": "Parameters supplied to the Update operation."
           },
           {
-            "name": "IfMatch",
+            "name": "If-Match",
             "in": "header",
             "required": false,
             "type": "string",
+            "x-ms-client-name": "IfMatch",
             "description": "The etag of Zone."
           },
           {
-            "name": "IfNoneMatch",
+            "name": "If-None-Match",
             "in": "header",
             "required": false,
             "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
             "description": "Defines the If-None-Match condition. Set to '*' to force Create-If-Not-Exist. Other values will be ignored."
           },
           {
@@ -104,6 +106,12 @@
             "description": "Recordse has been updated successfully",
             "schema": {
               "$ref": "#/definitions/RecordSet"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -169,17 +177,19 @@
             "description": "Parameters supplied to the CreateOrUpdate operation."
           },
           {
-            "name": "IfMatch",
+            "name": "If-Match",
             "in": "header",
             "required": false,
             "type": "string",
-            "description": "The etag of RecordSet."
+            "x-ms-client-name": "IfMatch",
+            "description": "The etag of Recordset."
           },
           {
-            "name": "IfNoneMatch",
+            "name": "If-None-Match",
             "in": "header",
             "required": false,
             "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
             "description": "Defines the If-None-Match condition. Set to '*' to force Create-If-Not-Exist. Other values will be ignored."
           },
           {
@@ -200,6 +210,12 @@
             "description": "Record set has been updated",
             "schema": {
               "$ref": "#/definitions/RecordSet"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -256,17 +272,19 @@
             }
           },
           {
-            "name": "IfMatch",
+            "name": "If-Match",
             "in": "header",
             "required": false,
             "type": "string",
+            "x-ms-client-name": "IfMatch",
             "description": "Defines the If-Match condition. The delete operation will be performed only if the ETag of the zone on the server matches this value."
           },
           {
-            "name": "IfNoneMatch",
+            "name": "If-None-Match",
             "in": "header",
             "required": false,
             "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
             "description": "Defines the If-None-Match condition. The delete operation will be performed only if the ETag of the zone on the server does not match this value."
           },
           {
@@ -282,6 +300,12 @@
           },
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       },
@@ -348,6 +372,12 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/RecordSet"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -417,6 +447,12 @@
             "schema": {
               "$ref": "#/definitions/RecordSetListResult"
             }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -466,6 +502,12 @@
             "schema": {
               "$ref": "#/definitions/RecordSetListResult"
             }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -505,17 +547,19 @@
             "description": "Parameters supplied to the CreateOrUpdate operation."
           },
           {
-            "name": "IfMatch",
+            "name": "If-Match",
             "in": "header",
             "required": false,
             "type": "string",
+            "x-ms-client-name": "IfMatch",
             "description": "The etag of Zone."
           },
           {
-            "name": "IfNoneMatch",
+            "name": "If-None-Match",
             "in": "header",
             "required": false,
             "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
             "description": "Defines the If-None-Match condition. Set to '*' to force Create-If-Not-Exist. Other values will be ignored."
           },
           {
@@ -536,6 +580,12 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/Zone"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -562,17 +612,19 @@
             "description": "The name of the zone without a terminating dot."
           },
           {
-            "name": "IfMatch",
+            "name": "If-Match",
             "in": "header",
             "required": false,
             "type": "string",
+            "x-ms-client-name": "IfMatch",
             "description": "Defines the If-Match condition. The delete operation will be performed only if the ETag of the zone on the server matches this value."
           },
           {
-            "name": "IfNoneMatch",
+            "name": "If-None-Match",
             "in": "header",
             "required": false,
             "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
             "description": "Defines the If-None-Match condition. The delete operation will be performed only if the ETag of the zone on the server does not match this value."
           },
           {
@@ -584,10 +636,7 @@
         ],
         "responses": {
           "204": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ZoneDeleteResult"
-            }
+            "description": "Zone does not exist"
           },
           "202": {
             "description": ""
@@ -596,6 +645,12 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/ZoneDeleteResult"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -634,6 +689,12 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/Zone"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -674,6 +735,12 @@
             "schema": {
               "$ref": "#/definitions/ZoneListResult"
             }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -708,6 +775,12 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/ZoneListResult"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1167,6 +1240,24 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudError": {
+      "type": "object",
+      "properties": { "error": { "$ref": "#/definitions/CloudErrorBody" } },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "properties": {
+        "code": { "type": "string" },
+        "message": { "type": "string" },
+        "target": { "type": "string" },
+        "details": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/CloudErrorBody" }
         }
       },
       "x-ms-external": true
