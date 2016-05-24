@@ -107,6 +107,13 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -150,6 +157,13 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       },
@@ -186,6 +200,13 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/FileOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
             }
           }
         }
@@ -234,6 +255,13 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -290,6 +318,13 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -351,6 +386,13 @@
             "schema": {
               "$ref": "#/definitions/FileStatusesResult"
             }
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -390,6 +432,13 @@
             "schema": {
               "$ref": "#/definitions/ContentSummaryResult"
             }
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -428,6 +477,13 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/FileStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
             }
           }
         }
@@ -498,6 +554,13 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       },
@@ -572,6 +635,13 @@
         "responses": {
           "201": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       },
@@ -633,6 +703,13 @@
             "schema": {
               "type": "file"
             }
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -676,6 +753,13 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -719,6 +803,13 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -762,45 +853,18 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
     },
     "/webhdfs/v1/{aclFilePath}": {
-      "put": {
-        "tags": [
-          "FileSystem"
-        ],
-        "operationId": "FileSystem_RemoveAcl",
-        "description": "Removes the existing Access Control List (ACL) of the specified file or directory.",
-        "parameters": [
-          {
-            "name": "aclFilePath",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Data Lake Store path (starting with '/') of the file or directory with the ACL being removed."
-          },
-          {
-            "name": "op",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The constant value for the operation.",
-            "enum": [
-              "REMOVEACL"
-            ]
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      },
       "get": {
         "tags": [
           "FileSystem"
@@ -834,6 +898,13 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/AclStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
             }
           }
         }
@@ -881,6 +952,13 @@
             "schema": {
               "$ref": "#/definitions/FileOperationResult"
             }
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -926,6 +1004,13 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/FileOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
             }
           }
         }
@@ -977,6 +1062,13 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -1020,6 +1112,13 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -1209,6 +1308,103 @@
         }
       },
       "description": "Data Lake Store filesystem file status information response."
+    },
+    "AdlsIllegalArgumentException": {
+      "x-ms-discriminator-value": "IllegalArgumentException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown indicating that one more arguments is incorrect. Thrown when a 400 error response code is returned (bad request)."
+    },
+    "AdlsUnsupportedOperationException": {
+      "x-ms-discriminator-value": "UnsupportedOperationException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown indicating that the requested operation is not supported. Thrown when a 400 error response code is returned (bad request)."
+    },
+    "AdlsSecurityException": {
+      "x-ms-discriminator-value": "SecurityException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown indicating that access is denied. Thrown when a 401 error response code is returned (Unauthorized)."
+    },
+    "AdlsIOException": {
+      "x-ms-discriminator-value": "IOException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown indicating there was an IO (read or write) error. Thrown when a 403 error response code is returned (forbidden)."
+    },
+    "AdlsFileNotFoundException": {
+      "x-ms-discriminator-value": "FileNotFoundException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown indicating the file or folder could not be found. Thrown when a 404 error response code is returned (not found)."
+    },
+    "AdlsRuntimeException": {
+      "x-ms-discriminator-value": "RuntimeException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown when an unexpected error occurs during an operation. Thrown when a 500 error response code is returned (Internal server error)."
+    },
+    "AdlsAccessControlException": {
+      "x-ms-discriminator-value": "AccessControlException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown indicating that access is denied due to insufficient permissions. Thrown when a 403 error response code is returned (forbidden)."
+    },
+    "AdlsRemoteException": {
+      "discriminator": "exception",
+      "required": [
+        "exception"
+      ],
+      "properties": {
+        "exception": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the class name of the exception thrown, such as 'IllegalArgumentException'."
+        },
+        "javaClassName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the full class package name for the exception thrown, such as 'java.lang.IllegalArgumentException'."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the message associated with the exception that was thrown, such as 'Invalid value for webhdfs parameter \"permission\":...'."
+        }
+      },
+      "description": "Data Lake Store filesystem exception based on the WebHDFS definition for RemoteExceptions."
+    },
+    "AdlsError": {
+      "properties": {
+        "RemoteException": {
+          "$ref": "#/definitions/AdlsRemoteException",
+          "readOnly": true,
+          "description": "Gets the object representing the actual WebHDFS exception being returned."
+        }
+      },
+      "description": "Data Lake Store filesystem error containing a specific WebHDFS exception."
     }
   },
   "parameters": {
