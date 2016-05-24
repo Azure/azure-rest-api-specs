@@ -361,6 +361,98 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/import": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_import",
+        "x-ms-long-running-operation": true,
+        "description": "Import data into redis cache.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportRDBParameters"
+            },
+            "description": "Parameters for redis import operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/export": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_export",
+        "x-ms-long-running-operation": true,
+        "description": "Import data into redis cache.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportRDBParameters"
+            },
+            "description": "Parameters for redis export operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -449,7 +541,7 @@
       "required": [
         "sku"
       ],
-      "description": "Parameters supplied to CreateOrUpdate redis operation."
+      "description": "Properties supplied to CreateOrUpdate redis operation."
     },
     "Resource": {
       "properties": {
@@ -649,7 +741,7 @@
           ],
           "x-ms-enum": {
             "name": "RebootType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "shardId": {
@@ -662,6 +754,46 @@
         "rebootType"
       ],
       "description": "Specifies which redis node(s) to reboot."
+    },
+    "ExportRDBParameters": {
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "File format."
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Prifix to use for exported files."
+        },
+        "container": {
+          "type": "string",
+          "description": "Container name to export to."
+        }
+      },
+      "required": [
+        "container",
+        "prefix"
+      ],
+      "description": "Parameters for redis export operation."
+    },
+    "ImportRDBParameters": {
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "File format."
+        },
+        "files": {
+          "type": "array",
+          "description": "files to import",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "files"
+      ],
+      "description": "Parameters for redis import operation."
     }
   },
   "parameters": {
