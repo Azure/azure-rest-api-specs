@@ -330,64 +330,6 @@
         }
       }
     },
-    "/{nextLink}": {
-      "get": {
-        "tags": [
-          "Account"
-        ],
-        "operationId": "Account_StorageContainersListNext",
-        "description": "Gets the next page of Azure Storage containers, if any, within the specified Azure Storage account. The response includes a link to the next page of results, if any.",
-        "parameters": [
-          {
-            "name": "nextLink",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The URL to the next Azure Storage Container page.",
-            "x-ms-skip-url-encoding": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ListBlobContainersResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post": {
-        "tags": [
-          "Account"
-        ],
-        "operationId": "Account_SasTokensListNext",
-        "description": "Gets the next page of the SAS token objects within the specified Azure Storage account and container, if any.",
-        "parameters": [
-          {
-            "name": "nextLink",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The URL to the next Azure Storage Container SAS token page.",
-            "x-ms-skip-url-encoding": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ListSasTokensResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/{storageAccountName}/Containers/{containerName}/listSasTokens": {
       "post": {
         "tags": [
