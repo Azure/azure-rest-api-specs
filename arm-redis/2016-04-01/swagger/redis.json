@@ -473,7 +473,7 @@
         },
         "family": {
           "type": "string",
-          "description": "Which family to use. Valid values: (C, P)",
+          "description": "Which family to use. Valid values: for Basic/Standard Sku (C), for Premium Sku (P)",
           "enum": [
             "C",
             "P"
@@ -535,13 +535,13 @@
         },
         "staticIP": {
           "type": "string",
-          "description": "Required when deploying a redis cache inside an existing Azure Virtual Network."
+          "description": "Required when deploying a redis cache inside an existing Azure Virtual Network. (Note - the first 4 addresses (0..3) in an Azure virtual network subnet address space are not usable)"
         }
       },
       "required": [
         "sku"
       ],
-      "description": "Properties supplied to CreateOrUpdate redis operation."
+      "description": "Properties supplied to the CreateOrUpdate redis operation."
     },
     "Resource": {
       "properties": {
@@ -660,7 +660,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/RedisResource"
         }
       ],
       "description": "A redis item in CreateOrUpdate Operation response."
@@ -763,7 +763,7 @@
         },
         "prefix": {
           "type": "string",
-          "description": "Prifix to use for exported files."
+          "description": "Prefix to use for exported files."
         },
         "container": {
           "type": "string",
