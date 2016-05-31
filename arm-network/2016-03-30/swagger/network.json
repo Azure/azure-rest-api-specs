@@ -894,7 +894,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routesTable/{devicePath}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}": {
       "post": {
         "tags": [
           "ExpressRouteCircuitRoutesTable"
@@ -6016,6 +6016,10 @@
         },
         "subnet": {
           "$ref": "#/definitions/Subnet"
+        },
+        "primary": {
+          "type": "boolean",
+          "description": "Gets whether this is a primary customer address on the NIC"
         },
         "publicIPAddress": {
           "$ref": "#/definitions/PublicIPAddress"
