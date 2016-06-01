@@ -1,0 +1,460 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Azure Sql Database API spec",
+        "description": "The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases.",
+        "version": "2014-04-01"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/Default": {
+            "put": {
+                "tags": [
+                    "DataMasking"
+                ],
+                "operationId": "DataMasking_CreateOrUpdatePolicy",
+                "description": "Creates or updates an Azure SQL Database data masking policy",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    },
+                    {
+                        "name": "databaseName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Azure SQL Database for which the data masking rule applies."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DataMaskingPolicy"
+                        },
+                        "description": "The required parameters for createing or updating a firewall rule."
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/DataMaskingPolicy"
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/DataMaskingPolicy"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "DataMasking"
+                ],
+                "operationId": "DataMasking_GetPolicy",
+                "description": "Returns an Azure SQL Database data masking policy.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    },
+                    {
+                        "name": "databaseName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Azure SQL Database for which the data masking policy applies."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/DataMaskingPolicy"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/Default/rules/{dataMaskingRule}": {
+            "put": {
+                "tags": [
+                    "DataMasking"
+                ],
+                "operationId": "DataMasking_CreateOrUpdateRule",
+                "description": "Creates or updates an Azure SQL Server Firewall rule.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    },
+                    {
+                        "name": "databaseName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Azure SQL Database for which the data masking rule applies."
+                    },
+                    {
+                        "name": "dataMaskingRule",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Azure SQL Database data masking rule."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DataMaskingRule"
+                        },
+                        "description": "The required parameters for createing or updating a data masking rule."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/DataMaskingRule"
+                        }
+                    },
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/DataMaskingRule"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "DataMasking"
+                ],
+                "operationId": "DataMasking_DeleteRule",
+                "description": "Deletes an Azure SQL database data masking rule.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    },
+                    {
+                        "name": "databaseName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Azure SQL Database for which the data masking rule applies."
+                    },
+                    {
+                        "name": "dataMaskingRule",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Azure SQL Database  data masking rule."
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    },
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/Default/Rules": {
+            "get": {
+                "tags": [
+                    "DataMasking"
+                ],
+                "operationId": "DataMasking_ListRules",
+                "description": "Returns a list of Azure SQL database data masking rules.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    },
+                    {
+                        "name": "databaseName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Azure SQL Database for which the data masking rules applies."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/DataMaskingRuleListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
+            }
+        }
+    },
+    "definitions": {
+        "DataMaskingPolicyProperties": {
+            "properties": {
+                "dataMaskingState": {
+                    "type": "string",
+                    "description": "Gets or sets the state of the data masking policy."
+                },
+                "exemptPrincipals": {
+                    "type": "string",
+                    "description": "Gets or sets the list of the exempt principals"
+                }
+            },
+            "required": [
+                "dataMaskingState",
+                "exemptPrincipals"
+            ],
+            "description": "Represents the properties of an Azure SQL Database data masking policy."
+        },
+        "DataMaskingPolicy": {
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/DataMaskingPolicyProperties",
+                    "description": "Represents the properties of the resource."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/SubResource"
+                }
+            ],
+            "description": "Represents an Azure SQL Database data masking policy."
+        },
+        "DataMaskingRuleProperties": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Gets or sets the rule Id."
+                },
+                "ruleState": {
+                    "type": "string",
+                    "description": "Gets or sets the rule state."
+                },
+                "schemaName": {
+                    "type": "string",
+                    "description": "Gets or sets the schema name on which the data masking rule is applied."
+                },
+                "tableName": {
+                    "type": "string",
+                    "description": "Gets or sets the table name on which the data masking rule is applied."
+                },
+                "columnName": {
+                    "type": "string",
+                    "description": "Gets or sets the column name on which the data masking rule is applied."
+                },
+                "maskingFunction": {
+                    "type": "string",
+                    "description": "Gets or sets the masking function that is used for the data masking rule."
+                },
+                "numberFrom": {
+                    "type": "string",
+                    "description": "Gets or sets the numberFrom property of the masking rule."
+                },
+                "numberTo": {
+                    "type": "string",
+                    "description": "Gets or sets the numberTo property of the data masking rule."
+                },
+                "prefixSize": {
+                    "type": "string",
+                    "description": "Gets or sets the prefixSize property that is used for the data masking rule."
+                },
+                "suffixSize": {
+                    "type": "string",
+                    "description": "Gets or sets the suffixSize property that is used for the data masking rule."
+                },
+                "replacementString": {
+                    "type": "string",
+                    "description": "Gets or sets the replacementString property that is used for the data masking rule."
+                }
+            },
+            "required": [
+                "id",
+                "ruleState",
+                "maskingFunction"
+            ],
+            "description": "Represents the properties of an Azure SQL Database data masking rule."
+        },
+        "DataMaskingRule": {
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/DataMaskingRuleProperties",
+                    "description": "Represents the properties of the resource."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/SubResource"
+                }
+            ],
+            "description": "Represents an Azure SQL Database data masking rule."
+        },
+        "DataMaskingRuleListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DataMaskingRule"
+                    },
+                    "description": "Gets or sets the list of Azure Sql Database data masking rules"
+                }
+            },
+            "description": "Represents the response to a List data masking rules request."
+        },
+        "Resource": {
+            "description": "Resource properties",
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name"
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id"
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource type"
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Resource location"
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                }
+            },
+            "required": [
+                "location"
+            ],
+            "x-ms-azure-resource": true
+        },
+        "SubResource": {
+            "description": "Subresource properties",
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name"
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id"
+                }
+            },
+            "x-ms-azure-resource": true
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client Api Version."
+        },
+        "ResourceGroupParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Resource Group to which the resource belongs.",
+            "x-ms-parameter-location": "method"
+        },
+        "ServerNameParameter": {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Server",
+            "x-ms-parameter-location": "method"
+        },
+        "ServerNameParameterGeneric": {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Server",
+            "x-ms-parameter-location": "method"
+        }
+    }
+}

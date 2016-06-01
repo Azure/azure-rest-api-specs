@@ -1,0 +1,440 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Azure Sql Database API spec",
+        "description": "The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases.",
+        "version": "2014-04-01"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}": {
+            "delete": {
+                "tags": [
+                    "DatabaseReplicationLinks"
+                ],
+                "operationId": "Databases_DeleteReplicationLink",
+                "description": "Deletes the Azure SQL Database Replication Link with the given id.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    },
+                    {
+                        "name": "databaseName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Azure SQL Database that has the replication link to be dropped."
+                    },
+                    {
+                        "name": "linkId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The id of the replication link to be deleted."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "204": {
+                        "description": ""
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "DatabaseReplicationLinks"
+                ],
+                "operationId": "Databases_GetReplicationLink",
+                "description": "Returns information about an Azure SQL Database Replication Link.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    },
+                    {
+                        "name": "databaseName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Azure SQL Database to get the link for."
+                    },
+                    {
+                        "name": "linkId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The replication link id to be retrieved."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ReplicationLink"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}/failover": {
+            "post": {
+                "tags": [
+                    "DatabaseReplicationLinks"
+                ],
+                "operationId": "Databases_FailoverReplicationLink",
+                "description": "Begins failover of the Azure SQL Database Replication Link with the given id.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    },
+                    {
+                        "name": "databaseName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Azure SQL Database that has the replication link to be failed over."
+                    },
+                    {
+                        "name": "linkId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The id of the replication link to be failed over."
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    },
+                    "202": {
+                        "description": ""
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}/forceFailoverAllowDataLoss": {
+            "post": {
+                "tags": [
+                    "DatabaseReplicationLinks"
+                ],
+                "operationId": "Databases_FailoverReplicationLinkAllowDataLoss",
+                "description": "Begins a forced failover of the Azure SQL Database Replication Link with the given id which may result in data loss.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    },
+                    {
+                        "name": "databaseName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Azure SQL Database that has the replication link to be failed over."
+                    },
+                    {
+                        "name": "linkId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The id of the replication link to be failed over."
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    },
+                    "202": {
+                        "description": ""
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks": {
+            "get": {
+                "tags": [
+                    "DatabaseReplicationLinks"
+                ],
+                "operationId": "Databases_ListReplicationLinks",
+                "description": "Returns information about Azure SQL Database Replication Links.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    },
+                    {
+                        "name": "databaseName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Azure SQL Database to retrieve links for."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ReplicationLinkListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ReplicationLinkProperties": {
+            "properties": {
+                "partnerServer": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the name of the Azure SQL Server hosting the partner Azure SQL Database."
+                },
+                "partnerDatabase": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the name of the partner Azure SQL Database."
+                },
+                "partnerLocation": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the Azure Region of the partner Azure SQL Database."
+                },
+                "role": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the role of the Azure SQL Database in the replication link.",
+                    "enum": [
+                        "Primary",
+                        "Secondary",
+                        "NonReadableSecondary",
+                        "Source",
+                        "Copy"
+                    ],
+                    "x-ms-enum": {
+                        "name": "ReplicationRole",
+                        "modelAsString": true
+                    }
+                },
+                "partnerRole": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the role of the partner Azure SQL Database in the replication link.",
+                    "enum": [
+                        "Primary",
+                        "Secondary",
+                        "NonReadableSecondary",
+                        "Source",
+                        "Copy"
+                    ],
+                    "x-ms-enum": {
+                        "name": "ReplicationRole",
+                        "modelAsString": true
+                    }
+                },
+                "startTime": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Gets the start time for the replication link."
+                },
+                "percentComplete": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the percentage of seeding complete for the replication link."
+                },
+                "replicationState": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the replication state for the replication link.",
+                    "enum": [
+                        "PENDING",
+                        "SEEDING",
+                        "CATCH_UP",
+                        "SUSPENDED"
+                    ],
+                    "x-ms-enum": {
+                        "name": "ReplicationState",
+                        "modelAsString": true
+                    }
+                }
+            },
+            "description": "Represents the properties of an Azure SQL Database Replication Link."
+        },
+        "ReplicationLink": {
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/ReplicationLinkProperties",
+                    "description": "Gets or sets the properties representing the resource."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/SubResource"
+                }
+            ],
+            "description": "Represents an Azure SQL Database Replication Link."
+        },
+        "ReplicationLinkListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ReplicationLink"
+                    },
+                    "description": "Gets or sets the list of Azure Sql Database Replication Links housed in the database."
+                }
+            },
+            "description": "Represents the response to a List Azure Sql Database Replication Link request."
+        },
+        "Resource": {
+            "description": "Resource properties",
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name"
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id"
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource type"
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Resource location"
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                }
+            },
+            "required": [
+                "location"
+            ],
+            "x-ms-azure-resource": true
+        },
+        "SubResource": {
+            "description": "Subresource properties",
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name"
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id"
+                }
+            },
+            "x-ms-azure-resource": true
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client Api Version."
+        },
+        "ResourceGroupParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Resource Group to which the resource belongs.",
+            "x-ms-parameter-location": "method"
+        },
+        "ServerNameParameter": {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Server",
+            "x-ms-parameter-location": "method"
+        },
+        "ServerNameParameterGeneric": {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Server",
+            "x-ms-parameter-location": "method"
+        }
+    }
+}

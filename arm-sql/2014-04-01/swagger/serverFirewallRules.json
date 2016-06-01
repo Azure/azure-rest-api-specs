@@ -1,0 +1,305 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Server Firewall Rule APIs",
+        "description": "The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your server firewall rules. The API enables users to create, retrieve, update, and delete server firewall rules.",
+        "version": "2014-04-01"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/firewallRules/{firewallRule}": {
+            "put": {
+                "tags": [
+                    "FirewallRules"
+                ],
+                "operationId": "Servers_CreateOrUpdateFirewallRule",
+                "description": "Creates or updates an Azure SQL server firewall rule.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameterGeneric"
+                    },
+                    {
+                        "name": "firewallRule",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Azure SQL Server Firewall Rule."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/FirewallRule"
+                        },
+                        "description": "The required parameters for createing or updating a firewall rule."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/FirewallRule"
+                        }
+                    },
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/FirewallRule"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "FirewallRules"
+                ],
+                "operationId": "Servers_DeleteFirewallRules",
+                "description": "Deletes an Azure SQL server firewall rule.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameterGeneric"
+                    },
+                    {
+                        "name": "firewallRule",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Azure SQL Server Firewall Rule."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "204": {
+                        "description": ""
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "FirewallRules"
+                ],
+                "operationId": "Servers_GetFirewallRule",
+                "description": "Returns an Azure SQL server firewall rule.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameterGeneric"
+                    },
+                    {
+                        "name": "firewallRule",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Azure SQL Server Firewall Rule."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/FirewallRule"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/firewallRules": {
+            "get": {
+                "tags": [
+                    "FirewallRules"
+                ],
+                "operationId": "Servers_ListFirewallRules",
+                "description": "Returns a list of Azure SQL server firewall rules.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameterGeneric"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/FirewallRuleListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
+            }
+        }
+    },
+    "definitions": {
+        "FirewallRuleProperties": {
+            "properties": {
+                "startIpAddress": {
+                    "type": "string",
+                    "description": "Gets the start IP address of the Azure SQL Database Firewall Rule."
+                },
+                "endIpAddress": {
+                    "type": "string",
+                    "description": "Gets the end IP address of the Azure SQL Database Firewall Rule."
+                }
+            },
+            "description": "Represents the properties of an Azure SQL Server Firewall Rule."
+        },
+        "FirewallRule": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/FirewallRuleProperties",
+                    "description": "Gets or sets the properties representing the resource.",
+                    "x-ms-client-flatten": true
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/SubResource"
+                }
+            ],
+            "description": "Represents an Azure SQL Server Firewall Rule."
+        },
+        "FirewallRuleListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FirewallRule"
+                    },
+                    "description": "Gets or sets the list of Azure SQL Server firewall rules for the server."
+                }
+            },
+            "description": "Represents the response to a List Firewall Rules request."
+        },
+        "Resource": {
+            "description": "Resource properties",
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name"
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id"
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource type"
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Resource location"
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                }
+            },
+            "required": [
+                "location"
+            ],
+            "x-ms-azure-resource": true
+        },
+        "SubResource": {
+            "description": "Subresource properties",
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name"
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id"
+                }
+            },
+            "x-ms-azure-resource": true
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client Api Version."
+        },
+        "ResourceGroupParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Resource Group to which the resource belongs.",
+            "x-ms-parameter-location": "method"
+        },
+        "ServerNameParameterGeneric": {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Server",
+            "x-ms-parameter-location": "method"
+        }
+    }
+}

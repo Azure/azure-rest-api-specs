@@ -1,0 +1,319 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Azure Sql Database API spec",
+        "description": "The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases.",
+        "version": "2014-04-01"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/capabilities": {
+            "get": {
+                "tags": [
+                    "Capabilities"
+                ],
+                "operationId": "Capabilities_Get",
+                "description": "Returns information about the Azure SQL capabilities available for the specified region.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "locationName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the region for which the Azure SQL capabilities are retrieved."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/LocationCapability"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "MaxSizeCapability": {
+            "properties": {
+                "limit": {
+                    "readOnly": true,
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets the maximum size of the database (see 'unit' for the units)."
+                },
+                "unit": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the units that the limit is expressed in.",
+                    "enum": [
+                        "Megabytes",
+                        "Gigabytes",
+                        "Terabytes",
+                        "Petabytes"
+                    ],
+                    "x-ms-enum": {
+                        "name": "MaxSizeUnits",
+                        "modelAsString": true
+                    }
+                },
+                "status": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the status of the maximum size capability.",
+                    "enum": [
+                        "Visible",
+                        "Available",
+                        "Default"
+                    ],
+                    "x-ms-enum": {
+                        "name": "CapabilityStatus",
+                        "modelAsString": true
+                    }
+                }
+            },
+            "description": "Represents the maximum size limits for an Azure SQL Database."
+        },
+        "ServiceObjectiveCapability": {
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the Service Objective name."
+                },
+                "status": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the status of the Service Objective.",
+                    "enum": [
+                        "Visible",
+                        "Available",
+                        "Default"
+                    ],
+                    "x-ms-enum": {
+                        "name": "CapabilityStatus",
+                        "modelAsString": true
+                    }
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the unique ID of the Service Objective."
+                },
+                "supportedMaxSizes": {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MaxSizeCapability"
+                    },
+                    "description": "Gets the list of supported maximum Azure SQL Database sizes for this Service Objective."
+                }
+            },
+            "description": "Represents the Service Objectives capabilities."
+        },
+        "EditionCapability": {
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the edition name."
+                },
+                "status": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the status of the Azure SQL Server edition.",
+                    "enum": [
+                        "Visible",
+                        "Available",
+                        "Default"
+                    ],
+                    "x-ms-enum": {
+                        "name": "CapabilityStatus",
+                        "modelAsString": true
+                    }
+                },
+                "supportedServiceLevelObjectives": {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ServiceObjectiveCapability"
+                    },
+                    "description": "Gets the list of supported Service Objectives for the edition."
+                }
+            },
+            "description": "Represents the Azure SQL Server edition capabilities."
+        },
+        "ServerVersionCapability": {
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the server version name."
+                },
+                "status": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the status of the Azure SQL Server version.",
+                    "enum": [
+                        "Visible",
+                        "Available",
+                        "Default"
+                    ],
+                    "x-ms-enum": {
+                        "name": "CapabilityStatus",
+                        "modelAsString": true
+                    }
+                },
+                "supportedEditions": {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EditionCapability"
+                    },
+                    "description": "Gets the list of supported Azure SQL Server editions."
+                }
+            },
+            "description": "Represents the Azure SQL Server capabilities."
+        },
+        "LocationCapability": {
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the region name."
+                },
+                "status": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the status for the region with respect to Azure SQL.",
+                    "enum": [
+                        "Visible",
+                        "Available",
+                        "Default"
+                    ],
+                    "x-ms-enum": {
+                        "name": "CapabilityStatus",
+                        "modelAsString": true
+                    }
+                },
+                "supportedServerVersions": {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ServerVersionCapability"
+                    },
+                    "description": "Gets the list of supported Azure SQL Server versions."
+                }
+            },
+            "description": "Represents the Azure SQL capabilities for a region."
+        },
+        "Resource": {
+            "description": "Resource properties",
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name"
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id"
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource type"
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Resource location"
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                }
+            },
+            "required": [
+                "location"
+            ],
+            "x-ms-azure-resource": true
+        },
+        "SubResource": {
+            "description": "Subresource properties",
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name"
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id"
+                }
+            },
+            "x-ms-azure-resource": true
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client Api Version."
+        },
+        "ResourceGroupParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Resource Group to which the resource belongs.",
+            "x-ms-parameter-location": "method"
+        },
+        "ServerNameParameter": {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Server",
+            "x-ms-parameter-location": "method"
+        },
+        "ServerNameParameterGeneric": {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Server",
+            "x-ms-parameter-location": "method"
+        }
+    }
+}

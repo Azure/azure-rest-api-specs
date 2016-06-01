@@ -1,0 +1,410 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Azure Sql Database API spec",
+        "description": "The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases.",
+        "version": "2014-04-01"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingPolicies/Default": {
+            "put": {
+                "tags": [
+                    "AuditingPolicy"
+                ],
+                "operationId": "AuditingPolicy_CreateOrUpdateDatebasePolicy",
+                "description": "Creates or updates an Azure SQL Database auditing policy.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    },
+                    {
+                        "name": "databaseName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Azure SQL Database for which the auditing policy applies."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DatabaseAuditingPolicy"
+                        },
+                        "description": "The required parameters for createing or updating a Azure SQL Database auditing policy."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/DatabaseAuditingPolicy"
+                        }
+                    },
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/DatabaseAuditingPolicy"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "AuditingPolicy"
+                ],
+                "operationId": "AuditingPolicy_GetDatabasePolicy",
+                "description": "Returns an Azure SQL Database auditing policy.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    },
+                    {
+                        "name": "databaseName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Azure SQL Database for which the auditing policy applies."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/DatabaseAuditingPolicy"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingPolicies/Default": {
+            "put": {
+                "tags": [
+                    "AuditingPolicy"
+                ],
+                "operationId": "AuditingPolicy_CreateOrUpdateServerPolicy",
+                "description": "Creates or updates an Azure SQL Server auditing policy.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameterGeneric"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ServerAuditingPolicy"
+                        },
+                        "description": "The required parameters for createing or updating a Azure SQL Server auditing policy."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ServerAuditingPolicy"
+                        }
+                    },
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ServerAuditingPolicy"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "AuditingPolicy"
+                ],
+                "operationId": "AuditingPolicy_GetServerPolicy",
+                "description": "Returns an Azure SQL Server auditing policy.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameterGeneric"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ServerAuditingPolicy"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "DatabaseAuditingPolicyProperties": {
+            "properties": {
+                "useServerDefault": {
+                    "type": "string",
+                    "description": "Indicates whether the default server auditing policy is used for that Azure SQL Database."
+                },
+                "auditingState": {
+                    "type": "string",
+                    "description": "Gets the auditing state of the Azure SQL Server auditing policy."
+                },
+                "eventTypesToAudit": {
+                    "type": "string",
+                    "description": "Gets the events types of the Azure SQL Server auditing policy."
+                },
+                "storageAccountName": {
+                    "type": "string",
+                    "description": "Gets the storage account name of the Azure SQL Server auditing policy."
+                },
+                "storageAccountKey": {
+                    "type": "string",
+                    "description": "Gets the primary storage account key of the Azure SQL Server auditing policy."
+                },
+                "storageAccountSecondaryKey": {
+                    "type": "string",
+                    "description": "Gets secondary key of the storage account of the Azure SQL Server auditing policy."
+                },
+                "storageTableEndpoint": {
+                    "type": "string",
+                    "description": "Gets the storage table endpoint of the Azure SQL Server auditing policy."
+                },
+                "storageAccountResourceGroupName": {
+                    "type": "string",
+                    "description": "Gets the resource group of the storage account of the Azure SQL Server auditing policy."
+                },
+                "storageAccountSubscriptionId": {
+                    "type": "string",
+                    "description": "Gets the subscription Id of the storage account of the Azure SQL Server auditing policy."
+                },
+                "retentionDays": {
+                    "type": "string",
+                    "description": "Gets the retention in days of the Azure SQL Database auditing policy."
+                },
+                "auditLogsTableName": {
+                    "type": "string",
+                    "description": "Gets the name of the table audit logs are written to in the Azure SQL Database auditing policy."
+                },
+                "fullAuditLogsTableName": {
+                    "type": "string",
+                    "description": "Gets the full name of the table audit logs are written to in the Azure SQL Database auditing policy."
+                }
+            },
+            "description": "Represents the properties of an Azure SQL auditing policy."
+        },
+        "DatabaseAuditingPolicy": {
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/DatabaseAuditingPolicyProperties",
+                    "description": "Represents the properties of the resource."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Represents an Azure SQL Database auditing policy."
+        },
+        "ServerAuditingPolicyProperties": {
+            "properties": {
+                "auditingState": {
+                    "type": "string",
+                    "description": "Gets the auditing state of the Azure SQL Server auditing policy."
+                },
+                "eventTypesToAudit": {
+                    "type": "string",
+                    "description": "Gets the events types of the Azure SQL Server auditing policy."
+                },
+                "storageAccountName": {
+                    "type": "string",
+                    "description": "Gets the storage account name of the Azure SQL Server auditing policy."
+                },
+                "storageAccountKey": {
+                    "type": "string",
+                    "description": "Gets the primary storage account key of the Azure SQL Server auditing policy."
+                },
+                "storageAccountSecondaryKey": {
+                    "type": "string",
+                    "description": "Gets secondary key of the storage account of the Azure SQL Server auditing policy."
+                },
+                "storageTableEndpoint": {
+                    "type": "string",
+                    "description": "Gets the storage table endpoint of the Azure SQL Server auditing policy."
+                },
+                "storageAccountResourceGroupName": {
+                    "type": "string",
+                    "description": "Gets the resource group of the storage account of the Azure SQL Server auditing policy."
+                },
+                "storageAccountSubscriptionId": {
+                    "type": "string",
+                    "description": "Gets the subscription Id of the storage account of the Azure SQL Server auditing policy."
+                },
+                "retentionDays": {
+                    "type": "string",
+                    "description": "Gets the retention in days of the Azure SQL Database auditing policy."
+                },
+                "auditLogsTableName": {
+                    "type": "string",
+                    "description": "Gets the name of the table audit logs are written to in the Azure SQL Database auditing policy."
+                },
+                "fullAuditLogsTableName": {
+                    "type": "string",
+                    "description": "Gets the full name of the table audit logs are written to in the Azure SQL Database auditing policy."
+                }
+            },
+            "description": "Represents the properties of an Azure SQL auditing policy."
+        },
+        "ServerAuditingPolicy": {
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/ServerAuditingPolicyProperties",
+                    "description": "Represents the properties of the resource."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Represents an Azure SQL Server auditing policy."
+        },
+        "Resource": {
+            "description": "Resource properties",
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name"
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id"
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource type"
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Resource location"
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                }
+            },
+            "required": [
+                "location"
+            ],
+            "x-ms-azure-resource": true
+        },
+        "SubResource": {
+            "description": "Subresource properties",
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name"
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id"
+                }
+            },
+            "x-ms-azure-resource": true
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client Api Version."
+        },
+        "ResourceGroupParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Resource Group to which the resource belongs.",
+            "x-ms-parameter-location": "method"
+        },
+        "ServerNameParameter": {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Server",
+            "x-ms-parameter-location": "method"
+        },
+        "ServerNameParameterGeneric": {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Server",
+            "x-ms-parameter-location": "method"
+        }
+    }
+}

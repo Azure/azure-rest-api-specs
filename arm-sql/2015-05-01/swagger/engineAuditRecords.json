@@ -16,13 +16,13 @@
         "application/json"
     ],
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/move": {
-            "post": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditRecords": {
+            "get": {
                 "tags": [
-                    "Databases"
+                    "EngineAuditRecords"
                 ],
-                "description": "Renames an Azure SQL Database.",
-                "operationId": "Databases_Rename",
+                "description": "Get a list of database engine audit records.",
+                "operationId": "EngineAuditRecords_List",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -44,18 +44,9 @@
                     {
                         "name": "databaseName",
                         "in": "path",
-                        "description": "The name of the Azure SQL Database to rename.",
+                        "description": "The name of the Azure SQL Database for which database engine audit records are retrieved.",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "name": "definition",
-                        "in": "body",
-                        "description": "The resource move definition for renaming this database.",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ResourceMoveDefinition"
-                        }
                     },
                     {
                         "name": "api-version",
@@ -63,31 +54,41 @@
                         "description": "Client Api Version.",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "The filter to apply on the operation",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successfully renamed the database."
+                        "description": "Successfully retrieved the list of engine audit records.",
+                        "schema": {
+                            "$ref": "#/definitions/EngineAuditRecordResourceList"
+                        }
                     },
                     "default": {
-                        "description": "*** Error Responses: ***\n\n * 400 InvalidResourceMoveRequest - The resource move request is invalid.\n\n * 400 InvalidMoveTargetResourceId - The target resource identifier in move request is invalid.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 CannotMoveOrDropJobAccountDatabase - Cannot drop database associated with job account.",
+                        "description": "*** Error Responses: ***\n\n * 400 InvalidEngineAuditRecordsQueryParameters - Invalid query parameters\n\n * 400 InvalidEngineAuditRecordsShowSystemLogsFilter - The ShowSystemLogs property only supports the equal (eq) operation\n\n * 400 InvalidEngineAuditRecordsEndTimeFilter - The EventTime property currently supports only the less than or equal (le) operation, designating the End Time.\n\n * 400 InvalidEngineAuditRecordsShowServerRecordsFilter - The ShowServerRecords property only supports the equal (eq) operation\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 405 DatabaseEngineAuditRecordsNotImplemented - Operations on database audit records are not enabled yet\n\n * 500 GetEngineAuditRecordsFailed - Failed to get audit records",
                         "schema": {
                             "$ref": "#/definitions/ArmErrorResponseMessage"
                         }
                     }
                 },
-                "deprecated": false
+                "deprecated": false,
+                "x-ms-odata": "#/definitions/EngineAuditRecordsFilterParameters",
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
             }
         }
     },
     "definitions": {
-        "ResourceMoveDefinition": {
+        "Object": {
             "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string"
-                }
-            }
+            "properties": {}
         },
         "ArmErrorResponseMessage": {
             "type": "object",
@@ -98,6 +99,7 @@
             }
         },
         "ArmErrorResponseExtendedErrorInfo": {
+            "type": "object",
             "properties": {
                 "details": {
                     "type": "array",
@@ -105,7 +107,9 @@
                         "$ref": "#/definitions/ArmErrorResponseErrorDetail"
                     }
                 },
-                "innerError": {},
+                "innerError": {
+                    "$ref": "#/definitions/Object"
+                },
                 "code": {
                     "type": "string"
                 },
@@ -131,27 +135,81 @@
                 }
             }
         },
-        "ArmResourceSku": {
+        "EngineAuditRecordsFilterParameters": {
             "type": "object",
             "properties": {
+                "eventTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "showSystemLogs": {
+                    "type": "boolean"
+                },
+                "showServerRecords": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "EngineAuditRecordResourceList": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EngineAuditRecordResource"
+                    }
+                },
+                "nextLink": {
+                    "type": "string"
+                }
+            }
+        },
+        "EngineAuditRecordResource": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
                 "name": {
                     "type": "string"
                 },
-                "tier": {
+                "type": {
                     "type": "string"
                 },
-                "size": {
+                "location": {
                     "type": "string"
                 },
-                "family": {
-                    "type": "string"
-                },
-                "capacity": {
-                    "format": "int32",
-                    "type": "integer"
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/EngineAuditRecordResourceProperties"
                 }
-            },
-            "description": "Respresents a SKU on an ARM resource"
+            }
+        },
+        "EngineAuditRecordResourceProperties": {
+            "type": "object",
+            "properties": {
+                "actionId": {
+                    "type": "string"
+                },
+                "principalName": {
+                    "type": "string"
+                },
+                "eventTimeUtc": {
+                    "type": "string"
+                },
+                "statement": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "additionalInfo": {
+                    "type": "string"
+                },
+                "clientIp": {
+                    "type": "string"
+                }
+            }
         }
     },
     "parameters": {
