@@ -10062,6 +10062,7 @@
           "description": "This property will be ignored if it is specified for a resourceFile which will be downloaded to a Windows compute node."
         }
       },
+      "required": ["blobSource", "filePath"],
       "description": "A file to be downloaded from Azure blob storage to a compute node."
     },
     "EnvironmentSetting": {
@@ -10075,6 +10076,7 @@
           "title": "The value of the environment variable."
         }
       },
+      "required": ["name"],
       "title": "An environment variable to be set on a task process."
     },
     "TaskConstraints": {
@@ -10145,6 +10147,7 @@
           "description": "If true, no other tasks will run on the same compute node for as long as the Job Manager is running. If false, other tasks can run simultaneously with the Job Manager on a compute node. The Job Manager task counts normally against the node's concurrent task limit, so this is only relevant if the node allows multiple concurrent tasks."
         }
       },
+      "required": ["id", "commandLine"],
       "title": "Specifies details of a Job Manager task."
     },
     "JobPreparationTask": {
@@ -10191,6 +10194,7 @@
           "description": "Note that the Job Preparation task should still be written to be idempotent because it can be rerun if the compute node is rebooted while Job Preparation task is still running. The default value is true."
         }
       },
+      "required": ["commandLine"],
       "title": "A Job Preparation task to run before any tasks of the job on any given compute node."
     },
     "JobReleaseTask": {
@@ -10236,6 +10240,7 @@
           "description": "The default value is false."
         }
       },
+      "required": ["commandLine"],
       "title": "A Job Release task to run on job completion on any compute node where the job has run."
     },
     "TaskSchedulingPolicy": {
@@ -10289,6 +10294,7 @@
           "title": "Whether the Batch service should wait for the start task to complete successfully (that is, to exit with exit code 0) before scheduling any tasks on the compute node."
         }
       },
+      "required": ["commandLine"],
       "title": "A task which is run when a compute node joins a pool in the Azure Batch service, or when the compute node is rebooted or reimaged."
     },
     "CertificateReference": {
@@ -10347,6 +10353,7 @@
           "title": "The value of the metadata item."
         }
       },
+      "required": ["name", "value"],
       "title": "A name-value pair associated with a Batch service resource.",
       "description": "The Batch service does not assign any meaning to this metadata; it is solely for the use of user code."
     },
@@ -10432,6 +10439,7 @@
           "title": "A list of name-value pairs associated with the pool as metadata."
         }
       },
+      "required": ["vmSize"],
       "title": "Specification for creating a new pool."
     },
     "AutoPoolSpecification": {
@@ -10530,6 +10538,7 @@
           "title": "A list of name-value pairs associated with each job created under this schedule as metadata."
         }
       },
+      "required": ["poolInfo"],
       "title": "Specifies details of the jobs to be created on a schedule."
     },
     "RecentJob": {
@@ -11645,6 +11654,7 @@
           "description": "You can pass the affinityId of a compute node or task to indicate that this task needs to be placed close to the node or task."
         }
       },
+      "required": ["affinityId"],
       "title": "A locality hint that can be used by the Batch service to select a compute node on which to start a task."
     },
     "TaskExecutionInformation": {
