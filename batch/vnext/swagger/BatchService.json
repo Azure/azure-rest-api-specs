@@ -10402,9 +10402,9 @@
           "format": "duration",
           "title": "A time interval for the desired AutoScale evaluation period in the pool."
         },
-        "enableInterNodeCommunication": {
-          "type": "boolean",
-          "title": "Whether the pool permits direct communication between nodes."
+        "networkConfiguration": {
+          "$ref": "#/definitions/NetworkConfiguration",
+          "title": "The network configuration for the pool."
         },
         "startTask": {
           "$ref": "#/definitions/StartTask",
@@ -11341,6 +11341,19 @@
       "required": ["imageReference", "nodeAgentSKUId"],
       "title": "The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure."
     },
+    "NetworkConfiguration": {
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "The ARM resource identifier of the virtual network subnet which the compute nodes of the pool will join. The virtual network must be in the same region and subscription as the Azure Batch account, and the specified subnet should have enough spare IP addresses to accommodate the number of nodes in the pool. This property can only be specified for pools created with a cloudServiceConfiguration."
+        },
+        "enableInterNodeCommunication": {
+          "type": "boolean",
+          "description": "Whether the pool permits direct communication between nodes."
+        }
+      },
+      "description": "The network configuration for a pool."
+    },
     "CloudPool": {
       "properties": {
         "id": {
@@ -11454,9 +11467,9 @@
           "$ref": "#/definitions/AutoScaleRun",
           "title": "The results and errors from the last execution of the autoscale formula."
         },
-        "enableInterNodeCommunication": {
-          "type": "boolean",
-          "title": "Whether the pool permits direct communication between nodes."
+        "networkConfiguration": {
+          "$ref": "#/definitions/NetworkConfiguration",
+          "title": "The network configuration for the pool."
         },
         "startTask": {
           "$ref": "#/definitions/StartTask",
@@ -11550,9 +11563,9 @@
           "format": "duration",
           "title": "A time interval for the desired autoscale evaluation period in the pool."
         },
-        "enableInterNodeCommunication": {
-          "type": "boolean",
-          "title": "Whether the pool permits direct communication between nodes."
+        "networkConfiguration": {
+          "$ref": "#/definitions/NetworkConfiguration",
+          "title": "The network configuration for the pool."
         },
         "startTask": {
           "$ref": "#/definitions/StartTask",
