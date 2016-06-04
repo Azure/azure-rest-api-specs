@@ -3,7 +3,10 @@
   "info": {
     "title": "SearchServiceClient",
     "description": "Client that can be used to manage and query indexes and documents, as well as manage other resources, on an Azure Search service.",
-    "version": "2015-02-28-Preview"
+    "version": "2015-02-28-Preview",
+    "x-ms-code-generation-settings": {  
+      "useDateTimeOffset": true  
+    }  
   },
   "consumes": [
     "application/json"
@@ -987,6 +990,7 @@
     "DataSourceListResult": {
       "properties": {
         "value": {
+          "x-ms-client-name": "DataSources",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -995,8 +999,7 @@
           "description": "The datasources in the Search service."
         }
       },
-      "description": "Response from a List Datasources request. If successful, it includes the full definitions of all datasources.",
-      "x-ms-external": true
+      "description": "Response from a List Datasources request. If successful, it includes the full definitions of all datasources."
     },
     "IndexingSchedule": {
       "properties": {
@@ -1014,8 +1017,7 @@
       "required": [
         "interval"
       ],
-      "description": "Represents a schedule for indexer execution.",
-      "x-ms-external": true
+      "description": "Represents a schedule for indexer execution."
     },
     "IndexingParameters": {
       "properties": {
@@ -1077,6 +1079,7 @@
     "IndexerListResult": {
       "properties": {
         "value": {
+          "x-ms-client-name": "Indexers",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -1085,8 +1088,7 @@
           "description": "The indexers in the Search service."
         }
       },
-      "description": "Response from a List Indexers request. If successful, it includes the full definitions of all indexers.",
-      "x-ms-external": true
+      "description": "Response from a List Indexers request. If successful, it includes the full definitions of all indexers."
     },
     "ItemError": {
       "properties": {
@@ -1136,12 +1138,14 @@
           "description": "The item-level indexing errors"
         },
         "itemsProcessed": {
+          "x-ms-client-name": "ItemCount",
           "type": "integer",
           "format": "int32",
           "readOnly": true,
           "description": "The number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed."
         },
         "itemsFailed": {
+          "x-ms-client-name": "FailedItemCount",
           "type": "integer",
           "format": "int32",
           "readOnly": true,
@@ -1158,7 +1162,7 @@
           "description": "Change tracking state with which an indexer execution finished."
         }
       },
-      "description": "Represents result of an individual indexer execution.",
+      "description": "Represents the result of an individual indexer execution.",
       "x-ms-external": true
     },
     "IndexerExecutionStatus": {
@@ -1303,8 +1307,7 @@
       "externalDocs": {
         "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
       },
-      "description": "Abstract base class for functions that can modify document scores during ranking.",
-      "x-ms-external": true
+      "description": "Abstract base class for functions that can modify document scores during ranking."
     },
     "DistanceScoringFunction": {
       "x-ms-discriminator-value": "distance",
@@ -1315,6 +1318,7 @@
       ],
       "properties": {
         "distance": {
+          "x-ms-client-name": "Parameters",
           "$ref": "#/definitions/DistanceScoringParameters",
           "description": "Parameter values for the distance scoring function."
         }
@@ -1325,8 +1329,7 @@
       "externalDocs": {
         "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
       },
-      "description": "Defines a function that boosts scores based on distance from a geographic location.",
-      "x-ms-external": true
+      "description": "Defines a function that boosts scores based on distance from a geographic location."
     },
     "DistanceScoringParameters": {
       "properties": {
@@ -1343,8 +1346,7 @@
       "required": [
         "referencePointParameter", "boostingDistance"
       ],
-      "description": "Provides parameter values to a distance scoring function.",
-      "x-ms-external": true
+      "description": "Provides parameter values to a distance scoring function."
     },
     "FreshnessScoringFunction": {
       "x-ms-discriminator-value": "freshness",
@@ -1355,6 +1357,7 @@
       ],
       "properties": {
         "freshness": {
+          "x-ms-client-name": "Parameters",
           "$ref": "#/definitions/FreshnessScoringParameters",
           "description": "Parameter values for the freshness scoring function."
         }
@@ -1365,8 +1368,7 @@
       "externalDocs": {
         "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
       },
-      "description": "Defines a function that boosts scores based on the value of a date-time field.",
-      "x-ms-external": true
+      "description": "Defines a function that boosts scores based on the value of a date-time field."
     },
     "FreshnessScoringParameters": {
       "properties": {
@@ -1379,8 +1381,7 @@
       "required": [
         "boostingDuration"
       ],
-      "description": "Provides parameter values to a freshness scoring function.",
-      "x-ms-external": true
+      "description": "Provides parameter values to a freshness scoring function."
     },
     "MagnitudeScoringFunction": {
       "x-ms-discriminator-value": "magnitude",
@@ -1391,6 +1392,7 @@
       ],
       "properties": {
         "magnitude": {
+          "x-ms-client-name": "Parameters",
           "$ref": "#/definitions/MagnitudeScoringParameters",
           "description": "Parameter values for the magnitude scoring function."
         }
@@ -1401,8 +1403,7 @@
       "externalDocs": {
         "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
       },
-      "description": "Defines a function that boosts scores based on the magnitude of a numeric field.",
-      "x-ms-external": true
+      "description": "Defines a function that boosts scores based on the magnitude of a numeric field."
     },
     "MagnitudeScoringParameters": {
       "properties": {
@@ -1417,6 +1418,7 @@
           "description": "The field value at which boosting ends."
         },
         "constantBoostBeyondRange": {
+          "x-ms-client-name": "ShouldBoostBeyondRangeByConstant",
           "type": "boolean",
           "description": "A value indicating whether to apply a constant boost for field values beyond the range end value; default is false."
         }
@@ -1424,8 +1426,7 @@
       "required": [
         "boostingRangeStart", "boostingRangeEnd"
       ],
-      "description": "Provides parameter values to a magnitude scoring function.",
-      "x-ms-external": true
+      "description": "Provides parameter values to a magnitude scoring function."
     },
     "TagScoringFunction": {
       "x-ms-discriminator-value": "tag",
@@ -1436,8 +1437,9 @@
       ],
       "properties": {
         "tag": {
+          "x-ms-client-name": "Parameters",
           "$ref": "#/definitions/TagScoringParameters",
-          "description": "Gets parameter values for the tag scoring function."
+          "description": "Parameter values for the tag scoring function."
         }
       },
       "required": [
@@ -1446,8 +1448,7 @@
       "externalDocs": {
         "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
       },
-      "description": "Defines a function that boosts scores of documents with string values matching a given list of tags.",
-      "x-ms-external": true
+      "description": "Defines a function that boosts scores of documents with string values matching a given list of tags."
     },
     "TagScoringParameters": {
       "properties": {
@@ -1482,6 +1483,7 @@
           "description": "The name of the scoring profile."
         },
         "text": {
+          "x-ms-client-name": "TextWeights",
           "$ref": "#/definitions/TextWeights",
           "description": "Parameters that boost scoring based on text matches in certain index fields."
         },
@@ -1503,8 +1505,7 @@
       "externalDocs": {
         "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
       },
-      "description": "Defines parameters for an Azure Search index that influence scoring in search queries.",
-      "x-ms-external": true
+      "description": "Defines parameters for an Azure Search index that influence scoring in search queries."
     },
     "ScoringFunctionAggregation": {
       "type": "string",
@@ -1562,8 +1563,7 @@
       "required": [
         "name", "searchMode", "sourceFields"
       ],
-      "description": "Defines how the Suggest API should apply to a group of fields in the index.",
-      "x-ms-external": true
+      "description": "Defines how the Suggest API should apply to a group of fields in the index."
     },
     "SuggesterSearchMode": {
       "type": "string",
@@ -1638,6 +1638,7 @@
     "IndexListResult": {
       "properties": {
         "value": {
+          "x-ms-client-name": "Indexes",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -1646,8 +1647,7 @@
           "description": "The indexes in the Search service."
         }
       },
-      "description": "Response from a List Indexes request. If successful, it includes the full definitions of all indexes.",
-      "x-ms-external": true
+      "description": "Response from a List Indexes request. If successful, it includes the full definitions of all indexes."
     }
   },
   "parameters": {
