@@ -2210,6 +2210,10 @@
           "x-ms-client-name": "name",
           "description": "Gets or sets the name of the table partition."
         },
+        "parentName": {
+          "$ref": "/definitions/DdlName",
+          "description": "Gets or sets the Ddl object of the partition's parent."
+        },
         "indexId": {
           "type": "integer",
           "format": "int32",
@@ -2221,6 +2225,11 @@
             "type": "string"
           },
           "description": "Gets or sets the list of labels associated with this partition."
+        },
+        "createDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time of the partition"
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL table partition item."
