@@ -3958,6 +3958,48 @@
             }
           },
           {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "An ETag is specified. Specify this header to perform the operation only if the resource's ETag is an exact match as specified.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "An ETag is specified. Specify this header to perform the operation only if the resource's ETag does not match the specified ETag.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "If-Modified-Since",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "description": "Specify this header to perform the operation only if the resource has been modified since the specified date/time.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "description": "Specify this header to perform the operation only if the resource has not been modified since the specified date/time.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
