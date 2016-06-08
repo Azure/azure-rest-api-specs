@@ -1,0 +1,1743 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "2016-02-03",
+		"title": "IoT Hub",
+		"description": "API for using the IoT Hub Features"
+	},
+	"host": "management.azure.com",
+	"schemes": ["https"],
+	"paths": {
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}": {
+			"get": {
+				"tags": ["GET"],
+				"summary": "Get an IotHub",
+				"description": "Get an IotHub",
+				"operationId": "IotHubResource_GetIotHub",
+				"consumes": [],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/IotHubDescription"
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"404": {
+						"description": "NotFound",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"412": {
+						"description": "PreconditionFailed",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"500": {
+						"description": "InternalServerError",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			},
+			"put": {
+				"tags": ["PUT"],
+				"summary": "Create or update an IotHub",
+				"description": "Create or update an IotHub",
+				"operationId": "IotHubResource_CreateIotHub",
+				"consumes": ["application/json", "text/json"],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "iotHubDescription",
+					"in": "body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/IotHubDescription"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/IotHubDescription"
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"404": {
+						"description": "NotFound",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"412": {
+						"description": "PreconditionFailed",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"500": {
+						"description": "InternalServerError",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			},
+			"delete": {
+				"tags": ["DELETE"],
+				"summary": "Delete an IotHub",
+				"description": "Delete an IotHub",
+				"operationId": "IotHubResource_DeleteIotHub",
+				"consumes": [],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/IotHubDescription"
+						}
+					},
+					"204": {
+						"description": "NoContent",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"404": {
+						"description": "NotFound",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"412": {
+						"description": "PreconditionFailed",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"500": {
+						"description": "InternalServerError",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/eventHubEndpoints/{eventHubEndpointName}/ConsumerGroups/{name}": {
+			"delete": {
+				"tags": ["DELETE"],
+				"summary": "Delete EventHub Consumer Group for an IotHub",
+				"description": "Delete EventHub Consumer Group for an IotHub",
+				"operationId": "IotHubResource_DeleteEventHubConsumerGroup",
+				"consumes": [],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "eventHubEndpointName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "name",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Object"
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"404": {
+						"description": "NotFound",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"412": {
+						"description": "PreconditionFailed",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"500": {
+						"description": "InternalServerError",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			}
+		},
+		"/providers/Microsoft.Devices/operations": {
+			"get": {
+				"tags": ["GET"],
+				"summary": "Get all supported Resource Provider Operations",
+				"description": "Get all supported Resource Provider Operations",
+				"operationId": "IotHubResource_GetResourceProviderOperations",
+				"consumes": [],
+				"produces": ["application/json", "text/json"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResponseWithContinuation[ResourceProviderOperationInfo]"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			}
+		},
+		"/subscriptions/{subscriptionId}/providers/Microsoft.Devices/IotHubs": {
+			"get": {
+				"tags": ["GET"],
+				"summary": "Get all IotHubs in a subscription",
+				"description": "Get all IotHubs in a subscription",
+				"operationId": "IotHubResource_GetIotHubs",
+				"consumes": [],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResponseWithContinuation[IotHubDescription]"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs": {
+			"get": {
+				"tags": ["GET"],
+				"summary": "Get all IotHubs in a Resourcegroup",
+				"description": "Get all IotHubs in a Resourcegroup",
+				"operationId": "IotHubResource_GetIotHubs",
+				"consumes": [],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResponseWithContinuation[IotHubDescription]"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/operationresults/{operationId}": {
+			"get": {
+				"tags": ["GET"],
+				"summary": "Get the result of an operation",
+				"description": "Get the result of an operation",
+				"operationId": "IotHubResource_GetOperationResult",
+				"consumes": [],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "operationId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/IotHubDescription"
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"404": {
+						"description": "NotFound",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"412": {
+						"description": "PreconditionFailed",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"500": {
+						"description": "InternalServerError",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/IotHubStats": {
+			"get": {
+				"tags": ["GET"],
+				"summary": "Get IotHub Stats",
+				"description": "Get IotHub Stats",
+				"operationId": "IotHubResource_GetIotHubStats",
+				"consumes": [],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/RegistryStatistics"
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"404": {
+						"description": "NotFound",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"412": {
+						"description": "PreconditionFailed",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"500": {
+						"description": "InternalServerError",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/skus": {
+			"get": {
+				"tags": ["GET"],
+				"summary": "Get Valid Skus",
+				"description": "Get Valid Skus",
+				"operationId": "IotHubResource_GetValidIotHubSkus",
+				"consumes": [],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResponseWithContinuation[IotHubSkuDescription]"
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"404": {
+						"description": "NotFound",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"412": {
+						"description": "PreconditionFailed",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"500": {
+						"description": "InternalServerError",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/eventHubEndpoints/{eventHubEndpointName}/ConsumerGroups": {
+			"get": {
+				"tags": ["GET"],
+				"summary": "Get EventHub Consumer Groups for an IotHub",
+				"description": "Get EventHub Consumer Groups for an IotHub",
+				"operationId": "IotHubResource_GetEventHubConsumerGroups",
+				"consumes": [],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "eventHubEndpointName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResponseWithContinuation[String]"
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"404": {
+						"description": "NotFound",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"412": {
+						"description": "PreconditionFailed",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"500": {
+						"description": "InternalServerError",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/eventHubEndpoints/{eventHubEndpointName}/ConsumerGroups/{groupName}": {
+			"get": {
+				"tags": ["GET"],
+				"summary": "Get EventHub Consumer Group for an IotHub",
+				"description": "Get EventHub Consumer Group for an IotHub",
+				"operationId": "IotHubResource_GetEventHubConsumerGroup",
+				"consumes": [],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "eventHubEndpointName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "groupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/EventHubConsumerGroupInfo"
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"404": {
+						"description": "NotFound",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"412": {
+						"description": "PreconditionFailed",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"500": {
+						"description": "InternalServerError",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			},
+			"put": {
+				"tags": ["PUT"],
+				"summary": "Add an EventHub Consumer Group to an IotHub",
+				"description": "Add an EventHub Consumer Group to an IotHub",
+				"operationId": "IotHubResource_AddEventHubConsumerGroup",
+				"consumes": [],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "eventHubEndpointName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "groupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/EventHubConsumerGroupInfo"
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"404": {
+						"description": "NotFound",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"412": {
+						"description": "PreconditionFailed",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"500": {
+						"description": "InternalServerError",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/jobs": {
+			"get": {
+				"tags": ["GET"],
+				"summary": "Get all the jobs in an IotHub",
+				"description": "Get all the jobs in an IotHub",
+				"operationId": "IotHubResource_GetJobs",
+				"consumes": [],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResponseWithContinuation[JobInfo]"
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"404": {
+						"description": "NotFound",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"412": {
+						"description": "PreconditionFailed",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"500": {
+						"description": "InternalServerError",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/jobs/{jobId}": {
+			"get": {
+				"tags": ["GET"],
+				"summary": "Get a job in an IotHub",
+				"description": "Get a job in an IotHub",
+				"operationId": "IotHubResource_GetJob",
+				"consumes": [],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "jobId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/JobInfo"
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"404": {
+						"description": "NotFound",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"412": {
+						"description": "PreconditionFailed",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"500": {
+						"description": "InternalServerError",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/quotaMetrics": {
+			"get": {
+				"tags": ["GET"],
+				"summary": "Get quota metrics for an IotHub",
+				"description": "Get quota metrics for an IotHub",
+				"operationId": "IotHubResource_GetQuotaMetrics",
+				"consumes": [],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResponseWithContinuation[IotHubQuotaMetricInfo]"
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"404": {
+						"description": "NotFound",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"412": {
+						"description": "PreconditionFailed",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"500": {
+						"description": "InternalServerError",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			}
+		},
+		"/subscriptions/{subscriptionId}/providers/Microsoft.Devices/checkNameAvailability": {
+			"post": {
+				"tags": ["POST"],
+				"summary": "Check if an IotHub name is available",
+				"description": "Check if an IotHub name is available",
+				"operationId": "IotHubResource_CheckIotHubNameAvailability",
+				"consumes": ["application/json", "text/json"],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "iotHubName",
+					"in": "body",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/IotHubNameAvailabilityInfo"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/listkeys": {
+			"post": {
+				"tags": ["POST"],
+				"summary": "Get all Keys for an IotHub",
+				"description": "Get all Keys for an IotHub",
+				"operationId": "IotHubResource_GetAllIotHubKeys",
+				"consumes": [],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResponseWithContinuation[SharedAccessSignatureAuthorizationRule]"
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"404": {
+						"description": "NotFound",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"412": {
+						"description": "PreconditionFailed",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"500": {
+						"description": "InternalServerError",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/IotHubKeys/{keyName}/listkeys": {
+			"post": {
+				"tags": ["POST"],
+				"summary": "Get the Key given a specific KeyName for an IotHub",
+				"description": "Get the Key given a specific KeyName for an IotHub",
+				"operationId": "IotHubResource_GetIotHubKeysForKeyName",
+				"consumes": [],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "keyName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/SharedAccessSignatureAuthorizationRule"
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"404": {
+						"description": "NotFound",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"412": {
+						"description": "PreconditionFailed",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"500": {
+						"description": "InternalServerError",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/exportDevices": {
+			"post": {
+				"tags": ["POST"],
+				"summary": "Export all the Devices in an IotHub",
+				"description": "Export all the Devices in an IotHub",
+				"operationId": "IotHubResource_ExportDevices",
+				"consumes": ["application/json", "text/json"],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "exportDevicesRequest",
+					"in": "body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/ExportDevicesRequest"
+					}
+				}, {
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/JobInfo"
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"404": {
+						"description": "NotFound",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"412": {
+						"description": "PreconditionFailed",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"500": {
+						"description": "InternalServerError",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/importDevices": {
+			"post": {
+				"tags": ["POST"],
+				"summary": "Import all the Devices in an IotHub",
+				"description": "Import all the Devices in an IotHub",
+				"operationId": "IotHubResource_ImportDevices",
+				"consumes": ["application/json", "text/json"],
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "importDevicesRequest",
+					"in": "body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/ImportDevicesRequest"
+					}
+				}, {
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}, {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/JobInfo"
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"404": {
+						"description": "NotFound",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"409": {
+						"description": "Conflict",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"412": {
+						"description": "PreconditionFailed",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					},
+					"500": {
+						"description": "InternalServerError",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
+					}
+				},
+				"deprecated": false,
+				"security": [{
+					"oauth2": ["user_impersonation"]
+				}]
+			}
+		}
+	},
+	"definitions": {
+		"Object": {
+			"type": "object",
+			"properties": {}
+		},
+		"SharedAccessSignatureAuthorizationRule": {
+			"type": "object",
+			"properties": {
+				"keyName": {
+					"type": "string"
+				},
+				"primaryKey": {
+					"type": "string"
+				},
+				"secondaryKey": {
+					"type": "string"
+				},
+				"rights": {
+					"enum": ["RegistryRead", "RegistryWrite", "ServiceConnect", "DeviceConnect"],
+					"type": "string"
+				}
+			}
+		},
+		"IotHubProperties": {
+			"type": "object",
+			"properties": {
+				"authorizationPolicies": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/SharedAccessSignatureAuthorizationRule"
+					}
+				},
+				"eventHubEndpoints": {
+					"type": "object",
+					"additionalProperties": {
+						"$ref": "#/definitions/EventHubProperties"
+					}
+				},
+				"storageEndpoints": {
+					"type": "object",
+					"additionalProperties": {
+						"$ref": "#/definitions/StorageEndpointProperties"
+					}
+				},
+				"messagingEndpoints": {
+					"type": "object",
+					"additionalProperties": {
+						"$ref": "#/definitions/MessagingEndpointProperties"
+					}
+				},
+				"enableFileUploadNotifications": {
+					"type": "boolean"
+				},
+				"cloudToDevice": {
+					"$ref": "#/definitions/CloudToDeviceProperties"
+				},
+				"comments": {
+					"type": "string"
+				},
+				"operationsMonitoringProperties": {
+					"$ref": "#/definitions/OperationsMonitoringProperties"
+				},
+				"features": {
+					"enum": ["None", "DeviceManagement"],
+					"type": "string"
+				}
+			}
+		},
+		"IotHubSkuInfo": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"enum": ["F1", "S1", "S2"],
+					"type": "string"
+				},
+				"tier": {
+					"enum": ["Free", "Standard"],
+					"type": "string",
+					"readOnly": true
+				},
+				"capacity": {
+					"format": "int64",
+					"type": "integer"
+				}
+			}
+		},
+		"CloudToDeviceProperties": {
+			"type": "object",
+			"properties": {
+				"maxDeliveryCount": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"defaultTtlAsIso8601": {
+					"type": "string"
+				},
+				"feedback": {
+					"$ref": "#/definitions/FeedbackProperties"
+				}
+			}
+		},
+		"OperationsMonitoringProperties": {
+			"type": "object",
+			"properties": {
+				"events": {
+					"type": "object",
+					"additionalProperties": {
+						"enum": ["None", "Error", "Information"],
+						"type": "string"
+					}
+				}
+			}
+		},
+		"FeedbackProperties": {
+			"type": "object",
+			"properties": {
+				"lockDurationAsIso8601": {
+					"type": "string"
+				},
+				"ttlAsIso8601": {
+					"type": "string"
+				},
+				"maxDeliveryCount": {
+					"format": "int32",
+					"type": "integer"
+				}
+			}
+		},
+		"IotHubDescription": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string",
+					"readOnly": true
+				},
+				"location": {
+					"type": "string"
+				},
+				"tags": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "string"
+					},
+					"readOnly": true
+				},
+				"subscriptionid": {
+					"type": "string"
+				},
+				"resourcegroup": {
+					"type": "string"
+				},
+				"etag": {
+					"type": "string"
+				},
+				"properties": {
+					"$ref": "#/definitions/IotHubProperties"
+				},
+				"sku": {
+					"$ref": "#/definitions/IotHubSkuInfo"
+				}
+			}
+		},
+		"ErrorDetails": {
+			"type": "object",
+			"properties": {
+				"Code": {
+					"type": "string"
+				},
+				"HttpStatusCode": {
+					"type": "string",
+					"readOnly": true
+				},
+				"Message": {
+					"type": "string"
+				},
+				"Details": {
+					"type": "string"
+				}
+			}
+		},
+		"ResponseWithContinuation[IotHubDescription]": {
+			"type": "object",
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/IotHubDescription"
+					}
+				},
+				"nextLink": {
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"RegistryStatistics": {
+			"type": "object",
+			"properties": {
+				"totalDeviceCount": {
+					"format": "int64",
+					"type": "integer"
+				},
+				"enabledDeviceCount": {
+					"format": "int64",
+					"type": "integer"
+				},
+				"disabledDeviceCount": {
+					"format": "int64",
+					"type": "integer"
+				}
+			}
+		},
+		"ResponseWithContinuation[IotHubSkuDescription]": {
+			"type": "object",
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/IotHubSkuDescription"
+					}
+				},
+				"nextLink": {
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"ResponseWithContinuation[String]": {
+			"type": "object",
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"nextLink": {
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"EventHubConsumerGroupInfo": {
+			"type": "object",
+			"properties": {
+				"tags": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "string"
+					}
+				},
+				"id": {
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				}
+			}
+		},
+		"ResponseWithContinuation[JobInfo]": {
+			"type": "object",
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/JobInfo"
+					}
+				},
+				"nextLink": {
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"JobInfo": {
+			"type": "object",
+			"properties": {
+				"jobId": {
+					"type": "string"
+				},
+				"startTimeUtc": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"endTimeUtc": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"status": {
+					"enum": ["unknown", "enqueued", "running", "completed", "failed", "cancelled"],
+					"type": "string"
+				},
+				"progress": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"failureReason": {
+					"type": "string"
+				}
+			}
+		},
+		"ResponseWithContinuation[IotHubQuotaMetricInfo]": {
+			"type": "object",
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/IotHubQuotaMetricInfo"
+					}
+				},
+				"nextLink": {
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"IotHubNameAvailabilityInfo": {
+			"type": "object",
+			"properties": {
+				"nameAvailable": {
+					"type": "boolean"
+				},
+				"reason": {
+					"enum": ["Invalid", "AlreadyExists"],
+					"type": "string"
+				},
+				"message": {
+					"type": "string"
+				}
+			}
+		},
+		"ResponseWithContinuation[SharedAccessSignatureAuthorizationRule]": {
+			"type": "object",
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/SharedAccessSignatureAuthorizationRule"
+					}
+				},
+				"nextLink": {
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"ExportDevicesRequest": {
+			"type": "object",
+			"properties": {
+				"ExportBlobContainerUri": {
+					"type": "string"
+				},
+				"ExcludeKeys": {
+					"type": "boolean"
+				}
+			}
+		},
+		"ImportDevicesRequest": {
+			"type": "object",
+			"properties": {
+				"InputBlobContainerUri": {
+					"type": "string"
+				},
+				"OutputBlobContainerUri": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"securityDefinitions": {
+		"oauth2": {
+			"type": "oauth2",
+			"description": "OAuth2 Implicit Grant",
+			"flow": "implicit",
+			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+			"scopes": {
+				"user_impersonation": "Access Microsoft Azure"
+			}
+		}
+	},
+	"security": [{
+		"oauth2": ["user_impersonation"]
+	}]
+}
