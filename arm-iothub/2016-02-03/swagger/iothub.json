@@ -39,32 +39,8 @@
 							"$ref": "#/definitions/IotHubDescription"
 						}
 					},
-					"400": {
-						"description": "BadRequest",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"404": {
-						"description": "NotFound",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"409": {
-						"description": "Conflict",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"412": {
-						"description": "PreconditionFailed",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"500": {
-						"description": "InternalServerError",
+					"default": {
+						"description": "DefaultErrorResponse",
 						"schema": {
 							"$ref": "#/definitions/ErrorDetails"
 						}
@@ -112,32 +88,8 @@
 							"$ref": "#/definitions/IotHubDescription"
 						}
 					},
-					"400": {
-						"description": "BadRequest",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"404": {
-						"description": "NotFound",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"409": {
-						"description": "Conflict",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"412": {
-						"description": "PreconditionFailed",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"500": {
-						"description": "InternalServerError",
+					"default": {
+						"description": "DefaultErrorResponse",
 						"schema": {
 							"$ref": "#/definitions/ErrorDetails"
 						}
@@ -178,38 +130,8 @@
 							"$ref": "#/definitions/IotHubDescription"
 						}
 					},
-					"204": {
-						"description": "NoContent",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"400": {
-						"description": "BadRequest",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"404": {
-						"description": "NotFound",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"409": {
-						"description": "Conflict",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"412": {
-						"description": "PreconditionFailed",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"500": {
-						"description": "InternalServerError",
+					"default": {
+						"description": "DefaultErrorResponse",
 						"schema": {
 							"$ref": "#/definitions/ErrorDetails"
 						}
@@ -262,32 +184,8 @@
 							"$ref": "#/definitions/Object"
 						}
 					},
-					"400": {
-						"description": "BadRequest",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"404": {
-						"description": "NotFound",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"409": {
-						"description": "Conflict",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"412": {
-						"description": "PreconditionFailed",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"500": {
-						"description": "InternalServerError",
+					"default": {
+						"description": "DefaultErrorResponse",
 						"schema": {
 							"$ref": "#/definitions/ErrorDetails"
 						}
@@ -313,6 +211,12 @@
 						"schema": {
 							"$ref": "#/definitions/ResponseWithContinuation[ResourceProviderOperationInfo]"
 						}
+					},
+					"default": {
+						"description": "DefaultErrorResponse",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
 					}
 				},
 				"deprecated": false,
@@ -326,7 +230,7 @@
 				"tags": ["GET"],
 				"summary": "Get all IotHubs in a subscription",
 				"description": "Get all IotHubs in a subscription",
-				"operationId": "IotHubResource_GetIotHubs",
+				"operationId": "IotHubResource_GetIotHubsForSubscription",
 				"consumes": [],
 				"produces": ["application/json", "text/json"],
 				"parameters": [{
@@ -341,6 +245,12 @@
 						"schema": {
 							"$ref": "#/definitions/ResponseWithContinuation[IotHubDescription]"
 						}
+					},
+					"default": {
+						"description": "DefaultErrorResponse",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
+						}
 					}
 				},
 				"deprecated": false,
@@ -354,7 +264,7 @@
 				"tags": ["GET"],
 				"summary": "Get all IotHubs in a Resourcegroup",
 				"description": "Get all IotHubs in a Resourcegroup",
-				"operationId": "IotHubResource_GetIotHubs",
+				"operationId": "IotHubResource_GetIotHubsForResourceGroup",
 				"consumes": [],
 				"produces": ["application/json", "text/json"],
 				"parameters": [{
@@ -373,6 +283,12 @@
 						"description": "OK",
 						"schema": {
 							"$ref": "#/definitions/ResponseWithContinuation[IotHubDescription]"
+						}
+					},
+					"default": {
+						"description": "DefaultErrorResponse",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
 						}
 					}
 				},
@@ -418,32 +334,8 @@
 							"$ref": "#/definitions/IotHubDescription"
 						}
 					},
-					"400": {
-						"description": "BadRequest",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"404": {
-						"description": "NotFound",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"409": {
-						"description": "Conflict",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"412": {
-						"description": "PreconditionFailed",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"500": {
-						"description": "InternalServerError",
+					"default": {
+						"description": "DefaultErrorResponse",
 						"schema": {
 							"$ref": "#/definitions/ErrorDetails"
 						}
@@ -486,32 +378,8 @@
 							"$ref": "#/definitions/RegistryStatistics"
 						}
 					},
-					"400": {
-						"description": "BadRequest",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"404": {
-						"description": "NotFound",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"409": {
-						"description": "Conflict",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"412": {
-						"description": "PreconditionFailed",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"500": {
-						"description": "InternalServerError",
+					"default": {
+						"description": "DefaultErrorResponse",
 						"schema": {
 							"$ref": "#/definitions/ErrorDetails"
 						}
@@ -554,32 +422,8 @@
 							"$ref": "#/definitions/ResponseWithContinuation[IotHubSkuDescription]"
 						}
 					},
-					"400": {
-						"description": "BadRequest",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"404": {
-						"description": "NotFound",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"409": {
-						"description": "Conflict",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"412": {
-						"description": "PreconditionFailed",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"500": {
-						"description": "InternalServerError",
+					"default": {
+						"description": "DefaultErrorResponse",
 						"schema": {
 							"$ref": "#/definitions/ErrorDetails"
 						}
@@ -627,32 +471,8 @@
 							"$ref": "#/definitions/ResponseWithContinuation[String]"
 						}
 					},
-					"400": {
-						"description": "BadRequest",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"404": {
-						"description": "NotFound",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"409": {
-						"description": "Conflict",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"412": {
-						"description": "PreconditionFailed",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"500": {
-						"description": "InternalServerError",
+					"default": {
+						"description": "DefaultErrorResponse",
 						"schema": {
 							"$ref": "#/definitions/ErrorDetails"
 						}
@@ -705,32 +525,8 @@
 							"$ref": "#/definitions/EventHubConsumerGroupInfo"
 						}
 					},
-					"400": {
-						"description": "BadRequest",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"404": {
-						"description": "NotFound",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"409": {
-						"description": "Conflict",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"412": {
-						"description": "PreconditionFailed",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"500": {
-						"description": "InternalServerError",
+					"default": {
+						"description": "DefaultErrorResponse",
 						"schema": {
 							"$ref": "#/definitions/ErrorDetails"
 						}
@@ -781,32 +577,8 @@
 							"$ref": "#/definitions/EventHubConsumerGroupInfo"
 						}
 					},
-					"400": {
-						"description": "BadRequest",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"404": {
-						"description": "NotFound",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"409": {
-						"description": "Conflict",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"412": {
-						"description": "PreconditionFailed",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"500": {
-						"description": "InternalServerError",
+					"default": {
+						"description": "DefaultErrorResponse",
 						"schema": {
 							"$ref": "#/definitions/ErrorDetails"
 						}
@@ -849,32 +621,8 @@
 							"$ref": "#/definitions/ResponseWithContinuation[JobInfo]"
 						}
 					},
-					"400": {
-						"description": "BadRequest",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"404": {
-						"description": "NotFound",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"409": {
-						"description": "Conflict",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"412": {
-						"description": "PreconditionFailed",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"500": {
-						"description": "InternalServerError",
+					"default": {
+						"description": "DefaultErrorResponse",
 						"schema": {
 							"$ref": "#/definitions/ErrorDetails"
 						}
@@ -922,32 +670,8 @@
 							"$ref": "#/definitions/JobInfo"
 						}
 					},
-					"400": {
-						"description": "BadRequest",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"404": {
-						"description": "NotFound",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"409": {
-						"description": "Conflict",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"412": {
-						"description": "PreconditionFailed",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"500": {
-						"description": "InternalServerError",
+					"default": {
+						"description": "DefaultErrorResponse",
 						"schema": {
 							"$ref": "#/definitions/ErrorDetails"
 						}
@@ -990,32 +714,8 @@
 							"$ref": "#/definitions/ResponseWithContinuation[IotHubQuotaMetricInfo]"
 						}
 					},
-					"400": {
-						"description": "BadRequest",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"404": {
-						"description": "NotFound",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"409": {
-						"description": "Conflict",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"412": {
-						"description": "PreconditionFailed",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"500": {
-						"description": "InternalServerError",
+					"default": {
+						"description": "DefaultErrorResponse",
 						"schema": {
 							"$ref": "#/definitions/ErrorDetails"
 						}
@@ -1053,6 +753,12 @@
 						"description": "OK",
 						"schema": {
 							"$ref": "#/definitions/IotHubNameAvailabilityInfo"
+						}
+					},
+					"default": {
+						"description": "DefaultErrorResponse",
+						"schema": {
+							"$ref": "#/definitions/ErrorDetails"
 						}
 					}
 				},
@@ -1093,32 +799,8 @@
 							"$ref": "#/definitions/ResponseWithContinuation[SharedAccessSignatureAuthorizationRule]"
 						}
 					},
-					"400": {
-						"description": "BadRequest",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"404": {
-						"description": "NotFound",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"409": {
-						"description": "Conflict",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"412": {
-						"description": "PreconditionFailed",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"500": {
-						"description": "InternalServerError",
+					"default": {
+						"description": "DefaultErrorResponse",
 						"schema": {
 							"$ref": "#/definitions/ErrorDetails"
 						}
@@ -1166,32 +848,8 @@
 							"$ref": "#/definitions/SharedAccessSignatureAuthorizationRule"
 						}
 					},
-					"400": {
-						"description": "BadRequest",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"404": {
-						"description": "NotFound",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"409": {
-						"description": "Conflict",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"412": {
-						"description": "PreconditionFailed",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"500": {
-						"description": "InternalServerError",
+					"default": {
+						"description": "DefaultErrorResponse",
 						"schema": {
 							"$ref": "#/definitions/ErrorDetails"
 						}
@@ -1241,32 +899,8 @@
 							"$ref": "#/definitions/JobInfo"
 						}
 					},
-					"400": {
-						"description": "BadRequest",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"404": {
-						"description": "NotFound",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"409": {
-						"description": "Conflict",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"412": {
-						"description": "PreconditionFailed",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"500": {
-						"description": "InternalServerError",
+					"default": {
+						"description": "DefaultErrorResponse",
 						"schema": {
 							"$ref": "#/definitions/ErrorDetails"
 						}
@@ -1316,32 +950,8 @@
 							"$ref": "#/definitions/JobInfo"
 						}
 					},
-					"400": {
-						"description": "BadRequest",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"404": {
-						"description": "NotFound",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"409": {
-						"description": "Conflict",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"412": {
-						"description": "PreconditionFailed",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					},
-					"500": {
-						"description": "InternalServerError",
+					"default": {
+						"description": "DefaultErrorResponse",
 						"schema": {
 							"$ref": "#/definitions/ErrorDetails"
 						}
@@ -1440,6 +1050,72 @@
 				}
 			}
 		},
+		"EventHubProperties": {
+			"type": "object",
+			"properties": {
+				"retentionTimeInDays": {
+					"format": "int64",
+					"type": "integer"
+				},
+				"partitionCount": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"partitionIds": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"path": {
+					"type": "string"
+				},
+				"endpoint": {
+					"type": "string"
+				},
+				"internalAuthorizationPolicies": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/SharedAccessAuthorizationRule"
+					}
+				},
+				"authorizationPolicies": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/SharedAccessAuthorizationRule"
+					}
+				}
+			}
+		},
+		"StorageEndpointProperties": {
+			"type": "object",
+			"properties": {
+				"sasTtlAsIso8601": {
+					"type": "string"
+				},
+				"connectionString": {
+					"type": "string"
+				},
+				"containerName": {
+					"type": "string"
+				}
+			}
+		},
+		"MessagingEndpointProperties": {
+			"type": "object",
+			"properties": {
+				"lockDurationAsIso8601": {
+					"type": "string"
+				},
+				"ttlAsIso8601": {
+					"type": "string"
+				},
+				"maxDeliveryCount": {
+					"format": "int32",
+					"type": "integer"
+				}
+			}
+		},
 		"CloudToDeviceProperties": {
 			"type": "object",
 			"properties": {
@@ -1464,6 +1140,48 @@
 						"enum": ["None", "Error", "Information"],
 						"type": "string"
 					}
+				}
+			}
+		},
+		"SharedAccessAuthorizationRule": {
+			"type": "object",
+			"properties": {
+				"KeyName": {
+					"type": "string"
+				},
+				"PrimaryKey": {
+					"type": "string"
+				},
+				"IssuerName": {
+					"type": "string"
+				},
+				"SecondaryKey": {
+					"type": "string"
+				},
+				"ClaimType": {
+					"type": "string"
+				},
+				"ClaimValue": {
+					"type": "string"
+				},
+				"Rights": {
+					"type": "array",
+					"items": {
+						"enum": ["Manage", "Send", "Listen", "ManageNotificationHub"],
+						"type": "string"
+					}
+				},
+				"CreatedTime": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"ModifiedTime": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"Revision": {
+					"format": "int64",
+					"type": "integer"
 				}
 			}
 		},
@@ -1516,6 +1234,152 @@
 				},
 				"sku": {
 					"$ref": "#/definitions/IotHubSkuInfo"
+				}
+			}
+		},
+		"ResponseWithContinuation[ResourceProviderOperationInfo]": {
+			"type": "object",
+			"properties": {
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ResourceProviderOperationInfo"
+					}
+				},
+				"nextLink": {
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"ResourceProviderOperationInfo": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"display": {
+					"$ref": "#/definitions/ResourceProviderOperationDisplayInfo"
+				},
+				"origin": {
+					"type": "string"
+				},
+				"properties": {
+					"$ref": "#/definitions/ResourceProviderOperationProperties"
+				}
+			}
+		},
+		"ResourceProviderOperationDisplayInfo": {
+			"type": "object",
+			"properties": {
+				"provider": {
+					"type": "string",
+					"readOnly": true
+				},
+				"resource": {
+					"type": "string",
+					"readOnly": true
+				},
+				"operation": {
+					"type": "string"
+				},
+				"description": {
+					"type": "string"
+				}
+			}
+		},
+		"ResourceProviderOperationProperties": {
+			"type": "object",
+			"properties": {
+				"serviceSpecification": {
+					"$ref": "#/definitions/ServiceSpecification"
+				}
+			}
+		},
+		"ServiceSpecification": {
+			"type": "object",
+			"properties": {
+				"metricSpecifications": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/MetricSpecification"
+					}
+				},
+				"logSpecifications": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/LogSpecification"
+					}
+				}
+			}
+		},
+		"MetricSpecification": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"displayName": {
+					"type": "string"
+				},
+				"displayDescription": {
+					"type": "string"
+				},
+				"unit": {
+					"enum": ["Bytes", "BytesPerSecond", "Count", "CountPerSecond", "Percent", "Seconds"],
+					"type": "string"
+				},
+				"aggregationType": {
+					"enum": ["Average", "Last", "Maximum", "Minimum", "None", "Total"],
+					"type": "string"
+				},
+				"dimensions": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/MetricDimension"
+					}
+				},
+				"availabilities": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/MetricAvailability"
+					}
+				}
+			}
+		},
+		"LogSpecification": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"displayName": {
+					"type": "string"
+				},
+				"blobDuration": {
+					"type": "string"
+				}
+			}
+		},
+		"MetricDimension": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"displayName": {
+					"type": "string"
+				}
+			}
+		},
+		"MetricAvailability": {
+			"type": "object",
+			"properties": {
+				"timeGrain": {
+					"type": "string"
+				},
+				"blobDuration": {
+					"type": "string"
 				}
 			}
 		},
@@ -1581,6 +1445,42 @@
 				"nextLink": {
 					"type": "string",
 					"readOnly": true
+				}
+			}
+		},
+		"IotHubSkuDescription": {
+			"type": "object",
+			"properties": {
+				"resourceType": {
+					"type": "string",
+					"readOnly": true
+				},
+				"sku": {
+					"$ref": "#/definitions/IotHubSkuInfo"
+				},
+				"capacity": {
+					"$ref": "#/definitions/IotHubCapacity"
+				}
+			}
+		},
+		"IotHubCapacity": {
+			"type": "object",
+			"properties": {
+				"minimum": {
+					"format": "int64",
+					"type": "integer"
+				},
+				"maximum": {
+					"format": "int64",
+					"type": "integer"
+				},
+				"default": {
+					"format": "int64",
+					"type": "integer"
+				},
+				"scaleType": {
+					"enum": ["Automatic", "Manual", "None"],
+					"type": "string"
 				}
 			}
 		},
@@ -1670,6 +1570,22 @@
 				"nextLink": {
 					"type": "string",
 					"readOnly": true
+				}
+			}
+		},
+		"IotHubQuotaMetricInfo": {
+			"type": "object",
+			"properties": {
+				"Name": {
+					"type": "string"
+				},
+				"CurrentValue": {
+					"format": "int64",
+					"type": "integer"
+				},
+				"MaxValue": {
+					"format": "int64",
+					"type": "integer"
 				}
 			}
 		},
