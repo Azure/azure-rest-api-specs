@@ -1131,7 +1131,7 @@
           "type": "boolean",
           "x-ms-client-name": "operationResult",
           "readOnly": true,
-          "description": "Gets the result of the operation or request."
+          "description": "the result of the operation or request."
         }
       },
       "description": "The result of the request or operation."
@@ -1143,19 +1143,19 @@
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the list of ACLSpec entries on a file or directory."
+          "description": "the list of ACLSpec entries on a file or directory."
         },
         "group": {
           "type": "string",
-          "description": "Gets or sets the group owner, an AAD Object ID."
+          "description": "the group owner, an AAD Object ID."
         },
         "owner": {
           "type": "string",
-          "description": "Gets or sets the user owner, an AAD Object ID."
+          "description": "the user owner, an AAD Object ID."
         },
         "stickyBit": {
           "type": "boolean",
-          "description": "Gets or sets the indicator of whether the sticky bit is on or off."
+          "description": "the indicator of whether the sticky bit is on or off."
         }
       },
       "description": "Data Lake Store file or directory Access Control List information."
@@ -1164,7 +1164,7 @@
       "properties": {
         "AclStatus": {
           "$ref": "#/definitions/AclStatus",
-          "description": "Gets or sets the AclStatus object for a given file or directory."
+          "description": "the AclStatus object for a given file or directory."
         }
       },
       "description": "Data Lake Store file or directory Access Control List information."
@@ -1175,25 +1175,25 @@
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the number of directories."
+          "description": "the number of directories."
         },
         "fileCount": {
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the number of files."
+          "description": "the number of files."
         },
         "length": {
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the number of bytes used by the contet."
+          "description": "the number of bytes used by the contet."
         },
         "spaceConsumed": {
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the disk space consumed by the content."
+          "description": "the disk space consumed by the content."
         }
       },
       "description": "Data Lake Store content summary information"
@@ -1203,7 +1203,7 @@
         "ContentSummary": {
           "$ref": "#/definitions/ContentSummary",
           "readOnly": true,
-          "description": "Gets the content summary for the specified path"
+          "description": "the content summary for the specified path"
         }
       },
       "description": "Data Lake Store filesystem content summary information response."
@@ -1214,56 +1214,56 @@
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the last access time as ticks since the epoch."
+          "description": "the last access time as ticks since the epoch."
         },
         "blockSize": {
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the block size for the file."
+          "description": "the block size for the file."
         },
         "childrenNum": {
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the number of children in the directory."
+          "description": "the number of children in the directory."
         },
         "group": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the group owner."
+          "description": "the group owner."
         },
         "length": {
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the number of bytes in a file."
+          "description": "the number of bytes in a file."
         },
         "modificationTime": {
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the modification time as ticks since the epoch."
+          "description": "the modification time as ticks since the epoch."
         },
         "owner": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the user who is the owner."
+          "description": "the user who is the owner."
         },
         "pathSuffix": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the path suffix."
+          "description": "the path suffix."
         },
         "permission": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the permission represented as an string."
+          "description": "the permission represented as an string."
         },
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the type of the path object.",
+          "description": "the type of the path object.",
           "enum": [
             "FILE",
             "DIRECTORY"
@@ -1284,7 +1284,7 @@
           "items": {
             "$ref": "#/definitions/FileStatusProperties"
           },
-          "description": "Gets the object containing the list of properties of the files."
+          "description": "the object containing the list of properties of the files."
         }
       },
       "description": "Data Lake Store file status list information."
@@ -1294,7 +1294,7 @@
         "FileStatuses": {
           "$ref": "#/definitions/FileStatuses",
           "readOnly": true,
-          "description": "Gets the object representing the list of file statuses."
+          "description": "the object representing the list of file statuses."
         }
       },
       "description": "Data Lake Store filesystem file status list information response."
@@ -1304,7 +1304,7 @@
         "FileStatus": {
           "$ref": "#/definitions/FileStatusProperties",
           "readOnly": true,
-          "description": "Gets the file status object associated with the specified path."
+          "description": "the file status object associated with the specified path."
         }
       },
       "description": "Data Lake Store filesystem file status information response."
@@ -1381,17 +1381,17 @@
         "exception": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the class name of the exception thrown, such as 'IllegalArgumentException'."
+          "description": "the class name of the exception thrown, such as 'IllegalArgumentException'."
         },
         "javaClassName": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the full class package name for the exception thrown, such as 'java.lang.IllegalArgumentException'."
+          "description": "the full class package name for the exception thrown, such as 'java.lang.IllegalArgumentException'."
         },
         "message": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the message associated with the exception that was thrown, such as 'Invalid value for webhdfs parameter \"permission\":...'."
+          "description": "the message associated with the exception that was thrown, such as 'Invalid value for webhdfs parameter \"permission\":...'."
         }
       },
       "description": "Data Lake Store filesystem exception based on the WebHDFS definition for RemoteExceptions."
@@ -1401,7 +1401,7 @@
         "RemoteException": {
           "$ref": "#/definitions/AdlsRemoteException",
           "readOnly": true,
-          "description": "Gets the object representing the actual WebHDFS exception being returned."
+          "description": "the object representing the actual WebHDFS exception being returned."
         }
       },
       "description": "Data Lake Store filesystem error containing a specific WebHDFS exception."
