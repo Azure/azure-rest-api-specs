@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "EngagementManagementClient",
-    "description": "The wrapper for the Engagement REST APIs.",
+    "title": "Engagement.ManagementClient",
+    "description": "Microsoft Azure Mobile Engagement REST APIs.",
     "version": "2014-12-01"
   },
   "host": "management.azure.com",
@@ -1308,14 +1308,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks": {
       "get": {
         "tags": [
           "Export",
           "List"
         ],
-        "operationId": "ExportJobs_List",
-        "description": "Get the list of export jobs.",
+        "operationId": "ExportTasks_List",
+        "description": "Get the list of export tasks.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1337,7 +1337,7 @@
             "in": "query",
             "required": false,
             "type": "integer",
-            "description": "Control paging of export jobs, start results at the given offset, defaults to 0 (1st page of data).",
+            "description": "Control paging of export tasks, start results at the given offset, defaults to 0 (1st page of data).",
             "default": 0,
             "minimum": 0
           },
@@ -1346,7 +1346,7 @@
             "in": "query",
             "required": false,
             "type": "integer",
-            "description": "Control paging of export jobs, number of export jobs to return with each call. By default, it returns all export jobs with a default paging of 20.\nThe response contains a `nextLink` property describing the path to get the next page if there are more results.\nThe maximum paging limit for $top is 40.",
+            "description": "Control paging of export tasks, number of export tasks to return with each call. By default, it returns all export tasks with a default paging of 20.\nThe response contains a `nextLink` property describing the path to get the next page if there are more results.\nThe maximum paging limit for $top is 40.",
             "default": 20,
             "maximum": 40,
             "minimum": 1
@@ -1356,18 +1356,18 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Sort results by an expression which looks like `$orderby=jobId asc` (default when not specified).\nThe syntax is orderby={property} {direction} or just orderby={property}.\nProperties that can be specified for sorting: jobId, errorDetails, dateCreated, jobStatus, and dateCreated.\nThe available directions are asc (for ascending order) and desc (for descending order).\nWhen not specified the asc direction is used.\nOnly one orderby property can be specified."
+            "description": "Sort results by an expression which looks like `$orderby=taskId asc` (default when not specified).\nThe syntax is orderby={property} {direction} or just orderby={property}.\nProperties that can be specified for sorting: taskId, errorDetails, dateCreated, taskStatus, and dateCreated.\nThe available directions are asc (for ascending order) and desc (for descending order).\nWhen not specified the asc direction is used.\nOnly one orderby property can be specified."
           }
         ],
         "responses": {
           "200": {
-            "description": "Success, export jobs are returned as JSON.",
+            "description": "Success. Returns a list of export task statuses.",
             "schema": {
-              "$ref": "#/definitions/ExportJobListResult"
+              "$ref": "#/definitions/ExportTaskListResult"
             }
           },
           "default": {
-            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.",
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
             "schema": {
               "$ref": "#/definitions/ApiError"
             }
@@ -1378,293 +1378,47 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/historical": {
-      "post": {
-        "tags": [
-          "Export",
-          "CRUD"
-        ],
-        "operationId": "ExportJobs_CreateHistorical",
-        "description": "Creates a job to export the specified data to a storageUrl.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AppCollectionParameter"
-          },
-          {
-            "$ref": "#/parameters/AppNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/HistoricalExportJob"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Success, export job is returned.",
-            "schema": {
-              "$ref": "#/definitions/ExportJobResult"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "URL path to get the created export job."
-              }
-            }
-          },
-          "202": {
-            "description": "Success, export job is returned.",
-            "schema": {
-              "$ref": "#/definitions/ExportJobResult"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "URL path to get the created export job."
-              }
-            }
-          },
-          "default": {
-            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n",
-            "schema": {
-              "$ref": "#/definitions/ApiError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/snapshot": {
-      "post": {
-        "tags": [
-          "Export",
-          "CRUD"
-        ],
-        "operationId": "ExportJobs_CreateSnapshot",
-        "description": "Creates a job to export the specified data to a storageUrl.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AppCollectionParameter"
-          },
-          {
-            "$ref": "#/parameters/AppNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SnapshotExportJob"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Success, export job is returned.",
-            "schema": {
-              "$ref": "#/definitions/ExportJobResult"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "URL path to get the created export job."
-              }
-            }
-          },
-          "202": {
-            "description": "Success, export job is returned.",
-            "schema": {
-              "$ref": "#/definitions/ExportJobResult"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "URL path to get the created export job."
-              }
-            }
-          },
-          "default": {
-            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n",
-            "schema": {
-              "$ref": "#/definitions/ApiError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/campaignStatsByIds": {
-      "post": {
-        "tags": [
-          "Export",
-          "CRUD"
-        ],
-        "operationId": "ExportJobs_CreateCampaignStatsByIds",
-        "description": "Creates a job to export a push campaign data to a storageUrl.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AppCollectionParameter"
-          },
-          {
-            "$ref": "#/parameters/AppNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CampaignStatsByIdsExportJob"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success, export job is returned.",
-            "schema": {
-              "$ref": "#/definitions/ExportJobResult"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "URL path to get the created export job."
-              }
-            }
-          },
-          "default": {
-            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n",
-            "schema": {
-              "$ref": "#/definitions/ApiError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/campaignStatsByPeriod": {
-      "post": {
-        "tags": [
-          "Export",
-          "CRUD"
-        ],
-        "operationId": "ExportJobs_CreateCampaignStatsByPeriod",
-        "description": "Creates a job to export a push campaign data for a period to a storageUrl.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AppCollectionParameter"
-          },
-          {
-            "$ref": "#/parameters/AppNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CampaignStatsByPeriodExportJob"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success, export job is returned.",
-            "schema": {
-              "$ref": "#/definitions/ExportJobResult"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "URL path to get the created export job."
-              }
-            }
-          },
-          "default": {
-            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n",
-            "schema": {
-              "$ref": "#/definitions/ApiError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/{id}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/AppCollectionParameter"
-        },
-        {
-          "$ref": "#/parameters/AppNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }
-      ],
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/{id}": {
       "get": {
         "tags": [
           "Export",
           "CRUD"
         ],
-        "operationId": "ExportJobs_Get",
-        "description": "The Get export job operation retrieves information about a previously created export job.",
+        "operationId": "ExportTasks_Get",
+        "description": "Retrieves information about a previously created export task.",
         "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Export job identifier."
+            "description": "Export task identifier."
           }
         ],
         "responses": {
           "200": {
-            "description": "Success, export job is returned.",
+            "description": "Success. The status of the export task is returned.",
             "schema": {
-              "$ref": "#/definitions/ExportJobResult"
+              "$ref": "#/definitions/ExportTaskResult"
             }
           },
           "default": {
-            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n* `404`: Export job not found.\n",
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
             "schema": {
               "$ref": "#/definitions/ApiError"
             }
@@ -1672,13 +1426,563 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/importJobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/activities": {
+      "post": {
+        "tags": [
+          "Export",
+          "CRUD"
+        ],
+        "operationId": "ExportTasks_CreateActivitiesTask",
+        "description": "Creates a task to export activities.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DateRangeExportTaskParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/ExportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/crashes": {
+      "post": {
+        "tags": [
+          "Export",
+          "CRUD"
+        ],
+        "operationId": "ExportTasks_CreateCrashesTask",
+        "description": "Creates a task to export crashes.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DateRangeExportTaskParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/ExportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/errors": {
+      "post": {
+        "tags": [
+          "Export",
+          "CRUD"
+        ],
+        "operationId": "ExportTasks_CreateErrorsTask",
+        "description": "Creates a task to export errors.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DateRangeExportTaskParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/ExportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/events": {
+      "post": {
+        "tags": [
+          "Export",
+          "CRUD"
+        ],
+        "operationId": "ExportTasks_CreateEventsTask",
+        "description": "Creates a task to export events.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DateRangeExportTaskParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/ExportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/jobs": {
+      "post": {
+        "tags": [
+          "Export",
+          "CRUD"
+        ],
+        "operationId": "ExportTasks_CreateJobsTask",
+        "description": "Creates a task to export jobs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DateRangeExportTaskParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/ExportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/sessions": {
+      "post": {
+        "tags": [
+          "Export",
+          "CRUD"
+        ],
+        "operationId": "ExportTasks_CreateSessionsTask",
+        "description": "Creates a task to export sessions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DateRangeExportTaskParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/ExportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/tags": {
+      "post": {
+        "tags": [
+          "Export",
+          "CRUD"
+        ],
+        "operationId": "ExportTasks_CreateTagsTask",
+        "description": "Creates a task to export tags.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportTaskParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/ExportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/tokens": {
+      "post": {
+        "tags": [
+          "Export",
+          "CRUD"
+        ],
+        "operationId": "ExportTasks_CreateTokensTask",
+        "description": "Creates a task to export tags.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportTaskParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/ExportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/feedbackByDate": {
+      "post": {
+        "tags": [
+          "Export",
+          "CRUD"
+        ],
+        "operationId": "ExportTasks_CreateFeedbackTaskByDateRange",
+        "description": "Creates a task to export push campaign data for a date range.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeedbackByDateRangeParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/ExportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/feedbackByCampaign": {
+      "post": {
+        "tags": [
+          "Export",
+          "CRUD"
+        ],
+        "operationId": "ExportTasks_CreateFeedbackTaskByCampaign",
+        "description": "Creates a task to export push campaign data for a set of campaigns.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeedbackByCampaignParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/ExportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/importTasks": {
       "get": {
         "tags": [
           "Import",
           "List"
         ],
-        "operationId": "ImportJobs_List",
+        "operationId": "importTasks_List",
         "description": "Get the list of import jobs.",
         "parameters": [
           {
@@ -1727,7 +2031,7 @@
           "200": {
             "description": "Success, import jobs are returned as JSON.",
             "schema": {
-              "$ref": "#/definitions/ImportJobListResult"
+              "$ref": "#/definitions/ImportTaskListResult"
             }
           },
           "default": {
@@ -1746,7 +2050,7 @@
           "Import",
           "CRUD"
         ],
-        "operationId": "ImportJobs_Create",
+        "operationId": "ImportTasks_Create",
         "description": "Creates a job to import the specified data to a storageUrl.",
         "parameters": [
           {
@@ -1769,7 +2073,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ImportJob"
+              "$ref": "#/definitions/ImportTask"
             }
           }
         ],
@@ -1777,7 +2081,7 @@
           "201": {
             "description": "Success, import job is returned.",
             "schema": {
-              "$ref": "#/definitions/ImportJobResult"
+              "$ref": "#/definitions/ImportTaskResult"
             },
             "headers": {
               "Location": {
@@ -1789,7 +2093,7 @@
           "202": {
             "description": "Success, import job is returned.",
             "schema": {
-              "$ref": "#/definitions/ImportJobResult"
+              "$ref": "#/definitions/ImportTaskResult"
             },
             "headers": {
               "Location": {
@@ -1807,7 +2111,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/importJobs/{id}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/importTasks/{id}": {
       "parameters": [
         {
           "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1830,7 +2134,7 @@
           "Import",
           "CRUD"
         ],
-        "operationId": "ImportJobs_Get",
+        "operationId": "ImportTasks_Get",
         "description": "The Get import job operation retrieves information about a previously created import job.",
         "parameters": [
           {
@@ -1845,7 +2149,7 @@
           "200": {
             "description": "Success, import job is returned.",
             "schema": {
-              "$ref": "#/definitions/ImportJobResult"
+              "$ref": "#/definitions/ImportTaskResult"
             }
           },
           "default": {
@@ -3419,173 +3723,270 @@
         }
       }
     },
-    "HistoricalExportJob": {
+    "CampaignType": {
+      "type": "string",
+      "enum": [
+        "Announcement",
+        "DataPush",
+        "NativePush",
+        "Poll"
+      ],
+      "x-ms-enum": {
+        "name": "CampaignType",
+        "modelAsString": false
+      },
+      "description": "Campaign type."
+    },
+    "ExportState": {
+      "type": "string",
+      "description": "The state of an export task.",
+      "enum": [
+        "Queued",
+        "Started",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ExportState",
+        "modelAsString": false
+      }
+    },
+    "ExportType": {
+      "type": "string",
+      "description": "The type of export.",
+      "enum": [
+        "Activity",
+        "Tag",
+        "Crash",
+        "Error",
+        "Event",
+        "Job",
+        "Session",
+        "Token",
+        "Push"
+      ],
+      "x-ms-enum": {
+        "name": "ExportType",
+        "modelAsString": false
+      }
+    },
+    "ExportFormat": {
+      "type": "string",
+      "description": "The format of exported data.",
+      "enum": [
+        "JsonBlob",
+        "CsvBlob"
+      ],
+      "x-ms-enum": {
+        "name": "ExportFormat",
+        "modelAsString": false
+      }
+    },
+    "ExportOptions": {
+      "type": "object",
+      "description": "Options to control export generation.",
       "properties": {
-        "startDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date at which the export should be started from. The date conforms to the ISO 8601 standard.\n"
-        },
-        "endDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date at which the export should export data to. The date conforms to the ISO 8601 standard.\n"
-        },
-        "historicalDataType": {
-          "type": "string",
-          "description": "The type of data to export.",
-          "enum": [
-            "Activity",
-            "Crash",
-            "Error",
-            "Event",
-            "Job",
-            "Session"
-          ],
-          "x-ms-enum": {
-            "name": "HistoricalDataTypes",
-            "modelAsString": true
-          }
-        },
-        "storageUrl": {
-          "type": "string",
-          "description": "A shared Access Signature (SAS) Storage URI where the output will be written."
+        "ExportUserId": {
+          "type": "boolean"
         }
       }
     },
-    "SnapshotExportJob": {
+    "Date": {
+      "type": "string",
+      "format": "date",
+      "description": "A date as defined by full-date in RFC3339."
+    },
+    "Timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "A date time as defined by date-time in RFC3339."
+    },
+    "URL": {
+      "type": "string",
+      "format": "uri"
+    },
+    "ContainerUrl": {
+      "$ref": "#/definitions/URL",
+      "description": "A shared Access Signature (SAS) BLOB container URL to contain the exported data."
+    },
+    "DateRangeExportTaskParameter": {
+      "readOnly": false,
+      "required": [
+        "ContainerUrl",
+        "StartDate",
+        "EndDate",
+        "ExportFormat"
+      ],
       "properties": {
-        "snapshotDataType": {
-          "type": "string",
-          "description": "The type of data to export.",
-          "enum": [
-            "Tag",
-            "Token"
-          ],
-          "x-ms-enum": {
-            "name": "SnapshotDataTypes",
-            "modelAsString": true
-          }
+        "ContainerUrl": {
+          "$ref": "#/definitions/ContainerUrl"
         },
-        "storageUrl": {
+        "Description": {
           "type": "string",
-          "description": "A shared Access Signature (SAS) Storage URI where the output will be written."
+          "description": "A description of the export task."
+        },
+        "StartDate": {
+          "$ref": "#/definitions/Date",
+          "description": "The RFC3339 full-date of the start of the period for which data is exported."
+        },
+        "EndDate": {
+          "$ref": "#/definitions/Date",
+          "description": "The RFC3339 full-date of the end of the period for which data is exported."
+        },
+        "ExportFormat": {
+          "$ref": "#/definitions/ExportFormat",
+          "description": "The format of the exported data."
         }
       }
     },
-    "CampaignStatsByIdsExportJob": {
+    "ExportTaskParameter": {
+      "readOnly": false,
+      "required": [
+        "ContainerUrl",
+        "ExportFormat"
+      ],
       "properties": {
-        "campaignType": {
-          "type": "string",
-          "description": "The push campaign type.\n"
+        "ContainerUrl": {
+          "$ref": "#/definitions/ContainerUrl"
         },
-        "campaignIds": {
+        "Description": {
+          "type": "string",
+          "description": "A description of the export task."
+        },
+        "ExportFormat": {
+          "$ref": "#/definitions/ExportFormat",
+          "description": "The format of the exported data."
+        }
+      }
+    },
+    "FeedbackByCampaignParameter": {
+      "readOnly": false,
+      "required": [
+        "ContainerUrl",
+        "CampaignType",
+        "CampaignIds",
+        "ExportFormat"
+      ],
+      "properties": {
+        "ContainerUrl": {
+          "$ref": "#/definitions/ContainerUrl"
+        },
+        "Description": {
+          "type": "string",
+          "description": "A description of the export task."
+        },
+        "CampaignType": {
+          "$ref": "#/definitions/CampaignType"
+        },
+        "CampaignIds": {
           "type": "array",
-          "description": "A list of campaign identifiers.\n",
+          "description": "A list of campaign identifiers.",
+          "minItems" : 1,
           "items": {
-            "type": "string"
+            "type": "integer",
+            "format": "long"
           }
         },
-        "storageUrl": {
-          "type": "string",
-          "description": "A shared Access Signature (SAS) Storage URI where the output will be written."
+        "ExportFormat": {
+          "$ref": "#/definitions/ExportFormat",
+          "description": "The format of the exported data."
         }
       }
     },
-    "CampaignStatsByPeriodExportJob": {
+    "FeedbackByDateRangeParameter": {
+      "readOnly": false,
+      "required": [
+        "ContainerUrl",
+        "CampaignType",
+        "CampaignWindowStart",
+        "CampaignWindowEnd",
+        "ExportFormat"
+      ],
       "properties": {
-        "campaignType": {
-          "type": "string",
-          "description": "The push campaign type.\n"
+        "ContainerUrl": {
+          "$ref": "#/definitions/ContainerUrl"
         },
-        "campaignWindowStart": {
+        "Description": {
           "type": "string",
-          "format": "date-time",
-          "description": "For push exports, the start of the period for inclusion of active campaigns. The date conforms to the ISO8601 format.\n"
+          "description": "A description of the export task."
         },
-        "campaignWindowEnd": {
-          "type": "string",
-          "format": "date-time",
-          "description": "For push exports, the end of the period for inclusion of active campaigns. The date conforms to the ISO8601 format.\n"
+        "CampaignType": {
+          "$ref": "#/definitions/CampaignType"
         },
-        "storageUrl": {
-          "type": "string",
-          "description": "A shared Access Signature (SAS) Storage URI where the output will be written."
+        "CampaignWindowStart": {
+          "$ref": "#/definitions/Timestamp",
+          "description": "The RFC3339 date-time start of the period for inclusion of active campaigns."
+        },
+        "CampaignWindowEnd": {
+          "$ref": "#/definitions/Timestamp",
+          "description": "The RFC3339 date-time end of the period for inclusion of active campaigns."
+        },
+        "ExportFormat": {
+          "$ref": "#/definitions/ExportFormat",
+          "description": "The format of the exported data."
         }
       }
     },
-    "ExportJobListResult": {
+    "ExportTaskListResult": {
+      "readOnly": true,
+      "required": [
+        "Value"
+      ],
       "properties": {
-        "value": {
+        "Value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportJobResult"
+            "$ref": "#/definitions/ExportTaskResult"
           },
-          "description": "The list of export jobs."
+          "description": "The list of export tasks."
         },
-        "nextLink": {
+        "NextLink": {
           "type": "string",
           "description": "When the results are paged, the nextLink is the URI for the next page of results. This property is empty when there are no additional pages."
         }
       },
-      "description": "Gets a paged list of ExportJobs."
+      "description": "Gets a paged list of ExportTasks."
     },
-    "ExportJobResult": {
+    "ExportTaskResult": {
+      "readOnly": true,
+      "required": [
+        "Id",
+        "State",
+        "DateCreated",
+        "ExportType"
+      ],
       "properties": {
-        "id": {
+        "Id": {
           "type": "string",
-          "description": "Unique identifier of the export job."
+          "description": "Unique identifier of the export task."
         },
-        "state": {
+        "Description": {
           "type": "string",
-          "description": "The current state of the export job.",
-          "enum": [
-            "Queued",
-            "Started",
-            "Succeeded",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "JobStates",
-            "modelAsString": true
-          }
+          "description": "A description of the export task."
         },
-        "dateCreated": {
+        "State": {
+          "$ref": "#/definitions/ExportState"
+        },
+        "DateCreated": {
           "type": "string",
           "format": "date-time",
-          "description": "The date at which the export job was created.\nThe date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+          "description": "The RFC3339 date-time the export task was created."
         },
-        "dateCompleted": {
+        "DateCompleted": {
           "type": "string",
           "format": "date-time",
-          "description": "The date at which the export job completed (Not present if not yet completed).\nThe date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+          "description": "The RFC3339 date-time the export task was completed."
         },
-        "exportDataType": {
-          "type": "string",
-          "description": "The type of data to export.",
-          "enum": [
-            "Activity",
-            "Tag",
-            "Crash",
-            "Error",
-            "Event",
-            "Job",
-            "Session",
-            "Token",
-            "Push"
-          ],
-          "x-ms-enum": {
-            "name": "ExportDataTypes",
-            "modelAsString": true
-          }
+        "ExportType": {
+          "$ref": "#/definitions/ExportType"
         },
-        "errorDetails": {
+        "ErrorDetails": {
           "type": "string",
           "description": "Details of errors encountered during the export, if any."
         }
       }
     },
-    "ImportJob": {
+    "ImportTask": {
       "properties": {
         "storageUrl": {
           "type": "string",
@@ -3593,31 +3994,31 @@
         }
       }
     },
-    "ImportJobListResult": {
+    "ImportTaskListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ImportJobResult"
+            "$ref": "#/definitions/ImportTaskResult"
           },
-          "description": "The list of import jobs."
+          "description": "The list of import task."
         },
         "nextLink": {
           "type": "string",
           "description": "When the results are paged, the nextLink is the URI for the next page of results. This property is empty when there are no additional pages."
         }
       },
-      "description": "Gets a paged list of ImportJobs."
+      "description": "Gets a paged list of ImportTasks."
     },
-    "ImportJobResult": {
+    "ImportTaskResult": {
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier of the import job."
+          "description": "Unique identifier of the import task."
         },
         "state": {
           "type": "string",
-          "description": "The current state of the import job.",
+          "description": "The current state of the import task.",
           "enum": [
             "Queued",
             "Started",
@@ -3646,7 +4047,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ImportJob"
+          "$ref": "#/definitions/ImportTask"
         }
       ]
     }

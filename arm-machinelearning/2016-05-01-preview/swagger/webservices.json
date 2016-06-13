@@ -596,8 +596,12 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of the entity described in swagger. Always 'object'.",
+          "description": "The type of the entity described in swagger.",
           "default": "object"
+        },
+        "format": {
+          "type": "string",
+          "description": "The format, if 'type' is not 'object'"
         },
         "properties": {
           "type": "object",
@@ -608,8 +612,7 @@
         }
       },
       "required": [
-        "type",
-        "properties"
+        "type"
       ]
     },
     "ColumnSpecification": {
@@ -707,6 +710,10 @@
         "name": {
           "type": "string",
           "description": "Asset's friendly name."
+        },
+        "id": {
+          "type": "string",
+          "description": "Asset's Id."
         },
         "type": {
           "type": "string",

@@ -620,11 +620,11 @@
       "properties": {
         "startIpAddress": {
           "type": "string",
-          "description": "Gets or sets the start IP address for the firewall rule."
+          "description": "the start IP address for the firewall rule."
         },
         "endIpAddress": {
           "type": "string",
-          "description": "Gets or sets the end IP address for the firewall rule."
+          "description": "the end IP address for the firewall rule."
         }
       },
       "description": "Data Lake Store firewall rule properties information"
@@ -633,24 +633,24 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the firewall rule's name."
+          "description": "the firewall rule's name."
         },
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the namespace and type of the firewall Rule."
+          "description": "the namespace and type of the firewall Rule."
         },
         "id": {
           "type": "string",
-          "description": "Gets or sets the firewall rule's subscription ID."
+          "description": "the firewall rule's subscription ID."
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the firewall rule's regional location."
+          "description": "the firewall rule's regional location."
         },
         "properties": {
           "$ref": "#/definitions/FirewallRuleProperties",
-          "description": "Gets or sets the properties of the firewall rule."
+          "description": "the properties of the firewall rule."
         }
       },
       "description": "Data Lake Store firewall rule information"
@@ -663,18 +663,18 @@
           "items": {
             "$ref": "#/definitions/FirewallRule"
           },
-          "description": "Gets the results of the list operation"
+          "description": "the results of the list operation"
         },
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the link (url) to the next page of results."
+          "description": "the link (url) to the next page of results."
         },
         "count": {
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the total count of results that are available, but might not be returned in the current page."
+          "description": "the total count of results that are available, but might not be returned in the current page."
         }
       },
       "description": "Data Lake Store firewall rule list information."
@@ -684,7 +684,7 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the status of the Data Lake Store account while being provisioned.",
+          "description": "the status of the Data Lake Store account while being provisioned.",
           "enum": [
             "Failed",
             "Creating",
@@ -704,7 +704,7 @@
         "state": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the status of the Data Lake Store account after provisioning has completed.",
+          "description": "the status of the Data Lake Store account after provisioning has completed.",
           "enum": [
             "active",
             "suspended"
@@ -718,21 +718,21 @@
           "type": "string",
           "readOnly": true,
           "format": "date-time",
-          "description": "Gets the account creation time."
+          "description": "the account creation time."
         },
         "lastModifiedTime": {
           "type": "string",
           "readOnly": true,
           "format": "date-time",
-          "description": "Gets the account last modified time."
+          "description": "the account last modified time."
         },
         "endpoint": {
           "type": "string",
-          "description": "Gets or sets the gateway host."
+          "description": "the gateway host."
         },
         "defaultGroup": {
           "type": "string",
-          "description": "Gets or sets the default owner group for all new folders and files created in the Data Lake Store account."
+          "description": "the default owner group for all new folders and files created in the Data Lake Store account."
         }
       },
       "description": "Data Lake Store account properties information"
@@ -741,32 +741,32 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Gets or sets the account regional location."
+          "description": "the account regional location."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the account name."
+          "description": "the account name."
         },
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the namespace and type of the account."
+          "description": "the namespace and type of the account."
         },
         "id": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the account subscription ID."
+          "description": "the account subscription ID."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the value of custom properties."
+          "description": "the value of custom properties."
         },
         "properties": {
           "$ref": "#/definitions/DataLakeStoreAccountProperties",
-          "description": "Gets or sets the Data Lake Store account properties."
+          "description": "the Data Lake Store account properties."
         }
       },
       "description": "Data Lake Store account information"
@@ -779,18 +779,18 @@
           "items": {
             "$ref": "#/definitions/DataLakeStoreAccount"
           },
-          "description": "Gets the results of the list operation"
+          "description": "the results of the list operation"
         },
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the link (url) to the next page of results."
+          "description": "the link (url) to the next page of results."
         },
         "count": {
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the total count of results that are available, but might not be returned in the current page."
+          "description": "the total count of results that are available, but might not be returned in the current page."
         }
       },
       "description": "Data Lake Store account list information response."
@@ -800,17 +800,17 @@
         "code": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the HTTP status code or error code associated with this error"
+          "description": "the HTTP status code or error code associated with this error"
         },
         "message": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the error message localized based on Accept-Language"
+          "description": "the error message localized based on Accept-Language"
         },
         "target": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the target of the particular error (for example, the name of the property in error)."
+          "description": "the target of the particular error (for example, the name of the property in error)."
         }
       },
       "description": "Data Lake Store error details information"
@@ -820,12 +820,12 @@
         "trace": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the stack trace for the error"
+          "description": "the stack trace for the error"
         },
         "context": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the context for the error message"
+          "description": "the context for the error message"
         }
       },
       "description": "Data Lake Store inner error information"
@@ -835,17 +835,17 @@
         "code": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the HTTP status code or error code associated with this error"
+          "description": "the HTTP status code or error code associated with this error"
         },
         "message": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the error message to display."
+          "description": "the error message to display."
         },
         "target": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the target of the error."
+          "description": "the target of the error."
         },
         "details": {
           "type": "array",
@@ -853,12 +853,12 @@
           "items": {
             "$ref": "#/definitions/ErrorDetails"
           },
-          "description": "Gets the list of error details"
+          "description": "the list of error details"
         },
         "innerError": {
           "$ref": "#/definitions/InnerError",
           "readOnly": true,
-          "description": "Gets the inner exceptions or errors, if any"
+          "description": "the inner exceptions or errors, if any"
         }
       },
       "description": "Data Lake Store error information"
@@ -868,7 +868,7 @@
         "status": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the status of the AzureAsuncOperation",
+          "description": "the status of the AzureAsuncOperation",
           "enum": [
             "InProgress",
             "Succeeded",
