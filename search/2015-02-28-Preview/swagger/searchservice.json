@@ -957,7 +957,7 @@
           "$ref": "#/definitions/Analyzer"
         }
       ],
-      "description": "Treats the entire content of a field as a single token. This is useful for data like zip codes, ids, and some product names.",
+      "description": "Treats the entire content of a field as a single token. This is useful for data like zip codes, ids, and some product names. This analyzer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/KeywordAnalyzer.html"
       }
@@ -993,7 +993,7 @@
           "description": "A list of stopwords."
         }
       },
-      "description": "Flexibly separates text into terms via a regular expression pattern.",
+      "description": "Flexibly separates text into terms via a regular expression pattern. This analyzer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/PatternAnalyzer.html"
       }
@@ -1005,7 +1005,7 @@
           "$ref": "#/definitions/Analyzer"
         }
       ],
-      "description": "Divides text at non-letters and converts them to lower case.",
+      "description": "Divides text at non-letters and converts them to lower case. This analyzer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/SimpleAnalyzer.html"
       }
@@ -1032,7 +1032,7 @@
           "description": "A list of stopwords."
         }
       },
-      "description": "Standard Lucene analyzer; Composed of the standard tokenizer, lowercase filter and stop filter.",
+      "description": "Standard Apache Lucene analyzer; Composed of the standard tokenizer, lowercase filter and stop filter.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/StandardAnalyzer.html"
       }
@@ -1044,7 +1044,10 @@
           "$ref": "#/definitions/Analyzer"
         }
       ],
-      "description": "Standard analyzer with ASCII folding filter."
+      "description": "Standard analyzer with ASCII folding filter. This analyzer is implemented using Apache Lucene.",
+      "externalDocs": {
+        "url": "https://msdn.microsoft.com/en-us/library/azure/mt605304.aspx#Analyzers"
+      }
     },
     "StopAnalyzer": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StopAnalyzer",
@@ -1062,7 +1065,7 @@
           "description": "A list of stopwords."
         }
       },
-      "description": "Divides text at non-letters; Applies the lowercase and stopword token filters.",
+      "description": "Divides text at non-letters; Applies the lowercase and stopword token filters. This analyzer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/StopAnalyzer.html"
       }
@@ -1074,7 +1077,7 @@
           "$ref": "#/definitions/Analyzer"
         }
       ],
-      "description": "An analyzer that uses the whitespace tokenizer.",
+      "description": "An analyzer that uses the whitespace tokenizer. This analyzer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/WhitespaceAnalyzer.html"
       }
@@ -1112,7 +1115,7 @@
           "description": "The maximum token length. Tokens longer than the maximum length are split. Default is 255."
         }
       },
-      "description": "Grammar-based tokenizer that is suitable for processing most European-language documents.",
+      "description": "Grammar-based tokenizer that is suitable for processing most European-language documents. This tokenizer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/ClassicTokenizer.html"
       }
@@ -1160,7 +1163,7 @@
           "description": "Character classes to keep in the tokens."
         }
       },
-      "description": "Tokenizes the input from an edge into n-grams of the given size(s).",
+      "description": "Tokenizes the input from an edge into n-grams of the given size(s). This tokenizer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/EdgeNGramTokenizer.html"
       },
@@ -1181,7 +1184,7 @@
           "description": "The read buffer size in bytes. Default is 256."
         }
       },
-      "description": "Emits the entire input as a single token.",
+      "description": "Emits the entire input as a single token. This tokenizer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/KeywordTokenizer.html"
       }
@@ -1193,7 +1196,7 @@
           "$ref": "#/definitions/Tokenizer"
         }
       ],
-      "description": "Divides text at non-letters and converts them to lower case.",
+      "description": "Divides text at non-letters. This tokenizer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/LetterTokenizer.html"
       }
@@ -1205,7 +1208,7 @@
           "$ref": "#/definitions/Tokenizer"
         }
       ],
-      "description": "Divides text at non-letters.",
+      "description": "Divides text at non-letters and converts them to lower case. This tokenizer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/LowerCaseTokenizer.html"
       }
@@ -1397,7 +1400,7 @@
           "description": "Character classes to keep in the tokens."
         }
       },
-      "description": "Tokenizes the input into n-grams of the given size(s).",
+      "description": "Tokenizes the input into n-grams of the given size(s). This tokenizer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/NGramTokenizer.html"
       },
@@ -1445,7 +1448,7 @@
           "description": "The number of initial tokens to skip. Default is 0."
         }
       },
-      "description": "Tokenizer for path-like hierarchies.",
+      "description": "Tokenizer for path-like hierarchies. This tokenizer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/path/PathHierarchyTokenizer.html"
       }
@@ -1474,7 +1477,7 @@
           "description": "The zero-based ordinal of the matching group in the regular expression pattern to extract into tokens. Use -1 if you want to use the entire pattern to split the input into tokens, irrespective of matching groups. Default is -1."
         }
       },
-      "description": "Tokenizer that uses regex pattern matching to construct distinct tokens.",
+      "description": "Tokenizer that uses regex pattern matching to construct distinct tokens. This tokenizer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/pattern/PatternTokenizer.html"
       }
@@ -1494,9 +1497,9 @@
           "description": "The maximum token length. Tokens longer than the maximum length are split. Default is 255."
         }
       },
-      "description": "Breaks text following the Unicode Text Segmentation rules.",
+      "description": "Breaks text following the Unicode Text Segmentation rules. This tokenizer is implemented using Apache Lucene.",
       "externalDocs": {
-        "url": "http://unicode.org/reports/tr29/"
+        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/StandardTokenizer.html"
       }
     },
     "UaxEmailUrlTokenizer": {
@@ -1514,7 +1517,7 @@
           "description": "The maximum token length. Tokens longer than the maximum length are split. Default is 255."
         }
       },
-      "description": "Tokenizes urls and emails as one token.",
+      "description": "Tokenizes urls and emails as one token. This tokenizer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/UAX29URLEmailTokenizer.html"
       }
@@ -1526,7 +1529,7 @@
           "$ref": "#/definitions/Tokenizer"
         }
       ],
-      "description": "Divides text at whitespace.",
+      "description": "Divides text at whitespace. This tokenizer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/WhitespaceTokenizer.html"
       }
@@ -1556,7 +1559,7 @@
           "$ref": "#/definitions/TokenFilter"
         }
       ],
-      "description": "A token filter that applies the Arabic normalizer to normalize the orthography.",
+      "description": "A token filter that applies the Arabic normalizer to normalize the orthography. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ar/ArabicNormalizationFilter.html"
       }
@@ -1568,7 +1571,7 @@
           "$ref": "#/definitions/TokenFilter"
         }
       ],
-      "description": "Strips all characters after an apostrophe.",
+      "description": "Strips all characters after an apostrophe (including the apostrophe itself). This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/tr/ApostropheFilter.html"
       }
@@ -1587,7 +1590,7 @@
           "description": "A value indicating whether the original token will be kept. Default is false."
         }
       },
-      "description": "Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the \"Basic Latin\" Unicode block) into their ASCII equivalents, if such equivalents exist.",
+      "description": "Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the \"Basic Latin\" Unicode block) into their ASCII equivalents, if such equivalents exist. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ASCIIFoldingFilter.html"
       }
@@ -1627,7 +1630,7 @@
           "description": "A value indicating whether to output both unigrams and bigrams (if true), or just bigrams (if false). Default is false."
         }
       },
-      "description": "Forms bigrams of CJK terms that are generated from StandardTokenizer.",
+      "description": "Forms bigrams of CJK terms that are generated from StandardTokenizer. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKBigramFilter.html"
       },
@@ -1640,7 +1643,7 @@
           "$ref": "#/definitions/TokenFilter"
         }
       ],
-      "description": "Normalizes CJK width differences. Folds fullwidth ASCII variants into the equivalent basic Latin, and half-width Katakana variants into the equivalent Kana.",
+      "description": "Normalizes CJK width differences. Folds fullwidth ASCII variants into the equivalent basic Latin, and half-width Katakana variants into the equivalent Kana. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKWidthFilter.html"
       }
@@ -1652,7 +1655,7 @@
           "$ref": "#/definitions/TokenFilter"
         }
       ],
-      "description": "Removes English possessives, and dots from acronyms.",
+      "description": "Removes \"'s\" from the end of words, and removes dots from acronyms. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/ClassicFilter.html"
       }
@@ -1687,7 +1690,7 @@
       "required": [
         "commonWords"
       ],
-      "description": "Construct bigrams for frequently occurring terms while indexing. Single terms are still indexed too, with bigrams overlaid.",
+      "description": "Construct bigrams for frequently occurring terms while indexing. Single terms are still indexed too, with bigrams overlaid. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/commongrams/CommonGramsFilter.html"
       }
@@ -1734,7 +1737,7 @@
       "required": [
         "wordList"
       ],
-      "description": "Decomposes compound words found in many Germanic languages.",
+      "description": "Decomposes compound words found in many Germanic languages. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/compound/DictionaryCompoundWordTokenFilter.html"
       }
@@ -1777,7 +1780,7 @@
           "description": "Specifies which side of the input the n-gram should be generated from. Default is \"front\"."
         }
       },
-      "description": "Generates n-grams of the given size(s) starting from the front or the back of an input token.",
+      "description": "Generates n-grams of the given size(s) starting from the front or the back of an input token. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/EdgeNGramTokenFilter.html"
       }
@@ -1798,7 +1801,7 @@
           "description": "The set of articles to remove."
         }
       },
-      "description": "Removes elisions. For example, \"l'avion\" (the plane) will be converted to \"avion\" (plane).",
+      "description": "Removes elisions. For example, \"l'avion\" (the plane) will be converted to \"avion\" (plane). This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/util/ElisionFilter.html"
       }
@@ -1810,9 +1813,9 @@
           "$ref": "#/definitions/TokenFilter"
         }
       ],
-      "description": "Normalizes German characters according to the heuristics of the German2 snowball algorithm.",
+      "description": "Normalizes German characters according to the heuristics of the German2 snowball algorithm. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
-        "url": "http://snowball.tartarus.org/algorithms/german2/stemmer.html"
+        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/de/GermanNormalizationFilter.html"
       }
     },
     "HindiNormalizationTokenFilter": {
@@ -1822,7 +1825,7 @@
           "$ref": "#/definitions/TokenFilter"
         }
       ],
-      "description": "Normalizes text in Hindi to remove some differences in spelling variations.",
+      "description": "Normalizes text in Hindi to remove some differences in spelling variations. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/hi/HindiNormalizationFilter.html"
       }
@@ -1834,7 +1837,7 @@
           "$ref": "#/definitions/TokenFilter"
         }
       ],
-      "description": "Normalizes the Unicode representation of text in Indian languages.",
+      "description": "Normalizes the Unicode representation of text in Indian languages. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/in/IndicNormalizationFilter.html"
       }
@@ -1864,7 +1867,7 @@
       "required": [
         "keepWords"
       ],
-      "description": "A token filter that only keeps tokens with text contained in a specified list of words.",
+      "description": "A token filter that only keeps tokens with text contained in a specified list of words. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/KeepWordFilter.html"
       }
@@ -1893,7 +1896,7 @@
       "required": [
         "keywords"
       ],
-      "description": "Marks terms as keywords.",
+      "description": "Marks terms as keywords. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/KeywordMarkerFilter.html"
       }
@@ -1905,7 +1908,7 @@
           "$ref": "#/definitions/TokenFilter"
         }
       ],
-      "description": "Emits each incoming token twice, once as keyword and once as non-keyword.",
+      "description": "Emits each incoming token twice, once as keyword and once as non-keyword. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/KeywordRepeatFilter.html"
       }
@@ -1917,7 +1920,7 @@
           "$ref": "#/definitions/TokenFilter"
         }
       ],
-      "description": "A high-performance kstem filter for English.",
+      "description": "A high-performance kstem filter for English. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/en/KStemFilter.html"
       }
@@ -1943,7 +1946,7 @@
           "description": "The maximum length in characters. Default is 2147483647 (2^31-1)."
         }
       },
-      "description": "Removes words that are too long or too short.",
+      "description": "Removes words that are too long or too short. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/LengthFilter.html"
       }
@@ -1968,7 +1971,7 @@
           "description": "A value indicating whether all tokens from the input must be consumed even if maxTokenCount is reached. Default is false."
         }
       },
-      "description": "Limits the number of tokens while indexing.",
+      "description": "Limits the number of tokens while indexing. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/LimitTokenCountFilter.html"
       }
@@ -1980,7 +1983,7 @@
           "$ref": "#/definitions/TokenFilter"
         }
       ],
-      "description": "Normalizes token text to lower case.",
+      "description": "Normalizes token text to lower case. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/LowerCaseFilter.html"
       }
@@ -2006,7 +2009,7 @@
           "description": "The maximum n-gram length. Default is 2."
         }
       },
-      "description": "Generates n-grams of the given size(s).",
+      "description": "Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/NGramTokenFilter.html"
       }
@@ -2035,7 +2038,7 @@
       "required": [
         "patterns"
       ],
-      "description": "Uses Java regexes to emit multiple tokens - one for each capture group in one or more patterns.",
+      "description": "Uses Java regexes to emit multiple tokens - one for each capture group in one or more patterns. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/pattern/PatternCaptureGroupTokenFilter.html"
       }
@@ -2061,7 +2064,7 @@
         "pattern",
         "replacement"
       ],
-      "description": "A token filter which applies a pattern to each token in the stream, replacing match occurrences with the specified replacement string.",
+      "description": "A token filter which applies a pattern to each token in the stream, replacing match occurrences with the specified replacement string. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/pattern/PatternReplaceFilter.html"
       }
@@ -2073,7 +2076,7 @@
           "$ref": "#/definitions/TokenFilter"
         }
       ],
-      "description": "Applies normalization for Persian.",
+      "description": "Applies normalization for Persian. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/fa/PersianNormalizationFilter.html"
       }
@@ -2119,7 +2122,7 @@
           "description": "A value indicating whether encoded tokens should replace original tokens. If false, encoded tokens are added as synonyms. Default is true."
         }
       },
-      "description": "Create tokens for phonetic matches.",
+      "description": "Create tokens for phonetic matches. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "https://lucene.apache.org/core/4_10_3/analyzers-phonetic/org/apache/lucene/analysis/phonetic/package-tree.html"
       }
@@ -2131,7 +2134,7 @@
           "$ref": "#/definitions/TokenFilter"
         }
       ],
-      "description": "Transforms the token stream as per the Porter stemming algorithm.",
+      "description": "Uses the Porter stemming algorithm to transform the token stream. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://tartarus.org/~martin/PorterStemmer/"
       }
@@ -2143,7 +2146,7 @@
           "$ref": "#/definitions/TokenFilter"
         }
       ],
-      "description": "Reverses the token string.",
+      "description": "Reverses the token string. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/reverse/ReverseStringFilter.html"
       }
@@ -2155,7 +2158,7 @@
           "$ref": "#/definitions/TokenFilter"
         }
       ],
-      "description": "Normalizes use of the interchangeable Scandinavian characters.",
+      "description": "Normalizes use of the interchangeable Scandinavian characters. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ScandinavianNormalizationFilter.html"
       }
@@ -2167,7 +2170,7 @@
           "$ref": "#/definitions/TokenFilter"
         }
       ],
-      "description": "Folds Scandinavian characters åÅäæÄÆ->a and öÖøØ->o. It also discriminates against use of double vowels aa, ae, ao, oe and oo, leaving just the first one.",
+      "description": "Folds Scandinavian characters åÅäæÄÆ->a and öÖøØ->o. It also discriminates against use of double vowels aa, ae, ao, oe and oo, leaving just the first one. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ScandinavianFoldingFilter.html"
       }
@@ -2213,7 +2216,7 @@
           "description": "The string to insert for each position at which there is no token. Default is an underscore (\"_\")."
         }
       },
-      "description": "Creates combinations of tokens as a single token.",
+      "description": "Creates combinations of tokens as a single token. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/shingle/ShingleFilter.html"
       }
@@ -2266,7 +2269,7 @@
       "required": [
         "language"
       ],
-      "description": "A filter that stems words using a Snowball-generated stemmer.",
+      "description": "A filter that stems words using a Snowball-generated stemmer. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/snowball/SnowballFilter.html"
       }
@@ -2278,7 +2281,7 @@
           "$ref": "#/definitions/TokenFilter"
         }
       ],
-      "description": "Normalizes the Unicode representation of Sorani text.",
+      "description": "Normalizes the Unicode representation of Sorani text. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ckb/SoraniNormalizationFilter.html"
       }
@@ -2363,7 +2366,10 @@
       "required": [
         "language"
       ],
-      "description": "Language specific stemming filter."
+      "description": "Language specific stemming filter. This token filter is implemented using Apache Lucene.",
+      "externalDocs": {
+        "url": "https://msdn.microsoft.com/library/azure/mt605304.aspx#TokenFilters"
+      }
     },
     "StemmerOverrideTokenFilter": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StemmerOverrideTokenFilter",
@@ -2384,7 +2390,7 @@
       "required": [
         "rules"
       ],
-      "description": "Provides the ability to override other stemming filters with custom dictionary-based stemming. Any dictionary-stemmed terms will be marked as keywords so that they will not be stemmed with stemmers down the chain. Must be placed before any stemming filters.",
+      "description": "Provides the ability to override other stemming filters with custom dictionary-based stemming. Any dictionary-stemmed terms will be marked as keywords so that they will not be stemmed with stemmers down the chain. Must be placed before any stemming filters. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/StemmerOverrideFilter.html"
       }
@@ -2462,7 +2468,7 @@
           "description": "A value indicating whether to ignore the last search term if it's a stop word. Default is true."
         }
       },
-      "description": "Removes stop words from a token stream.",
+      "description": "Removes stop words from a token stream. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/StopFilter.html"
       }
@@ -2496,7 +2502,7 @@
       "required": [
         "synonyms"
       ],
-      "description": "Matches single or multi-word synonyms in a token stream.",
+      "description": "Matches single or multi-word synonyms in a token stream. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/synonym/SynonymFilter.html"
       }
@@ -2508,7 +2514,7 @@
           "$ref": "#/definitions/TokenFilter"
         }
       ],
-      "description": "Trims leading and trailing whitespace from tokens.",
+      "description": "Trims leading and trailing whitespace from tokens. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/TrimFilter.html"
       }
@@ -2528,7 +2534,7 @@
           "description": "The length at which terms will be truncated. Default is 300."
         }
       },
-      "description": "Truncates the terms to a specific length.",
+      "description": "Truncates the terms to a specific length. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/TruncateTokenFilter.html"
       }
@@ -2547,7 +2553,7 @@
           "description": "A value indicating whether to remove duplicates only at the same position. Default is false."
         }
       },
-      "description": "Filters out tokens with same text as the previous token.",
+      "description": "Filters out tokens with same text as the previous token. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/RemoveDuplicatesTokenFilter.html"
       }
@@ -2559,7 +2565,7 @@
           "$ref": "#/definitions/TokenFilter"
         }
       ],
-      "description": "Normalizes token text to upper case.",
+      "description": "Normalizes token text to upper case. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/UpperCaseFilter.html"
       }
@@ -2625,7 +2631,7 @@
           "description": "A list of tokens to protect from being delimited."
         }
       },
-      "description": "Splits words into subwords and performs optional transformations on subword groups.",
+      "description": "Splits words into subwords and performs optional transformations on subword groups. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/WordDelimiterFilter.html"
       }
@@ -2655,7 +2661,7 @@
           "$ref": "#/definitions/CharFilter"
         }
       ],
-      "description": "A character filter that attempts to strip out HTML constructs.",
+      "description": "A character filter that attempts to strip out HTML constructs. This character filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/charfilter/HTMLStripCharFilter.html"
       }
@@ -2679,7 +2685,7 @@
       "required": [
         "mappings"
       ],
-      "description": "A character filter that applies mappings defined with the mappings option. Matching is greedy (longest pattern matching at a given point wins). Replacement is allowed to be the empty string.",
+      "description": "A character filter that applies mappings defined with the mappings option. Matching is greedy (longest pattern matching at a given point wins). Replacement is allowed to be the empty string. This character filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "*https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/charfilter/MappingCharFilter.html"
       }
@@ -2705,7 +2711,7 @@
         "pattern",
         "replacement"
       ],
-      "description": "A character filter that replaces characters in the input string. It uses a regular expression to identify character sequences to preserve and a replacement pattern to identify characters to replace. For example, given the input text \"aa bb aa bb\", pattern \"(aa)\\s+(bb)\", and replacement \"$1#$2\", the result would be \"aa#bb aa#bb\".",
+      "description": "A character filter that replaces characters in the input string. It uses a regular expression to identify character sequences to preserve and a replacement pattern to identify characters to replace. For example, given the input text \"aa bb aa bb\", pattern \"(aa)\\s+(bb)\", and replacement \"$1#$2\", the result would be \"aa#bb aa#bb\". This character filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/pattern/PatternReplaceCharFilter.html"
       }
