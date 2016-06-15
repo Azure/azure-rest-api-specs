@@ -2,7 +2,7 @@
 	"swagger": "2.0",
 	"info": {
 		"version": "2016-02-03",
-		"title": "IoT Hub",
+		"title": "iotHubClient",
 		"description": "API for using the IoT Hub Features"
 	},
 	"host": "management.azure.com",
@@ -31,6 +31,8 @@
 					"in": "path",
 					"required": true,
 					"type": "string"
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
@@ -46,16 +48,11 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			},
 			"put": {
 				"tags": ["PUT"],
-				"summary": "Create or update an IotHub",
-				"description": "Create or update an IotHub",
-				"operationId": "IotHubResource_CreateIotHub",
+				"operationId": "IotHubResource_CreateOrUpdateIotHub",
 				"consumes": ["application/json", "text/json"],
 				"produces": ["application/json", "text/json"],
 				"parameters": [{
@@ -80,10 +77,18 @@
 					"schema": {
 						"$ref": "#/definitions/IotHubDescription"
 					}
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/IotHubDescription"
+						}
+					},
+					"201": {
+						"description": "Created",
 						"schema": {
 							"$ref": "#/definitions/IotHubDescription"
 						}
@@ -95,10 +100,7 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			},
 			"delete": {
 				"tags": ["DELETE"],
@@ -122,10 +124,18 @@
 					"in": "path",
 					"required": true,
 					"type": "string"
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/IotHubDescription"
+						}
+					},
+					"202": {
+						"description": "Accepted",
 						"schema": {
 							"$ref": "#/definitions/IotHubDescription"
 						}
@@ -137,10 +147,7 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			}
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/eventHubEndpoints/{eventHubEndpointName}/ConsumerGroups/{name}": {
@@ -176,6 +183,8 @@
 					"in": "path",
 					"required": true,
 					"type": "string"
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
@@ -191,10 +200,7 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			}
 		},
 		"/providers/Microsoft.Devices/operations": {
@@ -205,11 +211,14 @@
 				"operationId": "IotHubResource_GetResourceProviderOperations",
 				"consumes": [],
 				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"$ref": "#/parameters/api-version"
+				}],
 				"responses": {
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/ResponseWithContinuation[ResourceProviderOperationInfo]"
+							"$ref": "#/definitions/ResponseWithContinuation[IEnumerable[ResourceProviderOperationInfo]]"
 						}
 					},
 					"default": {
@@ -219,10 +228,7 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			}
 		},
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Devices/IotHubs": {
@@ -238,12 +244,14 @@
 					"in": "path",
 					"required": true,
 					"type": "string"
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/ResponseWithContinuation[IotHubDescription]"
+							"$ref": "#/definitions/ResponseWithContinuation[IEnumerable[IotHubDescription]]"
 						}
 					},
 					"default": {
@@ -253,10 +261,7 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			}
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs": {
@@ -277,12 +282,14 @@
 					"in": "path",
 					"required": true,
 					"type": "string"
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/ResponseWithContinuation[IotHubDescription]"
+							"$ref": "#/definitions/ResponseWithContinuation[IEnumerable[IotHubDescription]]"
 						}
 					},
 					"default": {
@@ -292,17 +299,14 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			}
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/operationresults/{operationId}": {
 			"get": {
 				"tags": ["GET"],
-				"summary": "Get the result of an operation",
-				"description": "Get the result of an operation",
+				"summary": "Get the result of a long running operation like create or update iothub",
+				"description": "Get the result of a long running operation like create or update iothub",
 				"operationId": "IotHubResource_GetOperationResult",
 				"consumes": [],
 				"produces": ["application/json", "text/json"],
@@ -326,12 +330,16 @@
 					"in": "path",
 					"required": true,
 					"type": "string"
+				}, {
+					"$ref": "#/parameters/api-version"
+				}, {
+					"$ref": "#/parameters/asyncinfo"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/IotHubDescription"
+							"$ref": "#/definitions/AsyncOperationResult"
 						}
 					},
 					"default": {
@@ -341,10 +349,7 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			}
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/IotHubStats": {
@@ -370,6 +375,8 @@
 					"in": "path",
 					"required": true,
 					"type": "string"
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
@@ -385,10 +392,7 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			}
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/skus": {
@@ -414,12 +418,14 @@
 					"in": "path",
 					"required": true,
 					"type": "string"
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/ResponseWithContinuation[IotHubSkuDescription]"
+							"$ref": "#/definitions/ResponseWithContinuation[IEnumerable[IotHubSkuDescription]]"
 						}
 					},
 					"default": {
@@ -429,10 +435,7 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			}
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/eventHubEndpoints/{eventHubEndpointName}/ConsumerGroups": {
@@ -463,12 +466,14 @@
 					"in": "path",
 					"required": true,
 					"type": "string"
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/ResponseWithContinuation[String]"
+							"$ref": "#/definitions/ResponseWithContinuation[IEnumerable[String]]"
 						}
 					},
 					"default": {
@@ -478,10 +483,7 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			}
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/eventHubEndpoints/{eventHubEndpointName}/ConsumerGroups/{groupName}": {
@@ -517,6 +519,8 @@
 					"in": "path",
 					"required": true,
 					"type": "string"
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
@@ -532,10 +536,7 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			},
 			"put": {
 				"tags": ["PUT"],
@@ -569,6 +570,8 @@
 					"in": "path",
 					"required": true,
 					"type": "string"
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
@@ -584,10 +587,7 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			}
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/jobs": {
@@ -613,12 +613,14 @@
 					"in": "path",
 					"required": true,
 					"type": "string"
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/ResponseWithContinuation[JobInfo]"
+							"$ref": "#/definitions/ResponseWithContinuation[IEnumerable[JobResponse]]"
 						}
 					},
 					"default": {
@@ -628,10 +630,7 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			}
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/jobs/{jobId}": {
@@ -662,12 +661,14 @@
 					"in": "path",
 					"required": true,
 					"type": "string"
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/JobInfo"
+							"$ref": "#/definitions/JobResponse"
 						}
 					},
 					"default": {
@@ -677,10 +678,7 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			}
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/quotaMetrics": {
@@ -706,12 +704,14 @@
 					"in": "path",
 					"required": true,
 					"type": "string"
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/ResponseWithContinuation[IotHubQuotaMetricInfo]"
+							"$ref": "#/definitions/ResponseWithContinuation[IEnumerable[IotHubQuotaMetricInfo]]"
 						}
 					},
 					"default": {
@@ -721,17 +721,12 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			}
 		},
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Devices/checkNameAvailability": {
 			"post": {
 				"tags": ["POST"],
-				"summary": "Check if an IotHub name is available",
-				"description": "Check if an IotHub name is available",
 				"operationId": "IotHubResource_CheckIotHubNameAvailability",
 				"consumes": ["application/json", "text/json"],
 				"produces": ["application/json", "text/json"],
@@ -741,12 +736,14 @@
 					"required": true,
 					"type": "string"
 				}, {
-					"name": "iotHubName",
+					"name": "operationInputs",
 					"in": "body",
 					"required": true,
 					"schema": {
-						"type": "string"
+						"$ref": "#/definitions/OperationInputs"
 					}
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
@@ -762,17 +759,14 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			}
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/listkeys": {
 			"post": {
 				"tags": ["POST"],
-				"summary": "Get all Keys for an IotHub",
-				"description": "Get all Keys for an IotHub",
+				"summary": "Get all Shared Access Policies for an IotHub",
+				"description": "Get all Shared Access Policies for an IotHub",
 				"operationId": "IotHubResource_GetAllIotHubKeys",
 				"consumes": [],
 				"produces": ["application/json", "text/json"],
@@ -791,12 +785,14 @@
 					"in": "path",
 					"required": true,
 					"type": "string"
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/ResponseWithContinuation[SharedAccessSignatureAuthorizationRule]"
+							"$ref": "#/definitions/ResponseWithContinuation[IEnumerable[SharedAccessSignatureAuthorizationRule]]"
 						}
 					},
 					"default": {
@@ -806,10 +802,7 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			}
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/IotHubKeys/{keyName}/listkeys": {
@@ -840,6 +833,8 @@
 					"in": "path",
 					"required": true,
 					"type": "string"
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
@@ -855,10 +850,7 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			}
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/exportDevices": {
@@ -891,12 +883,14 @@
 					"in": "path",
 					"required": true,
 					"type": "string"
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/JobInfo"
+							"$ref": "#/definitions/JobResponse"
 						}
 					},
 					"default": {
@@ -906,10 +900,7 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			}
 		},
 		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/importDevices": {
@@ -942,12 +933,14 @@
 					"in": "path",
 					"required": true,
 					"type": "string"
+				}, {
+					"$ref": "#/parameters/api-version"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/JobInfo"
+							"$ref": "#/definitions/JobResponse"
 						}
 					},
 					"default": {
@@ -957,10 +950,7 @@
 						}
 					}
 				},
-				"deprecated": false,
-				"security": [{
-					"oauth2": ["user_impersonation"]
-				}]
+				"deprecated": false
 			}
 		}
 	},
@@ -995,6 +985,9 @@
 					"items": {
 						"$ref": "#/definitions/SharedAccessSignatureAuthorizationRule"
 					}
+				},
+				"hostName": {
+					"type": "string"
 				},
 				"eventHubEndpoints": {
 					"type": "object",
@@ -1237,7 +1230,7 @@
 				}
 			}
 		},
-		"ResponseWithContinuation[ResourceProviderOperationInfo]": {
+		"ResponseWithContinuation[IEnumerable[ResourceProviderOperationInfo]]": {
 			"type": "object",
 			"properties": {
 				"value": {
@@ -1401,7 +1394,7 @@
 				}
 			}
 		},
-		"ResponseWithContinuation[IotHubDescription]": {
+		"ResponseWithContinuation[IEnumerable[IotHubDescription]]": {
 			"type": "object",
 			"properties": {
 				"value": {
@@ -1413,6 +1406,28 @@
 				"nextLink": {
 					"type": "string",
 					"readOnly": true
+				}
+			}
+		},
+		"AsyncOperationResult": {
+			"type": "object",
+			"properties": {
+				"Status": {
+					"type": "string"
+				},
+				"Error": {
+					"$ref": "#/definitions/ErrorMesssage"
+				}
+			}
+		},
+		"ErrorMesssage": {
+			"type": "object",
+			"properties": {
+				"Code": {
+					"type": "string"
+				},
+				"Message": {
+					"type": "string"
 				}
 			}
 		},
@@ -1433,7 +1448,7 @@
 				}
 			}
 		},
-		"ResponseWithContinuation[IotHubSkuDescription]": {
+		"ResponseWithContinuation[IEnumerable[IotHubSkuDescription]]": {
 			"type": "object",
 			"properties": {
 				"value": {
@@ -1484,7 +1499,7 @@
 				}
 			}
 		},
-		"ResponseWithContinuation[String]": {
+		"ResponseWithContinuation[IEnumerable[String]]": {
 			"type": "object",
 			"properties": {
 				"value": {
@@ -1516,13 +1531,13 @@
 				}
 			}
 		},
-		"ResponseWithContinuation[JobInfo]": {
+		"ResponseWithContinuation[IEnumerable[JobResponse]]": {
 			"type": "object",
 			"properties": {
 				"value": {
 					"type": "array",
 					"items": {
-						"$ref": "#/definitions/JobInfo"
+						"$ref": "#/definitions/JobResponse"
 					}
 				},
 				"nextLink": {
@@ -1531,7 +1546,7 @@
 				}
 			}
 		},
-		"JobInfo": {
+		"JobResponse": {
 			"type": "object",
 			"properties": {
 				"jobId": {
@@ -1545,20 +1560,29 @@
 					"format": "date-time",
 					"type": "string"
 				},
+				"type": {
+					"enum": ["unknown", "export", "import", "backup", "readDeviceProperties", "writeDeviceProperties", "updateDeviceConfiguration", "rebootDevice", "factoryResetDevice", "firmwareUpdate"],
+					"type": "string"
+				},
 				"status": {
 					"enum": ["unknown", "enqueued", "running", "completed", "failed", "cancelled"],
 					"type": "string"
 				},
-				"progress": {
-					"format": "int32",
-					"type": "integer"
-				},
 				"failureReason": {
+					"type": "string"
+				},
+				"statusMessage": {
+					"type": "string"
+				},
+				"deviceId": {
+					"type": "string"
+				},
+				"parentJobId": {
 					"type": "string"
 				}
 			}
 		},
-		"ResponseWithContinuation[IotHubQuotaMetricInfo]": {
+		"ResponseWithContinuation[IEnumerable[IotHubQuotaMetricInfo]]": {
 			"type": "object",
 			"properties": {
 				"value": {
@@ -1589,6 +1613,30 @@
 				}
 			}
 		},
+		"OperationInputs": {
+			"type": "object",
+			"properties": {
+				"Name": {
+					"type": "string"
+				},
+				"ResourceType": {
+					"type": "string"
+				},
+				"Key": {
+					"type": "string"
+				},
+				"TokenLifeTimeInMinutes": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"ConnectionString": {
+					"type": "string"
+				},
+				"IotHubDescription": {
+					"$ref": "#/definitions/IotHubDescription"
+				}
+			}
+		},
 		"IotHubNameAvailabilityInfo": {
 			"type": "object",
 			"properties": {
@@ -1604,7 +1652,7 @@
 				}
 			}
 		},
-		"ResponseWithContinuation[SharedAccessSignatureAuthorizationRule]": {
+		"ResponseWithContinuation[IEnumerable[SharedAccessSignatureAuthorizationRule]]": {
 			"type": "object",
 			"properties": {
 				"value": {
@@ -1642,18 +1690,23 @@
 			}
 		}
 	},
-	"securityDefinitions": {
-		"oauth2": {
-			"type": "oauth2",
-			"description": "OAuth2 Implicit Grant",
-			"flow": "implicit",
-			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-			"scopes": {
-				"user_impersonation": "Access Microsoft Azure"
-			}
+	"parameters": {
+		"api-version": {
+			"name": "api-version",
+			"in": "query",
+			"description": "Client API version.",
+			"required": true,
+			"type": "string",
+			"default": "2016-02-03"
+		},
+		"asyncinfo": {
+			"name": "asyncinfo",
+			"in": "query",
+			"description": "asyncinfo flag",
+			"required": true,
+			"type": "string",
+			"default": "true"
 		}
 	},
-	"security": [{
-		"oauth2": ["user_impersonation"]
-	}]
+	"security": []
 }
