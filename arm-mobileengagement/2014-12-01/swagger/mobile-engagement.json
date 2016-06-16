@@ -1311,8 +1311,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks": {
       "get": {
         "tags": [
-          "Export",
-          "List"
+          "export",
+          "list"
         ],
         "operationId": "ExportTasks_List",
         "description": "Get the list of export tasks.",
@@ -1363,7 +1363,7 @@
           "200": {
             "description": "Success. Returns a list of export task statuses.",
             "schema": {
-              "$ref": "#/definitions/ExportTaskListResult"
+              "$ref": "#/definitions/exportTaskListResult"
             }
           },
           "default": {
@@ -1381,8 +1381,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/{id}": {
       "get": {
         "tags": [
-          "Export",
-          "CRUD"
+          "export",
+          "crud"
         ],
         "operationId": "ExportTasks_Get",
         "description": "Retrieves information about a previously created export task.",
@@ -1414,7 +1414,7 @@
           "200": {
             "description": "Success. The status of the export task is returned.",
             "schema": {
-              "$ref": "#/definitions/ExportTaskResult"
+              "$ref": "#/definitions/exportTaskResult"
             }
           },
           "default": {
@@ -1429,8 +1429,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/activities": {
       "post": {
         "tags": [
-          "Export",
-          "CRUD"
+          "export",
+          "crud"
         ],
         "operationId": "ExportTasks_CreateActivitiesTask",
         "description": "Creates a task to export activities.",
@@ -1455,7 +1455,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DateRangeExportTaskParameter"
+              "$ref": "#/definitions/dateRangeExportTaskParameter"
             }
           }
         ],
@@ -1463,7 +1463,7 @@
           "202": {
             "description": "Success. Returns the state of export task.",
             "schema": {
-              "$ref": "#/definitions/ExportTaskResult"
+              "$ref": "#/definitions/exportTaskResult"
             },
             "headers": {
               "Location": {
@@ -1484,8 +1484,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/crashes": {
       "post": {
         "tags": [
-          "Export",
-          "CRUD"
+          "export",
+          "crud"
         ],
         "operationId": "ExportTasks_CreateCrashesTask",
         "description": "Creates a task to export crashes.",
@@ -1510,7 +1510,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DateRangeExportTaskParameter"
+              "$ref": "#/definitions/dateRangeExportTaskParameter"
             }
           }
         ],
@@ -1518,7 +1518,7 @@
           "202": {
             "description": "Success. Returns the state of export task.",
             "schema": {
-              "$ref": "#/definitions/ExportTaskResult"
+              "$ref": "#/definitions/exportTaskResult"
             },
             "headers": {
               "Location": {
@@ -1539,8 +1539,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/errors": {
       "post": {
         "tags": [
-          "Export",
-          "CRUD"
+          "export",
+          "crud"
         ],
         "operationId": "ExportTasks_CreateErrorsTask",
         "description": "Creates a task to export errors.",
@@ -1565,7 +1565,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DateRangeExportTaskParameter"
+              "$ref": "#/definitions/dateRangeExportTaskParameter"
             }
           }
         ],
@@ -1573,7 +1573,7 @@
           "202": {
             "description": "Success. Returns the state of export task.",
             "schema": {
-              "$ref": "#/definitions/ExportTaskResult"
+              "$ref": "#/definitions/exportTaskResult"
             },
             "headers": {
               "Location": {
@@ -1594,8 +1594,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/events": {
       "post": {
         "tags": [
-          "Export",
-          "CRUD"
+          "export",
+          "crud"
         ],
         "operationId": "ExportTasks_CreateEventsTask",
         "description": "Creates a task to export events.",
@@ -1620,7 +1620,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DateRangeExportTaskParameter"
+              "$ref": "#/definitions/dateRangeExportTaskParameter"
             }
           }
         ],
@@ -1628,7 +1628,7 @@
           "202": {
             "description": "Success. Returns the state of export task.",
             "schema": {
-              "$ref": "#/definitions/ExportTaskResult"
+              "$ref": "#/definitions/exportTaskResult"
             },
             "headers": {
               "Location": {
@@ -1649,8 +1649,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/jobs": {
       "post": {
         "tags": [
-          "Export",
-          "CRUD"
+          "export",
+          "crud"
         ],
         "operationId": "ExportTasks_CreateJobsTask",
         "description": "Creates a task to export jobs.",
@@ -1675,7 +1675,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DateRangeExportTaskParameter"
+              "$ref": "#/definitions/dateRangeExportTaskParameter"
             }
           }
         ],
@@ -1683,7 +1683,7 @@
           "202": {
             "description": "Success. Returns the state of export task.",
             "schema": {
-              "$ref": "#/definitions/ExportTaskResult"
+              "$ref": "#/definitions/exportTaskResult"
             },
             "headers": {
               "Location": {
@@ -1704,8 +1704,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/sessions": {
       "post": {
         "tags": [
-          "Export",
-          "CRUD"
+          "export",
+          "crud"
         ],
         "operationId": "ExportTasks_CreateSessionsTask",
         "description": "Creates a task to export sessions.",
@@ -1730,7 +1730,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DateRangeExportTaskParameter"
+              "$ref": "#/definitions/dateRangeExportTaskParameter"
             }
           }
         ],
@@ -1738,7 +1738,7 @@
           "202": {
             "description": "Success. Returns the state of export task.",
             "schema": {
-              "$ref": "#/definitions/ExportTaskResult"
+              "$ref": "#/definitions/exportTaskResult"
             },
             "headers": {
               "Location": {
@@ -1759,8 +1759,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/tags": {
       "post": {
         "tags": [
-          "Export",
-          "CRUD"
+          "export",
+          "crud"
         ],
         "operationId": "ExportTasks_CreateTagsTask",
         "description": "Creates a task to export tags.",
@@ -1785,7 +1785,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExportTaskParameter"
+              "$ref": "#/definitions/exportTaskParameter"
             }
           }
         ],
@@ -1793,7 +1793,7 @@
           "202": {
             "description": "Success. Returns the state of export task.",
             "schema": {
-              "$ref": "#/definitions/ExportTaskResult"
+              "$ref": "#/definitions/exportTaskResult"
             },
             "headers": {
               "Location": {
@@ -1814,8 +1814,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/tokens": {
       "post": {
         "tags": [
-          "Export",
-          "CRUD"
+          "export",
+          "crud"
         ],
         "operationId": "ExportTasks_CreateTokensTask",
         "description": "Creates a task to export tags.",
@@ -1840,7 +1840,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExportTaskParameter"
+              "$ref": "#/definitions/exportTaskParameter"
             }
           }
         ],
@@ -1848,7 +1848,7 @@
           "202": {
             "description": "Success. Returns the state of export task.",
             "schema": {
-              "$ref": "#/definitions/ExportTaskResult"
+              "$ref": "#/definitions/exportTaskResult"
             },
             "headers": {
               "Location": {
@@ -1869,8 +1869,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/feedbackByDate": {
       "post": {
         "tags": [
-          "Export",
-          "CRUD"
+          "export",
+          "crud"
         ],
         "operationId": "ExportTasks_CreateFeedbackTaskByDateRange",
         "description": "Creates a task to export push campaign data for a date range.",
@@ -1895,7 +1895,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FeedbackByDateRangeParameter"
+              "$ref": "#/definitions/feedbackByDateRangeParameter"
             }
           }
         ],
@@ -1903,7 +1903,7 @@
           "202": {
             "description": "Success. Returns the state of export task.",
             "schema": {
-              "$ref": "#/definitions/ExportTaskResult"
+              "$ref": "#/definitions/exportTaskResult"
             },
             "headers": {
               "Location": {
@@ -1924,8 +1924,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/feedbackByCampaign": {
       "post": {
         "tags": [
-          "Export",
-          "CRUD"
+          "export",
+          "crud"
         ],
         "operationId": "ExportTasks_CreateFeedbackTaskByCampaign",
         "description": "Creates a task to export push campaign data for a set of campaigns.",
@@ -1950,7 +1950,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FeedbackByCampaignParameter"
+              "$ref": "#/definitions/feedbackByCampaignParameter"
             }
           }
         ],
@@ -1958,7 +1958,7 @@
           "202": {
             "description": "Success. Returns the state of export task.",
             "schema": {
-              "$ref": "#/definitions/ExportTaskResult"
+              "$ref": "#/definitions/exportTaskResult"
             },
             "headers": {
               "Location": {
@@ -1979,10 +1979,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/importTasks": {
       "get": {
         "tags": [
-          "Import",
-          "List"
+          "import",
+          "list"
         ],
-        "operationId": "importTasks_List",
+        "operationId": "ImportTasks_List",
         "description": "Get the list of import jobs.",
         "parameters": [
           {
@@ -2031,7 +2031,7 @@
           "200": {
             "description": "Success, import jobs are returned as JSON.",
             "schema": {
-              "$ref": "#/definitions/ImportTaskListResult"
+              "$ref": "#/definitions/importTaskListResult"
             }
           },
           "default": {
@@ -2047,8 +2047,8 @@
       },
       "post": {
         "tags": [
-          "Import",
-          "CRUD"
+          "import",
+          "crud"
         ],
         "operationId": "ImportTasks_Create",
         "description": "Creates a job to import the specified data to a storageUrl.",
@@ -2073,7 +2073,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ImportTask"
+              "$ref": "#/definitions/importTask"
             }
           }
         ],
@@ -2081,7 +2081,7 @@
           "201": {
             "description": "Success, import job is returned.",
             "schema": {
-              "$ref": "#/definitions/ImportTaskResult"
+              "$ref": "#/definitions/importTaskResult"
             },
             "headers": {
               "Location": {
@@ -2093,7 +2093,7 @@
           "202": {
             "description": "Success, import job is returned.",
             "schema": {
-              "$ref": "#/definitions/ImportTaskResult"
+              "$ref": "#/definitions/importTaskResult"
             },
             "headers": {
               "Location": {
@@ -2131,8 +2131,8 @@
       ],
       "get": {
         "tags": [
-          "Import",
-          "CRUD"
+          "import",
+          "crud"
         ],
         "operationId": "ImportTasks_Get",
         "description": "The Get import job operation retrieves information about a previously created import job.",
@@ -2149,7 +2149,7 @@
           "200": {
             "description": "Success, import job is returned.",
             "schema": {
-              "$ref": "#/definitions/ImportTaskResult"
+              "$ref": "#/definitions/importTaskResult"
             }
           },
           "default": {
@@ -3737,7 +3737,7 @@
       },
       "description": "Campaign type."
     },
-    "ExportState": {
+    "exportState": {
       "type": "string",
       "description": "The state of an export task.",
       "enum": [
@@ -3751,7 +3751,7 @@
         "modelAsString": false
       }
     },
-    "ExportType": {
+    "exportType": {
       "type": "string",
       "description": "The type of export.",
       "enum": [
@@ -3770,7 +3770,7 @@
         "modelAsString": false
       }
     },
-    "ExportFormat": {
+    "exportFormat": {
       "type": "string",
       "description": "The format of exported data.",
       "enum": [
@@ -3782,103 +3782,103 @@
         "modelAsString": false
       }
     },
-    "ExportOptions": {
+    "exportOptions": {
       "type": "object",
       "description": "Options to control export generation.",
       "properties": {
-        "ExportUserId": {
+        "exportUserId": {
           "type": "boolean"
         }
       }
     },
-    "Date": {
+    "date": {
       "type": "string",
       "format": "date",
       "description": "A date as defined by full-date in RFC3339."
     },
-    "Timestamp": {
+    "timestamp": {
       "type": "string",
       "format": "date-time",
       "description": "A date time as defined by date-time in RFC3339."
     },
-    "URL": {
+    "url": {
       "type": "string",
       "format": "uri"
     },
-    "ContainerUrl": {
-      "$ref": "#/definitions/URL",
+    "containerUrl": {
+      "$ref": "#/definitions/url",
       "description": "A shared Access Signature (SAS) BLOB container URL to contain the exported data."
     },
-    "DateRangeExportTaskParameter": {
+    "dateRangeExportTaskParameter": {
       "readOnly": false,
       "required": [
-        "ContainerUrl",
-        "StartDate",
-        "EndDate",
-        "ExportFormat"
+        "containerUrl",
+        "startDate",
+        "endDate",
+        "exportFormat"
       ],
       "properties": {
-        "ContainerUrl": {
-          "$ref": "#/definitions/ContainerUrl"
+        "containerUrl": {
+          "$ref": "#/definitions/containerUrl"
         },
-        "Description": {
+        "description": {
           "type": "string",
           "description": "A description of the export task."
         },
-        "StartDate": {
-          "$ref": "#/definitions/Date",
+        "startDate": {
+          "$ref": "#/definitions/date",
           "description": "The RFC3339 full-date of the start of the period for which data is exported."
         },
-        "EndDate": {
-          "$ref": "#/definitions/Date",
+        "endDate": {
+          "$ref": "#/definitions/date",
           "description": "The RFC3339 full-date of the end of the period for which data is exported."
         },
-        "ExportFormat": {
-          "$ref": "#/definitions/ExportFormat",
+        "exportFormat": {
+          "$ref": "#/definitions/exportFormat",
           "description": "The format of the exported data."
         }
       }
     },
-    "ExportTaskParameter": {
+    "exportTaskParameter": {
       "readOnly": false,
       "required": [
-        "ContainerUrl",
-        "ExportFormat"
+        "containerUrl",
+        "exportFormat"
       ],
       "properties": {
-        "ContainerUrl": {
-          "$ref": "#/definitions/ContainerUrl"
+        "containerUrl": {
+          "$ref": "#/definitions/containerUrl"
         },
-        "Description": {
+        "description": {
           "type": "string",
           "description": "A description of the export task."
         },
-        "ExportFormat": {
-          "$ref": "#/definitions/ExportFormat",
+        "exportFormat": {
+          "$ref": "#/definitions/exportFormat",
           "description": "The format of the exported data."
         }
       }
     },
-    "FeedbackByCampaignParameter": {
+    "feedbackByCampaignParameter": {
       "readOnly": false,
       "required": [
-        "ContainerUrl",
-        "CampaignType",
-        "CampaignIds",
-        "ExportFormat"
+        "containerUrl",
+        "campaignType",
+        "campaignIds",
+        "exportFormat"
       ],
       "properties": {
-        "ContainerUrl": {
-          "$ref": "#/definitions/ContainerUrl"
+        "containerUrl": {
+          "$ref": "#/definitions/containerUrl"
         },
-        "Description": {
+        "description": {
           "type": "string",
           "description": "A description of the export task."
         },
-        "CampaignType": {
+        "campaignType": {
           "$ref": "#/definitions/CampaignType"
         },
-        "CampaignIds": {
+        "campaignIds": {
           "type": "array",
           "description": "A list of campaign identifiers.",
           "minItems" : 1,
@@ -3887,106 +3887,106 @@
             "format": "long"
           }
         },
-        "ExportFormat": {
-          "$ref": "#/definitions/ExportFormat",
+        "exportFormat": {
+          "$ref": "#/definitions/exportFormat",
           "description": "The format of the exported data."
         }
       }
     },
-    "FeedbackByDateRangeParameter": {
+    "feedbackByDateRangeParameter": {
       "readOnly": false,
       "required": [
-        "ContainerUrl",
-        "CampaignType",
-        "CampaignWindowStart",
-        "CampaignWindowEnd",
-        "ExportFormat"
+        "containerUrl",
+        "campaignType",
+        "campaignWindowStart",
+        "campaignWindowEnd",
+        "exportFormat"
       ],
       "properties": {
-        "ContainerUrl": {
-          "$ref": "#/definitions/ContainerUrl"
+        "containerUrl": {
+          "$ref": "#/definitions/containerUrl"
         },
-        "Description": {
+        "description": {
           "type": "string",
           "description": "A description of the export task."
         },
-        "CampaignType": {
+        "campaignType": {
           "$ref": "#/definitions/CampaignType"
         },
-        "CampaignWindowStart": {
-          "$ref": "#/definitions/Timestamp",
+        "campaignWindowStart": {
+          "$ref": "#/definitions/timestamp",
           "description": "The RFC3339 date-time start of the period for inclusion of active campaigns."
         },
-        "CampaignWindowEnd": {
-          "$ref": "#/definitions/Timestamp",
+        "campaignWindowEnd": {
+          "$ref": "#/definitions/timestamp",
           "description": "The RFC3339 date-time end of the period for inclusion of active campaigns."
         },
-        "ExportFormat": {
-          "$ref": "#/definitions/ExportFormat",
+        "exportFormat": {
+          "$ref": "#/definitions/exportFormat",
           "description": "The format of the exported data."
         }
       }
     },
-    "ExportTaskListResult": {
+    "exportTaskListResult": {
       "readOnly": true,
       "required": [
-        "Value"
+        "value"
       ],
       "properties": {
-        "Value": {
+        "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportTaskResult"
+            "$ref": "#/definitions/exportTaskResult"
           },
           "description": "The list of export tasks."
         },
-        "NextLink": {
+        "nextLink": {
           "type": "string",
           "description": "When the results are paged, the nextLink is the URI for the next page of results. This property is empty when there are no additional pages."
         }
       },
       "description": "Gets a paged list of ExportTasks."
     },
-    "ExportTaskResult": {
+    "exportTaskResult": {
       "readOnly": true,
       "required": [
-        "Id",
-        "State",
-        "DateCreated",
-        "ExportType"
+        "id",
+        "state",
+        "dateCreated",
+        "exportType"
       ],
       "properties": {
-        "Id": {
+        "id": {
           "type": "string",
           "description": "Unique identifier of the export task."
         },
-        "Description": {
+        "description": {
           "type": "string",
           "description": "A description of the export task."
         },
-        "State": {
-          "$ref": "#/definitions/ExportState"
+        "state": {
+          "$ref": "#/definitions/exportState"
         },
-        "DateCreated": {
+        "dateCreated": {
           "type": "string",
           "format": "date-time",
           "description": "The RFC3339 date-time the export task was created."
         },
-        "DateCompleted": {
+        "dateCompleted": {
           "type": "string",
           "format": "date-time",
           "description": "The RFC3339 date-time the export task was completed."
         },
-        "ExportType": {
-          "$ref": "#/definitions/ExportType"
+        "exportType": {
+          "$ref": "#/definitions/exportType"
         },
-        "ErrorDetails": {
+        "errorDetails": {
           "type": "string",
           "description": "Details of errors encountered during the export, if any."
         }
       }
     },
-    "ImportTask": {
+    "importTask": {
       "properties": {
         "storageUrl": {
           "type": "string",
@@ -3994,12 +3994,12 @@
         }
       }
     },
-    "ImportTaskListResult": {
+    "importTaskListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ImportTaskResult"
+            "$ref": "#/definitions/importTaskResult"
           },
           "description": "The list of import task."
         },
@@ -4008,9 +4008,9 @@
           "description": "When the results are paged, the nextLink is the URI for the next page of results. This property is empty when there are no additional pages."
         }
       },
-      "description": "Gets a paged list of ImportTasks."
+      "description": "Gets a paged list of import tasks."
     },
-    "ImportTaskResult": {
+    "importTaskResult": {
       "properties": {
         "id": {
           "type": "string",
@@ -4047,7 +4047,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ImportTask"
+          "$ref": "#/definitions/importTask"
         }
       ]
     }
