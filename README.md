@@ -6,7 +6,7 @@ This repository is the canonical source for REST API specifications for Microsof
 
 ## Creating the Swagger Specification for Azure
 - This [document](./documentation/creating-swagger.md) will help you understand how AutoRest converts Swagger in to code.
-- If you are using swashbuckle to generate a swagger spec from your .NET WEB API then please take a look at this [repo]( https://github.com/Azure/swashbuckle-resource-provider).
+- If you are using **swashbuckle** to generate a swagger spec from your .NET WEB API then please take a look at this [repo]( https://github.com/Azure/swashbuckle-resource-provider).
 
 ## Directory Structure
 
