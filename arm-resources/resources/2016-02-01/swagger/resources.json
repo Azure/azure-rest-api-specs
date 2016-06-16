@@ -1476,50 +1476,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/providers/{resourceProviderNamespace}/operations": {
-      "get": {
-        "tags": [
-          "ResourceProviderOperationDetails"
-        ],
-        "operationId": "ResourceProviderOperationDetails_List",
-        "description": "Gets a list of resource providers.",
-        "parameters": [
-          {
-            "name": "resourceProviderNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource identity."
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderOperationDetailListResult"
-            }
-          },
-          "204": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderOperationDetailListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
     }
   },
   "definitions": {
@@ -1925,7 +1881,7 @@
       },
       "allOf": [
         {
-          "$ref": "Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Resource information."
@@ -2255,31 +2211,6 @@
         }
       },
       "description": "Resource provider operation's display properties."
-    },
-    "ResourceProviderOperationDefinition": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the provider operation name."
-        },
-        "display": {
-          "$ref": "#/definitions/ResourceProviderOperationDisplayProperties",
-          "description": "Gets or sets the display property of the provider operation."
-        }
-      },
-      "description": "Resource provider operation information."
-    },
-    "ResourceProviderOperationDetailListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceProviderOperationDefinition"
-          },
-          "description": "Gets or sets the list of resource provider operations."
-        }
-      },
-      "description": "List of resource provider operations."
     },
     "Resource": {
       "properties": {
