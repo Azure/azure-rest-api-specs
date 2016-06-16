@@ -41,7 +41,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "ApplicationOperations_Create",
+        "operationId": "Applications_Create",
         "description": "Create a new application. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx",
         "parameters": [
           {
@@ -73,7 +73,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "ApplicationOperations_List",
+        "operationId": "Applications_List",
         "description": "Lists applications by filter parameters. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx",
         "parameters": [
           {
@@ -109,7 +109,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "ApplicationOperations_Delete",
+        "operationId": "Applications_Delete",
         "description": "Delete an application. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx",
         "parameters": [
           {
@@ -137,7 +137,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "ApplicationOperations_Get",
+        "operationId": "Applications_Get",
         "description": "Get an application by object Id. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx",
         "parameters": [
           {
@@ -168,7 +168,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "ApplicationOperations_Patch",
+        "operationId": "Applications_Patch",
         "description": "Update existing application. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx",
         "parameters": [
           {
@@ -207,7 +207,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "GroupOperations_RemoveMember",
+        "operationId": "Groups_RemoveMember",
         "description": "Remove a memeber from a group. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151607.aspx",
         "parameters": [
           {
@@ -245,7 +245,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "GroupOperations_AddMember",
+        "operationId": "Groups_AddMember",
         "description": "Add a memeber to a group. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/groups-operations#AddGroupMembers",
         "parameters": [
           {
@@ -284,7 +284,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "GroupOperations_Delete",
+        "operationId": "Groups_Delete",
         "description": "Delete a group in the directory. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx",
         "parameters": [
           {
@@ -314,7 +314,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "GroupOperations_Create",
+        "operationId": "Groups_Create",
         "description": "Create a group in the directory. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx",
         "parameters": [
           {
@@ -346,7 +346,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "GroupOperations_List",
+        "operationId": "Groups_List",
         "description": "Gets list of groups for the current tenant.",
         "parameters": [
           {
@@ -373,7 +373,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "GroupOperations_ListNext"
+          "operationName": "Groups_ListNext"
         },
         "x-ms-odata": "#/definitions/ADGroup"
       }
@@ -383,7 +383,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "GroupOperations_GetGroupMembers",
+        "operationId": "Groups_GetGroupMembers",
         "description": "Gets the members of a group.",
         "parameters": [
           {
@@ -411,7 +411,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "GroupOperations_GetGroupMembersNext"
+          "operationName": "Groups_GetGroupMembersNext"
         }
       }
     },
@@ -420,7 +420,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "GroupOperations_Get",
+        "operationId": "Groups_Get",
         "description": "Gets group information from the directory.",
         "parameters": [
           {
@@ -453,7 +453,7 @@
         "tags": [
           "Group"
         ],
-        "operationId": "GroupOperations_GetMemberGroups",
+        "operationId": "Groups_GetMemberGroups",
         "description": "Gets a collection that contains the Object IDs of the groups of which the group is a member.",
         "parameters": [
           {
@@ -498,7 +498,7 @@
         "tags": [
           "ServicePrincipal"
         ],
-        "operationId": "ServicePrincipalOperations_Create",
+        "operationId": "ServicePrincipals_Create",
         "description": "Creates a service principal in the  directory.",
         "parameters": [
           {
@@ -530,7 +530,7 @@
         "tags": [
           "ServicePrincipal"
         ],
-        "operationId": "ServicePrincipalOperations_List",
+        "operationId": "ServicePrincipals_List",
         "description": "Gets list of service principals from the current tenant.",
         "parameters": [
           {
@@ -557,7 +557,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "ServicePrincipalOperations_ListNext"
+          "operationName": "ServicePrincipals_ListNext"
         },
         "x-ms-odata": "#/definitions/ServicePrincipal"
       }
@@ -567,7 +567,7 @@
         "tags": [
           "ServicePrincipal"
         ],
-        "operationId": "ServicePrincipalOperations_Delete",
+        "operationId": "ServicePrincipals_Delete",
         "description": "Deletes service principal from the directory.",
         "parameters": [
           {
@@ -595,7 +595,7 @@
         "tags": [
           "ServicePrincipal"
         ],
-        "operationId": "ServicePrincipalOperations_Get",
+        "operationId": "ServicePrincipals_Get",
         "description": "Gets service principal information from the directory.",
         "parameters": [
           {
@@ -623,42 +623,12 @@
         }
       }
     },
-    "/{tenantID}/users/{user}": {
-      "delete": {
-        "tags": [
-          "User"
-        ],
-        "operationId": "UserOperations_Delete",
-        "description": "Delete a user. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx",
-        "parameters": [
-          {
-            "name": "user",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "user object id or user principal name",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/tenantIDInPath"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/{tenantID}/users": {
       "post": {
         "tags": [
           "User"
         ],
-        "operationId": "UserOperations_CreateWorkOrSchoolAccount",
+        "operationId": "Users_Create",
         "description": "Create a new user. Reference: https://msdn.microsoft.com/library/azure/ad/graph/api/users-operations#CreateUser",
         "parameters": [
           {
@@ -666,7 +636,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserCreateWorkOrSchoolAccountParameters"
+              "$ref": "#/definitions/UserCreateParameters"
             },
             "description": "Parameters to create a user."
           },
@@ -690,8 +660,8 @@
         "tags": [
           "User"
         ],
-        "operationId": "UserOperations_List",
-        "description": "Gets list of users for the current tenant.",
+        "operationId": "Users_List",
+        "description": "Gets list of users for the current tenant. Reference https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/users-operations#GetUsers",
         "parameters": [
           {
             "name": "$filter",
@@ -717,7 +687,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "UserOperations_ListNext"
+          "operationName": "Users_ListNext"
         },
         "x-ms-odata": "#/definitions/User"
       }
@@ -727,8 +697,8 @@
         "tags": [
           "User"
         ],
-        "operationId": "UserOperations_Get",
-        "description": "Gets user information from the directory. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx",
+        "operationId": "Users_Get",
+        "description": "Gets user information from the directory. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/users-operations#GetAUser",
         "parameters": [
           {
             "name": "upnOrObjectId",
@@ -753,6 +723,71 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "Users_Update",
+        "description": "Updates an exisitng user. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/users-operations#UpdateUser",
+        "parameters": [
+          {
+            "name": "upnOrObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "User object Id or user principal name to get user information.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserUpdateParameters"
+            },
+            "description": "Parameters to update an exisitng user."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "Users_Delete",
+        "description": "Delete a user. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/users-operations#DeleteUser",
+        "parameters": [
+          {
+            "name": "upnOrObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "user object id or user principal name (upn)",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        }
       }
     },
     "/{tenantID}/users/{objectId}/getMemberGroups": {
@@ -760,7 +795,7 @@
         "tags": [
           "User"
         ],
-        "operationId": "UserOperations_GetMemberGroups",
+        "operationId": "Users_GetMemberGroups",
         "description": "Gets a collection that contains the Object IDs of the groups of which the user is a member.",
         "parameters": [
           {
@@ -802,12 +837,12 @@
     }
   },
   "x-ms-paths": {
-    "/{tenantID}/{nextLink}?GroupOperations_ListNext": {
+    "/{tenantID}/{nextLink}?Groups_ListNext": {
       "get": {
         "tags": [
           "Group"
         ],
-        "operationId": "GroupOperations_ListNext",
+        "operationId": "Groups_ListNext",
         "description": "Gets list of groups for the current tenant.",
         "parameters": [
           {
@@ -835,16 +870,16 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "GroupOperations_ListNext"
+          "operationName": "Groups_ListNext"
         }
       }
     },
-    "/{tenantID}/{nextLink}?GroupOperations_GetGroupMembersNext": {
+    "/{tenantID}/{nextLink}?Groups_GetGroupMembersNext": {
       "get": {
         "tags": [
           "Group"
         ],
-        "operationId": "GroupOperations_GetGroupMembersNext",
+        "operationId": "Groups_GetGroupMembersNext",
         "description": "Gets the members of a group.",
         "parameters": [
           {
@@ -872,16 +907,16 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "GroupOperations_GetGroupMembersNext"
+          "operationName": "Groups_GetGroupMembersNext"
         }
       }
     },
-    "/{tenantID}/{nextLink}?ServicePrincipalOperations_ListNext": {
+    "/{tenantID}/{nextLink}?ServicePrincipals_ListNext": {
       "get": {
         "tags": [
           "ServicePrincipal"
         ],
-        "operationId": "ServicePrincipalOperations_ListNext",
+        "operationId": "ServicePrincipals_ListNext",
         "description": "Gets list of service principals from the current tenant.",
         "parameters": [
           {
@@ -909,16 +944,16 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "ServicePrincipalOperations_ListNext"
+          "operationName": "ServicePrincipals_ListNext"
         }
       }
     },
-    "/{tenantID}/{nextLink}?UserOperations_ListNext": {
+    "/{tenantID}/{nextLink}?Users_ListNext": {
       "get": {
         "tags": [
           "User"
         ],
-        "operationId": "UserOperations_ListNext",
+        "operationId": "Users_ListNext",
         "description": "Gets list of users for the current tenant.",
         "parameters": [
           {
@@ -946,41 +981,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
-          "operationName": "UserOperations_ListNext"
-        }
-      }
-    },
-    "/{tenantID}/users?UserOperations_CreateLocalAccount": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "operationId": "UserOperations_CreateLocalAccount",
-        "description": "Create a new user. Reference: https://msdn.microsoft.com/library/azure/ad/graph/api/users-operations#CreateLocalAccountUser",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UserCreateLocalAccountParameters"
-            },
-            "description": "Parameters to create a user."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/tenantIDInPath"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created. Indicates success. The new user is returned in the response body.",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
+          "operationName": "Users_ListNext"
         }
       }
     }
@@ -1462,7 +1463,7 @@
       ],
       "description": "Contains information about a sign-in name of a local account user in an Azure Active Directory B2C tenant."
     },
-    "UserCreateParametersPasswordProfile": {
+    "PasswordProfile": {
       "properties": {
         "password": {
           "type": "string",
@@ -1489,19 +1490,9 @@
           "description": "User display name"
         },
         "passwordProfile": {
-          "$ref": "#/definitions/UserCreateParametersPasswordProfile",
+          "$ref": "#/definitions/PasswordProfile",
           "description": "Password Profile"
-        }
-      },
-      "required": [
-        "accountEnabled",
-        "displayName",
-        "passwordProfile"
-      ],
-      "description": "Request parameters for create a new user"
-    },
-    "UserCreateWorkOrSchoolAccountParameters": {
-      "properties": {
+        },
         "userPrincipalName": {
           "type": "string",
           "description": "The user principal name (someuser@contoso.com). It must contain one of the verified domains for the tenant."
@@ -1515,42 +1506,35 @@
           "description": "Needs to be specified if you are using a federated domain for the user's userPrincipalName (UPN) property while creating a new user account. It is used to associate an on-premises Active Directory user account to their Azure AD user object."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/UserCreateParameters"
-        }
-      ],
       "required": [
+        "accountEnabled",
+        "displayName",
+        "passwordProfile",
         "userPrincipalName",
         "mailNickname"
       ],
       "description": "Request parameters for create a new work or school account user"
     },
-    "UserCreateLocalAccountParameters": {
+    "UserUpdateParameters": {
       "properties": {
-        "creationType": {
-          "type": "string",
-          "description": "Must be set to \"LocalAccount\" to create a local account user. ",
-          "enum": [ "LocalAccount" ]
+        "accountEnabled": {
+          "type": "boolean",
+          "description": "Enable the account. If it is enabled then true else false."
         },
-        "signInNames": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserSignInName"
-          },
-          "description": "Specifies the sign-in names for the user. Each sign-in name must be unique across the company/tenant."
+        "displayName": {
+          "type": "string",
+          "description": "User display name"
+        },
+        "passwordProfile": {
+          "$ref": "#/definitions/PasswordProfile",
+          "description": "Password Profile"
+        },
+        "mailNickname": {
+          "type": "string",
+          "description": "The mail alias for the user"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/UserCreateParameters"
-        }
-      ],
-      "required": [
-        "creationType",
-        "signInNames"
-      ],
-      "description": "Request parameters for create a new local account user"
+      "description": "Request parameters for updating an existing work or school account user"
     },
     "User": {
       "properties": {
@@ -1577,6 +1561,10 @@
         "mail": {
           "type": "string",
           "description": "Gets or sets user mail"
+        },
+        "mailNickname": {
+          "type": "string",
+          "description": "The mail alias for the user"
         }
       },
       "description": "Active Directory user information"
