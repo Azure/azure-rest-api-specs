@@ -1296,7 +1296,8 @@
         },
         "mailEnabled": {
           "type": "boolean",
-          "description": "Mail"
+          "description": "Specifies whether the group is mail-enabled. Must be false. This is because only pure security groups can be created using the Graph API.",
+          "enum": [ false ]
         },
         "mailNickname": {
           "type": "string",
@@ -1304,7 +1305,8 @@
         },
         "securityEnabled": {
           "type": "boolean",
-          "description": "Is security enabled"
+          "description": "Specifies whether the group is a security group. Must be true. This is because only pure security groups can be created using the Graph API.",
+          "enum": [ true ]
         }
       },
       "required": [
