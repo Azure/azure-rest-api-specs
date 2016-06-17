@@ -208,7 +208,7 @@
           "Group"
         ],
         "operationId": "Groups_RemoveMember",
-        "description": "Remove a memeber from a group. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151607.aspx",
+        "description": "Remove a memeber from a group. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/groups-operations#DeleteGroupMember",
         "parameters": [
           {
             "name": "groupObjectId",
@@ -235,7 +235,7 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "No Content. Indicates success. No response body is returned."
           }
         }
       }
@@ -263,7 +263,7 @@
             "schema": {
               "$ref": "#/definitions/GroupAddMemberParameters"
             },
-            "description": "Member Object Url as https://graph.windows.net/contoso.onmicrosoft.com/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd"
+            "description": "Member Object Url as https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -274,7 +274,7 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "No Content. Indicates success. No response body is returned."
           }
         }
       }
@@ -1280,13 +1280,13 @@
       "properties": {
         "url": {
           "type": "string",
-          "description": "Group display name"
+          "description": "Member Object Url as \"https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd\", where \"0b1f9851-1bf0-433f-aec3-cb9272f093dc\" is the tenantId and \"f260bbc4-c254-447b-94cf-293b5ec434dd\" is the objectId of the member (user, application, servicePrincipal, group) to be added."
         }
       },
       "required": [
         "url"
       ],
-      "description": "Request parameters for adding members to a groups"
+      "description": "Request parameters for adding a member to a group"
     },
     "GroupCreateParameters": {
       "properties": {
