@@ -725,6 +725,7 @@
           "description": "Gets or sets Namespace tags."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/NamespaceProperties",
           "description": "Gets or sets properties of the Namespace."
         }
@@ -769,6 +770,7 @@
           "description": "Gets or sets tags of the Namespace."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/NamespaceProperties",
           "description": "Gets or sets properties of the Namespace."
         }
@@ -833,6 +835,7 @@
           "description": "Gets or sets Name of the Namespace AuthorizationRule."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties",
           "description": "Gets or sets properties of the Namespace AuthorizationRules."
         }
@@ -918,15 +921,15 @@
         },
         "primaryKey": {
           "type": "string",
-          "description": ""
+          "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token"
         },
         "secondaryKey": {
           "type": "string",
-          "description": ""
+          "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token"
         },
         "keyName": {
           "type": "string",
-          "description": ""
+          "description": "A string that describes the authorization rule"
         }
       },
       "description": "Namespace/ServiceBus Connection String"
