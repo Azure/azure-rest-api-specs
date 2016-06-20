@@ -121,13 +121,6 @@
               "$ref": "#/definitions/NamespaceResource"
             }
           },
-          "400": {
-            "description": "Invalid request body"
-            },
-          "500": {
-            "description": "Internal error"
-            }
-          },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -162,14 +155,8 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Namespace does not exist"
-          },
           "200": {
             "description": "Namespace delete successful"
-          },
-          "500": {
-            "description": "Internal error"
           }
         },
         "x-ms-long-running-operation": true
@@ -579,22 +566,22 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets name"
+          "description": "Name of the namespace"
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets location."
+          "description": "Namespace location"
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets tags."
+          "description": "Namespace tags"
         },
         "isAvailiable": {
           "type": "boolean",
-          "description": "Gets or sets true if the name is available and can be used to create new Namespace/ServiceBus. Otherwise false."
+          "description": "Is true if the name is available and can be used to create new Namespace/ServiceBus. Otherwise false."
         }
       },
       "required": [
@@ -604,34 +591,16 @@
     },
     "CheckAvailabilityResource": {
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the id"
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets datacenter location"
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets name"
-        },
-        "type": {
-          "type": "string",
-          "description": "Gets or sets resource type"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets tags"
-        },
         "isAvailiable": {
           "type": "boolean",
-          "description": "Gets or sets true if the name is available and can be used to create new Namespace/ServiceBus. Otherwise false."
+          "description": "Is true if the name is available and can be used to create new Namespace/ServiceBus. Otherwise false."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "description": "Description of a CheckAvailibility resource."
     },
     "NamespaceProperties": {
@@ -642,7 +611,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets provisioning state of the Namespace."
+          "description": "Provisioning state of the Namespace."
         },
         "region": {
           "externalDocs": {
@@ -674,21 +643,13 @@
           "type": "string",
           "description": "The Id of the Azure subscription associated with the namespace."
         },
-        "scaleUnit": {
-          "type": "string",
-          "description": "ScaleUnit where the namespace gets created"
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether or not the namespace is currently enabled."
-        },
         "critical": {
           "type": "boolean",
           "description": "Whether or not the namespace is set as Critical."
         },
         "namespaceType": {
           "type": "string",
-          "description": "Gets or sets the namespace type.",
+          "description": "The namespace type.",
           "enum": [
             "Messaging",
             "NotificationHub",
@@ -715,19 +676,19 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Gets or sets Namespace data center location."
+          "description": "Namespace data center location."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets Namespace tags."
+          "description": "Namespace tags."
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NamespaceProperties",
-          "description": "Gets or sets properties of the Namespace."
+          "description": "Properties of the Namespace."
         }
       },
       "required": [
@@ -738,43 +699,25 @@
     },
     "NamespaceResource": {
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the id of the created Namespace."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets datacenter location of the Namespace."
-        },
         "kind": {
           "type": "string",
-          "description": "Gets or sets kind of the Namespace."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets name of the Namespace."
-        },
-        "type": {
-          "type": "string",
-          "description": "Gets or sets resource type of the Namespace."
+          "description": "Kind of the Namespace."
         },
         "sku": {
           "$ref": "#/definitions/ARMSku",
-          "description": "Gets or sets sku of the Namespace."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets tags of the Namespace."
+          "description": "Sku of the Namespace."
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NamespaceProperties",
-          "description": "Gets or sets properties of the Namespace."
+          "description": "Properties of the Namespace."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "description": "Description of a Namespace resource."
     },
     "ARMSku": {
@@ -787,14 +730,6 @@
         "Tier": {
           "type": "string",
           "description": "The tier of this particular SKU"
-        },
-        "Size": {
-          "type": "string",
-          "description": "optional"
-        },
-        "Family": {
-          "type": "string",
-          "description": "optional"
         },
         "Capacity": {
           "format": "int32",
@@ -828,16 +763,16 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Gets or sets Namespace data center location."
+          "description": "Namespace data center location."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets Name of the Namespace AuthorizationRule."
+          "description": "Name of the Namespace AuthorizationRule."
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties",
-          "description": "Gets or sets properties of the Namespace AuthorizationRules."
+          "description": "Properties of the Namespace AuthorizationRules."
         }
       },
       "required": [
@@ -847,34 +782,17 @@
     },
     "SharedAccessAuthorizationRuleResource": {
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the id of the created Namespace AuthorizationRules."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets datacenter location of the Namespace AuthorizationRules."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets name of the Namespace AuthorizationRules."
-        },
-        "type": {
-          "type": "string",
-          "description": "Gets or sets resource type of the Namespace AuthorizationRules."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets tags of the Namespace AuthorizationRules."
-        },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties",
-          "description": "Gets or sets properties of the Namespace."
+          "description": "Properties of the Namespace."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "description": "Description of a Namespace AuthorizationRules."
     },
     "NamespaceListResult": {
@@ -884,11 +802,11 @@
           "items": {
             "$ref": "#/definitions/NamespaceResource"
           },
-          "description": "Gets or sets result of the List Namespace operation."
+          "description": "Result of the List Namespace operation."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets link to the next set of results. Not empty if Value contains incomplete list of Namespaces"
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces"
         }
       },
       "description": "The response of the List Namespace operation."
@@ -900,11 +818,11 @@
           "items": {
             "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
           },
-          "description": "Gets or sets result of the List AuthorizationRules operation."
+          "description": "Result of the List AuthorizationRules operation."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets link to the next set of results. Not empty if Value contains incomplete list of AuthorizationRules"
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of AuthorizationRules"
         }
       },
       "description": "The response of the List Namespace operation."
@@ -913,11 +831,11 @@
       "properties": {
         "primaryConnectionString": {
           "type": "string",
-          "description": "Gets or sets the primaryConnectionString of the created Namespace AuthorizationRule."
+          "description": "PrimaryConnectionString of the created Namespace AuthorizationRule."
         },
         "secondaryConnectionString": {
           "type": "string",
-          "description": "Gets or sets the secondaryConnectionString of the created Namespace AuthorizationRule"
+          "description": "SecondaryConnectionString of the created Namespace AuthorizationRule"
         },
         "primaryKey": {
           "type": "string",
@@ -933,6 +851,37 @@
         }
       },
       "description": "Namespace/ServiceBus Connection String"
+    }
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
