@@ -81,7 +81,7 @@
         "operationId": "Namespaces_CreateOrUpdate",
         "description": "Creates/Updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
         "externalDocs": {
-          "url": ""
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx"
         },
         "parameters": [
           {
@@ -116,18 +116,20 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "Namespace create request accepted",
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
             }
           },
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/NamespaceResource"
+          "400": {
+            "description": "Invalid request body"
+            },
+          "500": {
+            "description": "Internal error"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -136,7 +138,7 @@
         "operationId": "Namespaces_Delete",
         "description": "Deletes an existing namespace. This operation also removes all associated resources under the namespace.",
         "externalDocs": {
-          "url": ""
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx"
         },
         "parameters": [
           {
@@ -161,14 +163,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": ""
+          "404": {
+            "description": "Namespace does not exist"
           },
           "200": {
-            "description": ""
+            "description": "Namespace delete successful"
           },
-          "202": {
-            "description": ""
+          "500": {
+            "description": "Internal error"
           }
         },
         "x-ms-long-running-operation": true
@@ -206,7 +208,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Namespace returned successfully",
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
             }
@@ -261,7 +263,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Authorization rule created",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -304,11 +306,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": ""
-          },
           "200": {
-            "description": ""
+            "description": "Authorization rule deleted"
           }
         }
       },
@@ -349,7 +348,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Authorization rule returned successfully",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -362,10 +361,10 @@
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Namespaces_List",
+        "operationId": "Namespaces_ListByResourceGroup",
         "description": "Lists the available namespaces within a resourceGroup.",
         "externalDocs": {
-          "url": ""
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
         },
         "parameters": [
           {
@@ -384,7 +383,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Namespaces returned successfully",
             "schema": {
               "$ref": "#/definitions/NamespaceListResult"
             }
@@ -403,7 +402,7 @@
         "operationId": "Namespaces_ListAll",
         "description": "Lists all the available namespaces within the subscription irrespective of the resourceGroups.",
         "externalDocs": {
-          "url": ""
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
         },
         "parameters": [
           {
@@ -415,7 +414,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Namespaces returned successfully",
             "schema": {
               "$ref": "#/definitions/NamespaceListResult"
             }
@@ -457,7 +456,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Authorization rule returned successfully",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
             }
@@ -476,7 +475,7 @@
         "operationId": "Namespaces_ListKeys",
         "description": "Gets the Primary and Secondary ConnectionStrings to the namespace ",
         "externalDocs": {
-          "url": ""
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639398.aspx"
         },
         "parameters": [
           {
@@ -509,7 +508,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successful",
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
             }
@@ -522,10 +521,10 @@
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Namespaces_ListKeys",
+        "operationId": "Namespaces_RegenerateKeys",
         "description": "Gets the Primary and Secondary ConnectionStrings to the namespace ",
         "externalDocs": {
-          "url": ""
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt718977.aspx"
         },
         "parameters": [
           {
@@ -567,7 +566,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successful",
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
             }
