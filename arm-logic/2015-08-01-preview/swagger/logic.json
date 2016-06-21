@@ -1347,7 +1347,7 @@
         }
     },
     "definitions": {
-        "Resource": {
+        "IntegrationAccountResource": {
             "properties": {
                 "id": {
                     "type": "string",
@@ -1375,11 +1375,6 @@
             },
             "x-ms-azure-resource": true
         },
-        "Object": {
-            "type": "object",
-            "properties": {
-            }
-        },
         "ResourceReference": {
             "type": "object",
             "properties": {
@@ -1399,7 +1394,7 @@
                 }
             }
         },
-        "SkuName": {
+        "IntegrationAccountSkuName": {
             "type": "string",
             "enum": [
                 "NotSpecified",
@@ -1414,7 +1409,7 @@
                 "modelAsString": false
             }
         },
-        "ContentLink": {
+        "IntegrationAccountContentLink": {
             "type": "object",
             "properties": {
                 "uri": {
@@ -1431,16 +1426,18 @@
                     "description": "Gets or sets the content size."
                 },
                 "contentHash": {
-                    "$ref": "#/definitions/ContentHash",
+                    "$ref": "#/definitions/IntegrationAccountContentHash",
                     "description": "Gets or sets the content hash."
                 },
                 "metadata": {
-                    "$ref": "#/definitions/Object",
-                    "description": "Gets or sets the metadata."
+                    "type": "object",
+                    "description": "Gets or sets the metadata.",
+                    "properties": {
+                    }
                 }
             }
         },
-        "ContentHash": {
+        "IntegrationAccountContentHash": {
             "type": "object",
             "properties": {
                 "algorithm": {
@@ -1468,7 +1465,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/Resource"
+                    "$ref": "#/definitions/IntegrationAccountResource"
                 }
             ]
         },
@@ -1521,7 +1518,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/Resource"
+                    "$ref": "#/definitions/IntegrationAccountResource"
                 }
             ]
         },
@@ -1549,21 +1546,25 @@
                     "description": "Gets the changed time."
                 },
                 "content": {
-                    "$ref": "#/definitions/Object",
-                    "description": "Gets or sets the content."
+                    "type": "object",
+                    "description": "Gets or sets the content.",
+                    "properties": {
+                    }
                 },
                 "contentType": {
                     "type": "string",
                     "description": "Gets or sets the content type."
                 },
                 "contentLink": {
-                    "$ref": "#/definitions/ContentLink",
+                    "$ref": "#/definitions/IntegrationAccountContentLink",
                     "readOnly": true,
                     "description": "Gets the content link."
                 },
                 "metadata": {
-                    "$ref": "#/definitions/Object",
-                    "description": "Gets or sets the metadata."
+                    "type": "object",
+                    "description": "Gets or sets the metadata.",
+                    "properties": {
+                    }
                 }
             }
         },
@@ -1614,7 +1615,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/Resource"
+                    "$ref": "#/definitions/IntegrationAccountResource"
                 }
             ]
         },
@@ -1638,21 +1639,25 @@
                     "description": "Gets the changed time."
                 },
                 "content": {
-                    "$ref": "#/definitions/Object",
-                    "description": "Gets or sets the content."
+                    "type": "object",
+                    "description": "Gets or sets the content.",
+                    "properties": {
+                    }
                 },
                 "contentType": {
                     "type": "string",
                     "description": "Gets or sets the content type."
                 },
                 "contentLink": {
-                    "$ref": "#/definitions/ContentLink",
+                    "$ref": "#/definitions/IntegrationAccountContentLink",
                     "readOnly": true,
                     "description": "Gets the content link."
                 },
                 "metadata": {
-                    "$ref": "#/definitions/Object",
-                    "description": "Gets or sets the metadata."
+                    "type": "object",
+                    "description": "Gets or sets the metadata.",
+                    "properties": {
+                    }
                 }
             }
         },
@@ -1696,7 +1701,7 @@
             "type": "object",
             "properties": {
                 "name": {
-                    "$ref": "#/definitions/SkuName",
+                    "$ref": "#/definitions/IntegrationAccountSkuName",
                     "description": "Gets or sets the sku name."
                 }
             }
@@ -1737,7 +1742,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/Resource"
+                    "$ref": "#/definitions/IntegrationAccountResource"
                 }
             ]
         },        
@@ -1761,8 +1766,10 @@
                     "description": "Gets the changed time."
                 },
                 "metadata": {
-                    "$ref": "#/definitions/Object",
-                    "description": "Gets or sets the metadata."
+                    "type": "object",
+                    "description": "Gets or sets the metadata.",
+                    "properties": {
+                    }
                 },
                 "content": {
                     "$ref": "#/definitions/PartnerContent",
@@ -1851,7 +1858,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/Resource"
+                    "$ref": "#/definitions/IntegrationAccountResource"
                 }
             ]
         },
@@ -1871,8 +1878,10 @@
                     "description": "Gets the changed time."
                 },
                 "metadata": {
-                    "$ref": "#/definitions/Object",
-                    "description": "Gets or sets the metadata."
+                    "type": "object",
+                    "description": "Gets or sets the metadata.",
+                    "properties": {
+                    }
                 },
                 "agreementType": {
                     "$ref": "#/definitions/AgreementType",
@@ -3605,7 +3614,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/Resource"
+                    "$ref": "#/definitions/IntegrationAccountResource"
                 }
             ]
         },
@@ -3625,8 +3634,10 @@
                     "description": "Gets the changed time."
                 },
                 "metadata": {
-                    "$ref": "#/definitions/Object",
-                    "description": "Gets or sets the metadata."
+                    "type": "object",
+                    "description": "Gets or sets the metadata.",
+                    "properties": {
+                    }
                 },
                 "key": {
                     "$ref": "#/definitions/KeyVaultKeyReference",
