@@ -661,7 +661,8 @@
           }
         }
       },
-      "description": "Namespace properties."
+      "x-ms-client-flatten": true,
+      "description": "Properties of the Namespace."
     },
     "RegenerateKeysParameters": {
       "properties": {
@@ -694,9 +695,7 @@
           "description": "Namespace tags."
         },
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NamespaceProperties",
-          "description": "Properties of the Namespace."
+          "$ref": "#/definitions/NamespaceProperties"
         }
       },
       "required": [
@@ -720,13 +719,10 @@
           }
         },
         "sku": {
-          "$ref": "#/definitions/ARMSku",
-          "description": "Sku of the Namespace."
+          "$ref": "#/definitions/ARMSku"
         },
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NamespaceProperties",
-          "description": "Properties of the Namespace."
+          "$ref": "#/definitions/NamespaceProperties"
         }
       },
       "allOf": [
@@ -770,7 +766,8 @@
           "type": "integer",
           "description": "The messaging units or eventhub throughput units"
         }
-      }
+      },
+      "description": "Sku of the Namespace."
     },
     "SharedAccessAuthorizationRuleProperties": {
       "properties": {
@@ -791,6 +788,7 @@
           "description": "The rights associated with the rule."
         }
       },
+      "x-ms-client-flatten": true,
       "description": "SharedAccessAuthorizationRule properties."
     },
     "SharedAccessAuthorizationRuleCreateOrUpdateParameters": {
@@ -804,9 +802,7 @@
           "description": "Name of the Namespace AuthorizationRule."
         },
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties",
-          "description": "Properties of the Namespace AuthorizationRules."
+          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
         }
       },
       "required": [
@@ -817,9 +813,7 @@
     "SharedAccessAuthorizationRuleResource": {
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties",
-          "description": "Properties of the Namespace."
+          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
         }
       },
       "allOf": [
