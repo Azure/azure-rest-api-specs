@@ -1,0 +1,3686 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "LogicManagementClient",
+        "version": "2015-08-01-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json",
+        "text/json"
+    ],
+    "produces": [
+        "application/json",
+        "text/json"
+    ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Logic/integrationAccounts": {
+            "get": {
+                "tags": [
+                    "IntegrationAccounts"
+                ],
+                "operationId": "IntegrationAccounts_ListBySubscription",
+                "description": "Gets a list of integration accounts by subscription.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "name": "$top",
+                        "description": "The number of items to be included in the result.",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts": {
+            "get": {
+                "tags": [
+                    "IntegrationAccounts"
+                ],
+                "operationId": "IntegrationAccounts_ListByResourceGroup",
+                "description": "Gets a list of integration accounts by resource group.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "name": "$top",
+                        "description": "The number of items to be included in the result.",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}": {
+            "get": {
+                "tags": [
+                    "IntegrationAccounts"
+                ],
+                "operationId": "IntegrationAccounts_Get",
+                "description": "Gets an integration account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccount"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "IntegrationAccounts"
+                ],
+                "operationId": "IntegrationAccounts_CreateOrUpdate",
+                "description": "Creates or updates an integration account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "name": "integrationAccount",
+                        "description": "The integration account.",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccount"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccount"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccount"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "IntegrationAccounts"
+                ],
+                "operationId": "IntegrationAccounts_Update",
+                "description": "Updates an integration account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "name": "integrationAccount",
+                        "description": "The integration account.",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccount"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccount"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "IntegrationAccounts"
+                ],
+                "operationId": "IntegrationAccounts_Delete",
+                "description": "Deletes an integration account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/listCallbackUrl": {
+            "post": {
+                "tags": [
+                    "IntegrationAccounts"
+                ],
+                "operationId": "IntegrationAccounts_ListCallbackUrl",
+                "description": "Lists the integration account callback URL.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "name": "parameters",
+                        "description": "The callback URL parameters.",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ListCallbackUrlParameters"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CallbackUrl"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/schemas": {
+            "get": {
+                "tags": [
+                    "IntegrationAccountSchemas"
+                ],
+                "operationId": "IntegrationAccountSchemas_List",
+                "description": "Gets a list of integration account schemas.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "name": "$top",
+                        "description": "The number of items to be included in the result.",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "$filter",
+                        "description": "The filter to apply on the operation.",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountSchemaListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                },
+                "x-ms-odata": "#/definitions/IntegrationAccountSchemaFilter"
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/schemas/{schemaName}": {
+            "get": {
+                "tags": [
+                    "IntegrationAccountSchemas"
+                ],
+                "operationId": "IntegrationAccountSchemas_Get",
+                "description": "Gets an integration account schema.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "schemaName",
+                        "description": "The integration account schema name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountSchema"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "IntegrationAccountSchemas"
+                ],
+                "operationId": "IntegrationAccountSchemas_CreateOrUpdate",
+                "description": "Creates or updates an integration account schema.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "schemaName",
+                        "description": "The integration account schema name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "name": "schema",
+                        "description": "The integration account schema.",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountSchema"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountSchema"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountSchema"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "IntegrationAccountSchemas"
+                ],
+                "operationId": "IntegrationAccountSchemas_Delete",
+                "description": "Deletes an integration account schema.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "schemaName",
+                        "description": "The integration account schema name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/maps": {
+            "get": {
+                "tags": [
+                    "IntegrationAccountMaps"
+                ],
+                "operationId": "IntegrationAccountMaps_List",
+                "description": "Gets a list of integration account maps.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "name": "$top",
+                        "description": "The number of items to be included in the result.",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "$filter",
+                        "description": "The filter to apply on the operation.",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountMapListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                },
+                "x-ms-odata": "#/definitions/IntegrationAccountMapFilter"
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/maps/{mapName}": {
+            "get": {
+                "tags": [
+                    "IntegrationAccountMaps"
+                ],
+                "operationId": "IntegrationAccountMaps_Get",
+                "description": "Gets an integration account map.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "mapName",
+                        "description": "The integration account map name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountMap"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "IntegrationAccountMaps"
+                ],
+                "operationId": "IntegrationAccountMaps_CreateOrUpdate",
+                "description": "Creates or updates an integration account map.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "mapName",
+                        "description": "The integration account map name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "name": "map",
+                        "description": "The integration account map.",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountMap"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountMap"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountMap"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "IntegrationAccountMaps"
+                ],
+                "operationId": "IntegrationAccountMaps_Delete",
+                "description": "Deletes an integration account map.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "mapName",
+                        "description": "The integration account map name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/partners": {
+            "get": {
+                "tags": [
+                    "IntegrationAccountPartners"
+                ],
+                "operationId": "IntegrationAccountPartners_List",
+                "description": "Gets a list of integration account partners.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "name": "$top",
+                        "description": "The number of items to be included in the result.",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "$filter",
+                        "description": "The filter to apply on the operation.",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountPartnerListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                },
+                "x-ms-odata": "#/definitions/IntegrationAccountPartnerFilter"
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/partners/{partnerName}": {
+            "get": {
+                "tags": [
+                    "IntegrationAccountPartners"
+                ],
+                "operationId": "IntegrationAccountPartners_Get",
+                "description": "Gets an integration account partner.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "partnerName",
+                        "description": "The integration account partner name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountPartner"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "IntegrationAccountPartners"
+                ],
+                "operationId": "IntegrationAccountPartners_CreateOrUpdate",
+                "description": "Creates or updates an integration account partner.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "partnerName",
+                        "description": "The integration account partner name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "name": "partner",
+                        "description": "The integration account partner.",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountPartner"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountPartner"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountPartner"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "IntegrationAccountPartners"
+                ],
+                "operationId": "IntegrationAccountPartners_Delete",
+                "description": "Deletes an integration account partner.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "partnerName",
+                        "description": "The integration account partner name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/agreements": {
+            "get": {
+                "tags": [
+                    "IntegrationAccountAgreements"
+                ],
+                "operationId": "IntegrationAccountAgreements_List",
+                "description": "Gets a list of integration account agreements.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "name": "$top",
+                        "description": "The number of items to be included in the result.",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "$filter",
+                        "description": "The filter to apply on the operation.",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountAgreementListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                },
+                "x-ms-odata": "#/definitions/IntegrationAccountAgreementFilter"
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/agreements/{agreementName}": {
+            "get": {
+                "tags": [
+                    "IntegrationAccountAgreements"
+                ],
+                "operationId": "IntegrationAccountAgreements_Get",
+                "description": "Gets an integration account agreement.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "agreementName",
+                        "description": "The integration account agreement name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountAgreement"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "IntegrationAccountAgreements"
+                ],
+                "operationId": "IntegrationAccountAgreements_CreateOrUpdate",
+                "description": "Creates or updates an integration account agreement.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "agreementName",
+                        "description": "The integration account agreement name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "name": "agreement",
+                        "description": "The integration account agreement.",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountAgreement"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountAgreement"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountAgreement"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "IntegrationAccountAgreements"
+                ],
+                "operationId": "IntegrationAccountAgreements_Delete",
+                "description": "Deletes an integration account agreement.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "agreementName",
+                        "description": "The integration account agreement name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/certificates": {
+            "get": {
+                "tags": [
+                    "IntegrationAccountCertificates"
+                ],
+                "operationId": "IntegrationAccountCertificates_List",
+                "description": "Gets a list of integration account certificates.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "name": "$top",
+                        "description": "The number of items to be included in the result.",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountCertificateListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/certificates/{certificateName}": {
+            "get": {
+                "tags": [
+                    "IntegrationAccountCertificates"
+                ],
+                "operationId": "IntegrationAccountCertificates_Get",
+                "description": "Gets an integration account certificate.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "certificateName",
+                        "description": "The integration account certificate name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountCertificate"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "IntegrationAccountCertificates"
+                ],
+                "operationId": "IntegrationAccountCertificates_CreateOrUpdate",
+                "description": "Creates or updates an integration account certificate.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "certificateName",
+                        "description": "The integration account certificate name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "name": "certificate",
+                        "description": "The integration account certificate.",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountCertificate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountCertificate"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/IntegrationAccountCertificate"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "IntegrationAccountCertificates"
+                ],
+                "operationId": "IntegrationAccountCertificates_Delete",
+                "description": "Deletes an integration account certificate.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subscriptionId"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "integrationAccountName",
+                        "description": "The integration account name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "certificateName",
+                        "description": "The integration account certificate name.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/api-version"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "IntegrationAccountResource": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Gets or sets the resource id."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Gets or sets the resource name."
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Gets or sets the resource type."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Gets or sets the resource location."
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the resource tags."
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "ResourceReference": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Gets or sets the resource id."
+                },
+                "name": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Gets the resource name."
+                },
+                "type": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Gets the resource type."
+                }
+            }
+        },
+        "IntegrationAccountSkuName": {
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "Free",
+                "Shared",
+                "Basic",
+                "Standard",
+                "Premium"
+            ],
+            "x-ms-enum": {
+                "name": "SkuName",
+                "modelAsString": false
+            }
+        },
+        "IntegrationAccountContentLink": {
+            "type": "object",
+            "properties": {
+                "uri": {
+                    "type": "string",
+                    "description": "Gets or sets the content link URI."
+                },
+                "contentVersion": {
+                    "type": "string",
+                    "description": "Gets or sets the content version."
+                },
+                "contentSize": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Gets or sets the content size."
+                },
+                "contentHash": {
+                    "$ref": "#/definitions/IntegrationAccountContentHash",
+                    "description": "Gets or sets the content hash."
+                },
+                "metadata": {
+                    "type": "object",
+                    "description": "Gets or sets the metadata.",
+                    "properties": {
+                    }
+                }
+            }
+        },
+        "IntegrationAccountContentHash": {
+            "type": "object",
+            "properties": {
+                "algorithm": {
+                    "type": "string",
+                    "description": "Gets or sets the algorithm."
+                },
+                "value": {
+                    "type": "string",
+                    "description": "Gets or sets the value."
+                }
+            }
+        },
+        "IntegrationAccount": {
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/IntegrationAccountProperties",
+                    "description": "Gets or sets the integration account properties."
+                },
+                "sku": {
+                    "$ref": "#/definitions/IntegrationAccountSku",
+                    "description": "Gets or sets the sku."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IntegrationAccountResource"
+                }
+            ]
+        },
+        "IntegrationAccountProperties": {
+            "type": "object"
+        },
+        "IntegrationAccountListResult": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/IntegrationAccount"
+                    },
+                    "description": "Gets or sets the list of integration accounts."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "Gets or sets the URL to get the next set of results."
+                }
+            }
+        },
+        "ListCallbackUrlParameters": {
+            "type": "object",
+            "properties": {
+                "NotAfter": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Gets or sets the expiry time."
+                }
+            }
+        },
+        "CallbackUrl": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "string",
+                    "description": "Gets or sets the URL value."
+                }
+            }
+        },
+        "IntegrationAccountSchema": {
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/IntegrationAccountSchemaProperties",
+                    "description": "Gets or sets the integration account schema properties."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IntegrationAccountResource"
+                }
+            ]
+        },
+        "IntegrationAccountSchemaProperties": {
+            "type": "object",
+            "properties": {
+                "schemaType": {
+                    "$ref": "#/definitions/SchemaType",
+                    "description": "Gets or sets the schema type."
+                },
+                "targetNamespace": {
+                    "type": "string",
+                    "description": "Gets or sets the target namespace."
+                },
+                "createdTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Gets the created time."
+                },
+                "changedTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Gets the changed time."
+                },
+                "content": {
+                    "type": "object",
+                    "description": "Gets or sets the content.",
+                    "properties": {
+                    }
+                },
+                "contentType": {
+                    "type": "string",
+                    "description": "Gets or sets the content type."
+                },
+                "contentLink": {
+                    "$ref": "#/definitions/IntegrationAccountContentLink",
+                    "readOnly": true,
+                    "description": "Gets the content link."
+                },
+                "metadata": {
+                    "type": "object",
+                    "description": "Gets or sets the metadata.",
+                    "properties": {
+                    }
+                }
+            }
+        },
+        "IntegrationAccountSchemaListResult": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/IntegrationAccountSchema"
+                    },
+                    "description": "Gets or sets the list of integration account schemas."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "Gets or sets the URL to get the next set of results."
+                }
+            }
+        },
+        "IntegrationAccountSchemaFilter": {
+            "type": "object",
+            "properties": {
+                "schemaType": {
+                    "$ref": "#/definitions/SchemaType",
+                    "description": "Gets or sets the schema type of integration account schema."
+                }
+            }
+        },
+        "SchemaType": {
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "Xml"
+            ],
+            "x-ms-enum": {
+                "name": "SchemaType",
+                "modelAsString": false
+            }
+        },
+        "IntegrationAccountMap": {
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/IntegrationAccountMapProperties",
+                    "description": "Gets or sets the integration account map properties."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IntegrationAccountResource"
+                }
+            ]
+        },
+        "IntegrationAccountMapProperties": {
+            "type": "object",
+            "properties": {
+                "mapType": {
+                    "$ref": "#/definitions/MapType",
+                    "description": "Gets or sets the map type."
+                },
+                "createdTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Gets the created time."
+                },
+                "changedTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Gets the changed time."
+                },
+                "content": {
+                    "type": "object",
+                    "description": "Gets or sets the content.",
+                    "properties": {
+                    }
+                },
+                "contentType": {
+                    "type": "string",
+                    "description": "Gets or sets the content type."
+                },
+                "contentLink": {
+                    "$ref": "#/definitions/IntegrationAccountContentLink",
+                    "readOnly": true,
+                    "description": "Gets the content link."
+                },
+                "metadata": {
+                    "type": "object",
+                    "description": "Gets or sets the metadata.",
+                    "properties": {
+                    }
+                }
+            }
+        },
+        "IntegrationAccountMapListResult": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/IntegrationAccountMap"
+                    },
+                    "description": "Gets or sets the list of integration account maps."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "Gets or sets the URL to get the next set of results."
+                }
+            }
+        },
+        "IntegrationAccountMapFilter": {
+            "type": "object",
+            "properties": {
+                "schemaType": {
+                    "$ref": "#/definitions/MapType",
+                    "description": "Gets or sets the map type of integration account map."
+                }
+            }
+        },
+        "MapType": {
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "Xslt"
+            ],
+            "x-ms-enum": {
+                "name": "MapType",
+                "modelAsString": false
+            }
+        },
+        "IntegrationAccountSku": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "$ref": "#/definitions/IntegrationAccountSkuName",
+                    "description": "Gets or sets the sku name."
+                }
+            }
+        },
+        "IntegrationAccountPartnerListResult": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/IntegrationAccountPartner"
+                    },
+                    "description": "Gets or sets the list of integration account partners."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "Gets or sets the URL to get the next set of results."
+                }
+            }
+        },
+        "IntegrationAccountPartnerFilter": {
+            "type": "object",
+            "properties": {
+                "partnerType": {
+                    "$ref": "#/definitions/PartnerType",
+                    "description": "Gets or sets the partner type of integration account partner."
+                }
+            }
+        },
+        "IntegrationAccountPartner": {
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/IntegrationAccountPartnerProperties",
+                    "description": "Gets or sets the integration account partner properties."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IntegrationAccountResource"
+                }
+            ]
+        },        
+        "IntegrationAccountPartnerProperties": {
+            "type": "object",
+            "properties": {
+                "partnerType": {
+                    "$ref": "#/definitions/PartnerType",
+                    "description": "Gets or sets the partner type."
+                },
+                "createdTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Gets the created time."
+                },
+                "changedTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Gets the changed time."
+                },
+                "metadata": {
+                    "type": "object",
+                    "description": "Gets or sets the metadata.",
+                    "properties": {
+                    }
+                },
+                "content": {
+                    "$ref": "#/definitions/PartnerContent",
+                    "description": "Gets or sets the partner content."
+                }
+            }
+        },
+        "PartnerType": {
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "B2B"
+            ],
+            "x-ms-enum": {
+                "name": "PartnerType",
+                "modelAsString": false
+            }
+        },
+        "PartnerContent": {
+            "type": "object",
+            "properties": {
+                "b2b": {
+                    "$ref": "#/definitions/B2BPartnerContent",
+                    "description": "Gets or sets the B2B partner content."
+                }
+            }
+        },
+        "B2BPartnerContent": {
+            "type": "object",
+            "properties": {
+                "businessIdentities": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/BusinessIdentity"
+                    },
+                    "description": "Gets or sets the list of partner business identities."
+                }
+            }
+        },
+        "BusinessIdentity": {
+            "type": "object",
+            "properties": {
+                "Qualifier": {
+                    "type": "string",
+                    "description": "Gets or sets the business identity qualifier."
+                },
+                "Value": {
+                    "type": "string",
+                    "description": "Gets or sets the business identity value."
+                }
+            }
+        },
+        "IntegrationAccountAgreementListResult": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/IntegrationAccountAgreement"
+                    },
+                    "description": "Gets or sets the list of integration account agreements."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "Gets or sets the URL to get the next set of results."
+                }
+            }
+        },
+        "IntegrationAccountAgreementFilter": {
+            "type": "object",
+            "properties": {
+                "agreementType": {
+                    "$ref": "#/definitions/AgreementType",
+                    "description": "Gets or sets the agreement type of integration account agreement."
+                }
+            }
+        },
+        "IntegrationAccountAgreement": {
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/IntegrationAccountAgreementProperties",
+                    "description": "Gets or sets the integration account agreement properties."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IntegrationAccountResource"
+                }
+            ]
+        },
+        "IntegrationAccountAgreementProperties": {
+            "type": "object",
+            "properties": {
+                "createdTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Gets the created time."
+                },
+                "changedTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Gets the changed time."
+                },
+                "metadata": {
+                    "type": "object",
+                    "description": "Gets or sets the metadata.",
+                    "properties": {
+                    }
+                },
+                "agreementType": {
+                    "$ref": "#/definitions/AgreementType",
+                    "description": "Gets or sets the agreement type."
+                },
+                "hostPartner": {
+                    "type": "string",
+                    "description": "Gets or sets the host partner."
+                },
+                "guestPartner": {
+                    "type": "string",
+                    "description": "Gets or sets the guest partner."
+                },
+                "hostIdentity": {
+                    "$ref": "#/definitions/BusinessIdentity",
+                    "description": "Gets or sets the host identity."
+                },
+                "guestIdentity": {
+                    "$ref": "#/definitions/BusinessIdentity",
+                    "description": "Gets or sets the guest identity."
+                },
+                "content": {
+                    "$ref": "#/definitions/AgreementContent",
+                    "description": "Gets or sets the agreement content."
+                }
+            }
+        },
+        "AgreementType": {
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "AS2",
+                "X12",
+                "Edifact"
+            ],
+            "x-ms-enum": {
+                "name": "AgreementType",
+                "modelAsString": false
+            }
+        },
+        "AgreementContent": {
+            "type": "object",
+            "properties": {
+                "AS2": {
+                    "$ref": "#/definitions/AS2AgreementContent",
+                    "description": "Gets or sets the AS2 agreement content."
+                },
+                "X12": {
+                    "$ref": "#/definitions/X12AgreementContent",
+                    "description": "Gets or sets the X12 agreement content."
+                },
+                "Edifact": {
+                    "$ref": "#/definitions/EdifactAgreementContent",
+                    "description": "Gets or sets the EDIFACT agreement content."
+                }
+            }
+        },
+        "AS2AgreementContent": {
+            "type": "object",
+            "properties": {
+                "receiveAgreement": {
+                    "$ref": "#/definitions/AS2OneWayAgreement",
+                    "description": "Gets or sets the AS2 one-way receive agreement."
+                },
+                "sendAgreement": {
+                    "$ref": "#/definitions/AS2OneWayAgreement",
+                    "description": "Gets or sets the AS2 one-way send agreement."
+                }
+            }
+        },
+        "AS2OneWayAgreement": {
+            "type": "object",
+            "properties": {
+                "senderBusinessIdentity": {
+                    "$ref": "#/definitions/BusinessIdentity",
+                    "description": "Gets or sets the sender business identity"
+                },
+                "receiverBusinessIdentity": {
+                    "$ref": "#/definitions/BusinessIdentity",
+                    "description": "Gets or sets the receiver business identity"
+                },
+                "protocolSettings": {
+                    "$ref": "#/definitions/AS2ProtocolSettings",
+                    "description": "Gets or sets the AS2 protocol settings."
+                }
+            }
+        },
+        "AS2ProtocolSettings": {
+            "type": "object",
+            "properties": {
+                "messageConnectionSettings": {
+                    "$ref": "#/definitions/AS2MessageConnectionSettings",
+                    "description": "Gets or sets the message connection settings."
+                },
+                "acknowledgementConnectionSettings": {
+                    "$ref": "#/definitions/AS2AcknowledgementConnectionSettings",
+                    "description": "Gets or sets the acknowledgement connection settings."
+                },
+                "mdnSettings": {
+                    "$ref": "#/definitions/AS2MdnSettings",
+                    "description": "Gets or sets the MDN settings."
+                },
+                "securitySettings": {
+                    "$ref": "#/definitions/AS2SecuritySettings",
+                    "description": "Gets or sets the security settings."
+                },
+                "validationSettings": {
+                    "$ref": "#/definitions/AS2ValidationSettings",
+                    "description": "Gets or sets the validation settings."
+                },
+                "envelopeSettings": {
+                    "$ref": "#/definitions/AS2EnvelopeSettings",
+                    "description": "Gets or sets the envelope settings."
+                },
+                "errorSettings": {
+                    "$ref": "#/definitions/AS2ErrorSettings",
+                    "description": "Gets or sets the error settings."
+                }
+            }
+        },
+        "AS2AcknowledgementConnectionSettings": {
+            "type": "object",
+            "properties": {
+                "ignoreCertificateNameMismatch": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to ignore mismatch in certificate name."
+                },
+                "supportHttpStatusCodeContinue": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to support HTTP status code 'CONTINUE'."
+                },
+                "keepHttpConnectionAlive": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to keep the connection alive."
+                },
+                "unfoldHttpHeaders": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to unfold the HTTP headers."
+                }
+            }
+        },
+        "AS2MessageConnectionSettings": {
+            "type": "object",
+            "properties": {
+                "ignoreCertificateNameMismatch": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to ignore mismatch in certificate name."
+                },
+                "supportHttpStatusCodeContinue": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to support HTTP status code 'CONTINUE'."
+                },
+                "keepHttpConnectionAlive": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to keep the connection alive."
+                },
+                "unfoldHttpHeaders": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to unfold the HTTP headers."
+                }
+            }
+        },
+        "AS2MdnSettings": {
+            "type": "object",
+            "properties": {
+                "needMdn": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to send or request a MDN."
+                },
+                "signMdn": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether the MDN needs to be signed or not."
+                },
+                "sendMdnAsynchronously": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to send the asynchronous MDN."
+                },
+                "receiptDeliveryUrl": {
+                    "type": "string",
+                    "description": "Gets or sets the receipt delivery URL."
+                },
+                "dispositionNotificationTo": {
+                    "type": "string",
+                    "description": "Gets or sets the disposition notification to header value."
+                },
+                "signOutboundMdnIfOptional": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to sign the outbound MDN if optional."
+                },
+                "mdnText": {
+                    "type": "string",
+                    "description": "Gets or sets the MDN text."
+                },
+                "sendInboundMdnToMessageBox": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to send inbound MDN to message box."
+                },
+                "micHashingAlgorithm": {
+                    "$ref": "#/definitions/HashingAlgorithm",
+                    "description": "Gets or sets the signing or hashing algorithm."
+                }
+            }
+        },
+        "AS2SecuritySettings": {
+            "type": "object",
+            "properties": {
+                "overrideGroupSigningCertificate": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to send or request a MDN."
+                },
+                "signingCertificateName": {
+                    "type": "string",
+                    "description": "Gets or sets the name of the signing certificate."
+                },
+                "encryptionCertificateName": {
+                    "type": "string",
+                    "description": "Gets or sets the name of the encryption certificate."
+                },
+                "enableNrrForInboundEncodedMessages": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to enable NRR for inbound encoded messages."
+                },
+                "enableNrrForInboundDecodedMessages": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to enable NRR for inbound decoded messages."
+                },
+                "enableNrrForOutboundMdn": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to enable NRR for outbound MDN."
+                },
+                "enableNrrForOutboundEncodedMessages": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to enable NRR for outbound encoded messages."
+                },
+                "enableNrrForOutboundDecodedMessages": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to enable NRR for outbound decoded messages."
+                },
+                "enableNrrForInboundMdn": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to enable NRR for inbound MDN."
+                }
+            }
+        },
+        "AS2ValidationSettings": {
+            "type": "object",
+            "properties": {
+                "overrideMessageProperties": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to override incoming message properties with those in agreement."
+                },
+                "encryptMessage": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether the message has to be encrypted."
+                },
+                "signMessage": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether the message has to be signed."
+                },
+                "compressMessage": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether the message has to be compressed."
+                },
+                "checkDuplicateMessage": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to check for duplicate message."
+                },
+                "interchangeDuplicatesValidityDays": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the number of days to look back for duplicate interchange."
+                },
+                "checkCertificateRevocationListOnSend": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to check for certificate revocation list on send."
+                },
+                "checkCertificateRevocationListOnReceive": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to check for certificate revocation list on receive."
+                },
+                "encryptionAlgorithm": {
+                    "$ref": "#/definitions/EncryptionAlgorithm",
+                    "description": "Gets or sets the encryption algorithm."
+                }
+            }
+        },
+        "AS2EnvelopeSettings": {
+            "type": "object",
+            "properties": {
+                "messageContentType": {
+                    "type": "string",
+                    "description": "Gets or sets the message content type."
+                },
+                "transmitFileNameInMimeHeader": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to transmit file name in mime header."
+                },
+                "fileNameTemplate": {
+                    "type": "string",
+                    "description": "Gets or sets the template for file name."
+                },
+                "SuspendMessageOnFileNameGenerationError": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to suspend message on file name generation error."
+                },
+                "AutogenerateFileName": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to auto generate file name."
+                }
+            }
+        },
+        "AS2ErrorSettings": {
+            "type": "object",
+            "properties": {
+                "SuspendDuplicateMessage": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to suspend duplicate message."
+                },
+                "ResendIfMdnNotReceived": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to resend message If MDN is not received."
+                }
+            }
+        },
+        "X12AgreementContent": {
+            "type": "object",
+            "properties": {
+                "receiveAgreement": {
+                    "$ref": "#/definitions/X12OneWayAgreement",
+                    "description": "Gets or sets the X12 one-way receive agreement."
+                },
+                "sendAgreement": {
+                    "$ref": "#/definitions/X12OneWayAgreement",
+                    "description": "Gets or sets the X12 one-way send agreement."
+                }
+            }
+        },
+        "X12OneWayAgreement": {
+            "type": "object",
+            "properties": {
+                "senderBusinessIdentity": {
+                    "$ref": "#/definitions/BusinessIdentity",
+                    "description": "Gets or sets the sender business identity"
+                },
+                "receiverBusinessIdentity": {
+                    "$ref": "#/definitions/BusinessIdentity",
+                    "description": "Gets or sets the receiver business identity"
+                },
+                "protocolSettings": {
+                    "$ref": "#/definitions/X12ProtocolSettings",
+                    "description": "Gets or sets the X12 protocol settings."
+                }
+            }
+        },
+        "X12ProtocolSettings": {
+            "type": "object",
+            "properties": {
+                "validationSettings": {
+                    "$ref": "#/definitions/X12ValidationSettings",
+                    "description": "Gets or sets the X12 validation settings."
+                },
+                "framingSettings": {
+                    "$ref": "#/definitions/X12FramingSettings",
+                    "description": "Gets or sets the X12 framing settings."
+                },
+                "envelopeSettings": {
+                    "$ref": "#/definitions/X12EnvelopeSettings",
+                    "description": "Gets or sets the X12 envelope settings."
+                },
+                "acknowledgementSettings": {
+                    "$ref": "#/definitions/X12AcknowledgementSettings",
+                    "description": "Gets or sets the X12 acknowledgment settings."
+                },
+                "messageFilter": {
+                    "$ref": "#/definitions/X12MessageFilter",
+                    "description": "Gets or sets the X12 message filter."
+                },
+                "securitySettings": {
+                    "$ref": "#/definitions/X12SecuritySettings",
+                    "description": "Gets or sets the X12 security settings."
+                },
+                "processingSettings": {
+                    "$ref": "#/definitions/X12ProcessingSettings",
+                    "description": "Gets or sets the X12 processing settings."
+                },
+                "envelopeOverrides": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/X12EnvelopeOverride"
+                    },
+                    "description": "Gets or sets the X12 envelope override settings."
+                },
+                "validationOverrides": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/X12ValidationOverride"
+                    },
+                    "description": "Gets or sets the X12 validation override settings."
+                },
+                "messageFilterList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/X12MessageIdentifier"
+                    },
+                    "description": "Gets or sets the X12 message filter list."
+                },
+                "schemaReferences": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/X12SchemaReference"
+                    },
+                    "description": "Gets or sets the X12 schema references."
+                },
+                "x12DelimiterOverrides": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/X12DelimiterOverrides"
+                    },
+                    "description": "Gets or sets the X12 delimiter override settings."
+                }
+            }
+        },
+        "X12ValidationSettings": {
+            "type": "object",
+            "properties": {
+                "validateCharacterSet": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to validate character set in the message."
+                },
+                "checkDuplicateInterchangeControlNumber": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to check for duplicate interchange control number."
+                },
+                "interchangeControlNumberValidityDays": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the validity period of interchange control number."
+                },
+                "checkDuplicateGroupControlNumber": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to check for duplicate group control number."
+                },
+                "checkDuplicateTransactionSetControlNumber": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to check for duplicate transaction set control number."
+                },
+                "validateEDITypes": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to Whether to validate EDI types."
+                },
+                "validateXSDTypes": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to Whether to validate XSD types."
+                },
+                "allowLeadingAndTrailingSpacesAndZeroes": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to allow leading and trailing spaces and zeroes."
+                },
+                "trimLeadingAndTrailingSpacesAndZeroes": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to trim leading and trailing spaces and zeroes."
+                },
+                "trailingSeparatorPolicy": {
+                    "$ref": "#/definitions/TrailingSeparatorPolicy",
+                    "description": "Gets or sets the trailing separator policy."
+                }
+            }
+        },
+        "X12FramingSettings": {
+            "type": "object",
+            "properties": {
+                "dataElementSeparator": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the data element separator."
+                },
+                "componentSeparator": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the component separator."
+                },
+                "replaceSeparatorsInPayload": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to replace separators in payload."
+                },
+                "replaceCharacter": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the replacement character."
+                },
+                "segmentTerminator": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the segment terminator."
+                },
+                "characterSet": {
+                    "$ref": "#/definitions/X12CharacterSet",
+                    "description": "Gets or sets the X12 character set."
+                },
+                "segmentTerminatorSuffix": {
+                    "$ref": "#/definitions/SegmentTerminatorSuffix",
+                    "description": "Gets or sets the segment terminator suffix."
+                }
+
+            }
+        },
+        "X12EnvelopeSettings": {
+            "type": "object",
+            "properties": {
+                "controlStandardsId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the controls standards id."
+                },
+                "useControlStandardsIdAsRepetitionCharacter": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to use control standards id as repetition character."
+                },
+                "senderApplicationId": {
+                    "type": "string",
+                    "description": "Gets or sets the sender application id."
+                },
+                "receiverApplicationId": {
+                    "type": "string",
+                    "description": "Gets or sets the receiver application id."
+                },
+                "controlVersionNumber": {
+                    "type": "string",
+                    "description": "Gets or sets the control version number."
+                },
+                "interchangeControlNumberLowerBound": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the interchange  control number lower bound."
+                },
+                "interchangeControlNumberUpperBound": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the interchange  control number upper bound."
+                },
+                "rolloverInterchangeControlNumber": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to rollover interchange control number."
+                },
+                "enableDefaultGroupHeaders": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to enable default group headers."
+                },
+                "functionalGroupId": {
+                    "type": "string",
+                    "description": "Gets or sets the functional group id."
+                },
+                "groupControlNumberLowerBound": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the group control number lower bound."
+                },
+                "groupControlNumberUpperBound": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the group control number upper bound."
+                },
+                "rolloverGroupControlNumber": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to rollover group control number."
+                },
+                "groupHeaderAgencyCode": {
+                    "type": "string",
+                    "description": "Gets or sets the group header agency code."
+                },
+                "groupHeaderVersion": {
+                    "type": "string",
+                    "description": "Gets or sets the group header version."
+                },
+                "transactionSetControlNumberLowerBound": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the transaction set control number lower bound."
+                },
+                "transactionSetControlNumberUpperBound": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the transaction set control number upper bound."
+                },
+                "rolloverTransactionSetControlNumber": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to rollover transaction set control number."
+                },
+                "transactionSetControlNumberPrefix": {
+                    "type": "string",
+                    "description": "Gets or sets the transaction set control number prefix."
+                },
+                "transactionSetControlNumberSuffix": {
+                    "type": "string",
+                    "description": "Gets or sets the transaction set control number suffix."
+                },
+                "overwriteExistingTransactionSetControlNumber": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to overwrite existing transaction set control number."
+                },
+                "groupHeaderDateFormat": {
+                    "$ref": "#/definitions/X12DateFormat",
+                    "description": "Gets or sets the group header date format."
+                },
+                "groupHeaderTimeFormat": {
+                    "$ref": "#/definitions/X12TimeFormat",
+                    "description": "Gets or sets the group header time format."
+                },
+                "usageIndicator": {
+                    "$ref": "#/definitions/UsageIndicator",
+                    "description": "Gets or sets the usage indicator."
+                }
+            }
+        },
+        "X12AcknowledgementSettings": {
+            "type": "object",
+            "properties": {
+                "needTechnicalAcknowledgement": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether technical acknowledgement is needed."
+                },
+                "batchTechnicalAcknowledgements": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to batch the technical acknowledgements."
+                },
+                "needFunctionalAcknowledgement": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether functional acknowledgement is needed."
+                },
+                "functionalAcknowledgementVersion": {
+                    "type": "string",
+                    "description": "Gets or sets the functional acknowledgement version."
+                },
+                "batchFunctionalAcknowledgements": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to batch functional acknowledgements."
+                },
+                "needImplementationAcknowledgement": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether implementation acknowledgement is needed."
+                },
+                "implementationAcknowledgementVersion": {
+                    "type": "string",
+                    "description": "Gets or sets the implementation acknowledgement version."
+                },
+                "batchImplementationAcknowledgements": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to batch implementation acknowledgements."
+                },
+                "needLoopForValidMessages": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether a loop is needed for valid messages."
+                },
+                "sendSynchronousAcknowledgement": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to send synchronous acknowledgement."
+                },
+                "acknowledgementControlNumberPrefix": {
+                    "type": "string",
+                    "description": "Gets or sets the acknowledgement control number prefix."
+                },
+                "acknowledgementControlNumberSuffix": {
+                    "type": "string",
+                    "description": "Gets or sets the acknowledgement control number suffix."
+                },
+                "acknowledgementControlNumberLowerBound": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the acknowledgement control number lower bound."
+                },
+                "acknowledgementControlNumberUpperBound": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the acknowledgement control number upper bound."
+                },
+                "rolloverAcknowledgementControlNumber": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to rollover acknowledgement control number."
+                }
+            }
+        },
+        "X12MessageFilter": {
+            "type": "object",
+            "properties": {
+                "messageFilterType": {
+                    "$ref": "#/definitions/MessageFilterType",
+                    "description": "Gets or sets the message filter type."
+                }
+            }
+        },
+        "X12SecuritySettings": {
+            "type": "object",
+            "properties": {
+                "authorizationQualifier": {
+                    "type": "string",
+                    "description": "Gets or sets the authorization qualifier."
+                },
+                "authorizationValue": {
+                    "type": "string",
+                    "description": "Gets or sets the authorization value."
+                },
+                "securityQualifier": {
+                    "type": "string",
+                    "description": "Gets or sets the security qualifier."
+                },
+                "passwordValue": {
+                    "type": "string",
+                    "description": "Gets or sets the password value."
+                }
+            }
+        },
+        "X12ProcessingSettings": {
+            "type": "object",
+            "properties": {
+                "maskSecurityInfo": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to mask security information."
+                },
+                "convertImpliedDecimal": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to convert numerical type to implied decimal."
+                },
+                "preserveInterchange": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to preserve interchange."
+                },
+                "suspendInterchangeOnError": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to suspend interchange on error."
+                },
+                "createEmptyXmlTagsForTrailingSeparators": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to create empty xml tags for trailing separators."
+                },
+                "useDotAsDecimalSeparator": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to use dot as decimal separator."
+                }
+            }
+        },
+        "X12EnvelopeOverride": {
+            "type": "object",
+            "properties": {
+                "targetNamespace": {
+                    "type": "string",
+                    "description": "Gets or sets the target namespace on which this envelope settings has to be applied."
+                },
+                "protocolVersion": {
+                    "type": "string",
+                    "description": "Gets or sets the protocol version on which this envelope settings has to be applied."
+                },
+                "messageId": {
+                    "type": "string",
+                    "description": "Gets or sets the message id on which this envelope settings has to be applied."
+                },
+                "responsibleAgencyCode": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the responsible agency code."
+                },
+                "headerVersion": {
+                    "type": "string",
+                    "description": "Gets or sets the header version."
+                },
+                "senderApplicationId": {
+                    "type": "string",
+                    "description": "Gets or sets the sender application id."
+                },
+                "receiverApplicationId": {
+                    "type": "string",
+                    "description": "Gets or sets the receiver application id."
+                },
+                "functionalIdentifierCode": {
+                    "type": "string",
+                    "description": "Gets or sets the functional identifier code."
+                },
+                "dateFormat": {
+                    "$ref": "#/definitions/X12DateFormat",
+                    "description": "Gets or sets the date format."
+                },
+                "timeFormat": {
+                    "$ref": "#/definitions/X12TimeFormat",
+                    "description": "Gets or sets the time format."
+                }
+            }
+        },
+        "X12ValidationOverride": {
+            "type": "object",
+            "properties": {
+                "messageId": {
+                    "type": "string",
+                    "description": "Gets or sets the message id on which the validation settings has to be applied."
+                },
+                "validateEDITypes": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to validate EDI types."
+                },
+                "validateXSDTypes": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to validate XSD types."
+                },
+                "allowLeadingAndTrailingSpacesAndZeroes": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to allow leading and trailing spaces and zeroes."
+                },
+                "validateCharacterSet": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to validate character Set."
+                },
+                "trimLeadingAndTrailingSpacesAndZeroes": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to trim leading and trailing spaces and zeroes."
+                },
+                "trailingSeparatorPolicy": {
+                    "$ref": "#/definitions/TrailingSeparatorPolicy",
+                    "description": "Gets or sets the trailing separator policy."
+                }
+            }
+        },
+        "X12MessageIdentifier": {
+            "type": "object",
+            "properties": {
+                "messageId": {
+                    "type": "string",
+                    "description": "Gets or sets the message id."
+                }
+            }
+        },
+        "X12SchemaReference": {
+            "type": "object",
+            "properties": {
+                "messageId": {
+                    "type": "string",
+                    "description": "Gets or sets the message id."
+                },
+                "senderApplicationId": {
+                    "type": "string",
+                    "description": "Gets or sets the sender application id."
+                },
+                "schemaVersion": {
+                    "type": "string",
+                    "description": "Gets or sets the schema version."
+                },
+                "schemaName": {
+                    "type": "string",
+                    "description": "Gets or sets the schema name."
+                }
+            }
+        },
+        "X12DelimiterOverrides": {
+            "type": "object",
+            "properties": {
+                "protocolVersion": {
+                    "type": "string",
+                    "description": "Gets or sets the protocol version."
+                },
+                "messageId": {
+                    "type": "string",
+                    "description": "Gets or sets the message id."
+                },
+                "dataElementSeparator": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the data element separator."
+                },
+                "componentSeparator": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the component separator."
+                },
+                "segmentTerminator": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the segment terminator."
+                },
+                "segmentTerminatorSuffix": {
+                    "$ref": "#/definitions/SegmentTerminatorSuffix",
+                    "description": "Gets or sets the segment terminator suffix."
+                },
+                "replaceCharacter": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the replacement character."
+                },
+                "replaceSeparatorsInPayload": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to replace separators in payload."
+                },
+                "targetNamespace": {
+                    "type": "string",
+                    "description": "Gets or sets the target namespace on which this delimiter settings has to be applied."
+                }
+            }
+        },
+        "X12CharacterSet": {
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "Basic",
+                "Extended",
+                "UTF8"
+            ],
+            "x-ms-enum": {
+                "name": "X12CharacterSet",
+                "modelAsString": false
+            }
+        },
+        "SegmentTerminatorSuffix": {
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "None",
+                "CR",
+                "LF",
+                "CRLF"
+            ],
+            "x-ms-enum": {
+                "name": "SegmentTerminatorSuffix",
+                "modelAsString": false
+            }
+        },
+        "X12DateFormat": {
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "CCYYMMDD",
+                "YYMMDD"
+            ],
+            "x-ms-enum": {
+                "name": "X12DateFormat",
+                "modelAsString": false
+            }
+        },
+        "X12TimeFormat": {
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "HHMM",
+                "HHMMSS",
+                "HHMMSSdd",
+                "HHMMSSd"
+            ],
+            "x-ms-enum": {
+                "name": "X12TimeFormat",
+                "modelAsString": false
+            }
+        },
+        "UsageIndicator": {
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "Test",
+                "Information",
+                "Production"
+            ],
+            "x-ms-enum": {
+                "name": "UsageIndicator",
+                "modelAsString": false
+            }
+        },
+        "MessageFilterType": {
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "Include",
+                "Exclude"
+            ],
+            "x-ms-enum": {
+                "name": "MessageFilterType",
+                "modelAsString": false
+            }
+        },
+        "HashingAlgorithm": {
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "None",
+                "SHA2256",
+                "SHA2384",
+                "SHA2512"
+            ],
+            "x-ms-enum": {
+                "name": "HashingAlgorithm",
+                "modelAsString": false
+            }
+        },        
+        "EncryptionAlgorithm": {
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "None",
+                "DES3",
+                "RC2",
+                "AES128",
+                "AES192",
+                "AES256"
+            ],
+            "x-ms-enum": {
+                "name": "EncryptionAlgorithm",
+                "modelAsString": false
+            }
+        },
+        "TrailingSeparatorPolicy": {
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "NotAllowed",
+                "Optional",
+                "Mandatory"
+            ],
+            "x-ms-enum": {
+                "name": "TrailingSeparatorPolicy",
+                "modelAsString": false
+            }
+        },
+        "EdifactAgreementContent": {
+            "type": "object",
+            "properties": {
+                "receiveAgreement": {
+                    "$ref": "#/definitions/EdifactOneWayAgreement",
+                    "description": "Gets or sets EDIFACT one-way receive agreement."
+                },
+                "sendAgreement": {
+                    "$ref": "#/definitions/EdifactOneWayAgreement",
+                    "description": "Gets or sets EDIFACT one-way send agreement."
+                }
+            }
+        },
+        "EdifactOneWayAgreement": {
+            "type": "object",
+            "properties": {
+                "senderBusinessIdentity": {
+                    "$ref": "#/definitions/BusinessIdentity",
+                    "description": "Gets or sets the sender business identity"
+                },
+                "receiverBusinessIdentity": {
+                    "$ref": "#/definitions/BusinessIdentity",
+                    "description": "Gets or sets the receiver business identity"
+                },
+                "protocolSettings": {
+                    "$ref": "#/definitions/EdifactProtocolSettings",
+                    "description": "Gets or sets the EDIFACT protocol settings."
+                }
+            }
+        },
+        "EdifactProtocolSettings": {
+            "type": "object",
+            "properties": {
+                "validationSettings": {
+                    "$ref": "#/definitions/EdifactValidationSettings",
+                    "description": "Gets or sets the EDIFACT validation settings."
+                },
+                "framingSettings": {
+                    "$ref": "#/definitions/EdifactFramingSettings",
+                    "description": "Gets or sets the EDIFACT framing settings."
+                },
+                "envelopeSettings": {
+                    "$ref": "#/definitions/EdifactEnvelopeSettings",
+                    "description": "Gets or sets the EDIFACT envelope settings."
+                },
+                "acknowledgementSettings": {
+                    "$ref": "#/definitions/EdifactAcknowledgementSettings",
+                    "description": "Gets or sets the EDIFACT acknowledgement settings."
+                },
+                "messageFilter": {
+                    "$ref": "#/definitions/EdifactMessageFilter",
+                    "description": "Gets or sets the EDIFACT message filter."
+                },
+                "processingSettings": {
+                    "$ref": "#/definitions/EdifactProcessingSettings",
+                    "description": "Gets or sets the EDIFACT processing Settings."
+                },
+                "envelopeOverrides": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EdifactEnvelopeOverride"
+                    },
+                    "description": "Gets or sets the EDIFACT envelope override settings."
+                },
+                "messageFilterList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EdifactMessageIdentifier"
+                    },
+                    "description": "Gets or sets the EDIFACT message filter list."
+                },
+                "schemaReferences": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EdifactSchemaReference"
+                    },
+                    "description": "Gets or sets the EDIFACT schema references."
+                },
+                "validationOverrides": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EdifactValidationOverride"
+                    },
+                    "description": "Gets or sets the EDIFACT validation override settings."
+                },
+                "edifactDelimiterOverrides": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EdifactDelimiterOverride"
+                    },
+                    "description": "Gets or sets the EDIFACT delimiter override settings."
+                }
+            }
+        },
+        "EdifactValidationSettings": {
+            "type": "object",
+            "properties": {
+                "validateCharacterSet": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to validate character set in the message."
+                },
+                "checkDuplicateInterchangeControlNumber": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to check for duplicate interchange control number."
+                },
+                "interchangeControlNumberValidityDays": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the validity period of interchange control number."
+                },
+                "checkDuplicateGroupControlNumber": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to check for duplicate group control number."
+                },
+                "checkDuplicateTransactionSetControlNumber": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to check for duplicate transaction set control number."
+                },
+                "validateEDITypes": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to Whether to validate EDI types."
+                },
+                "validateXSDTypes": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to Whether to validate XSD types."
+                },
+                "allowLeadingAndTrailingSpacesAndZeroes": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to allow leading and trailing spaces and zeroes."
+                },
+                "trimLeadingAndTrailingSpacesAndZeroes": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to trim leading and trailing spaces and zeroes."
+                },
+                "trailingSeparatorPolicy": {
+                    "$ref": "#/definitions/TrailingSeparatorPolicy",
+                    "description": "Gets or sets the trailing separator policy."
+                }
+            }
+        },
+        "EdifactFramingSettings": {
+            "type": "object",
+            "properties": {
+                "serviceCodeListDirectoryVersion": {
+                    "type": "string",
+                    "description": "Gets or sets the service code list directory version."
+                },
+                "characterEncoding": {
+                    "type": "string",
+                    "description": "Gets or sets the character encoding."
+                },
+                "protocolVersion": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the protocol version."
+                },
+                "dataElementSeparator": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the data element separator."
+                },
+                "componentSeparator": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the component separator."
+                },
+                "segmentTerminator": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the segment terminator."
+                },
+                "releaseIndicator": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the release indicator."
+                },
+                "repetitionSeparator": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the repetition separator."
+                },
+                "characterSet": {
+                    "$ref": "#/definitions/EdifactCharacterSet",
+                    "description": "Gets or sets EDIFACT one-way receive agreement."
+                },
+                "decimalPointIndicator": {
+                    "$ref": "#/definitions/EdifactDecimalIndicator",
+                    "description": "Gets or sets EDIFACT one-way receive agreement."
+                },
+                "segmentTerminatorSuffix": {
+                    "$ref": "#/definitions/SegmentTerminatorSuffix",
+                    "description": "Gets or sets EDIFACT one-way receive agreement."
+                }
+            }
+        },
+        "EdifactEnvelopeSettings": {
+            "type": "object",
+            "properties": {
+                "groupAssociationAssignedCode": {
+                    "type": "string",
+                    "description": "Gets or sets the group association assigned code."
+                },
+                "communicationAgreementId": {
+                    "type": "string",
+                    "description": "Gets or sets the communication agreement id."
+                },
+                "applyDelimiterStringAdvice": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to apply delimiter string advice."
+                },
+                "createGroupingSegments": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to create grouping segments."
+                },
+                "enableDefaultGroupHeaders": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to enable default group headers."
+                },
+                "recipientReferencePasswordValue": {
+                    "type": "string",
+                    "description": "Gets or sets the recipient reference password value."
+                },
+                "recipientReferencePasswordQualifier": {
+                    "type": "string",
+                    "description": "Gets or sets the recipient reference password qualifier."
+                },
+                "applicationReferenceId": {
+                    "type": "string",
+                    "description": "Gets or sets the application reference id."
+                },
+                "processingPriorityCode": {
+                    "type": "string",
+                    "description": "Gets or sets the processing priority code."
+                },
+                "interchangeControlNumberLowerBound": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Gets or sets the interchange control number lower bound."
+                },
+                "interchangeControlNumberUpperBound": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Gets or sets the interchange control number upper bound."
+                },
+                "rolloverInterchangeControlNumber": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to rollover interchange control number."
+                },
+                "interchangeControlNumberPrefix": {
+                    "type": "string",
+                    "description": "Gets or sets the interchange control number prefix."
+                },
+                "interchangeControlNumberSuffix": {
+                    "type": "string",
+                    "description": "Gets or sets the interchange control number suffix."
+                },
+                "senderReverseRoutingAddress": {
+                    "type": "string",
+                    "description": "Gets or sets the sender reverse routing address."
+                },
+                "receiverReverseRoutingAddress": {
+                    "type": "string",
+                    "description": "Gets or sets the receiver reverse routing address."
+                },
+                "functionalGroupId": {
+                    "type": "string",
+                    "description": "Gets or sets the functional group id."
+                },
+                "groupControllingAgencyCode": {
+                    "type": "string",
+                    "description": "Gets or sets the group controlling agency code."
+                },
+                "groupMessageVersion": {
+                    "type": "string",
+                    "description": "Gets or sets the group message version."
+                },
+                "groupMessageRelease": {
+                    "type": "string",
+                    "description": "Gets or sets the group message release."
+                },
+                "groupControlNumberLowerBound": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Gets or sets the group control number lower bound."
+                },
+                "groupControlNumberUpperBound": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Gets or sets the group control number upper bound."
+                },
+                "rolloverGroupControlNumber": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to rollover group control number."
+                },
+                "groupControlNumberPrefix": {
+                    "type": "string",
+                    "description": "Gets or sets the group control number prefix."
+                },
+                "groupControlNumberSuffix": {
+                    "type": "string",
+                    "description": "Gets or sets the group control number suffix."
+                },
+                "groupApplicationReceiverQualifier": {
+                    "type": "string",
+                    "description": "Gets or sets the group application receiver qualifier."
+                },
+                "groupApplicationReceiverId": {
+                    "type": "string",
+                    "description": "Gets or sets the group application receiver id."
+                },
+                "groupApplicationSenderQualifier": {
+                    "type": "string",
+                    "description": "Gets or sets the group application sender qualifier."
+                },
+                "groupApplicationSenderId": {
+                    "type": "string",
+                    "description": "Gets or sets the group application sender id."
+                },
+                "groupApplicationPassword": {
+                    "type": "string",
+                    "description": "Gets or sets the group application password."
+                },
+                "overwriteExistingTransactionSetControlNumber": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to overwrite existing transaction set control number."
+                },
+                "transactionSetControlNumberPrefix": {
+                    "type": "string",
+                    "description": "Gets or sets the transaction set control number prefix."
+                },
+                "transactionSetControlNumberSuffix": {
+                    "type": "string",
+                    "description": "Gets or sets the transaction set control number suffix."
+                },
+                "transactionSetControlNumberLowerBound": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Gets or sets the transaction set control number lower bound."
+                },
+                "transactionSetControlNumberUpperBound": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Gets or sets the transaction set control number upper bound."
+                },
+                "rolloverTransactionSetControlNumber": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to rollover transaction set control number."
+                },
+                "isTestInterchange": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether the message is a test interchange."
+                },
+                "senderInternalIdentification": {
+                    "type": "string",
+                    "description": "Gets or sets the sender internal identification."
+                },
+                "senderInternalSubIdentification": {
+                    "type": "string",
+                    "description": "Gets or sets the sender internal sub identification."
+                },
+                "receiverInternalIdentification": {
+                    "type": "string",
+                    "description": "Gets or sets the receiver internal identification."
+                },
+                "receiverInternalSubIdentification": {
+                    "type": "string",
+                    "description": "Gets or sets the receiver internal sub identification."
+                }
+            }
+        },
+        "EdifactAcknowledgementSettings": {
+            "type": "object",
+            "properties": {
+                "needTechnicalAcknowledgement": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether technical acknowledgement is needed."
+                },
+                "batchTechnicalAcknowledgements": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to batch the technical acknowledgements."
+                },
+                "needFunctionalAcknowledgement": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether functional acknowledgement is needed."
+                },
+                "batchFunctionalAcknowledgements": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to batch functional acknowledgements."
+                },
+                "needLoopForValidMessages": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether a loop is needed for valid messages."
+                },
+                "sendSynchronousAcknowledgement": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to send synchronous acknowledgement."
+                },
+                "acknowledgementControlNumberPrefix": {
+                    "type": "string",
+                    "description": "Gets or sets the acknowledgement control number prefix."
+                },
+                "acknowledgementControlNumberSuffix": {
+                    "type": "string",
+                    "description": "Gets or sets the acknowledgement control number suffix."
+                },
+                "acknowledgementControlNumberLowerBound": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the acknowledgement control number lower bound."
+                },
+                "acknowledgementControlNumberUpperBound": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the acknowledgement control number upper bound."
+                },
+                "rolloverAcknowledgementControlNumber": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to rollover acknowledgement control number."
+                }
+            }
+        },
+        "EdifactMessageFilter": {
+            "type": "object",
+            "properties": {
+                "messageFilterType": {
+                    "$ref": "#/definitions/MessageFilterType",
+                    "description": "Gets or sets the message filter type."
+                }
+            }
+        },
+        "EdifactProcessingSettings": {
+            "type": "object",
+            "properties": {
+                "maskSecurityInfo": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to mask security information."
+                },
+                "preserveInterchange": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to preserve interchange."
+                },
+                "suspendInterchangeOnError": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to suspend interchange on error."
+                },
+                "createEmptyXmlTagsForTrailingSeparators": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to create empty xml tags for trailing separators."
+                },
+                "useDotAsDecimalSeparator": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to use dot as decimal separator."
+                }
+            }
+        },
+        "EdifactEnvelopeOverride": {
+            "type": "object",
+            "properties": {
+                "messageId": {
+                    "type": "string",
+                    "description": "Gets or sets the message id on which this envelope settings has to be applied."
+                },
+                "messageVersion": {
+                    "type": "string",
+                    "description": "Gets or sets the message version on which this envelope settings has to be applied."
+                },
+                "messageRelease": {
+                    "type": "string",
+                    "description": "Gets or sets the message release version on which this envelope settings has to be applied."
+                },
+                "messageAssociationAssignedCode": {
+                    "type": "string",
+                    "description": "Gets or sets the message association assigned code."
+                },
+                "targetNamespace": {
+                    "type": "string",
+                    "description": "Gets or sets the target namespace on which this envelope settings has to be applied."
+                },
+                "functionalGroupId": {
+                    "type": "string",
+                    "description": "Gets or sets the functional group id."
+                },
+                "senderApplicationQualifier": {
+                    "type": "string",
+                    "description": "Gets or sets the sender application qualifier."
+                },
+                "senderApplicationId": {
+                    "type": "string",
+                    "description": "Gets or sets the sender application id."
+                },
+                "receiverApplicationQualifier": {
+                    "type": "string",
+                    "description": "Gets or sets the receiver application qualifier."
+
+                },
+                "receiverApplicationId": {
+                    "type": "string",
+                    "description": "Gets or sets the receiver application id."
+                },
+                "controllingAgencyCode": {
+                    "type": "string",
+                    "description": "Gets or sets the controlling agency code."
+                },
+                "groupHeaderMessageVersion": {
+                    "type": "string",
+                    "description": "Gets or sets the group header message version."
+                },
+                "groupHeaderMessageRelease": {
+                    "type": "string",
+                    "description": "Gets or sets the group header message release."
+                },
+                "associationAssignedCode": {
+                    "type": "string",
+                    "description": "Gets or sets the association assigned code."
+                },
+                "applicationPassword": {
+                    "type": "string",
+                    "description": "Gets or sets the application password."
+                }
+            }
+        },
+        "EdifactMessageIdentifier": {
+            "type": "object",
+            "properties": {
+                "messageId": {
+                    "type": "string",
+                    "description": "Gets or sets the message id on which this envelope settings has to be applied."
+                }
+            }
+        },
+        "EdifactSchemaReference": {
+            "type": "object",
+            "properties": {
+                "messageId": {
+                    "type": "string",
+                    "description": "Gets or sets the message id."
+                },
+                "messageVersion": {
+                    "type": "string",
+                    "description": "Gets or sets the message version."
+                },
+                "messageRelease": {
+                    "type": "string",
+                    "description": "Gets or sets the message release version."
+                },
+                "senderApplicationId": {
+                    "type": "string",
+                    "description": "Gets or sets the sender application id."
+                },
+                "senderApplicationQualifier": {
+                    "type": "string",
+                    "description": "Gets or sets the sender application qualifier."
+                },
+                "associationAssignedCode": {
+                    "type": "string",
+                    "description": "Gets or sets the association assigned code."
+                },
+                "schemaName": {
+                    "type": "string",
+                    "description": "Gets or sets the schema name."
+                }
+            }
+        },
+        "EdifactValidationOverride": {
+            "type": "object",
+            "properties": {
+                "messageId": {
+                    "type": "string",
+                    "description": "Gets or sets the message id on which the validation settings has to be applied."
+                },
+                "enforceCharacterSet": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to validate character Set."
+                },
+                "validateEDITypes": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to validate EDI types."
+                },
+                "validateXSDTypes": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to validate XSD types."
+                },
+                "allowLeadingAndTrailingSpacesAndZeroes": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to allow leading and trailing spaces and zeroes."
+                },
+                "trailingSeparatorPolicy": {
+                    "$ref": "#/definitions/TrailingSeparatorPolicy",
+                    "description": "Gets or sets the trailing separator policy."
+                },
+                "trimLeadingAndTrailingSpacesAndZeroes": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether to trim leading and trailing spaces and zeroes."
+                }
+            }
+        },
+        "EdifactDelimiterOverride": {
+            "type": "object",
+            "properties": {
+                "messageId": {
+                    "type": "string",
+                    "description": "Gets or sets the message id."
+                },
+                "messageVersion": {
+                    "type": "string",
+                    "description": "Gets or sets the message version."
+                },
+                "messageRelease": {
+                    "type": "string",
+                    "description": "Gets or sets the message releaseversion."
+                },
+                "dataElementSeparator": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the data element separator."
+                },
+                "componentSeparator": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the component separator."
+                },
+                "segmentTerminator": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the segment terminator."
+                },
+                "repetitionSeparator": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the repetition separator."
+                },
+                "segmentTerminatorSuffix": {
+                    "$ref": "#/definitions/SegmentTerminatorSuffix",
+                    "description": "Gets or sets the segment terminator suffix."
+                },
+                "decimalPointIndicator": {
+                    "$ref": "#/definitions/EdifactDecimalIndicator",
+                    "description": "Gets or sets the decimal point indicator."
+                },
+                "releaseIndicator": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the release indicator."
+                },
+                "messageAssociationAssignedCode": {
+                    "type": "string",
+                    "description": "Gets or sets the message association assigned code."
+                },
+                "targetNamespace": {
+                    "type": "string",
+                    "description": "Gets or sets the target namespace on which this delimiter settings has to be applied."
+                }
+            }
+        },
+        "EdifactCharacterSet": {
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "UNOB",
+                "UNOA",
+                "UNOC",
+                "UNOD",
+                "UNOE",
+                "UNOF",
+                "UNOG",
+                "UNOH",
+                "UNOI",
+                "UNOJ",
+                "UNOK",
+                "UNOX",
+                "UNOY",
+                "KECA"
+            ],
+            "x-ms-enum": {
+                "name": "EdifactCharacterSet",
+                "modelAsString": false
+            }
+        },
+        "EdifactDecimalIndicator": {
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "Comma",
+                "Decimal"
+            ],
+            "x-ms-enum": {
+                "name": "EdifactDecimalIndicator",
+                "modelAsString": false
+            }
+        },
+        "IntegrationAccountCertificateListResult": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/IntegrationAccountCertificate"
+                    },
+                    "description": "Gets or sets the list of integration account certificates."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "Gets or sets the URL to get the next set of results."
+                }
+            }
+        },
+        "IntegrationAccountCertificate": {
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/IntegrationAccountCertificateProperties",
+                    "description": "Gets or sets the integration account certificate properties."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/IntegrationAccountResource"
+                }
+            ]
+        },
+        "IntegrationAccountCertificateProperties": {
+            "type": "object",
+            "properties": {
+                "createdTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Gets the created time."
+                },
+                "changedTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Gets the changed time."
+                },
+                "metadata": {
+                    "type": "object",
+                    "description": "Gets or sets the metadata.",
+                    "properties": {
+                    }
+                },
+                "key": {
+                    "$ref": "#/definitions/KeyVaultKeyReference",
+                    "description": "Gets or sets the key details in the key vault."
+                },
+                "publicCertificate": {
+                    "type": "string",
+                    "description": "Gets or sets the public certificate."
+                }
+            }
+        },
+        "KeyVaultKeyReference": {
+            "type": "object",
+            "properties": {
+                "keyVault": {
+                    "$ref": "#/definitions/ResourceReference",
+                    "description": "Gets or sets the key vault reference."
+                },
+                "keyName": {
+                    "type": "string",
+                    "description": "Gets or sets the private key name in key vault."
+                },
+                "keyVersion": {
+                    "type": "string",
+                    "description": "Gets or sets the private key version in key vault."
+                }
+            }
+        }
+    },
+    "parameters": {
+        "subscriptionId": {
+            "name": "subscriptionId",
+            "description": "The subscription id.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+        },
+        "api-version": {
+            "name": "api-version",
+            "description": "The API version.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+        }
+    }
+}
