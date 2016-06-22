@@ -23,7 +23,10 @@
     "request": "^2.61.0",
     "z-schema": "^3.16.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "yargs": "3.29.0",
+    "colors": "1.1.2"
+  },
   "homepage": "https://github.com/azure/azure-rest-api-specs",
   "repository": {
     "type": "git",
@@ -33,7 +36,8 @@
     "url": "http://github.com/azure/azure-rest-api-specs/issues"
   },
   "scripts": {
-    "pretest": "npm install -g mocha && npm install",
-    "test": "mocha"
+    "pretest": "npm install -g mocha && npm install --color-always",
+    "test": "mocha",
+    "test-validate": "mocha --grep lint"
   }
 }
