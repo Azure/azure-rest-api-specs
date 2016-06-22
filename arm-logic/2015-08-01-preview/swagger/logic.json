@@ -1351,26 +1351,26 @@
             "properties": {
                 "id": {
                     "type": "string",
-                    "description": "Gets or sets the resource id."
+                    "description": "The resource id."
                 },
                 "name": {
                     "type": "string",
-                    "description": "Gets or sets the resource name."
+                    "description": "The resource name."
                 },
                 "type": {
                     "type": "string",
-                    "description": "Gets or sets the resource type."
+                    "description": "The resource type."
                 },
                 "location": {
                     "type": "string",
-                    "description": "Gets or sets the resource location."
+                    "description": "The resource location."
                 },
                 "tags": {
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
                     },
-                    "description": "Gets or sets the resource tags."
+                    "description": "The resource tags."
                 }
             },
             "x-ms-azure-resource": true
@@ -1380,17 +1380,17 @@
             "properties": {
                 "id": {
                     "type": "string",
-                    "description": "Gets or sets the resource id."
+                    "description": "The resource id."
                 },
                 "name": {
                     "type": "string",
                     "readOnly": true,
-                    "description": "Gets the resource name."
+                    "description": "The resource name."
                 },
                 "type": {
                     "type": "string",
                     "readOnly": true,
-                    "description": "Gets the resource type."
+                    "description": "The resource type."
                 }
             }
         },
@@ -1414,24 +1414,24 @@
             "properties": {
                 "uri": {
                     "type": "string",
-                    "description": "Gets or sets the content link URI."
+                    "description": "The content link URI."
                 },
                 "contentVersion": {
                     "type": "string",
-                    "description": "Gets or sets the content version."
+                    "description": "The content version."
                 },
                 "contentSize": {
                     "type": "integer",
                     "format": "int64",
-                    "description": "Gets or sets the content size."
+                    "description": "The content size."
                 },
                 "contentHash": {
                     "$ref": "#/definitions/IntegrationAccountContentHash",
-                    "description": "Gets or sets the content hash."
+                    "description": "The content hash."
                 },
                 "metadata": {
                     "type": "object",
-                    "description": "Gets or sets the metadata.",
+                    "description": "The metadata.",
                     "properties": {
                     }
                 }
@@ -1442,11 +1442,11 @@
             "properties": {
                 "algorithm": {
                     "type": "string",
-                    "description": "Gets or sets the algorithm."
+                    "description": "The conetnt hash algorithm."
                 },
                 "value": {
                     "type": "string",
-                    "description": "Gets or sets the value."
+                    "description": "The content hash value."
                 }
             }
         },
@@ -1456,11 +1456,11 @@
                 "properties": {
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/IntegrationAccountProperties",
-                    "description": "Gets or sets the integration account properties."
+                    "description": "The integration account properties."
                 },
                 "sku": {
                     "$ref": "#/definitions/IntegrationAccountSku",
-                    "description": "Gets or sets the sku."
+                    "description": "The sku."
                 }
             },
             "allOf": [
@@ -1480,11 +1480,11 @@
                     "items": {
                         "$ref": "#/definitions/IntegrationAccount"
                     },
-                    "description": "Gets or sets the list of integration accounts."
+                    "description": "The list of integration accounts."
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "Gets or sets the URL to get the next set of results."
+                    "description": "The URL to get the next set of results."
                 }
             }
         },
@@ -1494,7 +1494,7 @@
                 "NotAfter": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "Gets or sets the expiry time."
+                    "description": "The expiry time."
                 }
             }
         },
@@ -1503,7 +1503,7 @@
             "properties": {
                 "value": {
                     "type": "string",
-                    "description": "Gets or sets the URL value."
+                    "description": "The URL value."
                 }
             }
         },
@@ -1513,7 +1513,7 @@
                 "properties": {
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/IntegrationAccountSchemaProperties",
-                    "description": "Gets or sets the integration account schema properties."
+                    "description": "The integration account schema properties."
                 }
             },
             "allOf": [
@@ -1527,42 +1527,42 @@
             "properties": {
                 "schemaType": {
                     "$ref": "#/definitions/SchemaType",
-                    "description": "Gets or sets the schema type."
+                    "description": "The schema type."
                 },
                 "targetNamespace": {
                     "type": "string",
-                    "description": "Gets or sets the target namespace."
+                    "description": "The target namespace."
                 },
                 "createdTime": {
                     "type": "string",
                     "format": "date-time",
                     "readOnly": true,
-                    "description": "Gets the created time."
+                    "description": "The created time."
                 },
                 "changedTime": {
                     "type": "string",
                     "format": "date-time",
                     "readOnly": true,
-                    "description": "Gets the changed time."
+                    "description": "The changed time."
                 },
                 "content": {
                     "type": "object",
-                    "description": "Gets or sets the content.",
+                    "description": "The content.",
                     "properties": {
                     }
                 },
                 "contentType": {
                     "type": "string",
-                    "description": "Gets or sets the content type."
+                    "description": "The content type."
                 },
                 "contentLink": {
                     "$ref": "#/definitions/IntegrationAccountContentLink",
                     "readOnly": true,
-                    "description": "Gets the content link."
+                    "description": "The content link."
                 },
                 "metadata": {
                     "type": "object",
-                    "description": "Gets or sets the metadata.",
+                    "description": "The metadata.",
                     "properties": {
                     }
                 }
@@ -1576,11 +1576,11 @@
                     "items": {
                         "$ref": "#/definitions/IntegrationAccountSchema"
                     },
-                    "description": "Gets or sets the list of integration account schemas."
+                    "description": "The list of integration account schemas."
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "Gets or sets the URL to get the next set of results."
+                    "description": "The URL to get the next set of results."
                 }
             }
         },
@@ -1589,7 +1589,7 @@
             "properties": {
                 "schemaType": {
                     "$ref": "#/definitions/SchemaType",
-                    "description": "Gets or sets the schema type of integration account schema."
+                    "description": "The schema type of integration account schema."
                 }
             }
         },
@@ -1610,7 +1610,7 @@
                 "properties": {
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/IntegrationAccountMapProperties",
-                    "description": "Gets or sets the integration account map properties."
+                    "description": "The integration account map properties."
                 }
             },
             "allOf": [
@@ -1624,38 +1624,38 @@
             "properties": {
                 "mapType": {
                     "$ref": "#/definitions/MapType",
-                    "description": "Gets or sets the map type."
+                    "description": "The map type."
                 },
                 "createdTime": {
                     "type": "string",
                     "format": "date-time",
                     "readOnly": true,
-                    "description": "Gets the created time."
+                    "description": "The created time."
                 },
                 "changedTime": {
                     "type": "string",
                     "format": "date-time",
                     "readOnly": true,
-                    "description": "Gets the changed time."
+                    "description": "The changed time."
                 },
                 "content": {
                     "type": "object",
-                    "description": "Gets or sets the content.",
+                    "description": "The content.",
                     "properties": {
                     }
                 },
                 "contentType": {
                     "type": "string",
-                    "description": "Gets or sets the content type."
+                    "description": "The content type."
                 },
                 "contentLink": {
                     "$ref": "#/definitions/IntegrationAccountContentLink",
                     "readOnly": true,
-                    "description": "Gets the content link."
+                    "description": "The content link."
                 },
                 "metadata": {
                     "type": "object",
-                    "description": "Gets or sets the metadata.",
+                    "description": "The metadata.",
                     "properties": {
                     }
                 }
@@ -1669,11 +1669,11 @@
                     "items": {
                         "$ref": "#/definitions/IntegrationAccountMap"
                     },
-                    "description": "Gets or sets the list of integration account maps."
+                    "description": "The list of integration account maps."
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "Gets or sets the URL to get the next set of results."
+                    "description": "The URL to get the next set of results."
                 }
             }
         },
@@ -1682,7 +1682,7 @@
             "properties": {
                 "schemaType": {
                     "$ref": "#/definitions/MapType",
-                    "description": "Gets or sets the map type of integration account map."
+                    "description": "The map type of integration account map."
                 }
             }
         },
@@ -1702,7 +1702,7 @@
             "properties": {
                 "name": {
                     "$ref": "#/definitions/IntegrationAccountSkuName",
-                    "description": "Gets or sets the sku name."
+                    "description": "The sku name."
                 }
             }
         },
@@ -1714,11 +1714,11 @@
                     "items": {
                         "$ref": "#/definitions/IntegrationAccountPartner"
                     },
-                    "description": "Gets or sets the list of integration account partners."
+                    "description": "The list of integration account partners."
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "Gets or sets the URL to get the next set of results."
+                    "description": "The URL to get the next set of results."
                 }
             }
         },
@@ -1727,7 +1727,7 @@
             "properties": {
                 "partnerType": {
                     "$ref": "#/definitions/PartnerType",
-                    "description": "Gets or sets the partner type of integration account partner."
+                    "description": "The partner type of integration account partner."
                 }
             }
         },
@@ -1737,7 +1737,7 @@
                 "properties": {
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/IntegrationAccountPartnerProperties",
-                    "description": "Gets or sets the integration account partner properties."
+                    "description": "The integration account partner properties."
                 }
             },
             "allOf": [
@@ -1751,29 +1751,29 @@
             "properties": {
                 "partnerType": {
                     "$ref": "#/definitions/PartnerType",
-                    "description": "Gets or sets the partner type."
+                    "description": "The partner type."
                 },
                 "createdTime": {
                     "type": "string",
                     "format": "date-time",
                     "readOnly": true,
-                    "description": "Gets the created time."
+                    "description": "The created time."
                 },
                 "changedTime": {
                     "type": "string",
                     "format": "date-time",
                     "readOnly": true,
-                    "description": "Gets the changed time."
+                    "description": "The changed time."
                 },
                 "metadata": {
                     "type": "object",
-                    "description": "Gets or sets the metadata.",
+                    "description": "The metadata.",
                     "properties": {
                     }
                 },
                 "content": {
                     "$ref": "#/definitions/PartnerContent",
-                    "description": "Gets or sets the partner content."
+                    "description": "The partner content."
                 }
             }
         },
@@ -1793,7 +1793,7 @@
             "properties": {
                 "b2b": {
                     "$ref": "#/definitions/B2BPartnerContent",
-                    "description": "Gets or sets the B2B partner content."
+                    "description": "The B2B partner content."
                 }
             }
         },
@@ -1805,7 +1805,7 @@
                     "items": {
                         "$ref": "#/definitions/BusinessIdentity"
                     },
-                    "description": "Gets or sets the list of partner business identities."
+                    "description": "The list of partner business identities."
                 }
             }
         },
@@ -1814,11 +1814,11 @@
             "properties": {
                 "Qualifier": {
                     "type": "string",
-                    "description": "Gets or sets the business identity qualifier."
+                    "description": "The business identity qualifier."
                 },
                 "Value": {
                     "type": "string",
-                    "description": "Gets or sets the business identity value."
+                    "description": "The business identity value."
                 }
             }
         },
@@ -1830,11 +1830,11 @@
                     "items": {
                         "$ref": "#/definitions/IntegrationAccountAgreement"
                     },
-                    "description": "Gets or sets the list of integration account agreements."
+                    "description": "The list of integration account agreements."
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "Gets or sets the URL to get the next set of results."
+                    "description": "The URL to get the next set of results."
                 }
             }
         },
@@ -1843,7 +1843,7 @@
             "properties": {
                 "agreementType": {
                     "$ref": "#/definitions/AgreementType",
-                    "description": "Gets or sets the agreement type of integration account agreement."
+                    "description": "The agreement type of integration account agreement."
                 }
             }
         },
@@ -1853,7 +1853,7 @@
                 "properties": {
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/IntegrationAccountAgreementProperties",
-                    "description": "Gets or sets the integration account agreement properties."
+                    "description": "The integration account agreement properties."
                 }
             },
             "allOf": [
@@ -1869,43 +1869,43 @@
                     "type": "string",
                     "format": "date-time",
                     "readOnly": true,
-                    "description": "Gets the created time."
+                    "description": "The created time."
                 },
                 "changedTime": {
                     "type": "string",
                     "format": "date-time",
                     "readOnly": true,
-                    "description": "Gets the changed time."
+                    "description": "The changed time."
                 },
                 "metadata": {
                     "type": "object",
-                    "description": "Gets or sets the metadata.",
+                    "description": "The metadata.",
                     "properties": {
                     }
                 },
                 "agreementType": {
                     "$ref": "#/definitions/AgreementType",
-                    "description": "Gets or sets the agreement type."
+                    "description": "The agreement type."
                 },
                 "hostPartner": {
                     "type": "string",
-                    "description": "Gets or sets the host partner."
+                    "description": "The host partner."
                 },
                 "guestPartner": {
                     "type": "string",
-                    "description": "Gets or sets the guest partner."
+                    "description": "The guest partner."
                 },
                 "hostIdentity": {
                     "$ref": "#/definitions/BusinessIdentity",
-                    "description": "Gets or sets the host identity."
+                    "description": "The host identity."
                 },
                 "guestIdentity": {
                     "$ref": "#/definitions/BusinessIdentity",
-                    "description": "Gets or sets the guest identity."
+                    "description": "The guest identity."
                 },
                 "content": {
                     "$ref": "#/definitions/AgreementContent",
-                    "description": "Gets or sets the agreement content."
+                    "description": "The agreement content."
                 }
             }
         },
@@ -1927,15 +1927,15 @@
             "properties": {
                 "AS2": {
                     "$ref": "#/definitions/AS2AgreementContent",
-                    "description": "Gets or sets the AS2 agreement content."
+                    "description": "The AS2 agreement content."
                 },
                 "X12": {
                     "$ref": "#/definitions/X12AgreementContent",
-                    "description": "Gets or sets the X12 agreement content."
+                    "description": "The X12 agreement content."
                 },
                 "Edifact": {
                     "$ref": "#/definitions/EdifactAgreementContent",
-                    "description": "Gets or sets the EDIFACT agreement content."
+                    "description": "The EDIFACT agreement content."
                 }
             }
         },
@@ -1944,11 +1944,11 @@
             "properties": {
                 "receiveAgreement": {
                     "$ref": "#/definitions/AS2OneWayAgreement",
-                    "description": "Gets or sets the AS2 one-way receive agreement."
+                    "description": "The AS2 one-way receive agreement."
                 },
                 "sendAgreement": {
                     "$ref": "#/definitions/AS2OneWayAgreement",
-                    "description": "Gets or sets the AS2 one-way send agreement."
+                    "description": "The AS2 one-way send agreement."
                 }
             }
         },
@@ -1957,15 +1957,15 @@
             "properties": {
                 "senderBusinessIdentity": {
                     "$ref": "#/definitions/BusinessIdentity",
-                    "description": "Gets or sets the sender business identity"
+                    "description": "The sender business identity"
                 },
                 "receiverBusinessIdentity": {
                     "$ref": "#/definitions/BusinessIdentity",
-                    "description": "Gets or sets the receiver business identity"
+                    "description": "The receiver business identity"
                 },
                 "protocolSettings": {
                     "$ref": "#/definitions/AS2ProtocolSettings",
-                    "description": "Gets or sets the AS2 protocol settings."
+                    "description": "The AS2 protocol settings."
                 }
             }
         },
@@ -1974,31 +1974,31 @@
             "properties": {
                 "messageConnectionSettings": {
                     "$ref": "#/definitions/AS2MessageConnectionSettings",
-                    "description": "Gets or sets the message connection settings."
+                    "description": "The message connection settings."
                 },
                 "acknowledgementConnectionSettings": {
                     "$ref": "#/definitions/AS2AcknowledgementConnectionSettings",
-                    "description": "Gets or sets the acknowledgement connection settings."
+                    "description": "The acknowledgement connection settings."
                 },
                 "mdnSettings": {
                     "$ref": "#/definitions/AS2MdnSettings",
-                    "description": "Gets or sets the MDN settings."
+                    "description": "The MDN settings."
                 },
                 "securitySettings": {
                     "$ref": "#/definitions/AS2SecuritySettings",
-                    "description": "Gets or sets the security settings."
+                    "description": "The security settings."
                 },
                 "validationSettings": {
                     "$ref": "#/definitions/AS2ValidationSettings",
-                    "description": "Gets or sets the validation settings."
+                    "description": "The validation settings."
                 },
                 "envelopeSettings": {
                     "$ref": "#/definitions/AS2EnvelopeSettings",
-                    "description": "Gets or sets the envelope settings."
+                    "description": "The envelope settings."
                 },
                 "errorSettings": {
                     "$ref": "#/definitions/AS2ErrorSettings",
-                    "description": "Gets or sets the error settings."
+                    "description": "The error settings."
                 }
             }
         },
@@ -2007,19 +2007,19 @@
             "properties": {
                 "ignoreCertificateNameMismatch": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to ignore mismatch in certificate name."
+                    "description": "The value indicating whether to ignore mismatch in certificate name."
                 },
                 "supportHttpStatusCodeContinue": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to support HTTP status code 'CONTINUE'."
+                    "description": "The value indicating whether to support HTTP status code 'CONTINUE'."
                 },
                 "keepHttpConnectionAlive": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to keep the connection alive."
+                    "description": "The value indicating whether to keep the connection alive."
                 },
                 "unfoldHttpHeaders": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to unfold the HTTP headers."
+                    "description": "The value indicating whether to unfold the HTTP headers."
                 }
             }
         },
@@ -2028,19 +2028,19 @@
             "properties": {
                 "ignoreCertificateNameMismatch": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to ignore mismatch in certificate name."
+                    "description": "The value indicating whether to ignore mismatch in certificate name."
                 },
                 "supportHttpStatusCodeContinue": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to support HTTP status code 'CONTINUE'."
+                    "description": "The value indicating whether to support HTTP status code 'CONTINUE'."
                 },
                 "keepHttpConnectionAlive": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to keep the connection alive."
+                    "description": "The value indicating whether to keep the connection alive."
                 },
                 "unfoldHttpHeaders": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to unfold the HTTP headers."
+                    "description": "The value indicating whether to unfold the HTTP headers."
                 }
             }
         },
@@ -2049,39 +2049,39 @@
             "properties": {
                 "needMdn": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to send or request a MDN."
+                    "description": "The value indicating whether to send or request a MDN."
                 },
                 "signMdn": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether the MDN needs to be signed or not."
+                    "description": "The value indicating whether the MDN needs to be signed or not."
                 },
                 "sendMdnAsynchronously": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to send the asynchronous MDN."
+                    "description": "The value indicating whether to send the asynchronous MDN."
                 },
                 "receiptDeliveryUrl": {
                     "type": "string",
-                    "description": "Gets or sets the receipt delivery URL."
+                    "description": "The receipt delivery URL."
                 },
                 "dispositionNotificationTo": {
                     "type": "string",
-                    "description": "Gets or sets the disposition notification to header value."
+                    "description": "The disposition notification to header value."
                 },
                 "signOutboundMdnIfOptional": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to sign the outbound MDN if optional."
+                    "description": "The value indicating whether to sign the outbound MDN if optional."
                 },
                 "mdnText": {
                     "type": "string",
-                    "description": "Gets or sets the MDN text."
+                    "description": "The MDN text."
                 },
                 "sendInboundMdnToMessageBox": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to send inbound MDN to message box."
+                    "description": "The value indicating whether to send inbound MDN to message box."
                 },
                 "micHashingAlgorithm": {
                     "$ref": "#/definitions/HashingAlgorithm",
-                    "description": "Gets or sets the signing or hashing algorithm."
+                    "description": "The signing or hashing algorithm."
                 }
             }
         },
@@ -2090,39 +2090,39 @@
             "properties": {
                 "overrideGroupSigningCertificate": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to send or request a MDN."
+                    "description": "The value indicating whether to send or request a MDN."
                 },
                 "signingCertificateName": {
                     "type": "string",
-                    "description": "Gets or sets the name of the signing certificate."
+                    "description": "The name of the signing certificate."
                 },
                 "encryptionCertificateName": {
                     "type": "string",
-                    "description": "Gets or sets the name of the encryption certificate."
+                    "description": "The name of the encryption certificate."
                 },
                 "enableNrrForInboundEncodedMessages": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to enable NRR for inbound encoded messages."
+                    "description": "The value indicating whether to enable NRR for inbound encoded messages."
                 },
                 "enableNrrForInboundDecodedMessages": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to enable NRR for inbound decoded messages."
+                    "description": "The value indicating whether to enable NRR for inbound decoded messages."
                 },
                 "enableNrrForOutboundMdn": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to enable NRR for outbound MDN."
+                    "description": "The value indicating whether to enable NRR for outbound MDN."
                 },
                 "enableNrrForOutboundEncodedMessages": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to enable NRR for outbound encoded messages."
+                    "description": "The value indicating whether to enable NRR for outbound encoded messages."
                 },
                 "enableNrrForOutboundDecodedMessages": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to enable NRR for outbound decoded messages."
+                    "description": "The value indicating whether to enable NRR for outbound decoded messages."
                 },
                 "enableNrrForInboundMdn": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to enable NRR for inbound MDN."
+                    "description": "The value indicating whether to enable NRR for inbound MDN."
                 }
             }
         },
@@ -2131,40 +2131,40 @@
             "properties": {
                 "overrideMessageProperties": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to override incoming message properties with those in agreement."
+                    "description": "The value indicating whether to override incoming message properties with those in agreement."
                 },
                 "encryptMessage": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether the message has to be encrypted."
+                    "description": "The value indicating whether the message has to be encrypted."
                 },
                 "signMessage": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether the message has to be signed."
+                    "description": "The value indicating whether the message has to be signed."
                 },
                 "compressMessage": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether the message has to be compressed."
+                    "description": "The value indicating whether the message has to be compressed."
                 },
                 "checkDuplicateMessage": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to check for duplicate message."
+                    "description": "The value indicating whether to check for duplicate message."
                 },
                 "interchangeDuplicatesValidityDays": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the number of days to look back for duplicate interchange."
+                    "description": "The number of days to look back for duplicate interchange."
                 },
                 "checkCertificateRevocationListOnSend": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to check for certificate revocation list on send."
+                    "description": "The value indicating whether to check for certificate revocation list on send."
                 },
                 "checkCertificateRevocationListOnReceive": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to check for certificate revocation list on receive."
+                    "description": "The value indicating whether to check for certificate revocation list on receive."
                 },
                 "encryptionAlgorithm": {
                     "$ref": "#/definitions/EncryptionAlgorithm",
-                    "description": "Gets or sets the encryption algorithm."
+                    "description": "The encryption algorithm."
                 }
             }
         },
@@ -2173,23 +2173,23 @@
             "properties": {
                 "messageContentType": {
                     "type": "string",
-                    "description": "Gets or sets the message content type."
+                    "description": "The message content type."
                 },
                 "transmitFileNameInMimeHeader": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to transmit file name in mime header."
+                    "description": "The value indicating whether to transmit file name in mime header."
                 },
                 "fileNameTemplate": {
                     "type": "string",
-                    "description": "Gets or sets the template for file name."
+                    "description": "The template for file name."
                 },
                 "SuspendMessageOnFileNameGenerationError": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to suspend message on file name generation error."
+                    "description": "The value indicating whether to suspend message on file name generation error."
                 },
                 "AutogenerateFileName": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to auto generate file name."
+                    "description": "The value indicating whether to auto generate file name."
                 }
             }
         },
@@ -2198,11 +2198,11 @@
             "properties": {
                 "SuspendDuplicateMessage": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to suspend duplicate message."
+                    "description": "The value indicating whether to suspend duplicate message."
                 },
                 "ResendIfMdnNotReceived": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to resend message If MDN is not received."
+                    "description": "The value indicating whether to resend message If MDN is not received."
                 }
             }
         },
@@ -2211,11 +2211,11 @@
             "properties": {
                 "receiveAgreement": {
                     "$ref": "#/definitions/X12OneWayAgreement",
-                    "description": "Gets or sets the X12 one-way receive agreement."
+                    "description": "The X12 one-way receive agreement."
                 },
                 "sendAgreement": {
                     "$ref": "#/definitions/X12OneWayAgreement",
-                    "description": "Gets or sets the X12 one-way send agreement."
+                    "description": "The X12 one-way send agreement."
                 }
             }
         },
@@ -2224,15 +2224,15 @@
             "properties": {
                 "senderBusinessIdentity": {
                     "$ref": "#/definitions/BusinessIdentity",
-                    "description": "Gets or sets the sender business identity"
+                    "description": "The sender business identity"
                 },
                 "receiverBusinessIdentity": {
                     "$ref": "#/definitions/BusinessIdentity",
-                    "description": "Gets or sets the receiver business identity"
+                    "description": "The receiver business identity"
                 },
                 "protocolSettings": {
                     "$ref": "#/definitions/X12ProtocolSettings",
-                    "description": "Gets or sets the X12 protocol settings."
+                    "description": "The X12 protocol settings."
                 }
             }
         },
@@ -2241,66 +2241,66 @@
             "properties": {
                 "validationSettings": {
                     "$ref": "#/definitions/X12ValidationSettings",
-                    "description": "Gets or sets the X12 validation settings."
+                    "description": "The X12 validation settings."
                 },
                 "framingSettings": {
                     "$ref": "#/definitions/X12FramingSettings",
-                    "description": "Gets or sets the X12 framing settings."
+                    "description": "The X12 framing settings."
                 },
                 "envelopeSettings": {
                     "$ref": "#/definitions/X12EnvelopeSettings",
-                    "description": "Gets or sets the X12 envelope settings."
+                    "description": "The X12 envelope settings."
                 },
                 "acknowledgementSettings": {
                     "$ref": "#/definitions/X12AcknowledgementSettings",
-                    "description": "Gets or sets the X12 acknowledgment settings."
+                    "description": "The X12 acknowledgment settings."
                 },
                 "messageFilter": {
                     "$ref": "#/definitions/X12MessageFilter",
-                    "description": "Gets or sets the X12 message filter."
+                    "description": "The X12 message filter."
                 },
                 "securitySettings": {
                     "$ref": "#/definitions/X12SecuritySettings",
-                    "description": "Gets or sets the X12 security settings."
+                    "description": "The X12 security settings."
                 },
                 "processingSettings": {
                     "$ref": "#/definitions/X12ProcessingSettings",
-                    "description": "Gets or sets the X12 processing settings."
+                    "description": "The X12 processing settings."
                 },
                 "envelopeOverrides": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/X12EnvelopeOverride"
                     },
-                    "description": "Gets or sets the X12 envelope override settings."
+                    "description": "The X12 envelope override settings."
                 },
                 "validationOverrides": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/X12ValidationOverride"
                     },
-                    "description": "Gets or sets the X12 validation override settings."
+                    "description": "The X12 validation override settings."
                 },
                 "messageFilterList": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/X12MessageIdentifier"
                     },
-                    "description": "Gets or sets the X12 message filter list."
+                    "description": "The X12 message filter list."
                 },
                 "schemaReferences": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/X12SchemaReference"
                     },
-                    "description": "Gets or sets the X12 schema references."
+                    "description": "The X12 schema references."
                 },
                 "x12DelimiterOverrides": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/X12DelimiterOverrides"
                     },
-                    "description": "Gets or sets the X12 delimiter override settings."
+                    "description": "The X12 delimiter override settings."
                 }
             }
         },
@@ -2309,44 +2309,44 @@
             "properties": {
                 "validateCharacterSet": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to validate character set in the message."
+                    "description": "The value indicating whether to validate character set in the message."
                 },
                 "checkDuplicateInterchangeControlNumber": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to check for duplicate interchange control number."
+                    "description": "The value indicating whether to check for duplicate interchange control number."
                 },
                 "interchangeControlNumberValidityDays": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the validity period of interchange control number."
+                    "description": "The validity period of interchange control number."
                 },
                 "checkDuplicateGroupControlNumber": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to check for duplicate group control number."
+                    "description": "The value indicating whether to check for duplicate group control number."
                 },
                 "checkDuplicateTransactionSetControlNumber": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to check for duplicate transaction set control number."
+                    "description": "The value indicating whether to check for duplicate transaction set control number."
                 },
                 "validateEDITypes": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to Whether to validate EDI types."
+                    "description": "The value indicating whether to Whether to validate EDI types."
                 },
                 "validateXSDTypes": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to Whether to validate XSD types."
+                    "description": "The value indicating whether to Whether to validate XSD types."
                 },
                 "allowLeadingAndTrailingSpacesAndZeroes": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to allow leading and trailing spaces and zeroes."
+                    "description": "The value indicating whether to allow leading and trailing spaces and zeroes."
                 },
                 "trimLeadingAndTrailingSpacesAndZeroes": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to trim leading and trailing spaces and zeroes."
+                    "description": "The value indicating whether to trim leading and trailing spaces and zeroes."
                 },
                 "trailingSeparatorPolicy": {
                     "$ref": "#/definitions/TrailingSeparatorPolicy",
-                    "description": "Gets or sets the trailing separator policy."
+                    "description": "The trailing separator policy."
                 }
             }
         },
@@ -2356,34 +2356,34 @@
                 "dataElementSeparator": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the data element separator."
+                    "description": "The data element separator."
                 },
                 "componentSeparator": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the component separator."
+                    "description": "The component separator."
                 },
                 "replaceSeparatorsInPayload": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to replace separators in payload."
+                    "description": "The value indicating whether to replace separators in payload."
                 },
                 "replaceCharacter": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the replacement character."
+                    "description": "The replacement character."
                 },
                 "segmentTerminator": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the segment terminator."
+                    "description": "The segment terminator."
                 },
                 "characterSet": {
                     "$ref": "#/definitions/X12CharacterSet",
-                    "description": "Gets or sets the X12 character set."
+                    "description": "The X12 character set."
                 },
                 "segmentTerminatorSuffix": {
                     "$ref": "#/definitions/SegmentTerminatorSuffix",
-                    "description": "Gets or sets the segment terminator suffix."
+                    "description": "The segment terminator suffix."
                 }
 
             }
@@ -2394,105 +2394,105 @@
                 "controlStandardsId": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the controls standards id."
+                    "description": "The controls standards id."
                 },
                 "useControlStandardsIdAsRepetitionCharacter": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to use control standards id as repetition character."
+                    "description": "The value indicating whether to use control standards id as repetition character."
                 },
                 "senderApplicationId": {
                     "type": "string",
-                    "description": "Gets or sets the sender application id."
+                    "description": "The sender application id."
                 },
                 "receiverApplicationId": {
                     "type": "string",
-                    "description": "Gets or sets the receiver application id."
+                    "description": "The receiver application id."
                 },
                 "controlVersionNumber": {
                     "type": "string",
-                    "description": "Gets or sets the control version number."
+                    "description": "The control version number."
                 },
                 "interchangeControlNumberLowerBound": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the interchange  control number lower bound."
+                    "description": "The interchange  control number lower bound."
                 },
                 "interchangeControlNumberUpperBound": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the interchange  control number upper bound."
+                    "description": "The interchange  control number upper bound."
                 },
                 "rolloverInterchangeControlNumber": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to rollover interchange control number."
+                    "description": "The value indicating whether to rollover interchange control number."
                 },
                 "enableDefaultGroupHeaders": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to enable default group headers."
+                    "description": "The value indicating whether to enable default group headers."
                 },
                 "functionalGroupId": {
                     "type": "string",
-                    "description": "Gets or sets the functional group id."
+                    "description": "The functional group id."
                 },
                 "groupControlNumberLowerBound": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the group control number lower bound."
+                    "description": "The group control number lower bound."
                 },
                 "groupControlNumberUpperBound": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the group control number upper bound."
+                    "description": "The group control number upper bound."
                 },
                 "rolloverGroupControlNumber": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to rollover group control number."
+                    "description": "The value indicating whether to rollover group control number."
                 },
                 "groupHeaderAgencyCode": {
                     "type": "string",
-                    "description": "Gets or sets the group header agency code."
+                    "description": "The group header agency code."
                 },
                 "groupHeaderVersion": {
                     "type": "string",
-                    "description": "Gets or sets the group header version."
+                    "description": "The group header version."
                 },
                 "transactionSetControlNumberLowerBound": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the transaction set control number lower bound."
+                    "description": "The transaction set control number lower bound."
                 },
                 "transactionSetControlNumberUpperBound": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the transaction set control number upper bound."
+                    "description": "The transaction set control number upper bound."
                 },
                 "rolloverTransactionSetControlNumber": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to rollover transaction set control number."
+                    "description": "The value indicating whether to rollover transaction set control number."
                 },
                 "transactionSetControlNumberPrefix": {
                     "type": "string",
-                    "description": "Gets or sets the transaction set control number prefix."
+                    "description": "The transaction set control number prefix."
                 },
                 "transactionSetControlNumberSuffix": {
                     "type": "string",
-                    "description": "Gets or sets the transaction set control number suffix."
+                    "description": "The transaction set control number suffix."
                 },
                 "overwriteExistingTransactionSetControlNumber": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to overwrite existing transaction set control number."
+                    "description": "The value indicating whether to overwrite existing transaction set control number."
                 },
                 "groupHeaderDateFormat": {
                     "$ref": "#/definitions/X12DateFormat",
-                    "description": "Gets or sets the group header date format."
+                    "description": "The group header date format."
                 },
                 "groupHeaderTimeFormat": {
                     "$ref": "#/definitions/X12TimeFormat",
-                    "description": "Gets or sets the group header time format."
+                    "description": "The group header time format."
                 },
                 "usageIndicator": {
                     "$ref": "#/definitions/UsageIndicator",
-                    "description": "Gets or sets the usage indicator."
+                    "description": "The usage indicator."
                 }
             }
         },
@@ -2501,65 +2501,65 @@
             "properties": {
                 "needTechnicalAcknowledgement": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether technical acknowledgement is needed."
+                    "description": "The value indicating whether technical acknowledgement is needed."
                 },
                 "batchTechnicalAcknowledgements": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to batch the technical acknowledgements."
+                    "description": "The value indicating whether to batch the technical acknowledgements."
                 },
                 "needFunctionalAcknowledgement": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether functional acknowledgement is needed."
+                    "description": "The value indicating whether functional acknowledgement is needed."
                 },
                 "functionalAcknowledgementVersion": {
                     "type": "string",
-                    "description": "Gets or sets the functional acknowledgement version."
+                    "description": "The functional acknowledgement version."
                 },
                 "batchFunctionalAcknowledgements": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to batch functional acknowledgements."
+                    "description": "The value indicating whether to batch functional acknowledgements."
                 },
                 "needImplementationAcknowledgement": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether implementation acknowledgement is needed."
+                    "description": "The value indicating whether implementation acknowledgement is needed."
                 },
                 "implementationAcknowledgementVersion": {
                     "type": "string",
-                    "description": "Gets or sets the implementation acknowledgement version."
+                    "description": "The implementation acknowledgement version."
                 },
                 "batchImplementationAcknowledgements": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to batch implementation acknowledgements."
+                    "description": "The value indicating whether to batch implementation acknowledgements."
                 },
                 "needLoopForValidMessages": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether a loop is needed for valid messages."
+                    "description": "The value indicating whether a loop is needed for valid messages."
                 },
                 "sendSynchronousAcknowledgement": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to send synchronous acknowledgement."
+                    "description": "The value indicating whether to send synchronous acknowledgement."
                 },
                 "acknowledgementControlNumberPrefix": {
                     "type": "string",
-                    "description": "Gets or sets the acknowledgement control number prefix."
+                    "description": "The acknowledgement control number prefix."
                 },
                 "acknowledgementControlNumberSuffix": {
                     "type": "string",
-                    "description": "Gets or sets the acknowledgement control number suffix."
+                    "description": "The acknowledgement control number suffix."
                 },
                 "acknowledgementControlNumberLowerBound": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the acknowledgement control number lower bound."
+                    "description": "The acknowledgement control number lower bound."
                 },
                 "acknowledgementControlNumberUpperBound": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the acknowledgement control number upper bound."
+                    "description": "The acknowledgement control number upper bound."
                 },
                 "rolloverAcknowledgementControlNumber": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to rollover acknowledgement control number."
+                    "description": "The value indicating whether to rollover acknowledgement control number."
                 }
             }
         },
@@ -2568,7 +2568,7 @@
             "properties": {
                 "messageFilterType": {
                     "$ref": "#/definitions/MessageFilterType",
-                    "description": "Gets or sets the message filter type."
+                    "description": "The message filter type."
                 }
             }
         },
@@ -2577,19 +2577,19 @@
             "properties": {
                 "authorizationQualifier": {
                     "type": "string",
-                    "description": "Gets or sets the authorization qualifier."
+                    "description": "The authorization qualifier."
                 },
                 "authorizationValue": {
                     "type": "string",
-                    "description": "Gets or sets the authorization value."
+                    "description": "The authorization value."
                 },
                 "securityQualifier": {
                     "type": "string",
-                    "description": "Gets or sets the security qualifier."
+                    "description": "The security qualifier."
                 },
                 "passwordValue": {
                     "type": "string",
-                    "description": "Gets or sets the password value."
+                    "description": "The password value."
                 }
             }
         },
@@ -2598,27 +2598,27 @@
             "properties": {
                 "maskSecurityInfo": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to mask security information."
+                    "description": "The value indicating whether to mask security information."
                 },
                 "convertImpliedDecimal": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to convert numerical type to implied decimal."
+                    "description": "The value indicating whether to convert numerical type to implied decimal."
                 },
                 "preserveInterchange": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to preserve interchange."
+                    "description": "The value indicating whether to preserve interchange."
                 },
                 "suspendInterchangeOnError": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to suspend interchange on error."
+                    "description": "The value indicating whether to suspend interchange on error."
                 },
                 "createEmptyXmlTagsForTrailingSeparators": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to create empty xml tags for trailing separators."
+                    "description": "The value indicating whether to create empty xml tags for trailing separators."
                 },
                 "useDotAsDecimalSeparator": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to use dot as decimal separator."
+                    "description": "The value indicating whether to use dot as decimal separator."
                 }
             }
         },
@@ -2627,44 +2627,44 @@
             "properties": {
                 "targetNamespace": {
                     "type": "string",
-                    "description": "Gets or sets the target namespace on which this envelope settings has to be applied."
+                    "description": "The target namespace on which this envelope settings has to be applied."
                 },
                 "protocolVersion": {
                     "type": "string",
-                    "description": "Gets or sets the protocol version on which this envelope settings has to be applied."
+                    "description": "The protocol version on which this envelope settings has to be applied."
                 },
                 "messageId": {
                     "type": "string",
-                    "description": "Gets or sets the message id on which this envelope settings has to be applied."
+                    "description": "The message id on which this envelope settings has to be applied."
                 },
                 "responsibleAgencyCode": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the responsible agency code."
+                    "description": "The responsible agency code."
                 },
                 "headerVersion": {
                     "type": "string",
-                    "description": "Gets or sets the header version."
+                    "description": "The header version."
                 },
                 "senderApplicationId": {
                     "type": "string",
-                    "description": "Gets or sets the sender application id."
+                    "description": "The sender application id."
                 },
                 "receiverApplicationId": {
                     "type": "string",
-                    "description": "Gets or sets the receiver application id."
+                    "description": "The receiver application id."
                 },
                 "functionalIdentifierCode": {
                     "type": "string",
-                    "description": "Gets or sets the functional identifier code."
+                    "description": "The functional identifier code."
                 },
                 "dateFormat": {
                     "$ref": "#/definitions/X12DateFormat",
-                    "description": "Gets or sets the date format."
+                    "description": "The date format."
                 },
                 "timeFormat": {
                     "$ref": "#/definitions/X12TimeFormat",
-                    "description": "Gets or sets the time format."
+                    "description": "The time format."
                 }
             }
         },
@@ -2673,31 +2673,31 @@
             "properties": {
                 "messageId": {
                     "type": "string",
-                    "description": "Gets or sets the message id on which the validation settings has to be applied."
+                    "description": "The message id on which the validation settings has to be applied."
                 },
                 "validateEDITypes": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to validate EDI types."
+                    "description": "The value indicating whether to validate EDI types."
                 },
                 "validateXSDTypes": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to validate XSD types."
+                    "description": "The value indicating whether to validate XSD types."
                 },
                 "allowLeadingAndTrailingSpacesAndZeroes": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to allow leading and trailing spaces and zeroes."
+                    "description": "The value indicating whether to allow leading and trailing spaces and zeroes."
                 },
                 "validateCharacterSet": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to validate character Set."
+                    "description": "The value indicating whether to validate character Set."
                 },
                 "trimLeadingAndTrailingSpacesAndZeroes": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to trim leading and trailing spaces and zeroes."
+                    "description": "The value indicating whether to trim leading and trailing spaces and zeroes."
                 },
                 "trailingSeparatorPolicy": {
                     "$ref": "#/definitions/TrailingSeparatorPolicy",
-                    "description": "Gets or sets the trailing separator policy."
+                    "description": "The trailing separator policy."
                 }
             }
         },
@@ -2706,7 +2706,7 @@
             "properties": {
                 "messageId": {
                     "type": "string",
-                    "description": "Gets or sets the message id."
+                    "description": "The message id."
                 }
             }
         },
@@ -2715,19 +2715,19 @@
             "properties": {
                 "messageId": {
                     "type": "string",
-                    "description": "Gets or sets the message id."
+                    "description": "The message id."
                 },
                 "senderApplicationId": {
                     "type": "string",
-                    "description": "Gets or sets the sender application id."
+                    "description": "The sender application id."
                 },
                 "schemaVersion": {
                     "type": "string",
-                    "description": "Gets or sets the schema version."
+                    "description": "The schema version."
                 },
                 "schemaName": {
                     "type": "string",
-                    "description": "Gets or sets the schema name."
+                    "description": "The schema name."
                 }
             }
         },
@@ -2736,43 +2736,43 @@
             "properties": {
                 "protocolVersion": {
                     "type": "string",
-                    "description": "Gets or sets the protocol version."
+                    "description": "The protocol version."
                 },
                 "messageId": {
                     "type": "string",
-                    "description": "Gets or sets the message id."
+                    "description": "The message id."
                 },
                 "dataElementSeparator": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the data element separator."
+                    "description": "The data element separator."
                 },
                 "componentSeparator": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the component separator."
+                    "description": "The component separator."
                 },
                 "segmentTerminator": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the segment terminator."
+                    "description": "The segment terminator."
                 },
                 "segmentTerminatorSuffix": {
                     "$ref": "#/definitions/SegmentTerminatorSuffix",
-                    "description": "Gets or sets the segment terminator suffix."
+                    "description": "The segment terminator suffix."
                 },
                 "replaceCharacter": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the replacement character."
+                    "description": "The replacement character."
                 },
                 "replaceSeparatorsInPayload": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to replace separators in payload."
+                    "description": "The value indicating whether to replace separators in payload."
                 },
                 "targetNamespace": {
                     "type": "string",
-                    "description": "Gets or sets the target namespace on which this delimiter settings has to be applied."
+                    "description": "The target namespace on which this delimiter settings has to be applied."
                 }
             }
         },
@@ -2902,11 +2902,11 @@
             "properties": {
                 "receiveAgreement": {
                     "$ref": "#/definitions/EdifactOneWayAgreement",
-                    "description": "Gets or sets EDIFACT one-way receive agreement."
+                    "description": "The EDIFACT one-way receive agreement."
                 },
                 "sendAgreement": {
                     "$ref": "#/definitions/EdifactOneWayAgreement",
-                    "description": "Gets or sets EDIFACT one-way send agreement."
+                    "description": "The EDIFACT one-way send agreement."
                 }
             }
         },
@@ -2915,15 +2915,15 @@
             "properties": {
                 "senderBusinessIdentity": {
                     "$ref": "#/definitions/BusinessIdentity",
-                    "description": "Gets or sets the sender business identity"
+                    "description": "The sender business identity"
                 },
                 "receiverBusinessIdentity": {
                     "$ref": "#/definitions/BusinessIdentity",
-                    "description": "Gets or sets the receiver business identity"
+                    "description": "The receiver business identity"
                 },
                 "protocolSettings": {
                     "$ref": "#/definitions/EdifactProtocolSettings",
-                    "description": "Gets or sets the EDIFACT protocol settings."
+                    "description": "The EDIFACT protocol settings."
                 }
             }
         },
@@ -2932,62 +2932,62 @@
             "properties": {
                 "validationSettings": {
                     "$ref": "#/definitions/EdifactValidationSettings",
-                    "description": "Gets or sets the EDIFACT validation settings."
+                    "description": "The EDIFACT validation settings."
                 },
                 "framingSettings": {
                     "$ref": "#/definitions/EdifactFramingSettings",
-                    "description": "Gets or sets the EDIFACT framing settings."
+                    "description": "The EDIFACT framing settings."
                 },
                 "envelopeSettings": {
                     "$ref": "#/definitions/EdifactEnvelopeSettings",
-                    "description": "Gets or sets the EDIFACT envelope settings."
+                    "description": "The EDIFACT envelope settings."
                 },
                 "acknowledgementSettings": {
                     "$ref": "#/definitions/EdifactAcknowledgementSettings",
-                    "description": "Gets or sets the EDIFACT acknowledgement settings."
+                    "description": "The EDIFACT acknowledgement settings."
                 },
                 "messageFilter": {
                     "$ref": "#/definitions/EdifactMessageFilter",
-                    "description": "Gets or sets the EDIFACT message filter."
+                    "description": "The EDIFACT message filter."
                 },
                 "processingSettings": {
                     "$ref": "#/definitions/EdifactProcessingSettings",
-                    "description": "Gets or sets the EDIFACT processing Settings."
+                    "description": "The EDIFACT processing Settings."
                 },
                 "envelopeOverrides": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/EdifactEnvelopeOverride"
                     },
-                    "description": "Gets or sets the EDIFACT envelope override settings."
+                    "description": "The EDIFACT envelope override settings."
                 },
                 "messageFilterList": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/EdifactMessageIdentifier"
                     },
-                    "description": "Gets or sets the EDIFACT message filter list."
+                    "description": "The EDIFACT message filter list."
                 },
                 "schemaReferences": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/EdifactSchemaReference"
                     },
-                    "description": "Gets or sets the EDIFACT schema references."
+                    "description": "The EDIFACT schema references."
                 },
                 "validationOverrides": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/EdifactValidationOverride"
                     },
-                    "description": "Gets or sets the EDIFACT validation override settings."
+                    "description": "The EDIFACT validation override settings."
                 },
                 "edifactDelimiterOverrides": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/EdifactDelimiterOverride"
                     },
-                    "description": "Gets or sets the EDIFACT delimiter override settings."
+                    "description": "The EDIFACT delimiter override settings."
                 }
             }
         },
@@ -2996,44 +2996,44 @@
             "properties": {
                 "validateCharacterSet": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to validate character set in the message."
+                    "description": "The value indicating whether to validate character set in the message."
                 },
                 "checkDuplicateInterchangeControlNumber": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to check for duplicate interchange control number."
+                    "description": "The value indicating whether to check for duplicate interchange control number."
                 },
                 "interchangeControlNumberValidityDays": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the validity period of interchange control number."
+                    "description": "The validity period of interchange control number."
                 },
                 "checkDuplicateGroupControlNumber": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to check for duplicate group control number."
+                    "description": "The value indicating whether to check for duplicate group control number."
                 },
                 "checkDuplicateTransactionSetControlNumber": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to check for duplicate transaction set control number."
+                    "description": "The value indicating whether to check for duplicate transaction set control number."
                 },
                 "validateEDITypes": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to Whether to validate EDI types."
+                    "description": "The value indicating whether to Whether to validate EDI types."
                 },
                 "validateXSDTypes": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to Whether to validate XSD types."
+                    "description": "The value indicating whether to Whether to validate XSD types."
                 },
                 "allowLeadingAndTrailingSpacesAndZeroes": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to allow leading and trailing spaces and zeroes."
+                    "description": "The value indicating whether to allow leading and trailing spaces and zeroes."
                 },
                 "trimLeadingAndTrailingSpacesAndZeroes": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to trim leading and trailing spaces and zeroes."
+                    "description": "The value indicating whether to trim leading and trailing spaces and zeroes."
                 },
                 "trailingSeparatorPolicy": {
                     "$ref": "#/definitions/TrailingSeparatorPolicy",
-                    "description": "Gets or sets the trailing separator policy."
+                    "description": "The trailing separator policy."
                 }
             }
         },
@@ -3042,53 +3042,53 @@
             "properties": {
                 "serviceCodeListDirectoryVersion": {
                     "type": "string",
-                    "description": "Gets or sets the service code list directory version."
+                    "description": "The service code list directory version."
                 },
                 "characterEncoding": {
                     "type": "string",
-                    "description": "Gets or sets the character encoding."
+                    "description": "The character encoding."
                 },
                 "protocolVersion": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the protocol version."
+                    "description": "The protocol version."
                 },
                 "dataElementSeparator": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the data element separator."
+                    "description": "The data element separator."
                 },
                 "componentSeparator": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the component separator."
+                    "description": "The component separator."
                 },
                 "segmentTerminator": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the segment terminator."
+                    "description": "The segment terminator."
                 },
                 "releaseIndicator": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the release indicator."
+                    "description": "The release indicator."
                 },
                 "repetitionSeparator": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the repetition separator."
+                    "description": "The repetition separator."
                 },
                 "characterSet": {
                     "$ref": "#/definitions/EdifactCharacterSet",
-                    "description": "Gets or sets EDIFACT one-way receive agreement."
+                    "description": "The EDIFACT frame setting characterSet."
                 },
                 "decimalPointIndicator": {
                     "$ref": "#/definitions/EdifactDecimalIndicator",
-                    "description": "Gets or sets EDIFACT one-way receive agreement."
+                    "description": "The EDIFACT frame setting decimal indicator."
                 },
                 "segmentTerminatorSuffix": {
                     "$ref": "#/definitions/SegmentTerminatorSuffix",
-                    "description": "Gets or sets EDIFACT one-way receive agreement."
+                    "description": "The EDIFACT frame setting segment terminator suffix."
                 }
             }
         },
@@ -3097,173 +3097,173 @@
             "properties": {
                 "groupAssociationAssignedCode": {
                     "type": "string",
-                    "description": "Gets or sets the group association assigned code."
+                    "description": "The group association assigned code."
                 },
                 "communicationAgreementId": {
                     "type": "string",
-                    "description": "Gets or sets the communication agreement id."
+                    "description": "The communication agreement id."
                 },
                 "applyDelimiterStringAdvice": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to apply delimiter string advice."
+                    "description": "The value indicating whether to apply delimiter string advice."
                 },
                 "createGroupingSegments": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to create grouping segments."
+                    "description": "The value indicating whether to create grouping segments."
                 },
                 "enableDefaultGroupHeaders": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to enable default group headers."
+                    "description": "The value indicating whether to enable default group headers."
                 },
                 "recipientReferencePasswordValue": {
                     "type": "string",
-                    "description": "Gets or sets the recipient reference password value."
+                    "description": "The recipient reference password value."
                 },
                 "recipientReferencePasswordQualifier": {
                     "type": "string",
-                    "description": "Gets or sets the recipient reference password qualifier."
+                    "description": "The recipient reference password qualifier."
                 },
                 "applicationReferenceId": {
                     "type": "string",
-                    "description": "Gets or sets the application reference id."
+                    "description": "The application reference id."
                 },
                 "processingPriorityCode": {
                     "type": "string",
-                    "description": "Gets or sets the processing priority code."
+                    "description": "The processing priority code."
                 },
                 "interchangeControlNumberLowerBound": {
                     "type": "integer",
                     "format": "int64",
-                    "description": "Gets or sets the interchange control number lower bound."
+                    "description": "The interchange control number lower bound."
                 },
                 "interchangeControlNumberUpperBound": {
                     "type": "integer",
                     "format": "int64",
-                    "description": "Gets or sets the interchange control number upper bound."
+                    "description": "The interchange control number upper bound."
                 },
                 "rolloverInterchangeControlNumber": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to rollover interchange control number."
+                    "description": "The value indicating whether to rollover interchange control number."
                 },
                 "interchangeControlNumberPrefix": {
                     "type": "string",
-                    "description": "Gets or sets the interchange control number prefix."
+                    "description": "The interchange control number prefix."
                 },
                 "interchangeControlNumberSuffix": {
                     "type": "string",
-                    "description": "Gets or sets the interchange control number suffix."
+                    "description": "The interchange control number suffix."
                 },
                 "senderReverseRoutingAddress": {
                     "type": "string",
-                    "description": "Gets or sets the sender reverse routing address."
+                    "description": "The sender reverse routing address."
                 },
                 "receiverReverseRoutingAddress": {
                     "type": "string",
-                    "description": "Gets or sets the receiver reverse routing address."
+                    "description": "The receiver reverse routing address."
                 },
                 "functionalGroupId": {
                     "type": "string",
-                    "description": "Gets or sets the functional group id."
+                    "description": "The functional group id."
                 },
                 "groupControllingAgencyCode": {
                     "type": "string",
-                    "description": "Gets or sets the group controlling agency code."
+                    "description": "The group controlling agency code."
                 },
                 "groupMessageVersion": {
                     "type": "string",
-                    "description": "Gets or sets the group message version."
+                    "description": "The group message version."
                 },
                 "groupMessageRelease": {
                     "type": "string",
-                    "description": "Gets or sets the group message release."
+                    "description": "The group message release."
                 },
                 "groupControlNumberLowerBound": {
                     "type": "integer",
                     "format": "int64",
-                    "description": "Gets or sets the group control number lower bound."
+                    "description": "The group control number lower bound."
                 },
                 "groupControlNumberUpperBound": {
                     "type": "integer",
                     "format": "int64",
-                    "description": "Gets or sets the group control number upper bound."
+                    "description": "The group control number upper bound."
                 },
                 "rolloverGroupControlNumber": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to rollover group control number."
+                    "description": "The value indicating whether to rollover group control number."
                 },
                 "groupControlNumberPrefix": {
                     "type": "string",
-                    "description": "Gets or sets the group control number prefix."
+                    "description": "The group control number prefix."
                 },
                 "groupControlNumberSuffix": {
                     "type": "string",
-                    "description": "Gets or sets the group control number suffix."
+                    "description": "The group control number suffix."
                 },
                 "groupApplicationReceiverQualifier": {
                     "type": "string",
-                    "description": "Gets or sets the group application receiver qualifier."
+                    "description": "The group application receiver qualifier."
                 },
                 "groupApplicationReceiverId": {
                     "type": "string",
-                    "description": "Gets or sets the group application receiver id."
+                    "description": "The group application receiver id."
                 },
                 "groupApplicationSenderQualifier": {
                     "type": "string",
-                    "description": "Gets or sets the group application sender qualifier."
+                    "description": "The group application sender qualifier."
                 },
                 "groupApplicationSenderId": {
                     "type": "string",
-                    "description": "Gets or sets the group application sender id."
+                    "description": "The group application sender id."
                 },
                 "groupApplicationPassword": {
                     "type": "string",
-                    "description": "Gets or sets the group application password."
+                    "description": "The group application password."
                 },
                 "overwriteExistingTransactionSetControlNumber": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to overwrite existing transaction set control number."
+                    "description": "The value indicating whether to overwrite existing transaction set control number."
                 },
                 "transactionSetControlNumberPrefix": {
                     "type": "string",
-                    "description": "Gets or sets the transaction set control number prefix."
+                    "description": "The transaction set control number prefix."
                 },
                 "transactionSetControlNumberSuffix": {
                     "type": "string",
-                    "description": "Gets or sets the transaction set control number suffix."
+                    "description": "The transaction set control number suffix."
                 },
                 "transactionSetControlNumberLowerBound": {
                     "type": "integer",
                     "format": "int64",
-                    "description": "Gets or sets the transaction set control number lower bound."
+                    "description": "The transaction set control number lower bound."
                 },
                 "transactionSetControlNumberUpperBound": {
                     "type": "integer",
                     "format": "int64",
-                    "description": "Gets or sets the transaction set control number upper bound."
+                    "description": "The transaction set control number upper bound."
                 },
                 "rolloverTransactionSetControlNumber": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to rollover transaction set control number."
+                    "description": "The value indicating whether to rollover transaction set control number."
                 },
                 "isTestInterchange": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether the message is a test interchange."
+                    "description": "The value indicating whether the message is a test interchange."
                 },
                 "senderInternalIdentification": {
                     "type": "string",
-                    "description": "Gets or sets the sender internal identification."
+                    "description": "The sender internal identification."
                 },
                 "senderInternalSubIdentification": {
                     "type": "string",
-                    "description": "Gets or sets the sender internal sub identification."
+                    "description": "The sender internal sub identification."
                 },
                 "receiverInternalIdentification": {
                     "type": "string",
-                    "description": "Gets or sets the receiver internal identification."
+                    "description": "The receiver internal identification."
                 },
                 "receiverInternalSubIdentification": {
                     "type": "string",
-                    "description": "Gets or sets the receiver internal sub identification."
+                    "description": "The receiver internal sub identification."
                 }
             }
         },
@@ -3272,49 +3272,49 @@
             "properties": {
                 "needTechnicalAcknowledgement": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether technical acknowledgement is needed."
+                    "description": "The value indicating whether technical acknowledgement is needed."
                 },
                 "batchTechnicalAcknowledgements": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to batch the technical acknowledgements."
+                    "description": "The value indicating whether to batch the technical acknowledgements."
                 },
                 "needFunctionalAcknowledgement": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether functional acknowledgement is needed."
+                    "description": "The value indicating whether functional acknowledgement is needed."
                 },
                 "batchFunctionalAcknowledgements": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to batch functional acknowledgements."
+                    "description": "The value indicating whether to batch functional acknowledgements."
                 },
                 "needLoopForValidMessages": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether a loop is needed for valid messages."
+                    "description": "The value indicating whether a loop is needed for valid messages."
                 },
                 "sendSynchronousAcknowledgement": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to send synchronous acknowledgement."
+                    "description": "The value indicating whether to send synchronous acknowledgement."
                 },
                 "acknowledgementControlNumberPrefix": {
                     "type": "string",
-                    "description": "Gets or sets the acknowledgement control number prefix."
+                    "description": "The acknowledgement control number prefix."
                 },
                 "acknowledgementControlNumberSuffix": {
                     "type": "string",
-                    "description": "Gets or sets the acknowledgement control number suffix."
+                    "description": "The acknowledgement control number suffix."
                 },
                 "acknowledgementControlNumberLowerBound": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the acknowledgement control number lower bound."
+                    "description": "The acknowledgement control number lower bound."
                 },
                 "acknowledgementControlNumberUpperBound": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the acknowledgement control number upper bound."
+                    "description": "The acknowledgement control number upper bound."
                 },
                 "rolloverAcknowledgementControlNumber": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to rollover acknowledgement control number."
+                    "description": "The value indicating whether to rollover acknowledgement control number."
                 }
             }
         },
@@ -3323,7 +3323,7 @@
             "properties": {
                 "messageFilterType": {
                     "$ref": "#/definitions/MessageFilterType",
-                    "description": "Gets or sets the message filter type."
+                    "description": "The message filter type."
                 }
             }
         },
@@ -3332,23 +3332,23 @@
             "properties": {
                 "maskSecurityInfo": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to mask security information."
+                    "description": "The value indicating whether to mask security information."
                 },
                 "preserveInterchange": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to preserve interchange."
+                    "description": "The value indicating whether to preserve interchange."
                 },
                 "suspendInterchangeOnError": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to suspend interchange on error."
+                    "description": "The value indicating whether to suspend interchange on error."
                 },
                 "createEmptyXmlTagsForTrailingSeparators": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to create empty xml tags for trailing separators."
+                    "description": "The value indicating whether to create empty xml tags for trailing separators."
                 },
                 "useDotAsDecimalSeparator": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to use dot as decimal separator."
+                    "description": "The value indicating whether to use dot as decimal separator."
                 }
             }
         },
@@ -3357,64 +3357,64 @@
             "properties": {
                 "messageId": {
                     "type": "string",
-                    "description": "Gets or sets the message id on which this envelope settings has to be applied."
+                    "description": "The message id on which this envelope settings has to be applied."
                 },
                 "messageVersion": {
                     "type": "string",
-                    "description": "Gets or sets the message version on which this envelope settings has to be applied."
+                    "description": "The message version on which this envelope settings has to be applied."
                 },
                 "messageRelease": {
                     "type": "string",
-                    "description": "Gets or sets the message release version on which this envelope settings has to be applied."
+                    "description": "The message release version on which this envelope settings has to be applied."
                 },
                 "messageAssociationAssignedCode": {
                     "type": "string",
-                    "description": "Gets or sets the message association assigned code."
+                    "description": "The message association assigned code."
                 },
                 "targetNamespace": {
                     "type": "string",
-                    "description": "Gets or sets the target namespace on which this envelope settings has to be applied."
+                    "description": "The target namespace on which this envelope settings has to be applied."
                 },
                 "functionalGroupId": {
                     "type": "string",
-                    "description": "Gets or sets the functional group id."
+                    "description": "The functional group id."
                 },
                 "senderApplicationQualifier": {
                     "type": "string",
-                    "description": "Gets or sets the sender application qualifier."
+                    "description": "The sender application qualifier."
                 },
                 "senderApplicationId": {
                     "type": "string",
-                    "description": "Gets or sets the sender application id."
+                    "description": "The sender application id."
                 },
                 "receiverApplicationQualifier": {
                     "type": "string",
-                    "description": "Gets or sets the receiver application qualifier."
+                    "description": "The receiver application qualifier."
 
                 },
                 "receiverApplicationId": {
                     "type": "string",
-                    "description": "Gets or sets the receiver application id."
+                    "description": "The receiver application id."
                 },
                 "controllingAgencyCode": {
                     "type": "string",
-                    "description": "Gets or sets the controlling agency code."
+                    "description": "The controlling agency code."
                 },
                 "groupHeaderMessageVersion": {
                     "type": "string",
-                    "description": "Gets or sets the group header message version."
+                    "description": "The group header message version."
                 },
                 "groupHeaderMessageRelease": {
                     "type": "string",
-                    "description": "Gets or sets the group header message release."
+                    "description": "The group header message release."
                 },
                 "associationAssignedCode": {
                     "type": "string",
-                    "description": "Gets or sets the association assigned code."
+                    "description": "The association assigned code."
                 },
                 "applicationPassword": {
                     "type": "string",
-                    "description": "Gets or sets the application password."
+                    "description": "The application password."
                 }
             }
         },
@@ -3423,7 +3423,7 @@
             "properties": {
                 "messageId": {
                     "type": "string",
-                    "description": "Gets or sets the message id on which this envelope settings has to be applied."
+                    "description": "The message id on which this envelope settings has to be applied."
                 }
             }
         },
@@ -3432,31 +3432,31 @@
             "properties": {
                 "messageId": {
                     "type": "string",
-                    "description": "Gets or sets the message id."
+                    "description": "The message id."
                 },
                 "messageVersion": {
                     "type": "string",
-                    "description": "Gets or sets the message version."
+                    "description": "The message version."
                 },
                 "messageRelease": {
                     "type": "string",
-                    "description": "Gets or sets the message release version."
+                    "description": "The message release version."
                 },
                 "senderApplicationId": {
                     "type": "string",
-                    "description": "Gets or sets the sender application id."
+                    "description": "The sender application id."
                 },
                 "senderApplicationQualifier": {
                     "type": "string",
-                    "description": "Gets or sets the sender application qualifier."
+                    "description": "The sender application qualifier."
                 },
                 "associationAssignedCode": {
                     "type": "string",
-                    "description": "Gets or sets the association assigned code."
+                    "description": "The association assigned code."
                 },
                 "schemaName": {
                     "type": "string",
-                    "description": "Gets or sets the schema name."
+                    "description": "The schema name."
                 }
             }
         },
@@ -3465,31 +3465,31 @@
             "properties": {
                 "messageId": {
                     "type": "string",
-                    "description": "Gets or sets the message id on which the validation settings has to be applied."
+                    "description": "The message id on which the validation settings has to be applied."
                 },
                 "enforceCharacterSet": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to validate character Set."
+                    "description": "The value indicating whether to validate character Set."
                 },
                 "validateEDITypes": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to validate EDI types."
+                    "description": "The value indicating whether to validate EDI types."
                 },
                 "validateXSDTypes": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to validate XSD types."
+                    "description": "The value indicating whether to validate XSD types."
                 },
                 "allowLeadingAndTrailingSpacesAndZeroes": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to allow leading and trailing spaces and zeroes."
+                    "description": "The value indicating whether to allow leading and trailing spaces and zeroes."
                 },
                 "trailingSeparatorPolicy": {
                     "$ref": "#/definitions/TrailingSeparatorPolicy",
-                    "description": "Gets or sets the trailing separator policy."
+                    "description": "The trailing separator policy."
                 },
                 "trimLeadingAndTrailingSpacesAndZeroes": {
                     "type": "boolean",
-                    "description": "Gets or sets a value indicating whether to trim leading and trailing spaces and zeroes."
+                    "description": "The value indicating whether to trim leading and trailing spaces and zeroes."
                 }
             }
         },
@@ -3498,56 +3498,56 @@
             "properties": {
                 "messageId": {
                     "type": "string",
-                    "description": "Gets or sets the message id."
+                    "description": "The message id."
                 },
                 "messageVersion": {
                     "type": "string",
-                    "description": "Gets or sets the message version."
+                    "description": "The message version."
                 },
                 "messageRelease": {
                     "type": "string",
-                    "description": "Gets or sets the message releaseversion."
+                    "description": "The message releaseversion."
                 },
                 "dataElementSeparator": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the data element separator."
+                    "description": "The data element separator."
                 },
                 "componentSeparator": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the component separator."
+                    "description": "The component separator."
                 },
                 "segmentTerminator": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the segment terminator."
+                    "description": "The segment terminator."
                 },
                 "repetitionSeparator": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the repetition separator."
+                    "description": "The repetition separator."
                 },
                 "segmentTerminatorSuffix": {
                     "$ref": "#/definitions/SegmentTerminatorSuffix",
-                    "description": "Gets or sets the segment terminator suffix."
+                    "description": "The segment terminator suffix."
                 },
                 "decimalPointIndicator": {
                     "$ref": "#/definitions/EdifactDecimalIndicator",
-                    "description": "Gets or sets the decimal point indicator."
+                    "description": "The decimal point indicator."
                 },
                 "releaseIndicator": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets or sets the release indicator."
+                    "description": "The release indicator."
                 },
                 "messageAssociationAssignedCode": {
                     "type": "string",
-                    "description": "Gets or sets the message association assigned code."
+                    "description": "The message association assigned code."
                 },
                 "targetNamespace": {
                     "type": "string",
-                    "description": "Gets or sets the target namespace on which this delimiter settings has to be applied."
+                    "description": "The target namespace on which this delimiter settings has to be applied."
                 }
             }
         },
@@ -3595,11 +3595,11 @@
                     "items": {
                         "$ref": "#/definitions/IntegrationAccountCertificate"
                     },
-                    "description": "Gets or sets the list of integration account certificates."
+                    "description": "The list of integration account certificates."
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "Gets or sets the URL to get the next set of results."
+                    "description": "The URL to get the next set of results."
                 }
             }
         },
@@ -3609,7 +3609,7 @@
                 "properties": {
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/IntegrationAccountCertificateProperties",
-                    "description": "Gets or sets the integration account certificate properties."
+                    "description": "The integration account certificate properties."
                 }
             },
             "allOf": [
@@ -3625,27 +3625,27 @@
                     "type": "string",
                     "format": "date-time",
                     "readOnly": true,
-                    "description": "Gets the created time."
+                    "description": "The created time."
                 },
                 "changedTime": {
                     "type": "string",
                     "format": "date-time",
                     "readOnly": true,
-                    "description": "Gets the changed time."
+                    "description": "The changed time."
                 },
                 "metadata": {
                     "type": "object",
-                    "description": "Gets or sets the metadata.",
+                    "description": "The metadata.",
                     "properties": {
                     }
                 },
                 "key": {
                     "$ref": "#/definitions/KeyVaultKeyReference",
-                    "description": "Gets or sets the key details in the key vault."
+                    "description": "The key details in the key vault."
                 },
                 "publicCertificate": {
                     "type": "string",
-                    "description": "Gets or sets the public certificate."
+                    "description": "The public certificate."
                 }
             }
         },
@@ -3654,15 +3654,15 @@
             "properties": {
                 "keyVault": {
                     "$ref": "#/definitions/ResourceReference",
-                    "description": "Gets or sets the key vault reference."
+                    "description": "The key vault reference."
                 },
                 "keyName": {
                     "type": "string",
-                    "description": "Gets or sets the private key name in key vault."
+                    "description": "The private key name in key vault."
                 },
                 "keyVersion": {
                     "type": "string",
-                    "description": "Gets or sets the private key version in key vault."
+                    "description": "The private key version in key vault."
                 }
             }
         }
