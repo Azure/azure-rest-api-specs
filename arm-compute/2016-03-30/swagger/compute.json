@@ -1171,7 +1171,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2856,6 +2856,10 @@
             "$ref": "#/definitions/Usage"
           },
           "description": "Gets or sets the list Compute Resource Usages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the uri to fetch the next page of Compute Resource Usages. Call ListNext() with this to fetch the next page of Compute Resource Usages."
         }
       },
       "description": "The List Usages operation response."
@@ -4197,6 +4201,10 @@
             "$ref": "#/definitions/VirtualMachineScaleSet"
           },
           "description": "Gets or sets the list of virtual machine scale sets."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS."
         }
       },
       "description": "The List Virtual Machine operation response."
@@ -4282,6 +4290,10 @@
             "$ref": "#/definitions/VirtualMachineScaleSetSku"
           },
           "description": "Gets the list of skus available for the virtual machine scale set."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus."
         }
       },
       "description": "The Virtual Machine Scale Set List Skus operation response."
@@ -4426,6 +4438,10 @@
             "$ref": "#/definitions/VirtualMachineScaleSetVM"
           },
           "description": "Gets or sets the list of virtual machine scale sets VMs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs"
         }
       },
       "description": "The List Virtual Machine Scale Set VMs operation response."
