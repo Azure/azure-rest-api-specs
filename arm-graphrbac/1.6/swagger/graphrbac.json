@@ -202,6 +202,40 @@
         }
       }
     },
+    "/{tenantID}/isMemberOf": {
+      "post": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Groups_IsMemberOf",
+        "description": "Checks whether the specified user, group, contact, or service principal is a direct or a transitive member of the specified group.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckGroupMembershipParameters"
+            },
+            "description": "Check group membership parameters."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Indicates success. Returns true if the user, contact, group, or service principal is a direct or a transitive member of the specified group; otherwsie, false.",
+            "schema": {
+              "$ref": "#/definitions/CheckGroupMembershipResult"
+            }
+          }
+        }
+      }
+    },
     "/{tenantID}/groups/{groupObjectId}/$links/members/{memberObjectId}": {
       "delete": {
         "tags": [
@@ -1381,6 +1415,32 @@
         }
       },
       "description": "Server response for GetMemberGroups API call"
+    },
+    "CheckGroupMembershipParameters": {
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The object ID of the group to check."
+        },
+        "memberId": {
+          "type": "string",
+          "description": "The object ID of the contact, group, user, or service principal to check for membership in the specified group."
+        }
+      },
+      "required": [
+        "groupId",
+        "memberId"
+      ],
+      "description": "Request parameters for IsMemberOf API call"
+    },
+    "CheckGroupMembershipResult": {
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "description": "true if the specified user, group, contact, or service principal has either direct or transitive membership in the specified group; otherwise, false."
+        }
+      },
+      "description": "Server response for IsMemberOf API call"
     },
     "ServicePrincipalCreateParameters": {
       "properties": {

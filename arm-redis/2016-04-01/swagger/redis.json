@@ -650,10 +650,12 @@
         },
         "subnetId": {
           "type": "string",
+          "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$",
           "description": "The full resource ID of a subnet in a virtual network to deploy the redis cache in. Example format: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1"
         },
         "staticIP": {
           "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+\\.\\d+$",
           "description": "Required when deploying a redis cache inside an existing Azure Virtual Network."
         }
       },
