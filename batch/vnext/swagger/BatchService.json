@@ -12521,7 +12521,7 @@
         "poolInfo": {
           "$ref": "#/definitions/PoolInformation",
           "title": "The pool on which the Batch service runs the job's tasks.",
-          "description": "If omitted, the job continues to run on its current pool."
+          "description": "You may change the pool for a job only when the job is disabled. The Patch Job call will fail if you include the poolInfo element and the job is not disabled. If you specify an autoPoolSpecification specification in the poolInfo, only the keepAlive property can be updated, and then only if the auto pool has a poolLifetimeOption of job. If omitted, the job continues to run on its current pool."
         },
         "metadata": {
           "type": "array",
@@ -12549,7 +12549,8 @@
         },
         "poolInfo": {
           "$ref": "#/definitions/PoolInformation",
-          "title": "The pool on which the Batch service runs the job's tasks."
+          "title": "The pool on which the Batch service runs the job's tasks.",
+          "description": "You may change the pool for a job only when the job is disabled. The Update Job call will fail if you include the poolInfo element and the job is not disabled. If you specify an autoPoolSpecification specification in the poolInfo, only the keepAlive property can be updated, and then only if the auto pool has a poolLifetimeOption of job."
         },
         "metadata": {
           "type": "array",
