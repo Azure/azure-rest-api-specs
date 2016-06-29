@@ -1909,7 +1909,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveRouteTable": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveRouteTable": {
       "post": {
         "tags": [
           "NetworkInterfaces"
@@ -1924,7 +1924,7 @@
             "type": "string",
             "description": "The name of the resource group."
           },
-		  {
+          {
             "name": "networkInterfaceName",
             "in": "path",
             "required": true,
@@ -1952,7 +1952,7 @@
         "x-ms-long-running-operation": true
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveNetworkSecurityGroups": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveNetworkSecurityGroups": {
       "post": {
         "tags": [
           "NetworkInterfaces"
@@ -1967,7 +1967,7 @@
             "type": "string",
             "description": "The name of the resource group."
           },
-		  {
+          {
             "name": "networkInterfaceName",
             "in": "path",
             "required": true,
@@ -3199,7 +3199,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/virtualNetworkPeerings/{virtualNetworkPeeringName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/virtualNetworkPeerings/{virtualNetworkPeeringName}": {
       "delete": {
         "tags": [
           "VirtualNetworkPeerings"
@@ -3354,7 +3354,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/virtualNetworkPeerings": {
-	"get": {
+      "get": {
         "tags": [
           "VirtualNetworkPeerings"
         ],
@@ -6604,38 +6604,38 @@
     "EffectiveNetworkSecurityGroup": {
       "properties": {
         "networkSecurityGroup": {
-	      "$ref": "#/definitions/SubResource",
+          "$ref": "#/definitions/SubResource",
           "description": "Gets the id of network security group that is applied"
-		},
-		"association": {
-		  "$ref": "#/definitions/EffectiveNetworkSecurityGroupAssociation"		  
-		},
-		"effectiveSecurityRules": {
-		  "type": "array",
+        },
+        "association": {
+          "$ref": "#/definitions/EffectiveNetworkSecurityGroupAssociation"
+        },
+        "effectiveSecurityRules": {
+          "type": "array",
           "items": {
             "$ref": "#/definitions/EffectiveNetworkSecurityRules"
           },
           "description": "Gets collection of effective security rules"
-		}
-	  },
-      "description": "Effective NetworkSecurityGroup"	  
+        }
+      },
+      "description": "Effective NetworkSecurityGroup"
     },
-	"EffectiveNetworkSecurityGroupAssociation": {
+    "EffectiveNetworkSecurityGroupAssociation": {
       "properties": {
         "subnet": {
-	      "$ref": "#/definitions/SubResource",
+          "$ref": "#/definitions/SubResource",
           "description": "Gets the id of subnet if assigned"
-		},
-		"networkInterface": {
-	      "$ref": "#/definitions/SubResource",
+        },
+        "networkInterface": {
+          "$ref": "#/definitions/SubResource",
           "description": "Gets the id of network interface if assigned"
-		}
-	  },	
+        }
+      },
       "description": "Effective NetworkSecurityGroup association"
     },
-	"EffectiveNetworkSecurityRules": {
+    "EffectiveNetworkSecurityRules": {
       "properties": {
-	    "name": {
+        "name": {
           "type": "string",
           "description": "Gets the name of the security rule specified by the user (if created by the user)"
         },
@@ -6668,7 +6668,7 @@
           "type": "string",
           "description": "Gets destination address prefix"
         },
-		"expandedSourceAddressPrefix": {
+        "expandedSourceAddressPrefix": {
           "type": "array",
           "items": {
             "type": "string"
@@ -6711,10 +6711,10 @@
             "modelAsString": true
           }
         }
-	  },	
+      },
       "description": "Effective NetworkSecurityRules"
     },
-	"EffectiveNetworkSecurityGroupListResult": {
+    "EffectiveNetworkSecurityGroupListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -6884,7 +6884,7 @@
       ],
       "description": "Route resource"
     },
-	"EffectiveRoute": {
+    "EffectiveRoute": {
       "properties": {
         "userDefinedRoute": {
           "$ref": "#/definitions/SubResource",
@@ -6909,28 +6909,28 @@
           "description": "Gets value of effective route",
           "enum": [
             "Active",
-            "Invalid",            
+            "Invalid",
           ],
           "x-ms-enum": {
             "name": "EffectiveRouteState",
             "modelAsString": true
           }
         },
-		"addressPrefix": {
+        "addressPrefix": {
           "type": "array",
           "items": {
             "type": "string"
           },
           "description": "Gets address prefixes of the effective routes in CIDR notation."
         },
-		"nextHopIpAddress": {
+        "nextHopIpAddress": {
           "type": "array",
           "items": {
             "type": "string"
           },
           "description": "Gets the IP address of the next hop of the effective route"
         },
-		"nextHopType": {
+        "nextHopType": {
           "type": "string",
           "description": "Gets or sets the type of Azure hop the packet should be sent to.",
           "enum": [
@@ -6953,7 +6953,7 @@
       ],
       "description": "Effective Route"
     },
-	"EffectiveRouteListResult": {
+    "EffectiveRouteListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -7162,21 +7162,21 @@
         }
       }
     },
-	"VirtualNetworkPeeringPropertiesFormat": {
+    "VirtualNetworkPeeringPropertiesFormat": {
       "properties": {
         "allowVirtualNetworkAccess": {
           "type": "boolean",
           "description": "Gets or sets whether the VMs in the linked virtual network space would be able to access all the VMs in local Virtual network space"
         },
-		"allowForwardedTraffic": {
+        "allowForwardedTraffic": {
           "type": "boolean",
           "description": "Gets or sets whether the forwarded traffic from the VMs in the remote virtual network will be allowed/disallowed"
         },
-		"allowGatewayTransit": {
+        "allowGatewayTransit": {
           "type": "boolean",
           "description": "Gets or sets if gatewayLinks can be used in remote virtual network’s link to this virtual network"
         },
-		"useRemoteGateways": {
+        "useRemoteGateways": {
           "type": "boolean",
           "description": "Gets or sets if remote gateways can be used on this virtual network. If the flag is set to true, and allowGatewayTransit on remotepeering is also true, virtual network will use gateways of remote virtual network for transit. Only 1 peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway."
         },
@@ -7184,13 +7184,13 @@
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets the reference of the remote virtual network"
         },
-		"peeringState": {
+        "peeringState": {
           "type": "string",
           "description": "Gets the status of the virtual network peering",
           "enum": [
             "Initiated",
-			"Connected",
-			"Disconnected"
+            "Connected",
+            "Disconnected"
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkPeeringState",
@@ -7225,28 +7225,28 @@
       ],
       "description": "Subnet in a VirtualNework resource"
     },
-	"VirtualNetworkPeering":{
-		"properties": {
-		  "properties" : {
-			  "x-ms-client-flatten": true,
-			  "$ref": "#/definitions/VirtualNetworkPeeringPropertiesFormat"
-			},
-		  "name": {
+    "VirtualNetworkPeering": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualNetworkPeeringPropertiesFormat"
+        },
+        "name": {
           "type": "string",
           "description": "Gets or sets the name of the resource that is unique within a resource group. This name can be used to access the resource"
-          },
-          "etag": {
-            "type": "string",
-            "description": "A unique read-only string that changes whenever the resource is updated"
-          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
       },
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
         }
       ],
-      "description": "Peerings in a VirtualNework resource"		
-	},
+      "description": "Peerings in a VirtualNework resource"
+    },
     "SubnetListResult": {
       "properties": {
         "value": {
@@ -7263,7 +7263,7 @@
       },
       "description": "Response for ListSubnets Api service callRetrieves all subnet that belongs to a virtual network"
     },
-	"VirtualNetworkPeeringListResult": {
+    "VirtualNetworkPeeringListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -7806,7 +7806,7 @@
           },
           "description": "Gets or sets list of subnets in a VirtualNetwork"
         },
-		"VirtualNetworkPeerings": {
+        "VirtualNetworkPeerings": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualNetworkPeering"
@@ -7823,7 +7823,7 @@
         }
       }
     },
-	"VirtualNetwork": {
+    "VirtualNetwork": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
