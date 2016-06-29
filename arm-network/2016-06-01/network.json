@@ -1909,6 +1909,92 @@
         }
       }
     },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveRouteTable": {
+      "post": {
+        "tags": [
+          "NetworkInterfaces"
+        ],
+        "operationId": "NetworkInterfaces_GetEffectiveRouteTable",
+        "description": "The get effective routetable operation retrieves all the route tables applied on a networkInterface.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+		  {
+            "name": "networkInterfaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network interface."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EffectiveRouteListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+		"x-ms-long-running-operation": true
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveNetworkSecurityGroups": {
+      "post": {
+        "tags": [
+          "NetworkInterfaces"
+        ],
+        "operationId": "NetworkInterfaces_ListEffectiveNetworkSecurityGroups",
+        "description": "The list effective network security group operation retrieves all the network security groups applied on a networkInterface.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+		  {
+            "name": "networkInterfaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network interface."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EffectiveNetworkSecurityGroupListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+		"x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}": {
       "delete": {
         "tags": [
@@ -6515,6 +6601,135 @@
       ],
       "description": "NetworkSecurityGroup resource"
     },
+	"EffectiveNetworkSecurityGroup": {
+      "properties": {
+        "networkSecurityGroup": {
+	      "$ref": "#/definitions/SubResource",
+          "description": "Gets the id of network security group that is applied"
+		},
+		"association": {
+		  "$ref": "#/definitions/EffectiveNetworkSecurityGroupAssociation"		  
+		},
+		"effectiveSecurityRules": {
+		  "type": "array",
+          "items": {
+            "$ref": "#/definitions/EffectiveNetworkSecurityRules"
+          },
+          "description": "Gets collection of effective security rules"
+		}
+	  },
+      "description": "Effective NetworkSecurityGroup"	  
+    },
+	"EffectiveNetworkSecurityGroupAssociation": {
+      "properties": {
+        "subnet": {
+	      "$ref": "#/definitions/SubResource",
+          "description": "Gets the id of subnet if assigned"
+		},
+		"networkInterface": {
+	      "$ref": "#/definitions/SubResource",
+          "description": "Gets the id of network interface if assigned"
+		}
+	  },	
+      "description": "Effective NetworkSecurityGroup association"
+    },
+	"EffectiveNetworkSecurityRules": {
+      "properties": {
+	    "name": {
+          "type": "string",
+          "description": "Gets the name of the security rule specified by the user (if created by the user)"
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Gets Network protocol this rule applies to",
+          "enum": [
+            "Tcp",
+            "Udp",
+            "*"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityRuleProtocol",
+            "modelAsString": true
+          }
+        },
+        "sourcePortRange": {
+          "type": "string",
+          "description": "Gets source port or range"
+        },
+        "destinationPortRange": {
+          "type": "string",
+          "description": "Gets destination port or range"
+        },
+        "sourceAddressPrefix": {
+          "type": "string",
+          "description": "Gets source address prefix"
+        },
+        "destinationAddressPrefix": {
+          "type": "string",
+          "description": "Gets destination address prefix"
+        },
+		"expandedSourceAddressPrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets expanded source address prefix"
+        },
+        "expandedDestinationAddressPrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets expanded destination address prefix"
+        },
+        "access": {
+          "type": "string",
+          "description": "Gets network traffic is allowed or denied",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityRuleAccess",
+            "modelAsString": true
+          }
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the priority of the rule"
+        },
+        "direction": {
+          "type": "string",
+          "description": "Gets the direction of the rule",
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityRuleDirection",
+            "modelAsString": true
+          }
+        }
+	  },	
+      "description": "Effective NetworkSecurityRules"
+    },
+	"EffectiveNetworkSecurityGroupListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EffectiveNetworkSecurityGroup"
+          },
+          "description": "Gets list of effective network security groups"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
+        }
+      },
+      "description": "Response for list effective network security groups api servive call"
+    },
     "NetworkSecurityGroupListResult": {
       "properties": {
         "value": {
@@ -6522,7 +6737,7 @@
           "items": {
             "$ref": "#/definitions/NetworkSecurityGroup"
           },
-          "description": "Gets List of NetworkSecurityGroups in a resource group"
+          "description": "Gets List of NetworkSecurityGroups"
         },
         "nextLink": {
           "type": "string",
@@ -6668,6 +6883,91 @@
         "nextHopType"
       ],
       "description": "Route resource"
+    },
+	"EffectiveRoute": {
+      "properties": {
+        "userDefinedRoute": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets the Id of the effective route. This is optional, only user defined routes have the name."
+        },
+        "source": {
+          "type": "string",
+          "description": "Gets who created the route",
+          "enum": [
+            "Unknown",
+            "User",
+            "VirtualNetworkGateway",
+            "Default",
+          ],
+          "x-ms-enum": {
+            "name": "EffectiveRouteSource",
+            "modelAsString": true
+          }
+        },
+        "state": {
+          "type": "string",
+          "description": "Gets value of effective route",
+          "enum": [
+            "Active",
+            "Invalid",            
+          ],
+          "x-ms-enum": {
+            "name": "EffectiveRouteState",
+            "modelAsString": true
+          }
+        },
+		"addressPrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets address prefixes of the effective routes in CIDR notation."
+        },
+		"nextHopIpAddress": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets the IP address of the next hop of the effective route"
+        },
+		"nextHopType": {
+          "type": "string",
+          "description": "Gets or sets the type of Azure hop the packet should be sent to.",
+          "enum": [
+            "VirtualNetworkGateway",
+            "VnetLocal",
+            "Internet",
+            "VirtualAppliance",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "RouteNextHopType",
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "Effective Route"
+    },
+	"EffectiveRouteListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EffectiveRoute"
+          },
+          "description": "Gets list of effective routes"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
+        }
+      },
+      "description": "Response for list effective route api servive call"
     },
     "Route": {
       "properties": {
