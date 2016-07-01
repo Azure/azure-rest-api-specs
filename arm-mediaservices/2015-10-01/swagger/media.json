@@ -65,6 +65,9 @@
             "schema": {
               "$ref": "#/definitions/ApiError"
             }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": null
           }
         }
       },
@@ -517,15 +520,6 @@
           "items": {
             "$ref": "#/definitions/MediaService"
           }
-        },
-        "count": {
-          "description": "The number of Media Services in the collection.",
-          "type": "integer",
-          "format": "int32"
-        },
-        "nextLink": {
-          "description": "The continuation token.",
-          "type": "string"
         }
       }
     },
@@ -552,8 +546,16 @@
       "description": "The request body for a RegenerateKey API.",
       "properties": {
         "keyType": {
-          "description": "The keyType must be 'Primary' or 'Secondary', indicating which key you want to regenerate.",
-          "type": "string"
+          "description": "The keyType indicating which key you want to regenerate.",
+          "type": "string",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "x-ms-enum": {
+            "name": "KeyType",
+            "modelAsString": false
+          }  
         }
       }
     },
