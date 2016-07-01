@@ -65,10 +65,10 @@
             "schema": {
               "$ref": "#/definitions/ApiError"
             }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": null
           }
+        },
+        "x-ms-pageable": {
+            "nextLinkName": null
         }
       },
       "post": {
@@ -78,7 +78,7 @@
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/MediaService"
+              "$ref": "#/definitions/CheckNameAvailabilityOutput"
             }
           },
           "default": {
@@ -103,12 +103,12 @@
             "type": "string"
           },
           {
-            "name": "MediaService",
-            "description": "Media Service properties needed for name availability.",
+            "name": "CheckNameAvailabilityInput",
+            "description": "Properties needed to check the availability of a name.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MediaService"
+              "$ref": "#/definitions/CheckNameAvailabilityInput"
             }
           }
         ]
@@ -495,6 +495,45 @@
         },
         "message": {
           "description": "Error message",
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilityInput": {
+      "description": "The request body for CheckNameAvailability API.",
+      "properties": {
+        "name": {
+          "description": "Specifies the type of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Specifies the type of the resource.",
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilityOutput": {
+      "description": "The request body for CheckNameAvailability API.",
+      "properties": {
+        "nameAvaialble": {
+          "description": "Specifiies if the name is available.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "Specifiies the reason if the name is not available",
+          "type": "string",
+          "enum": [
+            "None",
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "EntityNameUnavailabilityReason",
+            "modelAsString": false
+          }  
+        },
+        "message": {
+          "description": "Specifiies the detailed reason if the name is not available",
           "type": "string"
         }
       }
