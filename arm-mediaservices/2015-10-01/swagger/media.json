@@ -34,6 +34,43 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Media/CheckNameAvailability": {
+      "post": {
+        "summary": "Check whether the Media Service resource name is available. The name must be globally unique.",
+        "operationId": "MediaServices_CheckNameAvailabilty",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityOutput"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "CheckNameAvailabilityInput",
+            "description": "Properties needed to check the availability of a name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityInput"
+            }
+          }
+        ]
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices": {
       "get": {
         "summary": "List all of the Media Services in a resource group.",
@@ -70,48 +107,6 @@
         "x-ms-pageable": {
             "nextLinkName": null
         }
-      },
-      "post": {
-        "summary": "Check whether the Media Service resource name is available. The name must be globally unique.",
-        "operationId": "MediaServices_CheckNameAvailabilty",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityOutput"
-            }
-          },
-          "default": {
-            "description": "Detailed error information.",
-            "schema": {
-              "$ref": "#/definitions/ApiError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "resourceGroupName",
-            "description": "Name of the resource group within the Azure subscription.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "CheckNameAvailabilityInput",
-            "description": "Properties needed to check the availability of a name.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityInput"
-            }
-          }
-        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{mediaServiceName}": {
