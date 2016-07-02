@@ -5296,6 +5296,64 @@
       },
       "description": "Response for ListExpressRouteServiceProvider Api service call"
     },
+    "ApiErrorBase": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Gets or sets the error code."
+        },
+        "target": {
+          "type": "string",
+          "description": "Gets or sets the target of the particular error."
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets or sets the error message."
+        }
+      },
+      "description": "Api error base."
+    },
+    "InnerError": {
+      "properties": {
+        "exceptiontype": {
+          "type": "string",
+          "description": "Gets or sets the exception type."
+        },
+        "errordetail": {
+          "type": "string",
+          "description": "Gets or sets the internal error message or exception dump."
+        }
+      },
+      "description": "Inner error details."
+    },
+    "ApiError": {
+      "properties": {
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiErrorBase"
+          },
+          "description": "Gets or sets the Api error details"
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError",
+          "description": "Gets or sets the Api inner error"
+        },
+        "code": {
+          "type": "string",
+          "description": "Gets or sets the error code."
+        },
+        "target": {
+          "type": "string",
+          "description": "Gets or sets the target of the particular error."
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets or sets the error message."
+        }
+      },
+      "description": "Api error."
+    },
     "FrontendIPConfigurationPropertiesFormat": {
       "properties": {
         "inboundNatRules": {
