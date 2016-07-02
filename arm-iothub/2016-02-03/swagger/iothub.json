@@ -1,0 +1,1936 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2016-02-03",
+    "title": "iotHubClient",
+    "description": "API for using the IoT Hub Features"
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}": {
+      "get": {
+        "tags": ["GET"],
+        "summary": "Get an IotHub",
+        "description": "Get an IotHub",
+        "operationId": "IotHubResource_Get",
+        "consumes": [],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "name": "resourceName",
+          "in": "path",
+          "description": "Name of the resource.",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/subscriptionId"
+        }, {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IotHubDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["PUT"],
+        "summary": "Create or update an IotHub",
+        "description": "Create or update an IotHub",
+        "operationId": "IotHubResource_CreateOrUpdate",
+        "consumes": ["application/json", "text/json"],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "$ref": "#/parameters/subscriptionId",
+          "description": "The subscription identifier."
+        }, {
+          "name": "resourceGroupName",
+          "in": "path",
+          "description": "Name of the resource group.",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "resourceName",
+          "in": "path",
+          "description": "Name of the resource.",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "iotHubDescription",
+          "in": "body",
+          "description": "The iot hub description.",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/IotHubDescription"
+          }
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/IotHubDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["DELETE"],
+        "summary": "Delete an IotHub",
+        "description": "Delete an IotHub",
+        "operationId": "IotHubResource_Delete",
+        "consumes": [],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "name": "resourceName",
+          "in": "path",
+          "description": "Name of the resource.",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/subscriptionId"
+        }, {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/IotHubDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/eventHubEndpoints/{eventHubEndpointName}/ConsumerGroups/{name}": {
+      "delete": {
+        "tags": ["DELETE"],
+        "summary": "Delete EventHub Consumer Group for an IotHub",
+        "description": "Delete EventHub Consumer Group for an IotHub",
+        "operationId": "IotHubResource_DeleteEventHubConsumerGroup",
+        "consumes": [],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "name": "resourceName",
+          "in": "path",
+          "description": "Name of the resource.",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "eventHubEndpointName",
+          "in": "path",
+          "description": "Name of the event hub endpoint.",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "name",
+          "in": "path",
+          "description": "The name of the consumer group.",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/subscriptionId"
+        }, {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/providers/Microsoft.Devices/operations": {
+      "get": {
+        "tags": ["GET"],
+        "summary": "Get all supported Resource Provider Operations",
+        "description": "Get all supported Resource Provider Operations",
+        "operationId": "IotHubResource_ListResourceProviderOperations",
+        "consumes": [],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderOperationInfoListResult"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Devices/IotHubs": {
+      "get": {
+        "tags": ["GET"],
+        "summary": "Get all IotHubs in a subscription",
+        "description": "Get all IotHubs in a subscription",
+        "operationId": "IotHubResource_ListBySubscription",
+        "consumes": [],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "$ref": "#/parameters/subscriptionId",
+          "description": "The subscription identifier."
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IotHubDescriptionListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs": {
+      "get": {
+        "tags": ["GET"],
+        "summary": "Get all IotHubs in a Resourcegroup",
+        "description": "Get all IotHubs in a Resource group",
+        "operationId": "IotHubResource_ListByResourceGroup",
+        "consumes": [],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "$ref": "#/parameters/subscriptionId",
+          "description": "The subscription identifier."
+        }, {
+          "name": "resourceGroupName",
+          "in": "path",
+          "description": "Name of the resource group.",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IotHubDescriptionListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/operationresults/{operationId}": {
+      "get": {
+        "tags": ["GET"],
+        "summary": "Get the result of a long running operation like create or update iothub",
+        "description": "Get the result of a long running operation like create or update iothub",
+        "operationId": "IotHubResource_GetOperationResult",
+        "consumes": [],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "name": "operationId",
+          "in": "path",
+          "description": "The operation identifier.",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/subscriptionId"
+        }, {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "resourceName",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "asyncinfo",
+          "in": "query",
+          "description": "asyncinfo flag",
+          "required": true,
+          "type": "string",
+          "default": "true"
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AsyncOperationResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/IotHubStats": {
+      "get": {
+        "tags": ["GET"],
+        "summary": "Get IotHub Stats",
+        "description": "Get IotHub Stats",
+        "operationId": "IotHubResource_GetStats",
+        "consumes": [],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "name": "resourceName",
+          "in": "path",
+          "description": "Name of the resource.",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/subscriptionId"
+        }, {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RegistryStatistics"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/skus": {
+      "get": {
+        "tags": ["GET"],
+        "summary": "Get Valid Skus",
+        "description": "Get Valid Skus",
+        "operationId": "IotHubResource_GetValidSkus",
+        "consumes": [],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "name": "resourceName",
+          "in": "path",
+          "description": "Name of the resource.",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/subscriptionId"
+        }, {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IotHubSkuDescriptionListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/eventHubEndpoints/{eventHubEndpointName}/ConsumerGroups": {
+      "get": {
+        "tags": ["GET"],
+        "summary": "Get EventHub Consumer Groups for an IotHub",
+        "description": "Get EventHub Consumer Groups for an IotHub",
+        "operationId": "IotHubResource_ListEventHubConsumerGroups",
+        "consumes": [],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "name": "resourceName",
+          "in": "path",
+          "description": "Name of the resource.",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "eventHubEndpointName",
+          "in": "path",
+          "description": "Name of the event hub endpoint.",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/subscriptionId"
+        }, {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StringListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/eventHubEndpoints/{eventHubEndpointName}/ConsumerGroups/{groupName}": {
+      "get": {
+        "tags": ["GET"],
+        "summary": "Get EventHub Consumer Group for an IotHub",
+        "description": "Get EventHub Consumer Group for an IotHub",
+        "operationId": "IotHubResource_GetEventHubConsumerGroup",
+        "consumes": [],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "name": "resourceName",
+          "in": "path",
+          "description": "Name of the resource.",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "eventHubEndpointName",
+          "in": "path",
+          "description": "Name of the event hub endpoint.",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "groupName",
+          "in": "path",
+          "description": "Name of the consumer group.",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/subscriptionId"
+        }, {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EventHubConsumerGroupInfo"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["PUT"],
+        "summary": "Add an EventHub Consumer Group to an IotHub",
+        "description": "Add an EventHub Consumer Group to an IotHub",
+        "operationId": "IotHubResource_CreateEventHubConsumerGroup",
+        "consumes": [],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "name": "resourceName",
+          "in": "path",
+          "description": "Name of the resource.",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "eventHubEndpointName",
+          "in": "path",
+          "description": "Name of the event hub endpoint.",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "groupName",
+          "in": "path",
+          "description": "Name of the consumer group.",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/subscriptionId"
+        }, {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EventHubConsumerGroupInfo"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/jobs": {
+      "get": {
+        "tags": ["GET"],
+        "summary": "Get all the jobs in an IotHub",
+        "description": "Get all the jobs in an IotHub",
+        "operationId": "IotHubResource_ListJobs",
+        "consumes": [],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "name": "resourceName",
+          "in": "path",
+          "description": "Name of the resource.",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/subscriptionId"
+        }, {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobResponseListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/jobs/{jobId}": {
+      "get": {
+        "tags": ["GET"],
+        "summary": "Get a job in an IotHub",
+        "description": "Get a job in an IotHub",
+        "operationId": "IotHubResource_GetJob",
+        "consumes": [],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "name": "resourceName",
+          "in": "path",
+          "description": "Name of the resource.",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "jobId",
+          "in": "path",
+          "description": "The job identifier.",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/subscriptionId"
+        }, {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobResponse"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/quotaMetrics": {
+      "get": {
+        "tags": ["GET"],
+        "summary": "Get quota metrics for an IotHub",
+        "description": "Get quota metrics for an IotHub",
+        "operationId": "IotHubResource_GetQuotaMetrics",
+        "consumes": [],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "name": "resourceName",
+          "in": "path",
+          "description": "Name of the resource.",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/subscriptionId"
+        }, {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IotHubQuotaMetricInfoListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Devices/checkNameAvailability": {
+      "post": {
+        "tags": ["POST"],
+        "summary": "Check if an IotHub name is available",
+        "description": "Check if an IotHub name is available",
+        "operationId": "IotHubResource_CheckNameAvailability",
+        "consumes": ["application/json", "text/json"],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "$ref": "#/parameters/subscriptionId",
+          "description": "The subscription identifier."
+        }, {
+          "name": "operationInputs",
+          "in": "body",
+          "description": "The operation inputs. Set only the name parameter in the operationInputs structure to the desired iothub name",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/OperationInputs"
+          }
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IotHubNameAvailabilityInfo"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/listkeys": {
+      "post": {
+        "tags": ["POST"],
+        "summary": "Get all Shared Access Policies for an IotHub",
+        "description": "Get all Shared Access Policies for an IotHub",
+        "operationId": "IotHubResource_ListKeys",
+        "consumes": [],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "name": "resourceName",
+          "in": "path",
+          "description": "Name of the resource.",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/subscriptionId"
+        }, {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessSignatureAuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/IotHubKeys/{keyName}/listkeys": {
+      "post": {
+        "tags": ["POST"],
+        "summary": "Get the Key given a specific KeyName for an IotHub",
+        "description": "Get the Key given a specific KeyName for an IotHub",
+        "operationId": "IotHubResource_GetKeysForKeyName",
+        "consumes": [],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "name": "resourceName",
+          "in": "path",
+          "description": "Name of the resource.",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "keyName",
+          "in": "path",
+          "description": "Name of the key.",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/subscriptionId"
+        }, {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessSignatureAuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/exportDevices": {
+      "post": {
+        "tags": ["POST"],
+        "summary": "Export all the Devices in an IotHub",
+        "description": "Export all the Devices in an IotHub",
+        "operationId": "IotHubResource_ExportDevices",
+        "consumes": ["application/json", "text/json"],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "name": "resourceName",
+          "in": "path",
+          "description": "Name of the resource.",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "exportDevicesRequest",
+          "in": "body",
+          "description": "The export devices request.",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ExportDevicesRequest"
+          }
+        }, {
+          "$ref": "#/parameters/subscriptionId"
+        }, {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobResponse"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/importDevices": {
+      "post": {
+        "tags": ["POST"],
+        "summary": "Import all the Devices in an IotHub",
+        "description": "Import all the Devices in an IotHub",
+        "operationId": "IotHubResource_ImportDevices",
+        "consumes": ["application/json", "text/json"],
+        "produces": ["application/json", "text/json"],
+        "parameters": [{
+          "name": "resourceName",
+          "in": "path",
+          "description": "Name of the resource.",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "importDevicesRequest",
+          "in": "body",
+          "description": "The import devices request.",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ImportDevicesRequest"
+          }
+        }, {
+          "$ref": "#/parameters/subscriptionId"
+        }, {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "$ref": "#/parameters/api-version"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobResponse"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "Object": {
+      "type": "object",
+      "properties": {}
+    },
+    "SharedAccessSignatureAuthorizationRule": {
+      "description": "Contains properties that describe the keys to access the IotHub artifacts.",
+      "type": "object",
+      "properties": {
+        "keyName": {
+          "description": "Gets or sets the name of the key.",
+          "type": "string"
+        },
+        "primaryKey": {
+          "description": "Gets or sets the primary key.",
+          "type": "string"
+        },
+        "secondaryKey": {
+          "description": "Gets or sets the secondary key.",
+          "type": "string"
+        },
+        "rights": {
+          "description": "Gets or sets the access rights.",
+          "enum": ["RegistryRead", "RegistryWrite", "ServiceConnect", "DeviceConnect"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AccessRights",
+            "modelAsString": "True"
+          }
+        }
+      }
+    },
+    "IotHubProperties": {
+      "description": "Contains user facing view of Iot Hub properties",
+      "type": "object",
+      "properties": {
+        "authorizationPolicies": {
+          "description": "Gets or sets the authorization rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedAccessSignatureAuthorizationRule"
+          }
+        },
+        "hostName": {
+          "description": "Gets the name of the host.",
+          "type": "string"
+        },
+        "eventHubEndpoints": {
+          "description": "Gets the event hub endpoints.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/EventHubProperties"
+          }
+        },
+        "storageEndpoints": {
+          "description": "List of storage end points where files can be uploaded. Currently only one storage account can be configured.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StorageEndpointProperties"
+          }
+        },
+        "messagingEndpoints": {
+          "description": "List of messaging end points configured.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/MessagingEndpointProperties"
+          }
+        },
+        "enableFileUploadNotifications": {
+          "description": "File upload notification is optional at iot hub level. When enabled upload notifications will be available.",
+          "type": "boolean"
+        },
+        "cloudToDevice": {
+          "$ref": "#/definitions/CloudToDeviceProperties",
+          "description": "Gets the cloud to device properties."
+        },
+        "comments": {
+          "description": "Gets or sets the comments.",
+          "type": "string"
+        },
+        "operationsMonitoringProperties": {
+          "$ref": "#/definitions/OperationsMonitoringProperties",
+          "description": "Gets or sets the operations monitoring properties."
+        },
+        "features": {
+          "description": "Gets or sets the Capabilities/Features that need to be enabled for the Hub.",
+          "enum": ["None", "DeviceManagement"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Capabilities",
+            "modelAsString": "True"
+          }
+        }
+      }
+    },
+    "IotHubSkuInfo": {
+      "description": "Class IotHubSkuInfo. Contains the Sku related information for the hub.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name of the Sku.",
+          "enum": ["F1", "S1", "S2"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IotHubSku",
+            "modelAsString": "True"
+          }
+        },
+        "tier": {
+          "description": "Gets the tier.",
+          "enum": ["Free", "Standard"],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "IotHubSkuTier",
+            "modelAsString": "True"
+          }
+        },
+        "capacity": {
+          "format": "int64",
+          "description": "The number of units being provisioned.",
+          "type": "integer"
+        }
+      }
+    },
+    "EventHubProperties": {
+      "description": "Contains the user facing view of the properties of the provisioned event hub used by the Iot Hub",
+      "type": "object",
+      "properties": {
+        "retentionTimeInDays": {
+          "format": "int64",
+          "description": "Gets or sets the retention time in days.",
+          "type": "integer"
+        },
+        "partitionCount": {
+          "format": "int32",
+          "description": "Gets or sets the partition count.",
+          "type": "integer"
+        },
+        "partitionIds": {
+          "description": "Gets or sets the partition ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "path": {
+          "description": "Gets or sets the path.",
+          "type": "string"
+        },
+        "endpoint": {
+          "description": "Gets or sets the endpoint.",
+          "type": "string"
+        },
+        "internalAuthorizationPolicies": {
+          "description": "Gets or sets the internal authorization rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedAccessAuthorizationRule"
+          }
+        },
+        "authorizationPolicies": {
+          "description": "Gets or sets the authorization rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedAccessAuthorizationRule"
+          }
+        }
+      }
+    },
+    "StorageEndpointProperties": {
+      "description": "Contains the user facing view of the properties of the Storage Endpoint provided by the customer for file upload",
+      "type": "object",
+      "properties": {
+        "sasTtlAsIso8601": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "connectionString": {
+          "description": "Account key credentials for storage account selected by customer for uploading files",
+          "type": "string"
+        },
+        "containerName": {
+          "description": "Root container name where all files will be uploaded",
+          "type": "string"
+        }
+      }
+    },
+    "MessagingEndpointProperties": {
+      "description": "Contains the user facing view of the properties of the Messaging Endpoints used by this IoT Hub",
+      "type": "object",
+      "properties": {
+        "lockDurationAsIso8601": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "ttlAsIso8601": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "maxDeliveryCount": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "CloudToDeviceProperties": {
+      "description": "Contains user facing view of Iot Hub Cloud-To-Device messaging properties",
+      "type": "object",
+      "properties": {
+        "maxDeliveryCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "defaultTtlAsIso8601": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "feedback": {
+          "$ref": "#/definitions/FeedbackProperties",
+          "description": "Gets the feedback properties."
+        }
+      }
+    },
+    "OperationsMonitoringProperties": {
+      "description": "Contains the user facing view of the Operation Monitoring properties",
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "object",
+          "additionalProperties": {
+            "enum": ["None", "Error", "Information"],
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SharedAccessAuthorizationRule": {
+      "type": "object",
+      "properties": {
+        "KeyName": {
+          "type": "string"
+        },
+        "PrimaryKey": {
+          "type": "string"
+        },
+        "IssuerName": {
+          "type": "string"
+        },
+        "SecondaryKey": {
+          "type": "string"
+        },
+        "ClaimType": {
+          "type": "string"
+        },
+        "ClaimValue": {
+          "type": "string"
+        },
+        "Rights": {
+          "type": "array",
+          "items": {
+            "enum": ["Manage", "Send", "Listen", "ManageNotificationHub"],
+            "type": "string"
+          }
+        },
+        "CreatedTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "ModifiedTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Revision": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "FeedbackProperties": {
+      "description": "Contains user facing view of Iot Hub Feedback Queue properties",
+      "type": "object",
+      "properties": {
+        "lockDurationAsIso8601": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "ttlAsIso8601": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "maxDeliveryCount": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "IotHubDescription": {
+      "description": "Contains user facing view of the Description of the IotHub",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the Iot Hub",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource. It should include the resource provider namespace *and* the type of the entity. Microsoft.Devices/IotHubs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The location of the resource. This would be one amongst the supported Azure Geo Regions registered by the RP: West US | East US | North Central US | South Central US | West Europe | North Europe | East Asia | Southeast Asia | East US 2 | etc.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "A list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource, and each tag must have a key no greater than 512 characters (and value no greater than 256 characters).",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "subscriptionid": {
+          "description": "The subscriptionId.",
+          "type": "string"
+        },
+        "resourcegroup": {
+          "description": "The resource group name uniquely identifies the resource group within the user subscriptionId. The resource group name must be no longer than 80 characters long, and must be alphanumeric characters (Char.IsLetterOrDigit()) and ‘-‘, ‘_’, ‘(‘, ‘)’ and‘.’. Note that the name cannot end with ‘.’",
+          "type": "string"
+        },
+        "etag": {
+          "description": "The Etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal ETag convention.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/IotHubProperties",
+          "description": "Property bag contains other name/value pairs that can be used for telemetry and logging."
+        },
+        "sku": {
+          "$ref": "#/definitions/IotHubSkuInfo",
+          "description": "The sku. Sku Name - [F1 | S1 | S2 | ...] : Tier - [\"Free\" for F1 | \"Standard\" for S1, S2, ...] : Provisioned Units - Refer to the detailed product documentation for exact range of values"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SharedAccessSignatureAuthorizationRuleListResult": {
+      "description": "Contains the user view of a List Result with a next link",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedAccessSignatureAuthorizationRule"
+          }
+        },
+        "nextLink": {
+          "description": "Gets the next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceProviderOperationInfo": {
+      "description": "Contains properties that describe a ResourceProvider Operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/ResourceProviderOperationDisplayInfo",
+          "description": "Gets or sets the display."
+        },
+        "origin": {
+          "description": "Gets or sets the origin.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ResourceProviderOperationProperties",
+          "description": "Gets or sets the properties."
+        }
+      }
+    },
+    "ResourceProviderOperationDisplayInfo": {
+      "description": "Contains properties related to the RP Operation Display Info.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Gets the provider.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "Gets the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "Gets or sets the operation.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Gets or sets the description.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceProviderOperationProperties": {
+      "description": "Contains properties describing the Resource provider Operations.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Gets or sets the service specification."
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "Contains properties related to a service specification.",
+      "type": "object",
+      "properties": {
+        "metricSpecifications": {
+          "description": "Gets or sets the metric specifications.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          }
+        },
+        "logSpecifications": {
+          "description": "Gets or sets the log specifications.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Contains properties related to a metric specification.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Gets or sets the display name.",
+          "type": "string"
+        },
+        "displayDescription": {
+          "description": "Gets or sets the display description.",
+          "type": "string"
+        },
+        "unit": {
+          "description": "Gets or sets the unit.",
+          "enum": ["Bytes", "BytesPerSecond", "Count", "CountPerSecond", "Percent", "Seconds"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MetricUnit",
+            "modelAsString": "True"
+          }
+        },
+        "aggregationType": {
+          "description": "Gets or sets the type of the aggregation.",
+          "enum": ["Average", "Last", "Maximum", "Minimum", "None", "Total"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MetricAggregationType",
+            "modelAsString": "True"
+          }
+        },
+        "dimensions": {
+          "description": "Gets or sets the metric dimensions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          }
+        },
+        "availabilities": {
+          "description": "Gets or sets the metric availabilities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAvailability"
+          }
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Contains properties related to a log specification.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Gets or sets the display name.",
+          "type": "string"
+        },
+        "blobDuration": {
+          "description": "Gets or sets the duration of the BLOB.",
+          "type": "string"
+        }
+      }
+    },
+    "MetricDimension": {
+      "description": "Contains properties related to a Metric Dimension.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Gets or sets the display name.",
+          "type": "string"
+        }
+      }
+    },
+    "MetricAvailability": {
+      "description": "Contains properties related to a Metric Availability.",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "description": "Gets or sets the time grain.",
+          "type": "string"
+        },
+        "blobDuration": {
+          "description": "Gets or sets the duration of the BLOB.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "Contains properties related to the details of an error.",
+      "type": "object",
+      "properties": {
+        "Code": {
+          "description": "Gets or sets the code.",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ErrorCode",
+            "modelAsString": "True"
+          }
+        },
+        "HttpStatusCode": {
+          "description": "Gets the status code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "Message": {
+          "description": "Gets or sets the message.",
+          "type": "string"
+        },
+        "Details": {
+          "description": "Gets or sets the details.",
+          "type": "string"
+        }
+      }
+    },
+    "IotHubQuotaMetricInfoListResult": {
+      "description": "Contains the user view of a List Result with a next link",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IotHubQuotaMetricInfo"
+          }
+        },
+        "nextLink": {
+          "description": "Gets the next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AsyncOperationResult": {
+      "description": "Contains properties related to the status of a long running operation.",
+      "type": "object",
+      "properties": {
+        "Status": {
+          "description": "Gets or sets the status.",
+          "type": "string"
+        },
+        "Error": {
+          "$ref": "#/definitions/ErrorMesssage",
+          "description": "Gets or sets the error."
+        }
+      }
+    },
+    "ErrorMesssage": {
+      "description": "Contains properties relates to an error message.",
+      "type": "object",
+      "properties": {
+        "Code": {
+          "description": "Gets or sets the code.",
+          "type": "string"
+        },
+        "Message": {
+          "description": "Gets or sets the message.",
+          "type": "string"
+        }
+      }
+    },
+    "RegistryStatistics": {
+      "description": "Contains the properties related to the registry statistics of an IotHub.",
+      "type": "object",
+      "properties": {
+        "totalDeviceCount": {
+          "format": "int64",
+          "description": "Gets or sets the total device count.",
+          "type": "integer"
+        },
+        "enabledDeviceCount": {
+          "format": "int64",
+          "description": "Gets or sets the enabled device count.",
+          "type": "integer"
+        },
+        "disabledDeviceCount": {
+          "format": "int64",
+          "description": "Gets or sets the disabled device count.",
+          "type": "integer"
+        }
+      }
+    },
+    "JobResponseListResult": {
+      "description": "Contains the user view of a List Result with a next link",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobResponse"
+          }
+        },
+        "nextLink": {
+          "description": "Gets the next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IotHubSkuDescription": {
+      "description": "Contains properties related to the Iot Hub Sku.",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "Gets the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/IotHubSkuInfo",
+          "description": "Gets or sets the sku."
+        },
+        "capacity": {
+          "$ref": "#/definitions/IotHubCapacity",
+          "description": "Gets or sets the capacity."
+        }
+      }
+    },
+    "IotHubCapacity": {
+      "description": "Contains the properties related to the IotHub capacity information.",
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "format": "int64",
+          "description": "Gets or sets the minimum number of units.",
+          "type": "integer"
+        },
+        "maximum": {
+          "format": "int64",
+          "description": "Gets or sets the maximum number of units.",
+          "type": "integer"
+        },
+        "default": {
+          "format": "int64",
+          "description": "Gets or sets the default number of units.",
+          "type": "integer"
+        },
+        "scaleType": {
+          "description": "Gets or sets the type of the scale.",
+          "enum": ["Automatic", "Manual", "None"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IotHubScaleType",
+            "modelAsString": "True"
+          }
+        }
+      }
+    },
+    "StringListResult": {
+      "description": "Contains the user view of a List Result with a next link",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextLink": {
+          "description": "Gets the next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EventHubConsumerGroupInfo": {
+      "description": "Contains user facing properties indicating the EventHubConsumerGroupInfo.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Gets or sets the tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "description": "Gets or sets the identifier.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string"
+        }
+      }
+    },
+    "IotHubSkuDescriptionListResult": {
+      "description": "Contains the user view of a List Result with a next link",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IotHubSkuDescription"
+          }
+        },
+        "nextLink": {
+          "description": "Gets the next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "JobResponse": {
+      "description": "Contains user facing properties describing a Job Response",
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "description": "Service Generated. The job identifier.",
+          "type": "string"
+        },
+        "startTimeUtc": {
+          "format": "date-time",
+          "description": "Service generated. Start time of the Job.",
+          "type": "string"
+        },
+        "endTimeUtc": {
+          "format": "date-time",
+          "description": "Service generated. Represents the time the job stopped processing.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of job to execute.",
+          "enum": ["unknown", "export", "import", "backup", "readDeviceProperties", "writeDeviceProperties", "updateDeviceConfiguration", "rebootDevice", "factoryResetDevice", "firmwareUpdate"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": "True"
+          }
+        },
+        "status": {
+          "description": "Service generated. Status of the Job.",
+          "enum": ["unknown", "enqueued", "running", "completed", "failed", "cancelled"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": "True"
+          }
+        },
+        "failureReason": {
+          "description": "Service generated. If status == failure, this represents a string containing the reason.",
+          "type": "string"
+        },
+        "statusMessage": {
+          "description": "Status message for the job",
+          "type": "string"
+        },
+        "deviceId": {
+          "description": "The deviceId related to this response.",
+          "type": "string"
+        },
+        "parentJobId": {
+          "description": "The jobId of the parent job, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "IotHubDescriptionListResult": {
+      "description": "Contains the user view of a List Result with a next link",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IotHubDescription"
+          }
+        },
+        "nextLink": {
+          "description": "Gets the next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IotHubQuotaMetricInfo": {
+      "description": "Contains properties related to quota metrics for an Iot Hub.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "Gets or sets the name of the quota metric.",
+          "type": "string"
+        },
+        "CurrentValue": {
+          "format": "int64",
+          "description": "Gets or sets the current value for the quota metric.",
+          "type": "integer"
+        },
+        "MaxValue": {
+          "format": "int64",
+          "description": "Gets or sets the maximum value of the quota metric.",
+          "type": "integer"
+        }
+      }
+    },
+    "OperationInputs": {
+      "description": "Class OperationInputs.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "Gets or sets the name of the iot hub.",
+          "type": "string"
+        },
+        "ResourceType": {
+          "description": "Gets or sets the type of the resource.",
+          "type": "string"
+        },
+        "Key": {
+          "description": "Gets or sets the key.",
+          "type": "string"
+        },
+        "TokenLifeTimeInMinutes": {
+          "format": "int32",
+          "description": "Gets or sets the token life time in minutes.",
+          "type": "integer"
+        },
+        "ConnectionString": {
+          "description": "Gets or sets the connection string.",
+          "type": "string"
+        },
+        "IotHubDescription": {
+          "$ref": "#/definitions/IotHubDescription",
+          "description": "Gets or sets the iot hub description."
+        }
+      }
+    },
+    "IotHubNameAvailabilityInfo": {
+      "description": "Contains the user view of properties indicating whether a given iothub name is available",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "Gets or sets a value indicating whether the provided name is available.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "Gets or sets the reason for unavailability.",
+          "enum": ["Invalid", "AlreadyExists"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IotHubNameUnavailabilityReason",
+            "modelAsString": "True"
+          }
+        },
+        "message": {
+          "description": "Gets or sets the message.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceProviderOperationInfoListResult": {
+      "description": "Contains the user view of a List Result with a next link",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperationInfo"
+          }
+        },
+        "nextLink": {
+          "description": "Gets the next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ExportDevicesRequest": {
+      "description": "Used to provide parameters when requesting an export of all devices in the hub.",
+      "type": "object",
+      "properties": {
+        "ExportBlobContainerUri": {
+          "description": "Gets or sets the export BLOB container URI.",
+          "type": "string"
+        },
+        "ExcludeKeys": {
+          "description": "Gets or sets a value indicating whether keys should be excluded during export.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ImportDevicesRequest": {
+      "description": "Used to provide parameters when requesting an import of all devices in the hub.",
+      "type": "object",
+      "properties": {
+        "InputBlobContainerUri": {
+          "description": "Gets or sets the input BLOB container URI.",
+          "type": "string"
+        },
+        "OutputBlobContainerUri": {
+          "description": "Gets or sets the output BLOB container URI.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier.",
+      "required": true,
+      "type": "string"
+    },
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Version of the Api.",
+      "required": true,
+      "type": "string",
+      "default": "2016-02-03"
+    }
+  },
+  "security": []
+}
