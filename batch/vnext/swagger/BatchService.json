@@ -10121,6 +10121,84 @@
       "required": ["name"],
       "title": "An environment variable to be set on a task process."
     },
+     "ExitConditions": {
+      "properties": {
+        "exitCodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExitCodeMapping"
+          },
+          "description": "A list of individual task exit codes and how the Batch service should respond to them."
+        },
+        "exitCodeRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExitCodeRangeMapping"
+          },
+          "description": "A list of task exit codes ranges and how the Batch service should respond to them."
+        },
+        "schedulingError": {
+          "$ref": "#/definitions/ExitOptions",
+          "description": "How the Batch service should respond if the task fails with a scheduling error."
+        },
+        "default": {
+          "$ref": "#/definitions/ExitOptions",
+          "description": "How the Batch service should respond if the task fails with an exit condition not covered by any of the other properties – that is, any nonzero exit code not listed in the exitCodes or exitCodeRanges collection, or a scheduling error if the schedulingError property is not present."
+        }
+      },
+      "description": "Specifies how the Batch service should respond when the task completes."
+    },
+    "ExitCodeMapping": {
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A process exit code."
+        },
+        "exitOptions": {
+          "$ref": "#/definitions/ExitOptions",
+          "description": "How the Batch service should respond if the task exits with this exit code."
+        }
+      },
+      "description": "How the Batch service should respond if a task exits with a particular exit code.",
+      "required": ["code","exitOptions"]
+    },
+    "ExitCodeRangeMapping": {
+      "properties": {
+        "start": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The first exit code in the range."
+        },
+        "end": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The last exit code in the range."
+        },
+        "exitOptions": {
+          "$ref": "#/definitions/ExitOptions",
+          "description": "An exitOptions specifying how the Batch service should respond if the task exits with an exit code in the range start to end."
+        }
+      },
+      "description": "A range of exit codes and how the Batch service should respond to exit codes within that range.",
+      "required": ["start", "end","exitOptions"]
+
+    },
+    "ExitOptions": {
+      "properties": {
+        "jobAction": {
+          "type": "string",
+          "description": "An action to take on the job containing the task, if the task completes with the given exit condition and the job’s onTaskFailed property is 'performexitoptionsjobaction'.",
+          "enum": [
+            "none",
+            "disable",
+            "terminate",
+          ],
+          "x-ms-enum": { "name": "JobAction", "modelAsString": false }
+        }        
+      },
+      "description": "How the Batch service should respond to a particular exit condition."
+    },
     "TaskConstraints": {
       "properties": {
         "maxWallClockTime": {
@@ -10995,6 +11073,24 @@
           "$ref": "#/definitions/PoolInformation",
           "title": "The pool on which the Batch service runs the job's tasks."
         },
+        "onAllTasksComplete": {
+          "type": "string",
+          "description": "The action the Batch service should take when all tasks in the job are in the completed state.",
+          "enum": [
+            "noAction",
+            "terminateJob",
+          ],
+          "x-ms-enum": { "name": "OnAllTasksComplete", "modelAsString": false }
+        },
+        "onTaskFailure": {
+          "type": "string",
+          "description": "The action the Batch service should take when any task in the job fails. A task is considered to have failed if it completes with a non-zero exit code and has exhausted its retry count, or if it had a scheduling error.",
+          "enum": [
+            "noAction",
+            "performExitOptionsJobAction",
+          ],
+          "x-ms-enum": { "name": "OnTaskFailure", "modelAsString": false }
+        },
         "metadata": {
           "type": "array",
           "items": {
@@ -11056,6 +11152,24 @@
         "poolInfo": {
           "$ref": "#/definitions/PoolInformation",
           "title": "The pool on which the Batch service runs the job's tasks."
+        },
+        "onAllTasksComplete": {
+          "type": "string",
+          "description": "The action the Batch service should take when all tasks in the job are in the completed state.",
+          "enum": [
+            "noAction",
+            "terminateJob",
+          ],
+          "x-ms-enum": { "name": "OnAllTasksComplete", "modelAsString": false }
+        },
+        "onTaskFailure": {
+          "type": "string",
+          "description": "The action the Batch service should take when any task in the job fails. A task is considered to have failed if it completes with a non-zero exit code and has exhausted its retry count, or if it had a scheduling error.",
+          "enum": [
+            "noAction",
+            "performExitOptionsJobAction",
+          ],
+          "x-ms-enum": { "name": "OnTaskFailure", "modelAsString": false }
         },
         "metadata": {
           "type": "array",
@@ -11932,6 +12046,10 @@
           "format": "date-time",
           "title": "The creation time of the task."
         },
+        "exitConditions": {
+          "$ref": "#/definitions/ExitConditions",
+          "description": "How the Batch service should respond when the task completes."
+        },
         "state": {
           "type": "string",
           "title": "The current state of the task.",
@@ -12036,6 +12154,10 @@
           "type": "string",
           "title": "The command line of the task. For multi-instance tasks, the command line is executed on the primary subtask after all the subtasks have finished executing the coordianation command line.",
           "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux."
+        },
+        "exitConditions": {
+          "$ref": "#/definitions/ExitConditions",
+          "description": "How the Batch service should respond when the task completes."
         },
         "resourceFiles": {
           "type": "array",
@@ -12586,6 +12708,15 @@
           "title": "The priority of the job.",
           "description": "Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. If omitted, the priority of the job is left unchanged."
         },
+        "onAllTasksComplete": {
+          "type": "string",
+          "description": "Specifies an action the Batch service should take when all tasks in the job are in the completed state.",
+          "enum": [
+            "noAction",
+            "terminateJob",
+          ],
+          "x-ms-enum": { "name": "OnAllTasksComplete", "modelAsString": false }
+        },
         "constraints": {
           "$ref": "#/definitions/JobConstraints",
           "title": "The execution constraints for the job.",
@@ -12632,7 +12763,16 @@
           },
           "title": "A list of name-value pairs associated with the job as metadata.",
           "description": "If omitted, it takes the default value of an empty list; in effect, any existing metadata is deleted."
-        }
+        },
+        "onAllTasksComplete": {
+          "type": "string",
+          "description": "Specifies an action the Batch service should take when all tasks in the job are in the completed state.",
+          "enum": [
+            "noAction",
+            "terminateJob",
+          ],
+          "x-ms-enum": { "name": "OnAllTasksComplete", "modelAsString": false }
+        },
       },
       "required": ["poolInfo"],
       "title": "Parameters for a CloudJobOperations.Update request."
