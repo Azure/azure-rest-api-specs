@@ -1,0 +1,2247 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AutoRest.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Rest.Generator.AutoRest">
+            <summary>
+            Entry point for invoking code generation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.AutoRest.Version">
+            <summary>
+            Returns the version of this instance of AutoRest.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.AutoRest.Generate(Microsoft.Rest.Generator.Settings)">
+            <summary>
+            Generates client using provided settings.
+            </summary>
+            <param name="settings">Code generator settings.</param>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.BaseSettings.FileSystem">
+            <summary>
+            Gets or sets the IFileSystem used by code generation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.BaseSettings.CustomSettings">
+            <summary>
+            Custom provider specific settings.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.BaseSettings.Input">
+            <summary>
+            Gets or sets the path to the input specification file.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.BaseSettings.BaseInput">
+            <summary>
+            Gets or sets the path to the base specification file.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.BaseSettings.Modeler">
+            <summary>
+            Gets or sets the modeler to use for processing the input specification.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.BaseSettings.ShowHelp">
+            <summary>
+            If set to true, print out help message.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.BaseSettings.ValidationLevel">
+            <summary>
+            If set to true, print out help message.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.BaseSettings.Create(System.String[])">
+            <summary>
+            Factory method to generate CodeGenerationSettings from command line arguments.
+            Matches dictionary keys to the settings properties.
+            </summary>
+            <param name="arguments">Command line arguments</param>
+            <returns>CodeGenerationSettings</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.BaseSettings.Create(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Factory method to generate Settings from a dictionary. Matches dictionary
+            keys to the settings properties.
+            </summary>
+            <param name="settings">Dictionary of settings</param>
+            <returns>Settings</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.BaseSettings.PopulateSettings(System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Sets object properties from the dictionary matching keys to property names or aliases.
+            </summary>
+            <param name="entityToPopulate">Object to populate from dictionary.</param>
+            <param name="settings">Dictionary of settings.Settings that are populated get removed from the dictionary.</param>
+            <returns>Dictionary of settings that were not matched.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.CollectionFormat">
+            <summary>
+            Defines collection formats.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.ClientModel.CollectionFormat.None">
+            <summary>
+            Default unspecified CollectionFormat.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.ClientModel.CollectionFormat.Csv">
+            <summary>
+            Comma separated values foo,bar
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.ClientModel.CollectionFormat.Ssv">
+            <summary>
+            Space separated values foo bar.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.ClientModel.CollectionFormat.Tsv">
+            <summary>
+            Tab separated values foo\tbar.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.ClientModel.CollectionFormat.Pipes">
+            <summary>
+            Pipe separated values foo|bar.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.ClientModel.CollectionFormat.Multi">
+            <summary>
+            Corresponds to multiple parameter instances instead of multiple values for
+            a single instance foo=bar&amp;foo=baz. This is valid only for parameters in
+            "query" or "formData".
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.EnumValue">
+            <summary>
+            Defines enumeration values.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.EnumValue.Name">
+            <summary>
+            Gets or sets the enum value name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.EnumValue.SerializedName">
+            <summary>
+            Gets or sets the enum value serialized name.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.EnumValue.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to this object based on Name.
+            </summary>
+            <param name="obj">The object to compare with this object.</param>
+            <returns>true if the specified object is equal to this object; otherwise, false.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.EnumValue.GetHashCode">
+            <summary>
+            Serves as a hash function based on name.
+            </summary>
+            <returns>
+            A hash code for the current object.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.EnumType">
+            <summary>
+            Defines a model type for enumerations.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.EnumType.#ctor">
+            <summary>
+            Creates a new instance of EnumType object.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.EnumType.Values">
+            <summary>
+            Gets or sets the enum values. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.EnumType.SerializedName">
+            <summary>
+            Gets or sets the model type name on the wire.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.EnumType.Name">
+            <summary>
+            Gets or sets the model type name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.EnumType.ModelAsString">
+            <summary>
+            Indicates whether the set of enum values will be generated as string constants.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.EnumType.ToString">
+            <summary>
+            Returns a string representation of the PrimaryType object.
+            </summary>
+            <returns>
+            A string representation of the PrimaryType object.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.EnumType.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to this object based on Name and Values.
+            </summary>
+            <param name="obj">The object to compare with this object.</param>
+            <returns>true if the specified object is equal to this object; otherwise, false.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.EnumType.GetHashCode">
+            <summary>
+            Serves as a hash function based on value count.
+            </summary>
+            <returns>
+            A hash code for the current object.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.KnownPrimaryType">
+            <summary>
+            Known primary model types.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.Response">
+            <summary>
+            Defines a structure for operation response.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.Response.#ctor(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.ClientModel.IType)">
+            <summary>
+            Initializes a new instance of Response.
+            </summary>
+            <param name="body">Body type.</param>
+            <param name="headers">Headers type.</param>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Response.Body">
+            <summary>
+            Gets or sets the body type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Response.Headers">
+            <summary>
+            Gets or sets the headers type.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.Response.Equals(System.Object)">
+            <summary>
+            Overrides default Equals method comparing Body and Header properties.
+            </summary>
+            <param name="obj">Another Response object.</param>
+            <returns>True is objects are the same.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.Response.GetHashCode">
+            <summary>
+            Overrides default GetHashCode
+            </summary>
+            <returns>Hash code.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.ParameterTransformation">
+            <summary>
+            Defines a parameter transformation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.ParameterTransformation.OutputParameter">
+            <summary>
+            Gets or sets the output parameter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.ParameterTransformation.ParameterMappings">
+            <summary>
+            Gets the list of Parameter Mappings
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.ParameterTransformation.ToString">
+            <summary>
+            Returns a string representation of the ParameterMapping object.
+            </summary>
+            <returns>
+            A string representation of the ParameterMapping object.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.ParameterTransformation.Clone">
+            <summary>
+            Performs a deep clone of a parameter transformation.
+            </summary>
+            <returns>A deep clone of current object.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.ParameterMapping">
+            <summary>
+            Defines a parameter mapping.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.ParameterMapping.InputParameter">
+            <summary>
+            Gets or sets the input parameter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.ParameterMapping.InputParameterProperty">
+            <summary>
+            Gets or sets the input parameter dot separated property path.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.ParameterMapping.OutputParameterProperty">
+            <summary>
+            Gets or sets the output parameter dot separated property path.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.ParameterMapping.ToString">
+            <summary>
+            Returns a string representation of the ParameterMapping object.
+            </summary>
+            <returns>
+            A string representation of the ParameterMapping object.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.ParameterMapping.Clone">
+            <summary>
+            Performs a deep clone of a parameter mapping.
+            </summary>
+            <returns>A deep clone of current object.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.PrimaryType">
+            <summary>
+            Defines known model type.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.PrimaryType.#ctor(Microsoft.Rest.Generator.ClientModel.KnownPrimaryType)">
+            <summary>
+            Initializes a new instance of PrimaryType class from a known type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.PrimaryType.Type">
+            <summary>
+            Gets or sets the underlying known type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.PrimaryType.SerializedName">
+            <summary>
+            Gets or sets the model type name on the wire.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.PrimaryType.Name">
+            <summary>
+            Gets or sets the model type name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.PrimaryType.Format">
+            <summary>
+            Gets or sets the model type format.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.PrimaryType.ToString">
+            <summary>
+            Returns a string representation of the PrimaryType object.
+            </summary>
+            <returns>
+            A string representation of the PrimaryType object.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.ParameterLocation">
+            <summary>
+            Defines available parameter locations
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.Constraint">
+            <summary>
+            Defines constraints to be used with Property and Parameter types.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.ServiceClient">
+            <summary>
+            Defines the client model for every service.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.ServiceClient.#ctor">
+            <summary>
+            Creates a new instance of Client class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.ServiceClient.Name">
+            <summary>
+            Gets or sets the non-canonical name of the client model.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.ServiceClient.Namespace">
+            <summary>
+            Gets or sets the base namespace of the client model if applicable.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.ServiceClient.ApiVersion">
+            <summary>
+            Gets or sets the version of the API described by this service.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.ServiceClient.BaseUrl">
+            <summary>
+            Gets or sets the base url of the service.  This can be a templated url.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.ServiceClient.Properties">
+            <summary>
+            Gets or sets the client parameters.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.ServiceClient.ModelTypes">
+            <summary>
+            Gets the model types.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.ServiceClient.EnumTypes">
+            <summary>
+            Gets the enum types.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.ServiceClient.ErrorTypes">
+            <summary>
+            Gets the list of error type for customize exceptions.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.ServiceClient.HeaderTypes">
+            <summary>
+            Gets the list of header types.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.ServiceClient.Methods">
+            <summary>
+            Gets the methods.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.ServiceClient.MethodGroups">
+            <summary>
+            Gets the method groups.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.ServiceClient.Documentation">
+            <summary>
+            Gets or sets the documentation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.ServiceClient.Extensions">
+            <summary>
+            Gets vendor extensions dictionary.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.ServiceClient.ToString">
+            <summary>
+            Returns a string representation of the ServiceClient object.
+            </summary>
+            <returns>
+            A string representation of the ServiceClient object.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.DictionaryType">
+            <summary>
+            Defines a key-value dictionary type with string key data type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.DictionaryType.ValueType">
+            <summary>
+            Gets or sets the value type of the dictionary type.
+            </summary>        
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.DictionaryType.NameFormat">
+            <summary>
+            Gets or sets the dictionary type name format. Defaults to C# dictionary
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.DictionaryType.SupportsAdditionalProperties">
+            <summary>
+            Indicates that the class should deserialize properties with no matching class member into this collection.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.DictionaryType.Name">
+            <summary>
+            Gets the type name
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.DictionaryType.ToString">
+            <summary>
+            Returns a string representation of the DictionaryType object.
+            </summary>
+            <returns>
+            A string representation of the DictionaryType object.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.DictionaryType.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to this object based on the ValueType.
+            </summary>
+            <param name="obj">The object to compare with this object.</param>
+            <returns>true if the specified object is equal to this object; otherwise, false.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.DictionaryType.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.SequenceType">
+            <summary>
+            Defines a collection data type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.SequenceType.ElementType">
+            <summary>
+            Gets or sets the element type of the collection.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.SequenceType.NameFormat">
+            <summary>
+            Gets or sets the sequence type name format. Defaults to C# list
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.SequenceType.Name">
+            <summary>
+            Gets the type name
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.SequenceType.ToString">
+            <summary>
+            Returns a string representation of the SequenceType object.
+            </summary>
+            <returns>
+            A string representation of the SequenceType object.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.SequenceType.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to this object based on the ElementType.
+            </summary>
+            <param name="obj">The object to compare with this object.</param>
+            <returns>true if the specified object is equal to this object; otherwise, false.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.SequenceType.GetHashCode">
+            <summary>
+            Serves as a hash function based on ElementType.
+            </summary>
+            <returns>
+            A hash code for the current object.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.HttpMethod">
+            <summary>
+            Defines available HTTP methods
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.Method">
+            <summary>
+            Defines a method for the client model.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.Method.#ctor">
+            <summary>
+            Initializes a new instance of the Method class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.Name">
+            <summary>
+            Gets or sets the method name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.SerializedName">
+            <summary>
+            Gets or sets the name defined in the spec (OperationId).
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.Group">
+            <summary>
+            Gets or sets the group name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.Url">
+            <summary>
+            Gets or sets the HTTP url.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.IsAbsoluteUrl">
+            <summary>
+            Indicates whether the HTTP url is absolute.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.HttpMethod">
+            <summary>
+            Gets or sets the HTTPMethod.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.Parameters">
+            <summary>
+            Gets or sets the method parameters.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.LogicalParameters">
+            <summary>
+            Gets or sets the logical parameter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.Body">
+            <summary>
+            Gets or sets the body parameter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.InputParameterTransformation">
+            <summary>
+            Gets the list of input Parameter transformations
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.RequestHeaders">
+            <summary>
+            Gets or sets request headers.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.RequestSerializationFormat">
+            <summary>
+            Gets or sets the request format.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.ResponseSerializationFormat">
+            <summary>
+            Gets or sets the response format.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.Responses">
+            <summary>
+            Gets or sets response bodies by HttpStatusCode.
+            and headers.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.DefaultResponse">
+            <summary>
+            Gets or sets the default response.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.ReturnType">
+            <summary>
+            Gets or sets the method return type. The tuple contains a body
+            and headers.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.Summary">
+            <summary>
+            Gets or sets the summary.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.RequestContentType">
+            <summary>
+            Gets or sets the content type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.Extensions">
+            <summary>
+            Gets vendor extensions dictionary.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Method.Scope">
+            <summary>
+            Gets 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.Method.ToString">
+            <summary>
+            Returns a string representation of the Method object.
+            </summary>
+            <returns>
+            A string representation of the Method object.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.Method.Clone">
+            <summary>
+            Performs a deep clone of a method.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.IType">
+            <summary>
+            Defines an interface for client model types.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.IType.Name">
+            <summary>
+            Gets or sets the IType name.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.CompositeType">
+            <summary>
+            Defines model data type.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.CompositeType.#ctor">
+            <summary>
+            Initializes a new instance of CompositeType class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.CompositeType.SerializedName">
+            <summary>
+            Gets or sets the model type name used in on the wire.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.CompositeType.Properties">
+            <summary>
+            Gets or sets the list of CompositeType properties.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.CompositeType.ComposedProperties">
+            <summary>
+            Gets the union of Parent and current type properties
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.CompositeType.BaseModelType">
+            <summary>
+            Gets or sets the base model type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.CompositeType.PolymorphicDiscriminator">
+            <summary>
+            Gets or sets the discriminator property for polymorphic types.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.CompositeType.Documentation">
+            <summary>
+            Gets or sets the CompositeType documentation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.CompositeType.ContainsConstantProperties">
+            <summary>
+            Returns true if any of the properties is a Constant or is 
+            a CompositeType which ContainsConstantProperties set to true.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.CompositeType.Extensions">
+            <summary>
+            Gets a dictionary of x-vendor extensions defined for the CompositeType.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.CompositeType.ComposedExtensions">
+            <summary>
+            Gets the union of Parent and current type properties
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.CompositeType.Name">
+            <summary>
+            Gets or sets the CompositeType name.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.CompositeType.ToString">
+            <summary>
+            Returns a string representation of the CompositeType object.
+            </summary>
+            <returns>
+            A string representation of the CompositeType object.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.CompositeType.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to this object based on the Name.
+            </summary>
+            <param name="obj">The object to compare with this object.</param>
+            <returns>true if the specified object is equal to this object; otherwise, false.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.CompositeType.GetHashCode">
+            <summary>
+            Serves as a hash function based on Name.
+            </summary>
+            <returns>
+            A hash code for the current object.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.Parameter">
+            <summary>
+            Defines an HTTP method parameter.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.Parameter.#ctor">
+            <summary>
+            Creates a new instance of Parameter class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Parameter.Name">
+            <summary>
+            Gets or sets the parameter name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Parameter.SerializedName">
+            <summary>
+            Gets or sets the parameter name on the wire.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Parameter.DefaultValue">
+            <summary>
+            Gets or sets the default value.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Parameter.Type">
+            <summary>
+            Gets or sets the model type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Parameter.IsRequired">
+            <summary>
+            Indicates whether the parameter is required.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Parameter.IsConstant">
+            <summary>
+            Indicates whether the parameter value is constant. If true, default value can not be null.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Parameter.IsClientProperty">
+            <summary>
+            Indicates whether the parameter should be set via a property on the client instance 
+            instead of being passed to each API method that needs it.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Parameter.ClientProperty">
+            <summary>
+            Reference to the global Property that provides value for the parameter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Parameter.Constraints">
+            <summary>
+            Gets or sets the constraints.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Parameter.CollectionFormat">
+            <summary>
+            Gets or sets collection format for array parameters.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Parameter.Location">
+            <summary>
+            Gets or sets parameter location.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Parameter.Documentation">
+            <summary>
+            Gets or sets the documentation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Parameter.Extensions">
+            <summary>
+            Gets vendor extensions dictionary.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.Parameter.ToString">
+            <summary>
+            Returns a string representation of the Parameter object.
+            </summary>
+            <returns>
+            A string representation of the Parameter object.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.Parameter.Clone">
+            <summary>
+            Performs a deep clone of a parameter.
+            </summary>
+            <returns>A deep clone of current object.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.Property">
+            <summary>
+            Defines model properties.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.Property.#ctor">
+            <summary>
+            Creates a new instance of Property class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Property.Name">
+            <summary>
+            Gets or sets the property name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Property.SerializedName">
+            <summary>
+            Gets or sets the property name on the wire.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Property.DefaultValue">
+            <summary>
+            Gets or sets the default value.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Property.Type">
+            <summary>
+            Gets or sets the model type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Property.IsReadOnly">
+            <summary>
+            Indicates whether this property is read only.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Property.IsRequired">
+            <summary>
+            Indicates whether the property is required.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Property.IsConstant">
+            <summary>
+            Indicates whether the parameter value is constant. If true, default value can not be null.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Property.Constraints">
+            <summary>
+            Gets or sets the constraints.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Property.Documentation">
+            <summary>
+            Gets or sets the documentation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Property.Extensions">
+            <summary>
+            Gets vendor extensions dictionary.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ClientModel.Property.CollectionFormat">
+            <summary>
+            Gets or sets collection format for array parameters.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.Property.ToString">
+            <summary>
+            Returns a string representation of the Property object.
+            </summary>
+            <returns>
+            A string representation of the Property object.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ClientModel.Property.Clone">
+            <summary>
+            Performs a deep clone of a property.
+            </summary>
+            <returns>A deep clone of current object.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ClientModel.SerializationFormat">
+            <summary>
+            Contains the values of serialization formats supported for HTTP.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Logging.LogEntrySeverityConsoleColor">
+            <summary>
+            severity of the log message.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Logging.CodeGenerationException">
+            <summary>
+            Code generation aggregate exception.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Logging.CodeGenerationException.#ctor">
+            <summary>
+            Instantiates a new instance of the CodeGenerationException class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Logging.CodeGenerationException.#ctor(System.String)">
+            <summary>
+            Instantiates a new instance of the CodeGenerationException class.
+            </summary>
+            <param name="message">The exception message.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Logging.CodeGenerationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Instantiates a new instance of the CodeGenerationException class.
+            </summary>
+            <param name="message">The exception message.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Logging.CodeGenerationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Instantiates a new instance of the CodeGenerationException class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Logging.CodeGenerationException.#ctor(System.String,System.Exception[])">
+            <summary>
+            Instantiates a new instance of the CodeGenerationException class.
+            </summary>
+            <param name="message">The exception message.</param>
+            <param name="innerExceptions">An array of inner exceptions.</param>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Logging.ErrorManager">
+            <summary>
+            Error manager for code generator.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Logging.ErrorManager.CreateError(System.Exception,System.String,System.Object[])">
+            <summary>
+            Logs error and returns CodeGenerationException.
+            </summary>
+            <param name="exception">Exception to log and return.</param>
+            <param name="message">Error message. May include formatting.</param>
+            <param name="args">Optional args if the message includes formatting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Logging.ErrorManager.FormatMessageString(System.String,System.Object[])">
+            <summary>
+            Applies string formatting on message if args are not empty.
+            </summary>
+            <param name="message">Message</param>
+            <param name="args">Arguments</param>
+            <returns>Formatted string</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Logging.ErrorManager.CreateError(System.String,System.Object[])">
+            <summary>
+            Logs error and returns CodeGenerationException.
+            </summary>
+            <param name="message">Error message. May include formatting.</param>
+            <param name="parameters">Optional args if the message includes formatting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Logging.ErrorManager.ThrowErrors">
+            <summary>
+            Throws CodeGenerationException if any errors have been logged.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Logging.LogEntry">
+            <summary>
+            Represents a log entry in tracing output.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Logging.LogEntry.#ctor">
+            <summary>
+            Instantiates a new instance of the LogEntry class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Logging.LogEntry.#ctor(Microsoft.Rest.Generator.Logging.LogEntrySeverity,System.String)">
+            <summary>
+            Instantiates a new instance of the LogEntry class
+            </summary>
+            <param name="severity">The LogEntrySeverity of the LogEntry instance.</param>
+            <param name="message">The message of the LogEntry instance.</param>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Logging.LogEntry.Severity">
+            <summary>
+            Gets or sets the LogEntrySeverity.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Logging.LogEntry.Message">
+            <summary>
+            Gets or sets the Message.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Logging.LogEntry.Exception">
+            <summary>
+            Gets or sets the Exception to log.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Logging.LogEntrySeverity">
+            <summary>
+            severity of the log message.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Logging.Logger">
+            <summary>
+            Aggregator for error, warning, and trace messages.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Logging.Logger.#cctor">
+            <summary>
+            Instantiates a new instance of the LogEntry class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Logging.Logger.Entries">
+            <summary>
+            Gets a list of LogEntries.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Logging.Logger.LogInfo(System.String,System.Object[])">
+            <summary>
+            Logs a message of severity LogEntrySeverity.Info.
+            </summary>
+            <param name="message">Message to log. May include formatting.</param>
+            <param name="args">Optional arguments to use if message includes formatting.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Logging.Logger.WriteOutput(System.String,System.Object[])">
+            <summary>
+            An abstraction for the core to output text (ie not err,warning, or info)
+            </summary>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Logging.Logger.LogWarning(System.String,System.Object[])">
+            <summary>
+            Logs a message of severity LogEntrySeverity.Warning.
+            </summary>
+            <param name="text">Message to log. May include formatting.</param>
+            <param name="args">Optional arguments to use if the message includes formatting.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Logging.Logger.LogError(System.Exception,System.String,System.Object[])">
+            <summary>
+            Logs a message of severity LogEntrySeverity.Error.
+            </summary>
+            <param name="exception">Exception that corresponds to an error</param>
+            <param name="message">Message to log. May include formatting.</param>
+            <param name="args">Optional arguments to use if the message includes formatting.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Logging.Logger.LogError(System.String,System.Object[])">
+            <summary>
+            Logs a message of severity LogEntrySeverity.Error.
+            </summary>
+            <param name="message">Message to log. May include formatting.</param>
+            <param name="args">Optional arguments to use if the message includes formatting.</param>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CodeNamer.ReservedWords">
+            <summary>
+            Gets collection of reserved words.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.CamelCase(System.String)">
+            <summary>
+            Formats segments of a string split by underscores or hyphens into "Camel" case strings.
+            </summary>
+            <param name="name"></param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.PascalCase(System.String)">
+            <summary>
+            Formats segments of a string split by underscores or hyphens into "Pascal" case.
+            </summary>
+            <param name="name"></param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.QuoteValue(System.String,System.String,System.String)">
+            <summary>
+            Wraps value in quotes and escapes quotes inside.
+            </summary>
+            <param name="value">String to quote</param>
+            <param name="quoteChar">Quote character</param>
+            <param name="escapeChar">Escape character</param>
+            <exception cref="T:System.ArgumentNullException">Throw when either quoteChar or escapeChar are null.</exception>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.NormalizeClientModel(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Recursively normalizes names in the client model
+            </summary>
+            <param name="client"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.NormalizeClientProperties(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Normalizes the client properties names of a client model
+            </summary>
+            <param name="client">A client model</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.NormalizeMethod(Microsoft.Rest.Generator.ClientModel.Method)">
+            <summary>
+            Normalizes names in the method
+            </summary>
+            <param name="method"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.NormalizeParameters(Microsoft.Rest.Generator.ClientModel.Method)">
+            <summary>
+            Normalizes the parameter names of a method
+            </summary>
+            <param name="method">A method model</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.QuoteParameter(Microsoft.Rest.Generator.ClientModel.IParameter)">
+            <summary>
+            Quotes default value of the parameter.
+            </summary>
+            <param name="parameter"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.EscapeDefaultValue(System.String,Microsoft.Rest.Generator.ClientModel.IType)">
+            <summary>
+            Returns a quoted string for the given language if applicable.
+            </summary>
+            <param name="defaultValue">Value to quote.</param>
+            <param name="type">Data type.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.GetEnumMemberName(System.String)">
+            <summary>
+            Formats a string for naming members of an enum using Pascal case by default.
+            </summary>
+            <param name="name"></param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.GetFieldName(System.String)">
+            <summary>
+            Formats a string for naming fields using a prefix '_' and VariableName Camel case by default.
+            </summary>
+            <param name="name"></param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.GetInterfaceName(System.String)">
+            <summary>
+            Formats a string for naming interfaces using a prefix 'I' and Pascal case by default.
+            </summary>
+            <param name="name"></param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.GetMethodName(System.String)">
+            <summary>
+            Formats a string for naming a method using Pascal case by default.
+            </summary>
+            <param name="name"></param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.GetNamespaceName(System.String)">
+            <summary>
+            Formats a string for identifying a namespace using Pascal case by default.
+            </summary>
+            <param name="name"></param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.GetParameterName(System.String)">
+            <summary>
+            Formats a string for naming method parameters using GetVariableName Camel case by default.
+            </summary>
+            <param name="name"></param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.GetPropertyName(System.String)">
+            <summary>
+            Formats a string for naming properties using Pascal case by default.
+            </summary>
+            <param name="name"></param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.GetTypeName(System.String)">
+            <summary>
+            Formats a string for naming a Type or Object using Pascal case by default.
+            </summary>
+            <param name="name"></param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.GetMethodGroupName(System.String)">
+            <summary>
+            Formats a string for naming a Method Group using Pascal case by default.
+            </summary>
+            <param name="name"></param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.GetVariableName(System.String)">
+            <summary>
+            Formats a string for naming a local variable using Camel case by default.
+            </summary>
+            <param name="name"></param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.NormalizeTypeReference(Microsoft.Rest.Generator.ClientModel.Response)">
+            <summary>
+            Returns language specific type reference name.
+            </summary>
+            <param name="typePair"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.NormalizeTypeReference(Microsoft.Rest.Generator.ClientModel.IType)">
+            <summary>
+            Returns language specific type reference name.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.NormalizeTypeDeclaration(Microsoft.Rest.Generator.ClientModel.IType)">
+            <summary>
+            Returns language specific type declaration name.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.FormatCase(System.String,System.Boolean)">
+            <summary>
+            Formats a string as upper or lower case. Two-letter inputs that are all upper case are both lowered.
+            Example: ID = > id,  Ex => ex
+            </summary>
+            <param name="name"></param>
+            <param name="toLower"></param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.RemoveInvalidCharacters(System.String)">
+            <summary>
+            Removes invalid characters from the name. Everything but alpha-numeral, underscore,
+            and dash.
+            </summary>
+            <param name="name">String to parse.</param>
+            <returns>Name with invalid characters removed.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.RemoveInvalidCharactersNamespace(System.String)">
+            <summary>
+            Removes invalid characters from the namespace. Everything but alpha-numeral, underscore,
+            period, and dash.
+            </summary>
+            <param name="name">String to parse.</param>
+            <returns>Namespace with invalid characters removed.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.GetValidName(System.String,System.Char[])">
+            <summary>
+            Gets valid name for the identifier.
+            </summary>
+            <param name="name">String to parse.</param>
+            <param name="allowedCharacters">Allowed characters.</param>
+            <returns>Name with invalid characters removed.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.RemoveInvalidCharacters(System.String,System.Char[])">
+            <summary>
+            Removes invalid characters from the name.
+            </summary>
+            <param name="name">String to parse.</param>
+            <param name="allowerCharacters">Allowed characters.</param>
+            <returns>Name with invalid characters removed.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.GetEscapedReservedName(System.String,System.String)">
+            <summary>
+            If the provided name is a reserved word in a programming language then the method converts the
+            name by appending the provided appendValue
+            </summary>
+            <param name="name">Name.</param>
+            <param name="appendValue">String to append.</param>
+            <returns>The transformed reserved name</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.ResolveNameCollisions(Microsoft.Rest.Generator.ClientModel.ServiceClient,System.String,System.String)">
+            <summary>
+            Resolves name collisions in the client model by iterating over namespaces (if provided,
+            model names, client name, and client method groups.
+            </summary>
+            <param name="serviceClient">Service client to process.</param>
+            <param name="clientNamespace">Client namespace or null.</param>
+            <param name="modelNamespace">Client model namespace or null.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeNamer.ResolveMethodGroupNameCollision(Microsoft.Rest.Generator.ClientModel.ServiceClient,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Resolves name collisions in the client model for method groups (operations).
+            </summary>
+            <param name="serviceClient"></param>
+            <param name="exclusionDictionary"></param>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Settings.Namespace">
+            <summary>
+            Gets or sets a base namespace for generated code.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Settings.OutputDirectory">
+            <summary>
+            Gets or sets the output directory for generated files. If not specified, uses 'Generated' as the default.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Settings.CodeGenerator">
+            <summary>
+            Gets or sets the code generation language.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Settings.ClientName">
+            <summary>
+            Gets or sets a name of the generated client type. If not specified, will use
+            a value from the specification. For Swagger specifications,
+            the value of the 'Title' field is used.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Settings.PayloadFlatteningThreshold">
+            <summary>
+            Gets or sets the maximum number of properties in the request body.
+            If the number of properties in the request body is less than or
+            equal to this value, then these properties will be represented as method arguments.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Settings.Header">
+            <summary>
+            Gets or sets a comment header to include in each generated file.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Settings.AddCredentials">
+            <summary>
+            If set to true, generate client with a ServiceClientCredentials property and optional constructor parameter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Settings.OutputFileName">
+            <summary>
+            If set, will cause generated code to be output to a single file. Not supported by all code generators.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Settings.Verbose">
+            <summary>
+            If set to true, print out all messages.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Settings.PackageName">
+            <summary>
+            PackageName of then generated code package. Should be then names wanted for the package in then package manager.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Settings.PackageVersion">
+            <summary>
+            PackageName of then generated code package. Should be then names wanted for the package in then package manager.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Settings.Create(System.String[])">
+            <summary>
+            Factory method to generate CodeGenerationSettings from command line arguments.
+            Matches dictionary keys to the settings properties.
+            </summary>
+            <param name="arguments">Command line arguments</param>
+            <returns>CodeGenerationSettings</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Settings.Create(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Factory method to generate Settings from a dictionary. Matches dictionary
+            keys to the settings properties.
+            </summary>
+            <param name="settings">Dictionary of settings</param>
+            <returns>Settings</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Settings.PopulateSettings(System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Sets object properties from the dictionary matching keys to property names or aliases.
+            </summary>
+            <param name="entityToPopulate">Object to populate from dictionary.</param>
+            <param name="settings">Dictionary of settings.Settings that are populated get removed from the dictionary.</param>
+            <returns>Dictionary of settings that were not matched.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.SettingsAliasAttribute">
+            <summary>
+            Attribute used for extending parameters with aliases.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.SettingsAliasAttribute.#ctor">
+            <summary>
+            Initializes a new instance of SettingsAliasAttribute.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.SettingsAliasAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of SettingsAliasAttribute with an alias.
+            </summary>
+            <param name="alias">The alias for the setting.</param>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Template`1">
+            <summary>
+            Base code generation template.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Template`1.Model">
+            <summary>
+            Gets or sets the template model.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Template`1.EmptyLine">
+            <summary>
+            Adds empty line to the template.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Template`1.Settings">
+            <summary>
+            Gets or sets settings.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Template`1.TextWriter">
+            <summary>
+            Gets or sets the output stream.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Template`1.ExecuteAsync">
+            <summary>
+            Execute an individual request.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Template`1.WriteAttribute(System.String,System.Tuple{System.String,System.Int32},System.Tuple{System.String,System.Int32},System.Tuple{System.Tuple{System.String,System.Int32},System.Tuple{System.Object,System.Int32},System.Boolean})">
+            <summary>
+            Write the attribute string directly to the output
+            </summary>
+            <param name="attribute"></param>
+            <param name="tuple1"></param>
+            <param name="tuple2"></param>
+            <param name="tuple3"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Template`1.WriteLiteral(System.String)">
+            <summary>
+            Write the given value directly to the output
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Template`1.WriteLiteral(System.Object)">
+            <summary>
+            Write the given value directly to the output
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Template`1.Write(System.Object)">
+            <summary>
+            Convert to string and html encode
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Template`1.Write(System.String)">
+            <summary>
+            Html encode and write
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Template`1.WriteTo(System.IO.TextWriter,System.Object)">
+            <summary>
+            Writes the specified <paramref name="value"/> to <paramref name="writer"/>.
+            </summary>
+            <param name="writer">The <see cref="T:System.IO.TextWriter"/> instance to write to.</param>
+            <param name="value">The <see cref="T:System.Object"/> to write.</param>
+            <remarks>
+            For all other types, the encoded result of <see cref="M:System.Object.ToString"/> is written to the 
+            <paramref name="writer"/>.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Template`1.WriteTo(System.IO.TextWriter,System.String)">
+            <summary>
+            Writes the specified <paramref name="value"/> with HTML encoding to <paramref name="writer"/>.
+            </summary>
+            <param name="writer">The <see cref="T:System.IO.TextWriter"/> instance to write to.</param>
+            <param name="value">The <see cref="T:System.String"/> to write.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Template`1.WriteLiteralTo(System.IO.TextWriter,System.Object)">
+            <summary>
+            Writes the specified <paramref name="value"/> without HTML encoding to the <paramref name="writer"/>.
+            </summary>
+            <param name="writer">The <see cref="T:System.IO.TextWriter"/> instance to write to.</param>
+            <param name="value">The <see cref="T:System.Object"/> to write.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Template`1.WriteLiteralTo(System.IO.TextWriter,System.String)">
+            <summary>
+            Writes the specified <paramref name="value"/> without HTML encoding to <see cref="P:Microsoft.Rest.Generator.Template`1.TextWriter"/>.
+            </summary>
+            <param name="writer">The text writer.</param>
+            <param name="value">The <see cref="T:System.String"/> to write.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Template`1.Include``2(``0,``1)">
+            <summary>
+            Embeds sub-template content into a template.
+            </summary>
+            <typeparam name="TU">Template type</typeparam>
+            <typeparam name="TV">Template model type</typeparam>
+            <param name="template">Template</param>
+            <param name="templateModel">Template model</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Template`1.Header(System.String)">
+            <summary>
+            Inserts a wrapped header from settings with specified prefix.
+            </summary>
+            <param name="prefix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Template`1.WrapComment(System.String,System.String)">
+            <summary>
+            Inserts a wrapped comment with specified prefix.
+            </summary>
+            <param name="prefix"></param>
+            <param name="comment"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Template`1.ToString">
+            <summary>
+            Returns a string that represents the current template.
+            </summary>
+            <returns>Returns a string that represents the current template.</returns>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CodeGenerator.UsageInstructions">
+            <summary>
+            Text to inform the user of required package/module/gem/jar.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CodeGenerator.Settings">
+            <summary>
+            Gets the Settings passed when invoking AutoRest.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CodeGenerator.IsSingleFileGenerationSupported">
+            <summary>
+            Gets or sets boolean value indicating if code generation language supports all the code to be generated in a single file.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeGenerator.PopulateSettings(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Populate settings on self and any child objects
+            </summary>
+            <param name="settings">A dictionary of settings</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeGenerator.NormalizeClientModel(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Normalizes service model by updating names and types to be language specific.
+            </summary>
+            <param name="serviceClient"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeGenerator.Generate(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Generates code and outputs it in the file system.
+            </summary>
+            <param name="serviceClient"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeGenerator.Write(Microsoft.Rest.Generator.ITemplate,System.String)">
+            <summary>
+            Writes a template into the specified relative path.
+            </summary>
+            <param name="template"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CodeGenerator.Write(System.String,System.String)">
+            <summary>
+            Writes a template string into the specified relative path.
+            </summary>
+            <param name="template"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Extensibility.AutoRestConfiguration">
+            <summary>
+            In-memory representation of AutoRest.json configuration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Extensibility.AutoRestConfiguration.CodeGenerators">
+            <summary>
+            Gets or sets collections of CodeGenerators.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Extensibility.AutoRestConfiguration.Modelers">
+            <summary>
+            Gets or sets collections of Modelers.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Extensibility.AutoRestProviderConfiguration">
+            <summary>
+            In-memory representation of provider configuration in AutoRest.json file.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Extensibility.AutoRestProviderConfiguration.TypeName">
+            <summary>
+            Gets of sets provider name in 'type, assembly name' format.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Extensibility.AutoRestProviderConfiguration.Settings">
+            <summary>
+            Gets of sets provider specific settings.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Extensibility.ExtensionsLoader.ConfigurationFileName">
+            <summary>
+            The name of the AutoRest configuration file.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Extensibility.ExtensionsLoader.GetCodeGenerator(Microsoft.Rest.Generator.Settings)">
+            <summary>
+            Gets the code generator specified in the provided Settings.
+            </summary>
+            <param name="settings">The code generation settings</param>
+            <returns>Code generator specified in Settings.CodeGenerator</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Extensibility.ExtensionsLoader.GetModeler(Microsoft.Rest.Generator.BaseSettings)">
+            <summary>
+            Gets the modeler specified in the provided Settings.
+            </summary>
+            <param name="settings">The code generation settings</param>
+            <returns>Modeler specified in Settings.Modeler</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.ITemplate">
+            <summary>
+            Defines methods to manipulate templates.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ITemplate.Settings">
+            <summary>
+            Gets or sets settings.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.ITemplate.TextWriter">
+            <summary>
+            Gets or sets the output stream.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.ITemplate.ExecuteAsync">
+            <summary>
+            Execute an individual request.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.AnonymousTypesDiscouraged">
+            <summary>
+              Looks up a localized string similar to For better generated code quality, define schemas instead of using anonymous types..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.AutoRestCore">
+            <summary>
+              Looks up a localized string similar to AutoRest Core {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.BodyMustHaveSchema">
+            <summary>
+              Looks up a localized string similar to Each body parameter must have a schema.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.BodyWithType">
+            <summary>
+              Looks up a localized string similar to A body parameter cannot have a type, format, or any other properties describing its type..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.CodeGenerationError">
+            <summary>
+              Looks up a localized string similar to Errors found during Swagger document validation..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.CodeGenerationFailed">
+            <summary>
+              Looks up a localized string similar to Code generation failed with errors. See inner exceptions for details..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.CodeGenSettingsFileInvalid">
+            <summary>
+              Looks up a localized string similar to Could not load CodeGenSettings file &apos;{0}&apos;. Exception: &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.CommentString">
+            <summary>
+              Looks up a localized string similar to \\\\.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.ConfigurationFileNotFound">
+            <summary>
+              Looks up a localized string similar to AutoRest.json was not found in the current directory.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.ConflictingRef">
+            <summary>
+              Looks up a localized string similar to Members defined alongside $ref will be ignored according to JSON specification. allOf is the recommended way of modeling inheritance..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.DirectoryNotExist">
+            <summary>
+              Looks up a localized string similar to Directory {0} does not exist..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.EmptyClientName">
+            <summary>
+              Looks up a localized string similar to Empty x-ms-client-name property..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.EntityConflictTitleMessage">
+            <summary>
+              Looks up a localized string similar to {0} with name &apos;{1}&apos; was renamed to &apos;{2}&apos; because it conflicts with following entities: {3}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.ErrorGeneratingClientModel">
+            <summary>
+              Looks up a localized string similar to Error generating client model: {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.ErrorLoadingAssembly">
+            <summary>
+              Looks up a localized string similar to Error loading {0} assembly: {1}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.ErrorParsingConfig">
+            <summary>
+              Looks up a localized string similar to Error parsing AutoRest.json file.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.ErrorSavingGeneratedCode">
+            <summary>
+              Looks up a localized string similar to Error saving generated code: {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.ExtensionNotFound">
+            <summary>
+              Looks up a localized string similar to Plugin {0} does not have an assembly name in AutoRest.json.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.GeneratorInitialized">
+            <summary>
+              Looks up a localized string similar to Successfully initialized {0} Code Generator {1}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.HeaderShouldHaveClientName">
+            <summary>
+              Looks up a localized string similar to Each header parameter should have an explicit client name defined for improved code generation output quality..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.InitializingCodeGenerator">
+            <summary>
+              Looks up a localized string similar to Initializing code generator..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.InitializingModeler">
+            <summary>
+              Looks up a localized string similar to Initializing modeler..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.InvalidDefault">
+            <summary>
+              Looks up a localized string similar to The default value is not one of the values enumerated as valid for this element..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.InvalidIdentifierName">
+            <summary>
+              Looks up a localized string similar to Property name {0} cannot be used as an Identifier, as it contains only invalid characters..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.InvalidSchemaParameter">
+            <summary>
+              Looks up a localized string similar to Only body parameters can have a schema defined..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.InvalidTypeFormatCombination">
+            <summary>
+              Looks up a localized string similar to Type {0} and format {1} is not a supported combination.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.LanguageDoesNotSupportSingleFileGeneration">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; code generator does not support code generation to a single file..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.MissingDescription">
+            <summary>
+              Looks up a localized string similar to Consider adding a &apos;description&apos; element, essential for maintaining reference documentation..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.MissingRequiredProperty">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; is supposedly required, but no such property exists..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.ModelerInitialized">
+            <summary>
+              Looks up a localized string similar to Successfully initialized modeler {0} v {1}..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.NamespaceConflictReasonMessage">
+            <summary>
+              Looks up a localized string similar to {0} (already used in {1}).
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.NamingConflictsSuggestion">
+            <summary>
+              Looks up a localized string similar to Please consider changing your swagger specification to avoid naming conflicts..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.NoDefaultResponse">
+            <summary>
+              Looks up a localized string similar to There is no default response defined in the responses section.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.NoDefinitionForPathParameter1">
+            <summary>
+              Looks up a localized string similar to Could not find a definition for the path parameter &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.NoResponses">
+            <summary>
+              Looks up a localized string similar to No response objects defined..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.OnlyJSONInRequests1">
+            <summary>
+              Looks up a localized string similar to Currently, only JSON-based request payloads are supported, so &apos;{0}&apos; won&apos;t work..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.OnlyJSONInResponses1">
+            <summary>
+              Looks up a localized string similar to Currently, only JSON-based response payloads are supported, so &apos;{0}&apos; won&apos;t work..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.OnlyOneUnderscoreAllowedInOperationId">
+            <summary>
+              Looks up a localized string similar to Only 1 underscore is permitted in the operation id..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.OperationIdMissing">
+            <summary>
+              Looks up a localized string similar to OperationId is required for all operations. Please add it for &apos;{0}&apos; operation of &apos;{1}&apos; path..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.ParameterIsNotValid">
+            <summary>
+              Looks up a localized string similar to Parameter &apos;{0}&apos; is not expected..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.ParameterValueIsMissing">
+            <summary>
+              Looks up a localized string similar to Parameter &apos;{0}&apos; is required..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.ParameterValueIsNotValid">
+            <summary>
+              Looks up a localized string similar to Parameter &apos;{0}&apos; value is not valid. Expect &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.TooManyBodyParameters1">
+            <summary>
+              Looks up a localized string similar to Operations can not have more than one &apos;body&apos; parameter. The following were found: &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.TypeShouldBeAssemblyQualified">
+            <summary>
+              Looks up a localized string similar to Type &apos;{0}&apos; name should be assembly qualified. For example &apos;ClassName, AssemblyName&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Properties.Resources.XMSPathBaseNotInPaths">
+            <summary>
+              Looks up a localized string similar to The path &apos;{0}&apos; in x-ms-paths does not overload a normal path in the paths section..
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.SettingsInfoAttribute">
+            <summary>
+            Helper attribute used for documentation generation in AutoRest command line interface.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.SettingsInfoAttribute.#ctor(System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of SettingsInfoAttribute with documentation and required flag.
+            </summary>
+            <param name="documentation">Documentation body.</param>
+            <param name="isRequired">If set indicates that the property is a required command
+            line argument.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.SettingsInfoAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of SettingsInfoAttribute with documentation. 
+            IsRequired defaults to false.
+            </summary>
+            <param name="documentation">Documentation body.</param>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.SettingsInfoAttribute.Documentation">
+            <summary>
+            Documentation text of the settings property.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.SettingsInfoAttribute.IsRequired">
+            <summary>
+            True if property is required, false otherwise.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Utilities.ScopeProvider">
+            <summary>
+            Provides scope for variable names.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Utilities.ScopeProvider._variables">
+            <summary>
+            Placeholder for variable scope - this ensures that variables names are unique within the method
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.ScopeProvider.GetUniqueName(System.String)">
+            <summary>
+            Get a unique variable name in the current scope
+            </summary>
+            <param name="variableName">The variable name</param>
+            <returns>A variable name unique in this method</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Utilities.TemplateConstants">
+            <summary>
+            Defines constants used in the template.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Utilities.TemplateConstants.EmptyLine">
+            <summary>
+            Represents an empty line in the template.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Utilities.CamelCaseContractResolver">
+            <summary>
+            Used by Newtonsoft.Json.JsonSerializer to resolve a 
+            Newtonsoft.Json.Serialization.JsonContract for a given type.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.CamelCaseContractResolver.CreateProperties(System.Type,Newtonsoft.Json.MemberSerialization)">
+            <summary>
+            Creates properties for the given JsonContract.
+            </summary>
+            <param name="type">The type to create properties for.</param>
+            <param name="memberSerialization">The MemberSerialization mode for the type.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Utilities.Extensions">
+            <summary>
+            Provides useful extension methods to simplify common coding tasks.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.Extensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            Maps an action with side effects over a sequence.
+            </summary>
+            <param name='sequence'>The sequence to map over.</param>
+            <param name='action'>The action to map.</param>
+            <typeparam name='T'>Type of elements in the sequence.</typeparam>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.Extensions.Descendants``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Collections.Generic.IEnumerable{``0}})">
+            <summary>
+            Returns a collection of the descendant elements for this collection.
+            </summary>
+            <typeparam name='T'>Type of elements in the sequence.</typeparam>
+            <param name="items">Child collection</param>
+            <param name="childSelector">Child selector</param>
+            <returns>List of all items and descendants of each item</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.Extensions.IsNullOrEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Determines whether a sequence is empty.
+            </summary>
+            <typeparam name='T'>Type of elements in the sequence.</typeparam>
+            <param name='sequence'>The sequence.</param>
+            <returns>True if the sequence is empty, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.Extensions.WordWrap(System.String,System.Int32)">
+            <summary>
+            Word wrap a string of text to a given width.
+            </summary>
+            <param name='text'>The text to word wrap.</param>
+            <param name='width'>Width available to wrap.</param>
+            <returns>Lines of word wrapped text.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.Extensions.LoadFrom``2(``0,``1)">
+            <summary>
+            Performs shallow copy of properties from source into destination.
+            </summary>
+            <typeparam name="TU">Destination type</typeparam>
+            <typeparam name="TV">Source type</typeparam>
+            <param name="destination">Destination object.</param>
+            <param name="source">Source object.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.Extensions.ToCamelCase(System.String)">
+            <summary>
+            Converts the specified string to a camel cased string.
+            </summary>
+            <param name="value">The string to convert.</param>
+            <returns>The camel case string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.Extensions.ToPascalCase(System.String)">
+            <summary>
+            Converts the specified string to a pascal cased string.
+            </summary>
+            <param name="value">The string to convert.</param>
+            <returns>The pascal case string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.Extensions.EscapeXmlComment(System.String)">
+            <summary>
+            Escape reserved characters in xml comments with their escaped representations
+            </summary>
+            <param name="comment">The xml comment to escape</param>
+            <returns>The text appropriately escaped for inclusing in an xml comment</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.Extensions.IsPrimaryType(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.ClientModel.KnownPrimaryType)">
+            <summary>
+            Returns true if the type is a PrimaryType with KnownPrimaryType matching typeToMatch.
+            </summary>
+            <param name="type"></param>
+            <param name="typeToMatch"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.Extensions.IsOrContainsPrimaryType(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.ClientModel.KnownPrimaryType)">
+            <summary>
+            Returns true if the <paramref name="type"/> is a PrimaryType with KnownPrimaryType matching <paramref name="typeToMatch"/>
+            or a DictionaryType with ValueType matching <paramref name="typeToMatch"/> or a SequenceType matching <paramref name="typeToMatch"/>
+            </summary>
+            <param name="type"></param>
+            <param name="typeToMatch"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.Extensions.IsDictionaryContainingType(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.ClientModel.KnownPrimaryType)">
+            <summary>
+            Returns true if the <paramref name="type"/> is a DictionaryType with ValueType matching <paramref name="typeToMatch"/>
+            </summary>
+            <param name="type"></param>
+            <param name="typeToMatch"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.Extensions.IsSequenceContainingType(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.ClientModel.KnownPrimaryType)">
+            <summary>
+            Returns true if the <paramref name="type"/>is a SequenceType matching <paramref name="typeToMatch"/>
+            </summary>
+            <param name="type"></param>
+            <param name="typeToMatch"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Utilities.IndentedStringBuilder">
+            <summary>
+            Custom string builder with indentation support.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.CurrentIndentation">
+            <summary>
+            Gets current indentation.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of IndentedStringBuilder.
+            </summary>
+            <param name="indentation">String to use as an indentation.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.#ctor">
+            <summary>
+            Initializes a new instance of IndentedStringBuilder with Fourspaces as indentation.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.Indent">
+            <summary>
+            Adds a level of indentation.
+            </summary>
+            <returns>Current instance of IndentedStringBuilder.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.Outdent">
+            <summary>
+            Removes a level of indentation.
+            </summary>
+            <returns>Current instance of IndentedStringBuilder.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.Append(System.String)">
+            <summary>
+            Appends text.
+            </summary>
+            <param name="text">Text to append.</param>
+            <returns>Current instance of IndentedStringBuilder.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendFormat(System.String,System.Object[])">
+            <summary>
+            Appends formatted text.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An array of objects to format. </param>
+            <returns>Current instance of IndentedStringBuilder.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine">
+            <summary>
+            Appends a new line.
+            </summary>
+            <returns>Current instance of IndentedStringBuilder.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)">
+            <summary>
+            Appends text and adds a new line.
+            </summary>
+            <param name="text">Text to append.</param>
+            <returns>Current instance of IndentedStringBuilder.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String,System.Object[])">
+            <summary>
+            Appends formatted text and adds a new line.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An array of objects to format. </param>
+            <returns>Current instance of IndentedStringBuilder.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.ToString">
+            <summary>
+            Returns the accumulated string.
+            </summary>
+            <returns>The accumulated string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.IndentMultilineString(System.String,System.String)">
+            <summary>
+            Indents multiline string.
+            </summary>
+            <param name="value"></param>
+            <param name="indentation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Utilities.MemoryFileSystem.WildcardToRegex(System.String)">
+            <summary>
+            Converts unix asterisk based file pattern to regex
+            </summary>
+            <param name="wildcard">Asterisk based pattern</param>
+            <returns>Regeular expression of null is empty</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.CollectionRuleAttribute">
+            <summary>
+            A rule attribute that should be applied to all members of the collection that is annotated
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.RulesExtensions.GetValidatableProperties(System.Object)">
+            <summary>
+            Gets an enumerable of properties for <paramref name="entity"/> that can be validated
+            </summary>
+            <param name="entity">The object to get properties for</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.RulesExtensions.IsValidatableDictionary(System.Object)">
+            <summary>
+            Determines if a dictionary can be validated by running rules
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Rule">
+            <summary>
+            Defines validation logic for an object
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Rule.Exception">
+            <summary>
+            The name of the exception that describes this rule
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Rule.GetValidationMessages(System.Object)">
+            <summary>
+            Returns the validation messages resulting from validating this object
+            </summary>
+            <param name="entity">The object to validate</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Rule.CreateException(Microsoft.Rest.Generator.ValidationExceptionName,System.Object[])">
+            <summary>
+            Creates an exception for the given <paramref name="exceptionName"/>, using the <paramref name="messageValues"/> format parameters
+            </summary>
+            <param name="exceptionName"></param>
+            <param name="messageValues"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.RuleAttribute">
+            <summary>
+            An attribute that describes a rule to apply to the property or class that it decorates
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.RuleAttribute.GetValidationMessages(System.Object)">
+            <summary>
+            Returns a collection of validation messages for <paramref name="entity"/>
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.TypedRule`1">
+            <summary>
+            A rule that validates objects of type <typeparamref name="T"/>
+            </summary>
+            <typeparam name="T">The type of the object to validate</typeparam>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.TypedRule`1.GetValidationMessages(`0)">
+            <summary>
+            Overridable method that lets a child rule return multiple validation messages for the <paramref name="entity"/>
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.TypedRule`1.IsValid(`0,System.Object[]@)">
+            <summary>
+            Overridable method that lets a child rule return objects to be passed to string.Format
+            </summary>
+            <param name="entity"></param>
+            <param name="formatParameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.TypedRule`1.IsValid(`0)">
+            <summary>
+            Overridable method that lets a child rule specify if <paramref name="entity"/> passes validation
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

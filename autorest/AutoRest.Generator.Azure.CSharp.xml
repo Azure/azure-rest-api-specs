@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AutoRest.Generator.Azure.CSharp</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.Rest.Generator.CSharp.Azure.AzureCSharpCodeGenerator.NormalizeClientModel(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Normalizes client model by updating names and types to be language specific.
+            </summary>
+            <param name="serviceClient"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CSharp.Azure.AzureCSharpCodeGenerator.Generate(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Generates C# code for service client.
+            </summary>
+            <param name="serviceClient"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.CSharp.Azure.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.Properties.Resources.InvalidLongRunningOperationForCreateOrUpdate">
+            <summary>
+              Looks up a localized string similar to Long running operations for &apos;{0}&apos; requires a GET operation under the same path and same operation group &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.Properties.Resources.UsageInformation">
+            <summary>
+              Looks up a localized string similar to The {0} nuget package is required to compile the generated code..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.InitializeExceptionWithMessage">
+            <summary>
+            Get the expression for exception initialization with message.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.InitializeException">
+            <summary>
+            Get the expression for exception initialization.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.IsLongRunningOperation">
+            <summary>
+            Returns true if method has x-ms-long-running-operation extension.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.OperationResponseReturnTypeString">
+            <summary>
+            Returns AzureOperationResponse generic type declaration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.ReturnTypeString">
+            <summary>
+            Get the type name for the method's return type
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.TaskExtensionReturnTypeString">
+            <summary>
+            Get the return type for the async extension method
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.OperationExceptionTypeString">
+            <summary>
+            Get the type for operation exception.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.InitializeResponseBody">
+            <summary>
+            Gets the expression for response body initialization 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.SetDefaultHeaders">
+            <summary>
+            Gets the expression for default header setting. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.GetMethodInvocationArgs(Microsoft.Rest.Generator.ClientModel.Method)">
+            <summary>
+            Gets Get method invocation arguments for Long Running Operations.
+            </summary>
+            <param name="getMethod">Get method.</param>
+            <returns>Invocation arguments.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel.BuildUrl(System.String)">
+            <summary>
+            Generate code to build the URL from a url expression and method parameters
+            </summary>
+            <param name="variableName">The variable to store the url in.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.AzureMethodGroupTemplateModel.Usings">
+            <summary>
+            Returns the using statements for the Operations.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.AzureServiceClientTemplateModel.Operations">
+            <summary>
+            Returns the OperationsTemplateModels for the ServiceClient.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.AzureServiceClientTemplateModel.Usings">
+            <summary>
+            Returns the using statements for the ServiceClient.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.AzureModelTemplateModel.Usings">
+            <summary>
+            Returns the using statements for the model.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.AzureParameterTemplateModel.CanBeValidated">
+            <summary>
+            Gets True if parameter can call .Validate method
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.CSharp.Azure.AzureParameterTemplateModel.IsODataFilterExpression">
+            <summary>
+            Gets True if parameter is OData $filter, $top, $orderby, $expand, $skip expression
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CSharp.AzureCSharpCodeNamer.ResolveMethodGroupNameCollision(Microsoft.Rest.Generator.ClientModel.ServiceClient,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Skips name collision resolution for method groups (operations) as they get
+            renamed in template models.
+            </summary>
+            <param name="serviceClient"></param>
+            <param name="exclusionDictionary"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.CSharp.AzureCSharpCodeNamer.NormalizePaginatedMethods(Microsoft.Rest.Generator.ClientModel.ServiceClient,System.Collections.Generic.IDictionary{System.Collections.Generic.KeyValuePair{System.String,System.String},System.String})">
+            <summary>
+            Changes paginated method signatures to return Page type.
+            </summary>
+            <param name="serviceClient"></param>
+            <param name="pageClasses"></param>
+        </member>
+    </members>
+</doc>

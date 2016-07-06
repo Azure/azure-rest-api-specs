@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AutoRest.Generator.AzureResourceSchema</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema">
+            <summary>
+            An object representing a JSON schema. Each property of a JSON schema ($schema, title, and
+            description are metadata, not properties) is also a JSON schema, so the class is recursive.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema.Ref">
+            <summary>
+            A reference to the location in the parent schema where this schema's definition can be
+            found.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema.Items">
+            <summary>
+            The JSONSchema that will be applied to the elements of this schema, assuming this
+            schema is an array schema type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema.Format">
+            <summary>
+            The format of the value that matches this schema. This only applies to string values.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema.Description">
+            <summary>
+            The description metadata that describes this schema.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema.JsonType">
+            <summary>
+            The type metadata of this schema that describes what type matching JSON values must be.
+            For example, this value will be either "object", "string", "array", "integer",
+            "number", or "boolean".
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema.ResourceType">
+            <summary>
+            Get the resource type of this JsonSchema. If this JsonSchema defines an Azure Resource,
+            then this value will be found in definition.properties.type.enum[0]. If this JsonSchema
+            does not define an Azure Resource, then this will return null.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema.AdditionalProperties">
+            <summary>
+            The schema that matches additional properties that have not been specified in the
+            Properties dictionary.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema.Enum">
+            <summary>
+            An enumeration of values that will match this JSON schema. Any value not in this
+            enumeration will not match this schema.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema.Properties">
+            <summary>
+            The schemas that describe the properties of a matching JSON value.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema.Required">
+            <summary>
+            The names of the properties that are required for a matching JSON value.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema.Resources">
+            <summary>
+            The child resources that are allowed for this JsonSchema.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema.AddEnum(System.String,System.String[])">
+            <summary>
+            Add a new value (or values) to this JsonSchema's enum list. This JsonSchema (with the
+            new value(s)) is then returned so that additional changes can be chained together.
+            </summary>
+            <param name="enumValue"></param>
+            <param name="extraEnumValues"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema.AddProperty(System.String,Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema)">
+            <summary>
+            Add a new property to this JsonSchema, and then return this JsonSchema so that
+            additional changes can be chained together.
+            </summary>
+            <param name="propertyName">The name of the property to add.</param>
+            <param name="propertyDefinition">The JsonSchema definition of the property to add.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema.AddProperty(System.String,Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema,System.Boolean)">
+            <summary>
+            Add a new property to this JsonSchema, and then return this JsonSchema so that
+            additional changes can be chained together.
+            </summary>
+            <param name="propertyName">The name of the property to add.</param>
+            <param name="propertyDefinition">The JsonSchema definition of the property to add.</param>
+            <param name="isRequired">Whether this property is required or not.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema.AddRequired(System.String,System.String[])">
+            <summary>
+            Add the provided required property names to this JSON schema's list of required property names.
+            </summary>
+            <param name="requiredPropertyName"></param>
+            <param name="extraRequiredPropertyNames"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema.AddResource(Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema)">
+            <summary>
+            Add a child resource schema to this JsonSchema.
+            </summary>
+            <param name="childResourceSchema">The child resource schema to add to this JsonSchema.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema.Clone">
+            <summary>
+            Create a new JsonSchema that is an exact copy of this one.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.AzureResourceSchema.ResourceSchema">
+            <summary>
+            An object representing an Azure Resource Schema. It is important to note that an Azure
+            resource schema is actually not a valid JSON schema by itself. It is part of the
+            deploymentTemplate.json schema.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.AzureResourceSchema.ResourceSchema.Id">
+            <summary>
+            The id metadata that uniquely identifies this schema. Usually this will be the URL to
+            the permanent location of this schema in schema.management.azure.com/schemas/.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.AzureResourceSchema.ResourceSchema.Schema">
+            <summary>
+            The JSON schema metadata url that points to the schema that can be used to validate
+            this schema.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.AzureResourceSchema.ResourceSchema.Title">
+            <summary>
+            The title metadata for this schema.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.AzureResourceSchema.ResourceSchema.Description">
+            <summary>
+            The description metadata that describes this schema.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.AzureResourceSchema.ResourceSchema.ResourceDefinitions">
+            <summary>
+            The named JSON schemas that define the resources of this resource schema.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.AzureResourceSchema.ResourceSchema.Definitions">
+            <summary>
+            The named reusable JSON schemas that the resource definitions reference. These
+            definitions can also reference each other or themselves.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.AzureResourceSchema.ResourceSchema.GetResourceDefinitionByResourceType(System.String)">
+            <summary>
+            Search this ResourceSchema for a resource definition that has the provided type.
+            </summary>
+            <param name="resourceType">The resource type to look for in this ResourceSchema.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.AzureResourceSchema.ResourceSchema.AddResourceDefinition(System.String,Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema)">
+            <summary>
+            Add the provided resource definition JSON schema to this resourceh schema.
+            </summary>
+            <param name="resourceName">The name of the resource definition.</param>
+            <param name="resourceDefinition">The JSON schema that describes the resource.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.AzureResourceSchema.ResourceSchema.AddDefinition(System.String,Microsoft.Rest.Generator.AzureResourceSchema.JsonSchema)">
+            <summary>
+            Add the provided definition JSON schema to this resourceh schema.
+            </summary>
+            <param name="definitionName">The name of the resource definition.</param>
+            <param name="definition">The JSON schema that describes the resource.</param>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.AzureResourceSchema.ResourceSchemaParser">
+            <summary>
+            The ResourceSchemaParser class is responsible for converting a ServiceClient object into a
+            ResourceSchemaModel.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.AzureResourceSchema.ResourceSchemaParser.Parse(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Parse a ResourceSchemaModel from the provided ServiceClient.
+            </summary>
+            <param name="serviceClient"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.AzureResourceSchema.ResourceSchemaParser.IsCreateResourceMethod(Microsoft.Rest.Generator.ClientModel.Method)">
+            <summary>
+            Determine whether the provided method object represents an Azure REST API that would
+            create an Azure resource.
+            </summary>
+            <param name="method"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.AzureResourceSchema.ResourceSchemaParser.GetResourceTypes(System.String,System.String,System.Collections.Generic.IReadOnlyCollection{Microsoft.Rest.Generator.ClientModel.Parameter})">
+            <summary>
+            Get the resource type from the provided resourceProvider and the portion of the method
+            URL path that comes after the resourceProvider section.
+            </summary>
+            <param name="resourceProvider"></param>
+            <param name="methodPathAfterProvider"></param>
+            <param name="createResourceMethodParameters"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

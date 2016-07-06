@@ -1,0 +1,232 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AutoRest.Generator.Python</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.Rest.Generator.Python.PythonCodeGenerator.NormalizeClientModel(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Normalizes client model by updating names and types to be language specific.
+            </summary>
+            <param name="serviceClient"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.PythonCodeGenerator.Generate(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Generate Python client code for given ServiceClient.
+            </summary>
+            <param name="serviceClient"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.PythonCodeNamer.#ctor">
+            <summary>
+            Initializes a new instance of CSharpCodeNamingFramework.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.PythonCodeNamer.RemoveInvalidPythonCharacters(System.String)">
+            <summary>
+            Removes invalid characters from the name. Everything but alpha-numeral, underscore.
+            </summary>
+            <param name="name">String to parse.</param>
+            <returns>Name with invalid characters removed.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.PythonCodeNamer.NormalizeParameters(Microsoft.Rest.Generator.ClientModel.Method)">
+            <summary>
+            Normalizes the parameter names of a method
+            </summary>
+            <param name="method"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.PythonCodeNamer.NormalizeClientProperties(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Normalizes the client properties names of a client model
+            </summary>
+            <param name="client">A client model</param>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Python.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Python.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Python.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Python.Properties.Resources.InvalidIdentifierName">
+            <summary>
+              Looks up a localized string similar to Property name {0} cannot be used as an Identifier, as it contains only invalid characters..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Python.Properties.Resources.UsageInformation">
+            <summary>
+              Looks up a localized string similar to The {0} pip package is required to execute the generated code..
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Python.PythonConstants">
+            <summary>
+            Defines constants used in by Python.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Python.PythonConstants.None">
+            <summary>
+            Represents None object in Python
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.ScopeProvider.GetVariableName(System.String)">
+            <summary>
+            Get a variable name that is unique in this scope.
+            </summary>
+            <param name="prefix">Prefix to use in creating variable.</param>
+            <returns>A variable name unique in this scope.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.ModelTemplateModel.GetPropertyDocumentationString(Microsoft.Rest.Generator.ClientModel.Property)">
+            <summary>
+            Provides the modelProperty documentation string along with default value if any.
+            </summary>
+            <param name="property">Parameter to be documented</param>
+            <returns>Parameter documentation string along with default value if any 
+            in correct jsdoc notation</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.ModelTemplateModel.GetPropertyDocumentationType(Microsoft.Rest.Generator.ClientModel.IType)">
+            <summary>
+            Provides the type of the modelProperty
+            </summary>
+            <param name="type">Parameter type to be documented</param>
+            <returns>Parameter name in the correct jsdoc notation</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.ServiceClientTemplateModel.GetPropertyDocumentationString(Microsoft.Rest.Generator.ClientModel.Property)">
+            <summary>
+            Provides the property documentation string.
+            </summary>
+            <param name="property">Parameter to be documented</param>
+            <returns>Parameter documentation string correct notation</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.ServiceClientTemplateModel.GetPropertyDocumentationType(Microsoft.Rest.Generator.ClientModel.IType)">
+            <summary>
+            Provides the type of the modelProperty
+            </summary>
+            <param name="type">Parameter type to be documented</param>
+            <returns>Parameter name in the correct jsdoc notation</returns>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Python.MethodTemplateModel.FailureStatusCodePredicate">
+            <summary>
+            Get the predicate to determine of the http operation status code indicates success
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.MethodTemplateModel.MethodParameterDeclaration(System.Boolean)">
+            <summary>
+            Generate the method parameter declarations for a method
+            </summary>
+            <param name="addCustomHeaderParameters">If true add the customHeader to the parameters</param>
+            <returns>Generated string of parameters</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.MethodTemplateModel.BuildUrlPath(System.String)">
+            <summary>
+            Generate code to build the URL from a url expression and method parameters
+            </summary>
+            <param name="variableName">The variable to store the url in.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.MethodTemplateModel.BuildUrlQuery(System.String)">
+            <summary>
+            Generate code to build the query of URL from method parameters
+            </summary>
+            <param name="variableName">The variable to store the query in.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.MethodTemplateModel.BuildHeaders(System.String)">
+            <summary>
+            Generate code to build the headers from method parameters
+            </summary>
+            <param name="variableName">The variable to store the headers in.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Python.MethodTemplateModel.LocalParameters">
+            <summary>
+            Get the parameters that are actually method parameters in the order they appear in the method signature
+            exclude global parameters
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.MethodTemplateModel.GetParameterDocumentationString(Microsoft.Rest.Generator.ClientModel.Parameter)">
+            <summary>
+            Provides the parameter documentation string.
+            </summary>
+            <param name="parameter">Parameter to be documented</param>
+            <returns>Parameter documentation string correct notation</returns>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Python.MethodTemplateModel.ReturnTypeString">
+            <summary>
+            Get the type name for the method's return type
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Python.MethodTemplateModel.RequestBody">
+            <summary>
+            Get the method's request body (or null if there is no request body)
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.MethodTemplateModel.BuildInputMappings">
+            <summary>
+            Generates input mapping code block.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Python.MethodTemplateModel.SetDefaultHeaders">
+            <summary>
+            Gets the expression for default header setting. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.TemplateModels.ClientModelExtensions.NeedsFormattedSeparator(Microsoft.Rest.Generator.ClientModel.Parameter)">
+            <summary>
+            Format the value of a sequence given the modeled element format.  Note that only sequences of strings are supported
+            </summary>
+            <param name="parameter">The parameter to format</param>
+            <returns>return the separator</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.TemplateModels.ClientModelExtensions.GetSeparator(Microsoft.Rest.Generator.ClientModel.CollectionFormat)">
+            <summary>
+            Return the separator associated with a given collectionFormat
+            </summary>
+            <param name="format">The collection format</param>
+            <returns>The separator</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.TemplateModels.ClientModelExtensions.ToPythonCase(System.String)">
+            <summary>
+            Converts the specified string to a python style string.
+            </summary>
+            <param name="value">The string to convert.</param>
+            <returns>The python style string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.TemplateModels.ClientModelExtensions.ToString(Microsoft.Rest.Generator.ClientModel.IType,System.String)">
+            <summary>
+            Simple conversion of the type to string
+            </summary>
+            <param name="type">The type to convert</param>
+            <param name="reference">a reference to an instance of the type</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.TemplateModels.ClientModelExtensions.ToPythonRuntimeTypeString(Microsoft.Rest.Generator.ClientModel.IType)">
+            <summary>
+            Simple conversion of the type to string
+            </summary>
+            <param name="type">The type to convert</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Python.TemplateModels.ClientModelExtensions.SkipUrlEncoding(Microsoft.Rest.Generator.ClientModel.Parameter)">
+            <summary>
+            Determine whether URL encoding should be skipped for this parameter
+            </summary>
+            <param name="parameter">The parameter to check</param>
+            <returns>true if url encoding should be skipped for the parameter, otherwise false</returns>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Python.ParameterTemplateModel.DeclarationExpression">
+            <summary>
+            Gets parameter declaration
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio 14.0\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="14.0">
+ <Targets>
+  <Target Name="C:\Code\autorest\AutoRest\AutoRest\bin\Net45-Debug\AutoRest.exe">
+   <Modules>
+    <Module Name="autorest.exe">
+     <Namespaces>
+      <Namespace Name="Microsoft.Rest.Generator.Cli">
+       <Types>
+        <Type Name="HelpExample" Kind="Struct" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="OverrideEqualsAndOperatorEqualsOnValueTypes" Category="Microsoft.Performance" CheckId="CA1815" Status="ExcludedInSource" Created="2016-06-30 00:32:24Z" FixCategory="NonBreaking">
+           <Issue Name="Equals" Certainty="75" Level="Warning">'HelpExample' should override Equals.</Issue>
+           <Issue Name="op_Equality" Certainty="75" Level="Warning">'HelpExample' should override the equality (==) and inequality (!=) operators.</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="HelpGenerator" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Generate(System.String,Microsoft.Rest.Generator.BaseSettings)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="ExcludedInSource" Created="2016-06-30 00:32:24Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="CriticalError" Path="C:\Code\autorest\AutoRest\AutoRest" File="HelpGenerator.cs" Line="126">Modify 'HelpGenerator.Generate(string, BaseSettings)' to catch a more specific exception than 'object' or rethrow the exception.</Issue>
+             <Notes>
+              <User Name="[SuppressMessage]">
+               <Note Id="2" />
+              </User>
+             </Notes>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GenerateGeneratorsSection(System.String,Microsoft.Rest.Generator.BaseSettings,Microsoft.Rest.Generator.Extensibility.AutoRestConfiguration,System.Text.StringBuilder&amp;,System.String&amp;)" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="ExcludedInSource" Created="2016-06-30 00:32:24Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="CriticalError" Path="C:\Code\autorest\AutoRest\AutoRest" File="HelpGenerator.cs" Line="196">Modify 'HelpGenerator.GenerateGeneratorsSection(string, BaseSettings, AutoRestConfiguration, out StringBuilder, out string)' to catch a more specific exception than 'object' or rethrow the exception.</Issue>
+             <Notes>
+              <User Name="[SuppressMessage]">
+               <Note Id="3" />
+              </User>
+             </Notes>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Program" Kind="Class" Accessibility="Assembly" ExternallyVisible="False">
+         <Members>
+          <Member Name="#Main(System.String[])" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="AvoidExcessiveComplexity" Category="Microsoft.Maintainability" CheckId="CA1502" Status="ExcludedInSource" Created="2016-06-30 00:32:24Z" FixCategory="NonBreaking">
+             <Issue Certainty="90" Level="Warning" Path="C:\Code\autorest\AutoRest\AutoRest" File="Program.cs" Line="18">'Program.Main(string[])' has a cyclomatic complexity of 28. Rewrite or refactor the method to reduce complexity to 25.</Issue>
+            </Message>
+            <Message Id="System.Console.WriteLine(System.String)" TypeName="Do not pass literals as localized parameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="ExcludedInSource" Created="2016-06-30 00:32:24Z" FixCategory="DependsOnFix">
+             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Code\autorest\AutoRest\AutoRest" File="Program.cs" Line="75">Method 'Program.Main(string[])' passes a literal string as parameter 'value' of a call to 'Console.WriteLine(string)'. Retrieve the following string(s) from a resource table instead: " ".</Issue>
+            </Message>
+            <Message Id="System.Console.WriteLine(System.String,System.Object,System.Object)" TypeName="Do not pass literals as localized parameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="ExcludedInSource" Created="2016-06-30 00:32:24Z" FixCategory="DependsOnFix" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="Microsoft.Rest.Generator.Cli.Properties">
+       <Types>
+        <Type Name="Resources" Kind="Class" Accessibility="Assembly" ExternallyVisible="False">
+         <Members>
+          <Member Name="#.ctor()" Kind="Method" Static="False" Accessibility="Assembly" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="ExcludedInSource" Created="2016-06-30 00:32:24Z" FixCategory="NonBreaking" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+     <Resources>
+      <Resource Name="Microsoft.Rest.Generator.Cli.Properties.Resources.resources">
+       <Messages>
+        <Message Id="example-desc" TypeName="ResourceStringsShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1703" Status="ExcludedInSource" Created="2016-06-30 00:32:24Z" FixCategory="NonBreaking">
+         <Issue Name="StringResource" Certainty="50" Level="CriticalWarning">In resource 'Microsoft.Rest.Generator.Cli.Properties.Resources.resx', referenced by name 'HelpMarkdownTemplate', correct the spelling of 'example-desc' in string value '#AutoRest Command Line Interface Documentation&#xD;&#xA;&#xD;&#xA;##Syntax&#xD;&#xA;```bash&#xD;&#xA;$syntax$&#xD;&#xA;```&#xD;&#xA;&#xD;&#xA;##Parameters&#xD;&#xA;$parameters-start$&#xD;&#xA;**-$parameter$** $parameter-desc$&#xD;&#xA;&#xD;&#xA;$parameters-end$&#xD;&#xA;&#xD;&#xA;##Code Generators&#xD;&#xA;$generators-start$&#xD;&#xA;**-$generator$** $generator-desc$&#xD;&#xA;&#xD;&#xA;$generators-end$&#xD;&#xA;&#xD;&#xA;##Examples&#xD;&#xA;$examples-start...'.</Issue>
+         <Issue Name="StringResource" Certainty="50" Level="CriticalWarning">In resource 'Microsoft.Rest.Generator.Cli.Properties.Resources.resx', referenced by name 'HelpTextTemplate', correct the spelling of 'example-desc' in string value 'Microsoft (R) AutoRest $version$&#xD;&#xA;Copyright (C) Microsoft Corporation. All rights reserved.&#xD;&#xA;&#xD;&#xA;Usage: $syntax$&#xD;&#xA;&#xD;&#xA;Parameters:&#xD;&#xA;$parameters-start$&#xD;&#xA;  -$parameter$: $parameter-desc$&#xD;&#xA;$parameters-end$&#xD;&#xA;&#xD;&#xA;Code Generators:&#xD;&#xA;$generators-start$&#xD;&#xA;  -$generator$: $generator-desc$&#xD;&#xA;$generators-end$&#xD;&#xA;&#xD;&#xA;Example...'.</Issue>
+        </Message>
+        <Message Id="parameter-desc" TypeName="ResourceStringsShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1703" Status="ExcludedInSource" Created="2016-06-30 00:32:24Z" FixCategory="NonBreaking">
+         <Issue Name="StringResource" Certainty="50" Level="CriticalWarning">In resource 'Microsoft.Rest.Generator.Cli.Properties.Resources.resx', referenced by name 'HelpMarkdownTemplate', correct the spelling of 'parameter-desc' in string value '#AutoRest Command Line Interface Documentation&#xD;&#xA;&#xD;&#xA;##Syntax&#xD;&#xA;```bash&#xD;&#xA;$syntax$&#xD;&#xA;```&#xD;&#xA;&#xD;&#xA;##Parameters&#xD;&#xA;$parameters-start$&#xD;&#xA;**-$parameter$** $parameter-desc$&#xD;&#xA;&#xD;&#xA;$parameters-end$&#xD;&#xA;&#xD;&#xA;##Code Generators&#xD;&#xA;$generators-start$&#xD;&#xA;**-$generator$** $generator-desc$&#xD;&#xA;&#xD;&#xA;$generators-end$&#xD;&#xA;&#xD;&#xA;##Examples&#xD;&#xA;$examples-start...'.</Issue>
+         <Issue Name="StringResource" Certainty="50" Level="CriticalWarning">In resource 'Microsoft.Rest.Generator.Cli.Properties.Resources.resx', referenced by name 'HelpTextTemplate', correct the spelling of 'parameter-desc' in string value 'Microsoft (R) AutoRest $version$&#xD;&#xA;Copyright (C) Microsoft Corporation. All rights reserved.&#xD;&#xA;&#xD;&#xA;Usage: $syntax$&#xD;&#xA;&#xD;&#xA;Parameters:&#xD;&#xA;$parameters-start$&#xD;&#xA;  -$parameter$: $parameter-desc$&#xD;&#xA;$parameters-end$&#xD;&#xA;&#xD;&#xA;Code Generators:&#xD;&#xA;$generators-start$&#xD;&#xA;  -$generator$: $generator-desc$&#xD;&#xA;$generators-end$&#xD;&#xA;&#xD;&#xA;Example...'.</Issue>
+        </Message>
+        <Message Id="uto" TypeName="ResourceStringsShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1703" Status="ExcludedInSource" Created="2016-06-30 00:32:24Z" FixCategory="NonBreaking">
+         <Issue Name="StringResource" Certainty="50" Level="CriticalWarning">In resource 'Microsoft.Rest.Generator.Cli.Properties.Resources.resx', referenced by name 'HelpMarkdownTemplate', correct the spelling of 'uto' in string value '#AutoRest Command Line Interface Documentation&#xD;&#xA;&#xD;&#xA;##Syntax&#xD;&#xA;```bash&#xD;&#xA;$syntax$&#xD;&#xA;```&#xD;&#xA;&#xD;&#xA;##Parameters&#xD;&#xA;$parameters-start$&#xD;&#xA;**-$parameter$** $parameter-desc$&#xD;&#xA;&#xD;&#xA;$parameters-end$&#xD;&#xA;&#xD;&#xA;##Code Generators&#xD;&#xA;$generators-start$&#xD;&#xA;**-$generator$** $generator-desc$&#xD;&#xA;&#xD;&#xA;$generators-end$&#xD;&#xA;&#xD;&#xA;##Examples&#xD;&#xA;$examples-start...'.</Issue>
+        </Message>
+        <Message Id="xamples" TypeName="ResourceStringsShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1703" Status="ExcludedInSource" Created="2016-06-30 00:32:24Z" FixCategory="NonBreaking">
+         <Issue Name="StringResource" Certainty="50" Level="CriticalWarning">In resource 'Microsoft.Rest.Generator.Cli.Properties.Resources.resx', referenced by name 'HelpMarkdownTemplate', correct the spelling of 'xamples' in string value '#AutoRest Command Line Interface Documentation&#xD;&#xA;&#xD;&#xA;##Syntax&#xD;&#xA;```bash&#xD;&#xA;$syntax$&#xD;&#xA;```&#xD;&#xA;&#xD;&#xA;##Parameters&#xD;&#xA;$parameters-start$&#xD;&#xA;**-$parameter$** $parameter-desc$&#xD;&#xA;&#xD;&#xA;$parameters-end$&#xD;&#xA;&#xD;&#xA;##Code Generators&#xD;&#xA;$generators-start$&#xD;&#xA;**-$generator$** $generator-desc$&#xD;&#xA;&#xD;&#xA;$generators-end$&#xD;&#xA;&#xD;&#xA;##Examples&#xD;&#xA;$examples-start...'.</Issue>
+        </Message>
+       </Messages>
+      </Resource>
+     </Resources>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Notes>
+  <User Name="[SuppressMessage]">
+   <Note Id="2" Modified="2016-06-30 00:32:25Z">By design.</Note>
+   <Note Id="3" Modified="2016-06-30 00:32:25Z">By design.</Note>
+  </User>
+ </Notes>
+ <Rules>
+  <Rule TypeName="AvoidExcessiveComplexity" Category="Microsoft.Maintainability" CheckId="CA1502">
+   <Name>Avoid excessive complexity</Name>
+   <Description>Method implementations that are exceedingly complex increase the challenge of understanding and maintaining code.</Description>
+   <Resolution Name="Default">{0} has a cyclomatic complexity of {1}. Rewrite or refactor the method to reduce complexity to {2}.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182212.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="90">Warning</MessageLevel>
+   <File Name="maintainabilityrules.dll" Version="14.0.0.0" />
+  </Rule>
+  <Rule TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811">
+   <Name>Avoid uncalled private code</Name>
+   <Description>There is uncalled code that is not externally visible and is not a known runtime entry point. If this violation fires in error, please send a problem report to the Visual Studio Code Analysis team.</Description>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182264.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="performancerules.dll" Version="14.0.0.0" />
+  </Rule>
+  <Rule TypeName="Do not pass literals as localized parameters" Category="Microsoft.Globalization" CheckId="CA1303">
+   <Name>Do not pass literals as localized parameters</Name>
+   <Description>Literal strings that are embedded in source code are difficult to localize. Avoid passing literal strings as arguments in circumstances where a localized string is generally expected.</Description>
+   <Resolution Name="KnownValue">Method {0} passes a literal string as parameter '{1}' of a call to {2}. Retrieve the following string(s) from a resource table instead: {3}.</Resolution>
+   <Owner>RuleOwner</Owner>
+   <Url>http://msdn.microsoft.com/library/ms182187.aspx</Url>
+   <Email />
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="dataflowrules.dll" Version="14.0.0.0" />
+  </Rule>
+  <Rule TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031">
+   <Name>Do not catch general exception types</Name>
+   <Description>You should not catch Exception or SystemException. Catching generic exception types can hide run-time problems from the library user, and can complicate debugging. You should catch only those exceptions that you can handle gracefully.</Description>
+   <Resolution Name="Default">Modify {0} to catch a more specific exception than {1} or rethrow the exception.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182137.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">CriticalError</MessageLevel>
+   <File Name="designrules.dll" Version="14.0.0.0" />
+  </Rule>
+  <Rule TypeName="OverrideEqualsAndOperatorEqualsOnValueTypes" Category="Microsoft.Performance" CheckId="CA1815">
+   <Name>Override equals and operator equals on value types</Name>
+   <Description>The default System.ValueType implementation might not perform as well as a custom implementation.</Description>
+   <Resolution Name="Equals">{0} should override Equals.</Resolution>
+   <Resolution Name="op_Equality">{0} should override the equality (==) and inequality (!=) operators.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182276.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="performancerules.dll" Version="14.0.0.0" />
+  </Rule>
+  <Rule TypeName="ResourceStringsShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1703">
+   <Name>Resource strings should be spelled correctly</Name>
+   <Description>The individual words that make up a resource string should not be abbreviated and should be spelled correctly. If this rule generates a false positive on a term that should be recognized, add the word to the FxCop custom dictionary.</Description>
+   <Resolution Name="StringResource">In resource {0}, referenced by name '{1}', correct the spelling of '{2}' in string value '{3}'.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/bb264483.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="50">CriticalWarning</MessageLevel>
+   <File Name="namingrules.dll" Version="14.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">Category</String>
+  <String Key="Certainty">Certainty</String>
+  <String Key="CollapseAll">Collapse All</String>
+  <String Key="CheckId">Check Id</String>
+  <String Key="Error">Error</String>
+  <String Key="Errors">error(s)</String>
+  <String Key="ExpandAll">Expand All</String>
+  <String Key="Help">Help</String>
+  <String Key="Line">Line</String>
+  <String Key="Messages">message(s)</String>
+  <String Key="LocationNotStoredInPdb">[Location not stored in Pdb]</String>
+  <String Key="Project">Project</String>
+  <String Key="Resolution">Resolution</String>
+  <String Key="Rule">Rule</String>
+  <String Key="RuleFile">Rule File</String>
+  <String Key="RuleDescription">Rule Description</String>
+  <String Key="Source">Source</String>
+  <String Key="Status">Status</String>
+  <String Key="Target">Target</String>
+  <String Key="Warning">Warning</String>
+  <String Key="Warnings">warning(s)</String>
+  <String Key="ReportTitle">Code Analysis Report</String>
+ </Localized>
+</FxCopReport>

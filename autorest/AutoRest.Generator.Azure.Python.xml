@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AutoRest.Generator.Azure.Python</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.Rest.Generator.Azure.Python.AzurePythonCodeNamer.ResolveMethodGroupNameCollision(Microsoft.Rest.Generator.ClientModel.ServiceClient,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Skips name collision resolution for method groups (operations) as they get
+            renamed in template models.
+            </summary>
+            <param name="serviceClient"></param>
+            <param name="exclusionDictionary"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Python.AzurePythonCodeGenerator.NormalizeClientModel(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Normalizes client model by updating names and types to be language specific.
+            </summary>
+            <param name="serviceClient"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Python.AzurePythonCodeGenerator.NormalizePaginatedMethods(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Changes paginated method signatures to return Page type.
+            </summary>
+            <param name="serviceClient"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Python.AzurePythonCodeGenerator.CorrectFilterParameters(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Corrects type of the filter parameter. Currently typization of filters isn't
+            supported and therefore we provide to user an opportunity to pass it in form
+            of raw string.
+            </summary>
+            <param name="serviceClient">The service client.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Python.AzurePythonCodeGenerator.Generate(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Generate Python client code for given ServiceClient.
+            </summary>
+            <param name="serviceClient"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Azure.Python.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Python.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Python.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Python.Properties.Resources.UsageInformation">
+            <summary>
+              Looks up a localized string similar to The {0} pip package is required to execute the generated code..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Python.AzureMethodTemplateModel.IsLongRunningOperation">
+            <summary>
+            Returns true if method has x-ms-long-running-operation extension.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Python.AzureMethodTemplateModel.SetDefaultHeaders">
+            <summary>
+            Gets the expression for default header setting. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Python.AzureParameterTemplateModel.DeclarationExpression">
+            <summary>
+            Gets parameter declaration
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AutoRest</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Rest.Generator.Cli.ExitCode">
+            <summary>
+            Available exit codes.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Cli.HelpExample">
+            <summary>
+            Structure that represents an example in generated help.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Cli.HelpExample.Description">
+            <summary>
+            Gets or sets example plain text description.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Cli.HelpExample.Example">
+            <summary>
+            Gets or sets example code.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Cli.HelpGenerator">
+            <summary>
+            Helper class for dynamically generating CLI help from Settings.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Cli.HelpGenerator.Generate(System.String,Microsoft.Rest.Generator.BaseSettings)">
+            <summary>
+            Generates help string based on the passed in template.
+            <para>
+            The following keywords are supported:
+              $version$ - version of AutoRest Core
+              $syntax$ - replaced with the usage syntax
+              $parameters-start$...$parameters-end$ - contains a template for a parameters
+              $parameter$ - parameter name  
+              $parameter-desc$ - parameter documentation
+              $examples-start$...$examples-end$ - contains a template for an example
+              $example-desc$ - example description
+              $example$ - example code
+            </para>
+            </summary>
+            <example>
+               Microsoft (R) AutoRest Core $version$
+               Copyright (C) Microsoft Corporation. All rights reserved.
+               
+               Syntax         : $syntax$
+               
+               Parameters     :
+               $parameters-start$
+               -$parameter$ : $parameter-desc$
+               $parameters-end$
+               
+               Examples       :
+               
+               $examples-start$
+               $example-desc$
+               >$example$
+               $examples-end$
+            </example>
+            <param name="template">Template to use.</param>
+            <param name="settings">Settings to use.</param>
+            <returns>Generated help.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Cli.Program.IsShowMarkdownHelpIncluded(System.String[])">
+            <summary>
+            Returns true if show markdown flag is specified among the command line arguments.
+            </summary>
+            <param name="args">Command line arguments.</param>
+            <returns>True if markdown formatted help should be shown, otherwise false.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Cli.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Cli.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Cli.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Cli.Properties.Resources.ConsoleErrorMessage">
+            <summary>
+              Looks up a localized string similar to error: {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Cli.Properties.Resources.ConsoleErrorStackTrace">
+            <summary>
+              Looks up a localized string similar to \t{0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Cli.Properties.Resources.GenerationComplete">
+            <summary>
+              Looks up a localized string similar to Finished generating {0} code for {1}..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Cli.Properties.Resources.GenerationFailed">
+            <summary>
+              Looks up a localized string similar to Code generation failed..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Cli.Properties.Resources.HelpMarkdownTemplate">
+             <summary>
+               Looks up a localized string similar to #AutoRest Command Line Interface Documentation
+            
+            ##Syntax
+            ```bash
+            $syntax$
+            ```
+            
+            ##Parameters
+            $parameters-start$
+            **-$parameter$** $parameter-desc$
+            
+            $parameters-end$
+            
+            ##Examples
+            $examples-start$
+            - $example-desc$
+            ```bash
+            $example$
+            ```
+            
+            $examples-end$.
+             </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Cli.Properties.Resources.HelpTextTemplate">
+             <summary>
+               Looks up a localized string similar to Microsoft (R) AutoRest $version$
+            Copyright (C) Microsoft Corporation. All rights reserved.
+            
+            Usage: $syntax$
+            
+            Parameters:
+            $parameters-start$
+              -$parameter$: $parameter-desc$
+            $parameters-end$
+            
+            Examples:
+            $examples-start$
+              $example-desc$
+              &gt;$example$
+            
+            $examples-end$.
+             </summary>
+        </member>
+    </members>
+</doc>

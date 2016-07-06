@@ -1,0 +1,308 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AutoRest.Generator.NodeJS</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.NodeJSCodeGenerator.NormalizeClientModel(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Normalizes client model by updating names and types to be language specific.
+            </summary>
+            <param name="serviceClient"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.NodeJSCodeGenerator.Generate(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Generate NodeJS client code for given ServiceClient.
+            </summary>
+            <param name="serviceClient"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.NodeJsCodeNamer.#ctor">
+            <summary>
+            Initializes a new instance of CSharpCodeNamingFramework.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.NodeJsCodeNamer.NormalizeParameters(Microsoft.Rest.Generator.ClientModel.Method)">
+            <summary>
+            Normalizes the parameter names of a method
+            </summary>
+            <param name="method"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.NodeJsCodeNamer.NormalizeClientProperties(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Normalizes the client properties names of a client model
+            </summary>
+            <param name="client">A client model</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.NodeJsCodeNamer.NormalizeOdataFilterParameter(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Normalize odata filter parameter to PrimaryType.String
+            </summary>
+            <param name="client">Service Client</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.NodeJsCodeNamer.NormalizeMethodNames(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Normalizes the method name if it is a reserved word in javascript.
+            </summary>
+            <param name="client">The service client.</param>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.NodeJS.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.NodeJS.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.NodeJS.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.NodeJS.Properties.Resources.InvalidType">
+            <summary>
+              Looks up a localized string similar to {0} is not a supported Type..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.NodeJS.Properties.Resources.UsageInformation">
+            <summary>
+              Looks up a localized string similar to The {0} or higher npm package is required to execute the generated code..
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.ModelTemplateModel.PropertyTS(Microsoft.Rest.Generator.ClientModel.Property,System.Boolean)">
+            <summary>
+            Returns the TypeScript string to define the specified property, including its type and whether it's optional or not
+            </summary>
+            <param name="property">Model property to query</param>
+            <param name="inModelsModule">Pass true if generating the code for the models module, thus model types don't need a "models." prefix</param>
+            <returns>TypeScript property definition</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.ModelTemplateModel.GetPropertyDocumentationName(Microsoft.Rest.Generator.ClientModel.Property)">
+            <summary>
+            Provides the property name in the correct jsdoc notation depending on 
+            whether it is required or optional
+            </summary>
+            <param name="property">Parameter to be documented</param>
+            <returns>Parameter name in the correct jsdoc notation</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.ModelTemplateModel.GetPropertyDocumentationString(Microsoft.Rest.Generator.ClientModel.Property)">
+            <summary>
+            Provides the property documentation string along with default value if any.
+            </summary>
+            <param name="property">Parameter to be documented</param>
+            <returns>Parameter documentation string along with default value if any 
+            in correct jsdoc notation</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.ModelTemplateModel.GetPropertyDocumentationType(Microsoft.Rest.Generator.ClientModel.Property)">
+            <summary>
+            Provides the type of the property
+            </summary>
+            <param name="property">Parameter to be documented</param>
+            <returns>Parameter name in the correct jsdoc notation</returns>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.NodeJS.ServiceClientTemplateModel.OrderedModelTemplateModels">
+            <summary>
+            Provides an ordered ModelTemplateModel list such that the parent 
+            type comes before in the list than its child. This helps when 
+            requiring models in index.js
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.NodeJS.ServiceClientTemplateModel.RequiredConstructorParametersTS">
+            <summary>
+            Return the service client constructor required parameters, in TypeScript syntax.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.FailureStatusCodePredicate">
+            <summary>
+            Get the predicate to determine of the http operation status code indicates success
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.MethodParameterDeclaration">
+            <summary>
+            Generate the method parameter declarations for a method
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.MethodParameterDeclarationTS(System.Boolean)">
+            <summary>
+            Generate the method parameter declarations for a method, using TypeScript declaration syntax
+            <param name="includeOptions">whether the ServiceClientOptions parameter should be included</param>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.MethodParameterDeclarationWithCallback">
+            <summary>
+            Generate the method parameter declarations with callback for a method
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.MethodParameterDeclarationWithCallbackTS(System.Boolean)">
+            <summary>
+            Generate the method parameter declarations with callback for a method, using TypeScript method syntax
+            <param name="includeOptions">whether the ServiceClientOptions parameter should be included</param>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.LocalParameters">
+            <summary>
+            Get the parameters that are actually method parameters in the order they appear in the method signature
+            exclude global parameters and constants.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.LocalParametersWithOptions">
+            <summary>
+            Get the parameters that are actually method parameters in the order they appear in the method signature
+            exclude global parameters. All the optional parameters are pushed into the second last "options" parameter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.DocumentationParameters">
+            <summary>
+            Returns list of parameters and their properties in (alphabetical order) that needs to be documented over a method.
+            This property does simple tree traversal using stack and hashtable for already visited complex types.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.ReturnTypeString">
+            <summary>
+            Get the type name for the method's return type
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.DeserializationError">
+            <summary>
+            The Deserialization Error handling code block that provides a useful Error 
+            message when exceptions occur in deserialization along with the request 
+            and response object
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.GetParameterDocumentationName(Microsoft.Rest.Generator.ClientModel.Parameter)">
+            <summary>
+            Provides the parameter name in the correct jsdoc notation depending on 
+            whether it is required or optional
+            </summary>
+            <param name="parameter">Parameter to be documented</param>
+            <returns>Parameter name in the correct jsdoc notation</returns>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.RequestBody">
+            <summary>
+            Get the method's request body (or null if there is no request body)
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.ClientReference">
+            <summary>
+            Generate a reference to the ServiceClient
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.BuildUrl(System.String)">
+            <summary>
+            Generate code to build the URL from a url expression and method parameters
+            </summary>
+            <param name="variableName">The variable to store the url in.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.AddQueryParametersToUrl(System.String,Microsoft.Rest.Generator.Utilities.IndentedStringBuilder)">
+            <summary>
+            Generate code to construct the query string from an array of query parameter strings containing 'key=value'
+            </summary>
+            <param name="variableName">The variable reference for the url</param>
+            <param name="builder">The string builder for url construction</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.HasQueryParameters">
+            <summary>
+            Detremines whether the Uri will have any query string
+            </summary>
+            <returns>True if a query string is possible given the method parameters, otherwise false</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.BuildQueryParameterArray(Microsoft.Rest.Generator.Utilities.IndentedStringBuilder)">
+            <summary>
+            Genrate code to build an array of query parameter strings in a variable named 'queryParameters'.  The 
+            array should contain one string element for each query parameter of the form 'key=value'
+            </summary>
+            <param name="builder">The stringbuilder for url construction</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.BuildPathParameters(System.String,Microsoft.Rest.Generator.Utilities.IndentedStringBuilder)">
+            <summary>
+            Generate code to replace path parameters in the url template with the appropriate values
+            </summary>
+            <param name="variableName">The variable name for the url to be constructed</param>
+            <param name="builder">The string builder for url construction</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.RemoveDuplicateForwardSlashes(System.String)">
+            <summary>
+            Generate code to remove duplicated forward slashes from a URL in code
+            </summary>
+            <param name="urlVariableName"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.SetDefaultHeaders">
+            <summary>
+            Gets the expression for default header setting. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.MethodTemplateModel.BuildInputMappings">
+            <summary>
+            Generates input mapping code block.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.TemplateModels.ClientModelExtensions.GetFormattedReferenceValue(Microsoft.Rest.Generator.ClientModel.Parameter)">
+            <summary>
+            Format the value of a sequence given the modeled element format.  Note that only sequences of strings are supported
+            </summary>
+            <param name="parameter">The parameter to format</param>
+            <returns>A reference to the formatted parameter value</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.TemplateModels.ClientModelExtensions.GetSeparator(Microsoft.Rest.Generator.ClientModel.CollectionFormat)">
+            <summary>
+            Return the separator associated with a given collectionFormat
+            </summary>
+            <param name="format">The collection format</param>
+            <returns>The separator</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.TemplateModels.ClientModelExtensions.ToString(Microsoft.Rest.Generator.ClientModel.IType,System.String)">
+            <summary>
+            Simple conversion of the type to string
+            </summary>
+            <param name="type">The type to convert</param>
+            <param name="reference">a reference to an instance of the type</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.TemplateModels.ClientModelExtensions.GetEnumValuesArray(Microsoft.Rest.Generator.ClientModel.EnumType)">
+            <summary>
+            Returns a Javascript Array containing the values in a string enum type
+            </summary>
+            <param name="type">EnumType to model as Javascript Array</param>
+            <returns>The Javascript Array as a string</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.TemplateModels.ClientModelExtensions.PrimaryTSType(Microsoft.Rest.Generator.ClientModel.PrimaryType)">
+            <summary>
+            Returns the TypeScript type string for the specified primary type
+            </summary>
+            <param name="primary">primary type to query</param>
+            <returns>The TypeScript type correspoinding to this model primary type</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.TemplateModels.ClientModelExtensions.ValidateType(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.Utilities.IScopeProvider,System.String,System.Boolean,System.String)">
+            <summary>
+            Generate code to perform validation on a parameter or property
+            </summary>
+            <param name="type">The type to validate</param>
+            <param name="scope">A scope provider for generating variable names as necessary</param>
+            <param name="valueReference">A reference to the value being validated</param>
+            <param name="isRequired">True if the parameter is required.</param>
+            <param name="modelReference">A reference to the models array</param>
+            <returns>The code to validate the reference of the given type</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.TemplateModels.ClientModelExtensions.TSType(Microsoft.Rest.Generator.ClientModel.IType,System.Boolean)">
+            <summary>
+            Return the TypeScript type (as a string) for specified type.
+            </summary>
+            <param name="type">IType to query</param>
+            <param name="inModelsModule">Pass true if generating the code for the models module, thus model types don't need a "models." prefix</param>
+            <returns>TypeScript type string for type</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.NodeJS.TemplateModels.ClientModelExtensions.SkipUrlEncoding(Microsoft.Rest.Generator.ClientModel.Parameter)">
+            <summary>
+            Determine whether URL encoding should be skipped for this parameter
+            </summary>
+            <param name="parameter">The parameter to check</param>
+            <returns>true if url encoding should be skipped for the parameter, otherwise false</returns>
+        </member>
+    </members>
+</doc>

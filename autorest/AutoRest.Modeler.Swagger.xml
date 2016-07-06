@@ -1,0 +1,1035 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AutoRest.Modeler.Swagger</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Extensions">
+            <summary>
+            Provides useful extension methods to simplify common coding tasks.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.Extensions.StripDefinitionPath(System.String)">
+            <summary>
+            Removes #/definitions/ or url#/definitions from the reference path.
+            </summary>
+            <param name="reference">Definition reference.</param>
+            <returns>Definition name with path.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.Extensions.StripParameterPath(System.String)">
+            <summary>
+            Removes #/parameters/ or url#/parameters from the reference path.
+            </summary>
+            <param name="reference">Parameter reference.</param>
+            <returns>Parameter name with path.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.JsonConverters.PathLevelParameterConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            To merge common parameters at the path level into the parameters at 
+            the operation level if they do not exist at the operation level
+            </summary>
+            <param name="reader"></param>
+            <param name="objectType"></param>
+            <param name="existingValue"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.JsonConverters.PathLevelParameterConverter.GetParameterKey(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Returns the value of the reference or the value of the name and locattion (query, path, body)
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Model.Header">
+            <summary>
+            Swagger header object.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Model.CodeGenerationSettings">
+            <summary>
+            The object provides metadata about the API. 
+            The metadata can be used by the clients if needed, and can be presented 
+            in the Swagger-UI for convenience.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Model.ValidationContext">
+            <summary>
+            Specifies a context used in validation and version compare.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.SwaggerBase.Extensions">
+            <summary>
+            Vendor extensions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.Model.SwaggerBase.Compare(Microsoft.Rest.Modeler.Swagger.Model.SwaggerBase,Microsoft.Rest.Modeler.Swagger.Model.ValidationContext)">
+            <summary>
+            Compares the Swagger object against the prior version, looking for potential breaking changes.
+            </summary>
+            <param name="priorVersion"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Model.SwaggerObject">
+            <summary>
+            Describes a single operation determining with this object is mandatory.
+            https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#parameterObject
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.SwaggerObject.Type">
+            <summary>
+            The type of the parameter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.SwaggerObject.Format">
+            <summary>
+            The extending format for the previously mentioned type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.SwaggerObject.Items">
+            <summary>
+            Describes the type of items in the array.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.SwaggerObject.AdditionalProperties">
+            <summary>
+            Describes the type of additional properties in the data type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.SwaggerObject.CollectionFormat">
+            <summary>
+            Determines the format of the array if type array is used.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.SwaggerObject.Default">
+            <summary>
+            Sets a default value to the parameter.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Model.Contact">
+            <summary>
+            Contact information for the defined API.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.Contact.Name">
+            <summary>
+            Name of the API contact.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.Contact.Url">
+            <summary>
+            Url of the API contact.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.Contact.Email">
+            <summary>
+            Email of the API contact.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Model.DataType">
+            <summary>
+            Swagger data type.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Model.ExternalDoc">
+            <summary>
+            Allows referencing an external resource for extended documentation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ExternalDoc.Url">
+            <summary>
+            Url of external Swagger doc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ExternalDoc.Description">
+            <summary>
+            Description of external Swagger doc.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Model.Schema">
+            <summary>
+            Swagger schema object.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.Schema.Discriminator">
+            <summary>
+            Adds support for polymorphism. The discriminator is the schema 
+            property serviceTypeName that is used to differentiate between other schemas 
+            that inherit this schema. The property serviceTypeName used MUST be defined 
+            at this schema and it MUST be in the required property list. When used, 
+            the value MUST be the serviceTypeName of this schema or any schema that inherits it,
+            or it can be overridden with the x-ms-discriminator-value extension.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.Schema.Properties">
+            <summary>
+            Key is a type serviceTypeName.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.Schema.Extends">
+            <summary>
+            The value of this property MUST be another schema which will provide 
+            a base schema which the current schema will inherit from.  The
+            inheritance rules are such that any instance that is valid according
+            to the current schema MUST be valid according to the referenced
+            schema.  This MAY also be an array, in which case, the instance MUST
+            be valid for all the schemas in the array.  A schema that extends
+            another schema MAY define additional attributes, constrain existing
+            attributes, or add other constraints.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.Schema.AllOf">
+            <summary>
+            Defines the set of schemas this shema is composed of
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Model.License">
+            <summary>
+            License information for the defined API.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.License.Name">
+            <summary>
+            Name of the license governing the API.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.License.Url">
+            <summary>
+            URL of the licensing governing the API.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Model.Operation">
+            <summary>
+            Describes a single API operation on a path.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.Operation.Tags">
+            <summary>
+            A list of tags for API documentation control.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.Operation.OperationId">
+            <summary>
+            A friendly serviceTypeName for the operation. The id MUST be unique among all 
+            operations described in the API. Tools and libraries MAY use the 
+            operation id to uniquely identify an operation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.Operation.ExternalDocs">
+            <summary>
+            Additional external documentation for this operation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.Operation.Consumes">
+            <summary>
+            A list of MIME types the operation can consume.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.Operation.Produces">
+            <summary>
+            A list of MIME types the operation can produce. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.Operation.Parameters">
+            <summary>
+            A list of parameters that are applicable for this operation. 
+            If a parameter is already defined at the Path Item, the 
+            new definition will override it, but can never remove it.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.Operation.Responses">
+            <summary>
+            The list of possible responses as they are returned from executing this operation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.Operation.Schemes">
+            <summary>
+            The transfer protocol for the operation. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.Operation.Security">
+            <summary>
+            A declaration of which security schemes are applied for this operation. 
+            The list of values describes alternative security schemes that can be used 
+            (that is, there is a logical OR between the security requirements). 
+            This definition overrides any declared top-level security. To remove a 
+            top-level security declaration, an empty array can be used.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Model.SwaggerParameter">
+            <summary>
+            Describes a single operation parameter.
+            https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#parameterObject 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.SwaggerParameter.Schema">
+            <summary>
+            The schema defining the type used for the body parameter.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation">
+            <summary>
+            The location of the parameter.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Model.OperationResponse">
+            <summary>
+            Describes a single response from an API Operation.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Model.SecurityDefinition">
+            <summary>
+            Security Scheme Object - https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#security-scheme-object-
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.SecurityDefinition.Scopes">
+            <summary>
+            Lists the available scopes for an OAuth2 security scheme. 
+            Key is scope serviceTypeName and the value is short description
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition">
+            <summary>
+            Class that represents Swagger 2.0 schema
+            http://json.schemastore.org/swagger-2.0
+            Swagger Object - https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#swagger-object- 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.Swagger">
+            <summary>
+            Specifies the Swagger Specification version being used. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.Info">
+            <summary>
+            Provides metadata about the API. The metadata can be used by the clients if needed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.Host">
+            <summary>
+            The host (serviceTypeName or ip) serving the API.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.BasePath">
+            <summary>
+            The base path on which the API is served, which is relative to the host.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.Schemes">
+            <summary>
+            The transfer protocol of the API.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.Consumes">
+            <summary>
+            A list of MIME types the service can consume.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.Produces">
+            <summary>
+            A list of MIME types the APIs can produce.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.Paths">
+            <summary>
+            Key is actual path and the value is serializationProperty of http operations and operation objects.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.CustomPaths">
+            <summary>
+            Key is actual path and the value is serializationProperty of http operations and operation objects.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.Definitions">
+            <summary>
+            Key is the object serviceTypeName and the value is swagger definition.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.Parameters">
+            <summary>
+            Dictionary of parameters that can be used across operations.
+            This property does not define global parameters for all operations.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.Responses">
+            <summary>
+            Dictionary of responses that can be used across operations. The key indicates status code.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.SecurityDefinitions">
+            <summary>
+            Key is the object serviceTypeName and the value is swagger security definition.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.Security">
+            <summary>
+            A declaration of which security schemes are applied for the API as a whole. 
+            The list of values describes alternative security schemes that can be used 
+            (that is, there is a logical OR between the security requirements). Individual 
+            operations can override this definition.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.Tags">
+            <summary>
+            A list of tags used by the specification with additional metadata. The order 
+            of the tags can be used to reflect on their order by the parsing tools. Not all 
+            tags that are used by the Operation Object must be declared. The tags that are 
+            not declared may be organized randomly or based on the tools' logic. Each 
+            tag name in the list MUST be unique.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.ExternalDocs">
+            <summary>
+            Additional external documentation
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.ExternalReferences">
+            <summary>
+            A list of all external references listed in the service.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Model.Info">
+            <summary>
+            The object provides metadata about the API. 
+            The metadata can be used by the clients if needed, and can be presented 
+            in the Swagger-UI for convenience.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Model.Tag">
+            <summary>
+            Represents a Swagger Tag
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Model.TransferProtocolScheme">
+            <summary>
+            The transfer protocol of the API.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.ObjectBuilder">
+            <summary>
+            The builder for building a generic swagger object into parameters, 
+            service types or Json serialization types.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.ObjectBuilder.BuildServiceType(System.String)">
+            <summary>
+            The visitor method for building service types. This is called when an instance of this class is
+            visiting a _swaggerModeler to build a service type.
+            </summary>
+            <param name="serviceTypeName">name for the service type</param>
+            <returns>built service type</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.OperationBuilder">
+            <summary>
+            The builder for building swagger operations into client model methods.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.AddedAdditionalProperties">
+            <summary>
+              Looks up a localized string similar to The new version adds an &apos;additionalProperties&apos; element.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.AddedEnumValues">
+            <summary>
+              Looks up a localized string similar to The new version places constraints on valid values while the old doesn&apos;t.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.AddedRequiredProperty1">
+            <summary>
+              Looks up a localized string similar to The new version has a new required property &apos;{0}&apos; not found in the old version.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.AddingRequiredHeader1">
+            <summary>
+              Looks up a localized string similar to Adding a required header &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.AddingRequiredParameter1">
+            <summary>
+              Looks up a localized string similar to The new version adds a required parameter &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.AddingResponseCode1">
+            <summary>
+              Looks up a localized string similar to The new version adds a response code &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.AnonymousTypesDiscouraged">
+            <summary>
+              Looks up a localized string similar to For better code quality, it&apos;s preferable to define schemas in the definitions section, instead of inline..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ArrayCollectionFormatChanged">
+            <summary>
+              Looks up a localized string similar to The new version has a different array collection format than the previous one.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.BadMaximum1">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; is not a valid value for the &apos;maximum&apos; property. It must be a number..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.BadMaxItems1">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; is not a valid value for the &apos;maxItems&apos; property. It must be a non-negative integer..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.BadMaxLength1">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; is not a valid value for the &apos;maxLength&apos; property. It must be a non-negative integer.&quot;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.BadMinimum1">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; is not a valid value for the &apos;minimum&apos; property. It must be a number..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.BadMinItems1">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; is not a valid value for the &apos;minItems&apos; property. It must be a non-negative integer..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.BadMinLength1">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; is not a valid value for the &apos;minLength&apos; property. It must be a non-negative integer.&quot;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.BaseParameterIsRequired">
+            <summary>
+              Looks up a localized string similar to Base parameter is required..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.BodyMustHaveSchema">
+            <summary>
+              Looks up a localized string similar to Each body parameter must have a schema.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.BodyWithType">
+            <summary>
+              Looks up a localized string similar to A body parameter cannot have a type, format, or any other properties describing its type..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.CircularBaseSchemaSet">
+            <summary>
+              Looks up a localized string similar to Found a type set &apos;{0}&apos; which is circularly defined..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.CircularReference">
+            <summary>
+              Looks up a localized string similar to Circular reference detected: {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ConflictingRef">
+            <summary>
+              Looks up a localized string similar to Members defined alongside $ref will be ignored according to JSON specification. allOf is the recommended way of modeling inheritance..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ConstantStatusHasChanged">
+            <summary>
+              Looks up a localized string similar to The &apos;constant&apos; status changed from the old version to the new.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.DefaultValueChanged">
+            <summary>
+              Looks up a localized string similar to The new version has a different default value than the previous one.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.DefinitionDoesNotExist">
+            <summary>
+              Looks up a localized string similar to Reference specifies the definition {0} that does not exist..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.DifferentAllOf">
+            <summary>
+              Looks up a localized string similar to The new version has a different &apos;allOf&apos; property than the previous one.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.DifferentDiscriminator">
+            <summary>
+              Looks up a localized string similar to The new version has a different discriminator than the previous one.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.DifferentExtends">
+            <summary>
+              Looks up a localized string similar to The new version has a different &apos;extends&apos; property than the previous one.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.DuplicateOperationIdException">
+            <summary>
+              Looks up a localized string similar to Found operation objects with duplicate operationId &apos;{0}&apos;. OperationId must be unique among all operations described in the API..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.EmptyClientName">
+            <summary>
+              Looks up a localized string similar to Empty x-ms-client-name property..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.EmptyOperationId">
+            <summary>
+              Looks up a localized string similar to Empty operationId in new version..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ErrorParsingSpec">
+            <summary>
+              Looks up a localized string similar to Error parsing swagger file.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ErrorsFoundDuringComparison">
+            <summary>
+              Looks up a localized string similar to Errors found during Swagger version comparison..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ExceededMaximumReferenceDepth">
+            <summary>
+              Looks up a localized string similar to Reached Maximum reference depth when resolving reference &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.GeneratingClient">
+            <summary>
+              Looks up a localized string similar to Generating client model from swagger model..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.HeaderShouldHaveClientName">
+            <summary>
+              Looks up a localized string similar to Each header parameter should have an explicit client name defined for improved code generation output quality..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.IncompatibleTypesInBaseSchema">
+            <summary>
+              Looks up a localized string similar to Found incompatible property types {1}, {2} for property &apos;{0}&apos; in schema inheritance chain {3}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.IncompatibleTypesInSchemaComposition">
+            <summary>
+              Looks up a localized string similar to Found incompatible property types {1}, {2} for property &apos;{0}&apos; in schema {3}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.InfoSectionMissing">
+            <summary>
+              Looks up a localized string similar to Swagger specification is missing info section.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.InputParameterIsRequired">
+            <summary>
+              Looks up a localized string similar to Input parameter is required..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.InputRequired">
+            <summary>
+              Looks up a localized string similar to Input parameter is required..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.InvalidAncestors">
+            <summary>
+              Looks up a localized string similar to The schema&apos;s &apos;{0}&apos; ancestors should have at lease one property.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.InvalidCollectionFormat">
+            <summary>
+              Looks up a localized string similar to Collection format &apos;{0}&apos; is not a valid collection format (in parameter &apos;{1}&apos;)..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.InvalidDefault">
+            <summary>
+              Looks up a localized string similar to The default value is not one of the values enumerated as valid for this element..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.InvalidPattern2">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; is not a valid regular expression pattern: {1}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.InvalidSchemaParameter">
+            <summary>
+              Looks up a localized string similar to Only body parameters can have a schema defined..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.InvalidTypeExtendsWithAllOf">
+            <summary>
+              Looks up a localized string similar to Cannot use &apos;extend&apos; property with &apos;allOf&apos; property in schema {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.InvalidTypeFormatCombination">
+            <summary>
+              Looks up a localized string similar to Type {0} and format {1} is not a supported combination.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.InvalidTypeInSwaggerSchema">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; is not implemented in SwaggerSchema.ToType extension method..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.MissingDescription">
+            <summary>
+              Looks up a localized string similar to Consider adding a &apos;description&apos; element, essential for maintaining reference documentation..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.MissingRequiredProperty">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; is supposedly required, but no such property exists..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ModifiedOperationId">
+            <summary>
+              Looks up a localized string similar to The operation id has been changed. This will impact the generated code..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.MultiCollectionFormatNotSupported">
+            <summary>
+              Looks up a localized string similar to Collection format &quot;multi&quot; is not supported (in parameter &apos;{0}&apos;)..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.NoDefinitionForPathParameter1">
+            <summary>
+              Looks up a localized string similar to Could not find a definition for the path parameter &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.NoProduceOperationWithBody">
+            <summary>
+              Looks up a localized string similar to Method &apos;{0}&apos; does not declare any MIME type for the return body. Generated code will not deserialize the content..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.NoResponses">
+            <summary>
+              Looks up a localized string similar to No response objects defined..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.NoVersionChange">
+            <summary>
+              Looks up a localized string similar to The major/minor version has not been changed, so breaking changes will be reported as errors..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.OnlyJSONInRequests1">
+            <summary>
+              Looks up a localized string similar to Currently, only JSON-based request payloads are supported, so &apos;{0}&apos; won&apos;t work..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.OnlyJSONInResponses1">
+            <summary>
+              Looks up a localized string similar to Currently, only JSON-based response payloads are supported, so &apos;{0}&apos; won&apos;t work..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.OnlyOneUnderscoreAllowedInOperationId">
+            <summary>
+              Looks up a localized string similar to Only 1 underscore is permitted in the operation id..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.OperationIdMissing">
+            <summary>
+              Looks up a localized string similar to OperationId is required for all operations. Please add it for &apos;{0}&apos; operation of &apos;{1}&apos; path. .
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.OptionsNotSupported">
+            <summary>
+              Looks up a localized string similar to Options HTTP verb is not supported..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ParameterInHasChanged2">
+            <summary>
+              Looks up a localized string similar to How the parameter is passed has changed -- it used to be &apos;{0}&apos;, now it is &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ParameterReferenceNotFound1">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; was not found in the parameters section of the document..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ParsingSwagger">
+            <summary>
+              Looks up a localized string similar to Parsing swagger json file..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.PropertyValueChanged1">
+            <summary>
+              Looks up a localized string similar to The new version has a different &apos;{0}&apos; value than the previous one.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ProtocolNoLongerSupported1">
+            <summary>
+              Looks up a localized string similar to The new version does not support &apos;{0}&apos; as a protocol..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ReadOnlyNotRequired">
+            <summary>
+              Looks up a localized string similar to Property &apos;{0}&apos; in Model &apos;{1}&apos; is marked readOnly and is also required. This is not allowed..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ReadonlyPropertyChanged2">
+            <summary>
+              Looks up a localized string similar to The read only property has changed from &apos;{0}&apos; to &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ReferenceDoesNotExist">
+            <summary>
+              Looks up a localized string similar to Reference path &apos;{0}&apos; does not exist in the definition section of the Swagger document..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ReferenceRedirection">
+            <summary>
+              Looks up a localized string similar to The &apos;$ref&apos; property points to different models in the old and new versions.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.RemovedAdditionalProperties">
+            <summary>
+              Looks up a localized string similar to The new version removes the &apos;additionalProperties&apos; element.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.RemovedClientParameter1">
+            <summary>
+              Looks up a localized string similar to The new version is missing a client parameter found in the old version. Was &apos;{0}&apos; renamed or removed?.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.RemovedDefinition1">
+            <summary>
+              Looks up a localized string similar to The new version is missing a payload model found in the old version. Was &apos;{0}&apos; renamed or removed?.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.RemovedEnumValue1">
+            <summary>
+              Looks up a localized string similar to The new version does not include &apos;{0}&apos; in its list of valid values.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.RemovedEnumValues">
+            <summary>
+              Looks up a localized string similar to The new version does not specify a list of valid values.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.RemovedPath1">
+            <summary>
+              Looks up a localized string similar to The new version is missing a path found in the old version. Was &apos;{0}&apos; restructured or removed?.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.RemovedProperty1">
+            <summary>
+              Looks up a localized string similar to The new version is missing a property found in the old version. Was &apos;{0}&apos; renamed or removed?&quot;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.RemovedRequiredParameter1">
+            <summary>
+              Looks up a localized string similar to The required parameter &apos;{0}&apos; was removed..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.RemovedResponseCode1">
+            <summary>
+              Looks up a localized string similar to The new version removes the response code &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.RemovingRequiredHeader1">
+            <summary>
+              Looks up a localized string similar to Removing a required header &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.RequestBodyFormatNoLongerSupported1">
+            <summary>
+              Looks up a localized string similar to The new version does not support &apos;{0}&apos; as a request body format.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.RequiredStatusChange">
+            <summary>
+              Looks up a localized string similar to The &apos;required&apos; status changed from the old version to the new.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ResponseBodyFormatNoLongerSupported1">
+            <summary>
+              Looks up a localized string similar to The old version does not support &apos;{0}&apos; as a response body format..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ResponseReferenceNotFound">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; was not found in the responses section of the document..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.TitleMissing">
+            <summary>
+              Looks up a localized string similar to Swagger specification is missing title in info section.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.TooManyBodyParameters1">
+            <summary>
+              Looks up a localized string similar to Operations can not have more than one &apos;body&apos; parameter. The following were found: &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.TypeChanged">
+            <summary>
+              Looks up a localized string similar to The new version has a different type than the previous one.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.TypeFormatChanged">
+            <summary>
+              Looks up a localized string similar to The new version has a different format than the previous one.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.UnknownSwaggerVersion">
+            <summary>
+              Looks up a localized string similar to Invalid swagger 2.0 specification. Missing version property. .
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.UnsupportedMimeTypeForResponseBody">
+            <summary>
+              Looks up a localized string similar to The operation &apos;{0}&apos; has a response body in response &apos;{1}&apos;, but did not have a supported MIME type (&apos;application/json&apos; or &apos;application/octet-stream&apos;) in its Produces property..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.VersionLowered2">
+            <summary>
+              Looks up a localized string similar to The new version has a lower value than the old: {0} -&gt; {1}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.Properties.Resources.ZeroColonOne2">
+            <summary>
+              Looks up a localized string similar to {0}: {1}.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.SchemaBuilder">
+            <summary>
+            The builder for building swagger schema into client model parameters, 
+            service types or Json serialization types.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.ParameterBuilder">
+            <summary>
+            The builder for building swagger parameters into client model parameters, 
+            service types or Json serialization types.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.SwaggerModeler.ServiceDefinition">
+            <summary>
+            Swagger service model.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.SwaggerModeler.ServiceClient">
+            <summary>
+            Client model.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Modeler.Swagger.SwaggerModeler.DefaultProtocol">
+            <summary>
+            Default protocol when no protocol is specified in the schema
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.SwaggerModeler.Build(System.Collections.Generic.IEnumerable{Microsoft.Rest.Generator.ValidationMessage}@)">
+            <summary>
+            Builds service model from swagger file.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.SwaggerModeler.InitializeClientModel">
+            <summary>
+            Initialize the base service and populate global service properties
+            </summary>
+            <returns>The base ServiceModel Service</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.SwaggerModeler.BuildCompositeTypes">
+            <summary>
+            Build composite types from definitions
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.SwaggerModeler.AncestorsHaveProperties(System.Collections.Generic.Dictionary{System.String,Microsoft.Rest.Modeler.Swagger.Model.Schema},System.String)">
+            <summary>
+            Recursively traverse the schema's extends to verify that it or one of it's parents
+            has at least one property
+            </summary>
+            <param name="properties">The schema's properties</param>
+            <param name="extends">The schema's extends</param>
+            <returns>True if one or more properties found in this schema or in it's ancestors. False otherwise</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.SwaggerModeler.BuildMethod(Microsoft.Rest.Generator.ClientModel.HttpMethod,System.String,System.String,Microsoft.Rest.Modeler.Swagger.Model.Operation)">
+            <summary>
+            Builds method from swagger operation.
+            </summary>
+            <param name="httpMethod"></param>
+            <param name="url"></param>
+            <param name="name"></param>
+            <param name="operation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.SwaggerModeler.GetMethodGroup(Microsoft.Rest.Modeler.Swagger.Model.Operation)">
+            <summary>
+            Extracts method group from operation ID.
+            </summary>
+            <param name="operation">The swagger operation.</param>
+            <returns>Method group name or null.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.SwaggerModeler.GetMethodName(Microsoft.Rest.Modeler.Swagger.Model.Operation)">
+            <summary>
+            Extracts method name from operation ID.
+            </summary>
+            <param name="operation">The swagger operation.</param>
+            <returns>Method name.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Modeler.Swagger.SchemaResolver">
+            <summary>
+            Methods for normalizing and evaluating swagger schemas in their context in a swagger spec
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.SchemaResolver.#ctor(Microsoft.Rest.Modeler.Swagger.SwaggerModeler)">
+            <summary>
+            Create a new schema resolver in the context of the given swagger spec
+            </summary>
+            <param name="modeler">The swagger spec modeler</param>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.SchemaResolver.Clone">
+            <summary>
+            Copy the current context - used to maintain the schema evaluation context when following 
+            multiple chains of schema references.
+            </summary>
+            <returns>A schema resolver at the same depth as the current resolver.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.SchemaResolver.Unwrap(Microsoft.Rest.Modeler.Swagger.Model.Schema)">
+            <summary>
+            Normalize a swagger schema by dereferencing schema references and evaluating 
+            schema composition
+            </summary>
+            <param name="schema">The schema to normalize</param>
+            <returns>A normalized swagger schema</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.SchemaResolver.ExpandAllOf(Microsoft.Rest.Modeler.Swagger.Model.Schema)">
+            <summary>
+            Evaluate the composition of properties for a swagger spec and save the 
+            evaluated form in the specification.  This transformation is idempotent
+            </summary>
+            <param name="schema">The swagger schema to evaluate.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.SchemaResolver.SchemaTypesAreEquivalent(Microsoft.Rest.Modeler.Swagger.Model.Schema,Microsoft.Rest.Modeler.Swagger.Model.Schema)">
+            <summary>
+            Determine equivalence between the types described by two schemas. 
+            Limit the comparison to exclude comparison of complexe inline schemas.
+            </summary>
+            <param name="parentProperty"></param>
+            <param name="unwrappedProperty"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.SchemaResolver.FindParentProperty(System.String,System.String)">
+            <summary>
+            Determine whether a given property is defined in the given parent schema or its ancestors. 
+            Return the property schema if it is defined, or null if not.
+            </summary>
+            <param name="parentReference">A reference to an ancestor schema</param>
+            <param name="propertyName">The property to search for</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Modeler.Swagger.SchemaResolver.Dereference(System.String)">
+            <summary>
+            Dereference a schema reference, with guards to prevent following circular reference chains
+            </summary>
+            <param name="referencePath">The schema reference to dereference.</param>
+            <returns>The dereferenced schema.</returns>
+        </member>
+    </members>
+</doc>

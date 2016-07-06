@@ -1,0 +1,275 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AutoRest.Generator.Azure.Ruby</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Rest.Generator.Azure.NodeJS.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.NodeJS.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.NodeJS.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.NodeJS.Properties.Resources.InvalidLongRunningOperationForCreateOrUpdate">
+            <summary>
+              Looks up a localized string similar to Long running operations for CreateOrUpdate require a GET operation under the same path and same operation group..
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Azure.Ruby.AzureRubyCodeGenerator">
+            <summary>
+            A class with main code generation logic for Azure.Ruby.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Ruby.AzureRubyCodeGenerator.#ctor(Microsoft.Rest.Generator.Settings)">
+            <summary>
+            Initializes a new instance of the class AzureRubyCodeGenerator.
+            </summary>
+            <param name="settings">The settings.</param>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Ruby.AzureRubyCodeGenerator.Name">
+            <summary>
+            Gets the name of code generator.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Ruby.AzureRubyCodeGenerator.Description">
+            <summary>
+            Gets the description of code generator.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Ruby.AzureRubyCodeGenerator.UsageInstructions">
+            <summary>
+            Gets the usage instructions for the code generator.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Ruby.AzureRubyCodeGenerator.NormalizeClientModel(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Normalizes client model by updating names and types to be language specific.
+            </summary>
+            <param name="serviceClient">The service client.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Ruby.AzureRubyCodeGenerator.CorrectFilterParameters(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Corrects type of the filter parameter. Currently typization of filters isn't
+            supported and therefore we provide to user an opportunity to pass it in form
+            of raw string.
+            </summary>
+            <param name="serviceClient">The service client.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Ruby.AzureRubyCodeGenerator.Generate(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Generates C# code for service client.
+            </summary>
+            <param name="serviceClient">The service client.</param>
+            <returns>Async tasks which generates SDK files.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Azure.Ruby.Templates.AzureClientModelExtensions">
+            <summary>
+            Keeps a few aux method used across all templates/models.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Ruby.Templates.AzureClientModelExtensions.AzureDeserializeType(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.Utilities.IScopeProvider,System.String)">
+            <summary>
+            Generates Ruby code in form of string for deserializing object of given type.
+            </summary>
+            <param name="type">Type of object needs to be deserialized.</param>
+            <param name="scope">Current scope.</param>
+            <param name="valueReference">Reference to object which needs to be deserialized.</param>
+            <returns>Generated Ruby code in form of string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Ruby.Templates.AzureClientModelExtensions.AzureSerializeType(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.Utilities.IScopeProvider,System.String)">
+            <summary>
+            Generates Ruby code in form of string for serializing object of given type.
+            </summary>
+            <param name="type">Type of object needs to be serialized.</param>
+            <param name="scope">Current scope.</param>
+            <param name="valueReference">Reference to object which needs to serialized.</param>
+            <returns>Generated Ruby code in form of string.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Azure.Ruby.AzureMethodGroupTemplateModel">
+            <summary>
+            The model for the Azure method template.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Ruby.AzureMethodGroupTemplateModel.#ctor(Microsoft.Rest.Generator.ClientModel.ServiceClient,System.String)">
+            <summary>
+            Initializes a new instance
+            </summary>
+            <param name="serviceClient">The service client instance.</param>
+            <param name="methodGroupName">The name of the method group.</param>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Ruby.AzureMethodGroupTemplateModel.Includes">
+            <summary>
+            Gets the list of modules/classes which need to be included.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Azure.Ruby.AzureMethodTemplateModel">
+            <summary>
+            The model object for Azure methods.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Ruby.AzureMethodTemplateModel.#ctor(Microsoft.Rest.Generator.ClientModel.Method,Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Initializes a new instance of the AzureMethodTemplateModel class.
+            </summary>
+            <param name="source">The method current model is built for.</param>
+            <param name="serviceClient">The service client - main point of access to the SDK.</param>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Ruby.AzureMethodTemplateModel.IsLongRunningOperation">
+            <summary>
+            Returns true if method has x-ms-long-running-operation extension.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Ruby.AzureMethodTemplateModel.GetMethod">
+            <summary>
+            Gets the Get method model.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Ruby.AzureMethodTemplateModel.DeserializePollingResponse(System.String,Microsoft.Rest.Generator.ClientModel.IType)">
+            <summary>
+            Generates Ruby code in form of string for deserializing polling response.
+            </summary>
+            <param name="variableName">Variable name which keeps the response.</param>
+            <param name="type">Type of response.</param>
+            <returns>Ruby code in form of string for deserializing polling response.</returns>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Ruby.AzureMethodTemplateModel.InitializeResponseBody">
+            <summary>
+            Gets the logic required to preprocess response body when required.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Ruby.AzureMethodTemplateModel.ClassNamespaces">
+            <summary>
+            Gets the list of namespaces where we look for classes that need to
+            be instantiated dynamically due to polymorphism.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Ruby.AzureMethodTemplateModel.SetDefaultHeaders">
+            <summary>
+            Gets the expression for default header setting.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Ruby.AzureMethodTemplateModel.OperationResponseReturnTypeString">
+            <summary>
+            Gets AzureOperationResponse generic type declaration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Ruby.AzureMethodTemplateModel.FaradayMiddlewares">
+            <summary>
+            Gets the list of middelwares required for HTTP requests.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Ruby.AzureMethodTemplateModel.OperationExceptionTypeString">
+            <summary>
+            Gets the type for operation exception.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Azure.Ruby.AzureModelTemplateModel">
+            <summary>
+            The model for Azure model template.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Ruby.AzureModelTemplateModel.#ctor(Microsoft.Rest.Generator.ClientModel.CompositeType,System.Collections.Generic.ISet{Microsoft.Rest.Generator.ClientModel.CompositeType})">
+            <summary>
+            Initializes a new instance of the AzureModelTemplateModel class.
+            </summary>
+            <param name="source">The object to create model from.</param>
+            <param name="allTypes">The list of all model types; Used to implement polymorphism.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Ruby.AzureModelTemplateModel.GetBaseTypeName">
+            <summary>
+            Returns code for declaring inheritance.
+            </summary>
+            <returns>Code for declaring inheritance.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Ruby.AzureModelTemplateModel.SerializeProperty(System.String,Microsoft.Rest.Generator.ClientModel.IType)">
+            <summary>
+            Generates code for model serialization.
+            </summary>
+            <param name="variableName">Variable serialize model from.</param>
+            <param name="type">The type of the model.</param>
+            <returns>The code for serialization in string format.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Ruby.AzureModelTemplateModel.DeserializeProperty(System.String,Microsoft.Rest.Generator.ClientModel.IType)">
+            <summary>
+            Generates code for model deserialization.
+            </summary>
+            <param name="variableName">Variable deserialize model from.</param>
+            <param name="type">The type of the model.</param>
+            <returns>The code for вуserialization in string format.</returns>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Ruby.AzureModelTemplateModel.Includes">
+            <summary>
+            Gets the list of modules/classes which need to be included.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Azure.Ruby.AzureParameterTemplateModel">
+            <summary>
+            The model for the Azure method parameter template.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Ruby.AzureParameterTemplateModel.#ctor(Microsoft.Rest.Generator.ClientModel.Parameter)">
+            <summary>
+            Initializes a new instance of the AzureParameterTemplateModel class.
+            </summary>
+            <param name="source">The source.</param>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Azure.Ruby.AzureRequirementsTemplateModel">
+            <summary>
+            Model class which represents data for the rendering sdk_requirements file.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Ruby.AzureRequirementsTemplateModel.ExcludeModel(Microsoft.Rest.Generator.ClientModel.CompositeType)">
+            <summary>
+            Checks whether model should be excluded from producing.
+            </summary>
+            <param name="model">The model.</param>
+            <returns>True if should be excluded, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Ruby.AzureRequirementsTemplateModel.#ctor(Microsoft.Rest.Generator.ClientModel.ServiceClient,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the AzureRequirementsTemplateModel class.
+            </summary>
+            <param name="serviceClient">The service client (main point of access to SDK).</param>
+            <param name="sdkName">The name of the generated SDK, required for proper folder structuring.</param>
+            <param name="filesExtension">The files extension.</param>
+            <param name="ns">The namespace of the SDK.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Ruby.AzureRequirementsTemplateModel.GetDependencyGems">
+            <summary>
+            Returns a list of 'requires' to dependency gems but also includes azure related ones.
+            </summary>
+            <returns>List of all dependency gems in form of string.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Azure.Ruby.AzureServiceClientTemplateModel">
+            <summary>
+            The model for the Azure service client.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.Ruby.AzureServiceClientTemplateModel.#ctor(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Initializes a new instance of the AzureServiceClientTemplateModel class.
+            </summary>
+            <param name="serviceClient">The service client instance.</param>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Ruby.AzureServiceClientTemplateModel.Includes">
+            <summary>
+            Gets the list of modules/classes which need to be included.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Ruby.AzureServiceClientTemplateModel.BaseType">
+            <summary>
+            Gets the base type of the service client.
+            </summary>
+        </member>
+    </members>
+</doc>

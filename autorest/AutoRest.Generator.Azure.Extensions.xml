@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AutoRest.Generator.Azure.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Rest.Generator.Azure.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Properties.Resources.HeadMethodPossibleIncorrectSpecification">
+            <summary>
+              Looks up a localized string similar to &quot;HEAD &apos;{0}&apos; method missing 404 status code section -- this might be unintentional..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Properties.Resources.MissingProperties">
+            <summary>
+              Looks up a localized string similar to Azure resource {0} is missing required &apos;properties&apos; property..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Properties.Resources.ODataEmpty">
+            <summary>
+              Looks up a localized string similar to {0} needs to have a value..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Properties.Resources.ODataFilterMissing">
+            <summary>
+              Looks up a localized string similar to Method with {0} needs to have &quot;$filter&quot; parameter..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Properties.Resources.ODataInvalidReferance">
+            <summary>
+              Looks up a localized string similar to {0} needs to have a valid definition reference..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Azure.Properties.Resources.ResourcePropertyMismatch">
+            <summary>
+              Looks up a localized string similar to Schema definition for Resource type with x-ms-azure-resource extension should have following properties: {0}.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Azure.AzureExtensions">
+            <summary>
+            Base code generator for Azure.
+            Normalizes the ServiceClient according to Azure conventions and Swagger extensions.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Azure.AzureExtensions.HttpHeadStatusCodeSuccessFunc">
+            <summary>
+            Defines the possible set of valid HTTP status codes for HEAD requests.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.AzureExtensions.NormalizeAzureClientModel(Microsoft.Rest.Generator.ClientModel.ServiceClient,Microsoft.Rest.Generator.Settings,Microsoft.Rest.Generator.CodeNamer)">
+            <summary>
+            Normalizes client model using Azure-specific extensions.
+            </summary>
+            <param name="serviceClient">Service client</param>
+            <param name="settings">AutoRest settings</param>
+            <param name="codeNamer">AutoRest settings</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.AzureExtensions.UpdateHeadMethods(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Changes head method return type.
+            </summary>
+            <param name="serviceClient">Service client</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.AzureExtensions.SetDefaultResponses(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Set default response to CloudError if not defined explicitly.
+            </summary>
+            <param name="serviceClient"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.AzureExtensions.ParseODataExtension(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Converts Azure Parameters to regular parameters.
+            </summary>
+            <param name="serviceClient">Service client</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.AzureExtensions.AddLongRunningOperations(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Creates long running operation methods.
+            </summary>
+            <param name="serviceClient"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.AzureExtensions.AddAzureProperties(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Creates azure specific properties.
+            </summary>
+            <param name="serviceClient"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.AzureExtensions.IsAzureResource(Microsoft.Rest.Generator.ClientModel.CompositeType)">
+            <summary>
+            Determines a composite type as an External Resource if it's name equals "Resource" 
+            and it has an extension named "x-ms-azure-resource" marked as true.
+            </summary>
+            <param name="compositeType">Type to determine if it is an external resource</param>
+            <returns>True if it is an external resource, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Azure.AzureExtensions.AddPageableMethod(Microsoft.Rest.Generator.ClientModel.ServiceClient,Microsoft.Rest.Generator.CodeNamer)">
+            <summary>
+            Adds ListNext() method for each List method with x-ms-pageable extension.
+            </summary>
+            <param name="serviceClient"></param>
+            <param name="codeNamer"></param>
+        </member>
+    </members>
+</doc>

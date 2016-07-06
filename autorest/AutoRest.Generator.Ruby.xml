@@ -1,0 +1,856 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AutoRest.Generator.Ruby</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Rest.Generator.Ruby.RubyCodeGenerator">
+            <summary>
+            A class with main code generation logic for Ruby.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Ruby.RubyCodeGenerator.sdkName">
+            <summary>
+            The name of the SDK. Determined in the following way:
+            if the parameter 'Name' is provided that it becomes the
+            name of the SDK, otherwise the name of input swagger is converted
+            into Ruby style and taken as name.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Ruby.RubyCodeGenerator.packageVersion">
+            <summary>
+            The name of the package version to be used in creating a version.rb file
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Ruby.RubyCodeGenerator.packageName">
+            <summary>
+            The name of the package name to be used in creating a version.rb file
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Ruby.RubyCodeGenerator.sdkPath">
+            <summary>
+            Relative path to produced SDK files.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Ruby.RubyCodeGenerator.modelsPath">
+            <summary>
+            Relative path to produced SDK model files.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.RubyCodeGenerator.CodeNamer">
+            <summary>
+            A code namer instance (object which is responsible for correct files/variables naming).
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeGenerator.#ctor(Microsoft.Rest.Generator.Settings)">
+            <summary>
+            Initializes a new instance of the class RubyCodeGenerator.
+            </summary>
+            <param name="settings">The settings.</param>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.RubyCodeGenerator.Name">
+            <summary>
+            Gets the name of code generator.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.RubyCodeGenerator.Description">
+            <summary>
+            Gets the brief description of the code generator.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.RubyCodeGenerator.UsageInstructions">
+            <summary>
+            Gets the brief instructions required to complete before using the code generator.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.RubyCodeGenerator.ImplementationFileExtension">
+            <summary>
+            Gets the file extension of the generated code files.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeGenerator.NormalizeClientModel(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Normalizes client model by updating names and types to be language specific.
+            </summary>
+            <param name="serviceClient"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeGenerator.PopulateAdditionalProperties(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Adds special properties to the service client (e.g. credentials).
+            </summary>
+            <param name="serviceClient">The service client.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeGenerator.Generate(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Generates Ruby code for service client.
+            </summary>
+            <param name="serviceClient">The service client.</param>
+            <returns>Async task for generating SDK files.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Ruby.RubyCodeNamer">
+            <summary>
+            A class which keeps all naming related functionality.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Ruby.RubyCodeNamer.normalizedTypes">
+            <summary>
+            The set of already normalized types.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeNamer.#ctor">
+            <summary>
+            Initializes a new instance of RubyCodeNamer.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeNamer.UnderscoreCase(System.String)">
+            <summary>
+            Formats segments of a string into "underscore" case.
+            </summary>
+            <param name="name"></param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeNamer.RubyRemoveInvalidCharacters(System.String)">
+            <summary>
+            Corrects characters for Ruby compatibility.
+            </summary>
+            <param name="name">String to correct.</param>
+            <returns>Corrected string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeNamer.GetMethodName(System.String)">
+            <summary>
+            Returns name for the method which doesn't contain forbidden characters for current language.
+            </summary>
+            <param name="name">The intended name of method.</param>
+            <returns>The corrected name of method.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeNamer.GetFieldName(System.String)">
+            <summary>
+            Returns name for the field which doesn't contain forbidden characters for current language.
+            </summary>
+            <param name="name">The intended name of field.</param>
+            <returns>The corrected name of field.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeNamer.GetPropertyName(System.String)">
+            <summary>
+            Returns name for the property which doesn't contain forbidden characters for current language.
+            </summary>
+            <param name="name">The intended name of property.</param>
+            <returns>The corrected name of property.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeNamer.GetVariableName(System.String)">
+            <summary>
+            Returns name for the variable which doesn't contain forbidden characters for current language.
+            </summary>
+            <param name="name">The intended name of variable.</param>
+            <returns>The corrected name of variable.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeNamer.NormalizeClientModel(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Normalizes client model - corrects names/types to adapt them to current language.
+            </summary>
+            <param name="client">The service client.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeNamer.NormalizeParameters(Microsoft.Rest.Generator.ClientModel.Method)">
+            <summary>
+            Normalizes the parameter names of a method
+            </summary>
+            <param name="method"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeNamer.NormalizeClientProperties(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Normalizes the client properties names of a client model
+            </summary>
+            <param name="client">A client model</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeNamer.NormalizeTypeReference(Microsoft.Rest.Generator.ClientModel.IType)">
+            <summary>
+            Normalizes given type.
+            </summary>
+            <param name="type">Type to normalize.</param>
+            <returns>Normalized type.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeNamer.NormalizeCompositeType(Microsoft.Rest.Generator.ClientModel.CompositeType)">
+            <summary>
+            Normalizes composite type.
+            </summary>
+            <param name="compositeType">Type to normalize.</param>
+            <returns>Normalized type.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeNamer.NormalizeEnumType(Microsoft.Rest.Generator.ClientModel.EnumType)">
+            <summary>
+            Normalizes enum type.
+            </summary>
+            <param name="enumType">The enum type.</param>
+            <returns>Normalized enum type.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeNamer.NormalizePrimaryType(Microsoft.Rest.Generator.ClientModel.PrimaryType)">
+            <summary>
+            Normalizes primary type.
+            </summary>
+            <param name="primaryType">Primary type to normalize.</param>
+            <returns>Normalized primary type.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeNamer.NormalizeSequenceType(Microsoft.Rest.Generator.ClientModel.SequenceType)">
+            <summary>
+            Normalizes sequence type.
+            </summary>
+            <param name="sequenceType">The sequence type.</param>
+            <returns>Normalized sequence type.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RubyCodeNamer.NormalizeDictionaryType(Microsoft.Rest.Generator.ClientModel.DictionaryType)">
+            <summary>
+            Normalizes dictionary type.
+            </summary>
+            <param name="dictionaryType">The dictionary type.</param>
+            <returns>Normalized dictionary type.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Ruby.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Ruby.EnumTemplateModel">
+            <summary>
+            The model for the enum template.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.EnumTemplateModel.#ctor(Microsoft.Rest.Generator.ClientModel.EnumType)">
+            <summary>
+            Initializes a new instance of the class EnumTemplateModel.
+            </summary>
+            <param name="source">The source object.</param>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.EnumTemplateModel.TypeDefinitionName">
+            <summary>
+            Gets the trimmed name so that '?'
+            does not occur in the type definition
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Ruby.MethodGroupTemplateModel">
+            <summary>
+            The model for method group template.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.MethodGroupTemplateModel.#ctor(Microsoft.Rest.Generator.ClientModel.ServiceClient,System.String)">
+            <summary>
+            Initializes a new instance of the class MethodGroupTemplateModel.
+            </summary>
+            <param name="serviceClient">The service client.</param>
+            <param name="methodGroupName">The method group name.</param>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodGroupTemplateModel.HasModelTypes">
+            <summary>
+            Gets the flag indicating whether method include model types.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodGroupTemplateModel.MethodTemplateModels">
+            <summary>
+            Gets the method template models.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodGroupTemplateModel.MethodGroupName">
+            <summary>
+            Gets the method group (also known as operation) name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodGroupTemplateModel.Includes">
+            <summary>
+            Gets the list of modules/classes which need to be included.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Ruby.RequirementsTemplateModel">
+            <summary>
+            The model for requirements template (the main file which contains list of autoloading files).
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Ruby.RequirementsTemplateModel.SpacingForAutoload">
+            <summary>
+            Number of spaces between class name and file name required for better readability.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Ruby.RequirementsTemplateModel.sdkName">
+            <summary>
+            The name of the SDK.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Ruby.RequirementsTemplateModel.implementationFileExtension">
+            <summary>
+            Files extensions.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Ruby.RequirementsTemplateModel.ns">
+            <summary>
+            Namspace of the service client.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RequirementsTemplateModel.GetOrderedModels">
+            <summary>
+            Returns the ordered list of models. Ordered means that if some model has
+            another model as a base then the base will be before the model in the list.
+            </summary>
+            <returns>The ordered list of models.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RequirementsTemplateModel.GetAutoloadFormat(System.String,System.String)">
+            <summary>
+            Returns the formatted type and file name for 'autoload'ing it.
+            </summary>
+            <param name="typeName">The name of the type.</param>
+            <param name="fileName">The name of the file.</param>
+            <returns>File formatted for 'autoload'.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RequirementsTemplateModel.ExcludeModel(Microsoft.Rest.Generator.ClientModel.CompositeType)">
+            <summary>
+            Checks whether model should be excluded from producing.
+            </summary>
+            <param name="model">The model.</param>
+            <returns>True if should be excluded, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RequirementsTemplateModel.#ctor(Microsoft.Rest.Generator.ClientModel.ServiceClient,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of RequirementsTemplateModel class.
+            </summary>
+            <param name="serviceClient">The service client.</param>
+            <param name="sdkName">The name of the SDK.</param>
+            <param name="implementationFileExtension">The files extension.</param>
+            <param name="ns">The namespace of the SDK.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RequirementsTemplateModel.GetClientRequiredFile">
+            <summary>
+            Returns the API client fils for 'autoloading'.
+            </summary>
+            <returns>The API client client name in form of string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RequirementsTemplateModel.GetOperationsRequiredFiles">
+            <summary>
+            Returns a list of methods groups for 'autoloading' them.
+            </summary>
+            <returns>Method groups list in form of string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RequirementsTemplateModel.GetModelsRequiredFiles">
+            <summary>
+            Returns the list of model files for 'autoloading' them.
+            </summary>
+            <returns>Model files list in form of string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.RequirementsTemplateModel.GetDependencyGems">
+            <summary>
+            Returns a list of dependency gems.
+            </summary>
+            <returns>The list of 'required' gems in form of string.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Ruby.ServiceClientTemplateModel">
+            <summary>
+            The model for the service client template.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.ServiceClientTemplateModel.#ctor(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Initializes a new instance of ServiceClientTemplateModel class.
+            </summary>
+            <param name="serviceClient"></param>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.ServiceClientTemplateModel.HasModelTypes">
+            <summary>
+            Gets the flag indicating whether client include model types.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.ServiceClientTemplateModel.MethodTemplateModels">
+            <summary>
+            Gets and sets the model template models.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.ServiceClientTemplateModel.IsCustomBaseUri">
+            <summary>
+            Gets the flag indicating whether url is from x-ms-parameterized-host extension.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.ServiceClientTemplateModel.Includes">
+            <summary>
+            Gets the list of modules/classes which need to be included.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.ServiceClientTemplateModel.BaseType">
+            <summary>
+            Gets the base type of the client.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Ruby.MethodTemplateModel">
+            <summary>
+            The model object for regular Ruby methods.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.#ctor(Microsoft.Rest.Generator.ClientModel.Method,Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Initializes a new instance of the class MethodTemplateModel.
+            </summary>
+            <param name="source">The source object.</param>
+            <param name="serviceClient">The service client.</param>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.OperationResponseReturnTypeString">
+            <summary>
+            Gets the return type name for the underlying interface method
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.OperationExceptionTypeString">
+            <summary>
+            Gets the type for operation exception
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.InitializeResponseBody">
+            <summary>
+            Gets the code required to initialize response body.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.ClassNamespaces">
+            <summary>
+            Gets the list of namespaces where we look for classes that need to
+            be instantiated dynamically due to polymorphism.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.PathParamsRbDict">
+            <summary>
+            Gets the path parameters as a Ruby dictionary string
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.SkipEncodingPathParamsRbDict">
+            <summary>
+            Gets the skip encoding path parameters as a Ruby dictionary string
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.QueryParamsRbDict">
+            <summary>
+            Gets the query parameters as a Ruby dictionary string
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.SkipEncodingQueryParamsRbDict">
+            <summary>
+            Gets the skip encoding query parameters as a Ruby dictionary string
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.EncodingPathParams">
+            <summary>
+            Gets the path parameters not including the params that skip encoding
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.SkipEncodingPathParams">
+            <summary>
+            Gets the skip encoding path parameters
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.AllPathParams">
+            <summary>
+            Gets all path parameters
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.SkipEncodingQueryParams">
+            <summary>
+            Gets the skip encoding query parameters
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.EncodingQueryParams">
+            <summary>
+            Gets the query parameters not including the params that skip encoding
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.AllQueryParams">
+            <summary>
+            Gets all of the query parameters
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.FaradayMiddlewares">
+            <summary>
+            Gets the list of middelwares required for HTTP requests.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.SetDefaultHeaders">
+            <summary>
+            Gets the expression for default header setting.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.ServiceClient">
+            <summary>
+            Gets the reference to the service client object.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.ParameterTemplateModels">
+            <summary>
+            Gets the list of method paramater templates.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.Headers">
+            <summary>
+            Gets the list of parameter which need to be included into HTTP header.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.UrlWithoutParameters">
+            <summary>
+            Gets the URL without query parameters.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.SuccessStatusCodePredicate">
+            <summary>
+            Get the predicate to determine of the http operation status code indicates success
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.MethodParameterDeclaration">
+            <summary>
+            Gets the method parameter declaration parameters list.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.MethodParameterInvocation">
+            <summary>
+            Gets the method parameter invocation parameters list.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.LocalParameters">
+            <summary>
+            Get the parameters that are actually method parameters in the order they appear in the method signature
+            exclude global parameters
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.RequestBody">
+            <summary>
+            Get the method's request body (or null if there is no request body)
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.UrlReference">
+            <summary>
+            Generate a reference to the ServiceClient
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.ClientReference">
+            <summary>
+            Generate a reference to the ServiceClient
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.UrlWithPath">
+            <summary>
+            Gets the flag indicating whether URL contains path parameters.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.CreateDeserializationString(System.String,Microsoft.Rest.Generator.ClientModel.IType,System.String)">
+            <summary>
+            Creates a code in form of string which deserializes given input variable of given type.
+            </summary>
+            <param name="inputVariable">The input variable.</param>
+            <param name="type">The type of input variable.</param>
+            <param name="outputVariable">The output variable.</param>
+            <returns>The deserialization string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.CreateSerializationString(System.String,Microsoft.Rest.Generator.ClientModel.IType,System.String)">
+            <summary>
+            Creates a code in form of string which serializes given input variable of given type.
+            </summary>
+            <param name="inputVariable">The input variable.</param>
+            <param name="type">The type of input variable.</param>
+            <param name="outputVariable">The output variable.</param>
+            <returns>The serialization code.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.SaveExistingUrlItems(System.String,System.String)">
+            <summary>
+            Saves url items from the URL into collection.
+            </summary>
+            <param name="hashName">The name of the collection save url items to.</param>
+            <param name="variableName">The URL variable.</param>
+            <returns>Generated code of saving url items.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.RemoveDuplicateForwardSlashes(System.String)">
+            <summary>
+            Ensures that there is no duplicate forward slashes in the url.
+            </summary>
+            <param name="urlVariableName">The url variable.</param>
+            <returns>Updated url.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.BuildUrl(System.String)">
+            <summary>
+            Generate code to build the URL from a url expression and method parameters
+            </summary>
+            <param name="variableName">The variable to store the url in.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.GetStatusCodeReference(System.Net.HttpStatusCode)">
+            <summary>
+            Gets the formatted status code.
+            </summary>
+            <param name="code">The status code.</param>
+            <returns>Formatted status code.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.BuildPathParameters(System.String,Microsoft.Rest.Generator.Utilities.IndentedStringBuilder)">
+            <summary>
+            Generate code to replace path parameters in the url template with the appropriate values
+            </summary>
+            <param name="variableName">The variable name for the url to be constructed</param>
+            <param name="builder">The string builder for url construction</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.ParamsToRubyDict(System.Collections.Generic.IEnumerable{Microsoft.Rest.Generator.Ruby.ParameterTemplateModel})">
+            <summary>
+            Builds the parameters as a Ruby dictionary string
+            </summary>
+            <param name="parameters">The enumerable of parameters to be turned into a Ruby dictionary.</param>
+            <returns>ruby dictionary as a string</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.MethodTemplateModel.UrlPathNameFromPathPattern(System.String)">
+            <summary>
+            Builds the url path parameter from the pattern if exists
+            </summary>
+            <param name="urlPathParamName">Name of the path parameter to match.</param>
+            <returns>url path parameter as a string</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Ruby.TemplateModels.ClientModelExtensions">
+            <summary>
+            Keeps a few aux method used across all templates/models.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.TemplateModels.ClientModelExtensions.IsNullable(Microsoft.Rest.Generator.ClientModel.IType)">
+            <summary>
+            Determines if a type can be assigned the value null.
+            </summary>
+            <param name="type">The type to check.</param>
+            <returns>True if null can be assigned, otherwise false.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.TemplateModels.ClientModelExtensions.ToString(Microsoft.Rest.Generator.ClientModel.IType,System.String)">
+            <summary>
+            Simple conversion of the type to string.
+            </summary>
+            <param name="type">The type to convert</param>
+            <param name="reference">a reference to an instance of the type</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.TemplateModels.ClientModelExtensions.PrepareTypeForDocRecursively(Microsoft.Rest.Generator.ClientModel.IType)">
+            <summary>
+            Internal method for generating Yard-compatible representation of given type.
+            </summary>
+            <param name="type">The type doc needs to be generated for.</param>
+            <returns>Doc in form of string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.TemplateModels.ClientModelExtensions.GetSeparator(Microsoft.Rest.Generator.ClientModel.CollectionFormat)">
+            <summary>
+            Return the separator associated with a given collectionFormat.
+            </summary>
+            <param name="format">The collection format.</param>
+            <returns>The separator.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.TemplateModels.ClientModelExtensions.GetFormattedReferenceValue(Microsoft.Rest.Generator.ClientModel.Parameter)">
+            <summary>
+            Format the value of a sequence given the modeled element format. Note that only sequences of strings are supported.
+            </summary>
+            <param name="parameter">The parameter to format.</param>
+            <returns>A reference to the formatted parameter value.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.TemplateModels.ClientModelExtensions.GetYardDocumentation(Microsoft.Rest.Generator.ClientModel.IType)">
+            <summary>
+            Generates Yard-compatible representation of given type.
+            </summary>
+            <param name="type">The type doc needs to be generated for.</param>
+            <returns>Doc in form of string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.TemplateModels.ClientModelExtensions.ValidateType(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.Utilities.IScopeProvider,System.String)">
+            <summary>
+            Generate code to perform required validation on a type.
+            </summary>
+            <param name="type">The type to validate.</param>
+            <param name="scope">A scope provider for generating variable names as necessary.</param>
+            <param name="valueReference">A reference to the value being validated.</param>
+            <returns>The code to validate the reference of the given type.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.TemplateModels.ClientModelExtensions.IsSerializable(Microsoft.Rest.Generator.ClientModel.IType)">
+            <summary>
+            Determine whether a model should be serializable.
+            </summary>
+            <param name="type">The type to check.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.TemplateModels.ClientModelExtensions.HasModelTypes(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Verifies whether client includes model types.
+            </summary>
+            <param name="client">The client.</param>
+            <returns>True if client contain model types, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.TemplateModels.ClientModelExtensions.DeserializeType(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.Utilities.IScopeProvider,System.String)">
+            <summary>
+            Generates Ruby code in form of string for deserializing object of given type.
+            </summary>
+            <param name="type">Type of object needs to be deserialized.</param>
+            <param name="scope">Current scope.</param>
+            <param name="valueReference">Reference to object which needs to be deserialized.</param>
+            <returns>Generated Ruby code in form of string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.TemplateModels.ClientModelExtensions.SerializeType(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.Utilities.IScopeProvider,System.String)">
+            <summary>
+            Generates Ruby code in form of string for serializing object of given type.
+            </summary>
+            <param name="type">Type of object needs to be serialized.</param>
+            <param name="scope">Current scope.</param>
+            <param name="valueReference">Reference to object which needs to serialized.</param>
+            <returns>Generated Ruby code in form of string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.TemplateModels.ClientModelExtensions.DerivesFrom(Microsoft.Rest.Generator.ClientModel.CompositeType,Microsoft.Rest.Generator.ClientModel.CompositeType)">
+            <summary>
+            Determines whether one composite type derives directly or indirectly from another.
+            </summary>
+            <param name="type">Type to test.</param>
+            <param name="possibleAncestorType">Type that may be an ancestor of this type.</param>
+            <returns>true if the type is an ancestor, false otherwise.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Ruby.ParameterTemplateModel">
+            <summary>
+            The model for parameter template.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.ParameterTemplateModel.#ctor(Microsoft.Rest.Generator.ClientModel.Parameter)">
+            <summary>
+            Initializes a new instance of the class ParameterTemplateModel.
+            </summary>
+            <param name="source">The source parameter object.</param>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Ruby.PropertyTemplateModel">
+            <summary>
+            The model for property template.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.PropertyTemplateModel.#ctor(Microsoft.Rest.Generator.ClientModel.Property)">
+            <summary>
+            Initializes a new instance of the class PropertyTemplateModel.
+            </summary>
+            <param name="source">The source property object.</param>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Ruby.ModelTemplateModel">
+            <summary>
+            A model for the model template.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Ruby.ModelTemplateModel.scope">
+            <summary>
+            The current scope.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Ruby.ModelTemplateModel.parent">
+            <summary>
+            The reference to the base object.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Ruby.ModelTemplateModel.allTypes">
+            <summary>
+            List of all model types.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.ModelTemplateModel.PropertyTemplateModels">
+            <summary>
+            Gets the list of own properties of the object.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.ModelTemplateModel.Scope">
+            <summary>
+            Gets the current scope.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.ModelTemplateModel.Includes">
+            <summary>
+            Gets the list of modules/classes which need to be included.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.ModelTemplateModel.ClassNamespaces">
+            <summary>
+            Gets the list of namespaces where we look for classes that need to
+            be instantiated dynamically due to polymorphism.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.ModelTemplateModel.IsPolymorphic">
+            <summary>
+            Gets the value indicating whether current object is polymorhic.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.ModelTemplateModel.PolymorphicDiscriminatorProperty">
+            <summary>
+            Gets the polymorphic discriminator to use for the current object, or its parent's if it doesn't have one.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.ModelTemplateModel.DerivedTypes">
+            <summary>
+            Gets the list of all model types derived directly or indirectly from this type.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.ModelTemplateModel.#ctor(Microsoft.Rest.Generator.ClientModel.CompositeType,System.Collections.Generic.ISet{Microsoft.Rest.Generator.ClientModel.CompositeType})">
+            <summary>
+            Initializes a new instance of the ModelTemplateModel class.
+            </summary>
+            <param name="source">The object to create model from.</param>
+            <param name="allTypes">The list of all model types; Used to implement polymorphism.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.ModelTemplateModel.SerializeProperty(System.String,Microsoft.Rest.Generator.ClientModel.IType)">
+            <summary>
+            Generates code for model serialization.
+            </summary>
+            <param name="variableName">Variable serialize model from.</param>
+            <param name="type">The type of the model.</param>
+            <returns>The code for serialization in string format.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.ModelTemplateModel.DeserializeProperty(System.String,Microsoft.Rest.Generator.ClientModel.IType)">
+            <summary>
+            Generates code for model deserialization.
+            </summary>
+            <param name="variableName">Variable deserialize model from.</param>
+            <param name="type">The type of the model.</param>
+            <returns>The code for вуserialization in string format.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.ModelTemplateModel.GetBaseTypeName">
+            <summary>
+            Returns code for declaring inheritance.
+            </summary>
+            <returns>Code for declaring inheritance.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Ruby.ModuleDefinitionTemplateModel">
+            <summary>
+            The model for the service client template.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Ruby.ModuleDefinitionTemplateModel.ns">
+            <summary>
+            the namespace in the following format 'Azure::ARM::Foo::Bar'
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.ModuleDefinitionTemplateModel.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of ModuleDefinitionTemplateModel class.
+            </summary>
+            <param name="ns">namespace of the module</param>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.ModuleDefinitionTemplateModel.ModuleDeclarations">
+            <summary>
+            Get the module declarations for the entire depth of modules generated.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Ruby.VersionTemplateModel">
+            <summary>
+            The model for the service client template.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.Generator.Ruby.VersionTemplateModel.version">
+            <summary>
+            The package version of the Ruby Package
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Ruby.VersionTemplateModel.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of VersionClientTemplateModel class.
+            </summary>
+            <param name="version"></param>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Ruby.VersionTemplateModel.Version">
+            <summary>
+            Gets the package version of the Ruby Package
+            </summary>
+        </member>
+    </members>
+</doc>

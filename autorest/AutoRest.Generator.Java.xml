@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AutoRest.Generator.Java</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.Rest.Generator.Java.JavaCodeGenerator.NormalizeClientModel(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Normalizes client model by updating names and types to be language specific.
+            </summary>
+            <param name="serviceClient"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Java.JavaCodeGenerator.Generate(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Generate Java client code for given ServiceClient.
+            </summary>
+            <param name="serviceClient"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Java.JavaCodeNamer.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of CSharpCodeNamingFramework.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Java.JavaCodeNamer.ResolveMethodGroupNameCollision(Microsoft.Rest.Generator.ClientModel.ServiceClient,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Skips name collision resolution for method groups (operations) as they get
+            renamed in template models.
+            </summary>
+            <param name="serviceClient"></param>
+            <param name="exclusionDictionary"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Java.JavaCodeNamer.NormalizeParameters(Microsoft.Rest.Generator.ClientModel.Method)">
+            <summary>
+            Normalizes the parameter names of a method
+            </summary>
+            <param name="method"></param>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Java.JavaCodeNamer.NormalizeClientProperties(Microsoft.Rest.Generator.ClientModel.ServiceClient)">
+            <summary>
+            Normalizes the client properties names of a client model
+            </summary>
+            <param name="client">A client model</param>
+        </member>
+        <member name="T:Microsoft.Rest.Generator.Java.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Java.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Java.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Java.Properties.Resources.UsageInformation">
+            <summary>
+              Looks up a localized string similar to The {0} maven dependency is required to execute the generated code..
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Java.ScopeProvider.GetVariableName(System.String)">
+            <summary>
+            Get a variable name that is unique in this scope.
+            </summary>
+            <param name="prefix">Prefix to use in creating variable.</param>
+            <returns>A variable name unique in this scope.</returns>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Java.ModelTemplateModel.SpecialProperties">
+            <summary>
+            Returns list of properties that needs to be explicitly deserializes for a model.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Java.MethodTemplateModel.MethodParameterApiDeclaration">
+            <summary>
+            Generate the method parameter declarations for a method
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Java.MethodTemplateModel.BuildInputMappings(System.Boolean)">
+            <summary>
+            Generates input mapping code block.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Java.MethodTemplateModel.InitializeResponseBody">
+            <summary>
+            Gets the expression for response body initialization 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Java.MethodTemplateModel.MethodParameterApiDeclarationWithCallback">
+            <summary>
+            Generate the method parameter declarations with callback for a method
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Java.MethodTemplateModel.LocalParameters">
+            <summary>
+            Get the parameters that are actually method parameters in the order they appear in the method signature
+            exclude global parameters
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Generator.Java.MethodTemplateModel.OperationExceptionTypeString">
+            <summary>
+            Get the type for operation exception
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Generator.Java.TemplateModels.ClientModelExtensions.ImportSafe(Microsoft.Rest.Generator.ClientModel.IType)">
+            <summary>
+            A null friendly wrapper around type imports.
+            </summary>
+            <param name="type">an instance of IJavaType</param>
+            <returns>a list of imports to append</returns>
+        </member>
+    </members>
+</doc>
