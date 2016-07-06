@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Media/CheckNameAvailability": {
       "post": {
         "summary": "Check whether the Media Service resource name is available. The name must be globally unique.",
-        "operationId": "MediaServices_CheckNameAvailabilty",
+        "operationId": "MediaService_CheckNameAvailabilty",
         "responses": {
           "200": {
             "description": "OK",
@@ -74,7 +74,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices": {
       "get": {
         "summary": "List all of the Media Services in a resource group.",
-        "operationId": "MediaServices_ListByResourceGroup",
+        "operationId": "MediaService_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -112,7 +112,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{mediaServiceName}": {
       "get": {
         "summary": "Get a Media Service.",
-        "operationId": "MediaServices_GetMediaService",
+        "operationId": "MediaService_Get",
         "responses": {
           "200": {
             "description": "OK",
@@ -155,7 +155,7 @@
       },
       "put": {
         "summary": "Create a Media Service.",
-        "operationId": "MediaServices_PutMediaService",
+        "operationId": "MediaService_Create",
         "responses": {
           "200": {
             "description": "OK",
@@ -213,7 +213,7 @@
       },
       "delete": {
         "summary": "Delete a Media Service.",
-        "operationId": "MediaServices_DeleteMediaService",
+        "operationId": "MediaService_Delete",
         "responses": {
           "200": {
             "description": "OK"
@@ -253,7 +253,7 @@
       },
       "patch": {
         "summary": "Update a Media Service.",
-        "operationId": "MediaServices_UpdateMediaService",
+        "operationId": "MediaService_Update",
         "responses": {
           "200": {
             "description": "OK",
@@ -307,7 +307,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{mediaServiceName}/regenerateKey": {
       "post": {
         "summary": "Regenerate the key for a Media Service.",
-        "operationId": "MediaServices_RegenerateKey",
+        "operationId": "MediaService_RegenerateKey",
         "responses": {
           "200": {
             "description": "OK",
@@ -364,7 +364,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{mediaServiceName}/listKeys": {
       "post": {
         "summary": "List the keys for a Media Service.",
-        "operationId": "MediaServices_ListKeys",
+        "operationId": "MediaService_ListKeys",
         "responses": {
           "200": {
             "description": "OK",
@@ -412,7 +412,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{mediaServiceName}/syncStorageKeys": {
       "post": {
         "summary": "Synchronize the keys for a storage account to the Media Service.",
-        "operationId": "MediaServices_SyncStorageKeys",
+        "operationId": "MediaService_SyncStorageKeys",
         "responses": {
           "200": {
             "description": "OK",
@@ -489,7 +489,7 @@
           "type": "string"
         },
         "message": {
-          "description": "Error message",
+          "description": "Error message.",
           "type": "string"
         }
       }
@@ -498,8 +498,11 @@
       "description": "The request body for CheckNameAvailability API.",
       "properties": {
         "name": {
-          "description": "Specifies the type of the resource.",
-          "type": "string"
+          "description": "The name of the resource. A name must be globally unique.",
+          "type": "string",
+          "pattern": "^[a-z0-9]",
+          "minLength": 3,
+          "maxLength": 24
         },
         "type": {
           "description": "Specifies the type of the resource.",
@@ -508,14 +511,14 @@
       }
     },
     "CheckNameAvailabilityOutput": {
-      "description": "The request body for CheckNameAvailability API.",
+      "description": "The response body for CheckNameAvailability API.",
       "properties": {
         "nameAvailable": {
-          "description": "Specifiies if the name is available.",
+          "description": "Specifies if the name is available.",
           "type": "boolean"
         },
         "reason": {
-          "description": "Specifiies the reason if the name is not available",
+          "description": "Specifies the reason if the name is not available.",
           "type": "string",
           "enum": [
             "None",
@@ -528,7 +531,7 @@
           }  
         },
         "message": {
-          "description": "Specifiies the detailed reason if the name is not available",
+          "description": "Specifies the detailed reason if the name is not available.",
           "type": "string"
         }
       }
@@ -537,6 +540,7 @@
       "description": "The properties of a Media Service resource.",
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/MediaServiceProperties"
         }
       },
@@ -580,7 +584,7 @@
       "description": "The request body for a RegenerateKey API.",
       "properties": {
         "keyType": {
-          "description": "The keyType indicating which key you want to regenerate.",
+          "description": "The keyType indicating which key you want to regenerate, Primary or Secondary.",
           "type": "string",
           "enum": [
             "Primary",
@@ -597,7 +601,7 @@
       "description": "The response body for a RegenerateKey API.",
       "properties": {
         "key": {
-          "description": "The new key of either the primary or secondary key.",
+          "description": "The new value of either the primary or secondary key.",
           "type": "string"
         }
       }
