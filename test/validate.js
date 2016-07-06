@@ -162,7 +162,7 @@ function clrCmd(cmd) {
 
 function constructAutorestExePath(version) {
   // return path.join('packages', 'autorest.' + version, 'tools', 'AutoRest.exe');
-  return "C:\\Code\\autorest\\binaries\\net45\\AutoRest.exe";
+  return "./autorest/AutoRest.exe";
 }
 
 function runAutoRestOnSwagger(specFile, done) {
