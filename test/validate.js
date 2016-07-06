@@ -16,7 +16,10 @@ var exec = require('child_process').exec;
 var spawn = require('child_process').spawn;
 
 var globPath = path.join(__dirname, '../', '/**/swagger/*.json');
+var quickStartPath = path.join(__dirname, '../', '/**/quickstart-templates/*.json');
+var quickStartSwaggers = _(glob.sync(quickStartPath));
 var swaggers = _(glob.sync(globPath));
+swaggers = _(swaggers, quickStartSwaggers);
 
 var mappings = {
   'authorization': {
@@ -178,8 +181,11 @@ function runAutoRestOnSwagger(specFile, done) {
     autoRestExe, currentModeler, specPath);
   var dat = "";
   var spwn = spawn(clrCmd(autoRestExe),
-    ["-CodeGenerator", "None", "-Modeler", currentModeler, "-Input", specPath, "-ValidationLevel", "Warning"]);
+    ["-CodeGenerator", "None", "-Modeler", currentModeler, "-Input", specPath, "-ValidationLevel", "Warning", "-Verbose"]);
   spwn.stdout.on("data", function(data) {
+    dat += data;
+  });
+  spwn.stderr.on("data", function(data) {
     dat += data;
   });
   var cls = function() {
