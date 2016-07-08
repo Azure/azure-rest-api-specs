@@ -3,7 +3,7 @@
   "info": {
     "version": "2016-02-03",
     "title": "iotHubClient",
-    "description": "API for using the IoT Hub Features"
+    "description": "API for using the IoT Hub Features."
   },
   "host": "management.azure.com",
   "schemes": ["https"],
@@ -11,8 +11,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}": {
       "get": {
         "tags": ["GET"],
-        "summary": "Get an IotHub",
-        "description": "Get an IotHub",
+        "summary": "Get an IotHub.",
+        "description": "Get an IotHub.",
         "operationId": "IotHubResource_Get",
         "consumes": [],
         "produces": ["application/json", "text/json"],
@@ -51,8 +51,8 @@
       },
       "put": {
         "tags": ["PUT"],
-        "summary": "Create or update an IotHub",
-        "description": "Create or update an IotHub",
+        "summary": "Create or update an IotHub.",
+        "description": "Create or update an IotHub.",
         "operationId": "IotHubResource_CreateOrUpdate",
         "consumes": ["application/json", "text/json"],
         "produces": ["application/json", "text/json"],
@@ -73,7 +73,7 @@
         }, {
           "name": "iotHubDescription",
           "in": "body",
-          "description": "The iot hub description.",
+          "description": "The Iot hub description.",
           "required": true,
           "schema": {
             "$ref": "#/definitions/IotHubDescription"
@@ -99,8 +99,8 @@
       },
       "delete": {
         "tags": ["DELETE"],
-        "summary": "Delete an IotHub",
-        "description": "Delete an IotHub",
+        "summary": "Delete an IotHub.",
+        "description": "Delete an IotHub.",
         "operationId": "IotHubResource_Delete",
         "consumes": [],
         "produces": ["application/json", "text/json"],
@@ -141,8 +141,8 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Devices/IotHubs": {
       "get": {
         "tags": ["GET"],
-        "summary": "Get all IotHubs in a subscription",
-        "description": "Get all IotHubs in a subscription",
+        "summary": "Get all IotHubs in a subscription.",
+        "description": "Get all IotHubs in a subscription.",
         "operationId": "IotHubResource_ListBySubscription",
         "consumes": [],
         "produces": ["application/json", "text/json"],
@@ -174,8 +174,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs": {
       "get": {
         "tags": ["GET"],
-        "summary": "Get all IotHubs in a Resourcegroup",
-        "description": "Get all IotHubs in a Resource group",
+        "summary": "Get all IotHubs in a Resourcegroup.",
+        "description": "Get all IotHubs in a Resource group.",
         "operationId": "IotHubResource_ListByResourceGroup",
         "consumes": [],
         "produces": ["application/json", "text/json"],
@@ -210,66 +210,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/operationresults/{operationId}": {
-      "get": {
-        "tags": ["GET"],
-        "summary": "Get the result of a long running operation like create or update iothub",
-        "description": "Get the result of a long running operation like create or update iothub",
-        "operationId": "IotHubResource_GetOperationResult",
-        "consumes": [],
-        "produces": ["application/json", "text/json"],
-        "parameters": [{
-          "name": "operationId",
-          "in": "path",
-          "description": "The operation identifier.",
-          "required": true,
-          "type": "string"
-        }, {
-          "$ref": "#/parameters/subscriptionId"
-        }, {
-          "name": "resourceGroupName",
-          "description": "The name of the resource group.",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "resourceName",
-          "description": "The name of the resource",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "asyncinfo",
-          "in": "query",
-          "description": "asyncinfo flag",
-          "required": true,
-          "type": "string",
-          "default": "true"
-        }, {
-          "$ref": "#/parameters/api-version"
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AsyncOperationResult"
-            }
-          },
-          "default": {
-            "description": "DefaultErrorResponse",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/IotHubStats": {
       "get": {
         "tags": ["GET"],
-        "summary": "Get IotHub Stats",
-        "description": "Get IotHub Stats",
+        "summary": "Get IotHub Stats.",
+        "description": "Get IotHub Stats.",
         "operationId": "IotHubResource_GetStats",
         "consumes": [],
         "produces": ["application/json", "text/json"],
@@ -310,8 +255,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/skus": {
       "get": {
         "tags": ["GET"],
-        "summary": "Get Valid Skus",
-        "description": "Get Valid Skus",
+        "summary": "Get Valid Skus.",
+        "description": "Get Valid Skus.",
         "operationId": "IotHubResource_GetValidSkus",
         "consumes": [],
         "produces": ["application/json", "text/json"],
@@ -355,8 +300,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/eventHubEndpoints/{eventHubEndpointName}/ConsumerGroups": {
       "get": {
         "tags": ["GET"],
-        "summary": "Get EventHub Consumer Groups for an IotHub",
-        "description": "Get EventHub Consumer Groups for an IotHub",
+        "summary": "Get EventHub Consumer Groups for an IotHub.",
+        "description": "Get EventHub Consumer Groups for an IotHub.",
         "operationId": "IotHubResource_ListEventHubConsumerGroups",
         "consumes": [],
         "produces": ["application/json", "text/json"],
@@ -406,8 +351,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/eventHubEndpoints/{eventHubEndpointName}/ConsumerGroups/{name}": {
       "get": {
         "tags": ["GET"],
-        "summary": "Get EventHub Consumer Group for an IotHub",
-        "description": "Get EventHub Consumer Group for an IotHub",
+        "summary": "Get EventHub Consumer Group for an IotHub.",
+        "description": "Get EventHub Consumer Group for an IotHub.",
         "operationId": "IotHubResource_GetEventHubConsumerGroup",
         "consumes": [],
         "produces": ["application/json", "text/json"],
@@ -458,8 +403,8 @@
       },
       "put": {
         "tags": ["PUT"],
-        "summary": "Add an EventHub Consumer Group to an IotHub",
-        "description": "Add an EventHub Consumer Group to an IotHub",
+        "summary": "Add an EventHub Consumer Group to an IotHub.",
+        "description": "Add an EventHub Consumer Group to an IotHub.",
         "operationId": "IotHubResource_CreateEventHubConsumerGroup",
         "consumes": [],
         "produces": ["application/json", "text/json"],
@@ -510,8 +455,8 @@
       },
       "delete": {
         "tags": ["DELETE"],
-        "summary": "Delete EventHub Consumer Group for an IotHub",
-        "description": "Delete EventHub Consumer Group for an IotHub",
+        "summary": "Delete EventHub Consumer Group for an IotHub.",
+        "description": "Delete EventHub Consumer Group for an IotHub.",
         "operationId": "IotHubResource_DeleteEventHubConsumerGroup",
         "consumes": [],
         "produces": ["application/json", "text/json"],
@@ -564,8 +509,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/jobs": {
       "get": {
         "tags": ["GET"],
-        "summary": "Get all the jobs in an IotHub",
-        "description": "Get all the jobs in an IotHub",
+        "summary": "Get all the jobs in an IotHub.",
+        "description": "Get all the jobs in an IotHub.",
         "operationId": "IotHubResource_ListJobs",
         "consumes": [],
         "produces": ["application/json", "text/json"],
@@ -609,8 +554,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/jobs/{jobId}": {
       "get": {
         "tags": ["GET"],
-        "summary": "Get a job in an IotHub",
-        "description": "Get a job in an IotHub",
+        "summary": "Get a job in an IotHub.",
+        "description": "Get a job in an IotHub.",
         "operationId": "IotHubResource_GetJob",
         "consumes": [],
         "produces": ["application/json", "text/json"],
@@ -657,8 +602,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/quotaMetrics": {
       "get": {
         "tags": ["GET"],
-        "summary": "Get quota metrics for an IotHub",
-        "description": "Get quota metrics for an IotHub",
+        "summary": "Get quota metrics for an IotHub.",
+        "description": "Get quota metrics for an IotHub.",
         "operationId": "IotHubResource_GetQuotaMetrics",
         "consumes": [],
         "produces": ["application/json", "text/json"],
@@ -702,8 +647,8 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Devices/checkNameAvailability": {
       "post": {
         "tags": ["POST"],
-        "summary": "Check if an IotHub name is available",
-        "description": "Check if an IotHub name is available",
+        "summary": "Check if an IotHub name is available.",
+        "description": "Check if an IotHub name is available.",
         "operationId": "IotHubResource_CheckNameAvailability",
         "consumes": ["application/json", "text/json"],
         "produces": ["application/json", "text/json"],
@@ -712,7 +657,7 @@
         }, {
           "name": "operationInputs",
           "in": "body",
-          "description": "The operation inputs. Set the name parameter in the operationInputs structure to the desired iothub name",
+          "description": "The operation inputs. Set the name parameter in the operationInputs structure to the desired iothub name.",
           "required": true,
           "schema": {
             "$ref": "#/definitions/OperationInputs"
@@ -740,8 +685,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/listkeys": {
       "post": {
         "tags": ["POST"],
-        "summary": "Get all Shared Access Policies for an IotHub",
-        "description": "Get all Shared Access Policies for an IotHub",
+        "summary": "Get all Shared Access Policies for an IotHub.",
+        "description": "Get all Shared Access Policies for an IotHub.",
         "operationId": "IotHubResource_ListKeys",
         "consumes": [],
         "produces": ["application/json", "text/json"],
@@ -785,8 +730,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/IotHubKeys/{keyName}/listkeys": {
       "post": {
         "tags": ["POST"],
-        "summary": "Get the Key given a specific KeyName for an IotHub",
-        "description": "Get the Key given a specific KeyName for an IotHub",
+        "summary": "Get the Key given a specific KeyName for an IotHub.",
+        "description": "Get the Key given a specific KeyName for an IotHub.",
         "operationId": "IotHubResource_GetKeysForKeyName",
         "consumes": [],
         "produces": ["application/json", "text/json"],
@@ -833,8 +778,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/exportDevices": {
       "post": {
         "tags": ["POST"],
-        "summary": "Export all the Devices in an IotHub",
-        "description": "Export all the Devices in an IotHub",
+        "summary": "Export all the devices in an IotHub.",
+        "description": "Export all the devices in an IotHub.",
         "operationId": "IotHubResource_ExportDevices",
         "consumes": ["application/json", "text/json"],
         "produces": ["application/json", "text/json"],
@@ -883,8 +828,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/importDevices": {
       "post": {
         "tags": ["POST"],
-        "summary": "Import all the Devices in an IotHub",
-        "description": "Import all the Devices in an IotHub",
+        "summary": "Import all the devices in an IotHub.",
+        "description": "Import all the devices in an IotHub.",
         "operationId": "IotHubResource_ImportDevices",
         "consumes": ["application/json", "text/json"],
         "produces": ["application/json", "text/json"],
@@ -937,7 +882,7 @@
       "properties": {}
     },
     "SharedAccessSignatureAuthorizationRule": {
-      "description": "Contains properties that describe the keys to access the IotHub artifacts.",
+      "description": "The properties that describe the keys to access the IotHub artifacts.",
       "type": "object",
       "properties": {
         "keyName": {
@@ -958,13 +903,13 @@
           "type": "string",
           "x-ms-enum": {
             "name": "AccessRights",
-            "modelAsString": "False"
+            "modelAsString": false
           }
         }
       }
     },
     "IotHubProperties": {
-      "description": "Contains user facing view of Iot Hub properties",
+      "description": "The Iot Hub properties.",
       "type": "object",
       "properties": {
         "authorizationPolicies": {
@@ -979,7 +924,7 @@
           "type": "string"
         },
         "eventHubEndpoints": {
-          "description": "The event hub endpoints.",
+          "description": "The event hub endpoint properties.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/EventHubProperties"
@@ -1019,13 +964,13 @@
           "type": "string",
           "x-ms-enum": {
             "name": "Capabilities",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         }
       }
     },
     "IotHubSkuInfo": {
-      "description": "Class IotHubSkuInfo. Contains the Sku related information for the hub.",
+      "description": "The Sku related information for the hub.",
       "type": "object",
       "properties": {
         "name": {
@@ -1034,7 +979,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "IotHubSku",
-            "modelAsString": "False"
+            "modelAsString": true
           }
         },
         "tier": {
@@ -1044,28 +989,28 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "IotHubSkuTier",
-            "modelAsString": "False"
+            "modelAsString": false
           }
         },
         "capacity": {
           "format": "int64",
-          "description": "The number of units being provisioned.",
+          "description": "The number of units being provisioned. Range of values [For F1: 1-1, S1: 1-200, S2: 1-200, S3: 1-10]. To go above this range, call support.",
           "type": "integer"
         }
       }
     },
     "EventHubProperties": {
-      "description": "Contains the user facing view of the properties of the provisioned event hub used by the Iot Hub",
+      "description": "The properties of the provisioned event hub used by the Iot Hub.",
       "type": "object",
       "properties": {
         "retentionTimeInDays": {
           "format": "int64",
-          "description": "The retention time in days.",
+          "description": "The retention time in days. Range of values [For F1: 1-1, S1: 1-7, S2: 1-7, S3: 1-7].",
           "type": "integer"
         },
         "partitionCount": {
           "format": "int32",
-          "description": "The partition count.",
+          "description": "The partition count. Range of values [For F1: 2-2, S1: 2-128, S2: 2-128, S3: 2-128].",
           "type": "integer"
         },
         "partitionIds": {
@@ -1100,57 +1045,57 @@
       }
     },
     "StorageEndpointProperties": {
-      "description": "Contains the user facing view of the properties of the Storage Endpoint provided by the customer for file upload",
+      "description": "The properties of the Storage Endpoint for file upload.",
       "type": "object",
       "properties": {
         "sasTtlAsIso8601": {
-          "description": "SAS time to live",
-          "format": "date-time",
+          "description": "SAS time to live. Range: 1 Min - 1 Day.",
           "type": "string"
         },
         "connectionString": {
-          "description": "The account key credentials for storage account selected by customer for uploading files",
+          "description": "The account key credentials for storage account selected by customer for uploading files.",
           "type": "string"
         },
         "containerName": {
-          "description": "The root container name where all files will be uploaded",
+          "description": "The root container name where all files will be uploaded.",
           "type": "string"
         }
       }
     },
     "MessagingEndpointProperties": {
-      "description": "Contains the user facing view of the properties of the Messaging Endpoints used by this IoT Hub",
+      "description": "The properties of the Messaging Endpoints used by this IoT Hub.",
       "type": "object",
       "properties": {
         "lockDurationAsIso8601": {
-          "description": "The lock duration",
-          "format": "date-time",
+          "description": "The lock duration. Range: 5 Sec - 5 Min.",
           "type": "string"
         },
         "ttlAsIso8601": {
-          "description": "The time to live",
-          "format": "date-time",
+          "description": "The time to live. Range: 1 Min - 2 Days.",
           "type": "string"
         },
         "maxDeliveryCount": {
-          "description": "The max delivery count",
+          "description": "The max delivery count. Range: 1-100.",
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
         }
       }
     },
     "CloudToDeviceProperties": {
-      "description": "Contains user facing view of Iot Hub Cloud-To-Device messaging properties",
+      "description": "The Iot Hub Cloud-To-Device messaging properties.",
       "type": "object",
       "properties": {
         "maxDeliveryCount": {
-          "description": "The max delivery count",
+          "description": "The max delivery count for the device queue. Range : 1-100.",
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
         },
         "defaultTtlAsIso8601": {
-          "description": "The default time to live",
-          "format": "date-time",
+          "description": "The default time to live for the device queue. Range : 1 Min - 2 Days.",
           "type": "string"
         },
         "feedback": {
@@ -1159,18 +1104,18 @@
       }
     },
     "OperationsMonitoringProperties": {
-      "description": "Contains the user facing view of the Operation Monitoring properties",
+      "description": "The Operation Monitoring properties.",
       "type": "object",
       "properties": {
         "events": {
           "type": "object",
           "additionalProperties": {
             "enum": ["None", "Error", "Information"],
-            "description": "Operation Monitoring Level",
+            "description": "The Operation Monitoring Level.",
             "type": "string",
             "x-ms-enum": {
               "name": "OperationMonitoringLevel",
-              "modelAsString": "False"
+              "modelAsString": true
             }
           }
         }
@@ -1180,81 +1125,81 @@
       "type": "object",
       "properties": {
         "KeyName": {
-          "description": "The key name",
+          "description": "The key name.",
           "type": "string"
         },
         "PrimaryKey": {
-          "description": "The primary key",
+          "description": "The primary key.",
           "type": "string"
         },
         "IssuerName": {
-          "description": "The issuer name",
+          "description": "The issuer name.",
           "type": "string"
         },
         "SecondaryKey": {
-          "description": "The secondary key",
+          "description": "The secondary key.",
           "type": "string"
         },
         "ClaimType": {
-          "description": "The claim type",
+          "description": "The claim type.",
           "type": "string"
         },
         "ClaimValue": {
-          "description": "The claim value",
+          "description": "The claim value.",
           "type": "string"
         },
         "Rights": {
           "type": "array",
-          "description": "The rights",
+          "description": "The rights.",
           "items": {
             "enum": ["Manage", "Send", "Listen", "ManageNotificationHub"],
             "type": "string",
             "x-ms-enum": {
-              "name": "AccessRights",
-              "modelAsString": "False"
+              "name": "SBAccessRights",
+              "modelAsString": false
             }
           }
         },
         "CreatedTime": {
-          "description": "The created time",
+          "description": "The created time.",
           "format": "date-time",
           "type": "string"
         },
         "ModifiedTime": {
-          "description": "The modified time",
+          "description": "The modified time.",
           "format": "date-time",
           "type": "string"
         },
         "Revision": {
-          "description": "The revision",
+          "description": "The revision.",
           "format": "int64",
           "type": "integer"
         }
       }
     },
     "FeedbackProperties": {
-      "description": "Contains user facing view of Iot Hub Feedback Queue properties",
+      "description": "The Feedback Queue properties.",
       "type": "object",
       "properties": {
         "lockDurationAsIso8601": {
-          "description": "The lock duration",
-          "format": "date-time",
+          "description": "The lock duration for the feedback queue. Range: 5 Sec - 5 Min.",
           "type": "string"
         },
         "ttlAsIso8601": {
-          "description": "The time to live",
-          "format": "date-time",
+          "description": "The time to live for the feedback queue. Range: 1 Min - 2 Days",
           "type": "string"
         },
         "maxDeliveryCount": {
-          "description": "The max delivery count",
+          "description": "The max delivery count. Range : 1-100",
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
         }
       }
     },
     "IotHubDescription": {
-      "description": "Contains user facing view of the Description of the IotHub",
+      "description": "The description of the IotHub.",
       "type": "object",
       "properties": {
         "subscriptionid": {
@@ -1262,7 +1207,7 @@
           "type": "string"
         },
         "resourcegroup": {
-          "description": "The resource group name uniquely identifies the resource group within the user subscriptionId. The resource group name must be no longer than 80 characters long, and must be alphanumeric characters (Char.IsLetterOrDigit()) and ‘-‘, ‘_’, ‘(‘, ‘)’ and‘.’. Note that the name cannot end with ‘.’",
+          "description": "The resource group name uniquely identifies the resource group within the user subscriptionId. The resource group name must be no longer than 80 characters long, and must be alphanumeric characters (Char.IsLetterOrDigit()) and ‘-‘, ‘_’, ‘(‘, ‘)’ and‘.’. Note that the name cannot end with ‘.’.",
           "type": "string"
         },
         "etag": {
@@ -1287,38 +1232,38 @@
         "id": { 
           "readOnly": true, 
           "type": "string", 
-          "description": "Resource Id" 
+          "description": "The Resource Id." 
         }, 
         "name": { 
           "readOnly": true, 
           "type": "string", 
-          "description": "Resource name" 
+          "description": "The Resource name." 
         }, 
         "type": { 
           "readOnly": true, 
           "type": "string", 
-          "description": "Resource type" 
+          "description": "The Resource type." 
         }, 
         "location": { 
           "type": "string", 
-          "description": "Resource location" 
+          "description": "The Resource location." 
         }, 
         "tags": { 
           "type": "object", 
           "additionalProperties": { 
             "type": "string" 
           }, 
-          "description": "Resource tags" 
+          "description": "The Resource tags." 
         }
       },
       "x-ms-azure-resource": true 
     }, 
     "SharedAccessSignatureAuthorizationRuleListResult": {
-      "description": "Contains the user view of a List of authorization rules with a next link",
+      "description": "The list of authorization rules with a next link.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of authorization rules",
+          "description": "The list of authorization rules.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SharedAccessSignatureAuthorizationRule"
@@ -1332,7 +1277,7 @@
       }
     },
     "ErrorDetails": {
-      "description": "Contains properties related to the details of an error.",
+      "description": "The properties related to the details of an error.",
       "type": "object",
       "properties": {
         "Code": {
@@ -1355,7 +1300,7 @@
       }
     },
     "IotHubQuotaMetricInfoListResult": {
-      "description": "Contains the list of IotHubQuotaMetricInfo with a next link.",
+      "description": "The list of IotHubQuotaMetricInfo objects with a next link.",
       "type": "object",
       "properties": {
         "value": {
@@ -1372,35 +1317,8 @@
         }
       }
     },
-    "AsyncOperationResult": {
-      "description": "Contains properties related to the status of a long running operation.",
-      "type": "object",
-      "properties": {
-        "Status": {
-          "description": "The status of the async operation.",
-          "type": "string"
-        },
-        "Error": {
-          "$ref": "#/definitions/ErrorMesssage"
-        }
-      }
-    },
-    "ErrorMesssage": {
-      "description": "Contains properties related to an error message.",
-      "type": "object",
-      "properties": {
-        "Code": {
-          "description": "The error code.",
-          "type": "string"
-        },
-        "Message": {
-          "description": "The error message.",
-          "type": "string"
-        }
-      }
-    },
     "RegistryStatistics": {
-      "description": "Contains the properties related to the registry statistics of an IotHub.",
+      "description": "The properties related to the registry statistics.",
       "type": "object",
       "properties": {
         "totalDeviceCount": {
@@ -1421,11 +1339,11 @@
       }
     },
     "JobResponseListResult": {
-      "description": "Contains the user view of the List of JobResponse with a next link",
+      "description": "The list of JobResponse objects with a next link.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of JobResponse",
+          "description": "The list of JobResponse.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobResponse"
@@ -1439,7 +1357,7 @@
       }
     },
     "IotHubSkuDescription": {
-      "description": "Contains properties related to the Iot Hub Sku.",
+      "description": "The properties related to the Sku.",
       "type": "object",
       "properties": {
         "resourceType": {
@@ -1456,13 +1374,15 @@
       }
     },
     "IotHubCapacity": {
-      "description": "Contains the properties related to the IotHub capacity information.",
+      "description": "The properties related to the capacity information.",
       "type": "object",
       "properties": {
         "minimum": {
           "format": "int64",
           "description": "The minimum number of units.",
-          "type": "integer"
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1
         },
         "maximum": {
           "format": "int64",
@@ -1480,17 +1400,17 @@
           "type": "string",
           "x-ms-enum": {
             "name": "IotHubScaleType",
-            "modelAsString": "False"
+            "modelAsString": false
           }
         }
       }
     },
     "StringListResult": {
-      "description": "The user view of a List of strings with a next link",
+      "description": "The list of strings with a next link.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of strings",
+          "description": "The list of strings.",
           "type": "array",
           "items": {
             "type": "string"
@@ -1504,7 +1424,7 @@
       }
     },
     "EventHubConsumerGroupInfo": {
-      "description": "Contains user facing properties indicating the EventHubConsumerGroupInfo.",
+      "description": "The properties indicating the EventHubConsumerGroupInfo.",
       "type": "object",
       "properties": {
         "tags": {
@@ -1525,11 +1445,11 @@
       }
     },
     "IotHubSkuDescriptionListResult": {
-      "description": "Contains the user view of a List of IotHubSkuDescription with a next link",
+      "description": "The list of IotHubSkuDescription objects with a next link.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of IotHubSkuDescription",
+          "description": "The list of IotHubSkuDescription.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IotHubSkuDescription"
@@ -1543,7 +1463,7 @@
       }
     },
     "JobResponse": {
-      "description": "Contains user facing properties describing a Job Response",
+      "description": "The properties describing a Job Response.",
       "type": "object",
       "properties": {
         "jobId": {
@@ -1566,7 +1486,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "JobType",
-            "modelAsString": "True"
+            "modelAsString": true
           }
         },
         "status": {
@@ -1575,7 +1495,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "JobStatus",
-            "modelAsString": "False"
+            "modelAsString": false
           }
         },
         "failureReason": {
@@ -1583,7 +1503,7 @@
           "type": "string"
         },
         "statusMessage": {
-          "description": "Status message for the job",
+          "description": "The status message for the job.",
           "type": "string"
         },
         "deviceId": {
@@ -1597,11 +1517,11 @@
       }
     },
     "IotHubDescriptionListResult": {
-      "description": "Contains the user view of a List of IotHubDescription with a next link",
+      "description": "The list of IotHubDescription objects with a next link.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of IotHubDescription",
+          "description": "The list of IotHubDescription.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IotHubDescription"
@@ -1615,7 +1535,7 @@
       }
     },
     "IotHubQuotaMetricInfo": {
-      "description": "Contains properties related to quota metrics for an Iot Hub.",
+      "description": "The properties related to quota metrics.",
       "type": "object",
       "properties": {
         "Name": {
@@ -1645,11 +1565,11 @@
       }
     },
     "IotHubNameAvailabilityInfo": {
-      "description": "Contains the user view of properties indicating whether a given iothub name is available",
+      "description": "The properties indicating whether a given iothub name is available.",
       "type": "object",
       "properties": {
         "nameAvailable": {
-          "description": "The value indicating whether the provided name is available.",
+          "description": "The value which indicates whether the provided name is available.",
           "type": "boolean"
         },
         "reason": {
@@ -1658,7 +1578,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "IotHubNameUnavailabilityReason",
-            "modelAsString": "False"
+            "modelAsString": false
           }
         },
         "message": {
