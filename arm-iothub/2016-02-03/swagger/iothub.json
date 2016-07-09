@@ -20,6 +20,7 @@
           "name": "resourceName",
           "in": "path",
           "description": "The name of the resource.",
+          "pattern":  "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$",
           "required": true,
           "type": "string"
         }, {
@@ -899,7 +900,23 @@
         },
         "rights": {
           "description": "The access rights.",
-          "enum": ["RegistryRead", "RegistryWrite", "ServiceConnect", "DeviceConnect"],
+          "enum": [
+            "RegistryRead",
+            "RegistryWrite",
+            "ServiceConnect",
+            "DeviceConnect",
+            "RegistryRead, RegistryWrite",
+            "RegistryRead, ServiceConnect",
+            "RegistryRead, DeviceConnect",
+            "RegistryWrite, ServiceConnect",
+            "RegistryWrite, DeviceConnect",
+            "ServiceConnect, DeviceConnect",
+            "RegistryRead, RegistryWrite, ServiceConnect",
+            "RegistryRead, RegistryWrite, DeviceConnect",
+            "RegistryRead, ServiceConnect, DeviceConnect",
+            "RegistryWrite, ServiceConnect, DeviceConnect",
+            "RegistryRead, RegistryWrite, ServiceConnect, DeviceConnect"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "AccessRights",
@@ -1050,7 +1067,8 @@
       "properties": {
         "sasTtlAsIso8601": {
           "description": "SAS time to live. Range: 1 Min - 1 Day.",
-          "type": "string"
+          "type": "string",
+          "format": "date-time"
         },
         "connectionString": {
           "description": "The account key credentials for storage account selected by customer for uploading files.",
@@ -1068,11 +1086,13 @@
       "properties": {
         "lockDurationAsIso8601": {
           "description": "The lock duration. Range: 5 Sec - 5 Min.",
-          "type": "string"
+          "type": "string",
+          "format": "date-time"
         },
         "ttlAsIso8601": {
           "description": "The time to live. Range: 1 Min - 2 Days.",
-          "type": "string"
+          "type": "string",
+          "format": "date-time"
         },
         "maxDeliveryCount": {
           "description": "The max delivery count. Range: 1-100.",
@@ -1096,7 +1116,8 @@
         },
         "defaultTtlAsIso8601": {
           "description": "The default time to live for the device queue. Range : 1 Min - 2 Days.",
-          "type": "string"
+          "type": "string",
+          "format": "date-time"
         },
         "feedback": {
           "$ref": "#/definitions/FeedbackProperties"
@@ -1183,11 +1204,13 @@
       "properties": {
         "lockDurationAsIso8601": {
           "description": "The lock duration for the feedback queue. Range: 5 Sec - 5 Min.",
-          "type": "string"
+          "type": "string",
+          "format": "date-time"
         },
         "ttlAsIso8601": {
           "description": "The time to live for the feedback queue. Range: 1 Min - 2 Days",
-          "type": "string"
+          "type": "string",
+          "format": "date-time"
         },
         "maxDeliveryCount": {
           "description": "The max delivery count. Range : 1-100",
