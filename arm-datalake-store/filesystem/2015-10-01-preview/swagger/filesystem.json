@@ -1401,6 +1401,15 @@
       ],
       "description": "A WebHDFS exception thrown indicating the file or folder already exists. Thrown when a 403 error response code is returned (forbidden)."
     },
+    "AdlsBadOffsetException": {
+      "x-ms-discriminator-value": "BadOffsetException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown indicating the append or read is from a bad offset. Thrown when a 400 error response code is returned for append and open operations (Bad request)."
+    },
     "AdlsRuntimeException": {
       "x-ms-discriminator-value": "RemoteException.RuntimeException",
       "allOf": [ 
