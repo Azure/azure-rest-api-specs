@@ -101,16 +101,6 @@
             ]
           },
           {
-            "name": "Transfer-Encoding",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Indicates the data being sent to the server is being streamed in chunks.",
-            "enum": [
-              "chunked"
-            ]
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -479,16 +469,6 @@
             ]
           },
           {
-            "name": "Transfer-Encoding",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Indicates the data being sent to the server is being streamed in chunks.",
-            "enum": [
-              "chunked"
-            ]
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -563,16 +543,6 @@
             "type": "string",
             "enum": [
               "true"
-            ]
-          },
-          {
-            "name": "Transfer-Encoding",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Indicates the data being sent to the server is being streamed in chunks.",
-            "enum": [
-              "chunked"
             ]
           },
           {
@@ -1348,7 +1318,7 @@
       "description": "Data Lake Store filesystem file status information response."
     },
     "AdlsIllegalArgumentException": {
-      "x-ms-discriminator-value": "RemoteException.IllegalArgumentException",
+      "x-ms-discriminator-value": "IllegalArgumentException",
       "allOf": [ 
         { 
           "$ref":  "#/definitions/AdlsRemoteException" 
@@ -1357,7 +1327,7 @@
       "description": "A WebHDFS exception thrown indicating that one more arguments is incorrect. Thrown when a 400 error response code is returned (bad request)."
     },
     "AdlsUnsupportedOperationException": {
-      "x-ms-discriminator-value": "RemoteException.UnsupportedOperationException",
+      "x-ms-discriminator-value": "UnsupportedOperationException",
       "allOf": [ 
         { 
           "$ref":  "#/definitions/AdlsRemoteException" 
@@ -1366,7 +1336,7 @@
       "description": "A WebHDFS exception thrown indicating that the requested operation is not supported. Thrown when a 400 error response code is returned (bad request)."
     },
     "AdlsSecurityException": {
-      "x-ms-discriminator-value": "RemoteException.SecurityException",
+      "x-ms-discriminator-value": "SecurityException",
       "allOf": [ 
         { 
           "$ref":  "#/definitions/AdlsRemoteException" 
@@ -1375,7 +1345,7 @@
       "description": "A WebHDFS exception thrown indicating that access is denied. Thrown when a 401 error response code is returned (Unauthorized)."
     },
     "AdlsIOException": {
-      "x-ms-discriminator-value": "RemoteException.IOException",
+      "x-ms-discriminator-value": "IOException",
       "allOf": [ 
         { 
           "$ref":  "#/definitions/AdlsRemoteException" 
@@ -1384,7 +1354,7 @@
       "description": "A WebHDFS exception thrown indicating there was an IO (read or write) error. Thrown when a 403 error response code is returned (forbidden)."
     },
     "AdlsFileNotFoundException": {
-      "x-ms-discriminator-value": "RemoteException.FileNotFoundException",
+      "x-ms-discriminator-value": "FileNotFoundException",
       "allOf": [ 
         { 
           "$ref":  "#/definitions/AdlsRemoteException" 
@@ -1411,7 +1381,7 @@
       "description": "A WebHDFS exception thrown indicating the append or read is from a bad offset. Thrown when a 400 error response code is returned for append and open operations (Bad request)."
     },
     "AdlsRuntimeException": {
-      "x-ms-discriminator-value": "RemoteException.RuntimeException",
+      "x-ms-discriminator-value": "RuntimeException",
       "allOf": [ 
         { 
           "$ref":  "#/definitions/AdlsRemoteException" 
@@ -1431,7 +1401,7 @@
     "AdlsRemoteException": {
       "discriminator": "exception",
       "required": [
-        "RemoteException.exception"
+        "exception"
       ],
       "properties": {
         "exception": {
