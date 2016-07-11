@@ -1392,6 +1392,15 @@
       ],
       "description": "A WebHDFS exception thrown indicating the file or folder could not be found. Thrown when a 404 error response code is returned (not found)."
     },
+    "AdlsFileAlreadyExistsException": {
+      "x-ms-discriminator-value": "FileAlreadyExistsException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown indicating the file or folder already exists. Thrown when a 403 error response code is returned (forbidden)."
+    },
     "AdlsRuntimeException": {
       "x-ms-discriminator-value": "RemoteException.RuntimeException",
       "allOf": [ 
