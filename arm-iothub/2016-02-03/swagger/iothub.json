@@ -1164,7 +1164,8 @@
       "properties": {
         "sasTtlAsIso8601": {
           "description": "SAS time to live. Range: 1 Min (PT1M) - 1 Day (P1D).",
-          "type": "string"
+          "type": "string",
+          "format":  "duration"
         },
         "connectionString": {
           "description": "The account key credentials for storage account selected by customer for uploading files.",
@@ -1182,11 +1183,13 @@
       "properties": {
         "lockDurationAsIso8601": {
           "description": "The lock duration. Range: 5 Sec (PT5S) - 5 Min (PT5M).",
-          "type": "string"
+          "type": "string",
+          "format":  "duration"
         },
         "ttlAsIso8601": {
           "description": "The time to live. Range: 1 Min (PT1M) - 2 Days (P2D).",
-          "type": "string"
+          "type": "string",
+          "format":  "duration"
         },
         "maxDeliveryCount": {
           "description": "The max delivery count. Range: 1-100.",
@@ -1210,7 +1213,8 @@
         },
         "defaultTtlAsIso8601": {
           "description": "The default time to live for the device queue. Range : 1 Min (PT1M) - 2 Days (P2D).",
-          "type": "string"
+          "type": "string",
+          "format":  "duration"
         },
         "feedback": {
           "$ref": "#/definitions/FeedbackProperties"
@@ -1297,11 +1301,13 @@
       "properties": {
         "lockDurationAsIso8601": {
           "description": "The lock duration for the feedback queue. Range: 5 Sec (PT5S) - 5 Min (PT5M).",
-          "type": "string"
+          "type": "string",
+          "format":  "duration"
         },
         "ttlAsIso8601": {
           "description": "The time to live for the feedback queue. Range: 1 Min (PT1M) - 2 Days (P2D).",
-          "type": "string"
+          "type": "string",
+          "format":  "duration"
         },
         "maxDeliveryCount": {
           "description": "The max delivery count. Range : 1-100.",
@@ -1321,7 +1327,7 @@
           "type": "string"
         },
         "resourcegroup": {
-          "description": "The resource group name uniquely identifies the resource group within the user subscriptionId. The resource group name must be no longer than 80 characters long, and must be alphanumeric characters (Char.IsLetterOrDigit()) and ‘-‘, ‘_’, ‘(‘, ‘)’ and‘.’. Note that the name cannot end with ‘.’.",
+          "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
           "type": "string"
         },
         "etag": {
