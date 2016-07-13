@@ -468,6 +468,13 @@
             "description": "Query parameters. If null is passed returns all deployments."
           },
           {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The $expand query parameter."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -484,8 +491,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": {}
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}": {
@@ -496,6 +502,13 @@
         "operationId": "Providers_Get",
         "description": "Gets a resource provider.",
         "parameters": [
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The $expand query parameter."
+          },
           {
             "name": "resourceProviderNamespace",
             "in": "path",
@@ -517,8 +530,7 @@
               "$ref": "#/definitions/Provider"
             }
           }
-        }, 
-        "x-ms-odata": {}
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/resources": {
@@ -542,6 +554,13 @@
             "required": false,
             "type": "string",
             "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The $expand query parameter"
           },
           {
             "name": "$top",
@@ -897,6 +916,13 @@
             "required": false,
             "type": "string",
             "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The $expand query parameter."
           },
           {
             "name": "$top",
@@ -1503,10 +1529,6 @@
         "tagvalue": {
           "type": "string",
           "description": "Gets or sets the tag value."
-        },
-        "expand": {
-          "type": "string",
-          "description": "Gets or sets the expand value."
         }
       },
       "description": "Resource filter."
@@ -1649,6 +1671,36 @@
         "message"
       ]
     },
+    "AliasPathType": {
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Gets or sets the path."
+        },
+        "apiVersions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the api versions."
+        }
+      }
+    },
+    "AliasType": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the alias name."
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AliasPathType"
+          },
+          "description": "Gets or sets the paths for an alias."
+        }
+      }
+    },
     "ProviderResourceType": {
       "properties": {
         "resourceType": {
@@ -1661,6 +1713,13 @@
             "type": "string"
           },
           "description": "Gets or sets the collection of locations where this resource type can be created in."
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AliasType"
+          },
+          "description": "Gets or sets the aliases that are supported by this resource type."
         },
         "apiVersions": {
           "type": "array",
