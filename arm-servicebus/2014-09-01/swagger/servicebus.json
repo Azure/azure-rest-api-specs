@@ -560,9 +560,343 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}": {
+      "put": {
+        "tags": [
+          "Queues"
+        ],
+        "operationId": "Namespaces_CreateOrUpdateQueue",
+        "description": "Creates/Updates a service Queue. This operation is idempotent.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639395.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name":"queueName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The queue name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueueCreateOrUpdateParameters"
+            },
+            "description": "Parameters supplied to create a Queue Resource."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Queue created",
+            "schema": {
+              "$ref": "#/definitions/QueueResource"
+            }
+          }
+        }
+      },
+     "delete": {
+         "tags": [
+           "Queues"
+         ],
+         "operationId": "Queues_Delete",
+         "description": "Deletes a queue from the specified namespace and resource group.",
+         "externalDocs": {
+             "url": "https://msdn.microsoft.com/en-us/library/azure/mt639411.aspx"
+         },
+        "parameters": [
+          {
+              "name": "resourceGroupName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The name of the resource group."
+          },
+          {
+              "name":"queueName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The queue name."
+          },
+          {
+              "name": "namespaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The namespace name."
+          },
+          {
+              "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+              "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {          
+            "200": {
+                "description": "Queue deleted."
+            }         
+        },
+        "x-ms-long-running-operation": false
+     },
+      "get": {
+          "tags": [
+            "Queues"
+          ],
+          "operationId": "Queues_Get",
+          "description": "Returns the description for the specified namespace.",
+          "externalDocs": {
+              "url": "https://msdn.microsoft.com/en-us/library/azure/mt639380.aspx"
+          },
+        "parameters": [
+          {
+              "name": "resourceGroupName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The name of the resource group."
+          },
+          {
+              "name": "namespaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The namespace name."
+          },
+          {
+              "name":"queueName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The queue name."
+          },
+          {
+              "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+              "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+            "200": {
+                "description": "Successfully retrieved queue description.",
+                "schema": {
+                    "$ref": "#/definitions/QueueResource"
+                }
+            }
+        }
+      }
     }
   },
   "definitions": {
+     "QueueCreateOrUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets Queue name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets ARM type of the namespace."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets  the location of the resource."
+        },       
+        "properties": {
+          "$ref": "#/definitions/QueueProperties",
+          "description": "Gets or sets properties of the Queues."
+        }
+      },
+      "required": [
+        "location"        
+      ],
+      "description": "Parameters supplied to the CreateOrUpdate Queue operation."
+    },
+    "QueueProperties": {
+      "properties": {
+        "AccessedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Get last time a message was sent, or the last time there was a receive request to this queue."
+        },        
+        "AutoDeleteOnIdle": {
+           "type": "string",
+           "format": "time-span",
+           "description": "Gets or sets the TimeSpan idle interval after which the queue is automatically deleted. The minimum duration is 5 minutes."
+          },
+         "AvailabilityStatus ": {
+          "type": "string",
+          "description": "Gets the entity availability status for the queue.",
+          "enum": [
+            "Available",
+            "Limited",
+            "Renaming",
+            "Restoring",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "NamespaceType",
+            "modelAsString": false
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the exact time the message was created."
+        },
+        "DefaultMessageTimeToLive": {
+           "type": "string",
+           "format": "time-span",
+           "description": "Gets or sets the default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
+          },
+         "DuplicateDetectionHistoryTimeWindow ": {
+           "type": "string",
+           "format": "time-span",
+           "description": "Gets or sets the TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes.."
+          },
+          "EnableBatchedOperations": {
+          "type": "boolean",
+          "description": "Gets or sets a value that indicates whether server-side batched operations are enabled.."
+        },
+        "EnableDeadLetteringOnMessageExpiration": {
+          "type": "boolean",
+          "description": "Gets or sets a value that indicates whether this queue has dead letter support when a message expires."
+        },
+        "EnableExpress": {
+          "type": "boolean",
+          "description": "Gets or sets a value that indicates whether Express Entities are enabled. An express queue holds a message in memory temporarily before writing it to persistent storage."
+        },
+        "EnablePartitioning": {
+          "type": "boolean",
+          "description": "Gets or sets a value that indicates whether the queue to be partitioned across multiple message brokers is enabled."
+        },
+        "ForwardDeadLetteredMessagesTo": {
+          "type": "string",
+          "description": "Gets or sets the path to the recipient to which the dead lettered message is forwarded."
+        },
+        "ForwardTo": {
+          "type": "string",
+          "description": "Gets or sets the path to the recipient to which the message is forwarded."
+        },
+        "IsAnonymousAccessible": {
+          "type": "boolean",
+          "description": "Gets or sets a value that indicates whether the message is anonymous accessible."
+        },
+        "LockDuration ": {
+           "type": "string",
+           "format": "time-span",
+           "description": "Gets or sets the duration of a peek lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute."
+          },
+          "MaxDeliveryCount ": {
+           "format": "int32",
+           "type": "integer",
+           "description": "Gets or sets the maximum delivery count. A message is automatically deadlettered after this number of deliveries."
+          },
+          "MaxSizeInMegabytes ": {
+           "format": "int64",
+           "type": "integer",
+           "description": "Gets or sets the maximum size of the queue in megabytes, which is the size of memory allocated for the queue."
+          },
+           "MessageCount ": {
+           "format": "int64",
+           "type": "integer",
+           "description": "Gets the number of messages in the queue."
+          },
+          "MessageCountDetails": {
+          "type": "object",
+          "description": "Gets message details for a queue."
+        },
+        "Path": {
+          "type": "string",
+          "description": "Gets or sets the name of the queue."
+        },
+         "RequiresDuplicateDetection": {
+          "type": "boolean",
+          "description": "Gets or sets the value indicating if this queue requires duplicate detection."
+        },
+         "RequiresSession": {
+          "type": "boolean",
+          "description": "Gets or sets a value that indicates whether the queue supports the concept of session."
+        },
+        "SizeInBytes ": {
+           "format": "int64",
+           "type": "integer",
+           "description": "Gets the size of the queue in bytes."
+          },
+         "EntityStatus ": {
+          "type": "string",
+          "description": "Enumerates the possible values for the status of a messaging entity.",
+          "enum": [
+            "Active",
+            "Creating",
+            "Deleting",
+            "Disabled",
+            "ReceiveDisabled",
+            "Renaming",
+            "Restoring",
+            "SendDisabled",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "EntityStatus",
+            "modelAsString": false
+          }
+        },
+        "SupportOrdering": {
+          "type": "boolean",
+          "description": "Gets or sets a value that indicates whether the queue supports ordering."
+        },
+        "UpdatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the exact time the message has been updated."
+        },
+         "UserMetadata": {
+          "type": "string",
+          "description": "Gets or sets the user metadata."
+        }
+    },
+      "description": "Represents the metadata description of the queue."
+    },
+    "QueueResource": {
+      "properties": {
+                   "properties": {
+                "$ref": "#/definitions/QueueProperties",
+                "description": "Gets or sets properties of the Queues."
+            }
+        },
+      "allOf": [
+        {
+            "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Description of queue Resource."
+    },
     "CheckAvailabilityParameters": {
       "properties": {
         "name": {
