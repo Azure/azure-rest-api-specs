@@ -1476,50 +1476,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/providers/{resourceProviderNamespace}/operations": {
-      "get": {
-        "tags": [
-          "ResourceProviderOperationDetails"
-        ],
-        "operationId": "ResourceProviderOperationDetails_List",
-        "description": "Gets a list of resource providers.",
-        "parameters": [
-          {
-            "name": "resourceProviderNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource identity."
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderOperationDetailListResult"
-            }
-          },
-          "204": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderOperationDetailListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
     }
   },
   "definitions": {
@@ -1545,6 +1501,10 @@
         "tagvalue": {
           "type": "string",
           "description": "Gets or sets the tag value."
+        },
+        "expand": {
+          "type": "string",
+          "description": "Gets or sets the expand value."
         }
       },
       "description": "Resource filter."
@@ -1629,6 +1589,9 @@
           "description": "Gets or sets the debug setting of the deployment."
         }
       },
+      "required": [
+        "mode"
+      ],
       "description": "Deployment properties."
     },
     "DebugSetting": {
@@ -1921,11 +1884,27 @@
         "properties": {
           "type": "object",
           "description": "Gets or sets the resource properties."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Gets or sets the kind of the resource."
+        },
+        "managedBy": {
+          "type": "string",
+          "description": "Gets or sets the managedBy property of the resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Gets or sets the sku of the resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Gets or sets the identity of the resource."
         }
       },
       "allOf": [
         {
-          "$ref": "Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Resource information."
@@ -1951,6 +1930,62 @@
       },
       "description": "Plan for the resource."
     },
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the sku name."
+        },
+        "tier": {
+          "type": "string",
+          "description": "Gets or sets the sku tier."
+        },
+        "size": {
+          "type": "string",
+          "description": "Gets or sets the sku size."
+        },
+        "family": {
+          "type": "string",
+          "description": "Gets or sets the sku family."
+        },
+        "model": {
+          "type": "string",
+          "description": "Gets or sets the sku model."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the sku capacity."
+        }
+      },
+      "description": "Sku for the resource."
+    },
+    "Identity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the identity type.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Identity for the resource."
+    },
     "ResourceListResult": {
       "properties": {
         "value": {
@@ -1958,7 +1993,7 @@
           "items": {
             "$ref": "#/definitions/GenericResource"
           },
-          "description": "Gets or sets the list of resource groups."
+          "description": "Gets or sets the list of resources."
         },
         "nextLink": {
           "type": "string",
@@ -2255,31 +2290,6 @@
         }
       },
       "description": "Resource provider operation's display properties."
-    },
-    "ResourceProviderOperationDefinition": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the provider operation name."
-        },
-        "display": {
-          "$ref": "#/definitions/ResourceProviderOperationDisplayProperties",
-          "description": "Gets or sets the display property of the provider operation."
-        }
-      },
-      "description": "Resource provider operation information."
-    },
-    "ResourceProviderOperationDetailListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceProviderOperationDefinition"
-          },
-          "description": "Gets or sets the list of resource provider operations."
-        }
-      },
-      "description": "List of resource provider operations."
     },
     "Resource": {
       "properties": {
