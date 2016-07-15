@@ -847,6 +847,22 @@
     }
   },
   "definitions": {
+    "AnalyzerName": {
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "x-ms-external": true
+    },
+    "DataType": {
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "x-ms-external": true
+    },
     "DataSourceCredentials": {
       "properties": {
         "connectionString": {
@@ -1220,37 +1236,43 @@
           "description": "The name of the field."
         },
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/DataType",
           "description": "The data type of the field."
         },
         "analyzer": {
           "externalDocs": {
             "url": "https://msdn.microsoft.com/library/azure/dn879793.aspx"
           },
-          "type": "string",
+          "$ref": "#/definitions/AnalyzerName",
           "description": "Name of the text analyzer to use."
         },
         "key": {
+          "x-ms-client-name": "isKey",
           "type": "boolean",
           "description": "A value indicating whether the field is the key of the index. Valid only for string fields. Every index must have exactly one key field."
         },
         "searchable": {
+          "x-ms-client-name": "isSearchable",
           "type": "boolean",
           "description": "A value indicating whether the field is included in full-text searches. Valid only forstring or string collection fields. Default is false."
         },
         "filterable": {
+          "x-ms-client-name": "isFilterable",
           "type": "boolean",
           "description": "A value indicating whether the field can be used in filter expressions. Default is false."
         },
         "sortable": {
+          "x-ms-client-name": "isSortable",
           "type": "boolean",
           "description": "A value indicating whether the field can be used in orderby expressions. Not valid for string collection fields. Default is false."
         },
         "facetable": {
+          "x-ms-client-name": "isFacetable",
           "type": "boolean",
           "description": "A value indicating whether it is possible to facet on this field. Not valid for geo-point fields. Default is false."
         },
         "retrievable": {
+          "x-ms-client-name": "isRetrievable",
           "type": "boolean",
           "description": "A value indicating whether the field can be returned in a search result. Default is true."
         }
