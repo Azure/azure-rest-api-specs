@@ -1,0 +1,250 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "GraphRbacManagementClient",
+    "version": "1.6-internal",
+    "description": "The Graph RBAC Management Client"
+  },
+  "host": "graph.windows.net",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{tenantID}/me": {
+      "get": {
+        "tags": [
+          "Objects"
+        ],
+        "operationId": "Objects_GetCurrentUser",
+        "description": "Gets the details for current logged in user",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AADObject"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/getObjectsByObjectIds": {
+      "post": {
+        "tags": [
+          "Objects"
+        ],
+        "operationId": "Objects_GetObjectsByObjectIds",
+        "description": "Gets AD group membership by provided AD object Ids",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetObjectsParameters"
+            },
+            "description": "Objects filtering parameters."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetObjectsResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Objects_GetObjectsByObjectIdsNext"
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/{tenantID}/{nextLink}?Objects_GetObjectsByObjectIdsNext": {
+      "post": {
+        "tags": [
+          "Objects"
+        ],
+        "operationId": "Objects_GetObjectsByObjectIdsNext",
+        "description": "Gets AD group membership by provided AD object Ids",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetObjectsResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Objects_GetObjectsByObjectIdsNext"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GetObjectsParameters": {
+      "properties": {
+        "objectIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Requested object Ids"
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Requested object types"
+        },
+        "includeDirectoryObjectReferences": {
+          "type": "boolean",
+          "description": "If true, also searches for object ids in the partner tenant"
+        }
+      },
+      "required": [
+        "includeDirectoryObjectReferences"
+      ],
+      "description": "Request parameters for GetObjectsByObjectIds API call"
+    },
+    "AADObject": {
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "Gets or sets object Id"
+        },
+        "objectType": {
+          "type": "string",
+          "description": "Gets or sets object type"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets object display name"
+        },
+        "userPrincipalName": {
+          "type": "string",
+          "description": "Gets or sets principal name"
+        },
+        "mail": {
+          "type": "string",
+          "description": "Gets or sets mail"
+        },
+        "mailEnabled": {
+          "type": "boolean",
+          "description": "Gets or sets MailEnabled field"
+        },
+        "securityEnabled": {
+          "type": "boolean",
+          "description": "Gets or sets SecurityEnabled field"
+        },
+        "signInName": {
+          "type": "string",
+          "description": "Gets or sets signIn name"
+        },
+        "servicePrincipalNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the list of service principal names."
+        },
+        "userType": {
+          "type": "string",
+          "description": "Gets or sets the user type"
+        }
+      },
+      "description": "Active Directory object information"
+    },
+    "GetObjectsResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AADObject"
+          },
+          "description": "Collection of Active Directory object"
+        },
+        "odata.nextLink": {
+          "type": "string",
+          "description": "Gets or sets the URL to get the next set of results."
+        }
+      },
+      "description": "Server response for Active Directory objects inquiry API calls"
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "tenantIDInPath": {
+      "name": "tenantID",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets or sets the tenant Id."
+    }
+  }
+}
