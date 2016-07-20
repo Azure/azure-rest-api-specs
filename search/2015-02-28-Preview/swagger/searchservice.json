@@ -1078,6 +1078,51 @@
       "description": "Represents parameters for indexer execution.",
       "x-ms-external": true
     },
+    "FieldMappingFunction": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the field mapping function."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "A dictionary of parameter name/value pairs to pass to the function. Each value must be of a primitive type."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Represents a function that transforms a value from a data source before indexing.",
+      "externalDocs": {
+        "url": "https://azure.microsoft.com/documentation/articles/search-indexer-field-mappings/"
+      }
+    },
+    "FieldMapping": {
+      "properties": {
+        "sourceFieldName": {
+          "type": "string",
+          "description": "The name of the field in the data source."
+        },
+        "targetFieldName": {
+          "type": "string",
+          "description": "The name of the target field in the index. Same as the source field name by default."
+        },
+        "mappingFunction": {
+          "$ref": "#/definitions/FieldMappingFunction",
+          "description": "A function to apply to each source field value before indexing."
+        }
+      },
+      "required": [
+        "sourceFieldName"
+      ],
+      "description": "Defines a mapping between a field in a data source and a target field in an index.",
+      "externalDocs": {
+        "url": "https://azure.microsoft.com/documentation/articles/search-indexer-field-mappings/"
+      }
+    },
     "Indexer": {
       "properties": {
         "name": {
@@ -1106,6 +1151,16 @@
         "parameters": {
           "$ref": "#/definitions/IndexingParameters",
           "description": "Parameters for indexer execution."
+        },
+        "fieldMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FieldMapping"
+          },
+          "description": "Defines mappings between fields in the data source and corresponding target fields in the index.",
+          "externalDocs": {
+            "url": "https://azure.microsoft.com/documentation/articles/search-indexer-field-mappings/"
+          }
         },
         "disabled": {
           "x-ms-client-name": "IsDisabled",
