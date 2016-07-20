@@ -3427,7 +3427,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
@@ -5581,27 +5581,31 @@
     "FrontendIPConfigurationPropertiesFormat": {
       "properties": {
         "inboundNatRules": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
           },
-          "description": "Read only.Inbound rules URIs that use this frontend IP"
+          "description": "Read only. Inbound rules URIs that use this frontend IP"
         },
         "inboundNatPools": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
           },
-          "description": "Read only.Inbound pools URIs that use this frontend IP"
+          "description": "Read only. Inbound pools URIs that use this frontend IP"
         },
         "outboundNatRules": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
           },
-          "description": "Read only.Outbound rules URIs that use this frontend IP"
+          "description": "Read only. Outbound rules URIs that use this frontend IP"
         },
         "loadBalancingRules": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
@@ -5664,6 +5668,7 @@
     "BackendAddressPoolPropertiesFormat": {
       "properties": {
         "backendIPConfigurations": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkInterfaceIPConfiguration"
@@ -5671,6 +5676,7 @@
           "description": "Gets collection of references to IPs defined in NICs"
         },
         "loadBalancingRules": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
@@ -5678,6 +5684,7 @@
           "description": "Gets Load Balancing rules that use this Backend Address Pool"
         },
         "outboundNatRule": {
+          "readOnly": true,
           "$ref": "#/definitions/SubResource",
           "description": "Gets outbound rules that use this Backend Address Pool"
         },
@@ -5804,6 +5811,7 @@
     "ProbePropertiesFormat": {
       "properties": {
         "loadBalancingRules": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
@@ -5880,6 +5888,7 @@
           "description": "Gets or sets a reference to frontend IP Addresses"
         },
         "backendIPConfiguration": {
+          "readOnly": true,
           "$ref": "#/definitions/NetworkInterfaceIPConfiguration",
           "description": "Gets or sets a reference to a private ip address defined on a NetworkInterface of a VM. Traffic sent to frontendPort of each of the frontendIPConfigurations is forwarded to the backed IP"
         },
@@ -6559,6 +6568,7 @@
           "description": "Gets or default security rules of network security group"
         },
         "networkInterfaces": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkInterface"
@@ -6566,6 +6576,7 @@
           "description": "Gets collection of references to Network Interfaces"
         },
         "subnets": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Subnet"
@@ -6790,6 +6801,7 @@
           }
         },
         "ipConfiguration": {
+          "readOnly": true,
           "$ref": "#/definitions/IPConfiguration"
         },
         "dnsSettings": {
@@ -6897,7 +6909,7 @@
             "Unknown",
             "User",
             "VirtualNetworkGateway",
-            "Default",
+            "Default"
           ],
           "x-ms-enum": {
             "name": "EffectiveRouteSource",
@@ -6909,7 +6921,7 @@
           "description": "Gets value of effective route",
           "enum": [
             "Active",
-            "Invalid",
+            "Invalid"
           ],
           "x-ms-enum": {
             "name": "EffectiveRouteState",
@@ -7001,6 +7013,7 @@
           "description": "Gets or sets Routes in a Route Table"
         },
         "subnets": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Subnet"
@@ -7150,6 +7163,7 @@
           "description": "Gets or sets the reference of the RouteTable resource"
         },
         "ipConfigurations": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/IPConfiguration"
