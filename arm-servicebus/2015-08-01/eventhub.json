@@ -1456,6 +1456,22 @@
       ],
       "description": "Description of a Namespace resource."
     },
+	"NamespaceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamespaceResource"
+          },
+          "description": "Result of the List Namespace operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces"
+        }
+      },
+      "description": "The response of the List Namespace operation."
+    },
     "ARMSku": {
       "type": "object",
       "properties": {
@@ -1871,24 +1887,7 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "RegenerateKeysParameters": {
-      "properties": {
-        "Policykey": {
-          "type": "string",
-          "description": "Key that needs to be regenerated .",
-          "enum": [
-            "PrimaryKey",
-            "SecondayKey"
-          ],
-          "x-ms-enum": {
-            "name": "Policykey",
-            "modelAsString": false
-          }
-        }
-      },
-      "description": "Parameters supplied to the Regenerate Namespace Auth Rule."
-    }
+    },    
   },
   "parameters": {
     "SubscriptionIdParameter": {
