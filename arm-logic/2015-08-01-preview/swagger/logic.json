@@ -1375,25 +1375,6 @@
             },
             "x-ms-azure-resource": true
         },
-        "ResourceReference": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "The resource id."
-                },
-                "name": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "The resource name."
-                },
-                "type": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "The resource type."
-                }
-            }
-        },
         "IntegrationAccountSkuName": {
             "type": "string",
             "enum": [
@@ -3653,8 +3634,24 @@
             "type": "object",
             "properties": {
                 "keyVault": {
-                    "$ref": "#/definitions/ResourceReference",
-                    "description": "The key vault reference."
+                    "type": "object",
+                    "description": "The key vault reference.",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "description": "The resource id."
+                        },
+                        "name": {
+                            "type": "string",
+                            "readOnly": true,
+                            "description": "The resource name."
+                        },
+                        "type": {
+                            "type": "string",
+                            "readOnly": true,
+                            "description": "The resource type."
+                        }
+                    }
                 },
                 "keyName": {
                     "type": "string",
