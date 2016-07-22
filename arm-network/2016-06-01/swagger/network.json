@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resrources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2016-03-30"
+    "version": "2016-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1909,6 +1909,92 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveRouteTable": {
+      "post": {
+        "tags": [
+          "NetworkInterfaces"
+        ],
+        "operationId": "NetworkInterfaces_GetEffectiveRouteTable",
+        "description": "The get effective routetable operation retrieves all the route tables applied on a networkInterface.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkInterfaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network interface."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EffectiveRouteListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveNetworkSecurityGroups": {
+      "post": {
+        "tags": [
+          "NetworkInterfaces"
+        ],
+        "operationId": "NetworkInterfaces_ListEffectiveNetworkSecurityGroups",
+        "description": "The list effective network security group operation retrieves all the network security groups applied on a networkInterface.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkInterfaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network interface."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EffectiveNetworkSecurityGroupListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}": {
       "delete": {
         "tags": [
@@ -3113,6 +3199,202 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/virtualNetworkPeerings/{virtualNetworkPeeringName}": {
+      "delete": {
+        "tags": [
+          "VirtualNetworkPeerings"
+        ],
+        "operationId": "VirtualNetworkPeerings_Delete",
+        "description": "The delete virtual network peering operation deletes the specified peering.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network."
+          },
+          {
+            "name": "virtualNetworkPeeringName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network peering."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          },
+          "202": {
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "VirtualNetworkPeerings"
+        ],
+        "operationId": "VirtualNetworkPeerings_Get",
+        "description": "The Get virtual network peering operation retreives information about the specified virtual network peering.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network."
+          },
+          {
+            "name": "virtualNetworkPeeringName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network peering."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkPeering"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VirtualNetworkPeerings"
+        ],
+        "operationId": "VirtualNetworkPeerings_CreateOrUpdate",
+        "description": "The Put virtual network peering operation creates/updates a peering in the specified virtual network",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network."
+          },
+          {
+            "name": "virtualNetworkPeeringName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the peering."
+          },
+          {
+            "name": "VirtualNetworkPeeringParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkPeering"
+            },
+            "description": "Parameters supplied to the create/update virtual network peering operation"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkPeering"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkPeering"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/virtualNetworkPeerings": {
+      "get": {
+        "tags": [
+          "VirtualNetworkPeerings"
+        ],
+        "operationId": "VirtualNetworkPeerings_List",
+        "description": "The List virtual network peerings opertion retrieves all the peerings in a virtual network.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkPeeringListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/usages": {
       "get": {
         "tags": [
@@ -4014,7 +4296,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the application gateway subnet resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the application gateway subnet resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of IP configuration of application gateway"
@@ -4206,7 +4488,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the backend address pool resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the backend address pool resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of Backend Address Pool of application gateway"
@@ -4509,7 +4791,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the request routing rule resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the request routing rule resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of Request routing rule of application gateway"
@@ -4633,7 +4915,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the ApplicationGateway resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the ApplicationGateway resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of Application Gateway"
@@ -4691,7 +4973,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the backend http settings resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of probe of application gateway"
@@ -4738,7 +5020,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       }
     },
@@ -4912,7 +5194,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       }
     },
@@ -5057,7 +5339,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of ExpressRouteCircuit"
@@ -5261,7 +5543,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the resource "
+          "description": "Gets provisioning state of the resource "
         }
       },
       "description": "Properties of ExpressRouteServiceProvider"
@@ -5299,27 +5581,31 @@
     "FrontendIPConfigurationPropertiesFormat": {
       "properties": {
         "inboundNatRules": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
           },
-          "description": "Read only.Inbound rules URIs that use this frontend IP"
+          "description": "Read only. Inbound rules URIs that use this frontend IP"
         },
         "inboundNatPools": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
           },
-          "description": "Read only.Inbound pools URIs that use this frontend IP"
+          "description": "Read only. Inbound pools URIs that use this frontend IP"
         },
         "outboundNatRules": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
           },
-          "description": "Read only.Outbound rules URIs that use this frontend IP"
+          "description": "Read only. Outbound rules URIs that use this frontend IP"
         },
         "loadBalancingRules": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
@@ -5332,7 +5618,7 @@
         },
         "privateIPAllocationMethod": {
           "type": "string",
-          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic)",
+          "description": "Gets or sets PrivateIP allocation method",
           "enum": [
             "Static",
             "Dynamic"
@@ -5352,7 +5638,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of Frontend IP Configuration of the load balancer"
@@ -5382,6 +5668,7 @@
     "BackendAddressPoolPropertiesFormat": {
       "properties": {
         "backendIPConfigurations": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkInterfaceIPConfiguration"
@@ -5389,6 +5676,7 @@
           "description": "Gets collection of references to IPs defined in NICs"
         },
         "loadBalancingRules": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
@@ -5396,12 +5684,13 @@
           "description": "Gets Load Balancing rules that use this Backend Address Pool"
         },
         "outboundNatRule": {
+          "readOnly": true,
           "$ref": "#/definitions/SubResource",
           "description": "Gets outbound rules that use this Backend Address Pool"
         },
         "provisioningState": {
           "type": "string",
-          "description": "Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Get provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of BackendAddressPool"
@@ -5488,7 +5777,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
       "required": [
@@ -5522,6 +5811,7 @@
     "ProbePropertiesFormat": {
       "properties": {
         "loadBalancingRules": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
@@ -5561,7 +5851,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
       "required": [
@@ -5598,12 +5888,13 @@
           "description": "Gets or sets a reference to frontend IP Addresses"
         },
         "backendIPConfiguration": {
+          "readOnly": true,
           "$ref": "#/definitions/NetworkInterfaceIPConfiguration",
           "description": "Gets or sets a reference to a private ip address defined on a NetworkInterface of a VM. Traffic sent to frontendPort of each of the frontendIPConfigurations is forwarded to the backed IP"
         },
         "protocol": {
           "type": "string",
-          "description": "Gets or sets the transport potocol for the external endpoint. Possible values are Udp or Tcp",
+          "description": "Gets or sets the transport potocol for the endpoint. Possible values are Udp or Tcp",
           "enum": [
             "Udp",
             "Tcp"
@@ -5634,7 +5925,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of Inbound NAT rule"
@@ -5669,7 +5960,7 @@
         },
         "protocol": {
           "type": "string",
-          "description": "Gets or sets the transport potocol for the external endpoint. Possible values are Udp or Tcp",
+          "description": "Gets or sets the transport potocol for the endpoint. Possible values are Udp or Tcp",
           "enum": [
             "Udp",
             "Tcp"
@@ -5696,7 +5987,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
       "required": [
@@ -5749,7 +6040,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
       "required": [
@@ -5836,7 +6127,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of Load Balancer"
@@ -5882,7 +6173,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets List of address blocks reserved for this virtual network in CIDR notation"
+          "description": "Gets or sets list of address blocks reserved for this virtual network in CIDR notation"
         }
       },
       "description": "AddressSpace contains an array of IP address ranges that can be used by subnets"
@@ -5925,7 +6216,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the LocalNetworkGateway resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the LocalNetworkGateway resource Updating/Deleting/Failed"
         }
       },
       "description": "LocalNetworkGateway properties"
@@ -5992,7 +6283,7 @@
         },
         "privateIPAllocationMethod": {
           "type": "string",
-          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic)",
+          "description": "Gets or sets PrivateIP allocation method",
           "enum": [
             "Static",
             "Dynamic"
@@ -6070,7 +6361,7 @@
         },
         "internalDnsNameLabel": {
           "type": "string",
-          "description": "Gets or sets the Internal DNS name"
+          "description": "Gets or sets the internal DNS name"
         },
         "internalFqdn": {
           "type": "string",
@@ -6081,7 +6372,7 @@
           "description": "Gets or sets internal domain name suffix of the NIC."
         }
       },
-      "description": "Dns Settings of a network interface"
+      "description": "Dns settings of a network interface"
     },
     "NetworkInterfacePropertiesFormat": {
       "properties": {
@@ -6098,15 +6389,15 @@
           "items": {
             "$ref": "#/definitions/NetworkInterfaceIPConfiguration"
           },
-          "description": "Gets or sets list of IPConfigurations of the NetworkInterface"
+          "description": "Gets or sets list of IPConfigurations of the network interface"
         },
         "dnsSettings": {
           "$ref": "#/definitions/NetworkInterfaceDnsSettings",
-          "description": "Gets or sets DNS Settings in  NetworkInterface"
+          "description": "Gets or sets DNS settings in network interface"
         },
         "macAddress": {
           "type": "string",
-          "description": "Gets the MAC Address of the network interface"
+          "description": "Gets the MAC address of the network interface"
         },
         "primary": {
           "type": "boolean",
@@ -6122,7 +6413,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
       "description": "NetworkInterface properties. "
@@ -6227,7 +6518,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
       "required": [
@@ -6267,16 +6558,17 @@
           "items": {
             "$ref": "#/definitions/SecurityRule"
           },
-          "description": "Gets or sets Security rules of network security group"
+          "description": "Gets or sets security rules of network security group"
         },
         "defaultSecurityRules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SecurityRule"
           },
-          "description": "Gets or sets Default security rules of network security group"
+          "description": "Gets or default security rules of network security group"
         },
         "networkInterfaces": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkInterface"
@@ -6284,6 +6576,7 @@
           "description": "Gets collection of references to Network Interfaces"
         },
         "subnets": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Subnet"
@@ -6296,7 +6589,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
       "description": "Network Security Group resource"
@@ -6319,6 +6612,135 @@
       ],
       "description": "NetworkSecurityGroup resource"
     },
+    "EffectiveNetworkSecurityGroup": {
+      "properties": {
+        "networkSecurityGroup": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets the id of network security group that is applied"
+        },
+        "association": {
+          "$ref": "#/definitions/EffectiveNetworkSecurityGroupAssociation"
+        },
+        "effectiveSecurityRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EffectiveNetworkSecurityRules"
+          },
+          "description": "Gets collection of effective security rules"
+        }
+      },
+      "description": "Effective NetworkSecurityGroup"
+    },
+    "EffectiveNetworkSecurityGroupAssociation": {
+      "properties": {
+        "subnet": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets the id of subnet if assigned"
+        },
+        "networkInterface": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets the id of network interface if assigned"
+        }
+      },
+      "description": "Effective NetworkSecurityGroup association"
+    },
+    "EffectiveNetworkSecurityRules": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets the name of the security rule specified by the user (if created by the user)"
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Gets Network protocol this rule applies to",
+          "enum": [
+            "Tcp",
+            "Udp",
+            "*"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityRuleProtocol",
+            "modelAsString": true
+          }
+        },
+        "sourcePortRange": {
+          "type": "string",
+          "description": "Gets source port or range"
+        },
+        "destinationPortRange": {
+          "type": "string",
+          "description": "Gets destination port or range"
+        },
+        "sourceAddressPrefix": {
+          "type": "string",
+          "description": "Gets source address prefix"
+        },
+        "destinationAddressPrefix": {
+          "type": "string",
+          "description": "Gets destination address prefix"
+        },
+        "expandedSourceAddressPrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets expanded source address prefix"
+        },
+        "expandedDestinationAddressPrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets expanded destination address prefix"
+        },
+        "access": {
+          "type": "string",
+          "description": "Gets network traffic is allowed or denied",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityRuleAccess",
+            "modelAsString": true
+          }
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the priority of the rule"
+        },
+        "direction": {
+          "type": "string",
+          "description": "Gets the direction of the rule",
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityRuleDirection",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Effective NetworkSecurityRules"
+    },
+    "EffectiveNetworkSecurityGroupListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EffectiveNetworkSecurityGroup"
+          },
+          "description": "Gets list of effective network security groups"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
+        }
+      },
+      "description": "Response for list effective network security groups api servive call"
+    },
     "NetworkSecurityGroupListResult": {
       "properties": {
         "value": {
@@ -6326,7 +6748,7 @@
           "items": {
             "$ref": "#/definitions/NetworkSecurityGroup"
           },
-          "description": "Gets List of NetworkSecurityGroups in a resource group"
+          "description": "Gets List of NetworkSecurityGroups"
         },
         "nextLink": {
           "type": "string",
@@ -6379,6 +6801,7 @@
           }
         },
         "ipConfiguration": {
+          "readOnly": true,
           "$ref": "#/definitions/IPConfiguration"
         },
         "dnsSettings": {
@@ -6399,7 +6822,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
       "description": "PublicIpAddress properties"
@@ -6465,13 +6888,98 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the resource Updating/Deleting/Failed"
         }
       },
       "required": [
         "nextHopType"
       ],
       "description": "Route resource"
+    },
+    "EffectiveRoute": {
+      "properties": {
+        "userDefinedRoute": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets the Id of the effective route. This is optional, only user defined routes have the name."
+        },
+        "source": {
+          "type": "string",
+          "description": "Gets who created the route",
+          "enum": [
+            "Unknown",
+            "User",
+            "VirtualNetworkGateway",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "EffectiveRouteSource",
+            "modelAsString": true
+          }
+        },
+        "state": {
+          "type": "string",
+          "description": "Gets value of effective route",
+          "enum": [
+            "Active",
+            "Invalid"
+          ],
+          "x-ms-enum": {
+            "name": "EffectiveRouteState",
+            "modelAsString": true
+          }
+        },
+        "addressPrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets address prefixes of the effective routes in CIDR notation."
+        },
+        "nextHopIpAddress": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets the IP address of the next hop of the effective route"
+        },
+        "nextHopType": {
+          "type": "string",
+          "description": "Gets or sets the type of Azure hop the packet should be sent to.",
+          "enum": [
+            "VirtualNetworkGateway",
+            "VnetLocal",
+            "Internet",
+            "VirtualAppliance",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "RouteNextHopType",
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "Effective Route"
+    },
+    "EffectiveRouteListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EffectiveRoute"
+          },
+          "description": "Gets list of effective routes"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
+        }
+      },
+      "description": "Response for list effective route api servive call"
     },
     "Route": {
       "properties": {
@@ -6505,6 +7013,7 @@
           "description": "Gets or sets Routes in a Route Table"
         },
         "subnets": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Subnet"
@@ -6513,7 +7022,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the resource Updating/Deleting/Failed"
         }
       },
       "description": "Route Table resource"
@@ -6592,7 +7101,7 @@
         },
         "privateIPAllocationMethod": {
           "type": "string",
-          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic)",
+          "description": "Gets or sets PrivateIP allocation method",
           "enum": [
             "Static",
             "Dynamic"
@@ -6612,7 +7121,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of IPConfiguration"
@@ -6654,6 +7163,7 @@
           "description": "Gets or sets the reference of the RouteTable resource"
         },
         "ipConfigurations": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/IPConfiguration"
@@ -6662,7 +7172,48 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the resource"
+        }
+      }
+    },
+    "VirtualNetworkPeeringPropertiesFormat": {
+      "properties": {
+        "allowVirtualNetworkAccess": {
+          "type": "boolean",
+          "description": "Gets or sets whether the VMs in the linked virtual network space would be able to access all the VMs in local Virtual network space"
+        },
+        "allowForwardedTraffic": {
+          "type": "boolean",
+          "description": "Gets or sets whether the forwarded traffic from the VMs in the remote virtual network will be allowed/disallowed"
+        },
+        "allowGatewayTransit": {
+          "type": "boolean",
+          "description": "Gets or sets if gatewayLinks can be used in remote virtual network’s link to this virtual network"
+        },
+        "useRemoteGateways": {
+          "type": "boolean",
+          "description": "Gets or sets if remote gateways can be used on this virtual network. If the flag is set to true, and allowGatewayTransit on remotepeering is also true, virtual network will use gateways of remote virtual network for transit. Only 1 peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway."
+        },
+        "remoteVirtualNetwork": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets the reference of the remote virtual network"
+        },
+        "peeringState": {
+          "type": "string",
+          "description": "Gets the status of the virtual network peering",
+          "enum": [
+            "Initiated",
+            "Connected",
+            "Disconnected"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkPeeringState",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets provisioning state of the resource"
         }
       }
     },
@@ -6674,7 +7225,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+          "description": "Gets or sets the name of the resource that is unique within a resource group. This name can be used to access the resource"
         },
         "etag": {
           "type": "string",
@@ -6688,6 +7239,28 @@
       ],
       "description": "Subnet in a VirtualNework resource"
     },
+    "VirtualNetworkPeering": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualNetworkPeeringPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "Peerings in a VirtualNework resource"
+    },
     "SubnetListResult": {
       "properties": {
         "value": {
@@ -6696,6 +7269,22 @@
             "$ref": "#/definitions/Subnet"
           },
           "description": "Gets the subnets in a virtual network"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListSubnets Api service callRetrieves all subnet that belongs to a virtual network"
+    },
+    "VirtualNetworkPeeringListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkPeering"
+          },
+          "description": "Gets the peerings in a virtual network"
         },
         "nextLink": {
           "type": "string",
@@ -6767,13 +7356,9 @@
     },
     "VirtualNetworkGatewayIPConfigurationPropertiesFormat": {
       "properties": {
-        "privateIPAddress": {
-          "type": "string",
-          "description": "Gets or sets the privateIPAddress of the IP Configuration"
-        },
         "privateIPAllocationMethod": {
           "type": "string",
-          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic)",
+          "description": "Gets or sets PrivateIP allocation method",
           "enum": [
             "Static",
             "Dynamic"
@@ -6793,7 +7378,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of VirtualNetworkGatewayIPConfiguration"
@@ -6879,7 +7464,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the VirtualNetworkGateway resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the VirtualNetworkGateway resource Updating/Deleting/Failed"
         }
       },
       "description": "VirtualNeworkGateay properties"
@@ -7054,7 +7639,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the VirtualNetworkGatewayConnection resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the VirtualNetworkGatewayConnection resource Updating/Deleting/Failed"
         }
       },
       "description": "VirtualNeworkGatewayConnection properties"
@@ -7085,7 +7670,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the VPN client revoked certificate resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the VPN client revoked certificate resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of the revoked VPN client certificate of virtual network gateway"
@@ -7120,7 +7705,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the VPN client root certificate resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the VPN client root certificate resource Updating/Deleting/Failed"
         }
       },
       "description": "Properties of SSL certificates of application gateway"
@@ -7233,7 +7818,14 @@
           "items": {
             "$ref": "#/definitions/Subnet"
           },
-          "description": "Gets or sets List of subnets in a VirtualNetwork"
+          "description": "Gets or sets list of subnets in a VirtualNetwork"
+        },
+        "VirtualNetworkPeerings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkPeering"
+          },
+          "description": "Gets or sets list of peerings in a VirtualNetwork"
         },
         "resourceGuid": {
           "type": "string",
@@ -7241,7 +7833,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+          "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       }
     },
