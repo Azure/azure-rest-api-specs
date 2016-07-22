@@ -36,31 +36,6 @@
     }
   },
   "paths": {
-    "/{tenantID}/me": {
-      "get": {
-        "tags": [
-          "Objects"
-        ],
-        "operationId": "Objects_GetCurrentUser",
-        "description": "Gets the details for current logged in user",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/tenantIDInPath"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/AADObject"
-            }
-          }
-        }
-      }
-    },
     "/{tenantID}/getObjectsByObjectIds": {
       "post": {
         "tags": [
