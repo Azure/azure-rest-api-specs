@@ -34,7 +34,7 @@
         "user_impersonation": "impersonate your user account"
       }
     }
-  }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/checkNamespaceAvailability": {
       "post": {
@@ -1871,7 +1871,6 @@
       }
     }
   },
-
   "definitions": {
     "SubscriptionCreateOrUpdateParameters": {
       "properties": {
@@ -2587,7 +2586,7 @@
           }
         }
       },
-      "description": "Parameters supplied to the Regenerate Namespace Auth Rule."
+      "description": "Parameters supplied to the Regenerate Auth Rule."
     },
     "NamespaceCreateOrUpdateParameters": {
       "properties": {
@@ -2639,6 +2638,22 @@
         }
       ],
       "description": "Description of a Namespace resource."
+    },
+	"NamespaceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamespaceResource"
+          },
+          "description": "Result of the List Namespace operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces"
+        }
+      },
+      "description": "The response of the List Namespace operation."
     },
     "ARMSku": {
       "type": "object",
@@ -2703,12 +2718,10 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Namespace data center location."
           "description": "data center location."
         },
         "name": {
           "type": "string",
-          "description": "Name of the Namespace AuthorizationRule."
           "description": "Name of the AuthorizationRule."
         },
         "properties": {
@@ -2718,7 +2731,6 @@
       "required": [
         "properties"
       ],
-      "description": "Parameters supplied to the CreateOrUpdate Namespace AuthorizationRules."
       "description": "Parameters supplied to the CreateOrUpdate  AuthorizationRules."
     },
     "SharedAccessAuthorizationRuleResource": {
@@ -2733,23 +2745,7 @@
         }
       ],
       "description": "Description of a Namespace AuthorizationRules."
-    },
-    "NamespaceListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NamespaceResource"
-          },
-          "description": "Result of the List Namespace operation."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces"
-        }
-      },
-      "description": "The response of the List Namespace operation."
-    },
+    },    
     "SharedAccessAuthorizationRuleListResult": {
       "properties": {
         "value": {
