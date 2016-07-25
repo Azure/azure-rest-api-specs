@@ -9900,15 +9900,15 @@
       "properties": {
         "applicationId": {
           "type": "string",
-          "title": "The id of the application to install."
+          "title": "The id of the application to deploy."
         },
         "version": {
           "type": "string",
-          "title": "The version of the application to install. If omitted, the default version is installed."
+          "title": "The version of the application to deploy. If omitted, the default version is deployed."
         }
       },
       "required": ["applicationId"],
-      "title": "A reference to an application package to be installed on compute nodes in a pool."
+      "title": "A reference to an application package to be deployed to compute nodes."
     },
     "ApplicationSummary": {
       "properties": {
@@ -10265,7 +10265,14 @@
           "type": "boolean",
           "title": "Whether the Job Manager task requires exclusive use of the compute node where it runs.",
           "description": "If true, no other tasks will run on the same compute node for as long as the Job Manager is running. If false, other tasks can run simultaneously with the Job Manager on a compute node. The Job Manager task counts normally against the node's concurrent task limit, so this is only relevant if the node allows multiple concurrent tasks."
-        }
+        },
+        "applicationPackageReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationPackageReference"
+          },
+          "title": "A list of application packages that the Batch service will deploy to the compute node before running the command line."
+        },
       },
       "required": ["id", "commandLine"],
       "title": "Specifies details of a Job Manager task."
@@ -12135,7 +12142,14 @@
         "dependsOn": {
           "$ref": "#/definitions/TaskDependencies",
           "title": "Any dependencies this task has."
-        }
+        },
+        "applicationPackageReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationPackageReference"
+          },
+          "title": "A list of application packages that the Batch service will deploy to the compute node before running the command line."
+        },
       },
       "title": "An Azure Batch task."
     },
@@ -12193,7 +12207,14 @@
         "dependsOn": {
           "$ref": "#/definitions/TaskDependencies",
           "title": "Any other tasks that this task depends on."
-        }
+        },
+        "applicationPackageReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationPackageReference"
+          },
+          "title": "A list of application packages that the Batch service will deploy to the compute node before running the command line."
+        },
       },
       "required": ["id", "commandLine"],
       "title": "An Azure Batch task to add."
