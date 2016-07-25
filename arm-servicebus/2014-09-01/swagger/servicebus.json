@@ -1901,7 +1901,7 @@
         },
         "AutoDeleteOnIdle": {
           "type": "string",
-          "format": "string",
+          "format": "duration",
           "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
         },
         "AvailabilityStatus ": {
@@ -1926,7 +1926,7 @@
         },
         "DefaultMessageTimeToLive": {
           "type": "string",
-          "format": "string",
+          "format": "duration",
           "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
         },
         "EnableBatchedOperations": {
@@ -1940,10 +1940,6 @@
         "EnableDeadLetteringOnMessageExpiration": {
           "type": "boolean",
           "description": "Value that indicates if a subscription has dead letter support when a message expires."
-        },
-        "ExtensionData": {
-          "type": "object",
-          "description": "Structure that contains extra data."
         },
         "ForwardDeadLetteredMessagesTo": {
           "type": "string",
@@ -1959,7 +1955,7 @@
         },
         "LockDuration": {
           "type": "string",
-          "format": "string",
+          "format": "duration",
           "description": "The lock duration time span for the subscription."
         },
         "MaxDeliveryCount": {
@@ -2013,35 +2009,24 @@
         },
         "UserMetadata": {
           "type": "string",
-          "description": "The user metadata."
+          "description": "Represents the metadata description of the Subscription."
         }
       },
-	  "x-ms-client-flatten": true,
-      "description": "Represents the metadata description of the Subscription."
+      "x-ms-client-flatten": true,
+      "description": "Description of Subscription Resource."
     },
     "SubscriptionResource": {
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "URL of the resource."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the subscription."
-        },
-        "type": {
-          "type": "string",
-          "description": "The name of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Supported Azure location in which the resource exists."
-        },
         "properties": {
           "$ref": "#/definitions/SubscriptionProperties",
           "description": "Properties of the Subscription."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "description": "Description of Subscription Resource."
     },
     "SubscriptionListResult": {
@@ -2089,15 +2074,11 @@
         "AccessedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Message was sent, or the last time there was a receive request to this topic."
-        },
-        "Authorization": {
-          "type": "object",
-          "description": "AuthorizationRules."
+          "description": "Last time the message was sent or a request was received for this topic."
         },
         "AutoDeleteOnIdle": {
           "type": "string",
-          "format": "string",
+          "format": "duration",
           "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
         },
         "AvailabilityStatus ": {
@@ -2122,12 +2103,12 @@
         },
         "DefaultMessageTimeToLive": {
           "type": "string",
-          "format": "string",
+          "format": "duration",
           "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
         },
         "DuplicateDetectionHistoryTimeWindow ": {
           "type": "string",
-          "format": "string",
+          "format": "duration",
           "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes.."
         },
         "EnableBatchedOperations": {
@@ -2145,10 +2126,6 @@
         "EnablePartitioning": {
           "type": "boolean",
           "description": "Value that indicates whether the topic to be partitioned across multiple message brokers is enabled."
-        },
-        "ExtensionData": {
-          "type": "object",
-          "description": "Structure that contains extra data."
         },
         "IsAnonymousAccessible": {
           "type": "boolean",
@@ -2214,36 +2191,23 @@
         },
         "UserMetadata": {
           "type": "string",
-          "description": "The user metadata."
+          "description": "Represents the metadata description of the topic"
         }
       },
-	  "x-ms-client-flatten": true,
-      "description": "Represents the metadata description of the topic."
+      "x-ms-client-flatten": true
     },
     "TopicResource": {
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "URL of the resource."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the topic."
-        },
-        "type": {
-          "type": "string",
-          "description": "The name of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Supported Azure location in which the resource exists."
-        },
         "properties": {
           "$ref": "#/definitions/TopicProperties",
-          "description": "Properties of the Topics."
+          "description": "Properties of the Topic."
         }
       },
-
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "description": "Description of topic Resource."
     },
     "TopicListResult": {
@@ -2291,7 +2255,7 @@
         "AccessedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "last time a message was sent, or the last time there was a receive request to this queue."
+          "description": "Last time a message was sent, or the last time there was a receive request to this queue."
         },
         "AutoDeleteOnIdle": {
           "type": "string",
@@ -2436,15 +2400,15 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/QueueProperties",
-          "description": "properties of the Queues."
+          "description": "properties of the Queue."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource",
-          "description": "Description of queue Resource."
+          "$ref": "#/definitions/Resource"
         }
-      ]
+      ],
+      "description": "Description of queue Resource."
     },
     "QueueListResult": {
       "properties": {
@@ -2632,7 +2596,7 @@
       ],
       "description": "Description of a Namespace resource."
     },
-	"NamespaceListResult": {
+    "NamespaceListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -2685,7 +2649,7 @@
       },
       "description": "Sku of the Namespace."
     },
-    "MessageCountDetails.": {
+    "MessageCountDetails": {
       "type": "object",
       "properties": {
         "ActiveMessageCount": {
@@ -2713,9 +2677,9 @@
           "type": "integer",
           "description": "Number of messages transferred to another queue, topic, or subscription."
         }
-        },		
-      "description": "Message Count Details."
       },
+      "description": "Message Count Details."
+    },
     "SharedAccessAuthorizationRuleProperties": {
       "properties": {
         "rights": {
@@ -2769,7 +2733,7 @@
         }
       ],
       "description": "Description of a Namespace AuthorizationRules."
-    },    
+    },
     "SharedAccessAuthorizationRuleListResult": {
       "properties": {
         "value": {
