@@ -496,7 +496,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The connection string of the namespace for the specified authorizationRule."
+            "description": "The authorizationRule name."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -521,7 +521,7 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_RegenerateKeys",
-        "description": "Primary and Secondary ConnectionStrings to the namespace ",
+        "description": "Regenerats the Primary or Secondary ConnectionStrings to the namespace ",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt718977.aspx"
         },
@@ -545,7 +545,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The connection string of the namespace for the specified authorizationRule."
+            "description": "The authorizationRule name."
           },
           {
             "name": "parameters",
@@ -578,7 +578,7 @@
         "tags": [
           "Queues"
         ],
-        "operationId": "Queues_CreateOrUpdate",
+        "operationId": "Queue_CreateOrUpdate",
         "description": "Creates/Updates a service Queue. This operation is idempotent.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639395.aspx"
@@ -634,8 +634,8 @@
         "tags": [
           "Queues"
         ],
-        "operationId": "Queues_Delete",
-        "description": "Deletes a queue from the specified namespace and resource group.",
+        "operationId": "Queue_Delete",
+        "description": "Deletes a queue from the specified namespace in resource group.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639411.aspx"
         },
@@ -672,15 +672,14 @@
           "200": {
             "description": "Queue deleted."
           }
-        },
-        "x-ms-long-running-operation": false
+        }
       },
       "get": {
         "tags": [
           "Queues"
         ],
         "operationId": "Queues_Get",
-        "description": "Returns the description for the specified queues.",
+        "description": "Returns the description for the specified queue.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639380.aspx"
         },
@@ -728,7 +727,7 @@
         "tags": [
           "Queues"
         ],
-        "operationId": "Queues_CreateOrUpdateAuthorizationRule",
+        "operationId": "Queue_CreateOrUpdateAuthorizationRule",
         "description": "Creates an authorization rule for a queue",
         "parameters": [
           {
@@ -788,7 +787,7 @@
         "tags": [
           "Queues"
         ],
-        "operationId": "Queues_DeleteAuthorizationRule",
+        "operationId": "Queue_DeleteAuthorizationRule",
         "description": "Deletes a queue authorization rule",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt705609.aspx"
@@ -831,7 +830,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Authorization rule deleted"
+            "description": "Queue authorizationRule deleted"
           }
         }
       },
@@ -839,8 +838,8 @@
         "tags": [
           "Queues"
         ],
-        "operationId": "Queues_GetAuthorizationRule",
-        "description": "Authorization rule for a queue by name.",
+        "operationId": "Queue_GetAuthorizationRule",
+        "description": "Queue authorizationRule for a queue by name.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt705611.aspx"
         },
@@ -882,7 +881,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Queues Authorization rule returned successfully",
+            "description": "Queues AuthorizationRule returned successfully",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -895,8 +894,8 @@
         "tags": [
           "Queues"
         ],
-        "operationId": "Queues_GetAll",
-        "description": "Enumerates the queues in a namespace. An empty feed is returned if no queue exists in the namespace.",
+        "operationId": "Queues_ListAll",
+        "description": "Lists the queues within the namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639415.aspx"
         },
@@ -906,7 +905,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group. If resourceGroupName value is null the method lists all the namespaces within subscription"
+            "description": "The name of the resource group."
           },
           {
             "name": "namespaceName",
@@ -940,8 +939,8 @@
         "tags": [
           "Queues"
         ],
-        "operationId": "Queues_ListAuthorizationRules",
-        "description": "Returns all authorization rules in the specified resource group.",
+        "operationId": "Queue_ListAuthorizationRules",
+        "description": "Returns all Queue authorizationRules.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt705607.aspx"
         },
@@ -992,8 +991,8 @@
         "tags": [
           "Queues"
         ],
-        "operationId": "Queues_ListKeys",
-        "description": "Primary and Secondary ConnectionStrings to the queue. ",
+        "operationId": "Queue_ListKeys",
+        "description": "Primary and Secondary ConnectionStrings to the queue.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt705608.aspx"
         },
@@ -1024,7 +1023,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The connection string of the namespace for the specified authorizationRule."
+            "description": "The authorizationRule name."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1048,8 +1047,8 @@
         "tags": [
           "Queues"
         ],
-        "operationId": "Queues_RegenerateKeys",
-        "description": "Primary and Secondary ConnectionStrings to the Queues ",
+        "operationId": "Queue_RegenerateKeys",
+        "description": "Regenerates the Primary or Secondary ConnectionStrings to the Queue",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt705606.aspx"
         },
@@ -1080,7 +1079,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The connection string of the namespace for the specified authorizationRule."
+            "description": "The authorizationRule name"
           },
           {
             "name": "parameters",
@@ -1113,8 +1112,8 @@
         "tags": [
           "Topics"
         ],
-        "operationId": "Topics_CreateOrUpdate",
-        "description": "Creates a new topic in the specified namespace and resource group.",
+        "operationId": "Topic_CreateOrUpdate",
+        "description": "Creates a topic in the specified namespace",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639409.aspx"
         },
@@ -1169,8 +1168,8 @@
         "tags": [
           "Topics"
         ],
-        "operationId": "Topics_Delete",
-        "description": "Deletes an existing topics. This operation also removes all associated resources under the topics.",
+        "operationId": "Topic_Delete",
+        "description": "Deletes a topic from the specified namespace and resource group.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639404.aspx"
         },
@@ -1214,7 +1213,7 @@
         "tags": [
           "Topics"
         ],
-        "operationId": "Topics_GetTopic",
+        "operationId": "Topic_GetTopic",
         "description": "Returns the description for the specified topic",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639399.aspx"
@@ -1263,8 +1262,8 @@
         "tags": [
           "topics"
         ],
-        "operationId": "Topics_CreateOrUpdateAuthorizationRule",
-        "description": "Creates an authorization rule for a topics",
+        "operationId": "Topic_CreateOrUpdateAuthorizationRule",
+        "description": "Creates an authorizatioRule for the specified topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720678.aspx"
         },
@@ -1315,7 +1314,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Topics Authorization rule created",
+            "description": "Topic Authorization rule created",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -1326,8 +1325,8 @@
         "tags": [
           "Topics"
         ],
-        "operationId": "Topics_GetAuthorizationRule",
-        "description": "Authorization rule for a topics by name.",
+        "operationId": "Topic_GetAuthorizationRule",
+        "description": "Returns the specified authorizationRule.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720676.aspx"
         },
@@ -1369,7 +1368,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Topics Authorization rule returned successfully",
+            "description": "Topic AuthorizationRule returned successfully",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -1380,8 +1379,8 @@
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Topics_DeleteAuthorizationRule",
-        "description": "Deletes a topic authorization rule",
+        "operationId": "Topic_DeleteAuthorizationRule",
+        "description": "Deletes a topic authorizationRule",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720681.aspx"
         },
@@ -1412,7 +1411,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Authorization Rule Name."
+            "description": "AuthorizationRule Name."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1423,7 +1422,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Topics Authorization rule deleted"
+            "description": "Topics AuthorizationRule deleted"
           }
         }
       }
@@ -1433,7 +1432,7 @@
         "tags": [
           "Topics"
         ],
-        "operationId": "Topics_ListAuthorizationRules",
+        "operationId": "Topic_ListAuthorizationRules",
         "description": "Authorization rules for a topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720681.aspx"
@@ -1469,7 +1468,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Topics Authorization rule returned successfully",
+            "description": "Topic AuthorizationRule returned successfully",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
             }
@@ -1485,8 +1484,8 @@
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Topics_ListKeys",
-        "description": "Primary and Secondary ConnectionStrings to the topics ",
+        "operationId": "Topic_ListKeys",
+        "description": "Primary and Secondary ConnectionStrings to the topic",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720677.aspx"
         },
@@ -1517,7 +1516,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The connection string of the namespace for the specified authorizationRule."
+            "description": "The authorizationRule name."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1541,8 +1540,8 @@
         "tags": [
           "Topics"
         ],
-        "operationId": "Topics_RegenerateKeys",
-        "description": "Primary and Secondary ConnectionStrings to the topic ",
+        "operationId": "Topic_RegenerateKeys",
+        "description": "Regenerates Primary or Secondary ConnectionStrings to the topic",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720679.aspx"
         },
@@ -1573,7 +1572,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The connection string of the topic for the specified authorizationRule."
+            "description": "The authorizationRule name."
           },
           {
             "name": "parameters",
@@ -1606,8 +1605,8 @@
         "tags": [
           "Topics"
         ],
-        "operationId": "Topics_GetAll",
-        "description": "Enumerates the topics in a namespace. An empty feed is returned if no topic exists in the namespace.",
+        "operationId": "Topics_ListAll",
+        "description": "Lists allthe topics in a namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639388.aspx"
         },
@@ -1617,7 +1616,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group. If resourceGroupName value is null the method lists all the namespaces within subscription"
+            "description": "The name of the resource group."
           },
           {
             "name": "namespaceName",
@@ -1651,8 +1650,8 @@
         "tags": [
           "Subscriptions"
         ],
-        "operationId": "Subscriptions_CreateOrUpdate",
-        "description": "Creates a new topic subscription in the specified namespace and resource group..",
+        "operationId": "Subscription_CreateOrUpdate",
+        "description": "Creates a topic subscription",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639385.aspx"
         },
@@ -1708,14 +1707,13 @@
               "$ref": "#/definitions/SubscriptionResource"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "tags": [
           "Subscriptions"
         ],
-        "operationId": "Subscriptions_Delete",
+        "operationId": "Subscription_Delete",
         "description": "Deletes a subscription from the specified topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639381.aspx"
@@ -1760,14 +1758,13 @@
           "200": {
             "description": "Subscription deleted."
           }
-        },
-        "x-ms-long-running-operation": false
+        }
       },
       "get": {
         "tags": [
           "Subscriptions"
         ],
-        "operationId": "Subscriptions_Get",
+        "operationId": "Subscription_Get",
         "description": "Returns a subscription description for the specified topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639402.aspx"
@@ -1823,8 +1820,8 @@
         "tags": [
           "Subscriptions"
         ],
-        "operationId": "Subscriptions_GetList",
-        "description": "Returns the description for the specified topic",
+        "operationId": "Subscriptions_ListAll",
+        "description": "Lsit all the subscriptions under a topic specified",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639400.aspx"
         },
@@ -1904,7 +1901,7 @@
         },
         "AutoDeleteOnIdle": {
           "type": "string",
-          "format": "time-span",
+          "format": "string",
           "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
         },
         "AvailabilityStatus ": {
@@ -1918,7 +1915,7 @@
             "Unknown"
           ],
           "x-ms-enum": {
-            "name": "NamespaceType",
+            "name": "AvailabilityStatus",
             "modelAsString": false
           }
         },
@@ -1929,7 +1926,7 @@
         },
         "DefaultMessageTimeToLive": {
           "type": "string",
-          "format": "time-span",
+          "format": "string",
           "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
         },
         "EnableBatchedOperations": {
@@ -1954,7 +1951,7 @@
         },
         "ForwardTo": {
           "type": "string",
-          "description": "Path to the recipient to which the dead lettered messages are forwarded."
+          "description": "Path to the recipient to which the message is forwarded."
         },
         "IsReadOnly": {
           "type": "boolean",
@@ -1962,7 +1959,7 @@
         },
         "LockDuration": {
           "type": "string",
-          "format": "time-span",
+          "format": "string",
           "description": "The lock duration time span for the subscription."
         },
         "MaxDeliveryCount": {
@@ -1976,8 +1973,7 @@
           "description": "Number of messages."
         },
         "MessageCountDetails": {
-          "type": "object",
-          "description": "Message details for a subscription."
+          "$ref": "#/definitions/MessageCountDetails"
         },
         "Name": {
           "type": "string",
@@ -2101,7 +2097,7 @@
         },
         "AutoDeleteOnIdle": {
           "type": "string",
-          "format": "time-span",
+          "format": "string",
           "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
         },
         "AvailabilityStatus ": {
@@ -2115,7 +2111,7 @@
             "Unknown"
           ],
           "x-ms-enum": {
-            "name": "NamespaceType",
+            "name": "AvailabilityStatus",
             "modelAsString": false
           }
         },
@@ -2126,12 +2122,12 @@
         },
         "DefaultMessageTimeToLive": {
           "type": "string",
-          "format": "time-span",
+          "format": "string",
           "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
         },
         "DuplicateDetectionHistoryTimeWindow ": {
           "type": "string",
-          "format": "time-span",
+          "format": "string",
           "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes.."
         },
         "EnableBatchedOperations": {
@@ -2168,8 +2164,7 @@
           "description": "Maximum size of the topic in megabytes, which is the size of memory allocated for the topic."
         },
         "MessageCountDetails": {
-          "type": "object",
-          "description": "Message details for a topic."
+          "$ref": "#/definitions/MessageCountDetails"
         },
         "Path": {
           "type": "string",
@@ -2382,8 +2377,7 @@
           "description": "the number of messages in the queue."
         },
         "MessageCountDetails": {
-          "type": "object",
-          "description": "message details for a queue."
+          "$ref": "#/definitions/MessageCountDetails"
         },
         "Path": {
           "type": "string",
@@ -2691,6 +2685,40 @@
       },
       "description": "Sku of the Namespace."
     },
+    "MessageCountDetails.": {
+      "type": "object",
+      "properties": {
+        "ActiveMessageCount": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Number of active messages in the queue, topic, or subscription."
+        },
+        "DeadLetterMessageCount": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Number of messages that are dead letters."
+        },
+        "ScheduledMessageCount": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Number scheduled messages."
+        },
+        "TransferDeadLetterMessageCount": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Number of messages transferred into dead letters."
+        },
+        "TransferMessageCount": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Number of messages transferred to another queue, topic, or subscription."
+        }
+          "format": "int32",
+          "type": "integer",
+          "description": "The messaging units or eventhub throughput units"
+        }		
+      "description": "Message Count Details."
+      },
     "SharedAccessAuthorizationRuleProperties": {
       "properties": {
         "rights": {
