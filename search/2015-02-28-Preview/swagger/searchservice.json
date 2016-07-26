@@ -851,9 +851,135 @@
           }
         }
       }
+    },
+    "/indexes('{indexName}')/search.analyze": {
+      "post": {
+        "tags": [
+          "Indexes"
+        ],
+        "operationId": "Indexes_Analyze",
+        "description": "Shows how an analyzer breaks text into tokens.",
+        "externalDocs": {
+          "url": "https://azure.microsoft.com/en-us/documentation/articles/search-api-2015-02-28-preview/#TestAnalyzer"
+        },
+        "parameters": [
+          {
+            "name": "indexName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the index for which to test an analyzer."
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeRequest"
+            },
+            "description": "The text and analyzer or analysis components to test."
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "description": "The tracking ID sent with the request to help with debugging.",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": { "name": "search-request-options" }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "AnalyzeRequest": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text to break into tokens."
+        },
+        "analyzer": {
+          "$ref": "#/definitions/AnalyzerName",
+          "description": "The name of the analyzer to use to break the given text. If this parameter is not specified, you must specify a tokenizer instead. The tokenizer and analyzer parameters are mutually exclusive."
+        },
+        "tokenizer": {
+          "$ref": "#/definitions/TokenizerName",
+          "description": "The name of the tokenizer to use to break the given text. If this parameter is not specified, you must specify an analyzer instead. The tokenizer and analyzer parameters are mutually exclusive."
+        },
+        "tokenFilters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenFilterName"
+          },
+          "description": "An optional list of token filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter."
+        },
+        "charFilters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CharFilterName"
+          },
+          "description": "An optional list of character filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter."
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "description": "Specifies some text and analysis components used to break that text into tokens."
+    },
+    "AnalyzeResult": {
+      "properties": {
+        "tokens": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenInfo"
+          },
+          "description": "The list of tokens returned by the analyzer specified in the request."
+        }
+      },
+      "description": "The result of testing an analyzer on text."
+    },
+    "TokenInfo": {
+      "properties": {
+        "token": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The token returned by the analyzer."
+        },
+        "startOffset": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The index of the first character of the token in the input text."
+        },
+        "endOffset": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The index of the last character of the token in the input text."
+        },
+        "position": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The position of the token in the input text relative to other tokens. The first token in the input text has position 0, the next has position 1, and so on. Depending on the analyzer used, some tokens might have the same position, for example if they are synonyms of each other."
+        }
+      },
+      "description": "Information about a token returned by an analyzer."
+    },
     "AnalyzerName": {
       "properties": {
         "name": {
