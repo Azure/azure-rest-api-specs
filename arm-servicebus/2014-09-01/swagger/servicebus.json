@@ -1884,6 +1884,7 @@
           "description": "Name of the subscription."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/SubscriptionProperties"
         }
       },
@@ -2012,14 +2013,13 @@
           "description": "Represents the metadata description of the Subscription."
         }
       },
-      "x-ms-client-flatten": true,
       "description": "Description of Subscription Resource."
     },
     "SubscriptionResource": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SubscriptionProperties",
-          "description": "Properties of the Subscription."
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SubscriptionProperties"
         }
       },
       "allOf": [
@@ -2060,6 +2060,7 @@
           "description": "Location of the resource."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/TopicProperties"
         }
       },
@@ -2192,14 +2193,13 @@
           "type": "string",
           "description": "Represents the metadata description of the topic"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "TopicResource": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/TopicProperties",
-          "description": "Properties of the Topic."
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TopicProperties"
         }
       },
       "allOf": [
@@ -2240,6 +2240,7 @@
           "description": "location of the resource."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/QueueProperties"
         }
       },
@@ -2388,17 +2389,15 @@
         },
         "UserMetadata": {
           "type": "string",
-          "description": "the user metadata."
+          "description": "Represents the metadata description of the queue."
         }
-      },
-      "x-ms-client-flatten": true,
-      "description": "Represents the metadata description of the queue."
+      }
     },
     "QueueResource": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/QueueProperties",
-          "description": "properties of the Queue."
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QueueProperties"
         }
       },
       "allOf": [
