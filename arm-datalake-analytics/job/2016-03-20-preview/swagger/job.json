@@ -525,7 +525,12 @@
           "description": "Gets or sets the job resource type.",
           "enum": [
             "VertexResource",
-            "StatisticsResource"
+            "JobManagerResource",
+            "StatisticsResource",
+            "VertexResourceInUserFolder",
+            "JobManagerResourceInUserFolder",
+            "StatisticsResourceInUserFolder"
+
           ],
           "x-ms-enum": {
             "name": "JobResourceType",
@@ -557,6 +562,13 @@
         "debugData": {
           "$ref": "#/definitions/JobDataPath",
           "description": "Gets or sets the job specific debug data locations."
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Diagnostics"
+          },
+          "description": "Gets or sets the diagnostics for the job."
         },
         "algebraFilePath": {
           "type": "string",
@@ -695,6 +707,53 @@
       },
       "description": "The common Data Lake Analytics job properties."
     },
+    "Diagnostics" : {
+      "properties": {
+        "columnNumber" : {
+          "description": "Gets the column where the error occured.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "end" : {
+          "description": "Gets the ending index of the error.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "lineNumber" : {
+          "description": "Gets the line number the error occured on.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "message" : {
+          "description": "Gets the error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "severity" : {
+          "description": "Gets the severity of the error.",
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Warning",
+            "Error",
+            "Info"
+          ],
+          "x-ms-enum": {
+            "name": "SeverityTypes",
+            "modelAsString": false
+          }
+        },
+        "start" : {
+          "description": "Gets the starting index of the error.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
+    },
     "JobErrorDetails": {
       "properties": {
         "description": {
@@ -749,7 +808,7 @@
           "readOnly": true,
           "description": "Gets the recommended resolution for the failure, if any."
         },
-        "InnerError": {
+        "innerError": {
           "$ref": "#/definitions/JobInnerError",
           "readOnly": true,
           "description": "Gets the inner error of this specific job error message, if any."
@@ -950,6 +1009,18 @@
             "name": "JobResult",
             "modelAsString": false
           }
+        },
+        "logFolder": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets or sets the log folder path to use in the following format: adl://<accountName>.azuredatalakestore.net/system/jobservice/jobs/Usql/2016/03/13/17/18/5fe51957-93bc-4de0-8ddc-c5a4753b068b/logs/."
+        },
+        "logFilePatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },        
+          "description": "Gets or sets the list of log file name patterns to find in the logFolder. '*' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt"
         },
         "stateAuditRecords": {
           "type": "array",

@@ -127,11 +127,8 @@
               "$ref": "#/definitions/CognitiveServicesAccount"
             }
           },
-          "404": {
-            "description": "If the resource group *or* resource does not exist, 404 (NotFound) should be returned."
-          },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error response describing why the operation failed. If the resource group *or* resource does not exist, 404 (NotFound) should be returned.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -175,12 +172,6 @@
           },
           "204": {
             "description": "a 204 (NoContent) should be used if the resource does not exist and the request is well formed."
-          },
-          "404": {
-            "description": "If the resource group does not exist, 404 (NotFound) will be returned by the proxy layer and will not reach the resource provider."
-          },
-          "412": {
-            "description": "412 (PreconditionFailed) and other normal REST codes are acceptable as long as they match the REST guidelines."
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -231,11 +222,8 @@
               "application/json": "{\n  “id”: “/subscriptions/{id}/resourceGroups/{group}/providers/{rpns}/{type}/{name}”,\n  “name”: “{name}”,\n  “type”: “Microsoft.CognitiveSerices/accounts”,\n  \"location\": \"North US\",\n  \"tags\": {\n    \"key1\": \"value 1\",\n    \"key2\": \"value 2\"\n   },\n  \"kind\" : \"resource kind\",\n   \"sku\": {\n\t    \"name\": \"sku code\"\n\t} \n  “etag”: “00000000-0000-0000-0000-000000000000”,\n  \"properties\": { }\n}"
             }
           },
-          "404": {
-            "description": "If the resource does not exist, 404 (NotFound) should be returned. For other errors (e.g. internal errors) use the appropriate HTTP error code."
-          },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) should be returned.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -275,11 +263,8 @@
               "application/json": "{\n  “value”: [\n    {\n        “id”: “{url to resource 1}”,\n        “name”: “Name1”,\n        “type”: “Microsoft.CognitiveServices/accounts”,\n        \"location\": \"North US\"    \n        \"kind\" : \"resource kind\",\n        \"sku\": {\n\t        \"name\": \"sku code\"\n\t  }, \n        \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    },\n    {\n        “id”: “{url to resource 2}”,\n        “name”: “Name2”,\n        “type”: “Microsoft.CognitiveServices/accounts”,\n        \"location\": \"North US\",\n        \"kind\" : \"resource kind\",\n        \"sku\": {\n\t        \"name\": \"sku code\"\n\t  }, \n        \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    }\n  ],\n  “nextLink”: “{originalRequestUrl}?$skipToken={opaqueString}”\n}"
             }
           },
-          "404": {
-            "description": "If the resource group does not exist, 404 (NotFound) will be returned by the proxy *without* reaching the resource provider. "
-          },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -314,9 +299,6 @@
             "examples": {
               "application/json": "{\n  “value”: [\n    {\n        “id”: “{url to resource 1}”,\n        “name”: “Name1”,\n        “type”: “Microsoft.CognitiveServices/accounts”,\n        \"location\": \"North US\"    \n        \"kind\" : \"resource kind\",\n            \"sku\": {\n            \"name\": \"sku code\"\n        }, \n       \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    },\n    {\n        “id”: “{url to resource 2}”,\n        “name”: “Name2”,\n        “type”: “Microsoft.CognitiveServices/accounts”,\n        \"location\": \"North US\",\n        \"kind\" : \"resource kind\",\n            \"sku\": {\n            \"name\": \"sku code\"\n        }, \n       \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    }\n  ],\n  “nextLink”: “{originalRequestUrl}?$skipToken={opaqueString}”\n}\n"
             }
-          },
-          "404": {
-            "description": "If the subscription does not exist, 404 (NotFound) will be returned by the proxy *without* reaching the resource provider.If the subscription is not registered with the resource provider, it should return a 404 (NotFound) or an empty collection."
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -424,7 +406,6 @@
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           }
-          
         ],
         "responses": {
           "200": {
@@ -484,11 +465,8 @@
               "application/json": "{\n    \"value\": [\n        {\n            \"resourceType\": \"Microsoft.CognitiveServices/accounts\"\n            \"sku\": {\n                \"name\": \"sku name\",\n                \"tier\": \"sku tier\"\n            }\n        },\n        {\n            \"resourceType\": \"Microsoft.CognitiveServices/accounts\"\n            \"sku\": {\n                \"name\": \"sku name\",\n                \"tier\": \"sku tier\"\n            }\n        }\n    ]\n}"
             }
           },
-          "404": {
-            "description": "If the resource does not exist, 404 (NotFound) should be returned. For other errors (e.g. internal errors) use the appropriate HTTP error code.  If no skus are valid, return 200 + an empty value array."
-          },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) will be returned.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -534,7 +512,8 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CognitiveServicesAccountPropertiesCreateParameters"
+          "$ref": "#/definitions/CognitiveServicesAccountPropertiesCreateParameters",
+          "description": "Must exist in the request. Must not be null."
         }
       },
       "required": [
@@ -599,7 +578,7 @@
       "description": "The SKU of the cognitive services account."
     },
     "CognitiveServicesAccountPropertiesCreateParameters": {
-      "description": "required empty proprties object"
+      "description": "required empty proprties object. Must be an empty object, and must exist in the request."
     },
     "CognitiveServicesAccount": {
       "description": "Cognitive Services Account is an Azure resource representing the provisioned account, its type, location and SKU.",
@@ -699,13 +678,13 @@
       "properties": {
         "keyName": {
           "type": "string",
-          "description": "key name to generate (key1|key2)",
+          "description": "key name to generate (Key1|Key2)",
           "enum": [
             "Key1",
             "Key2"
           ],
           "x-ms-enum": {
-            "name": "KeyNameEnum",
+            "name": "KeyName",
             "modelAsString": false
           }
         }
@@ -737,6 +716,13 @@
       }
     },
     "Error": {
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorBody"
+        }
+      }
+    },
+    "ErrorBody": {
       "properties": {
         "code": {
           "type": "string",

@@ -260,12 +260,14 @@
     "AdminKeyResult": {
       "properties": {
         "primaryKey": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets the primary API key of the Search service."
+          "description": "The primary API key of the Search service."
         },
         "secondaryKey": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets the secondary API key of the Search service."
+          "description": "The secondary API key of the Search service."
         }
       },
       "description": "Response containing the primary and secondary API keys for a given Azure Search service."
@@ -273,12 +275,14 @@
     "QueryKey": {
       "properties": {
         "name": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets the name of the query API key; may be empty."
+          "description": "The name of the query API key; may be empty."
         },
         "key": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets the value of the query API key."
+          "description": "The value of the query API key."
         }
       },
       "description": "Describes an API key for a given Azure Search service that has permissions for query operations only."
@@ -286,11 +290,12 @@
     "ListQueryKeysResult": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/QueryKey"
           },
-          "description": "Gets the query keys for the Azure Search service."
+          "description": "The query keys for the Azure Search service."
         }
       },
       "description": "Response containing the query API keys for a given Azure Search service."
@@ -299,7 +304,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the SKU of the Search service.",
+          "description": "The SKU of the Search service.",
           "enum": [
             "free",
             "standard",
@@ -316,17 +321,17 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "Gets or sets the SKU of the Search Service, which determines price tier and capacity limits."
+          "description": "The SKU of the Search Service, which determines price tier and capacity limits."
         },
         "replicaCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the number of replicas in the Search service. If specified, it must be a value between 1 and 6 inclusive."
+          "description": "The number of replicas in the Search service. If specified, it must be a value between 1 and 6 inclusive."
         },
         "partitionCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the number of partitions in the Search service; if specified, it can be 1, 2, 3, 4, 6, or 12."
+          "description": "The number of partitions in the Search service; if specified, it can be 1, 2, 3, 4, 6, or 12."
         }
       },
       "description": "Defines properties of an Azure Search service that can be modified."
@@ -335,18 +340,18 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Gets or sets the geographic location of the Search service."
+          "description": "The geographic location of the Search service."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets tags to help categorize the Search service in the Azure Portal."
+          "description": "Tags to help categorize the Search service in the Azure Portal."
         },
         "properties": {
           "$ref": "#/definitions/SearchServiceProperties",
-          "description": "Gets or sets properties of the Search service."
+          "description": "Properties of the Search service."
         }
       },
       "description": "Properties that describe an Azure Search service."
@@ -354,8 +359,9 @@
     "SearchServiceReadableProperties": {
       "properties": {
         "status": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets the status of the Search service.",
+          "description": "The status of the Search service.",
           "enum": [
             "running",
             "provisioning",
@@ -369,12 +375,14 @@
           }
         },
         "statusDetails": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets the details of the Search service status."
+          "description": "The details of the Search service status."
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets the state of the last provisioning operation performed on the Search service.",
+          "description": "The state of the last provisioning operation performed on the Search service.",
           "enum": [
             "succeeded",
             "provisioning",
@@ -386,17 +394,17 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "Gets or sets the SKU of the Search Service, which determines price tier and capacity limits."
+          "description": "The SKU of the Search Service, which determines price tier and capacity limits."
         },
         "replicaCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the number of replicas in the Search service. If specified, it must be a value between 1 and 6 inclusive."
+          "description": "The number of replicas in the Search service. If specified, it must be a value between 1 and 6 inclusive."
         },
         "partitionCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the number of partitions in the Search service; if specified, it can be 1, 2, 3, 4, 6, or 12."
+          "description": "The number of partitions in the Search service; if specified, it can be 1, 2, 3, 4, 6, or 12."
         }
       },
       "description": "Defines all the properties of an Azure Search service."
@@ -406,29 +414,30 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource Id"
+          "description": "The resource Id of the Azure Search service."
         },
         "name": {
           "externalDocs": {
             "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
           },
           "type": "string",
-          "description": "Gets or sets the name of the Search service."
+          "description": "The name of the Search service."
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the geographic location of the Search service."
+          "description": "The geographic location of the Search service."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets tags to help categorize the Search service in the Azure Portal."
+          "description": "Tags to help categorize the Search service in the Azure Portal."
         },
         "properties": {
+          "readOnly": true,
           "$ref": "#/definitions/SearchServiceReadableProperties",
-          "description": "Gets properties of the Search service."
+          "description": "Properties of the Search service."
         }
       },
       "description": "Describes an Azure Search service and its current state."
@@ -436,11 +445,12 @@
     "SearchServiceListResult": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SearchServiceResource"
           },
-          "description": "Gets the Search services in the resource group."
+          "description": "The Search services in the resource group."
         }
       },
       "description": "Response containing a list of Azure Search services for a given resource group."
