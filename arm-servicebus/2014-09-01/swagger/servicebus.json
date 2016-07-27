@@ -73,6 +73,75 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListBySubscription",
+        "description": "Lists all the available namespaces within the subscription irrespective of the resourceGroups.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespaces returned successfully",
+            "schema": {
+              "$ref": "#/definitions/NamespaceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListByResourceGroup",
+        "description": "Lists the available namespaces within a resourceGroup.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespaces returned successfully",
+            "schema": {
+              "$ref": "#/definitions/NamespaceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}": {
       "put": {
         "tags": [
@@ -116,12 +185,6 @@
         ],
         "responses": {
           "201": {
-            "description": "Namespace create request accepted",
-            "schema": {
-              "$ref": "#/definitions/NamespaceResource"
-            }
-          },
-          "200": {
             "description": "Namespace create request accepted",
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
@@ -209,6 +272,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListAuthorizationRules",
+        "description": "Authorization rules for a namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace Authorization rule returned successfully",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}": {
       "put": {
         "tags": [
@@ -216,6 +324,9 @@
         ],
         "operationId": "Namespaces_CreateOrUpdateAuthorizationRule",
         "description": "Creates an authorization rule for a namespace",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639410.aspx"
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -236,7 +347,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Aauthorization Rule Name."
+            "description": "Namespace Aauthorization Rule Name."
           },
           {
             "name": "parameters",
@@ -256,7 +367,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Authorization rule created",
+            "description": "Namespace Authorization rule created",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -269,6 +380,9 @@
         ],
         "operationId": "Namespaces_DeleteAuthorizationRule",
         "description": "Deletes a namespace authorization rule",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639417.aspx"
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -300,7 +414,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Authorization rule deleted"
+            "description": "Namespace Authorization rule deleted"
           }
         }
       },
@@ -309,7 +423,10 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_GetAuthorizationRule",
-        "description": "Gets an authorization rule for a namespace by name.",
+        "description": "Authorization rule for a namespace by name.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx"
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -341,122 +458,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Authorization rule returned successfully",
+            "description": "Namespace Authorization rule returned successfully",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces": {
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_ListByResourceGroup",
-        "description": "Lists the available namespaces within a resourceGroup.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group. If resourceGroupName value is null the method lists all the namespaces within subscription"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespaces returned successfully",
-            "schema": {
-              "$ref": "#/definitions/NamespaceListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces": {
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_ListBySubscription",
-        "description": "Lists all the available namespaces within the subscription irrespective of the resourceGroups.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespaces returned successfully",
-            "schema": {
-              "$ref": "#/definitions/NamespaceListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules": {
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_ListAuthorizationRules",
-        "description": "Gets the authorization rules for a namespace.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Authorization rule returned successfully",
-            "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -466,7 +472,7 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_ListKeys",
-        "description": "Gets the Primary and Secondary ConnectionStrings to the namespace ",
+        "description": "Primary and Secondary ConnectionStrings to the namespace ",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639398.aspx"
         },
@@ -490,7 +496,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The connection string of the namespace for the specified authorizationRule."
+            "description": "The authorizationRule name."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -515,7 +521,7 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_RegenerateKeys",
-        "description": "Gets the Primary and Secondary ConnectionStrings to the namespace ",
+        "description": "Regenerats the Primary or Secondary ConnectionStrings to the namespace ",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt718977.aspx"
         },
@@ -539,7 +545,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The connection string of the namespace for the specified authorizationRule."
+            "description": "The authorizationRule name."
           },
           {
             "name": "parameters",
@@ -566,9 +572,1334 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues": {
+      "get": {
+        "tags": [
+          "Queues"
+        ],
+        "operationId": "Queues_ListAll",
+        "description": "Lists the queues within the namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639415.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Queues returned successfully",
+            "schema": {
+              "$ref": "#/definitions/QueueListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}": {
+      "put": {
+        "tags": [
+          "Queues"
+        ],
+        "operationId": "Queue_CreateOrUpdate",
+        "description": "Creates/Updates a service Queue. This operation is idempotent.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639395.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "queueName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The queue name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueueCreateOrUpdateParameters"
+            },
+            "description": "Parameters supplied to create a Queue Resource."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Queue created",
+            "schema": {
+              "$ref": "#/definitions/QueueResource"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Queues"
+        ],
+        "operationId": "Queue_Delete",
+        "description": "Deletes a queue from the specified namespace in resource group.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639411.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "queueName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The queue name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Queue deleted."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Queues"
+        ],
+        "operationId": "Queues_Get",
+        "description": "Returns the description for the specified queue.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639380.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "queueName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The queue name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved queue description.",
+            "schema": {
+              "$ref": "#/definitions/QueueResource"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}/authorizationRules": {
+      "get": {
+        "tags": [
+          "Queues"
+        ],
+        "operationId": "Queue_ListAuthorizationRules",
+        "description": "Returns all Queue authorizationRules.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt705607.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name"
+          },
+          {
+            "name": "queueName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The queue name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Queues Authorization rule returned successfully",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}/authorizationRules/{authorizationRuleName}": {
+      "put": {
+        "tags": [
+          "Queues"
+        ],
+        "operationId": "Queue_CreateOrUpdateAuthorizationRule",
+        "description": "Creates an authorization rule for a queue",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "queueName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The queue name."
+          },
+          {
+            "name": "authorizationRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Aauthorization Rule Name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
+            },
+            "description": "The shared access authorization rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Queues Authorization rule created",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Queues"
+        ],
+        "operationId": "Queue_DeleteAuthorizationRule",
+        "description": "Deletes a queue authorization rule",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt705609.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "queueName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The queue name."
+          },
+          {
+            "name": "authorizationRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Authorization Rule Name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Queue authorizationRule deleted"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Queues"
+        ],
+        "operationId": "Queue_GetAuthorizationRule",
+        "description": "Queue authorizationRule for a queue by name.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt705611.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name"
+          },
+          {
+            "name": "queueName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The queue name."
+          },
+          {
+            "name": "authorizationRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Authorization rule name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Queues AuthorizationRule returned successfully",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}/authorizationRules/{authorizationRuleName}/ListKeys": {
+      "post": {
+        "tags": [
+          "Queues"
+        ],
+        "operationId": "Queue_ListKeys",
+        "description": "Primary and Secondary ConnectionStrings to the queue.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt705608.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "queueName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The queue name."
+          },
+          {
+            "name": "authorizationRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The authorizationRule name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "schema": {
+              "$ref": "#/definitions/ResourceListKeys"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}/authorizationRules/{authorizationRuleName}/regenerateKeys": {
+      "post": {
+        "tags": [
+          "Queues"
+        ],
+        "operationId": "Queue_RegenerateKeys",
+        "description": "Regenerates the Primary or Secondary ConnectionStrings to the Queue",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt705606.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "queueName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The queue name."
+          },
+          {
+            "name": "authorizationRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The authorizationRule name"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateKeysParameters"
+            },
+            "description": "Parameters supplied to regenerate Auth Rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "schema": {
+              "$ref": "#/definitions/ResourceListKeys"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics": {
+      "get": {
+        "tags": [
+          "Topics"
+        ],
+        "operationId": "Topics_ListAll",
+        "description": "Lists allthe topics in a namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639388.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved list of topics.",
+            "schema": {
+              "$ref": "#/definitions/TopicListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}": {
+      "put": {
+        "tags": [
+          "Topics"
+        ],
+        "operationId": "Topic_CreateOrUpdate",
+        "description": "Creates a topic in the specified namespace",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639409.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topic name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TopicCreateOrUpdateParameters"
+            },
+            "description": "Parameters supplied to create a Topic Resource."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Topic created",
+            "schema": {
+              "$ref": "#/definitions/TopicResource"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Topics"
+        ],
+        "operationId": "Topic_Delete",
+        "description": "Deletes a topic from the specified namespace and resource group.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639404.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topics name."
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topics name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Topic delete successful"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Topics"
+        ],
+        "operationId": "Topic_GetTopic",
+        "description": "Returns the description for the specified topic",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639399.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topic name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved topic description.",
+            "schema": {
+              "$ref": "#/definitions/TopicResource"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules": {
+      "get": {
+        "tags": [
+          "Topics"
+        ],
+        "operationId": "Topic_ListAuthorizationRules",
+        "description": "Authorization rules for a topic.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720681.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topic name"
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topic name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Topic AuthorizationRule returned successfully",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules/{authorizationRuleName}": {
+      "put": {
+        "tags": [
+          "topics"
+        ],
+        "operationId": "Topic_CreateOrUpdateAuthorizationRule",
+        "description": "Creates an authorizatioRule for the specified topic.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720678.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topic name."
+          },
+          {
+            "name": "authorizationRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Aauthorization Rule Name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
+            },
+            "description": "The shared access authorization rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Topic Authorization rule created",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Topics"
+        ],
+        "operationId": "Topic_GetAuthorizationRule",
+        "description": "Returns the specified authorizationRule.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720676.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name"
+          },
+          {
+            "name": "authorizationRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Authorization rule name."
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topic name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Topic AuthorizationRule returned successfully",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Topic_DeleteAuthorizationRule",
+        "description": "Deletes a topic authorizationRule",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720681.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topic name."
+          },
+          {
+            "name": "authorizationRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "AuthorizationRule Name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Topics AuthorizationRule deleted"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules/{authorizationRuleName}/ListKeys": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Topic_ListKeys",
+        "description": "Primary and Secondary ConnectionStrings to the topic",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720677.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topic name."
+          },
+          {
+            "name": "authorizationRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The authorizationRule name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "schema": {
+              "$ref": "#/definitions/ResourceListKeys"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules/{authorizationRuleName}/regenerateKeys": {
+      "post": {
+        "tags": [
+          "Topics"
+        ],
+        "operationId": "Topic_RegenerateKeys",
+        "description": "Regenerates Primary or Secondary ConnectionStrings to the topic",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720679.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topic name."
+          },
+          {
+            "name": "authorizationRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The authorizationRule name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateKeysParameters"
+            },
+            "description": "Parameters supplied to regenerate Auth Rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "schema": {
+              "$ref": "#/definitions/ResourceListKeys"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/subscriptions": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_ListAll",
+        "description": "Lsit all the subscriptions under a topic specified",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639400.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topic name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved list of Subscriptions.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/subscriptions/{subscriptionName}": {
+      "put": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscription_CreateOrUpdate",
+        "description": "Creates a topic subscription",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639385.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topicName name."
+          },
+          {
+            "name": "subscriptionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The subscriptionName name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubscriptionCreateOrUpdateParameters"
+            },
+            "description": "Parameters supplied to create a subscription Resource."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Subscription create request accepted",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionResource"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscription_Delete",
+        "description": "Deletes a subscription from the specified topic.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639381.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topic name."
+          },
+          {
+            "name": "subscriptionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The subscription name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Subscription deleted."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscription_Get",
+        "description": "Returns a subscription description for the specified topic.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639402.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topic name."
+          },
+          {
+            "name": "subscriptionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The subscription name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved queue description.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionResource"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
     "CheckAvailabilityParameters": {
       "properties": {
         "name": {
@@ -609,6 +1940,75 @@
         }
       ],
       "description": "Description of a CheckAvailibility resource."
+    },
+    "NamespaceCreateOrUpdateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Namespace data center location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Namespace tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NamespaceProperties"
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ],
+      "description": "Parameters supplied to the CreateOrUpdate Namespace operation."
+    },
+    "NamespaceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamespaceResource"
+          },
+          "description": "Result of the List Namespace operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces"
+        }
+      },
+      "description": "The response of the List Namespace operation."
+    },
+    "NamespaceResource": {
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Kind of the Namespace.",
+          "enum": [
+            "Messaging",
+            "EventHub"
+          ],
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/ARMSku"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NamespaceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Description of a Namespace resource."
     },
     "NamespaceProperties": {
       "properties": {
@@ -668,76 +2068,7 @@
           }
         }
       },
-      "x-ms-client-flatten": true,
       "description": "Properties of the Namespace."
-    },
-    "RegenerateKeysParameters": {
-      "properties": {
-        "Policykey": {
-          "type": "string",
-          "description": "Key that needs to be regenerated .",
-          "enum": [
-            "PrimaryKey",
-            "SecondayKey"
-          ],
-          "x-ms-enum": {
-            "name": "Policykey",
-            "modelAsString": false
-          }
-        }
-      },
-      "description": "Parameters supplied to the Regenerate Namespace Auth Rule."
-    },
-    "NamespaceCreateOrUpdateParameters": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Namespace data center location."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Namespace tags."
-        },
-        "properties": {
-          "$ref": "#/definitions/NamespaceProperties"
-        }
-      },
-      "required": [
-        "location",
-        "properties"
-      ],
-      "description": "Parameters supplied to the CreateOrUpdate Namespace operation."
-    },
-    "NamespaceResource": {
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Kind of the Namespace.",
-          "enum": [
-            "Messaging",
-            "EventHub"
-          ],
-          "x-ms-enum": {
-            "name": "Kind",
-            "modelAsString": true
-          }
-        },
-        "sku": {
-          "$ref": "#/definitions/ARMSku"
-        },
-        "properties": {
-          "$ref": "#/definitions/NamespaceProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Description of a Namespace resource."
     },
     "ARMSku": {
       "type": "object",
@@ -776,6 +2107,54 @@
       },
       "description": "Sku of the Namespace."
     },
+    "SharedAccessAuthorizationRuleCreateOrUpdateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "data center location."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the AuthorizationRule."
+        },
+        "properties": {
+          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Parameters supplied to the CreateOrUpdate  AuthorizationRules."
+    },
+    "SharedAccessAuthorizationRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+          },
+          "description": "Result of the List AuthorizationRules operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of AuthorizationRules"
+        }
+      },
+      "description": "The response of the List Namespace operation."
+    },
+    "SharedAccessAuthorizationRuleResource": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Description of a Namespace AuthorizationRules."
+    },
     "SharedAccessAuthorizationRuleProperties": {
       "properties": {
         "rights": {
@@ -797,70 +2176,6 @@
       },
       "x-ms-client-flatten": true,
       "description": "SharedAccessAuthorizationRule properties."
-    },
-    "SharedAccessAuthorizationRuleCreateOrUpdateParameters": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Namespace data center location."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the Namespace AuthorizationRule."
-        },
-        "properties": {
-          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "description": "Parameters supplied to the CreateOrUpdate Namespace AuthorizationRules."
-    },
-    "SharedAccessAuthorizationRuleResource": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Description of a Namespace AuthorizationRules."
-    },
-    "NamespaceListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NamespaceResource"
-          },
-          "description": "Result of the List Namespace operation."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces"
-        }
-      },
-      "description": "The response of the List Namespace operation."
-    },
-    "SharedAccessAuthorizationRuleListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
-          },
-          "description": "Result of the List AuthorizationRules operation."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of AuthorizationRules"
-        }
-      },
-      "description": "The response of the List Namespace operation."
     },
     "ResourceListKeys": {
       "properties": {
@@ -887,36 +2202,607 @@
       },
       "description": "Namespace/ServiceBus Connection String"
     },
-    "Resource": {
+    "RegenerateKeysParameters": {
       "properties": {
-        "id": {
-          "readOnly": true,
+        "Policykey": {
           "type": "string",
-          "description": "Resource Id"
-        },
+          "description": "Key that needs to be regenerated .",
+          "enum": [
+            "PrimaryKey",
+            "SecondayKey"
+          ],
+          "x-ms-enum": {
+            "name": "Policykey",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Parameters supplied to the Regenerate Auth Rule."
+    },
+    "QueueCreateOrUpdateParameters": {
+      "properties": {
         "name": {
-          "readOnly": true,
           "type": "string",
-          "description": "Resource name"
+          "description": "Queue name."
         },
         "type": {
-          "readOnly": true,
           "type": "string",
-          "description": "Resource type"
+          "description": "ARM type of the namespace."
         },
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "location of the resource."
         },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QueueProperties"
         }
       },
-      "x-ms-azure-resource": true
+      "required": [
+        "location"
+      ],
+      "description": "Parameters supplied to the CreateOrUpdate Queue operation."
+    },
+    "QueueListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueueResource"
+          },
+          "description": "Result of the List Queues operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Queues"
+        }
+      },
+      "description": "The response of the List Queues operation."
+    },
+    "QueueResource": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QueueProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Description of queue Resource."
+    },
+    "QueueProperties": {
+      "properties": {
+        "AccessedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time a message was sent, or the last time there was a receive request to this queue."
+        },
+        "AutoDeleteOnIdle": {
+          "type": "string",
+          "format": "duration",
+          "description": "the TimeSpan idle interval after which the queue is automatically deleted. The minimum duration is 5 minutes."
+        },
+        "AvailabilityStatus ": {
+          "type": "string",
+          "description": "entity availability status for the queue.",
+          "enum": [
+            "Available",
+            "Limited",
+            "Renaming",
+            "Restoring",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "AvailabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "the exact time the message was created."
+        },
+        "DefaultMessageTimeToLive": {
+          "type": "string",
+          "format": "duration",
+          "description": "the default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
+        },
+        "DuplicateDetectionHistoryTimeWindow ": {
+          "type": "string",
+          "format": "duration",
+          "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes.."
+        },
+        "EnableBatchedOperations": {
+          "type": "boolean",
+          "description": "value that indicates whether server-side batched operations are enabled.."
+        },
+        "EnableDeadLetteringOnMessageExpiration": {
+          "type": "boolean",
+          "description": "a value that indicates whether this queue has dead letter support when a message expires."
+        },
+        "EnableExpress": {
+          "type": "boolean",
+          "description": "a value that indicates whether Express Entities are enabled. An express queue holds a message in memory temporarily before writing it to persistent storage."
+        },
+        "EnablePartitioning": {
+          "type": "boolean",
+          "description": "value that indicates whether the queue to be partitioned across multiple message brokers is enabled."
+        },
+        "ForwardDeadLetteredMessagesTo": {
+          "type": "string",
+          "description": "the path to the recipient to which the dead lettered message is forwarded."
+        },
+        "ForwardTo": {
+          "type": "string",
+          "description": "the path to the recipient to which the message is forwarded."
+        },
+        "IsAnonymousAccessible": {
+          "type": "boolean",
+          "description": "a value that indicates whether the message is anonymous accessible."
+        },
+        "LockDuration ": {
+          "type": "string",
+          "format": "duration",
+          "description": "the duration of a peek lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute."
+        },
+        "MaxDeliveryCount ": {
+          "format": "int32",
+          "type": "integer",
+          "description": "the maximum delivery count. A message is automatically deadlettered after this number of deliveries."
+        },
+        "MaxSizeInMegabytes ": {
+          "format": "int64",
+          "type": "integer",
+          "description": "the maximum size of the queue in megabytes, which is the size of memory allocated for the queue."
+        },
+        "MessageCount ": {
+          "format": "int64",
+          "type": "integer",
+          "description": "the number of messages in the queue."
+        },
+        "MessageCountDetails": {
+          "$ref": "#/definitions/MessageCountDetails"
+        },
+        "Path": {
+          "type": "string",
+          "description": "the name of the queue."
+        },
+        "RequiresDuplicateDetection": {
+          "type": "boolean",
+          "description": "the value indicating if this queue requires duplicate detection."
+        },
+        "RequiresSession": {
+          "type": "boolean",
+          "description": "a value that indicates whether the queue supports the concept of session."
+        },
+        "SizeInBytes ": {
+          "format": "int64",
+          "type": "integer",
+          "description": "the size of the queue in bytes."
+        },
+        "EntityStatus ": {
+          "type": "string",
+          "description": "Enumerates the possible values for the status of a messaging entity.",
+          "enum": [
+            "Active",
+            "Creating",
+            "Deleting",
+            "Disabled",
+            "ReceiveDisabled",
+            "Renaming",
+            "Restoring",
+            "SendDisabled",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "EntityStatus",
+            "modelAsString": false
+          }
+        },
+        "SupportOrdering": {
+          "type": "boolean",
+          "description": "a value that indicates whether the queue supports ordering."
+        },
+        "UpdatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "the exact time the message has been updated."
+        },
+        "UserMetadata": {
+          "type": "string",
+          "description": "Represents the metadata description of the queue."
+        }
+      }
+    },
+    "MessageCountDetails": {
+      "type": "object",
+      "properties": {
+        "ActiveMessageCount": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Number of active messages in the queue, topic, or subscription."
+        },
+        "DeadLetterMessageCount": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Number of messages that are dead letters."
+        },
+        "ScheduledMessageCount": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Number scheduled messages."
+        },
+        "TransferDeadLetterMessageCount": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Number of messages transferred into dead letters."
+        },
+        "TransferMessageCount": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Number of messages transferred to another queue, topic, or subscription."
+        }
+      },
+      "description": "Message Count Details."
+    },
+    "TopicCreateOrUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Topic name."
+        },
+        "type": {
+          "type": "string",
+          "description": "ARM type of the namespace."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TopicProperties"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "Parameters supplied to the CreateOrUpdate Topic operation."
+    },
+    "TopicListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TopicResource"
+          },
+          "description": "Result of the List Topics operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Topics"
+        }
+      },
+      "description": "The response of the List Topics operation."
+    },
+    "TopicResource": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TopicProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Description of topic Resource."
+    },
+    "TopicProperties": {
+      "properties": {
+        "AccessedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the message was sent or a request was received for this topic."
+        },
+        "AutoDeleteOnIdle": {
+          "type": "string",
+          "format": "duration",
+          "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
+        },
+        "AvailabilityStatus ": {
+          "type": "string",
+          "description": "Entity availability status for the topic.",
+          "enum": [
+            "Available",
+            "Limited",
+            "Renaming",
+            "Restoring",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "AvailabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Exact time the message was created."
+        },
+        "DefaultMessageTimeToLive": {
+          "type": "string",
+          "format": "duration",
+          "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
+        },
+        "DuplicateDetectionHistoryTimeWindow ": {
+          "type": "string",
+          "format": "duration",
+          "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes.."
+        },
+        "EnableBatchedOperations": {
+          "type": "boolean",
+          "description": "Value that indicates whether server-side batched operations are enabled.."
+        },
+        "EnableExpress": {
+          "type": "boolean",
+          "description": "Value that indicates whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage."
+        },
+        "EnableFilteringMessagesBeforePublishing": {
+          "type": "boolean",
+          "description": "Whether messages should be filtered before publishing."
+        },
+        "EnablePartitioning": {
+          "type": "boolean",
+          "description": "Value that indicates whether the topic to be partitioned across multiple message brokers is enabled."
+        },
+        "IsAnonymousAccessible": {
+          "type": "boolean",
+          "description": "Value that indicates whether the message is anonymous accessible."
+        },
+        "IsReadOnly": {
+          "type": "boolean",
+          "description": "Value that indicates whether the entity description is read-only."
+        },
+        "MaxSizeInMegabytes ": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Maximum size of the topic in megabytes, which is the size of memory allocated for the topic."
+        },
+        "MessageCountDetails": {
+          "$ref": "#/definitions/MessageCountDetails"
+        },
+        "Path": {
+          "type": "string",
+          "description": "Name of the topic."
+        },
+        "RequiresDuplicateDetection": {
+          "type": "boolean",
+          "description": "Value indicating if this topic requires duplicate detection."
+        },
+        "SizeInBytes ": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Size of the topic in bytes."
+        },
+        "EntityStatus ": {
+          "type": "string",
+          "description": "Enumerates the possible values for the status of a messaging entity.",
+          "enum": [
+            "Active",
+            "Creating",
+            "Deleting",
+            "Disabled",
+            "ReceiveDisabled",
+            "Renaming",
+            "Restoring",
+            "SendDisabled",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "EntityStatus",
+            "modelAsString": false
+          }
+        },
+        "SubscriptionCount": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Number of subscriptions."
+        },
+        "SupportOrdering": {
+          "type": "boolean",
+          "description": "Value that indicates whether the topic supports ordering."
+        },
+        "UpdatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The exact time the message has been updated."
+        },
+        "UserMetadata": {
+          "type": "string",
+          "description": "Represents the metadata description of the topic"
+        }
+      }
+    },
+    "SubscriptionCreateOrUpdateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Subscription data center location."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource Manager type of the resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the subscription."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SubscriptionProperties"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "Parameters supplied to the CreateOrUpdate Subscription operation."
+    },
+    "SubscriptionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionResource"
+          },
+          "description": "Result of the List Subscriptions operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Subscriptions"
+        }
+      },
+      "description": "The response of the List Subscriptions operation."
+    },
+    "SubscriptionResource": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SubscriptionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Description of Subscription Resource."
+    },
+    "SubscriptionProperties": {
+      "properties": {
+        "AccessedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time a there was a receive request to this subscription."
+        },
+        "AutoDeleteOnIdle": {
+          "type": "string",
+          "format": "duration",
+          "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
+        },
+        "AvailabilityStatus ": {
+          "type": "string",
+          "description": "Entity availability status for the topic.",
+          "enum": [
+            "Available",
+            "Limited",
+            "Renaming",
+            "Restoring",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "AvailabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Exact time the message was created."
+        },
+        "DefaultMessageTimeToLive": {
+          "type": "string",
+          "format": "duration",
+          "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
+        },
+        "EnableBatchedOperations": {
+          "type": "boolean",
+          "description": "Value that indicates whether server-side batched operations are enabled.."
+        },
+        "EnableDeadLetteringOnFilterEvaluationExceptions": {
+          "type": "boolean",
+          "description": "Value that indicates if a subscription has dead letter support on Filter evaluation exceptions."
+        },
+        "EnableDeadLetteringOnMessageExpiration": {
+          "type": "boolean",
+          "description": "Value that indicates if a subscription has dead letter support when a message expires."
+        },
+        "ForwardDeadLetteredMessagesTo": {
+          "type": "string",
+          "description": "Path to the recipient to which the dead lettered messages are forwarded."
+        },
+        "ForwardTo": {
+          "type": "string",
+          "description": "Path to the recipient to which the message is forwarded."
+        },
+        "IsReadOnly": {
+          "type": "boolean",
+          "description": "Value that indicates whether the entity description is read-only."
+        },
+        "LockDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "The lock duration time span for the subscription."
+        },
+        "MaxDeliveryCount": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Number of maximum deliveries."
+        },
+        "MessageCount": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Number of messages."
+        },
+        "MessageCountDetails": {
+          "$ref": "#/definitions/MessageCountDetails"
+        },
+        "Name": {
+          "type": "string",
+          "description": "Name of the subscription description."
+        },
+        "RequiresSession": {
+          "type": "boolean",
+          "description": "Value indicating if a subscription supports the concept of session."
+        },
+        "EntityStatus": {
+          "type": "string",
+          "description": "Enumerates the possible values for the status of a messaging entity.",
+          "enum": [
+            "Active",
+            "Creating",
+            "Deleting",
+            "Disabled",
+            "ReceiveDisabled",
+            "Renaming",
+            "Restoring",
+            "SendDisabled",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "EntityStatus",
+            "modelAsString": false
+          }
+        },
+        "TopicPath": {
+          "type": "string",
+          "description": "Path of the topic that this subscription description belongs to."
+        },
+        "UpdatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The exact time the message has been updated."
+        },
+        "UserMetadata": {
+          "type": "string",
+          "description": "Represents the metadata description of the Subscription."
+        }
+      },
+      "description": "Description of Subscription Resource."
     }
   },
   "parameters": {
@@ -925,7 +2811,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",
