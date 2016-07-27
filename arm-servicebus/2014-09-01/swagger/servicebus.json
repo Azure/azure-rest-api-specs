@@ -189,6 +189,12 @@
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
             }
+          },
+          "200": {
+            "description": "Namespace create request successful",
+            "schema": {
+              "$ref": "#/definitions/NamespaceResource"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -2020,18 +2026,18 @@
           "description": "State of the namespace.",
           "enum": [
             "Unknown",
-			"Creating",
-			"Created",
-			"Activating",
-			"Enabling",
-			"Active",
-			"Disabling",
-			"Disabled",
-			"SoftDeleting",
-			"SoftDeleted",
-			"Removing",
-			"Removed",
-			"Failed"
+            "Creating",
+            "Created",
+            "Activating",
+            "Enabling",
+            "Active",
+            "Disabling",
+            "Disabled",
+            "SoftDeleting",
+            "SoftDeleted",
+            "Removing",
+            "Removed",
+            "Failed"
           ],
           "x-ms-enum": {
             "name": "NamespaceState",
@@ -2058,14 +2064,14 @@
           "type": "boolean",
           "description": "Whether or not the namespace is set as Critical."
         },
-		"CreateACSNamespace": {
-		  "type": "boolean",
+        "CreateACSNamespace": {
+          "type": "boolean",
           "description": "Indicates whether to create ACS namespace."
-		},
-		"Enabled": {
-		  "type": "boolean",
+        },
+        "Enabled": {
+          "type": "boolean",
           "description": "Specifies whether this instance is enabled."
-		},
+        },
         "NamespaceType": {
           "type": "string",
           "description": "The namespace type.",
