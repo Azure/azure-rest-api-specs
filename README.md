@@ -2,7 +2,16 @@
 
 # Azure REST API Specifications
 
+## Code of Conduct
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## Description
+
 This repository is the canonical source for REST API specifications for Microsoft Azure.
+
+## Creating the Swagger Specification for Azure
+- This [document](./documentation/creating-swagger.md) will help you understand how AutoRest converts Swagger in to code.
+- If you are using **swashbuckle** to generate a swagger spec from your .NET WEB API then please take a look at this [repo]( https://github.com/Azure/swashbuckle-resource-provider).
 
 ## Directory Structure
 
@@ -48,10 +57,7 @@ The structure should appear like so:
 └── readme.md
 ```
 
-At this point, the specifications are expected to be in swagger format.
-
-## Creating the Swagger Specification for Azure
-This [document](./documentation/creating-swagger.md) will help you understand how AutoRest converts Swagger in to code.
+At this point, the specifications are expected to be in swagger format
 
 ## How to validate your swagger
 * [You can use this json schema validator](https://json-schema-validator.herokuapp.com/)
