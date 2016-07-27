@@ -47,7 +47,6 @@
         "operationId": "Job_GetStatistics",
         "description": "Gets statistics of the specified job.",
         "parameters": [
-          
           {
             "name": "jobIdentity",
             "in": "path",
@@ -58,9 +57,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -81,7 +77,6 @@
         "operationId": "Job_GetDebugDataPath",
         "description": "Gets the U-SQL job debug data information specified by the job ID.",
         "parameters": [
-          
           {
             "name": "jobIdentity",
             "in": "path",
@@ -92,9 +87,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -126,9 +118,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -159,9 +148,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -179,7 +165,6 @@
         "operationId": "Job_Get",
         "description": "Gets the job information for the specified job ID.",
         "parameters": [
-          
           {
             "name": "jobIdentity",
             "in": "path",
@@ -190,9 +175,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -230,9 +212,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -253,7 +232,6 @@
         "operationId": "Job_List",
         "description": "Lists the jobs, if any, associated with the specified Data Lake Analytics account. The response includes a link to the next page of results, if any.",
         "parameters": [
-          
           {
             "name": "$filter",
             "in": "query",
@@ -321,9 +299,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -553,8 +528,8 @@
             "StatisticsResource"
           ],
           "x-ms-enum": {
-            "name": "Type",
-            "modelAsString": true
+            "name": "JobResourceType",
+            "modelAsString": false
           }
         }
       },
@@ -638,7 +613,7 @@
           ],
           "x-ms-enum": {
             "name": "CompileMode",
-            "modelAsString": true
+            "modelAsString": false
           }
         }
       }
@@ -789,7 +764,7 @@
           ],
           "x-ms-enum": {
             "name": "SeverityTypes",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "source": {
@@ -824,7 +799,7 @@
           ],
           "x-ms-enum": {
             "name": "SeverityTypes",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "details": {
@@ -1020,13 +995,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "header",
-      "required": true,
-      "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
