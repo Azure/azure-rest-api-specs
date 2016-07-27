@@ -73,75 +73,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces": {
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_ListBySubscription",
-        "description": "Lists all the available namespaces within the subscription irrespective of the resourceGroups.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespaces returned successfully",
-            "schema": {
-              "$ref": "#/definitions/NamespaceListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces": {
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_ListByResourceGroup",
-        "description": "Lists the available namespaces within a resourceGroup.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespaces returned successfully",
-            "schema": {
-              "$ref": "#/definitions/NamespaceListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}": {
       "put": {
         "tags": [
@@ -185,6 +116,12 @@
         ],
         "responses": {
           "201": {
+            "description": "Namespace create request accepted",
+            "schema": {
+              "$ref": "#/definitions/NamespaceResource"
+            }
+          },
+          "200": {
             "description": "Namespace create request accepted",
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
@@ -272,51 +209,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules": {
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_ListAuthorizationRules",
-        "description": "Authorization rules for a namespace.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespace Authorization rule returned successfully",
-            "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}": {
       "put": {
         "tags": [
@@ -324,9 +216,6 @@
         ],
         "operationId": "Namespaces_CreateOrUpdateAuthorizationRule",
         "description": "Creates an authorization rule for a namespace",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639410.aspx"
-        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -347,7 +236,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Namespace Aauthorization Rule Name."
+            "description": "Aauthorization Rule Name."
           },
           {
             "name": "parameters",
@@ -367,7 +256,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace Authorization rule created",
+            "description": "Authorization rule created",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -380,9 +269,6 @@
         ],
         "operationId": "Namespaces_DeleteAuthorizationRule",
         "description": "Deletes a namespace authorization rule",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639417.aspx"
-        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -414,7 +300,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace Authorization rule deleted"
+            "description": "Authorization rule deleted"
           }
         }
       },
@@ -423,10 +309,7 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_GetAuthorizationRule",
-        "description": "Authorization rule for a namespace by name.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx"
-        },
+        "description": "Gets an authorization rule for a namespace by name.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -458,11 +341,122 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace Authorization rule returned successfully",
+            "description": "Authorization rule returned successfully",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListByResourceGroup",
+        "description": "Lists the available namespaces within a resourceGroup.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. If resourceGroupName value is null the method lists all the namespaces within subscription"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespaces returned successfully",
+            "schema": {
+              "$ref": "#/definitions/NamespaceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListBySubscription",
+        "description": "Lists all the available namespaces within the subscription irrespective of the resourceGroups.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespaces returned successfully",
+            "schema": {
+              "$ref": "#/definitions/NamespaceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListAuthorizationRules",
+        "description": "Gets the authorization rules for a namespace.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorization rule returned successfully",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -472,7 +466,7 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_ListKeys",
-        "description": "Primary and Secondary ConnectionStrings to the namespace ",
+        "description": "Gets the Primary and Secondary ConnectionStrings to the namespace ",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639398.aspx"
         },
@@ -496,7 +490,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The authorizationRule name."
+            "description": "The connection string of the namespace for the specified authorizationRule."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -521,7 +515,7 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_RegenerateKeys",
-        "description": "Regenerats the Primary or Secondary ConnectionStrings to the namespace ",
+        "description": "Gets the Primary and Secondary ConnectionStrings to the namespace ",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt718977.aspx"
         },
@@ -545,7 +539,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The authorizationRule name."
+            "description": "The connection string of the namespace for the specified authorizationRule."
           },
           {
             "name": "parameters",
@@ -575,37 +569,6 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "CheckAvailabilityParameters": {
       "properties": {
         "name": {
@@ -646,75 +609,6 @@
         }
       ],
       "description": "Description of a CheckAvailibility resource."
-    },
-    "NamespaceCreateOrUpdateParameters": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Namespace data center location."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Namespace tags."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NamespaceProperties"
-        }
-      },
-      "required": [
-        "location",
-        "properties"
-      ],
-      "description": "Parameters supplied to the CreateOrUpdate Namespace operation."
-    },
-    "NamespaceListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NamespaceResource"
-          },
-          "description": "Result of the List Namespace operation."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces"
-        }
-      },
-      "description": "The response of the List Namespace operation."
-    },
-    "NamespaceResource": {
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Kind of the Namespace.",
-          "enum": [
-            "Messaging",
-            "EventHub"
-          ],
-          "x-ms-enum": {
-            "name": "kind",
-            "modelAsString": true
-          }
-        },
-        "sku": {
-          "$ref": "#/definitions/ARMSku"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NamespaceProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Description of a Namespace resource."
     },
     "NamespaceProperties": {
       "properties": {
@@ -774,7 +668,76 @@
           }
         }
       },
+      "x-ms-client-flatten": true,
       "description": "Properties of the Namespace."
+    },
+    "RegenerateKeysParameters": {
+      "properties": {
+        "Policykey": {
+          "type": "string",
+          "description": "Key that needs to be regenerated .",
+          "enum": [
+            "PrimaryKey",
+            "SecondayKey"
+          ],
+          "x-ms-enum": {
+            "name": "Policykey",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Parameters supplied to the Regenerate Namespace Auth Rule."
+    },
+    "NamespaceCreateOrUpdateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Namespace data center location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Namespace tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/NamespaceProperties"
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ],
+      "description": "Parameters supplied to the CreateOrUpdate Namespace operation."
+    },
+    "NamespaceResource": {
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Kind of the Namespace.",
+          "enum": [
+            "Messaging",
+            "EventHub"
+          ],
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/ARMSku"
+        },
+        "properties": {
+          "$ref": "#/definitions/NamespaceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Description of a Namespace resource."
     },
     "ARMSku": {
       "type": "object",
@@ -813,54 +776,6 @@
       },
       "description": "Sku of the Namespace."
     },
-    "SharedAccessAuthorizationRuleCreateOrUpdateParameters": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "data center location."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the AuthorizationRule."
-        },
-        "properties": {
-          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "description": "Parameters supplied to the CreateOrUpdate  AuthorizationRules."
-    },
-    "SharedAccessAuthorizationRuleListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
-          },
-          "description": "Result of the List AuthorizationRules operation."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of AuthorizationRules"
-        }
-      },
-      "description": "The response of the List Namespace operation."
-    },
-    "SharedAccessAuthorizationRuleResource": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Description of a Namespace AuthorizationRules."
-    },
     "SharedAccessAuthorizationRuleProperties": {
       "properties": {
         "rights": {
@@ -882,6 +797,70 @@
       },
       "x-ms-client-flatten": true,
       "description": "SharedAccessAuthorizationRule properties."
+    },
+    "SharedAccessAuthorizationRuleCreateOrUpdateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Namespace data center location."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Namespace AuthorizationRule."
+        },
+        "properties": {
+          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Parameters supplied to the CreateOrUpdate Namespace AuthorizationRules."
+    },
+    "SharedAccessAuthorizationRuleResource": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Description of a Namespace AuthorizationRules."
+    },
+    "NamespaceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamespaceResource"
+          },
+          "description": "Result of the List Namespace operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces"
+        }
+      },
+      "description": "The response of the List Namespace operation."
+    },
+    "SharedAccessAuthorizationRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+          },
+          "description": "Result of the List AuthorizationRules operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of AuthorizationRules"
+        }
+      },
+      "description": "The response of the List Namespace operation."
     },
     "ResourceListKeys": {
       "properties": {
@@ -908,22 +887,36 @@
       },
       "description": "Namespace/ServiceBus Connection String"
     },
-    "RegenerateKeysParameters": {
+    "Resource": {
       "properties": {
-        "Policykey": {
+        "id": {
+          "readOnly": true,
           "type": "string",
-          "description": "Key that needs to be regenerated .",
-          "enum": [
-            "PrimaryKey",
-            "SecondayKey"
-          ],
-          "x-ms-enum": {
-            "name": "Policykey",
-            "modelAsString": false
-          }
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         }
       },
-      "description": "Parameters supplied to the Regenerate Auth Rule."
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
@@ -932,7 +925,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",
