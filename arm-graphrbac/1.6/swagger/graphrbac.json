@@ -36,6 +36,31 @@
     }
   },
   "paths": {
+    "/{tenantID}/me": {
+      "get": {
+        "tags": [
+          "Objects"
+        ],
+        "operationId": "Objects_GetCurrentUser",
+        "description": "Gets the details for current logged in user",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AADObject"
+            }
+          }
+        }
+      }
+    },  
     "/{tenantID}/applications": {
       "post": {
         "tags": [
@@ -98,7 +123,7 @@
             }
           }
         },
-        "x-ms-odata": "#/definitions/ApplicationFilter",
+        "x-ms-odata": "#/definitions/Application",
         "x-ms-pageable": {
           "nextLinkName": null
         }
@@ -1166,23 +1191,6 @@
         }
       },
       "description": "Request parameters for updating an existing application"
-    },
-    "ApplicationFilter": {
-      "properties": {
-        "displayNameStartsWith": {
-          "type": "string",
-          "description": "Application display name starts with"
-        },
-        "appId": {
-          "type": "string",
-          "description": "ApplicationId"
-        },
-        "identifierUri": {
-          "type": "string",
-          "description": "Identifier Uri"
-        }
-      },
-      "description": "Filter parameters for listing applications"
     },
     "Application": {
       "properties": {

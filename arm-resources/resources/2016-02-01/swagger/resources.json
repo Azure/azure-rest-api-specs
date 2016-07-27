@@ -468,6 +468,13 @@
             "description": "Query parameters. If null is passed returns all deployments."
           },
           {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The $expand query parameter. e.g. To include property aliases in response, use $expand=resourceTypes/aliases."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -495,6 +502,13 @@
         "operationId": "Providers_Get",
         "description": "Gets a resource provider.",
         "parameters": [
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The $expand query parameter. e.g. To include property aliases in response, use $expand=resourceTypes/aliases."
+          },
           {
             "name": "resourceProviderNamespace",
             "in": "path",
@@ -540,6 +554,13 @@
             "required": false,
             "type": "string",
             "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The $expand query parameter"
           },
           {
             "name": "$top",
@@ -895,6 +916,13 @@
             "required": false,
             "type": "string",
             "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The $expand query parameter."
           },
           {
             "name": "$top",
@@ -1483,7 +1511,7 @@
       "properties": {
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets the provisioning state."
+          "description": "The provisioning state."
         }
       },
       "description": "Deployment filter."
@@ -1492,19 +1520,15 @@
       "properties": {
         "resourceType": {
           "type": "string",
-          "description": "Gets or sets the resource type."
+          "description": "The resource type."
         },
         "tagname": {
           "type": "string",
-          "description": "Gets or sets the tag name."
+          "description": "The tag name."
         },
         "tagvalue": {
           "type": "string",
-          "description": "Gets or sets the tag value."
-        },
-        "expand": {
-          "type": "string",
-          "description": "Gets or sets the expand value."
+          "description": "The tag value."
         }
       },
       "description": "Resource filter."
@@ -1513,11 +1537,11 @@
       "properties": {
         "tagName": {
           "type": "string",
-          "description": "Gets or sets the tag name."
+          "description": "The tag name."
         },
         "tagValue": {
           "type": "string",
-          "description": "Gets or sets the tag value."
+          "description": "The tag value."
         }
       },
       "description": "Resource group filter."
@@ -1558,23 +1582,23 @@
       "properties": {
         "template": {
           "type": "object",
-          "description": "Gets or sets the template content. Use only one of Template or TemplateLink."
+          "description": "The template content. It can be a JObject or a well formed JSON string. Use only one of Template or TemplateLink."
         },
         "templateLink": {
           "$ref": "#/definitions/TemplateLink",
-          "description": "Gets or sets the URI referencing the template. Use only one of Template or TemplateLink."
+          "description": "The template URI. Use only one of Template or TemplateLink."
         },
         "parameters": {
           "type": "object",
-          "description": "Deployment parameters. Use only one of Parameters or ParametersLink."
+          "description": "Deployment parameters. It can be a JObject or a well formed JSON string. Use only one of Parameters or ParametersLink."
         },
         "parametersLink": {
           "$ref": "#/definitions/ParametersLink",
-          "description": "Gets or sets the URI referencing the parameters. Use only one of Parameters or ParametersLink."
+          "description": "The parameters URI. Use only one of Parameters or ParametersLink."
         },
         "mode": {
           "type": "string",
-          "description": "Gets or sets the deployment mode.",
+          "description": "The deployment mode.",
           "enum": [
             "Incremental",
             "Complete"
@@ -1586,7 +1610,7 @@
         },
         "debugSetting": {
           "$ref": "#/definitions/DebugSetting",
-          "description": "Gets or sets the debug setting of the deployment."
+          "description": "The debug setting of the deployment."
         }
       },
       "required": [
@@ -1599,7 +1623,7 @@
         "detailLevel": {
           "x-ms-client-flatten": true,
           "type": "string",
-          "description": "Gets or sets the debug detail level."
+          "description": "The debug detail level."
         }
       }
     },
@@ -1607,7 +1631,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DeploymentProperties",
-          "description": "Gets or sets the deployment properties."
+          "description": "The deployment properties."
         }
       },
       "description": "Deployment operation parameters."
@@ -1616,7 +1640,7 @@
       "properties": {
         "template": {
           "type": "object",
-          "description": "Gets or sets the template content."
+          "description": "The template content."
         }
       }
     },
@@ -1624,22 +1648,22 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Gets or sets the error code returned from the server."
+          "description": "The error code returned from the server."
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the error message returned from the server."
+          "description": "The error message returned from the server."
         },
         "target": {
           "type": "string",
-          "description": "Gets or sets the target of the error."
+          "description": "The target of the error."
         },
         "details": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceManagementErrorWithDetails"
           },
-          "description": "Gets or sets validation error."
+          "description": "Validation error."
         }
       },
       "required": [
@@ -1647,32 +1671,69 @@
         "message"
       ]
     },
-    "ProviderResourceType": {
+    "AliasPathType": {
       "properties": {
-        "resourceType": {
+        "path": {
           "type": "string",
-          "description": "Gets or sets the resource type."
-        },
-        "locations": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Gets or sets the collection of locations where this resource type can be created in."
+          "description": "The path of an alias."
         },
         "apiVersions": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the api version."
+          "description": "The api versions."
+        }
+      }
+    },
+    "AliasType": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The alias name."
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AliasPathType"
+          },
+          "description": "The paths for an alias."
+        }
+      }
+    },
+    "ProviderResourceType": {
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type."
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The collection of locations where this resource type can be created in."
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AliasType"
+          },
+          "description": "The aliases that are supported by this resource type."
+        },
+        "apiVersions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The api version."
         },
         "properties": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the properties."
+          "description": "The properties."
         }
       },
       "description": "Resource type managed by the resource provider."
@@ -1681,22 +1742,22 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the provider id."
+          "description": "The provider id."
         },
         "namespace": {
           "type": "string",
-          "description": "Gets or sets the namespace of the provider."
+          "description": "The namespace of the provider."
         },
         "registrationState": {
           "type": "string",
-          "description": "Gets or sets the registration state of the provider."
+          "description": "The registration state of the provider."
         },
         "resourceTypes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ProviderResourceType"
           },
-          "description": "Gets or sets the collection of provider resource types."
+          "description": "The collection of provider resource types."
         }
       },
       "description": "Resource provider information."
@@ -1705,15 +1766,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the ID of the dependency."
+          "description": "The ID of the dependency."
         },
         "resourceType": {
           "type": "string",
-          "description": "Gets or sets the dependency resource type."
+          "description": "The dependency resource type."
         },
         "resourceName": {
           "type": "string",
-          "description": "Gets or sets the dependency resource name."
+          "description": "The dependency resource name."
         }
       },
       "description": "Deployment dependency information."
@@ -1725,19 +1786,19 @@
           "items": {
             "$ref": "#/definitions/BasicDependency"
           },
-          "description": "Gets the list of dependencies."
+          "description": "The list of dependencies."
         },
         "id": {
           "type": "string",
-          "description": "Gets or sets the ID of the dependency."
+          "description": "The ID of the dependency."
         },
         "resourceType": {
           "type": "string",
-          "description": "Gets or sets the dependency resource type."
+          "description": "The dependency resource type."
         },
         "resourceName": {
           "type": "string",
-          "description": "Gets or sets the dependency resource name."
+          "description": "The dependency resource name."
         }
       },
       "description": "Deployment dependency information."
@@ -1746,42 +1807,42 @@
       "properties": {
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets the state of the provisioning."
+          "description": "The state of the provisioning."
         },
         "correlationId": {
           "type": "string",
-          "description": "Gets or sets the correlation ID of the deployment."
+          "description": "The correlation ID of the deployment."
         },
         "timestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the timestamp of the template deployment."
+          "description": "The timestamp of the template deployment."
         },
         "outputs": {
           "type": "object",
-          "description": "Gets or sets key/value pairs that represent deploymentoutput."
+          "description": "Key/value pairs that represent deploymentoutput."
         },
         "providers": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Provider"
           },
-          "description": "Gets the list of resource providers needed for the deployment."
+          "description": "The list of resource providers needed for the deployment."
         },
         "dependencies": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Dependency"
           },
-          "description": "Gets the list of deployment dependencies."
+          "description": "The list of deployment dependencies."
         },
         "template": {
           "type": "object",
-          "description": "Gets or sets the template content. Use only one of Template or TemplateLink."
+          "description": "The template content. Use only one of Template or TemplateLink."
         },
         "templateLink": {
           "$ref": "#/definitions/TemplateLink",
-          "description": "Gets or sets the URI referencing the template. Use only one of Template or TemplateLink."
+          "description": "The URI referencing the template. Use only one of Template or TemplateLink."
         },
         "parameters": {
           "type": "object",
@@ -1789,11 +1850,11 @@
         },
         "parametersLink": {
           "$ref": "#/definitions/ParametersLink",
-          "description": "Gets or sets the URI referencing the parameters. Use only one of Parameters or ParametersLink."
+          "description": "The URI referencing the parameters. Use only one of Parameters or ParametersLink."
         },
         "mode": {
           "type": "string",
-          "description": "Gets or sets the deployment mode.",
+          "description": "The deployment mode.",
           "enum": [
             "Incremental",
             "Complete"
@@ -1805,7 +1866,7 @@
         },
         "debugSetting": {
           "$ref": "#/definitions/DebugSetting",
-          "description": "Gets or sets the debug setting of the deployment."
+          "description": "The debug setting of the deployment."
         }
       },
       "description": "Deployment properties with additional details."
@@ -1814,11 +1875,11 @@
       "properties": {
         "error": {
           "$ref": "#/definitions/ResourceManagementErrorWithDetails",
-          "description": "Gets or sets validation error."
+          "description": "Validation error."
         },
         "properties": {
           "$ref": "#/definitions/DeploymentPropertiesExtended",
-          "description": "Gets or sets the template deployment properties."
+          "description": "The template deployment properties."
         }
       },
       "description": "Information from validate template deployment response."
@@ -1827,15 +1888,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the ID of the deployment."
+          "description": "The ID of the deployment."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the deployment."
+          "description": "The name of the deployment."
         },
         "properties": {
           "$ref": "#/definitions/DeploymentPropertiesExtended",
-          "description": "Gets or sets deployment properties."
+          "description": "Deployment properties."
         }
       },
       "required": [
@@ -1850,11 +1911,11 @@
           "items": {
             "$ref": "#/definitions/DeploymentExtended"
           },
-          "description": "Gets or sets the list of deployments."
+          "description": "The list of deployments."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
       "description": "List of deployments."
@@ -1866,11 +1927,11 @@
           "items": {
             "$ref": "#/definitions/Provider"
           },
-          "description": "Gets or sets the list of resource providers."
+          "description": "The list of resource providers."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
       "description": "List of resource providers."
@@ -1879,27 +1940,27 @@
       "properties": {
         "plan": {
           "$ref": "#/definitions/Plan",
-          "description": "Gets or sets the plan of the resource."
+          "description": "The plan of the resource."
         },
         "properties": {
           "type": "object",
-          "description": "Gets or sets the resource properties."
+          "description": "The resource properties."
         },
         "kind": {
           "type": "string",
-          "description": "Gets or sets the kind of the resource."
+          "description": "The kind of the resource."
         },
         "managedBy": {
           "type": "string",
-          "description": "Gets or sets the managedBy property of the resource."
+          "description": "The managedBy property of the resource."
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "Gets or sets the sku of the resource."
+          "description": "The sku of the resource."
         },
         "identity": {
           "$ref": "#/definitions/Identity",
-          "description": "Gets or sets the identity of the resource."
+          "description": "The identity of the resource."
         }
       },
       "allOf": [
@@ -1913,19 +1974,19 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the plan ID."
+          "description": "The plan ID."
         },
         "publisher": {
           "type": "string",
-          "description": "Gets or sets the publisher ID."
+          "description": "The publisher ID."
         },
         "product": {
           "type": "string",
-          "description": "Gets or sets the offer ID."
+          "description": "The offer ID."
         },
         "promotionCode": {
           "type": "string",
-          "description": "Gets or sets the promotion code."
+          "description": "The promotion code."
         }
       },
       "description": "Plan for the resource."
@@ -1934,28 +1995,28 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the sku name."
+          "description": "The sku name."
         },
         "tier": {
           "type": "string",
-          "description": "Gets or sets the sku tier."
+          "description": "The sku tier."
         },
         "size": {
           "type": "string",
-          "description": "Gets or sets the sku size."
+          "description": "The sku size."
         },
         "family": {
           "type": "string",
-          "description": "Gets or sets the sku family."
+          "description": "The sku family."
         },
         "model": {
           "type": "string",
-          "description": "Gets or sets the sku model."
+          "description": "The sku model."
         },
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the sku capacity."
+          "description": "The sku capacity."
         }
       },
       "description": "Sku for the resource."
@@ -1974,7 +2035,7 @@
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the identity type.",
+          "description": "The identity type.",
           "enum": [
             "SystemAssigned"
           ],
@@ -1993,11 +2054,11 @@
           "items": {
             "$ref": "#/definitions/GenericResource"
           },
-          "description": "Gets or sets the list of resources."
+          "description": "The list of resources."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
       "required": [
@@ -2010,25 +2071,25 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the ID of the resource group."
+          "description": "The ID of the resource group."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the Name of the resource group."
+          "description": "The Name of the resource group."
         },
         "properties": {
           "$ref": "#/definitions/ResourceGroupProperties"
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the location of the resource group. It cannot be changed after the resource group has been created. Has to be one of the supported Azure Locations, such as West US, East US, West Europe, East Asia, etc."
+          "description": "The location of the resource group. It cannot be changed after the resource group has been created. Has to be one of the supported Azure Locations, such as West US, East US, West Europe, East Asia, etc."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the tags attached to the resource group."
+          "description": "The tags attached to the resource group."
         }
       },
       "required": [
@@ -2053,11 +2114,11 @@
           "items": {
             "$ref": "#/definitions/ResourceGroup"
           },
-          "description": "Gets or sets the list of resource groups."
+          "description": "The list of resource groups."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
       "required": [
@@ -2072,7 +2133,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the ids of the resources."
+          "description": "The ids of the resources."
         },
         "targetResourceGroup": {
           "type": "string",
@@ -2088,7 +2149,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the ids of the resources. The only supported string currently is '*' (all resources). Future api updates will support exporting specific resources."
+          "description": "The ids of the resources. The only supported string currently is '*' (all resources). Future api updates will support exporting specific resources."
         },
         "options": {
           "type": "string",
@@ -2114,15 +2175,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the tag ID."
+          "description": "The tag ID."
         },
         "tagValue": {
           "type": "string",
-          "description": "Gets or sets the tag value."
+          "description": "The tag value."
         },
         "count": {
           "$ref": "#/definitions/TagCount",
-          "description": "Gets or sets the tag value count."
+          "description": "The tag value count."
         }
       },
       "description": "Tag information."
@@ -2131,22 +2192,22 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the tag ID."
+          "description": "The tag ID."
         },
         "tagName": {
           "type": "string",
-          "description": "Gets or sets the tag name."
+          "description": "The tag name."
         },
         "count": {
           "$ref": "#/definitions/TagCount",
-          "description": "Gets or sets the tag count."
+          "description": "The tag count."
         },
         "values": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TagValue"
           },
-          "description": "Gets or sets the list of tag values."
+          "description": "The list of tag values."
         }
       },
       "description": "Tag details."
@@ -2158,11 +2219,11 @@
           "items": {
             "$ref": "#/definitions/TagDetails"
           },
-          "description": "Gets or sets the list of tags."
+          "description": "The list of tags."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
       "required": [
@@ -2174,15 +2235,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the ID of the resource."
+          "description": "The ID of the resource."
         },
         "resourceName": {
           "type": "string",
-          "description": "Gets or sets the name of the resource."
+          "description": "The name of the resource."
         },
         "resourceType": {
           "type": "string",
-          "description": "Gets or sets the type of the resource."
+          "description": "The type of the resource."
         }
       },
       "description": "Target resource."
@@ -2191,7 +2252,7 @@
       "properties": {
         "content": {
           "type": "object",
-          "description": "Gets or sets HTTP message content."
+          "description": "HTTP message content."
         }
       }
     },
@@ -2199,36 +2260,36 @@
       "properties": {
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets the state of the provisioning."
+          "description": "The state of the provisioning."
         },
         "timestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the date and time of the operation."
+          "description": "The date and time of the operation."
         },
         "serviceRequestId": {
           "type": "string",
-          "description": "Gets or sets deployment operation service request id."
+          "description": "Deployment operation service request id."
         },
         "statusCode": {
           "type": "string",
-          "description": "Gets or sets operation status code."
+          "description": "Operation status code."
         },
         "statusMessage": {
           "type": "object",
-          "description": "Gets or sets operation status message."
+          "description": "Operation status message."
         },
         "targetResource": {
           "$ref": "#/definitions/TargetResource",
-          "description": "Gets or sets the target resource."
+          "description": "The target resource."
         },
         "request": {
           "$ref": "#/definitions/HttpMessage",
-          "description": "Gets or sets the HTTP request message."
+          "description": "The HTTP request message."
         },
         "response": {
           "$ref": "#/definitions/HttpMessage",
-          "description": "Gets or sets the HTTP response message."
+          "description": "The HTTP response message."
         }
       },
       "description": "Deployment operation properties."
@@ -2237,15 +2298,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets full deployment operation id."
+          "description": "Full deployment operation id."
         },
         "operationId": {
           "type": "string",
-          "description": "Gets or sets deployment operation id."
+          "description": "Deployment operation id."
         },
         "properties": {
           "$ref": "#/definitions/DeploymentOperationProperties",
-          "description": "Gets or sets deployment properties."
+          "description": "Deployment properties."
         }
       },
       "description": "Deployment operation information."
@@ -2257,11 +2318,11 @@
           "items": {
             "$ref": "#/definitions/DeploymentOperation"
           },
-          "description": "Gets or sets the list of deployments."
+          "description": "The list of deployments."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
       "description": "List of deployment operations."
@@ -2270,23 +2331,23 @@
       "properties": {
         "publisher": {
           "type": "string",
-          "description": "Gets or sets operation description."
+          "description": "Operation description."
         },
         "provider": {
           "type": "string",
-          "description": "Gets or sets operation provider."
+          "description": "Operation provider."
         },
         "resource": {
           "type": "string",
-          "description": "Gets or sets operation resource."
+          "description": "Operation resource."
         },
         "operation": {
           "type": "string",
-          "description": "Gets or sets operation."
+          "description": "Operation."
         },
         "description": {
           "type": "string",
-          "description": "Gets or sets operation description."
+          "description": "Operation description."
         }
       },
       "description": "Resource provider operation's display properties."
@@ -2338,11 +2399,11 @@
       "properties": {
         "template": {
           "type": "object",
-          "description": "Gets or sets the template content."
+          "description": "The template content."
         },
         "error": {
           "$ref": "#/definitions/ResourceManagementErrorWithDetails",
-          "description": "Gets or sets the error."
+          "description": "The error."
         }
       }
     }
