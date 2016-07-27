@@ -2004,49 +2004,69 @@
     },
     "NamespaceProperties": {
       "properties": {
-        "name": {
+        "Name": {
           "type": "string",
           "description": "The name of the namespace."
         },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the Namespace."
-        },
-        "region": {
+        "Region": {
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx"
           },
           "type": "string",
           "description": "Specifies the targeted region in which the namespace should be created. It can be any of the following values: Australia EastAustralia SoutheastCentral USEast USEast US 2West USNorth Central USSouth Central USEast AsiaSoutheast AsiaBrazil SouthJapan EastJapan WestNorth EuropeWest Europe"
         },
-        "status": {
-          "externalDocs": {
-            "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx"
-          },
+        "Status": {
           "type": "string",
-          "description": "Status of the namespace. It can be any of these values:1 = Created/Active2 = Creating3 = Suspended4 = Deleting"
+          "description": "State of the namespace.",
+          "enum": [
+            "Unknown",
+			"Creating",
+			"Created",
+			"Activating",
+			"Enabling",
+			"Active",
+			"Disabling",
+			"Disabled",
+			"SoftDeleting",
+			"SoftDeleted",
+			"Removing",
+			"Removed",
+			"Failed"
+          ],
+          "x-ms-enum": {
+            "name": "NamespaceState",
+            "modelAsString": false
+          }
         },
-        "createdAt": {
+        "CreatedAt": {
           "type": "string",
           "format": "date-time",
           "description": "The time the namespace was created."
         },
-        "serviceBusEndpoint": {
+        "ServiceBusEndpoint": {
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx"
           },
           "type": "string",
           "description": "Endpoint you can use to perform ServiceBus operations."
         },
-        "subscriptionId": {
+        "SubscriptionId": {
           "type": "string",
           "description": "The Id of the Azure subscription associated with the namespace."
         },
-        "critical": {
+        "Critical": {
           "type": "boolean",
           "description": "Whether or not the namespace is set as Critical."
         },
-        "namespaceType": {
+		"CreateACSNamespace": {
+		  "type": "boolean",
+          "description": "Indicates whether to create ACS namespace."
+		},
+		"Enabled": {
+		  "type": "boolean",
+          "description": "Specifies whether this instance is enabled."
+		},
+        "NamespaceType": {
           "type": "string",
           "description": "The namespace type.",
           "enum": [
@@ -2286,7 +2306,7 @@
             "modelAsString": false
           }
         },
-        "createdAt": {
+        "CreatedAt": {
           "type": "string",
           "format": "date-time",
           "description": "the exact time the message was created."
@@ -2369,7 +2389,7 @@
           "type": "integer",
           "description": "the size of the queue in bytes."
         },
-        "EntityStatus ": {
+        "Status": {
           "type": "string",
           "description": "Enumerates the possible values for the status of a messaging entity.",
           "enum": [
@@ -2546,10 +2566,6 @@
           "type": "boolean",
           "description": "Value that indicates whether the message is anonymous accessible."
         },
-        "IsReadOnly": {
-          "type": "boolean",
-          "description": "Value that indicates whether the entity description is read-only."
-        },
         "MaxSizeInMegabytes ": {
           "format": "int64",
           "type": "integer",
@@ -2571,7 +2587,7 @@
           "type": "integer",
           "description": "Size of the topic in bytes."
         },
-        "EntityStatus ": {
+        "Status": {
           "type": "string",
           "description": "Enumerates the possible values for the status of a messaging entity.",
           "enum": [
@@ -2747,7 +2763,7 @@
           "type": "boolean",
           "description": "Value indicating if a subscription supports the concept of session."
         },
-        "EntityStatus": {
+        "Status": {
           "type": "string",
           "description": "Enumerates the possible values for the status of a messaging entity.",
           "enum": [
