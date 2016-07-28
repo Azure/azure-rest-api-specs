@@ -233,6 +233,9 @@
         "responses": {
           "200": {
             "description": "Namespace delete successful"
+          },
+          "202": {
+            "description": "Namespace delete accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1119,7 +1122,7 @@
           "Topics"
         ],
         "operationId": "Topics_ListAll",
-        "description": "Lists allthe topics in a namespace.",
+        "description": "Lists all the topics in a namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639388.aspx"
         },
@@ -1363,7 +1366,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules/{authorizationRuleName}": {
       "put": {
         "tags": [
-          "topics"
+          "Topics"
         ],
         "operationId": "Topics_CreateOrUpdateAuthorizationRule",
         "description": "Creates an authorizatioRule for the specified topic.",
@@ -1657,7 +1660,7 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_ListAll",
-        "description": "Lsit all the subscriptions under a topic specified",
+        "description": "Lsit all the subscriptions under a specified topic",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639400.aspx"
         },
@@ -1915,10 +1918,6 @@
         "location": {
           "type": "string",
           "description": "Namespace location"
-        },
-        "isAvailiable": {
-          "type": "boolean",
-          "description": "Is true if the name is available and can be used to create new Namespace/ServiceBus. Otherwise false."
         }
       },
       "required": [
@@ -1928,7 +1927,7 @@
     },
     "CheckAvailabilityResource": {
       "properties": {
-        "isAvailiable": {
+        "isAvailable": {
           "type": "boolean",
           "description": "Is true if the name is available and can be used to create new Namespace/ServiceBus. Otherwise false."
         }
@@ -1944,7 +1943,10 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Namespace data center location."
+          "description": "Namespace location."
+        },
+        "sku": {
+          "$ref": "#/definitions/ARMSku"
         },
         "tags": {
           "type": "object",
@@ -1959,8 +1961,7 @@
         }
       },
       "required": [
-        "location",
-        "properties"
+        "location"
       ],
       "description": "Parameters supplied to the CreateOrUpdate Namespace operation."
     },
