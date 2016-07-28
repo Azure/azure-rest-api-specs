@@ -36,40 +36,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/checkNamespaceAvailability": {
-      "post": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_CheckAvailability",
-        "description": "Checks the availability of the given service namespace across all Windows Azure subscriptions. This is useful because the domain name is created based on the service namespace name.",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckAvailabilityParameters"
-            },
-            "description": "The namespace name."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespaces Checked name successfully",
-            "schema": {
-              "$ref": "#/definitions/CheckAvailabilityResource"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/namespaces": {
       "get": {
         "tags": [
@@ -1313,36 +1279,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "CheckAvailabilityParameters": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the namespace"
-        },
-        "location": {
-          "type": "string",
-          "description": "Namespace location"
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "description": "Parameters supplied to the Check Name Availability for Namespace and ServiceBus."
-    },
-    "CheckAvailabilityResource": {
-      "properties": {
-        "isAvailable": {
-          "type": "boolean",
-          "description": "Is true if the name is available and can be used to create new Namespace/ServiceBus. Otherwise false."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Description of a CheckAvailibility resource."
     },
     "NamespaceCreateOrUpdateParameters": {
       "properties": {
