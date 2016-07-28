@@ -1997,6 +1997,7 @@
           "$ref": "#/definitions/ARMSku"
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/NamespaceProperties"
         }
       },
@@ -2009,16 +2010,16 @@
     },
     "NamespaceProperties": {
       "properties": {
-        "Name": {
-          "type": "string",
-          "description": "The name of the namespace."
-        },
         "Region": {
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx"
           },
           "type": "string",
           "description": "Specifies the targeted region in which the namespace should be created. It can be any of the following values: Australia EastAustralia SoutheastCentral USEast USEast US 2West USNorth Central USSouth Central USEast AsiaSoutheast AsiaBrazil SouthJapan EastJapan WestNorth EuropeWest Europe"
+        },
+        "ProvisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the Namespace."
         },
         "Status": {
           "type": "string",
@@ -2097,7 +2098,7 @@
             "Premium"
           ],
           "x-ms-enum": {
-            "name": "Name",
+            "name": "SkuName",
             "modelAsString": true
           }
         },
@@ -2120,6 +2121,9 @@
           "description": "The messaging units or eventhub throughput units"
         }
       },
+      "required": [
+        "Tier"
+      ],
       "description": "Sku of the Namespace."
     },
     "SharedAccessAuthorizationRuleCreateOrUpdateParameters": {
@@ -2759,10 +2763,6 @@
         },
         "MessageCountDetails": {
           "$ref": "#/definitions/MessageCountDetails"
-        },
-        "Name": {
-          "type": "string",
-          "description": "Name of the subscription description."
         },
         "RequiresSession": {
           "type": "boolean",
