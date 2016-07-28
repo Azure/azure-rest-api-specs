@@ -4288,6 +4288,27 @@
       },
       "description": "SKU of application gateway"
     },
+    "ApplicationGatewaySslPolicy": {
+      "properties": {
+        "disabledSslProtocols": {
+          "type": "array",
+          "description": "Get or sets SSL protocols to be disabled on Application Gateway",
+          "items": {
+            "type": "string",
+            "enum": [
+              "TLSv1_0",
+              "TLSv1_1",
+              "TLSv1_2"
+            ],
+            "x-ms-enum": {
+              "name": "ApplicationGatewaySslProtocol",
+              "modelAsString": true
+            }
+          }
+        }
+      },
+      "description": "Gets or sets application gateway SSL policy"
+    },
     "ApplicationGatewayIPConfigurationPropertiesFormat": {
       "properties": {
         "subnet": {
@@ -4322,6 +4343,41 @@
         }
       ],
       "description": "IP configuration of application gateway"
+    },
+    "ApplicationGatewayAuthenticationCertificatePropertiesFormat": {
+      "properties": {
+        "data": {
+          "type": "string",
+          "description": "Gets or sets the certificate public data "
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the authentication certificate resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of Authentication certificates of application gateway"
+    },
+    "ApplicationGatewayAuthenticationCertificate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayAuthenticationCertificatePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "Authentication certificates of application gateway"
     },
     "ApplicationGatewaySslCertificatePropertiesFormat": {
       "properties": {
@@ -4554,6 +4610,13 @@
         "probe": {
           "$ref": "#/definitions/SubResource",
           "description": "Gets or sets probe resource of application gateway "
+        },
+        "authenticationCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Gets or sets array of references to Application Gateway Authentication Certificates"
         },
         "provisioningState": {
           "type": "string",
@@ -4824,6 +4887,10 @@
           "$ref": "#/definitions/ApplicationGatewaySku",
           "description": "Gets or sets sku of application gateway resource"
         },
+        "sslPolicy": {
+          "$ref": "#/definitions/ApplicationGatewaySslPolicy",
+          "description": "Gets or sets SSL policy of application gateway resource"
+        },
         "operationalState": {
           "readOnly": true,
           "type": "string",
@@ -4845,6 +4912,13 @@
             "$ref": "#/definitions/ApplicationGatewayIPConfiguration"
           },
           "description": "Gets or sets subnets of application gateway resource"
+        },
+        "authenticationCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayAuthenticationCertificate"
+          },
+          "description": "Gets or sets authentication certificates of application gateway resource"
         },
         "sslCertificates": {
           "type": "array",
