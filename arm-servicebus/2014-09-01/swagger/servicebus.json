@@ -1944,18 +1944,11 @@
     },
     "NamespaceProperties": {
       "properties": {
-        "Region": {
-          "externalDocs": {
-            "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx"
-          },
-          "type": "string",
-          "description": "Specifies the targeted region in which the namespace should be created."
-        },
-        "ProvisioningState": {
+        "provisioningState": {
           "type": "string",
           "description": "Provisioning state of the Namespace."
         },
-        "Status": {
+        "status": {
           "type": "string",
           "description": "State of the namespace.",
           "enum": [
@@ -1978,44 +1971,30 @@
             "modelAsString": false
           }
         },
-        "CreatedAt": {
+        "createdAt": {
           "type": "string",
           "format": "date-time",
           "description": "The time the namespace was created."
         },
-        "ServiceBusEndpoint": {
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the namespace was updated."
+        },
+        "serviceBusEndpoint": {
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx"
           },
           "type": "string",
           "description": "Endpoint you can use to perform ServiceBus operations."
         },
-        "SubscriptionId": {
-          "type": "string",
-          "description": "The Id of the Azure subscription associated with the namespace."
-        },
-        "Critical": {
-          "type": "boolean",
-          "description": "Whether or not the namespace is set as Critical."
-        },
-        "CreateACSNamespace": {
+        "createACSNamespace": {
           "type": "boolean",
           "description": "Indicates whether to create ACS namespace."
         },
-        "Enabled": {
+        "enabled": {
           "type": "boolean",
           "description": "Specifies whether this instance is enabled."
-        },
-        "NamespaceType": {
-          "type": "string",
-          "description": "The namespace type.",
-          "enum": [
-            "Messaging"
-          ],
-          "x-ms-enum": {
-            "name": "NamespaceType",
-            "modelAsString": true
-          }
         }
       },
       "description": "Properties of the Namespace."
