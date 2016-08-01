@@ -58,7 +58,7 @@ describe('Azure Swagger Schema Validation', function() {
         var validator = new z();
         validator.setRemoteReference(schemaUrl, schema4);
         validator.setRemoteReference(swaggerSchemaUrl, swaggerSchema);
-        var valid = validator.validate(JSON.parse(data), extensionSwaggerSchema);
+        var valid = validator.validate(JSON.parse(stripBOM(data)), extensionSwaggerSchema);
         if (!valid) {
             var error = validator.getLastErrors();
             throw new Error("Schema validation failed: " + JSON.stringify(error, null, "\t"));

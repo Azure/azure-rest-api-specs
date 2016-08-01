@@ -1881,16 +1881,23 @@
         "sku": {
           "$ref": "#/definitions/Sku"
         },
-        "kind": {
-          "type": "string",
-          "description": "Namespace kind"
-        },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
           "description": "Namespace tags."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Specifies the namespace type; for example: Messaging.",
+          "enum": [
+            "Messaging"
+          ],
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1927,7 +1934,7 @@
             "Messaging"
           ],
           "x-ms-enum": {
-            "name": "kind",
+            "name": "Kind",
             "modelAsString": true
           }
         },
