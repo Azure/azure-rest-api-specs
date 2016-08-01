@@ -226,7 +226,153 @@
           }
         }
       }
+    },	
+    "/{tenantID}/applications/{applicationObjectId}/keyCredentials": {
+      "get": {
+        "tags": [
+          "ApplicationKeyCredentials"
+        ],
+        "operationId": "Applications_ListKeyCredentials",
+        "description": "Get keyCredentials associated with the application by object Id. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#keycredential-type",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object id",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/KeyCredentialListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "patch": {
+        "tags": [
+          "ApplicationKeyCredentials"
+        ],
+        "operationId": "Applications_PatchKeyCredentials",
+        "description": "Update keyCredentials associated with an existing application. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#keycredential-type",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object id",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyCredentialsUpdateParameters"
+            },
+            "description": "Parameters to update keyCredentials of an existing application."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        }
+      }
     },
+    "/{tenantID}/applications/{applicationObjectId}/passwordCredentials": {
+      "get": {
+        "tags": [
+          "ApplicationPasswordCredentials"
+        ],
+        "operationId": "Applications_ListPasswordCredentials",
+        "description": "Gets passwordCredentials associated with an existing application. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#passwordcredential-type",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object id",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PasswordCredentialListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "patch": {
+        "tags": [
+          "ApplicationPasswordCredentials"
+        ],
+        "operationId": "Applications_PatchPasswordCredentials",
+        "description": "Updates passwordCredentials associated with an existing application. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#passwordcredential-type",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object id",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PasswordCredentialsUpdateParameters"
+            },
+            "description": "Parameters to update passwordCredentials of an existing application."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        }
+      }
+    },	
     "/{tenantID}/isMemberOf": {
       "post": {
         "tags": [
@@ -681,7 +827,153 @@
           }
         }
       }
+    },	
+	"/{tenantID}/servicePrincipals/{objectId}/keyCredentials": {
+      "get": {
+        "tags": [
+          "ServicePrincipalKeyCredentials"
+        ],
+        "operationId": "ServicePrincipals_ListKeyCredentials",
+        "description": "Get keyCredentials associated with the service principal by object Id. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#keycredential-type",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Object id to get service principal information.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/KeyCredentialListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "patch": {
+        "tags": [
+          "ServicePrincipalKeyCredentials"
+        ],
+        "operationId": "ServicePrincipals_PatchKeyCredentials",
+        "description": "Update keyCredentials associated with an existing service principal. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#keycredential-type",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Object id to get service principal information.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyCredentialsUpdateParameters"
+            },
+            "description": "Parameters to update keyCredentials of an existing service principal."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        }
+      }
     },
+    "/{tenantID}/servicePrincipals/{objectId}/passwordCredentials": {
+      "get": {
+        "tags": [
+          "ServicePrincipalPasswordCredentials"
+        ],
+        "operationId": "ServicePrincipals_ListPasswordCredentials",
+        "description": "Gets passwordCredentials associated with an existing service principal. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#passwordcredential-type",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Object id to get service principal information.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PasswordCredentialListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "patch": {
+        "tags": [
+          "ServicePrincipalPasswordCredentials"
+        ],
+        "operationId": "ServicePrincipals_PatchPasswordCredentials",
+        "description": "Updates passwordCredentials associated with an existing service principal. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#passwordcredential-type",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Object id to get service principal information.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PasswordCredentialsUpdateParameters"
+            },
+            "description": "Parameters to update passwordCredentials of an existing service principal."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        }
+      }
+    },	
     "/{tenantID}/users": {
       "post": {
         "tags": [
@@ -1068,15 +1360,15 @@
         },
         "usage": {
           "type": "string",
-          "description": "Gets or sets usage"
+          "description": "Gets or sets usage. Acceptable values are 'Verify' and 'Sign'."
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets type"
+          "description": "Gets or sets type. Acceptable values are 'AsymmetricX509Cert' and 'Symmetric'."
         }
       },
-      "description": "Active Directory service principal Key Credential information"
-    },
+      "description": "Active Directory Key Credential information"
+    },	
     "PasswordCredential": {
       "properties": {
         "startDate": {
@@ -1098,8 +1390,8 @@
           "description": "Gets or sets value"
         }
       },
-      "description": "Active Directory service principal Password Credential information"
-    },
+      "description": "Active Directory PasswordCredential information"
+    },	
     "ApplicationCreateParameters": {
       "properties": {
         "availableToOtherTenants": {
@@ -1253,6 +1545,54 @@
         }
       },
       "description": "Role assignment list operation result."
+    },
+    "KeyCredentialListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyCredential"
+          },
+          "description": "KeyCredential list."
+        }
+      },
+      "description": "KeyCredential list operation result."
+    },	
+	"KeyCredentialsUpdateParameters": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyCredential"
+          },
+          "description": "KeyCredential list."
+        }
+      },
+      "description": "Request parameters for  KeyCredentials update operation"
+    },	
+    "PasswordCredentialListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PasswordCredential"
+          },
+          "description": "PasswordCredential list."
+        }
+      },
+      "description": "PasswordCredential list operation result."
+    },
+    "PasswordCredentialsUpdateParameters": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PasswordCredential"
+          },
+          "description": "PasswordCredential list."
+        }
+      },
+      "description": "Request paramters for PasswordCredentials update operation"
     },
     "AADObject": {
       "properties": {
