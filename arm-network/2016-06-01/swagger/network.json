@@ -7234,6 +7234,49 @@
       ],
       "description": "IPConfiguration"
     },
+    "ResourceNavigationLinkFormat": {
+      "properties": {
+        "linkedResourceType": {
+          "type": "string",
+          "description": "Gets or sets the resource type of the linked resource"
+        },
+        "link": {
+          "type": "string",
+          "description": "Gets or sets the link to the external resource"
+        },
+        "parentResourceGuid": {
+          "type": "string",
+          "description": "Gets or sets the link to the external resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the ResourceNavigationLink resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of ResourceNavigationLink"
+    },
+    "ResourceNavigationLink": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ResourceNavigationLinkFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "ResourceNavigationLink resource"
+    },
     "SubnetPropertiesFormat": {
       "properties": {
         "addressPrefix": {
@@ -7255,6 +7298,13 @@
             "$ref": "#/definitions/IPConfiguration"
           },
           "description": "Gets array of references to the network interface IP configurations using subnet"
+        },
+        "resourceNavigationLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceNavigationLink"
+          },
+          "description": "Gets array of references to the external resources using subnet"
         },
         "provisioningState": {
           "type": "string",
