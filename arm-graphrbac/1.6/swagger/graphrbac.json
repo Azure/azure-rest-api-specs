@@ -1696,13 +1696,16 @@
       "required": [
         "availableToOtherTenants",
         "displayName",
-        "homepage",
         "identifierUris"
       ],
       "description": "Request parameters for create a new application"
     },
     "ApplicationUpdateParameters": {
       "properties": {
+        "availableToOtherTenants": {
+          "type": "boolean",
+          "description": "Indicates if the application will be available to other tenants"
+        },
         "displayName": {
           "type": "string",
           "description": "Application display name"
@@ -2057,6 +2060,20 @@
         "accountEnabled": {
           "type": "boolean",
           "description": "Specifies if the account is enabled"
+        },
+        "keyCredentials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyCredential"
+          },
+          "description": "the list of KeyCredential objects"
+        },
+        "passwordCredentials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PasswordCredential"
+          },
+          "description": "the list of PasswordCredential objects"
         }
       },
       "required": [
