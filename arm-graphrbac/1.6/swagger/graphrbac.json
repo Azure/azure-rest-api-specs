@@ -53,14 +53,20 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/AADObject"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         }
       }
-    },  
+    },
     "/{tenantID}/applications": {
       "post": {
         "tags": [
@@ -87,9 +93,15 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         }
@@ -117,9 +129,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         },
@@ -154,7 +172,13 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
           }
         }
       },
@@ -182,9 +206,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         }
@@ -222,7 +252,183 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/applications/{applicationObjectId}/keyCredentials": {
+      "get": {
+        "tags": [
+          "ApplicationKeyCredentials"
+        ],
+        "operationId": "Applications_ListKeyCredentials",
+        "description": "Get keyCredentials associated with the application by object Id. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#keycredential-type",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object id",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KeyCredentialListResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "patch": {
+        "tags": [
+          "ApplicationKeyCredentials"
+        ],
+        "operationId": "Applications_UpdateKeyCredentials",
+        "description": "Update keyCredentials associated with an existing application. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#keycredential-type",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object id",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyCredentialsUpdateParameters"
+            },
+            "description": "Parameters to update keyCredentials of an existing application."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/applications/{applicationObjectId}/passwordCredentials": {
+      "get": {
+        "tags": [
+          "ApplicationPasswordCredentials"
+        ],
+        "operationId": "Applications_ListPasswordCredentials",
+        "description": "Gets passwordCredentials associated with an existing application. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#passwordcredential-type",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object id",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PasswordCredentialListResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "patch": {
+        "tags": [
+          "ApplicationPasswordCredentials"
+        ],
+        "operationId": "Applications_UpdatePasswordCredentials",
+        "description": "Updates passwordCredentials associated with an existing application. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#passwordcredential-type",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object id",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PasswordCredentialsUpdateParameters"
+            },
+            "description": "Parameters to update passwordCredentials of an existing application."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
           }
         }
       }
@@ -256,6 +462,12 @@
             "description": "OK. Indicates success. Returns true if the user, contact, group, or service principal is a direct or a transitive member of the specified group; otherwsie, false.",
             "schema": {
               "$ref": "#/definitions/CheckGroupMembershipResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         }
@@ -295,6 +507,12 @@
         "responses": {
           "204": {
             "description": "No Content. Indicates success. No response body is returned."
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
           }
         }
       }
@@ -334,6 +552,12 @@
         "responses": {
           "204": {
             "description": "No Content. Indicates success. No response body is returned."
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
           }
         }
       }
@@ -363,7 +587,13 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
           }
         }
       }
@@ -394,9 +624,15 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/ADGroup"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         }
@@ -424,9 +660,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/GroupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         },
@@ -462,9 +704,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/GetObjectsResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         },
@@ -499,9 +747,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ADGroup"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         }
@@ -541,9 +795,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/GroupGetMemberGroupsResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         },
@@ -578,9 +838,15 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/ServicePrincipal"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         }
@@ -608,9 +874,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ServicePrincipalListResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         },
@@ -646,7 +918,13 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
           }
         }
       },
@@ -674,9 +952,185 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ServicePrincipal"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/servicePrincipals/{objectId}/keyCredentials": {
+      "get": {
+        "tags": [
+          "ServicePrincipalKeyCredentials"
+        ],
+        "operationId": "ServicePrincipals_ListKeyCredentials",
+        "description": "Get keyCredentials associated with the service principal by object Id. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#keycredential-type",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Object id to get service principal information.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KeyCredentialListResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "patch": {
+        "tags": [
+          "ServicePrincipalKeyCredentials"
+        ],
+        "operationId": "ServicePrincipals_UpdateKeyCredentials",
+        "description": "Update keyCredentials associated with an existing service principal. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#keycredential-type",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Object id to get service principal information.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyCredentialsUpdateParameters"
+            },
+            "description": "Parameters to update keyCredentials of an existing service principal."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/servicePrincipals/{objectId}/passwordCredentials": {
+      "get": {
+        "tags": [
+          "ServicePrincipalPasswordCredentials"
+        ],
+        "operationId": "ServicePrincipals_ListPasswordCredentials",
+        "description": "Gets passwordCredentials associated with an existing service principal. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#passwordcredential-type",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Object id to get service principal information.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PasswordCredentialListResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "patch": {
+        "tags": [
+          "ServicePrincipalPasswordCredentials"
+        ],
+        "operationId": "ServicePrincipals_UpdatePasswordCredentials",
+        "description": "Updates passwordCredentials associated with an existing service principal. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#passwordcredential-type",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Object id to get service principal information.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PasswordCredentialsUpdateParameters"
+            },
+            "description": "Parameters to update passwordCredentials of an existing service principal."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         }
@@ -712,6 +1166,12 @@
             "schema": {
               "$ref": "#/definitions/User"
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
           }
         }
       },
@@ -738,9 +1198,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/UserListResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         },
@@ -776,9 +1242,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         }
@@ -817,6 +1289,12 @@
         "responses": {
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
           }
         }
       },
@@ -844,7 +1322,13 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
           }
         }
       }
@@ -883,9 +1367,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/UserGetMemberGroupsResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         },
@@ -921,9 +1411,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/GroupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         },
@@ -958,9 +1454,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/GetObjectsResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         },
@@ -995,9 +1497,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ServicePrincipalListResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         },
@@ -1032,9 +1540,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/UserListResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
             }
           }
         },
@@ -1046,59 +1560,95 @@
     }
   },
   "definitions": {
+    "GraphError": {
+      "properties": {
+        "odata.error": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OdataError",
+          "description": "Graph error."
+        }
+      },
+      "description": "Active Directory error information"
+    },
+    "OdataError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ErrorMessage",
+          "description": "Error Message."
+        }
+      },
+      "description": "Active Directory odata error information"
+    },
+    "ErrorMessage": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "x-ms-client-name": "message",
+          "description": "Error message value."
+        }
+      },
+      "description": "Active Directory error message"
+    },
     "KeyCredential": {
       "properties": {
         "startDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets start date"
+          "description": "start date"
         },
         "endDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets end date"
+          "description": "end date"
         },
         "value": {
           "type": "string",
-          "description": "Gets or sets value"
+          "description": "value"
         },
         "keyId": {
           "type": "string",
-          "description": "Gets or sets key Id"
+          "description": "key Id"
         },
         "usage": {
           "type": "string",
-          "description": "Gets or sets usage"
+          "description": "usage. Acceptable values are 'Verify' and 'Sign'."
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets type"
+          "description": "type. Acceptable values are 'AsymmetricX509Cert' and 'Symmetric'."
         }
       },
-      "description": "Active Directory service principal Key Credential information"
+      "description": "Active Directory Key Credential information"
     },
     "PasswordCredential": {
       "properties": {
         "startDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets start date"
+          "description": "start date"
         },
         "endDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets end date"
+          "description": "end date"
         },
         "keyId": {
           "type": "string",
-          "description": "Gets or sets key Id"
+          "description": "key Id"
         },
         "value": {
           "type": "string",
-          "description": "Gets or sets value"
+          "description": "value"
         }
       },
-      "description": "Active Directory service principal Password Credential information"
+      "description": "Active Directory PasswordCredential information"
     },
     "ApplicationCreateParameters": {
       "properties": {
@@ -1133,26 +1683,29 @@
           "items": {
             "$ref": "#/definitions/KeyCredential"
           },
-          "description": "Gets or sets the list of KeyCredential objects"
+          "description": "the list of KeyCredential objects"
         },
         "passwordCredentials": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PasswordCredential"
           },
-          "description": "Gets or sets the list of PasswordCredential objects"
+          "description": "the list of PasswordCredential objects"
         }
       },
       "required": [
         "availableToOtherTenants",
         "displayName",
-        "homepage",
         "identifierUris"
       ],
       "description": "Request parameters for create a new application"
     },
     "ApplicationUpdateParameters": {
       "properties": {
+        "availableToOtherTenants": {
+          "type": "boolean",
+          "description": "Indicates if the application will be available to other tenants"
+        },
         "displayName": {
           "type": "string",
           "description": "Application display name"
@@ -1180,14 +1733,14 @@
           "items": {
             "$ref": "#/definitions/KeyCredential"
           },
-          "description": "Gets or sets the list of KeyCredential objects"
+          "description": "the list of KeyCredential objects"
         },
         "passwordCredentials": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PasswordCredential"
           },
-          "description": "Gets or sets the list of PasswordCredential objects"
+          "description": "the list of PasswordCredential objects"
         }
       },
       "description": "Request parameters for updating an existing application"
@@ -1196,22 +1749,22 @@
       "properties": {
         "objectId": {
           "type": "string",
-          "description": "Gets or sets object Id"
+          "description": "object Id"
         },
         "objectType": {
           "type": "string",
-          "description": "Gets or sets object type"
+          "description": "object type"
         },
         "appId": {
           "type": "string",
-          "description": "Gets or sets application Id"
+          "description": "application Id"
         },
         "appPermissions": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets application permissions"
+          "description": "application permissions"
         },
         "availableToOtherTenants": {
           "type": "boolean",
@@ -1219,21 +1772,21 @@
         },
         "displayName": {
           "type": "string",
-          "description": "Gets or sets the displayName"
+          "description": "the displayName"
         },
         "identifierUris": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the application identifier Uris"
+          "description": "the application identifier Uris"
         },
         "replyUrls": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the application reply Urls"
+          "description": "the application reply Urls"
         },
         "homepage": {
           "type": "string",
@@ -1254,50 +1807,98 @@
       },
       "description": "Role assignment list operation result."
     },
+    "KeyCredentialListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyCredential"
+          },
+          "description": "KeyCredential list."
+        }
+      },
+      "description": "KeyCredential list operation result."
+    },
+    "KeyCredentialsUpdateParameters": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyCredential"
+          },
+          "description": "KeyCredential list."
+        }
+      },
+      "description": "Request parameters for  KeyCredentials update operation"
+    },
+    "PasswordCredentialListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PasswordCredential"
+          },
+          "description": "PasswordCredential list."
+        }
+      },
+      "description": "PasswordCredential list operation result."
+    },
+    "PasswordCredentialsUpdateParameters": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PasswordCredential"
+          },
+          "description": "PasswordCredential list."
+        }
+      },
+      "description": "Request paramters for PasswordCredentials update operation"
+    },
     "AADObject": {
       "properties": {
         "objectId": {
           "type": "string",
-          "description": "Gets or sets object Id"
+          "description": "object Id"
         },
         "objectType": {
           "type": "string",
-          "description": "Gets or sets object type"
+          "description": "object type"
         },
         "displayName": {
           "type": "string",
-          "description": "Gets or sets object display name"
+          "description": "object display name"
         },
         "userPrincipalName": {
           "type": "string",
-          "description": "Gets or sets principal name"
+          "description": "principal name"
         },
         "mail": {
           "type": "string",
-          "description": "Gets or sets mail"
+          "description": "mail"
         },
         "mailEnabled": {
           "type": "boolean",
-          "description": "Gets or sets MailEnabled field"
+          "description": "MailEnabled field"
         },
         "securityEnabled": {
           "type": "boolean",
-          "description": "Gets or sets SecurityEnabled field"
+          "description": "SecurityEnabled field"
         },
         "signInName": {
           "type": "string",
-          "description": "Gets or sets signIn name"
+          "description": "signIn name"
         },
         "servicePrincipalNames": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the list of service principal names."
+          "description": "the list of service principal names."
         },
         "userType": {
           "type": "string",
-          "description": "Gets or sets the user type"
+          "description": "the user type"
         }
       },
       "description": "Active Directory object information"
@@ -1313,7 +1914,7 @@
         },
         "odata.nextLink": {
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "the URL to get the next set of results."
         }
       },
       "description": "Server response for Active Directory objects inquiry API calls"
@@ -1363,23 +1964,23 @@
       "properties": {
         "objectId": {
           "type": "string",
-          "description": "Gets or sets object Id"
+          "description": "object Id"
         },
         "objectType": {
           "type": "string",
-          "description": "Gets or sets object type"
+          "description": "object type"
         },
         "displayName": {
           "type": "string",
-          "description": "Gets or sets group display name"
+          "description": "group display name"
         },
         "securityEnabled": {
           "type": "boolean",
-          "description": "Gets or sets security enabled field"
+          "description": "security enabled field"
         },
         "mail": {
           "type": "string",
-          "description": "Gets or sets mail field"
+          "description": "mail field"
         }
       },
       "description": "Active Directory group information"
@@ -1391,11 +1992,11 @@
           "items": {
             "$ref": "#/definitions/ADGroup"
           },
-          "description": "Gets or sets the list of groups."
+          "description": "the list of groups."
         },
         "odata.nextLink": {
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "the URL to get the next set of results."
         }
       },
       "description": "Server response for Get tenant groups API call"
@@ -1454,11 +2055,25 @@
       "properties": {
         "appId": {
           "type": "string",
-          "description": "Gets or sets application Id"
+          "description": "application Id"
         },
         "accountEnabled": {
           "type": "boolean",
           "description": "Specifies if the account is enabled"
+        },
+        "keyCredentials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyCredential"
+          },
+          "description": "the list of KeyCredential objects"
+        },
+        "passwordCredentials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PasswordCredential"
+          },
+          "description": "the list of PasswordCredential objects"
         }
       },
       "required": [
@@ -1471,26 +2086,26 @@
       "properties": {
         "objectId": {
           "type": "string",
-          "description": "Gets or sets object Id"
+          "description": "object Id"
         },
         "objectType": {
           "type": "string",
-          "description": "Gets or sets object type"
+          "description": "object type"
         },
         "displayName": {
           "type": "string",
-          "description": "Gets or sets service principal display name"
+          "description": "service principal display name"
         },
         "appId": {
           "type": "string",
-          "description": "Gets or sets app id"
+          "description": "app id"
         },
         "servicePrincipalNames": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the list of names."
+          "description": "the list of names."
         }
       },
       "description": "Active Directory service principal information"
@@ -1502,11 +2117,11 @@
           "items": {
             "$ref": "#/definitions/ServicePrincipal"
           },
-          "description": "Gets or sets the list of service principals."
+          "description": "the list of service principals."
         },
         "odata.nextLink": {
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "the URL to get the next set of results."
         }
       },
       "description": "Server response for get tenant service principals API call"
@@ -1588,27 +2203,27 @@
       "properties": {
         "objectId": {
           "type": "string",
-          "description": "Gets or sets object Id"
+          "description": "object Id"
         },
         "objectType": {
           "type": "string",
-          "description": "Gets or sets object type"
+          "description": "object type"
         },
         "userPrincipalName": {
           "type": "string",
-          "description": "Gets or sets user principal name"
+          "description": "user principal name"
         },
         "displayName": {
           "type": "string",
-          "description": "Gets or sets user display name"
+          "description": "user display name"
         },
         "signInName": {
           "type": "string",
-          "description": "Gets or sets user signIn name"
+          "description": "user signIn name"
         },
         "mail": {
           "type": "string",
-          "description": "Gets or sets user mail"
+          "description": "user mail"
         },
         "mailNickname": {
           "type": "string",
@@ -1648,11 +2263,11 @@
           "items": {
             "$ref": "#/definitions/User"
           },
-          "description": "Gets or sets the list of users."
+          "description": "the list of users."
         },
         "odata.nextLink": {
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "the URL to get the next set of results."
         }
       },
       "description": "Server response for Get tenant users API call"
@@ -1671,7 +2286,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Gets or sets the tenant Id."
+      "description": "the tenant Id."
     }
   }
 }
