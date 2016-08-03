@@ -294,14 +294,24 @@
         "keys": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [ "all", "encrypt", "decrypt", "wrapkey", "unwrapkey", "sign", "verify", "get", "list", "create", "update", "import", "delete", "backup", "restore" ],
+            "x-ms-enum": {
+              "name": "KeyPermissions",
+              "modelAsString": true
+            }
           },
           "description": "Permissions to keys"
         },
         "secrets": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [ "all", "get", "list", "set", "delete" ],
+            "x-ms-enum": {
+              "name": "SecretPermissions",
+              "modelAsString": true
+            }
           },
           "description": "Permissions to secrets"
         }
