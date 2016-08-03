@@ -1944,10 +1944,10 @@
             "schema": {
               "$ref": "#/definitions/EffectiveRouteListResult"
             }
+          },
+          "202": {
+            "description": ""
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-long-running-operation": true
       }
@@ -1987,10 +1987,10 @@
             "schema": {
               "$ref": "#/definitions/EffectiveNetworkSecurityGroupListResult"
             }
+          },
+          "202": {
+            "description": ""
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-long-running-operation": true
       }
@@ -6710,7 +6710,7 @@
         "effectiveSecurityRules": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EffectiveNetworkSecurityRules"
+            "$ref": "#/definitions/EffectiveNetworkSecurityRule"
           },
           "description": "Gets collection of effective security rules"
         }
@@ -6730,7 +6730,7 @@
       },
       "description": "Effective NetworkSecurityGroup association"
     },
-    "EffectiveNetworkSecurityRules": {
+    "EffectiveNetworkSecurityRule": {
       "properties": {
         "name": {
           "type": "string",
@@ -6984,9 +6984,9 @@
     },
     "EffectiveRoute": {
       "properties": {
-        "userDefinedRoute": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Gets the Id of the effective route. This is optional, only user defined routes have the name."
+        "name": {
+          "type": "string",
+          "description": "Gets the name of the user defined route. This is optional."
         },
         "source": {
           "type": "string",
@@ -7044,11 +7044,6 @@
           }
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
       "description": "Effective Route"
     },
     "EffectiveRouteListResult": {
