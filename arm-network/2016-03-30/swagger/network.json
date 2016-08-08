@@ -704,7 +704,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}": {
       "delete": {
         "tags": [
           "ExpressRouteCircuits"
@@ -894,7 +894,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routesTable/{devicePath}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}": {
       "post": {
         "tags": [
           "ExpressRouteCircuitRoutesTable"
@@ -2910,7 +2910,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks/{virtualNetworkName}/subnets/{subnetName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}": {
       "delete": {
         "tags": [
           "Subnets"
@@ -3071,7 +3071,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks/{virtualNetworkName}/subnets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets": {
       "get": {
         "tags": [
           "Subnets"
@@ -3145,7 +3145,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
@@ -3463,7 +3463,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworkgateways/{virtualNetworkGatewayName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}": {
       "put": {
         "tags": [
           "VirtualNetworkGateways"
@@ -3631,7 +3631,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworkgateways/{virtualNetworkGatewayName}/reset": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/reset": {
       "post": {
         "tags": [
           "VirtualNetworkGateways"
@@ -3683,7 +3683,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworkgateways/{virtualNetworkGatewayName}/generatevpnclientpackage": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage": {
       "post": {
         "tags": [
           "VirtualNetworkGateways"
@@ -3731,7 +3731,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks/{virtualNetworkName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}": {
       "delete": {
         "tags": [
           "VirtualNetworks"
@@ -3871,7 +3871,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualnetworks": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualNetworks": {
       "get": {
         "tags": [
           "VirtualNetworks"
@@ -3899,7 +3899,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks": {
       "get": {
         "tags": [
           "VirtualNetworks"
@@ -4819,22 +4819,22 @@
       "properties": {
         "primarybytesIn": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Gets BytesIn of the peering."
         },
         "primarybytesOut": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Gets BytesOut of the peering."
         },
         "secondarybytesIn": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Gets BytesIn of the peering."
         },
         "secondarybytesOut": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Gets BytesOut of the peering."
         }
       },
@@ -6016,6 +6016,10 @@
         },
         "subnet": {
           "$ref": "#/definitions/Subnet"
+        },
+        "primary": {
+          "type": "boolean",
+          "description": "Gets whether this is a primary customer address on the NIC"
         },
         "publicIPAddress": {
           "$ref": "#/definitions/PublicIPAddress"
