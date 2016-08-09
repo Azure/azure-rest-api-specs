@@ -1,0 +1,1476 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "InsightsClient",
+    "version": "2015-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "paths": {
+    "/providers/microsoft.insights/eventtypes/management/eventcategories": {
+      "get": {
+        "tags": [
+          "EventOperations"
+        ],
+        "operationId": "EventOperations_ListEventCategories",
+        "description": "The list of event categories.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EventCategoryCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.insights/eventtypes/management/digestEvents": {
+      "get": {
+        "tags": [
+          "EventOperations"
+        ],
+        "operationId": "EventOperations_ListDigestEvents",
+        "description": "The List Digest Event Values operation lists the digest events.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The list of property names to be returned. You can save bandwith by selecting only the properties you need."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EventDataCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/EventData"
+      }
+    },
+    "/providers/microsoft.insights/eventtypes/management/digestEvents": {
+      "get": {
+        "tags": [
+          "EventOperations"
+        ],
+        "operationId": "EventOperations_ListTenantDigestEvents",
+        "description": "The List Tenant Digest Event Values operation lists the tenant-level digest events.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The list of property names to be returned. You can save bandwith by selecting only the properties you need."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EventDataCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/EventData"
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.insights/eventtypes/management/values": {
+      "get": {
+        "tags": [
+          "EventOperations"
+        ],
+        "operationId": "EventOperations_ListEvents",
+        "description": "The List Event Values operation lists the events.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The list of property names to be returned. You can save bandwidth by selecting only the properties you need.Here is an example:string selectedProperties = \"EventDataId, EventTimestamp, ResourceUri\""
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EventDataCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/EventData"
+      }
+    },
+    "/providers/microsoft.insights/eventtypes/management/values": {
+      "get": {
+        "tags": [
+          "EventOperations"
+        ],
+        "operationId": "EventOperations_ListTenantEvents",
+        "description": "The list tenant event values operation lists the tenant events.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The list of property names to be returned. You can save bandwidth by selecting only the properties you need.Here is an example:string selectedProperties = \"EventDataId, EventTimestamp, ResourceUri\""
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EventDataCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/EventData"
+      }
+    },
+    "/{resourceUri}/providers/microsoft.insights/logDefinitions": {
+      "get": {
+        "tags": [
+          "LogDefinitionOperations"
+        ],
+        "operationId": "LogDefinitionOperations_GetLogDefinitions",
+        "description": "The List Log Definitions operation lists the log definitions for the resource.",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource identifier of the target resource to get logs for."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/LogDefinitionCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-odata": "#/definitions/LogDefinition"
+      }
+    },
+    "/providers/microsoft.insights/logs": {
+      "get": {
+        "tags": [
+          "LogOperations"
+        ],
+        "operationId": "LogOperations_GetLogs",
+        "description": "The List Log operation lists the logs for the resource.",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "body",
+            "required": false,
+"schema" : {}
+          },
+          {
+            "name": "filterString",
+            "in": "body",
+            "required": false,
+"schema" : {}
+          },
+          {
+            "name": "definitions",
+            "in": "body",
+            "required": false,
+"schema" : {}
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/LogCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/{resourceUri}/metricDefinitions": {
+      "get": {
+        "tags": [
+          "MetricDefinitionOperations"
+        ],
+        "operationId": "MetricDefinitionOperations_GetMetricDefinitions",
+        "description": "The List Metric Definitions operation lists the metric definitions for the resource.",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource identifier of the target resource to get metrics for.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-odata": "#/definitions/MetricDefinition"
+      }
+    },
+    "/{resourceUri}/metrics": {
+      "get": {
+        "tags": [
+          "MetricOperations"
+        ],
+        "operationId": "MetricOperations_GetMetrics",
+        "description": "The List Metric operation lists the metric value sets for the resource metrics.",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource identifier of the target resource to get metrics for.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MetricCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-odata": "#/definitions/Metric"
+      }
+    },
+    "/{resourceUri}/usages": {
+      "get": {
+        "tags": [
+          "UsageMetricOperations"
+        ],
+        "operationId": "UsageMetricOperations_ListDeprecated",
+        "description": "The List operation lists the usage metrics for the resource.",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource identifier of the target resource to get usages for."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "names",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "{metricNames:commaSeparated}"
+          },
+          {
+            "name": "apiVersion",
+"in": "body",
+            "required": true,
+            "description": "The resource provider api version.",
+"schema" : {}
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UsageMetricCollectionDeprecated"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the unique name of the sku e.g. 'Free_A0'."
+        },
+        "tier": {
+          "type": "string",
+          "description": "Gets or sets the tier of the sku e.g. 'free'."
+        },
+        "size": {
+          "type": "string",
+          "description": "Gets or sets the size of the sku e.g. 'A0'."
+        },
+        "family": {
+          "type": "string",
+          "description": "Gets or sets the family of the sku e.g. 'A'."
+        }
+      },
+      "description": "Represents a sku."
+    },
+    "Capacity": {
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the minimum capacity."
+        },
+        "maximum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the maximum capacity."
+        },
+        "default": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the default capacity."
+        },
+        "scaleType": {
+          "type": "string",
+          "description": "Gets or sets the scale type supported.",
+          "enum": [
+            "None",
+            "Manual",
+            "Automatic"
+          ],
+          "x-ms-enum": {
+            "name": "SupportedScaleType",
+            "modelAsString": "False"
+          }
+        }
+      },
+      "description": "Represents the sku capacity."
+    },
+    "SkuDefinition": {
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Gets or sets the type of the resource e.g. 'Microsoft.Compute/virtualMachines'."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Gets or sets the sku."
+        },
+        "capacity": {
+          "$ref": "#/definitions/Capacity",
+          "description": "Gets or sets the capacity of the sku."
+        }
+      },
+      "description": "Represents a sku definition."
+    },
+    "SkuListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuDefinition"
+          },
+          "description": "Gets or sets the values for the sku definition."
+        },
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "Continue",
+            "SwitchingProtocols",
+            "OK",
+            "Created",
+            "Accepted",
+            "NonAuthoritativeInformation",
+            "NoContent",
+            "ResetContent",
+            "PartialContent",
+            "MultipleChoices",
+            "Ambiguous",
+            "MovedPermanently",
+            "Moved",
+            "Found",
+            "Redirect",
+            "SeeOther",
+            "RedirectMethod",
+            "NotModified",
+            "UseProxy",
+            "Unused",
+            "TemporaryRedirect",
+            "RedirectKeepVerb",
+            "BadRequest",
+            "Unauthorized",
+            "PaymentRequired",
+            "Forbidden",
+            "NotFound",
+            "MethodNotAllowed",
+            "NotAcceptable",
+            "ProxyAuthenticationRequired",
+            "RequestTimeout",
+            "Conflict",
+            "Gone",
+            "LengthRequired",
+            "PreconditionFailed",
+            "RequestEntityTooLarge",
+            "RequestUriTooLong",
+            "UnsupportedMediaType",
+            "RequestedRangeNotSatisfiable",
+            "ExpectationFailed",
+            "UpgradeRequired",
+            "InternalServerError",
+            "NotImplemented",
+            "BadGateway",
+            "ServiceUnavailable",
+            "GatewayTimeout",
+            "HttpVersionNotSupported"
+          ],
+          "x-ms-enum": {
+            "name": "HttpStatusCode",
+            "modelAsString": "False"
+          }
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "description": "A standard service response including an HTTP status code and request ID."
+    },
+    "LocalizableString": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Gets or sets the invariant value."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "Gets or sets the locale specific value."
+        }
+      },
+      "description": "The localizable string class."
+    },
+    "EventCategoryCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocalizableString"
+          },
+          "description": "Gets or sets this list that includes the Azure event categories."
+        }
+      },
+      "description": "Represents collection of event categories."
+    },
+    "SenderAuthorization": {
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "Gets or sets the Action."
+        },
+        "condition": {
+          "type": "string",
+          "description": "Gets or sets the condition."
+        },
+        "role": {
+          "type": "string",
+          "description": "Gets or sets the role."
+        },
+        "scope": {
+          "type": "string",
+          "description": "Gets or sets the scope."
+        }
+      },
+      "description": "The authorization class."
+    },
+    "HttpRequestInfo": {
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "Gets or sets the client request id."
+        },
+        "clientIpAddress": {
+          "type": "string",
+          "description": "Gets or sets the client Ip Address"
+        },
+        "method": {
+          "type": "string",
+          "description": "Gets or sets the method."
+        },
+        "uri": {
+          "type": "string",
+          "description": "Gets or sets the Uri."
+        }
+      },
+      "description": "The HttpInfo class."
+    },
+    "EventData": {
+      "properties": {
+        "authorization": {
+          "$ref": "#/definitions/SenderAuthorization",
+          "description": "Gets or sets the authorization.This is the authorization used by the user who has performed the operation that led to this event."
+        },
+        "channels": {
+          "type": "string",
+          "description": "Gets or sets the event channels.The regular event logs, that you see in the Azure Management Portals, flow through the 'Operation' channel.",
+          "enum": [
+            "Admin",
+            "Operation",
+            "Debug",
+            "Analytics"
+          ],
+          "x-ms-enum": {
+            "name": "EventChannels",
+            "modelAsString": "False"
+          }
+        },
+        "claims": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the claims"
+        },
+        "caller": {
+          "type": "string",
+          "description": "Gets or sets the caller"
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the event."
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the Id"
+        },
+        "eventDataId": {
+          "type": "string",
+          "description": "Gets or sets the event data Id.This is a unique identifier for an event."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Gets or sets the correlation Id.The correlation Id is shared among the events that belong to the same deployment."
+        },
+        "eventName": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "Gets or sets the event name.This value should not be confused with OperationName.For practical purposes, OperationName might be more appealing to end users."
+        },
+        "category": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "Gets or sets the event category."
+        },
+        "httpRequest": {
+          "$ref": "#/definitions/HttpRequestInfo",
+          "description": "Gets or sets the HTTP request info.The client IP address of the user who initiated the event is captured as part of the HTTP request info."
+        },
+        "level": {
+          "type": "string",
+          "description": "Gets or sets the event level",
+          "enum": [
+            "Critical",
+            "Error",
+            "Warning",
+            "Informational",
+            "Verbose"
+          ],
+          "x-ms-enum": {
+            "name": "EventLevel",
+            "modelAsString": "False"
+          }
+        },
+        "resourceGroupName": {
+          "externalDocs": {
+            "url": "http://msdn.microsoft.com/en-us/library/azure/dn790546.aspx"
+          },
+          "type": "string",
+          "description": "Gets or sets the resource group name."
+        },
+        "resourceProviderName": {
+          "$ref": "#/definitions/LocalizableString",
+          "externalDocs": {
+            "url": "http://msdn.microsoft.com/en-us/library/azure/dn790572.aspx"
+          },
+          "description": "Gets or sets the resource provider name."
+        },
+        "resourceId": {
+          "externalDocs": {
+            "url": "http://msdn.microsoft.com/en-us/library/azure/dn790569.aspx"
+          },
+          "type": "string",
+          "description": "Gets or sets the resource uri"
+        },
+        "resourceType": {
+          "$ref": "#/definitions/LocalizableString",
+          "externalDocs": {
+            "url": "http://msdn.microsoft.com/en-us/library/azure/dn790569.aspx"
+          },
+          "description": "Gets or sets the resource type"
+        },
+        "operationId": {
+          "type": "string",
+          "description": "Gets or sets the operation idThis value should not be confused with EventName."
+        },
+        "operationName": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "Gets or sets the operation name."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the property bag"
+        },
+        "status": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "Gets or sets the event status.Some typical values are: Started, Succeeded, Failed"
+        },
+        "subStatus": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "Gets or sets the event sub status.Most of the time, when included, this captures the HTTP status code."
+        },
+        "eventTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the occurrence time of event"
+        },
+        "submissionTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the event submission time.This value should not be confused eventTimestamp. As there might be a delay between the occurence time of the event, and the time that the event is submitted to the Azure logging infrastructure."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Gets or sets the Azure subscription Id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Gets or sets the Azure tenant Id"
+        }
+      },
+      "description": "The Azure event log entries are of type EventData"
+    },
+    "EventDataCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventData"
+          },
+          "description": "Gets or sets this list that includes the Azure audit logs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link works as a continuation token when all of the events are not returned in the response and a second call is required."
+        }
+      },
+      "description": "Represents collection of events."
+    },
+    "BlobInfo": {
+      "properties": {
+        "blobUri": {
+          "type": "string",
+          "description": "Gets or sets the blob info."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the start time of the range for this blob."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the end time of the range for this blob."
+        },
+        "sasToken": {
+          "type": "string",
+          "description": "Gets or sets the SAS Key for accessing Blob Storage."
+        }
+      },
+      "description": "Contains the information for blobs. Each one is used for a specific time range."
+    },
+    "BlobLocation": {
+      "properties": {
+        "blobEndpoint": {
+          "type": "string",
+          "description": "Gets or sets the blob endpoint."
+        },
+        "blobInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlobInfo"
+          },
+          "description": "Gets or sets the blob info."
+        }
+      },
+      "description": "Details about the set of blobs containing data split by time."
+    },
+    "LogDefinition": {
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "Gets or sets the category of the log."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Gets or sets the resource identifier of the resource that has emitted the log."
+        },
+        "retention": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the retention."
+        },
+        "blobLocation": {
+          "$ref": "#/definitions/BlobLocation",
+          "description": "Gets or sets the location of the blob."
+        }
+      },
+      "description": "Log definition class specifies the metadata for a log."
+    },
+    "LogDefinitionCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogDefinition"
+          },
+          "description": "Gets or sets the values for the log definitions."
+        }
+      },
+      "description": "Represents collection of log definitions."
+    },
+    "LogValue": {
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the time when the log was generated"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Gets or sets id of the reosurce related to the log."
+        },
+        "operationName": {
+          "type": "string",
+          "description": "Gets or sets the name of the operation."
+        },
+        "operationVersion": {
+          "type": "string",
+          "description": "Gets or sets the version of the operation."
+        },
+        "category": {
+          "type": "string",
+          "description": "Gets or sets the category of the log."
+        },
+        "resultType": {
+          "type": "string",
+          "description": "Gets or sets the status of the operation."
+        },
+        "resultSignature": {
+          "type": "string",
+          "description": "Gets or sets the substatus of the operation."
+        },
+        "resultDescription": {
+          "type": "string",
+          "description": "Gets or sets the substatus of the operation."
+        },
+        "durationMs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the duration of the operation in milliseconds."
+        },
+        "callerIpAddress": {
+          "type": "string",
+          "description": "Gets or sets the caller IP address."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Gets or sets the correlation id of the log.  Used to group together a set of related log."
+        },
+        "identity": {
+          "type": "string",
+          "description": "Gets or sets the identity that generated the event."
+        },
+        "level": {
+          "type": "string",
+          "description": "Gets or sets the level (Informational/Warning/Error/Critical) of the event."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets tThe location of the resource emitting the event."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the collection of extended properties."
+        }
+      },
+      "description": "A log value set represents a set of log values in a time period."
+    },
+    "Log": {
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "Gets or sets the category."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the end time."
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogValue"
+          },
+          "description": "Gets or sets the value of the collection."
+        }
+      },
+      "description": "The log."
+    },
+    "LogCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Log"
+          },
+          "description": "Gets or sets the value of the collection."
+        }
+      },
+      "description": "The collection of log value sets."
+    },
+    "MetricTableInfo": {
+      "properties": {
+        "tableName": {
+          "type": "string",
+          "description": "Gets or sets the name of the table."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the first data will appear in the data."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last data that will this table."
+        },
+        "sasToken": {
+          "type": "string",
+          "description": "Gets or sets the SAS Key for accessing the table."
+        },
+        "sasTokenExpirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the expiration date/time of the SAS Key."
+        }
+      },
+      "description": "Contains the details of the tables that metric data is stored in. A new table is created every 10 days for storing metrics."
+    },
+    "MetricLocation": {
+      "properties": {
+        "tableEndpoint": {
+          "type": "string",
+          "description": "Gets or sets the REST endpoint of the tables that contains the metrics."
+        },
+        "tableInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricTableInfo"
+          },
+          "description": "Gets or sets the list of tables that contain the metric data."
+        },
+        "partitionKey": {
+          "type": "string",
+          "description": "Gets or sets the partition key inside the tables that contains the metrics."
+        }
+      },
+      "description": "Where the data for this metric is stored."
+    },
+    "MetricAvailability": {
+      "properties": {
+        "timeGrain": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the time grain specifies the aggregation interval for the metric."
+        },
+        "retention": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the retention period for the metric at the specified timegrain."
+        },
+        "location": {
+          "$ref": "#/definitions/MetricLocation",
+          "description": "Gets or sets the location where the data for this metric availability is stored."
+        },
+        "blobLocation": {
+          "$ref": "#/definitions/BlobLocation",
+          "description": "Gets or sets the location info for this availability."
+        }
+      },
+      "description": "Metric availability specifies the time grain (aggregation interval or frequency) and the retention period for that time grain."
+    },
+    "Dimension": {
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "Gets or sets the name."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocalizableString"
+          },
+          "description": "Gets or sets the list of values."
+        }
+      },
+      "description": "Metric dimension specifies the dimension name and list of dimension values."
+    },
+    "MetricDefinition": {
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "Gets or sets the name and the display name of the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Gets or sets the unit of the metric.",
+          "enum": [
+            "Count",
+            "Bytes",
+            "Seconds",
+            "CountPerSecond",
+            "BytesPerSecond",
+            "Percent",
+            "MilliSeconds"
+          ],
+          "x-ms-enum": {
+            "name": "Unit",
+            "modelAsString": "False"
+          }
+        },
+        "primaryAggregationType": {
+          "type": "string",
+          "description": "Gets or sets the primary aggregation type value defining how to use the values for display.",
+          "enum": [
+            "None",
+            "Average",
+            "Minimum",
+            "Maximum",
+            "Total",
+            "Last"
+          ],
+          "x-ms-enum": {
+            "name": "AggregationType",
+            "modelAsString": "False"
+          }
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Gets or sets the resource identifier of the resource that has emitted the metric."
+        },
+        "metricAvailabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAvailability"
+          },
+          "description": "Gets or sets the collection of what aggregation intervals are available to be queried."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the collection of extended properties."
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "description": "Gets or sets the collection of availability information defining what timeGrains are available to be queried."
+        }
+      },
+      "description": "Metric definition class specifies the metadata for a metric."
+    },
+    "MetricDefinitionCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDefinition"
+          },
+          "description": "Gets or sets the values for the metric definitions."
+        }
+      },
+      "description": "Represents collection of metric definitions."
+    },
+    "MetricValue": {
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the timestamp for the metric value."
+        },
+        "average": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the average value in the time range."
+        },
+        "minimum": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the least value in the time range."
+        },
+        "maximum": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the greatest value in the time range."
+        },
+        "total": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the sum of all of the values in the time range."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the number of samples in the time range. Can be used to determine the number of values that contributed to the average value."
+        },
+        "last": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the last sample in the time range."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the collection of extended properties."
+        }
+      },
+      "description": "Represents a metric value."
+    },
+    "Metric": {
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "Gets or sets the name and the display name of the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Gets or sets the unit of the metric.",
+          "enum": [
+            "Count",
+            "Bytes",
+            "Seconds",
+            "CountPerSecond",
+            "BytesPerSecond",
+            "Percent",
+            "MilliSeconds"
+          ],
+          "x-ms-enum": {
+            "name": "Unit",
+            "modelAsString": "False"
+          }
+        },
+        "timeGrain": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the time grain of the metric. Also known as the aggregation interval or frequency."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the end time."
+        },
+        "metricValues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricValue"
+          },
+          "description": "Gets or sets the collection of actual metric values."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Gets or sets the resource ID of the resource that has emitted the metric."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the collection of extended properties."
+        },
+        "dimensionName": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "Gets or sets the name of the dimension."
+        },
+        "dimensionValue": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "Gets or sets the value of the dimension."
+        }
+      },
+      "description": "A metric value set represents a set of metric values in a time period."
+    },
+    "MetricCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Metric"
+          },
+          "description": "Gets or sets the value of the collection."
+        }
+      },
+      "description": "The collection of metric value sets."
+    },
+    "UsageMetricDeprecated": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the usage metric name."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the usage display name."
+        },
+        "currentValue": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the current value for the usage metric."
+        },
+        "limit": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the quota limit the usage metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Gets or sets the unit for the usage metric."
+        },
+        "nextResetTime": {
+          "type": "string",
+          "description": "Gets or sets the next reset date/time for the current value."
+        },
+        "quotaPeriod": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the duration of the quota period."
+        }
+      },
+      "description": "Deprecated. Contains usage Metric data."
+    },
+    "UsageMetricCollectionDeprecated": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UsageMetricDeprecated"
+          },
+          "description": "Gets or sets the usage values."
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UsageMetricDeprecated"
+          },
+          "description": "Gets or sets the usage values."
+        }
+      },
+      "description": "Deprecated. Represents a collection of usage metrics."
+    },
+    "UsageMetric": {
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "Gets or sets the usage metric name and display name."
+        },
+        "currentValue": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the current value for the usage metric."
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id for the usage metric."
+        },
+        "limit": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the quota limit the usage metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Gets or sets the unit for the usage metric."
+        },
+        "nextResetTime": {
+          "type": "string",
+          "description": "Gets or sets the next reset time for the current value."
+        },
+        "quotaPeriod": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the amount of time it takes to reset the value."
+        }
+      },
+      "description": "Usage Metric data."
+    },
+    "UsageMetricCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UsageMetric"
+          },
+          "description": "Gets or sets the usage values."
+        }
+      },
+      "description": "Represents collection of usage metrics."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}

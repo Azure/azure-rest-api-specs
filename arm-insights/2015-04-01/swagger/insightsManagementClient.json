@@ -1,0 +1,3783 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "InsightsManagementClient",
+    "version": "2015-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{ruleName}/incidents/{incidentName}": {
+      "get": {
+        "tags": [
+          "AlertOperations"
+        ],
+        "operationId": "AlertOperations_GetIncident",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the rule."
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the incident to retrieve."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Incident"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{ruleName}/incidents": {
+      "get": {
+        "tags": [
+          "AlertOperations"
+        ],
+        "operationId": "AlertOperations_ListIncidentsForRule",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the rule."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/IncidentListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{name}": {
+      "put": {
+        "tags": [
+          "AlertOperations"
+        ],
+        "operationId": "AlertOperations_CreateOrUpdateRule",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The rule to create or update."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuleCreateOrUpdateParameters"
+            },
+            "description": "The rule to create or update."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RuleCreateOrUpdateResult"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RuleCreateOrUpdateResult"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AlertOperations"
+        ],
+        "operationId": "AlertOperations_UpdateRule",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The rule to update."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuleCreateOrUpdateParameters"
+            },
+            "description": "The rule to update."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RuleCreateOrUpdateResult"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RuleCreateOrUpdateResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{ruleName}": {
+      "delete": {
+        "tags": [
+          "AlertOperations"
+        ],
+        "operationId": "AlertOperations_DeleteRule",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the rule to delete."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RuleDeleteResult"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RuleDeleteResult"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AlertOperations"
+        ],
+        "operationId": "AlertOperations_GetRule",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the rule to retrieve."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RuleGetResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules": {
+      "get": {
+        "tags": [
+          "AlertOperations"
+        ],
+        "operationId": "AlertOperations_ListRules",
+        "description": "List the alert rules within a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RuleResourceCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-odata": "#/definitions/RuleResource"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.sql/servers/{serverName}/databases/{databaseName}/providers/microsoft.insights/automatedexportsettings/default": {
+      "get": {
+        "tags": [
+          "AutomatedExportOperations"
+        ],
+        "operationId": "AutomatedExportOperations_GetSetting",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource name."
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The server name."
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The database name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AutomatedExportSettingGetResult"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AutomatedExportOperations"
+        ],
+        "operationId": "AutomatedExportOperations_UpdateSetting",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource name."
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The server name."
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The database name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutomatedExportSettingCreateOrUpdateParameters"
+            },
+            "description": "Parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AutomatedExportSettingCreateOrUpdateResult"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AutomatedExportSettingCreateOrUpdateResult"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AutomatedExportOperations"
+        ],
+        "operationId": "AutomatedExportOperations_DeleteSetting",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource name."
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The server name."
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The database name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AutomatedExportSettingDeleteResult"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AutomatedExportSettingDeleteResult"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AutomatedExportOperations"
+        ],
+        "operationId": "AutomatedExportOperations_CreateOrUpdateSetting",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name."
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The server name."
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The database name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutomatedExportSettingCreateOrUpdateParameters"
+            },
+            "description": "Parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AutomatedExportSettingCreateOrUpdateResult"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AutomatedExportSettingCreateOrUpdateResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/autoscalesettings": {
+      "get": {
+        "tags": [
+          "AutoscaleOperations"
+        ],
+        "operationId": "AutoscaleOperations_ListSettings",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource name."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingResourceCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-odata": "#/definitions/AutoscaleSettingResource"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/autoscalesettings/{autoscaleSettingName}": {
+      "patch": {
+        "tags": [
+          "AutoscaleOperations"
+        ],
+        "operationId": "AutoscaleOperations_UpdateSetting",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource name."
+          },
+          {
+            "name": "autoscaleSettingName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The autoscale setting name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingCreateOrUpdateParameters"
+            },
+            "description": "Parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingCreateOrUpdateResult"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingCreateOrUpdateResult"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AutoscaleOperations"
+        ],
+        "operationId": "AutoscaleOperations_CreateOrUpdateSetting",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource name."
+          },
+          {
+            "name": "autoscaleSettingName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The autoscale setting name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingCreateOrUpdateParameters"
+            },
+            "description": "Parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingCreateOrUpdateResult"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingCreateOrUpdateResult"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AutoscaleOperations"
+        ],
+        "operationId": "AutoscaleOperations_DeleteSetting",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource name."
+          },
+          {
+            "name": "autoscaleSettingName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The autoscale setting name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingDeleteResult"
+            }
+          },
+          "204": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingDeleteResult"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AutoscaleOperations"
+        ],
+        "operationId": "AutoscaleOperations_GetSetting",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource name."
+          },
+          {
+            "name": "autoscaleSettingName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The autoscale setting name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingGetResult"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/diagnosticSettings/agent": {
+      "put": {
+        "tags": [
+          "AgentDiagnosticSettingsOperations"
+        ],
+        "operationId": "AgentDiagnosticSettingsOperations_Put",
+        "description": "Puts the new diagnostic settings.",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource uri."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentDiagnosticSettgingsPutParameters"
+            },
+            "description": "Parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EmptyResult"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EmptyResult"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AgentDiagnosticSettingsOperations"
+        ],
+        "operationId": "AgentDiagnosticSettingsOperations_Get",
+        "description": "Gets the diagnostic settings.",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource uri."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AgentDiagnosticSettingsGetResult"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MonitoringConfigurationOperations"
+        ],
+        "operationId": "MonitoringConfigurationOperations_UpdateConfiguration",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource identifier for the configuration."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MonitoringConfigurationCreateOrUpdateParameters"
+            },
+            "description": "Parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MonitoringConfigurationCreateOrUpdateResult"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MonitoringConfigurationCreateOrUpdateResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.insights/logprofiles/{name}": {
+      "delete": {
+        "tags": [
+          "LogProfilesOperations"
+        ],
+        "operationId": "LogProfilesOperations_Delete",
+        "description": "Deletes the log profile.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the log profile."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EmptyResult"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "LogProfilesOperations"
+        ],
+        "operationId": "LogProfilesOperations_Get",
+        "description": "Gets the log profile.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the log profile."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/LogProfileGetResult"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LogProfilesOperations"
+        ],
+        "operationId": "LogProfilesOperations_CreateOrUpdate",
+        "description": "Create or update the log profile.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the log profile."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogProfileCreatOrUpdateParameters"
+            },
+            "description": "Parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EmptyResult"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EmptyResult"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.insights/logprofiles": {
+      "get": {
+        "tags": [
+          "LogProfilesOperations"
+        ],
+        "operationId": "LogProfilesOperations_List",
+        "description": "List the log profiles.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/LogProfileCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/{resourceUri}/providers/microsoft.insights/diagnosticSettings/service": {
+      "delete": {
+        "tags": [
+          "ServiceDiagnosticSettingsOperations"
+        ],
+        "operationId": "ServiceDiagnosticSettingsOperations_Delete",
+        "description": "Deletes the diagnostic settings for the specified resource.",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource identifier of the configuration."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EmptyResult"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ServiceDiagnosticSettingsOperations"
+        ],
+        "operationId": "ServiceDiagnosticSettingsOperations_Get",
+        "description": "Gets the active diagnostic settings. To get the diagnostic settings being applied, use GetStatus.",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource identifier of the configuration."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ServiceDiagnosticSettingsGetResult"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ServiceDiagnosticSettingsOperations"
+        ],
+        "operationId": "ServiceDiagnosticSettingsOperations_Put",
+        "description": "Create or update new diagnostic settings for the specified resource. This operation is long running. Use GetStatus to check the status of this operation.",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource identifier of the configuration."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceDiagnosticSettingsPutParameters"
+            },
+            "description": "Parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EmptyResult"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EmptyResult"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{resourceUri}/diagnosticSettings/storage": {
+      "put": {
+        "tags": [
+          "MonitoringConfigurationOperations"
+        ],
+        "operationId": "MonitoringConfigurationOperations_CreateOrUpdateStorageConfiguration",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource identifier of the configuration."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrUpdateStorageConfigurationParameters"
+            },
+            "description": "Parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MonitoringConfigurationCreateOrUpdateResult"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MonitoringConfigurationCreateOrUpdateResult"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "MonitoringConfigurationOperations"
+        ],
+        "operationId": "MonitoringConfigurationOperations_GetStorageConfiguration",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource identifier of the configuration."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StorageConfigurationGetResult"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MonitoringConfigurationOperations"
+        ],
+        "operationId": "MonitoringConfigurationOperations_UpdateStorageConfiguration",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource identifier of the configuration."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrUpdateStorageConfigurationParameters"
+            },
+            "description": "Parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MonitoringConfigurationCreateOrUpdateResult"
+            }
+          },
+          "202": {
+            "description": ""
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MonitoringConfigurationCreateOrUpdateResult"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceId}/skus": {
+      "get": {
+        "tags": [
+          "SkuOperations"
+        ],
+        "operationId": "SkuOperations_ListSkuDefinitions",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource id."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SkuListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/{resourceId}": {
+      "patch": {
+        "tags": [
+          "SkuOperations"
+        ],
+        "operationId": "SkuOperations_UpdateCurrentSku",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SkuUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SkuUpdateResult"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SkuOperations"
+        ],
+        "operationId": "SkuOperations_GetCurrentSku",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource id."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SkuGetResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the unique name of the sku e.g. 'Free_A0'."
+        },
+        "tier": {
+          "type": "string",
+          "description": "Gets or sets the tier of the sku e.g. 'free'."
+        },
+        "size": {
+          "type": "string",
+          "description": "Gets or sets the size of the sku e.g. 'A0'."
+        },
+        "family": {
+          "type": "string",
+          "description": "Gets or sets the family of the sku e.g. 'A'."
+        }
+      },
+      "description": "Represents a sku."
+    },
+    "Capacity": {
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the minimum capacity."
+        },
+        "maximum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the maximum capacity."
+        },
+        "default": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the default capacity."
+        },
+        "scaleType": {
+          "type": "string",
+          "description": "Gets or sets the scale type supported.",
+          "enum": [
+            "None",
+            "Manual",
+            "Automatic"
+          ],
+          "x-ms-enum": {
+            "name": "SupportedScaleType",
+            "modelAsString": "False"
+          }
+        }
+      },
+      "description": "Represents the sku capacity."
+    },
+    "SkuDefinition": {
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Gets or sets the type of the resource e.g. 'Microsoft.Compute/virtualMachines'."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Gets or sets the sku."
+        },
+        "capacity": {
+          "$ref": "#/definitions/Capacity",
+          "description": "Gets or sets the capacity of the sku."
+        }
+      },
+      "description": "Represents a sku definition."
+    },
+    "SkuListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuDefinition"
+          },
+          "description": "Gets or sets the values for the sku definition."
+        },
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "Continue",
+            "SwitchingProtocols",
+            "OK",
+            "Created",
+            "Accepted",
+            "NonAuthoritativeInformation",
+            "NoContent",
+            "ResetContent",
+            "PartialContent",
+            "MultipleChoices",
+            "Ambiguous",
+            "MovedPermanently",
+            "Moved",
+            "Found",
+            "Redirect",
+            "SeeOther",
+            "RedirectMethod",
+            "NotModified",
+            "UseProxy",
+            "Unused",
+            "TemporaryRedirect",
+            "RedirectKeepVerb",
+            "BadRequest",
+            "Unauthorized",
+            "PaymentRequired",
+            "Forbidden",
+            "NotFound",
+            "MethodNotAllowed",
+            "NotAcceptable",
+            "ProxyAuthenticationRequired",
+            "RequestTimeout",
+            "Conflict",
+            "Gone",
+            "LengthRequired",
+            "PreconditionFailed",
+            "RequestEntityTooLarge",
+            "RequestUriTooLong",
+            "UnsupportedMediaType",
+            "RequestedRangeNotSatisfiable",
+            "ExpectationFailed",
+            "UpgradeRequired",
+            "InternalServerError",
+            "NotImplemented",
+            "BadGateway",
+            "ServiceUnavailable",
+            "GatewayTimeout",
+            "HttpVersionNotSupported"
+          ],
+          "x-ms-enum": {
+            "name": "HttpStatusCode",
+            "modelAsString": "False"
+          }
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "description": "A standard service response including an HTTP status code and request ID."
+    },
+    "Incident": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Incident name."
+        },
+        "ruleName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Rule name that is associated with the incident."
+        },
+        "isActive": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "A boolean to indicate whether the incident is active or resolved."
+        },
+        "activatedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the incident was activated."
+        },
+        "resolvedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the incident was resolved. If null, it means the incident is still active."
+        }
+      },
+      "description": "An alert incident indicates the activation status of an alert rule."
+    },
+    "IncidentListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Incident"
+          },
+          "description": "Gets or sets the incident collection."
+        }
+      },
+      "description": "The List incidents operation response."
+    },
+    "RuleCondition": {
+      "properties": {},
+      "description": "The condition that results in the alert rule being activated."
+    },
+    "RuleAction": {
+      "properties": {},
+      "description": "The action that is performed when the alert rule becomes active, and when an alert condition is resolved."
+    },
+    "Rule": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the alert rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the alert rule that will be included in the alert email."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Gets or sets the flag that indicates whether the alert rule is enabled."
+        },
+        "condition": {
+          "$ref": "#/definitions/RuleCondition",
+          "description": "Gets or sets the condition that results in the alert rule being activated."
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleAction"
+          },
+          "description": "Gets or sets the actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
+        },
+        "lastUpdatedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the rule was updated."
+        }
+      },
+      "description": "An alert rule."
+    },
+    "RuleCreateOrUpdateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the rule."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags of the rule."
+        },
+        "properties": {
+          "$ref": "#/definitions/Rule",
+          "description": "Gets or sets the rule to create or update."
+        }
+      },
+      "description": "Parameters supplied to the Create or Update Rule operation."
+    },
+    "RuleCreateOrUpdateResult": {
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "Continue",
+            "SwitchingProtocols",
+            "OK",
+            "Created",
+            "Accepted",
+            "NonAuthoritativeInformation",
+            "NoContent",
+            "ResetContent",
+            "PartialContent",
+            "MultipleChoices",
+            "Ambiguous",
+            "MovedPermanently",
+            "Moved",
+            "Found",
+            "Redirect",
+            "SeeOther",
+            "RedirectMethod",
+            "NotModified",
+            "UseProxy",
+            "Unused",
+            "TemporaryRedirect",
+            "RedirectKeepVerb",
+            "BadRequest",
+            "Unauthorized",
+            "PaymentRequired",
+            "Forbidden",
+            "NotFound",
+            "MethodNotAllowed",
+            "NotAcceptable",
+            "ProxyAuthenticationRequired",
+            "RequestTimeout",
+            "Conflict",
+            "Gone",
+            "LengthRequired",
+            "PreconditionFailed",
+            "RequestEntityTooLarge",
+            "RequestUriTooLong",
+            "UnsupportedMediaType",
+            "RequestedRangeNotSatisfiable",
+            "ExpectationFailed",
+            "UpgradeRequired",
+            "InternalServerError",
+            "NotImplemented",
+            "BadGateway",
+            "ServiceUnavailable",
+            "GatewayTimeout",
+            "HttpVersionNotSupported"
+          ],
+          "x-ms-enum": {
+            "name": "HttpStatusCode",
+            "modelAsString": "False"
+          }
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "description": "The create or update rule response. It's marked as empty. We only pass it to ensure json error handling."
+    },
+    "RuleDeleteResult": {
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "Continue",
+            "SwitchingProtocols",
+            "OK",
+            "Created",
+            "Accepted",
+            "NonAuthoritativeInformation",
+            "NoContent",
+            "ResetContent",
+            "PartialContent",
+            "MultipleChoices",
+            "Ambiguous",
+            "MovedPermanently",
+            "Moved",
+            "Found",
+            "Redirect",
+            "SeeOther",
+            "RedirectMethod",
+            "NotModified",
+            "UseProxy",
+            "Unused",
+            "TemporaryRedirect",
+            "RedirectKeepVerb",
+            "BadRequest",
+            "Unauthorized",
+            "PaymentRequired",
+            "Forbidden",
+            "NotFound",
+            "MethodNotAllowed",
+            "NotAcceptable",
+            "ProxyAuthenticationRequired",
+            "RequestTimeout",
+            "Conflict",
+            "Gone",
+            "LengthRequired",
+            "PreconditionFailed",
+            "RequestEntityTooLarge",
+            "RequestUriTooLong",
+            "UnsupportedMediaType",
+            "RequestedRangeNotSatisfiable",
+            "ExpectationFailed",
+            "UpgradeRequired",
+            "InternalServerError",
+            "NotImplemented",
+            "BadGateway",
+            "ServiceUnavailable",
+            "GatewayTimeout",
+            "HttpVersionNotSupported"
+          ],
+          "x-ms-enum": {
+            "name": "HttpStatusCode",
+            "modelAsString": "False"
+          }
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "description": "The delete rule response. It's marked as empty. We only pass it to ensure json error handling."
+    },
+    "RuleGetResult": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the resource identifier of the rule."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the rule."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the rule."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags of the rule."
+        },
+        "properties": {
+          "$ref": "#/definitions/Rule",
+          "description": "Gets or sets the retrieved rule."
+        }
+      },
+      "description": "The Get Rule operation response."
+    },
+    "RuleResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the resource identifier of the rule."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the alert rule."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the rule."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags of the rule."
+        },
+        "properties": {
+          "$ref": "#/definitions/Rule",
+          "description": "Gets or sets the retrieved rule."
+        }
+      },
+      "description": "The alert rule resource."
+    },
+    "RuleResourceCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleResource"
+          },
+          "description": "Gets or sets the values for the alert rule resources."
+        }
+      },
+      "description": "Represents a collection of alert rule resources."
+    },
+    "DatabaseServerCredential": {
+      "properties": {
+        "databaseUserName": {
+          "type": "string",
+          "description": "Gets or sets the database user name."
+        },
+        "databasePassword": {
+          "type": "string",
+          "description": "Gets or sets the database password."
+        }
+      },
+      "description": "Database Server Credential."
+    },
+    "BackupLocationProfile": {
+      "properties": {
+        "storageAccount": {
+          "type": "string",
+          "description": "Gets or sets the name of the storage account."
+        }
+      },
+      "description": "The configuration for the backup location (blob storage)."
+    },
+    "DatabaseBackupOption": {
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the start time for the job."
+        },
+        "repeatInterval": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the repeat interval.How often the automated export job will run."
+        },
+        "retentionPeriod": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the retention period.How long the exported files will be saved."
+        },
+        "keepAtLeastOneBackup": {
+          "type": "boolean",
+          "description": "Gets or sets the keep at least one backup flag.Whether at least one exported file will be kept."
+        },
+        "consistencyOption": {
+          "type": "string",
+          "description": "Gets or sets the database consistency option.",
+          "enum": [
+            "CreateCopy",
+            "ReadOnly"
+          ],
+          "x-ms-enum": {
+            "name": "DatabaseConsistencyOption",
+            "modelAsString": "False"
+          }
+        }
+      },
+      "description": "The options for the database backup job."
+    },
+    "AutomatedExportSetting": {
+      "properties": {
+        "databaseCredential": {
+          "$ref": "#/definitions/DatabaseServerCredential",
+          "description": "Gets or sets the credential for the server hosting the database."
+        },
+        "blobStorageSetting": {
+          "$ref": "#/definitions/BackupLocationProfile",
+          "description": "Gets or sets the blob storage settings, where the exported file will be written."
+        },
+        "backupOption": {
+          "$ref": "#/definitions/DatabaseBackupOption",
+          "description": "Gets or sets the backup job options."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Gets or sets the enable flag. Specifies whether automated export is enabled for the resource."
+        }
+      },
+      "description": "A setting that contains all of the configuration for the automated export of a database."
+    },
+    "AutomatedExportSettingGetResult": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the resource identifier of the setting."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the setting."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags of the rule."
+        },
+        "properties": {
+          "$ref": "#/definitions/AutomatedExportSetting",
+          "description": "Gets or sets the retrieved setting."
+        }
+      },
+      "description": "A standard service response including an HTTP status code and request ID."
+    },
+    "AutomatedExportSettingCreateOrUpdateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the setting."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags of the rule."
+        },
+        "properties": {
+          "$ref": "#/definitions/AutomatedExportSetting",
+          "description": "Gets or sets the setting to create or update."
+        }
+      },
+      "description": "Parameters supplied to the Create or Update automated export setting operation."
+    },
+    "AutomatedExportSettingCreateOrUpdateResult": {
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "Continue",
+            "SwitchingProtocols",
+            "OK",
+            "Created",
+            "Accepted",
+            "NonAuthoritativeInformation",
+            "NoContent",
+            "ResetContent",
+            "PartialContent",
+            "MultipleChoices",
+            "Ambiguous",
+            "MovedPermanently",
+            "Moved",
+            "Found",
+            "Redirect",
+            "SeeOther",
+            "RedirectMethod",
+            "NotModified",
+            "UseProxy",
+            "Unused",
+            "TemporaryRedirect",
+            "RedirectKeepVerb",
+            "BadRequest",
+            "Unauthorized",
+            "PaymentRequired",
+            "Forbidden",
+            "NotFound",
+            "MethodNotAllowed",
+            "NotAcceptable",
+            "ProxyAuthenticationRequired",
+            "RequestTimeout",
+            "Conflict",
+            "Gone",
+            "LengthRequired",
+            "PreconditionFailed",
+            "RequestEntityTooLarge",
+            "RequestUriTooLong",
+            "UnsupportedMediaType",
+            "RequestedRangeNotSatisfiable",
+            "ExpectationFailed",
+            "UpgradeRequired",
+            "InternalServerError",
+            "NotImplemented",
+            "BadGateway",
+            "ServiceUnavailable",
+            "GatewayTimeout",
+            "HttpVersionNotSupported"
+          ],
+          "x-ms-enum": {
+            "name": "HttpStatusCode",
+            "modelAsString": "False"
+          }
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "description": "The create or update automated export setting response. It's marked as empty. We only pass it to ensure json error handling."
+    },
+    "AutomatedExportSettingDeleteResult": {
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "Continue",
+            "SwitchingProtocols",
+            "OK",
+            "Created",
+            "Accepted",
+            "NonAuthoritativeInformation",
+            "NoContent",
+            "ResetContent",
+            "PartialContent",
+            "MultipleChoices",
+            "Ambiguous",
+            "MovedPermanently",
+            "Moved",
+            "Found",
+            "Redirect",
+            "SeeOther",
+            "RedirectMethod",
+            "NotModified",
+            "UseProxy",
+            "Unused",
+            "TemporaryRedirect",
+            "RedirectKeepVerb",
+            "BadRequest",
+            "Unauthorized",
+            "PaymentRequired",
+            "Forbidden",
+            "NotFound",
+            "MethodNotAllowed",
+            "NotAcceptable",
+            "ProxyAuthenticationRequired",
+            "RequestTimeout",
+            "Conflict",
+            "Gone",
+            "LengthRequired",
+            "PreconditionFailed",
+            "RequestEntityTooLarge",
+            "RequestUriTooLong",
+            "UnsupportedMediaType",
+            "RequestedRangeNotSatisfiable",
+            "ExpectationFailed",
+            "UpgradeRequired",
+            "InternalServerError",
+            "NotImplemented",
+            "BadGateway",
+            "ServiceUnavailable",
+            "GatewayTimeout",
+            "HttpVersionNotSupported"
+          ],
+          "x-ms-enum": {
+            "name": "HttpStatusCode",
+            "modelAsString": "False"
+          }
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "description": "The delete automated export setting response. It's marked as empty. We only pass it to ensure json error handling."
+    },
+    "ScaleCapacity": {
+      "properties": {
+        "minimum": {
+          "type": "string",
+          "description": "Gets or sets the minimum number of instances for the resource."
+        },
+        "maximum": {
+          "type": "string",
+          "description": "Gets or sets the maximum number of instances for the resource. The actual maximum number may be limited by the cores that are available."
+        },
+        "default": {
+          "type": "string",
+          "description": "Gets or sets the number of instances that will be set if metrics are not available for evaluation. The default is only used if the current instance count is lower than the default."
+        }
+      },
+      "description": "The number of instances that can be used during this profile."
+    },
+    "MetricTrigger": {
+      "properties": {
+        "metricName": {
+          "type": "string",
+          "description": "Gets or sets the name of the metric that defines what the rule monitors."
+        },
+        "metricNamespace": {
+          "type": "string",
+          "description": "Gets or sets the metric namespace.Only should be present for availability level metrics, where the value must be WindowsAzure.Availability."
+        },
+        "metricResourceUri": {
+          "type": "string",
+          "description": "Gets or sets the resource identifier of the resource the rule monitors."
+        },
+        "timeGrain": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the granularity of metrics the rule monitors. Must be one of the predefined values returned from metric definitions for the metric. Must be between 12 hours and 1 minute."
+        },
+        "statistic": {
+          "type": "string",
+          "description": "Gets or sets the metric statistic type.How the metrics from multiple instances are combined.",
+          "enum": [
+            "Average",
+            "Min",
+            "Max",
+            "Sum"
+          ],
+          "x-ms-enum": {
+            "name": "MetricStatisticType",
+            "modelAsString": "False"
+          }
+        },
+        "timeWindow": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the range of time in which instance data is collected. This value must be greater than the delay in metric collection, which can vary from resource-to-resource. Must be between 12 hours and 5 minutes."
+        },
+        "timeAggregation": {
+          "type": "string",
+          "description": "Gets or sets time aggregation type.How the data that is collected should be combined over time. The default value is Average.",
+          "enum": [
+            "Average",
+            "Minimum",
+            "Maximum",
+            "Last",
+            "Total",
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "TimeAggregationType",
+            "modelAsString": "False"
+          }
+        },
+        "operator": {
+          "type": "string",
+          "description": "Gets or sets the operator that is used to compare the metric data and the threshold.",
+          "enum": [
+            "Equals",
+            "NotEquals",
+            "GreaterThan",
+            "GreaterThanOrEqual",
+            "LessThan",
+            "LessThanOrEqual"
+          ],
+          "x-ms-enum": {
+            "name": "ComparisonOperationType",
+            "modelAsString": "False"
+          }
+        },
+        "threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the threshold of the metric that triggers the scale action."
+        }
+      },
+      "description": "The trigger that results in a scaling action."
+    },
+    "ScaleAction": {
+      "properties": {
+        "direction": {
+          "type": "string",
+          "description": "Gets or sets the scale direction. Whether the scaling action increases or decreases the number of instances.",
+          "enum": [
+            "None",
+            "Increase",
+            "Decrease"
+          ],
+          "x-ms-enum": {
+            "name": "ScaleDirection",
+            "modelAsString": "False"
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the type of action that should occur, this must be set to ChangeCount.",
+          "enum": [
+            "ChangeSize",
+            "ChangeCount",
+            "PercentChangeCount",
+            "ExactCount"
+          ],
+          "x-ms-enum": {
+            "name": "ScaleType",
+            "modelAsString": "False"
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets or sets the number of instances that are involved in the scaling action. This value must be 1 or greater. The default value is 1."
+        },
+        "cooldown": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the amount of time to wait since the last scaling action before this action occurs. Must be between 1 week and 1 minute."
+        }
+      },
+      "description": "The parameters for the scaling action."
+    },
+    "ScaleRule": {
+      "properties": {
+        "metricTrigger": {
+          "$ref": "#/definitions/MetricTrigger",
+          "description": "Gets or sets the trigger that results in a scaling action."
+        },
+        "scaleAction": {
+          "$ref": "#/definitions/ScaleAction",
+          "description": "Gets or sets the parameters for the scaling action."
+        }
+      },
+      "description": "A rule that provide the triggers and parameters for the scaling action."
+    },
+    "TimeWindow": {
+      "properties": {
+        "timeZone": {
+          "type": "string",
+          "description": "Gets or sets the time zone of the start and end times for the profile."
+        },
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the start time for the profile."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the end time for the profile."
+        }
+      },
+      "description": "A specific date for the profile. This element is not used if the Recurrence element is used."
+    },
+    "RecurrentSchedule": {
+      "properties": {
+        "timeZone": {
+          "type": "string",
+          "description": "Gets or sets the time zone for the hours of the profile."
+        },
+        "days": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the collection of days that the profile takes effect on."
+        },
+        "hours": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "Gets or sets the collection of hours at which the profile takes effect at."
+        },
+        "minutes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "Gets or sets the collection of minutes at which the profile takes effect at."
+        }
+      },
+      "description": "The scheduling constraints for when the profile begins."
+    },
+    "Recurrence": {
+      "properties": {
+        "frequency": {
+          "type": "string",
+          "description": "Gets or sets the recurrence frequency. How often the schedule profile should take effect. This value must be Week, meaning each week will have the same set of profiles.",
+          "enum": [
+            "None",
+            "Second",
+            "Minute",
+            "Hour",
+            "Day",
+            "Week",
+            "Month",
+            "Year"
+          ],
+          "x-ms-enum": {
+            "name": "RecurrenceFrequency",
+            "modelAsString": "False"
+          }
+        },
+        "schedule": {
+          "$ref": "#/definitions/RecurrentSchedule",
+          "description": "Gets or sets the scheduling constraints for when the profile begins."
+        }
+      },
+      "description": "The repeating times at which this profile begins. This element is not used if the FixedDate element is used."
+    },
+    "AutoscaleProfile": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the profile."
+        },
+        "capacity": {
+          "$ref": "#/definitions/ScaleCapacity",
+          "description": "Gets or sets the number of instances that can be used during this profile."
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleRule"
+          },
+          "description": "Gets or sets the collection of rules that provide the triggers and parameters for the scaling action. A maximum of 10 rules can be specified."
+        },
+        "fixedDate": {
+          "$ref": "#/definitions/TimeWindow",
+          "description": "Gets or sets the specific date for the profile. This element is not used if the Recurrence element is used."
+        },
+        "recurrence": {
+          "$ref": "#/definitions/Recurrence",
+          "description": "Gets or sets the repeating times at which this profile begins. This element is not used if the FixedDate element is used."
+        }
+      },
+      "description": "Autoscale profile."
+    },
+    "EmailNotification": {
+      "properties": {
+        "sendToSubscriptionAdministrator": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether to send email to subscription administrator."
+        },
+        "sendToSubscriptionCoAdministrators": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether to send email to subscription co-administrators."
+        },
+        "customEmails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the custom email list."
+        }
+      },
+      "description": "Email notification."
+    },
+    "WebhookNotification": {
+      "properties": {
+        "serviceUri": {
+          "type": "string",
+          "description": "Gets or sets the service address to receive the notification."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a property bag of settings."
+        }
+      },
+      "description": "Webhook notification."
+    },
+    "AutoscaleNotification": {
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "Gets or sets the operation associated with the notification."
+        },
+        "email": {
+          "$ref": "#/definitions/EmailNotification",
+          "description": "Gets or sets the email notification."
+        },
+        "webhooks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebhookNotification"
+          },
+          "description": "Gets or sets the collection of webhook notifications."
+        }
+      },
+      "description": "Autoscale notification."
+    },
+    "AutoscaleSetting": {
+      "properties": {
+        "profiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutoscaleProfile"
+          },
+          "description": "Gets or sets the collection of automatic scaling profiles that specify different scaling parameters for different time periods. A maximum of 20 profiles can be specified."
+        },
+        "notifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutoscaleNotification"
+          },
+          "description": "Gets or sets the collection of notifications."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Gets or sets the enabled flag.Specifies whether automatic scaling is enabled for the resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the autoscale setting."
+        },
+        "targetResourceUri": {
+          "type": "string",
+          "description": "Gets or sets the resource identifier of the resource that the autoscale setting should be added to."
+        }
+      },
+      "description": "A setting that contains all of the configuration for the automatic scaling of a resource."
+    },
+    "AutoscaleSettingResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the resource identifier of the autoscale setting."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the autoscale setting."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the autoscale setting."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags of the rule."
+        },
+        "properties": {
+          "$ref": "#/definitions/AutoscaleSetting",
+          "description": "Gets or sets the retrieved autoscale setting."
+        }
+      },
+      "description": "The autoscale setting resource."
+    },
+    "AutoscaleSettingResourceCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutoscaleSettingResource"
+          },
+          "description": "Gets or sets the values for the autoscale setting resources."
+        }
+      },
+      "description": "Represents a collection of autoscale setting resources."
+    },
+    "AutoscaleSettingCreateOrUpdateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the setting."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags of the rule."
+        },
+        "properties": {
+          "$ref": "#/definitions/AutoscaleSetting",
+          "description": "Gets or sets the setting to create or update."
+        }
+      },
+      "description": "Parameters supplied to the Create or Update autoscale setting operation."
+    },
+    "AutoscaleSettingCreateOrUpdateResult": {
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "Continue",
+            "SwitchingProtocols",
+            "OK",
+            "Created",
+            "Accepted",
+            "NonAuthoritativeInformation",
+            "NoContent",
+            "ResetContent",
+            "PartialContent",
+            "MultipleChoices",
+            "Ambiguous",
+            "MovedPermanently",
+            "Moved",
+            "Found",
+            "Redirect",
+            "SeeOther",
+            "RedirectMethod",
+            "NotModified",
+            "UseProxy",
+            "Unused",
+            "TemporaryRedirect",
+            "RedirectKeepVerb",
+            "BadRequest",
+            "Unauthorized",
+            "PaymentRequired",
+            "Forbidden",
+            "NotFound",
+            "MethodNotAllowed",
+            "NotAcceptable",
+            "ProxyAuthenticationRequired",
+            "RequestTimeout",
+            "Conflict",
+            "Gone",
+            "LengthRequired",
+            "PreconditionFailed",
+            "RequestEntityTooLarge",
+            "RequestUriTooLong",
+            "UnsupportedMediaType",
+            "RequestedRangeNotSatisfiable",
+            "ExpectationFailed",
+            "UpgradeRequired",
+            "InternalServerError",
+            "NotImplemented",
+            "BadGateway",
+            "ServiceUnavailable",
+            "GatewayTimeout",
+            "HttpVersionNotSupported"
+          ],
+          "x-ms-enum": {
+            "name": "HttpStatusCode",
+            "modelAsString": "False"
+          }
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "description": "The create or update autoscale setting response. It's marked as empty. We only pass it to ensure json error handling."
+    },
+    "AutoscaleSettingDeleteResult": {
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "Continue",
+            "SwitchingProtocols",
+            "OK",
+            "Created",
+            "Accepted",
+            "NonAuthoritativeInformation",
+            "NoContent",
+            "ResetContent",
+            "PartialContent",
+            "MultipleChoices",
+            "Ambiguous",
+            "MovedPermanently",
+            "Moved",
+            "Found",
+            "Redirect",
+            "SeeOther",
+            "RedirectMethod",
+            "NotModified",
+            "UseProxy",
+            "Unused",
+            "TemporaryRedirect",
+            "RedirectKeepVerb",
+            "BadRequest",
+            "Unauthorized",
+            "PaymentRequired",
+            "Forbidden",
+            "NotFound",
+            "MethodNotAllowed",
+            "NotAcceptable",
+            "ProxyAuthenticationRequired",
+            "RequestTimeout",
+            "Conflict",
+            "Gone",
+            "LengthRequired",
+            "PreconditionFailed",
+            "RequestEntityTooLarge",
+            "RequestUriTooLong",
+            "UnsupportedMediaType",
+            "RequestedRangeNotSatisfiable",
+            "ExpectationFailed",
+            "UpgradeRequired",
+            "InternalServerError",
+            "NotImplemented",
+            "BadGateway",
+            "ServiceUnavailable",
+            "GatewayTimeout",
+            "HttpVersionNotSupported"
+          ],
+          "x-ms-enum": {
+            "name": "HttpStatusCode",
+            "modelAsString": "False"
+          }
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "description": "The delete autoscale setting response. It's marked as empty. We only pass it to ensure json error handling."
+    },
+    "AutoscaleSettingGetResult": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the resource identifier of the setting."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the setting."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the setting."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags of the rule."
+        },
+        "properties": {
+          "$ref": "#/definitions/AutoscaleSetting",
+          "description": "Gets or sets the retrieved setting."
+        }
+      },
+      "description": "A standard service response including an HTTP status code and request ID."
+    },
+    "DiagnosticInfrastructureLogs": {
+      "properties": {
+        "scheduledTransferLogLevelFilter": {
+          "type": "string",
+          "description": "Gets or sets the minimum severity level of the logs collected.",
+          "enum": [
+            "Undefined",
+            "Verbose",
+            "Information",
+            "Warning",
+            "Error",
+            "Critical"
+          ],
+          "x-ms-enum": {
+            "name": "LogLevel",
+            "modelAsString": "False"
+          }
+        },
+        "scheduledTransferPeriod": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the interval between scheduled transfers to storage rounded up to the nearest minute."
+        }
+      },
+      "description": "Enable collection of logs generated by the agent. The diagnostic infrastructure logs are useful for troubleshooting the diagnostics system itself."
+    },
+    "MetricAggregation": {
+      "properties": {
+        "scheduledTransferPeriod": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the time grain (aggregation interval or frequency)."
+        }
+      },
+      "description": "Represents an metric aggregation."
+    },
+    "Metrics": {
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Gets or sets the resource ID of the resource the agent runs on."
+        },
+        "aggregations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAggregation"
+          },
+          "description": "Gets or sets the list of aggregations to generate."
+        }
+      },
+      "description": "Represents a metric collection configuration."
+    },
+    "DirectoryPath": {
+      "properties": {},
+      "description": "A directory path definition."
+    },
+    "DirectoryConfiguration": {
+      "properties": {
+        "containerName": {
+          "type": "string",
+          "description": "Gets or sets the name of the blob container in your Azure Storage account that will be used to store the log files."
+        },
+        "path": {
+          "$ref": "#/definitions/DirectoryPath",
+          "description": "Gets or sets the path of the resource to monitor."
+        }
+      },
+      "description": "Enable the collection of the contents of a directory, IIS failed access request logs and/or IIS logs. "
+    },
+    "Directories": {
+      "properties": {
+        "dataSources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DirectoryConfiguration"
+          },
+          "description": "Gets or sets the list of directories to monitor."
+        },
+        "iisLogs": {
+          "type": "string",
+          "description": "Gets or sets the IIS logs. Including this element in the configuration enables the collection of IIS logs."
+        },
+        "failedRequestLogs": {
+          "type": "string",
+          "description": "Gets or sets the failed request logs. Including this element in the configuration enables collection of logs about failed requests to an IIS site or application. You must also enable tracing options under system.WebServer in Web.config."
+        },
+        "scheduledTransferPeriod": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the interval between scheduled transfers to storage rounded up to the nearest minute."
+        }
+      },
+      "description": "Represents an absolute directory path."
+    },
+    "LocalizedString": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Gets or sets the display name for the counter."
+        },
+        "locale": {
+          "type": "string",
+          "description": "Gets or sets the locale to use when displaying the counter name."
+        }
+      },
+      "description": "Represents the display name in a specific locale."
+    },
+    "PerformanceCounterConfiguration": {
+      "properties": {
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocalizedString"
+          },
+          "description": "Gets or sets the display name for the counter."
+        },
+        "counterSpecifier": {
+          "type": "string",
+          "description": "Gets or sets the name of the performance counter. For example, \"\\Processor(_Total)\\% Processor Time\". To get a list of performance counters on your host run the command typeperf."
+        },
+        "sampleRate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the sample rate. How often the counter should be sampled."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Gets or sets the unit of measure of the counter.",
+          "enum": [
+            "Count",
+            "Bytes",
+            "Seconds",
+            "Percent",
+            "CountPerSecond",
+            "BytesPerSecond",
+            "MilliSeconds"
+          ],
+          "x-ms-enum": {
+            "name": "Units",
+            "modelAsString": "False"
+          }
+        }
+      },
+      "description": "Enable the collection of Performance Counters."
+    },
+    "PerformanceCounters": {
+      "properties": {
+        "counters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PerformanceCounterConfiguration"
+          },
+          "description": "Gets or sets the list of performance counters."
+        },
+        "scheduledTransferPeriod": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the interval between scheduled transfers to storage rounded up to the nearest minute."
+        }
+      },
+      "description": "Represents a collection or performance counters and their shared configuration."
+    },
+    "WindowsEventLog": {
+      "properties": {
+        "dataSources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the Windows Event logs to collect. A list of XPath queries describing the windows events to be collected. For example: \"System!*[System[(Level &lt;=3)]]\". To collect all events specify \"*\"."
+        },
+        "scheduledTransferPeriod": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the interval between scheduled transfers to storage rounded up to the nearest minute."
+        }
+      },
+      "description": "represents a windows event log collection configuration."
+    },
+    "EtwEventConfiguration": {
+      "properties": {
+        "eventId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the id of the event."
+        },
+        "destination": {
+          "type": "string",
+          "description": "Gets or sets the name of the table to store the events in."
+        }
+      },
+      "description": "Represents the configuration for collecting ETW events."
+    },
+    "EtwProvider": {
+      "properties": {
+        "scheduledTransferPeriod": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the interval between scheduled transfers to storage rounded up to the nearest minute. Note that the value is an XML \"Duration Data Type\"."
+        },
+        "scheduledTransferLogLevelFilter": {
+          "type": "string",
+          "description": "Gets or sets the minimum severity level to transfer to your storage account.",
+          "enum": [
+            "Undefined",
+            "Verbose",
+            "Information",
+            "Warning",
+            "Error",
+            "Critical"
+          ],
+          "x-ms-enum": {
+            "name": "LogLevel",
+            "modelAsString": "False"
+          }
+        },
+        "provider": {
+          "type": "string",
+          "description": "Gets or sets the class name of the EventSource event, or, the GUID of the event provider."
+        },
+        "scheduledTransferKeywordFilter": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the scheduled transfer key filter. This field is a bitmask of the keywords that you would like logged. For details on EventSource keywords see: http://msdn.microsoft.com/en-us/library/system.diagnostics.tracing.eventsource(v=vs.110).aspx. For details on ETW event keywords see: http://msdn.microsoft.com/en-us/library/windows/desktop/dd996930(v=vs.85).aspx."
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EtwEventConfiguration"
+          },
+          "description": "Gets or sets the list of events to collect."
+        },
+        "defaultDestination": {
+          "type": "string",
+          "description": "Gets or sets the name of the table to store the events in."
+        }
+      },
+      "description": "Configures collection of events generated from .NET System.Diagnostics.Tracing.EventSource."
+    },
+    "EtwProviders": {
+      "properties": {
+        "eventSourceProviders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EtwProvider"
+          },
+          "description": "Gets or sets the collection of ETW events from EventSource providers."
+        },
+        "manifestProviders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EtwProvider"
+          },
+          "description": "Gets or sets the collection of ETW events from ETW Manifest providers."
+        }
+      },
+      "description": "Represents the configuration for ETW providers by category."
+    },
+    "CrashDumps": {
+      "properties": {
+        "directoryQuotaPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the configures the percentage of overallQuotaInMB that will be reserved for crash dumps."
+        },
+        "dumpType": {
+          "type": "string",
+          "description": "Gets or sets the crash dump type. Configures collection of Mini or Full cash dumps.",
+          "enum": [
+            "Mini",
+            "Full"
+          ],
+          "x-ms-enum": {
+            "name": "CrashDumpType",
+            "modelAsString": "False"
+          }
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Gets or sets the name of the blob container in your Azure Storage account that will be used to store crash dumps."
+        },
+        "processes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the names of the process you want to collect a crash dump for."
+        }
+      },
+      "description": "Enable collection of crash dumps."
+    },
+    "DiagnosticMonitorConfiguration": {
+      "properties": {
+        "overallQuotaInMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the maximum amount of local disk space that may be consumed by the various types of diagnostic data collected by the agent. The default setting is 5120MB."
+        },
+        "diagnosticInfrastructureLogs": {
+          "$ref": "#/definitions/DiagnosticInfrastructureLogs",
+          "description": "Gets or sets the diagnostics infrastructure logs property. Enable collection of logs generated by the agent. The diagnostic infrastructure logs are useful for troubleshooting the diagnostics system itself."
+        },
+        "metrics": {
+          "$ref": "#/definitions/Metrics",
+          "description": "Gets or sets the metrics. This element allows the generation of a performance counter table that is optimized for fast queries. Each performance counter that is defined in the PerformanceCounters element is stored in the Metrics table in addition to the Performance Counter table."
+        },
+        "directories": {
+          "$ref": "#/definitions/Directories",
+          "description": "Gets or sets the directories. Enable the collection of the contents of a directory, IIS failed access request logs and/or IIS logs."
+        },
+        "performanceCounters": {
+          "$ref": "#/definitions/PerformanceCounters",
+          "description": "Gets or sets the performance counters. Enable the collection of Performance Counters."
+        },
+        "windowsEventLog": {
+          "$ref": "#/definitions/WindowsEventLog",
+          "description": "Gets or sets the windows event log. Enable the collection of Windows Event Logs."
+        },
+        "etwProviders": {
+          "$ref": "#/definitions/EtwProviders",
+          "description": "Gets or sets the ETW providers. Configures the collection of ETW events from EventSource and/or ETW Manifest based providers."
+        },
+        "crashDumps": {
+          "$ref": "#/definitions/CrashDumps",
+          "description": "Gets or sets the crash dumps. Enable collection of crash dumps."
+        }
+      },
+      "description": "Basic diagnostics configuration."
+    },
+    "DirectoryAbsolute": {
+      "properties": {
+        "expandEnvironment": {
+          "type": "boolean",
+          "description": "Gets or sets the expand environment flag. Configures whether or not environment variables in Path will be expanded."
+        },
+        "path": {
+          "type": "string",
+          "description": "Gets or sets the absolute path to the directory to monitor."
+        }
+      },
+      "description": "The absolute path to the directory to monitor."
+    },
+    "PublicMonitoringConfiguration": {
+      "properties": {
+        "diagnosticMonitorConfiguration": {
+          "$ref": "#/definitions/DiagnosticMonitorConfiguration",
+          "description": "Gets or sets the configuration settings for the telemetry data to be collected."
+        },
+        "localResourceDirectory": {
+          "$ref": "#/definitions/DirectoryAbsolute",
+          "description": "Gets or sets the directory on the virtual machine to be used by the Monitoring Agent to store event data. If not set the default directory will be used."
+        },
+        "storageAccount": {
+          "type": "string",
+          "description": "Gets or sets the name of the Azure Storage account to store the data in."
+        }
+      },
+      "description": "Represents the public monitoring configuration."
+    },
+    "AgentDiagnosticSettings": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the setting name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the setting description."
+        },
+        "publicConfiguration": {
+          "$ref": "#/definitions/PublicMonitoringConfiguration",
+          "description": "Gets or sets the public diagnostic configuration."
+        }
+      },
+      "description": "Represents the diagnosticSettings."
+    },
+    "AgentDiagnosticSettgingsPutParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgentDiagnosticSettings",
+          "description": "Gets or sets the public configuration settings."
+        }
+      },
+      "description": "Parameters supplied to the Create or Update monitoring configuration."
+    },
+    "EmptyResult": {
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "Continue",
+            "SwitchingProtocols",
+            "OK",
+            "Created",
+            "Accepted",
+            "NonAuthoritativeInformation",
+            "NoContent",
+            "ResetContent",
+            "PartialContent",
+            "MultipleChoices",
+            "Ambiguous",
+            "MovedPermanently",
+            "Moved",
+            "Found",
+            "Redirect",
+            "SeeOther",
+            "RedirectMethod",
+            "NotModified",
+            "UseProxy",
+            "Unused",
+            "TemporaryRedirect",
+            "RedirectKeepVerb",
+            "BadRequest",
+            "Unauthorized",
+            "PaymentRequired",
+            "Forbidden",
+            "NotFound",
+            "MethodNotAllowed",
+            "NotAcceptable",
+            "ProxyAuthenticationRequired",
+            "RequestTimeout",
+            "Conflict",
+            "Gone",
+            "LengthRequired",
+            "PreconditionFailed",
+            "RequestEntityTooLarge",
+            "RequestUriTooLong",
+            "UnsupportedMediaType",
+            "RequestedRangeNotSatisfiable",
+            "ExpectationFailed",
+            "UpgradeRequired",
+            "InternalServerError",
+            "NotImplemented",
+            "BadGateway",
+            "ServiceUnavailable",
+            "GatewayTimeout",
+            "HttpVersionNotSupported"
+          ],
+          "x-ms-enum": {
+            "name": "HttpStatusCode",
+            "modelAsString": "False"
+          }
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "description": "Generic empty response. We only pass it to ensure json error handling"
+    },
+    "AgentDiagnosticSettingsGetResult": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the configuration."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the configuration."
+        },
+        "properties": {
+          "$ref": "#/definitions/AgentDiagnosticSettings",
+          "description": "Gets or sets the retrieved configuration."
+        }
+      },
+      "description": "A standard service response including an HTTP status code and request ID."
+    },
+    "RetentionPolicy": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether the retention policy is enabled."
+        },
+        "days": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of days for the retention."
+        }
+      },
+      "description": "Part of MultiTenantDiagnosticSettings. Child of MetricSettings. Specifies the retention policy for the specific metric."
+    },
+    "LogProfile": {
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "description": "Gets or sets the resource id of the storage account."
+        },
+        "serviceBusRuleId": {
+          "type": "string",
+          "description": "Gets or sets the resource id of the service bus rule."
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the locations."
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": " Gets or sets the categories."
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy",
+          "description": "Gets or sets the retention policy for this log."
+        }
+      },
+      "description": "The log profile."
+    },
+    "LogProfileGetResult": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the resource id of the log profile."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the log profile."
+        },
+        "properties": {
+          "$ref": "#/definitions/LogProfile",
+          "description": "Gets or sets the retrieved log profile."
+        }
+      },
+      "description": "A standard service response including an HTTP status code and request ID."
+    },
+    "LogProfileResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the resource identifier of the log profile."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the log profile."
+        },
+        "properties": {
+          "$ref": "#/definitions/LogProfile",
+          "description": "Gets or sets the properties of the log profile."
+        }
+      },
+      "description": "The log profile resource."
+    },
+    "LogProfileCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogProfileResource"
+          },
+          "description": "Gets or sets the values of the log profiles."
+        }
+      },
+      "description": "Represents a collection of log profiles."
+    },
+    "LogProfileCreatOrUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LogProfile",
+          "description": "Gets or sets the properties of the log profile."
+        }
+      },
+      "description": "Parameters supplied to create or update log profiles."
+    },
+    "MetricSettings": {
+      "properties": {
+        "timeGrain": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the timegrain of the metric."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether this timegrain is enabled."
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy",
+          "description": "Gets or sets the retention policy for this timegrain."
+        }
+      },
+      "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular metric."
+    },
+    "LogSettings": {
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Gets or sets the name of the logs to which this setting is applied."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether this log is enabled."
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy",
+          "description": "Gets or sets the retention policy for this log."
+        }
+      },
+      "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log."
+    },
+    "ServiceDiagnosticSettings": {
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "description": "Gets or sets the resource id of the storage account."
+        },
+        "serviceBusRuleId": {
+          "type": "string",
+          "description": "Gets or sets the id of the service bus rule."
+        },
+        "storageAccountName": {
+          "type": "string",
+          "description": "[Deprecated] Use StorageAccountId instead. Gets or sets the name of the storage account."
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSettings"
+          },
+          "description": "Gets or sets the list of metrics."
+        },
+        "logs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSettings"
+          },
+          "description": "Gets or sets the list of logs."
+        }
+      },
+      "description": "The diagnostic settings for service."
+    },
+    "ServiceDiagnosticSettingsGetResult": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the configuration."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the configuration."
+        },
+        "properties": {
+          "$ref": "#/definitions/ServiceDiagnosticSettings",
+          "description": "Gets or sets the retrieved configuration."
+        }
+      },
+      "description": "A standard service response including an HTTP status code and request ID."
+    },
+    "ServiceDiagnosticSettingsPutParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceDiagnosticSettings",
+          "description": "Gets or sets the public configuration settings."
+        }
+      },
+      "description": "Parameters supplied to the Create or Update service configuration."
+    },
+    "PublicConfiguration": {
+      "properties": {},
+      "description": "Public configuration."
+    },
+    "DiagnosticSettings": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the setting name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the setting description."
+        },
+        "publicConfiguration": {
+          "$ref": "#/definitions/PublicConfiguration",
+          "description": "Gets or sets the public diagnostic configuration."
+        }
+      },
+      "description": "Represents the settings for agents to collect diagnostics information."
+    },
+    "MonitoringConfigurationCreateOrUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiagnosticSettings",
+          "description": "Gets or sets the public configuration settings."
+        }
+      },
+      "description": "Parameters supplied to the Create or Update monitoring configuration."
+    },
+    "MonitoringConfigurationCreateOrUpdateResult": {
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "Continue",
+            "SwitchingProtocols",
+            "OK",
+            "Created",
+            "Accepted",
+            "NonAuthoritativeInformation",
+            "NoContent",
+            "ResetContent",
+            "PartialContent",
+            "MultipleChoices",
+            "Ambiguous",
+            "MovedPermanently",
+            "Moved",
+            "Found",
+            "Redirect",
+            "SeeOther",
+            "RedirectMethod",
+            "NotModified",
+            "UseProxy",
+            "Unused",
+            "TemporaryRedirect",
+            "RedirectKeepVerb",
+            "BadRequest",
+            "Unauthorized",
+            "PaymentRequired",
+            "Forbidden",
+            "NotFound",
+            "MethodNotAllowed",
+            "NotAcceptable",
+            "ProxyAuthenticationRequired",
+            "RequestTimeout",
+            "Conflict",
+            "Gone",
+            "LengthRequired",
+            "PreconditionFailed",
+            "RequestEntityTooLarge",
+            "RequestUriTooLong",
+            "UnsupportedMediaType",
+            "RequestedRangeNotSatisfiable",
+            "ExpectationFailed",
+            "UpgradeRequired",
+            "InternalServerError",
+            "NotImplemented",
+            "BadGateway",
+            "ServiceUnavailable",
+            "GatewayTimeout",
+            "HttpVersionNotSupported"
+          ],
+          "x-ms-enum": {
+            "name": "HttpStatusCode",
+            "modelAsString": "False"
+          }
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "description": "The create or update monitoring setting response. It's marked as empty. We only pass it to ensure json error handling."
+    },
+    "StorageLoggingConfiguration": {
+      "properties": {
+        "delete": {
+          "type": "boolean",
+          "description": "Gets or sets the delete flag. Indicates whether all delete requests should be logged."
+        },
+        "read": {
+          "type": "boolean",
+          "description": "Gets or sets the read flag. Indicates whether all read requests should be logged."
+        },
+        "write": {
+          "type": "boolean",
+          "description": "Gets or sets the write flag. Indicates whether all write requests should be logged."
+        },
+        "retention": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the retention flag. Indicates the how long log data should be retained (must be an even number of days). All data older than this value will be deleted. The minimum number of days is 1; the largest value is 365 (one year)."
+        }
+      },
+      "description": "The properties for logging. This allows specifying the operations to be logged and their retention."
+    },
+    "StorageMetricAggregation": {
+      "properties": {
+        "scheduledTransferPeriod": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the time grain (aggregation interval or frequency). Must be either one minute or one hour."
+        },
+        "retention": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the retention period. Indicates the how long metrics data should be retained (must be an even number of days). All data older than this value will be deleted. The minimum number of days is 1; the largest value is 365 (one year)."
+        },
+        "level": {
+          "type": "string",
+          "description": "Gets or sets the level of metrics to collect.",
+          "enum": [
+            "None",
+            "Service",
+            "ServiceAndApi"
+          ],
+          "x-ms-enum": {
+            "name": "StorageMetricLevel",
+            "modelAsString": "False"
+          }
+        }
+      },
+      "description": "Represents an metric aggregation."
+    },
+    "StorageMetricConfiguration": {
+      "properties": {
+        "aggregations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageMetricAggregation"
+          },
+          "description": "Gets or sets the list of aggregations to generate."
+        }
+      },
+      "description": "Represents a metric collection configuration."
+    },
+    "StorageConfiguration": {
+      "properties": {
+        "logging": {
+          "$ref": "#/definitions/StorageLoggingConfiguration",
+          "description": "Gets or sets the storage logging configuration. Settings for logging successful and failed requests to a storage service. This information can be used to monitor individual requests and to diagnose issues with a storage service. Requests are logged on a best-effort basis."
+        },
+        "metrics": {
+          "$ref": "#/definitions/StorageMetricConfiguration",
+          "description": "Gets or sets the settings for metrics that include aggregated transaction statistics and capacity data about requests to a storage service."
+        }
+      },
+      "description": "The public diagnostics settings for Storage account services."
+    },
+    "CreateOrUpdateStorageConfigurationParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageConfiguration",
+          "description": "Gets or sets the public configuration settings."
+        }
+      },
+      "description": "Parameters supplied to the Create or Update storage configuration."
+    },
+    "MonitoringConfigurationGetResult": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the configuration."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the configuration."
+        },
+        "properties": {
+          "$ref": "#/definitions/DiagnosticSettings",
+          "description": "Gets or sets the retrieved configuration properties."
+        }
+      },
+      "description": "A standard service response including an HTTP status code and request ID."
+    },
+    "StorageConfigurationGetResult": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the configuration."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the configuration."
+        },
+        "properties": {
+          "$ref": "#/definitions/StorageConfiguration",
+          "description": "Gets or sets the retrieved configuration properties."
+        }
+      },
+      "description": "A standard service response including an HTTP status code and request ID."
+    },
+    "StorageLoggingDiagnosticSettings": {
+      "properties": {
+        "delete": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether delete operations should be logged."
+        },
+        "read": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether read operations should be logged."
+        },
+        "write": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether write operations should be logged."
+        },
+        "retention": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets a value indicating whether retention operations should be logged."
+        }
+      },
+      "description": "The logging diagnostic settings. This allow to specify the operations to be logged and the retention."
+    },
+    "StorageMetricDiagnosticSettings": {
+      "properties": {
+        "aggregations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageMetricAggregation"
+          },
+          "description": "Gets or sets the list of aggregations to generate."
+        }
+      },
+      "description": "Represents a metric collection configuration."
+    },
+    "StorageDiagnosticSettings": {
+      "properties": {
+        "logging": {
+          "$ref": "#/definitions/StorageLoggingDiagnosticSettings",
+          "description": "Gets or sets the logging diagnostic settings."
+        },
+        "metrics": {
+          "$ref": "#/definitions/StorageMetricDiagnosticSettings",
+          "description": "Gets or sets the metrics diagnostic settings."
+        }
+      },
+      "description": "The diagnostic settings for storage services."
+    },
+    "StorageDiagnosticSettingsPutParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageDiagnosticSettings",
+          "description": "Gets or sets the storage diagnostic settings."
+        }
+      },
+      "description": "Parameters supplied to the Create or Update storage configuration."
+    },
+    "StorageDiagnosticSettingsGetResult": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the configuration."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the configuration."
+        },
+        "properties": {
+          "$ref": "#/definitions/StorageDiagnosticSettings",
+          "description": "Gets or sets the storage diagnostic settings."
+        }
+      },
+      "description": "A standard service response including an HTTP status code and request ID."
+    },
+    "CurrentSku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the unique name of the sku e.g. 'Free_A0'."
+        },
+        "tier": {
+          "type": "string",
+          "description": "Gets or sets the tier of the sku e.g. 'free'."
+        },
+        "size": {
+          "type": "string",
+          "description": "Gets or sets the size of the sku e.g. 'A0'."
+        },
+        "family": {
+          "type": "string",
+          "description": "Gets or sets the family of the sku e.g. 'A'."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the current capacity."
+        }
+      }
+    },
+    "SkuUpdateParameters": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/CurrentSku",
+          "description": "Gets or sets the current sku."
+        }
+      }
+    },
+    "SkuUpdateResult": {
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "Continue",
+            "SwitchingProtocols",
+            "OK",
+            "Created",
+            "Accepted",
+            "NonAuthoritativeInformation",
+            "NoContent",
+            "ResetContent",
+            "PartialContent",
+            "MultipleChoices",
+            "Ambiguous",
+            "MovedPermanently",
+            "Moved",
+            "Found",
+            "Redirect",
+            "SeeOther",
+            "RedirectMethod",
+            "NotModified",
+            "UseProxy",
+            "Unused",
+            "TemporaryRedirect",
+            "RedirectKeepVerb",
+            "BadRequest",
+            "Unauthorized",
+            "PaymentRequired",
+            "Forbidden",
+            "NotFound",
+            "MethodNotAllowed",
+            "NotAcceptable",
+            "ProxyAuthenticationRequired",
+            "RequestTimeout",
+            "Conflict",
+            "Gone",
+            "LengthRequired",
+            "PreconditionFailed",
+            "RequestEntityTooLarge",
+            "RequestUriTooLong",
+            "UnsupportedMediaType",
+            "RequestedRangeNotSatisfiable",
+            "ExpectationFailed",
+            "UpgradeRequired",
+            "InternalServerError",
+            "NotImplemented",
+            "BadGateway",
+            "ServiceUnavailable",
+            "GatewayTimeout",
+            "HttpVersionNotSupported"
+          ],
+          "x-ms-enum": {
+            "name": "HttpStatusCode",
+            "modelAsString": "False"
+          }
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "description": "A standard service response including an HTTP status code and request ID."
+    },
+    "SkuGetResult": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/CurrentSku",
+          "description": "Gets or sets the resource sku."
+        }
+      },
+      "description": "A standard service response including an HTTP status code and request ID."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}
