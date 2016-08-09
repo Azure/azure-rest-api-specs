@@ -4251,6 +4251,49 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/CheckIpAddressAvailability": {
+      "get": {
+        "operationId": "CheckIpAddressAvailability",
+        "description": "Checks whether a private Ip address is available for use.",
+        "parameters": [
+          {
+            "name": "IpAddress",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The private Ip address to be verified."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/IPAddressAvailabilityResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -7964,6 +8007,22 @@
         }
       },
       "description": "Response for CheckDnsNameAvailability Api servive call"
+    },
+    "IPAddressAvailabilityResult": {
+      "properties": {
+        "available": {
+          "type": "boolean",
+          "description": "Private Ip address availability (True/False)"
+        },
+        "availableIpAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Other available private Ip addresses if the asked for address is taken"
+        }
+      },
+      "description": "Response for CheckIpAddressAvailability Api servive call"
     },
     "ErrorDetails": {
       "properties": {
