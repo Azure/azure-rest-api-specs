@@ -4252,17 +4252,17 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/CheckIpAddressAvailability": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/CheckIPAddressAvailability": {
       "get": {
-        "operationId": "CheckIpAddressAvailability",
+        "operationId": "VirtualNetworks_CheckIPAddressAvailability",
         "description": "Checks whether a private Ip address is available for use.",
         "parameters": [
           {
-            "name": "IpAddress",
+            "name": "ipAddress",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The private Ip address to be verified."
+            "description": "The private IP address to be verified."
           },
           {
             "name": "resourceGroupName",
@@ -4287,7 +4287,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "private IP address availability and list of other free addresses if the requested one is not available",
             "schema": {
               "$ref": "#/definitions/IPAddressAvailabilityResult"
             }
@@ -8012,17 +8012,17 @@
       "properties": {
         "available": {
           "type": "boolean",
-          "description": "Private Ip address availability (True/False)"
+          "description": "Private IP address availability"
         },
-        "availableIpAddresses": {
+        "availableIPAddresses": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Other available private Ip addresses if the asked for address is taken"
+          "description": "Contains other available private IP addresses if the asked for address is taken"
         }
       },
-      "description": "Response for CheckIpAddressAvailability Api servive call"
+      "description": "Response for CheckIPAddressAvailability Api service call"
     },
     "ErrorDetails": {
       "properties": {
