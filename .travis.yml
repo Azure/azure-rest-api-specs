@@ -18,5 +18,5 @@ script:
   - DOCKER_CMD="docker run --rm --env-file /tmp/env_file -e GH_TOKEN -v $PWD:/git-restapi/ lmazuel/swagger-to-sdk"
   - if [[ $MODE == 'python' ]]; then $DOCKER_CMD AutorestCI/azure-sdk-for-python --pr-repo-id Azure/azure-sdk-for-python -o dev -v; fi
   - if [[ $MODE == 'node' ]]; then $DOCKER_CMD AutorestCI/azure-sdk-for-node --pr-repo-id Azure/azure-sdk-for-node -o master -v; fi
-  - if [[ $MODE == 'ruby' ]]; then $DOCKER_CMD AutorestCI/azure-sdk-ruby --pr-repo-id Azure/azure-sdk-ruby -o master -v; fi
+  - if [[ $MODE == 'ruby' ]]; then $DOCKER_CMD AutorestCI/azure-sdk-for-ruby --pr-repo-id Azure/azure-sdk-for-ruby -o master -v; fi
   - if [[ $MODE == 'syntax' ]]; then npm test; fi
