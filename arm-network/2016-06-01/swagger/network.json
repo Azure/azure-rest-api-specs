@@ -4251,6 +4251,49 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/CheckIPAddressAvailability": {
+      "get": {
+        "operationId": "VirtualNetworks_CheckIPAddressAvailability",
+        "description": "Checks whether a private Ip address is available for use.",
+        "parameters": [
+          {
+            "name": "ipAddress",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The private IP address to be verified."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "private IP address availability and list of other free addresses if the requested one is not available",
+            "schema": {
+              "$ref": "#/definitions/IPAddressAvailabilityResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -7229,6 +7272,47 @@
       ],
       "description": "IPConfiguration"
     },
+    "ResourceNavigationLinkFormat": {
+      "properties": {
+        "linkedResourceType": {
+          "type": "string",
+          "description": "Resource type of the linked resource"
+        },
+        "link": {
+          "type": "string",
+          "description": "Link to the external resource"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning state of the ResourceNavigationLink resource"
+        }
+      },
+      "description": "Properties of ResourceNavigationLink"
+    },
+    "ResourceNavigationLink": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ResourceNavigationLinkFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "ResourceNavigationLink resource"
+    },
     "SubnetPropertiesFormat": {
       "properties": {
         "addressPrefix": {
@@ -7250,6 +7334,13 @@
             "$ref": "#/definitions/IPConfiguration"
           },
           "description": "Gets array of references to the network interface IP configurations using subnet"
+        },
+        "resourceNavigationLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceNavigationLink"
+          },
+          "description": "Gets array of references to the external resources using subnet"
         },
         "provisioningState": {
           "type": "string",
@@ -7964,6 +8055,22 @@
         }
       },
       "description": "Response for CheckDnsNameAvailability Api servive call"
+    },
+    "IPAddressAvailabilityResult": {
+      "properties": {
+        "available": {
+          "type": "boolean",
+          "description": "Private IP address availability"
+        },
+        "availableIPAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Contains other available private IP addresses if the asked for address is taken"
+        }
+      },
+      "description": "Response for CheckIPAddressAvailability Api service call"
     },
     "ErrorDetails": {
       "properties": {
