@@ -427,7 +427,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/AuthorizationRules": {
-      "post": {
+      "get": {
         "tags": [
           "Namespaces"
         ],
@@ -982,7 +982,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/AuthorizationRules": {
-      "post": {
+      "get": {
         "tags": [
           "NotificationHubs"
         ],
@@ -1191,7 +1191,7 @@
           "200": {
             "description": "Gets all the NotificationHub PNS credentials",
             "schema": {
-              "$ref": "#/definitions/NotificationHubResource"
+              "$ref": "#/definitions/PnsCredentialsResource"
             }
           }
         }
@@ -1306,8 +1306,7 @@
         }
       },
       "required": [
-        "location",
-        "properties"
+        "location"
       ],
       "allOf": [
         {
@@ -1444,7 +1443,7 @@
     },
     "PolicykeyResource": {
       "properties": {
-        "Policykey": {
+        "policyKey": {
           "type": "string",
           "description": "Name of the key that has to be regenerated for the Namespace/Notification Hub Authorization Rule. The value can be Primary Key/Secondary Key."
         }
@@ -1690,6 +1689,50 @@
         }
       ],
       "description": "Description of a NotificationHub Resource."
+    },
+    "PnsCredentialsResource": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PnsCredentialsProperties",
+          "description": "NotificationHub PNS Credentials."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Description of a NotificationHub PNS Credentials."
+    },
+    "PnsCredentialsProperties": {
+      "properties": {
+        "apnsCredential": {
+          "$ref": "#/definitions/ApnsCredential",
+          "description": "The ApnsCredential of the created NotificationHub"
+        },
+        "wnsCredential": {
+          "$ref": "#/definitions/WnsCredential",
+          "description": "The WnsCredential of the created NotificationHub"
+        },
+        "gcmCredential": {
+          "$ref": "#/definitions/GcmCredential",
+          "description": "The GcmCredential of the created NotificationHub"
+        },
+        "mpnsCredential": {
+          "$ref": "#/definitions/MpnsCredential",
+          "description": "The MpnsCredential of the created NotificationHub"
+        },
+        "admCredential": {
+          "$ref": "#/definitions/AdmCredential",
+          "description": "The AdmCredential of the created NotificationHub"
+        },
+        "baiduCredential": {
+          "$ref": "#/definitions/BaiduCredential",
+          "description": "The BaiduCredential of the created NotificationHub"
+        }
+      },
+      "description": "Description of a NotificationHub PNS Credentials."
     },
     "NotificationHubListResult": {
       "properties": {
