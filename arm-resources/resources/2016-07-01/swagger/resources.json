@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ResourceManagementClient",
-    "version": "2016-02-01"
+    "version": "2016-07-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1003,7 +1003,8 @@
             "name": "api-version",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Api version to use."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1067,7 +1068,8 @@
             "name": "api-version",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Api version to use."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1134,7 +1136,8 @@
             "name": "api-version",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Api version to use."
           },
           {
             "name": "parameters",
@@ -1213,7 +1216,8 @@
             "name": "api-version",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Api version to use."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1642,7 +1646,8 @@
           "type": "object",
           "description": "The template content."
         }
-      }
+      },
+      "description": "The deployment export result. "
     },
     "ResourceManagementErrorWithDetails": {
       "properties": {
@@ -1684,7 +1689,8 @@
           },
           "description": "The api versions."
         }
-      }
+      },
+      "description": "The type of the paths for alias. "
     },
     "AliasType": {
       "properties": {
@@ -1699,7 +1705,24 @@
           },
           "description": "The paths for an alias."
         }
-      }
+      },
+      "description": "The alias type. "
+    },
+    "ZoneMappingType": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of this zone mapping."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The zones in this zone mapping."
+        }
+      },
+      "description": "Zone mapping type. "
     },
     "ProviderResourceType": {
       "properties": {
@@ -1728,10 +1751,18 @@
           },
           "description": "The api version."
         },
+        "zoneMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZoneMappingType"
+          },
+          "description": "The zone mappings supported by this resource type."
+        },
         "properties": {
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "description": "The additional properties. "
           },
           "description": "The properties."
         }
@@ -2087,7 +2118,8 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "description": "The additional properties. "
           },
           "description": "The tags attached to the resource group."
         }
