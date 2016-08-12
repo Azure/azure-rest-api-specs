@@ -1172,18 +1172,6 @@
       ],
       "description": "Allows you to take control over the process of converting text into indexable/searchable tokens. It's a user-defined configuration consisting of a single predefined tokenizer and one or more filters. The tokenizer is responsible for breaking text into tokens, and the filters for modifying tokens emitted by the tokenizer."
     },
-    "KeywordAnalyzer": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.KeywordAnalyzer",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Analyzer"
-        }
-      ],
-      "description": "Treats the entire content of a field as a single token. This is useful for data like zip codes, ids, and some product names. This analyzer is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/KeywordAnalyzer.html"
-      }
-    },
     "PatternAnalyzer": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.PatternAnalyzer",
       "allOf": [
@@ -1220,18 +1208,6 @@
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/PatternAnalyzer.html"
       }
     },
-    "SimpleAnalyzer": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.SimpleAnalyzer",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Analyzer"
-        }
-      ],
-      "description": "Divides text at non-letters and converts them to lower case. This analyzer is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/SimpleAnalyzer.html"
-      }
-    },
     "StandardAnalyzer": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StandardAnalyzer",
       "allOf": [
@@ -1259,18 +1235,6 @@
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/StandardAnalyzer.html"
       }
     },
-    "StandardAsciiFoldingAnalyzer": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.StandardAsciiFoldingAnalyzer",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Analyzer"
-        }
-      ],
-      "description": "Standard analyzer with ASCII folding filter. This analyzer is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "https://msdn.microsoft.com/en-us/library/azure/mt605304.aspx#Analyzers"
-      }
-    },
     "StopAnalyzer": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StopAnalyzer",
       "allOf": [
@@ -1290,18 +1254,6 @@
       "description": "Divides text at non-letters; Applies the lowercase and stopword token filters. This analyzer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/StopAnalyzer.html"
-      }
-    },
-    "WhitespaceAnalyzer": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.WhitespaceAnalyzer",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Analyzer"
-        }
-      ],
-      "description": "An analyzer that uses the whitespace tokenizer. This analyzer is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/WhitespaceAnalyzer.html"
       }
     },
     "Tokenizer": {
@@ -1409,30 +1361,6 @@
       "description": "Emits the entire input as a single token. This tokenizer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/KeywordTokenizer.html"
-      }
-    },
-    "LetterTokenizer": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.LetterTokenizer",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Tokenizer"
-        }
-      ],
-      "description": "Divides text at non-letters. This tokenizer is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/LetterTokenizer.html"
-      }
-    },
-    "LowercaseTokenizer": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.LowercaseTokenizer",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Tokenizer"
-        }
-      ],
-      "description": "Divides text at non-letters and converts them to lower case. This tokenizer is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/LowerCaseTokenizer.html"
       }
     },
     "MicrosoftTokenizerLanguage": {
@@ -1744,18 +1672,6 @@
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/UAX29URLEmailTokenizer.html"
       }
     },
-    "WhitespaceTokenizer": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.WhitespaceTokenizer",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Tokenizer"
-        }
-      ],
-      "description": "Divides text at whitespace. This tokenizer is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/WhitespaceTokenizer.html"
-      }
-    },
     "TokenFilter": {
       "discriminator": "@odata.type",
       "properties": {
@@ -1772,30 +1688,6 @@
       "description": "Abstract base class for token filters.",
       "externalDocs": {
         "url": "https://msdn.microsoft.com/library/mt605304.aspx"
-      }
-    },
-    "ArabicNormalizationTokenFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.ArabicNormalizationTokenFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "description": "A token filter that applies the Arabic normalizer to normalize the orthography. This token filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ar/ArabicNormalizationFilter.html"
-      }
-    },
-    "ApostropheTokenFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.ApostropheTokenFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "description": "Strips all characters after an apostrophe (including the apostrophe itself). This token filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/tr/ApostropheFilter.html"
       }
     },
     "AsciiFoldingTokenFilter": {
@@ -1857,30 +1749,6 @@
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKBigramFilter.html"
       },
       "x-ms-external": true
-    },
-    "CjkWidthTokenFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.CjkWidthTokenFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "description": "Normalizes CJK width differences. Folds fullwidth ASCII variants into the equivalent basic Latin, and half-width Katakana variants into the equivalent Kana. This token filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKWidthFilter.html"
-      }
-    },
-    "ClassicTokenFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.ClassicTokenFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "description": "Removes \"'s\" from the end of words, and removes dots from acronyms. This token filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/ClassicFilter.html"
-      }
     },
     "CommonGramTokenFilter": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CommonGramTokenFilter",
@@ -2028,42 +1896,6 @@
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/util/ElisionFilter.html"
       }
     },
-    "GermanNormalizationTokenFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.GermanNormalizationTokenFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "description": "Normalizes German characters according to the heuristics of the German2 snowball algorithm. This token filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/de/GermanNormalizationFilter.html"
-      }
-    },
-    "HindiNormalizationTokenFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.HindiNormalizationTokenFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "description": "Normalizes text in Hindi to remove some differences in spelling variations. This token filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/hi/HindiNormalizationFilter.html"
-      }
-    },
-    "IndicNormalizationTokenFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.IndicNormalizationTokenFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "description": "Normalizes the Unicode representation of text in Indian languages. This token filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/in/IndicNormalizationFilter.html"
-      }
-    },
     "KeepTokenFilter": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.KeepTokenFilter",
       "allOf": [
@@ -2123,30 +1955,6 @@
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/KeywordMarkerFilter.html"
       }
     },
-    "KeywordRepeatTokenFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.KeywordRepeatTokenFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "description": "Emits each incoming token twice, once as keyword and once as non-keyword. This token filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/KeywordRepeatFilter.html"
-      }
-    },
-    "KStemTokenFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.KStemTokenFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "description": "A high-performance kstem filter for English. This token filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/en/KStemFilter.html"
-      }
-    },
     "LengthTokenFilter": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.LengthTokenFilter",
       "allOf": [
@@ -2196,18 +2004,6 @@
       "description": "Limits the number of tokens while indexing. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/LimitTokenCountFilter.html"
-      }
-    },
-    "LowercaseTokenFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.LowercaseTokenFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "description": "Normalizes token text to lower case. This token filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/LowerCaseFilter.html"
       }
     },
     "NGramTokenFilter": {
@@ -2286,21 +2082,9 @@
         "pattern",
         "replacement"
       ],
-      "description": "A token filter which applies a pattern to each token in the stream, replacing match occurrences with the specified replacement string. This token filter is implemented using Apache Lucene.",
+      "description": "A character filter that replaces characters in the input string. It uses a regular expression to identify character sequences to preserve and a replacement pattern to identify characters to replace. For example, given the input text \"aa bb aa bb\", pattern \"(aa)\\s+(bb)\", and replacement \"$1#$2\", the result would be \"aa#bb aa#bb\". This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/pattern/PatternReplaceFilter.html"
-      }
-    },
-    "PersianNormalizationTokenFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.PersianNormalizationTokenFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "description": "Applies normalization for Persian. This token filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/fa/PersianNormalizationFilter.html"
       }
     },
     "PhoneticEncoder": {
@@ -2347,54 +2131,6 @@
       "description": "Create tokens for phonetic matches. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "https://lucene.apache.org/core/4_10_3/analyzers-phonetic/org/apache/lucene/analysis/phonetic/package-tree.html"
-      }
-    },
-    "PorterStemTokenFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.PorterStemTokenFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "description": "Uses the Porter stemming algorithm to transform the token stream. This token filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://tartarus.org/~martin/PorterStemmer/"
-      }
-    },
-    "ReverseTokenFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.ReverseTokenFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "description": "Reverses the token string. This token filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/reverse/ReverseStringFilter.html"
-      }
-    },
-    "ScandinavianNormalizationTokenFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.ScandinavianNormalizationTokenFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "description": "Normalizes use of the interchangeable Scandinavian characters. This token filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ScandinavianNormalizationFilter.html"
-      }
-    },
-    "ScandinavianFoldingNormalizationTokenFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.ScandinavianFoldingNormalizationTokenFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "description": "Folds Scandinavian characters åÅäæÄÆ->a and öÖøØ->o. It also discriminates against use of double vowels aa, ae, ao, oe and oo, leaving just the first one. This token filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ScandinavianFoldingFilter.html"
       }
     },
     "ShingleTokenFilter": {
@@ -2496,18 +2232,6 @@
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/snowball/SnowballFilter.html"
       }
     },
-    "SoraniNormalizationTokenFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.SoraniNormalizationTokenFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "description": "Normalizes the Unicode representation of Sorani text. This token filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ckb/SoraniNormalizationFilter.html"
-      }
-    },
     "StemmerTokenFilterLanguage": {
       "type": "string",
       "enum": [
@@ -2545,7 +2269,7 @@
         "indonesian",
         "irish",
         "italian",
-        "lightItalian",
+        "light_italian",
         "sorani", 
         "latvian", 
         "norwegian",
@@ -2671,12 +2395,12 @@
           "items": {
             "type": "string"
           },
-          "description": "The list of stopwords. This property and the stopwords_list property cannot both be set."
+          "description": "The list of stopwords. This property and the stopwords list property cannot both be set."
         },
-        "stopwords_list": {
-          "type": "string",
+        "stopwordsList": {
+          "$ref": "#/definitions/StopwordsList",
           "default": "english",
-          "description": "A predefined list of stopwords to use. This property and the stopwords property cannot both be set. Default is \"_english_\"."
+          "description": "A predefined list of stopwords to use. This property and the stopwords property cannot both be set. Default is English."
         },
         "ignoreCase": {
           "type": "boolean",
@@ -2729,18 +2453,6 @@
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/synonym/SynonymFilter.html"
       }
     },
-    "TrimTokenFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.TrimTokenFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "description": "Trims leading and trailing whitespace from tokens. This token filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/TrimFilter.html"
-      }
-    },
     "TruncateTokenFilter": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.TruncateTokenFilter",
       "allOf": [
@@ -2778,18 +2490,6 @@
       "description": "Filters out tokens with same text as the previous token. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/RemoveDuplicatesTokenFilter.html"
-      }
-    },
-    "UppercaseTokenFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.UppercaseTokenFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "description": "Normalizes token text to upper case. This token filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/UpperCaseFilter.html"
       }
     },
     "WordDelimiterTokenFilter": {
@@ -2874,18 +2574,6 @@
       "description": "Abstract base class for character filters.",
       "externalDocs": {
         "url": "https://msdn.microsoft.com/library/mt605304.aspx"
-      }
-    },
-    "HtmlStripCharFilter": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.HtmlStripCharFilter",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CharFilter"
-        }
-      ],
-      "description": "A character filter that attempts to strip out HTML constructs. This character filter is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/charfilter/HTMLStripCharFilter.html"
       }
     },
     "MappingCharFilter": {
