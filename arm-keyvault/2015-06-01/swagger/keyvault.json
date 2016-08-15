@@ -257,7 +257,8 @@
       },
       "description": "SKU details",
       "required": [
-        "name"
+        "name",
+        "family"
       ]
     },
     "AccessPolicyEntry": {
@@ -270,7 +271,7 @@
         "objectId": {
           "type": "string",
           "format": "uuid",
-          "description": "The object ID of a user or service principal in the Azure Active Directory tenant for the vault. "
+          "description": "The object ID of a user or service principal in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies."
         },
         "applicationId": {
           "type": "string",
@@ -282,21 +283,36 @@
           "description": "Permissions the identity has for keys and secrets"
         }
       },
-      "description": "An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID."
+      "description": "An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID.",
+      "required": [
+        "tenantId",
+        "objectId",
+        "permissions"
+      ]
     },
     "Permissions": {
       "properties": {
         "keys": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [ "all", "encrypt", "decrypt", "wrapkey", "unwrapkey", "sign", "verify", "get", "list", "create", "update", "import", "delete", "backup", "restore" ],
+            "x-ms-enum": {
+              "name": "KeyPermissions",
+              "modelAsString": true
+            }
           },
           "description": "Permissions to keys"
         },
         "secrets": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [ "all", "get", "list", "set", "delete" ],
+            "x-ms-enum": {
+              "name": "SecretPermissions",
+              "modelAsString": true
+            }
           },
           "description": "Permissions to secrets"
         }
