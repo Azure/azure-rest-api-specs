@@ -1230,7 +1230,7 @@
         "tags": [
           "Topics"
         ],
-        "operationId": "Topics_GetTopic",
+        "operationId": "Topics_Get",
         "description": "Returns the description for the specified topic",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639399.aspx"
@@ -1415,18 +1415,18 @@
             "description": "The namespace name"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization rule name."
-          },
-          {
             "name": "topicName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The topic name."
+          },
+          {
+            "name": "authorizationRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Authorization rule name."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2220,7 +2220,7 @@
           "format": "duration",
           "description": "the duration of a peek lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute."
         },
-		    "accessedAt": {
+		"accessedAt": {
           "type": "string",
           "format": "date-time",
           "description": "Last time a message was sent, or the last time there was a receive request to this queue."
