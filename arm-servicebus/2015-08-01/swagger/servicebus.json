@@ -2220,7 +2220,7 @@
           "format": "duration",
           "description": "the duration of a peek lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute."
         },
-		"accessedAt": {
+        "accessedAt": {
           "type": "string",
           "format": "date-time",
           "description": "Last time a message was sent, or the last time there was a receive request to this queue."
@@ -2275,11 +2275,11 @@
         "enablePartitioning": {
           "type": "boolean",
           "description": "value that indicates whether the queue to be partitioned across multiple message brokers is enabled."
-        },        
+        },
         "isAnonymousAccessible": {
           "type": "boolean",
           "description": "a value that indicates whether the message is anonymous accessible."
-        },        
+        },
         "maxDeliveryCount ": {
           "format": "int32",
           "type": "integer",
@@ -2297,7 +2297,7 @@
         },
         "countDetails": {
           "$ref": "#/definitions/MessageCountDetails"
-        },        
+        },
         "requiresDuplicateDetection": {
           "type": "boolean",
           "description": "the value indicating if this queue requires duplicate detection."
@@ -2338,7 +2338,7 @@
           "type": "string",
           "format": "date-time",
           "description": "the exact time the message has been updated."
-        } 
+        }
       }
     },
     "MessageCountDetails": {
@@ -2454,14 +2454,14 @@
           "format": "date-time",
           "description": "Exact time the message was created."
         },
-		"countDetails": {
+        "countDetails": {
           "$ref": "#/definitions/MessageCountDetails"
         },
-		"defaultMessageTimeToLive": {
+        "defaultMessageTimeToLive": {
           "type": "string",
           "format": "duration",
           "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
-        },		
+        },
         "duplicateDetectionHistoryTimeWindow ": {
           "type": "string",
           "format": "duration",
@@ -2474,16 +2474,16 @@
         "enableExpress": {
           "type": "boolean",
           "description": "Value that indicates whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage."
-        },        
+        },
         "enablePartitioning": {
           "type": "boolean",
           "description": "Value that indicates whether the topic to be partitioned across multiple message brokers is enabled."
         },
-		"enableSubscriptionPartitioning": {
+        "enableSubscriptionPartitioning": {
           "type": "boolean",
           "description": "Value that indicates whether partitioning is enabled or disabled.."
         },
-		"filteringMessagesBeforePublishing": {
+        "filteringMessagesBeforePublishing": {
           "type": "boolean",
           "description": "Whether messages should be filtered before publishing."
         },
@@ -2491,10 +2491,10 @@
           "type": "boolean",
           "description": "Value that indicates whether the message is anonymous accessible."
         },
-		"isExpress":{
-		  "type": "boolean",
+        "isExpress": {
+          "type": "boolean",
           "description": ""
-		},
+        },
         "maxSizeInMegabytes": {
           "format": "int64",
           "type": "integer",
@@ -2541,7 +2541,7 @@
           "type": "string",
           "format": "date-time",
           "description": "The exact time the message has been updated."
-        }        
+        }
       }
     },
     "SubscriptionCreateOrUpdateParameters": {
@@ -2605,7 +2605,7 @@
           "type": "string",
           "format": "duration",
           "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
-        },        		
+        },
         "countDetails": {
           "$ref": "#/definitions/MessageCountDetails"
         },
@@ -2619,7 +2619,7 @@
           "format": "duration",
           "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
         },
-		"deadLetteringOnFilterEvaluationExceptions": {
+        "deadLetteringOnFilterEvaluationExceptions": {
           "type": "boolean",
           "description": "Value that indicates if a subscription has dead letter support on Filter evaluation exceptions."
         },
@@ -2631,7 +2631,7 @@
           "type": "boolean",
           "description": "Value that indicates whether server-side batched operations are enabled.."
         },
-		"entityAvailabilityStatus": {
+        "entityAvailabilityStatus": {
           "type": "string",
           "description": "Entity availability status for the topic.",
           "enum": [
