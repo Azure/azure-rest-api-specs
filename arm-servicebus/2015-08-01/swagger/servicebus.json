@@ -2209,19 +2209,8 @@
           "description": "the TimeSpan idle interval after which the queue is automatically deleted. The minimum duration is 5 minutes."
         },
         "entityAvailabilityStatus ": {
-          "type": "string",
-          "description": "entity availability status for the queue.",
-          "enum": [
-            "Available",
-            "Limited",
-            "Renaming",
-            "Restoring",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "name": "EntityAvailabilityStatus",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/EntityAvailabilityStatus",
+          "description": "Entity availability status for the queue."
         },
         "createdAt": {
           "type": "string",
@@ -2290,23 +2279,8 @@
           "description": "the size of the queue in bytes."
         },
         "status": {
-          "type": "string",
-          "description": "Enumerates the possible values for the status of a messaging entity.",
-          "enum": [
-            "Active",
-            "Creating",
-            "Deleting",
-            "Disabled",
-            "ReceiveDisabled",
-            "Renaming",
-            "Restoring",
-            "SendDisabled",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "name": "entityStatus",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/EntityStatus",
+          "description": "Enumerates the possible values for the status of a messaging entity."
         },
         "supportOrdering": {
           "type": "boolean",
@@ -2413,19 +2387,8 @@
           "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
         },
         "entityAvailabilityStatus ": {
-          "type": "string",
-          "description": "Entity availability status for the topic.",
-          "enum": [
-            "Available",
-            "Limited",
-            "Renaming",
-            "Restoring",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "name": "EntityAvailabilityStatus",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/EntityAvailabilityStatus",
+          "description": "Entity availability status for the topic."
         },
         "createdAt": {
           "type": "string",
@@ -2488,23 +2451,8 @@
           "description": "Size of the topic in bytes."
         },
         "status": {
-          "type": "string",
-          "description": "Enumerates the possible values for the status of a messaging entity.",
-          "enum": [
-            "Active",
-            "Creating",
-            "Deleting",
-            "Disabled",
-            "ReceiveDisabled",
-            "Renaming",
-            "Restoring",
-            "SendDisabled",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "name": "entityStatus",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/EntityStatus",
+          "description": "Enumerates the possible values for the status of a messaging entity."
         },
         "subscriptionCount": {
           "format": "int32",
@@ -2610,19 +2558,8 @@
           "description": "Value that indicates whether server-side batched operations are enabled.."
         },
         "entityAvailabilityStatus": {
-          "type": "string",
-          "description": "Entity availability status for the topic.",
-          "enum": [
-            "Available",
-            "Limited",
-            "Renaming",
-            "Restoring",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "name": "EntityAvailabilityStatus",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/EntityAvailabilityStatus",
+          "description": "Entity availability status for the topic."
         },
         "isReadOnly": {
           "type": "boolean",
@@ -2648,23 +2585,8 @@
           "description": "Value indicating if a subscription supports the concept of session."
         },
         "status": {
-          "type": "string",
-          "description": "Enumerates the possible values for the status of a messaging entity.",
-          "enum": [
-            "Active",
-            "Creating",
-            "Deleting",
-            "Disabled",
-            "ReceiveDisabled",
-            "Renaming",
-            "Restoring",
-            "SendDisabled",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "name": "entityStatus",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/EntityStatus",
+          "description": "Enumerates the possible values for the status of a messaging entity."
         },
         "updatedAt": {
           "type": "string",
@@ -2673,6 +2595,40 @@
         }
       },
       "description": "Description of Subscription Resource."
+    },
+    "EntityAvailabilityStatus": {
+      "type": "string",
+      "enum": [
+        "Available",
+        "Limited",
+        "Renaming",
+        "Restoring",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "EntityAvailabilityStatus",
+        "modelAsString": false
+      },
+      "description": "Entity availability status."
+    },
+    "EntityStatus": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Creating",
+        "Deleting",
+        "Disabled",
+        "ReceiveDisabled",
+        "Renaming",
+        "Restoring",
+        "SendDisabled",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "EntityStatus",
+        "modelAsString": false
+      },
+      "description": "Entity status."
     }
   },
   "parameters": {
