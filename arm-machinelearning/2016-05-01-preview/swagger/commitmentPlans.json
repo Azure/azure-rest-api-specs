@@ -1,0 +1,903 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "v1",
+        "title": "Azure ML Commitment Plans Management Client",
+        "description": "These APIs allow end users to operate on Azure Machine Learning Commitment Plans resources and their child Commitment Association resources. They support the following operations:<ul><li>Create or update a commitment plan</li><li>Get a commitment plan</li><li>Patch a commitment plan</li><li>Delete a commitment plan</li><li>Get all commitment plans in a resource group</li><li>Get all commitment plans in a subscription</li><li>Get a commitment association</li><li>Get all commitment associations for a commitment plan</li><li>Move a commitment association from one commitment plan to another</li><li>Get usage history for a commitment plan</li></ul>",
+        "version": "2016-05-01-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json",
+        "text/json"
+    ],
+    "produces": [
+        "application/json",
+        "text/json"
+    ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{planName}/commitmentAssociations/{associationName}": {
+            "get": {
+                "tags": [
+                    "CommitmentAssociation"
+                ],
+                "operationId": "CommitmentAssociation_GetCommitmentAssociation",
+                "description": "Gets a commitment association.",
+                "parameters": [
+                    {
+                      "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group the resource is under.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "planName",
+                        "description": "The name of the commitment association's parent commitment plan.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "associationName",
+                        "description": "The name of the commitment association resource.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CommitmentAssociation"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{planName}/commitmentAssociations": {
+            "get": {
+                "tags": [
+                    "CommitmentAssociation"
+                ],
+                "operationId": "CommitmentAssociation_GetCommitmentAssociations",
+                "description": "Get all commitment associations for a parent commitment plan.",
+                "parameters": [
+                    {
+                      "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group the resources are under.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "planName",
+                        "description": "The name of the parent commitment plan.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$skipToken",
+                        "description": "Continuation token for pagination.",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PaginatedResult[CommitmentAssociation]"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{planName}/commitmentAssociations/{associationName}/move": {
+            "put": {
+                "tags": [
+                    "CommitmentAssociation"
+                ],
+                "operationId": "CommitmentAssociation_MoveCommitmentAssociationPut",
+                "description": "Re-parents a commitment association from one commitment plan to another.",
+                "parameters": [
+                    {
+                      "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group the resource is under.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "planName",
+                        "description": "The name of the source parent commitment plan.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "associationName",
+                        "description": "The name of the commitment association to move.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "moveRequest",
+                        "description": "Specifies the destination commitment plan.",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MoveCommitmentAssociationRequest"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CommitmentAssociation"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "CommitmentAssociation"
+                ],
+                "operationId": "CommitmentAssociation_MoveCommitmentAssociationPost",
+                "description": "Re-parents a commitment association from one commitment plan to another.",
+                "parameters": [
+                    {
+                      "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group the resource is under.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "planName",
+                        "description": "The name of the source parent commitment plan.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "associationName",
+                        "description": "The name of the commitment association to move.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "moveRequest",
+                        "description": "Specifies the destination commitment plan.",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MoveCommitmentAssociationRequest"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CommitmentAssociation"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{planName}": {
+            "get": {
+                "tags": [
+                    "CommitmentPlan"
+                ],
+                "operationId": "CommitmentPlan_GetCommitmentPlan",
+                "description": "Gets a commitment plan.",
+                "parameters": [
+                    {
+                      "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group the resource is under.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "planName",
+                        "description": "The name of the commitment plan resource.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CommitmentPlan"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "CommitmentPlan"
+                ],
+                "operationId": "CommitmentPlan_PutCommitmentPlan",
+                "description": "Creates or updates a commitment plan resource.",
+                "parameters": [
+                    {
+                      "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group the resource is under.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "planName",
+                        "description": "The name of the commitment plan resource.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "commitmentPlan",
+                        "description": "The commitment plan resource.",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CommitmentPlan"
+                        }
+                    },
+                    {
+                      "$ref": "#/parameters/APIVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CommitmentPlan"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "CommitmentPlan"
+                ],
+                "operationId": "CommitmentPlan_PostCommitmentPlan",
+                "description": "Creates or updates a commitment plan resource.",
+                "parameters": [
+                    {
+                      "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group the resource is under.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "planName",
+                        "description": "The name of the commitment plan resource.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "commitmentPlan",
+                        "description": "The commitment plan resource.",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CommitmentPlan"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CommitmentPlan"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "CommitmentPlan"
+                ],
+                "operationId": "CommitmentPlan_DeleteCommitmentPlan",
+                "description": "Deletes a commitment plan resource.",
+                "parameters": [
+                    {
+                      "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group the resource is under.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "planName",
+                        "description": "The name of the commitment plan resource.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "CommitmentPlan"
+                ],
+                "operationId": "CommitmentPlan_PatchCommitmentPlan",
+                "description": "Creates or updates a commitment plan resource.",
+                "parameters": [
+                    {
+                      "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group the resource is under.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "planName",
+                        "description": "The name of the commitment plan resource.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "commitmentPlan",
+                        "description": "The commitment plan resource.",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CommitmentPlan"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CommitmentPlan"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearning/commitmentPlans": {
+            "get": {
+                "tags": [
+                    "CommitmentPlan"
+                ],
+                "operationId": "CommitmentPlan_GetCommitmentPlansForSubscription",
+                "description": "Gets all commitment plan resources in a subscription.",
+                "parameters": [
+                    {
+                      "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "$skipToken",
+                        "description": "Continuation token for pagination.",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PaginatedResult[CommitmentPlan]"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans": {
+            "get": {
+                "tags": [
+                    "CommitmentPlan"
+                ],
+                "operationId": "CommitmentPlan_GetCommitmentPlansForSubscriptionAndResourceGroup",
+                "description": "Gets all commitment plan resources for a subscription and resource group.",
+                "parameters": [
+                    {
+                      "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group the resources are under.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$skipToken",
+                        "description": "Continuation token for pagination.",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PaginatedResult[CommitmentPlan]"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{planName}/usageHistory": {
+            "get": {
+                "tags": [
+                    "CommitmentPlan"
+                ],
+                "operationId": "CommitmentPlan_GetCommitmentPlanUsageHistory",
+                "description": "Retrieves the usage history for a commitment plan.",
+                "parameters": [
+                    {
+                      "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "description": "The resource group name the resource is under.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "planName",
+                        "description": "The name of the commitment plan resource.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$skipToken",
+                        "description": "Continuation token for pagination.",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PaginatedResult[PlanUsageHistory]"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "description": "Azure Subscription ID.",
+            "in": "path",
+            "type": "string",
+            "required": true
+        },
+        "APIVersionParameter": {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "The versiong of the Microsoft.MachineLearning resource provider API to be used.",
+            "required": true
+        }
+   },
+   "definitions": {
+        "Resource": {
+            "x-ms-azure-resource": true,
+            "required": [
+                "location"
+            ],
+            "properties": {
+                "id": {
+                    "description": "Resource Id",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "name": {
+                    "description": "Resource Name",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "Resource Location",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Resource type",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "tags": {
+                    "description": "Resource tags",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "CommitmentAssociation": {
+            "type": "object",
+            "description": "Represents the association between a commitment plan and some other resource, such as a Machine Learning web service.",
+            "properties": {
+                "etag": {
+                    "type": "string",
+                    "description": "An entity tag used to enforce optimistic concurrency."
+                },
+                "id": {
+                    "type": "string",
+                    "description": "The commitment association ARM resource ID."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "The resource location."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The resource name.",
+                    "readOnly": true
+                },
+                "properties": {
+                    "$ref": "#/definitions/CommitmentAssociationProperties"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of the resource: Microsoft.MachineLearning/commitmentPlans/commitmentAssociations",
+                    "readOnly": true
+                }
+            }
+        },
+        "CommitmentAssociationProperties": {
+            "type": "object",
+            "description": "Properties of a commitment association resource.",
+            "properties": {
+                "associatedResourceId": {
+                    "type": "string",
+                    "description": "The ID of the resource this association points to, such as the ARM ID of a Machine Learning web service."
+                },
+                "commitmentPlanId": {
+                    "type": "string",
+                    "description": "The ARM ID of the parent commitment plan resource."
+                },
+                "creationDate": {
+                    "format": "date-time",
+                    "type": "string",
+                    "description": "The date at which this commitment association was created."
+                }
+            }
+        },
+        "ResourceSku": {
+            "type": "object",
+            "description": "The SKU of a resource.",
+            "properties": {
+                "capacity": {
+                    "format": "int32",
+                    "type": "integer",
+                    "description": "The scale-out capacity of the resource. 1 is 1x, 2 is 2x, etc. This impacts the quantities and cost of any commitment plan resource."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The SKU name. Along with tier, uniquely identifies the SKU."
+                },
+                "tier": {
+                    "type": "string",
+                    "description": "The SKU tier. Along with name, uniquely identifies the SKU."
+                }
+            }
+        },
+        "PaginatedResult[CommitmentAssociation]": {
+            "type": "object",
+            "description": "A paginated set of commitment association resources.",
+            "properties": {
+                "nextLink": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "A URI to retrieve the next page of results."
+                },
+                "value": {
+                    "type": "array",
+                    "description": "The set of results for this page.",
+                    "items": {
+                        "$ref": "#/definitions/CommitmentAssociation"
+                    },
+                    "readOnly": true
+                }
+            }
+        },
+        "MoveCommitmentAssociationRequest": {
+            "type": "object",
+            "description": "Specifies the destination commitment plan for a move operation.",
+            "properties": {
+                "destinationPlanId": {
+                    "type": "string",
+                    "description": "The ARM ID of the commitment plan to re-parent the commitment association to."
+                }
+            }
+        },
+        "CommitmentPlan": {
+            "type": "object",
+            "description": "A commitment plan resource.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "etag": {
+                    "type": "string",
+                    "description": "An entity tag used to enforce optimistic concurrency."
+                },
+                "properties": {
+                    "$ref": "#/definitions/CommitmentPlanProperties"
+                },
+                "sku": {
+                    "$ref": "#/definitions/ResourceSku"
+                }
+            }
+        },
+        "CommitmentPlanProperties": {
+            "type": "object",
+            "description": "Properties of a commitment plan resource.",
+            "properties": {
+                "chargeForOverage": {
+                    "type": "boolean",
+                    "description": "Indicates whether usage beyond the commitment plan's included quantities will be charged."
+                },
+                "chargeForPlan": {
+                    "type": "boolean",
+                    "description": "Indicates whether the commitment plan will incur a daily charge."
+                },
+                "creationDate": {
+                    "format": "date-time",
+                    "description": "The date at which this commitment plan was created.",
+                    "type": "string"
+                },
+                "includedQuantities": {
+                    "type": "object",
+                    "description": "The included resource quantities this plan gives you.",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/PlanQuantity"
+                    },
+                    "readOnly": true
+                },
+                "maxAssociationLimit": {
+                    "format": "int32",
+                    "type": "integer",
+                    "description": "The maximum number of commitment associations that can be children of this commitment plan."
+                },
+                "maxCapacityLimit": {
+                    "format": "int32",
+                    "type": "integer",
+                    "description": "The maximum scale-out capacity for this commitment plan."
+                },
+                "minCapacityLimit": {
+                    "format": "int32",
+                    "type": "integer",
+                    "description": "The minimum scale-out capacity for this commitment plan."
+                },
+                "planMeter": {
+                    "type": "string",
+                    "description": "The Azure meter which will be used to charge for this commitment plan on a daily basis."
+                },
+                "refillFrequencyInDays": {
+                    "format": "int32",
+                    "type": "integer",
+                    "description": "The frequency at which this commitment plan's included quantities are refilled."
+                },
+                "suspendPlanOnOverage": {
+                    "type": "boolean",
+                    "description": "Indicates whether this commitment plan will be moved into a suspended state if usage beyond the commitment plan's included quantities is incurred."
+                }
+            }
+        },
+        "PlanQuantity": {
+            "type": "object",
+            "description": "Represents an Azure resource and the quantity of that resource a commitment plan provides.",
+            "properties": {
+                "allowance": {
+                    "format": "double",
+                    "type": "number",
+                    "description": "The quantity of the resource which is added to the commitment plan at an interval specified by its allowance frequency."
+                },
+                "amount": {
+                    "format": "double",
+                    "type": "number",
+                    "description": "The quantity of the resource available to the plan the last time usage was calculated."
+                },
+                "includedQuantityMeter": {
+                    "type": "string",
+                    "description": "The Azure meter used for usage against included quantities."
+                },
+                "overageMeter": {
+                    "type": "string",
+                    "description": "The Azure meter used for usage that exceeds included quantities."
+                }
+            }
+        },
+        "PaginatedResult[CommitmentPlan]": {
+            "type": "object",
+            "description": "A page of commitment plan resources.",
+            "properties": {
+                "nextLink": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "A URI to retrieve the next page of results."
+                },
+                "value": {
+                    "type": "array",
+                    "description": "The set of results for this page.",
+                    "items": {
+                        "$ref": "#/definitions/CommitmentPlan"
+                    },
+                    "readOnly": true
+                }
+            }
+        },
+        "PaginatedResult[PlanUsageHistory]": {
+            "type": "object",
+            "properties": {
+                "nextLink": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "A URI to retrieve the next page of results."
+                },
+                "value": {
+                    "type": "array",
+                    "description": "The set of results for this page.",
+                    "items": {
+                        "$ref": "#/definitions/PlanUsageHistory"
+                    },
+                    "readOnly": true
+                }
+            }
+        },
+        "PlanUsageHistory": {
+            "type": "object",
+            "description": "Represents historical information about usage of the Azure resources associated with a commitment plan.",
+            "properties": {
+                "planDeletionOverage": {
+                    "type": "object",
+                    "description": "Overage incurred as a result of deleting a commitment plan.",
+                    "additionalProperties": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "readOnly": true
+                },
+                "planMigrationOverage": {
+                    "type": "object",
+                    "description": "Overage incurred as a result of migrating a commitment plan from one SKU to another.",
+                    "additionalProperties": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "readOnly": true
+                },
+                "planQuantitiesAfterUsage": {
+                    "type": "object",
+                    "description": "Included quantities remaining after usage against the commitment plan's associated resources was calculated.",
+                    "additionalProperties": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "readOnly": true
+                },
+                "planQuantitiesBeforeUsage": {
+                    "type": "object",
+                    "description": "Included quantities remaining before usage against the commitment plan's associated resources was calculated.",
+                    "additionalProperties": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "readOnly": true
+                },
+                "planUsageOverage": {
+                    "type": "object",
+                    "description": "Usage against the commitment plan's associated resources which was not covered by included quantities and is therefore overage.",
+                    "additionalProperties": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "readOnly": true
+                },
+                "usage": {
+                    "type": "object",
+                    "description": "Usage against the commitment plan's associated resources.",
+                    "additionalProperties": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "readOnly": true
+                },
+                "usageDate": {
+                    "format": "date-time",
+                    "type": "string",
+                    "description": "The date of usage.",
+                    "readOnly": true
+                }
+            }
+        }
+    }
+}
