@@ -142,7 +142,7 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_CreateOrUpdate",
-        "description": "Creates/Updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
+        "description": "Creates Updates namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx"
         },
@@ -575,7 +575,7 @@
           }
         }
       }
-    },    
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs": {
       "get": {
         "tags": [
@@ -621,7 +621,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}": {
       "put": {
         "tags": [
           "EventHubs"
@@ -676,7 +676,7 @@
               "$ref": "#/definitions/EventHubResource"
             }
           }
-        },
+        }
       },
       "delete": {
         "tags": [
@@ -721,7 +721,7 @@
             "description": "EventHub deleted."
           }
         },
-		"x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true
       },
       "get": {
         "tags": [
@@ -1287,7 +1287,7 @@
     }
   },
   "definitions": {
-	"Resource": {
+    "Resource": {
       "properties": {
         "id": {
           "readOnly": true,
@@ -1587,7 +1587,7 @@
       },
       "description": "Parameters supplied to the Regenerate Auth Rule."
     },
-	"EventHubCreateOrUpdateParameters": {
+    "EventHubCreateOrUpdateParameters": {
       "properties": {
         "location": {
           "type": "string",
@@ -1602,8 +1602,7 @@
           "description": "Name of the Event Hub."
         },
         "properties": {
-          "$ref": "#/definitions/EventHubProperties",
-		  "$ref": "#/definitions/TopicProperties"          
+          "$ref": "#/definitions/EventHubProperties"
         }
       },
       "required": [
@@ -1612,7 +1611,7 @@
       "description": "Parameters supplied to the CreateOrUpdate EventHub operation."
     },
     "EventHubProperties": {
-      "properties": {        
+      "properties": {
         "createdAt": {
           "type": "string",
           "format": "date-time",
@@ -1622,17 +1621,17 @@
           "format": "int64",
           "type": "integer",
           "description": "Number of days to retain the events for this Event Hub."
-        },        
+        },
         "partitionCount": {
           "format": "int64",
           "type": "integer",
           "description": "Number of partitions created for EventHub."
         },
-		"partitionIds": {          
+        "partitionIds": {
           "type": "array",
-		  "items": {
-		  "type": "integer"
-		  },
+          "items": {
+            "type": "integer"
+          },
           "description": "Current number of shards on the Event Hub."
         },
         "status": {
@@ -1640,14 +1639,14 @@
           "description": "Enumerates the possible values for the status of the EventHub.",
           "enum": [
             "Active",
-			"Disabled",
-			"Restoring",
-			"SendDisabled",
-			"ReceiveDisabled",
-			"Creating",
-			"Deleting",
-			"Renaming",
-			"Unknown"
+            "Disabled",
+            "Restoring",
+            "SendDisabled",
+            "ReceiveDisabled",
+            "Creating",
+            "Deleting",
+            "Renaming",
+            "Unknown"
           ],
           "x-ms-enum": {
             "name": "EntityStatus",
@@ -1661,7 +1660,7 @@
         }
       }
     },
-	 "EventHubResource": {
+    "EventHubResource": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1690,7 +1689,7 @@
         }
       },
       "description": "The response of the List EventHub operation."
-    },    
+    },
     "ConsumerGroupCreateOrUpdateParameters": {
       "properties": {
         "location": {
@@ -1706,7 +1705,7 @@
           "description": "Name of the consumer group."
         },
         "properties": {
-		  "x-ms-client-flatten": true,
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ConsumerGroupProperties"
         }
       },
@@ -1770,7 +1769,7 @@
         }
       },
       "description": "The response of the List Consumer Group operation."
-    }    
+    }
   },
   "parameters": {
     "SubscriptionIdParameter": {
