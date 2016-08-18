@@ -43,9 +43,6 @@
         ],
         "operationId": "Namespaces_ListBySubscription",
         "description": "Lists all the available namespaces within the subscription irrespective of the resourceGroups.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
-        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -67,47 +64,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces": {
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_ListBySubscription",
-        "description": "Lists all the available namespaces within the subscription irrespective of the resourceGroups.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespaces returned successfully",
-            "schema": {
-              "$ref": "#/definitions/NamespaceListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces": {
       "get": {
         "tags": [
           "Namespaces"
         ],
         "operationId": "Namespaces_ListByResourceGroup",
         "description": "Lists the available namespaces within a resourceGroup.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
-        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -136,7 +99,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}": {
       "put": {
         "tags": [
           "Namespaces"
@@ -199,9 +162,6 @@
         ],
         "operationId": "Namespaces_Delete",
         "description": "Deletes an existing namespace. This operation also removes all associated resources under the namespace.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx"
-        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -240,9 +200,6 @@
         ],
         "operationId": "Namespaces_Get",
         "description": "Returns the description for the specified namespace.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx"
-        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -275,16 +232,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules": {
       "get": {
         "tags": [
           "Namespaces"
         ],
         "operationId": "Namespaces_ListAuthorizationRules",
         "description": "Authorization rules for a namespace.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
-        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -320,16 +274,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}": {
       "put": {
         "tags": [
           "Namespaces"
         ],
         "operationId": "Namespaces_CreateOrUpdateAuthorizationRule",
         "description": "Creates an authorization rule for a namespace",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639410.aspx"
-        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -383,9 +334,6 @@
         ],
         "operationId": "Namespaces_DeleteAuthorizationRule",
         "description": "Deletes a namespace authorization rule",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639417.aspx"
-        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -427,9 +375,6 @@
         ],
         "operationId": "Namespaces_GetAuthorizationRule",
         "description": "Authorization rule for a namespace by name.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx"
-        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -469,16 +414,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/listKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/listKeys": {
       "post": {
         "tags": [
           "Namespaces"
         ],
         "operationId": "Namespaces_ListKeys",
         "description": "Primary and Secondary ConnectionStrings to the namespace ",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639398.aspx"
-        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -518,16 +460,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/regenerateKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/regenerateKeys": {
       "post": {
         "tags": [
           "Namespaces"
         ],
         "operationId": "Namespaces_RegenerateKeys",
         "description": "Regenerats the Primary or Secondary ConnectionStrings to the namespace ",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt718977.aspx"
-        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -771,6 +710,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/authorizationRules": {
+      "get": {
+        "tags": [
+          "Eventhubs"
+        ],
+        "operationId": "EventHub_ListAuthorizationRules",
+        "description": "Authorization rules for a EventHub.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The NameSpace name"
+          },
+          {
+            "name": "eventHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The EventHub name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "EventHub AuthorizationRule returned successfully",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/authorizationRules/{authorizationRuleName}": {
       "put": {
         "tags": [
@@ -918,7 +906,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The topic name."
+            "description": "The Eventhub name."
           },
           {
             "name": "authorizationRuleName",
@@ -1034,7 +1022,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The connection string of the topic for the specified authorizationRule."
+            "description": "The connection string of the EventHub for the specified authorizationRule."
           },
           {
             "name": "parameters",
@@ -1568,7 +1556,7 @@
           "description": "A string that describes the authorization rule"
         }
       },
-      "description": "Namespace/ServiceBus Connection String"
+      "description": "Namespace/EventHub Connection String"
     },
     "RegenerateKeysParameters": {
       "properties": {
@@ -1724,10 +1712,6 @@
         "EventHubPath": {
           "type": "string",
           "description": "The path of the event hub."
-        },
-        "Name": {
-          "type": "string",
-          "description": "The name of the consumer group description."
         },
         "UpdatedAt": {
           "type": "string",
