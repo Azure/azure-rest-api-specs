@@ -27,13 +27,13 @@
     - If the nextLinkName property of the "x-ms-pageable" extension is defined with a value, then the Model definition should also have a property named with the same value for nextLink.
     - If a swagger spec has a fully pageable operation and a single page pageable operation then the generated code in C# will generate Page1.cs and Page.cs. They will differ on nextLink. To avoid this it is best advised that all the operations are defined as fully pageable in the spec.
  - Define Default
-	Define "Default" if the error response has more properties than code and message
+    -  Define "Default" if the error response has more properties than code and message
  - API Version match
-	Make sure version in Swagger Spec matches Api-version folder in path
+   - Make sure version in Swagger Spec matches Api-version folder in path
  - Swagger folder
-	Make sure Swagger folder is present in path
+   - Make sure Swagger folder is present in path
  - Inherit from Resource
-    All resource like models should inherit from Resource
+   - All resource like models should inherit from Resource
  - CreateUpdate/Create
    - It is a good practice to explain the behavior difference between CreateOrUpdate and Update in Description
  - Specify units in Description
