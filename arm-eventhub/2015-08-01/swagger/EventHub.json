@@ -182,6 +182,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "Namespace is already Deleted"
+          },
           "200": {
             "description": "Namespace delete successful"
           },
@@ -361,6 +364,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "Namespace Authorization rule is already Deleted"
+          },
           "200": {
             "description": "Namespace Authorization rule deleted"
           }
@@ -653,8 +659,14 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "EventHub is already Deleted"
+          },
           "200": {
             "description": "EventHub deleted."
+          },
+          "202": {
+            "description": "EventHub delete request has been accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -712,7 +724,7 @@
         "tags": [
           "Eventhubs"
         ],
-        "operationId": "EventHub_ListAuthorizationRules",
+        "operationId": "EventHubs_ListAuthorizationRules",
         "description": "Authorization rules for a EventHub.",
         "parameters": [
           {
@@ -920,6 +932,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "EventHub Authorization rule is already Deleted"
+          },
           "200": {
             "description": "EventHub Authorization rule deleted"
           }
@@ -1157,8 +1172,14 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "Consumer Group is already Deleted"
+          },
           "200": {
             "description": "Consumer Group deleted."
+          },
+          "202": {
+            "description": "Consumer Group delete request has been accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1301,6 +1322,9 @@
           "description": "Resource tags"
         }
       },
+      "required": [
+        "location"
+      ],
       "x-ms-azure-resource": true
     },
     "NamespaceCreateOrUpdateParameters": {
@@ -1424,7 +1448,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The resource type that this object applies to. Eg: NamespaceType",
+          "description": "Name of this Sku",
           "enum": [
             "Basic",
             "Standard",
@@ -1451,11 +1475,11 @@
         "capacity": {
           "format": "int32",
           "type": "integer",
-          "description": "The messaging units or eventhub throughput units"
+          "description": "The eventhub throughput units"
         }
       },
       "required": [
-        "Tier"
+        "tier"
       ],
       "description": "Sku of the Namespace."
     },
@@ -1701,21 +1725,21 @@
     },
     "ConsumerGroupProperties": {
       "properties": {
-        "CreatedAt": {
+        "createdAt": {
           "type": "string",
           "format": "date-time",
           "description": "Exact time the message was created."
         },
-        "EventHubPath": {
+        "eventHubPath": {
           "type": "string",
           "description": "The path of the event hub."
         },
-        "UpdatedAt": {
+        "updatedAt": {
           "type": "string",
           "format": "date-time",
           "description": "The exact time the message has been updated."
         },
-        "UserMetadata": {
+        "userMetadata": {
           "type": "string",
           "description": "The user metadata."
         }

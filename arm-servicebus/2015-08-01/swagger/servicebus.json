@@ -194,11 +194,14 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "Namespace is already deleted"
+          },
           "200": {
             "description": "Namespace delete successful"
           },
           "202": {
-            "description": "Namespace delete accepted"
+            "description": "Namespace delete request has been accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -385,6 +388,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "Namespace AuthorizationRule is already deleted"
+          },
           "200": {
             "description": "Namespace Authorization rule deleted"
           }
@@ -686,6 +692,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "Queue is already deleted"
+          },
           "200": {
             "description": "Queue deleted."
           }
@@ -898,6 +907,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "Queue AuthorizationRule is already deleted"
+          },
           "200": {
             "description": "Queue authorizationRule deleted"
           }
@@ -1220,8 +1232,14 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "Topic is already deleted"
+          },
           "200": {
             "description": "Topic delete successful"
+          },
+          "202": {
+            "description": "Topic delete request has been accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1490,6 +1508,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "Topic Authorization Rule is already deleted"
+          },
           "200": {
             "description": "Topics AuthorizationRule deleted"
           }
@@ -1779,6 +1800,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "Subscription is already deleted"
+          },
           "200": {
             "description": "Subscription deleted."
           }
@@ -1870,6 +1894,9 @@
           "description": "Resource tags"
         }
       },
+      "required": [
+        "location"
+      ],
       "x-ms-azure-resource": true
     },
     "NamespaceCreateOrUpdateParameters": {
@@ -1993,7 +2020,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The resource type that this object applies to. Eg: NamespaceType",
+          "description": "Name of this Sku",
           "enum": [
             "Basic",
             "Standard",
@@ -2020,11 +2047,11 @@
         "capacity": {
           "format": "int32",
           "type": "integer",
-          "description": "The messaging units or eventhub throughput units"
+          "description": "The messaging units for the tier specified"
         }
       },
       "required": [
-        "Tier"
+        "tier"
       ],
       "description": "Sku of the Namespace."
     },
