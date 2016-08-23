@@ -247,7 +247,7 @@
   "parameters": {
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
-      "description": "Azure Subscription ID.",
+      "description": "Azure subscription id.",
       "in": "path",
       "type": "string",
       "required": true
@@ -263,7 +263,6 @@
   "definitions": {
     "Resource": {
       "x-ms-azure-resource": true,
-      "description": "Common properties of an ARM resource.",
       "required": [
         "location"
       ],
@@ -391,7 +390,7 @@
           "description": "This is only populated at creation time (PUT) for web services originating from an AzureML Studio experiment."
         },
         "commitmentPlan": {
-          "$ref": "#/definitions/CommitmentPlanReference",
+          "$ref": "#/definitions/CommitmentPlan",
           "description": "The commitment plan associated with this web service. This is required to be specified at creation time (PUT) and is not updateable afterwards."
         },
         "input": {
@@ -541,9 +540,9 @@
         "id"
       ]
     },
-    "CommitmentPlanReference": {
+    "CommitmentPlan": {
       "type": "object",
-      "description": "References the ID of the machine learning commitment plan associated with the web service.",
+      "description": "Information about the machine learning commitment plan associated with the web service.",
       "properties": {
         "id": {
           "type": "string",
