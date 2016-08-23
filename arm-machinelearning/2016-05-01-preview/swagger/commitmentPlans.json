@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{planName}/commitmentAssociations/{associationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{commitmentPlanName}/commitmentAssociations/{commitmentAssociationName}": {
       "get": {
         "tags": [
           "CommitmentAssociations"
@@ -25,28 +25,16 @@
         "description": "Gets a commitment association.",
         "parameters": [
           {
-           "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "planName",
-            "description": "The association's parent commitment plan name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CommitmentPlanNameParameter"
           },
           {
-            "name": "associationName",
-            "description": "The commitment association name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CommitmentAssociationNameParameter"
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
@@ -62,7 +50,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{planName}/commitmentAssociations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{commitmentPlanName}/commitmentAssociations": {
       "get": {
         "tags": [
           "CommitmentAssociations"
@@ -71,28 +59,16 @@
         "description": "Get all commitment associations for a parent commitment plan.",
         "parameters": [
           {
-           "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "planName",
-            "description": "The association's parent commitment plan name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CommitmentPlanNameParameter"
           },
           {
-            "name": "$skipToken",
-            "description": "Continuation token for pagination.",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/SkipTokenParameter"
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
@@ -102,13 +78,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PaginatedResult[CommitmentAssociation]"
+              "$ref": "#/definitions/CommitmentAssociationListResult"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{planName}/commitmentAssociations/{associationName}/move": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{commitmentPlanName}/commitmentAssociations/{commitmentAssociationName}/move": {
       "post": {
         "tags": [
           "CommitmentAssociations"
@@ -117,28 +93,19 @@
         "description": "Re-parents a commitment association from one commitment plan to another.",
         "parameters": [
           {
-           "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "planName",
-            "description": "The association's parent commitment plan name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CommitmentPlanNameParameter"
           },
           {
-            "name": "associationName",
-            "description": "The commitment association name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CommitmentAssociationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
           },
           {
             "name": "movePayload",
@@ -148,9 +115,6 @@
             "schema": {
               "$ref": "#/definitions/MoveCommitmentAssociationRequest"
             }
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
           }
         ],
         "responses": {
@@ -163,7 +127,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{planName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{commitmentPlanName}": {
       "get": {
         "tags": [
           "CommitmentPlans"
@@ -232,7 +196,7 @@
         "parameters": [
           {
             "name": "patchPayload",
-            "description": "The payload to patch the Azure ML commitment plan with.",
+            "description": "The payload to patch the Azure ML commitment plan with. Only tags and SKU may be modified on an existing commitment plan.",
             "in": "body",
             "required": true,
             "schema": {
@@ -251,21 +215,13 @@
       },
       "parameters": [
         {
-         "$ref": "#/parameters/SubscriptionIdParameter"
+          "$ref": "#/parameters/SubscriptionIdParameter"
         },
         {
-          "name": "resourceGroupName",
-          "description": "The resource group name.",
-          "in": "path",
-          "required": true,
-          "type": "string"
+          "$ref": "#/parameters/ResourceGroupNameParameter"
         },
         {
-          "name": "planName",
-          "description": "The commitment plan name.",
-          "in": "path",
-          "required": true,
-          "type": "string"
+          "$ref": "#/parameters/CommitmentPlanNameParameter"
         },
         {
           "$ref": "#/parameters/APIVersionParameter"
@@ -298,7 +254,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PaginatedResult[CommitmentPlan]"
+              "$ref": "#/definitions/CommitmentPlanListResult"
             }
           }
         }
@@ -313,21 +269,13 @@
         "description": "Retrieve all Azure ML commitment plans in a resource group.",
         "parameters": [
           {
-           "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "$skipToken",
-            "description": "Continuation token for pagination.",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/SkipTokenParameter"
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
@@ -337,43 +285,31 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PaginatedResult[CommitmentPlan]"
+              "$ref": "#/definitions/CommitmentPlanListResult"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{planName}/usageHistory": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{commitmentPlanName}/usageHistory": {
       "get": {
         "tags": [
           "CommitmentPlans"
         ],
-        "operationId": "CommitmentPlans_GetUsageHistory",
+        "operationId": "UsageHistory_List",
         "description": "Retrieves the usage history for an Azure ML commitment plan.",
         "parameters": [
           {
            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "description": "The resource group name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "planName",
-            "description": "The commitment plan name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CommitmentPlanNameParameter"
           },
           {
-            "name": "$skipToken",
-            "description": "Continuation token for pagination.",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/SkipTokenParameter"
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
@@ -383,7 +319,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PaginatedResult[PlanUsageHistory]"
+              "$ref": "#/definitions/PlanUsageHistoryListResult"
             }
           }
         }
@@ -394,16 +330,44 @@
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "description": "Azure Subscription ID.",
-      "in": "path",
       "type": "string",
+      "in": "path",
       "required": true
     },
     "APIVersionParameter": {
-      "in": "query",
       "name": "api-version",
+      "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
       "type": "string",
-      "description": "The versiong of the Microsoft.MachineLearning resource provider API to be used.",
+      "in": "query",
       "required": true
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "description": "The resource group name.",
+      "type": "string",
+      "in": "path",
+      "required": true
+    },
+    "CommitmentPlanNameParameter": {
+      "name": "commitmentPlanName",
+      "description": "The Azure ML commitment plan name.",
+      "type": "string",
+      "in": "path",
+      "required": true
+    },
+    "CommitmentAssociationNameParameter": {
+      "name": "commitmentAssociationName",
+      "description": "The commitment association name.",
+      "type": "string",
+      "in": "path",
+      "required": true
+    },
+    "SkipTokenParameter": {
+      "name": "$skipToken",
+      "description": "Continuation token for pagination.",
+      "type": "string",
+      "in": "query",
+      "required": false
     }
   },
   "definitions": {
@@ -497,9 +461,9 @@
         }
       }
     },
-    "PaginatedResult[CommitmentAssociation]": {
+    "CommitmentAssociationListResult": {
       "type": "object",
-      "description": "A paginated set of commitment association resources.",
+      "description": "A page of commitment association resources.",
       "properties": {
         "nextLink": {
           "type": "string",
@@ -538,7 +502,8 @@
           "description": "An entity tag used to enforce optimistic concurrency."
         },
         "properties": {
-          "$ref": "#/definitions/CommitmentPlanProperties"
+          "$ref": "#/definitions/CommitmentPlanProperties",
+          "readOnly": true
         },
         "sku": {
           "$ref": "#/definitions/ResourceSku"
@@ -551,51 +516,61 @@
       "properties": {
         "chargeForOverage": {
           "type": "boolean",
-          "description": "Indicates whether usage beyond the commitment plan's included quantities will be charged."
+          "description": "Indicates whether usage beyond the commitment plan's included quantities will be charged.",
+          "readOnly": true
         },
         "chargeForPlan": {
           "type": "boolean",
-          "description": "Indicates whether the commitment plan will incur a charge."
+          "description": "Indicates whether the commitment plan will incur a charge.",
+          "readOnly": true
         },
         "creationDate": {
           "format": "date-time",
+          "type": "string",
           "description": "The date at which this commitment plan was created, in ISO 8601 format.",
-          "type": "string"
+          "readOnly": true
         },
         "includedQuantities": {
           "type": "object",
           "description": "The included resource quantities this plan gives you.",
           "additionalProperties": {
             "$ref": "#/definitions/PlanQuantity"
-          }
+          },
+          "readOnly": true
         },
         "maxAssociationLimit": {
           "format": "int32",
           "type": "integer",
-          "description": "The maximum number of commitment associations that can be children of this commitment plan."
+          "description": "The maximum number of commitment associations that can be children of this commitment plan.",
+          "readOnly": true
         },
         "maxCapacityLimit": {
           "format": "int32",
           "type": "integer",
-          "description": "The maximum scale-out capacity for this commitment plan."
+          "description": "The maximum scale-out capacity for this commitment plan.",
+          "readOnly": true
         },
         "minCapacityLimit": {
           "format": "int32",
           "type": "integer",
-          "description": "The minimum scale-out capacity for this commitment plan."
+          "description": "The minimum scale-out capacity for this commitment plan.",
+          "readOnly": true
         },
         "planMeter": {
           "type": "string",
-          "description": "The Azure meter which will be used to charge for this commitment plan."
+          "description": "The Azure meter which will be used to charge for this commitment plan.",
+          "readOnly": true
         },
         "refillFrequencyInDays": {
           "format": "int32",
           "type": "integer",
-          "description": "The frequency at which this commitment plan's included quantities are refilled."
+          "description": "The frequency at which this commitment plan's included quantities are refilled.",
+          "readOnly": true
         },
         "suspendPlanOnOverage": {
           "type": "boolean",
-          "description": "Indicates whether this commitment plan will be moved into a suspended state if usage beyond the commitment plan's included quantities is incurred."
+          "description": "Indicates whether this commitment plan will be moved into a suspended state if usage beyond the commitment plan's included quantities is incurred.",
+          "readOnly": true
         }
       }
     },
@@ -606,24 +581,28 @@
         "allowance": {
           "format": "double",
           "type": "number",
-          "description": "The quantity added to the commitment plan at an interval specified by its allowance frequency."
+          "description": "The quantity added to the commitment plan at an interval specified by its allowance frequency.",
+          "readOnly": true
         },
         "amount": {
           "format": "double",
           "type": "number",
-          "description": "The quantity available to the plan the last time usage was calculated."
+          "description": "The quantity available to the plan the last time usage was calculated.",
+          "readOnly": true
         },
         "includedQuantityMeter": {
           "type": "string",
-          "description": "The Azure meter for usage against included quantities."
+          "description": "The Azure meter for usage against included quantities.",
+          "readOnly": true
         },
         "overageMeter": {
           "type": "string",
-          "description": "The Azure meter for usage which exceeds included quantities."
+          "description": "The Azure meter for usage which exceeds included quantities.",
+          "readOnly": true
         }
       }
     },
-    "PaginatedResult[CommitmentPlan]": {
+    "CommitmentPlanListResult": {
       "type": "object",
       "description": "A page of commitment plan resources.",
       "properties": {
@@ -640,7 +619,7 @@
         }
       }
     },
-    "PaginatedResult[PlanUsageHistory]": {
+    "PlanUsageHistoryListResult": {
       "type": "object",
       "description": "A page of usage history.",
       "properties": {
