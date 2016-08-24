@@ -57,6 +57,9 @@
         ],
         "operationId": "CommitmentAssociations_List",
         "description": "Get all commitment associations for a parent commitment plan.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -200,7 +203,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CommitmentPlan"
+              "$ref": "#/definitions/CommitmentPlanPatchPayload"
             }
           }
         ],
@@ -235,6 +238,9 @@
         ],
         "operationId": "CommitmentPlans_List",
         "description": "Retrieve all Azure ML commitment plans in a subscription.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "parameters": [
           {
            "$ref": "#/parameters/SubscriptionIdParameter"
@@ -267,6 +273,9 @@
         ],
         "operationId": "CommitmentPlans_ListInResourceGroup",
         "description": "Retrieve all Azure ML commitment plans in a resource group.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -298,6 +307,9 @@
         ],
         "operationId": "UsageHistory_List",
         "description": "Retrieves the usage history for an Azure ML commitment plan.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "parameters": [
           {
            "$ref": "#/parameters/SubscriptionIdParameter"
@@ -342,6 +354,7 @@
       "required": true
     },
     "ResourceGroupNameParameter": {
+      "x-ms-parameter-location": "method",
       "name": "resourceGroupName",
       "description": "The resource group name.",
       "type": "string",
@@ -349,6 +362,7 @@
       "required": true
     },
     "CommitmentPlanNameParameter": {
+      "x-ms-parameter-location": "method",
       "name": "commitmentPlanName",
       "description": "The Azure ML commitment plan name.",
       "type": "string",
@@ -356,6 +370,7 @@
       "required": true
     },
     "CommitmentAssociationNameParameter": {
+      "x-ms-parameter-location": "method",
       "name": "commitmentAssociationName",
       "description": "The commitment association name.",
       "type": "string",
@@ -363,6 +378,7 @@
       "required": true
     },
     "SkipTokenParameter": {
+      "x-ms-parameter-location": "method",
       "name": "$skipToken",
       "description": "Continuation token for pagination.",
       "type": "string",
@@ -371,6 +387,13 @@
     }
   },
   "definitions": {
+    "Tags": {
+      "type": "object",
+      "description": "Resource tags",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
     "Resource": {
       "x-ms-azure-resource": true,
       "description": "Common properties of an ARM resource.",
@@ -385,7 +408,8 @@
         },
         "name": {
           "description": "Resource Name",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "location": {
           "description": "Resource Location",
@@ -397,11 +421,7 @@
           "readOnly": true
         },
         "tags": {
-          "description": "Resource tags",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/Tags"
         }
       }
     },
@@ -429,16 +449,19 @@
       "properties": {
         "associatedResourceId": {
           "type": "string",
-          "description": "The ID of the resource this association points to, such as the ARM ID of an Azure ML web service."
+          "description": "The ID of the resource this association points to, such as the ARM ID of an Azure ML web service.",
+          "readOnly": true
         },
         "commitmentPlanId": {
           "type": "string",
-          "description": "The ARM ID of the parent Azure ML commitment plan."
+          "description": "The ARM ID of the parent Azure ML commitment plan.",
+          "readOnly": true
         },
         "creationDate": {
           "format": "date-time",
           "type": "string",
-          "description": "The date at which this commitment association was created, in ISO 8601 format."
+          "description": "The date at which this commitment association was created, in ISO 8601 format.",
+          "readOnly": true
         }
       }
     },
@@ -485,6 +508,18 @@
         "destinationPlanId": {
           "type": "string",
           "description": "The ARM ID of the commitment plan to re-parent the commitment association to."
+        }
+      }
+    },
+    "CommitmentPlanPatchPayload": {
+      "type": "object",
+      "description": "The properties of a commitment plan which may be updated via PATCH.",
+      "properties": {
+        "tags": {
+          "$ref": "#/definitions/Tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
         }
       }
     },
