@@ -48,8 +48,9 @@
           {
             "name": "api-version",
             "in": "query",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "type": "string",
+            "default": "2016-03-01"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -89,8 +90,9 @@
           {
             "name": "api-version",
             "in": "query",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "type": "string",
+            "default": "2016-03-01"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -133,8 +135,9 @@
           {
             "name": "api-version",
             "in": "query",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "type": "string",
+            "default": "2016-03-01"
           },
           {
             "name": "parameters",
@@ -187,8 +190,9 @@
           {
             "name": "api-version",
             "in": "query",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "type": "string",
+            "default": "2016-03-01"
           },
           {
             "name": "parameters",
@@ -243,8 +247,9 @@
           {
             "name": "api-version",
             "in": "query",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "type": "string",
+            "default": "2016-03-01"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -288,8 +293,9 @@
           {
             "name": "api-version",
             "in": "query",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "type": "string",
+            "default": "2016-03-01"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -323,8 +329,9 @@
           {
             "name": "api-version",
             "in": "query",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "type": "string",
+            "default": "2016-03-01"
           },
           {
             "name": "$filter",
@@ -927,8 +934,9 @@
           {
             "name": "api-version",
             "in": "query",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "type": "string",
+            "default": "2016-03-01"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -960,8 +968,9 @@
           {
             "name": "api-version",
             "in": "query",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "type": "string",
+            "default": "2016-03-01"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -993,8 +1002,9 @@
           {
             "name": "api-version",
             "in": "query",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "type": "string",
+            "default": "2016-03-01"
           },
           {
             "name": "parameters",
@@ -1039,8 +1049,9 @@
           {
             "name": "api-version",
             "in": "query",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "type": "string",
+            "default": "2016-03-01"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1077,8 +1088,9 @@
           {
             "name": "api-version",
             "in": "query",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "type": "string",
+            "default": "2015-07-01"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1110,8 +1122,9 @@
           {
             "name": "api-version",
             "in": "query",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "type": "string",
+            "default": "2015-07-01"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1143,8 +1156,9 @@
           {
             "name": "api-version",
             "in": "query",
-            "required": true,
-            "type": "string"
+            "required": false,
+            "type": "string",
+            "default": "2015-07-01"
           },
           {
             "name": "parameters",
@@ -1472,6 +1486,24 @@
       },
       "description": "Represents the sku capacity."
     },
+    "SkuListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuDefinition"
+          },
+          "description": "Gets or sets the values for the sku definition."
+        },
+        "statusCode": {
+          "$ref": "#/definitions/HttpStatusCode"
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "description": "A standard service response including an HTTP status code and request ID."
+    },
     "SkuDefinition": {
       "properties": {
         "resourceType": {
@@ -1489,27 +1521,13 @@
       },
       "description": "Represents a sku definition."
     },
-	"HttpStatusCode": {
-	  "x-ms-external": true,
-	  "properties": {}
-	},
-    "SkuListResult": {
+    "HttpStatusCode": {
+      "x-ms-external": true,
       "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuDefinition"
-          },
-          "description": "Gets or sets the values for the sku definition."
-        },
-        "statusCode": {
-		  "$ref": "#/definitions/HttpStatusCode"
-        },
-        "requestId": {
-          "type": "string"
-        }
-      },
-      "description": "A standard service response including an HTTP status code and request ID."
+         "dummy" : {
+           "type": "string"
+         }
+      }
     },
     "Incident": {
       "properties": {
@@ -1556,12 +1574,308 @@
       "description": "The List incidents operation response."
     },
     "RuleCondition": {
-      "properties": {},
+      "type": "object",
+      "discriminator": "odata.type",
+      "properties": {
+        "odata.type": {
+          "type": "string"
+        }
+      },
+      "required": [ "odata.type" ],
       "description": "The condition that results in the alert rule being activated."
     },
+    "RuleDataSource": {
+      "type": "object",
+      "discriminator": "odata.type",
+      "properties": {
+        "odata.type": {
+          "type": "string"
+        }
+      },
+      "required": [ "odata.type" ],
+      "description": "The resource from which the rule collects its data."
+    },
+    "RuleMetricDataSource": {
+      "x-ms-discriminator-value": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleDataSource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "resourceUri": {
+               "type": "string",
+               "description": "Gets or sets the resource identifier of the resource the rule monitors."
+            },
+            "metricNamespace": {
+              "type": "string",
+              "description": "Gets or sets the metric namespace. Only should be present for availability level metrics, where the value must be WindowsAzure.Availability."
+            },
+            "metricName": {
+              "type": "string",
+              "description": "Gets or sets the name of the metric that defines what the rule monitors."
+            }
+          }
+        }
+      ],
+      "description": "A rule metric data source."
+    },
+    "RuleManagementEventClaimsDataSource": {
+      "properties": {
+        "emailAddress": {
+          "type": "string",
+          "description": "Gets or sets the email address."
+        }
+      },
+      "description": "The claims for a rule management event data source."
+    },
+    "RuleManagementEventDataSource": {
+      "x-ms-discriminator-value": "Microsoft.Azure.Management.Insights.Models.RuleManagementEventDataSource",
+      "allOf": [
+        {
+          "$ref" : "#/definitions/RuleDataSource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "eventName": {
+              "type": "string",
+              "description": "Gets or sets the event name."
+            },
+            "eventSource": {
+              "type": "string",
+              "description": "Gets or sets the event source."
+            },
+            "level": {
+              "type": "string",
+              "description": "Gets or sets the level."
+            },
+            "operationName": {
+              "type": "string",
+              "description": "Gets or sets the operation name."
+            },
+            "resourceGroupName": {
+              "type": "string",
+              "description": "Gets or sets the resource group name."
+            },
+            "resourceProviderName": {
+              "type": "string",
+              "description": "Gets or sets the resource provider name."
+            },
+            "resourceUri": {
+              "type": "string",
+              "description": "Gets or sets the resource uri."
+            },
+            "status": {
+              "type": "string",
+              "description": "Gets or sets the status."
+            },
+            "subStatus": {
+              "type": "string",
+              "description": "Gets or sets the substatus."
+            },
+            "claims": {
+              "$ref": "#/definitions/RuleManagementEventClaimsDataSource",
+              "description": "Gets or sets the claims."
+            }
+          }
+        }
+      ],
+      "description": "A rule management event data source."
+    },
+    "ConditionOperator": {
+      "type": "string",
+      "enum": [
+        "GreaterThan",
+        "GreaterThanOrEqual",
+        "LessThan",
+        "LessThanOrEqual"
+      ],
+      "x-ms-enum": {
+        "name": "ConditionOperator",
+        "modelAsString": "False"
+      }
+    },
+    "TimeAggregationOperator": {
+       "type": "string",
+       "enum": [
+         "Average",
+         "Minimum",
+         "Maximum",
+         "Total",
+         "Last"
+       ],
+      "x-ms-enum": {
+        "name": "TimeAggregationOperator",
+        "modelAsString": "False"
+      }
+    },
+    "ThresholdRuleCondition": {
+      "x-ms-discriminator-value": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+      "allOf": [
+        {
+          "$ref" : "#/definitions/RuleCondition"
+        },
+        {
+          "type": "object",
+          "required": [ "threshold", "operator" ],
+          "properties": {
+            "dataSource": {
+              "$ref": "#/definitions/RuleDataSource",
+              "description": "Gets or sets the resource from which the rule collects its data."
+            },
+            "operator": {
+              "$ref": "#/definitions/ConditionOperator",
+              "description": "Gets or sets the operator used to compare the data and the threshold."
+            },
+            "threshold": {
+              "type": "number",
+              "format": "double",
+              "description": "Gets or sets the threshold value that activates the alert."
+            },
+            "windowSize": {
+              "$ref": "#/definitions/TimeSpan",
+              "description": "Gets or sets the period of time that is used to monitor alert activity based on the threshold. Must be between 5 minutes and 1 day."
+            },
+            "timeAggregation": {
+              "$ref": "#/definitions/TimeAggregationOperator",
+              "description": "Gets or sets the time aggregation operator. How the data that is collected should be combined over time. The default value is the PrimaryAggregationType of the Metric."
+            }
+          }
+        }
+      ],
+      "description": "A rule condition based on a metric crossing a threshold."
+    },
+    "LocationThresholdRuleCondition": {
+      "x-ms-discriminator-value": "Microsoft.Azure.Management.Insights.Models.LocationThresholdRuleCondition",
+      "allOf": [
+        {
+           "$ref" : "#/definitions/RuleCondition"
+        },
+        {
+           "type": "object",
+           "properties": {
+             "dataSource": {
+               "$ref": "#/definitions/RuleDataSource",
+               "description": "Gets or sets the resource from which the rule collects its data."
+             },
+             "windowSize": {
+               "$ref": "#/definitions/TimeSpan",
+               "description": "Gets or sets the period of time that is used to monitor alert activity based on the threshold. Must be between 5 minutes and 1 day."
+             },
+             "failedLocationCount": {
+               "type": "integer",
+               "format": "int32",
+               "description": "Gets or sets the number of locations that must fail to activate the alert."
+             }
+            },
+            "required": [ "failedLocationCount" ]
+        }
+      ],
+      "description": "A rule condition based on a certain number of locations failing."
+    },
+    "ManagementEventAggregationCondition": {
+      "properties": {
+        "operator": {
+           "$ref": "#/definitions/ConditionOperator",
+           "description": "Gets or sets the condition operator."
+        },
+        "threshold": {
+           "type": "number",
+           "format": "double",
+           "description": "Gets or sets the condition threshold."
+        },
+        "windowSize": {
+          "type": "string",
+          "format": "timespan8601",
+          "description": "Gets or sets the time period over which the alert rule is evaluated."
+        }
+      },
+      "description": "A management event aggregation condition."
+    },
+    "ManagementEventRuleCondition": {
+      "x-ms-discriminator-value": "Microsoft.Azure.Management.Insights.Models.ManagementEventRuleCondition",
+      "allOf": [
+        {
+           "$ref" : "#/definitions/RuleCondition"
+        },
+        {
+           "type": "object",
+           "properties": {
+              "dataSource": {
+                "$ref": "#/definitions/RuleDataSource",
+                "description": "Gets or sets the resource from which the rule collects its data."
+              },
+              "aggregation": {
+                "$ref": "#/definitions/ManagementEventAggregationCondition",
+                "description": "Gets or sets the aggregation condition."
+              }
+            }
+        }
+      ],
+      "description": "A management event rule condition."
+    },
     "RuleAction": {
-      "properties": {},
+      "type": "object",
+      "discriminator": "odata.type",
+      "properties": {
+        "odata.type": {
+          "type": "string"
+        }
+      },
+      "required": [ "odata.type" ],
       "description": "The action that is performed when the alert rule becomes active, and when an alert condition is resolved."
+    },
+    "RuleEmailAction": {
+      "x-ms-discriminator-value": "Microsoft.Azure.Management.Insights.Models.RuleEmailAction",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleAction"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sendToServiceOwners": {
+                "type": "boolean",
+                "description": "Gets or sets the flag to send e-mails to the service owners. Whether the administrators (service and co-adiminstrators) of the service should be notified when the alert is activated."
+            },
+            "customEmails": {
+                "type": "array",
+                "items": {
+                  "type" : "string"
+                },
+                "description": "Gets or sets the list of administrator's custom email addresses notifiy of the activation of the alert."
+            }
+         }
+        }
+      ],
+      "description": "Specifies the action to send email when the rule condition is evaluated."
+    },
+    "RuleWebhookAction": {
+      "x-ms-discriminator-value": "Microsoft.Azure.Management.Insights.Models.RuleWebhookAction",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleAction"
+        },
+        {
+          "type": "object",
+          "properties": {
+             "serviceUri": {
+               "type": "string",
+               "description": "Gets or sets the service uri to Post the notitication."
+             },
+             "properties": {
+               "type": "object",
+               "additionalProperties": {
+                  "type": "string"
+               },
+               "description": "Gets or sets the dictionary of custom properties to include with the post operation."
+             }
+          }
+        }
+       ],
+       "description": "Specifies the action to post to service when the rule condition is evaluated."
     },
     "Rule": {
       "properties": {
@@ -1595,6 +1909,7 @@
           "description": "Last time the rule was updated."
         }
       },
+      "required": [ "isEnabled" ],
       "description": "An alert rule."
     },
     "RuleCreateOrUpdateParameters": {
@@ -1620,7 +1935,7 @@
     "RuleCreateOrUpdateResult": {
       "properties": {
         "statusCode": {
-		  "$ref": "#/definitions/HttpStatusCode"
+          "$ref": "#/definitions/HttpStatusCode"
         },
         "requestId": {
           "type": "string"
@@ -1631,7 +1946,7 @@
     "RuleDeleteResult": {
       "properties": {
         "statusCode": {
-		  "$ref": "#/definitions/HttpStatusCode"
+          "$ref": "#/definitions/HttpStatusCode"
         },
         "requestId": {
           "type": "string"
@@ -1833,7 +2148,7 @@
     "AutomatedExportSettingCreateOrUpdateResult": {
       "properties": {
         "statusCode": {
-		  "$ref": "#/definitions/HttpStatusCode"
+          "$ref": "#/definitions/HttpStatusCode"
         },
         "requestId": {
           "type": "string"
@@ -1844,7 +2159,7 @@
     "AutomatedExportSettingDeleteResult": {
       "properties": {
         "statusCode": {
-		  "$ref": "#/definitions/HttpStatusCode"
+           "$ref": "#/definitions/HttpStatusCode"
         },
         "requestId": {
           "type": "string"
@@ -2018,6 +2333,7 @@
           "description": "Gets or sets the end time for the profile."
         }
       },
+      "required": [ "start", "end" ],
       "description": "A specific date for the profile. This element is not used if the Recurrence element is used."
     },
     "RecurrentSchedule": {
@@ -2257,7 +2573,7 @@
     "AutoscaleSettingCreateOrUpdateResult": {
       "properties": {
         "statusCode": {
-		  "$ref": "#/definitions/HttpStatusCode"
+          "$ref": "#/definitions/HttpStatusCode"
         },
         "requestId": {
           "type": "string"
@@ -2268,7 +2584,7 @@
     "AutoscaleSettingDeleteResult": {
       "properties": {
         "statusCode": {
-		  "$ref": "#/definitions/HttpStatusCode"
+          "$ref": "#/definitions/HttpStatusCode"
         },
         "requestId": {
           "type": "string"
@@ -2692,7 +3008,7 @@
     "EmptyResult": {
       "properties": {
         "statusCode": {
-		  "$ref": "#/definitions/HttpStatusCode"
+          "$ref": "#/definitions/HttpStatusCode"
         },
         "requestId": {
           "type": "string"
@@ -2729,6 +3045,7 @@
           "description": "Gets or sets the number of days for the retention."
         }
       },
+      "required": [ "enabled", "days" ],
       "description": "Part of MultiTenantDiagnosticSettings. Child of MetricSettings. Specifies the retention policy for the specific metric."
     },
     "LogProfile": {
@@ -2817,11 +3134,19 @@
       },
       "description": "Parameters supplied to create or update log profiles."
     },
+    "TimeSpan": {
+      "x-ms-external": true,
+      "properties": {
+        "Days": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "MetricSettings": {
       "properties": {
         "timeGrain": {
-          "type": "integer",
-          "format": "int64",
+          "$ref": "#/definitions/TimeSpan",
           "description": "Gets or sets the timegrain of the metric."
         },
         "enabled": {
@@ -2833,6 +3158,7 @@
           "description": "Gets or sets the retention policy for this timegrain."
         }
       },
+      "required": [ "enabled", "timeGrain" ],
       "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular metric."
     },
     "LogSettings": {
@@ -2850,6 +3176,7 @@
           "description": "Gets or sets the retention policy for this log."
         }
       },
+      "required": [ "enabled" ],
       "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log."
     },
     "ServiceDiagnosticSettings": {
@@ -2942,7 +3269,7 @@
     "MonitoringConfigurationCreateOrUpdateResult": {
       "properties": {
         "statusCode": {
-		  "$ref": "#/definitions/HttpStatusCode"
+          "$ref": "#/definitions/HttpStatusCode"
         },
         "requestId": {
           "type": "string"
@@ -3177,7 +3504,7 @@
     "SkuUpdateResult": {
       "properties": {
         "statusCode": {
-		  "$ref": "#/definitions/HttpStatusCode"
+          "$ref": "#/definitions/HttpStatusCode"
         },
         "requestId": {
           "type": "string"
@@ -3249,7 +3576,7 @@
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
-      "required": true,
+      "required": false,
       "type": "string",
       "description": "Client Api Version."
     }

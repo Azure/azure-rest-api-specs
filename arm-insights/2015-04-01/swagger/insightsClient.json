@@ -535,6 +535,7 @@
       "description": "The HttpInfo class."
     },
     "EventData": {
+      "required": [ "channels", "level", "eventTimestamp", "submissionTimestamp" ],
       "properties": {
         "authorization": {
           "$ref": "#/definitions/SenderAuthorization",
@@ -903,6 +904,7 @@
           "description": "Gets or sets the expiration date/time of the SAS Key."
         }
       },
+      "required": [ "startTime", "endTime", "sasToken", "sasTokenExpirationTime" ],
       "description": "Contains the details of the tables that metric data is stored in. A new table is created every 10 days for storing metrics."
     },
     "MetricLocation": {
