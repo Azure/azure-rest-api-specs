@@ -327,7 +327,7 @@
         }
       }
     },
-    "/{resourceUri}/metricDefinitions": {
+    "/{resourceUri}/providers/microsoft.insights/metricDefinitions": {
       "get": {
         "tags": [
           "MetricDefinition"
@@ -348,7 +348,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "default": "2015-07-01"
+            "default": "2016-03-01"
           },
           {
             "name": "$filter",
@@ -375,7 +375,7 @@
         "x-ms-odata": "#/definitions/MetricDefinition"
       }
     },
-    "/{resourceUri}/metrics": {
+    "/{resourceUri}/providers/microsoft.insights/metrics": {
       "get": {
         "tags": [
           "Metric"
@@ -399,7 +399,11 @@
             "description": "The filter to apply on the operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2016-06-01"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -927,67 +931,72 @@
       },
       "description": "Where the data for this metric is stored."
     },
+    "TimeSpan": {
+      "x-ms-external": true,
+      "properties": {
+        "Days": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "MetricAvailability": {
       "properties": {
         "timeGrain": {
-          "type": "integer",
-          "format": "int64",
+          "$ref": "#/definitions/TimeSpan",
           "description": "Gets or sets the time grain specifies the aggregation interval for the metric."
         },
         "retention": {
-          "type": "integer",
-          "format": "int64",
+          "$ref": "#/definitions/TimeSpan",
           "description": "Gets or sets the retention period for the metric at the specified timegrain."
-        },
-        "location": {
-          "$ref": "#/definitions/MetricLocation",
-          "description": "Gets or sets the location where the data for this metric availability is stored."
-        },
-        "blobLocation": {
-          "$ref": "#/definitions/BlobLocation",
-          "description": "Gets or sets the location info for this availability."
         }
       },
       "description": "Metric availability specifies the time grain (aggregation interval or frequency) and the retention period for that time grain."
     },
-    "Dimension": {
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/LocalizableString",
-          "description": "Gets or sets the name."
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LocalizableString"
-          },
-          "description": "Gets or sets the list of values."
-        }
-      },
-      "description": "Metric dimension specifies the dimension name and list of dimension values."
-    },
+	"Unit": {
+	  "type": "string",
+	  "description": "Gets or sets the unit of the metric.",
+	  "enum": [
+		"Count",
+		"Bytes",
+		"Seconds",
+		"CountPerSecond",
+		"BytesPerSecond",
+		"Percent",
+		"MilliSeconds"
+	  ],
+	  "x-ms-enum": {
+		"name": "Unit",
+		"modelAsString": "False"
+	  }
+	},
     "MetricDefinition": {
       "properties": {
+	    "resourceUri": {
+		  "type": "string",
+		  "description": "Gets or sets the resource identifier of the resource that has emitted the metric."
+		},
+        "resourceId": {
+          "type": "string",
+          "description": "Gets or sets the resource identifier of the resource that has emitted the metric."
+        },
         "name": {
           "$ref": "#/definitions/LocalizableString",
           "description": "Gets or sets the name and the display name of the metric."
         },
-        "unit": {
+		"startTime": {
           "type": "string",
-          "description": "Gets or sets the unit of the metric.",
-          "enum": [
-            "Count",
-            "Bytes",
-            "Seconds",
-            "CountPerSecond",
-            "BytesPerSecond",
-            "Percent",
-            "MilliSeconds"
-          ],
-          "x-ms-enum": {
-            "name": "Unit",
-            "modelAsString": "False"
-          }
+          "format": "date-time",
+          "description": "Gets or sets the occurrence time of event"
+		},
+		"endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the occurrence time of event"
+		},		
+        "unit": {
+		  "$ref": "#/definitions/Unit",
+          "description": "Gets or sets the unit of the metric."
         },
         "primaryAggregationType": {
           "type": "string",
@@ -1005,10 +1014,6 @@
             "modelAsString": "False"
           }
         },
-        "resourceId": {
-          "type": "string",
-          "description": "Gets or sets the resource identifier of the resource that has emitted the metric."
-        },
         "metricAvailabilities": {
           "type": "array",
           "items": {
@@ -1016,19 +1021,9 @@
           },
           "description": "Gets or sets the collection of what aggregation intervals are available to be queried."
         },
-        "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets the collection of extended properties."
-        },
-        "dimensions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Dimension"
-          },
-          "description": "Gets or sets the collection of availability information defining what timeGrains are available to be queried."
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the resource identifier of the metric definition."
         }
       },
       "description": "Metric definition class specifies the metadata for a metric."
@@ -1046,6 +1041,7 @@
       "description": "Represents collection of metric definitions."
     },
     "MetricValue": {
+	  "required": [ "timestamp" ],
       "properties": {
         "timestamp": {
           "type": "string",
@@ -1067,7 +1063,7 @@
           "format": "double",
           "description": "Gets or sets the greatest value in the time range."
         },
-        "total": {
+        "sum": {
           "type": "number",
           "format": "double",
           "description": "Gets or sets the sum of all of the values in the time range."
@@ -1076,85 +1072,27 @@
           "type": "integer",
           "format": "int64",
           "description": "Gets or sets the number of samples in the time range. Can be used to determine the number of values that contributed to the average value."
-        },
-        "last": {
-          "type": "number",
-          "format": "double",
-          "description": "Gets or sets the last sample in the time range."
-        },
-        "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets the collection of extended properties."
         }
       },
       "description": "Represents a metric value."
     },
     "Metric": {
+	  "required": [ "name", "unit", "data" ],
       "properties": {
         "name": {
           "$ref": "#/definitions/LocalizableString",
           "description": "Gets or sets the name and the display name of the metric."
         },
         "unit": {
-          "type": "string",
-          "description": "Gets or sets the unit of the metric.",
-          "enum": [
-            "Count",
-            "Bytes",
-            "Seconds",
-            "CountPerSecond",
-            "BytesPerSecond",
-            "Percent",
-            "MilliSeconds"
-          ],
-          "x-ms-enum": {
-            "name": "Unit",
-            "modelAsString": "False"
-          }
+          "$ref": "#/definitions/Unit",
+          "description": "Gets or sets the unit of the metric."
         },
-        "timeGrain": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets or sets the time grain of the metric. Also known as the aggregation interval or frequency."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the start time."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the end time."
-        },
-        "metricValues": {
+        "data": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MetricValue"
-          },
-          "description": "Gets or sets the collection of actual metric values."
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "Gets or sets the resource ID of the resource that has emitted the metric."
-        },
-        "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets the collection of extended properties."
-        },
-        "dimensionName": {
-          "$ref": "#/definitions/LocalizableString",
-          "description": "Gets or sets the name of the dimension."
-        },
-        "dimensionValue": {
-          "$ref": "#/definitions/LocalizableString",
-          "description": "Gets or sets the value of the dimension."
+		    "$ref": "#/definitions/MetricValue"
+		  },
+          "description": "Array of data points representing the metric values."
         }
       },
       "description": "A metric value set represents a set of metric values in a time period."
