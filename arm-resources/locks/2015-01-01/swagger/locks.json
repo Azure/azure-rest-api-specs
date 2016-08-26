@@ -48,7 +48,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name."
+            "description": "The resource group name.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "lockName",
@@ -103,7 +106,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. ",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "resourceProviderNamespace",
@@ -185,7 +190,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group. "
+            "description": "The name of the resource group. ",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "resourceProviderNamespace",
@@ -415,7 +423,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource group name."
+            "description": "Resource group name.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "$filter",
@@ -459,7 +470,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "resourceProviderNamespace",
