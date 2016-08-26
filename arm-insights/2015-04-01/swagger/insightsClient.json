@@ -38,7 +38,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successful request to get the list of event categories",
             "schema": {
               "$ref": "#/definitions/EventCategoryCollection"
             }
@@ -84,7 +84,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successful request to get a page of digest events",
             "schema": {
               "$ref": "#/definitions/EventDataCollection"
             }
@@ -131,7 +131,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successful request to get a page of tenant digest events",
             "schema": {
               "$ref": "#/definitions/EventDataCollection"
             }
@@ -178,7 +178,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successful request to get a page of events",
             "schema": {
               "$ref": "#/definitions/EventDataCollection"
             }
@@ -225,7 +225,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successful request to get a page of tenant events",
             "schema": {
               "$ref": "#/definitions/EventDataCollection"
             }
@@ -272,7 +272,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successful request to get the last of log definitions",
             "schema": {
               "$ref": "#/definitions/LogDefinitionCollection"
             }
@@ -316,7 +316,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successful request to get the logs",
             "schema": {
               "$ref": "#/definitions/LogCollection"
             }
@@ -363,7 +363,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successful request to get the list of metric definitions",
             "schema": {
               "$ref": "#/definitions/MetricDefinitionCollection"
             }
@@ -411,7 +411,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successful request to get the list of metric values",
             "schema": {
               "$ref": "#/definitions/MetricCollection"
             }
@@ -457,7 +457,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successful request to get the list of usage metric values",
             "schema": {
               "$ref": "#/definitions/UsageMetricCollection"
             }
@@ -882,55 +882,6 @@
       },
       "description": "The collection of log value sets."
     },
-    "MetricTableInfo": {
-      "properties": {
-        "tableName": {
-          "type": "string",
-          "description": "Gets or sets the name of the table."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the first data will appear in the data."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the last data that will this table."
-        },
-        "sasToken": {
-          "type": "string",
-          "description": "Gets or sets the SAS Key for accessing the table."
-        },
-        "sasTokenExpirationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the expiration date/time of the SAS Key."
-        }
-      },
-      "required": [ "startTime", "endTime", "sasToken", "sasTokenExpirationTime" ],
-      "description": "Contains the details of the tables that metric data is stored in. A new table is created every 10 days for storing metrics."
-    },
-    "MetricLocation": {
-      "properties": {
-        "tableEndpoint": {
-          "type": "string",
-          "description": "Gets or sets the REST endpoint of the tables that contains the metrics."
-        },
-        "tableInfo": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricTableInfo"
-          },
-          "description": "Gets or sets the list of tables that contain the metric data."
-        },
-        "partitionKey": {
-          "type": "string",
-          "description": "Gets or sets the partition key inside the tables that contains the metrics."
-        }
-      },
-      "description": "Where the data for this metric is stored."
-    },
     "TimeSpan": {
       "x-ms-external": true,
       "properties": {
@@ -1063,7 +1014,7 @@
           "format": "double",
           "description": "Gets or sets the greatest value in the time range."
         },
-        "sum": {
+        "total": {
           "type": "number",
           "format": "double",
           "description": "Gets or sets the sum of all of the values in the time range."
