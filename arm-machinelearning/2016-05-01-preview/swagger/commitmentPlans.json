@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure ML Commitment Plans Management Client",
-    "description": "These APIs allow end users to operate on Azure Machine Learning Commitment Plans resources and their child Commitment Association resources. They support the following operations:<ul><li>Create or update a commitment plan</li><li>Get a commitment plan</li><li>Patch a commitment plan</li><li>Delete a commitment plan</li><li>Get all commitment plans in a resource group</li><li>Get all commitment plans in a subscription</li><li>Get a commitment association</li><li>Get all commitment associations for a commitment plan</li><li>Move a commitment association from one commitment plan to another</li><li>Get usage history for a commitment plan</li></ul>",
+    "description": "These APIs allow end users to operate on Azure Machine Learning Commitment Plans resources and their child Commitment Association resources. They support CRUD operations for commitment plans, get and list operations for commitment associations, moving commitment associations between commitment plans, and retrieving commitment plan usage history.",
     "version": "2016-05-01-preview"
   },
   "host": "management.azure.com",
@@ -402,25 +402,26 @@
       ],
       "properties": {
         "id": {
-          "description": "Resource Id",
+          "description": "Resource Id.",
           "type": "string",
           "readOnly": true
         },
         "name": {
-          "description": "Resource Name",
+          "description": "Resource name.",
           "type": "string",
           "readOnly": true
         },
         "location": {
-          "description": "Resource Location",
+          "description": "Resource location.",
           "type": "string"
         },
         "type": {
-          "description": "Resource type",
+          "description": "Resource type.",
           "type": "string",
           "readOnly": true
         },
         "tags": {
+          "description": "User-defined tags for the resource.",
           "$ref": "#/definitions/Tags"
         }
       }
@@ -439,6 +440,7 @@
           "description": "An entity tag used to enforce optimistic concurrency."
         },
         "properties": {
+          "description": "The properties of the commitment association resource.",
           "$ref": "#/definitions/CommitmentAssociationProperties"
         }
       }
@@ -516,9 +518,11 @@
       "description": "The properties of a commitment plan which may be updated via PATCH.",
       "properties": {
         "tags": {
+          "description": "User-defined tags for the commitment plan.",
           "$ref": "#/definitions/Tags"
         },
         "sku": {
+          "description": "The commitment plan SKU.",
           "$ref": "#/definitions/ResourceSku"
         }
       }
@@ -537,10 +541,12 @@
           "description": "An entity tag used to enforce optimistic concurrency."
         },
         "properties": {
+          "description": "The commitment plan properties.",
           "$ref": "#/definitions/CommitmentPlanProperties",
           "readOnly": true
         },
         "sku": {
+          "description": "The commitment plan SKU.",
           "$ref": "#/definitions/ResourceSku"
         }
       }
