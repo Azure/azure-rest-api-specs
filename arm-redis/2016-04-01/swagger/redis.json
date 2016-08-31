@@ -748,13 +748,12 @@
           "type": "integer",
           "format": "int32",
           "description": "Redis ssl port"
+        },
+        "properties": {
+          "$ref": "#/definitions/RedisProperties",
+          "x-ms-client-flatten": true
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/RedisProperties"
-        }
-      ],
       "description": "Parameters describing a redis instance"
     },
     "RedisReadablePropertiesWithAccessKey": {
