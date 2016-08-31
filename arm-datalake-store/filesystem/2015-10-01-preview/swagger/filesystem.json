@@ -117,7 +117,7 @@
           }
         }
       },
-	  "put": {
+      "put": {
         "tags": [
           "FileSystem"
         ],
@@ -168,16 +168,13 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": ""
           },
-		  "default": {
+          "default": {
             "description": "An unexpected error from the server.",
             "schema":
             {
@@ -941,7 +938,7 @@
         }
       }
     },
-	"/webhdfs/v1/{defaultAclFilePath}": {
+    "/webhdfs/v1/{defaultAclFilePath}": {
       "put": {
         "tags": [
           "FileSystem"
@@ -968,16 +965,13 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": ""
           },
-		  "default": {
+          "default": {
             "description": "An unexpected error from the server.",
             "schema":
             {
@@ -986,9 +980,9 @@
           }
         }
       }
-	},
+    },
     "/webhdfs/v1/{aclFilePath}": {
-	  "put": {
+      "put": {
         "tags": [
           "FileSystem"
         ],
@@ -1014,16 +1008,13 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": ""
           },
-		  "default": {
+          "default": {
             "description": "An unexpected error from the server.",
             "schema":
             {
@@ -1320,14 +1311,14 @@
           "type": "string",
           "description": "the user owner, an AAD Object ID."
         },
-		"permission": {
+        "permission": {
           "type": "integer",
-		  "format": "int32",
+          "format": "int32",
           "description": "The octal representation of the unnamed user, mask and other permissions."
         },
         "stickyBit": {
           "type": "boolean",
-		  "readOnly": true,
+          "readOnly": true,
           "description": "the indicator of whether the sticky bit is on or off."
         }
       },
@@ -1401,7 +1392,7 @@
           "format": "int64",
           "description": "the number of children in the directory."
         },
-		"expirationTime": {
+        "expirationTime": {
           "type": "integer",
           "readOnly": true,
           "format": "int64",
