@@ -255,10 +255,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/USqlCredential"
-            }
+            "description": "Successfully created the credential within the specified database.",
           }
         }
       },
@@ -298,10 +295,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/USqlCredential"
-            }
+            "description": "Successfully updated the specified credential's password in the specified database",
           }
         }
       },
@@ -332,14 +326,14 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved and returned the specified credential (name only) from the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlCredential"
             }
           }
         }
       },
-      "delete": {
+      "post": {
         "tags": [
           "Catalog"
         ],
@@ -361,12 +355,21 @@
             "description": "The name of the credential to delete"
           },
           {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataLakeAnalyticsCatalogCredentialDeleteParameters"
+            },
+            "description": "The parameters to delete a credential if the current user is not the account owner."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully deleted the specified credential from the specified database."
           }
         }
       }
@@ -1933,6 +1936,15 @@
         "userId"
       ],
       "description": "Data Lake Analytics catalog credential creation parameters."
+    },
+    "DataLakeAnalyticsCatalogCredentialDeleteParameters": {
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "the current password for the credential and user with access to the data source. This is required if the requester is not the account owner."
+        }
+      },
+      "description": "Data Lake Analytics catalog credential deletion parameters."
     },
     "DataLakeAnalyticsCatalogCredentialUpdateParameters": {
       "properties": {
