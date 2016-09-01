@@ -149,26 +149,32 @@
     "Location": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
-          "description": "The ID of the resource (/subscriptions/SubscriptionId)."
+          "description": "The fully qualified Id of the location. For example, /subscriptions/00000000-0000-0000-0000-000000000000/locations/westus."
         },
         "subscriptionId": {
+          "readOnly": true,
           "type": "string",
           "description": "The subscription Id."
         },
         "name": {
+          "readOnly": true,
           "type": "string",
           "description": "The location name."
         },
         "displayName": {
+          "readOnly": true,
           "type": "string",
           "description": "The display name of the location."
         },
         "latitude": {
+          "readOnly": true,
           "type": "string",
           "description": "The latitude of the location."
         },
         "longitude": {
+          "readOnly": true,
           "type": "string",
           "description": "The longitude of the location."
         }
@@ -190,22 +196,27 @@
     "Subscription": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "The fully qualified Id. For example, /subscriptions/00000000-0000-0000-0000-000000000000."
         },
         "subscriptionId": {
+          "readOnly": true,
           "type": "string",
           "description": "The subscription Id."
         },
         "tenantId": {
+          "readOnly": true,
           "type": "string",
           "description": "The tenant Id."
         },
         "displayName": {
+          "readOnly": true,
           "type": "string",
           "description": "The subscription display name."
         },
         "state": {
+          "readOnly": true,
           "type": "string",
           "description": "The subscription state.",
           "enum": [
@@ -234,14 +245,17 @@
     "SubscriptionPolicies": {
       "properties": {
         "locationPlacementId": {
+          "readOnly": true,
           "type": "string",
           "description": "The subscription location placement Id. The Id indicates which regions are visible for a subscription. For example, a subscription with a location placement Id of Public_2014-09-01 has access to Azure public regions."
         },
         "quotaId": {
+          "readOnly": true,
           "type": "string",
           "description": "The subscription quota Id."
         },
         "spendingLimit": {
+          "readOnly": true,
           "type": "string",
           "description": "The subscription spending limit.",
           "enum": [
@@ -279,10 +293,12 @@
     "TenantIdDescription": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "The fully qualified Id. For example, /tenants/00000000-0000-0000-0000-000000000000."
         },
         "tenantId": {
+          "readOnly": true,
           "type": "string",
           "description": "The tenantId. For example, 00000000-0000-0000-0000-000000000000."
         }
