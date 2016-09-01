@@ -9,12 +9,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -193,7 +191,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID of the resource (/subscriptions/SubscriptionId)."
+          "description": "The fully qualified Id. For example, /subscriptions/00000000-0000-0000-0000-000000000000."
         },
         "subscriptionId": {
           "type": "string",
@@ -209,7 +207,18 @@
         },
         "state": {
           "type": "string",
-          "description": "The subscription state."
+          "description": "The subscription state.",
+          "enum": [
+            "Enabled",
+            "Warned",
+            "PastDue",
+            "Disabled",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "SubscriptionState",
+            "modelAsString": false
+          }
         },
         "subscriptionPolicies": {
           "$ref": "#/definitions/SubscriptionPolicies",
@@ -226,7 +235,7 @@
       "properties": {
         "locationPlacementId": {
           "type": "string",
-          "description": "The subscription location placement Id."
+          "description": "The subscription location placement Id. The Id indicates which regions are visible for a subscription. For example, a subscription with a location placement Id of Public_2014-09-01 has access to Azure public regions."
         },
         "quotaId": {
           "type": "string",
@@ -271,11 +280,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The Id."
+          "description": "The fully qualified Id. For example, /tenants/00000000-0000-0000-0000-000000000000."
         },
         "tenantId": {
           "type": "string",
-          "description": "The tenantId."
+          "description": "The tenantId. For example, 00000000-0000-0000-0000-000000000000."
         }
       },
       "description": "Tenant Id information."
