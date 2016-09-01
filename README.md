@@ -12,6 +12,8 @@ This repository is the canonical source for REST API specifications for Microsof
 ## Creating the Swagger Specification for Azure
 - This [document](./documentation/creating-swagger.md) will help you understand how AutoRest converts Swagger in to code.
 - If you are using **swashbuckle** to generate a swagger spec from your .NET WEB API then please take a look at this [repo]( https://github.com/Azure/swashbuckle-resource-provider).
+- Swagger spec for every api-version should be in a serate folder named with the api-version.
+  - It is time consuming to review the file line by line for every api-version. When you are creating the swagger spec for the new api-version, please copy the swagger spec from the previous version in to the new api-versioned folder and commit it. After that overwrite it with the changes for the new api-version. This makes it easy for us to review the changes.
 
 ## Directory Structure
 
