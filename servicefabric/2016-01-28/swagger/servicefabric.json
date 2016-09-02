@@ -3129,53 +3129,6 @@
         }
       }
     },
-    "/ImageStore/{imageStorePath}": {
-      "put": {
-        "operationId": "CopyApplicationPackage",
-        "consumes": [
-          "application/octet-stream"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "imageStorePath",
-            "in": "path",
-            "description": "The image store path",
-            "type": "string",
-            "required": true,
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "file",
-            "in": "body",
-            "description": "The file to copy",
-            "required": true,
-            "schema": {
-              "type": "file"
-            }
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The application package",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      }
-    },
     "/$/GetLoadInformation": {
       "get": {
         "operationId": "GetClusterLoadInformation",
