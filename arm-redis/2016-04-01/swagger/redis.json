@@ -79,13 +79,13 @@
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/RedisResourceWithAccessKey"
+              "$ref": "#/definitions/RedisResource"
             }
           },
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/RedisResourceWithAccessKey"
+              "$ref": "#/definitions/RedisResource"
             }
           }
         }
@@ -262,7 +262,7 @@
           "200": {
             "description": "Lists the keys for Redis Cache",
             "schema": {
-              "$ref": "#/definitions/RedisListKeysResult"
+              "$ref": "#/definitions/RedisAccessKeys"
             }
           }
         }
@@ -310,7 +310,7 @@
           "200": {
             "description": "Lists the regenerated keys for Redis Cache",
             "schema": {
-              "$ref": "#/definitions/RedisListKeysResult"
+              "$ref": "#/definitions/RedisAccessKeys"
             }
           }
         }
@@ -734,22 +734,31 @@
     "RedisReadableProperties": {
       "properties": {
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "Redis instance provisioning status"
         },
         "hostName": {
+          "readOnly": true,
           "type": "string",
           "description": "Redis host name"
         },
         "port": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "Redis non-ssl port"
         },
         "sslPort": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "Redis ssl port"
+        },
+        "accessKeys": {
+          "readOnly": true,
+          "$ref": "#/definitions/RedisAccessKeys",
+          "description": "Redis cache access keys."
         },
         "properties": {
           "$ref": "#/definitions/RedisProperties",
@@ -757,35 +766,6 @@
         }
       },
       "description": "Parameters describing a redis instance"
-    },
-    "RedisReadablePropertiesWithAccessKey": {
-      "properties": {
-        "accessKeys": {
-          "$ref": "#/definitions/RedisAccessKeys",
-          "description": "Redis cache access keys."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/RedisReadableProperties"
-        }
-      ],
-      "description": "Properties generated only in response to CreateOrUpdate redis operation."
-    },
-    "RedisResourceWithAccessKey": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RedisReadablePropertiesWithAccessKey",
-          "description": "Redis cache properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "A redis item in CreateOrUpdate Operation response."
     },
     "RedisResource": {
       "properties": {
@@ -817,19 +797,6 @@
         }
       },
       "description": "The response of list redis operation."
-    },
-    "RedisListKeysResult": {
-      "properties": {
-        "primaryKey": {
-          "type": "string",
-          "description": "The current primary key that clients can use to authenticate with redis cache."
-        },
-        "secondaryKey": {
-          "type": "string",
-          "description": "The current secondary key that clients can use to authenticate with redis cache."
-        }
-      },
-      "description": "The response of redis list keys operation."
     },
     "RedisRegenerateKeyParameters": {
       "properties": {
