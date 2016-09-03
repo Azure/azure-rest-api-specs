@@ -90,6 +90,89 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "ManagementLocks"
+        ],
+        "operationId": "ManagementLocks_DeleteAtResourceGroupLevel",
+        "description": "Deletes the management lock of a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "lockName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of lock."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "200": {
+            "description": ""
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ManagementLocks"
+        ],
+        "operationId": "ManagementLocks_GetAtResourceGroupLevel",
+        "description": "Gets a management lock at the resource group level.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "lockName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The lock name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ManagementLockObject"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/locks/{lockName}": {
@@ -368,48 +451,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Authorization/locks/{lockName}": {
-      "delete": {
-        "tags": [
-          "ManagementLocks"
-        ],
-        "operationId": "ManagementLocks_DeleteAtResourceGroupLevel",
-        "description": "Deletes the management lock of a resource group.",
-        "parameters": [
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource group names."
-          },
-          {
-            "name": "lockName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of lock."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": ""
-          },
-          "200": {
-            "description": ""
-          },
-          "202": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/locks": {
       "get": {
         "tags": [
@@ -547,9 +588,6 @@
             "type": "string",
             "description": "NextLink from the previous successful call to List operation.",
             "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -603,45 +641,6 @@
     }
   },
   "definitions": {
-    "DeploymentExtendedFilter": {
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "description": "Gets or sets the provisioning state."
-        }
-      },
-      "description": "Deployment filter."
-    },
-    "GenericResourceFilter": {
-      "properties": {
-        "resourceType": {
-          "type": "string",
-          "description": "Gets or sets the resource type."
-        },
-        "tagname": {
-          "type": "string",
-          "description": "Gets or sets the tag name."
-        },
-        "tagvalue": {
-          "type": "string",
-          "description": "Gets or sets the tag value."
-        }
-      },
-      "description": "Resource filter."
-    },
-    "ResourceGroupFilter": {
-      "properties": {
-        "tagName": {
-          "type": "string",
-          "description": "Gets or sets the tag name."
-        },
-        "tagValue": {
-          "type": "string",
-          "description": "Gets or sets the tag value."
-        }
-      },
-      "description": "Resource group filter."
-    },
     "ManagementLockProperties": {
       "properties": {
         "level": {
@@ -702,49 +701,6 @@
         }
       },
       "description": "List of management locks."
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {
