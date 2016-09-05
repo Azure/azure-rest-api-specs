@@ -3125,7 +3125,21 @@
             "url": "https://msdn.microsoft.com/library/azure/dn879793.aspx"
           },
           "$ref": "#/definitions/AnalyzerName",
-          "description": "Name of the text analyzer to use."
+          "description": "The name of the analyzer to use for the field at search time and indexing time. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field."
+        },
+        "searchAnalyzer": {
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn879793.aspx"
+          },
+          "$ref": "#/definitions/AnalyzerName",
+          "description": "The name of the analyzer used at search time for the field. This option can be used only with searchable fields. It must be set together with indexAnalyzer and it cannot be set together with the analyzer option. This analyzer can be updated on an existing field."
+        },
+        "indexAnalyzer": {
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn879793.aspx"
+          },
+          "$ref": "#/definitions/AnalyzerName",
+          "description": "The name of the analyzer used at indexing time for the field. This option can be used only with searchable fields. It must be set together with searchAnalyzer and it cannot be set together with the analyzer option. Once the analyzer is chosen, it cannot be changed for the field."
         },
         "key": {
           "x-ms-client-name": "isKey",
