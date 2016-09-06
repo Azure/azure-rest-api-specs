@@ -1455,8 +1455,7 @@
           "description": "Gets or sets the resource identifier of the resource the rule monitors."
         },
         "timeGrain": {
-          "type": "integer",
-          "format": "int64",
+		  "$ref": "#/definitions/TimeSpan",
           "description": "Gets or sets the granularity of metrics the rule monitors. Must be one of the predefined values returned from metric definitions for the metric. Must be between 12 hours and 1 minute."
         },
         "statistic": {
@@ -1474,8 +1473,7 @@
           }
         },
         "timeWindow": {
-          "type": "integer",
-          "format": "int64",
+          "$ref": "#/definitions/TimeSpan",
           "description": "Gets or sets the range of time in which instance data is collected. This value must be greater than the delay in metric collection, which can vary from resource-to-resource. Must be between 12 hours and 5 minutes."
         },
         "timeAggregation": {
@@ -1551,8 +1549,7 @@
           "description": "Gets or sets the number of instances that are involved in the scaling action. This value must be 1 or greater. The default value is 1."
         },
         "cooldown": {
-          "type": "integer",
-          "format": "int64",
+          "$ref": "#/definitions/TimeSpan",
           "description": "Gets or sets the amount of time to wait since the last scaling action before this action occurs. Must be between 1 week and 1 minute."
         }
       },
