@@ -107,6 +107,79 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_SetFileExpiry",
+        "description": "Sets or removes the expiration time on the specified file. This operation can only be executed against files. Folders are not supported.",
+        "parameters": [
+          {
+            "name": "filePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Data Lake Store path (starting with '/') of the file on which to set or remove the expiration time."
+          },
+          {
+            "name": "expiryOption",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "NeverExpire",
+              "RelativeToNow",
+              "RelativeToCreationDate",
+              "Absolute"
+            ],
+            "x-ms-enum": {
+              "name": "ExpiryOptionType",
+              "modelAsString": false
+            },
+            "description": "Indicates the type of expiration to use for the file: 1. NeverExpire: ExpireTime is ignored. 2. RelativeToNow: ExpireTime is an integer in milliseconds representing the expiration date relative to when file expiration is updated. 3. RelativeToCreationDate: ExpireTime is an integer in milliseconds representing the expiration date relative to file creation. 4. Absolute: ExpireTime is an integer in milliseconds, as a Unix timestamp relative to 1/1/1970 00:00:00."
+          },
+          {
+            "name": "expireTime",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The time that the file will expire, corresponding to the ExpiryOption that was set."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "SETEXPIRY"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully set the expiration time on the specified file."
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -150,6 +223,13 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       },
@@ -186,6 +266,13 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/FileOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
             }
           }
         }
@@ -234,6 +321,13 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -290,6 +384,13 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -351,6 +452,13 @@
             "schema": {
               "$ref": "#/definitions/FileStatusesResult"
             }
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -390,6 +498,13 @@
             "schema": {
               "$ref": "#/definitions/ContentSummaryResult"
             }
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -416,7 +531,7 @@
             "type": "string",
             "description": "The constant value for the operation.",
             "enum": [
-              "GETFILESTATUS"
+              "MSGETFILESTATUS"
             ]
           },
           {
@@ -428,6 +543,13 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/FileStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
             }
           }
         }
@@ -460,6 +582,14 @@
             },
             "required": true,
             "description": "The file contents to include when appending to the file."
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The optional offset in the stream to begin the append operation. Default is to append at the end of the stream."
           },
           {
             "name": "op",
@@ -498,6 +628,13 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       },
@@ -572,6 +709,13 @@
         "responses": {
           "201": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       },
@@ -633,6 +777,13 @@
             "schema": {
               "type": "file"
             }
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -676,6 +827,13 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -719,6 +877,13 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -762,6 +927,56 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
+          }
+        }
+      }
+    },
+    "/webhdfs/v1/{defaultAclFilePath}": {
+      "put": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_RemoveDefaultAcl",
+        "description": "Removes the existing Default Access Control List (ACL) of the specified directory.",
+        "parameters": [
+          {
+            "name": "defaultAclFilePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Data Lake Store path (starting with '/') of the directory with the default ACL being removed."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "REMOVEDEFAULTACL"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Removed the Default Access Control List on the specified directory."
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -797,7 +1012,14 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully removed the Access Control List on the specified file or directory."
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       },
@@ -822,7 +1044,7 @@
             "type": "string",
             "description": "The constant value for the operation.",
             "enum": [
-              "GETACLSTATUS"
+              "MSGETACLSTATUS"
             ]
           },
           {
@@ -834,6 +1056,13 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/AclStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
             }
           }
         }
@@ -881,6 +1110,13 @@
             "schema": {
               "$ref": "#/definitions/FileOperationResult"
             }
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -926,6 +1162,13 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/FileOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
             }
           }
         }
@@ -977,6 +1220,13 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -1020,6 +1270,13 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
           }
         }
       }
@@ -1032,7 +1289,7 @@
           "type": "boolean",
           "x-ms-client-name": "operationResult",
           "readOnly": true,
-          "description": "Gets the result of the operation or request."
+          "description": "the result of the operation or request."
         }
       },
       "description": "The result of the request or operation."
@@ -1044,19 +1301,25 @@
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the list of ACLSpec entries on a file or directory."
+          "description": "the list of ACLSpec entries on a file or directory."
         },
         "group": {
           "type": "string",
-          "description": "Gets or sets the group owner, an AAD Object ID."
+          "description": "the group owner, an AAD Object ID."
         },
         "owner": {
           "type": "string",
-          "description": "Gets or sets the user owner, an AAD Object ID."
+          "description": "the user owner, an AAD Object ID."
+        },
+        "permission": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The octal representation of the unnamed user, mask and other permissions."
         },
         "stickyBit": {
           "type": "boolean",
-          "description": "Gets or sets the indicator of whether the sticky bit is on or off."
+          "readOnly": true,
+          "description": "the indicator of whether the sticky bit is on or off."
         }
       },
       "description": "Data Lake Store file or directory Access Control List information."
@@ -1065,7 +1328,7 @@
       "properties": {
         "AclStatus": {
           "$ref": "#/definitions/AclStatus",
-          "description": "Gets or sets the AclStatus object for a given file or directory."
+          "description": "the AclStatus object for a given file or directory."
         }
       },
       "description": "Data Lake Store file or directory Access Control List information."
@@ -1076,25 +1339,25 @@
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the number of directories."
+          "description": "the number of directories."
         },
         "fileCount": {
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the number of files."
+          "description": "the number of files."
         },
         "length": {
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the number of bytes used by the contet."
+          "description": "the number of bytes used by the contet."
         },
         "spaceConsumed": {
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the disk space consumed by the content."
+          "description": "the disk space consumed by the content."
         }
       },
       "description": "Data Lake Store content summary information"
@@ -1104,7 +1367,7 @@
         "ContentSummary": {
           "$ref": "#/definitions/ContentSummary",
           "readOnly": true,
-          "description": "Gets the content summary for the specified path"
+          "description": "the content summary for the specified path"
         }
       },
       "description": "Data Lake Store filesystem content summary information response."
@@ -1115,56 +1378,62 @@
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the last access time as ticks since the epoch."
+          "description": "the last access time as ticks since the epoch."
         },
         "blockSize": {
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the block size for the file."
+          "description": "the block size for the file."
         },
         "childrenNum": {
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the number of children in the directory."
+          "description": "the number of children in the directory."
+        },
+        "expirationTime": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "Gets the expiration time, if any, as ticks since the epoch. If this is set to 0 or DateTime.MaxValue there is no expiration."
         },
         "group": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the group owner."
+          "description": "the group owner."
         },
         "length": {
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the number of bytes in a file."
+          "description": "the number of bytes in a file."
         },
         "modificationTime": {
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "Gets the modification time as ticks since the epoch."
+          "description": "the modification time as ticks since the epoch."
         },
         "owner": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the user who is the owner."
+          "description": "the user who is the owner."
         },
         "pathSuffix": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the path suffix."
+          "description": "the path suffix."
         },
         "permission": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the permission represented as an string."
+          "description": "the permission represented as an string."
         },
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the type of the path object.",
+          "description": "the type of the path object.",
           "enum": [
             "FILE",
             "DIRECTORY"
@@ -1185,7 +1454,7 @@
           "items": {
             "$ref": "#/definitions/FileStatusProperties"
           },
-          "description": "Gets the object containing the list of properties of the files."
+          "description": "the object containing the list of properties of the files."
         }
       },
       "description": "Data Lake Store file status list information."
@@ -1195,7 +1464,7 @@
         "FileStatuses": {
           "$ref": "#/definitions/FileStatuses",
           "readOnly": true,
-          "description": "Gets the object representing the list of file statuses."
+          "description": "the object representing the list of file statuses."
         }
       },
       "description": "Data Lake Store filesystem file status list information response."
@@ -1205,10 +1474,125 @@
         "FileStatus": {
           "$ref": "#/definitions/FileStatusProperties",
           "readOnly": true,
-          "description": "Gets the file status object associated with the specified path."
+          "description": "the file status object associated with the specified path."
         }
       },
       "description": "Data Lake Store filesystem file status information response."
+    },
+    "AdlsIllegalArgumentException": {
+      "x-ms-discriminator-value": "IllegalArgumentException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown indicating that one more arguments is incorrect. Thrown when a 400 error response code is returned (bad request)."
+    },
+    "AdlsUnsupportedOperationException": {
+      "x-ms-discriminator-value": "UnsupportedOperationException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown indicating that the requested operation is not supported. Thrown when a 400 error response code is returned (bad request)."
+    },
+    "AdlsSecurityException": {
+      "x-ms-discriminator-value": "SecurityException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown indicating that access is denied. Thrown when a 401 error response code is returned (Unauthorized)."
+    },
+    "AdlsIOException": {
+      "x-ms-discriminator-value": "IOException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown indicating there was an IO (read or write) error. Thrown when a 403 error response code is returned (forbidden)."
+    },
+    "AdlsFileNotFoundException": {
+      "x-ms-discriminator-value": "FileNotFoundException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown indicating the file or folder could not be found. Thrown when a 404 error response code is returned (not found)."
+    },
+    "AdlsFileAlreadyExistsException": {
+      "x-ms-discriminator-value": "FileAlreadyExistsException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown indicating the file or folder already exists. Thrown when a 403 error response code is returned (forbidden)."
+    },
+    "AdlsBadOffsetException": {
+      "x-ms-discriminator-value": "BadOffsetException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown indicating the append or read is from a bad offset. Thrown when a 400 error response code is returned for append and open operations (Bad request)."
+    },
+    "AdlsRuntimeException": {
+      "x-ms-discriminator-value": "RuntimeException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown when an unexpected error occurs during an operation. Thrown when a 500 error response code is returned (Internal server error)."
+    },
+    "AdlsAccessControlException": {
+      "x-ms-discriminator-value": "AccessControlException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown indicating that access is denied due to insufficient permissions. Thrown when a 403 error response code is returned (forbidden)."
+    },
+    "AdlsRemoteException": {
+      "discriminator": "exception",
+      "required": [
+        "exception"
+      ],
+      "properties": {
+        "exception": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the class name of the exception thrown, such as 'IllegalArgumentException'."
+        },
+        "javaClassName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the full class package name for the exception thrown, such as 'java.lang.IllegalArgumentException'."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the message associated with the exception that was thrown, such as 'Invalid value for webhdfs parameter \"permission\":...'."
+        }
+      },
+      "description": "Data Lake Store filesystem exception based on the WebHDFS definition for RemoteExceptions."
+    },
+    "AdlsError": {
+      "properties": {
+        "RemoteException": {
+          "$ref": "#/definitions/AdlsRemoteException",
+          "readOnly": true,
+          "description": "the object representing the actual WebHDFS exception being returned."
+        }
+      },
+      "description": "Data Lake Store filesystem error containing a specific WebHDFS exception."
     }
   },
   "parameters": {

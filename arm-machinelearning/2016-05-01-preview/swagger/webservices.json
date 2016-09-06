@@ -262,6 +262,7 @@
   },
   "definitions": {
     "Resource": {
+      "x-ms-azure-resource": true,
       "required": [
         "location"
       ],
@@ -304,9 +305,12 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/WebServiceProperties",
-          "description": "Web service resource properties."          
+          "description": "Web service resource properties."
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "WebServiceProperties": {
       "type": "object",
@@ -365,6 +369,10 @@
           "description": "The uri for the swagger spec associated with this web service.",
           "readOnly": true
         },
+        "exposeSampleData": {
+            "type": "boolean",
+            "description": "Flag that controls whether to expose sample data or not in the web service's swagger definition."
+        },
         "realtimeConfiguration": {
           "$ref": "#/definitions/RealtimeConfiguration",
           "description": "Configuration for the service's realtime endpoint."
@@ -393,6 +401,10 @@
           "$ref": "#/definitions/ServiceInputOutputSpecification",
           "description": "Swagger schema for the service's output(s), as applicable."
         },
+        "exampleRequest": {
+          "$ref": "#/definitions/ExampleRequest",
+          "description": "Sample request data for each of the service's inputs, as applicable."
+        },
         "assets": {
           "type": "object",
           "description": "Set of assets associated with the web service.",
@@ -402,7 +414,7 @@
         },
         "parameters": {
           "type": "object",
-          "description": "The set of global parameters values defined for the web service, given as a global parameter name -> default value collection. If no default value is specified, the parameter is considered to be required.",
+          "description": "The set of global parameters values defined for the web service, given as a global parameter name to default value map. If no default value is specified, the parameter is considered to be required.",
           "additionalProperties": {
             "type": "string"
           }
@@ -426,31 +438,8 @@
       ],
       "properties": {
         "package": {
-          "type": "object",
           "description": "The definition of the graph package making up this web service.",
-          "properties": {
-            "nodes": {
-              "type": "object",
-              "description": "The set of nodes making up the graph, provided as a nodeId -> GraphNode map",
-              "additionalProperties": {
-                "$ref": "#/definitions/GraphNode"
-              }
-            },
-            "edges": {
-              "type": "array",
-              "description": "The list of edges making up the graph.",
-              "items": {
-                "$ref": "#/definitions/GraphEdge"
-              }
-            },
-            "graphParameters": {
-              "type": "object",
-              "description": "The collection of global parameters for the graph, given as a global parameter name -> GraphParameter map. Each parameter here has a 1:1 match with the global parameters values map declared at the WebServiceProperties level.",
-              "additionalProperties": {
-                "$ref": "#/definitions/GraphParameter"
-              }
-            }
-          }
+          "$ref": "#/definitions/GraphPackage"
         }
       }
     },
@@ -519,7 +508,10 @@
           "description": "Moment of time after which diagnostics are no longer collected. If null, diagnostic collection is not time limited.",
           "format": "date-time"
         }
-      }
+      },
+      "required": [
+        "level"
+      ]
     },
     "StorageAccount": {
       "type": "object",
@@ -580,7 +572,7 @@
         },
         "properties": {
           "type": "object",
-          "description": "Collection of (name -> swagger schema) for each input or output of the web service.",
+          "description": "Map of name to swagger schema for each input or output of the web service.",
           "additionalProperties": {
             "$ref": "#/definitions/TableSpecification"
           }
@@ -605,8 +597,12 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of the entity described in swagger. Always 'object'.",
+          "description": "The type of the entity described in swagger.",
           "default": "object"
+        },
+        "format": {
+          "type": "string",
+          "description": "The format, if 'type' is not 'object'"
         },
         "properties": {
           "type": "object",
@@ -617,8 +613,7 @@
         }
       },
       "required": [
-        "type",
-        "properties"
+        "type"
       ]
     },
     "ColumnSpecification": {
@@ -683,6 +678,32 @@
         "type"
       ]
     },
+    "ExampleRequest": {
+      "type": "object",
+      "description": "Sample input data for the service's input(s).",
+      "properties": {
+        "inputs": {
+          "type": "object",
+          "description": "Sample input data for the web service's input(s) given as an input name to sample input values matrix map.",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "globalParameters": {
+          "type": "object",
+          "description": "Sample input data for the web service's global parameters",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
     "AssetItem": {
       "type": "object",
       "description": "Information about an asset associated with the web service.",
@@ -690,6 +711,10 @@
         "name": {
           "type": "string",
           "description": "Asset's friendly name."
+        },
+        "id": {
+          "type": "string",
+          "description": "Asset's Id."
         },
         "type": {
           "type": "string",
@@ -831,6 +856,33 @@
             "modelAsString": true
           },
           "default": "Dataset"
+        }
+      }
+    },
+    "GraphPackage": {
+      "type": "object",
+      "description": "Defines the graph of modules making up the machine learning solution.",
+      "properties": {
+        "nodes": {
+          "type": "object",
+          "description": "The set of nodes making up the graph, provided as a nodeId to GraphNode map",
+          "additionalProperties": {
+            "$ref": "#/definitions/GraphNode"
+          }
+        },
+        "edges": {
+          "type": "array",
+          "description": "The list of edges making up the graph.",
+          "items": {
+            "$ref": "#/definitions/GraphEdge"
+          }
+        },
+        "graphParameters": {
+          "type": "object",
+          "description": "The collection of global parameters for the graph, given as a global parameter name to GraphParameter map. Each parameter here has a 1:1 match with the global parameters values map declared at the WebServiceProperties level.",
+          "additionalProperties": {
+            "$ref": "#/definitions/GraphParameter"
+          }
         }
       }
     },
