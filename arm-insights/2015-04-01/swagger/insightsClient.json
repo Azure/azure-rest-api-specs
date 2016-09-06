@@ -9,12 +9,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "paths": {
     "/providers/microsoft.insights/eventtypes/management/eventcategories": {
@@ -22,7 +20,7 @@
         "tags": [
           "Event"
         ],
-        "operationId": "Event_ListEventCategories",
+        "operationId": "EventCategories_List",
         "description": "The list of event categories.",
         "parameters": [
           {
@@ -30,7 +28,8 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "default": "2015-04-01"
+            "default": "2015-04-01",
+            "description": "The api-version to send to the server"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -54,7 +53,7 @@
         "tags": [
           "Event"
         ],
-        "operationId": "Event_ListDigestEvents",
+        "operationId": "DigestEvent_List",
         "description": "The List Digest Event Values operation lists the digest events.",
         "parameters": [
           {
@@ -62,7 +61,8 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "default": "2015-04-01"
+            "default": "2015-04-01",
+            "description": "The api-version to send to the server"
           },
           {
             "name": "$filter",
@@ -101,7 +101,7 @@
         "tags": [
           "Event"
         ],
-        "operationId": "Event_ListTenantDigestEvents",
+        "operationId": "TenantDigestEvent_List",
         "description": "The List Tenant Digest Event Values operation lists the tenant-level digest events.",
         "parameters": [
           {
@@ -109,7 +109,8 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "default": "2015-04-01"
+            "default": "2015-04-01",
+            "description": "The api-version to send to the server"
           },
           {
             "name": "$filter",
@@ -148,7 +149,7 @@
         "tags": [
           "Event"
         ],
-        "operationId": "Event_ListEvents",
+        "operationId": "Event_List",
         "description": "The List Event Values operation lists the events.",
         "parameters": [
           {
@@ -156,7 +157,8 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "default": "2015-04-01"
+            "default": "2015-04-01",
+            "description": "The api-version to send to the server"
           },
           {
             "name": "$filter",
@@ -195,7 +197,7 @@
         "tags": [
           "Event"
         ],
-        "operationId": "Event_ListTenantEvents",
+        "operationId": "TenantEvent_List",
         "description": "The list tenant event values operation lists the tenant events.",
         "parameters": [
           {
@@ -203,7 +205,8 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "default": "2015-04-01"
+            "default": "2015-04-01",
+            "description": "The api-version to send to the server"
           },
           {
             "name": "$filter",
@@ -242,7 +245,7 @@
         "tags": [
           "LogDefinition"
         ],
-        "operationId": "LogDefinition_GetLogDefinitions",
+        "operationId": "LogDefinition_Get",
         "description": "The List Log Definitions operation lists the log definitions for the resource.",
         "parameters": [
           {
@@ -257,7 +260,8 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "default": "2015-07-01"
+            "default": "2015-07-01",
+            "description": "The api-version to send to the server"
           },
           {
             "name": "$filter",
@@ -289,26 +293,29 @@
         "tags": [
           "Log"
         ],
-        "operationId": "Log_GetLogs",
+        "operationId": "Log_Get",
         "description": "The List Log operation lists the logs for the resource.",
         "parameters": [
           {
             "name": "resourceUri",
             "in": "body",
             "required": false,
-"schema" : {}
+"schema" : {},
+            "description" : "The call must return the logs for this resource id"
           },
           {
             "name": "filterString",
             "in": "body",
             "required": false,
-"schema" : {}
+"schema" : {},
+            "description" : "The filter to use in the query for logs"
           },
           {
             "name": "definitions",
             "in": "body",
             "required": false,
-"schema" : {}
+"schema" : {},
+            "description" : "The list of log definitions to use in the query"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -332,7 +339,7 @@
         "tags": [
           "MetricDefinition"
         ],
-        "operationId": "MetricDefinition_GetMetricDefinitions",
+        "operationId": "MetricDefinition_Get",
         "description": "The List Metric Definitions operation lists the metric definitions for the resource.",
         "parameters": [
           {
@@ -348,7 +355,8 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "default": "2016-03-01"
+            "default": "2016-03-01",
+            "description": "The api-version to send to the server"
           },
           {
             "name": "$filter",
@@ -380,7 +388,7 @@
         "tags": [
           "Metric"
         ],
-        "operationId": "Metric_GetMetrics",
+        "operationId": "Metric_Get",
         "description": "The List Metric operation lists the metric value sets for the resource metrics.",
         "parameters": [
           {
@@ -403,7 +411,8 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "default": "2016-06-01"
+            "default": "2016-06-01",
+            "description": "The api-version to send to the server"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -449,7 +458,8 @@
             "name": "$filter",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "description": "The odata filter string to use in the query"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -556,7 +566,7 @@
           ],
           "x-ms-enum": {
             "name": "EventChannels",
-            "modelAsString": "False"
+            "modelAsString": false
           }
         },
         "claims": {
@@ -610,7 +620,7 @@
           ],
           "x-ms-enum": {
             "name": "EventLevel",
-            "modelAsString": "False"
+            "modelAsString": false
           }
         },
         "resourceGroupName": {
@@ -650,6 +660,7 @@
           "description": "Gets or sets the operation name."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -693,10 +704,6 @@
             "$ref": "#/definitions/EventData"
           },
           "description": "Gets or sets this list that includes the Azure audit logs."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the next link works as a continuation token when all of the events are not returned in the response and a second call is required."
         }
       },
       "description": "Represents collection of events."
@@ -835,6 +842,7 @@
           "description": "Gets or sets tThe location of the resource emitting the event."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -889,7 +897,8 @@
           "type": "integer",
           "format": "int32"
         }
-      }
+      },
+      "description": "This is a spec for the external type with the same name (in System.Net)"
     },
     "MetricAvailability": {
       "properties": {
@@ -904,29 +913,25 @@
       },
       "description": "Metric availability specifies the time grain (aggregation interval or frequency) and the retention period for that time grain."
     },
-	"Unit": {
-	  "type": "string",
-	  "description": "Gets or sets the unit of the metric.",
-	  "enum": [
-		"Count",
-		"Bytes",
-		"Seconds",
-		"CountPerSecond",
-		"BytesPerSecond",
-		"Percent",
-		"MilliSeconds"
-	  ],
-	  "x-ms-enum": {
-		"name": "Unit",
-		"modelAsString": "False"
-	  }
-	},
+    "Unit": {
+      "type": "string",
+      "description": "Gets or sets the unit of the metric.",
+      "enum": [
+        "Count",
+        "Bytes",
+        "Seconds",
+        "CountPerSecond",
+        "BytesPerSecond",
+        "Percent",
+        "MilliSeconds"
+      ],
+      "x-ms-enum": {
+        "name": "Unit",
+        "modelAsString": false
+      }
+    },
     "MetricDefinition": {
       "properties": {
-	    "resourceUri": {
-		  "type": "string",
-		  "description": "Gets or sets the resource identifier of the resource that has emitted the metric."
-		},
         "resourceId": {
           "type": "string",
           "description": "Gets or sets the resource identifier of the resource that has emitted the metric."
@@ -935,18 +940,8 @@
           "$ref": "#/definitions/LocalizableString",
           "description": "Gets or sets the name and the display name of the metric."
         },
-		"startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the occurrence time of event"
-		},
-		"endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the occurrence time of event"
-		},		
         "unit": {
-		  "$ref": "#/definitions/Unit",
+          "$ref": "#/definitions/Unit",
           "description": "Gets or sets the unit of the metric."
         },
         "primaryAggregationType": {
@@ -955,14 +950,14 @@
           "enum": [
             "None",
             "Average",
+            "Count",
             "Minimum",
             "Maximum",
-            "Total",
-            "Last"
+            "Total"
           ],
           "x-ms-enum": {
             "name": "AggregationType",
-            "modelAsString": "False"
+            "modelAsString": false
           }
         },
         "metricAvailabilities": {
@@ -992,7 +987,7 @@
       "description": "Represents collection of metric definitions."
     },
     "MetricValue": {
-	  "required": [ "timestamp" ],
+      "required": [ "timestamp" ],
       "properties": {
         "timestamp": {
           "type": "string",
@@ -1028,7 +1023,7 @@
       "description": "Represents a metric value."
     },
     "Metric": {
-	  "required": [ "name", "unit", "data" ],
+      "required": [ "name", "unit", "data" ],
       "properties": {
         "name": {
           "$ref": "#/definitions/LocalizableString",
@@ -1041,8 +1036,8 @@
         "data": {
           "type": "array",
           "items": {
-		    "$ref": "#/definitions/MetricValue"
-		  },
+            "$ref": "#/definitions/MetricValue"
+          },
           "description": "Array of data points representing the metric values."
         }
       },
