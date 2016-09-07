@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ManagementLockClient",
-    "version": "2015-01-01"
+    "version": "2016-09-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -642,6 +642,14 @@
       },
       "description": "Resource group filter."
     },
+    "ManagementLockOwner": {
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Gets or sets the application Id of the management lock owner."
+        }
+      }
+    },
     "ManagementLockProperties": {
       "properties": {
         "level": {
@@ -660,6 +668,13 @@
         "notes": {
           "type": "string",
           "description": "Gets or sets the notes of the management lock."
+        },
+        "owners": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagementLockOwner"
+          },
+          "description": "Gets or sets the owners of the management lock."
         }
       },
       "description": "The management lock properties."
