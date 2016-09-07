@@ -9,12 +9,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -78,13 +76,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
             }
           },
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
             }
@@ -607,7 +605,7 @@
       "properties": {
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets the provisioning state."
+          "description": "The provisioning state."
         }
       },
       "description": "Deployment filter."
@@ -616,15 +614,15 @@
       "properties": {
         "resourceType": {
           "type": "string",
-          "description": "Gets or sets the resource type."
+          "description": "The resource type."
         },
         "tagname": {
           "type": "string",
-          "description": "Gets or sets the tag name."
+          "description": "The tag name."
         },
         "tagvalue": {
           "type": "string",
-          "description": "Gets or sets the tag value."
+          "description": "The tag value."
         }
       },
       "description": "Resource filter."
@@ -633,11 +631,11 @@
       "properties": {
         "tagName": {
           "type": "string",
-          "description": "Gets or sets the tag name."
+          "description": "The tag name."
         },
         "tagValue": {
           "type": "string",
-          "description": "Gets or sets the tag value."
+          "description": "The tag value."
         }
       },
       "description": "Resource group filter."
@@ -646,7 +644,7 @@
       "properties": {
         "applicationId": {
           "type": "string",
-          "description": "Gets or sets the application Id of the management lock owner."
+          "description": "The application Id of the management lock owner."
         }
       }
     },
@@ -654,7 +652,7 @@
       "properties": {
         "level": {
           "type": "string",
-          "description": "Gets or sets the lock level of the management lock.",
+          "description": "The lock level of the management lock.",
           "enum": [
             "NotSpecified",
             "CanNotDelete",
@@ -667,14 +665,14 @@
         },
         "notes": {
           "type": "string",
-          "description": "Gets or sets the notes of the management lock."
+          "description": "The notes of the management lock."
         },
         "owners": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagementLockOwner"
           },
-          "description": "Gets or sets the owners of the management lock."
+          "description": "The owners of the management lock."
         }
       },
       "description": "The management lock properties."
@@ -684,19 +682,21 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ManagementLockProperties",
-          "description": "Gets or sets the properties of the lock."
+          "description": "The properties of the lock."
         },
         "id": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the Id of the lock."
+          "description": "The Id of the lock."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the type of the lock."
+          "description": "The type of the lock."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the lock."
+          "description": "The name of the lock."
         }
       },
       "description": "Management lock information.",
@@ -709,11 +709,11 @@
           "items": {
             "$ref": "#/definitions/ManagementLockObject"
           },
-          "description": "Gets or sets the list of locks."
+          "description": "The list of locks."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
       "description": "List of management locks."
