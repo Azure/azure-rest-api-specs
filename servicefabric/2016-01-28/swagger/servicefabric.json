@@ -1782,12 +1782,12 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "serviceDescription",
+            "name": "createServiceDescription",
             "in": "body",
             "description": "The description of the service",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServiceDescription"
+              "$ref": "#/definitions/CreateServiceDescription"
             }
           },
           {
@@ -1902,12 +1902,12 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "serviceGroupDescription",
+            "name": "createServiceGroupDescription",
             "in": "body",
             "description": "The description of the service group",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServiceGroupDescription"
+              "$ref": "#/definitions/CreateServiceGroupDescription"
             }
           },
           {
@@ -2030,12 +2030,12 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "serviceGroupUpdateDescription",
+            "name": "updateServiceGroupDescription",
             "in": "body",
             "description": "The description of the service group update",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServiceGroupUpdateDescription"
+              "$ref": "#/definitions/UpdateServiceGroupDescription"
             }
           },
           {
@@ -2281,12 +2281,12 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "serviceUpdateDescription",
+            "name": "updateServiceDescription",
             "in": "body",
             "description": "The description of the service update",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServiceUpdateDescription"
+              "$ref": "#/definitions/UpdateServiceDescription"
             }
           },
           {
@@ -4547,11 +4547,56 @@
         }
       }
     },
+    "CreateServiceGroupDescription": {
+      "type": "object",
+      "discriminator": "ServiceKind",
+      "required": [
+        "ServiceKind"
+      ],
+      "properties": {
+        "ServiceKind": {
+          "type": "string"
+        },
+        "ApplicationName": {
+          "type": "string"
+        },
+        "ServiceName": {
+          "type": "string"
+        },
+        "ServiceTypeName": {
+          "type": "string"
+        },
+        "PartitionDescription": {
+          "$ref": "#/definitions/PartitionDescription"
+        },
+        "PlacementConstraints": {
+          "type": "string"
+        },
+        "CorrelationScheme": {
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "ServiceLoadMetrics": {
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "ServicePlacementPolicies": {
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "Flags": {
+          "type": "integer"
+        },
+        "ServiceGroupMemberDescription": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceGroupMemberDescription"
+          }
+        }
+      }
+    },
     "StatelessCreateServiceGroupDescription": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ServiceGroupDescription"
+          "$ref": "#/definitions/CreateServiceGroupDescription"
         }
       ],
       "x-ms-discriminator-value": "Stateless",
@@ -4565,7 +4610,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ServiceGroupDescription"
+          "$ref": "#/definitions/CreateServiceGroupDescription"
         }
       ],
       "x-ms-discriminator-value": "Stateful",
@@ -4851,11 +4896,50 @@
         }
       }
     },
+    "CreateServiceDescription": {
+      "type": "object",
+      "discriminator": "ServiceKind",
+      "required": [
+        "ServiceKind"
+      ],
+      "properties": {
+        "ServiceKind": {
+          "type": "string"
+        },
+        "ApplicationName": {
+          "type": "string"
+        },
+        "ServiceName": {
+          "type": "string"
+        },
+        "ServiceTypeName": {
+          "type": "string"
+        },
+        "PartitionDescription": {
+          "$ref": "#/definitions/PartitionDescription"
+        },
+        "PlacementConstraints": {
+          "type": "string"
+        },
+        "CorrelationScheme": {
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "ServiceLoadMetrics": {
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "ServicePlacementPolicies": {
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "Flags": {
+          "type": "integer"
+        }
+      }
+    },
     "StatelessCreateServiceDescription": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ServiceDescription"
+          "$ref": "#/definitions/CreateServiceDescription"
         }
       ],
       "x-ms-discriminator-value": "Stateless",
@@ -4869,7 +4953,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ServiceDescription"
+          "$ref": "#/definitions/CreateServiceDescription"
         }
       ],
       "x-ms-discriminator-value": "Stateful",
@@ -4900,7 +4984,7 @@
         }
       }
     },
-    "ServiceUpdateDescription": {
+    "UpdateServiceDescription": {
       "type": "object",
       "discriminator": "ServiceKind",
       "required": [
@@ -4915,11 +4999,11 @@
         }
       }
     },
-    "StatelessServiceUpdateDescription": {
+    "StatelessUpdateServiceDescription": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ServiceUpdateDescription"
+          "$ref": "#/definitions/UpdateServiceDescription"
         }
       ],
       "x-ms-discriminator-value": "Stateless",
@@ -4929,11 +5013,11 @@
         }
       }
     },
-    "StatefulServiceUpdateDescription": {
+    "StatefulUpdateServiceDescription": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ServiceUpdateDescription"
+          "$ref": "#/definitions/UpdateServiceDescription"
         }
       ],
       "x-ms-discriminator-value": "Stateful",
@@ -4955,7 +5039,7 @@
         }
       }
     },
-    "ServiceGroupUpdateDescription": {
+    "UpdateServiceGroupDescription": {
       "type": "object",
       "discriminator": "ServiceKind",
       "required": [
@@ -4970,11 +5054,11 @@
         }
       }
     },
-    "StatelessServiceGroupUpdateDescription": {
+    "StatelessUpdateServiceGroupDescription": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ServiceGroupUpdateDescription"
+          "$ref": "#/definitions/UpdateServiceGroupDescription"
         }
       ],
       "x-ms-discriminator-value": "Stateless",
@@ -4984,11 +5068,11 @@
         }
       }
     },
-    "StatefulServiceGroupUpdateDescription": {
+    "StatefulUpdateServiceGroupDescription": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ServiceGroupUpdateDescription"
+          "$ref": "#/definitions/UpdateServiceGroupDescription"
         }
       ],
       "x-ms-discriminator-value": "Stateful",
