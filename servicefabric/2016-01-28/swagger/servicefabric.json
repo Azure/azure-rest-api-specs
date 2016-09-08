@@ -55,7 +55,7 @@
                   "type": "string"
                 },
                 "HealthState": {
-                  "type": "integer"
+                  "type": "string"
                 },
                 "Description": {
                   "type": "string"
@@ -112,11 +112,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The node array",
+            "description": "The node list",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Node"
+              "type": "object",
+              "properties": {
+                "ContinuationToken": {
+                  "type": "string"
+                },
+                "Items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Node"
+                  }
+                }
               }
             }
           },
@@ -227,7 +235,7 @@
               "type": "object",
               "properties": {
                 "DeactivationIntent": {
-                  "type": "integer"
+                  "type": "string"
                 }
               }
             }
@@ -809,7 +817,7 @@
                   "type": "string"
                 },
                 "HealthState": {
-                  "type": "integer"
+                  "type": "string"
                 },
                 "Description": {
                   "type": "string"
@@ -883,7 +891,7 @@
                   "type": "string"
                 },
                 "HealthState": {
-                  "type": "integer"
+                  "type": "string"
                 },
                 "Description": {
                   "type": "string"
@@ -964,7 +972,7 @@
                   "type": "string"
                 },
                 "HealthState": {
-                  "type": "integer"
+                  "type": "string"
                 },
                 "Description": {
                   "type": "string"
@@ -1317,11 +1325,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The application",
+            "description": "The application list",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Application"
+              "type": "object",
+              "properties": {
+                "ContinuationToken": {
+                  "type": "string"
+                },
+                "Items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Application"
+                  }
+                }
               }
             }
           },
@@ -1397,11 +1413,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The service",
+            "description": "The service list",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Service"
+              "type": "object",
+              "properties": {
+                "ContinuationToken": {
+                  "type": "string"
+                },
+                "Items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Service"
+                  }
+                }
               }
             }
           },
@@ -1657,7 +1681,7 @@
                   "type": "string"
                 },
                 "HealthState": {
-                  "type": "integer"
+                  "type": "string"
                 },
                 "Description": {
                   "type": "string"
@@ -2519,7 +2543,7 @@
                   "type": "string"
                 },
                 "HealthState": {
-                  "type": "integer"
+                  "type": "string"
                 },
                 "Description": {
                   "type": "string"
@@ -2579,9 +2603,17 @@
           "200": {
             "description": "The partitions",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Partition"
+              "type": "object",
+              "properties": {
+                "ContinuationToken": {
+                  "type": "string"
+                },
+                "Items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Partition"
+                  }
+                }
               }
             }
           },
@@ -2761,11 +2793,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The replica",
+            "description": "The replica list",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Replica"
+              "type": "object",
+              "properties": {
+                "ContinuationToken": {
+                  "type": "string"
+                },
+                "Items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Replica"
+                  }
+                }
               }
             }
           },
@@ -2896,7 +2936,7 @@
                   "type": "string"
                 },
                 "HealthState": {
-                  "type": "integer"
+                  "type": "string"
                 },
                 "Description": {
                   "type": "string"
@@ -3017,7 +3057,7 @@
                   "type": "string"
                 },
                 "HealthState": {
-                  "type": "integer"
+                  "type": "string"
                 },
                 "Description": {
                   "type": "string"
@@ -3258,7 +3298,7 @@
           "type": "string"
         },
         "HealthState": {
-          "type": "integer"
+          "type": "string"
         },
         "IsSeedNode": {
           "type": "boolean"
@@ -3284,7 +3324,7 @@
           "type": "object",
           "properties": {
             "NodeDeactivationIntent": {
-              "type": "integer"
+              "type": "string"
             },
             "NodeDeactivationStatus": {
               "type": "integer"
@@ -3303,7 +3343,7 @@
           "type": "string"
         },
         "HealthState": {
-          "type": "integer"
+          "type": "string"
         },
         "TimeToLiveInMilliSeconds": {
           "type": "string"
@@ -4050,7 +4090,7 @@
       "type": "object",
       "properties": {
         "ServiceKind": {
-          "type": "integer"
+          "type": "string"
         },
         "ServiceName": {
           "type": "string"
@@ -4091,7 +4131,7 @@
       "type": "object",
       "properties": {
         "ServiceKind": {
-          "type": "integer"
+          "type": "string"
         },
         "ServiceName": {
           "type": "string"
@@ -4304,7 +4344,7 @@
           }
         },
         "HealthState": {
-          "type": "integer"
+          "type": "string"
         }
       }
     },
@@ -4351,7 +4391,7 @@
           "type": "string"
         },
         "ServiceKind": {
-          "type": "integer"
+          "type": "string"
         },
         "Name": {
           "type": "string"
@@ -4366,7 +4406,7 @@
           "type": "boolean"
         },
         "HealthState": {
-          "type": "integer"
+          "type": "string"
         },
         "ServiceStatus": {
           "type": "integer"
@@ -4380,7 +4420,7 @@
       "type": "object",
       "properties": {
         "PartitionScheme": {
-          "type": "integer"
+          "type": "string"
         },
         "Count": {
           "type": "integer"
@@ -4409,7 +4449,7 @@
           "type": "string"
         },
         "ServiceKind": {
-          "type": "integer"
+          "type": "string"
         }
       }
     },
@@ -4465,7 +4505,7 @@
           "$ref": "#/definitions/ServiceGroupDescription"
         }
       ],
-      "x-ms-discriminator-value": "FABRIC_SERVICE_KIND_STATELESS",
+      "x-ms-discriminator-value": "Stateless",
       "properties": {
         "InstanceCount": {
           "type": "integer"
@@ -4479,7 +4519,7 @@
           "$ref": "#/definitions/ServiceGroupDescription"
         }
       ],
-      "x-ms-discriminator-value": "FABRIC_SERVICE_KIND_STATEFUL",
+      "x-ms-discriminator-value": "Stateful",
       "properties": {
         "TargetReplicaSetSize": {
           "type": "integer"
@@ -4514,7 +4554,7 @@
           "$ref": "#/definitions/ServiceGroupDescription"
         }
       ],
-      "x-ms-discriminator-value": "1",
+      "x-ms-discriminator-value": "Stateless",
       "properties": {
         "InstanceCount": {
           "type": "integer"
@@ -4528,7 +4568,7 @@
           "$ref": "#/definitions/ServiceGroupDescription"
         }
       ],
-      "x-ms-discriminator-value": "2",
+      "x-ms-discriminator-value": "Stateful",
       "properties": {
         "TargetReplicaSetSize": {
           "type": "integer"
@@ -4643,7 +4683,7 @@
           "type": "string"
         },
         "RollingUpgradeMode": {
-          "type": "integer"
+          "type": "string"
         },
         "UpgradeDurationInMilliseconds": {
           "type": "string"
@@ -4694,7 +4734,7 @@
           "type": "string"
         },
         "ServiceCorrelationScheme": {
-          "type": "integer"
+          "type": "string"
         }
       }
     },
@@ -4719,7 +4759,7 @@
       "type": "object",
       "properties": {
         "Type": {
-          "type": "integer"
+          "type": "string"
         }
       }
     },
@@ -4769,7 +4809,7 @@
           "$ref": "#/definitions/ServiceDescription"
         }
       ],
-      "x-ms-discriminator-value": "FABRIC_SERVICE_KIND_STATELESS",
+      "x-ms-discriminator-value": "Stateless",
       "properties": {
         "InstanceCount": {
           "type": "integer"
@@ -4783,7 +4823,7 @@
           "$ref": "#/definitions/ServiceDescription"
         }
       ],
-      "x-ms-discriminator-value": "FABRIC_SERVICE_KIND_STATEFUL",
+      "x-ms-discriminator-value": "Stateful",
       "properties": {
         "TargetReplicaSetSize": {
           "type": "integer"
@@ -4818,7 +4858,7 @@
           "$ref": "#/definitions/ServiceDescription"
         }
       ],
-      "x-ms-discriminator-value": "1",
+      "x-ms-discriminator-value": "Stateless",
       "properties": {
         "InstanceCount": {
           "type": "integer"
@@ -4832,7 +4872,7 @@
           "$ref": "#/definitions/ServiceDescription"
         }
       ],
-      "x-ms-discriminator-value": "2",
+      "x-ms-discriminator-value": "Stateful",
       "properties": {
         "TargetReplicaSetSize": {
           "type": "integer"
@@ -4868,7 +4908,7 @@
       ],
       "properties": {
         "ServiceKind": {
-          "type": "integer"
+          "type": "string"
         },
         "Flags": {
           "type": "integer"
@@ -4882,7 +4922,7 @@
           "$ref": "#/definitions/ServiceUpdateDescription"
         }
       ],
-      "x-ms-discriminator-value": "1",
+      "x-ms-discriminator-value": "Stateless",
       "properties": {
         "InstanceCount": {
           "type": "integer"
@@ -4896,7 +4936,7 @@
           "$ref": "#/definitions/ServiceUpdateDescription"
         }
       ],
-      "x-ms-discriminator-value": "2",
+      "x-ms-discriminator-value": "Stateful",
       "properties": {
         "TargetReplicaSetSize": {
           "type": "integer"
@@ -4923,7 +4963,7 @@
       ],
       "properties": {
         "ServiceKind": {
-          "type": "integer"
+          "type": "string"
         },
         "Flags": {
           "type": "integer"
@@ -4937,7 +4977,7 @@
           "$ref": "#/definitions/ServiceGroupUpdateDescription"
         }
       ],
-      "x-ms-discriminator-value": "1",
+      "x-ms-discriminator-value": "Stateless",
       "properties": {
         "InstanceCount": {
           "type": "integer"
@@ -4951,7 +4991,7 @@
           "$ref": "#/definitions/ServiceGroupUpdateDescription"
         }
       ],
-      "x-ms-discriminator-value": "2",
+      "x-ms-discriminator-value": "Stateful",
       "properties": {
         "TargetReplicaSetSize": {
           "type": "integer"
@@ -5028,7 +5068,7 @@
       "type": "object",
       "properties": {
         "ServiceKind": {
-          "type": "integer"
+          "type": "string"
         },
         "PartitionInformation": {
           "$ref": "#/definitions/PartitionInformation"
@@ -5040,7 +5080,7 @@
           "type": "integer"
         },
         "HealthState": {
-          "type": "integer"
+          "type": "string"
         },
         "PartitionStatus": {
           "type": "integer"
@@ -5062,7 +5102,7 @@
       "type": "object",
       "properties": {
         "ServiceKind": {
-          "type": "integer"
+          "type": "string"
         },
         "InstanceId": {
           "type": "string"
@@ -5077,7 +5117,7 @@
           "type": "integer"
         },
         "HealthState": {
-          "type": "integer"
+          "type": "string"
         },
         "Address": {
           "type": "string"
@@ -5131,7 +5171,7 @@
       "type": "object",
       "properties": {
         "ServiceKind": {
-          "type": "integer"
+          "type": "string"
         },
         "PartitionId": {
           "type": "string"
@@ -5336,7 +5376,7 @@
       "type": "object",
       "properties": {
         "FailureAction": {
-          "type": "integer"
+          "type": "string"
         },
         "HealthCheckWaitDurationInMilliseconds": {
           "type": "string"
@@ -5399,7 +5439,7 @@
           "type": "integer"
         },
         "RollingUpgradeMode": {
-          "type": "integer"
+          "type": "string"
         },
         "UpgradeReplicaSetCheckTimeoutInSeconds": {
           "type": "integer"
@@ -5428,13 +5468,13 @@
           "type": "object",
           "properties": {
             "RollingUpgradeMode": {
-              "type": "integer"
+              "type": "string"
             },
             "ForceRestart": {
               "type": "boolean"
             },
             "FailureAction": {
-              "type": "integer"
+              "type": "string"
             },
             "UpgradeReplicaSetCheckTimeoutInSeconds": {
               "type": "integer"
@@ -5511,7 +5551,7 @@
           "type": "string"
         },
         "RollingUpgradeMode": {
-          "type": "integer"
+          "type": "string"
         },
         "UpgradeDurationInMilliseconds": {
           "type": "string"
