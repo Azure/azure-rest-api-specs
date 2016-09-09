@@ -606,7 +606,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LogProfile"
+              "$ref": "#/definitions/LogProfileCreateOrUpdateParameters"
             },
             "description": "Parameters supplied to the operation."
           },
@@ -1840,6 +1840,16 @@
       "required": [ "enabled", "days" ],
       "description": "Part of MultiTenantDiagnosticSettings. Child of MetricSettings. Specifies the retention policy for the specific metric."
     },
+    "LogProfileCreateOrUpdateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LogProfile",
+          "description": "The properties envelope to create a Log Profile."
+        }
+      },
+      "description": "Paramters to create a new Log Profile"
+    },
     "LogProfile": {
       "properties": {
         "storageAccountId": {
@@ -1956,10 +1966,6 @@
         "serviceBusRuleId": {
           "type": "string",
           "description": "Gets or sets the id of the service bus rule."
-        },
-        "storageAccountName": {
-          "type": "string",
-          "description": "[Deprecated] Use StorageAccountId instead. Gets or sets the name of the storage account."
         },
         "metrics": {
           "type": "array",
