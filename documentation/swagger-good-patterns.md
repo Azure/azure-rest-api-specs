@@ -24,9 +24,7 @@
     - Parameter names in the apis should be name of the resource like virtualMachines\{virtualMachine} or virtualMachines\{virtualMachineName} both are good example but virtualMachines\{vm} is bad example. 
     - Any action name should be same as what is defined in the Rest APIs, like regenerateAdminKeys should be regenerateAdminKeys in the Swagger as well, where as regenerateKeys is bad example.
  - Check for Completeness
-    - Get information about all the operations from a RP, which usually can be obtained by making a GET request where the uri is of the following pattern:
-      https://management.azure.com/providers/{serviceName}/operations?api-version={apiVersion}.
-      There should be matching swagger management apis for all the operations returned from operations api for resource provider.
+    - Get information about all the operations from a RP, which usually can be obtained by making a GET http request where the uri is of the following pattern: `https://management.azure.com/providers/{serviceName}/operations?api-version={apiVersion}`. There should be matching swagger management apis for all the operations returned from operations api for resource provider.
  - Global Parameters
     - SubscriptionId & ApiVersion should always be defined in the global parameters section, **for them to be properties on the client**.
     - ResourceGroupName can also be defined in the global parameters section with the extension ["x-ms-parameter-location": "method"](https://github.com/Azure/autorest/blob/master/Documentation/swagger-extensions.md#x-ms-parameter-location). This will not make it a client property and it reduces repetition.
