@@ -3410,6 +3410,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
+      "x-ms-discriminator-value": "Event",
       "properties": {
         "UnhealthyEvent": {
           "$ref": "#/definitions/HealthEvent"
@@ -3426,6 +3427,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
+      "x-ms-discriminator-value": "Partitions",
       "properties": {
         "UnhealthyEvaluations": {
           "type": "array",
@@ -3448,6 +3450,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
+      "x-ms-discriminator-value": "Replicas",
       "properties": {
         "UnhealthyEvaluations": {
           "type": "array",
@@ -3470,6 +3473,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
+      "x-ms-discriminator-value": "DeployedServicePackages",
       "properties": {
         "UnhealthyEvaluations": {
           "type": "array",
@@ -3489,6 +3493,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
+      "x-ms-discriminator-value": "DeployedApplications",
       "properties": {
         "UnhealthyEvaluations": {
           "type": "array",
@@ -3511,6 +3516,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
+      "x-ms-discriminator-value": "Services",
       "properties": {
         "ServiceTypeName": {
           "type": "string"
@@ -3536,6 +3542,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
+      "x-ms-discriminator-value": "Nodes",
       "properties": {
         "UnhealthyEvaluations": {
           "type": "array",
@@ -3558,6 +3565,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
+      "x-ms-discriminator-value": "Applications",
       "properties": {
         "UnhealthyEvaluations": {
           "type": "array",
@@ -3580,7 +3588,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
-      "x-ms-discriminator-value": "UDNodesHealthEvaluation",
+      "x-ms-discriminator-value": "UpgradeDomainNodes",
       "properties": {
         "UpgradeDomainName": {
           "type": "string"
@@ -3606,7 +3614,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
-      "x-ms-discriminator-value": "UDDeployedApplicationsHealthEvaluation",
+      "x-ms-discriminator-value": "UpgradeDomainDeployedApplications",
       "properties": {
         "UpgradeDomainName": {
           "type": "string"
@@ -3632,6 +3640,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
+      "x-ms-discriminator-value": "SystemApplication",
       "properties": {
         "UnhealthyEvaluations": {
           "type": "array",
@@ -3648,6 +3657,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
+      "x-ms-discriminator-value": "Partition",
       "properties": {
         "PartitionId": {
           "type": "string"
@@ -3667,6 +3677,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
+      "x-ms-discriminator-value": "Replica",
       "properties": {
         "PartitionId": {
           "type": "string"
@@ -3689,6 +3700,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
+      "x-ms-discriminator-value": "DeployedServicePackage",
       "properties": {
         "ApplicationName": {
           "type": "string"
@@ -3714,6 +3726,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
+      "x-ms-discriminator-value": "DeployedApplication",
       "properties": {
         "ApplicationName": {
           "type": "string"
@@ -3736,6 +3749,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
+      "x-ms-discriminator-value": "Service",
       "properties": {
         "ServiceName": {
           "type": "string"
@@ -3755,6 +3769,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
+      "x-ms-discriminator-value": "Node",
       "properties": {
         "NodeName": {
           "type": "string"
@@ -3774,6 +3789,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
+      "x-ms-discriminator-value": "Application",
       "properties": {
         "ServiceName": {
           "type": "string"
@@ -3793,7 +3809,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
-      "x-ms-discriminator-value": "HealthEvaluationKindDeltaNodesCheck",
+      "x-ms-discriminator-value": "DeltaNodesCheck",
       "properties": {
         "UnhealthyEvaluations": {
           "type": "array",
@@ -3822,7 +3838,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
-      "x-ms-discriminator-value": "HealthEvaluationKindUpgradeDomainDeltaNodesCheck",
+      "x-ms-discriminator-value": "UpgradeDomainDeltaNodesCheck",
       "properties": {
         "UpgradeDomainName": {
           "type": "string"
@@ -3854,7 +3870,7 @@
           "$ref": "#/definitions/HealthEvaluation"
         }
       ],
-      "x-ms-discriminator-value": "ApplicationTypeApplicationsHealthEvaluation",
+      "x-ms-discriminator-value": "ApplicationType",
       "properties": {
         "ApplicationTypeName": {
           "type": "string"
