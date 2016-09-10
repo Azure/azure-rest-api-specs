@@ -1,0 +1,497 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2016-05-06-preview",
+    "title": "ASAzureWebAPI",
+    "description": "The Azure Analysis Services API provides a RESTful set of web services enables users to create, retrieve, update, and delete servers"
+  },
+  "host": "management.azure.com",
+  "basePath": "/webapi",
+  "schemes": [ "https" ],
+  "paths": {
+    "/resourceprovider/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{analysisServerName}": {
+      "get": {
+        "description": "Gets the current state of the specified Analysis Services server",
+        "tags": [ "RpProvision" ],
+        "operationId": "RpProvision_GetDetailsAsync",
+        "consumes": [ ],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "parameters": [
+          {
+            "name": "analysisServerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Name of the Analysis Services server"
+          },
+          {
+            "name": "cancellationToken",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/CancellationToken" },
+            "description": "Cancellation token"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Subscription Id for the subscription in which the operation is executed"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Name of the Azure Resource group"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/Object" }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "description": "Updates the current state of the specified Analysis Services server as specified by the request body",
+        "tags": [ "RpProvision" ],
+        "operationId": "RpProvision_ProvisionAsync",
+        "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "parameters": [
+          {
+            "name": "provisionRequest",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/RpProvisionRequest" },
+            "description": "Request body for privisioning"
+          },
+          {
+            "name": "analysisServerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Name of the Analysis Services server"
+          },
+          {
+            "name": "cancellationToken",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/CancellationToken" },
+            "description": "Cancellation token"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Subscription Id for the subscription in which the operation is executed"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Name of the Azure Resource group"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/Object" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "deprecated": false
+      },
+      "delete": {
+        "description": "Deletes the specified Analysis Services server.",
+        "tags": [ "RpProvision" ],
+        "operationId": "RpProvision_DeprovisionAsync",
+        "consumes": [ ],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "parameters": [
+          {
+            "name": "analysisServerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Name of the Analysis Services server"
+          },
+          {
+            "name": "cancellationToken",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/CancellationToken" },
+            "description": "Cancellation token"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Subscription Id for the subscription in which the operation is executed"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Name of the Azure Resource group"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/Object" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "deprecated": false
+      },
+      "patch": {
+        "description": "Updates the current state of the specified Analysis Services server as specified by the request body",
+        "tags": [ "RpProvision" ],
+        "operationId": "RpProvision_UpdateDetailsAsync",
+        "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "parameters": [
+          {
+            "name": "analysisServerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Name of the Analysis Services server"
+          },
+          {
+            "name": "updateRequest",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/RpServerUpdateRequest" },
+            "description": "Request object for updating the server"
+          },
+          {
+            "name": "cancellationToken",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/CancellationToken" },
+            "description": "Cancellation token"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Subscription Id for the subscription in which the operation is executed"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Name of the Azure Resource group"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/Object" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "deprecated": false
+      }
+    },
+    "/resourceprovider/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers": {
+      "get": {
+        "description": "Gets all the AS servers for the given resource group",
+        "tags": [ "RpProvision" ],
+        "operationId": "RpProvision_GetAllSeversForResourceGroupAsync",
+        "consumes": [ ],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "parameters": [
+          {
+            "name": "cancellationToken",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/CancellationToken" },
+            "description": "Cancellation token"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Subscription Id for the subscription in which the operation is executed"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Name of the Azure Resource group"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/Object" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/resourceprovider/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/servers": {
+      "get": {
+        "description": "Gets all the AS servers for the given subscription",
+        "tags": [ "RpProvision" ],
+        "operationId": "RpProvision_GetAllServersForSubscriptionAsync",
+        "consumes": [ ],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "parameters": [
+          {
+            "name": "cancellationToken",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/CancellationToken" },
+            "description": "Cancellation token"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Subscription Id for the subscription in which the operation is executed"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/Object" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/resourceprovider/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationstatuses/{operationId}": {
+      "get": {
+        "description": "Gets all the AS servers for the give resource group",
+        "tags": [ "RpProxy" ],
+        "operationId": "RpProxy_GetOperationStatusAsync",
+        "consumes": [ ],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Identifier for the operation for which to get status"
+          },
+          {
+            "name": "cancellationToken",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/CancellationToken" },
+            "description": "Cancellation token"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Subscription Id for the subscription in which the operation is executed"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Region in which the server operation was executed"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/Object" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/resourceprovider/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationresults/{operationId}": {
+      "get": {
+        "description": "Gets result of the specified operation",
+        "tags": [ "RpProxy" ],
+        "operationId": "RpProxy_GetOperationResultAsync",
+        "consumes": [ ],
+        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Identifier for the operation for which to get status"
+          },
+          {
+            "name": "cancellationToken",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/CancellationToken" },
+            "description": "Cancellation token"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Subscription Id for the subscription in which the operation is executed"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Region in which the server operation was executed"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/Object" }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "CancellationToken": {
+      "description": "Cancellation token specification",
+      "type": "object",
+      "properties": {
+        "IsCancellationRequested": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "CanBeCanceled": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "WaitHandle": {
+          "$ref": "WaitHandle",
+          "readOnly": true
+        }
+      }
+    },
+    "WaitHandle": {
+      "description": "Wait handle object",
+      "type": "object",
+      "properties": {
+        "Handle": { "$ref": "Object" },
+        "SafeWaitHandle": { "$ref": "SafeWaitHandle" }
+      }
+    },
+    "Object": {
+      "type": "object",
+      "properties": { }
+    },
+    "SafeWaitHandle": {
+      "description": "Specifies the state of the wait handle",
+      "type": "object",
+      "properties": {
+        "IsInvalid": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "IsClosed": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "RpServerUpdateRequest": {
+      "description": "Update request specification",
+      "type": "object",
+      "properties": {
+        "location": { "type": "string" },
+        "sku": { "$ref": "RpSkuTier" },
+        "tags": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "RpPropertyBag"
+          }
+      }
+    },
+    "RpSkuTier": {
+      "description": "Update request specification",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "tier": { "type": "string" }
+      }
+    },
+    "RpPropertyBag": {
+      "description": "Property bag",
+      "type": "object",
+      "properties": {
+        "provisioningState": { "type": "string" },
+        "serverFullName": { "type": "string" },
+        "asAdministrators": { "$ref": "RpAsAdministrators" }
+      }
+    },
+    "RpAsAdministrators": {
+      "description": "Array of administrator user identities",
+      "type": "object",
+      "properties": {
+        "members": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "RpProvisionRequest": {
+      "description": "Provision request specification",
+      "type": "object",
+      "properties": {
+        "location": { "type": "string" },
+        "sku": { "$ref": "RpSkuTier" },
+        "tags": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "RpPropertyBag" 
+          }
+      }
+    }
+  }
+}
