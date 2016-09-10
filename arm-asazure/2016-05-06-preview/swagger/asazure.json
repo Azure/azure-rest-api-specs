@@ -14,8 +14,8 @@
         "description": "Gets the current state of the specified Analysis Services server",
         "tags": [ "RpProvision" ],
         "operationId": "RpProvision_GetDetailsAsync",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "consumes": [ "application/json", "text/json"],
+        "produces": [ "application/json", "text/json"],
         "parameters": [
           {
             "name": "analysisServerName",
@@ -54,22 +54,21 @@
             "description": "OK",
             "schema": { "$ref": "#/definitions/Object" }
           }
-        },
-        "deprecated": false
+        }
       },
       "put": {
         "description": "Updates the current state of the specified Analysis Services server as specified by the request body",
         "tags": [ "RpProvision" ],
         "operationId": "RpProvision_ProvisionAsync",
-        "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
-        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "consumes": [ "application/json", "text/json"],
+        "produces": [ "application/json", "text/json"],
         "parameters": [
           {
             "name": "provisionRequest",
             "in": "body",
             "required": true,
             "schema": { "$ref": "#/definitions/RpProvisionRequest" },
-            "description": "Request body for privisioning"
+            "description": "Request body for provisioning"
           },
           {
             "name": "analysisServerName",
@@ -109,15 +108,14 @@
             "schema": { "$ref": "#/definitions/Object" }
           }
         },
-        "x-ms-long-running-operation": true,
-        "deprecated": false
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "description": "Deletes the specified Analysis Services server.",
         "tags": [ "RpProvision" ],
         "operationId": "RpProvision_DeprovisionAsync",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "consumes": [ "application/json", "text/json"],
+        "produces": [ "application/json", "text/json"],
         "parameters": [
           {
             "name": "analysisServerName",
@@ -157,15 +155,14 @@
             "schema": { "$ref": "#/definitions/Object" }
           }
         },
-        "x-ms-long-running-operation": true,
-        "deprecated": false
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "description": "Updates the current state of the specified Analysis Services server as specified by the request body",
         "tags": [ "RpProvision" ],
         "operationId": "RpProvision_UpdateDetailsAsync",
-        "consumes": [ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" ],
-        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "consumes": [ "application/json", "text/json"],
+        "produces": [ "application/json", "text/json"],
         "parameters": [
           {
             "name": "analysisServerName",
@@ -212,8 +209,7 @@
             "schema": { "$ref": "#/definitions/Object" }
           }
         },
-        "x-ms-long-running-operation": true,
-        "deprecated": false
+        "x-ms-long-running-operation": true
       }
     },
     "/resourceprovider/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers": {
@@ -221,8 +217,8 @@
         "description": "Gets all the AS servers for the given resource group",
         "tags": [ "RpProvision" ],
         "operationId": "RpProvision_GetAllSeversForResourceGroupAsync",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "consumes": [ "application/json", "text/json"],
+        "produces": [ "application/json", "text/json"],
         "parameters": [
           {
             "name": "cancellationToken",
@@ -253,8 +249,7 @@
             "description": "OK",
             "schema": { "$ref": "#/definitions/Object" }
           }
-        },
-        "deprecated": false
+        }
       }
     },
     "/resourceprovider/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/servers": {
@@ -262,8 +257,8 @@
         "description": "Gets all the AS servers for the given subscription",
         "tags": [ "RpProvision" ],
         "operationId": "RpProvision_GetAllServersForSubscriptionAsync",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "consumes": [ "application/json", "text/json"],
+        "produces": [ "application/json", "text/json"],
         "parameters": [
           {
             "name": "cancellationToken",
@@ -286,8 +281,7 @@
             "description": "OK",
             "schema": { "$ref": "#/definitions/Object" }
           }
-        },
-        "deprecated": false
+        }
       }
     },
     "/resourceprovider/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationstatuses/{operationId}": {
@@ -295,8 +289,8 @@
         "description": "Gets all the AS servers for the give resource group",
         "tags": [ "RpProxy" ],
         "operationId": "RpProxy_GetOperationStatusAsync",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "consumes": [ "application/json", "text/json"],
+        "produces": [ "application/json", "text/json"],
         "parameters": [
           {
             "name": "operationId",
@@ -335,8 +329,7 @@
             "description": "OK",
             "schema": { "$ref": "#/definitions/Object" }
           }
-        },
-        "deprecated": false
+        }
       }
     },
     "/resourceprovider/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationresults/{operationId}": {
@@ -344,8 +337,8 @@
         "description": "Gets result of the specified operation",
         "tags": [ "RpProxy" ],
         "operationId": "RpProxy_GetOperationResultAsync",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json", "application/xml", "text/xml" ],
+        "consumes": [ "application/json", "text/json"],
+        "produces": [ "application/json", "text/json"],
         "parameters": [
           {
             "name": "operationId",
@@ -384,8 +377,7 @@
             "description": "OK",
             "schema": { "$ref": "#/definitions/Object" }
           }
-        },
-        "deprecated": false
+        }
       }
     }
   },
