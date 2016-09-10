@@ -1241,7 +1241,8 @@
           "type": "integer",
           "format": "int32",
           "default": 255,
-          "description": "The maximum token length. Tokens longer than the maximum length are split. Default is 255."
+          "maximum": 300,
+          "description": "The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters."
         },
         "stopwords": {
           "type": "array",
@@ -1307,7 +1308,8 @@
           "type": "integer",
           "format": "int32",
           "default": 255,
-          "description": "The maximum token length. Tokens longer than the maximum length are split. Default is 255."
+          "maximum": 300,
+          "description": "The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters."
         }
       },
       "description": "Grammar-based tokenizer that is suitable for processing most European-language documents. This tokenizer is implemented using Apache Lucene.",
@@ -1390,8 +1392,8 @@
         "bangla", 
         "bulgarian", 
         "catalan", 
-        "chinese_simplified",
-        "chinese_traditional", 
+        "chineseSimplified",
+        "chineseTraditional", 
         "croatian", 
         "czech", 
         "danish", 
@@ -1411,15 +1413,15 @@
         "malay", 
         "malayalam", 
         "marathi",
-        "norwegian_bokmaal", 
+        "norwegianBokmaal", 
         "polish", 
         "portuguese", 
-        "portuguese_brazilian", 
+        "portugueseBrazilian", 
         "punjabi",
         "romanian", 
         "russian", 
-        "serbian_cyrillic", 
-        "serbian_latin", 
+        "serbianCyrillic", 
+        "serbianLatin", 
         "slovenian",
         "spanish", 
         "swedish", 
@@ -1448,6 +1450,7 @@
           "type": "integer",
           "format": "int32",
           "default": 255,
+          "maximum": 300,
           "description": "The maximum token length. Tokens longer than the maximum length are split. Maximum token length that can be used is 300 characters. Tokens longer than 300 characters are first split into tokens of length 300 and then each of those tokens is split based on the max token length set. Default is 255."
         },
         "isSearchTokenizer": {
@@ -1457,7 +1460,7 @@
         },
         "language": {
           "$ref": "#/definitions/MicrosoftTokenizerLanguage",
-          "description": "The language to use."
+          "description": "The language to use. The default is English."
         }
       },
       "description": "Divides text using language-specific rules."
@@ -1492,15 +1495,15 @@
         "malay",
         "malayalam",
         "marathi",
-        "norwegian_bokmaal",
+        "norwegianBokmaal",
         "polish",
         "portuguese",
-        "portuguese_brazilian",
+        "portugueseBrazilian",
         "punjabi",
         "romanian",
         "russian",
-        "serbian_cyrillic",
-        "serbian_latin", 
+        "serbianCyrillic",
+        "serbianLatin", 
         "slovak",
         "slovenian",
         "spanish",
@@ -1529,6 +1532,7 @@
           "type": "integer",
           "format": "int32",
           "default": 255,
+          "maximum": 300,
           "description": "The maximum token length. Tokens longer than the maximum length are split. Maximum token length that can be used is 300 characters. Tokens longer than 300 characters are first split into tokens of length 300 and then each of those tokens is split based on the max token length set. Default is 255."
         },
         "isSearchTokenizer": {
@@ -1538,7 +1542,7 @@
         },
         "language": {
           "$ref": "#/definitions/MicrosoftStemmingTokenizerLanguage",
-          "description": "The language to use."
+          "description": "The language to use. The default is English."
         }
       },
       "description": "Divides text using language-specific rules and reduces words to their base forms."
@@ -1666,7 +1670,8 @@
           "type": "integer",
           "format": "int32",
           "default": 255,
-          "description": "The maximum token length. Tokens longer than the maximum length are split. Default is 255."
+          "maximum": 300,
+          "description": "The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters."
         }
       },
       "description": "Breaks text following the Unicode Text Segmentation rules. This tokenizer is implemented using Apache Lucene.",
@@ -1686,7 +1691,8 @@
           "type": "integer",
           "format": "int32",
           "default": 255,
-          "description": "The maximum token length. Tokens longer than the maximum length are split. Default is 255."
+          "maximum": 300,
+          "description": "The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters."
         }
       },
       "description": "Tokenizes urls and emails as one token. This tokenizer is implemented using Apache Lucene.",
@@ -2291,7 +2297,7 @@
         "indonesian",
         "irish",
         "italian",
-        "light_italian",
+        "lightItalian",
         "sorani", 
         "latvian", 
         "norwegian",
@@ -2619,7 +2625,7 @@
       ],
       "description": "A character filter that applies mappings defined with the mappings option. Matching is greedy (longest pattern matching at a given point wins). Replacement is allowed to be the empty string. This character filter is implemented using Apache Lucene.",
       "externalDocs": {
-        "url": "*https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/charfilter/MappingCharFilter.html"
+        "url": "https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/charfilter/MappingCharFilter.html"
       }
     },
     "PatternReplaceCharFilter": {
@@ -3125,7 +3131,21 @@
             "url": "https://msdn.microsoft.com/library/azure/dn879793.aspx"
           },
           "$ref": "#/definitions/AnalyzerName",
-          "description": "Name of the text analyzer to use."
+          "description": "The name of the analyzer to use for the field at search time and indexing time. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field."
+        },
+        "searchAnalyzer": {
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn879793.aspx"
+          },
+          "$ref": "#/definitions/AnalyzerName",
+          "description": "The name of the analyzer used at search time for the field. This option can be used only with searchable fields. It must be set together with indexAnalyzer and it cannot be set together with the analyzer option. This analyzer can be updated on an existing field."
+        },
+        "indexAnalyzer": {
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn879793.aspx"
+          },
+          "$ref": "#/definitions/AnalyzerName",
+          "description": "The name of the analyzer used at indexing time for the field. This option can be used only with searchable fields. It must be set together with searchAnalyzer and it cannot be set together with the analyzer option. Once the analyzer is chosen, it cannot be changed for the field."
         },
         "key": {
           "x-ms-client-name": "isKey",

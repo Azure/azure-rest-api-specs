@@ -41,7 +41,7 @@ be found at [Swagger RESTful API Documentation Specification](https://github.com
 In this document, references to the 'spec' or to the 'swagger' refer to an instance of a Swagger file. AutoRest 
 supports Swagger version 2.0. The version of Swagger being used must be included in the spec.
 
-```json
+```json5
 {
   "swagger": "2.0"
   ...
@@ -51,7 +51,7 @@ supports Swagger version 2.0. The version of Swagger being used must be included
 ## Info Object<a name="InfoObject"></a>
 Each spec includes an "info object."
 The **title** field is used as the name of the generated client.
-```json
+```json5
 "info": {
   "title": "MyClientName",
 }
@@ -65,7 +65,7 @@ Override the title client name by passing the `-ClientName` to AutoRest.
 
 The version field specifies the service version of the API described in the spec. This is used as the default 
 value for Azure clients where api-version is passed in the querystring.
-```json
+```json5
 "info": {
   "version": "2014-04-01-preview"
 ```
@@ -85,7 +85,7 @@ The host field specifies the baseURI. (everything after the protocol and before 
 ## Schemes<a name="Schemes"></a>
 The schemes field is an array of transfer protocols that can be used by individual operations. AutoRest supports 
 *http* and *https*. The generated client uses the first scheme from the array.
-```json
+```json5
 {
   "swagger": "2.0",
   "schemes": [
@@ -99,7 +99,7 @@ The schemes field is an array of transfer protocols that can be used by individu
 ## Consumes / Produces<a name="ConsumesProduces"></a>
 The *consumes* and *produces* fields declare the mime-types supported by the API. The root-level definition can 
 be overridden by individual operations. AutoRest supports JSON payloads.
-```json
+```json5
 {
   "swagger": "2.0",
   "consumes": [
@@ -114,7 +114,7 @@ be overridden by individual operations. AutoRest supports JSON payloads.
 
 ## Paths<a name="Paths"></a>
 The paths object defines the relative paths of API endpoints (appended to the baseURI to invoke operations).
-```json
+```json5
 "swagger": "2.0",
 "paths": {
   "/tenants": {
@@ -136,7 +136,7 @@ Each path item in the spec defines the operations available at that endpoint. Th
 identified by the HTTP operation (sometimes referred to as HTTP verbs). AutoRest supports: **head**, **get**, 
 **put**, **post**, **delete** and **patch**.
 
-```json
+```json5
 {
   "swagger": "2.0",
   "paths": {
@@ -149,7 +149,7 @@ identified by the HTTP operation (sometimes referred to as HTTP verbs). AutoRest
 ```
 ### Operation and OperationId<a name="OperationOperationId"></a>
 Every operation must have a unique operationId. The operationId is used to determine the generated method name.
-```json
+```json5
 "paths": {
   "/users": {
     "get": {
@@ -166,7 +166,7 @@ IList<User> users = listResult.Value;
 All of the operations specified become methods on the client. The client API model can easily become a long and 
 cumbersome list of methods. AutoRest allows grouping of operations by using a naming convention. Operation groups 
 are identified by splitting the operationId by underscore.
-```json
+```json5
 "paths": {
   "/{tenantId}/users": {
     "get": {
@@ -186,7 +186,7 @@ The operation group interface and the interface implementation is the "core" of 
 this API ultimately call the "core" implementation. This allows the operations to be easily mocked for testing without 
 needing to mock all signature variations. Other API signatures for the same operation are generated as extension methods.
 For example, consider this `GetUserById` operation on the `SampleClient`.
-```json
+```json5
 "/users/{userId}": {
     "get": {
       "operationId": "Users_GetById"
@@ -220,7 +220,7 @@ defines a name, description, schema, what request element it is `in` (AutoRest s
 The value of path parameters are replaced in the templated URL path at the position specified by the name. Parameters that 
 are `in` the `path` must have a `true` value for the `required` field. In this example, the `{userId}` in this operation 
 is populated with the value of userId provided in the client method.
-```json
+```json5
 "paths": {
   "/users/{userid}": {
     "get": {
@@ -247,7 +247,7 @@ var user = client.Users.GetById(userId);
 
 #### Query Parameters<a name="QueryParameters"></a>
 Query parameters are appended to the request URI. They can be specified as required or optional.
-```json
+```json5
 "paths": {
   "/users/{userId}": {
     "get": {
@@ -270,7 +270,7 @@ The user doesn't need to know where the parameter is placed. Doc comments surfac
 ####Body Parameters<a name="BodyParameters"></a>
 Body parameters include schema for the payload. In this example, the schema element is a `$ref` to the type details 
 in the `#/definitions` section of the spec. More on the `#/definitions` later.
-```json
+```json5
 "paths": {
   "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": {
     "post": {
@@ -296,7 +296,7 @@ in the `#/definitions` section of the spec. More on the `#/definitions` later.
 
 ### Responses<a name="Responses"></a>
 Each operation defines the possible responses by HTTP status code:
-```json
+```json5
 "/users/{userId}": {
   "get": {
     "operationId": "users_getUserById",
@@ -320,7 +320,7 @@ the common ancestor of success responses and error responses ends up being Objec
 
 ### Negative Responses<a name="NegativeResponses"></a>
 You can describe all the [possible HTTP Response status codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) in the responses section of an operation. AutoRest generated code will deserialize the response for all the described response status codes as per their definition in the swagger. If a response status code is not defined then generated code will align to the default response behavior as described above. For example: If you want to specifically handle `400` and `404` in different way and **not throw an exception**, then you should describe `400` and  `404` response status codes possibly with a schema. In that case, AutoRest generated code will deserialize the `400` and `404` response status codes as defined in Swaggger and not throw an exception.
-```json
+```json5
 "/users/{userId}": {
   "get": {
     "operationId": "users_getUserById",
@@ -358,7 +358,7 @@ Swagger 2.0 has a built-in limitation on paths. Only one operation can be mapped
 
 To overcome this limitation an "x-ms-paths" extension was introduced parallel to "paths". Urls under "x-ms-paths" are allowed to have query parameters for disambiguation, however they are removed during model parsing.
 
-```json
+```json5
 "paths":{
    "/pets": {
         "get": {
@@ -391,7 +391,7 @@ the referenced schema applies is included in the new schema. By convention, if a
 only one other schema, AutoRest treats this reference as an indication that the `allOf` schema represents a base 
 type being extended. In this example, the generated code would include a `Dog` model that inherits from the `Pet` model.
 
-```json
+```json5
 {
   "definitions": {
     "pet": {
@@ -429,7 +429,7 @@ to disambiguate polymorphic payloads. The discriminator field allows the deseria
 specific type. Suppose the Dog and Cat type are `allOf` Pet and an operation will return a Dog or a Cat. If the Pet definition 
 includes a `discriminator` then payloads can be Dog or Cat. A response can be defined as a Pet model and the API signature 
 will indicate Pet. At runtime, the returned object is an instance of the more specific type.
-```json
+```json5
 {
   "definitions": {
     "pet": {
@@ -453,7 +453,7 @@ Azure Resource Manager brings a common pattern that is leveraged to provide a mo
 Resource types all have a common set of Resource properties: id, name, location, tags...
 In a resource payload, the common properties are at the top-level and the resource-specific properties are nested within 
 `properties`. The top-level outer properties are sometimes referred to as the 'ARM envelope' and the inner data as the 'Resource properties.'
-```json
+```json5
 {
     "id": "/subscriptions/{id}/resourceGroups/{group}/providers/{rpns}/{type}/{name}",
     "name": "Resource Name",
@@ -491,7 +491,7 @@ Resource-specific properties by one level for that model.
 ### x-ms-azure-resource<a name="x-ms-azure-resource"></a>
 In using Swagger to describe Azure Resource Manager operations, types are identified as Resources by declaring that a type 
 is "allOf" the common `Resource` type. That common `Resource` type includes the `x-ms-azure-resource` Swagger extension.
-```json
+```json5
     "Resource": {
       "x-ms-azure-resource": true,
       "properties": {
@@ -530,7 +530,7 @@ looking at an ARM Resource it also has 'properties', the 'properties' term is ov
 In practice, the Resource properties may be re-used in the Swagger spec and can be defined separately. If the schema of the 
 resource properties is included inline, AutoRest still needs to generate a type for the properties and does so by appending 
 `Properties` to the Resource name
-```json
+```json5
 "definitions": {
   "SomeResourceProperties": {
     "properties": {
@@ -565,7 +565,7 @@ values.  To indicate that an enum will rarely change and that C# enum semantics 
 
 In C#, an enum type is generated and is declared as the type of the related request/response object. The enum is serialized 
 as the string expected by the REST API.
-```json
+```json5
   "accountType": {
     "type": "string",
     "enum": [
@@ -603,7 +603,7 @@ Swagger as the list of items and the `nextLink`. Tag the operation as `x-ms-page
 methods for navigating between pages.
 
 #### x-ms-pageable extension structure<a name="paging-structure"></a>
-```json
+```json5
 {
   "x-ms-pageable" : {
     "nextLinkName": "Specify the name of the property that provides the nextLink. 
@@ -615,7 +615,7 @@ methods for navigating between pages.
 }
 ```
 #### x-ms-pageable operation definition<a name="pageOperation"></a>
-```json
+```json5
 "paths": {
   "/products": {
     "get": {
@@ -636,7 +636,7 @@ methods for navigating between pages.
 }
 ```
 #### x-ms-pageable model definition<a name="pageModel"></a>
-```json
+```json5
 "ProductListResult": {
   "properties": {
     "value": {
@@ -658,7 +658,7 @@ This is not a good choice when the parameter is provided from a source where the
 The URL encoding is *NOT* an idempotent operation. For example, the percent character "%" is URL-encoded as "%25". If the 
 parameter is URL-encoded again, "%25" becomes "%2525". Mark parameters where the source is KNOWN to be URL-encoded to 
 prevent the automatic encoding behavior.
-```json
+```json5
 "parameters": [
   {
     "name": "databaseName",
@@ -676,7 +676,7 @@ sends a 201 (Created) or 202 (Accepted) and provides a link to monitor the statu
 is marked with extension `"x-ms-long-running-operation": true,` in Swagger, the generated code will know how to fetch 
 the link to monitor the status. It will keep on polling at regular intervals till the request reaches one of the 
 terminal states`Succeeded|Failed|Canceled`.
-```json
+```json5
 "paths": {
   "/products/{name}": {
     "put": {
@@ -720,7 +720,7 @@ terminal states`Succeeded|Failed|Canceled`.
 Swagger allows for parameters to be defined separately from the operation where they are used. By convention, AutoRest 
 treats global parameter definitions as Client properties. For example, almost all Azure Resource Manager APIs require 
 `subscriptionId` and `api-version`. These are defined as global parameters and become properties of the client.
-```json
+```json5
 "parameters": [
   {
     "name": "subscriptionId",
@@ -736,7 +736,7 @@ client.SubscriptionId = "xyz-123";
 By convention, when AutoRest sees that an operation defines a parameter as a reference to a global parameter, the generated 
 method does not expose the parameter. Instead, the parameter is populated with the value from the client property.
 
-```json
+```json5
 "paths": {
   "/subscriptions/{subscriptionId}/providers/MyProvider/SomeOperation": {
     "post": {
@@ -746,7 +746,7 @@ method does not expose the parameter. Instead, the parameter is populated with t
 }
 ```
 If an operation requires that a parameter is exposed as a method parameter, it is defined without referencing the global definition.
-```json
+```json5
 "paths": {
   "/subscriptions/{subscriptionId}/providers/MyProvider/SomeOperation": {
     "post": {
