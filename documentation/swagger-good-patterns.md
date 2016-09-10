@@ -1,24 +1,28 @@
 # Swagger recommended patterns
 
- - Type property as an enum
+ - **Type property as an enum**
+
     If a Model Property has the name "type" in it or the name or description indicates that it is "some kind/type of" an artifact, then make sure at least one of the following criterion is satisfied
      - Create an enum with set of allowed values if possible
      - If enum creating is not possible, document the values in description. If the number of allowed values is huge, add a link to MSDN documentation in the description.
- - Client flattening
+ - **Client flattening**
+
     It is very easy to get confused about where the "x-ms-client-flatten" extension needs to be applied. Following tips can help 
     - Flattening can only happen on a Composite Model Type (in the SwaggerModeler language). It cannot be applied on any collection (Arrays, Dictionaries) as one does not know at compile time what needs to be flattened.
     - Flattening will bring the properties of the **referenced Composite Type** one level up, as a result the referenced property dies and gives way to the inner properties that it was composed of. The best example can be found [here](https://github.com/Azure/azure-rest-api-specs/blob/master/arm-storage/2016-01-01/swagger/storage.json#L763).
- - ClientName & DiscriminatorValue should not be same as the PropertyName
+ - **ClientName & DiscriminatorValue should not be same as the PropertyName**
+ 
     The value of "x-ms-client-flatten" and "x-ms-discriminator-value" should not be the same as the name of the ModelProperty or the Model it is being applied on. Otherwise, the purpose is defeated.
- - Checks on the Resource Model
+ - **Checks on the Resource Model**
     - Every "Resource" Model should have "location" as a "required" property as per the mandate from ARM team; no exceptions are allowed over here.
     - Every "Resource" Model should be tagged with "x-ms-azure-resource". This will cause the Resource to inherit from the Resource definition in the client runtime.
     - GET/PUT/PATCH for a resource should return the same "Resource" Model, also PUT should accept the same body (there can be readonly, optional, required properties).
     - For PATCH model every property should be optional and they should not provide any default values.
- - Consistency in the naming of list methods
+ - **Consistency in the naming of list methods**
     - Operations that provide resources in a resource group should be named as "OperationGroup_ListByResourceGroup"
     - Operations that provide resources in a subscription should be named as "OperationGroup_List"
     - If the ListByResourceGroup is overloaded "i.e. if the resourcegroup is null then the operation lists all resources in the subscription" then, such operations should not be allowed.
+    - If the list operation is on a child resource type then please follow the convention of `Noun_ListBy{Parent}`. For example "Databases" is a child resource type of "SqlServer". So for listing all the databases the operationId should be `Databases_ListBySqlServer`. This will ensure consistency in the naming pattern across all the RPs in Azure and it will be easy for customers onbaording to Azure (reduces their learning curve).
  - Consistency of the Names of the APIs, parameters and models
     - Resource Model name should be same as singular form of the resource type. Like for virtualMachines resource type it should be VirtualMachine.
     - Parameter names in the apis should be name of the resource like virtualMachines\{virtualMachine} or virtualMachines\{virtualMachineName} both are good example but virtualMachines\{vm} is bad example. 
