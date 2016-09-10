@@ -2,20 +2,45 @@
   "swagger": "2.0",
   "info": {
     "version": "2016-05-06-preview",
-    "title": "ASAzureWebAPI",
-    "description": "The Azure Analysis Services API provides a RESTful set of web services enables users to create, retrieve, update, and delete servers"
+    "title": "AzureAnalysisServices",
+    "description": "The Azure Analysis Services Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete servers",
+    "x-ms-code-generation-settings": {
+      "name": "AzureAnalysisServicesClient"
+    }
   },
   "host": "management.azure.com",
   "basePath": "/webapi",
   "schemes": [ "https" ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
-    "/resourceprovider/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{analysisServerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{analysisServerName}": {
       "get": {
         "description": "Gets the current state of the specified Analysis Services server",
         "tags": [ "RpProvision" ],
         "operationId": "RpProvision_GetDetailsAsync",
-        "consumes": [ "application/json", "text/json"],
-        "produces": [ "application/json", "text/json"],
         "parameters": [
           {
             "name": "analysisServerName",
@@ -52,7 +77,7 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/Object" }
+            "schema": { "$ref": "#/definitions/RpProvisionResult" }
           }
         }
       },
@@ -60,8 +85,6 @@
         "description": "Updates the current state of the specified Analysis Services server as specified by the request body",
         "tags": [ "RpProvision" ],
         "operationId": "RpProvision_ProvisionAsync",
-        "consumes": [ "application/json", "text/json"],
-        "produces": [ "application/json", "text/json"],
         "parameters": [
           {
             "name": "provisionRequest",
@@ -105,7 +128,11 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/Object" }
+            "schema": { "$ref": "#/definitions/RpProvisionResult" }
+          },
+          "201": {
+            "description": "InProgress",
+            "schema": { "$ref": "#/definitions/RpProvisionResult" }
           }
         },
         "x-ms-long-running-operation": true
@@ -114,8 +141,6 @@
         "description": "Deletes the specified Analysis Services server.",
         "tags": [ "RpProvision" ],
         "operationId": "RpProvision_DeprovisionAsync",
-        "consumes": [ "application/json", "text/json"],
-        "produces": [ "application/json", "text/json"],
         "parameters": [
           {
             "name": "analysisServerName",
@@ -152,7 +177,11 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/Object" }
+            "schema": { "$ref": "#/definitions/RpProvisionResult" }
+          },
+          "204": {
+            "description": "No Content",
+            "schema": { "$ref": "#/definitions/RpProvisionResult" }
           }
         },
         "x-ms-long-running-operation": true
@@ -161,8 +190,6 @@
         "description": "Updates the current state of the specified Analysis Services server as specified by the request body",
         "tags": [ "RpProvision" ],
         "operationId": "RpProvision_UpdateDetailsAsync",
-        "consumes": [ "application/json", "text/json"],
-        "produces": [ "application/json", "text/json"],
         "parameters": [
           {
             "name": "analysisServerName",
@@ -206,19 +233,17 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/Object" }
+            "schema": { "$ref": "#/definitions/RpProvisionResult" }
           }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/resourceprovider/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers": {
       "get": {
         "description": "Gets all the AS servers for the given resource group",
         "tags": [ "RpProvision" ],
         "operationId": "RpProvision_GetAllSeversForResourceGroupAsync",
-        "consumes": [ "application/json", "text/json"],
-        "produces": [ "application/json", "text/json"],
         "parameters": [
           {
             "name": "cancellationToken",
@@ -247,18 +272,16 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/Object" }
+            "schema": { "$ref": "#/definitions/ProvisionResultList" }
           }
         }
       }
     },
-    "/resourceprovider/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/servers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/servers": {
       "get": {
         "description": "Gets all the AS servers for the given subscription",
         "tags": [ "RpProvision" ],
         "operationId": "RpProvision_GetAllServersForSubscriptionAsync",
-        "consumes": [ "application/json", "text/json"],
-        "produces": [ "application/json", "text/json"],
         "parameters": [
           {
             "name": "cancellationToken",
@@ -279,18 +302,16 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/Object" }
+            "schema": { "$ref": "#/definitions/ProvisionResultList" }
           }
         }
       }
     },
-    "/resourceprovider/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationstatuses/{operationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationstatuses/{operationId}": {
       "get": {
         "description": "Gets all the AS servers for the give resource group",
         "tags": [ "RpProxy" ],
         "operationId": "RpProxy_GetOperationStatusAsync",
-        "consumes": [ "application/json", "text/json"],
-        "produces": [ "application/json", "text/json"],
         "parameters": [
           {
             "name": "operationId",
@@ -327,18 +348,20 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/Object" }
+            "schema": { "$ref": "#/definitions/OperationDetail" }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": { "$ref": "#/definitions/OperationDetail" }
           }
         }
       }
     },
-    "/resourceprovider/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationresults/{operationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationresults/{operationId}": {
       "get": {
         "description": "Gets result of the specified operation",
         "tags": [ "RpProxy" ],
         "operationId": "RpProxy_GetOperationResultAsync",
-        "consumes": [ "application/json", "text/json"],
-        "produces": [ "application/json", "text/json"],
         "parameters": [
           {
             "name": "operationId",
@@ -375,7 +398,15 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/Object" }
+            "schema": { "$ref": "#/definitions/OperationDetail" }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": { "$ref": "#/definitions/OperationDetail" }
+          },
+          "204": {
+            "description": "No Content",
+            "schema": { "$ref": "#/definitions/OperationDetail" }
           }
         }
       }
@@ -395,7 +426,7 @@
           "readOnly": true
         },
         "WaitHandle": {
-          "$ref": "WaitHandle",
+          "$ref": "#/definitions/WaitHandle",
           "readOnly": true
         }
       }
@@ -404,8 +435,8 @@
       "description": "Wait handle object",
       "type": "object",
       "properties": {
-        "Handle": { "$ref": "Object" },
-        "SafeWaitHandle": { "$ref": "SafeWaitHandle" }
+        "Handle": { "$ref": "#/definitions/Object" },
+        "SafeWaitHandle": { "$ref": "#/definitions/SafeWaitHandle" }
       }
     },
     "Object": {
@@ -431,15 +462,15 @@
       "type": "object",
       "properties": {
         "location": { "type": "string" },
-        "sku": { "$ref": "RpSkuTier" },
+        "sku": { "$ref": "#/definitions/RpSkuTier" },
         "tags": {
           "type": "object",
           "additionalProperties": { "type": "string" }
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "RpPropertyBag"
-          }
+          "$ref": "#/definitions/RpPropertyBag"
+        }
       }
     },
     "RpSkuTier": {
@@ -456,7 +487,7 @@
       "properties": {
         "provisioningState": { "type": "string" },
         "serverFullName": { "type": "string" },
-        "asAdministrators": { "$ref": "RpAsAdministrators" }
+        "asAdministrators": { "$ref": "#/definitions/RpAsAdministrators" }
       }
     },
     "RpAsAdministrators": {
@@ -474,15 +505,64 @@
       "type": "object",
       "properties": {
         "location": { "type": "string" },
-        "sku": { "$ref": "RpSkuTier" },
+        "sku": { "$ref": "#/definitions/RpSkuTier" },
         "tags": {
           "type": "object",
           "additionalProperties": { "type": "string" }
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "RpPropertyBag" 
-          }
+          "$ref": "#/definitions/RpPropertyBag"
+        }
+      }
+    },
+    "RpProvisionResult": {
+      "description": "Provision result specification",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "resourceType": { "type": "string" },
+        "location": { "type": "string" },
+        "sku": { "$ref": "#/definitions/RpSkuTier" },
+        "tags": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RpPropertyBag"
+        }
+      }
+    },
+    "ProvisionResultList": {
+      "description": "Provision request specification",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/RpProvisionResult" }
+        }
+      }
+    },
+    "ExceptionData": {
+      "description": "Error details",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string" },
+        "message": { "type": "string" }
+      }
+    },
+    "OperationDetail": {
+      "description": "Provision result specification",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "status": { "type": "string" },
+        "startTime": { "type": "string" },
+        "endTime": { "type": "string" },
+        "error": { "$ref": "#/definitions/ExceptionData" }
       }
     }
   }
