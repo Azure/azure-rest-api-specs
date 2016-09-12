@@ -25,7 +25,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/revokeInstantItemRecovery": {
       "post": {
         "tags": [
-          "RecoveryPoint"
+          "ItemLevelRecoveryConnections"
         ],
         "description": "Revokes an iSCSI connection which can be used to download a script. Executing this script opens a file explorer displaying all recoverable files and folders. This is an asynchronous operation.",
         "operationId": "ItemLevelRecoveryConnections_Revoke",
@@ -86,7 +86,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/provisionInstantItemRecovery": {
       "post": {
         "tags": [
-          "RecoveryPoint"
+          "ItemLevelRecoveryConnections"
         ],
         "description": "Provisions a script which invokes an iSCSI connection to the backup data. Executing this script opens a file explorer displaying all the recoverable files and folders. This is an asynchronous operation. To know the status of provisioning, call GetProtectedItemOperationResult API.",
         "operationId": "ItemLevelRecoveryConnections_Provision",
@@ -156,7 +156,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/restore": {
       "post": {
         "tags": [
-          "RecoveryPoint"
+          "Restores"
         ],
         "description": "Restores the specified backed up data. This is an asynchronous operation. To know the status of this API call, use GetProtectedItemOperationResult API.",
         "operationId": "Restores_Trigger",
@@ -226,7 +226,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}/operations/{operationId}": {
       "get": {
         "tags": [
-          "ProtectionPolicies"
+          "ProtectionPolicyOperationStatuses"
         ],
         "description": "Provides the status of the asynchronous operations like backup, restore. The status can be in progress, completed or failed. You can refer to the Operation Status enum for all the possible states of an operation. Some operations create jobs. This method returns the list of jobs associated with operation.",
         "operationId": "ProtectionPolicyOperationStatuses_Get",
@@ -276,7 +276,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}/operationResults/{operationId}": {
       "get": {
         "tags": [
-          "ProtectionPolicies"
+          "ProtectionPolicyOperationResults"
         ],
         "description": "Provides the result of an operation.",
         "operationId": "ProtectionPolicyOperationResults_Get",
@@ -510,7 +510,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/operationResults/{operationId}": {
       "get": {
         "tags": [
-          "ProtectionContainers"
+          "ProtectionContainerOperationResults"
         ],
         "description": "Fetches the result of any operation on the container.",
         "operationId": "ProtectionContainerOperationResults_Get",
@@ -573,7 +573,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/operationResults/{operationId}": {
       "get": {
         "tags": [
-          "ProtectionContainers"
+          "ProtectionContainerRefreshOperationResults"
         ],
         "description": "Provides the result of the refresh operation triggered by the BeginRefresh operation.",
         "operationId": "ProtectionContainerRefreshOperationResults_Get",
@@ -760,7 +760,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}": {
       "get": {
         "tags": [
-          "ProtectedItems"
+          "RecoveryPoints"
         ],
         "description": "Provides the information of the backed up data identified using RecoveryPointID. This is an asynchronous operation. To know the status of the operation, call the GetProtectedItemOperationResult API.",
         "operationId": "RecoveryPoints_Get",
@@ -824,7 +824,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints": {
       "get": {
         "tags": [
-          "ProtectedItems"
+          "RecoveryPoints"
         ],
         "description": "Lists the backup copies for the backed up item.",
         "operationId": "RecoveryPoints_List",
@@ -892,7 +892,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/backup": {
       "post": {
         "tags": [
-          "ProtectedItems"
+          "Backups"
         ],
         "description": "Triggers backup for specified backed up item. This is an asynchronous operation. To know the status of the operation, call GetProtectedItemOperationResult API.",
         "operationId": "Backups_Trigger",
@@ -955,7 +955,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationsStatus/{operationId}": {
       "get": {
         "tags": [
-          "ProtectedItems"
+          "ProtectedItemOperationStatuses"
         ],
         "description": "Fetches the status of an operation such as triggering a backup, restore. The status can be in progress, completed or failed. You can refer to the OperationStatus enum for all the possible states of the operation. Some operations create jobs. This method returns the list of jobs associated with the operation.",
         "operationId": "ProtectedItemOperationStatuses_Get",
@@ -1019,7 +1019,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}": {
       "get": {
         "tags": [
-          "ProtectedItems"
+          "ProtectedItemOperationResults"
         ],
         "description": "Fetches the result of any operation on the backup item.",
         "operationId": "ProtectedItemOperationResults_Get",
@@ -1378,7 +1378,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupJobs/operationResults/{operationId}": {
       "get": {
         "tags": [
-          "Job"
+          "ExportJobsOperationResults"
         ],
         "description": "Fetches the result of the operation triggered by the Export Job API.",
         "operationId": "ExportJobsOperationResults_Get",
@@ -1411,7 +1411,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/OperationResultInfo"
+              "$ref": "#/definitions/OperationResultInfoBase"
             }
           },
           "202": {
@@ -1424,7 +1424,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/operationResults/{operationId}": {
       "get": {
         "tags": [
-          "Job"
+          "JobOperationResults"
         ],
         "description": "Fetches the result of any operation.\r\n            the operation.",
         "operationId": "JobOperationResults_Get",
@@ -1477,7 +1477,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupJobsExport": {
       "post": {
         "tags": [
-          "Job"
+          "Jobs"
         ],
         "description": "Exports all jobs for a given SAS URL. The SAS URL will expire within 15 minutes of its creation.",
         "operationId": "Jobs_Export",
@@ -1518,7 +1518,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/cancel": {
       "post": {
         "tags": [
-          "Job"
+          "JobCancellations"
         ],
         "description": "Cancels a job. This is an asynchronous operation. To know the status of the cancellation, call GetCancelOperationResult API.",
         "operationId": "JobCancellations_Trigger",
@@ -1558,7 +1558,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}": {
       "get": {
         "tags": [
-          "Job"
+          "JobDetails"
         ],
         "description": "Gets exteded information associated with the job.",
         "operationId": "JobDetails_Get",
@@ -1601,7 +1601,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupJobs": {
       "get": {
         "tags": [
-          "Job"
+          "Jobs"
         ],
         "description": "Provides a pageable list of jobs.",
         "operationId": "Jobs_List",
@@ -1655,7 +1655,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupOperations/{operationId}": {
       "get": {
         "tags": [
-          "BackupOperationResult"
+          "BackupOperationStatuses"
         ],
         "description": "Fetches the status of an operation such as triggering a backup, restore. The status can be in progress, completed or failed. You can refer to the OperationStatus enum for all the possible states of an operation. Some operations create jobs. This method returns the list of jobs when the operation is complete.",
         "operationId": "BackupOperationStatuses_Get",
@@ -1698,7 +1698,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupOperationResults/{operationId}": {
       "get": {
         "tags": [
-          "BackupOperationResult"
+          "BackupOperationResults"
         ],
         "description": "Provides the status of the delete operations such as deleting backed up item. Once the operation has started, the status code in the response would be Accepted. It will continue to be in this state till it reaches completion. On successful completion, the status code will be OK. This method expects OperationID as an argument. OperationID is part of the Location header of the operation response.",
         "operationId": "BackupOperationResults_Get",
@@ -1968,7 +1968,13 @@
     "OperationStatusExtendedInfo": {
       "description": "Base class for additional information of operation status.",
       "type": "object",
-      "properties": {}
+      "properties": {
+        "objectType": {
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "type": "string"
+        }
+      },
+      "discriminator": "objectType"
     },
     "OperationWorkerResponse": {
       "description": "This is the base class for operation result responses.",
@@ -2164,8 +2170,8 @@
         }
       }
     },
-    "OperationResultInfo": {
-      "description": "Operation result info.",
+    "OperationResultInfoBase": {
+      "description": "Base class for operation result info.",
       "type": "object",
       "allOf": [
         {
@@ -2174,17 +2180,11 @@
       ],
       "properties": {
         "objectType": {
-          "description": "Gets the class type.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
           "type": "string"
-        },
-        "jobList": {
-          "description": "List of jobs created by this operation.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
-      }
+      },
+      "discriminator": "objectType"
     },
     "WorkloadProtectableItem": {
       "description": "Base class for backup item. Workload-specific backup items are derived from this class.",
@@ -2561,17 +2561,6 @@
       },
       "discriminator": "objectType"
     },
-    "AzureBackupServerEngine": {
-      "description": "Backup engine type when Azure Backup Server is used to manage the backups.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BackupEngineBase"
-        }
-      ],
-      "properties": {},
-      "x-ms-discriminator-value": "AzureBackupServerEngine"
-    },
     "DpmBackupEngine": {
       "description": "Data Protection Manager (DPM) specific backup engine.",
       "type": "object",
@@ -2583,29 +2572,16 @@
       "properties": {},
       "x-ms-discriminator-value": "DpmBackupEngine"
     },
-    "IaaSVMContainer": {
-      "description": "IaaS VM workload-specific container.",
+    "AzureBackupServerEngine": {
+      "description": "Backup engine type when Azure Backup Server is used to manage the backups.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProtectionContainer"
+          "$ref": "#/definitions/BackupEngineBase"
         }
       ],
-      "properties": {
-        "virtualMachineId": {
-          "description": "Fully qualified ARM url of the virtual machine represented by this Azure IaaS VM container.",
-          "type": "string"
-        },
-        "virtualMachineVersion": {
-          "description": "Specifies whether the container represents a Classic or an Azure Resource Manager VM.",
-          "type": "string"
-        },
-        "resourceGroup": {
-          "description": "Resource group name of Recovery Services Vault.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "IaaSVMContainer"
+      "properties": {},
+      "x-ms-discriminator-value": "AzureBackupServerEngine"
     },
     "MabContainer": {
       "description": "Container with items backed up using MAB backup engine.",
@@ -2696,6 +2672,30 @@
       "properties": {},
       "x-ms-discriminator-value": "AzureSqlContainer"
     },
+    "IaaSVMContainer": {
+      "description": "IaaS VM workload-specific container.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectionContainer"
+        }
+      ],
+      "properties": {
+        "virtualMachineId": {
+          "description": "Fully qualified ARM url of the virtual machine represented by this Azure IaaS VM container.",
+          "type": "string"
+        },
+        "virtualMachineVersion": {
+          "description": "Specifies whether the container represents a Classic or an Azure Resource Manager VM.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource group name of Recovery Services Vault.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "IaaSVMContainer"
+    },
     "IaaSVMProtectableItem": {
       "description": "IaaS VM workload-specific backup item.",
       "type": "object",
@@ -2708,55 +2708,6 @@
         "virtualMachineId": {
           "description": "Fully qualified ARM ID of the virtual machine.",
           "type": "string"
-        }
-      }
-    },
-    "MabFileFolderProtectedItem": {
-      "description": "MAB workload-specific backup item.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProtectedItem"
-        }
-      ],
-      "properties": {
-        "friendlyName": {
-          "description": "Friendly name of this backup item.",
-          "type": "string"
-        },
-        "computerName": {
-          "description": "Name of the computer associated with this backup item.",
-          "type": "string"
-        },
-        "lastBackupStatus": {
-          "description": "Status of last backup operation.",
-          "type": "string"
-        },
-        "extendedInfo": {
-          "$ref": "#/definitions/MabFileFolderProtectedItemExtendedInfo",
-          "description": "Additional information with this backup item."
-        }
-      },
-      "x-ms-discriminator-value": "MabFileFolderProtectedItem"
-    },
-    "MabFileFolderProtectedItemExtendedInfo": {
-      "description": "Additional information on the backed up item.",
-      "type": "object",
-      "properties": {
-        "lastRefreshedAt": {
-          "format": "date-time",
-          "description": "Last time when the agent data synced to service.",
-          "type": "string"
-        },
-        "oldestRecoveryPoint": {
-          "format": "date-time",
-          "description": "The oldest backup copy available.",
-          "type": "string"
-        },
-        "recoveryPointCount": {
-          "format": "int32",
-          "description": "Number of backup copies associated with the backup item.",
-          "type": "integer"
         }
       }
     },
@@ -2877,6 +2828,62 @@
         }
       }
     },
+    "MabFileFolderProtectedItem": {
+      "description": "MAB workload-specific backup item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectedItem"
+        }
+      ],
+      "properties": {
+        "friendlyName": {
+          "description": "Friendly name of this backup item.",
+          "type": "string"
+        },
+        "computerName": {
+          "description": "Name of the computer associated with this backup item.",
+          "type": "string"
+        },
+        "lastBackupStatus": {
+          "description": "Status of last backup operation.",
+          "type": "string"
+        },
+        "protectionState": {
+          "description": "Protected, ProtectionStopped, IRPending or ProtectionError",
+          "type": "string"
+        },
+        "isScheduledForDeferredDelete": {
+          "type": "boolean"
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/MabFileFolderProtectedItemExtendedInfo",
+          "description": "Additional information with this backup item."
+        }
+      },
+      "x-ms-discriminator-value": "MabFileFolderProtectedItem"
+    },
+    "MabFileFolderProtectedItemExtendedInfo": {
+      "description": "Additional information on the backed up item.",
+      "type": "object",
+      "properties": {
+        "lastRefreshedAt": {
+          "format": "date-time",
+          "description": "Last time when the agent data synced to service.",
+          "type": "string"
+        },
+        "oldestRecoveryPoint": {
+          "format": "date-time",
+          "description": "The oldest backup copy available.",
+          "type": "string"
+        },
+        "recoveryPointCount": {
+          "format": "int32",
+          "description": "Number of backup copies associated with the backup item.",
+          "type": "integer"
+        }
+      }
+    },
     "IaasVMBackupRequest": {
       "description": "IaaS VM workload-specific backup request.",
       "type": "object",
@@ -2894,8 +2901,8 @@
       },
       "x-ms-discriminator-value": "IaasVMBackupRequest"
     },
-    "AzureSqlProtectionPolicy": {
-      "description": "Azure SQL workload-specific backup policy.",
+    "MabProtectionPolicy": {
+      "description": "Mab container-specific backup policy.",
       "type": "object",
       "allOf": [
         {
@@ -2903,12 +2910,21 @@
         }
       ],
       "properties": {
+        "schedulePolicy": {
+          "$ref": "#/definitions/SchedulePolicy",
+          "description": "Backup schedule of backup policy."
+        },
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
           "description": "Retention policy details."
         }
       },
-      "x-ms-discriminator-value": "AzureSql"
+      "x-ms-discriminator-value": "MAB"
+    },
+    "SchedulePolicy": {
+      "description": "Base class for backup schedule.",
+      "type": "object",
+      "properties": {}
     },
     "RetentionPolicy": {
       "description": "Base class for retention policy.",
@@ -2935,13 +2951,8 @@
       },
       "x-ms-discriminator-value": "AzureIaasVM"
     },
-    "SchedulePolicy": {
-      "description": "Base class for backup schedule.",
-      "type": "object",
-      "properties": {}
-    },
-    "MabProtectionPolicy": {
-      "description": "Mab container-specific backup policy.",
+    "AzureSqlProtectionPolicy": {
+      "description": "Azure SQL workload-specific backup policy.",
       "type": "object",
       "allOf": [
         {
@@ -2949,16 +2960,41 @@
         }
       ],
       "properties": {
-        "schedulePolicy": {
-          "$ref": "#/definitions/SchedulePolicy",
-          "description": "Backup schedule of backup policy."
-        },
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
           "description": "Retention policy details."
         }
       },
-      "x-ms-discriminator-value": "MAB"
+      "x-ms-discriminator-value": "AzureSql"
+    },
+    "GenericRecoveryPoint": {
+      "description": "Generic backup copy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPoint"
+        }
+      ],
+      "properties": {
+        "friendlyName": {
+          "description": "Friendly name of the backup copy.",
+          "type": "string"
+        },
+        "recoveryPointType": {
+          "description": "Type of the backup copy.",
+          "type": "string"
+        },
+        "recoveryPointTime": {
+          "format": "date-time",
+          "description": "Time at which this backup copy was created.",
+          "type": "string"
+        },
+        "recoveryPointAdditionalInfo": {
+          "description": "Additional information associated with this backup copy.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "GenericRecoveryPoint"
     },
     "IaasVMRecoveryPoint": {
       "description": "IaaS VM workload specific backup copy.",
@@ -3050,35 +3086,6 @@
           "type": "string"
         }
       }
-    },
-    "GenericRecoveryPoint": {
-      "description": "Generic backup copy.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RecoveryPoint"
-        }
-      ],
-      "properties": {
-        "friendlyName": {
-          "description": "Friendly name of the backup copy.",
-          "type": "string"
-        },
-        "recoveryPointType": {
-          "description": "Type of the backup copy.",
-          "type": "string"
-        },
-        "recoveryPointTime": {
-          "format": "date-time",
-          "description": "Time at which this backup copy was created.",
-          "type": "string"
-        },
-        "recoveryPointAdditionalInfo": {
-          "description": "Additional information associated with this backup copy.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "GenericRecoveryPoint"
     },
     "IaasVMRestoreRequest": {
       "description": "IaaS VM workload-specific restore.",
@@ -3197,134 +3204,6 @@
         }
       },
       "x-ms-discriminator-value": "IaasVMILRRegistrationRequest"
-    },
-    "DpmJob": {
-      "description": "DPM workload-specifc job object.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Job"
-        }
-      ],
-      "properties": {
-        "duration": {
-          "description": "Time elapsed for job.",
-          "type": "string"
-        },
-        "dpmServerName": {
-          "description": "DPM server name managing the backup item or backup job.",
-          "type": "string"
-        },
-        "containerName": {
-          "description": "Name of cluster/server protecting current backup item, if any.",
-          "type": "string"
-        },
-        "containerType": {
-          "description": "Type of container.",
-          "type": "string"
-        },
-        "workloadType": {
-          "description": "Type of backup item.",
-          "type": "string"
-        },
-        "actionsInfo": {
-          "description": "The state/actions applicable on this job like cancel/retry.",
-          "type": "array",
-          "items": {
-            "enum": [
-              "Invalid",
-              "Cancellable",
-              "Retriable"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "JobSupportedAction",
-              "modelAsString": false
-            }
-          }
-        },
-        "errorDetails": {
-          "description": "The errors.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DpmErrorInfo"
-          }
-        },
-        "extendedInfo": {
-          "$ref": "#/definitions/DpmJobExtendedInfo",
-          "description": "Additional information for this job."
-        }
-      },
-      "x-ms-discriminator-value": "DpmJob"
-    },
-    "DpmErrorInfo": {
-      "description": "DPM workload-specific error information.",
-      "type": "object",
-      "properties": {
-        "errorString": {
-          "description": "Localized error string.",
-          "type": "string"
-        },
-        "recommendations": {
-          "description": "List of localized recommendations for above error code.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "DpmJobExtendedInfo": {
-      "description": "Additional information on the DPM workload-specific job.",
-      "type": "object",
-      "properties": {
-        "tasksList": {
-          "description": "List of tasks associated with this job.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DpmJobTaskDetails"
-          }
-        },
-        "propertyBag": {
-          "description": "The job properties.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "dynamicErrorMessage": {
-          "description": "Non localized error message on job execution.",
-          "type": "string"
-        }
-      }
-    },
-    "DpmJobTaskDetails": {
-      "description": "DPM workload-specific job task details.",
-      "type": "object",
-      "properties": {
-        "taskId": {
-          "description": "The task display name.",
-          "type": "string"
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "The start time.",
-          "type": "string"
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "The end time.",
-          "type": "string"
-        },
-        "duration": {
-          "description": "Time elapsed for task.",
-          "type": "string"
-        },
-        "status": {
-          "description": "The status.",
-          "type": "string"
-        }
-      }
     },
     "AzureIaaSVMJob": {
       "description": "Azure IaaS VM workload-specifc job object.",
@@ -3462,6 +3341,134 @@
           "format": "double",
           "description": "Progress of the task.",
           "type": "number"
+        }
+      }
+    },
+    "DpmJob": {
+      "description": "DPM workload-specifc job object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Job"
+        }
+      ],
+      "properties": {
+        "duration": {
+          "description": "Time elapsed for job.",
+          "type": "string"
+        },
+        "dpmServerName": {
+          "description": "DPM server name managing the backup item or backup job.",
+          "type": "string"
+        },
+        "containerName": {
+          "description": "Name of cluster/server protecting current backup item, if any.",
+          "type": "string"
+        },
+        "containerType": {
+          "description": "Type of container.",
+          "type": "string"
+        },
+        "workloadType": {
+          "description": "Type of backup item.",
+          "type": "string"
+        },
+        "actionsInfo": {
+          "description": "The state/actions applicable on this job like cancel/retry.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "Invalid",
+              "Cancellable",
+              "Retriable"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "JobSupportedAction",
+              "modelAsString": false
+            }
+          }
+        },
+        "errorDetails": {
+          "description": "The errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DpmErrorInfo"
+          }
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/DpmJobExtendedInfo",
+          "description": "Additional information for this job."
+        }
+      },
+      "x-ms-discriminator-value": "DpmJob"
+    },
+    "DpmErrorInfo": {
+      "description": "DPM workload-specific error information.",
+      "type": "object",
+      "properties": {
+        "errorString": {
+          "description": "Localized error string.",
+          "type": "string"
+        },
+        "recommendations": {
+          "description": "List of localized recommendations for above error code.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DpmJobExtendedInfo": {
+      "description": "Additional information on the DPM workload-specific job.",
+      "type": "object",
+      "properties": {
+        "tasksList": {
+          "description": "List of tasks associated with this job.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DpmJobTaskDetails"
+          }
+        },
+        "propertyBag": {
+          "description": "The job properties.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "dynamicErrorMessage": {
+          "description": "Non localized error message on job execution.",
+          "type": "string"
+        }
+      }
+    },
+    "DpmJobTaskDetails": {
+      "description": "DPM workload-specific job task details.",
+      "type": "object",
+      "properties": {
+        "taskId": {
+          "description": "The task display name.",
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "The start time.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "The end time.",
+          "type": "string"
+        },
+        "duration": {
+          "description": "Time elapsed for task.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status.",
+          "type": "string"
         }
       }
     },
@@ -3620,6 +3627,134 @@
         }
       }
     },
+    "OperationResultInfo": {
+      "description": "Operation result info.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationResultInfoBase"
+        }
+      ],
+      "properties": {
+        "jobList": {
+          "description": "List of jobs created by this operation.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "OperationResultInfo"
+    },
+    "ExportJobsOperationResultInfo": {
+      "description": "This class is used to send blob details after exporting jobs.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationResultInfoBase"
+        }
+      ],
+      "properties": {
+        "blobUrl": {
+          "description": "URL of the blob into which the serialized string of list of jobs is exported.",
+          "type": "string"
+        },
+        "blobSasKey": {
+          "description": "SAS key to access the blob. It expires in 15 mins.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "ExportJobsOperationResultInfo"
+    },
+    "OperationStatusProvisionILRExtendedInfo": {
+      "description": "Operation status extended info for ILR provision action.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationStatusExtendedInfo"
+        }
+      ],
+      "properties": {
+        "recoveryTarget": {
+          "$ref": "#/definitions/InstantItemRecoveryTarget",
+          "description": "Target details for file / folder restore."
+        }
+      },
+      "x-ms-discriminator-value": "OperationStatusProvisionILRExtendedInfo"
+    },
+    "InstantItemRecoveryTarget": {
+      "description": "Target details for file / folder restore.",
+      "type": "object",
+      "properties": {
+        "clientScripts": {
+          "description": "List of client scripts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientScriptForConnect"
+          }
+        }
+      }
+    },
+    "ClientScriptForConnect": {
+      "description": "Client script details for file / folder restore.",
+      "type": "object",
+      "properties": {
+        "scriptContent": {
+          "description": "File content of the client script for file / folder restore.",
+          "type": "string"
+        },
+        "scriptExtension": {
+          "description": "File extension of the client script for file / folder restore - .ps1 , .sh , etc.",
+          "type": "string"
+        },
+        "osType": {
+          "description": "OS type - Windows, Linux etc. for which this file / folder restore client script works.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationStatusJobsExtendedInfo": {
+      "description": "Operation status extended info for list of jobs.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationStatusExtendedInfo"
+        }
+      ],
+      "properties": {
+        "jobIds": {
+          "description": "IDs of the jobs created for the protected item.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "failedJobsError": {
+          "description": "Stores all the failed jobs along with the corresponding error codes.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "OperationStatusJobsExtendedInfo"
+    },
+    "OperationStatusJobExtendedInfo": {
+      "description": "Operation status job extended info.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationStatusExtendedInfo"
+        }
+      ],
+      "properties": {
+        "jobId": {
+          "description": "ID of the job created for this protected item.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "OperationStatusJobExtendedInfo"
+    },
     "AzureIaaSClassicComputeVMContainer": {
       "description": "IaaS VM workload-specific backup item representing a classic virtual machine.",
       "type": "object",
@@ -3642,17 +3777,6 @@
       "properties": {},
       "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
     },
-    "AzureIaaSClassicComputeVMProtectedItem": {
-      "description": "IaaS VM workload-specific backup item representing the Classic Compute VM.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureIaaSVMProtectedItem"
-        }
-      ],
-      "properties": {},
-      "x-ms-discriminator-value": "Microsoft.ClassicCompute/virtualMachines"
-    },
     "AzureIaaSComputeVMProtectedItem": {
       "description": "IaaS VM workload-specific backup item representing the Azure Resource Manager VM.",
       "type": "object",
@@ -3663,6 +3787,17 @@
       ],
       "properties": {},
       "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
+    },
+    "AzureIaaSClassicComputeVMProtectedItem": {
+      "description": "IaaS VM workload-specific backup item representing the Classic Compute VM.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureIaaSVMProtectedItem"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "Microsoft.ClassicCompute/virtualMachines"
     },
     "ResourceList": {
       "description": "Base for all lists of resources.",
