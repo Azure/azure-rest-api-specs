@@ -19,7 +19,7 @@
       "get": {
         "description": "Gets an incident associated to an alert rule",
         "tags": [
-          "Alert"
+          "AlertRuleIncidents"
         ],
         "operationId": "AlertRuleIncidents_Get",
         "parameters": [
@@ -117,7 +117,7 @@
       "put": {
         "description": "Creates or updates an alert rule",
         "tags": [
-          "Alert"
+          "AlertRules"
         ],
         "operationId": "AlertRules_CreateOrUpdate",
         "parameters": [
@@ -170,7 +170,7 @@
       "delete": {
         "description": "Deletes an alert rule",
         "tags": [
-          "Alert"
+          "AlertRules"
         ],
         "operationId": "AlertRules_Delete",
         "parameters": [
@@ -212,7 +212,7 @@
       "get": {
         "description": "Gets an alert rule",
         "tags": [
-          "Alert"
+          "AlertRules"
         ],
         "operationId": "AlertRules_Get",
         "parameters": [
@@ -255,7 +255,7 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules": {
       "get": {
         "tags": [
-          "Alert"
+          "AlertRules"
         ],
         "operationId": "AlertRules_List",
         "description": "List the alert rules within a resource group.",
@@ -304,7 +304,7 @@
       "get": {
         "description": "Lists the autoscale settings for a resource group",
         "tags": [
-          "Autoscale"
+          "AutoscaleSettings"
         ],
         "operationId": "AutoscaleSettings_List",
         "parameters": [
@@ -345,9 +345,9 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/autoscalesettings/{autoscaleSettingName}": {
       "patch": {
-        "description": "Updates and autoscale setting",
+        "description": "Updates an autoscale setting",
         "tags": [
-          "Autoscale"
+          "AutoscaleSettings"
         ],
         "operationId": "AutoscaleSettings_Update",
         "parameters": [
@@ -393,7 +393,7 @@
       "put": {
         "description": "Creates or updates and autoscale setting",
         "tags": [
-          "Autoscale"
+          "AutoscaleSettings"
         ],
         "operationId": "AutoscaleSettings_CreateOrUpdate",
         "parameters": [
@@ -439,7 +439,7 @@
       "delete": {
         "description": "Deletes and autoscale setting",
         "tags": [
-          "Autoscale"
+          "AutoscaleSettings"
         ],
         "operationId": "AutoscaleSettings_Delete",
         "parameters": [
@@ -476,7 +476,7 @@
       "get": {
         "description": "Gets an autoscale setting",
         "tags": [
-          "Autoscale"
+          "AutoscaleSettings"
         ],
         "operationId": "AutoscaleSettings_Get",
         "parameters": [
@@ -733,7 +733,8 @@
           "ServiceDiagnosticSettings"
         ],
         "operationId": "ServiceDiagnosticSettings_Put",
-        "description": "Create or update new diagnostic settings for the specified resource. This operation is long running. Use GetStatus to check the status of this operation.",
+        "x-ms-long-running-operation": true,
+        "description": "Create or update new diagnostic settings for the specified resource. This operation is long running.",
         "parameters": [
           {
             "name": "resourceUri",
@@ -780,7 +781,7 @@
       "get": {
         "description": "Lists the SKU definitions for a resource",
         "tags": [
-          "Sku"
+          "SkuDefinitions"
         ],
         "operationId": "SkuDefinitions_List",
         "parameters": [
@@ -819,7 +820,7 @@
       "patch": {
         "description": "Updates the current SKU for a resource",
         "tags": [
-          "Sku"
+          "CurrentSku"
         ],
         "operationId": "CurrentSku_Update",
         "parameters": [
@@ -862,7 +863,7 @@
       "get": {
         "description": "Gets the current SKU for a resource",
         "tags": [
-          "Sku"
+          "CurrentSku"
         ],
         "operationId": "CurrentSku_Get",
         "parameters": [
@@ -900,19 +901,19 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the unique name of the sku e.g. 'Free_A0'."
+          "description": "the unique name of the sku e.g. 'Free_A0'."
         },
         "tier": {
           "type": "string",
-          "description": "Gets or sets the tier of the sku e.g. 'free'."
+          "description": "the tier of the sku e.g. 'free'."
         },
         "size": {
           "type": "string",
-          "description": "Gets or sets the size of the sku e.g. 'A0'."
+          "description": "the size of the sku e.g. 'A0'."
         },
         "family": {
           "type": "string",
-          "description": "Gets or sets the family of the sku e.g. 'A'."
+          "description": "the family of the sku e.g. 'A'."
         }
       },
       "description": "Represents a sku."
@@ -922,21 +923,21 @@
         "minimum": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the minimum capacity."
+          "description": "the minimum capacity."
         },
         "maximum": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the maximum capacity."
+          "description": "the maximum capacity."
         },
         "default": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the default capacity."
+          "description": "the default capacity."
         },
         "scaleType": {
           "type": "string",
-          "description": "Gets or sets the scale type supported.",
+          "description": "the scale type supported.",
           "enum": [
             "None",
             "Manual",
@@ -957,7 +958,7 @@
           "items": {
             "$ref": "#/definitions/SkuDefinition"
           },
-          "description": "Gets or sets the values for the sku definition."
+          "description": "the values for the sku definition."
         }
       },
       "description": "A standard service response including an HTTP status code and request ID."
@@ -966,15 +967,15 @@
       "properties": {
         "resourceType": {
           "type": "string",
-          "description": "Gets or sets the type of the resource e.g. 'Microsoft.Compute/virtualMachines'."
+          "description": "the type of the resource e.g. 'Microsoft.Compute/virtualMachines'."
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "Gets or sets the sku."
+          "description": "the sku."
         },
         "capacity": {
           "$ref": "#/definitions/Capacity",
-          "description": "Gets or sets the capacity of the sku."
+          "description": "the capacity of the sku."
         }
       },
       "description": "Represents a sku definition."
@@ -1018,7 +1019,7 @@
           "items": {
             "$ref": "#/definitions/Incident"
           },
-          "description": "Gets or sets the incident collection."
+          "description": "the incident collection."
         }
       },
       "description": "The List incidents operation response."
@@ -1056,11 +1057,11 @@
           "properties": {
             "resourceUri": {
                "type": "string",
-               "description": "Gets or sets the resource identifier of the resource the rule monitors."
+               "description": "the resource identifier of the resource the rule monitors."
             },
             "metricName": {
               "type": "string",
-              "description": "Gets or sets the name of the metric that defines what the rule monitors."
+              "description": "the name of the metric that defines what the rule monitors."
             }
           },
           "description": "Particular properties of the RuleMetricDataSource"
@@ -1072,7 +1073,7 @@
       "properties": {
         "emailAddress": {
           "type": "string",
-          "description": "Gets or sets the email address."
+          "description": "the email address."
         }
       },
       "description": "The claims for a rule management event data source."
@@ -1088,43 +1089,43 @@
           "properties": {
             "eventName": {
               "type": "string",
-              "description": "Gets or sets the event name."
+              "description": "the event name."
             },
             "eventSource": {
               "type": "string",
-              "description": "Gets or sets the event source."
+              "description": "the event source."
             },
             "level": {
               "type": "string",
-              "description": "Gets or sets the level."
+              "description": "the level."
             },
             "operationName": {
               "type": "string",
-              "description": "Gets or sets the operation name."
+              "description": "the operation name."
             },
             "resourceGroupName": {
               "type": "string",
-              "description": "Gets or sets the resource group name."
+              "description": "the resource group name."
             },
             "resourceProviderName": {
               "type": "string",
-              "description": "Gets or sets the resource provider name."
+              "description": "the resource provider name."
             },
             "resourceUri": {
               "type": "string",
-              "description": "Gets or sets the resource uri."
+              "description": "the resource uri."
             },
             "status": {
               "type": "string",
-              "description": "Gets or sets the status."
+              "description": "the status."
             },
             "subStatus": {
               "type": "string",
-              "description": "Gets or sets the substatus."
+              "description": "the substatus."
             },
             "claims": {
               "$ref": "#/definitions/RuleManagementEventClaimsDataSource",
-              "description": "Gets or sets the claims."
+              "description": "the claims."
             }
           },
           "description": "Particular properties for the RuleManagementEventDataSource"
@@ -1171,24 +1172,25 @@
           "properties": {
             "dataSource": {
               "$ref": "#/definitions/RuleDataSource",
-              "description": "Gets or sets the resource from which the rule collects its data."
+              "description": "the resource from which the rule collects its data."
             },
             "operator": {
               "$ref": "#/definitions/ConditionOperator",
-              "description": "Gets or sets the operator used to compare the data and the threshold."
+              "description": "the operator used to compare the data and the threshold."
             },
             "threshold": {
               "type": "number",
               "format": "double",
-              "description": "Gets or sets the threshold value that activates the alert."
+              "description": "the threshold value that activates the alert."
             },
             "windowSize": {
-              "$ref": "#/definitions/TimeSpan",
-              "description": "Gets or sets the period of time that is used to monitor alert activity based on the threshold. Must be between 5 minutes and 1 day."
+              "type": "string",
+              "format": "duration",
+              "description": "the period of time that is used to monitor alert activity based on the threshold. Must be between 5 minutes and 1 day."
             },
             "timeAggregation": {
               "$ref": "#/definitions/TimeAggregationOperator",
-              "description": "Gets or sets the time aggregation operator. How the data that is collected should be combined over time. The default value is the PrimaryAggregationType of the Metric."
+              "description": "the time aggregation operator. How the data that is collected should be combined over time. The default value is the PrimaryAggregationType of the Metric."
             }
           },
           "description": "Particular properties of the ThresholdRuleCondition"
@@ -1207,16 +1209,17 @@
            "properties": {
              "dataSource": {
                "$ref": "#/definitions/RuleDataSource",
-               "description": "Gets or sets the resource from which the rule collects its data."
+               "description": "the resource from which the rule collects its data."
              },
              "windowSize": {
-               "$ref": "#/definitions/TimeSpan",
-               "description": "Gets or sets the period of time that is used to monitor alert activity based on the threshold. Must be between 5 minutes and 1 day."
+               "type": "string",
+               "format": "duration",
+               "description": "the period of time that is used to monitor alert activity based on the threshold. Must be between 5 minutes and 1 day."
              },
              "failedLocationCount": {
                "type": "integer",
                "format": "int32",
-               "description": "Gets or sets the number of locations that must fail to activate the alert."
+               "description": "the number of locations that must fail to activate the alert."
              }
             },
             "required": [ "failedLocationCount" ],
@@ -1229,16 +1232,17 @@
       "properties": {
         "operator": {
            "$ref": "#/definitions/ConditionOperator",
-           "description": "Gets or sets the condition operator."
+           "description": "the condition operator."
         },
         "threshold": {
            "type": "number",
            "format": "double",
-           "description": "Gets or sets the condition threshold."
+           "description": "the condition threshold."
         },
         "windowSize": {
-          "$ref": "#/definitions/TimeSpan",
-          "description": "Gets or sets the time period over which the alert rule is evaluated."
+          "type": "string",
+          "format": "duration",
+          "description": "the time period over which the alert rule is evaluated."
         }
       },
       "description": "A management event aggregation condition."
@@ -1254,11 +1258,11 @@
            "properties": {
               "dataSource": {
                 "$ref": "#/definitions/RuleDataSource",
-                "description": "Gets or sets the resource from which the rule collects its data."
+                "description": "the resource from which the rule collects its data."
               },
               "aggregation": {
                 "$ref": "#/definitions/ManagementEventAggregationCondition",
-                "description": "Gets or sets the aggregation condition."
+                "description": "the aggregation condition."
               }
             },
             "description": "Particular properties of the ManagementEventRuleCondition"
@@ -1288,14 +1292,14 @@
           "properties": {
             "sendToServiceOwners": {
                 "type": "boolean",
-                "description": "Gets or sets the flag to send e-mails to the service owners. Whether the administrators (service and co-adiminstrators) of the service should be notified when the alert is activated."
+                "description": "the flag to send e-mails to the service owners. Whether the administrators (service and co-adiminstrators) of the service should be notified when the alert is activated."
             },
             "customEmails": {
                 "type": "array",
                 "items": {
                   "type" : "string"
                 },
-                "description": "Gets or sets the list of administrator's custom email addresses notifiy of the activation of the alert."
+                "description": "the list of administrator's custom email addresses notifiy of the activation of the alert."
             }
           },
           "description": "Particular properties of the RuleEmailAction"
@@ -1314,7 +1318,7 @@
           "properties": {
              "serviceUri": {
                "type": "string",
-               "description": "Gets or sets the service uri to Post the notitication."
+               "description": "the service uri to Post the notitication."
              },
              "properties": {
                "x-ms-client-flatten": true,
@@ -1322,7 +1326,7 @@
                "additionalProperties": {
                   "type": "string"
                },
-               "description": "Gets or sets the dictionary of custom properties to include with the post operation."
+               "description": "the dictionary of custom properties to include with the post operation."
              }
           },
           "description": "Particular properties of the RuleWebhookAction"
@@ -1334,26 +1338,26 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the alert rule."
+          "description": "the name of the alert rule."
         },
         "description": {
           "type": "string",
-          "description": "Gets or sets the description of the alert rule that will be included in the alert email."
+          "description": "the description of the alert rule that will be included in the alert email."
         },
         "isEnabled": {
           "type": "boolean",
-          "description": "Gets or sets the flag that indicates whether the alert rule is enabled."
+          "description": "the flag that indicates whether the alert rule is enabled."
         },
         "condition": {
           "$ref": "#/definitions/RuleCondition",
-          "description": "Gets or sets the condition that results in the alert rule being activated."
+          "description": "the condition that results in the alert rule being activated."
         },
         "actions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/RuleAction"
           },
-          "description": "Gets or sets the actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
+          "description": "the actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
         },
         "lastUpdatedTime": {
           "readOnly": true,
@@ -1369,19 +1373,19 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Gets or sets the location of the rule."
+          "description": "the location of the rule."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the tags of the rule."
+          "description": "the tags of the rule."
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/Rule",
-          "description": "Gets or sets the rule to create or update."
+          "description": "the rule to create or update."
         }
       },
       "description": "Parameters supplied to the Create or Update Rule operation."
@@ -1390,27 +1394,27 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the resource identifier of the rule."
+          "description": "the resource identifier of the rule."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the alert rule."
+          "description": "the name of the alert rule."
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the location of the rule."
+          "description": "the location of the rule."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the tags of the rule."
+          "description": "the tags of the rule."
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/Rule",
-          "description": "Gets or sets the retrieved rule."
+          "description": "the retrieved rule."
         }
       },
       "description": "The alert rule resource."
@@ -1422,7 +1426,7 @@
           "items": {
             "$ref": "#/definitions/RuleResource"
           },
-          "description": "Gets or sets the values for the alert rule resources."
+          "description": "the values for the alert rule resources."
         }
       },
       "description": "Represents a collection of alert rule resources."
@@ -1431,15 +1435,15 @@
       "properties": {
         "minimum": {
           "type": "string",
-          "description": "Gets or sets the minimum number of instances for the resource."
+          "description": "the minimum number of instances for the resource."
         },
         "maximum": {
           "type": "string",
-          "description": "Gets or sets the maximum number of instances for the resource. The actual maximum number may be limited by the cores that are available."
+          "description": "the maximum number of instances for the resource. The actual maximum number may be limited by the cores that are available."
         },
         "default": {
           "type": "string",
-          "description": "Gets or sets the number of instances that will be set if metrics are not available for evaluation. The default is only used if the current instance count is lower than the default."
+          "description": "the number of instances that will be set if metrics are not available for evaluation. The default is only used if the current instance count is lower than the default."
         }
       },
       "description": "The number of instances that can be used during this profile."
@@ -1448,19 +1452,20 @@
       "properties": {
         "metricName": {
           "type": "string",
-          "description": "Gets or sets the name of the metric that defines what the rule monitors."
+          "description": "the name of the metric that defines what the rule monitors."
         },
         "metricResourceUri": {
           "type": "string",
-          "description": "Gets or sets the resource identifier of the resource the rule monitors."
+          "description": "the resource identifier of the resource the rule monitors."
         },
         "timeGrain": {
-		  "$ref": "#/definitions/TimeSpan",
-          "description": "Gets or sets the granularity of metrics the rule monitors. Must be one of the predefined values returned from metric definitions for the metric. Must be between 12 hours and 1 minute."
+          "type": "string",
+          "format": "duration",
+          "description": "the granularity of metrics the rule monitors. Must be one of the predefined values returned from metric definitions for the metric. Must be between 12 hours and 1 minute."
         },
         "statistic": {
           "type": "string",
-          "description": "Gets or sets the metric statistic type.How the metrics from multiple instances are combined.",
+          "description": "the metric statistic type.How the metrics from multiple instances are combined.",
           "enum": [
             "Average",
             "Min",
@@ -1473,12 +1478,13 @@
           }
         },
         "timeWindow": {
-          "$ref": "#/definitions/TimeSpan",
-          "description": "Gets or sets the range of time in which instance data is collected. This value must be greater than the delay in metric collection, which can vary from resource-to-resource. Must be between 12 hours and 5 minutes."
+          "type": "string",
+          "format": "duration",
+          "description": "the range of time in which instance data is collected. This value must be greater than the delay in metric collection, which can vary from resource-to-resource. Must be between 12 hours and 5 minutes."
         },
         "timeAggregation": {
           "type": "string",
-          "description": "Gets or sets time aggregation type.How the data that is collected should be combined over time. The default value is Average.",
+          "description": "time aggregation type.How the data that is collected should be combined over time. The default value is Average.",
           "enum": [
             "Average",
             "Minimum",
@@ -1493,7 +1499,7 @@
         },
         "operator": {
           "type": "string",
-          "description": "Gets or sets the operator that is used to compare the metric data and the threshold.",
+          "description": "the operator that is used to compare the metric data and the threshold.",
           "enum": [
             "Equals",
             "NotEquals",
@@ -1510,7 +1516,7 @@
         "threshold": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the threshold of the metric that triggers the scale action."
+          "description": "the threshold of the metric that triggers the scale action."
         }
       },
       "description": "The trigger that results in a scaling action."
@@ -1519,7 +1525,7 @@
       "properties": {
         "direction": {
           "type": "string",
-          "description": "Gets or sets the scale direction. Whether the scaling action increases or decreases the number of instances.",
+          "description": "the scale direction. Whether the scaling action increases or decreases the number of instances.",
           "enum": [
             "None",
             "Increase",
@@ -1532,7 +1538,7 @@
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the type of action that should occur, this must be set to ChangeCount.",
+          "description": "the type of action that should occur, this must be set to ChangeCount.",
           "enum": [
             "ChangeSize",
             "ChangeCount",
@@ -1546,11 +1552,12 @@
         },
         "value": {
           "type": "string",
-          "description": "Gets or sets the number of instances that are involved in the scaling action. This value must be 1 or greater. The default value is 1."
+          "description": "the number of instances that are involved in the scaling action. This value must be 1 or greater. The default value is 1."
         },
         "cooldown": {
-          "$ref": "#/definitions/TimeSpan",
-          "description": "Gets or sets the amount of time to wait since the last scaling action before this action occurs. Must be between 1 week and 1 minute."
+          "type": "string",
+          "format": "duration",
+          "description": "the amount of time to wait since the last scaling action before this action occurs. Must be between 1 week and 1 minute."
         }
       },
       "description": "The parameters for the scaling action."
@@ -1559,11 +1566,11 @@
       "properties": {
         "metricTrigger": {
           "$ref": "#/definitions/MetricTrigger",
-          "description": "Gets or sets the trigger that results in a scaling action."
+          "description": "the trigger that results in a scaling action."
         },
         "scaleAction": {
           "$ref": "#/definitions/ScaleAction",
-          "description": "Gets or sets the parameters for the scaling action."
+          "description": "the parameters for the scaling action."
         }
       },
       "description": "A rule that provide the triggers and parameters for the scaling action."
@@ -1572,17 +1579,17 @@
       "properties": {
         "timeZone": {
           "type": "string",
-          "description": "Gets or sets the time zone of the start and end times for the profile."
+          "description": "the time zone of the start and end times for the profile."
         },
         "start": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start time for the profile."
+          "description": "the start time for the profile."
         },
         "end": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the end time for the profile."
+          "description": "the end time for the profile."
         }
       },
       "required": [ "start", "end" ],
@@ -1592,14 +1599,14 @@
       "properties": {
         "timeZone": {
           "type": "string",
-          "description": "Gets or sets the time zone for the hours of the profile."
+          "description": "the time zone for the hours of the profile."
         },
         "days": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the collection of days that the profile takes effect on."
+          "description": "the collection of days that the profile takes effect on."
         },
         "hours": {
           "type": "array",
@@ -1607,7 +1614,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "description": "Gets or sets the collection of hours at which the profile takes effect at."
+          "description": "the collection of hours at which the profile takes effect at."
         },
         "minutes": {
           "type": "array",
@@ -1615,7 +1622,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "description": "Gets or sets the collection of minutes at which the profile takes effect at."
+          "description": "the collection of minutes at which the profile takes effect at."
         }
       },
       "description": "The scheduling constraints for when the profile begins."
@@ -1624,7 +1631,7 @@
       "properties": {
         "frequency": {
           "type": "string",
-          "description": "Gets or sets the recurrence frequency. How often the schedule profile should take effect. This value must be Week, meaning each week will have the same set of profiles.",
+          "description": "the recurrence frequency. How often the schedule profile should take effect. This value must be Week, meaning each week will have the same set of profiles.",
           "enum": [
             "None",
             "Second",
@@ -1642,7 +1649,7 @@
         },
         "schedule": {
           "$ref": "#/definitions/RecurrentSchedule",
-          "description": "Gets or sets the scheduling constraints for when the profile begins."
+          "description": "the scheduling constraints for when the profile begins."
         }
       },
       "description": "The repeating times at which this profile begins. This element is not used if the FixedDate element is used."
@@ -1651,26 +1658,26 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the profile."
+          "description": "the name of the profile."
         },
         "capacity": {
           "$ref": "#/definitions/ScaleCapacity",
-          "description": "Gets or sets the number of instances that can be used during this profile."
+          "description": "the number of instances that can be used during this profile."
         },
         "rules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScaleRule"
           },
-          "description": "Gets or sets the collection of rules that provide the triggers and parameters for the scaling action. A maximum of 10 rules can be specified."
+          "description": "the collection of rules that provide the triggers and parameters for the scaling action. A maximum of 10 rules can be specified."
         },
         "fixedDate": {
           "$ref": "#/definitions/TimeWindow",
-          "description": "Gets or sets the specific date for the profile. This element is not used if the Recurrence element is used."
+          "description": "the specific date for the profile. This element is not used if the Recurrence element is used."
         },
         "recurrence": {
           "$ref": "#/definitions/Recurrence",
-          "description": "Gets or sets the repeating times at which this profile begins. This element is not used if the FixedDate element is used."
+          "description": "the repeating times at which this profile begins. This element is not used if the FixedDate element is used."
         }
       },
       "description": "Autoscale profile."
@@ -1679,18 +1686,18 @@
       "properties": {
         "sendToSubscriptionAdministrator": {
           "type": "boolean",
-          "description": "Gets or sets a value indicating whether to send email to subscription administrator."
+          "description": "a value indicating whether to send email to subscription administrator."
         },
         "sendToSubscriptionCoAdministrators": {
           "type": "boolean",
-          "description": "Gets or sets a value indicating whether to send email to subscription co-administrators."
+          "description": "a value indicating whether to send email to subscription co-administrators."
         },
         "customEmails": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the custom email list."
+          "description": "the custom email list."
         }
       },
       "description": "Email notification."
@@ -1699,7 +1706,7 @@
       "properties": {
         "serviceUri": {
           "type": "string",
-          "description": "Gets or sets the service address to receive the notification."
+          "description": "the service address to receive the notification."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1707,7 +1714,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets a property bag of settings."
+          "description": "a property bag of settings."
         }
       },
       "description": "Webhook notification."
@@ -1716,18 +1723,18 @@
       "properties": {
         "operation": {
           "type": "string",
-          "description": "Gets or sets the operation associated with the notification."
+          "description": "the operation associated with the notification."
         },
         "email": {
           "$ref": "#/definitions/EmailNotification",
-          "description": "Gets or sets the email notification."
+          "description": "the email notification."
         },
         "webhooks": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/WebhookNotification"
           },
-          "description": "Gets or sets the collection of webhook notifications."
+          "description": "the collection of webhook notifications."
         }
       },
       "description": "Autoscale notification."
@@ -1739,26 +1746,26 @@
           "items": {
             "$ref": "#/definitions/AutoscaleProfile"
           },
-          "description": "Gets or sets the collection of automatic scaling profiles that specify different scaling parameters for different time periods. A maximum of 20 profiles can be specified."
+          "description": "the collection of automatic scaling profiles that specify different scaling parameters for different time periods. A maximum of 20 profiles can be specified."
         },
         "notifications": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AutoscaleNotification"
           },
-          "description": "Gets or sets the collection of notifications."
+          "description": "the collection of notifications."
         },
         "enabled": {
           "type": "boolean",
-          "description": "Gets or sets the enabled flag.Specifies whether automatic scaling is enabled for the resource."
+          "description": "the enabled flag.Specifies whether automatic scaling is enabled for the resource."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the autoscale setting."
+          "description": "the name of the autoscale setting."
         },
         "targetResourceUri": {
           "type": "string",
-          "description": "Gets or sets the resource identifier of the resource that the autoscale setting should be added to."
+          "description": "the resource identifier of the resource that the autoscale setting should be added to."
         }
       },
       "description": "A setting that contains all of the configuration for the automatic scaling of a resource."
@@ -1767,27 +1774,27 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the resource identifier of the autoscale setting."
+          "description": "the resource identifier of the autoscale setting."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the autoscale setting."
+          "description": "the name of the autoscale setting."
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the location of the autoscale setting."
+          "description": "the location of the autoscale setting."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the tags of the rule."
+          "description": "the tags of the rule."
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AutoscaleSetting",
-          "description": "Gets or sets the retrieved autoscale setting."
+          "description": "the retrieved autoscale setting."
         }
       },
       "description": "The autoscale setting resource."
@@ -1799,7 +1806,7 @@
           "items": {
             "$ref": "#/definitions/AutoscaleSettingResource"
           },
-          "description": "Gets or sets the values for the autoscale setting resources."
+          "description": "the values for the autoscale setting resources."
         }
       },
       "description": "Represents a collection of autoscale setting resources."
@@ -1808,19 +1815,19 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Gets or sets the location of the setting."
+          "description": "the location of the setting."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the tags of the rule."
+          "description": "the tags of the rule."
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AutoscaleSetting",
-          "description": "Gets or sets the setting to create or update."
+          "description": "the setting to create or update."
         }
       },
       "description": "Parameters supplied to the Create or Update autoscale setting operation."
@@ -1829,12 +1836,12 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Gets or sets a value indicating whether the retention policy is enabled."
+          "description": "a value indicating whether the retention policy is enabled."
         },
         "days": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the number of days for the retention."
+          "description": "the number of days for the retention."
         }
       },
       "required": [ "enabled", "days" ],
@@ -1854,29 +1861,29 @@
       "properties": {
         "storageAccountId": {
           "type": "string",
-          "description": "Gets or sets the resource id of the storage account."
+          "description": "the resource id of the storage account."
         },
         "serviceBusRuleId": {
           "type": "string",
-          "description": "Gets or sets the resource id of the service bus rule."
+          "description": "the resource id of the service bus rule."
         },
         "locations": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the locations."
+          "description": "the locations."
         },
         "categories": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": " Gets or sets the categories."
+          "description": " the categories."
         },
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
-          "description": "Gets or sets the retention policy for this log."
+          "description": "the retention policy for this log."
         }
       },
       "description": "The log profile."
@@ -1885,16 +1892,16 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the resource identifier of the log profile."
+          "description": "the resource identifier of the log profile."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the log profile."
+          "description": "the name of the log profile."
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/LogProfile",
-          "description": "Gets or sets the properties of the log profile."
+          "description": "the properties of the log profile."
         }
       },
       "description": "The log profile resource."
@@ -1906,34 +1913,25 @@
           "items": {
             "$ref": "#/definitions/LogProfileResource"
           },
-          "description": "Gets or sets the values of the log profiles."
+          "description": "the values of the log profiles."
         }
       },
       "description": "Represents a collection of log profiles."
     },
-    "TimeSpan": {
-      "x-ms-external": true,
-      "properties": {
-        "Days": {
-          "type": "integer",
-          "format": "int32"
-        }
-      },
-      "description": "This is a spec for the external type with the same name (in System.Net)"
-    },
     "MetricSettings": {
       "properties": {
         "timeGrain": {
-          "$ref": "#/definitions/TimeSpan",
-          "description": "Gets or sets the timegrain of the metric."
+          "type": "string",
+          "format": "duration",
+          "description": "the timegrain of the metric."
         },
         "enabled": {
           "type": "boolean",
-          "description": "Gets or sets a value indicating whether this timegrain is enabled."
+          "description": "a value indicating whether this timegrain is enabled."
         },
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
-          "description": "Gets or sets the retention policy for this timegrain."
+          "description": "the retention policy for this timegrain."
         }
       },
       "required": [ "enabled", "timeGrain" ],
@@ -1943,15 +1941,15 @@
       "properties": {
         "category": {
           "type": "string",
-          "description": "Gets or sets the name of the logs to which this setting is applied."
+          "description": "the name of the logs to which this setting is applied."
         },
         "enabled": {
           "type": "boolean",
-          "description": "Gets or sets a value indicating whether this log is enabled."
+          "description": "a value indicating whether this log is enabled."
         },
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
-          "description": "Gets or sets the retention policy for this log."
+          "description": "the retention policy for this log."
         }
       },
       "required": [ "enabled" ],
@@ -1961,29 +1959,29 @@
       "properties": {
         "storageAccountId": {
           "type": "string",
-          "description": "Gets or sets the resource id of the storage account."
+          "description": "the resource id of the storage account."
         },
         "serviceBusRuleId": {
           "type": "string",
-          "description": "Gets or sets the id of the service bus rule."
+          "description": "the id of the service bus rule."
         },
         "metrics": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSettings"
           },
-          "description": "Gets or sets the list of metrics."
+          "description": "the list of metrics."
         },
         "logs": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogSettings"
           },
-          "description": "Gets or sets the list of logs."
+          "description": "the list of logs."
         },
         "workspaceId": {
           "type": "string",
-          "description": "Gets or sets the OMS workspace Id"
+          "description": "the OMS workspace Id"
         }
       },
       "description": "The diagnostic settings for service."
@@ -1992,16 +1990,16 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the configuration."
+          "description": "the name of the configuration."
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the location of the configuration."
+          "description": "the location of the configuration."
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ServiceDiagnosticSettings",
-          "description": "Gets or sets the retrieved configuration."
+          "description": "the retrieved configuration."
         }
       },
       "description": "A standard service response including an HTTP status code and request ID."
@@ -2011,7 +2009,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ServiceDiagnosticSettings",
-          "description": "Gets or sets the public configuration settings."
+          "description": "the public configuration settings."
         }
       },
       "description": "Parameters supplied to the Create or Update service configuration."
@@ -2020,24 +2018,24 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the unique name of the sku e.g. 'Free_A0'."
+          "description": "the unique name of the sku e.g. 'Free_A0'."
         },
         "tier": {
           "type": "string",
-          "description": "Gets or sets the tier of the sku e.g. 'free'."
+          "description": "the tier of the sku e.g. 'free'."
         },
         "size": {
           "type": "string",
-          "description": "Gets or sets the size of the sku e.g. 'A0'."
+          "description": "the size of the sku e.g. 'A0'."
         },
         "family": {
           "type": "string",
-          "description": "Gets or sets the family of the sku e.g. 'A'."
+          "description": "the family of the sku e.g. 'A'."
         },
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the current capacity."
+          "description": "the current capacity."
         }
       },
       "description": "The current SKU object"
@@ -2046,7 +2044,7 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/CurrentSku",
-          "description": "Gets or sets the current sku."
+          "description": "the current sku."
         }
       },
       "description": "The parameter to update the current SKU of a resource"
@@ -2055,7 +2053,7 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/CurrentSku",
-          "description": "Gets or sets the resource sku."
+          "description": "the resource sku."
         }
       },
       "description": "A standard service response including an HTTP status code and request ID."

@@ -76,7 +76,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The list of property names to be returned. You can save bandwidth by selecting only the properties you need.Here is an example:string selectedProperties = \"EventDataId, EventTimestamp, ResourceUri\""
+            "description": "The list of property names to be returned. Valid values are: authorization, channels, claims, correlationId, description, eventDataId, eventName, eventTimestamp, httpRequest, level, operationId, operationName, properties, resourceGroupName, resourceProviderName, resourceId, status, submissionTimestamp, subStatus, subscriptionId"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -124,10 +124,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The list of property names to be returned. You can save bandwidth by selecting only the properties you need.Here is an example:string selectedProperties = \"EventDataId, EventTimestamp, ResourceUri\""
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "description": "The list of property names to be returned. Valid values are: authorization, channels, claims, correlationId, description, eventDataId, eventName, eventTimestamp, httpRequest, level, operationId, operationName, properties, resourceGroupName, resourceProviderName, resourceId, status, submissionTimestamp, subStatus"
           }
         ],
         "responses": {
@@ -149,7 +146,7 @@
         "tags": [
           "MetricDefinitions"
         ],
-        "operationId": "MetricDefinitions_Get",
+        "operationId": "MetricDefinitions_List",
         "description": "The List Metric Definitions operation lists the metric definitions for the resource.",
         "parameters": [
           {
@@ -198,7 +195,7 @@
         "tags": [
           "Metrics"
         ],
-        "operationId": "Metrics_Get",
+        "operationId": "Metrics_List",
         "description": "The List Metric operation lists the metric value sets for the resource metrics.",
         "parameters": [
           {
@@ -295,11 +292,11 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "Gets or sets the invariant value."
+          "description": "the invariant value."
         },
         "localizedValue": {
           "type": "string",
-          "description": "Gets or sets the locale specific value."
+          "description": "the locale specific value."
         }
       },
       "description": "The localizable string class."
@@ -311,7 +308,7 @@
           "items": {
             "$ref": "#/definitions/LocalizableString"
           },
-          "description": "Gets or sets this list that includes the Azure event categories."
+          "description": "the list that includes the Azure event categories."
         }
       },
       "description": "Represents collection of event categories."
@@ -320,19 +317,19 @@
       "properties": {
         "action": {
           "type": "string",
-          "description": "Gets or sets the Action."
+          "description": "the Action."
         },
         "condition": {
           "type": "string",
-          "description": "Gets or sets the condition."
+          "description": "the condition."
         },
         "role": {
           "type": "string",
-          "description": "Gets or sets the role."
+          "description": "the role."
         },
         "scope": {
           "type": "string",
-          "description": "Gets or sets the scope."
+          "description": "the scope."
         }
       },
       "description": "The authorization class."
@@ -341,19 +338,19 @@
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "Gets or sets the client request id."
+          "description": "the client request id."
         },
         "clientIpAddress": {
           "type": "string",
-          "description": "Gets or sets the client Ip Address"
+          "description": "the client Ip Address"
         },
         "method": {
           "type": "string",
-          "description": "Gets or sets the method."
+          "description": "the method."
         },
         "uri": {
           "type": "string",
-          "description": "Gets or sets the Uri."
+          "description": "the Uri."
         }
       },
       "description": "The HttpInfo class."
@@ -363,11 +360,11 @@
       "properties": {
         "authorization": {
           "$ref": "#/definitions/SenderAuthorization",
-          "description": "Gets or sets the authorization.This is the authorization used by the user who has performed the operation that led to this event."
+          "description": "the authorization.This is the authorization used by the user who has performed the operation that led to this event."
         },
         "channels": {
           "type": "string",
-          "description": "Gets or sets the event channels.The regular event logs, that you see in the Azure Management Portals, flow through the 'Operation' channel.",
+          "description": "the event channels.The regular event logs, that you see in the Azure Management Portals, flow through the 'Operation' channel.",
           "enum": [
             "Admin",
             "Operation",
@@ -384,43 +381,43 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the claims"
+          "description": "the claims"
         },
         "caller": {
           "type": "string",
-          "description": "Gets or sets the caller"
+          "description": "the caller"
         },
         "description": {
           "type": "string",
-          "description": "Gets or sets the description of the event."
+          "description": "the description of the event."
         },
         "id": {
           "type": "string",
-          "description": "Gets or sets the Id"
+          "description": "the Id"
         },
         "eventDataId": {
           "type": "string",
-          "description": "Gets or sets the event data Id.This is a unique identifier for an event."
+          "description": "the event data Id.This is a unique identifier for an event."
         },
         "correlationId": {
           "type": "string",
-          "description": "Gets or sets the correlation Id.The correlation Id is shared among the events that belong to the same deployment."
+          "description": "the correlation Id.The correlation Id is shared among the events that belong to the same deployment."
         },
         "eventName": {
           "$ref": "#/definitions/LocalizableString",
-          "description": "Gets or sets the event name.This value should not be confused with OperationName.For practical purposes, OperationName might be more appealing to end users."
+          "description": "the event name.This value should not be confused with OperationName.For practical purposes, OperationName might be more appealing to end users."
         },
         "category": {
           "$ref": "#/definitions/LocalizableString",
-          "description": "Gets or sets the event category."
+          "description": "the event category."
         },
         "httpRequest": {
           "$ref": "#/definitions/HttpRequestInfo",
-          "description": "Gets or sets the HTTP request info.The client IP address of the user who initiated the event is captured as part of the HTTP request info."
+          "description": "the HTTP request info.The client IP address of the user who initiated the event is captured as part of the HTTP request info."
         },
         "level": {
           "type": "string",
-          "description": "Gets or sets the event level",
+          "description": "the event level",
           "enum": [
             "Critical",
             "Error",
@@ -438,36 +435,36 @@
             "url": "http://msdn.microsoft.com/en-us/library/azure/dn790546.aspx"
           },
           "type": "string",
-          "description": "Gets or sets the resource group name."
+          "description": "the resource group name."
         },
         "resourceProviderName": {
           "$ref": "#/definitions/LocalizableString",
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/azure/dn790572.aspx"
           },
-          "description": "Gets or sets the resource provider name."
+          "description": "the resource provider name."
         },
         "resourceId": {
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/azure/dn790569.aspx"
           },
           "type": "string",
-          "description": "Gets or sets the resource uri"
+          "description": "the resource uri"
         },
         "resourceType": {
           "$ref": "#/definitions/LocalizableString",
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/azure/dn790569.aspx"
           },
-          "description": "Gets or sets the resource type"
+          "description": "the resource type"
         },
         "operationId": {
           "type": "string",
-          "description": "Gets or sets the operation idThis value should not be confused with EventName."
+          "description": "the operation id. This value should not be confused with EventName."
         },
         "operationName": {
           "$ref": "#/definitions/LocalizableString",
-          "description": "Gets or sets the operation name."
+          "description": "the operation name."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -475,33 +472,33 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the property bag"
+          "description": "the property bag"
         },
         "status": {
           "$ref": "#/definitions/LocalizableString",
-          "description": "Gets or sets the event status.Some typical values are: Started, Succeeded, Failed"
+          "description": "the event status.Some typical values are: Started, Succeeded, Failed"
         },
         "subStatus": {
           "$ref": "#/definitions/LocalizableString",
-          "description": "Gets or sets the event sub status.Most of the time, when included, this captures the HTTP status code."
+          "description": "the event sub status.Most of the time, when included, this captures the HTTP status code."
         },
         "eventTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the occurrence time of event"
+          "description": "the occurrence time of event"
         },
         "submissionTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the event submission time.This value should not be confused eventTimestamp. As there might be a delay between the occurence time of the event, and the time that the event is submitted to the Azure logging infrastructure."
+          "description": "the event submission time.This value should not be confused eventTimestamp. As there might be a delay between the occurence time of the event, and the time that the event is submitted to the Azure logging infrastructure."
         },
         "subscriptionId": {
           "type": "string",
-          "description": "Gets or sets the Azure subscription Id"
+          "description": "the Azure subscription Id"
         },
         "tenantId": {
           "type": "string",
-          "description": "Gets or sets the Azure tenant Id"
+          "description": "the Azure tenant Id"
         }
       },
       "description": "The Azure event log entries are of type EventData"
@@ -513,37 +510,29 @@
           "items": {
             "$ref": "#/definitions/EventData"
           },
-          "description": "Gets or sets this list that includes the Azure audit logs."
+          "description": "this list that includes the Azure audit logs."
         }
       },
       "description": "Represents collection of events."
     },
-    "TimeSpan": {
-      "x-ms-external": true,
-      "properties": {
-        "Days": {
-          "type": "integer",
-          "format": "int32"
-        }
-      },
-      "description": "This is a spec for the external type with the same name (in System.Net)"
-    },
     "MetricAvailability": {
       "properties": {
         "timeGrain": {
-          "$ref": "#/definitions/TimeSpan",
-          "description": "Gets or sets the time grain specifies the aggregation interval for the metric."
+          "type": "string",
+          "format": "duration",
+          "description": "the time grain specifies the aggregation interval for the metric."
         },
         "retention": {
-          "$ref": "#/definitions/TimeSpan",
-          "description": "Gets or sets the retention period for the metric at the specified timegrain."
+          "type": "string",
+          "format": "duration",
+          "description": "the retention period for the metric at the specified timegrain."
         }
       },
       "description": "Metric availability specifies the time grain (aggregation interval or frequency) and the retention period for that time grain."
     },
     "Unit": {
       "type": "string",
-      "description": "Gets or sets the unit of the metric.",
+      "description": "the unit of the metric.",
       "enum": [
         "Count",
         "Bytes",
@@ -562,19 +551,19 @@
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "Gets or sets the resource identifier of the resource that has emitted the metric."
+          "description": "the resource identifier of the resource that has emitted the metric."
         },
         "name": {
           "$ref": "#/definitions/LocalizableString",
-          "description": "Gets or sets the name and the display name of the metric."
+          "description": "the name and the display name of the metric."
         },
         "unit": {
           "$ref": "#/definitions/Unit",
-          "description": "Gets or sets the unit of the metric."
+          "description": "the unit of the metric."
         },
         "primaryAggregationType": {
           "type": "string",
-          "description": "Gets or sets the primary aggregation type value defining how to use the values for display.",
+          "description": "the primary aggregation type value defining how to use the values for display.",
           "enum": [
             "None",
             "Average",
@@ -593,11 +582,11 @@
           "items": {
             "$ref": "#/definitions/MetricAvailability"
           },
-          "description": "Gets or sets the collection of what aggregation intervals are available to be queried."
+          "description": "the collection of what aggregation intervals are available to be queried."
         },
         "id": {
           "type": "string",
-          "description": "Gets or sets the resource identifier of the metric definition."
+          "description": "the resource identifier of the metric definition."
         }
       },
       "description": "Metric definition class specifies the metadata for a metric."
@@ -609,7 +598,7 @@
           "items": {
             "$ref": "#/definitions/MetricDefinition"
           },
-          "description": "Gets or sets the values for the metric definitions."
+          "description": "the values for the metric definitions."
         }
       },
       "description": "Represents collection of metric definitions."
@@ -620,32 +609,32 @@
         "timestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the timestamp for the metric value."
+          "description": "the timestamp for the metric value."
         },
         "average": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the average value in the time range."
+          "description": "the average value in the time range."
         },
         "minimum": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the least value in the time range."
+          "description": "the least value in the time range."
         },
         "maximum": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the greatest value in the time range."
+          "description": "the greatest value in the time range."
         },
         "total": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the sum of all of the values in the time range."
+          "description": "the sum of all of the values in the time range."
         },
         "count": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the number of samples in the time range. Can be used to determine the number of values that contributed to the average value."
+          "description": "the number of samples in the time range. Can be used to determine the number of values that contributed to the average value."
         }
       },
       "description": "Represents a metric value."
@@ -655,11 +644,11 @@
       "properties": {
         "name": {
           "$ref": "#/definitions/LocalizableString",
-          "description": "Gets or sets the name and the display name of the metric."
+          "description": "the name and the display name of the metric."
         },
         "unit": {
           "$ref": "#/definitions/Unit",
-          "description": "Gets or sets the unit of the metric."
+          "description": "the unit of the metric."
         },
         "data": {
           "type": "array",
@@ -678,7 +667,7 @@
           "items": {
             "$ref": "#/definitions/Metric"
           },
-          "description": "Gets or sets the value of the collection."
+          "description": "the value of the collection."
         }
       },
       "description": "The collection of metric value sets."
@@ -687,34 +676,34 @@
       "properties": {
         "name": {
           "$ref": "#/definitions/LocalizableString",
-          "description": "Gets or sets the usage metric name and display name."
+          "description": "the usage metric name and display name."
         },
         "currentValue": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the current value for the usage metric."
+          "description": "the current value for the usage metric."
         },
         "id": {
           "type": "string",
-          "description": "Gets or sets the id for the usage metric."
+          "description": "the id for the usage metric."
         },
         "limit": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the quota limit the usage metric."
+          "description": "the quota limit the usage metric."
         },
         "unit": {
           "type": "string",
-          "description": "Gets or sets the unit for the usage metric."
+          "description": "the unit for the usage metric."
         },
         "nextResetTime": {
           "type": "string",
-          "description": "Gets or sets the next reset time for the current value."
+          "description": "the next reset time for the current value."
         },
         "quotaPeriod": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the amount of time it takes to reset the value."
+          "description": "the amount of time it takes to reset the value."
         }
       },
       "description": "Usage Metric data."
@@ -726,7 +715,7 @@
           "items": {
             "$ref": "#/definitions/UsageMetric"
           },
-          "description": "Gets or sets the usage values."
+          "description": "the usage values."
         }
       },
       "description": "Represents collection of usage metrics."
