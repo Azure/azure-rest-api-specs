@@ -24,12 +24,7 @@
         "description": "The list of event categories.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2015-04-01",
-            "description": "The api-version to send to the server"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -57,12 +52,7 @@
         "description": "The List Event Values operation lists the events.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2015-04-01",
-            "description": "The api-version to send to the server"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -105,12 +95,7 @@
         "description": "The list tenant event values operation lists the tenant events.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2015-04-01",
-            "description": "The api-version to send to the server"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -257,9 +242,10 @@
           {
             "name": "api-version",
             "in": "query",
-            "required": true,
+            "required": false,
             "type": "string",
-            "description": "The resource provider api version."
+            "default": "2014-04-01",
+            "description": "The api-version to send to the server"
           },
           {
             "name": "$filter",
@@ -291,10 +277,12 @@
     "LocalizableString": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "string",
           "description": "the invariant value."
         },
         "localizedValue": {
+          "readOnly": true,
           "type": "string",
           "description": "the locale specific value."
         }
@@ -304,6 +292,7 @@
     "EventCategoryCollection": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/LocalizableString"
@@ -316,18 +305,22 @@
     "SenderAuthorization": {
       "properties": {
         "action": {
+          "readOnly": true,
           "type": "string",
           "description": "the Action."
         },
         "condition": {
+          "readOnly": true,
           "type": "string",
           "description": "the condition."
         },
         "role": {
+          "readOnly": true,
           "type": "string",
           "description": "the role."
         },
         "scope": {
+          "readOnly": true,
           "type": "string",
           "description": "the scope."
         }
@@ -337,18 +330,22 @@
     "HttpRequestInfo": {
       "properties": {
         "clientRequestId": {
+          "readOnly": true,
           "type": "string",
           "description": "the client request id."
         },
         "clientIpAddress": {
+          "readOnly": true,
           "type": "string",
           "description": "the client Ip Address"
         },
         "method": {
+          "readOnly": true,
           "type": "string",
           "description": "the method."
         },
         "uri": {
+          "readOnly": true,
           "type": "string",
           "description": "the Uri."
         }
@@ -359,6 +356,7 @@
       "required": [ "channels", "level", "eventTimestamp", "submissionTimestamp" ],
       "properties": {
         "authorization": {
+          "readOnly": true,
           "$ref": "#/definitions/SenderAuthorization",
           "description": "the authorization.This is the authorization used by the user who has performed the operation that led to this event."
         },
@@ -377,41 +375,50 @@
           }
         },
         "claims": {
+          "readOnly": true,
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "the claims"
+          "description": "key value pairs to identify ARM permissions"
         },
         "caller": {
+          "readOnly": true,
           "type": "string",
           "description": "the caller"
         },
         "description": {
+          "readOnly": true,
           "type": "string",
           "description": "the description of the event."
         },
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "the Id"
         },
         "eventDataId": {
+          "readOnly": true,
           "type": "string",
           "description": "the event data Id.This is a unique identifier for an event."
         },
         "correlationId": {
+          "readOnly": true,
           "type": "string",
           "description": "the correlation Id.The correlation Id is shared among the events that belong to the same deployment."
         },
         "eventName": {
+          "readOnly": true,
           "$ref": "#/definitions/LocalizableString",
           "description": "the event name.This value should not be confused with OperationName.For practical purposes, OperationName might be more appealing to end users."
         },
         "category": {
+          "readOnly": true,
           "$ref": "#/definitions/LocalizableString",
           "description": "the event category."
         },
         "httpRequest": {
+          "readOnly": true,
           "$ref": "#/definitions/HttpRequestInfo",
           "description": "the HTTP request info.The client IP address of the user who initiated the event is captured as part of the HTTP request info."
         },
@@ -431,6 +438,7 @@
           }
         },
         "resourceGroupName": {
+          "readOnly": true,
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/azure/dn790546.aspx"
           },
@@ -438,6 +446,7 @@
           "description": "the resource group name."
         },
         "resourceProviderName": {
+          "readOnly": true,
           "$ref": "#/definitions/LocalizableString",
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/azure/dn790572.aspx"
@@ -445,6 +454,7 @@
           "description": "the resource provider name."
         },
         "resourceId": {
+          "readOnly": true,
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/azure/dn790569.aspx"
           },
@@ -452,6 +462,7 @@
           "description": "the resource uri"
         },
         "resourceType": {
+          "readOnly": true,
           "$ref": "#/definitions/LocalizableString",
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/azure/dn790569.aspx"
@@ -459,14 +470,17 @@
           "description": "the resource type"
         },
         "operationId": {
+          "readOnly": true,
           "type": "string",
           "description": "the operation id. This value should not be confused with EventName."
         },
         "operationName": {
+          "readOnly": true,
           "$ref": "#/definitions/LocalizableString",
           "description": "the operation name."
         },
         "properties": {
+          "readOnly": true,
           "x-ms-client-flatten": true,
           "type": "object",
           "additionalProperties": {
@@ -475,10 +489,12 @@
           "description": "the property bag"
         },
         "status": {
+          "readOnly": true,
           "$ref": "#/definitions/LocalizableString",
           "description": "the event status.Some typical values are: Started, Succeeded, Failed"
         },
         "subStatus": {
+          "readOnly": true,
           "$ref": "#/definitions/LocalizableString",
           "description": "the event sub status.Most of the time, when included, this captures the HTTP status code."
         },
@@ -493,10 +509,12 @@
           "description": "the event submission time.This value should not be confused eventTimestamp. As there might be a delay between the occurence time of the event, and the time that the event is submitted to the Azure logging infrastructure."
         },
         "subscriptionId": {
+          "readOnly": true,
           "type": "string",
           "description": "the Azure subscription Id"
         },
         "tenantId": {
+          "readOnly": true,
           "type": "string",
           "description": "the Azure tenant Id"
         }
@@ -506,6 +524,7 @@
     "EventDataCollection": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/EventData"
@@ -518,11 +537,13 @@
     "MetricAvailability": {
       "properties": {
         "timeGrain": {
+          "readOnly": true,
           "type": "string",
           "format": "duration",
           "description": "the time grain specifies the aggregation interval for the metric."
         },
         "retention": {
+          "readOnly": true,
           "type": "string",
           "format": "duration",
           "description": "the retention period for the metric at the specified timegrain."
@@ -531,6 +552,7 @@
       "description": "Metric availability specifies the time grain (aggregation interval or frequency) and the retention period for that time grain."
     },
     "Unit": {
+      "readOnly": true,
       "type": "string",
       "description": "the unit of the metric.",
       "enum": [
@@ -550,18 +572,22 @@
     "MetricDefinition": {
       "properties": {
         "resourceId": {
+          "readOnly": true,
           "type": "string",
           "description": "the resource identifier of the resource that has emitted the metric."
         },
         "name": {
+          "readOnly": true,
           "$ref": "#/definitions/LocalizableString",
           "description": "the name and the display name of the metric."
         },
         "unit": {
+          "readOnly": true,
           "$ref": "#/definitions/Unit",
           "description": "the unit of the metric."
         },
         "primaryAggregationType": {
+          "readOnly": true,
           "type": "string",
           "description": "the primary aggregation type value defining how to use the values for display.",
           "enum": [
@@ -578,6 +604,7 @@
           }
         },
         "metricAvailabilities": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricAvailability"
@@ -585,6 +612,7 @@
           "description": "the collection of what aggregation intervals are available to be queried."
         },
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "the resource identifier of the metric definition."
         }
@@ -594,6 +622,7 @@
     "MetricDefinitionCollection": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDefinition"
@@ -612,26 +641,31 @@
           "description": "the timestamp for the metric value."
         },
         "average": {
+          "readOnly": true,
           "type": "number",
           "format": "double",
           "description": "the average value in the time range."
         },
         "minimum": {
+          "readOnly": true,
           "type": "number",
           "format": "double",
           "description": "the least value in the time range."
         },
         "maximum": {
+          "readOnly": true,
           "type": "number",
           "format": "double",
           "description": "the greatest value in the time range."
         },
         "total": {
+          "readOnly": true,
           "type": "number",
           "format": "double",
           "description": "the sum of all of the values in the time range."
         },
         "count": {
+          "readOnly": true,
           "type": "integer",
           "format": "int64",
           "description": "the number of samples in the time range. Can be used to determine the number of values that contributed to the average value."
@@ -663,6 +697,7 @@
     "MetricCollection": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Metric"
@@ -675,32 +710,39 @@
     "UsageMetric": {
       "properties": {
         "name": {
+          "readOnly": true,
           "$ref": "#/definitions/LocalizableString",
           "description": "the usage metric name and display name."
         },
         "currentValue": {
+          "readOnly": true,
           "type": "number",
           "format": "double",
           "description": "the current value for the usage metric."
         },
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "the id for the usage metric."
         },
         "limit": {
+          "readOnly": true,
           "type": "number",
           "format": "double",
           "description": "the quota limit the usage metric."
         },
         "unit": {
+          "readOnly": true,
           "type": "string",
           "description": "the unit for the usage metric."
         },
         "nextResetTime": {
+          "readOnly": true,
           "type": "string",
           "description": "the next reset time for the current value."
         },
         "quotaPeriod": {
+          "readOnly": true,
           "type": "integer",
           "format": "int64",
           "description": "the amount of time it takes to reset the value."
@@ -711,6 +753,7 @@
     "UsageMetricCollection": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/UsageMetric"

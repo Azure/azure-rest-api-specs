@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "InsightsManagementClient",
-    "version": "2015-04-01"
+    "version": "2016-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -45,12 +45,7 @@
             "description": "The name of the incident to retrieve."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2016-03-01",
-            "description": "The api-version to send to the server"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -89,12 +84,7 @@
             "description": "The name of the rule."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2016-03-01",
-            "description": "The api-version to send to the server"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -113,7 +103,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{name}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{ruleName}": {
       "put": {
         "description": "Creates or updates an alert rule",
         "tags": [
@@ -136,12 +126,7 @@
             "description": "The rule to create or update."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2016-03-01",
-            "description": "The api-version to send to the server"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -164,9 +149,7 @@
             "description": "Created alert rule"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{ruleName}": {
+      },
       "delete": {
         "description": "Deletes an alert rule",
         "tags": [
@@ -189,12 +172,7 @@
             "description": "The name of the rule to delete."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2016-03-01",
-            "description": "The api-version to send to the server"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -231,12 +209,7 @@
             "description": "The name of the rule to retrieve."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2016-03-01",
-            "description": "The api-version to send to the server"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -268,12 +241,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2016-03-01",
-            "description": "The api-version to send to the server"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -323,7 +291,12 @@
             "description": "The filter to apply on the operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2015-04-01",
+            "description": "The api-version to send to the server"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -344,52 +317,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/autoscalesettings/{autoscaleSettingName}": {
-      "patch": {
-        "description": "Updates an autoscale setting",
-        "tags": [
-          "AutoscaleSettings"
-        ],
-        "operationId": "AutoscaleSettings_Update",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource name."
-          },
-          {
-            "name": "autoscaleSettingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The autoscale setting name."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AutoscaleSettingCreateOrUpdateParameters"
-            },
-            "description": "Parameters supplied to the operation."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created autoscale setting"
-          },
-          "200": {
-            "description": "Successful request to create or update an autoscale setting"
-          }
-        }
-      },
       "put": {
         "description": "Creates or updates and autoscale setting",
         "tags": [
@@ -421,7 +348,12 @@
             "description": "Parameters supplied to the operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2015-04-01",
+            "description": "The api-version to send to the server"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -458,7 +390,12 @@
             "description": "The autoscale setting name."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2015-04-01",
+            "description": "The api-version to send to the server"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -495,7 +432,12 @@
             "description": "The autoscale setting name."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "2015-04-01",
+            "description": "The api-version to send to the server"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -527,12 +469,7 @@
             "description": "The name of the log profile."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2016-03-01",
-            "description": "The api-version to send to the server"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -559,12 +496,7 @@
             "description": "The name of the log profile."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2016-03-01",
-            "description": "The api-version to send to the server"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -594,12 +526,7 @@
             "description": "The name of the log profile."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2016-03-01",
-            "description": "The api-version to send to the server"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -636,12 +563,7 @@
         "description": "List the log profiles.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2016-03-01",
-            "description": "The api-version to send to the server"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -661,38 +583,6 @@
       }
     },
     "/{resourceUri}/providers/microsoft.insights/diagnosticSettings/service": {
-      "delete": {
-        "tags": [
-          "ServiceDiagnosticSettings"
-        ],
-        "operationId": "ServiceDiagnosticSettings_Delete",
-        "description": "Deletes the diagnostic settings for the specified resource.",
-        "parameters": [
-          {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource identifier of the configuration."
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2015-07-01",
-            "description": "The api-version to send to the server"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful request to delete a service diagnostic setting"
-          }
-        }
-      },
       "get": {
         "tags": [
           "ServiceDiagnosticSettings"
@@ -733,8 +623,7 @@
           "ServiceDiagnosticSettings"
         ],
         "operationId": "ServiceDiagnosticSettings_Put",
-        "x-ms-long-running-operation": true,
-        "description": "Create or update new diagnostic settings for the specified resource. This operation is long running.",
+        "description": "Create or update new diagnostic settings for the specified resource.",
         "parameters": [
           {
             "name": "resourceUri",
@@ -776,210 +665,9 @@
           }
         }
       }
-    },
-    "/{resourceId}/skus": {
-      "get": {
-        "description": "Lists the SKU definitions for a resource",
-        "tags": [
-          "SkuDefinitions"
-        ],
-        "operationId": "SkuDefinitions_List",
-        "parameters": [
-          {
-            "name": "resourceId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource id."
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The api-version to send to the server"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful request for a (page of the) list of Sku definitions",
-            "schema": {
-              "$ref": "#/definitions/SkuListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/{resourceId}": {
-      "patch": {
-        "description": "Updates the current SKU for a resource",
-        "tags": [
-          "CurrentSku"
-        ],
-        "operationId": "CurrentSku_Update",
-        "parameters": [
-          {
-            "name": "resourceId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The call will update the current sku of this resource id (uri)"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The api-version to send to the server"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SkuUpdateParameters"
-            },
-            "description": "The parameters to update an sku"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful request to update the current Sku"
-          },
-          "202": {
-            "description": "Accepted request to update the current Sku"
-          }
-        }
-      },
-      "get": {
-        "description": "Gets the current SKU for a resource",
-        "tags": [
-          "CurrentSku"
-        ],
-        "operationId": "CurrentSku_Get",
-        "parameters": [
-          {
-            "name": "resourceId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource id."
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The api-version to send to the server"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful request for the current Sku",
-            "schema": {
-              "$ref": "#/definitions/SkuGetResult"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
-    "Sku": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "the unique name of the sku e.g. 'Free_A0'."
-        },
-        "tier": {
-          "type": "string",
-          "description": "the tier of the sku e.g. 'free'."
-        },
-        "size": {
-          "type": "string",
-          "description": "the size of the sku e.g. 'A0'."
-        },
-        "family": {
-          "type": "string",
-          "description": "the family of the sku e.g. 'A'."
-        }
-      },
-      "description": "Represents a sku."
-    },
-    "Capacity": {
-      "properties": {
-        "minimum": {
-          "type": "integer",
-          "format": "int32",
-          "description": "the minimum capacity."
-        },
-        "maximum": {
-          "type": "integer",
-          "format": "int32",
-          "description": "the maximum capacity."
-        },
-        "default": {
-          "type": "integer",
-          "format": "int32",
-          "description": "the default capacity."
-        },
-        "scaleType": {
-          "type": "string",
-          "description": "the scale type supported.",
-          "enum": [
-            "None",
-            "Manual",
-            "Automatic"
-          ],
-          "x-ms-enum": {
-            "name": "SupportedScaleType",
-            "modelAsString": false
-          }
-        }
-      },
-      "description": "Represents the sku capacity."
-    },
-    "SkuListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuDefinition"
-          },
-          "description": "the values for the sku definition."
-        }
-      },
-      "description": "A standard service response including an HTTP status code and request ID."
-    },
-    "SkuDefinition": {
-      "properties": {
-        "resourceType": {
-          "type": "string",
-          "description": "the type of the resource e.g. 'Microsoft.Compute/virtualMachines'."
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "the sku."
-        },
-        "capacity": {
-          "$ref": "#/definitions/Capacity",
-          "description": "the capacity of the sku."
-        }
-      },
-      "description": "Represents a sku definition."
-    },
     "Incident": {
       "properties": {
         "name": {
@@ -2013,95 +1701,6 @@
         }
       },
       "description": "Parameters supplied to the Create or Update service configuration."
-    },
-    "CurrentSku": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "the unique name of the sku e.g. 'Free_A0'."
-        },
-        "tier": {
-          "type": "string",
-          "description": "the tier of the sku e.g. 'free'."
-        },
-        "size": {
-          "type": "string",
-          "description": "the size of the sku e.g. 'A0'."
-        },
-        "family": {
-          "type": "string",
-          "description": "the family of the sku e.g. 'A'."
-        },
-        "capacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "the current capacity."
-        }
-      },
-      "description": "The current SKU object"
-    },
-    "SkuUpdateParameters": {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/CurrentSku",
-          "description": "the current sku."
-        }
-      },
-      "description": "The parameter to update the current SKU of a resource"
-    },
-    "SkuGetResult": {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/CurrentSku",
-          "description": "the resource sku."
-        }
-      },
-      "description": "A standard service response including an HTTP status code and request ID."
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true,
-      "description": "An azure resource object"
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
-      "x-ms-azure-resource": true,
-      "description": "An azure resource object to be used as representation for a sub-resource"
     }
   },
   "parameters": {
@@ -2115,7 +1714,7 @@
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
-      "required": false,
+      "required": true,
       "type": "string",
       "description": "Client Api Version."
     }
