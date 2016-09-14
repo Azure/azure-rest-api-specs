@@ -51,12 +51,7 @@
             "description": "Name of the Analysis Services server"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true,
-            "description": "Name of the Azure Resource group"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -93,12 +88,7 @@
             "description": "Name of the Analysis Services server"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true,
-            "description": "Name of the Azure Resource group"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -133,12 +123,7 @@
             "description": "Name of the Analysis Services server"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true,
-            "description": "Name of the Azure Resource group"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -180,12 +165,7 @@
             "description": "Request object for updating the server"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true,
-            "description": "Name of the Azure Resource group"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -205,17 +185,12 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers": {
       "get": {
-        "description": "Gets all the AS servers for the given resource group",
+        "description": "Gets all the Analysis Services servers for the given resource group",
         "tags": [ "RpProvision" ],
         "operationId": "RpProvision_GetAllServersForResourceGroupAsync",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true,
-            "description": "Name of the Azure Resource group"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -234,9 +209,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/servers": {
       "get": {
-        "description": "Gets all the AS servers for the given subscription",
+        "description": "List all the Analysis Services servers for the given subscription",
         "tags": [ "RpProvision" ],
-        "operationId": "RpProvision_GetAllServersForSubscriptionAsync",
+        "operationId": "RpProvision_ListAllServersForSubscriptionAsync",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -255,7 +230,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationstatuses/{operationId}": {
       "get": {
-        "description": "Gets all the AS servers for the give resource group",
+        "description": "Gets all the Analysis Services servers for the give resource group",
         "tags": [ "RpProxy" ],
         "operationId": "RpProxy_GetOperationStatusAsync",
         "parameters": [
@@ -452,7 +427,7 @@
         },
         "resourceType": {
           "type": "string",
-          "description": "The collection of returned provision operation results"
+          "description": "Type of the resource for Analysis Services"
         },
         "location": {
           "type": "string",
@@ -547,6 +522,15 @@
       "required": true,
       "type": "string",
       "description": "Client API Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Azure Resource group"
     }
   }
 }
