@@ -55,18 +55,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The filter to apply on the operation."
+            "$ref": "#/parameters/FilterParameter"
           },
           {
-            "name": "$select",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The list of property names to be returned. Valid values are: authorization, channels, claims, correlationId, description, eventDataId, eventName, eventTimestamp, httpRequest, level, operationId, operationName, properties, resourceGroupName, resourceProviderName, resourceId, status, submissionTimestamp, subStatus, subscriptionId"
+            "$ref": "#/parameters/SelectParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -98,18 +90,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The filter to apply on the operation."
+            "$ref": "#/parameters/FilterParameter"
           },
           {
-            "name": "$select",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The list of property names to be returned. Valid values are: authorization, channels, claims, correlationId, description, eventDataId, eventName, eventTimestamp, httpRequest, level, operationId, operationName, properties, resourceGroupName, resourceProviderName, resourceId, status, submissionTimestamp, subStatus"
+            "$ref": "#/parameters/SelectParameter"
           }
         ],
         "responses": {
@@ -135,27 +119,18 @@
         "description": "The List Metric Definitions operation lists the metric definitions for the resource.",
         "parameters": [
           {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource identifier of the target resource to get metrics for.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/ResourceUriParameter"
           },
           {
             "name": "api-version",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "default": "2016-03-01",
+            "enum": [ "2016-03-01" ],
             "description": "The api-version to send to the server"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation."
+            "$ref": "#/parameters/OptionalFilterParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -184,26 +159,17 @@
         "description": "The List Metric operation lists the metric value sets for the resource metrics.",
         "parameters": [
           {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource identifier of the target resource to get metrics for.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation."
+            "$ref": "#/parameters/OptionalFilterParameter"
           },
           {
             "name": "api-version",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
-            "default": "2016-06-01",
+            "enum": [ "2016-09-01" ],
             "description": "The api-version to send to the server"
           },
           {
@@ -233,26 +199,18 @@
         "description": "The List operation lists the usage metrics for the resource.",
         "parameters": [
           {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource identifier of the target resource to get usages for."
+            "$ref": "#/parameters/EncodedResourceUriParameter"
           },
           {
             "name": "api-version",
             "in": "query",
             "required": false,
             "type": "string",
-            "default": "2014-04-01",
+            "enum": [ "2014-04-01" ],
             "description": "The api-version to send to the server"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The odata filter string to use in the query"
+            "$ref": "#/parameters/OptionalFilterParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -777,7 +735,49 @@
       "in": "query",
       "required": true,
       "type": "string",
+      "enum": [ "2015-04-01" ],
       "description": "Client Api Version."
+    },
+    "FilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The filter to apply on the operation.",
+      "x-ms-parameter-location": "method"
+    },
+    "OptionalFilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The filter to apply on the operation.",
+      "x-ms-parameter-location": "method"
+    },
+    "SelectParameter": {
+      "name": "$select",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The list of property names to be returned. Valid values are: authorization, channels, claims, correlationId, description, eventDataId, eventName, eventTimestamp, httpRequest, level, operationId, operationName, properties, resourceGroupName, resourceProviderName, resourceId, status, submissionTimestamp, subStatus, subscriptionId",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "EncodedResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method"
     }
   }
 }

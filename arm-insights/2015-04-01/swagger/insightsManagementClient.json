@@ -24,18 +24,10 @@
         "operationId": "AlertRuleIncidents_Get",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "ruleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the rule."
+            "$ref": "#/parameters/RuleNameParameter"
           },
           {
             "name": "incidentName",
@@ -70,18 +62,10 @@
         "operationId": "AlertRuleIncidents_List",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "ruleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the rule."
+            "$ref": "#/parameters/RuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -112,18 +96,10 @@
         "operationId": "AlertRules_CreateOrUpdate",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The rule to create or update."
+            "$ref": "#/parameters/RuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -143,10 +119,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request to create or update an alert rule"
+            "description": "Successful request to create or update an alert rule",
+            "schema": {
+              "$ref": "#/definitions/RuleResource"
+            }
           },
           "201": {
-            "description": "Created alert rule"
+            "description": "Created alert rule",
+            "schema": {
+              "$ref": "#/definitions/RuleResource"
+            }
           }
         }
       },
@@ -158,18 +140,10 @@
         "operationId": "AlertRules_Delete",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "ruleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the rule to delete."
+            "$ref": "#/parameters/RuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -195,18 +169,10 @@
         "operationId": "AlertRules_Get",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "ruleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the rule to retrieve."
+            "$ref": "#/parameters/RuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -234,21 +200,13 @@
         "description": "List the alert rules within a resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation."
+            "$ref": "#/parameters/FilterParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -277,26 +235,13 @@
         "operationId": "AutoscaleSettings_List",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource name."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation."
+            "$ref": "#/parameters/FilterParameter"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2015-04-01",
-            "description": "The api-version to send to the server"
+            "$ref": "#/parameters/AutoscaleApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -325,18 +270,10 @@
         "operationId": "AutoscaleSettings_CreateOrUpdate",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource name."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "autoscaleSettingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The autoscale setting name."
+            "$ref": "#/parameters/AutoscaleSettingNameParameter"
           },
           {
             "name": "parameters",
@@ -348,12 +285,7 @@
             "description": "Parameters supplied to the operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2015-04-01",
-            "description": "The api-version to send to the server"
+            "$ref": "#/parameters/AutoscaleApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -361,10 +293,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request to create or update an autoscale setting"
+            "description": "Successful request to create or update an autoscale setting",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingResource"
+            }
           },
           "201": {
-            "description": "Created autoscale setting"
+            "description": "Created autoscale setting",
+            "schema": {
+              "$ref": "#/definitions/AutoscaleSettingResource"
+            }
           }
         }
       },
@@ -376,26 +314,13 @@
         "operationId": "AutoscaleSettings_Delete",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource name."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "autoscaleSettingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The autoscale setting name."
+            "$ref": "#/parameters/AutoscaleSettingNameParameter"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2015-04-01",
-            "description": "The api-version to send to the server"
+            "$ref": "#/parameters/AutoscaleApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -418,26 +343,13 @@
         "operationId": "AutoscaleSettings_Get",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource name."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "autoscaleSettingName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The autoscale setting name."
+            "$ref": "#/parameters/AutoscaleSettingNameParameter"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2015-04-01",
-            "description": "The api-version to send to the server"
+            "$ref": "#/parameters/AutoscaleApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -462,11 +374,7 @@
         "description": "Deletes the log profile.",
         "parameters": [
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the log profile."
+            "$ref": "#/parameters/LogProfileNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -489,11 +397,7 @@
         "description": "Gets the log profile.",
         "parameters": [
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the log profile."
+            "$ref": "#/parameters/LogProfileNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -519,11 +423,7 @@
         "description": "Create or update the log profile.",
         "parameters": [
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the log profile."
+            "$ref": "#/parameters/LogProfileNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -543,13 +443,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request to create or update a log profile"
+            "description": "Successful request to create or update a log profile",
+            "schema": {
+              "$ref": "#/definitions/LogProfileResource"
+            }
           },
           "201": {
-            "description": "Created log profile"
+            "description": "Created log profile",
+            "schema": {
+              "$ref": "#/definitions/LogProfileResource"
+            }
           },
           "202": {
-            "description": "Accepted request to create or update log profile"
+            "description": "Accepted request to create or update log profile",
+            "schema": {
+              "$ref": "#/definitions/LogProfileResource"
+            }
           }
         }
       }
@@ -591,20 +500,10 @@
         "description": "Gets the active diagnostic settings. To get the diagnostic settings being applied, use GetStatus.",
         "parameters": [
           {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource identifier of the configuration."
+            "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2015-07-01",
-            "description": "The api-version to send to the server"
-          },
+            "$ref": "#/parameters/DiagnosticSettingsApiVersionParameter"          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
@@ -626,19 +525,10 @@
         "description": "Create or update new diagnostic settings for the specified resource.",
         "parameters": [
           {
-            "name": "resourceUri",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource identifier of the configuration."
+            "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "2015-07-01",
-            "description": "The api-version to send to the server"
+            "$ref": "#/parameters/DiagnosticSettingsApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -655,13 +545,22 @@
         ],
         "responses": {
           "201": {
-            "description": "Created service diagnostic setting"
+            "description": "Created service diagnostic setting",
+            "schema": {
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+            }
           },
           "200": {
-            "description": "Successful request to create a service diagnostic setting"
+            "description": "Successful request to create a service diagnostic setting",
+            "schema": {
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+            }
           },
           "202": {
-            "description": "Accepted request to create a service diagnostic setting"
+            "description": "Accepted request to create a service diagnostic setting",
+            "schema": {
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+            }
           }
         }
       }
@@ -1078,33 +977,53 @@
       },
       "description": "Parameters supplied to the Create or Update Rule operation."
     },
-    "RuleResource": {
+    "Resource": {
       "properties": {
         "id": {
           "type": "string",
-          "description": "the resource identifier of the rule."
+          "description": "Azure resource Id"
         },
         "name": {
           "type": "string",
-          "description": "the name of the alert rule."
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "description": "Azure resource type"
         },
         "location": {
           "type": "string",
-          "description": "the location of the rule."
+          "description": "Resource location"
         },
         "tags": {
-          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "the tags of the rule."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/Rule",
-          "description": "the retrieved rule."
+          "description": "Resource tags"
         }
       },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    },
+    "RuleResource": {
+      "allOf": [
+          {
+            "$ref": "#/definitions/Resource"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "properties": {
+                "x-ms-client-flatten": true,
+                "$ref": "#/definitions/Rule"
+              }
+            },
+            "description": "Description of an AlertRule resource"
+          }
+      ],
       "description": "The alert rule resource."
     },
     "RuleResourceCollection": {
@@ -1459,32 +1378,21 @@
       "description": "A setting that contains all of the configuration for the automatic scaling of a resource."
     },
     "AutoscaleSettingResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "the resource identifier of the autoscale setting."
+      "allOf": [
+        {
+           "$ref": "#/definitions/Resource"
         },
-        "name": {
-          "type": "string",
-          "description": "the name of the autoscale setting."
-        },
-        "location": {
-          "type": "string",
-          "description": "the location of the autoscale setting."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "the tags of the rule."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AutoscaleSetting",
-          "description": "the retrieved autoscale setting."
+        {
+           "type": "object",
+		        "properties": {
+              "properties": {
+                 "x-ms-client-flatten": true,
+		             "$ref": "#/definitions/AutoscaleSetting"
+              }
+            },
+            "description": "Description of an Autoscale setting"
         }
-      },
+      ],
       "description": "The autoscale setting resource."
     },
     "AutoscaleSettingResourceCollection": {
@@ -1577,21 +1485,21 @@
       "description": "The log profile."
     },
     "LogProfileResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "the resource identifier of the log profile."
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
         },
-        "name": {
-          "type": "string",
-          "description": "the name of the log profile."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/LogProfile",
-          "description": "the properties of the log profile."
+        {
+           "type": "object",
+		       "properties": {
+              "properties": {
+                 "x-ms-client-flatten": true,
+                 "$ref": "#/definitions/LogProfile"
+              }
+           },
+           "description": "Description of a Log Profile"
         }
-      },
+      ],
       "description": "The log profile resource."
     },
     "LogProfileCollection": {
@@ -1675,21 +1583,21 @@
       "description": "The diagnostic settings for service."
     },
     "ServiceDiagnosticSettingsResource": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "the name of the configuration."
+      "allOf": [
+        {
+           "$ref": "#/definitions/Resource"
         },
-        "location": {
-          "type": "string",
-          "description": "the location of the configuration."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ServiceDiagnosticSettings",
-          "description": "the retrieved configuration."
+        {
+           "type": "object",
+		       "properties": {
+              "properties": {
+                 "x-ms-client-flatten": true,
+                 "$ref": "#/definitions/ServiceDiagnosticSettings"
+              }
+           },
+           "description": "Description of a service diagnostic setting"
         }
-      },
+      ],
       "description": "A standard service response including an HTTP status code and request ID."
     },
     "ServiceDiagnosticSettingsPutParameters": {
@@ -1716,7 +1624,74 @@
       "in": "query",
       "required": true,
       "type": "string",
+      "enum": [ "2016-03-01" ],
       "description": "Client Api Version."
+    },
+    "AutoscaleApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "enum": [ "2015-04-01" ],
+      "description": "The api-version to send to the server",
+      "x-ms-parameter-location": "method"
+    },
+    "DiagnosticSettingsApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "enum": [ "2015-07-01" ],
+      "description": "The api-version to send to the server",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "RuleNameParameter": {
+      "name": "ruleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the rule.",
+      "x-ms-parameter-location": "method"
+    },
+    "FilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The filter to apply on the operation.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "AutoscaleSettingNameParameter": {
+      "name": "autoscaleSettingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The autoscale setting name.",
+      "x-ms-parameter-location": "method"
+    },
+    "LogProfileNameParameter": {
+      "name": "name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the log profile.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
