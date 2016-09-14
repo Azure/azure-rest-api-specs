@@ -4,11 +4,12 @@
     "title": "ServiceFabricClient",
     "version": "1.0.0"
   },
-  "host": "localhost:10710",
+  "host": "localhost:19080",
   "paths": {
     "/$/GetClusterManifest": {
       "get": {
-        "operationId": "GetClusterManifest",
+        "operationId": "ClusterManifests_Get",
+        "description": "Get cluster manifests",
         "produces": [
           "application/json"
         ],
@@ -35,7 +36,8 @@
     },
     "/$/ReportClusterHealth": {
       "post": {
-        "operationId": "SendClusterHealthReport",
+        "operationId": "ClusterHealthReports_Send",
+        "description": "Report cluster healths",
         "produces": [
           "application/json"
         ],
@@ -47,6 +49,7 @@
             "required": true,
             "schema": {
               "type": "object",
+              "description": "The report of the cluster health",
               "properties": {
                 "SourceId": {
                   "type": "string"
@@ -94,7 +97,8 @@
     },
     "/Nodes": {
       "get": {
-        "operationId": "GetNodeList",
+        "operationId": "Nodes_List",
+        "description": "List nodes",
         "produces": [
           "application/json"
         ],
@@ -114,18 +118,7 @@
           "200": {
             "description": "The node list",
             "schema": {
-              "type": "object",
-              "properties": {
-                "ContinuationToken": {
-                  "type": "string"
-                },
-                "Items": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/Node"
-                  }
-                }
-              }
+              "$ref": "#/definitions/NodeList"
             }
           },
           "default": {
@@ -139,7 +132,8 @@
     },
     "/Nodes/{nodeName}": {
       "get": {
-        "operationId": "GetNode",
+        "operationId": "Nodes_Get",
+        "description": "Get nodes",
         "produces": [
           "application/json"
         ],
@@ -180,7 +174,8 @@
     },
     "/Nodes/{nodeName}/$/Activate": {
       "post": {
-        "operationId": "EnableNode",
+        "operationId": "Nodes_Enable",
+        "description": "Enable nodes",
         "produces": [
           "application/json"
         ],
@@ -214,7 +209,8 @@
     },
     "/Nodes/{nodeName}/$/Deactivate": {
       "post": {
-        "operationId": "DisableNode",
+        "operationId": "Nodes_Disable",
+        "description": "Disable nodes",
         "produces": [
           "application/json"
         ],
@@ -225,20 +221,6 @@
             "description": "The name of the node",
             "type": "string",
             "required": true
-          },
-          {
-            "name": "disableNode",
-            "in": "body",
-            "description": "The node of the disable",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "DeactivationIntent": {
-                  "type": "string"
-                }
-              }
-            }
           },
           {
             "$ref": "#/parameters/api-version"
@@ -262,7 +244,8 @@
     },
     "/Nodes/{nodeName}/$/RemoveNodeState": {
       "post": {
-        "operationId": "RemoveNodeState",
+        "operationId": "NodeStates_Remove",
+        "description": "Remove node states",
         "produces": [
           "application/json"
         ],
@@ -296,7 +279,8 @@
     },
     "/Nodes/{nodeName}/$/GetHealth": {
       "get": {
-        "operationId": "GetNodeHealth",
+        "operationId": "NodeHealths_Get",
+        "description": "Get node healths",
         "produces": [
           "application/json"
         ],
@@ -337,7 +321,8 @@
     },
     "/Nodes/{nodeName}/$/GetApplications": {
       "get": {
-        "operationId": "GetDeployedApplicationList",
+        "operationId": "DeployedApplications_List",
+        "description": "List deployed applications",
         "produces": [
           "application/json"
         ],
@@ -374,7 +359,8 @@
     },
     "/Nodes/{nodeName}/$/GetApplications/{applicationName}": {
       "get": {
-        "operationId": "GetDeployedApplication",
+        "operationId": "DeployedApplications_Get",
+        "description": "Get deployed applications",
         "produces": [
           "application/json"
         ],
@@ -415,7 +401,8 @@
     },
     "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetHealth": {
       "get": {
-        "operationId": "GetDeployedApplicationHealth",
+        "operationId": "DeployedApplicationHealths_Get",
+        "description": "Get deployed application healths",
         "produces": [
           "application/json"
         ],
@@ -471,7 +458,8 @@
     },
     "/Nodes/{nodeName}/$/GetLoadInformation": {
       "get": {
-        "operationId": "GetNodeLoadInformation",
+        "operationId": "NodeLoadInformations_Get",
+        "description": "Get node load informations",
         "produces": [
           "application/json"
         ],
@@ -505,7 +493,8 @@
     },
     "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetCodePackages": {
       "get": {
-        "operationId": "GetDeployedCodePackage",
+        "operationId": "DeployedCodePackages_Get",
+        "description": "Get deployed code packages",
         "produces": [
           "application/json"
         ],
@@ -550,7 +539,8 @@
     },
     "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetReplicas": {
       "get": {
-        "operationId": "GetDeployedReplica",
+        "operationId": "DeployedReplicas_Get",
+        "description": "Get deployed replicas",
         "produces": [
           "application/json"
         ],
@@ -595,7 +585,8 @@
     },
     "/Nodes/{nodeName}/$/GetPartitions/{partitionName}/$/GetReplicas/{replicaId}/$/GetDetail": {
       "get": {
-        "operationId": "GetDeployedReplicaDetail",
+        "operationId": "DeployedReplicaDetails_Get",
+        "description": "Get deployed replica details",
         "produces": [
           "application/json"
         ],
@@ -644,7 +635,8 @@
     },
     "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetServicePackages": {
       "get": {
-        "operationId": "GetDeployedServicePackage",
+        "operationId": "DeployedServicePackages_Get",
+        "description": "Get deployed service packages",
         "produces": [
           "application/json"
         ],
@@ -689,7 +681,8 @@
     },
     "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetServicePackages/{servicePackageName}/$/GetHealth": {
       "get": {
-        "operationId": "GetDeployedServicePackageHealth",
+        "operationId": "DeployedServicePackageHealths_Get",
+        "description": "Get deployed service package healths",
         "produces": [
           "application/json"
         ],
@@ -745,7 +738,8 @@
     },
     "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetServiceTypes": {
       "get": {
-        "operationId": "GetDeployedServiceType",
+        "operationId": "DeployedServiceTypes_Get",
+        "description": "Get deployed service types",
         "produces": [
           "application/json"
         ],
@@ -790,7 +784,8 @@
     },
     "/Nodes/{nodeName}/$/ReportHealth": {
       "post": {
-        "operationId": "SendNodeHealthReport",
+        "operationId": "NodeHealthReports_Send",
+        "description": "Send node health reports",
         "produces": [
           "application/json"
         ],
@@ -809,6 +804,7 @@
             "required": true,
             "schema": {
               "type": "object",
+              "description": "The report of the node health",
               "properties": {
                 "SourceId": {
                   "type": "string"
@@ -856,7 +852,8 @@
     },
     "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/ReportHealth": {
       "post": {
-        "operationId": "SendDeployedApplicationHealthReport",
+        "operationId": "DeployedApplicationHealthReports_Send",
+        "description": "Send deployed application health reports",
         "produces": [
           "application/json"
         ],
@@ -883,6 +880,7 @@
             "required": true,
             "schema": {
               "type": "object",
+              "description": "The report of the deployed application health",
               "properties": {
                 "SourceId": {
                   "type": "string"
@@ -930,7 +928,8 @@
     },
     "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetServicePackages/{serviceManifestName}/$/ReportHealth": {
       "post": {
-        "operationId": "SendDeployedServicePackageHealthReport",
+        "operationId": "DeployedServicePackageHealthReports_Send",
+        "description": "Send deployed service package health reports",
         "produces": [
           "application/json"
         ],
@@ -964,6 +963,7 @@
             "required": true,
             "schema": {
               "type": "object",
+              "description": "The report of the deployed service package health",
               "properties": {
                 "SourceId": {
                   "type": "string"
@@ -1011,7 +1011,8 @@
     },
     "/ApplicationTypes": {
       "get": {
-        "operationId": "GetApplicationTypeList",
+        "operationId": "ApplicationTypes_List",
+        "description": "List application types",
         "produces": [
           "application/json"
         ],
@@ -1041,7 +1042,8 @@
     },
     "/ApplicationTypes/{applicationTypeName}": {
       "get": {
-        "operationId": "GetApplicationType",
+        "operationId": "ApplicationTypes_Get",
+        "description": "Get application types",
         "produces": [
           "application/json"
         ],
@@ -1078,7 +1080,8 @@
     },
     "/ApplicationTypes/{applicationTypeName}/$/GetServiceManifest": {
       "get": {
-        "operationId": "GetServiceManifest",
+        "operationId": "ServiceManifests_Get",
+        "description": "Get service manifests",
         "produces": [
           "application/json"
         ],
@@ -1126,7 +1129,8 @@
     },
     "/ApplicationTypes/{applicationTypeName}/$/GetServiceTypes": {
       "get": {
-        "operationId": "GetServiceType",
+        "operationId": "ServiceTypes_Get",
+        "description": "Get service types",
         "produces": [
           "application/json"
         ],
@@ -1170,7 +1174,8 @@
     },
     "/ApplicationTypes/{applicationTypeName}/$/GetApplicationManifest": {
       "get": {
-        "operationId": "GetApplicationManifest",
+        "operationId": "ApplicationManifests_Get",
+        "description": "Get application manifests",
         "produces": [
           "application/json"
         ],
@@ -1218,7 +1223,8 @@
     },
     "/ApplicationTypes/$/Provision": {
       "post": {
-        "operationId": "RegisterApplicationType",
+        "operationId": "ApplicationTypes_Register",
+        "description": "Register application types",
         "produces": [
           "application/json"
         ],
@@ -1230,6 +1236,7 @@
             "required": true,
             "schema": {
               "type": "object",
+              "description": "The type of the register application",
               "properties": {
                 "ApplicationTypeBuildPath": {
                   "type": "string"
@@ -1259,7 +1266,8 @@
     },
     "/ApplicationTypes/{applicationTypeName}/$/Unprovision": {
       "post": {
-        "operationId": "UnregisterApplicationType",
+        "operationId": "ApplicationTypes_Unregister",
+        "description": "Unregister application types",
         "produces": [
           "application/json"
         ],
@@ -1278,6 +1286,7 @@
             "required": true,
             "schema": {
               "type": "object",
+              "description": "The type of the unregister application",
               "properties": {
                 "ApplicationTypeVersion": {
                   "type": "string"
@@ -1307,7 +1316,8 @@
     },
     "/Applications": {
       "get": {
-        "operationId": "GetApplicationList",
+        "operationId": "Applications_List",
+        "description": "List applications",
         "produces": [
           "application/json"
         ],
@@ -1327,18 +1337,7 @@
           "200": {
             "description": "The application list",
             "schema": {
-              "type": "object",
-              "properties": {
-                "ContinuationToken": {
-                  "type": "string"
-                },
-                "Items": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/Application"
-                  }
-                }
-              }
+              "$ref": "#/definitions/ApplicationList"
             }
           },
           "default": {
@@ -1352,7 +1351,8 @@
     },
     "/Applications/{applicationName}": {
       "get": {
-        "operationId": "GetApplication",
+        "operationId": "Applications_Get",
+        "description": "Get applications",
         "produces": [
           "application/json"
         ],
@@ -1394,7 +1394,8 @@
     },
     "/Applications/{applicationName}/$/GetServices": {
       "get": {
-        "operationId": "GetServiceList",
+        "operationId": "Services_List",
+        "description": "List services",
         "produces": [
           "application/json"
         ],
@@ -1415,18 +1416,7 @@
           "200": {
             "description": "The service list",
             "schema": {
-              "type": "object",
-              "properties": {
-                "ContinuationToken": {
-                  "type": "string"
-                },
-                "Items": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/Service"
-                  }
-                }
-              }
+              "$ref": "#/definitions/ServiceList"
             }
           },
           "default": {
@@ -1440,7 +1430,8 @@
     },
     "/Applications/{applicationName}/$/GetServices/{serviceName}": {
       "get": {
-        "operationId": "GetService",
+        "operationId": "Services_Get",
+        "description": "Get services",
         "produces": [
           "application/json"
         ],
@@ -1483,7 +1474,8 @@
     },
     "/Applications/{applicationName}/$/GetServices/{serviceName}/$/GetServiceGroupDescription": {
       "get": {
-        "operationId": "GetServiceGroupDescription",
+        "operationId": "ServiceGroupDescriptions_Get",
+        "description": "Get service group descriptions",
         "produces": [
           "application/json"
         ],
@@ -1526,7 +1518,8 @@
     },
     "/Applications/{applicationName}/$/GetServices/{serviceName}/$/GetServiceGroupMembers": {
       "get": {
-        "operationId": "GetServiceGroupMember",
+        "operationId": "ServiceGroupMembers_Get",
+        "description": "Get service group members",
         "produces": [
           "application/json"
         ],
@@ -1569,7 +1562,8 @@
     },
     "/Applications/{applicationName}/$/GetHealth": {
       "get": {
-        "operationId": "GetApplicationHealth",
+        "operationId": "ApplicationHealths_Get",
+        "description": "Get application healths",
         "produces": [
           "application/json"
         ],
@@ -1618,7 +1612,8 @@
     },
     "/Applications/{applicationName}/$/GetUpgradeProgress": {
       "get": {
-        "operationId": "GetApplicationUpgrade",
+        "operationId": "ApplicationUpgrades_Get",
+        "description": "Get application upgrades",
         "produces": [
           "application/json"
         ],
@@ -1653,7 +1648,8 @@
     },
     "/Applications/{applicationName}/$/ReportHealth": {
       "post": {
-        "operationId": "SendApplicationHealthReport",
+        "operationId": "ApplicationHealthReports_Send",
+        "description": "Send application health reports",
         "produces": [
           "application/json"
         ],
@@ -1673,6 +1669,7 @@
             "required": true,
             "schema": {
               "type": "object",
+              "description": "The report of the application health",
               "properties": {
                 "SourceId": {
                   "type": "string"
@@ -1720,7 +1717,8 @@
     },
     "/Applications/$/Create": {
       "post": {
-        "operationId": "NewApplication",
+        "operationId": "Applications_Create",
+        "description": "Create applications",
         "produces": [
           "application/json"
         ],
@@ -1768,7 +1766,8 @@
     },
     "/Applications/{applicationName}/$/GetServices/$/Create": {
       "post": {
-        "operationId": "NewService",
+        "operationId": "Services_Create",
+        "description": "Create services",
         "produces": [
           "application/json"
         ],
@@ -1824,7 +1823,8 @@
     },
     "/Applications/{applicationName}/$/GetServices/$/CreateFromTemplate": {
       "post": {
-        "operationId": "NewServiceFromTemplate",
+        "operationId": "ServiceFromTemplates_Create",
+        "description": "Create service from templates",
         "produces": [
           "application/json"
         ],
@@ -1844,6 +1844,7 @@
             "required": true,
             "schema": {
               "type": "object",
+              "description": "The template of the service description",
               "properties": {
                 "ServiceName": {
                   "type": "string"
@@ -1888,7 +1889,8 @@
     },
     "/Applications/{applicationName}/$/GetServices/$/CreateServiceGroup": {
       "post": {
-        "operationId": "NewServiceGroup",
+        "operationId": "ServiceGroups_Create",
+        "description": "Create service groups",
         "produces": [
           "application/json"
         ],
@@ -1944,7 +1946,8 @@
     },
     "/Applications/{applicationName}/$/GetServiceGroups/$/CreateServiceGroupFromTemplate": {
       "post": {
-        "operationId": "NewServiceGroupFromTemplate",
+        "operationId": "ServiceGroupFromTemplates_Create",
+        "description": "Create service group from templates",
         "produces": [
           "application/json"
         ],
@@ -1964,6 +1967,7 @@
             "required": true,
             "schema": {
               "type": "object",
+              "description": "The template of the service description",
               "properties": {
                 "ServiceName": {
                   "type": "string"
@@ -2008,7 +2012,8 @@
     },
     "/Applications/{applicationName}/$/GetServices/{serviceName}/$/UpdateServiceGroup": {
       "post": {
-        "operationId": "UpdateServiceGroup",
+        "operationId": "ServiceGroups_Update",
+        "description": "Update service groups",
         "produces": [
           "application/json"
         ],
@@ -2060,7 +2065,8 @@
     },
     "/Applications/{applicationName}/$/Delete": {
       "post": {
-        "operationId": "RemoveApplication",
+        "operationId": "Applications_Remove",
+        "description": "Remove applications",
         "produces": [
           "application/json"
         ],
@@ -2095,7 +2101,8 @@
     },
     "/Applications/{applicationName}/$/Upgrade": {
       "post": {
-        "operationId": "StartApplicationUpgrade",
+        "operationId": "ApplicationUpgrades_Start",
+        "description": "Start application upgrades",
         "produces": [
           "application/json"
         ],
@@ -2139,7 +2146,8 @@
     },
     "/Applications/{applicationName}/$/UpdateUpgrade": {
       "post": {
-        "operationId": "UpdateApplicationUpgrade",
+        "operationId": "ApplicationUpgrades_Update",
+        "description": "Update application upgrades",
         "produces": [
           "application/json"
         ],
@@ -2183,7 +2191,8 @@
     },
     "/Applications/{applicationName}/$/MoveNextUpgradeDomain": {
       "post": {
-        "operationId": "ResumeApplicationUpgrade",
+        "operationId": "ApplicationUpgrades_Resume",
+        "description": "Resume application upgrades",
         "produces": [
           "application/json"
         ],
@@ -2203,6 +2212,7 @@
             "required": true,
             "schema": {
               "type": "object",
+              "description": "The upgrade of the resume application",
               "properties": {
                 "UpgradeDomainName": {
                   "type": "string"
@@ -2232,7 +2242,8 @@
     },
     "/Applications/{applicationName}/$/RollbackUpgrade": {
       "post": {
-        "operationId": "StartApplicationUpgradeRollback",
+        "operationId": "ApplicationUpgradeRollbacks_Start",
+        "description": "Start application upgrade rollbacks",
         "produces": [
           "application/json"
         ],
@@ -2267,7 +2278,8 @@
     },
     "/Services/{serviceName}/$/Update": {
       "post": {
-        "operationId": "UpdateService",
+        "operationId": "Services_Update",
+        "description": "Update services",
         "produces": [
           "application/json"
         ],
@@ -2311,7 +2323,8 @@
     },
     "/Services/{serviceName}/$/Delete": {
       "post": {
-        "operationId": "RemoveService",
+        "operationId": "Services_Remove",
+        "description": "Remove services",
         "produces": [
           "application/json"
         ],
@@ -2346,7 +2359,8 @@
     },
     "/Applications/{applicationName}/$/GetServiceGroups/{serviceName}/$/Delete": {
       "post": {
-        "operationId": "RemoveServiceGroup",
+        "operationId": "ServiceGroups_Remove",
+        "description": "Remove service groups",
         "produces": [
           "application/json"
         ],
@@ -2389,7 +2403,8 @@
     },
     "/Services/{serviceName}/$/GetDescription": {
       "get": {
-        "operationId": "GetServiceDescription",
+        "operationId": "ServiceDescriptions_Get",
+        "description": "Get service descriptions",
         "produces": [
           "application/json"
         ],
@@ -2424,7 +2439,8 @@
     },
     "/Services/{serviceName}/$/ResolvePartition": {
       "get": {
-        "operationId": "ResolveService",
+        "operationId": "Services_Resolve",
+        "description": "Resolve services",
         "produces": [
           "application/json"
         ],
@@ -2480,7 +2496,8 @@
     },
     "/Services/{serviceName}/$/GetHealth": {
       "get": {
-        "operationId": "GetServiceHealth",
+        "operationId": "ServiceHealths_Get",
+        "description": "Get service healths",
         "produces": [
           "application/json"
         ],
@@ -2515,7 +2532,8 @@
     },
     "/Services/{serviceName}/$/ReportHealth": {
       "post": {
-        "operationId": "SendServiceHealth",
+        "operationId": "ServiceHealths_Send",
+        "description": "Send service healths",
         "produces": [
           "application/json"
         ],
@@ -2535,6 +2553,7 @@
             "required": true,
             "schema": {
               "type": "object",
+              "description": "The report of the service health",
               "properties": {
                 "SourceId": {
                   "type": "string"
@@ -2582,7 +2601,8 @@
     },
     "/Services/{serviceName}/$/GetPartitions": {
       "get": {
-        "operationId": "GetPartitionList",
+        "operationId": "Partitions_List",
+        "description": "List partitions",
         "produces": [
           "application/json"
         ],
@@ -2603,18 +2623,7 @@
           "200": {
             "description": "The partitions",
             "schema": {
-              "type": "object",
-              "properties": {
-                "ContinuationToken": {
-                  "type": "string"
-                },
-                "Items": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/Partition"
-                  }
-                }
-              }
+              "$ref": "#/definitions/PartitionList"
             }
           },
           "default": {
@@ -2628,7 +2637,8 @@
     },
     "/Services/{serviceName}/$/GetPartitions/{partitionId}": {
       "get": {
-        "operationId": "GetPartition",
+        "operationId": "Partitions_Get",
+        "description": "Get partitions",
         "produces": [
           "application/json"
         ],
@@ -2670,7 +2680,8 @@
     },
     "/Services/{serviceName}/$/GetPartitions/$/Recover": {
       "post": {
-        "operationId": "RepairPartitionList",
+        "operationId": "PartitionLists_Repair",
+        "description": "Repair partition lists",
         "produces": [
           "application/json"
         ],
@@ -2705,7 +2716,8 @@
     },
     "/Partitions/{partitionId}/$/Recover": {
       "post": {
-        "operationId": "RepairPartition",
+        "operationId": "Partitions_Repair",
+        "description": "Repair partitions",
         "produces": [
           "application/json"
         ],
@@ -2740,7 +2752,8 @@
     },
     "/Partitions/{partitionId}/$/ResetLoad": {
       "post": {
-        "operationId": "ResetPartitionLoad",
+        "operationId": "PartitionLoads_Reset",
+        "description": "Reset partition loads",
         "produces": [
           "application/json"
         ],
@@ -2775,7 +2788,8 @@
     },
     "/Partitions/{partitionId}/$/GetReplicas": {
       "get": {
-        "operationId": "GetReplicaList",
+        "operationId": "Replicas_List",
+        "description": "List replicas",
         "produces": [
           "application/json"
         ],
@@ -2795,18 +2809,7 @@
           "200": {
             "description": "The replica list",
             "schema": {
-              "type": "object",
-              "properties": {
-                "ContinuationToken": {
-                  "type": "string"
-                },
-                "Items": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/Replica"
-                  }
-                }
-              }
+              "$ref": "#/definitions/ReplicaList"
             }
           },
           "default": {
@@ -2820,7 +2823,8 @@
     },
     "/Partitions/{partitionId}/$/GetReplicas/{replicaId}": {
       "get": {
-        "operationId": "GetReplica",
+        "operationId": "Replicas_Get",
+        "description": "Get replicas",
         "produces": [
           "application/json"
         ],
@@ -2861,7 +2865,8 @@
     },
     "/Partitions/{partitionId}/$/GetHealth": {
       "get": {
-        "operationId": "GetPartitionHealth",
+        "operationId": "PartitionHealths_Get",
+        "description": "Get partition healths",
         "produces": [
           "application/json"
         ],
@@ -2909,7 +2914,8 @@
     },
     "/Partitions/{partitionId}/$/ReportHealth": {
       "post": {
-        "operationId": "SendPartitionHealthReport",
+        "operationId": "PartitionHealthReports_Send",
+        "description": "Send partition health reports",
         "produces": [
           "application/json"
         ],
@@ -2928,6 +2934,7 @@
             "required": true,
             "schema": {
               "type": "object",
+              "description": "The report of the partition health",
               "properties": {
                 "SourceId": {
                   "type": "string"
@@ -2975,7 +2982,8 @@
     },
     "/Partitions/{partitionId}/$/GetReplicas/{replicaId}/$/GetHealth": {
       "get": {
-        "operationId": "GetReplicaHealth",
+        "operationId": "ReplicaHealths_Get",
+        "description": "Get replica healths",
         "produces": [
           "application/json"
         ],
@@ -3023,7 +3031,8 @@
     },
     "/Partitions/{partitionId}/$/GetReplicas/{replicaId}/$/ReportHealth": {
       "post": {
-        "operationId": "SendReplicaHealth",
+        "operationId": "ReplicaHealths_Send",
+        "description": "Send replica healths",
         "produces": [
           "application/json"
         ],
@@ -3049,6 +3058,7 @@
             "required": true,
             "schema": {
               "type": "object",
+              "description": "The report of the replica health",
               "properties": {
                 "SourceId": {
                   "type": "string"
@@ -3096,7 +3106,8 @@
     },
     "/Partitions/{partitionId}/$/GetLoadInformation": {
       "get": {
-        "operationId": "GetPartitionLoadInformation",
+        "operationId": "PartitionLoadInformations_Get",
+        "description": "Get partition load informations",
         "produces": [
           "application/json"
         ],
@@ -3130,7 +3141,8 @@
     },
     "/Partitions/{partitionId}/$/GetReplicas/{replicaId}/$/GetLoadInformation": {
       "get": {
-        "operationId": "GetReplicaLoadInformation",
+        "operationId": "ReplicaLoadInformations_Get",
+        "description": "Get replica load informations",
         "produces": [
           "application/json"
         ],
@@ -3171,7 +3183,8 @@
     },
     "/$/GetLoadInformation": {
       "get": {
-        "operationId": "GetClusterLoadInformation",
+        "operationId": "ClusterLoadInformations_Get",
+        "description": "Get cluster load informations",
         "produces": [
           "application/json"
         ],
@@ -3198,7 +3211,8 @@
     },
     "/$/GetClusterHealth": {
       "get": {
-        "operationId": "GetClusterHealth",
+        "operationId": "ClusterHealths_Get",
+        "description": "Get cluster healths",
         "produces": [
           "application/json"
         ],
@@ -3246,7 +3260,8 @@
     },
     "/$/GetUpgradeProgress": {
       "get": {
-        "operationId": "GetUpgradeProgress",
+        "operationId": "UpgradeProgresses_Get",
+        "description": "Get upgrade progresses",
         "produces": [
           "application/json"
         ],
@@ -3275,6 +3290,7 @@
   "definitions": {
     "Node": {
       "type": "object",
+      "description": "The node",
       "properties": {
         "Name": {
           "type": "string"
@@ -3311,6 +3327,7 @@
         },
         "Id": {
           "type": "object",
+          "description": "The id",
           "properties": {
             "Id": {
               "type": "string"
@@ -3322,6 +3339,7 @@
         },
         "NodeDeactivationInfo": {
           "type": "object",
+          "description": "The info of the deactivation info",
           "properties": {
             "NodeDeactivationIntent": {
               "type": "string"
@@ -3333,8 +3351,24 @@
         }
       }
     },
+    "NodeList": {
+      "type": "object",
+      "description": "The list of the node",
+      "properties": {
+        "ContinuationToken": {
+          "type": "string"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Node"
+          }
+        }
+      }
+    },
     "HealthEvent": {
       "type": "object",
+      "description": "The event of the health",
       "properties": {
         "SourceId": {
           "type": "string"
@@ -3379,6 +3413,7 @@
     },
     "HealthEvaluation": {
       "type": "object",
+      "description": "The evauation of the health",
       "discriminator": "Kind",
       "required": [
         "Kind"
@@ -3397,6 +3432,7 @@
     },
     "UnhealthyEvaluation": {
       "type": "object",
+      "description": "The evaluation of the unhealthy",
       "properties": {
         "HealthEvaluation": {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3405,6 +3441,7 @@
     },
     "EventHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the event health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3422,6 +3459,7 @@
     },
     "PartitionsHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the partitions health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3445,6 +3483,7 @@
     },
     "ReplicasHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the replicas health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3468,6 +3507,7 @@
     },
     "DeployedServicePackagesHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the deployed service packages health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3488,6 +3528,7 @@
     },
     "DeployedApplicationsHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the deployed applications health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3511,6 +3552,7 @@
     },
     "ServicesHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the services health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3537,6 +3579,7 @@
     },
     "NodesHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the nodes health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3560,6 +3603,7 @@
     },
     "ApplicationsHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the applications health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3583,6 +3627,7 @@
     },
     "UpgradeDomainNodesHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the upgrade domain nodes health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3609,6 +3654,7 @@
     },
     "UpgradeDomainDeployedApplicationsHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the upgrade domain deployed applications health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3635,6 +3681,7 @@
     },
     "SystemApplicationHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the system application health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3652,6 +3699,7 @@
     },
     "PartitionHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the partition health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3672,6 +3720,7 @@
     },
     "ReplicaHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the replica health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3695,6 +3744,7 @@
     },
     "DeployedServicePackageHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the deployed service package health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3721,6 +3771,7 @@
     },
     "DeployedApplicationHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the deployed application health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3744,6 +3795,7 @@
     },
     "ServiceHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the service health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3764,6 +3816,7 @@
     },
     "NodeHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the node health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3784,6 +3837,7 @@
     },
     "ApplicationHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the application health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3804,6 +3858,7 @@
     },
     "DeltaNodesCheckHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the delta nodes check health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3833,6 +3888,7 @@
     },
     "UpgradeDomainDeltaNodesCheckHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the upgrade domain delta nodes check health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3865,6 +3921,7 @@
     },
     "ApplicationTypeHealthEvaluation": {
       "type": "object",
+      "description": "The evaluation of the application type health",
       "allOf": [
         {
           "$ref": "#/definitions/HealthEvaluation"
@@ -3891,6 +3948,7 @@
     },
     "NodeHealth": {
       "type": "object",
+      "description": "The health of the node",
       "properties": {
         "HealthEvents": {
           "type": "array",
@@ -3908,6 +3966,7 @@
     },
     "DeployedApplication": {
       "type": "object",
+      "description": "The application of the deployed",
       "properties": {
         "Id": {
           "type": "string"
@@ -3919,7 +3978,7 @@
           "type": "string"
         },
         "Status": {
-          "type": "integer"
+          "type": "string"
         },
         "WorkDirectory": {
           "type": "string"
@@ -3934,6 +3993,7 @@
     },
     "DeployedServicePackageHealthState": {
       "type": "object",
+      "description": "The state of the deployed service package health",
       "properties": {
         "ApplicationName": {
           "type": "string"
@@ -3951,6 +4011,7 @@
     },
     "DeployedApplicationHealth": {
       "type": "object",
+      "description": "The health of the deployed application",
       "properties": {
         "HealthEvents": {
           "type": "array",
@@ -3977,6 +4038,7 @@
     },
     "NodeLoadMetricInformation": {
       "type": "object",
+      "description": "The information of the node load metric",
       "properties": {
         "Name": {
           "type": "string"
@@ -4003,6 +4065,7 @@
     },
     "NodeLoadInformation": {
       "type": "object",
+      "description": "The information of the node load",
       "properties": {
         "NodeName": {
           "type": "string"
@@ -4014,6 +4077,7 @@
     },
     "CodePackageEntryPointStatistics": {
       "type": "object",
+      "description": "The statistics of the code package entry point",
       "properties": {
         "LastExitCode": {
           "type": "integer"
@@ -4052,6 +4116,7 @@
     },
     "EntryPoint": {
       "type": "object",
+      "description": "The point of the entry",
       "properties": {
         "EntryPointLocation": {
           "type": "integer"
@@ -4066,7 +4131,7 @@
           "type": "integer"
         },
         "Status": {
-          "type": "integer"
+          "type": "string"
         },
         "CodePackageEntryPointStatistics": {
           "$ref": "#/definitions/CodePackageEntryPointStatistics"
@@ -4075,6 +4140,7 @@
     },
     "DeployedCodePackage": {
       "type": "object",
+      "description": "The package of the deployed code",
       "properties": {
         "Name": {
           "type": "string"
@@ -4104,6 +4170,7 @@
     },
     "DeployedReplica": {
       "type": "object",
+      "description": "The replica of the deployed",
       "properties": {
         "ServiceKind": {
           "type": "string"
@@ -4145,6 +4212,7 @@
     },
     "DeployedReplicaDetail": {
       "type": "object",
+      "description": "The detail of the deployed replica",
       "properties": {
         "ServiceKind": {
           "type": "string"
@@ -4178,12 +4246,14 @@
         },
         "ReplicatorStatus": {
           "type": "object",
+          "description": "The status of the replicator",
           "properties": {
             "Kind": {
               "type": "integer"
             },
             "ReplicationQueueStatus": {
               "type": "object",
+              "description": "The status of the replication queue",
               "properties": {
                 "QueueUtilizationPercentage": {
                   "type": "string"
@@ -4211,6 +4281,7 @@
     },
     "DeployedServicePackage": {
       "type": "object",
+      "description": "The package of the deployed service",
       "properties": {
         "Name": {
           "type": "string"
@@ -4219,12 +4290,13 @@
           "type": "string"
         },
         "Status": {
-          "type": "integer"
+          "type": "string"
         }
       }
     },
     "DeployedServicePackageHealth": {
       "type": "object",
+      "description": "The health of the deployed service package",
       "properties": {
         "ApplicationName": {
           "type": "string"
@@ -4248,6 +4320,7 @@
     },
     "DeployedServiceType": {
       "type": "object",
+      "description": "The type of the deploye service",
       "properties": {
         "ServiceTypeName": {
           "type": "string"
@@ -4259,12 +4332,13 @@
           "type": "string"
         },
         "Status": {
-          "type": "integer"
+          "type": "string"
         }
       }
     },
     "ApplicationType": {
       "type": "object",
+      "description": "The type of the application",
       "properties": {
         "Name": {
           "type": "string"
@@ -4276,6 +4350,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "description": "The list of the default parameter",
             "properties": {
               "Key": {
                 "type": "string"
@@ -4290,6 +4365,7 @@
     },
     "ServiceManifest": {
       "type": "object",
+      "description": "The manifest of the service",
       "properties": {
         "Manifest": {
           "type": "string"
@@ -4298,9 +4374,11 @@
     },
     "ServiceType": {
       "type": "object",
+      "description": "The type of the service",
       "properties": {
         "ServiceTypeDescription": {
           "type": "object",
+          "description": "The description of the service type",
           "properties": {
             "IsStateful": {
               "type": "boolean"
@@ -4329,6 +4407,7 @@
     },
     "Application": {
       "type": "object",
+      "description": "The application",
       "properties": {
         "Id": {
           "type": "string"
@@ -4343,12 +4422,13 @@
           "type": "string"
         },
         "Status": {
-          "type": "integer"
+          "type": "string"
         },
         "Parameters": {
           "type": "array",
           "items": {
             "type": "object",
+            "description": "The parameters",
             "properties": {
               "Key": {
                 "type": "string"
@@ -4364,8 +4444,24 @@
         }
       }
     },
+    "ApplicationList": {
+      "type": "object",
+      "description": "The list of the application",
+      "properties": {
+        "ContinuationToken": {
+          "type": "string"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        }
+      }
+    },
     "ApplicationDescription": {
       "type": "object",
+      "description": "The ",
       "properties": {
         "Name": {
           "type": "string"
@@ -4380,6 +4476,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "description": "The list of the parameter",
             "properties": {
               "Key": {
                 "type": "string"
@@ -4394,6 +4491,7 @@
     },
     "ApplicationManifest": {
       "type": "object",
+      "description": "The manifest of the application",
       "properties": {
         "Manifest": {
           "type": "string"
@@ -4402,6 +4500,7 @@
     },
     "Service": {
       "type": "object",
+      "description": "The service",
       "properties": {
         "Id": {
           "type": "string"
@@ -4432,8 +4531,24 @@
         }
       }
     },
+    "ServiceList": {
+      "type": "object",
+      "description": "The list of the service",
+      "properties": {
+        "ContinuationToken": {
+          "type": "string"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Service"
+          }
+        }
+      }
+    },
     "PartitionDescription": {
       "type": "object",
+      "description": "The description of the partition",
       "properties": {
         "PartitionScheme": {
           "type": "string"
@@ -4457,6 +4572,7 @@
     },
     "ServiceGroupMemberDescription": {
       "type": "object",
+      "description": "The description of the service group member",
       "properties": {
         "ServiceName": {
           "type": "string"
@@ -4471,6 +4587,7 @@
     },
     "ServiceGroupDescription": {
       "type": "object",
+      "description": "The description of the service group",
       "discriminator": "ServiceKind",
       "required": [
         "ServiceKind"
@@ -4516,6 +4633,7 @@
     },
     "StatelessServiceGroupDescription": {
       "type": "object",
+      "description": "The description of the stateless service group",
       "allOf": [
         {
           "$ref": "#/definitions/ServiceGroupDescription"
@@ -4530,6 +4648,7 @@
     },
     "StatefulServiceGroupDescription": {
       "type": "object",
+      "description": "The description of the stateful service group",
       "allOf": [
         {
           "$ref": "#/definitions/ServiceGroupDescription"
@@ -4565,6 +4684,7 @@
     },
     "CreateServiceGroupDescription": {
       "type": "object",
+      "description": "The description of the create service group",
       "discriminator": "ServiceKind",
       "required": [
         "ServiceKind"
@@ -4610,6 +4730,7 @@
     },
     "StatelessCreateServiceGroupDescription": {
       "type": "object",
+      "description": "The description of the stateless create service group",
       "allOf": [
         {
           "$ref": "#/definitions/CreateServiceGroupDescription"
@@ -4624,6 +4745,7 @@
     },
     "StatefulCreateServiceGroupDescription": {
       "type": "object",
+      "description": "The description of the stateful create service group",
       "allOf": [
         {
           "$ref": "#/definitions/CreateServiceGroupDescription"
@@ -4659,6 +4781,7 @@
     },
     "ServiceGroupMember": {
       "type": "object",
+      "description": "The member of the service group",
       "properties": {
         "Name": {
           "type": "string"
@@ -4673,6 +4796,7 @@
     },
     "ApplicationHealth": {
       "type": "object",
+      "description": "The health of the application",
       "properties": {
         "HealthEvents": {
           "type": "array",
@@ -4693,6 +4817,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "description": "The states of the service health",
             "properties": {
               "ServiceName": {
                 "type": "string"
@@ -4707,6 +4832,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "description": "The states of the deployed application health",
             "properties": {
               "ApplicationName": {
                 "type": "string"
@@ -4724,6 +4850,7 @@
     },
     "ApplicationUpgrade": {
       "type": "object",
+      "description": "The upgrade of the application",
       "properties": {
         "Name": {
           "type": "string"
@@ -4757,6 +4884,7 @@
         },
         "CurrentUpgradeDomainProgress": {
           "type": "object",
+          "description": "The progress of the current upgrade domain",
           "properties": {
             "DomainName": {
               "type": "string"
@@ -4777,6 +4905,7 @@
         },
         "DeployedApplicationHealthStates": {
           "type": "object",
+          "description": "The states of the deployed application health",
           "properties": {
             "DomainName": {
               "type": "string"
@@ -4790,6 +4919,7 @@
     },
     "ServiceCorrelationDescription": {
       "type": "object",
+      "description": "The description of the service correlation",
       "properties": {
         "ServiceName": {
           "type": "string"
@@ -4801,6 +4931,7 @@
     },
     "ServiceLoadMetricDescription": {
       "type": "object",
+      "description": "The description of the service load metric",
       "properties": {
         "Name": {
           "type": "string"
@@ -4818,6 +4949,7 @@
     },
     "ServicePlacementPolicyDescription": {
       "type": "object",
+      "description": "The description of the service placement policy",
       "properties": {
         "Type": {
           "type": "string"
@@ -4826,6 +4958,7 @@
     },
     "ServiceDescription": {
       "type": "object",
+      "description": "The description of the service",
       "discriminator": "ServiceKind",
       "required": [
         "ServiceKind"
@@ -4865,6 +4998,7 @@
     },
     "StatelessServiceDescription": {
       "type": "object",
+      "description": "The description of the stateless service",
       "allOf": [
         {
           "$ref": "#/definitions/ServiceDescription"
@@ -4879,6 +5013,7 @@
     },
     "StatefulServiceDescription": {
       "type": "object",
+      "description": "The description of the stateful service",
       "allOf": [
         {
           "$ref": "#/definitions/ServiceDescription"
@@ -4914,6 +5049,7 @@
     },
     "CreateServiceDescription": {
       "type": "object",
+      "description": "The description of the create service",
       "discriminator": "ServiceKind",
       "required": [
         "ServiceKind"
@@ -4953,6 +5089,7 @@
     },
     "StatelessCreateServiceDescription": {
       "type": "object",
+      "description": "The description of the stateless create service",
       "allOf": [
         {
           "$ref": "#/definitions/CreateServiceDescription"
@@ -4967,6 +5104,7 @@
     },
     "StatefulCreateServiceDescription": {
       "type": "object",
+      "description": "The description of the stateful create service",
       "allOf": [
         {
           "$ref": "#/definitions/CreateServiceDescription"
@@ -5002,6 +5140,7 @@
     },
     "UpdateServiceDescription": {
       "type": "object",
+      "description": "The description of the update service",
       "discriminator": "ServiceKind",
       "required": [
         "ServiceKind"
@@ -5017,6 +5156,7 @@
     },
     "StatelessUpdateServiceDescription": {
       "type": "object",
+      "description": "The description of the stateless update service",
       "allOf": [
         {
           "$ref": "#/definitions/UpdateServiceDescription"
@@ -5031,6 +5171,7 @@
     },
     "StatefulUpdateServiceDescription": {
       "type": "object",
+      "description": "The description of the stateful update service",
       "allOf": [
         {
           "$ref": "#/definitions/UpdateServiceDescription"
@@ -5057,6 +5198,7 @@
     },
     "UpdateServiceGroupDescription": {
       "type": "object",
+      "description": "The description of the update service group",
       "discriminator": "ServiceKind",
       "required": [
         "ServiceKind"
@@ -5072,6 +5214,7 @@
     },
     "StatelessUpdateServiceGroupDescription": {
       "type": "object",
+      "description": "The description of the stateless update service group",
       "allOf": [
         {
           "$ref": "#/definitions/UpdateServiceGroupDescription"
@@ -5086,6 +5229,7 @@
     },
     "StatefulUpdateServiceGroupDescription": {
       "type": "object",
+      "description": "The description of the stateful update service group",
       "allOf": [
         {
           "$ref": "#/definitions/UpdateServiceGroupDescription"
@@ -5112,6 +5256,7 @@
     },
     "ServiceHealth": {
       "type": "object",
+      "description": "The health of the service",
       "properties": {
         "HealthEvents": {
           "type": "array",
@@ -5129,6 +5274,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "description": "The states of the partition health",
             "properties": {
               "PartitionId": {
                 "type": "string"
@@ -5143,9 +5289,10 @@
     },
     "PartitionInformation": {
       "type": "object",
+      "description": "The information of the partition",
       "properties": {
         "ServicePartitionKind": {
-          "type": "integer"
+          "type": "string"
         },
         "Id": {
           "type": "string"
@@ -5166,12 +5313,16 @@
     },
     "Partition": {
       "type": "object",
+      "description": "The partition",
       "properties": {
         "ServiceKind": {
           "type": "string"
         },
         "PartitionInformation": {
           "$ref": "#/definitions/PartitionInformation"
+        },
+        "InstanceCount": {
+          "type": "integer"
         },
         "TargetReplicaSetSize": {
           "type": "integer"
@@ -5183,10 +5334,11 @@
           "type": "string"
         },
         "PartitionStatus": {
-          "type": "integer"
+          "type": "string"
         },
         "CurrentConfigurationEpoch": {
           "type": "object",
+          "description": "The epoch of the current configuration",
           "properties": {
             "ConfigurationVersion": {
               "type": "string"
@@ -5198,8 +5350,24 @@
         }
       }
     },
+    "PartitionList": {
+      "type": "object",
+      "description": "The list of the partition",
+      "properties": {
+        "ContinuationToken": {
+          "type": "string"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Partition"
+          }
+        }
+      }
+    },
     "Replica": {
       "type": "object",
+      "description": "The replica",
       "properties": {
         "ServiceKind": {
           "type": "string"
@@ -5230,8 +5398,24 @@
         }
       }
     },
+    "ReplicaList": {
+      "type": "object",
+      "description": "The list of the replica",
+      "properties": {
+        "ContinuationToken": {
+          "type": "string"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Replica"
+          }
+        }
+      }
+    },
     "PartitionHealth": {
       "type": "object",
+      "description": "The health of the partition",
       "properties": {
         "HealthEvents": {
           "type": "array",
@@ -5249,6 +5433,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "description": "The states of the replica health",
             "properties": {
               "HealthEvents": {
                 "type": "integer"
@@ -5269,6 +5454,7 @@
     },
     "ReplicaHealth": {
       "type": "object",
+      "description": "The health of the replica",
       "properties": {
         "ServiceKind": {
           "type": "string"
@@ -5292,6 +5478,7 @@
     },
     "PartitionLoadInformation": {
       "type": "object",
+      "description": "The information of the partition load",
       "properties": {
         "PartitionId": {
           "type": "string"
@@ -5312,6 +5499,7 @@
     },
     "ReplicaLoadInformation": {
       "type": "object",
+      "description": "The information of the replica load",
       "properties": {
         "PartitionId": {
           "type": "string"
@@ -5329,6 +5517,7 @@
     },
     "LoadMetricInformation": {
       "type": "object",
+      "description": "The information of the load metric",
       "properties": {
         "Name": {
           "type": "string"
@@ -5380,6 +5569,7 @@
         },
         "MinNodeLoadId": {
           "type": "object",
+          "description": "The id of the min node",
           "properties": {
             "Id": {
               "type": "string"
@@ -5391,6 +5581,7 @@
         },
         "MaxNodeLoadId": {
           "type": "object",
+          "description": "The id of the max node load",
           "properties": {
             "Id": {
               "type": "string"
@@ -5401,6 +5592,7 @@
     },
     "ClusterLoadInformation": {
       "type": "object",
+      "description": "The information of the cluster load",
       "properties": {
         "LastBalancingStartTimeUtc": {
           "type": "string"
@@ -5418,6 +5610,7 @@
     },
     "ClusterHealth": {
       "type": "object",
+      "description": "The health of the cluster",
       "properties": {
         "HealthEvents": {
           "type": "array",
@@ -5438,12 +5631,14 @@
           "type": "array",
           "items": {
             "type": "object",
+            "description": "The states of tehe node health",
             "properties": {
               "Name": {
                 "type": "string"
               },
               "Id": {
                 "type": "object",
+                "description": "The id",
                 "properties": {
                   "Id": {
                     "type": "string"
@@ -5460,6 +5655,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "description": "The state of the application health",
             "properties": {
               "Name": {
                 "type": "string"
@@ -5474,6 +5670,7 @@
     },
     "MonitoringPolicy": {
       "type": "object",
+      "description": "The policy of the monitoring",
       "properties": {
         "FailureAction": {
           "type": "string"
@@ -5497,6 +5694,7 @@
     },
     "ApplicationHealthPolicy": {
       "type": "object",
+      "description": "The policy of the application health",
       "properties": {
         "ConsiderWarningAsError": {
           "type": "boolean"
@@ -5506,6 +5704,7 @@
         },
         "DefaultServiceTypeHealthPolicy": {
           "type": "object",
+          "description": "The policy of the default service type health",
           "properties": {
             "MaxPercentUnhealthyServices": {
               "type": "integer"
@@ -5522,6 +5721,7 @@
     },
     "StartApplicationUpgradeDescription": {
       "type": "object",
+      "description": "The description of the start application upgrade",
       "properties": {
         "Name": {
           "type": "string"
@@ -5557,6 +5757,7 @@
     },
     "UpdateApplicationUpgradeDescription": {
       "type": "object",
+      "description": "The description of the update application upgrade",
       "properties": {
         "Name": {
           "type": "string"
@@ -5566,6 +5767,7 @@
         },
         "UpdateDescription": {
           "type": "object",
+          "description": "The description of the update",
           "properties": {
             "RollingUpgradeMode": {
               "type": "string"
@@ -5603,6 +5805,7 @@
     },
     "ResolvedServicePartition": {
       "type": "object",
+      "description": "The partition of the resolved service",
       "properties": {
         "Name": {
           "type": "string"
@@ -5614,6 +5817,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "description": "The endpoints",
             "properties": {
               "Kind": {
                 "type": "integer"
@@ -5631,6 +5835,7 @@
     },
     "ClusterUpgradeProgress": {
       "type": "object",
+      "description": "The progress of the cluster upgrade",
       "properties": {
         "CodeVersion": {
           "type": "string"
@@ -5667,6 +5872,7 @@
         },
         "CurrentUpgradeDomainProgress": {
           "type": "object",
+          "description": "The progress of the current upgrade domain",
           "properties": {
             "DomainName": {
               "type": "string"
@@ -5687,6 +5893,7 @@
         },
         "UpgradeDomainProgressAtFailure": {
           "type": "object",
+          "description": "The failure of the upgrade domain progress at",
           "properties": {
             "DomainName": {
               "type": "string"
@@ -5700,9 +5907,11 @@
     },
     "ErrorModel": {
       "type": "object",
+      "description": "The model of the error",
       "properties": {
         "Error": {
           "type": "object",
+          "description": "The error",
           "properties": {
             "Code": {
               "type": "string"
