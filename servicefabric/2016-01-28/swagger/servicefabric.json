@@ -216,6 +216,22 @@
             "required": true
           },
           {
+            "name": "node",
+            "in": "body",
+            "description": "The node",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "description": "The node",
+              "properties": {
+                "deactivationIntent": {
+                  "type": "string",
+                  "enum": ["Pause", "Restart", "RemoveData", "RemoveNode"]
+                }
+              }
+            }
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
