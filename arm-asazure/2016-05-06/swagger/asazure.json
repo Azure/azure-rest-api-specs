@@ -9,7 +9,6 @@
     }
   },
   "host": "management.azure.com",
-  "basePath": "/webapi",
   "schemes": [ "https" ],
   "consumes": [
     "application/json"
@@ -138,8 +137,7 @@
             "schema": { "$ref": "#/definitions/RpProvisionResult" }
           },
           "204": {
-            "description": "No Content",
-            "schema": { "$ref": "#/definitions/RpProvisionResult" }
+            "description": "No Content"
           }
         },
         "x-ms-long-running-operation": true
@@ -187,7 +185,7 @@
       "get": {
         "description": "Gets all the Analysis Services servers for the given resource group",
         "tags": [ "RpProvision" ],
-        "operationId": "RpProvision_GetAllServersForResourceGroupAsync",
+        "operationId": "RpProvision_ListAllServersForResourceGroupAsync",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -230,7 +228,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationstatuses/{operationId}": {
       "get": {
-        "description": "Gets all the Analysis Services servers for the give resource group",
+        "description": "Gets result of the specified operation. The API return the HTTP status code and a response body",
         "tags": [ "RpProxy" ],
         "operationId": "RpProxy_GetOperationStatusAsync",
         "parameters": [
@@ -271,7 +269,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationresults/{operationId}": {
       "get": {
-        "description": "Gets result of the specified operation",
+        "description": "Gets result of the specified operation. The API return only the HTTP status code and does not have a response body",
         "tags": [ "RpProxy" ],
         "operationId": "RpProxy_GetOperationResultAsync",
         "parameters": [
@@ -300,16 +298,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": { "$ref": "#/definitions/OperationDetail" }
+            "description": "OK"
           },
           "202": {
-            "description": "Accepted",
-            "schema": { "$ref": "#/definitions/OperationDetail" }
+            "description": "Accepted"
           },
           "204": {
-            "description": "No Content",
-            "schema": { "$ref": "#/definitions/OperationDetail" }
+            "description": "No Content"
           }
         }
       }
@@ -322,10 +317,12 @@
       "properties": {
         "location": {
           "type": "string",
+          "required":  true,
           "description": "Location of the service"
         },
         "sku": {
           "$ref": "#/definitions/RpSkuTier",
+          "required": true,
           "description": "Server SKU"
         },
         "tags": {
@@ -349,11 +346,29 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Sku name for frontend requests"
+          "enum": [
+            "S1",
+            "S2",
+            "S4"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": false
+          },
+          "required": true,
+          "description": "Name of the Sku level for the server being provisioned."
         },
         "tier": {
           "type": "string",
-          "description": "Tier for frontend requests"
+          "enum": [
+            "Developer",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": false
+          },
+          "description": "Name of the tier to which the Sku applies."
         }
       }
     },
@@ -363,6 +378,7 @@
       "properties": {
         "provisioningState": {
           "type": "string",
+          "readOnly": true,
           "description": "The current state of the provisioning operation"
         },
         "serverFullName": {
@@ -383,7 +399,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "description": "UPN of the user"
+            "description": "UPN of the user. Example johnsmith@contoso.com."
           },
           "description": "Collection of administrator user identities"
         }
@@ -395,10 +411,12 @@
       "properties": {
         "location": {
           "type": "string",
+          "required": true,
           "description": "Location of the Analysis server"
         },
         "sku": {
           "$ref": "#/definitions/RpSkuTier",
+          "required": true,
           "description": "Sku of the Analysis server"
         },
         "tags": {
@@ -495,11 +513,13 @@
         },
         "startTime": {
           "type": "string",
-          "description": "Start time of the operation"
+          "format": "date-time",
+          "description": "The UTC time at which the operation started"
         },
         "endTime": {
           "type": "string",
-          "description": "Completion time of the operation"
+          "format": "date-time",
+          "description": "The UTC time at which the operation ended"
         },
         "error": {
           "$ref": "#/definitions/ExceptionData",
