@@ -1,7 +1,9 @@
-# AutoRest Swagger
+# Creating Swagger (Reference documentation)
 AutoRest is a tool for generating HTTP client libraries from Swagger files. This document explains the conventions 
 and extensions used by AutoRest in processing Swagger to produce client libraries. The Swagger specification can 
 be found at [Swagger RESTful API Documentation Specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md).
+
+This page is intended to serve as reference documentation. If you have any questions about a specific part of a Swagger file or how AutoRest uses it to generate code, this is the correct place.
 
 1. [Swagger](#Swagger)
 2. [Info Object](#InfoObject)
