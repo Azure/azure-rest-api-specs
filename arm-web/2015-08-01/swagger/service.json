@@ -18721,11 +18721,13 @@
         },
         "name": {
           "description": "Name of the virtual network (read-only)",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "type": {
           "description": "Resource type of the virtual network (read-only)",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "subnet": {
           "description": "Subnet within the virtual network",
@@ -19031,47 +19033,56 @@
       "properties": {
         "name": {
           "$ref": "#/definitions/ResourceMetricName",
-          "description": "Name of metric"
+          "description": "Name of metric",
+          "readOnly": true
         },
         "unit": {
           "description": "Metric unit",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "timeGrain": {
           "description": "Metric granularity. E.g PT1H, PT5M, P1D",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "startTime": {
           "format": "date-time",
           "description": "Metric start time",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "endTime": {
           "format": "date-time",
           "description": "Metric end time",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "resourceId": {
           "description": "Metric resource Id",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "id": {
           "description": "Resource Id",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "metricValues": {
           "description": "Metric values",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceMetricValue"
-          }
+          },
+          "readOnly": true
         },
         "properties": {
           "description": "Properties",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceMetricProperty"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -19081,11 +19092,13 @@
       "properties": {
         "value": {
           "description": "metric name value",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "localizedValue": {
           "description": "Localized metric name value",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -19095,39 +19108,46 @@
       "properties": {
         "timestamp": {
           "description": "Value timestamp",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "average": {
           "format": "float",
           "description": "Value average",
-          "type": "number"
+          "type": "number",
+          "readOnly": true
         },
         "minimum": {
           "format": "float",
           "description": "Value minimum",
-          "type": "number"
+          "type": "number",
+          "readOnly": true
         },
         "maximum": {
           "format": "float",
           "description": "Value maximum",
-          "type": "number"
+          "type": "number",
+          "readOnly": true
         },
         "total": {
           "format": "float",
           "description": "Value total",
-          "type": "number"
+          "type": "number",
+          "readOnly": true
         },
         "count": {
           "format": "float",
           "description": "Value count",
-          "type": "number"
+          "type": "number",
+          "readOnly": true
         },
         "properties": {
           "description": "Properties",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceMetricProperty"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -19409,21 +19429,18 @@
           "properties": {
             "state": {
               "description": "State of the web app",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "hostNames": {
               "description": "Hostnames associated with web app",
               "type": "array",
               "items": {
                 "type": "string"
-              },
-              "readOnly": true
+              }
             },
             "repositorySiteName": {
               "description": "Name of repository site",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "usageState": {
               "description": "State indicating whether web app has exceeded its quota usage",
@@ -19432,7 +19449,6 @@
                 "Exceeded"
               ],
               "type": "string",
-              "readOnly": true,
               "x-ms-enum": {
                 "name": "UsageState",
                 "modelAsString": false
@@ -19447,8 +19463,7 @@
               "type": "array",
               "items": {
                 "type": "string"
-              },
-              "readOnly": true
+              }
             },
             "availabilityState": {
               "description": "Management information availability state for the web app. Possible values are Normal or Limited. \r\n            Normal means that the site is running correctly and that management information for the site is available. \r\n            Limited means that only partial management information for the site is available and that detailed site information is unavailable.",
@@ -19458,7 +19473,6 @@
                 "DisasterRecoveryMode"
               ],
               "type": "string",
-              "readOnly": true,
               "x-ms-enum": {
                 "name": "SiteAvailabilityState",
                 "modelAsString": false
@@ -19481,8 +19495,7 @@
             "lastModifiedTimeUtc": {
               "format": "date-time",
               "description": "Last time web app was modified in UTC",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "siteConfig": {
               "$ref": "#/definitions/SiteConfig",
@@ -19493,23 +19506,19 @@
               "type": "array",
               "items": {
                 "type": "string"
-              },
-              "readOnly": true
+              }
             },
             "premiumAppDeployed": {
               "description": "If set indicates whether web app is deployed as a premium app",
-              "type": "boolean",
-              "readOnly": true
+              "type": "boolean"
             },
             "scmSiteAlsoStopped": {
               "description": "If set indicates whether to stop SCM (KUDU) site when the web app is stopped. Default is false.",
-              "type": "boolean",
-              "readOnly": true
+              "type": "boolean"
             },
             "targetSwapSlot": {
               "description": "Read-only property that specifies which slot this app will swap into",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "hostingEnvironmentProfile": {
               "$ref": "#/definitions/HostingEnvironmentProfile",
@@ -19537,8 +19546,7 @@
             },
             "outboundIpAddresses": {
               "description": "List of comma separated IP addresses that this web app uses for outbound connections. Those can be used when configuring firewall rules for databases accessed by this web app.",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "containerSize": {
               "format": "int32",
@@ -19558,8 +19566,7 @@
             "maxNumberOfWorkers": {
               "format": "int32",
               "description": "Maximum number of workers\r\n            This only applies to function container",
-              "type": "integer",
-              "readOnly": true
+              "type": "integer"
             },
             "cloningInfo": {
               "$ref": "#/definitions/CloningInfo",
@@ -19567,18 +19574,15 @@
             },
             "resourceGroup": {
               "description": "Resource group web app belongs to",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "isDefaultContainer": {
               "description": "Site is a default container",
-              "type": "boolean",
-              "readOnly": true
+              "type": "boolean"
             },
             "defaultHostName": {
               "description": "Default hostname of the web app",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             }
           },
           "x-ms-client-flatten": true
@@ -20004,6 +20008,9 @@
     },
     "CloningInfo": {
       "description": "Represents information needed for cloning operation",
+      "required": [
+        "sourceWebAppId"
+      ],
       "type": "object",
       "properties": {
         "correlationId": {
@@ -20390,6 +20397,9 @@
     },
     "IpSecurityRestriction": {
       "description": "Represents an ip security restriction on a web app.",
+      "required": [
+        "ipAddress"
+      ],
       "type": "object",
       "properties": {
         "ipAddress": {
@@ -20623,8 +20633,7 @@
         "properties": {
           "description": "ARM envelope properties",
           "required": [
-            "status",
-            "name"
+            "status"
           ],
           "properties": {
             "name": {
@@ -20642,7 +20651,6 @@
                 "Pending"
               ],
               "type": "string",
-              "readOnly": true,
               "x-ms-enum": {
                 "name": "StatusOptions",
                 "modelAsString": false
@@ -20650,8 +20658,7 @@
             },
             "subscription": {
               "description": "App Service Plan Subscription",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "adminSiteName": {
               "description": "App Service Plan administration site",
@@ -20664,13 +20671,11 @@
             "maximumNumberOfWorkers": {
               "format": "int32",
               "description": "Maximum number of instances that can be assigned to this App Service Plan",
-              "type": "integer",
-              "readOnly": true
+              "type": "integer"
             },
             "geoRegion": {
               "description": "Geographical location for the App Service Plan",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "perSiteScaling": {
               "description": "If True apps assigned to this App Service Plan can be scaled independently\r\n            If False apps assigned to this App Service Plan will scale to all instances of the plan",
@@ -20679,13 +20684,11 @@
             "numberOfSites": {
               "format": "int32",
               "description": "Number of web apps assigned to this App Service Plan",
-              "type": "integer",
-              "readOnly": true
+              "type": "integer"
             },
             "resourceGroup": {
               "description": "Resource group of the serverfarm",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             }
           },
           "x-ms-client-flatten": true
@@ -21396,7 +21399,16 @@
         },
         "type": {
           "description": "Resource type used for verification",
-          "type": "string"
+          "enum": [
+            "Site",
+            "Slot",
+            "HostingEnvironment"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CheckNameResourceTypes",
+            "modelAsString": true
+          }
         },
         "isFqdn": {
           "description": "Is fully qualified domain name",
@@ -21431,7 +21443,15 @@
         },
         "type": {
           "description": "Resource type used for verification",
-          "type": "string"
+          "enum": [
+            "ServerFarm",
+            "Site"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ValidateResourceTypes",
+            "modelAsString": true
+          }
         },
         "location": {
           "description": "Expected location of the resource",
@@ -22477,26 +22497,22 @@
             "deletedTimestamp": {
               "format": "date-time",
               "description": "Time when the site was deleted",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "state": {
               "description": "State of the web app",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "hostNames": {
               "description": "Hostnames associated with web app",
               "type": "array",
               "items": {
                 "type": "string"
-              },
-              "readOnly": true
+              }
             },
             "repositorySiteName": {
               "description": "Name of repository site",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "usageState": {
               "description": "State indicating whether web app has exceeded its quota usage",
@@ -22505,7 +22521,6 @@
                 "Exceeded"
               ],
               "type": "string",
-              "readOnly": true,
               "x-ms-enum": {
                 "name": "UsageState",
                 "modelAsString": false
@@ -22520,8 +22535,7 @@
               "type": "array",
               "items": {
                 "type": "string"
-              },
-              "readOnly": true
+              }
             },
             "availabilityState": {
               "description": "Management information availability state for the web app. Possible values are Normal or Limited. \r\n            Normal means that the site is running correctly and that management information for the site is available. \r\n            Limited means that only partial management information for the site is available and that detailed site information is unavailable.",
@@ -22531,7 +22545,6 @@
                 "DisasterRecoveryMode"
               ],
               "type": "string",
-              "readOnly": true,
               "x-ms-enum": {
                 "name": "SiteAvailabilityState",
                 "modelAsString": false
@@ -22554,8 +22567,7 @@
             "lastModifiedTimeUtc": {
               "format": "date-time",
               "description": "Last time web app was modified in UTC",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "siteConfig": {
               "$ref": "#/definitions/SiteConfig",
@@ -22566,23 +22578,19 @@
               "type": "array",
               "items": {
                 "type": "string"
-              },
-              "readOnly": true
+              }
             },
             "premiumAppDeployed": {
               "description": "If set indicates whether web app is deployed as a premium app",
-              "type": "boolean",
-              "readOnly": true
+              "type": "boolean"
             },
             "scmSiteAlsoStopped": {
               "description": "If set indicates whether to stop SCM (KUDU) site when the web app is stopped. Default is false.",
-              "type": "boolean",
-              "readOnly": true
+              "type": "boolean"
             },
             "targetSwapSlot": {
               "description": "Read-only property that specifies which slot this app will swap into",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "hostingEnvironmentProfile": {
               "$ref": "#/definitions/HostingEnvironmentProfile",
@@ -22610,8 +22618,7 @@
             },
             "outboundIpAddresses": {
               "description": "List of comma separated IP addresses that this web app uses for outbound connections. Those can be used when configuring firewall rules for databases accessed by this web app.",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "containerSize": {
               "format": "int32",
@@ -22631,8 +22638,7 @@
             "maxNumberOfWorkers": {
               "format": "int32",
               "description": "Maximum number of workers\r\n            This only applies to function container",
-              "type": "integer",
-              "readOnly": true
+              "type": "integer"
             },
             "cloningInfo": {
               "$ref": "#/definitions/CloningInfo",
@@ -22640,18 +22646,15 @@
             },
             "resourceGroup": {
               "description": "Resource group web app belongs to",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "isDefaultContainer": {
               "description": "Site is a default container",
-              "type": "boolean",
-              "readOnly": true
+              "type": "boolean"
             },
             "defaultHostName": {
               "description": "Default hostname of the web app",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             }
           },
           "x-ms-client-flatten": true
