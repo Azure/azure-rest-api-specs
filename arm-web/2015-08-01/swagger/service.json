@@ -420,7 +420,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CertificateOrderCertificateCollection"
+              "$ref": "#/definitions/AppServiceCertificateCollection"
             }
           }
         },
@@ -759,8 +759,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get properties of hostingEnvironment (App Service Environment).",
-        "description": "Get properties of hostingEnvironment (App Service Environment).",
+        "summary": "Get properties of AppServiceEnvironment (App Service Environment).",
+        "description": "Get properties of AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_Get",
         "consumes": [],
         "produces": [
@@ -780,7 +780,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -795,7 +795,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/HostingEnvironment"
+              "$ref": "#/definitions/AppServiceEnvironment"
             }
           }
         },
@@ -805,8 +805,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Create or update a hostingEnvironment (App Service Environment).",
-        "description": "Create or update a hostingEnvironment (App Service Environment).",
+        "summary": "Create or update a AppServiceEnvironment (App Service Environment).",
+        "description": "Create or update a AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_CreateOrUpdate",
         "consumes": [
           "application/json",
@@ -830,17 +830,17 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
           {
             "name": "hostingEnvironmentEnvelope",
             "in": "body",
-            "description": "Properties of hostingEnvironment (App Service Environment)",
+            "description": "Properties of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HostingEnvironment"
+              "$ref": "#/definitions/AppServiceEnvironment"
             }
           },
           {
@@ -854,13 +854,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/HostingEnvironment"
+              "$ref": "#/definitions/AppServiceEnvironment"
             }
           },
           "202": {
             "description": "Operation is in progress",
             "schema": {
-              "$ref": "#/definitions/HostingEnvironment"
+              "$ref": "#/definitions/AppServiceEnvironment"
             }
           },
           "400": {
@@ -880,8 +880,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Delete a hostingEnvironment (App Service Environment).",
-        "description": "Delete a hostingEnvironment (App Service Environment).",
+        "summary": "Delete a AppServiceEnvironment (App Service Environment).",
+        "description": "Delete a AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_Delete",
         "consumes": [],
         "produces": [
@@ -901,14 +901,14 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
           {
             "name": "forceDelete",
             "in": "query",
-            "description": "Delete even if the hostingEnvironment (App Service Environment) contains resources",
+            "description": "Delete even if the AppServiceEnvironment (App Service Environment) contains resources",
             "type": "boolean"
           },
           {
@@ -950,8 +950,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get diagnostic information for hostingEnvironment (App Service Environment).",
-        "description": "Get diagnostic information for hostingEnvironment (App Service Environment).",
+        "summary": "Get diagnostic information for AppServiceEnvironment (App Service Environment).",
+        "description": "Get diagnostic information for AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_ListDiagnostics",
         "consumes": [],
         "produces": [
@@ -971,7 +971,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -1001,8 +1001,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get diagnostic information for hostingEnvironment (App Service Environment).",
-        "description": "Get diagnostic information for hostingEnvironment (App Service Environment).",
+        "summary": "Get diagnostic information for AppServiceEnvironment (App Service Environment).",
+        "description": "Get diagnostic information for AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_GetDiagnosticsItem",
         "consumes": [],
         "produces": [
@@ -1022,7 +1022,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -1056,8 +1056,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get used, available, and total worker capacity for hostingEnvironment (App Service Environment).",
-        "description": "Get used, available, and total worker capacity for hostingEnvironment (App Service Environment).",
+        "summary": "Get used, available, and total worker capacity for AppServiceEnvironment (App Service Environment).",
+        "description": "Get used, available, and total worker capacity for AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_ListCapacities",
         "consumes": [],
         "produces": [
@@ -1075,7 +1075,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -1105,8 +1105,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get IP addresses assigned to the hostingEnvironment (App Service Environment).",
-        "description": "Get IP addresses assigned to the hostingEnvironment (App Service Environment).",
+        "summary": "Get IP addresses assigned to the AppServiceEnvironment (App Service Environment).",
+        "description": "Get IP addresses assigned to the AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_ListVips",
         "consumes": [],
         "produces": [
@@ -1126,7 +1126,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -1195,8 +1195,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Reboots all machines in a hostingEnvironment (App Service Environment).",
-        "description": "Reboots all machines in a hostingEnvironment (App Service Environment).",
+        "summary": "Reboots all machines in a AppServiceEnvironment (App Service Environment).",
+        "description": "Reboots all machines in a AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_Reboot",
         "consumes": [],
         "produces": [
@@ -1216,7 +1216,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -1252,8 +1252,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "List all currently running operations on the hostingEnvironment (App Service Environment)",
-        "description": "List all currently running operations on the hostingEnvironment (App Service Environment)",
+        "summary": "List all currently running operations on the AppServiceEnvironment (App Service Environment)",
+        "description": "List all currently running operations on the AppServiceEnvironment (App Service Environment)",
         "operationId": "AppServiceEnvironments_ListOperations",
         "consumes": [],
         "produces": [
@@ -1273,7 +1273,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -1300,8 +1300,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get status of an operation on a hostingEnvironment (App Service Environment).",
-        "description": "Get status of an operation on a hostingEnvironment (App Service Environment).",
+        "summary": "Get status of an operation on a AppServiceEnvironment (App Service Environment).",
+        "description": "Get status of an operation on a AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_GetOperation",
         "consumes": [],
         "produces": [
@@ -1321,7 +1321,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -1367,8 +1367,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get global metrics of hostingEnvironment (App Service Environment).",
-        "description": "Get global metrics of hostingEnvironment (App Service Environment).",
+        "summary": "Get global metrics of AppServiceEnvironment (App Service Environment).",
+        "description": "Get global metrics of AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_ListMetrics",
         "consumes": [],
         "produces": [
@@ -1386,7 +1386,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -1428,8 +1428,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get global metric definitions of hostingEnvironment (App Service Environment).",
-        "description": "Get global metric definitions of hostingEnvironment (App Service Environment).",
+        "summary": "Get global metric definitions of AppServiceEnvironment (App Service Environment).",
+        "description": "Get global metric definitions of AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_ListMetricDefinitions",
         "consumes": [],
         "produces": [
@@ -1449,7 +1449,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -1476,8 +1476,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get global usages of hostingEnvironment (App Service Environment).",
-        "description": "Get global usages of hostingEnvironment (App Service Environment).",
+        "summary": "Get global usages of AppServiceEnvironment (App Service Environment).",
+        "description": "Get global usages of AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_ListUsages",
         "consumes": [],
         "produces": [
@@ -1495,7 +1495,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -1531,8 +1531,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get metrics for a multiRole pool of a hostingEnvironment (App Service Environment).",
-        "description": "Get metrics for a multiRole pool of a hostingEnvironment (App Service Environment).",
+        "summary": "Get metrics for a multiRole pool of a AppServiceEnvironment (App Service Environment).",
+        "description": "Get metrics for a multiRole pool of a AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_ListMultiRoleMetrics",
         "consumes": [],
         "produces": [
@@ -1550,7 +1550,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -1610,8 +1610,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get metrics for a worker pool of a hostingEnvironment (App Service Environment).",
-        "description": "Get metrics for a worker pool of a hostingEnvironment (App Service Environment).",
+        "summary": "Get metrics for a worker pool of a AppServiceEnvironment (App Service Environment).",
+        "description": "Get metrics for a worker pool of a AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_ListWebWorkerMetrics",
         "consumes": [],
         "produces": [
@@ -1629,7 +1629,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -1678,8 +1678,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get metric definitions for a multiRole pool of a hostingEnvironment (App Service Environment).",
-        "description": "Get metric definitions for a multiRole pool of a hostingEnvironment (App Service Environment).",
+        "summary": "Get metric definitions for a multiRole pool of a AppServiceEnvironment (App Service Environment).",
+        "description": "Get metric definitions for a multiRole pool of a AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_ListMultiRoleMetricDefinitions",
         "consumes": [],
         "produces": [
@@ -1697,7 +1697,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -1727,8 +1727,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get metric definitions for a worker pool of a hostingEnvironment (App Service Environment).",
-        "description": "Get metric definitions for a worker pool of a hostingEnvironment (App Service Environment).",
+        "summary": "Get metric definitions for a worker pool of a AppServiceEnvironment (App Service Environment).",
+        "description": "Get metric definitions for a worker pool of a AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_ListWebWorkerMetricDefinitions",
         "consumes": [],
         "produces": [
@@ -1746,7 +1746,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -1783,8 +1783,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get usages for a multiRole pool of a hostingEnvironment (App Service Environment).",
-        "description": "Get usages for a multiRole pool of a hostingEnvironment (App Service Environment).",
+        "summary": "Get usages for a multiRole pool of a AppServiceEnvironment (App Service Environment).",
+        "description": "Get usages for a multiRole pool of a AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_ListMultiRoleUsages",
         "consumes": [],
         "produces": [
@@ -1802,7 +1802,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -1832,8 +1832,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get usages for a worker pool of a hostingEnvironment (App Service Environment).",
-        "description": "Get usages for a worker pool of a hostingEnvironment (App Service Environment).",
+        "summary": "Get usages for a worker pool of a AppServiceEnvironment (App Service Environment).",
+        "description": "Get usages for a worker pool of a AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_ListWebWorkerUsages",
         "consumes": [],
         "produces": [
@@ -1851,7 +1851,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -1888,8 +1888,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get all sites on the hostingEnvironment (App Service Environment).",
-        "description": "Get all sites on the hostingEnvironment (App Service Environment).",
+        "summary": "Get all sites on the AppServiceEnvironment (App Service Environment).",
+        "description": "Get all sites on the AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_ListWebApps",
         "consumes": [],
         "produces": [
@@ -1907,7 +1907,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -1943,8 +1943,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get all serverfarms (App Service Plans) on the hostingEnvironment (App Service Environment).",
-        "description": "Get all serverfarms (App Service Plans) on the hostingEnvironment (App Service Environment).",
+        "summary": "Get all serverfarms (App Service Plans) on the AppServiceEnvironment (App Service Environment).",
+        "description": "Get all serverfarms (App Service Plans) on the AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_ListAppServicePlans",
         "consumes": [],
         "produces": [
@@ -1962,7 +1962,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -2011,7 +2011,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -2062,7 +2062,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -2112,7 +2112,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -2183,7 +2183,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -2232,7 +2232,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -2283,7 +2283,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -2340,7 +2340,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -2418,7 +2418,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -2455,8 +2455,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get metrics for a specific instance of a worker pool of a hostingEnvironment (App Service Environment).",
-        "description": "Get metrics for a specific instance of a worker pool of a hostingEnvironment (App Service Environment).",
+        "summary": "Get metrics for a specific instance of a worker pool of a AppServiceEnvironment (App Service Environment).",
+        "description": "Get metrics for a specific instance of a worker pool of a AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_ListWorkerPoolInstanceMetrics",
         "consumes": [],
         "produces": [
@@ -2476,7 +2476,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -2529,8 +2529,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get metric definitions for a specific instance of a worker pool of a hostingEnvironment (App Service Environment).",
-        "description": "Get metric definitions for a specific instance of a worker pool of a hostingEnvironment (App Service Environment).",
+        "summary": "Get metric definitions for a specific instance of a worker pool of a AppServiceEnvironment (App Service Environment).",
+        "description": "Get metric definitions for a specific instance of a worker pool of a AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_ListWorkerPoolInstanceMetricDefinitions",
         "consumes": [],
         "produces": [
@@ -2550,7 +2550,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -2591,8 +2591,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get metrics for a specific instance of a multiRole pool of a hostingEnvironment (App Service Environment).",
-        "description": "Get metrics for a specific instance of a multiRole pool of a hostingEnvironment (App Service Environment).",
+        "summary": "Get metrics for a specific instance of a multiRole pool of a AppServiceEnvironment (App Service Environment).",
+        "description": "Get metrics for a specific instance of a multiRole pool of a AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_ListMultiRolePoolInstanceMetrics",
         "consumes": [],
         "produces": [
@@ -2612,7 +2612,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -2652,8 +2652,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get metric definitions for a specific instance of a multiRole pool of a hostingEnvironment (App Service Environment).",
-        "description": "Get metric definitions for a specific instance of a multiRole pool of a hostingEnvironment (App Service Environment).",
+        "summary": "Get metric definitions for a specific instance of a multiRole pool of a AppServiceEnvironment (App Service Environment).",
+        "description": "Get metric definitions for a specific instance of a multiRole pool of a AppServiceEnvironment (App Service Environment).",
         "operationId": "AppServiceEnvironments_ListMultiRolePoolInstanceMetricDefinitions",
         "consumes": [],
         "produces": [
@@ -2673,7 +2673,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -2707,8 +2707,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Suspends the hostingEnvironment.",
-        "description": "Suspends the hostingEnvironment.",
+        "summary": "Suspends the AppServiceEnvironment.",
+        "description": "Suspends the AppServiceEnvironment.",
         "operationId": "AppServiceEnvironments_Suspend",
         "consumes": [],
         "produces": [
@@ -2726,7 +2726,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -2763,8 +2763,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Resumes the hostingEnvironment.",
-        "description": "Resumes the hostingEnvironment.",
+        "summary": "Resumes the AppServiceEnvironment.",
+        "description": "Resumes the AppServiceEnvironment.",
         "operationId": "AppServiceEnvironments_Resume",
         "consumes": [],
         "produces": [
@@ -2782,7 +2782,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
+            "description": "Name of AppServiceEnvironment (App Service Environment)",
             "required": true,
             "type": "string"
           },
@@ -5361,10 +5361,10 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/geoRegions": {
-      "post": {
+      "get": {
         "summary": "Gets list of available geo regions",
         "description": "Gets list of available geo regions",
-        "operationId": "ListGeoRegions",
+        "operationId": "GetSubscriptionGeoRegions",
         "consumes": [],
         "produces": [
           "application/json",
@@ -5376,12 +5376,6 @@
             "in": "query",
             "description": "Filter only to regions that support this sku",
             "type": "string"
-          },
-          {
-            "name": "linuxWorkersEnabled",
-            "in": "query",
-            "description": "Filter only to regions that support linux workers",
-            "type": "boolean"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -6338,57 +6332,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/sourcecontrols/{sourceControlType}": {
-      "put": {
-        "summary": "Updates source control token",
-        "description": "Updates source control token",
-        "operationId": "UpdateSourceControl",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "sourceControlType",
-            "in": "path",
-            "description": "Type of source control",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "requestMessage",
-            "in": "body",
-            "description": "Source control token information",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SourceControl"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SourceControl"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/recommendations": {
       "get": {
         "tags": [
@@ -6772,14 +6715,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web.Admin/environments/{environmentName}/usage": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/hybridConnectionNamespaces/{namespaceName}/relays/{relayName}": {
       "get": {
         "tags": [
-          "Usage"
+          "WebApps"
         ],
-        "summary": "Returns usage records for specified subscription and resource groups",
-        "description": "Returns usage records for specified subscription and resource groups",
-        "operationId": "Usage_GetByResourceGroup",
+        "summary": "Retrieves a specific Service Bus Hybrid Connection used by this Web App.",
+        "description": "Retrieves a specific Service Bus Hybrid Connection used by this Web App.",
+        "operationId": "WebApps_GetHybridConnectionSlot",
         "consumes": [],
         "produces": [
           "application/json",
@@ -6791,31 +6734,184 @@
           {
             "name": "resourceGroupName",
             "in": "path",
-            "description": "Name of resource group",
+            "description": "The resource group name",
             "required": true,
             "type": "string"
           },
           {
-            "name": "environmentName",
+            "name": "name",
             "in": "path",
-            "description": "Environment name",
+            "description": "The name of the web app",
             "required": true,
             "type": "string"
           },
           {
-            "name": "lastId",
-            "in": "query",
-            "description": "Last marker that was returned from the batch",
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The namespace for this hybrid connection",
             "required": true,
             "type": "string"
           },
           {
-            "name": "batchSize",
-            "in": "query",
-            "description": "size of the batch to be returned.",
+            "name": "relayName",
+            "in": "path",
+            "description": "The relay name for this hybrid connection",
             "required": true,
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "The name of the slot for the web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridConnection"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Creates a new Hybrid Connection using a Service Bus relay",
+        "description": "Creates a new Hybrid Connection using a Service Bus relay",
+        "operationId": "WebApps_CreateOrUpdateHybridConnectionSlot",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The namespace for this hybrid connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "relayName",
+            "in": "path",
+            "description": "The relay name for this hybrid connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "The details of the hybrid connection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HybridConnection"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "The name of the slot for the web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridConnection"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Removes a Hybrid Connection from this site.",
+        "description": "Removes a Hybrid Connection from this site.",
+        "operationId": "WebApps_DeleteHybridConnectionSlot",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The namespace for this hybrid connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "relayName",
+            "in": "path",
+            "description": "The relay name for this hybrid connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "The name of the slot for the web app.",
+            "required": true,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -6829,6 +6925,354 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Creates a new Hybrid Connection using a Service Bus relay",
+        "description": "Creates a new Hybrid Connection using a Service Bus relay",
+        "operationId": "WebApps_UpdateHybridConnectionSlot",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The namespace for this hybrid connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "relayName",
+            "in": "path",
+            "description": "The relay name for this hybrid connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "The details of the hybrid connection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HybridConnection"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "The name of the slot for the web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridConnection"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hybridConnectionNamespaces/{namespaceName}/relays/{relayName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Retrieves a specific Service Bus Hybrid Connection used by this Web App.",
+        "description": "Retrieves a specific Service Bus Hybrid Connection used by this Web App.",
+        "operationId": "WebApps_GetHybridConnection",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The namespace for this hybrid connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "relayName",
+            "in": "path",
+            "description": "The relay name for this hybrid connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridConnection"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Creates a new Hybrid Connection using a Service Bus relay",
+        "description": "Creates a new Hybrid Connection using a Service Bus relay",
+        "operationId": "WebApps_CreateOrUpdateHybridConnection",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The namespace for this hybrid connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "relayName",
+            "in": "path",
+            "description": "The relay name for this hybrid connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "The details of the hybrid connection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HybridConnection"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridConnection"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Removes a Hybrid Connection from this site.",
+        "description": "Removes a Hybrid Connection from this site.",
+        "operationId": "WebApps_DeleteHybridConnection",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The namespace for this hybrid connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "relayName",
+            "in": "path",
+            "description": "The relay name for this hybrid connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Creates a new Hybrid Connection using a Service Bus relay",
+        "description": "Creates a new Hybrid Connection using a Service Bus relay",
+        "operationId": "WebApps_UpdateHybridConnection",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The namespace for this hybrid connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "relayName",
+            "in": "path",
+            "description": "The relay name for this hybrid connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "The details of the hybrid connection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HybridConnection"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridConnection"
             }
           }
         },
@@ -9585,12 +10029,6 @@
             "type": "string"
           },
           {
-            "name": "includeSiteTypes",
-            "in": "query",
-            "description": "Types of apps included in the response",
-            "type": "string"
-          },
-          {
             "name": "includeSlots",
             "in": "query",
             "description": "Whether or not to include deployments slots in results",
@@ -9615,214 +10053,6 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}": {
-      "get": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Get details of a web app",
-        "description": "Get details of a web app",
-        "operationId": "WebApps_Get",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "propertiesToInclude",
-            "in": "query",
-            "description": "Additional web app properties included in the response",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Site"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Creates a new web app or modifies an existing web app.",
-        "description": "Creates a new web app or modifies an existing web app.",
-        "operationId": "WebApps_CreateOrUpdate",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteEnvelope",
-            "in": "body",
-            "description": "Details of web app if it exists already",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Site"
-            }
-          },
-          {
-            "name": "skipDnsRegistration",
-            "in": "query",
-            "description": "If true web app hostname is not registered with DNS on creation. This parameter is\r\n            only used for app creation",
-            "type": "string"
-          },
-          {
-            "name": "skipCustomDomainVerification",
-            "in": "query",
-            "description": "If true, custom (non *.azurewebsites.net) domains associated with web app are not verified.",
-            "type": "string"
-          },
-          {
-            "name": "forceDnsRegistration",
-            "in": "query",
-            "description": "If true, web app hostname is force registered with DNS",
-            "type": "string"
-          },
-          {
-            "name": "ttlInSeconds",
-            "in": "query",
-            "description": "Time to live in seconds for web app's default domain name",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Site"
-            }
-          },
-          "202": {
-            "description": "Asynchronous operation in progress",
-            "schema": {
-              "$ref": "#/definitions/Site"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Deletes a web app",
-        "description": "Deletes a web app",
-        "operationId": "WebApps_Delete",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "deleteMetrics",
-            "in": "query",
-            "description": "If true, web app metrics are also deleted",
-            "type": "string"
-          },
-          {
-            "name": "deleteEmptyServerFarm",
-            "in": "query",
-            "description": "If true and App Service Plan is empty after web app deletion, App Service Plan is also deleted",
-            "type": "string"
-          },
-          {
-            "name": "skipDnsRegistration",
-            "in": "query",
-            "description": "If true, DNS registration is skipped",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}": {
@@ -9938,19 +10168,19 @@
             "name": "skipDnsRegistration",
             "in": "query",
             "description": "If true web app hostname is not registered with DNS on creation. This parameter is\r\n            only used for app creation",
-            "type": "string"
+            "type": "boolean"
           },
           {
             "name": "skipCustomDomainVerification",
             "in": "query",
             "description": "If true, custom (non *.azurewebsites.net) domains associated with web app are not verified.",
-            "type": "string"
+            "type": "boolean"
           },
           {
             "name": "forceDnsRegistration",
             "in": "query",
             "description": "If true, web app hostname is force registered with DNS",
-            "type": "string"
+            "type": "boolean"
           },
           {
             "name": "ttlInSeconds",
@@ -10022,19 +10252,19 @@
             "name": "deleteMetrics",
             "in": "query",
             "description": "If true, web app metrics are also deleted",
-            "type": "string"
+            "type": "boolean"
           },
           {
             "name": "deleteEmptyServerFarm",
             "in": "query",
             "description": "If true and App Service Plan is empty after web app deletion, App Service Plan is also deleted",
-            "type": "string"
+            "type": "boolean"
           },
           {
             "name": "skipDnsRegistration",
             "in": "query",
             "description": "If true, DNS registration is skipped",
-            "type": "string"
+            "type": "boolean"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -10054,15 +10284,71 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/iscloneable": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get details of a web app",
+        "description": "Get details of a web app",
+        "operationId": "WebApps_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "propertiesToInclude",
+            "in": "query",
+            "description": "Additional web app properties included in the response",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Site"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
         "tags": [
           "WebApps"
         ],
         "summary": "Creates a new web app or modifies an existing web app.",
         "description": "Creates a new web app or modifies an existing web app.",
-        "operationId": "WebApps_IsCloneable",
-        "consumes": [],
+        "operationId": "WebApps_CreateOrUpdate",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
         "produces": [
           "application/json",
           "text/json",
@@ -10085,6 +10371,39 @@
             "type": "string"
           },
           {
+            "name": "siteEnvelope",
+            "in": "body",
+            "description": "Details of web app if it exists already",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Site"
+            }
+          },
+          {
+            "name": "skipDnsRegistration",
+            "in": "query",
+            "description": "If true web app hostname is not registered with DNS on creation. This parameter is\r\n            only used for app creation",
+            "type": "boolean"
+          },
+          {
+            "name": "skipCustomDomainVerification",
+            "in": "query",
+            "description": "If true, custom (non *.azurewebsites.net) domains associated with web app are not verified.",
+            "type": "boolean"
+          },
+          {
+            "name": "forceDnsRegistration",
+            "in": "query",
+            "description": "If true, web app hostname is force registered with DNS",
+            "type": "boolean"
+          },
+          {
+            "name": "ttlInSeconds",
+            "in": "query",
+            "description": "Time to live in seconds for web app's default domain name",
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -10095,7 +10414,78 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SiteCloneability"
+              "$ref": "#/definitions/Site"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress",
+            "schema": {
+              "$ref": "#/definitions/Site"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Deletes a web app",
+        "description": "Deletes a web app",
+        "operationId": "WebApps_Delete",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deleteMetrics",
+            "in": "query",
+            "description": "If true, web app metrics are also deleted",
+            "type": "boolean"
+          },
+          {
+            "name": "deleteEmptyServerFarm",
+            "in": "query",
+            "description": "If true and App Service Plan is empty after web app deletion, App Service Plan is also deleted",
+            "type": "boolean"
+          },
+          {
+            "name": "skipDnsRegistration",
+            "in": "query",
+            "description": "If true, DNS registration is skipped",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
             }
           }
         },
@@ -10136,6 +10526,54 @@
             "name": "slot",
             "in": "path",
             "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteCloneability"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/iscloneable": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Creates a new web app or modifies an existing web app.",
+        "description": "Creates a new web app or modifies an existing web app.",
+        "operationId": "WebApps_IsCloneable",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the web app",
             "required": true,
             "type": "string"
           },
@@ -10210,14 +10648,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Asynchronous operation in progress",
+          "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/RecoverResponse"
             }
-          },
-          "404": {
-            "description": "Web app not found"
           }
         },
         "deprecated": false,
@@ -10284,67 +10719,15 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Asynchronous operation in progress",
+          "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/RecoverResponse"
             }
-          },
-          "404": {
-            "description": "Web app not found"
           }
         },
         "deprecated": false,
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/snapshots": {
-      "get": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Returns all Snapshots to the user.",
-        "description": "Returns all Snapshots to the user.",
-        "operationId": "WebApps_ListSnapshots",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Website Name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SnapshotCollection"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/snapshots": {
@@ -10403,6 +10786,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/snapshots": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Returns all Snapshots to the user.",
+        "description": "Returns all Snapshots to the user.",
+        "operationId": "WebApps_ListSnapshots",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Website Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SnapshotCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/deletedSites": {
       "get": {
         "tags": [
@@ -10428,12 +10860,6 @@
             "name": "propertiesToInclude",
             "in": "query",
             "description": "Additional web app properties included in the response",
-            "type": "string"
-          },
-          {
-            "name": "includeSiteTypes",
-            "in": "query",
-            "description": "Types of apps included in the response",
             "type": "string"
           },
           {
@@ -10622,6 +11048,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deployments": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List deployments",
+        "description": "List deployments",
+        "operationId": "WebApps_ListDeployments",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeploymentCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/deployments": {
       "get": {
         "tags": [
@@ -10717,55 +11192,6 @@
             "name": "instanceId",
             "in": "path",
             "description": "Id of web app instance",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/DeploymentCollection"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deployments": {
-      "get": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "List deployments",
-        "description": "List deployments",
-        "operationId": "WebApps_ListDeployments",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
             "required": true,
             "type": "string"
           },
@@ -11780,180 +12206,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hostNameBindings/{hostName}": {
-      "get": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Get web app binding for a hostname",
-        "description": "Get web app binding for a hostname",
-        "operationId": "WebApps_GetHostNameBinding",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "hostName",
-            "in": "path",
-            "description": "Name of host",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HostNameBinding"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Creates a web app hostname binding",
-        "description": "Creates a web app hostname binding",
-        "operationId": "WebApps_CreateOrUpdateHostNameBinding",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "hostName",
-            "in": "path",
-            "description": "Name of host",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "hostNameBinding",
-            "in": "body",
-            "description": "Host name binding information",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/HostNameBinding"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HostNameBinding"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "delete": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Deletes a host name binding",
-        "description": "Deletes a host name binding",
-        "operationId": "WebApps_DeleteHostNameBinding",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "hostName",
-            "in": "path",
-            "description": "Name of host",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/hostNameBindings/{hostName}": {
       "get": {
         "tags": [
@@ -12149,14 +12401,14 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/web": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hostNameBindings/{hostName}": {
       "get": {
         "tags": [
           "WebApps"
         ],
-        "summary": "Gets the configuration of the web app",
-        "description": "Gets the configuration of the web app",
-        "operationId": "WebApps_GetConfiguration",
+        "summary": "Get web app binding for a hostname",
+        "description": "Get web app binding for a hostname",
+        "operationId": "WebApps_GetHostNameBinding",
         "consumes": [],
         "produces": [
           "application/json",
@@ -12180,6 +12432,13 @@
             "type": "string"
           },
           {
+            "name": "hostName",
+            "in": "path",
+            "description": "Name of host",
+            "required": true,
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -12190,7 +12449,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SiteConfig"
+              "$ref": "#/definitions/HostNameBinding"
             }
           }
         },
@@ -12200,9 +12459,9 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Update the configuration of web app",
-        "description": "Update the configuration of web app",
-        "operationId": "WebApps_CreateOrUpdateConfiguration",
+        "summary": "Creates a web app hostname binding",
+        "description": "Creates a web app hostname binding",
+        "operationId": "WebApps_CreateOrUpdateHostNameBinding",
         "consumes": [
           "application/json",
           "text/json",
@@ -12230,12 +12489,19 @@
             "type": "string"
           },
           {
-            "name": "siteConfig",
+            "name": "hostName",
+            "in": "path",
+            "description": "Name of host",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostNameBinding",
             "in": "body",
-            "description": "Request body that contains the configuraiton setting for the web app",
+            "description": "Host name binding information",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SiteConfig"
+              "$ref": "#/definitions/HostNameBinding"
             }
           },
           {
@@ -12249,24 +12515,20 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SiteConfig"
+              "$ref": "#/definitions/HostNameBinding"
             }
           }
         },
         "deprecated": false
       },
-      "patch": {
+      "delete": {
         "tags": [
           "WebApps"
         ],
-        "summary": "Update the configuration of web app",
-        "description": "Update the configuration of web app",
-        "operationId": "WebApps_UpdateConfiguration",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
+        "summary": "Deletes a host name binding",
+        "description": "Deletes a host name binding",
+        "operationId": "WebApps_DeleteHostNameBinding",
+        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -12289,13 +12551,11 @@
             "type": "string"
           },
           {
-            "name": "siteConfig",
-            "in": "body",
-            "description": "Request body that contains the configuraiton setting for the web app",
+            "name": "hostName",
+            "in": "path",
+            "description": "Name of host",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/SiteConfig"
-            }
+            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -12308,7 +12568,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SiteConfig"
+              "$ref": "#/definitions/Object"
             }
           }
         },
@@ -12483,6 +12743,172 @@
             "description": "Name of web app slot. If not specified then will default to production slot.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteConfig"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/web": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the configuration of the web app",
+        "description": "Gets the configuration of the web app",
+        "operationId": "WebApps_GetConfiguration",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteConfig"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Update the configuration of web app",
+        "description": "Update the configuration of web app",
+        "operationId": "WebApps_CreateOrUpdateConfiguration",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteConfig",
+            "in": "body",
+            "description": "Request body that contains the configuraiton setting for the web app",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteConfig"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteConfig"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Update the configuration of web app",
+        "description": "Update the configuration of web app",
+        "operationId": "WebApps_UpdateConfiguration",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteConfig",
+            "in": "body",
+            "description": "Request body that contains the configuraiton setting for the web app",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteConfig"
+            }
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -12954,54 +13380,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/appsettings/list": {
-      "post": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets the application settings of web app",
-        "description": "Gets the application settings of web app",
-        "operationId": "WebApps_ListApplicationSettings",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/StringDictionary"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/appsettings/list": {
       "post": {
         "tags": [
@@ -13036,6 +13414,54 @@
             "name": "slot",
             "in": "path",
             "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StringDictionary"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/appsettings/list": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the application settings of web app",
+        "description": "Gets the application settings of web app",
+        "operationId": "WebApps_ListApplicationSettings",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
             "required": true,
             "type": "string"
           },
@@ -13186,54 +13612,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/connectionstrings/list": {
-      "post": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets the connection strings associated with web app",
-        "description": "Gets the connection strings associated with web app",
-        "operationId": "WebApps_ListConnectionStrings",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ConnectionStringDictionary"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/connectionstrings/list": {
       "post": {
         "tags": [
@@ -13268,6 +13646,54 @@
             "name": "slot",
             "in": "path",
             "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectionStringDictionary"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/connectionstrings/list": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the connection strings associated with web app",
+        "description": "Gets the connection strings associated with web app",
+        "operationId": "WebApps_ListConnectionStrings",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
             "required": true,
             "type": "string"
           },
@@ -13418,54 +13844,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/authsettings/list": {
-      "post": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets the Authentication / Authorization settings associated with web app",
-        "description": "Gets the Authentication / Authorization settings associated with web app",
-        "operationId": "WebApps_ListAuthSettings",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SiteAuthSettings"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/authsettings/list": {
       "post": {
         "tags": [
@@ -13500,6 +13878,54 @@
             "name": "slot",
             "in": "path",
             "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteAuthSettings"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/authsettings/list": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the Authentication / Authorization settings associated with web app",
+        "description": "Gets the Authentication / Authorization settings associated with web app",
+        "operationId": "WebApps_ListAuthSettings",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
             "required": true,
             "type": "string"
           },
@@ -13644,6 +14070,238 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SiteAuthSettings"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/pushsettings/list": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the Push settings associated with web app",
+        "description": "Gets the Push settings associated with web app",
+        "operationId": "WebApps_ListSitePushSettings",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PushSettings"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/pushsettings/list": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the Push settings associated with web app",
+        "description": "Gets the Push settings associated with web app",
+        "operationId": "WebApps_ListSitePushSettingsSlot",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PushSettings"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/pushsettings": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates the Push settings associated with web app",
+        "description": "Updates the Push settings associated with web app",
+        "operationId": "WebApps_UpdateSitePushSettings",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pushSettings",
+            "in": "body",
+            "description": "Push settings associated with web app",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PushSettings"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PushSettings"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/pushsettings": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates the Push settings associated with web app",
+        "description": "Updates the Push settings associated with web app",
+        "operationId": "WebApps_UpdateSitePushSettingsSlot",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pushSettings",
+            "in": "body",
+            "description": "Push settings associated with web app",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PushSettings"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PushSettings"
             }
           }
         },
@@ -17325,570 +17983,6 @@
         },
         "deprecated": false
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hybridConnectionNamespaces/{namespaceName}/relays/{relayName}": {
-      "get": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Retrieves a specific Service Bus Hybrid Connection used by this Web App.",
-        "description": "Retrieves a specific Service Bus Hybrid Connection used by this Web App.",
-        "operationId": "WebApps_GetHybridConnection",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The resource group name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The namespace for this hybrid connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "relayName",
-            "in": "path",
-            "description": "The relay name for this hybrid connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HybridConnection"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Creates a new Hybrid Connection using a Service Bus relay",
-        "description": "Creates a new Hybrid Connection using a Service Bus relay",
-        "operationId": "WebApps_CreateOrUpdateHybridConnection",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The resource group name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The namespace for this hybrid connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "relayName",
-            "in": "path",
-            "description": "The relay name for this hybrid connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionEnvelope",
-            "in": "body",
-            "description": "The details of the hybrid connection",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/HybridConnection"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HybridConnection"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "delete": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Removes a Hybrid Connection from this site.",
-        "description": "Removes a Hybrid Connection from this site.",
-        "operationId": "WebApps_DeleteHybridConnection",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The resource group name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The namespace for this hybrid connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "relayName",
-            "in": "path",
-            "description": "The relay name for this hybrid connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "patch": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Creates a new Hybrid Connection using a Service Bus relay",
-        "description": "Creates a new Hybrid Connection using a Service Bus relay",
-        "operationId": "WebApps_UpdateHybridConnection",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The resource group name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The namespace for this hybrid connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "relayName",
-            "in": "path",
-            "description": "The relay name for this hybrid connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionEnvelope",
-            "in": "body",
-            "description": "The details of the hybrid connection",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/HybridConnection"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HybridConnection"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/hybridConnectionNamespaces/{namespaceName}/relays/{relayName}": {
-      "get": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Retrieves a specific Service Bus Hybrid Connection used by this Web App.",
-        "description": "Retrieves a specific Service Bus Hybrid Connection used by this Web App.",
-        "operationId": "WebApps_GetHybridConnectionSlot",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The resource group name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The namespace for this hybrid connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "relayName",
-            "in": "path",
-            "description": "The relay name for this hybrid connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "The name of the slot for the web app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HybridConnection"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Creates a new Hybrid Connection using a Service Bus relay",
-        "description": "Creates a new Hybrid Connection using a Service Bus relay",
-        "operationId": "WebApps_CreateOrUpdateHybridConnectionSlot",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The resource group name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The namespace for this hybrid connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "relayName",
-            "in": "path",
-            "description": "The relay name for this hybrid connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionEnvelope",
-            "in": "body",
-            "description": "The details of the hybrid connection",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/HybridConnection"
-            }
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "The name of the slot for the web app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HybridConnection"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "delete": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Removes a Hybrid Connection from this site.",
-        "description": "Removes a Hybrid Connection from this site.",
-        "operationId": "WebApps_DeleteHybridConnectionSlot",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The resource group name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The namespace for this hybrid connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "relayName",
-            "in": "path",
-            "description": "The relay name for this hybrid connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "The name of the slot for the web app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "patch": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Creates a new Hybrid Connection using a Service Bus relay",
-        "description": "Creates a new Hybrid Connection using a Service Bus relay",
-        "operationId": "WebApps_UpdateHybridConnectionSlot",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The resource group name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The namespace for this hybrid connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "relayName",
-            "in": "path",
-            "description": "The relay name for this hybrid connection",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionEnvelope",
-            "in": "body",
-            "description": "The details of the hybrid connection",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/HybridConnection"
-            }
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "The name of the slot for the web app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HybridConnection"
-            }
-          }
-        },
-        "deprecated": false
-      }
     }
   },
   "definitions": {
@@ -17950,6 +18044,7 @@
                 "KeyVaultDoesNotExist",
                 "KeyVaultSecretDoesNotExist",
                 "UnknownError",
+                "ExternalPrivateKey",
                 "Unknown"
               ],
               "type": "string",
@@ -18168,6 +18263,10 @@
               "format": "date-time",
               "description": "Certificate expiration time",
               "type": "string"
+            },
+            "isPrivateKeyExternal": {
+              "description": "Is Private Key External",
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true
@@ -18251,7 +18350,7 @@
         }
       }
     },
-    "CertificateOrderCertificateCollection": {
+    "AppServiceCertificateCollection": {
       "description": "Collection of certitificateorder certificates",
       "type": "object",
       "properties": {
@@ -18293,6 +18392,14 @@
               "format": "int32",
               "description": "Delay in hours to revoke existing certificate after the new certificate is issued",
               "type": "integer"
+            },
+            "csr": {
+              "description": "Csr to be used for re-key operation",
+              "type": "string"
+            },
+            "isPrivateKeyExternal": {
+              "description": "Should we change the ASC type (from managed private key to external private key and vice versa)",
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true
@@ -18315,6 +18422,14 @@
               "format": "int32",
               "description": "Certificate Key Size",
               "type": "integer"
+            },
+            "csr": {
+              "description": "Csr to be used for re-key operation",
+              "type": "string"
+            },
+            "isPrivateKeyExternal": {
+              "description": "Should we change the ASC type (from managed private key to external private key and vice versa)",
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true
@@ -18391,7 +18506,7 @@
         }
       }
     },
-    "HostingEnvironment": {
+    "AppServiceEnvironment": {
       "description": "Description of an hostingEnvironment (App Service Environment)",
       "type": "object",
       "allOf": [
@@ -18876,7 +18991,7 @@
           "description": "Collection of resources",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/HostingEnvironment"
+            "$ref": "#/definitions/AppServiceEnvironment"
           }
         },
         "nextLink": {
@@ -18955,7 +19070,7 @@
           "description": "Properties",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/KeyValuePair[String,String]"
+            "$ref": "#/definitions/ResourceMetricProperty"
           }
         }
       }
@@ -19011,21 +19126,22 @@
           "description": "Properties",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/KeyValuePair[String,String]"
+            "$ref": "#/definitions/ResourceMetricProperty"
           }
         }
       }
     },
-    "KeyValuePair[String,String]": {
+    "ResourceMetricProperty": {
+      "description": "Resource metric property",
       "type": "object",
       "properties": {
         "key": {
-          "type": "string",
-          "readOnly": true
+          "description": "Key for resource metric property",
+          "type": "string"
         },
         "value": {
-          "type": "string",
-          "readOnly": true
+          "description": "Value of pair",
+          "type": "string"
         }
       }
     },
@@ -20507,7 +20623,8 @@
         "properties": {
           "description": "ARM envelope properties",
           "required": [
-            "status"
+            "status",
+            "name"
           ],
           "properties": {
             "name": {
@@ -22360,7 +22477,8 @@
             "deletedTimestamp": {
               "format": "date-time",
               "description": "Time when the site was deleted",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "state": {
               "description": "State of the web app",
