@@ -1,0 +1,551 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2016-05-06",
+    "title": "AzureAnalysisServices",
+    "description": "The Azure Analysis Services Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete servers",
+    "x-ms-code-generation-settings": {
+      "name": "AzureAnalysisServicesClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [ "https" ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{analysisServerName}": {
+      "get": {
+        "description": "Gets the current state of the specified Analysis Services server",
+        "tags": [ "RpProvision" ],
+        "operationId": "RpProvision_GetServerDetails",
+        "parameters": [
+          {
+            "name": "analysisServerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Name of the Analysis Services server"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/RpProvisionResult" }
+          }
+        }
+      },
+      "put": {
+        "description": "Updates the current state of the specified Analysis Services server as specified by the request body",
+        "tags": [ "RpProvision" ],
+        "operationId": "RpProvision_ProvisionServer",
+        "parameters": [
+          {
+            "name": "provisionRequest",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/RpProvisionRequest" },
+            "description": "Request body for provisioning"
+          },
+          {
+            "name": "analysisServerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Name of the Analysis Services server"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/RpProvisionResult" }
+          },
+          "201": {
+            "description": "InProgress",
+            "schema": { "$ref": "#/definitions/RpProvisionResult" }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "description": "Deletes the specified Analysis Services server.",
+        "tags": [ "RpProvision" ],
+        "operationId": "RpProvision_DeprovisionServer",
+        "parameters": [
+          {
+            "name": "analysisServerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Name of the Analysis Services server"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/RpProvisionResult" }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "description": "Updates the current state of the specified Analysis Services server as specified by the request body",
+        "tags": [ "RpProvision" ],
+        "operationId": "RpProvision_UpdateServerDetails",
+        "parameters": [
+          {
+            "name": "analysisServerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Name of the Analysis Services server"
+          },
+          {
+            "name": "updateRequest",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/RpServerUpdateRequest" },
+            "description": "Request object for updating the server"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/RpProvisionResult" }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers": {
+      "get": {
+        "description": "Gets all the Analysis Services servers for the given resource group",
+        "tags": [ "RpProvision" ],
+        "operationId": "RpProvision_ListServersByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/ProvisionResultList" }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/servers": {
+      "get": {
+        "description": "List all the Analysis Services servers for the given subscription",
+        "tags": [ "RpProvision" ],
+        "operationId": "RpProvision_ListServers",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/ProvisionResultList" }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationstatuses/{operationId}": {
+      "get": {
+        "description": "Gets result of the specified operation. The API return the HTTP status code and a response body",
+        "tags": [ "RpProxy" ],
+        "operationId": "RpProxy_GetOperationStatus",
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Identifier for the operation for which to get status"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Region in which the server operation was executed"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/OperationDetail" }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": { "$ref": "#/definitions/OperationDetail" }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationresults/{operationId}": {
+      "get": {
+        "description": "Gets result of the specified operation. The API return only the HTTP status code and does not have a response body",
+        "tags": [ "RpProxy" ],
+        "operationId": "RpProxy_GetOperationResult",
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Identifier for the operation for which to get status"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "Region in which the server operation was executed"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RpServerUpdateRequest": {
+      "description": "Update request specification",
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location of the service"
+        },
+        "sku": {
+          "$ref": "#/definitions/RpSkuTier",
+          "description": "Server SKU"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "description": "Key value pairs"
+          },
+          "description": "tags associated with analysis server"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RpPropertyBag",
+          "description": "Property bag for resource operation"
+        }
+      }
+    },
+    "RpSkuTier": {
+      "description": "Represents the SKU name and tier",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "S1",
+            "S2",
+            "S4"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": false
+          },
+          "description": "Name of the Sku level for the server being provisioned."
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "Developer",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": false
+          },
+          "description": "Name of the tier to which the Sku applies."
+        }
+      }
+    },
+    "RpPropertyBag": {
+      "description": "Property bag",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The current state of the provisioning operation"
+        },
+        "serverFullName": {
+          "type": "string",
+          "description": "Full URI of the Analysis Server"
+        },
+        "asAdministrators": {
+          "$ref": "#/definitions/RpAsAdministrators",
+          "description": "List of users to be made administrators on the server"
+        }
+      }
+    },
+    "RpAsAdministrators": {
+      "description": "Array of administrator user identities",
+      "type": "object",
+      "properties": {
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "UPN of the user. Example johnsmith@contoso.com."
+          },
+          "description": "Collection of administrator user identities"
+        }
+      }
+    },
+    "RpProvisionRequest": {
+      "description": "Provision request specification",
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location of the Analysis server"
+        },
+        "sku": {
+          "$ref": "#/definitions/RpSkuTier",
+          "description": "Sku of the Analysis server"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "Key value pairs of additional properties that can ebe specified"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RpPropertyBag",
+          "description": "Provision request properties"
+        }
+      }
+    },
+    "RpProvisionResult": {
+      "description": "Provision result specification",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier for the operation"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the operation"
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Type of the resource for Analysis Services"
+        },
+        "location": {
+          "type": "string",
+          "description": "Region in which the server operation was executed"
+        },
+        "sku": {
+          "$ref": "#/definitions/RpSkuTier",
+          "description": "The SKU name and tier"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "description": "Key-value pairs"
+          },
+          "description": "Custom tags specified as Key-value pairs"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RpPropertyBag",
+          "description": "Property bag for server operations"
+        }
+      }
+    },
+    "ProvisionResultList": {
+      "description": "Provision request specification",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/RpProvisionResult" },
+          "description": "The collection of returned provision operation results"
+        }
+      }
+    },
+    "ExceptionData": {
+      "description": "Details of an error in the operation",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed message describing the error"
+        }
+      }
+    },
+    "OperationDetail": {
+      "description": "Details of the operation specified by the operation id",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier for the operation"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the operation"
+        },
+        "status": {
+          "type": "string",
+          "description": "HTTP status code for the operation"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time at which the operation started"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time at which the operation ended"
+        },
+        "error": {
+          "$ref": "#/definitions/ExceptionData",
+          "description": "Object that specifies details of the error"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "A unique identifier of a Microsoft Azure subscription. The subscription id forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Azure Resource group which a given Analysis Services server is part of."
+    }
+  }
+}
