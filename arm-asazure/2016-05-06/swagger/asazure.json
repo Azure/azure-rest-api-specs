@@ -67,7 +67,7 @@
         }
       },
       "put": {
-        "description": "Updates the current state of the specified Analysis Services server as specified by the request body",
+        "description": "Provisions the specified Analysis Services server based on the configuration specified in the request body",
         "tags": [ "RpProvision" ],
         "operationId": "RpProvision_ProvisionServer",
         "parameters": [
@@ -330,8 +330,7 @@
             "description": "Key value pairs"
           },
           "description": "tags associated with analysis server"
-        },
-        "properties": {
+        },        "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/RpPropertyBag",
           "description": "Property bag for resource operation"
@@ -367,7 +366,11 @@
           },
           "description": "Name of the tier to which the Sku applies."
         }
-      }
+      },
+      "required": [
+        "name",
+        "tier"
+      ]
     },
     "RpPropertyBag": {
       "description": "Property bag",
@@ -380,6 +383,7 @@
         },
         "serverFullName": {
           "type": "string",
+          "readOnly": true,
           "description": "Full URI of the Analysis Server"
         },
         "asAdministrators": {
@@ -424,7 +428,11 @@
           "$ref": "#/definitions/RpPropertyBag",
           "description": "Provision request properties"
         }
-      }
+      },
+      "required": [
+        "location", 
+        "sku"
+        ]
     },
     "RpProvisionResult": {
       "description": "Provision result specification",
@@ -474,7 +482,10 @@
           "items": { "$ref": "#/definitions/RpProvisionResult" },
           "description": "The collection of returned provision operation results"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ExceptionData": {
       "description": "Details of an error in the operation",
