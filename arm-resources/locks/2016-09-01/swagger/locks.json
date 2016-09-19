@@ -163,13 +163,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
             }
           },
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
             }
@@ -239,13 +239,10 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "NoContent"
           },
           "200": {
-            "description": ""
-          },
-          "202": {
-            "description": ""
+            "description": "OK"
           }
         }
       }
@@ -283,13 +280,13 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
             }
           },
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
             }
@@ -319,13 +316,10 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "NoContent"
           },
           "200": {
-            "description": ""
-          },
-          "202": {
-            "description": ""
+            "description": "OK"
           }
         }
       },
@@ -352,13 +346,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ManagementLockObject"
-            }
-          },
-          "204": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
             }
@@ -397,13 +385,10 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "NoContent"
           },
           "200": {
-            "description": ""
-          },
-          "202": {
-            "description": ""
+            "description": "OK"
           }
         }
       }
@@ -442,7 +427,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManagementLockListResult"
             }
@@ -518,7 +503,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManagementLockListResult"
             }
@@ -528,39 +513,6 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-odata": "#/definitions/ManagementLockObject"
-      }
-    },
-    "/{nextLink}": {
-      "get": {
-        "tags": [
-          "ManagementLocks"
-        ],
-        "operationId": "ManagementLocks_ListNext",
-        "description": "Get a list of management locks at resource level or below.",
-        "parameters": [
-          {
-            "name": "nextLink",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "NextLink from the previous successful call to List operation.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ManagementLockListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/locks": {
@@ -587,7 +539,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManagementLockListResult"
             }
@@ -675,6 +627,7 @@
           "description": "The owners of the management lock."
         }
       },
+      "required": [ "level" ],
       "description": "The management lock properties."
     },
     "ManagementLockObject": {
@@ -699,6 +652,7 @@
           "description": "The name of the lock."
         }
       },
+      "required": [ "properties" ],
       "description": "Management lock information.",
       "x-ms-azure-resource": true
     },
