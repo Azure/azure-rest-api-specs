@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Media/CheckNameAvailability": {
       "post": {
         "summary": "Check whether the Media Service resource name is available. The name must be globally unique.",
-        "operationId": "MediaService_CheckNameAvailabilty",
+        "operationId": "MediaService_CheckNameAvailability",
         "responses": {
           "200": {
             "description": "OK",
@@ -496,6 +496,10 @@
     },
     "CheckNameAvailabilityInput": {
       "description": "The request body for CheckNameAvailability API.",
+      "required": [
+        "name",
+        "type"
+      ],      
       "properties": {
         "name": {
           "description": "The name of the resource. A name must be globally unique.",
@@ -506,18 +510,30 @@
         },
         "type": {
           "description": "Specifies the type of the resource.",
-          "type": "string"
+          "$ref": "#/definitions/ResourceType"
         }
       }
     },
+    "ResourceType": {
+      "description": "Type of MediaService resource used in CheckNameAvailability.",
+      "readOnly": true,
+      "enum": [
+        "mediaservices"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ResourceType",
+        "modelAsString": false
+      }
+    },    
     "CheckNameAvailabilityOutput": {
       "description": "The response body for CheckNameAvailability API.",
       "properties": {
-        "nameAvailable": {
+        "NameAvailable": {
           "description": "Specifies if the name is available.",
           "type": "boolean"
         },
-        "reason": {
+        "Reason": {
           "description": "Specifies the reason if the name is not available.",
           "type": "string",
           "enum": [
@@ -530,7 +546,7 @@
             "modelAsString": false
           }  
         },
-        "message": {
+        "Message": {
           "description": "Specifies the detailed reason if the name is not available.",
           "type": "string"
         }
