@@ -1,0 +1,285 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-01-01",
+    "title": "RecoveryServicesBackupVaultClient",
+    "x-ms-code-generation-settings": {
+      "internalConstructors": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json",
+    "application/octet-stream"
+  ],
+  "produces": [
+    "application/json",
+    "text/json",
+    "application/octet-stream"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}": {
+      "get": {
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Get the Vault details.",
+        "operationId": "Vaults_Get",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceOutput"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Creates or updates a Recovery Services vault.",
+        "operationId": "Vaults_Create",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "resourceInput",
+            "in": "body",
+            "description": "Vault object to be created.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceOutput"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ResourceOutput"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Deletes a vault.",
+        "operationId": "Vaults_Delete",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "isGlobalRPContext",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "Object": {
+      "description": "Base of all objects.",
+      "type": "object",
+      "properties": {}
+    },
+    "ResourceCollectionOutput": {
+      "description": "The response model for Vault.",
+      "type": "object",
+      "properties": {
+        "Value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceOutput"
+          }
+        }
+      }
+    },
+    "ResourceOutput": {
+      "description": "Resource information, as returned by the resource provider.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Location of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string"
+        },
+        "etag": {
+          "description": "ETag of the Vault.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "The tags attached to the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ResourceProperties"
+        },
+        "id": {
+          "description": "The Id of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the resource.",
+          "type": "string"
+        }
+      }
+    },
+    "Sku": {
+      "description": "Identifies the unique system identifier for each Azure resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceInput": {
+      "description": "Resource information, as sent to the resource provider for the resource-level operations.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Resource location.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ResourceProperties"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Identifies the unique system identifier for each Azure resource."
+        }
+      }
+    },
+    "ResourceProperties": {
+      "description": "Properties of the vault.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning State.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription Id.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group where the recovery services vault is present.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "VaultName": {
+      "name": "vaultName",
+      "in": "path",
+      "description": "The name of the recovery services vault.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account."
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
