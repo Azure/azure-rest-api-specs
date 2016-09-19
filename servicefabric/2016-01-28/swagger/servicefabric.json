@@ -3129,9 +3129,9 @@
         }
       }
     },
-    "NodeHealthReport": {
+    "HealthReport": {
       "type": "object",
-      "description": "The report of the node health",
+      "description": "The report of the health",
       "properties": {
         "SourceId": {
           "type": "string"
@@ -3155,6 +3155,15 @@
           "type": "boolean"
         }
       }
+    },
+    "NodeHealthReport": {
+      "type": "object",
+      "description": "The report of the node health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
+        }
+      ]
     },
     "DisableNode": {
       "type": "object",
@@ -3813,29 +3822,11 @@
     "DeployedApplicationHealthReport": {
       "type": "object",
       "description": "The report of the deployed application health",
-      "properties": {
-        "SourceId": {
-          "type": "string"
-        },
-        "Property": {
-          "type": "string"
-        },
-        "HealthState": {
-          "$ref": "#/definitions/HealthState"
-        },
-        "Description": {
-          "type": "string"
-        },
-        "TimeToLiveInMilliSeconds": {
-          "type": "string"
-        },
-        "SequenceNumber": {
-          "type": "string"
-        },
-        "RemoveWhenExpired": {
-          "type": "boolean"
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
         }
-      }
+      ]
     },
     "DeployedServicePackageHealthState": {
       "type": "object",
@@ -4185,29 +4176,11 @@
     "DeployedServiceHealthReport": {
       "type": "object",
       "description": "The report of the deployed service package health",
-      "properties": {
-        "SourceId": {
-          "type": "string"
-        },
-        "Property": {
-          "type": "string"
-        },
-        "HealthState": {
-          "$ref": "#/definitions/HealthState"
-        },
-        "Description": {
-          "type": "string"
-        },
-        "TimeToLiveInMilliSeconds": {
-          "type": "string"
-        },
-        "SequenceNumber": {
-          "type": "string"
-        },
-        "RemoveWhenExpired": {
-          "type": "boolean"
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
         }
-      }
+      ]
     },
     "ApplicationType": {
       "type": "object",
@@ -4374,29 +4347,11 @@
     "ApplicationHealthReport": {
       "type": "object",
       "description": "The report of the application health",
-      "properties": {
-        "SourceId": {
-          "type": "string"
-        },
-        "Property": {
-          "type": "string"
-        },
-        "HealthState": {
-          "$ref": "#/definitions/HealthState"
-        },
-        "Description": {
-          "type": "string"
-        },
-        "TimeToLiveInMilliSeconds": {
-          "type": "string"
-        },
-        "SequenceNumber": {
-          "type": "string"
-        },
-        "RemoveWhenExpired": {
-          "type": "boolean"
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
         }
-      }
+      ]
     },
     "Service": {
       "type": "object",
@@ -4450,29 +4405,11 @@
     "ServiceHealthReport": {
       "type": "object",
       "description": "The report of the service health",
-      "properties": {
-        "SourceId": {
-          "type": "string"
-        },
-        "Property": {
-          "type": "string"
-        },
-        "HealthState": {
-          "$ref": "#/definitions/HealthState"
-        },
-        "Description": {
-          "type": "string"
-        },
-        "TimeToLiveInMilliSeconds": {
-          "type": "string"
-        },
-        "SequenceNumber": {
-          "type": "string"
-        },
-        "RemoveWhenExpired": {
-          "type": "boolean"
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
         }
-      }
+      ]
     },
     "PartitionDescription": {
       "type": "object",
@@ -5312,29 +5249,11 @@
     "PartitionHealthReport": {
       "type": "object",
       "description": "The report of the partition health",
-      "properties": {
-        "SourceId": {
-          "type": "string"
-        },
-        "Property": {
-          "type": "string"
-        },
-        "HealthState": {
-          "$ref": "#/definitions/HealthState"
-        },
-        "Description": {
-          "type": "string"
-        },
-        "TimeToLiveInMilliSeconds": {
-          "type": "string"
-        },
-        "SequenceNumber": {
-          "type": "string"
-        },
-        "RemoveWhenExpired": {
-          "type": "boolean"
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
         }
-      }
+      ]
     },
     "Replica": {
       "type": "object",
@@ -5387,29 +5306,11 @@
     "ReplicaHealthReport": {
       "type": "object",
       "description": "The report of the replica health",
-      "properties": {
-        "SourceId": {
-          "type": "string"
-        },
-        "Property": {
-          "type": "string"
-        },
-        "HealthState": {
-          "$ref": "#/definitions/HealthState"
-        },
-        "Description": {
-          "type": "string"
-        },
-        "TimeToLiveInMilliSeconds": {
-          "type": "string"
-        },
-        "SequenceNumber": {
-          "type": "string"
-        },
-        "RemoveWhenExpired": {
-          "type": "boolean"
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
         }
-      }
+      ]
     },
     "PartitionHealth": {
       "type": "object",
@@ -5591,29 +5492,11 @@
     "ClusterHealthReport": {
       "type": "object",
       "description": "The report of the cluster health",
-      "properties": {
-        "SourceId": {
-          "type": "string"
-        },
-        "Property": {
-          "type": "string"
-        },
-        "HealthState": {
-          "$ref": "#/definitions/HealthState"
-        },
-        "Description": {
-          "type": "string"
-        },
-        "TimeToLiveInMilliSeconds": {
-          "type": "string"
-        },
-        "SequenceNumber": {
-          "type": "string"
-        },
-        "RemoveWhenExpired": {
-          "type": "boolean"
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
         }
-      }
+      ]
     },
     "ClusterLoadInformation": {
       "type": "object",
