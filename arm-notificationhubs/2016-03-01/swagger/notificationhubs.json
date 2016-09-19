@@ -129,6 +129,52 @@
           }
         }
       },
+	  "patch": {
+		"tags": [
+          "Namespaces"
+        ],
+		"operationId": "Namespaces_Patch",
+		"description": "Patches the existing namespace",
+		"parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespacePatchParameters"
+            },
+            "description": "Parameters supplied to create a Namespace Resource."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+		"responses": {
+			"200": {
+				"description": "Namespace is Create/Update",
+				"schema": {
+					"$ref": "#/definitions/NamespaceResource"
+				}
+			}
+		}
+	  },
       "delete": {
         "tags": [
           "Namespaces"
@@ -1315,6 +1361,21 @@
       ],
       "description": "Parameters supplied to the CreateOrUpdate Namespace operation."
     },
+    "NamespacePatchParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NamespaceProperties",
+          "description": "Properties of the Namespace."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Parameters supplied to the Patch Namespace operation."
+    },
     "NamespaceResource": {
       "properties": {
         "properties": {
@@ -1757,7 +1818,6 @@
           "description": "Resource Id"
         },
         "name": {
-          "readOnly": true,
           "type": "string",
           "description": "Resource name"
         },
@@ -1776,7 +1836,11 @@
             "type": "string"
           },
           "description": "Resource tags"
-        }
+        },
+		"sku": {
+		  "$ref": "#/definitions/Sku",
+		   "description": "The sku of the created namespace"
+		}
       },
       "required": [
         "location"
@@ -1791,7 +1855,32 @@
         }
       },
       "x-ms-azure-resource": true
-    }
+    },
+	"Sku": {
+	 "properties": {
+	 "name": {
+		"type":"string",
+		"description": "Name of the notification hub sku"
+	 },
+	 "tier": {
+		"type":"string",
+		"description":"Name of the notification hub tier"
+	 },
+	 "size": {
+		"type":"string",
+		"description":""
+	 },
+	 "family": {
+		"type":"string",
+		"description":""
+	 },
+	 "capacity": {
+		"type":"integer",
+		"description":""
+	 }
+	},
+	"description":"The Sku description for a namespace"
+  }
   },
   "parameters": {
     "SubscriptionIdParameter": {
