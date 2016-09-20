@@ -56,7 +56,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deployment to be deleted."
+            "description": "The name of the deployment to be deleted.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -97,7 +100,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deployment."
+            "description": "The name of the deployment.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -137,7 +143,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deployment."
+            "description": "The name of the deployment.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "name": "parameters",
@@ -193,7 +202,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deployment."
+            "description": "The name of the deployment.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -235,7 +247,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deployment."
+            "description": "The name of the deployment.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -274,7 +289,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deployment."
+            "description": "The name of the deployment.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "name": "parameters",
@@ -331,7 +349,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deployment."
+            "description": "The name of the deployment.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1123,7 +1144,8 @@
           "202": {
             "description": "Accepted"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "put": {
         "tags": [
@@ -1204,8 +1226,12 @@
             "schema": {
               "$ref": "#/definitions/GenericResource"
             }
+          },
+          "202": {
+            "description": "Accepted"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "get": {
         "tags": [
@@ -1341,7 +1367,8 @@
           "202": {
             "description": "Accepted"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "put": {
         "tags": [
@@ -1387,7 +1414,11 @@
             "schema": {
               "$ref": "#/definitions/GenericResource"
             }
-          }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "x-ms-long-running-operation": true
         }
       },
       "get": {
@@ -1624,7 +1655,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deployment."
+            "description": "The name of the deployment.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "name": "operationId",
@@ -1673,7 +1707,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deployment."
+            "description": "The name of the deployment.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "name": "$top",
@@ -1846,14 +1883,17 @@
     "ResourceManagementErrorWithDetails": {
       "properties": {
         "code": {
+          "readOnly": true,
           "type": "string",
           "description": "The error code returned from the server."
         },
         "message": {
+          "readOnly": true,
           "type": "string",
           "description": "The error message returned from the server."
         },
         "target": {
+          "readOnly": true,
           "type": "string",
           "description": "The target of the error."
         },
@@ -1966,6 +2006,7 @@
     "Provider": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "The provider id."
         },
@@ -1974,10 +2015,12 @@
           "description": "The namespace of the provider."
         },
         "registrationState": {
+          "readOnly": true,
           "type": "string",
           "description": "The registration state of the provider."
         },
         "resourceTypes": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/ProviderResourceType"
@@ -2031,14 +2074,17 @@
     "DeploymentPropertiesExtended": {
       "properties": {
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "The state of the provisioning."
         },
         "correlationId": {
+          "readOnly": true,
           "type": "string",
           "description": "The correlation ID of the deployment."
         },
         "timestamp": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "The timestamp of the template deployment."
@@ -2139,6 +2185,7 @@
           "description": "The list of deployments."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The URL to get the next set of results."
         }
@@ -2155,6 +2202,7 @@
           "description": "The list of resource providers."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The URL to get the next set of results."
         }
@@ -2173,7 +2221,8 @@
         },
         "kind": {
           "type": "string",
-          "description": "The kind of the resource."
+          "description": "The kind of the resource.",
+          "pattern": "^[-\\w\\._,\\(\\)]+$"
         },
         "managedBy": {
           "type": "string",
@@ -2282,6 +2331,7 @@
           "description": "The list of resources."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The URL to get the next set of results."
         }
@@ -2347,6 +2397,7 @@
           "description": "The list of resource groups."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The URL to get the next set of results."
         }
@@ -2452,6 +2503,7 @@
           "description": "The list of tags."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The URL to get the next set of results."
         }
@@ -2489,27 +2541,33 @@
     "DeploymentOperationProperties": {
       "properties": {
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "The state of the provisioning."
         },
         "timestamp": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "The date and time of the operation."
         },
         "serviceRequestId": {
+          "readOnly": true,
           "type": "string",
           "description": "Deployment operation service request id."
         },
         "statusCode": {
+          "readOnly": true,
           "type": "string",
           "description": "Operation status code."
         },
         "statusMessage": {
+          "readOnly": true,
           "type": "object",
           "description": "Operation status message."
         },
         "targetResource": {
+          "readOnly": true,
           "$ref": "#/definitions/TargetResource",
           "description": "The target resource."
         },
@@ -2527,10 +2585,12 @@
     "DeploymentOperation": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "Full deployment operation id."
         },
         "operationId": {
+          "readOnly": true,
           "type": "string",
           "description": "Deployment operation id."
         },
@@ -2551,6 +2611,7 @@
           "description": "The list of deployments."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The URL to get the next set of results."
         }
