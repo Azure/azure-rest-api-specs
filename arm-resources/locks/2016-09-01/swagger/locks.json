@@ -553,45 +553,6 @@
     }
   },
   "definitions": {
-    "DeploymentExtendedFilter": {
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "description": "The provisioning state."
-        }
-      },
-      "description": "Deployment filter."
-    },
-    "GenericResourceFilter": {
-      "properties": {
-        "resourceType": {
-          "type": "string",
-          "description": "The resource type."
-        },
-        "tagname": {
-          "type": "string",
-          "description": "The tag name."
-        },
-        "tagvalue": {
-          "type": "string",
-          "description": "The tag value."
-        }
-      },
-      "description": "Resource filter."
-    },
-    "ResourceGroupFilter": {
-      "properties": {
-        "tagName": {
-          "type": "string",
-          "description": "The tag name."
-        },
-        "tagValue": {
-          "type": "string",
-          "description": "The tag value."
-        }
-      },
-      "description": "Resource group filter."
-    },
     "ManagementLockOwner": {
       "properties": {
         "applicationId": {
@@ -672,49 +633,6 @@
       },
       "description": "List of management locks."
     },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
-      "x-ms-azure-resource": true
-    }
   },
   "parameters": {
     "SubscriptionIdParameter": {
