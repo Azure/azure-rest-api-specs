@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2015-01-01",
+    "version": "2016-06-01",
     "title": "RecoveryServicesBackupVaultClient",
     "x-ms-code-generation-settings": {
       "internalConstructors": true
@@ -12,17 +12,13 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json",
-    "application/octet-stream"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json",
-    "application/octet-stream"
+    "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}": {
       "get": {
         "tags": [
           "Vaults"
@@ -42,13 +38,16 @@
           },
           {
             "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ResourceOutput"
+              "$ref": "#/definitions/Vault"
             }
           }
         },
@@ -79,12 +78,15 @@
             "$ref": "#/parameters/VaultName"
           },
           {
-            "name": "resourceInput",
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "vaultCreationArgs",
             "in": "body",
             "description": "Vault object to be created.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ResourceInput"
+              "$ref": "#/definitions/VaultCreationArgs"
             }
           }
         ],
@@ -92,13 +94,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ResourceOutput"
+              "$ref": "#/definitions/Vault"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/ResourceOutput"
+              "$ref": "#/definitions/Vault"
             }
           }
         },
@@ -125,6 +127,9 @@
             "$ref": "#/parameters/VaultName"
           },
           {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
             "name": "isGlobalRPContext",
             "in": "query",
             "required": false,
@@ -138,6 +143,39 @@
         },
         "deprecated": false
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults": {
+      "get": {
+        "tags": [
+          "Vaults"
+        ],
+        "summary": "Retrieve a list of Vaults.",
+        "operationId": "Vaults_ListByResourceGroup",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VaultList"
+            }
+          }
+        },
+        "deprecated": false
+      }
     }
   },
   "definitions": {
@@ -146,19 +184,19 @@
       "type": "object",
       "properties": {}
     },
-    "ResourceCollectionOutput": {
+    "VaultList": {
       "description": "The response model for Vault.",
       "type": "object",
       "properties": {
         "Value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ResourceOutput"
+            "$ref": "#/definitions/Vault"
           }
         }
       }
     },
-    "ResourceOutput": {
+    "Vault": {
       "description": "Resource information, as returned by the resource provider.",
       "type": "object",
       "properties": {
@@ -182,7 +220,7 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/ResourceProperties"
+          "$ref": "#/definitions/VaultProperties"
         },
         "id": {
           "description": "The Id of the resource.",
@@ -204,7 +242,7 @@
         }
       }
     },
-    "ResourceInput": {
+    "VaultCreationArgs": {
       "description": "Resource information, as sent to the resource provider for the resource-level operations.",
       "type": "object",
       "properties": {
@@ -213,7 +251,7 @@
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/ResourceProperties"
+          "$ref": "#/definitions/VaultProperties"
         },
         "sku": {
           "$ref": "#/definitions/Sku",
@@ -221,7 +259,7 @@
         }
       }
     },
-    "ResourceProperties": {
+    "VaultProperties": {
       "description": "Properties of the vault.",
       "type": "object",
       "properties": {
