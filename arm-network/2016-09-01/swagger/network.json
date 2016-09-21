@@ -4347,60 +4347,60 @@
     }
   },
   "definitions": {
-	"ApplicationGatewayBackendHealth": {
-      "properties": {	  
-		"BackendAddressPools": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationGatewayBackendHealthPool"
-		  }
-		}
-      },		
-      "description": "List of backendhealth pools."
-	},	
-	"ApplicationGatewayBackendHealthPool": {
+	  "ApplicationGatewayBackendHealth": {
+	    "properties": {
+	      "BackendAddressPools": {
+	        "type": "array",
+	        "items": {
+	          "$ref": "#/definitions/ApplicationGatewayBackendHealthPool"
+	        }
+	      }
+	    },
+	    "description": "List of backendhealth pools."
+	  },	
+	  "ApplicationGatewayBackendHealthPool": {
       "properties": {
-		"BackendAddressPool": {
+        "BackendAddressPool": {
           "$ref": "#/definitions/ApplicationGatewayBackendAddressPool",
           "description": "Reference of application gateway backend address pool resource."
         },	  
-		"BackendHttpSettingsCollection": {
+        "BackendHttpSettingsCollection": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayBackendHealthHttpSettings"
           },
-          "description": "List of application gateway backendhealth http settings."
-		}
+        "description": "List of application gateway backendhealth http settings."
+        }
       },
       "description": "Application gateway backendhealth pool."
-	},	  
-	"ApplicationGatewayBackendHealthHttpSettings": {
+    },
+    "ApplicationGatewayBackendHealthHttpSettings": {
       "properties": {
-		"BackendHttpSettings": {
+        "BackendHttpSettings": {
           "$ref": "#/definitions/ApplicationGatewayBackendHttpSettings",
           "description": "Reference of application gateway backend http settings resource."
         },	  
-		"Servers": {
+        "Servers": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayBackendHealthServer"
           },
-          "description": "List of application gateway backendhealth servers."
-		}
+        "description": "List of application gateway backendhealth servers."
+        }
       },
       "description": "Application gateway backendhealth http settings."
-	},	
-	"ApplicationGatewayBackendHealthServer": {
+    },	
+    "ApplicationGatewayBackendHealthServer": {
       "properties": {
         "Address": {
-          "type": "string",
-          "description": "IP address or FQDN of backend server"
+        "type": "string",
+        "description": "IP address or FQDN of backend server"
         },	  
-		"IpConfiguration": {
+        "IpConfiguration": {
           "$ref": "#/definitions/SubResource",
           "description": "Reference of IP configuration of backend server."
         },	  
-		"Health": {
+        "Health": {
           "type": "string",
           "description": "Health of backend server",
           "enum": [
@@ -4416,7 +4416,7 @@
         }
       },	
       "description": "Application gateway backendhealth http settings."
-	},  
+    },  
     "ApplicationGatewaySku": {
       "properties": {
         "name": {
