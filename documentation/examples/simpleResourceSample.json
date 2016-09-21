@@ -1,296 +1,306 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "SimpleResourceSample",
-        "description": "A simple canonical ARM resource sample",
-        "version": "2016-01-01"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SwaggerSample/sampleResources/{sampleResourceName}": {
-            "put": {
-                "tags": [
-                    "SwaggerSample"
-                ],
-                "operationId": "SampleResources_CreateOrUpdate",
-                "description": "Create an instance of your resource type. The CreateOrUpdate suffix is used because there is no PATCH operation for this resource. Instead PUT is used for both create an update",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SampleResourceNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "schema": {
-                            "$ref": "#/definitions/SampleResource"
-                        },
-                        "required": true,
-                        "description": "Parameters used to create the sample resource"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The created resource.",
-                        "schema": {
-                            "$ref": "#/definitions/SampleResource"
-                        }
-                    },
-                    "201": {
-                        "description": "SampleResource created. If present for a long running operation, the return value should have a status field indicating the resources status",
-                        "schema": {
-                            "$ref": "#/definitions/SampleResource"
-                        }
-                    },
-                    "202": {
-                        "description": "Create accepted. We should return no body for 202, but we should have a location header indicating where we can get more info about the progress of the create"
-                    }
-                },
-                "x-ms-long-running-operation": true
+  "swagger": "2.0",
+  "info": {
+    "title": "SimpleResourceSample",
+    "description": "A simple canonical ARM resource sample",
+    "version": "2016-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SwaggerSample/sampleResources/{sampleResourceName}": {
+      "put": {
+        "tags": [
+          "SwaggerSample"
+        ],
+        "operationId": "SampleResources_CreateOrUpdate",
+        "description": "Create an instance of your resource type. The CreateOrUpdate suffix is used because there is no PATCH operation for this resource. Instead PUT is used for both create an update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SampleResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SampleResource"
             },
-            "get": {
-                "tags": [
-                    "SwaggerSample"
-                ],
-                "operationId": "SampleResources_Get",
-                "description": "Get an instance of your sample resource",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SampleResourceNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The specified sample resource",
-                        "schema": {
-                            "$ref": "#/definitions/SampleResource"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "SwaggerSample"
-                ],
-                "operationId": "SampleResources_Delete",
-                "description": "Delete an instance of your sample resource",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SampleResourceNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "202": {
-                        "description": "Accepted"
-                    },
-                    "204": {
-                        "description": "No Content"
-                    }
-                },
-                "x-ms-long-running-operation": true
+            "required": true,
+            "description": "Parameters used to create the sample resource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The created resource.",
+            "schema": {
+              "$ref": "#/definitions/SampleResource"
             }
+          },
+          "201": {
+            "description": "SampleResource created. If present for a long running operation, the return value should have a status field indicating the resources status",
+            "schema": {
+              "$ref": "#/definitions/SampleResource"
+            }
+          },
+          "202": {
+            "description": "Create accepted. We should return no body for 202, but we should have a location header indicating where we can get more info about the progress of the create"
+          }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SwaggerSample/sampleResources": {
-            "get": {
-                "tags": [
-                    "SwaggerSample"
-                ],
-                "operationId": "SampleResources_ListByResourceGroup",
-                "description": "Delete an instance of your sample resource",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The list of sample resources in the given resource group",
-                        "schema": {
-                            "$ref": "#/definitions/SampleResourceList"
-                        }
-                    }
-                }
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "SwaggerSample"
+        ],
+        "operationId": "SampleResources_Get",
+        "description": "Get an instance of your sample resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SampleResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The specified sample resource",
+            "schema": {
+              "$ref": "#/definitions/SampleResource"
             }
-        },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.SwaggerSample/sampleResources": {
-            "get": {
-                "tags": [
-                    "SwaggerSample"
-                ],
-                "operationId": "SampleResources_ListBySubscription",
-                "description": "List all sampleResource instances in the given subscription",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The list of sample resources in the given subscription",
-                        "schema": {
-                            "$ref": "#/definitions/SampleResourceList"
-                        }
-                    }
-                }
-            }
+          }
         }
+      },
+      "delete": {
+        "tags": [
+          "SwaggerSample"
+        ],
+        "operationId": "SampleResources_Delete",
+        "description": "Delete an instance of your sample resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SampleResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     },
-    "definitions": {
-        "Resource": {
-            "description": "Common resource definition. TODO: move to external reference/x-swagger common definition",
-            "properties": {
-                "id": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource Id"
-                },
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource name"
-                },
-                "type": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource type"
-                },
-                "location": {
-                    "type": "string",
-                    "description": "Resource location"
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags"
-                }
-            },
-            "required": [
-                "location"
-            ],
-            "x-ms-azure-resource": true
-        },
-        "SampleResourceProperties": {
-            "description": "The property bag defined by my resource type. Corresponds to the 'properties' attribute for the common resource type definition",
-            "properties": {
-                "sampleSize": {
-                    "type": "integer",
-                    "description": "A hypothetical size. Here to illustrate how to handle resource specific read/write properties"
-                },
-                "provisioningState": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "The provisioning state for this resource. Here to illustrate how to handle server generated (readOnly=true) properties"
-                }
-            },
-            "required": [
-                "sampleSize"
-            ]
-        },
-        "SampleResource": {
-            "description": "The (very simple) example resource type definition",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ],
-            "properties": {
-                "properties": {
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/SampleResourceProperties"
-                }
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SwaggerSample/sampleResources": {
+      "get": {
+        "tags": [
+          "SwaggerSample"
+        ],
+        "operationId": "SampleResources_ListByResourceGroup",
+        "description": "Delete an instance of your sample resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of sample resources in the given resource group",
+            "schema": {
+              "$ref": "#/definitions/SampleResourceList"
             }
+          }
         },
-        "SampleResourceList": {
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/SampleResource"
-                    },
-                    "description": "The list of sample resources"
-                }
-            },
-            "description": "The SampleResource list operation response."
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
+      }
     },
-    "parameters": {
-        "SampleResourceNameParameter": {
-            "name": "sampleResourceName",
-            "in": "path",
-            "type": "string",
-            "required": true,
-            "pattern": "[a-zA-Z]+",
-            "description": "The common definition that includes a sample constraint on out resource type's name so you don't have to specify that everywhere.",
-            "x-ms-parameter-location": "method"
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SwaggerSample/sampleResources": {
+      "get": {
+        "tags": [
+          "SwaggerSample"
+        ],
+        "operationId": "SampleResources_List",
+        "description": "List all sampleResource instances in the given subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of sample resources in the given subscription",
+            "schema": {
+              "$ref": "#/definitions/SampleResourceList"
+            }
+          }
         },
-        "ResourceGroupNameParameter": {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "pattern": "[a-zA-Z]+",
-            "maxLength": 42,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription. TODO: Move to common definitions"
-        },
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. TODO: Move to common definitions"
-        },
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version."
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
+      }
     }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "Common resource definition. TODO: move to external reference/x-swagger common definition",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "SampleResourceProperties": {
+      "description": "The property bag defined by my resource type. Corresponds to the 'properties' attribute for the common resource type definition",
+      "properties": {
+        "sampleSize": {
+          "type": "integer",
+          "description": "A hypothetical size. Here to illustrate how to handle resource specific read/write properties"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state for this resource. Here to illustrate how to handle server generated (readOnly=true) properties"
+        }
+      },
+      "required": [
+        "sampleSize"
+      ]
+    },
+    "SampleResource": {
+      "description": "The (very simple) example resource type definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SampleResourceProperties"
+        }
+      }
+    },
+    "SampleResourceList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SampleResource"
+          },
+          "description": "The list of sample resources"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "the uri to fetch the next page of sampleResources"
+        }
+      },
+      "description": "The SampleResource list operation response."
+    }
+  },
+  "parameters": {
+    "SampleResourceNameParameter": {
+      "name": "sampleResourceName",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "pattern": "[a-zA-Z]+",
+      "description": "The common definition that includes a sample constraint on out resource type's name so you don't have to specify that everywhere.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "pattern": "[a-zA-Z]+",
+      "maxLength": 42,
+      "type": "string",
+      "description": "The name of the resource group within the user's subscription. TODO: Move to common definitions"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. TODO: Move to common definitions"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
 }
