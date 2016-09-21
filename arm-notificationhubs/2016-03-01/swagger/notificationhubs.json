@@ -129,13 +129,13 @@
           }
         }
       },
-	  "patch": {
-		"tags": [
+      "patch": {
+        "tags": [
           "Namespaces"
         ],
-		"operationId": "Namespaces_Patch",
-		"description": "Patches the existing namespace",
-		"parameters": [
+        "operationId": "Namespaces_Patch",
+        "description": "Patches the existing namespace",
+        "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
@@ -166,15 +166,15 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
-		"responses": {
-			"200": {
-				"description": "Namespace is Create/Update",
-				"schema": {
-					"$ref": "#/definitions/NamespaceResource"
-				}
-			}
-		}
-	  },
+        "responses": {
+          "200": {
+            "description": "Namespace is Updated",
+            "schema": {
+              "$ref": "#/definitions/NamespaceResource"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Namespaces"
@@ -1363,17 +1363,18 @@
     },
     "NamespacePatchParameters": {
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NamespaceProperties",
-          "description": "Properties of the Namespace."
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the created namespace"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "description": "Parameters supplied to the Patch Namespace operation."
     },
     "NamespaceResource": {
@@ -1414,7 +1415,7 @@
     },
     "SharedAccessAuthorizationRuleCreateOrUpdateParameters": {
       "properties": {
-        "properties": {          
+        "properties": {
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties",
           "description": "Properties of the Namespace AuthorizationRules."
         }
@@ -1837,10 +1838,10 @@
           },
           "description": "Resource tags"
         },
-		"sku": {
-		  "$ref": "#/definitions/Sku",
-		   "description": "The sku of the created namespace"
-		}
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the created namespace"
+        }
       },
       "required": [
         "location"
@@ -1856,31 +1857,42 @@
       },
       "x-ms-azure-resource": true
     },
-	"Sku": {
-	 "properties": {
-	 "name": {
-		"type":"string",
-		"description": "Name of the notification hub sku"
-	 },
-	 "tier": {
-		"type":"string",
-		"description":"Name of the notification hub tier"
-	 },
-	 "size": {
-		"type":"string",
-		"description":""
-	 },
-	 "family": {
-		"type":"string",
-		"description":""
-	 },
-	 "capacity": {
-		"type":"integer",
-		"description":""
-	 }
-	},
-	"description":"The Sku description for a namespace"
-  }
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the notification hub sku",
+          "enum": [
+            "Free",
+            "free",
+            "Basic",
+            "basic",
+            "Standard",
+            "standard"
+          ]
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier of particular sku"
+        },
+        "size": {
+          "type": "string",
+          "description": "The Sku size"
+        },
+        "family": {
+          "type": "string",
+          "description": "The Sku Family"
+        },
+        "capacity": {
+          "type": "integer",
+          "description": "The capacity of the resource"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The Sku description for a namespace"
+    }
   },
   "parameters": {
     "SubscriptionIdParameter": {
