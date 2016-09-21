@@ -48,7 +48,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "The created resource.",
                         "schema": {
                             "$ref": "#/definitions/SampleResource"
                         }
@@ -60,7 +60,7 @@
                         }
                     },
                     "202": {
-                        "description": "Create accepted. We should return no body for 202"
+                        "description": "Create accepted. We should return no body for 202, but we should have a location header indicating where we can get more info about the progress of the create"
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -87,7 +87,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "A single resource",
+                        "description": "The specified sample resource",
                         "schema": {
                             "$ref": "#/definitions/SampleResource"
                         }
@@ -145,7 +145,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "The list of sample resources in the given resource group",
                         "schema": {
                             "$ref": "#/definitions/SampleResourceList"
                         }
@@ -170,7 +170,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "The list of sample resources in the given subscription",
                         "schema": {
                             "$ref": "#/definitions/SampleResourceList"
                         }
