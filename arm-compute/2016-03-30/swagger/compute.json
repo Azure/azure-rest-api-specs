@@ -958,6 +958,9 @@
             "$ref": "#/parameters/LocationParameter"
           },
           {
+            "$ref": "#/parameters/TagsParameter"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -4584,6 +4587,18 @@
       "required": true,
       "type": "string",
       "description": "The Azure location."
+    },
+    "TagsParameter": {
+      "name": "tags",
+      "in": "body",
+      "required": false,
+      "schema": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "description": "Resource tags."
     }
   }
 }
