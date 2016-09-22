@@ -1528,8 +1528,10 @@
           "$ref": "#/definitions/Resource"
         }
       ],
+      "description": "data model for an arm gateway resource",
       "properties": {
         "properties": {
+          "description": "collection of properties",
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
@@ -1690,6 +1692,7 @@
         },
         "publishedTimeUtc": {
           "type": "string",
+          "format": "date-time",
           "description": "gateway install msi published time"
         }
       }
@@ -1740,6 +1743,7 @@
       }
     },
     "GatewayParameters": {
+      "description": "collection of parameters for operations on a gateway resource",
       "properties": {
         "location": {
           "type": "string",
@@ -1750,6 +1754,7 @@
           "description": "resource tags"
         },
         "properties": {
+          "description": "collection of properties",
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
@@ -1778,6 +1783,7 @@
       ],
       "properties": {
         "properties": {
+          "description": "collection of properties",
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
@@ -1821,6 +1827,7 @@
       }
     },
     "NodeParameters": {
+      "description": "parameter collection for operations on arm node resource",
       "properties": {
         "location": {
           "type": "string",
@@ -1831,6 +1838,7 @@
           "description": "resource tags"
         },
         "properties": {
+          "description": "collection of properties",
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
@@ -1864,6 +1872,7 @@
       ],
       "properties": {
         "properties": {
+          "description": "collection of properties",
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
@@ -1886,8 +1895,10 @@
       }
     },
     "SessionParameters": {
+      "description": "parameter collection for creation and other operations on sessions",
       "properties": {
         "properties": {
+          "description": "collection of properties",
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
@@ -1939,6 +1950,7 @@
       "description": "A powershell session resource (practically equivalent to a runspace instance)",
       "properties": {
         "properties": {
+          "description": "collection of properties",
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
@@ -1976,6 +1988,7 @@
       }
     },
     "PowerShellCommandStatus": {
+      "description": "result status from invoking a powershell command",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2038,6 +2051,7 @@
       "description": "the parameters to a powershell script execution command",
       "properties": {
         "properties": {
+          "description": "collection of properties",
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
@@ -2071,6 +2085,7 @@
       }
     },
     "PowerShellCommandResult": {
+      "description": "results from invoking a powershell command",
       "properties": {
         "messageType": {
           "description": "the type of message",
@@ -2163,6 +2178,7 @@
       }
     },
     "PowerShellTabCompletionParameters": {
+      "description": "collection of parameters for powershell tab completion",
       "properties": {
         "command": {
           "type": "string",
