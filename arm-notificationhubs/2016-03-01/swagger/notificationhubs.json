@@ -1247,18 +1247,43 @@
   "definitions": {
     "CheckAvailabilityParameters": {
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the created namespace"
+        },
         "isAvailiable": {
           "type": "boolean",
           "description": "True if the name is available and can be used to create new Namespace/NotificationHub. Otherwise false."
         }
       },
       "required": [
-        "name"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
+        "name",
+        "location"
       ],
       "description": "Parameters supplied to the Check Name Availability for Namespace and NotificationHubs."
     },
@@ -1819,6 +1844,7 @@
           "description": "Resource Id"
         },
         "name": {
+          "readOnly": true,
           "type": "string",
           "description": "Resource name"
         },
