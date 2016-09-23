@@ -71,10 +71,10 @@
         "operationId": "Servers_Create",
         "parameters": [
           {
-            "name": "provisionRequest",
+            "name": "serverParameters",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/AnalysisServicesResourceCreateParameters" },
+            "schema": { "$ref": "#/definitions/AnalysisServicesResource" },
             "description": "Request body for provisioning"
           },
           {
@@ -130,8 +130,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": { "$ref": "#/definitions/AnalysisServicesResource" }
+            "description": "OK"
           },
           "204": {
             "description": "No Content"
@@ -140,7 +139,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "description": "Updates the current state of the specified Analysis Services server as specified by the request",
+        "description": "Updates the current state of the specified Analysis Services server",
         "tags": [ "Servers" ],
         "operationId": "Servers_Update",
         "parameters": [
@@ -152,10 +151,10 @@
             "description": "Name of the Analysis Services server"
           },
           {
-            "name": "updateRequest",
+            "name": "updateServerParameters",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/AnalysisServicesResourceParameters" },
+            "schema": { "$ref": "#/definitions/AnalysisServicesResourceUpdateParameters" },
             "description": "Request object for updating the server"
           },
           {
@@ -198,6 +197,9 @@
             "description": "OK",
             "schema": { "$ref": "#/definitions/AnalysisServicesResources" }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -205,7 +207,7 @@
       "get": {
         "description": "List all the Analysis Services servers for the given subscription",
         "tags": [ "Servers" ],
-        "operationId": "Servers_ListBySubscription",
+        "operationId": "Servers_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -219,149 +221,15 @@
             "description": "OK",
             "schema": { "$ref": "#/definitions/AnalysisServicesResources" }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationstatuses/{operationId}": {
-      "get": {
-        "description": "Gets status of the specified operation.",
-        "tags": [ "OperationDetails" ],
-        "operationId": "OperationDetails_Get",
-        "parameters": [
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true,
-            "description": "Identifier for the operation for which to get status"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true,
-            "description": "Region in which the server operation was executed"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": { "$ref": "#/definitions/OperationDetail" }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": { "$ref": "#/definitions/OperationDetail" }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationresults/{operationId}": {
-      "get": {
-        "description": "Gets completion result of the specified operation",
-        "tags": [ "OperationResults" ],
-        "operationId": "OperationResults_Get",
-        "parameters": [
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true,
-            "description": "Identifier for the operation for which to get status"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true,
-            "description": "Region in which the server operation was executed"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "No Content"
-          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     }
   },
   "definitions": {
-    "AnalysisServicesResourceCreateParameters": {
-      "description": "Analysis Services creation parameters",
-      "type": "object",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Location of the Analysis Services resource"
-        },
-        "sku": {
-          "$ref": "#/definitions/ResourceSkuTier",
-          "description": "Sku of the Analysis Services resource"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": { "type": "string" },
-          "description": "Key value pairs of additional properties that can ebe specified"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AnalysisServicesResourceProperties",
-          "description": "Provision request properties"
-        }
-      },
-      "required": [
-        "location",
-        "sku",
-        "tags",
-        "properties"
-      ]
-    },
-    "AnalysisServicesResourceParameters": {
-      "description": "Provision request specification",
-      "type": "object",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Location of the Analysis Services resource"
-        },
-        "sku": {
-          "$ref": "#/definitions/ResourceSkuTier",
-          "description": "Sku of the Analysis Services resource"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": { "type": "string" },
-          "description": "Key value pairs of additional properties that can ebe specified"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AnalysisServicesResourceProperties",
-          "description": "Provision request properties"
-        }
-      }
-    },
-    "AnalysisServicesResource": {
+    "Resource": {
       "description": "Represents an instance of Analysis Services resource",
       "type": "object",
       "properties": {
@@ -375,18 +243,46 @@
           "readOnly": true,
           "description": "Name of the Analysis Services resource"
         },
+        "location": {
+          "type": "string",
+          "description": "Location of the Analysis Services resource"
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "Sku of the Analysis Services resource"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "Key value pairs of additional properties that can ebe specified"
+        }
+      },
+      "required": [
+        "location",
+        "sku"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "AnalysisServicesResource": {
+      "description": "Represents an instance of Analysis Services resource",
+      "type": "object",
+      "properties": {
         "resourceType": {
           "type": "string",
           "readOnly": true,
           "description": "Specifies the type of Analysis Services resource"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AnalysisServicesResourceProperties",
+          "description": "Provision request properties"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalysisServicesResourceParameters"
+          "$ref": "#/definitions/Resource"
         }
-      ],
-      "x-ms-azure-resource": true
+      ]
     },
     "AnalysisServicesResources": {
       "description": "A collection of Analysis Services resources",
@@ -402,6 +298,26 @@
         "value"
       ]
     },
+    "AnalysisServicesResourceUpdateParameters": {
+      "description": "Provision request specification",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "Sku of the Analysis Services resource"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "Key value pairs of additional properties that can ebe specified"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AnalysisServicesResourceMutableProperties",
+          "description": "Provision request properties"
+        }
+      }
+    },
     "AnalysisServicesResourceProperties": {
       "description": "Properties of Analysis Services resource",
       "type": "object",
@@ -415,14 +331,15 @@
           "type": "string",
           "readOnly": true,
           "description": "Full name of the Analysis Services resource"
-        },
-        "asAdministrators": {
-          "$ref": "#/definitions/ServerAdministrators",
-          "description": "List of users that are administrators on the Analysis Services resource"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisServicesResourceMutableProperties"
+        }
+      ]
     },
-    "ResourceSkuTier": {
+    "ResourceSku": {
       "description": "Represents the SKU name and tier for Analysis Services resource",
       "type": "object",
       "properties": {
@@ -456,6 +373,15 @@
         "name",
         "tier"
       ]
+    },
+    "AnalysisServicesResourceMutableProperties": {
+      "description": "Represents a set of mutable Analysis Services resource properties",
+      "type": "object",
+      "properties": {
+        "serverAdministrators": {
+          "$ref": "#/definitions/ServerAdministrators"
+        }
+      }
     },
     "ServerAdministrators": {
       "description": "Array of administrator user identities",
