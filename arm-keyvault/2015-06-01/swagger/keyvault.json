@@ -100,7 +100,7 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK Response."
           }
         }
       },
@@ -271,7 +271,7 @@
         "objectId": {
           "type": "string",
           "format": "uuid",
-          "description": "The object ID of a user or service principal in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies."
+          "description": "The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies."
         },
         "applicationId": {
           "type": "string",
@@ -280,10 +280,10 @@
         },
         "permissions": {
           "$ref": "#/definitions/Permissions",
-          "description": "Permissions the identity has for keys and secrets"
+          "description": "Permissions the identity has for keys, secrets and certificates."
         }
       },
-      "description": "An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID.",
+      "description": "An identity that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID.",
       "required": [
         "tenantId",
         "objectId",
@@ -296,7 +296,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [ "all", "encrypt", "decrypt", "wrapkey", "unwrapkey", "sign", "verify", "get", "list", "create", "update", "import", "delete", "backup", "restore" ],
+            "enum": [ "all", "encrypt", "decrypt", "wrapKey", "unwrapKey", "sign", "verify", "get", "list", "create", "update", "import", "delete", "backup", "restore" ],
             "x-ms-enum": {
               "name": "KeyPermissions",
               "modelAsString": true
@@ -315,9 +315,21 @@
             }
           },
           "description": "Permissions to secrets"
+        },
+        "certificates": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [ "all", "get", "list", "delete", "create", "import", "update", "managecontacts", "getissuers", "listissuers", "setissuers", "deleteissuers", "manageissuers" ],
+            "x-ms-enum": {
+              "name": "CertificatePermissions",
+              "modelAsString": true
+            }
+          },
+          "description": "Permissions to certificates"
         }
       },
-      "description": "Permissions the identity has for keys and secrets"
+      "description": "Permissions the identity has for keys, secrets and certificates."
     },
     "VaultProperties": {
       "properties": {
