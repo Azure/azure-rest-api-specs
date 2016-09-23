@@ -195,7 +195,7 @@
                     "ImportExport"
                 ],
                 "operationId": "Servers_GetImportStatus",
-                "description": "Gets the status of an import operation given the operation ID.",
+                "description": "The status of an import operation given the operation ID.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -246,7 +246,7 @@
                     "ImportExport"
                 ],
                 "operationId": "Databases_GetImportExportStatus",
-                "description": "Gets the status of an import or export operation on an Azure SQL database given the operation ID.",
+                "description": "The status of an import or export operation on an Azure SQL database given the operation ID.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -304,7 +304,7 @@
             "properties": {
                 "operationMode": {
                     "type": "string",
-                    "description": "Gets the type of Import/Export opertion being performed"
+                    "description": "The type of Import/Export opertion being performed"
                 },
                 "properties": {
                     "x-ms-client-flatten": true,
@@ -317,11 +317,11 @@
             "properties": {
                 "name": {
                     "type": "string",
-                    "description": "Gets the name of the extenstion."
+                    "description": "The name of the extenstion."
                 },
                 "type": {
                     "type": "string",
-                    "description": "Gets the type of the extenstion."
+                    "description": "The type of the extenstion."
                 },
                 "properties": {
                     "x-ms-client-flatten": true,
@@ -336,19 +336,19 @@
                 "properties": {
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/ImportExportOperationStatusResponseProperties",
-                    "description": "Gets or sets the properties of the response."
+                    "description": "The properties of the response."
                 },
                 "id": {
                     "type": "string",
-                    "description": "Gets or sets the id returned from the server."
+                    "description": "The id returned from the server."
                 },
                 "name": {
                     "type": "string",
-                    "description": "Gets or sets the name returned from the server."
+                    "description": "The name returned from the server."
                 },
                 "type": {
                     "type": "string",
-                    "description": "Gets or sets the type returned from the server."
+                    "description": "The type returned from the server."
                 }
             },
             "description": "Response for Azure Sql Import/Export Status operation."
@@ -357,40 +357,40 @@
             "properties": {
                 "requestType": {
                     "type": "string",
-                    "description": "Gets or sets the request type of the operation."
+                    "description": "The request type of the operation."
                 },
                 "requestId": {
                     "type": "string",
                     "format": "uuid",
-                    "description": "Gets or sets the request type of the operation."
+                    "description": "The request type of the operation."
                 },
                 "serverName": {
                     "type": "string",
-                    "description": "Gets or sets the name of the Azure SQL Server."
+                    "description": "The name of the Azure SQL Server."
                 },
                 "databaseName": {
                     "type": "string",
-                    "description": "Gets or sets the name of the Azure SQL Database."
+                    "description": "The name of the Azure SQL Database."
                 },
                 "status": {
                     "type": "string",
-                    "description": "Gets or sets the status message returned from the server."
+                    "description": "The status message returned from the server."
                 },
                 "lastModifiedTime": {
                     "type": "string",
-                    "description": "Gets or sets the operation status last modified time."
+                    "description": "The operation status last modified time."
                 },
                 "queuedTime": {
                     "type": "string",
-                    "description": "Gets or sets the operation queued time."
+                    "description": "The operation queued time."
                 },
                 "blobUri": {
                     "type": "string",
-                    "description": "Gets or sets the blob uri."
+                    "description": "The blob uri."
                 },
                 "errorMessage": {
                     "type": "string",
-                    "description": "Gets or sets the error message returned from the server."
+                    "description": "The error message returned from the server."
                 }
             },
             "description": "Response for Azure Sql Import/Export Status operation."
@@ -399,19 +399,19 @@
             "properties": {
                 "databaseName": {
                     "type": "string",
-                    "description": "Gets or sets the name of the Azure SQL database to import."
+                    "description": "The name of the Azure SQL database to import."
                 },
                 "edition": {
                     "type": "string",
-                    "description": "Gets or sets the edition for the Azure Sql Database being created."
+                    "description": "The edition for the Azure Sql Database being created."
                 },
                 "serviceObjectiveName": {
                     "type": "string",
-                    "description": "Gets or sets the name of the service objective to assign to the Azure SQL Database."
+                    "description": "The name of the service objective to assign to the Azure SQL Database."
                 },
                 "maxSizeBytes": {
                     "type": "string",
-                    "description": "Gets or sets the maximum size for the newly imported database."
+                    "description": "The maximum size for the newly imported database."
                 }
             },
             "allOf": [
@@ -425,27 +425,27 @@
             "properties": {
                 "storageKeyType": {
                     "type": "string",
-                    "description": "Gets or sets the type of the storage key to use. Valid values are StorageAccessKey and SharedAccessKey."
+                    "description": "The type of the storage key to use. Valid values are StorageAccessKey and SharedAccessKey."
                 },
                 "storageKey": {
                     "type": "string",
-                    "description": "Gets or sets the storage key to use."
+                    "description": "The storage key to use."
                 },
                 "storageUri": {
                     "type": "string",
-                    "description": "Gets or sets the storage uri to use."
+                    "description": "The storage uri to use."
                 },
                 "administratorLogin": {
                     "type": "string",
-                    "description": "Gets or sets the name of the SQL administrator."
+                    "description": "The name of the SQL administrator."
                 },
                 "administratorLoginPassword": {
                     "type": "string",
-                    "description": "Gets or sets the password of the SQL administrator."
+                    "description": "The password of the SQL administrator."
                 },
                 "authenticationType": {
                     "type": "string",
-                    "description": "Gets or sets the authentication type."
+                    "description": "The authentication type."
                 }
             },
             "description": "Export Azure SQL Database parameters."
@@ -458,7 +458,7 @@
             "required": true,
             "type": "string",
             "format": "uuid",
-            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+            "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
         },
         "ApiVersionParameter": {
             "name": "api-version",

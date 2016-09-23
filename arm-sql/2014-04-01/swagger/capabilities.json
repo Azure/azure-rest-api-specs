@@ -56,12 +56,12 @@
                     "readOnly": true,
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets the maximum size of the database (see 'unit' for the units)."
+                    "description": "The maximum size of the database (see 'unit' for the units)."
                 },
                 "unit": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Gets the units that the limit is expressed in.",
+                    "description": "The units that the limit is expressed in.",
                     "enum": [
                         "Megabytes",
                         "Gigabytes",
@@ -69,22 +69,20 @@
                         "Petabytes"
                     ],
                     "x-ms-enum": {
-                        "name": "MaxSizeUnits",
-                        "modelAsString": true
+                        "name": "MaxSizeUnits"
                     }
                 },
                 "status": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Gets the status of the maximum size capability.",
+                    "description": "The status of the maximum size capability.",
                     "enum": [
                         "Visible",
                         "Available",
                         "Default"
                     ],
                     "x-ms-enum": {
-                        "name": "CapabilityStatus",
-                        "modelAsString": true
+                        "name": "CapabilityStatus"
                     }
                 }
             },
@@ -95,26 +93,25 @@
                 "name": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Gets the Service Objective name."
+                    "description": "The Service Objective name."
                 },
                 "status": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Gets the status of the Service Objective.",
+                    "description": "The status of the Service Objective.",
                     "enum": [
                         "Visible",
                         "Available",
                         "Default"
                     ],
                     "x-ms-enum": {
-                        "name": "CapabilityStatus",
-                        "modelAsString": true
+                        "name": "CapabilityStatus"
                     }
                 },
                 "id": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Gets the unique ID of the Service Objective."
+                    "description": "The unique ID of the Service Objective."
                 },
                 "supportedMaxSizes": {
                     "readOnly": true,
@@ -122,7 +119,7 @@
                     "items": {
                         "$ref": "#/definitions/MaxSizeCapability"
                     },
-                    "description": "Gets the list of supported maximum Azure SQL Database sizes for this Service Objective."
+                    "description": "The list of supported maximum Azure SQL Database sizes for this Service Objective."
                 }
             },
             "description": "Represents the Service Objectives capabilities."
@@ -132,20 +129,19 @@
                 "name": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Gets the edition name."
+                    "description": "The edition name."
                 },
                 "status": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Gets the status of the Azure SQL Server edition.",
+                    "description": "The status of the Azure SQL Server edition.",
                     "enum": [
                         "Visible",
                         "Available",
                         "Default"
                     ],
                     "x-ms-enum": {
-                        "name": "CapabilityStatus",
-                        "modelAsString": true
+                        "name": "CapabilityStatus"
                     }
                 },
                 "supportedServiceLevelObjectives": {
@@ -154,7 +150,7 @@
                     "items": {
                         "$ref": "#/definitions/ServiceObjectiveCapability"
                     },
-                    "description": "Gets the list of supported Service Objectives for the edition."
+                    "description": "The list of supported Service Objectives for the edition."
                 }
             },
             "description": "Represents the Azure SQL Server edition capabilities."
@@ -164,20 +160,19 @@
                 "name": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Gets the server version name."
+                    "description": "The server version name."
                 },
                 "status": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Gets the status of the Azure SQL Server version.",
+                    "description": "The status of the Azure SQL Server version.",
                     "enum": [
                         "Visible",
                         "Available",
                         "Default"
                     ],
                     "x-ms-enum": {
-                        "name": "CapabilityStatus",
-                        "modelAsString": true
+                        "name": "CapabilityStatus"
                     }
                 },
                 "supportedEditions": {
@@ -186,7 +181,7 @@
                     "items": {
                         "$ref": "#/definitions/EditionCapability"
                     },
-                    "description": "Gets the list of supported Azure SQL Server editions."
+                    "description": "The list of supported Azure SQL Server editions."
                 }
             },
             "description": "Represents the Azure SQL Server capabilities."
@@ -196,20 +191,19 @@
                 "name": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Gets the region name."
+                    "description": "The region name."
                 },
                 "status": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Gets the status for the region with respect to Azure SQL.",
+                    "description": "The status for the region with respect to Azure SQL.",
                     "enum": [
                         "Visible",
                         "Available",
                         "Default"
                     ],
                     "x-ms-enum": {
-                        "name": "CapabilityStatus",
-                        "modelAsString": true
+                        "name": "CapabilityStatus"
                     }
                 },
                 "supportedServerVersions": {
@@ -218,61 +212,10 @@
                     "items": {
                         "$ref": "#/definitions/ServerVersionCapability"
                     },
-                    "description": "Gets the list of supported Azure SQL Server versions."
+                    "description": "The list of supported Azure SQL Server versions."
                 }
             },
             "description": "Represents the Azure SQL capabilities for a region."
-        },
-        "Resource": {
-            "description": "Resource properties",
-            "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource name"
-                },
-                "id": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource Id"
-                },
-                "type": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource type"
-                },
-                "location": {
-                    "type": "string",
-                    "description": "Resource location"
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags"
-                }
-            },
-            "required": [
-                "location"
-            ],
-            "x-ms-azure-resource": true
-        },
-        "SubResource": {
-            "description": "Subresource properties",
-            "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource name"
-                },
-                "id": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource Id"
-                }
-            },
-            "x-ms-azure-resource": true
         }
     },
     "parameters": {
@@ -282,7 +225,7 @@
             "required": true,
             "type": "string",
             "format": "uuid",
-            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+            "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
         },
         "ApiVersionParameter": {
             "name": "api-version",
