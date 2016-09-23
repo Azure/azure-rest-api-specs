@@ -396,60 +396,6 @@
           "description": "Collection of administrator user identities"
         }
       }
-    },
-    "ExceptionData": {
-      "description": "Details of an error in the operation",
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Error code"
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Detailed message describing the error"
-        }
-      }
-    },
-    "OperationDetail": {
-      "description": "Details of the operation specified by the operation id",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Identifier for the operation"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Name of the operation"
-        },
-        "status": {
-          "type": "string",
-          "readOnly": true,
-          "description": "HTTP status code for the operation"
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The UTC time at which the operation started"
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The UTC time at which the operation ended"
-        },
-        "error": {
-          "$ref": "#/definitions/ExceptionData",
-          "readOnly": true,
-          "description": "Object that specifies details of the error"
-        }
-      }
     }
   },
   "parameters": {
