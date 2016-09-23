@@ -1,335 +1,334 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "Azure Sql Database API spec",
-        "description": "The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your external server administrators.",
-        "version": "2014-04-01"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}": {
-            "put": {
-                "tags": [
-                    "ServerAdministrators"
-                ],
-                "operationId": "Servers_CreateOrUpdateAzureADAdministrator",
-                "description": "Begins creating a new Azure SQL Server Active Directory Administrator or updating an existing Azure SQL Server Active Directory Administrator. To determine the status of the operation call GetServerAdministratorOperationStatus.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ServerNameParameterGeneric"
-                    },
-                    {
-                        "name": "administratorName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the Azure SQL Server Active Directory Administrator."
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ServerAzureADAdministrator"
-                        },
-                        "description": "The required parameters for createing or updating an Active Directory Administrator."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/ServerAzureADAdministrator"
-                        }
-                    },
-                    "201": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/ServerAzureADAdministrator"
-                        }
-                    },
-                    "202": {
-                        "description": ""
-                    }
-                },
-                "x-ms-long-running-operation": true
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Sql Database API spec",
+    "description": "The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your external server administrators.",
+    "version": "2014-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}": {
+      "put": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "Servers_CreateOrUpdateAzureADAdministrator",
+        "description": "Begins creating a new Azure SQL Server Active Directory Administrator or updating an existing Azure SQL Server Active Directory Administrator. To determine the status of the operation call GetServerAdministratorOperationStatus.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameterGeneric"
+          },
+          {
+            "name": "administratorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Server Active Directory Administrator."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerAzureADAdministrator"
             },
-            "delete": {
-                "tags": [
-                    "ServerAdministrators"
-                ],
-                "operationId": "Servers_DeleteAzureADAdministrator",
-                "description": "Begins deleting an existing Azure SQL Server Active Directory Administrator.To determine the status of the operation call GetServerAdministratorDeleteOperationStatus.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ServerNameParameterGeneric"
-                    },
-                    {
-                        "name": "administratorName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the Azure SQL Server Active Directory Administrator."
-                    }
-                ],
-                "responses": {
-                    "202": {
-                        "description": ""
-                    },
-                    "204": {
-                        "description": ""
-                    },
-                    "200": {
-                        "description": ""
-                    }
-                },
-                "x-ms-long-running-operation": true
-            },
-            "get": {
-                "tags": [
-                    "ServerAdministrators"
-                ],
-                "operationId": "Servers_GetAzureADAdministrator",
-                "description": "Returns an Azure SQL Server Administrator.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ServerNameParameterGeneric"
-                    },
-                    {
-                        "name": "administratorName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the Azure SQL Server Active Directory Administrator."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/ServerAzureADAdministrator"
-                        }
-                    }
-                }
+            "description": "The required parameters for createing or updating an Active Directory Administrator."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerAzureADAdministrator"
             }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators": {
-            "get": {
-                "tags": [
-                    "ServerAdministrators"
-                ],
-                "operationId": "Servers_ListAzureADAdministrator",
-                "description": "Returns a list of Azure SQL Server Administrators.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ServerNameParameterGeneric"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/ServerAdministratorListResult"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ServerAzureADAdministrator"
             }
+          },
+          "202": {
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "Servers_DeleteAzureADAdministrator",
+        "description": "Begins deleting an existing Azure SQL Server Active Directory Administrator.To determine the status of the operation call GetServerAdministratorDeleteOperationStatus.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameterGeneric"
+          },
+          {
+            "name": "administratorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Server Active Directory Administrator."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          },
+          "200": {
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "Servers_GetAzureADAdministrator",
+        "description": "Returns an Azure SQL Server Administrator.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameterGeneric"
+          },
+          {
+            "name": "administratorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Server Active Directory Administrator."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerAzureADAdministrator"
+            }
+          }
         }
+      }
     },
-    "definitions": {
-        "ServerAdministratorProperties": {
-            "properties": {
-                "administratorType": {
-                    "type": "string",
-                    "description": "The type of Azure SQL Server Administrator."
-                },
-                "login": {
-                    "type": "string",
-                    "description": "The Azure SQL Server Administrator Login Value."
-                },
-                "sid": {
-                    "type": "string",
-                    "description": "The Azure SQL Server Administrator Sid."
-                },
-                "tenantId": {
-                    "type": "string",
-                    "description": "The Azure SQL Server Active Directory Administrator tenant id."
-                }
-            },
-            "required": [
-                "tenantId",
-                "administratorType",
-                "login",
-                "sid"
-            ],
-            "description": "Represents the properties of an Azure SQL Server Administrator."
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators": {
+      "get": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "Servers_ListAzureADAdministrator",
+        "description": "Returns a list of Azure SQL Server Administrators.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameterGeneric"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorListResult"
+            }
+          }
         },
-        "ServerAzureADAdministrator": {
-            "properties": {
-                "properties": {
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/ServerAdministratorProperties",
-                    "description": "The properties representing the resource."
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/SubResource"
-                }
-            ],
-            "description": "Represents an Azure SQL Server Active Directory Administrator."
-        },
-        "ServerAdministratorListResult": {
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ServerAzureADAdministrator"
-                    },
-                    "description": "The list of Azure SQL Server Active Directory Administrators for the server."
-                }
-            },
-            "description": "Represents the response to a List Azure SQL Active Directory Administrators request."
-        },
-        "Resource": {
-            "description": "Resource properties",
-            "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource name"
-                },
-                "id": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource Id"
-                },
-                "type": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource type"
-                },
-                "location": {
-                    "type": "string",
-                    "description": "Resource location"
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags"
-                }
-            },
-            "required": [
-                "location"
-            ],
-            "x-ms-azure-resource": true
-        },
-        "SubResource": {
-            "description": "Subresource properties",
-            "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource name"
-                },
-                "id": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource Id"
-                }
-            },
-            "x-ms-azure-resource": true
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
-    },
-    "parameters": {
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid",
-            "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
-        },
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version."
-        },
-        "ResourceGroupParameter": {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Resource Group to which the resource belongs.",
-            "x-ms-parameter-location": "method"
-        },
-        "ServerNameParameter": {
-            "name": "serverName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure SQL Server",
-            "x-ms-parameter-location": "method"
-        },
-        "ServerNameParameterGeneric": {
-            "name": "serverName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure SQL Server",
-            "x-ms-parameter-location": "method"
-        }
+      }
     }
+  },
+  "definitions": {
+    "ServerAdministratorProperties": {
+      "properties": {
+        "administratorType": {
+          "type": "string",
+          "description": "The type of Azure SQL Server Administrator."
+        },
+        "login": {
+          "type": "string",
+          "description": "The Azure SQL Server Administrator Login Value."
+        },
+        "sid": {
+          "type": "string",
+          "description": "The Azure SQL Server Administrator Sid."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The Azure SQL Server Active Directory Administrator tenant id."
+        }
+      },
+      "required": [
+        "tenantId",
+        "administratorType",
+        "login",
+        "sid"
+      ],
+      "description": "Represents the properties of an Azure SQL Server Administrator."
+    },
+    "ServerAzureADAdministrator": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServerAdministratorProperties",
+          "description": "The properties representing the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "Represents an Azure SQL Server Active Directory Administrator."
+    },
+    "ServerAdministratorListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerAzureADAdministrator"
+          },
+          "description": "The list of Azure SQL Server Active Directory Administrators for the server."
+        }
+      },
+      "description": "Represents the response to a List Azure SQL Active Directory Administrators request."
+    },
+    "Resource": {
+      "description": "Resource properties",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "description": "Subresource properties",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Resource Group to which the resource belongs.",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure SQL Server",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameterGeneric": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure SQL Server",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

@@ -1,214 +1,213 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "Azure Sql Server API spec",
-        "description": "The Azure SQL Server management API provides a RESTful set of web services that interact with Azure SQL Server services to manage your databases. The API enables users update server connection policy.",
-        "version": "2014-04-01"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/connectionPolicies/Default": {
-            "put": {
-                "tags": [
-                    "SecureServerConnection"
-                ],
-                "operationId": "Servers_UpdateSecureConnectionPolicy",
-                "description": "Updates Server connection policy.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ServerNameParameter"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ServerSecureConnectionPolicy"
-                        },
-                        "description": "The required parameters for updating a secure connection policy."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/ServerSecureConnectionPolicy"
-                        }
-                    },
-                    "201": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/ServerSecureConnectionPolicy"
-                        }
-                    }
-                }
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Sql Server API spec",
+    "description": "The Azure SQL Server management API provides a RESTful set of web services that interact with Azure SQL Server services to manage your databases. The API enables users update server connection policy.",
+    "version": "2014-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/connectionPolicies/Default": {
+      "put": {
+        "tags": [
+          "SecureServerConnection"
+        ],
+        "operationId": "Servers_UpdateSecureConnectionPolicy",
+        "description": "Updates Server connection policy.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerSecureConnectionPolicy"
             },
-            "get": {
-                "tags": [
-                    "SecureConnection"
-                ],
-                "operationId": "Servers_GetSecureConnectionPolicy",
-                "description": "Returns an Azure SQL Server secure connection policy.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ServerNameParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/ServerSecureConnectionPolicy"
-                        }
-                    }
-                }
+            "description": "The required parameters for updating a secure connection policy."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerSecureConnectionPolicy"
             }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ServerSecureConnectionPolicy"
+            }
+          }
         }
-    },
-    "definitions": {
-        "ServerSecureConnectionPolicyProperties": {
-            "properties": {
-                "connectionType": {
-                    "type": "string",
-                    "description": "The server connection type. The ServerConnectonTypes enumeration contains all the valid connection types.",
-                    "enum": [
-                        "Default",
-                        "Proxy",
-                        "Redirect"
-                    ],
-                    "x-ms-enum": {
-                        "name": "ServerConnectonTypes",
-                        "modelAsString": true
-                    }
-                }
-            },
-            "description": "Represents the properties of an Azure SQL Server secure connection policy."
-        },
-        "ServerSecureConnectionPolicy": {
-            "properties": {
-                "properties": {
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/ServerSecureConnectionPolicyProperties",
-                    "description": "Represents the properties of the resource."
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/SubResource"
-                }
-            ],
-            "description": "Represents an Azure SQL Server secure connection policy."
-        },
-        "Resource": {
-            "description": "Resource properties",
-            "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource name"
-                },
-                "id": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource Id"
-                },
-                "type": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource type"
-                },
-                "location": {
-                    "type": "string",
-                    "description": "Resource location"
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags"
-                }
-            },
-            "required": [
-                "location"
-            ],
-            "x-ms-azure-resource": true
-        },
-        "SubResource": {
-            "description": "Subresource properties",
-            "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource name"
-                },
-                "id": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource Id"
-                }
-            },
-            "x-ms-azure-resource": true
+      },
+      "get": {
+        "tags": [
+          "SecureConnection"
+        ],
+        "operationId": "Servers_GetSecureConnectionPolicy",
+        "description": "Returns an Azure SQL Server secure connection policy.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerSecureConnectionPolicy"
+            }
+          }
         }
-    },
-    "parameters": {
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid",
-            "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
-        },
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version."
-        },
-        "ResourceGroupParameter": {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Resource Group to which the resource belongs.",
-            "x-ms-parameter-location": "method"
-        },
-        "ServerNameParameter": {
-            "name": "serverName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure SQL Server",
-            "x-ms-parameter-location": "method"
-        }
+      }
     }
+  },
+  "definitions": {
+    "ServerSecureConnectionPolicyProperties": {
+      "properties": {
+        "connectionType": {
+          "type": "string",
+          "description": "The server connection type. The ServerConnectonTypes enumeration contains all the valid connection types.",
+          "enum": [
+            "Default",
+            "Proxy",
+            "Redirect"
+          ],
+          "x-ms-enum": {
+            "name": "ServerConnectonTypes",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Represents the properties of an Azure SQL Server secure connection policy."
+    },
+    "ServerSecureConnectionPolicy": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServerSecureConnectionPolicyProperties",
+          "description": "Represents the properties of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "Represents an Azure SQL Server secure connection policy."
+    },
+    "Resource": {
+      "description": "Resource properties",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "description": "Subresource properties",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Resource Group to which the resource belongs.",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure SQL Server",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

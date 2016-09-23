@@ -1,225 +1,225 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2015-05-01-preview",
-        "title": "SqlManagementClient",
-        "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
-    },
-    "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditRecords": {
-            "get": {
-                "tags": [
-                    "EngineAuditRecords"
-                ],
-                "description": "Get a list of database engine audit records.",
-                "operationId": "EngineAuditRecords_List",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "description": "The name of the Resource Group to which the Azure SQL Database Server belongs.",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "serverName",
-                        "in": "path",
-                        "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "databaseName",
-                        "in": "path",
-                        "description": "The name of the Azure SQL Database for which database engine audit records are retrieved.",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "api-version",
-                        "in": "query",
-                        "description": "Client Api Version.",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "$filter",
-                        "in": "query",
-                        "description": "The filter to apply on the operation",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved the list of engine audit records.",
-                        "schema": {
-                            "$ref": "#/definitions/EngineAuditRecordResourceList"
-                        }
-                    },
-                    "default": {
-                        "description": "*** Error Responses: ***\n\n * 400 InvalidEngineAuditRecordsQueryParameters - Invalid query parameters\n\n * 400 InvalidEngineAuditRecordsShowSystemLogsFilter - The ShowSystemLogs property only supports the equal (eq) operation\n\n * 400 InvalidEngineAuditRecordsEndTimeFilter - The EventTime property currently supports only the less than or equal (le) operation, designating the End Time.\n\n * 400 InvalidEngineAuditRecordsShowServerRecordsFilter - The ShowServerRecords property only supports the equal (eq) operation\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 405 DatabaseEngineAuditRecordsNotImplemented - Operations on database audit records are not enabled yet\n\n * 500 GetEngineAuditRecordsFailed - Failed to get audit records",
-                        "schema": {
-                            "$ref": "#/definitions/ArmErrorResponseMessage"
-                        }
-                    }
-                },
-                "deprecated": false,
-                "x-ms-odata": "#/definitions/EngineAuditRecordsFilterParameters",
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
-        }
-    },
-    "definitions": {
-        "Object": {
-            "type": "object",
-            "properties": {}
-        },
-        "ArmErrorResponseMessage": {
-            "type": "object",
-            "properties": {
-                "error": {
-                    "$ref": "#/definitions/ArmErrorResponseExtendedErrorInfo"
-                }
-            }
-        },
-        "ArmErrorResponseExtendedErrorInfo": {
-            "type": "object",
-            "properties": {
-                "details": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ArmErrorResponseErrorDetail"
-                    }
-                },
-                "innerError": {
-                    "$ref": "#/definitions/Object"
-                },
-                "code": {
-                    "type": "string"
-                },
-                "message": {
-                    "type": "string"
-                },
-                "target": {
-                    "type": "string"
-                }
-            }
-        },
-        "ArmErrorResponseErrorDetail": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "string"
-                },
-                "message": {
-                    "type": "string"
-                },
-                "target": {
-                    "type": "string"
-                }
-            }
-        },
-        "EngineAuditRecordsFilterParameters": {
-            "type": "object",
-            "properties": {
-                "eventTime": {
-                    "format": "date-time",
-                    "type": "string"
-                },
-                "showSystemLogs": {
-                    "type": "boolean"
-                },
-                "showServerRecords": {
-                    "type": "boolean"
-                }
-            }
-        },
-        "EngineAuditRecordResourceList": {
-            "type": "object",
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/EngineAuditRecordResource"
-                    }
-                },
-                "nextLink": {
-                    "type": "string"
-                }
-            }
-        },
-        "EngineAuditRecordResource": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "location": {
-                    "type": "string"
-                },
-                "properties": {
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/EngineAuditRecordResourceProperties"
-                }
-            }
-        },
-        "EngineAuditRecordResourceProperties": {
-            "type": "object",
-            "properties": {
-                "actionId": {
-                    "type": "string"
-                },
-                "principalName": {
-                    "type": "string"
-                },
-                "eventTimeUtc": {
-                    "type": "string"
-                },
-                "statement": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "additionalInfo": {
-                    "type": "string"
-                },
-                "clientIp": {
-                    "type": "string"
-                }
-            }
-        }
-    },
-    "parameters": {
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditRecords": {
+      "get": {
+        "tags": [
+          "EngineAuditRecords"
+        ],
+        "description": "Get a list of database engine audit records.",
+        "operationId": "Databases_ListEngineAuditRecords",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
             "in": "path",
+            "description": "The name of the Resource Group to which the Azure SQL Database Server belongs.",
             "required": true,
-            "type": "string",
-            "format": "uuid",
-            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+            "type": "string"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database for which database engine audit records are retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Client Api Version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of engine audit records.",
+            "schema": {
+              "$ref": "#/definitions/EngineAuditRecordResourceList"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidEngineAuditRecordsQueryParameters - Invalid query parameters\n\n * 400 InvalidEngineAuditRecordsShowSystemLogsFilter - The ShowSystemLogs property only supports the equal (eq) operation\n\n * 400 InvalidEngineAuditRecordsEndTimeFilter - The EventTime property currently supports only the less than or equal (le) operation, designating the End Time.\n\n * 400 InvalidEngineAuditRecordsShowServerRecordsFilter - The ShowServerRecords property only supports the equal (eq) operation\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 405 DatabaseEngineAuditRecordsNotImplemented - Operations on database audit records are not enabled yet\n\n * 500 GetEngineAuditRecordsFailed - Failed to get audit records",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/EngineAuditRecordsFilterParameters",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
+      }
     }
+  },
+  "definitions": {
+    "Object": {
+      "type": "object",
+      "properties": {}
+    },
+    "ArmErrorResponseMessage": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ArmErrorResponseExtendedErrorInfo"
+        }
+      }
+    },
+    "ArmErrorResponseExtendedErrorInfo": {
+      "type": "object",
+      "properties": {
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArmErrorResponseErrorDetail"
+          }
+        },
+        "innerError": {
+          "$ref": "#/definitions/Object"
+        },
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      }
+    },
+    "ArmErrorResponseErrorDetail": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      }
+    },
+    "EngineAuditRecordsFilterParameters": {
+      "type": "object",
+      "properties": {
+        "eventTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "showSystemLogs": {
+          "type": "boolean"
+        },
+        "showServerRecords": {
+          "type": "boolean"
+        }
+      }
+    },
+    "EngineAuditRecordResourceList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EngineAuditRecordResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "EngineAuditRecordResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EngineAuditRecordResourceProperties"
+        }
+      }
+    },
+    "EngineAuditRecordResourceProperties": {
+      "type": "object",
+      "properties": {
+        "actionId": {
+          "type": "string"
+        },
+        "principalName": {
+          "type": "string"
+        },
+        "eventTimeUtc": {
+          "type": "string"
+        },
+        "statement": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "additionalInfo": {
+          "type": "string"
+        },
+        "clientIp": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
+    },
+  }
 }

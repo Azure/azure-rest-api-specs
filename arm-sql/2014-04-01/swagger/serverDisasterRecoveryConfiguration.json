@@ -1,400 +1,399 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "Azure Sql Database API spec",
-        "description": "The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases.",
-        "version": "2014-04-01"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration": {
-            "get": {
-                "tags": [
-                    "ServerDisasterRecoveryConfiguration"
-                ],
-                "operationId": "Servers_ListDisasterRecoveryConfigurations",
-                "description": "Returns a list of Azure SQL Server disaster recovery configurations.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ServerNameParameterGeneric"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/ServerDisasterRecoveryConfigurationList"
-                        }
-                    }
-                }
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Sql Database API spec",
+    "description": "The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases.",
+    "version": "2014-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration": {
+      "get": {
+        "tags": [
+          "ServerDisasterRecoveryConfiguration"
+        ],
+        "operationId": "Servers_ListDisasterRecoveryConfigurations",
+        "description": "Returns a list of Azure SQL Server disaster recovery configurations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameterGeneric"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerDisasterRecoveryConfigurationList"
             }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration/{serverDisasterRecoveryConfigurationName}": {
-            "get": {
-                "tags": [
-                    "ServerDisasterRecoveryConfiguration"
-                ],
-                "operationId": "Servers_GetDisasterRecoveryConfiguration",
-                "description": "Returns information about an Azure SQL Server disaster recovery configurations.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ServerNameParameterGeneric"
-                    },
-                    {
-                        "name": "serverDisasterRecoveryConfigurationName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the Azure SQL server disaster recovery configuration to be retrieved."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/ServerDisasterRecoveryConfiguration"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "ServerDisasterRecoveryConfiguration"
-                ],
-                "operationId": "Servers_DeleteDisasterRecoveryConfiguration",
-                "description": "Deletes the Azure SQL server disaster recovery configuration with the given name.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ServerNameParameterGeneric"
-                    },
-                    {
-                        "name": "serverDisasterRecoveryConfigurationName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the Azure SQL server disaster recovery configuration to be deleted."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    },
-                    "204": {
-                        "description": ""
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "ServerDisasterRecoveryConfiguration"
-                ],
-                "operationId": "Servers_CreateOrUpdateDisasterRecoveryConfiguration",
-                "description": "Begins creating a new or updating an existing Azure SQL Server disaster recovery configuration. To determine the status of the operation call GetServerDisasterRecoveryConfigurationOperationStatus.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ServerNameParameterGeneric"
-                    },
-                    {
-                        "name": "serverDisasterRecoveryConfigurationName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the Azure SQL server disaster recovery configuration to be retrieved."
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ServerDisasterRecoveryConfiguration"
-                        },
-                        "description": "The required parameters for creating or updating a Server disaster recovery configuration."
-                    }
-                ],
-                "responses": {
-                    "202": {
-                        "description": ""
-                    },
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/ServerDisasterRecoveryConfiguration"
-                        }
-                    },
-                    "201": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/ServerDisasterRecoveryConfiguration"
-                        }
-                    }
-                },
-                "x-ms-long-running-operation": true
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration/{serverDisasterRecoveryConfigurationName}/failover": {
-            "post": {
-                "tags": [
-                    "ServerDisasterRecoveryConfiguration"
-                ],
-                "operationId": "Servers_FailoverDisasterRecoveryConfiguration",
-                "description": "Begins failover for the Azure SQL server disaster recovery configuration with the given name.",
-                "parameters": [
-                    {
-                        "name": "serverDisasterRecoveryConfigurationName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the Azure SQL server disaster recovery configuration to start failover."
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ServerNameParameterGeneric"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration/{serverDisasterRecoveryConfigurationName}/forceFailoverAllowDataLoss": {
-            "post": {
-                "tags": [
-                    "ServerDisasterRecoveryConfiguration"
-                ],
-                "operationId": "Servers_ForceFailoverAllowDataLossDisasterRecoveryConfiguration",
-                "description": "Begins failover for the Azure SQL server disaster recovery configuration with the given name.",
-                "parameters": [
-                    {
-                        "name": "serverDisasterRecoveryConfigurationName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the Azure SQL server disaster recovery configuration to start failover."
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ServerNameParameterGeneric"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                }
-            }
+          }
         }
+      }
     },
-    "definitions": {
-        "ServerDisasterRecoveryConfiguration": {
-            "properties": {
-                "properties": {
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/ServerDisasterRecoveryConfigurationProperties",
-                    "description": "The properties representing the Server Disaster Recovery Configuration."
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/SubResource"
-                }
-            ],
-            "description": "Represents a server disaster recovery configuration."
-        },
-        "ServerDisasterRecoveryConfigurationList": {
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ServerDisasterRecoveryConfiguration"
-                    },
-                    "description": "The list of Azure Sql Server disaster recovery configurations."
-                }
-            },
-            "description": "Represents the response to a List Azure Sql Server disaster recovery configuration request."
-        },
-        "ServerDisasterRecoveryConfigurationProperties": {
-            "properties": {
-                "autoFailover": {
-                    "type": "string",
-                    "description": "Whether or not automatic failover is enabled."
-                },
-                "failoverPolicy": {
-                    "type": "string",
-                    "description": "The policy for automatically failing over."
-                },
-                "partnerLogicalServerName": {
-                    "type": "string",
-                    "description": "The name of the partner server."
-                },
-                "partnerServerId": {
-                    "type": "string",
-                    "description": "The id path the partner server."
-                },
-                "role": {
-                    "type": "string",
-                    "description": "The role of the server."
-                },
-                "type": {
-                    "type": "string",
-                    "description": "The type of server disaster recovery configuration."
-                }
-            },
-            "description": "Represents the properties of an Azure SQL Server disaster recovery configuration."
-        },
-        "Resource": {
-            "description": "Resource properties",
-            "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource name"
-                },
-                "id": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource Id"
-                },
-                "type": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource type"
-                },
-                "location": {
-                    "type": "string",
-                    "description": "Resource location"
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags"
-                }
-            },
-            "required": [
-                "location"
-            ],
-            "x-ms-azure-resource": true
-        },
-        "SubResource": {
-            "description": "Subresource properties",
-            "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource name"
-                },
-                "id": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource Id"
-                }
-            },
-            "x-ms-azure-resource": true
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration/{serverDisasterRecoveryConfigurationName}": {
+      "get": {
+        "tags": [
+          "ServerDisasterRecoveryConfiguration"
+        ],
+        "operationId": "Servers_GetDisasterRecoveryConfiguration",
+        "description": "Returns information about an Azure SQL Server disaster recovery configurations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameterGeneric"
+          },
+          {
+            "name": "serverDisasterRecoveryConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL server disaster recovery configuration to be retrieved."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerDisasterRecoveryConfiguration"
+            }
+          }
         }
+      },
+      "delete": {
+        "tags": [
+          "ServerDisasterRecoveryConfiguration"
+        ],
+        "operationId": "Servers_DeleteDisasterRecoveryConfiguration",
+        "description": "Deletes the Azure SQL server disaster recovery configuration with the given name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameterGeneric"
+          },
+          {
+            "name": "serverDisasterRecoveryConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL server disaster recovery configuration to be deleted."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ServerDisasterRecoveryConfiguration"
+        ],
+        "operationId": "Servers_CreateOrUpdateDisasterRecoveryConfiguration",
+        "description": "Begins creating a new or updating an existing Azure SQL Server disaster recovery configuration. To determine the status of the operation call GetServerDisasterRecoveryConfigurationOperationStatus.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameterGeneric"
+          },
+          {
+            "name": "serverDisasterRecoveryConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL server disaster recovery configuration to be retrieved."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerDisasterRecoveryConfiguration"
+            },
+            "description": "The required parameters for creating or updating a Server disaster recovery configuration."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerDisasterRecoveryConfiguration"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ServerDisasterRecoveryConfiguration"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     },
-    "parameters": {
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration/{serverDisasterRecoveryConfigurationName}/failover": {
+      "post": {
+        "tags": [
+          "ServerDisasterRecoveryConfiguration"
+        ],
+        "operationId": "Servers_FailoverDisasterRecoveryConfiguration",
+        "description": "Begins failover for the Azure SQL server disaster recovery configuration with the given name.",
+        "parameters": [
+          {
+            "name": "serverDisasterRecoveryConfigurationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "format": "uuid",
-            "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
-        },
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version."
-        },
-        "ResourceGroupParameter": {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Resource Group to which the resource belongs.",
-            "x-ms-parameter-location": "method"
-        },
-        "ServerNameParameter": {
-            "name": "serverName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure SQL Server",
-            "x-ms-parameter-location": "method"
-        },
-        "ServerNameParameterGeneric": {
-            "name": "serverName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure SQL Server",
-            "x-ms-parameter-location": "method"
+            "description": "The name of the Azure SQL server disaster recovery configuration to start failover."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameterGeneric"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration/{serverDisasterRecoveryConfigurationName}/forceFailoverAllowDataLoss": {
+      "post": {
+        "tags": [
+          "ServerDisasterRecoveryConfiguration"
+        ],
+        "operationId": "Servers_ForceFailoverAllowDataLossDisasterRecoveryConfiguration",
+        "description": "Begins failover for the Azure SQL server disaster recovery configuration with the given name.",
+        "parameters": [
+          {
+            "name": "serverDisasterRecoveryConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL server disaster recovery configuration to start failover."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameterGeneric"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
     }
+  },
+  "definitions": {
+    "ServerDisasterRecoveryConfiguration": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServerDisasterRecoveryConfigurationProperties",
+          "description": "The properties representing the Server Disaster Recovery Configuration."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "Represents a server disaster recovery configuration."
+    },
+    "ServerDisasterRecoveryConfigurationList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerDisasterRecoveryConfiguration"
+          },
+          "description": "The list of Azure Sql Server disaster recovery configurations."
+        }
+      },
+      "description": "Represents the response to a List Azure Sql Server disaster recovery configuration request."
+    },
+    "ServerDisasterRecoveryConfigurationProperties": {
+      "properties": {
+        "autoFailover": {
+          "type": "string",
+          "description": "Whether or not automatic failover is enabled."
+        },
+        "failoverPolicy": {
+          "type": "string",
+          "description": "The policy for automatically failing over."
+        },
+        "partnerLogicalServerName": {
+          "type": "string",
+          "description": "The name of the partner server."
+        },
+        "partnerServerId": {
+          "type": "string",
+          "description": "The id path the partner server."
+        },
+        "role": {
+          "type": "string",
+          "description": "The role of the server."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of server disaster recovery configuration."
+        }
+      },
+      "description": "Represents the properties of an Azure SQL Server disaster recovery configuration."
+    },
+    "Resource": {
+      "description": "Resource properties",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "description": "Subresource properties",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Resource Group to which the resource belongs.",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure SQL Server",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameterGeneric": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure SQL Server",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
