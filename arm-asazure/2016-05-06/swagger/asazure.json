@@ -5,7 +5,7 @@
     "title": "AzureAnalysisServices",
     "description": "The Azure Analysis Services Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete servers",
     "x-ms-code-generation-settings": {
-      "name": "AzureAnalysisServicesClient"
+      "name": "AnalysisServicesClient"
     }
   },
   "host": "management.azure.com",
@@ -37,16 +37,15 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{analysisServerName}": {
       "get": {
-        "description": "Gets the current state of the specified Analysis Services server",
-        "tags": [ "RpProvision" ],
-        "operationId": "RpProvision_GetServerDetails",
+        "description": "Gets details about the specified Analysis Services server",
+        "tags": [ "Servers" ],
+        "operationId": "Servers_GetDetails",
         "parameters": [
           {
             "name": "analysisServerName",
             "in": "path",
             "required": true,
             "type": "string",
-            "x-ms-skip-url-encoding": true,
             "description": "Name of the Analysis Services server"
           },
           {
@@ -62,20 +61,20 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/RpProvisionResult" }
+            "schema": { "$ref": "#/definitions/AnalysisServicesResource" }
           }
         }
       },
       "put": {
-        "description": "Provisions the specified Analysis Services server based on the configuration specified in the request body",
-        "tags": [ "RpProvision" ],
-        "operationId": "RpProvision_ProvisionServer",
+        "description": "Provisions the specified Analysis Services server based on the configuration specified in the request",
+        "tags": [ "Servers" ],
+        "operationId": "Servers_Create",
         "parameters": [
           {
             "name": "provisionRequest",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/RpProvisionRequest" },
+            "schema": { "$ref": "#/definitions/AnalysisServicesResourceCreateParameters" },
             "description": "Request body for provisioning"
           },
           {
@@ -83,7 +82,6 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "x-ms-skip-url-encoding": true,
             "description": "Name of the Analysis Services server"
           },
           {
@@ -99,26 +97,25 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/RpProvisionResult" }
+            "schema": { "$ref": "#/definitions/AnalysisServicesResource" }
           },
           "201": {
             "description": "InProgress",
-            "schema": { "$ref": "#/definitions/RpProvisionResult" }
+            "schema": { "$ref": "#/definitions/AnalysisServicesResource" }
           }
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
         "description": "Deletes the specified Analysis Services server.",
-        "tags": [ "RpProvision" ],
-        "operationId": "RpProvision_DeprovisionServer",
+        "tags": [ "Servers" ],
+        "operationId": "Servers_Delete",
         "parameters": [
           {
             "name": "analysisServerName",
             "in": "path",
             "required": true,
             "type": "string",
-            "x-ms-skip-url-encoding": true,
             "description": "Name of the Analysis Services server"
           },
           {
@@ -134,7 +131,7 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/RpProvisionResult" }
+            "schema": { "$ref": "#/definitions/AnalysisServicesResource" }
           },
           "204": {
             "description": "No Content"
@@ -143,23 +140,22 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "description": "Updates the current state of the specified Analysis Services server as specified by the request body",
-        "tags": [ "RpProvision" ],
-        "operationId": "RpProvision_UpdateServerDetails",
+        "description": "Updates the current state of the specified Analysis Services server as specified by the request",
+        "tags": [ "Servers" ],
+        "operationId": "Servers_Update",
         "parameters": [
           {
             "name": "analysisServerName",
             "in": "path",
             "required": true,
             "type": "string",
-            "x-ms-skip-url-encoding": true,
             "description": "Name of the Analysis Services server"
           },
           {
             "name": "updateRequest",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/RpServerUpdateRequest" },
+            "schema": { "$ref": "#/definitions/AnalysisServicesResourceParameters" },
             "description": "Request object for updating the server"
           },
           {
@@ -175,7 +171,7 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/RpProvisionResult" }
+            "schema": { "$ref": "#/definitions/AnalysisServicesResource" }
           }
         },
         "x-ms-long-running-operation": true
@@ -184,8 +180,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers": {
       "get": {
         "description": "Gets all the Analysis Services servers for the given resource group",
-        "tags": [ "RpProvision" ],
-        "operationId": "RpProvision_ListServersByResourceGroup",
+        "tags": [ "Servers" ],
+        "operationId": "Servers_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -200,7 +196,7 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/ProvisionResultList" }
+            "schema": { "$ref": "#/definitions/AnalysisServicesResources" }
           }
         }
       }
@@ -208,8 +204,8 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/servers": {
       "get": {
         "description": "List all the Analysis Services servers for the given subscription",
-        "tags": [ "RpProvision" ],
-        "operationId": "RpProvision_ListServers",
+        "tags": [ "Servers" ],
+        "operationId": "Servers_ListBySubscription",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -221,16 +217,16 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/ProvisionResultList" }
+            "schema": { "$ref": "#/definitions/AnalysisServicesResources" }
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationstatuses/{operationId}": {
       "get": {
-        "description": "Gets result of the specified operation. The API return the HTTP status code and a response body",
-        "tags": [ "RpProxy" ],
-        "operationId": "RpProxy_GetOperationStatus",
+        "description": "Gets status of the specified operation.",
+        "tags": [ "OperationDetails" ],
+        "operationId": "OperationDetails_Get",
         "parameters": [
           {
             "name": "operationId",
@@ -269,9 +265,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationresults/{operationId}": {
       "get": {
-        "description": "Gets result of the specified operation. The API return only the HTTP status code and does not have a response body",
-        "tags": [ "RpProxy" ],
-        "operationId": "RpProxy_GetOperationResult",
+        "description": "Gets completion result of the specified operation",
+        "tags": [ "OperationResults" ],
+        "operationId": "OperationResults_Get",
         "parameters": [
           {
             "name": "operationId",
@@ -311,34 +307,123 @@
     }
   },
   "definitions": {
-    "RpServerUpdateRequest": {
-      "description": "Update request specification",
+    "AnalysisServicesResourceCreateParameters": {
+      "description": "Analysis Services creation parameters",
       "type": "object",
       "properties": {
         "location": {
           "type": "string",
-          "description": "Location of the service"
+          "description": "Location of the Analysis Services resource"
         },
         "sku": {
-          "$ref": "#/definitions/RpSkuTier",
-          "description": "Server SKU"
+          "$ref": "#/definitions/ResourceSkuTier",
+          "description": "Sku of the Analysis Services resource"
         },
         "tags": {
           "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "description": "Key value pairs"
-          },
-          "description": "tags associated with analysis server"
-        },        "properties": {
+          "additionalProperties": { "type": "string" },
+          "description": "Key value pairs of additional properties that can ebe specified"
+        },
+        "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RpPropertyBag",
-          "description": "Property bag for resource operation"
+          "$ref": "#/definitions/AnalysisServicesResourceProperties",
+          "description": "Provision request properties"
+        }
+      },
+      "required": [
+        "location",
+        "sku",
+        "tags",
+        "properties"
+      ]
+    },
+    "AnalysisServicesResourceParameters": {
+      "description": "Provision request specification",
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location of the Analysis Services resource"
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSkuTier",
+          "description": "Sku of the Analysis Services resource"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "Key value pairs of additional properties that can ebe specified"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AnalysisServicesResourceProperties",
+          "description": "Provision request properties"
         }
       }
     },
-    "RpSkuTier": {
-      "description": "Represents the SKU name and tier",
+    "AnalysisServicesResource": {
+      "description": "Represents an instance of Analysis Services resource",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Identifier that represents the Analysis Services resource"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the Analysis Services resource"
+        },
+        "resourceType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the type of Analysis Services resource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisServicesResourceParameters"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "AnalysisServicesResources": {
+      "description": "A collection of Analysis Services resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/AnalysisServicesResource" },
+          "description": "The collection of Analysis Services resources"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AnalysisServicesResourceProperties": {
+      "description": "Properties of Analysis Services resource",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The current deployment state of Analysis Services resource"
+        },
+        "serverFullName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Full name of the Analysis Services resource"
+        },
+        "asAdministrators": {
+          "$ref": "#/definitions/ServerAdministrators",
+          "description": "List of users that are administrators on the Analysis Services resource"
+        }
+      }
+    },
+    "ResourceSkuTier": {
+      "description": "Represents the SKU name and tier for Analysis Services resource",
       "type": "object",
       "properties": {
         "name": {
@@ -350,7 +435,7 @@
           ],
           "x-ms-enum": {
             "name": "SkuName",
-            "modelAsString": false
+            "modelAsString": true
           },
           "description": "Name of the Sku level for the server being provisioned."
         },
@@ -362,7 +447,7 @@
           ],
           "x-ms-enum": {
             "name": "SkuTier",
-            "modelAsString": false
+            "modelAsString": true
           },
           "description": "Name of the tier to which the Sku applies."
         }
@@ -372,27 +457,7 @@
         "tier"
       ]
     },
-    "RpPropertyBag": {
-      "description": "Property bag",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The current state of the provisioning operation"
-        },
-        "serverFullName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Full URI of the Analysis Server"
-        },
-        "asAdministrators": {
-          "$ref": "#/definitions/RpAsAdministrators",
-          "description": "List of users to be made administrators on the server"
-        }
-      }
-    },
-    "RpAsAdministrators": {
+    "ServerAdministrators": {
       "description": "Array of administrator user identities",
       "type": "object",
       "properties": {
@@ -406,97 +471,18 @@
         }
       }
     },
-    "RpProvisionRequest": {
-      "description": "Provision request specification",
-      "type": "object",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Location of the Analysis server"
-        },
-        "sku": {
-          "$ref": "#/definitions/RpSkuTier",
-          "description": "Sku of the Analysis server"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": { "type": "string" },
-          "description": "Key value pairs of additional properties that can ebe specified"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RpPropertyBag",
-          "description": "Provision request properties"
-        }
-      },
-      "required": [
-        "location", 
-        "sku"
-        ]
-    },
-    "RpProvisionResult": {
-      "description": "Provision result specification",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Identifier for the operation"
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the operation"
-        },
-        "resourceType": {
-          "type": "string",
-          "description": "Type of the resource for Analysis Services"
-        },
-        "location": {
-          "type": "string",
-          "description": "Region in which the server operation was executed"
-        },
-        "sku": {
-          "$ref": "#/definitions/RpSkuTier",
-          "description": "The SKU name and tier"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "description": "Key-value pairs"
-          },
-          "description": "Custom tags specified as Key-value pairs"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RpPropertyBag",
-          "description": "Property bag for server operations"
-        }
-      }
-    },
-    "ProvisionResultList": {
-      "description": "Provision request specification",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/RpProvisionResult" },
-          "description": "The collection of returned provision operation results"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "ExceptionData": {
       "description": "Details of an error in the operation",
       "type": "object",
       "properties": {
         "code": {
           "type": "string",
+          "readOnly": true,
           "description": "Error code"
         },
         "message": {
           "type": "string",
+          "readOnly": true,
           "description": "Detailed message describing the error"
         }
       }
@@ -507,28 +493,34 @@
       "properties": {
         "id": {
           "type": "string",
+          "readOnly": true,
           "description": "Identifier for the operation"
         },
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "Name of the operation"
         },
         "status": {
           "type": "string",
+          "readOnly": true,
           "description": "HTTP status code for the operation"
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The UTC time at which the operation started"
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The UTC time at which the operation ended"
         },
         "error": {
           "$ref": "#/definitions/ExceptionData",
+          "readOnly": true,
           "description": "Object that specifies details of the error"
         }
       }
@@ -554,7 +546,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "method",
       "description": "Name of the Azure Resource group which a given Analysis Services server is part of."
     }
