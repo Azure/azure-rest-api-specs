@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2016-06-01",
-    "title": "RecoveryServicesBackupVaultClient",
+    "title": "RecoveryServicesClient",
     "x-ms-code-generation-settings": {
       "internalConstructors": true
     }
@@ -58,7 +58,7 @@
           "Vaults"
         ],
         "description": "Creates or updates a Recovery Services vault.",
-        "operationId": "Vaults_Create",
+        "operationId": "Vaults_CreateOrUpdate",
         "consumes": [
           "application/json",
           "text/json"
@@ -81,12 +81,12 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "name": "vaultCreationArgs",
+            "name": "vault",
             "in": "body",
-            "description": "Vault object to be created.",
+            "description": "Recovery Services Vault to be created.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VaultCreationArgs"
+              "$ref": "#/definitions/Vault"
             }
           }
         ],
@@ -137,8 +137,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "NoContent"
+          "200": {
+            "description": "OK"
           }
         },
         "deprecated": false
@@ -181,14 +181,16 @@
   "definitions": {
     "Object": {
       "description": "Base of all objects.",
+      "required": [],
       "type": "object",
       "properties": {}
     },
     "VaultList": {
       "description": "The response model for Vault.",
+      "required": [],
       "type": "object",
       "properties": {
-        "Value": {
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Vault"
@@ -198,76 +200,90 @@
     },
     "Vault": {
       "description": "Resource information, as returned by the resource provider.",
+      "required": [
+        "location"
+      ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "location": {
-          "description": "Location of the resource.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string"
-        },
         "etag": {
           "description": "ETag of the Vault.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "The tags attached to the resource.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "string",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/VaultProperties"
-        },
-        "id": {
-          "description": "The Id of the resource.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of the resource.",
-          "type": "string"
         }
-      }
+      },
+      "x-ms-client-flatten": true
     },
     "Sku": {
       "description": "Identifies the unique system identifier for each Azure resource.",
+      "required": [],
       "type": "object",
       "properties": {
         "name": {
           "description": "Name.",
-          "type": "string"
-        }
-      }
-    },
-    "VaultCreationArgs": {
-      "description": "Resource information, as sent to the resource provider for the resource-level operations.",
-      "type": "object",
-      "properties": {
-        "location": {
-          "description": "Resource location.",
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/VaultProperties"
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "Identifies the unique system identifier for each Azure resource."
+          "enum": [
+            "Standard"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
         }
       }
     },
     "VaultProperties": {
       "description": "Properties of the vault.",
+      "required": [],
       "type": "object",
       "properties": {
         "provisioningState": {
           "description": "Provisioning State.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "description": "Resource Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource Name",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource Type",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Resource Location",
+          "type": "string"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        },
+        "tags": {
+          "description": "Resource Tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
