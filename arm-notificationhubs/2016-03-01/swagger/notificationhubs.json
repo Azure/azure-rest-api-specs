@@ -129,6 +129,52 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Patch",
+        "description": "Patches the existing namespace",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespacePatchParameters"
+            },
+            "description": "Parameters supplied to patch a Namespace Resource."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace is Updated",
+            "schema": {
+              "$ref": "#/definitions/NamespaceResource"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Namespaces"
@@ -1201,18 +1247,43 @@
   "definitions": {
     "CheckAvailabilityParameters": {
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the created namespace"
+        },
         "isAvailiable": {
           "type": "boolean",
           "description": "True if the name is available and can be used to create new Namespace/NotificationHub. Otherwise false."
         }
       },
       "required": [
-        "name"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
+        "name",
+        "location"
       ],
       "description": "Parameters supplied to the Check Name Availability for Namespace and NotificationHubs."
     },
@@ -1315,6 +1386,22 @@
       ],
       "description": "Parameters supplied to the CreateOrUpdate Namespace operation."
     },
+    "NamespacePatchParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the created namespace"
+        }
+      },
+      "description": "Parameters supplied to the Patch Namespace operation."
+    },
     "NamespaceResource": {
       "properties": {
         "properties": {
@@ -1353,7 +1440,7 @@
     },
     "SharedAccessAuthorizationRuleCreateOrUpdateParameters": {
       "properties": {
-        "properties": {          
+        "properties": {
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties",
           "description": "Properties of the Namespace AuthorizationRules."
         }
@@ -1776,6 +1863,10 @@
             "type": "string"
           },
           "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the created namespace"
         }
       },
       "required": [
@@ -1791,6 +1882,43 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the notification hub sku",
+          "enum": [
+            "Free",
+            "Basic",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier of particular sku"
+        },
+        "size": {
+          "type": "string",
+          "description": "The Sku size"
+        },
+        "family": {
+          "type": "string",
+          "description": "The Sku Family"
+        },
+        "capacity": {
+          "type": "integer",
+          "description": "The capacity of the resource"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The Sku description for a namespace"
     }
   },
   "parameters": {

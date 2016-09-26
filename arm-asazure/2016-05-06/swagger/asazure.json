@@ -1,0 +1,425 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2016-05-06",
+    "title": "AzureAnalysisServices",
+    "description": "The Azure Analysis Services Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete servers",
+    "x-ms-code-generation-settings": {
+      "name": "AnalysisServicesClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [ "https" ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{analysisServerName}": {
+      "get": {
+        "description": "Gets details about the specified Analysis Services server",
+        "tags": [ "Servers" ],
+        "operationId": "Servers_GetDetails",
+        "parameters": [
+          {
+            "name": "analysisServerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Analysis Services server"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/AnalysisServicesResource" }
+          }
+        }
+      },
+      "put": {
+        "description": "Provisions the specified Analysis Services server based on the configuration specified in the request",
+        "tags": [ "Servers" ],
+        "operationId": "Servers_Create",
+        "parameters": [
+          {
+            "name": "serverParameters",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/AnalysisServicesResource" },
+            "description": "Request body for provisioning"
+          },
+          {
+            "name": "analysisServerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Analysis Services server"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/AnalysisServicesResource" }
+          },
+          "201": {
+            "description": "InProgress",
+            "schema": { "$ref": "#/definitions/AnalysisServicesResource" }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "description": "Deletes the specified Analysis Services server.",
+        "tags": [ "Servers" ],
+        "operationId": "Servers_Delete",
+        "parameters": [
+          {
+            "name": "analysisServerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Analysis Services server"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "description": "Updates the current state of the specified Analysis Services server",
+        "tags": [ "Servers" ],
+        "operationId": "Servers_Update",
+        "parameters": [
+          {
+            "name": "analysisServerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Analysis Services server"
+          },
+          {
+            "name": "updateServerParameters",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/AnalysisServicesResourceUpdateParameters" },
+            "description": "Request object for updating the server"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/AnalysisServicesResource" }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers": {
+      "get": {
+        "description": "Gets all the Analysis Services servers for the given resource group",
+        "tags": [ "Servers" ],
+        "operationId": "Servers_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/AnalysisServicesResources" }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/servers": {
+      "get": {
+        "description": "List all the Analysis Services servers for the given subscription",
+        "tags": [ "Servers" ],
+        "operationId": "Servers_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/AnalysisServicesResources" }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "Represents an instance of Analysis Services resource",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Identifier that represents the Analysis Services resource"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the Analysis Services resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the Analysis Services resource"
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "Sku of the Analysis Services resource"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "Key value pairs of additional properties that can ebe specified"
+        }
+      },
+      "required": [
+        "location",
+        "sku"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "AnalysisServicesResource": {
+      "description": "Represents an instance of Analysis Services resource",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the type of Analysis Services resource"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AnalysisServicesResourceProperties",
+          "description": "Provision request properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "AnalysisServicesResources": {
+      "description": "A collection of Analysis Services resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/AnalysisServicesResource" },
+          "description": "The collection of Analysis Services resources"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AnalysisServicesResourceUpdateParameters": {
+      "description": "Provision request specification",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "Sku of the Analysis Services resource"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "Key value pairs of additional properties that can ebe specified"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AnalysisServicesResourceMutableProperties",
+          "description": "Provision request properties"
+        }
+      }
+    },
+    "AnalysisServicesResourceProperties": {
+      "description": "Properties of Analysis Services resource",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The current deployment state of Analysis Services resource"
+        },
+        "serverFullName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Full name of the Analysis Services resource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisServicesResourceMutableProperties"
+        }
+      ]
+    },
+    "ResourceSku": {
+      "description": "Represents the SKU name and tier for Analysis Services resource",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "S1",
+            "S2",
+            "S4"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          },
+          "description": "Name of the Sku level for the server being provisioned."
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "Developer",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          },
+          "description": "Name of the tier to which the Sku applies."
+        }
+      },
+      "required": [
+        "name",
+        "tier"
+      ]
+    },
+    "AnalysisServicesResourceMutableProperties": {
+      "description": "Represents a set of mutable Analysis Services resource properties",
+      "type": "object",
+      "properties": {
+        "serverAdministrators": {
+          "$ref": "#/definitions/ServerAdministrators"
+        }
+      }
+    },
+    "ServerAdministrators": {
+      "description": "Array of administrator user identities",
+      "type": "object",
+      "properties": {
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "UPN of the user. Example johnsmith@contoso.com."
+          },
+          "description": "Collection of administrator user identities"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "A unique identifier of a Microsoft Azure subscription. The subscription id forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Azure Resource group which a given Analysis Services server is part of."
+    }
+  }
+}
