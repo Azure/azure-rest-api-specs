@@ -302,6 +302,9 @@
               "$ref": "#/definitions/ApiServiceResource"
             }
           },
+          "202": {
+            "description": "Accepted. Asynchronous Operation in progress."
+          },
           "400": {
             "description": "Bad Request."
           }
@@ -639,7 +642,7 @@
         "tags": [
           "Apis"
         ],
-        "operationId": "Apis_ListByResourceGroup",
+        "operationId": "Apis_ListByService",
         "description": "List all APIs of the Api Management service instance.",
         "parameters": [
           {
@@ -928,7 +931,7 @@
         "tags": [
           "ApiOperations"
         ],
-        "operationId": "ApiOperations_ListByResourceGroup",
+        "operationId": "ApiOperations_ListByApis",
         "description": "List all API operations.",
         "parameters": [
           {
@@ -1235,7 +1238,7 @@
         "tags": [
           "ApiProducts"
         ],
-        "operationId": "ApiProducts_ListByResourceGroup",
+        "operationId": "ApiProducts_ListByApi",
         "description": "List all API associated products.",
         "parameters": [
           {
@@ -1304,7 +1307,7 @@
         "tags": [
           "Subscriptions"
         ],
-        "operationId": "Subscriptions_ListByResourceGroup",
+        "operationId": "Subscriptions_ListByService",
         "description": "List all subscriptions of the Api Management service instance.",
         "parameters": [
           {
@@ -1651,7 +1654,7 @@
         "tags": [
           "Products"
         ],
-        "operationId": "Products_ListByResourceGroup",
+        "operationId": "Products_ListByService",
         "description": "List all products.",
         "parameters": [
           {
@@ -1918,7 +1921,7 @@
         "tags": [
           "ProductApis"
         ],
-        "operationId": "ProductApis_ListByResourceGroup",
+        "operationId": "ProductApis_ListByProduct",
         "description": "List all Product APIs.",
         "parameters": [
           {
@@ -2085,7 +2088,7 @@
         "tags": [
           "ProductGroups"
         ],
-        "operationId": "ProductGroups_ListByResourceGroup",
+        "operationId": "ProductGroups_ListByProduct",
         "description": "List all Product Groups.",
         "parameters": [
           {
@@ -2512,7 +2515,7 @@
         "tags": [
           "GroupUsers"
         ],
-        "operationId": "GroupUsers_ListByResourceGroup",
+        "operationId": "GroupUsers_ListByGroup",
         "description": "List all group users.",
         "parameters": [
           {
@@ -3303,7 +3306,7 @@
         "tags": [
           "Certificates"
         ],
-        "operationId": "Certificates_ListByResourceGroup",
+        "operationId": "Certificates_ListByService",
         "description": "This operation returns a collection of all certificates in the specified service instance.",
         "parameters": [
           {
@@ -3511,7 +3514,7 @@
         "tags": [
           "PolicySnippents"
         ],
-        "operationId": "PolicySnippents_ListByResourceGroup",
+        "operationId": "PolicySnippents_ListByService",
         "description": "List all policy snippets.",
         "parameters": [
           {
@@ -3567,7 +3570,7 @@
         "tags": [
           "ProductSubscriptions"
         ],
-        "operationId": "ProductSubscriptions_ListByResourceGroup",
+        "operationId": "ProductSubscriptions_ListByProduct",
         "description": "List all Product APIs.",
         "parameters": [
           {
@@ -3636,7 +3639,7 @@
         "tags": [
           "Users"
         ],
-        "operationId": "Users_ListByResourceGroup",
+        "operationId": "Users_ListByService",
         "description": "List all users.",
         "parameters": [
           {
@@ -3945,7 +3948,7 @@
         "tags": [
           "UserGroups"
         ],
-        "operationId": "UserGroups_ListByResourceGroup",
+        "operationId": "UserGroups_ListByUser",
         "description": "List all user groups.",
         "parameters": [
           {
@@ -4014,7 +4017,7 @@
         "tags": [
           "UserSubscriptions"
         ],
-        "operationId": "UserSubscriptions_ListByResourceGroup",
+        "operationId": "UserSubscriptions_ListByUser",
         "description": "List all user subscriptions of the Api Management service instance.",
         "parameters": [
           {
@@ -4083,7 +4086,7 @@
         "tags": [
           "AuthorizationServers"
         ],
-        "operationId": "AuthorizationServers_ListByResourceGroup",
+        "operationId": "AuthorizationServers_ListByService",
         "description": "List all authorization servers.",
         "parameters": [
           {
@@ -4343,7 +4346,7 @@
         "tags": [
           "Regions"
         ],
-        "operationId": "Regions_ListByResourceGroup",
+        "operationId": "Regions_ListByService",
         "description": "List all regions.",
         "parameters": [
           {
@@ -4381,7 +4384,7 @@
         "tags": [
           "UserIdentities"
         ],
-        "operationId": "UserIdentities_ListByResourceGroup",
+        "operationId": "UserIdentities_ListByUser",
         "description": "List all user identities.",
         "parameters": [
           {
@@ -4426,7 +4429,7 @@
         "tags": [
           "Reports"
         ],
-        "operationId": "Reports_ListByResourceGroup",
+        "operationId": "Reports_ListByService",
         "description": "Lists report records.",
         "parameters": [
           {
@@ -4672,7 +4675,7 @@
         "tags": [
           "Loggers"
         ],
-        "operationId": "Loggers_ListByResourceGroup",
+        "operationId": "Loggers_ListByService",
         "description": "List all loggers.",
         "parameters": [
           {
@@ -4932,7 +4935,7 @@
         "tags": [
           "Property"
         ],
-        "operationId": "Property_ListByResourceGroup",
+        "operationId": "Property_ListByService",
         "description": "List all properties.",
         "parameters": [
           {
@@ -5192,7 +5195,7 @@
         "tags": [
           "OpenIdConnectProviders"
         ],
-        "operationId": "OpenIdConnectProviders_ListByResourceGroup",
+        "operationId": "OpenIdConnectProviders_ListByService",
         "description": "List all OpenID Connect Providers.",
         "parameters": [
           {
@@ -5727,83 +5730,6 @@
             "schema": {
               "$ref": "#/definitions/TenantConfigurationSyncStateContract"
             }
-          }
-        }
-      }
-    }
-  },
-  "x-ms-paths" : {
-     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis?path={path}&wsdlServiceName={wsdlServiceName}&wsdlEndpointName={wsdlEndpointName}": {
-      "post": {
-        "tags": [
-          "Apis"
-        ],
-        "operationId": "Apis_Import",
-        "description": "This operation creates a new API directly or by importing an API description in one of the supported formats.",
-        "consumes": [
-          "application/vnd.sun.wadl+xml",
-          "application/vnd.swagger.doc+json",
-          "application/wsdl+xml"
-        ],
-         "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "aid",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API.",
-            "maxLength": 256
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Path of the Api."            
-          },
-          {
-            "name": "wsdlServiceName",
-            "in": "path",
-            "required": false,
-            "type": "string",
-            "description": "Local name of the WSDL Service to be imported. This is optional and only required for Api of Type Wsdl."
-          },
-          {
-            "name": "wsdlEndpointName",
-            "in": "path",
-            "required": false,
-            "type": "string",
-            "description": "Local name of the WSDL Endpoint to be imported. This is optional and only required for Api of Type Wsdl."
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"            
-          },
-          "204": {
-            "description": "No Content."
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found."
           }
         }
       }
