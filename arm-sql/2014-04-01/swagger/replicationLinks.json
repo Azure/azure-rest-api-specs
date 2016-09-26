@@ -110,7 +110,7 @@
           "DatabaseReplicationLinks"
         ],
         "operationId": "Databases_FailoverReplicationLink",
-        "description": "Begins failover of the Azure SQL Database Replication Link with the given id.",
+        "description": "Failover the Azure SQL Database Replication Link with the given id.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -156,7 +156,7 @@
           "DatabaseReplicationLinks"
         ],
         "operationId": "Databases_FailoverReplicationLinkAllowDataLoss",
-        "description": "Begins a forced failover of the Azure SQL Database Replication Link with the given id which may result in data loss.",
+        "description": "Force failover the Azure SQL Database Replication Link with the given id which may result in data loss.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -268,8 +268,7 @@
             "Copy"
           ],
           "x-ms-enum": {
-            "name": "ReplicationRole",
-            "modelAsString": true
+            "name": "ReplicationRole"
           }
         },
         "partnerRole": {
@@ -284,8 +283,7 @@
             "Copy"
           ],
           "x-ms-enum": {
-            "name": "ReplicationRole",
-            "modelAsString": true
+            "name": "ReplicationRole"
           }
         },
         "startTime": {
@@ -420,14 +418,6 @@
       "x-ms-parameter-location": "method"
     },
     "ServerNameParameter": {
-      "name": "serverName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the Azure SQL Server",
-      "x-ms-parameter-location": "method"
-    },
-    "ServerNameParameterGeneric": {
       "name": "serverName",
       "in": "path",
       "required": true,
