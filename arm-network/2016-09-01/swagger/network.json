@@ -312,6 +312,56 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/backendhealth": {
+      "post": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_BackendHealth",
+        "description": "The BackendHealth operation gets the backend health of application gateway in the specified resource group through Network resource provider.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Expands BackendAddressPool and BackendHttpSettings referenced in backend health."
+          }		  
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayBackendHealth"
+            }
+          },
+          "202": {
+            "description": "Request accepted. Poll on returned operation to track."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },	
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}": {
       "delete": {
         "tags": [
@@ -4297,6 +4347,76 @@
     }
   },
   "definitions": {
+    "ApplicationGatewayBackendHealth": {
+      "properties": {
+        "backendAddressPools": {
+          "type": "array",
+	        "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendHealthPool"
+	        }
+	      }
+	    },
+	    "description": "List of backendhealth pools."
+	  },	
+    "ApplicationGatewayBackendHealthPool": {
+      "properties": {
+        "backendAddressPool": {
+          "$ref": "#/definitions/ApplicationGatewayBackendAddressPool",
+          "description": "Reference of application gateway backend address pool resource."
+        },	  
+        "backendHttpSettingsCollection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendHealthHttpSettings"
+          },
+        "description": "List of application gateway backendhealth http settings."
+        }
+      },
+      "description": "Application gateway backendhealth pool."
+    },
+    "ApplicationGatewayBackendHealthHttpSettings": {
+      "properties": {
+        "backendHttpSettings": {
+          "$ref": "#/definitions/ApplicationGatewayBackendHttpSettings",
+          "description": "Reference of application gateway backend http settings resource."
+        },	  
+        "servers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendHealthServer"
+        },
+        "description": "List of application gateway backendhealth servers."
+        }
+      },
+      "description": "Application gateway backendhealth http settings."
+    },	
+    "ApplicationGatewayBackendHealthServer": {
+      "properties": {
+        "address": {
+        "type": "string",
+        "description": "IP address or FQDN of backend server"
+        },	  
+        "ipConfiguration": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Reference of IP configuration of backend server."
+        },	  
+        "health": {
+          "type": "string",
+          "description": "Health of backend server",
+          "enum": [
+            "Unknown",
+            "Up",
+            "Down",
+            "Partial"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayBackendHealthServerHealth",
+            "modelAsString": true
+          }
+        }
+      },	
+      "description": "Application gateway backendhealth http settings."
+    },  
     "ApplicationGatewaySku": {
       "properties": {
         "name": {
@@ -4305,7 +4425,9 @@
           "enum": [
             "Standard_Small",
             "Standard_Medium",
-            "Standard_Large"
+            "Standard_Large",
+            "WAF_Medium",
+            "WAF_Large"
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewaySkuName",
@@ -4316,7 +4438,8 @@
           "type": "string",
           "description": "Tier of application gateway",
           "enum": [
-            "Standard"
+            "Standard",
+            "WAF"
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayTier",
@@ -5026,6 +5149,10 @@
           },
           "description": "Request routing rules of application gateway resource"
         },
+        "webApplicationFirewallConfiguration": {
+          "$ref": "#/definitions/ApplicationGatewayWebApplicationFirewallConfiguration",
+          "description": "Web application firewall configuration"
+        },
         "resourceGuid": {
           "type": "string",
           "description": "Resource guid property of the ApplicationGateway resource"
@@ -5116,6 +5243,30 @@
         }
       ],
       "description": "UrlPathMap of application gateway"
+    },
+    "ApplicationGatewayWebApplicationFirewallConfiguration": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether web application firewall is enabled"
+        },
+        "firewallMode": {
+          "type": "string",
+          "description": "Web application firewall mode",
+          "enum": [
+            "Detection",
+            "Prevention"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayFirewallMode",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "description": "Application gateway web application firewall configuration"
     },
     "AuthorizationPropertiesFormat": {
       "properties": {

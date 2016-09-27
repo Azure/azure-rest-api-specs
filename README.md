@@ -2,18 +2,21 @@
 
 # Azure REST API Specifications
 
-## Code of Conduct
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
 ## Description
 
 This repository is the canonical source for REST API specifications for Microsoft Azure.
 
-## Creating the Swagger Specification for Azure
-- This [document](./documentation/creating-swagger.md) will help you understand how AutoRest converts Swagger in to code.
-- If you are using **swashbuckle** to generate a swagger spec from your .NET WEB API then please take a look at this [repo]( https://github.com/Azure/swashbuckle-resource-provider).
-- Swagger spec for every api-version should be in a serate folder named with the api-version.
-  - It is time consuming to review the file line by line for every api-version. When you are creating the swagger spec for the new api-version, please copy the swagger spec from the previous version in to the new api-versioned folder and commit it. After that overwrite it with the changes for the new api-version. This makes it easy for us to review the changes.
+## Basics
+In the Azure Developer Experience workflow, you are at Step 3:
+
+[API Design Review](https://github.com/Azure/adx-documentation-pr#begin-api-design-review) -> [Engage with ADX team](https://github.com/Azure/adx-documentation-pr/blob/master/README.md#engage-with-adx-team) -> _**[Swagger specification](https://github.com/Azure/adx-documentation-pr#create-swagger-specification)**_ -> [SDKs](https://github.com/Azure/adx-documentation-pr#sdks) -> [CLIs](https://github.com/Azure/adx-documentation-pr#clis)
+
+If you're a spec author looking for information about all of of the repositories and steps in the pipeline, go back to the [adx-documentation-pr](https://github.com/Azure/adx-documentation-pr) repository. Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that repo.
+
+## Getting started
+- Our [Contribution guidelines](./.github/CONTRIBUTING.md) walks you through the process of contributing to this repository.
+- The [/documentation](./documentation/) folder contains reference documentation for all aspects of Swagger and our recommended patterns. Start with the [Creating Swagger](./documentation/creating-swagger.md) page.
+- If you are using **Swashbuckle** to generate a swagger spec from your .NET WEB API then please take a look at this [repo]( https://github.com/Azure/swashbuckle-resource-provider).
 
 ## Directory Structure
 
@@ -59,32 +62,10 @@ The structure should appear like so:
 └── readme.md
 ```
 
-At this point, the specifications are expected to be in swagger format
+Currently, the specifications are expected to be in Swagger JSON format
 
-## How to validate your swagger
-* [You can use this json schema validator](https://json-schema-validator.herokuapp.com/)
-  * In the upper left box, paste the [swagger schema from here](https://github.com/swagger-api/swagger-spec/blob/master/schemas/v2.0/schema.json)
-  * In the lower left box, paste your swagger json
-  * Upon clicking the validate button, you should either see errors or success.
+## Next steps
+The next step in the process after a spec is completed is to generate SDKs. Go to the [SDKs section](https://github.com/Azure/adx-documentation-pr#sdks) of the Azure Developer Experience guide for more information.
 
-## Generating Code from Specifications
-
-If you are interested in generating code from these specifications, please check out [AutoRest](https://github.com/azure/autorest). There you will find the code generator as well as instructions on how to use it.
-
-## How to Contribute
-
-Please contribute to services you know and love. The curation of these specifications will ensure that we have great documentation and even better client library support for our Azure Services. If you have any questions, please reach out to the autoresteng dl.
-
-### Submitting changes
-
-Please send a [GitHub Pull Request to Azure REST API Specs](https://github.com/azure/azure-rest-api-specs/pull/new/master) with a clear list of what you've done (read more about [pull requests](http://help.github.com/pull-requests/)). When you send a pull request, we will love you forever if you include additions to the documentation for your given service. We can always use more documentation and beautiful markdown. Please follow make sure all of your commits are atomic (one feature per commit).
-
-Always write a clear log message for your commits. One-line messages are fine for small changes, but bigger changes should look like this:
-
-    $ git commit -m "A brief summary of the commit
-    >
-    > A paragraph describing what changed and its impact."
-    
-Please be kind with your pull requests and ensure you keeping them as focused and cohesive as possible. Keep your pull
-request free of merge commits, code review fixes and anything that may take away from the essence of your contribution.
-Use the git tools you have available to you, such as amend, rebase, etc.
+---
+_This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments._
