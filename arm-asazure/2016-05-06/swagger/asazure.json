@@ -255,6 +255,11 @@
           "readOnly": true,
           "description": "Name of the Analysis Services resource"
         },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the type of Analysis Services resource"
+        },
         "location": {
           "type": "string",
           "description": "Location of the Analysis Services resource"
@@ -279,11 +284,6 @@
       "description": "Represents an instance of Analysis Services resource",
       "type": "object",
       "properties": {
-        "resourceType": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Specifies the type of Analysis Services resource"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AnalysisServicesResourceProperties",
@@ -390,7 +390,7 @@
       "description": "Represents a set of mutable Analysis Services resource properties",
       "type": "object",
       "properties": {
-        "serverAdministrators": {
+        "asAdministrators": {
           "$ref": "#/definitions/ServerAdministrators"
         }
       }
@@ -430,7 +430,9 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[-\\w\\._]+$",
+      "pattern": "^[-\\w\\._\\(\\)]+$", 
+      "minLength": 1, 
+      "maxLength": 90 ,
       "x-ms-parameter-location": "method",
       "description": "Name of the Azure Resource group which a given Analysis Services server is part of."
     }
