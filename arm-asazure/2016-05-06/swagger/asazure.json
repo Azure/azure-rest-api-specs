@@ -3,9 +3,9 @@
   "info": {
     "version": "2016-05-06",
     "title": "AzureAnalysisServices",
-    "description": "The Azure Analysis Services Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete servers",
+    "description": "The Azure Analysis Services Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete Analysis Services servers",
     "x-ms-code-generation-settings": {
-      "name": "AnalysisServicesClient"
+      "name": "AnalysisServicesManagementClient"
     }
   },
   "host": "management.azure.com",
@@ -35,14 +35,14 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{analysisServerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}": {
       "get": {
         "description": "Gets details about the specified Analysis Services server",
         "tags": [ "Servers" ],
         "operationId": "Servers_GetDetails",
         "parameters": [
           {
-            "name": "analysisServerName",
+            "name": "serverName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -64,7 +64,7 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/AnalysisServicesResource" }
+            "schema": { "$ref": "#/definitions/AnalysisServicesServer" }
           }
         }
       },
@@ -74,14 +74,7 @@
         "operationId": "Servers_Create",
         "parameters": [
           {
-            "name": "serverParameters",
-            "in": "body",
-            "required": true,
-            "schema": { "$ref": "#/definitions/AnalysisServicesResource" },
-            "description": "Request body for provisioning"
-          },
-          {
-            "name": "analysisServerName",
+            "name": "serverName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -94,6 +87,13 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "serverParameters",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/AnalysisServicesServer" },
+            "description": "Request body for provisioning"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -103,11 +103,11 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/AnalysisServicesResource" }
+            "schema": { "$ref": "#/definitions/AnalysisServicesServer" }
           },
           "201": {
             "description": "InProgress",
-            "schema": { "$ref": "#/definitions/AnalysisServicesResource" }
+            "schema": { "$ref": "#/definitions/AnalysisServicesServer" }
           }
         },
         "x-ms-long-running-operation": true
@@ -118,7 +118,7 @@
         "operationId": "Servers_Delete",
         "parameters": [
           {
-            "name": "analysisServerName",
+            "name": "serverName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -153,7 +153,7 @@
         "operationId": "Servers_Update",
         "parameters": [
           {
-            "name": "analysisServerName",
+            "name": "serverName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -163,14 +163,14 @@
             "description": "Name of the Analysis Services server"
           },
           {
-            "name": "updateServerParameters",
-            "in": "body",
-            "required": true,
-            "schema": { "$ref": "#/definitions/AnalysisServicesResourceUpdateParameters" },
-            "description": "Request object for updating the server"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "name": "serverUpdateParameters",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/AnalysisServicesServerUpdateParameters" },
+            "description": "Request object for updating the server"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -182,7 +182,7 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/AnalysisServicesResource" }
+            "schema": { "$ref": "#/definitions/AnalysisServicesServer" }
           }
         },
         "x-ms-long-running-operation": true
@@ -207,7 +207,7 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/AnalysisServicesResources" }
+            "schema": { "$ref": "#/definitions/AnalysisServicesServers" }
           }
         },
         "x-ms-pageable": {
@@ -231,7 +231,7 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/AnalysisServicesResources" }
+            "schema": { "$ref": "#/definitions/AnalysisServicesServers" }
           }
         },
         "x-ms-pageable": {
@@ -280,13 +280,13 @@
       ],
       "x-ms-azure-resource": true
     },
-    "AnalysisServicesResource": {
+    "AnalysisServicesServer": {
       "description": "Represents an instance of Analysis Services resource",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AnalysisServicesResourceProperties",
+          "$ref": "#/definitions/AnalysisServicesServerProperties",
           "description": "Provision request properties"
         }
       },
@@ -296,13 +296,13 @@
         }
       ]
     },
-    "AnalysisServicesResources": {
+    "AnalysisServicesServers": {
       "description": "A collection of Analysis Services resources",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
-          "items": { "$ref": "#/definitions/AnalysisServicesResource" },
+          "items": { "$ref": "#/definitions/AnalysisServicesServer" },
           "description": "The collection of Analysis Services resources"
         }
       },
@@ -310,7 +310,7 @@
         "value"
       ]
     },
-    "AnalysisServicesResourceUpdateParameters": {
+    "AnalysisServicesServerUpdateParameters": {
       "description": "Provision request specification",
       "type": "object",
       "properties": {
@@ -325,12 +325,12 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AnalysisServicesResourceMutableProperties",
+          "$ref": "#/definitions/AnalysisServicesServerMutableProperties",
           "description": "Provision request properties"
         }
       }
     },
-    "AnalysisServicesResourceProperties": {
+    "AnalysisServicesServerProperties": {
       "description": "Properties of Analysis Services resource",
       "type": "object",
       "properties": {
@@ -347,7 +347,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalysisServicesResourceMutableProperties"
+          "$ref": "#/definitions/AnalysisServicesServerMutableProperties"
         }
       ]
     },
@@ -386,7 +386,7 @@
         "tier"
       ]
     },
-    "AnalysisServicesResourceMutableProperties": {
+    "AnalysisServicesServerMutableProperties": {
       "description": "Represents a set of mutable Analysis Services resource properties",
       "type": "object",
       "properties": {
