@@ -27,11 +27,7 @@
             "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -140,6 +136,14 @@
       "description": "The identifier of the resource.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
