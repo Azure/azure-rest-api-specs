@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2016-05-06",
+    "version": "2016-05-16",
     "title": "AzureAnalysisServices",
     "description": "The Azure Analysis Services Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete Analysis Services servers",
     "x-ms-code-generation-settings": {
@@ -42,6 +42,9 @@
         "operationId": "Servers_GetDetails",
         "parameters": [
           {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "name": "serverName",
             "in": "path",
             "required": true,
@@ -50,9 +53,6 @@
             "minLength": 3,
             "maxLength": 63,
             "description": "Name of the Analysis Services server"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -74,6 +74,9 @@
         "operationId": "Servers_Create",
         "parameters": [
           {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "name": "serverName",
             "in": "path",
             "required": true,
@@ -82,9 +85,6 @@
             "minLength": 3,
             "maxLength": 63,
             "description": "Name of the Analysis Services server"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "serverParameters",
@@ -118,6 +118,9 @@
         "operationId": "Servers_Delete",
         "parameters": [
           {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "name": "serverName",
             "in": "path",
             "required": true,
@@ -126,9 +129,6 @@
             "minLength": 3,
             "maxLength": 63,
             "description": "Name of the Analysis Services server"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -143,6 +143,10 @@
           },
           "204": {
             "description": "No Content"
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": { "$ref": "#/definitions/AnalysisServicesServer" }
           }
         },
         "x-ms-long-running-operation": true
@@ -153,6 +157,9 @@
         "operationId": "Servers_Update",
         "parameters": [
           {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "name": "serverName",
             "in": "path",
             "required": true,
@@ -161,9 +168,6 @@
             "minLength": 3,
             "maxLength": 63,
             "description": "Name of the Analysis Services server"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "serverUpdateParameters",
