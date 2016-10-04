@@ -258,7 +258,16 @@
         "edition": {
           "readOnly": true,
           "type": "string",
-          "description": "The edition of the Azure SQL Database."
+          "description": "The edition of the Azure SQL Database.",
+          "enum": [
+            "Basic",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "RecoverableDatabaseEditions",
+            "modelAsString": true
+          }
         },
         "maxSizeBytes": {
           "readOnly": true,

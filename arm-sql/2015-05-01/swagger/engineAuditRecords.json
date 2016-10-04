@@ -25,11 +25,9 @@
         "operationId": "Databases_ListEngineAuditRecords",
         "parameters": [
           {
-            "required": false,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": false,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -47,11 +45,7 @@
             "type": "string"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "Client Api Version.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -84,8 +78,55 @@
     }
   },
   "definitions": {
+    "ArmErrorResponseMessage": {
+      "type": "object",
+      "description":"represents and error message.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ArmErrorResponseExtendedErrorInfo"
+        }
+      }
+    },
+    "ArmErrorResponseExtendedErrorInfo": {
+      "type": "object",
+      "description": "Detailed information about the error that occurred.",
+      "properties": {
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArmErrorResponseErrorDetail"
+          }
+        },
+        "innerError": {},
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      }
+    },
+    "ArmErrorResponseErrorDetail": {
+      "type": "object",
+      "description": "Details about the error that occurred",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      }
+    },
     "EngineAuditRecordsFilterParameters": {
       "type": "object",
+      "description": "Supported properties when using $filter",
       "properties": {
         "eventTime": {
           "format": "date-time",
@@ -104,6 +145,7 @@
     },
     "EngineAuditRecordResourceList": {
       "type": "object",
+      "description": "Represents a list of engine audit records resources",
       "properties": {
         "value": {
           "type": "array",
@@ -118,6 +160,7 @@
     },
     "EngineAuditRecordResource": {
       "type": "object",
+      "description": "Contains an engine auditing record.",
       "properties": {
         "id": {
           "type": "string"
@@ -132,12 +175,14 @@
           "type": "string"
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/EngineAuditRecordResourceProperties"
         }
       }
     },
     "EngineAuditRecordResourceProperties": {
       "type": "object",
+      "description": "The properties of an engine auditing record",
       "properties": {
         "actionId": {
           "type": "string"
@@ -161,20 +206,20 @@
           "type": "string"
         }
       }
-    },
+    }
   },
   "parameters": {
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
-      "description": "Subscription ID which uniquely identifies Microsoft Azure subscription.",
+      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription.",
       "required": true,
-      "x-ms-parameter-location": "client",
+      "format": "uuid",
       "type": "string"
     },
     "ApiVersionParameter": {
       "name": "api-version",
-      "in": "path",
+      "in": "query",
       "description": "Client Api Version.",
       "required": true,
       "x-ms-parameter-location": "client",

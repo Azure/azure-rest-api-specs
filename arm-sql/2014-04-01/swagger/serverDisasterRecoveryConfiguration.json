@@ -44,6 +44,9 @@
               "$ref": "#/definitions/ServerDisasterRecoveryConfigurationList"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -125,7 +128,7 @@
           "ServerDisasterRecoveryConfiguration"
         ],
         "operationId": "Servers_CreateOrUpdateDisasterRecoveryConfiguration",
-        "description": "Begins creating a new or updating an existing Azure SQL Server disaster recovery configuration. To determine the status of the operation call GetServerDisasterRecoveryConfigurationOperationStatus.",
+        "description": "Starts creating a new or updating an existing Azure SQL Server disaster recovery configuration.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -182,7 +185,7 @@
           "ServerDisasterRecoveryConfiguration"
         ],
         "operationId": "Servers_FailoverDisasterRecoveryConfiguration",
-        "description": "Begins failover for the Azure SQL server disaster recovery configuration with the given name.",
+        "description": "Starts a failover for the Azure SQL server disaster recovery configuration with the given name.",
         "parameters": [
           {
             "name": "serverDisasterRecoveryConfigurationName",
@@ -206,7 +209,7 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK"
           }
         }
       }
@@ -279,11 +282,28 @@
       "properties": {
         "autoFailover": {
           "type": "string",
-          "description": "Whether or not automatic failover is enabled."
+          "description": "Whether or not automatic failover is enabled.",
+          "enum": [
+            "Off",
+            "On"
+          ],
+          "x-ms-enum": {
+            "name": "ServerDisasterRecoveryAutoFailover",
+            "modelAsString": true
+          }
         },
         "failoverPolicy": {
           "type": "string",
-          "description": "The policy for automatically failing over."
+          "description": "The policy for automatically failing over.",
+          "enum": [
+            "Manual",
+            "Automatic",
+            "Off"
+          ],
+          "x-ms-enum": {
+            "name": "ServerDisasterRecoveryPolicy",
+            "modelAsString": true
+          }
         },
         "partnerLogicalServerName": {
           "type": "string",
@@ -295,11 +315,30 @@
         },
         "role": {
           "type": "string",
-          "description": "The role of the server."
+          "description": "The role of the server.",
+          "enum": [
+            "None",
+            "Primary",
+            "Secondary"
+          ],
+          "x-ms-enum": {
+            "name": "ServerDisasterRecoveryRole",
+            "modelAsString": true
+          }
         },
         "type": {
           "type": "string",
-          "description": "The type of server disaster recovery configuration."
+          "description": "The type of server disaster recovery configuration.",
+          "enum": [
+            "AutoDR",
+            "Migration",
+            "Copy",
+            "ContinuousCopy"
+          ],
+          "x-ms-enum": {
+            "name": "ServerDisasterRecoveryType",
+            "modelAsString": true
+          }
         }
       },
       "description": "Represents the properties of an Azure SQL Server disaster recovery configuration."

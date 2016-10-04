@@ -25,14 +25,12 @@
         "operationId": "Databases_Rename",
         "parameters": [
           {
+            
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the Resource Group to which the Azure SQL Database Server belongs.",
-            "required": true,
-            "type": "string"
+            
+            "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "name": "serverName",
@@ -58,11 +56,8 @@
             }
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "Client Api Version.",
-            "required": true,
-            "type": "string"
+            
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -82,15 +77,18 @@
   },
   "definitions": {
     "ResourceMoveDefinition": {
+      "description": "Contains the information necessary to perform a resource move (rename).",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The target ID for the resource",
           "type": "string"
         }
       }
     },
     "ArmErrorResponseMessage": {
       "type": "object",
+      "description":"represents and error message.",
       "properties": {
         "error": {
           "$ref": "#/definitions/ArmErrorResponseExtendedErrorInfo"
@@ -98,6 +96,8 @@
       }
     },
     "ArmErrorResponseExtendedErrorInfo": {
+      "type": "object",
+      "description": "Detailed information about the error that occurred.",
       "properties": {
         "details": {
           "type": "array",
@@ -119,6 +119,7 @@
     },
     "ArmErrorResponseErrorDetail": {
       "type": "object",
+      "description": "Details about the error that occurred",
       "properties": {
         "code": {
           "type": "string"
@@ -133,6 +134,7 @@
     },
     "ArmResourceSku": {
       "type": "object",
+      "description": "Represents an ARM Resource SKU",
       "properties": {
         "name": {
           "type": "string"
@@ -150,18 +152,33 @@
           "format": "int32",
           "type": "integer"
         }
-      },
-      "description": "Respresents a SKU on an ARM resource"
+      }
     }
   },
   "parameters": {
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
+      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription.",
       "required": true,
-      "type": "string",
       "format": "uuid",
-      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "x-ms-parameter-location": "client",
+      "type": "string"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the Resource Group to which the resource belongs.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
     }
   }
 }

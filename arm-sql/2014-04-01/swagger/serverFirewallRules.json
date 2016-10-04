@@ -181,11 +181,11 @@
       "properties": {
         "startIpAddress": {
           "type": "string",
-          "description": "The start IP address of the Azure SQL Database Firewall Rule."
+          "description": "The start IP address of the Azure SQL Database Firewall Rule. Must be IPv4 format."
         },
         "endIpAddress": {
           "type": "string",
-          "description": "The end IP address of the Azure SQL Database Firewall Rule."
+          "description": "The end IP address of the Azure SQL Database Firewall Rule. Must be IPv4 format."
         }
       },
       "description": "Represents the properties of an Azure SQL Server Firewall Rule."
@@ -216,41 +216,6 @@
         }
       },
       "description": "Represents the response to a List Firewall Rules request."
-    },
-    "Resource": {
-      "description": "Resource properties",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
     },
     "SubResource": {
       "description": "Subresource properties",

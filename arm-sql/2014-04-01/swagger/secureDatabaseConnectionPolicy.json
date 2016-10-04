@@ -21,7 +21,7 @@
         "tags": [
           "SecureConnection"
         ],
-        "operationId": "Databases_CreateOrUpdateSecureConnectionPolicy",
+        "operationId": "Databases_SetSecureConnectionPolicy",
         "description": "Creates or updates an Azure SQL Server Firewall rule.",
         "parameters": [
           {
@@ -121,7 +121,14 @@
         },
         "securityEnabledAccess": {
           "type": "string",
-          "description": "Whether or not block direct access is applied."
+          "description": "Whether or not block direct access is applied.",
+          "enum": [
+            "Required",
+            "Optional"
+          ],
+          "x-ms-enum": {
+            "name": "DatabaseSecureConnectionAccess"
+          }
         }
       },
       "description": "Represents the properties of an Azure SQL Database secure connection policy."
@@ -140,41 +147,6 @@
         }
       ],
       "description": "Represents an Azure SQL Database secure connection policy."
-    },
-    "Resource": {
-      "description": "Resource properties",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
     },
     "SubResource": {
       "description": "Subresource properties",

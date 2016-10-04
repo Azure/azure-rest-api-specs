@@ -22,7 +22,7 @@
           "ServerAdministrators"
         ],
         "operationId": "Servers_CreateOrUpdateAzureADAdministrator",
-        "description": "Begins creating a new Azure SQL Server Active Directory Administrator or updating an existing Azure SQL Server Active Directory Administrator. To determine the status of the operation call GetServerAdministratorOperationStatus.",
+        "description": "Creates a new Azure SQL Server Active Directory Administrator or updates an existing Azure SQL Server Active Directory Administrator.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -77,7 +77,7 @@
           "ServerAdministrators"
         ],
         "operationId": "Servers_DeleteAzureADAdministrator",
-        "description": "Begins deleting an existing Azure SQL Server Active Directory Administrator.To determine the status of the operation call GetServerAdministratorDeleteOperationStatus.",
+        "description": "Deletes an existing Azure SQL Server Active Directory Administrator.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -101,13 +101,13 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           },
           "200": {
-            "description": ""
+            "description": "OK"
           }
         },
         "x-ms-long-running-operation": true
@@ -189,7 +189,13 @@
       "properties": {
         "administratorType": {
           "type": "string",
-          "description": "The type of Azure SQL Server Administrator."
+          "description": "The type of Azure SQL Server Administrator.",
+          "enum": [
+            "ActiveDirectory"
+          ],
+          "x-ms-enum": {
+            "name": "AdministratorType"
+          }
         },
         "login": {
           "type": "string",
@@ -197,7 +203,7 @@
         },
         "sid": {
           "type": "string",
-          "description": "The Azure SQL Server Administrator Sid."
+          "description": "The Azure SQL Server Administrator Sid (Secure ID)."
         },
         "tenantId": {
           "type": "string",
@@ -238,41 +244,6 @@
         }
       },
       "description": "Represents the response to a List Azure SQL Active Directory Administrators request."
-    },
-    "Resource": {
-      "description": "Resource properties",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
     },
     "SubResource": {
       "description": "Subresource properties",
