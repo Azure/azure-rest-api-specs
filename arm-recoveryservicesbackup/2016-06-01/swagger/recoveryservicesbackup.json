@@ -12,17 +12,13 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json",
-    "application/octet-stream"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json",
-    "application/octet-stream"
+    "application/json"
   ],
   "paths": {
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/revokeInstantItemRecovery": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/revokeInstantItemRecovery": {
       "post": {
         "tags": [
           "ItemLevelRecoveryConnections"
@@ -30,8 +26,7 @@
         "description": "Revokes an iSCSI connection which can be used to download a script. Executing this script opens a file explorer displaying all recoverable files and folders. This is an asynchronous operation.",
         "operationId": "ItemLevelRecoveryConnections_Revoke",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -83,7 +78,7 @@
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/provisionInstantItemRecovery": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/provisionInstantItemRecovery": {
       "post": {
         "tags": [
           "ItemLevelRecoveryConnections"
@@ -91,8 +86,7 @@
         "description": "Provisions a script which invokes an iSCSI connection to the backup data. Executing this script opens a file explorer displaying all the recoverable files and folders. This is an asynchronous operation. To know the status of provisioning, call GetProtectedItemOperationResult API.",
         "operationId": "ItemLevelRecoveryConnections_Provision",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -141,7 +135,7 @@
             "description": "resource ILR request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ILRRequest"
+              "$ref": "#/definitions/ILRRequestResource"
             }
           }
         ],
@@ -153,7 +147,7 @@
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/restore": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/restore": {
       "post": {
         "tags": [
           "Restores"
@@ -161,8 +155,7 @@
         "description": "Restores the specified backed up data. This is an asynchronous operation. To know the status of this API call, use GetProtectedItemOperationResult API.",
         "operationId": "Restores_Trigger",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -211,7 +204,7 @@
             "description": "resource restore request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RestoreRequest"
+              "$ref": "#/definitions/RestoreRequestResource"
             }
           }
         ],
@@ -223,7 +216,7 @@
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}/operations/{operationId}": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}/operations/{operationId}": {
       "get": {
         "tags": [
           "ProtectionPolicyOperationStatuses"
@@ -231,8 +224,7 @@
         "description": "Provides the status of the asynchronous operations like backup, restore. The status can be in progress, completed or failed. You can refer to the Operation Status enum for all the possible states of an operation. Some operations create jobs. This method returns the list of jobs associated with operation.",
         "operationId": "ProtectionPolicyOperationStatuses_Get",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -273,7 +265,7 @@
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}/operationResults/{operationId}": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}/operationResults/{operationId}": {
       "get": {
         "tags": [
           "ProtectionPolicyOperationResults"
@@ -281,8 +273,7 @@
         "description": "Provides the result of an operation.",
         "operationId": "ProtectionPolicyOperationResults_Get",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -316,14 +307,14 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ProtectionPolicy"
+              "$ref": "#/definitions/ProtectionPolicyResource"
             }
           }
         },
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}": {
       "get": {
         "tags": [
           "ProtectionPolicies"
@@ -331,8 +322,7 @@
         "description": "Provides the details of the backup policies associated to Recovery Services Vault. This is an asynchronous operation. Status of the operation can be fetched using GetPolicyOperationResult API.",
         "operationId": "ProtectionPolicies_Get",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -359,7 +349,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ProtectionPolicy"
+              "$ref": "#/definitions/ProtectionPolicyResource"
             }
           }
         },
@@ -372,8 +362,7 @@
         "description": "Creates or modifies a backup policy. This is an asynchronous operation. Status of the operation can be fetched using GetPolicyOperationResult API.",
         "operationId": "ProtectionPolicies_CreateOrUpdate",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -401,7 +390,7 @@
             "description": "resource backup policy",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProtectionPolicy"
+              "$ref": "#/definitions/ProtectionPolicyResource"
             }
           }
         ],
@@ -409,7 +398,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ProtectionPolicy"
+              "$ref": "#/definitions/ProtectionPolicyResource"
             }
           },
           "202": {
@@ -425,8 +414,7 @@
         "description": "Deletes specified backup policy from your Recovery Services Vault. This is an asynchronous operation. Status of the operation can be fetched using GetPolicyOperationResult API.",
         "operationId": "ProtectionPolicies_Delete",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -460,7 +448,7 @@
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupPolicies": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies": {
       "get": {
         "tags": [
           "ProtectionPolicies"
@@ -468,8 +456,7 @@
         "description": "Lists of backup policies associated with Recovery Services Vault. API provides pagination parameters to fetch scoped results.",
         "operationId": "ProtectionPolicies_List",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -507,7 +494,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/operationResults/{operationId}": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/operationResults/{operationId}": {
       "get": {
         "tags": [
           "ProtectionContainerOperationResults"
@@ -515,8 +502,7 @@
         "description": "Fetches the result of any operation on the container.",
         "operationId": "ProtectionContainerOperationResults_Get",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -557,7 +543,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ProtectionContainer"
+              "$ref": "#/definitions/ProtectionContainerResource"
             }
           },
           "202": {
@@ -570,7 +556,7 @@
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/operationResults/{operationId}": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/operationResults/{operationId}": {
       "get": {
         "tags": [
           "ProtectionContainerRefreshOperationResults"
@@ -578,8 +564,7 @@
         "description": "Provides the result of the refresh operation triggered by the BeginRefresh operation.",
         "operationId": "ProtectionContainerRefreshOperationResults_Get",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -620,7 +605,7 @@
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}": {
       "get": {
         "tags": [
           "ProtectionContainers"
@@ -628,8 +613,7 @@
         "description": "Gets details of the specific container registered to your Recovery Services Vault.",
         "operationId": "ProtectionContainers_Get",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -663,14 +647,14 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ProtectionContainer"
+              "$ref": "#/definitions/ProtectionContainerResource"
             }
           }
         },
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupProtectionContainers": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectionContainers": {
       "get": {
         "tags": [
           "ProtectionContainers"
@@ -678,8 +662,7 @@
         "description": "Lists the containers registered to Recovery Services Vault.",
         "operationId": "ProtectionContainers_List",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -717,7 +700,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/refreshContainers": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/refreshContainers": {
       "post": {
         "tags": [
           "ProtectionContainers"
@@ -725,8 +708,7 @@
         "description": "Discovers all the containers in the subscription that can be backed up to Recovery Services Vault. This is an asynchronous operation. To know the status of the operation, call GetRefreshOperationResult API.",
         "operationId": "ProtectionContainers_Refresh",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -757,7 +739,7 @@
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}": {
       "get": {
         "tags": [
           "RecoveryPoints"
@@ -765,8 +747,7 @@
         "description": "Provides the information of the backed up data identified using RecoveryPointID. This is an asynchronous operation. To know the status of the operation, call the GetProtectedItemOperationResult API.",
         "operationId": "RecoveryPoints_Get",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -814,14 +795,14 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RecoveryPoint"
+              "$ref": "#/definitions/RecoveryPointResource"
             }
           }
         },
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints": {
       "get": {
         "tags": [
           "RecoveryPoints"
@@ -829,8 +810,7 @@
         "description": "Lists the backup copies for the backed up item.",
         "operationId": "RecoveryPoints_List",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -889,7 +869,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/backup": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/backup": {
       "post": {
         "tags": [
           "Backups"
@@ -897,8 +877,7 @@
         "description": "Triggers backup for specified backed up item. This is an asynchronous operation. To know the status of the operation, call GetProtectedItemOperationResult API.",
         "operationId": "Backups_Trigger",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -940,7 +919,7 @@
             "description": "resource backup request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BackupRequest"
+              "$ref": "#/definitions/BackupRequestResource"
             }
           }
         ],
@@ -952,7 +931,7 @@
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationsStatus/{operationId}": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationsStatus/{operationId}": {
       "get": {
         "tags": [
           "ProtectedItemOperationStatuses"
@@ -960,8 +939,7 @@
         "description": "Fetches the status of an operation such as triggering a backup, restore. The status can be in progress, completed or failed. You can refer to the OperationStatus enum for all the possible states of the operation. Some operations create jobs. This method returns the list of jobs associated with the operation.",
         "operationId": "ProtectedItemOperationStatuses_Get",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1016,7 +994,7 @@
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}": {
       "get": {
         "tags": [
           "ProtectedItemOperationResults"
@@ -1024,8 +1002,7 @@
         "description": "Fetches the result of any operation on the backup item.",
         "operationId": "ProtectedItemOperationResults_Get",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1073,7 +1050,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ProtectedItem"
+              "$ref": "#/definitions/ProtectedItemResource"
             }
           },
           "202": {
@@ -1086,7 +1063,7 @@
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupProtectedItems": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectedItems": {
       "get": {
         "tags": [
           "ProtectedItems"
@@ -1094,8 +1071,7 @@
         "description": "Provides a pageable list of all items that can be backed up within a subscription.",
         "operationId": "ProtectedItems_List",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1140,7 +1116,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}": {
       "get": {
         "tags": [
           "ProtectedItems"
@@ -1148,8 +1124,7 @@
         "description": "Provides the details of the backed up item. This is an asynchronous operation. To know the status of the operation, call the GetItemOperationResult API.",
         "operationId": "ProtectedItems_Get",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1197,7 +1172,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ProtectedItem"
+              "$ref": "#/definitions/ProtectedItemResource"
             }
           }
         },
@@ -1211,8 +1186,7 @@
         "description": "Enables backup of an item or to modifies the backup policy information of an already backed up item. This is an asynchronous operation. To know the status of the operation, call the GetItemOperationResult API.",
         "operationId": "ProtectedItems_CreateOrUpdate",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1254,7 +1228,7 @@
             "description": "resource backed up item",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProtectedItem"
+              "$ref": "#/definitions/ProtectedItemResource"
             }
           }
         ],
@@ -1272,8 +1246,7 @@
         "description": "Used to disable backup of an item within a container. This is an asynchronous operation. To know the status of the request, call the GetItemOperationResult API.",
         "operationId": "ProtectedItems_Delete",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1321,7 +1294,7 @@
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupProtectableItems": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectableItems": {
       "get": {
         "tags": [
           "ProtectableItems"
@@ -1329,8 +1302,7 @@
         "description": "Provides a pageable list of protectable objects within your subscription according to the query filter and the pagination parameters.",
         "operationId": "ProtectableItems_List",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1375,7 +1347,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupJobs/operationResults/{operationId}": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/operationResults/{operationId}": {
       "get": {
         "tags": [
           "ExportJobsOperationResults"
@@ -1383,8 +1355,7 @@
         "description": "Fetches the result of the operation triggered by the Export Job API.",
         "operationId": "ExportJobsOperationResults_Get",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1411,7 +1382,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/OperationResultInfoBase"
+              "$ref": "#/definitions/OperationResultInfoBaseResource"
             }
           },
           "202": {
@@ -1421,7 +1392,7 @@
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/operationResults/{operationId}": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/operationResults/{operationId}": {
       "get": {
         "tags": [
           "JobOperationResults"
@@ -1429,8 +1400,7 @@
         "description": "Fetches the result of any operation.\r\n            the operation.",
         "operationId": "JobOperationResults_Get",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1474,7 +1444,7 @@
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupJobsExport": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobsExport": {
       "post": {
         "tags": [
           "Jobs"
@@ -1482,8 +1452,7 @@
         "description": "Exports all jobs for a given SAS URL. The SAS URL will expire within 15 minutes of its creation.",
         "operationId": "Jobs_Export",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1515,7 +1484,7 @@
         "x-ms-odata": "#/definitions/JobQueryObject"
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/cancel": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/cancel": {
       "post": {
         "tags": [
           "JobCancellations"
@@ -1523,8 +1492,7 @@
         "description": "Cancels a job. This is an asynchronous operation. To know the status of the cancellation, call GetCancelOperationResult API.",
         "operationId": "JobCancellations_Trigger",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1555,7 +1523,7 @@
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}": {
       "get": {
         "tags": [
           "JobDetails"
@@ -1563,8 +1531,7 @@
         "description": "Gets exteded information associated with the job.",
         "operationId": "JobDetails_Get",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1591,14 +1558,14 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Job"
+              "$ref": "#/definitions/JobResource"
             }
           }
         },
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupJobs": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs": {
       "get": {
         "tags": [
           "Jobs"
@@ -1606,8 +1573,7 @@
         "description": "Provides a pageable list of jobs.",
         "operationId": "Jobs_List",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1652,7 +1618,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupOperations/{operationId}": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperations/{operationId}": {
       "get": {
         "tags": [
           "BackupOperationStatuses"
@@ -1660,8 +1626,7 @@
         "description": "Fetches the status of an operation such as triggering a backup, restore. The status can be in progress, completed or failed. You can refer to the OperationStatus enum for all the possible states of an operation. Some operations create jobs. This method returns the list of jobs when the operation is complete.",
         "operationId": "BackupOperationStatuses_Get",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1695,7 +1660,7 @@
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupOperationResults/{operationId}": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperationResults/{operationId}": {
       "get": {
         "tags": [
           "BackupOperationResults"
@@ -1703,8 +1668,7 @@
         "description": "Provides the status of the delete operations such as deleting backed up item. Once the operation has started, the status code in the response would be Accepted. It will continue to be in this state till it reaches completion. On successful completion, the status code will be OK. This method expects OperationID as an argument. OperationID is part of the Location header of the operation response.",
         "operationId": "BackupOperationResults_Get",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1741,7 +1705,7 @@
         "deprecated": false
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/RecoveryServices/vaults/{vaultName}/backupEngines": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupEngines": {
       "get": {
         "tags": [
           "BackupEngines"
@@ -1749,8 +1713,7 @@
         "description": "Backup management servers registered to Recovery Services Vault. Returns a pageable list of servers.",
         "operationId": "BackupEngines_Get",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1849,7 +1812,7 @@
           "description": "List of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Job"
+            "$ref": "#/definitions/JobResource"
           }
         }
       }
@@ -1857,11 +1820,6 @@
     "BackupEngineBase": {
       "description": "The base backup engine class. All workload specific backup engines derive from this class.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "properties": {
         "friendlyName": {
           "description": "Friendly name of the backup engine.",
@@ -1976,6 +1934,18 @@
       },
       "discriminator": "objectType"
     },
+    "JobResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Job"
+        }
+      }
+    },
     "OperationWorkerResponse": {
       "description": "This is the base class for operation result responses.",
       "type": "object",
@@ -2052,11 +2022,6 @@
     "Job": {
       "description": "Defines workload agnostic properties for a job.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "properties": {
         "entityFriendlyName": {
           "description": "Friendly name of the entity on which the current job is executing.",
@@ -2165,7 +2130,7 @@
           "description": "List of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WorkloadProtectableItem"
+            "$ref": "#/definitions/WorkloadProtectableItemResource"
           }
         }
       }
@@ -2173,11 +2138,6 @@
     "OperationResultInfoBase": {
       "description": "Base class for operation result info.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationWorkerResponse"
-        }
-      ],
       "properties": {
         "objectType": {
           "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
@@ -2186,14 +2146,33 @@
       },
       "discriminator": "objectType"
     },
-    "WorkloadProtectableItem": {
-      "description": "Base class for backup item. Workload-specific backup items are derived from this class.",
-      "type": "object",
+    "WorkloadProtectableItemResource": {
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
       ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkloadProtectableItem"
+        }
+      }
+    },
+    "ProtectedItemResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProtectedItem"
+        }
+      }
+    },
+    "WorkloadProtectableItem": {
+      "description": "Base class for backup item. Workload-specific backup items are derived from this class.",
+      "type": "object",
       "properties": {
         "backupManagementType": {
           "description": "Type of backup managemenent to backup an item.",
@@ -2244,7 +2223,7 @@
           "description": "List of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ProtectedItem"
+            "$ref": "#/definitions/ProtectedItemResource"
           }
         }
       }
@@ -2252,11 +2231,6 @@
     "ProtectedItem": {
       "description": "Base class for backup items.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "properties": {
         "protectedItemType": {
           "description": "backup item type.",
@@ -2293,6 +2267,18 @@
         "expand": {
           "description": "Specifies if the additional information should be provided for this item.",
           "type": "string"
+        }
+      }
+    },
+    "BackupRequestResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackupRequest"
         }
       }
     },
@@ -2343,7 +2329,7 @@
           "description": "List of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RecoveryPoint"
+            "$ref": "#/definitions/RecoveryPointResource"
           }
         }
       }
@@ -2351,11 +2337,6 @@
     "BackupRequest": {
       "description": "Base class for backup request. Workload-specific backup requests are derived from this class.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "properties": {
         "objectType": {
           "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
@@ -2363,6 +2344,18 @@
         }
       },
       "discriminator": "objectType"
+    },
+    "RecoveryPointResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecoveryPoint"
+        }
+      }
     },
     "ProtectionContainerResourceList": {
       "description": "List of ProtectionContainer resources",
@@ -2377,7 +2370,7 @@
           "description": "List of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ProtectionContainer"
+            "$ref": "#/definitions/ProtectionContainerResource"
           }
         }
       }
@@ -2385,11 +2378,6 @@
     "RecoveryPoint": {
       "description": "Base class for backup copies. Workload-specific backup copies are derived from this class.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "properties": {
         "objectType": {
           "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
@@ -2414,6 +2402,18 @@
         }
       }
     },
+    "ProtectionContainerResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProtectionContainer"
+        }
+      }
+    },
     "ProtectionPolicyResourceList": {
       "description": "List of ProtectionPolicy resources",
       "type": "object",
@@ -2427,7 +2427,7 @@
           "description": "List of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ProtectionPolicy"
+            "$ref": "#/definitions/ProtectionPolicyResource"
           }
         }
       }
@@ -2435,11 +2435,6 @@
     "ProtectionContainer": {
       "description": "Base class for container with backup items. Containers with specific workloads are derived from this class.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "properties": {
         "friendlyName": {
           "description": "Friendly name of the container.",
@@ -2498,14 +2493,33 @@
         }
       }
     },
-    "ProtectionPolicy": {
-      "description": "Base class for backup policy. Workload-specific backup policies are derived from this class.",
-      "type": "object",
+    "ProtectionPolicyResource": {
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
       ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProtectionPolicy"
+        }
+      }
+    },
+    "RestoreRequestResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RestoreRequest"
+        }
+      }
+    },
+    "ProtectionPolicy": {
+      "description": "Base class for backup policy. Workload-specific backup policies are derived from this class.",
+      "type": "object",
       "properties": {
         "protectedItemsCount": {
           "format": "int32",
@@ -2529,14 +2543,21 @@
         }
       }
     },
-    "RestoreRequest": {
-      "description": "Base class for restore request. Workload-specific restore requests are derived from this class.",
-      "type": "object",
+    "ILRRequestResource": {
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
       ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ILRRequest"
+        }
+      }
+    },
+    "RestoreRequest": {
+      "description": "Base class for restore request. Workload-specific restore requests are derived from this class.",
+      "type": "object",
       "properties": {
         "objectType": {
           "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
@@ -2548,11 +2569,6 @@
     "ILRRequest": {
       "description": "Parameters to restore file/folders API.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "properties": {
         "objectType": {
           "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
@@ -2560,6 +2576,17 @@
         }
       },
       "discriminator": "objectType"
+    },
+    "AzureBackupServerEngine": {
+      "description": "Backup engine type when Azure Backup Server is used to manage the backups.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupEngineBase"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "AzureBackupServerEngine"
     },
     "DpmBackupEngine": {
       "description": "Data Protection Manager (DPM) specific backup engine.",
@@ -2572,16 +2599,40 @@
       "properties": {},
       "x-ms-discriminator-value": "DpmBackupEngine"
     },
-    "AzureBackupServerEngine": {
-      "description": "Backup engine type when Azure Backup Server is used to manage the backups.",
+    "AzureSqlContainer": {
+      "description": "Azure Sql workload-specific container.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/BackupEngineBase"
+          "$ref": "#/definitions/ProtectionContainer"
         }
       ],
       "properties": {},
-      "x-ms-discriminator-value": "AzureBackupServerEngine"
+      "x-ms-discriminator-value": "AzureSqlContainer"
+    },
+    "IaaSVMContainer": {
+      "description": "IaaS VM workload-specific container.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectionContainer"
+        }
+      ],
+      "properties": {
+        "virtualMachineId": {
+          "description": "Fully qualified ARM url of the virtual machine represented by this Azure IaaS VM container.",
+          "type": "string"
+        },
+        "virtualMachineVersion": {
+          "description": "Specifies whether the container represents a Classic or an Azure Resource Manager VM.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource group name of Recovery Services Vault.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "IaaSVMContainer"
     },
     "MabContainer": {
       "description": "Container with items backed up using MAB backup engine.",
@@ -2661,41 +2712,6 @@
         }
       }
     },
-    "AzureSqlContainer": {
-      "description": "Azure Sql workload-specific container.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProtectionContainer"
-        }
-      ],
-      "properties": {},
-      "x-ms-discriminator-value": "AzureSqlContainer"
-    },
-    "IaaSVMContainer": {
-      "description": "IaaS VM workload-specific container.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProtectionContainer"
-        }
-      ],
-      "properties": {
-        "virtualMachineId": {
-          "description": "Fully qualified ARM url of the virtual machine represented by this Azure IaaS VM container.",
-          "type": "string"
-        },
-        "virtualMachineVersion": {
-          "description": "Specifies whether the container represents a Classic or an Azure Resource Manager VM.",
-          "type": "string"
-        },
-        "resourceGroup": {
-          "description": "Resource group name of Recovery Services Vault.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "IaaSVMContainer"
-    },
     "IaaSVMProtectableItem": {
       "description": "IaaS VM workload-specific backup item.",
       "type": "object",
@@ -2772,62 +2788,6 @@
         }
       }
     },
-    "AzureSqlProtectedItem": {
-      "description": "Azure SQL workload-specific backup item.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProtectedItem"
-        }
-      ],
-      "properties": {
-        "protectedItemDataId": {
-          "description": "Internal ID of a backup item. Used by Azure SQL Backup engine to contact Recovery Services.",
-          "type": "string"
-        },
-        "protectionState": {
-          "description": "Backup state of the backed up item. Possible values: Protected, ProtectionStopped, IRPending or ProtectionError.",
-          "enum": [
-            "Invalid",
-            "IRPending",
-            "Protected",
-            "ProtectionError",
-            "ProtectionStopped",
-            "ProtectionPaused"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProtectionState",
-            "modelAsString": false
-          }
-        },
-        "extendedInfo": {
-          "$ref": "#/definitions/AzureSqlProtectedItemExtendedInfo",
-          "description": "Additional information for this backup item."
-        }
-      },
-      "x-ms-discriminator-value": "Microsoft.Sql/servers/databases"
-    },
-    "AzureSqlProtectedItemExtendedInfo": {
-      "description": "Additional information on Azure SQL specific backup item.",
-      "type": "object",
-      "properties": {
-        "oldestRecoveryPoint": {
-          "format": "date-time",
-          "description": "The oldest backup copy available for this item in the service.",
-          "type": "string"
-        },
-        "recoveryPointCount": {
-          "format": "int32",
-          "description": "Number of available backup copies associated with this backup item.",
-          "type": "integer"
-        },
-        "policyState": {
-          "description": "State of the backup policy associated with this backup item.",
-          "type": "string"
-        }
-      }
-    },
     "MabFileFolderProtectedItem": {
       "description": "MAB workload-specific backup item.",
       "type": "object",
@@ -2881,6 +2841,62 @@
           "format": "int32",
           "description": "Number of backup copies associated with the backup item.",
           "type": "integer"
+        }
+      }
+    },
+    "AzureSqlProtectedItem": {
+      "description": "Azure SQL workload-specific backup item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectedItem"
+        }
+      ],
+      "properties": {
+        "protectedItemDataId": {
+          "description": "Internal ID of a backup item. Used by Azure SQL Backup engine to contact Recovery Services.",
+          "type": "string"
+        },
+        "protectionState": {
+          "description": "Backup state of the backed up item. Possible values: Protected, ProtectionStopped, IRPending or ProtectionError.",
+          "enum": [
+            "Invalid",
+            "IRPending",
+            "Protected",
+            "ProtectionError",
+            "ProtectionStopped",
+            "ProtectionPaused"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProtectionState",
+            "modelAsString": false
+          }
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/AzureSqlProtectedItemExtendedInfo",
+          "description": "Additional information for this backup item."
+        }
+      },
+      "x-ms-discriminator-value": "Microsoft.Sql/servers/databases"
+    },
+    "AzureSqlProtectedItemExtendedInfo": {
+      "description": "Additional information on Azure SQL specific backup item.",
+      "type": "object",
+      "properties": {
+        "oldestRecoveryPoint": {
+          "format": "date-time",
+          "description": "The oldest backup copy available for this item in the service.",
+          "type": "string"
+        },
+        "recoveryPointCount": {
+          "format": "int32",
+          "description": "Number of available backup copies associated with this backup item.",
+          "type": "integer"
+        },
+        "policyState": {
+          "description": "State of the backup policy associated with this backup item.",
+          "type": "string"
         }
       }
     },
@@ -3713,6 +3729,22 @@
         }
       }
     },
+    "OperationStatusJobExtendedInfo": {
+      "description": "Operation status job extended info.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationStatusExtendedInfo"
+        }
+      ],
+      "properties": {
+        "jobId": {
+          "description": "ID of the job created for this protected item.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "OperationStatusJobExtendedInfo"
+    },
     "OperationStatusJobsExtendedInfo": {
       "description": "Operation status extended info for list of jobs.",
       "type": "object",
@@ -3738,22 +3770,6 @@
         }
       },
       "x-ms-discriminator-value": "OperationStatusJobsExtendedInfo"
-    },
-    "OperationStatusJobExtendedInfo": {
-      "description": "Operation status job extended info.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationStatusExtendedInfo"
-        }
-      ],
-      "properties": {
-        "jobId": {
-          "description": "ID of the job created for this protected item.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "OperationStatusJobExtendedInfo"
     },
     "AzureIaaSClassicComputeVMContainer": {
       "description": "IaaS VM workload-specific backup item representing a classic virtual machine.",
@@ -3822,8 +3838,32 @@
           "description": "List of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BackupEngineBase"
+            "$ref": "#/definitions/BackupEngineBaseResource"
           }
+        }
+      }
+    },
+    "BackupEngineBaseResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackupEngineBase"
+        }
+      }
+    },
+    "OperationResultInfoBaseResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationWorkerResponse"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OperationResultInfoBase"
         }
       }
     }
