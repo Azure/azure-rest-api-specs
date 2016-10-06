@@ -1,0 +1,657 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Swashbuckle Dummy",
+    "x-ms-code-generation-settings": {
+      "internalConstructors": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{ResourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/plannedFailover": {
+      "post": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
+        ],
+        "operationId": "ReplicationProtectedItemsController_PlannedFailover",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "replicatedProtectedItemName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverInput",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PlannedFailoverInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{ResourceNamespace}/{resourceType}/{resourceName}/replicationProtectedItems": {
+      "get": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
+        ],
+        "operationId": "ReplicationProtectedItemsController_EnumerateAllReplicationProtectedItems",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItemCollection"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{ResourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionContainerMappings/{mappingName}": {
+      "get": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.ProtectionContainerMappingsController"
+        ],
+        "operationId": "ProtectionContainerMappingsController_GetProtectionContainerMapping",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectionContainerMapping"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.ProtectionContainerMappingsController"
+        ],
+        "operationId": "ProtectionContainerMappingsController_CreateProtectionContainerMapping",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "creationInput",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateProtectionContainerMappingInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "ProtectionContainerMapping": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ProtectionContainerMappingProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProtectionContainerMappingProperties": {
+      "type": "object",
+      "properties": {
+        "targetProtectionContainerId": {
+          "type": "string"
+        },
+        "targetProtectionContainerFriendlyName": {
+          "type": "string"
+        },
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/ProtectionContainerMappingProviderSpecificDetails"
+        },
+        "health": {
+          "type": "string"
+        },
+        "healthErrorDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthError"
+          }
+        },
+        "policyId": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "sourceProtectionContainerFriendlyName": {
+          "type": "string"
+        },
+        "sourceFabricFriendlyName": {
+          "type": "string"
+        },
+        "targetFabricFriendlyName": {
+          "type": "string"
+        },
+        "policyFriendlyName": {
+          "type": "string"
+        }
+      }
+    },
+    "ProtectionContainerMappingProviderSpecificDetails": {
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HealthError": {
+      "type": "object",
+      "properties": {
+        "errorLevel": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": "string"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "possibleCauses": {
+          "type": "string"
+        },
+        "recommendedAction": {
+          "type": "string"
+        },
+        "creationTimeUtc": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "recoveryProviderErrorMessage": {
+          "type": "string"
+        },
+        "entityId": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateProtectionContainerMappingInput": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CreateProtectionContainerMappingInputProperties"
+        }
+      }
+    },
+    "CreateProtectionContainerMappingInputProperties": {
+      "type": "object",
+      "properties": {
+        "targetProtectionContainerId": {
+          "type": "string"
+        },
+        "PolicyId": {
+          "type": "string"
+        },
+        "providerSpecificInput": {
+          "$ref": "#/definitions/ReplicationProviderSpecificContainerMappingInput"
+        }
+      }
+    },
+    "ReplicationProviderSpecificContainerMappingInput": {
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "type": "string"
+        }
+      }
+    },
+    "Object": {
+      "description": "Base of all objects.",
+      "type": "object",
+      "properties": {
+        
+      }
+    },
+    "ReplicationProtectedItemCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicationProtectedItem"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "ReplicationProtectedItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ReplicationProtectedItemProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ReplicationProtectedItemProperties": {
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "type": "string"
+        },
+        "protectedItemType": {
+          "type": "string"
+        },
+        "protectableItemId": {
+          "type": "string"
+        },
+        "recoveryServicesProviderId": {
+          "type": "string"
+        },
+        "primaryFabricFriendlyName": {
+          "type": "string"
+        },
+        "recoveryFabricFriendlyName": {
+          "type": "string"
+        },
+        "recoveryFabricId": {
+          "type": "string"
+        },
+        "primaryProtectionContainerFriendlyName": {
+          "type": "string"
+        },
+        "recoveryProtectionContainerFriendlyName": {
+          "type": "string"
+        },
+        "protectionState": {
+          "type": "string"
+        },
+        "protectionStateDescription": {
+          "type": "string"
+        },
+        "activeLocation": {
+          "type": "string"
+        },
+        "testFailoverState": {
+          "type": "string"
+        },
+        "testFailoverStateDescription": {
+          "type": "string"
+        },
+        "allowedOperations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "replicationHealth": {
+          "type": "string"
+        },
+        "replicationHealthErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthError"
+          }
+        },
+        "policyId": {
+          "type": "string"
+        },
+        "policyFriendlyName": {
+          "type": "string"
+        },
+        "lastSuccessfulFailoverTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSuccessfulTestFailoverTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "currentScenario": {
+          "$ref": "#/definitions/CurrentScenarioDetails"
+        },
+        "failoverRecoveryPointId": {
+          "type": "string"
+        },
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/ReplicationProviderSpecificSettings"
+        }
+      }
+    },
+    "CurrentScenarioDetails": {
+      "type": "object",
+      "properties": {
+        "scenarioName": {
+          "type": "string"
+        },
+        "jobId": {
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "ReplicationProviderSpecificSettings": {
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PlannedFailoverInput": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlannedFailoverInputProperties"
+        }
+      }
+    },
+    "PlannedFailoverInputProperties": {
+      "type": "object",
+      "properties": {
+        "failoverDirection": {
+          "type": "string"
+        },
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/ProviderSpecificFailoverInput"
+        }
+      }
+    },
+    "ProviderSpecificFailoverInput": {
+      "type": "object",
+      "properties": {
+        
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription Id.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group where the recovery services vault is present.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "ResourceNamespace": {
+      "name": "resourceNamespace",
+      "in": "path",
+      "description": "The namespace of the resource. Supported are Microsoft.SiteRecovery and Microsoft.RecoveryServices for production.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "ResourceType": {
+      "name": "resourceType",
+      "in": "path",
+      "description": "The type of the resource. Supported are SiteRecovery and vault for production.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "ResourceName": {
+      "name": "vaultName",
+      "in": "path",
+      "description": "The name of the recovery services vault.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account."
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
