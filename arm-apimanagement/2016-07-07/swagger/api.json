@@ -5537,6 +5537,54 @@
       }
     }
   },
+  "x-ms-paths": {
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}?export=true": {
+      "get": {
+        "tags": [
+          "Apis"
+        ],
+        "operationId": "Apis_Export",
+        "description": "This operation returns the details of the API specified by its identifier.",
+        "parameters": [
+           {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains a stream with a full set of API metadata and includes API entity with an embedded array of operation entities.",
+            "schema": {
+              "$ref": "#/definitions/ApiExportResult"
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"              
+            }
+          },
+		      "404": {
+            "description": "The specified API does not exist.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"              
+            }
+          }
+        }
+      }
+    }
+  },
   "definitions": {
     "ResourcesMoveInfo": {
       "properties": {
