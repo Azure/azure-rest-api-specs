@@ -66,4 +66,24 @@ These are patterns that a spec is expected to follow by default to be included i
  - **Specify units in Description**
  
    - It is a good practice to specify units in description for properties like size
- - **Add a link to MSDN Rest Api Docs whenever possible.**
+ 
+ - **Add a link to MSDN Rest Api Docs/examples whenever possible.**
+ 
+ - **Mutability**
+ 
+	- Use x-ms-mutability extension to document mutability aspects of models
+	- `Readonly: true` should be applied on all read-only properties
+ 
+ - **Required properties**
+ 
+	- `Required: true` should be applied on all required properties
+ 
+ - **Correct data types**
+
+	- Use correct data types for properties. A lot of times boolean properties are marked as string
+ 
+ - **Resource should include all the properties per ARM standard**
+ 
+ - **Response Codes**
+	
+	- Include all the response codes for an operations including error response codes
