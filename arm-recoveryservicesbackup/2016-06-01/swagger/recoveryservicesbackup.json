@@ -2190,7 +2190,8 @@
           "description": "State of the back up item. Possible values: Protected, NotProtected.",
           "type": "string"
         }
-      }
+      },
+      "discriminator": "protectableItemType"
     },
     "BMSPOQueryObject": {
       "description": "Filters to list items that can be backed up.",
@@ -2577,17 +2578,6 @@
       },
       "discriminator": "objectType"
     },
-    "AzureBackupServerEngine": {
-      "description": "Backup engine type when Azure Backup Server is used to manage the backups.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BackupEngineBase"
-        }
-      ],
-      "properties": {},
-      "x-ms-discriminator-value": "AzureBackupServerEngine"
-    },
     "DpmBackupEngine": {
       "description": "Data Protection Manager (DPM) specific backup engine.",
       "type": "object",
@@ -2599,16 +2589,16 @@
       "properties": {},
       "x-ms-discriminator-value": "DpmBackupEngine"
     },
-    "AzureSqlContainer": {
-      "description": "Azure Sql workload-specific container.",
+    "AzureBackupServerEngine": {
+      "description": "Backup engine type when Azure Backup Server is used to manage the backups.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProtectionContainer"
+          "$ref": "#/definitions/BackupEngineBase"
         }
       ],
       "properties": {},
-      "x-ms-discriminator-value": "AzureSqlContainer"
+      "x-ms-discriminator-value": "AzureBackupServerEngine"
     },
     "IaaSVMContainer": {
       "description": "IaaS VM workload-specific container.",
@@ -2711,6 +2701,17 @@
           "type": "string"
         }
       }
+    },
+    "AzureSqlContainer": {
+      "description": "Azure Sql workload-specific container.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectionContainer"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "AzureSqlContainer"
     },
     "IaaSVMProtectableItem": {
       "description": "IaaS VM workload-specific backup item.",
@@ -2917,36 +2918,6 @@
       },
       "x-ms-discriminator-value": "IaasVMBackupRequest"
     },
-    "MabProtectionPolicy": {
-      "description": "Mab container-specific backup policy.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProtectionPolicy"
-        }
-      ],
-      "properties": {
-        "schedulePolicy": {
-          "$ref": "#/definitions/SchedulePolicy",
-          "description": "Backup schedule of backup policy."
-        },
-        "retentionPolicy": {
-          "$ref": "#/definitions/RetentionPolicy",
-          "description": "Retention policy details."
-        }
-      },
-      "x-ms-discriminator-value": "MAB"
-    },
-    "SchedulePolicy": {
-      "description": "Base class for backup schedule.",
-      "type": "object",
-      "properties": {}
-    },
-    "RetentionPolicy": {
-      "description": "Base class for retention policy.",
-      "type": "object",
-      "properties": {}
-    },
     "AzureIaaSVMProtectionPolicy": {
       "description": "IaaS VM workload-specific backup policy.",
       "type": "object",
@@ -2967,6 +2938,36 @@
       },
       "x-ms-discriminator-value": "AzureIaasVM"
     },
+    "SchedulePolicy": {
+      "description": "Base class for backup schedule.",
+      "type": "object",
+      "properties": {}
+    },
+    "RetentionPolicy": {
+      "description": "Base class for retention policy.",
+      "type": "object",
+      "properties": {}
+    },
+    "MabProtectionPolicy": {
+      "description": "Mab container-specific backup policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectionPolicy"
+        }
+      ],
+      "properties": {
+        "schedulePolicy": {
+          "$ref": "#/definitions/SchedulePolicy",
+          "description": "Backup schedule of backup policy."
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy",
+          "description": "Retention policy details."
+        }
+      },
+      "x-ms-discriminator-value": "MAB"
+    },
     "AzureSqlProtectionPolicy": {
       "description": "Azure SQL workload-specific backup policy.",
       "type": "object",
@@ -2982,35 +2983,6 @@
         }
       },
       "x-ms-discriminator-value": "AzureSql"
-    },
-    "GenericRecoveryPoint": {
-      "description": "Generic backup copy.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RecoveryPoint"
-        }
-      ],
-      "properties": {
-        "friendlyName": {
-          "description": "Friendly name of the backup copy.",
-          "type": "string"
-        },
-        "recoveryPointType": {
-          "description": "Type of the backup copy.",
-          "type": "string"
-        },
-        "recoveryPointTime": {
-          "format": "date-time",
-          "description": "Time at which this backup copy was created.",
-          "type": "string"
-        },
-        "recoveryPointAdditionalInfo": {
-          "description": "Additional information associated with this backup copy.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "GenericRecoveryPoint"
     },
     "IaasVMRecoveryPoint": {
       "description": "IaaS VM workload specific backup copy.",
@@ -3102,6 +3074,35 @@
           "type": "string"
         }
       }
+    },
+    "GenericRecoveryPoint": {
+      "description": "Generic backup copy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPoint"
+        }
+      ],
+      "properties": {
+        "friendlyName": {
+          "description": "Friendly name of the backup copy.",
+          "type": "string"
+        },
+        "recoveryPointType": {
+          "description": "Type of the backup copy.",
+          "type": "string"
+        },
+        "recoveryPointTime": {
+          "format": "date-time",
+          "description": "Time at which this backup copy was created.",
+          "type": "string"
+        },
+        "recoveryPointAdditionalInfo": {
+          "description": "Additional information associated with this backup copy.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "GenericRecoveryPoint"
     },
     "IaasVMRestoreRequest": {
       "description": "IaaS VM workload-specific restore.",
@@ -3220,6 +3221,161 @@
         }
       },
       "x-ms-discriminator-value": "IaasVMILRRegistrationRequest"
+    },
+    "MabJob": {
+      "description": "MAB workload-specific job.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Job"
+        }
+      ],
+      "properties": {
+        "duration": {
+          "description": "Time taken by job to run.",
+          "type": "string"
+        },
+        "actionsInfo": {
+          "description": "The state/actions applicable on jobs like cancel/retry.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "Invalid",
+              "Cancellable",
+              "Retriable"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "JobSupportedAction",
+              "modelAsString": false
+            }
+          }
+        },
+        "mabServerName": {
+          "description": "Name of server protecting the DS.",
+          "type": "string"
+        },
+        "mabServerType": {
+          "description": "Server type of MAB container. Possible values: IaasVMContainer, MABContainer, AzureSqlContainer, WindowsServer.",
+          "enum": [
+            "Invalid",
+            "Unknown",
+            "IaasVMContainer",
+            "IaasVMServiceContainer",
+            "DPMContainer",
+            "DPMVenusContainer",
+            "MABContainer",
+            "ClusterResource",
+            "AzureSqlContainer",
+            "WindowsServer",
+            "Windows"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MabServerType",
+            "modelAsString": false
+          }
+        },
+        "workloadType": {
+          "description": "Workload type of backup item. Possible values: VM, FileFolder, AzureSqlDb.",
+          "enum": [
+            "Invalid",
+            "VM",
+            "FileFolder",
+            "AzureSqlDb",
+            "SQLDB",
+            "Exchange",
+            "Sharepoint",
+            "DPMUnknown"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkloadType",
+            "modelAsString": false
+          }
+        },
+        "errorDetails": {
+          "description": "The errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MabErrorInfo"
+          }
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/MabJobExtendedInfo",
+          "description": "Additional information on the job."
+        }
+      },
+      "x-ms-discriminator-value": "MabJob"
+    },
+    "MabErrorInfo": {
+      "description": "MAB workload-specific error information.",
+      "type": "object",
+      "properties": {
+        "errorString": {
+          "description": "Localized error string.",
+          "type": "string"
+        },
+        "recommendations": {
+          "description": "List of localized recommendations.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MabJobExtendedInfo": {
+      "description": "Additional information for the MAB workload-specific job.",
+      "type": "object",
+      "properties": {
+        "tasksList": {
+          "description": "List of tasks for this job.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MabJobTaskDetails"
+          }
+        },
+        "propertyBag": {
+          "description": "The job properties.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "dynamicErrorMessage": {
+          "description": "Non localized error message specific to this job.",
+          "type": "string"
+        }
+      }
+    },
+    "MabJobTaskDetails": {
+      "description": "MAB workload-specific job task details.",
+      "type": "object",
+      "properties": {
+        "taskId": {
+          "description": "The task display name.",
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "The start time.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "The end time.",
+          "type": "string"
+        },
+        "duration": {
+          "description": "Time elapsed for task.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status.",
+          "type": "string"
+        }
+      }
     },
     "AzureIaaSVMJob": {
       "description": "Azure IaaS VM workload-specifc job object.",
@@ -3488,180 +3644,6 @@
         }
       }
     },
-    "MabJob": {
-      "description": "MAB workload-specific job.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Job"
-        }
-      ],
-      "properties": {
-        "duration": {
-          "description": "Time taken by job to run.",
-          "type": "string"
-        },
-        "actionsInfo": {
-          "description": "The state/actions applicable on jobs like cancel/retry.",
-          "type": "array",
-          "items": {
-            "enum": [
-              "Invalid",
-              "Cancellable",
-              "Retriable"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "JobSupportedAction",
-              "modelAsString": false
-            }
-          }
-        },
-        "mabServerName": {
-          "description": "Name of server protecting the DS.",
-          "type": "string"
-        },
-        "mabServerType": {
-          "description": "Server type of MAB container. Possible values: IaasVMContainer, MABContainer, AzureSqlContainer, WindowsServer.",
-          "enum": [
-            "Invalid",
-            "Unknown",
-            "IaasVMContainer",
-            "IaasVMServiceContainer",
-            "DPMContainer",
-            "DPMVenusContainer",
-            "MABContainer",
-            "ClusterResource",
-            "AzureSqlContainer",
-            "WindowsServer",
-            "Windows"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "MabServerType",
-            "modelAsString": false
-          }
-        },
-        "workloadType": {
-          "description": "Workload type of backup item. Possible values: VM, FileFolder, AzureSqlDb.",
-          "enum": [
-            "Invalid",
-            "VM",
-            "FileFolder",
-            "AzureSqlDb",
-            "SQLDB",
-            "Exchange",
-            "Sharepoint",
-            "DPMUnknown"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "WorkloadType",
-            "modelAsString": false
-          }
-        },
-        "errorDetails": {
-          "description": "The errors.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MabErrorInfo"
-          }
-        },
-        "extendedInfo": {
-          "$ref": "#/definitions/MabJobExtendedInfo",
-          "description": "Additional information on the job."
-        }
-      },
-      "x-ms-discriminator-value": "MabJob"
-    },
-    "MabErrorInfo": {
-      "description": "MAB workload-specific error information.",
-      "type": "object",
-      "properties": {
-        "errorString": {
-          "description": "Localized error string.",
-          "type": "string"
-        },
-        "recommendations": {
-          "description": "List of localized recommendations.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "MabJobExtendedInfo": {
-      "description": "Additional information for the MAB workload-specific job.",
-      "type": "object",
-      "properties": {
-        "tasksList": {
-          "description": "List of tasks for this job.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MabJobTaskDetails"
-          }
-        },
-        "propertyBag": {
-          "description": "The job properties.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "dynamicErrorMessage": {
-          "description": "Non localized error message specific to this job.",
-          "type": "string"
-        }
-      }
-    },
-    "MabJobTaskDetails": {
-      "description": "MAB workload-specific job task details.",
-      "type": "object",
-      "properties": {
-        "taskId": {
-          "description": "The task display name.",
-          "type": "string"
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "The start time.",
-          "type": "string"
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "The end time.",
-          "type": "string"
-        },
-        "duration": {
-          "description": "Time elapsed for task.",
-          "type": "string"
-        },
-        "status": {
-          "description": "The status.",
-          "type": "string"
-        }
-      }
-    },
-    "OperationResultInfo": {
-      "description": "Operation result info.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationResultInfoBase"
-        }
-      ],
-      "properties": {
-        "jobList": {
-          "description": "List of jobs created by this operation.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "OperationResultInfo"
-    },
     "ExportJobsOperationResultInfo": {
       "description": "This class is used to send blob details after exporting jobs.",
       "type": "object",
@@ -3681,6 +3663,25 @@
         }
       },
       "x-ms-discriminator-value": "ExportJobsOperationResultInfo"
+    },
+    "OperationResultInfo": {
+      "description": "Operation result info.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationResultInfoBase"
+        }
+      ],
+      "properties": {
+        "jobList": {
+          "description": "List of jobs created by this operation.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "OperationResultInfo"
     },
     "OperationStatusProvisionILRExtendedInfo": {
       "description": "Operation status extended info for ILR provision action.",
@@ -3729,22 +3730,6 @@
         }
       }
     },
-    "OperationStatusJobExtendedInfo": {
-      "description": "Operation status job extended info.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationStatusExtendedInfo"
-        }
-      ],
-      "properties": {
-        "jobId": {
-          "description": "ID of the job created for this protected item.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "OperationStatusJobExtendedInfo"
-    },
     "OperationStatusJobsExtendedInfo": {
       "description": "Operation status extended info for list of jobs.",
       "type": "object",
@@ -3771,6 +3756,22 @@
       },
       "x-ms-discriminator-value": "OperationStatusJobsExtendedInfo"
     },
+    "OperationStatusJobExtendedInfo": {
+      "description": "Operation status job extended info.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationStatusExtendedInfo"
+        }
+      ],
+      "properties": {
+        "jobId": {
+          "description": "ID of the job created for this protected item.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "OperationStatusJobExtendedInfo"
+    },
     "AzureIaaSClassicComputeVMContainer": {
       "description": "IaaS VM workload-specific backup item representing a classic virtual machine.",
       "type": "object",
@@ -3793,16 +3794,27 @@
       "properties": {},
       "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
     },
-    "AzureIaaSComputeVMProtectedItem": {
+    "AzureIaaSComputeVMProtectableItem": {
       "description": "IaaS VM workload-specific backup item representing the Azure Resource Manager VM.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AzureIaaSVMProtectedItem"
+          "$ref": "#/definitions/IaaSVMProtectableItem"
         }
       ],
       "properties": {},
       "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
+    },
+    "AzureIaaSClassicComputeVMProtectableItem": {
+      "description": "IaaS VM workload-specific backup item representing the Classic Compute VM.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IaaSVMProtectableItem"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "Microsoft.ClassicCompute/virtualMachines"
     },
     "AzureIaaSClassicComputeVMProtectedItem": {
       "description": "IaaS VM workload-specific backup item representing the Classic Compute VM.",
@@ -3814,6 +3826,17 @@
       ],
       "properties": {},
       "x-ms-discriminator-value": "Microsoft.ClassicCompute/virtualMachines"
+    },
+    "AzureIaaSComputeVMProtectedItem": {
+      "description": "IaaS VM workload-specific backup item representing the Azure Resource Manager VM.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureIaaSVMProtectedItem"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
     },
     "ResourceList": {
       "description": "Base for all lists of resources.",
