@@ -34,13 +34,54 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{sourceResourceGroupName}/moveResources": {
+      "post": {
+        "tags": [
+          "ResourceProvider"
+        ],
+        "operationId": "ApiManagement_MoveResources",
+        "description": "Move resources from one resource group to another. The resources being moved should all be in the same resource group.",
+        "parameters": [
+          {
+            "name": "sourceResourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Source resource group name.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourcesMoveInfo"
+            },
+            "description": "move resources' parameters."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {         
+          "204": {
+            "description": "Successfully moved ApiManagement resources."
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/managedeployments": {
       "post": {
         "tags": [
           "ResourceProvider"
         ],
         "operationId": "ApiManagementService_ManageDeployments",
-        "description": "Manage (CUD) deployments of an Api Management service",
+        "description": "Manage deployments of an Api Management service. This operation can be used to  Change Sku or Sku Units, Change Service Tier (Developer/Standard/Premium) and Manage Vpn Configuration. This is a long running operation and could take several minutes to complete.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -99,7 +140,7 @@
           "ResourceProvider"
         ],
         "operationId": "ApiManagementService_Restore",
-        "description": "Begin restore from backup operation of an Api Management service.To determine whether the operation has finished processing the request, call GetLongRunningOperationStatus.",
+        "description": "This operation restores a backup of an ApiManagement service created using ApiManagementService_Backup operation on current service. This is a long running operation and could take several minutes to complete.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -125,7 +166,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully restored the ApiManagement service from the backup.",
+            "description": "Successfully restored the backup onto the ApiManagement service.",
             "schema": {
               "$ref": "#/definitions/ApiServiceResource"
             }
@@ -158,7 +199,7 @@
           "ResourceProvider"
         ],
         "operationId": "ApiManagementService_Backup",
-        "description": "Begin backup operation of an Api Management service.To determine whether the operation has finished processing the request, call GetLongRunningOperationStatus.",
+        "description": "This operation creates a backup of the ApiManagement service to the given Azure Storage Account. This is long running operation and could take several minutes to complete.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -173,7 +214,7 @@
             "schema": {
               "$ref": "#/definitions/ApiServiceBackupRestoreParameters"
             },
-            "description": "Parameters supplied to the BeginBackup operation."
+            "description": "Parameters supplied to the ApiManagementService_Backup operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -217,7 +258,7 @@
           "ResourceProvider"
         ],
         "operationId": "ApiManagementService_CreateOrUpdate",
-        "description": "Creates a new API Management service or updates an existing Api Management service",
+        "description": "Creates a new API Management service or updates an existing Api Management service. This is long running operation and could take several minutes to complete.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -293,7 +334,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully updated the current ApiManagement service.",
             "schema": {
               "$ref": "#/definitions/ApiServiceResource"
             }
@@ -335,7 +376,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully got the ApiManagement Service Resource.",
             "schema": {
               "$ref": "#/definitions/ApiServiceResource"
             }
@@ -449,7 +490,7 @@
           "ResourceProvider"
         ],
         "operationId": "ApiManagementService_GetSsoToken",
-        "description": "Gets SsoToken for an Api Management service.",
+        "description": "Gets the Single Sign On token for the API Management Service valid for 5 Minutes.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -466,16 +507,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "Returns 200 OK if successful with the SSO Redirect URI.",
             "schema": {
               "$ref": "#/definitions/ApiServiceGetSsoTokenResult"
             }
-          },
-          "404": {
-            "description": "Service not found."
-          },
-          "403": {
-            "description": "Service is suspended."
           }
         }
       }
@@ -506,7 +541,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Return the result of check name availability.",
             "schema": {
               "$ref": "#/definitions/ApiServiceNameAvailabilityResult"
             }
@@ -572,7 +607,7 @@
           "ResourceProvider"
         ],
         "operationId": "ApiManagementService_UpdateHostname",
-        "description": "Begin updating hostname of an Api Management service.To determine whether the operation has finished processing the request, call GetLongRunningOperationStatus.",
+        "description": "This operation creates, updates or deletes a custom hostname for an ApiManagement service. The custome hostname can be applied to Proxy and Portal endpoint. This is a long running operation and could take several minutes to complete.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -647,7 +682,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| serviceUrl  | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| path        | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |"
           },
           {
             "name": "$top",
@@ -698,7 +733,7 @@
           "Apis"
         ],
         "operationId": "Apis_Get",
-        "description": "Gets specific API of the Api Management service instance.",
+        "description": "This operation returns the details of the API specified by its identifier.",
         "produces": [
           "application/json",
           "application/vnd.sun.wadl+xml",
@@ -713,13 +748,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "apiId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API.",
-            "maxLength": 256,
-			"pattern": "^[^*#&+:<>?]+$"
+            "$ref": "#/parameters/ApiIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -730,7 +759,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The response body contains the specified API entity.",
             "schema": {
               "$ref": "#/definitions/ApiContract"
             }
@@ -763,13 +792,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "apiId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API.",
-            "maxLength": 256,
-			"pattern": "^[^*#&+:<>?]+$"
+            "$ref": "#/parameters/ApiIdParameter"
           },
           {
             "name": "parameters",
@@ -826,12 +849,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "apiId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API.",
-			"pattern": "^[^*#&+:<>?]+$"
+            "$ref": "#/parameters/ApiIdParameter"
           },
           {
             "name": "parameters",
@@ -888,12 +906,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "apiId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API.",
-			"pattern": "^[^*#&+:<>?]+$"
+            "$ref": "#/parameters/ApiIdParameter"
           },
           {
             "name": "If-Match",
@@ -943,18 +956,14 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "apiId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API."
+            "$ref": "#/parameters/ApiIdParameter"
           },
           {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n| name        | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| method      | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| urlTemplate | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |"
           },
           {
             "name": "$top",
@@ -1014,11 +1023,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "apiId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API."
+            "$ref": "#/parameters/ApiIdParameter"
           },
           {
             "name": "operationId",
@@ -1069,11 +1074,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "apiId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API."
+            "$ref": "#/parameters/ApiIdParameter"
           },
           {
             "name": "operationId",
@@ -1137,11 +1138,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "apiId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API."
+            "$ref": "#/parameters/ApiIdParameter"
           },
           {
             "name": "operationId",
@@ -1211,11 +1208,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "apiId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API."
+            "$ref": "#/parameters/ApiIdParameter"
           },
           {
             "name": "operationId",
@@ -1278,18 +1271,14 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "apiId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API."
+            "$ref": "#/parameters/ApiIdParameter"
           },
           {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
           },
           {
             "name": "$top",
@@ -1316,7 +1305,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The operation returns a collection of products which have the Api entity.",
             "schema": {
               "$ref": "#/definitions/ProductPaged"
             }
@@ -1356,7 +1345,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "| Field        | Supported operators    | Supported functions                         |\n|--------------|------------------------|---------------------------------------------|\n| id           | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| userId       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| productId    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state        | eq                     |                                             |"
           },
           {
             "name": "$top",
@@ -1383,7 +1372,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "A Collection of the Subscription entities for the specified API Management service instance.",
             "schema": {
               "$ref": "#/definitions/SubscriptionPaged"
             }
@@ -1469,6 +1458,7 @@
             "required": true,
             "type": "string",
             "description": "Identifier of the subscription.",
+            "minLength": 1,
             "maxLength": 256,
             "pattern": "^[^*#&+:<>?]+$"
           },
@@ -1769,7 +1759,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| terms       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state       | eq                     |                                             |"
           },
           {
             "name": "$top",
@@ -1803,7 +1793,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "A Collection of the Product entities for the specified API Management service instance.",
             "schema": {
               "$ref": "#/definitions/ProductPaged"
             }
@@ -1837,11 +1827,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the product."
+            "$ref": "#/parameters/ProductIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1852,7 +1838,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The response body contains the specified Product entity.",
             "schema": {
               "$ref": "#/definitions/ProductContract"
             }
@@ -1887,12 +1873,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the product.",
-            "maxLength": 256
+            "$ref": "#/parameters/ProductIdParameter"
           },
           {
             "name": "parameters",
@@ -1947,11 +1928,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the product."
+            "$ref": "#/parameters/ProductIdParameter"
           },
           {
             "name": "parameters",
@@ -2017,11 +1994,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the product."
+            "$ref": "#/parameters/ProductIdParameter"
           },
           {
             "name": "deleteSubscriptions",
@@ -2080,18 +2053,14 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the product."
+            "$ref": "#/parameters/ProductIdParameter"
           },
           {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| serviceUrl  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| path        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n"
           },
           {
             "name": "$top",
@@ -2118,7 +2087,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The response body contains a collection of Api entities in the product.",
             "schema": {
               "$ref": "#/definitions/ApiPaged"
             }
@@ -2159,22 +2128,10 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the product.",
-            "maxLength": 256,
-            "pattern": "^[^*#&+:<>?]+$"
+            "$ref": "#/parameters/ProductIdParameter"
           },
           {
-            "name": "apiId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API.",
-            "maxLength": 256,
-            "pattern": "^[^*#&+:<>?]+$"
+            "$ref": "#/parameters/ApiIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2220,18 +2177,10 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the product."
+            "$ref": "#/parameters/ProductIdParameter"
           },
           {
-            "name": "apiId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API."
+            "$ref": "#/parameters/ApiIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2275,18 +2224,14 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the product."
+            "$ref": "#/parameters/ProductIdParameter"
           },
           {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| type        | eq, ne                 | N/A                                         |"
           },
           {
             "name": "$top",
@@ -2313,7 +2258,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "This operation returns a Collection of Group entities.",
             "schema": {
               "$ref": "#/definitions/GroupPaged"
             }
@@ -2354,20 +2299,10 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the product.",
-            "maxLength": 256
+            "$ref": "#/parameters/ProductIdParameter"
           },
           {
-            "name": "groupId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the Group.",
-            "maxLength": 256
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2406,18 +2341,10 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the product."
+            "$ref": "#/parameters/ProductIdParameter"
           },
           {
-            "name": "groupId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the Group."
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2462,7 +2389,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| type        | eq, ne                 | N/A                                         |"
           },
           {
             "name": "$top",
@@ -2489,7 +2416,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "This operation returns a Collection of Group entities.",
             "schema": {
               "$ref": "#/definitions/GroupPaged"
             }
@@ -2516,11 +2443,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "groupId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the group."
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2531,7 +2454,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The response body contains the specified Group entity.",
             "schema": {
               "$ref": "#/definitions/GroupContract"
             }
@@ -2566,13 +2489,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "groupId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the group.",
-            "maxLength": 256,
-            "pattern": "^[^*#&+:<>?]+$"
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
             "name": "parameters",
@@ -2627,11 +2544,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "groupId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the group."
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
             "name": "parameters",
@@ -2704,11 +2617,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "groupId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the group."
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
             "name": "If-Match",
@@ -2767,18 +2676,14 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "groupId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the group."
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "| Field            | Supported operators    | Supported functions               |\n|------------------|------------------------|-----------------------------------|\n| id               | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| firstName        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| lastName         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| email            | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state            | eq                     | N/A                               |\n| registrationDate | ge, le, eq, ne, gt, lt | N/A                               |\n| note             | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
           },
           {
             "name": "$top",
@@ -2805,7 +2710,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "This operation returns a Collection of user entities associated with the group.",
             "schema": {
               "$ref": "#/definitions/UserPaged"
             }
@@ -2846,20 +2751,10 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "groupId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the group.",
-            "maxLength": 256
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
-            "name": "uid",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the user.",
-            "maxLength": 256
+            "$ref": "#/parameters/UserIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2912,18 +2807,10 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "groupId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the group."
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
-            "name": "uid",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the user."
+            "$ref": "#/parameters/UserIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2960,734 +2847,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/policy": {
-      "get": {
-        "tags": [
-          "TenantPolicy"
-        ],
-        "operationId": "TenantPolicy_Get",
-        "description": "Gets tenant-level policy.",
-        "produces": [
-          "application/vnd.ms-azure-apim.policy+xml",
-          "application/vnd.ms-azure-apim.policy.raw+xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "string",
-              "format": "byte"
-            }
-          },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "There is no policy configuration attached.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "TenantPolicy"
-        ],
-        "operationId": "TenantPolicy_Set",
-        "description": "Sets tenant-level policy.",
-        "consumes": [          
-          "application/vnd.ms-azure-apim.policy+xml",
-          "application/vnd.ms-azure-apim.policy.raw+xml"        
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "policyStream",
-            "in": "body",
-            "required": true,
-            "description": "Policy stream.",		      	
-            "schema": {
-              "type": "string",
-              "format": "byte"
-            }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "description": "ETag of the Tenant Global Policy Entity. Etag should not be specified for create call. It should match current Entity state for update or it should be * for Unconditional update.",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The policy configuration was successfully attached."
-          },
-          "204": {
-            "description": "The existing policy configuration was successfully updated."
-          },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "412": {
-            "description": "Returned if the policy resource doesn’t pass the condition specified by the If-Match header.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "TenantPolicy"
-        ],
-        "operationId": "TenantPolicy_Delete",
-        "description": "Deletes tenant-level policy.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "ETag of the Tenant Global Policy Entity. Etag should match current Entity state or it should be * for Unconditional delete.",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The existing policy configuration was successfully updated."
-          },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "Tenant level global policy not found.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "412": {
-            "description": "Returned if the policy resource doesn’t pass the condition specified by the If-Match header.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policy": {
-      "get": {
-        "tags": [
-          "ProductPolicy"
-        ],
-        "operationId": "ProductPolicy_Get",
-        "description": "Gets specific product policy.",
-        "produces": [
-          "application/vnd.ms-azure-apim.policy+xml",
-          "application/vnd.ms-azure-apim.policy.raw+xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the product."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the policy associated with the product.",
-            "schema": {
-              "type": "string",
-              "format": "byte"
-            }
-          },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified product does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "ProductPolicy"
-        ],
-        "operationId": "ProductPolicy_Set",
-        "description": "Sets policy for product.",
-        "consumes": [          
-          "application/vnd.ms-azure-apim.policy+xml",
-          "application/vnd.ms-azure-apim.policy.raw+xml"        
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the product.",
-            "maxLength": 256
-          },
-          {
-            "name": "policyStream",
-            "in": "body",
-            "required": true,
-            "description": "Policy stream.",
-            "schema": {
-              "type": "string",
-              "format": "byte"
-            }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state version of the product to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The policy configuration was successfully attached to the product."
-          },
-          "204": {
-            "description": "The existing policy configuration was successfully updated."
-          },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified product does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "412": {
-            "description": "Returned if the policy resource doesn’t pass the condition specified by the If-Match header..",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "ProductPolicy"
-        ],
-        "operationId": "ProductPolicy_Delete",
-        "description": "Deletes specific product policy of the Api Management service instance.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the product."
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state version of the product. A value of \"*\" can be used for If-Match to unconditionally apply the operation..",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The existing policy configuration was successfully updated."
-          },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified product does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "412": {
-            "description": "Returned if the policy resource doesn’t pass the condition specified by the If-Match header..",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policy": {
-      "get": {
-        "tags": [
-          "ApiPolicy"
-        ],
-        "operationId": "ApiPolicy_Get",
-        "description": "This operation returns the policy configuration for the specified API.",
-        "produces": [
-          "application/vnd.ms-azure-apim.policy+xml",
-          "application/vnd.ms-azure-apim.policy.raw+xml"     
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "apiId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "string",
-              "format": "byte"
-            }
-          },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified product does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "ApiPolicy"
-        ],
-        "operationId": "ApiPolicy_Set",
-        "description": "Sets policy for API.",
-        "consumes": [
-          "application/vnd.ms-azure-apim.policy+xml",
-          "application/vnd.ms-azure-apim.policy.raw+xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "apiId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API.",
-            "maxLength": 256
-          },
-          {
-            "name": "policyStream",
-            "in": "body",
-            "required": true,
-            "description": "Policy stream.",
-            "schema": {
-              "type": "string",
-              "format": "byte"
-            }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "description": "The entity state version of the API. A value of \"*\" can be used for If-Match to unconditionally apply the operation..",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": ""
-          },
-          "204": {
-            "description": ""
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "ApiPolicy"
-        ],
-        "operationId": "ApiPolicy_Delete",
-        "description": "Deletes specific API policy of the Api Management service instance.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "apiId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API."
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state version of the API. A value of \"*\" can be used for If-Match to unconditionally apply the operation..",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          },
-          "204": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}/policy": {
-      "get": {
-        "tags": [
-          "ApiOperationPolicy"
-        ],
-        "operationId": "ApiOperationPolicy_Get",
-        "description": "Gets specific API operation policy.",
-        "produces": [
-          "application/vnd.ms-azure-apim.policy+xml",
-          "application/vnd.ms-azure-apim.policy.raw+xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "apiId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API."
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API operation."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the policy document that is applied on the API operation.",
-            "schema": {
-              "type": "string",
-              "format": "byte"
-            }
-          },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified product does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "ApiOperationPolicy"
-        ],
-        "operationId": "ApiOperationPolicy_Set",
-        "description": "Sets policy for API operation.",
-        "consumes": [
-          "application/vnd.ms-azure-apim.policy+xml",
-          "application/vnd.ms-azure-apim.policy.raw+xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "apiId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API.",
-            "maxLength": 256
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API operation.",
-            "maxLength": 256
-          },
-          {
-            "name": "policyStream",
-            "in": "body",
-            "required": true,
-            "description": "Policy stream.",
-            "schema": {
-              "type": "string",
-              "format": "byte"
-            }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "description": "The entity state version of the operation to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-         "201": {
-            "description": "The policy configuration was successfully attached to the operation."
-          },
-          "204": {
-            "description": "The existing policy configuration was successfully updated."
-          },
-          "400": {
-            "description": "Request validation failed.The typical cause is that the API or operation doesn't exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "412": {
-            "description": "Returned if the policy resource doesn’t pass the condition specified by the If-Match header..",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "ApiOperationPolicy"
-        ],
-        "operationId": "ApiOperationPolicy_Delete",
-        "description": "Deletes specific API operation policy of the Api Management service instance.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "apiId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API."
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the API operation."
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "description": "The entity state version of the API Operation. A value of \"*\" can be used for If-Match to unconditionally apply the operation..",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-         "204": {
-            "description": "The policy configuration was successfully removed from the operation."
-          },
-          "400": {
-            "description": "Request validation failed.The typical cause is that the API or operation doesn't exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "412": {
-            "description": "Returned if the policy resource doesn’t pass the condition specified by the If-Match header..",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/certificates": {
       "get": {
         "tags": [
@@ -3710,7 +2869,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "| Field          | Supported operators    | Supported functions                         |\n|----------------|------------------------|---------------------------------------------|\n| id             | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| subject        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| thumbprint     | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| expirationDate | ge, le, eq, ne, gt, lt | N/A                                         |"
           },
           {
             "name": "$top",
@@ -3786,7 +2945,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The response body contains the specified Certificate entity.",
             "schema": {
               "$ref": "#/definitions/CertificateContract"
             }
@@ -3812,7 +2971,7 @@
           "Certificates"
         ],
         "operationId": "Certificates_CreateOrUpdate",
-        "description": "Creates new or update existing certificate.",
+        "description": "This operation adds a new certificate to or updates an existing certificate of the specified API Management service instance.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -3825,9 +2984,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Identifier of the subscription.",
+            "description": "Identifier of the certificate entity. Must be unique in the current API Management service instance.",
+            "minLength": 1,
             "maxLength": 256,
-			"pattern": "^[^*#&+:<>?]+$"
+            "pattern": "^[^*#&+:<>?]+$"
           },
           {
             "name": "parameters",
@@ -4001,18 +3161,14 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the product."
+            "$ref": "#/parameters/ProductIdParameter"
           },
           {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "| Field        | Supported operators    | Supported functions                         |\n|--------------|------------------------|---------------------------------------------|\n| id           | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| userId       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| productId    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state        | eq                     |                                             |"
           },
           {
             "name": "$top",
@@ -4087,7 +3243,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "| Field            | Supported operators    | Supported functions               |\n|------------------|------------------------|-----------------------------------|\n| id               | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| firstName        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| lastName         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| email            | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state            | eq                     | N/A                               |\n| registrationDate | ge, le, eq, ne, gt, lt | N/A                               |\n| note             | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
           },
           {
             "name": "$top",
@@ -4148,11 +3304,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "uid",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the user."
+            "$ref": "#/parameters/UserIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -4198,13 +3350,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "uid",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the user.",
-            "maxLength": 256,
-			"pattern": "^[^*#&+:<>?]+$"
+            "$ref": "#/parameters/UserIdParameter"
           },
           {
             "name": "parameters",
@@ -4256,11 +3402,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "uid",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the user."
+            "$ref": "#/parameters/UserIdParameter"
           },
           {
             "name": "parameters",
@@ -4333,11 +3475,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "uid",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the user."
+            "$ref": "#/parameters/UserIdParameter"
           },
           {
             "name": "deleteSubscriptions",
@@ -4403,11 +3541,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "uid",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the user."
+            "$ref": "#/parameters/UserIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -4455,18 +3589,14 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "uid",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the user."
+            "$ref": "#/parameters/UserIdParameter"
           },
           {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
           },
           {
             "name": "$top",
@@ -4534,18 +3664,14 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "uid",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "User identifier."
+            "$ref": "#/parameters/UserIdParameter"
           },
           {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "| Field        | Supported operators    | Supported functions                         |\n|--------------|------------------------|---------------------------------------------|\n| id           | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| userId       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| productId    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state        | eq                     |                                             |"
           },
           {
             "name": "$top",
@@ -4620,7 +3746,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."            
+            "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"            
           },
           {
             "name": "$top",
@@ -4942,11 +4068,7 @@
             "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "uid",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the user."
+            "$ref": "#/parameters/UserIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -5048,7 +4170,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "This operation returns a Collection of Report record.",
             "schema": {
               "$ref": "#/definitions/ReportPaged"
             }
@@ -5246,7 +4368,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| type  | eq                     |                                             |"
           },
           {
             "name": "$top",
@@ -5519,7 +4641,7 @@
             }
           },
           "412": {
-            "description": "Returned if the logger resource doesn�t pass the condition specified by the If-Match header.",
+            "description": "Returned if the logger resource doesn’t pass the condition specified by the If-Match header.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
@@ -5549,7 +4671,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "| Field | Supported operators    | Supported functions                                   |\n|-------|------------------------|-------------------------------------------------------|\n| tags  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith, any, all |\n| name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith           |"
           },
           {
             "name": "$top",
@@ -5851,7 +4973,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
           },
           {
             "name": "$top",
@@ -6247,7 +5369,7 @@
           "TenantConfiguration"
         ],
         "operationId": "TenantConfiguration_Deploy",
-        "description": "This operation applies changes from the specified Git branch to the configuration database.",
+        "description": "This operation applies changes from the specified Git branch to the configuration database. This is a long running operation and could take several minutes to complete.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -6295,7 +5417,7 @@
           "TenantConfiguration"
         ],
         "operationId": "TenantConfiguration_Save",
-        "description": "This operation creates a commit with the current configuration snapshot to the specified branch in the repository.",
+        "description": "This operation creates a commit with the current configuration snapshot to the specified branch in the repository. This is a long running operation and could take several minutes to complete.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -6342,7 +5464,7 @@
           "TenantConfiguration"
         ],
         "operationId": "TenantConfiguration_Validate",
-        "description": "This operation validates the changes in the specified Git branch.",
+        "description": "This operation validates the changes in the specified Git branch. This is a long running operation and could take several minutes to complete.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -6416,12 +5538,28 @@
     }
   },
   "definitions": {
+    "ResourcesMoveInfo": {
+      "properties": {
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The ids of the resources."
+        },
+        "targetResourceGroup": {
+          "type": "string",
+          "description": "The target resource group."
+        }
+      },
+      "description": "Parameters of move resources."
+    },
     "CertificateInformation": {
       "properties": {
         "expiry": {
           "type": "string",
           "format": "date-time",
-          "description": "Expiration date of the certificate."
+          "description": "Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "thumbprint": {
           "type": "string",
@@ -6591,15 +5729,15 @@
       "properties": {
         "storageAccount": {
           "type": "string",
-          "description": "Azure Cloud Starage account (used to place/retrieve the backup) name."
+          "description": "Azure Cloud Storage account (used to place/retrieve the backup) name."
         },
         "accessKey": {
           "type": "string",
-          "description": "Azure Cloud Starage account (used to place/retrieve the backup) access key."
+          "description": "Azure Cloud Storage account (used to place/retrieve the backup) access key."
         },
         "containerName": {
           "type": "string",
-          "description": "Azure Cloud Starage blob container name used to place/retrieve the backup."
+          "description": "Azure Cloud Storage blob container name used to place/retrieve the backup."
         },
         "backupName": {
           "type": "string",
@@ -6636,7 +5774,7 @@
         "createdAtUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "Creation UTC date of the Api Management service."
+          "description": "Creation UTC date of the Api Management service.The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "runtimeUrl": {
           "type": "string",
@@ -6674,7 +5812,7 @@
         },
         "vpnconfiguration": {
           "$ref": "#/definitions/VirtualNetworkConfiguration",
-          "description": "virtual network configuration of the Api Management service ."
+          "description": "Virtual network configuration of the Api Management service."
         },
         "additionalLocations": {
           "type": "array",
@@ -6879,7 +6017,7 @@
         },
         "certificate": {
           "type": "string",
-          "description": "Encoded certificate."
+          "description": "Base64 Encoded certificate."
         },
         "certificate_password": {
           "type": "string",
@@ -6960,25 +6098,29 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "API identifier path: /apis/{apiId}"
+          "description": "API identifier path: /apis/{apiId}",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "API name. Must be 1 to 300 characters long.",
+          "description": "API name.",
+          "minLength": 1,
           "maxLength": 300
         },
         "description": {
           "type": "string",
-          "description": "API description."
+          "description": "Description of the API. May include HTML formatting tags."
         },
         "serviceUrl": {
           "type": "string",
-          "description": "Base address for API requests. Must be 1 to 2000 characters long.",
+          "description": "Absolute URL of the backend service implementing this API.",
+          "minLength": 1,
           "maxLength": 2000
         },
         "path": {
           "type": "string",
-          "description": "Path for API requests. Must be 1 to 400 characters long.",
+          "description": "Path for API requests.",
+          "minLength": 0,
           "maxLength": 400
         },
         "protocols": {
@@ -7212,7 +6354,8 @@
         },
         "name": {
           "type": "string",
-          "description": "Operation Name. Must be 1 to 300 characters long.",
+          "description": "Operation Name.",
+          "minLength": 1,
           "maxLength": 300
         },
         "method": {
@@ -7295,7 +6438,8 @@
         },
         "name": {
           "type": "string",
-          "description": "Product name. Must be 1 to 300 characters long.",
+          "description": "Product name.",
+          "minLength": 1,
           "maxLength": 300
         },
         "description": {
@@ -7308,7 +6452,7 @@
         },
         "subscriptionRequired": {
           "type": "boolean",
-          "description": "whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as \"protected\" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as \"open\" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it's value is assumed to be true."
+          "description": "Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as \"protected\" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as \"open\" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it's value is assumed to be true."
         },
         "approvalRequired": {
           "type": "boolean",
@@ -7366,11 +6510,11 @@
         },
         "userId": {
           "type": "string",
-          "description": "Subscriber identifier path."
+          "description": "Subscriber identifier path in form /users/{uid}"
         },
         "productId": {
           "type": "string",
-          "description": "Product identifier path."
+          "description": "Product identifier path in form /products/{productid}"
         },
         "name": {
           "type": "string",
@@ -7395,27 +6539,27 @@
         "createdDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Subscription creation date."
+          "description": "Subscription creation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "startDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Subscription activation date."
+          "description": "Subscription activation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "expirationDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Subscription expiration date."
+          "description": "Subscription expiration date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "endDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Date when subscription was cancelled or expired."
+          "description": "Date when subscription was cancelled or expired. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "notificationDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Upcoming subscription expiration notification date."
+          "description": "Upcoming subscription expiration notification date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "primaryKey": {
           "type": "string",
@@ -7457,11 +6601,11 @@
       "properties": {
         "userId": {
           "type": "string",
-          "description": "User (user id path) for whom subscription is being created."
+          "description": "User (user id path) for whom subscription is being created in form /users/{uid}"
         },
         "productId": {
           "type": "string",
-          "description": "Product (product id path) for which subscription is being created."
+          "description": "Product (product id path) for which subscription is being created in form /products/{productid}"
         },
         "name": {
           "type": "string",
@@ -7469,12 +6613,14 @@
         },
         "primaryKey": {
           "type": "string",
-          "description": "Primary subscription key. If not specified during request key will be generated automatically. Must be 1 to 256 characters long.",
+          "description": "Primary subscription key. If not specified during request key will be generated automatically.",
+          "minLength": 1,
           "maxLength": 256
         },
         "secondaryKey": {
           "type": "string",
-          "description": "Secondary subscription key. If not specified during request key will be generated automatically. Must be 1 to 256 characters long.",
+          "description": "Secondary subscription key. If not specified during request key will be generated automatically.",
+          "minLength": 1,
           "maxLength": 256
         },
         "state": {
@@ -7522,12 +6668,14 @@
         },
         "primaryKey": {
           "type": "string",
-          "description": "Primary subscription key. Must be 1 to 256 characters long.",
+          "description": "Primary subscription key.",
+		  "minLength": 1,
           "maxLength": 256
         },
         "secondaryKey": {
           "type": "string",
-          "description": "Secondary subscription key. Must be 1 to 256 characters long.",
+          "description": "Secondary subscription key.",
+		  "minLength": 1,
           "maxLength": 256
         },
         "state": {
@@ -7568,13 +6716,13 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Product name. Must be 1 to 300 characters long.",
+          "description": "Product name.",
           "maxLength": 300,
           "minLength": 1
         },
         "description": {
           "type": "string",
-          "description": "Product description. May be 1 to 500 characters long.",
+          "description": "Product description.",
           "maxLength": 500,
           "minLength": 1
         },
@@ -7618,7 +6766,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Group name. Must be 1 to 300 characters long.",
+          "description": "Group name.",
           "maxLength": 300,
           "minLength": 1
         },
@@ -7679,7 +6827,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Group name. Must be 1 to 300 characters long.",
+          "description": "Group name.",
           "maxLength": 300,
           "minLength": 1
         },
@@ -7714,7 +6862,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Group name. Must be 1 to 300 characters long.",
+          "description": "Group name.",
           "maxLength": 300,
           "minLength": 1
         },
@@ -7788,7 +6936,7 @@
         "registrationDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Date of user registration."
+          "description": "Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "note": {
           "type": "string",
@@ -7843,7 +6991,7 @@
         "expirationDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Expiration date of the certificate."
+          "description": "Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         }
       },
       "description": "Certificate details."
@@ -7926,12 +7074,14 @@
         },
         "firstName": {
           "type": "string",
-          "description": "First name. Must be 1 to 100 characters long.",
+          "description": "First name.",
+		  "minLength": 1,
           "maxLength": 100
         },
         "lastName": {
           "type": "string",
-          "description": "Last name. Must be 1 to 100 characters long.",
+          "description": "Last name.",
+		  "minLength": 1,
           "maxLength": 100
         },
         "state": {
@@ -7971,12 +7121,14 @@
         },
         "firstName": {
           "type": "string",
-          "description": "First name. Must be 1 to 100 characters long.",
+          "description": "First name.",
+		  "minLength": 1,
           "maxLength": 100
         },
         "lastName": {
           "type": "string",
-          "description": "Last name. Must be 1 to 100 characters long.",
+          "description": "Last name.",
+		  "minLength": 1,
           "maxLength": 100
         },
         "state": {
@@ -8220,7 +7372,7 @@
         "timestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Start of aggregation period."
+          "description": "Start of aggregation period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "interval": {
           "type": "integer",
@@ -8396,7 +7548,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Logger identifier."
+          "description": "Logger identifier in form /loggers/{loggerId}"
         },
         "type": {
           "type": "string",
@@ -8528,12 +7680,14 @@
         },
         "name": {
           "type": "string",
-          "description": "Unique name of Property. Must be between 1 to 256 characters long.",
+          "description": "Unique name of Property.",
+          "minLength": 1,
           "maxLength": 256
         },
         "value": {
           "type": "string",
-          "description": "The Value of the Property. Must be between 1 to 4096 characters long.",
+          "description": "The Value of the Property.",
+          "minLength": 1,
           "maxLength": 4096
         },
         "tags": {
@@ -8579,12 +7733,14 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Unique name of Property. Must be between 1 to 256 characters long.",
-          "maxLength": 256
+          "description": "Unique name of Property.",
+          "maxLength": 256,
+		  "minLength": 1
         },
         "value": {
           "type": "string",
-          "description": "The Value of the Property. Must be between 1 to 4096 characters long.",
+          "description": "The Value of the Property.",
+		  "minLength": 1,
           "maxLength": 4096
         },
         "tags": {
@@ -8609,12 +7765,14 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Unique name of Property. Must be between 1 to 256 characters long.",
+          "description": "Unique name of Property.",
+		  "minLength": 1,
           "maxLength": 256
         },
         "value": {
           "type": "string",
-          "description": "The Value of the Property. Must be between 1 to 4096 characters long.",
+          "description": "The Value of the Property.",
+		  "minLength": 1,
           "maxLength": 4096
         },
         "tags": {
@@ -8865,12 +8023,12 @@
         "started": {
           "type": "string",
           "format": "date-time",
-          "description": "Start time of an async operation."
+          "description": "Start time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "updated": {
           "type": "string",
           "format": "date-time",
-          "description": "Last update time of an async operation."
+          "description": "Last update time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "resultInfo": {
           "type": "string",
@@ -8923,12 +8081,12 @@
         "syncDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The date of the latest synchronization, in ISO 8601 format."
+          "description": "The date of the latest synchronization. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "configurationChangeDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The date of the latest configuration change, in ISO 8601 format."
+          "description": "The date of the latest configuration change. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         }
       },
       "description": "Tenant Configuration Synchronization State."
@@ -8960,7 +8118,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "Version of the API to be used with the client request."
     },
     "ServiceNameParameter": {
       "name": "serviceName",
@@ -8968,7 +8126,9 @@
       "required": true,
       "type": "string",
       "description": "The name of the Api Management service.",
+      "minLength": 1,
       "maxLength": 50,
+      "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$",
       "x-ms-parameter-location": "method"
     },
     "ResourceGroupNameParameter": {
@@ -8978,6 +8138,50 @@
       "type": "string",
       "description": "The name of the resource group.",
       "x-ms-parameter-location": "method"
-    }
+    },
+    "ApiIdParameter": {
+      "name": "apiId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "API identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+	    "x-ms-parameter-location": "method"
+    },
+    "ProductIdParameter": {
+      "name": "productId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Product identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+	    "x-ms-parameter-location": "method"
+      },
+    "GroupIdParameter": {
+      "name": "groupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Group identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+	    "x-ms-parameter-location": "method"
+      },
+    "UserIdParameter": {
+      "name": "uid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "User identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+	    "x-ms-parameter-location": "method"
+      }
   }
 }
