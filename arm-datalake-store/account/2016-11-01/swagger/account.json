@@ -848,6 +848,26 @@
           "$ref": "#/definitions/EncryptionConfig",
           "description": "The Key vault encryption configuration."
         },
+		"firewallState": {
+          "type": "string",
+          "description": "The current state of the IP address firewall for this Data Lake store account.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallState",
+            "modelAsString": false
+          }
+        },
+		"firewallRules": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          },
+          "description": "The list of firewall rules associated with this Data Lake store account."
+        },
         "lastModifiedTime": {
           "type": "string",
           "readOnly": true,
