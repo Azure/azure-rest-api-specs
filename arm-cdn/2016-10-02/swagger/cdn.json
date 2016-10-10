@@ -40,7 +40,7 @@
           "Profiles"
         ],
         "summary": "Lists the CDN profiles within an Azure subscitption.",
-        "operationId": "Profiles_ListBySubscriptionId",
+        "operationId": "Profiles_List",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -64,7 +64,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -105,7 +105,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -118,16 +118,16 @@
         "operationId": "Profiles_Get",
         "parameters": [
           {
-            "name": "profileName",
+            "name": "resourceGroupName",
             "in": "path",
-            "description": "Name of the CDN profile within the resource group.",
+            "description": "Name of the resource group within the Azure subscription.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "resourceGroupName",
+            "name": "profileName",
             "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
+            "description": "Name of the CDN profile within the resource group.",
             "required": true,
             "type": "string"
           },
@@ -161,6 +161,13 @@
         "operationId": "Profiles_Create",
         "parameters": [
           {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the resource group within the Azure subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "profileName",
             "in": "path",
             "description": "Name of the CDN profile within the resource group.",
@@ -175,13 +182,6 @@
             "schema": {
               "$ref": "#/definitions/ProfileCreateParameters"
             }
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -226,6 +226,13 @@
         "operationId": "Profiles_Update",
         "parameters": [
           {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the resource group within the Azure subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "profileName",
             "in": "path",
             "description": "Name of the CDN profile within the resource group.",
@@ -240,13 +247,6 @@
             "schema": {
               "$ref": "#/definitions/ProfileUpdateParameters"
             }
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -282,19 +282,19 @@
           "Profiles"
         ],
         "summary": "Deletes an existing CDN profile with the specified parameters. Deleting a profile will result in the deletion of all subresources including endpoints, origins and custom domains.",
-        "operationId": "Profiles_DeleteIfExists",
+        "operationId": "Profiles_Delete",
         "parameters": [
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the CDN profile within the resource group.",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "resourceGroupName",
             "in": "path",
             "description": "Name of the resource group within the Azure subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile within the resource group.",
             "required": true,
             "type": "string"
           },
@@ -331,16 +331,16 @@
         "operationId": "Profiles_GenerateSsoUri",
         "parameters": [
           {
-            "name": "profileName",
+            "name": "resourceGroupName",
             "in": "path",
-            "description": "Name of the CDN profile within the resource group.",
+            "description": "Name of the resource group within the Azure subscription.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "resourceGroupName",
+            "name": "profileName",
             "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
+            "description": "Name of the CDN profile within the resource group.",
             "required": true,
             "type": "string"
           },
@@ -376,16 +376,16 @@
         "operationId": "Endpoints_ListByProfile",
         "parameters": [
           {
-            "name": "profileName",
+            "name": "resourceGroupName",
             "in": "path",
-            "description": "Name of the CDN profile within the resource group.",
+            "description": "Name of the resource group within the Azure subscription.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "resourceGroupName",
+            "name": "profileName",
             "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
+            "description": "Name of the CDN profile within the resource group.",
             "required": true,
             "type": "string"
           },
@@ -411,7 +411,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -424,9 +424,9 @@
         "operationId": "Endpoints_Get",
         "parameters": [
           {
-            "name": "endpointName",
+            "name": "resourceGroupName",
             "in": "path",
-            "description": "Name of the endpoint within the CDN profile.",
+            "description": "Name of the resource group within the Azure subscription.",
             "required": true,
             "type": "string"
           },
@@ -438,9 +438,9 @@
             "type": "string"
           },
           {
-            "name": "resourceGroupName",
+            "name": "endpointName",
             "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
+            "description": "Name of the endpoint within the CDN profile.",
             "required": true,
             "type": "string"
           },
@@ -473,6 +473,20 @@
         "summary": "Creates a new CDN endpoint with the specified parameters.",
         "operationId": "Endpoints_Create",
         "parameters": [
+		  {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the resource group within the Azure subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile within the resource group.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "endpointName",
             "in": "path",
@@ -488,20 +502,6 @@
             "schema": {
               "$ref": "#/definitions/EndpointCreateParameters"
             }
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the CDN profile within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -546,6 +546,20 @@
         "operationId": "Endpoints_Update",
         "parameters": [
           {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the resource group within the Azure subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "endpointName",
             "in": "path",
             "description": "Name of the endpoint within the CDN profile.",
@@ -560,20 +574,6 @@
             "schema": {
               "$ref": "#/definitions/EndpointUpdateParameters"
             }
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the CDN profile within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -609,12 +609,12 @@
           "Endpoints"
         ],
         "summary": "Deletes an existing CDN endpoint with the specified parameters.",
-        "operationId": "Endpoints_DeleteIfExists",
+        "operationId": "Endpoints_Delete",
         "parameters": [
           {
-            "name": "endpointName",
+            "name": "resourceGroupName",
             "in": "path",
-            "description": "Name of the endpoint within the CDN profile.",
+            "description": "Name of the resource group within the Azure subscription.",
             "required": true,
             "type": "string"
           },
@@ -626,9 +626,9 @@
             "type": "string"
           },
           {
-            "name": "resourceGroupName",
+            "name": "endpointName",
             "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
+            "description": "Name of the endpoint within the CDN profile.",
             "required": true,
             "type": "string"
           },
@@ -665,9 +665,9 @@
         "operationId": "Endpoints_Start",
         "parameters": [
           {
-            "name": "endpointName",
+            "name": "resourceGroupName",
             "in": "path",
-            "description": "Name of the endpoint within the CDN profile.",
+            "description": "Name of the resource group within the Azure subscription.",
             "required": true,
             "type": "string"
           },
@@ -679,9 +679,9 @@
             "type": "string"
           },
           {
-            "name": "resourceGroupName",
+            "name": "endpointName",
             "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
+            "description": "Name of the endpoint within the CDN profile.",
             "required": true,
             "type": "string"
           },
@@ -718,9 +718,9 @@
         "operationId": "Endpoints_Stop",
         "parameters": [
           {
-            "name": "endpointName",
+            "name": "resourceGroupName",
             "in": "path",
-            "description": "Name of the endpoint within the CDN profile.",
+            "description": "Name of the resource group within the Azure subscription.",
             "required": true,
             "type": "string"
           },
@@ -732,9 +732,9 @@
             "type": "string"
           },
           {
-            "name": "resourceGroupName",
+            "name": "endpointName",
             "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
+            "description": "Name of the endpoint within the CDN profile.",
             "required": true,
             "type": "string"
           },
@@ -771,6 +771,20 @@
         "operationId": "Endpoints_PurgeContent",
         "parameters": [
           {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the resource group within the Azure subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "endpointName",
             "in": "path",
             "description": "Name of the endpoint within the CDN profile.",
@@ -785,20 +799,6 @@
             "schema": {
               "$ref": "#/definitions/PurgeParameters"
             }
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the CDN profile within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -830,6 +830,20 @@
         "operationId": "Endpoints_LoadContent",
         "parameters": [
           {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the resource group within the Azure subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "endpointName",
             "in": "path",
             "description": "Name of the endpoint within the CDN profile.",
@@ -844,20 +858,6 @@
             "schema": {
               "$ref": "#/definitions/LoadParameters"
             }
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the CDN profile within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -889,6 +889,20 @@
         "operationId": "Endpoints_ValidateCustomDomain",
         "parameters": [
           {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the resource group within the Azure subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "endpointName",
             "in": "path",
             "description": "Name of the endpoint within the CDN profile.",
@@ -903,20 +917,6 @@
             "schema": {
               "$ref": "#/definitions/ValidateCustomDomainInput"
             }
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the CDN profile within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -950,9 +950,9 @@
         "operationId": "Origins_ListByEndpoint",
         "parameters": [
           {
-            "name": "endpointName",
+            "name": "resourceGroupName",
             "in": "path",
-            "description": "Name of the endpoint within the CDN profile.",
+            "description": "Name of the resource group within the Azure subscription.",
             "required": true,
             "type": "string"
           },
@@ -964,9 +964,9 @@
             "type": "string"
           },
           {
-            "name": "resourceGroupName",
+            "name": "endpointName",
             "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
+            "description": "Name of the endpoint within the CDN profile.",
             "required": true,
             "type": "string"
           },
@@ -992,7 +992,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1005,16 +1005,9 @@
         "operationId": "Origins_Get",
         "parameters": [
           {
-            "name": "originName",
+            "name": "resourceGroupName",
             "in": "path",
-            "description": "Name of the origin, an arbitrary value but it needs to be unique under endpoint",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint within the CDN profile.",
+            "description": "Name of the resource group within the Azure subscription.",
             "required": true,
             "type": "string"
           },
@@ -1026,9 +1019,16 @@
             "type": "string"
           },
           {
-            "name": "resourceGroupName",
+            "name": "endpointName",
             "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
+            "description": "Name of the endpoint within the CDN profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originName",
+            "in": "path",
+            "description": "Name of the origin, an arbitrary value but it needs to be unique under endpoint",
             "required": true,
             "type": "string"
           },
@@ -1062,6 +1062,27 @@
         "operationId": "Origins_Create",
         "parameters": [
           {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the resource group within the Azure subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint within the CDN profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "originName",
             "in": "path",
             "description": "Name of the origin, an arbitrary value but it needs to be unique under endpoint",
@@ -1076,27 +1097,6 @@
             "schema": {
               "$ref": "#/definitions/OriginParameters"
             }
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint within the CDN profile.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the CDN profile within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1141,6 +1141,27 @@
         "operationId": "Origins_Update",
         "parameters": [
           {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the resource group within the Azure subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint within the CDN profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "originName",
             "in": "path",
             "description": "Name of the origin. Must be unique within endpoint.",
@@ -1155,27 +1176,6 @@
             "schema": {
               "$ref": "#/definitions/OriginParameters"
             }
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint within the CDN profile.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the CDN profile within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1211,19 +1211,12 @@
           "Origins"
         ],
         "summary": "Deletes an existing CDN origin within an endpoint.",
-        "operationId": "Origins_DeleteIfExists",
+        "operationId": "Origins_Delete",
         "parameters": [
           {
-            "name": "originName",
+            "name": "resourceGroupName",
             "in": "path",
-            "description": "Name of the origin. Must be unique within endpoint.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint within the CDN profile.",
+            "description": "Name of the resource group within the Azure subscription.",
             "required": true,
             "type": "string"
           },
@@ -1235,9 +1228,16 @@
             "type": "string"
           },
           {
-            "name": "resourceGroupName",
+            "name": "endpointName",
             "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
+            "description": "Name of the endpoint within the CDN profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originName",
+            "in": "path",
+            "description": "Name of the origin. Must be unique within endpoint.",
             "required": true,
             "type": "string"
           },
@@ -1277,9 +1277,9 @@
         "operationId": "CustomDomains_ListByEndpoint",
         "parameters": [
           {
-            "name": "endpointName",
+            "name": "resourceGroupName",
             "in": "path",
-            "description": "Name of the endpoint within the CDN profile.",
+            "description": "Name of the resource group within the Azure subscription.",
             "required": true,
             "type": "string"
           },
@@ -1291,9 +1291,9 @@
             "type": "string"
           },
           {
-            "name": "resourceGroupName",
+            "name": "endpointName",
             "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
+            "description": "Name of the endpoint within the CDN profile.",
             "required": true,
             "type": "string"
           },
@@ -1319,7 +1319,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1332,16 +1332,9 @@
         "operationId": "CustomDomains_Get",
         "parameters": [
           {
-            "name": "customDomainName",
+            "name": "resourceGroupName",
             "in": "path",
-            "description": "Name of the custom domain within an endpoint.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint within the CDN profile.",
+            "description": "Name of the resource group within the Azure subscription.",
             "required": true,
             "type": "string"
           },
@@ -1353,9 +1346,16 @@
             "type": "string"
           },
           {
-            "name": "resourceGroupName",
+            "name": "endpointName",
             "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
+            "description": "Name of the endpoint within the CDN profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customDomainName",
+            "in": "path",
+            "description": "Name of the custom domain within an endpoint.",
             "required": true,
             "type": "string"
           },
@@ -1389,6 +1389,27 @@
         "operationId": "CustomDomains_Create",
         "parameters": [
           {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the resource group within the Azure subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint within the CDN profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "customDomainName",
             "in": "path",
             "description": "Name of the custom domain within an endpoint.",
@@ -1403,27 +1424,6 @@
             "schema": {
               "$ref": "#/definitions/CustomDomainParameters"
             }
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint within the CDN profile.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the CDN profile within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1468,6 +1468,27 @@
         "operationId": "CustomDomains_Update",
         "parameters": [
           {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the resource group within the Azure subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint within the CDN profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "customDomainName",
             "in": "path",
             "description": "Name of the custom domain within an endpoint.",
@@ -1482,27 +1503,6 @@
             "schema": {
               "$ref": "#/definitions/CustomDomainParameters"
             }
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint within the CDN profile.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the CDN profile within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1525,19 +1525,12 @@
           "CustomDomains"
         ],
         "summary": "Deletes an existing CDN custom domain within an endpoint.",
-        "operationId": "CustomDomains_DeleteIfExists",
+        "operationId": "CustomDomains_Delete",
         "parameters": [
           {
-            "name": "customDomainName",
+            "name": "resourceGroupName",
             "in": "path",
-            "description": "Name of the custom domain within an endpoint.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint within the CDN profile.",
+            "description": "Name of the resource group within the Azure subscription.",
             "required": true,
             "type": "string"
           },
@@ -1549,9 +1542,16 @@
             "type": "string"
           },
           {
-            "name": "resourceGroupName",
+            "name": "endpointName",
             "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
+            "description": "Name of the endpoint within the CDN profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customDomainName",
+            "in": "path",
+            "description": "Name of the custom domain within an endpoint.",
             "required": true,
             "type": "string"
           },
@@ -1591,7 +1591,7 @@
           "CheckNameAvailability"
         ],
         "summary": "Check the availability of a resource name without creating the resource. This is needed for resources where name is globally unique, such as a CDN endpoint.",
-        "operationId": "NameAvailability_CheckNameAvailability",
+        "operationId": "CheckNameAvailability",
         "parameters": [
           {
             "name": "checkNameAvailabilityInput",
@@ -1628,7 +1628,7 @@
           "Operations"
         ],
         "summary": "Lists all of the available CDN REST API operations.",
-        "operationId": "Operations_List",
+        "operationId": "ListOperations",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1649,7 +1649,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -1705,6 +1705,10 @@
             "$ref": "#/definitions/Profile"
           },
           "description": "List of CDN profiles within a resource group."
+        },
+		"nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
         }
       }
     },
@@ -1859,6 +1863,10 @@
             "$ref": "#/definitions/Endpoint"
           },
           "description": "List of CDN endpoints within a profile"
+        },
+		"nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
         }
       }
     },
@@ -2180,6 +2188,10 @@
             "$ref": "#/definitions/Origin"
           },
           "description": "List of CDN origins within an endpoint"
+        },
+		"nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
         }
       }
     },
@@ -2257,6 +2269,10 @@
             "$ref": "#/definitions/CustomDomain"
           },
           "description": "List of CDN CustomDomains within an endpoint."
+        },
+		"nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
         }
       }
     },
@@ -2373,6 +2389,10 @@
             "$ref": "#/definitions/Operation"
           },
           "description": "List of CDN operations supported by the CDN resource provider."
+        },
+		"nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
         }
       }
     },
@@ -2465,7 +2485,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "SkuName",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
