@@ -1935,6 +1935,7 @@
       "discriminator": "objectType"
     },
     "JobResource": {
+      "description": "Defines workload agnostic properties for a job.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2147,6 +2148,7 @@
       "discriminator": "objectType"
     },
     "WorkloadProtectableItemResource": {
+      "description": "Base class for backup item. Workload-specific backup items are derived from this class.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2159,6 +2161,7 @@
       }
     },
     "ProtectedItemResource": {
+      "description": "Base class for backup items.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2272,6 +2275,7 @@
       }
     },
     "BackupRequestResource": {
+      "description": "Base class for backup request. Workload-specific backup requests are derived from this class.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2305,7 +2309,21 @@
         },
         "itemType": {
           "description": "Type of workload this item represents. Possible values: VM, FileFolder.",
-          "type": "string"
+          "enum": [
+            "Invalid",
+            "VM",
+            "FileFolder",
+            "AzureSqlDb",
+            "SQLDB",
+            "Exchange",
+            "Sharepoint",
+            "DPMUnknown"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataSourceType",
+            "modelAsString": false
+          }
         },
         "policyName": {
           "description": "Backup policy name associated with the backup item.",
@@ -2347,6 +2365,7 @@
       "discriminator": "objectType"
     },
     "RecoveryPointResource": {
+      "description": "Base class for backup copies. Workload-specific backup copies are derived from this class.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2404,6 +2423,7 @@
       }
     },
     "ProtectionContainerResource": {
+      "description": "Base class for container with backup items. Containers with specific workloads are derived from this class.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2495,6 +2515,7 @@
       }
     },
     "ProtectionPolicyResource": {
+      "description": "Base class for backup policy. Workload-specific backup policies are derived from this class.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2507,6 +2528,7 @@
       }
     },
     "RestoreRequestResource": {
+      "description": "Base class for restore request. Workload-specific restore requests are derived from this class.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2545,6 +2567,7 @@
       }
     },
     "ILRRequestResource": {
+      "description": "Parameters to restore file/folders API.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2941,12 +2964,24 @@
     "SchedulePolicy": {
       "description": "Base class for backup schedule.",
       "type": "object",
-      "properties": {}
+      "properties": {
+        "schedulePolicyType": {
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "type": "string"
+        }
+      },
+      "discriminator": "schedulePolicyType"
     },
     "RetentionPolicy": {
       "description": "Base class for retention policy.",
       "type": "object",
-      "properties": {}
+      "properties": {
+        "retentionPolicyType": {
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "type": "string"
+        }
+      },
+      "discriminator": "retentionPolicyType"
     },
     "MabProtectionPolicy": {
       "description": "Mab container-specific backup policy.",
@@ -3119,7 +3154,17 @@
         },
         "recoveryType": {
           "description": "Type of this recovery. \r\n            Possible values: OriginalLocation, AlternateLocation, RestoreDisks.",
-          "type": "string"
+          "enum": [
+            "Invalid",
+            "OriginalLocation",
+            "AlternateLocation",
+            "RestoreDisks"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": false
+          }
         },
         "sourceResourceId": {
           "description": "Fully qualified ARM ID of the VM which is being recovered.",
@@ -3683,6 +3728,72 @@
       },
       "x-ms-discriminator-value": "OperationResultInfo"
     },
+    "AzureIaaSClassicComputeVMContainer": {
+      "description": "IaaS VM workload-specific backup item representing a classic virtual machine.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IaaSVMContainer"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "Microsoft.ClassicCompute/virtualMachines"
+    },
+    "AzureIaaSComputeVMContainer": {
+      "description": "IaaS VM workload-specific backup item representing an Azure Resource Manager virtual machine.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IaaSVMContainer"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
+    },
+    "AzureIaaSComputeVMProtectableItem": {
+      "description": "IaaS VM workload-specific backup item representing the Azure Resource Manager VM.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IaaSVMProtectableItem"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
+    },
+    "AzureIaaSClassicComputeVMProtectableItem": {
+      "description": "IaaS VM workload-specific backup item representing the Classic Compute VM.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IaaSVMProtectableItem"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "Microsoft.ClassicCompute/virtualMachines"
+    },
+    "AzureIaaSClassicComputeVMProtectedItem": {
+      "description": "IaaS VM workload-specific backup item representing the Classic Compute VM.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureIaaSVMProtectedItem"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "Microsoft.ClassicCompute/virtualMachines"
+    },
+    "AzureIaaSComputeVMProtectedItem": {
+      "description": "IaaS VM workload-specific backup item representing the Azure Resource Manager VM.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureIaaSVMProtectedItem"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
+    },
     "OperationStatusProvisionILRExtendedInfo": {
       "description": "Operation status extended info for ILR provision action.",
       "type": "object",
@@ -3772,71 +3883,266 @@
       },
       "x-ms-discriminator-value": "OperationStatusJobExtendedInfo"
     },
-    "AzureIaaSClassicComputeVMContainer": {
-      "description": "IaaS VM workload-specific backup item representing a classic virtual machine.",
+    "SimpleSchedulePolicy": {
+      "description": "Simple policy schedule.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/IaaSVMContainer"
+          "$ref": "#/definitions/SchedulePolicy"
         }
       ],
-      "properties": {},
-      "x-ms-discriminator-value": "Microsoft.ClassicCompute/virtualMachines"
+      "properties": {
+        "scheduleRunFrequency": {
+          "description": "Frequency of the schedule operation of this policy. \r\n            Possible values: Daily, Weekly.",
+          "type": "string"
+        },
+        "scheduleRunDays": {
+          "description": "List of days of week this schedule has to be run.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scheduleRunTimes": {
+          "description": "List of times of day this schedule has to be run.",
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "scheduleWeeklyFrequency": {
+          "format": "int32",
+          "description": "At every number weeks this schedule has to be run.",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "SimpleSchedulePolicy"
     },
-    "AzureIaaSComputeVMContainer": {
-      "description": "IaaS VM workload-specific backup item representing an Azure Resource Manager virtual machine.",
+    "LongTermSchedulePolicy": {
+      "description": "Long term policy schedule.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/IaaSVMContainer"
+          "$ref": "#/definitions/SchedulePolicy"
         }
       ],
-      "properties": {},
-      "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
+      "properties": {}
     },
-    "AzureIaaSComputeVMProtectableItem": {
-      "description": "IaaS VM workload-specific backup item representing the Azure Resource Manager VM.",
+    "LongTermRetentionPolicy": {
+      "description": "Long term retention policy.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/IaaSVMProtectableItem"
+          "$ref": "#/definitions/RetentionPolicy"
         }
       ],
-      "properties": {},
-      "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
+      "properties": {
+        "dailySchedule": {
+          "$ref": "#/definitions/DailyRetentionSchedule",
+          "description": "Daily retention schedule of the protection policy."
+        },
+        "weeklySchedule": {
+          "$ref": "#/definitions/WeeklyRetentionSchedule",
+          "description": "Weekly retention schedule of the protection policy."
+        },
+        "monthlySchedule": {
+          "$ref": "#/definitions/MonthlyRetentionSchedule",
+          "description": "Monthly retention schedule of the protection policy."
+        },
+        "yearlySchedule": {
+          "$ref": "#/definitions/YearlyRetentionSchedule",
+          "description": "Yearly retention schedule of the protection policy."
+        }
+      },
+      "x-ms-discriminator-value": "LongTermRetentionPolicy"
     },
-    "AzureIaaSClassicComputeVMProtectableItem": {
-      "description": "IaaS VM workload-specific backup item representing the Classic Compute VM.",
+    "DailyRetentionSchedule": {
+      "description": "Daily retention schedule.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IaaSVMProtectableItem"
+      "properties": {
+        "retentionTimes": {
+          "description": "Retention times of retention policy.",
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "retentionDuration": {
+          "$ref": "#/definitions/RetentionDuration",
+          "description": "Retention duration of retention Policy."
         }
-      ],
-      "properties": {},
-      "x-ms-discriminator-value": "Microsoft.ClassicCompute/virtualMachines"
+      }
     },
-    "AzureIaaSClassicComputeVMProtectedItem": {
-      "description": "IaaS VM workload-specific backup item representing the Classic Compute VM.",
+    "WeeklyRetentionSchedule": {
+      "description": "Weekly retention schedule.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureIaaSVMProtectedItem"
+      "properties": {
+        "daysOfTheWeek": {
+          "description": "List of days of week for weekly retention policy.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "retentionTimes": {
+          "description": "Retention times of retention policy.",
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "retentionDuration": {
+          "$ref": "#/definitions/RetentionDuration",
+          "description": "Retention duration of retention Policy."
         }
-      ],
-      "properties": {},
-      "x-ms-discriminator-value": "Microsoft.ClassicCompute/virtualMachines"
+      }
     },
-    "AzureIaaSComputeVMProtectedItem": {
-      "description": "IaaS VM workload-specific backup item representing the Azure Resource Manager VM.",
+    "MonthlyRetentionSchedule": {
+      "description": "Monthly retention schedule.",
+      "type": "object",
+      "properties": {
+        "retentionScheduleFormatType": {
+          "description": "Retention schedule format type for monthly retention policy. Possible values: Daily, Weekly.",
+          "type": "string"
+        },
+        "retentionScheduleDaily": {
+          "$ref": "#/definitions/DailyRetentionFormat",
+          "description": "Daily retention format for monthly retention policy."
+        },
+        "retentionScheduleWeekly": {
+          "$ref": "#/definitions/WeeklyRetentionFormat",
+          "description": "Weekly retention format for monthly retention policy."
+        },
+        "retentionTimes": {
+          "description": "Retention times of retention policy.",
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "retentionDuration": {
+          "$ref": "#/definitions/RetentionDuration",
+          "description": "Retention duration of retention Policy."
+        }
+      }
+    },
+    "YearlyRetentionSchedule": {
+      "description": "Yearly retention schedule.",
+      "type": "object",
+      "properties": {
+        "retentionScheduleFormatType": {
+          "description": "Retention schedule format for yearly retention policy. Possible values: Daily, Weekly.",
+          "type": "string"
+        },
+        "monthsOfYear": {
+          "description": "List of months of year of yearly retention policy. Possible Values: January, February, ..., December.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "retentionScheduleDaily": {
+          "$ref": "#/definitions/DailyRetentionFormat",
+          "description": "Daily retention format for yearly retention policy."
+        },
+        "retentionScheduleWeekly": {
+          "$ref": "#/definitions/WeeklyRetentionFormat",
+          "description": "Weekly retention format for yearly retention policy."
+        },
+        "retentionTimes": {
+          "description": "Retention times of retention policy.",
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "retentionDuration": {
+          "$ref": "#/definitions/RetentionDuration",
+          "description": "Retention duration of retention Policy."
+        }
+      }
+    },
+    "RetentionDuration": {
+      "description": "Retention duration.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "description": "Count of duration types. Retention duration is obtained by the counting the duration type Count times. \r\n            For example, when Count = 3 and DurationType = Weeks, retention duration will be three weeks.",
+          "type": "integer"
+        },
+        "durationType": {
+          "description": "Retention duration type of retention policy. Possible values: Days, Weeks, Months, Years.",
+          "type": "string"
+        }
+      }
+    },
+    "DailyRetentionFormat": {
+      "description": "Daily retention format.",
+      "type": "object",
+      "properties": {
+        "daysOfTheMonth": {
+          "description": "List of days of the month.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Day"
+          }
+        }
+      }
+    },
+    "WeeklyRetentionFormat": {
+      "description": "Weekly retention format.",
+      "type": "object",
+      "properties": {
+        "daysOfTheWeek": {
+          "description": "List of days of the week. Possible values: Sunday, Monday, ..., Saturday.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "weeksOfTheMonth": {
+          "description": "List of weeks of month. Possible values: First, Second, Third, Fourth, Last.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Day": {
+      "description": "Day of the week.",
+      "type": "object",
+      "properties": {
+        "date": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "isLast": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SimpleRetentionPolicy": {
+      "description": "Simple policy retention.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AzureIaaSVMProtectedItem"
+          "$ref": "#/definitions/RetentionPolicy"
         }
       ],
-      "properties": {},
-      "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
+      "properties": {
+        "retentionDuration": {
+          "$ref": "#/definitions/RetentionDuration",
+          "description": "Retention duration of the protection policy."
+        }
+      },
+      "x-ms-discriminator-value": "SimpleRetentionPolicy"
     },
     "ResourceList": {
       "description": "Base for all lists of resources.",
@@ -3867,6 +4173,7 @@
       }
     },
     "BackupEngineBaseResource": {
+      "description": "The base backup engine class. All workload specific backup engines derive from this class.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -3879,6 +4186,7 @@
       }
     },
     "OperationResultInfoBaseResource": {
+      "description": "Base class for operation result info.",
       "allOf": [
         {
           "$ref": "#/definitions/OperationWorkerResponse"
