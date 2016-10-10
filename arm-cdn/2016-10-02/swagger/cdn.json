@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2016-10-02",
+    "version": "2016-04-02",
     "title": "CdnManagementClient",
     "description": "Use these APIs to manage Azure CDN resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure. For more information, see <a href=\"https://msdn.microsoft.com/en-us/library/azure/dn790557.aspx\">Authenticating Azure Resource Manager requests.</a>"
   },
@@ -1821,13 +1821,6 @@
             "$ref": "#/definitions/DeepCreatedOrigin"
           }
         },
-		"geoFilters": {
-		  "description": "The list of geo filters for the CDN endpoint.",
-		  "type": "array",
-		  "items": {
-			"$ref": "#/definitions/GeoFilter"
-		  }
-		},
         "resourceState": {
           "description": "Resource status of the endpoint.",
           "readOnly": true,
@@ -1947,14 +1940,7 @@
           "items": {
             "$ref": "#/definitions/DeepCreatedOrigin"
           }
-        },
-		"geoFilters": {
-		  "description": "The list of geo filters for the CDN endpoint.",
-		  "type": "array",
-		  "items": {
-			"$ref": "#/definitions/GeoFilter"
-		  }
-		}
+        }
       }
     },
     "EndpointPropertiesUpdateParameters": {
@@ -2031,32 +2017,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-	"GeoFilter": {
-      "description": "Geo filter of a CDN endpoint.",
-      "type": "object",
-      "required": [
-        "relativePath",
-		"action",
-		"countryCodes"
-      ],
-      "properties": {
-        "relativePath": {
-          "description": "Relative path apply geo filter.",
-          "type": "string"
-        },
-        "action": {
-          "description": "Action of the geo filter.",
-          "type": "string"
-        },
-		"countryCodes":	{
-		  "description": "Country codes of the geo filter.",
-          "type": "array",
-		  "items": {
-            "type": "string"
-          }
-		}
-      }
     },
     "PurgeParameters": {
       "type": "object",
@@ -2459,8 +2419,7 @@
             "Standard_Verizon",
             "Premium_Verizon",
             "Custom_Verizon",
-            "Standard_Akamai",
-			"Standard_ChinaCdn"
+            "Standard_Akamai"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2498,7 +2457,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2016-10-02"
+      "description": "Version of the API to be used with the client request. Current version is 2016-04-02"
     }
   }
 }
