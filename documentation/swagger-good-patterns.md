@@ -71,19 +71,20 @@ These are patterns that a spec is expected to follow by default to be included i
  
  - **Mutability**
  
-	- Use x-ms-mutability extension to document mutability aspects of models
-	- `Readonly: true` should be applied on all read-only properties
+	- Use [x-ms-mutability extension](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-mutability) to document mutability aspects of models.
+	- `Readonly: true` should be applied on all read-only properties. Read-only values include server generated values. The provisioning state is a canonical example of a read-only property.
  
  - **Required properties**
  
-	- `Required: true` should be applied on all required properties
+	- All required properties should be indicated by name in the `required` array attribute.
  
  - **Correct data types**
 
 	- Use correct data types for properties. A lot of times boolean properties are marked as string
  
  - **Resource should include all the properties per ARM standard**
+	- Please refer to [Resource definitions](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/resource-definitions.md) for version V1 and version V2 definitions.   
  
  - **Response Codes**
 	
-	- Include all the response codes for an operations including error response codes
+	- Include all the positive response codes for an operation.
