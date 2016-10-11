@@ -50,11 +50,11 @@ Swagger files are simply JSON files that follow the [OpenAPI Specification](http
 ### Documentation
 The [/documentation](../documentation/) folder contains many resources for writing Swagger files.
 
-The [Swagger Good Patterns](./documentation/swagger-good-patterns.md) page is intended as a guide for different scenarios. If you know the service behavior that you're trying to model (e.g. PUT/PATCH/GET responses and request schemas, or modeling long running operations), that document is structured to make it easy to find our recommendations.
+The [Swagger Good Patterns](../documentation/swagger-good-patterns.md) page is intended as a guide for different scenarios. If you know the service behavior that you're trying to model (e.g. PUT/PATCH/GET responses and request schemas, or modeling long running operations), that document is structured to make it easy to find our recommendations.
 
-The [Reference Documentation](./documentation/creating-swagger.md) page contains lots of information about each part of a Swagger file and how to structure it correctly for code generation. If you're looking for an explanation of what a part of Swagger relates to your service or how it's used to generate code, that document is the right place to go.
+The [Reference Documentation](../documentation/creating-swagger.md) page contains lots of information about each part of a Swagger file and how to structure it correctly for code generation. If you're looking for an explanation of what a part of Swagger relates to your service or how it's used to generate code, that document is the right place to go.
 
-The [Linter](./documentation/linter.md) page has instructions for downloading our extension for VS Code and links to explanations for each validation error or warning.
+The [Linter](../documentation/linter.md) page has instructions for downloading our extension for VS Code and links to explanations for each validation error or warning.
 
 ### Filenames and folder structure
 - Swagger spec for every api-version should be in a separate folder named with the api-version.
