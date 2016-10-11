@@ -598,7 +598,7 @@
       "properties": {
         "applicationId": {
           "type": "string",
-          "description": "The application Id of the management lock owner."
+          "description": "The application Id of the lock owner."
         }
       }
     },
@@ -606,7 +606,7 @@
       "properties": {
         "level": {
           "type": "string",
-          "description": "The lock level of the management lock.",
+          "description": "The lock level of the lock.",
           "enum": [
             "NotSpecified",
             "CanNotDelete",
@@ -619,18 +619,18 @@
         },
         "notes": {
           "type": "string",
-          "description": "The notes of the management lock."
+          "description": "The notes of the lock."
         },
         "owners": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagementLockOwner"
           },
-          "description": "The owners of the management lock."
+          "description": "The owners of the lock."
         }
       },
       "required": [ "level" ],
-      "description": "The management lock properties."
+      "description": "The lock properties."
     },
     "ManagementLockObject": {
       "properties": {
@@ -655,7 +655,7 @@
         }
       },
       "required": [ "properties" ],
-      "description": "Management lock information.",
+      "description": "The lock information.",
       "x-ms-azure-resource": true
     },
     "ManagementLockListResult": {
@@ -672,7 +672,7 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "List of management locks."
+      "description": "The list of locks."
     }
   },
   "parameters": {
