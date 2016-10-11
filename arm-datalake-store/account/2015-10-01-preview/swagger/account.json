@@ -419,6 +419,42 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/enableKeyVault": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "Account_EnableKeyVault",
+        "description": "Attempts to enable a user managed key vault for encryption of the specified Data Lake Store account.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure resource group that contains the Data Lake Store account."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store account to attempt to enable the Key Vault for."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully enabled the user managed Key Vault for use encrypting this Data Lake Store account."
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts": {
       "get": {
         "tags": [
@@ -679,6 +715,69 @@
       },
       "description": "Data Lake Store firewall rule list information."
     },
+    "EncryptionIdentity": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of encryption being used. Currently the only supported type is 'SystemAssigned'.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionIdentityType",
+            "modelAsString": false
+          }
+        },
+        "principalId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true,
+          "description": "The principal identifier associated with the encryption."
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true,
+          "description": "The tenant identifier associated with the encryption."
+        }
+      }
+    },
+    "EncryptionConfig": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of encryption configuration being used. Currently the only supported types are 'UserManaged' and 'ServiceManaged'.",
+          "enum": [
+            "UserManaged",
+            "ServiceManaged"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionConfigType",
+            "modelAsString": false
+          }
+        },
+        "keyVaultMetaInfo": {
+          "$ref": "#/definitions/KeyVaultMetaInfo",
+          "description": "The Key vault information for connecting to user managed encryption keys."
+        }
+      }
+    },
+    "KeyVaultMetaInfo": {
+      "properties": {
+        "keyVaultResourceId": {
+          "type": "string",
+          "description": "The resource identifier for the user managed Key Vault being used to encrypt."
+        },
+        "encryptionKeyName": {
+          "type": "string",
+          "description": "The name of the user managed encryption key."
+        },
+        "encryptionKeyVersion": {
+          "type": "string",
+          "description": "The version of the user managed encryption key."
+        }
+      }
+    },
     "DataLakeStoreAccountProperties": {
       "properties": {
         "provisioningState": {
@@ -720,6 +819,35 @@
           "format": "date-time",
           "description": "the account creation time."
         },
+        "encryptionState": {
+          "type": "string",
+          "description": "The current state of encryption for this Data Lake store account.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionState",
+            "modelAsString": false
+          }
+        },
+        "encryptionProvisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current state of encryption provisioning for this Data Lake store account.",
+          "enum": [
+            "Creating",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "encryptionConfig": {
+          "$ref": "#/definitions/EncryptionConfig",
+          "description": "The Key vault encryption configuration."
+        },
         "lastModifiedTime": {
           "type": "string",
           "readOnly": true,
@@ -756,6 +884,10 @@
           "type": "string",
           "readOnly": true,
           "description": "the account subscription ID."
+        },
+        "identity": {
+          "$ref": "#/definitions/EncryptionIdentity",
+          "description": "The Key vault encryption identity, if any."
         },
         "tags": {
           "type": "object",

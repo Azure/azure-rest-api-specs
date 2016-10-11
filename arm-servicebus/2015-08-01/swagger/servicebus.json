@@ -194,11 +194,14 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "200": {
             "description": "Namespace delete successful"
           },
           "202": {
-            "description": "Namespace delete accepted"
+            "description": "Namespace delete request has been accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -385,6 +388,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "200": {
             "description": "Namespace Authorization rule deleted"
           }
@@ -686,6 +692,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "200": {
             "description": "Queue deleted."
           }
@@ -898,6 +907,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "200": {
             "description": "Queue authorizationRule deleted"
           }
@@ -1220,17 +1232,19 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "200": {
             "description": "Topic delete successful"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "get": {
         "tags": [
           "Topics"
         ],
-        "operationId": "Topics_GetTopic",
+        "operationId": "Topics_Get",
         "description": "Returns the description for the specified topic",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639399.aspx"
@@ -1415,18 +1429,18 @@
             "description": "The namespace name"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization rule name."
-          },
-          {
             "name": "topicName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The topic name."
+          },
+          {
+            "name": "authorizationRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Authorization rule name."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1446,7 +1460,7 @@
       },
       "delete": {
         "tags": [
-          "Namespaces"
+          "Topics"
         ],
         "operationId": "Topics_DeleteAuthorizationRule",
         "description": "Deletes a topic authorizationRule",
@@ -1490,6 +1504,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "200": {
             "description": "Topics AuthorizationRule deleted"
           }
@@ -1499,7 +1516,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules/{authorizationRuleName}/ListKeys": {
       "post": {
         "tags": [
-          "Namespaces"
+          "Topics"
         ],
         "operationId": "Topics_ListKeys",
         "description": "Primary and Secondary ConnectionStrings to the topic",
@@ -1779,6 +1796,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "200": {
             "description": "Subscription deleted."
           }
@@ -1870,6 +1890,9 @@
           "description": "Resource tags"
         }
       },
+      "required": [
+        "location"
+      ],
       "x-ms-azure-resource": true
     },
     "NamespaceCreateOrUpdateParameters": {
@@ -1887,17 +1910,6 @@
             "type": "string"
           },
           "description": "Namespace tags."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Specifies the namespace type; for example: Messaging.",
-          "enum": [
-            "Messaging"
-          ],
-          "x-ms-enum": {
-            "name": "Kind",
-            "modelAsString": true
-          }
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1927,17 +1939,6 @@
     },
     "NamespaceResource": {
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Kind of the Namespace.",
-          "enum": [
-            "Messaging"
-          ],
-          "x-ms-enum": {
-            "name": "Kind",
-            "modelAsString": true
-          }
-        },
         "sku": {
           "$ref": "#/definitions/Sku"
         },
@@ -2015,7 +2016,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The resource type that this object applies to. Eg: NamespaceType",
+          "description": "Name of this Sku",
           "enum": [
             "Basic",
             "Standard",
@@ -2042,11 +2043,11 @@
         "capacity": {
           "format": "int32",
           "type": "integer",
-          "description": "The messaging units or eventhub throughput units"
+          "description": "The messaging units for the tier specified"
         }
       },
       "required": [
-        "Tier"
+        "tier"
       ],
       "description": "Sku of the Namespace."
     },
@@ -2065,9 +2066,6 @@
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
         }
       },
-      "required": [
-        "properties"
-      ],
       "description": "Parameters supplied to the CreateOrUpdate  AuthorizationRules."
     },
     "SharedAccessAuthorizationRuleListResult": {
@@ -2119,6 +2117,9 @@
           "description": "The rights associated with the rule."
         }
       },
+      "required": [
+        "rights"
+      ],
       "description": "SharedAccessAuthorizationRule properties."
     },
     "ResourceListKeys": {
@@ -2153,7 +2154,7 @@
           "description": "Key that needs to be regenerated .",
           "enum": [
             "PrimaryKey",
-            "SecondayKey"
+            "SecondaryKey"
           ],
           "x-ms-enum": {
             "name": "Policykey",
@@ -2215,172 +2216,126 @@
     },
     "QueueProperties": {
       "properties": {
-        "AccessedAt": {
+        "lockDuration ": {
+          "type": "string",
+          "description": "the duration of a peek lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute."
+        },
+        "accessedAt": {
           "type": "string",
           "format": "date-time",
           "description": "Last time a message was sent, or the last time there was a receive request to this queue."
         },
-        "AutoDeleteOnIdle": {
+        "autoDeleteOnIdle": {
           "type": "string",
-          "format": "duration",
           "description": "the TimeSpan idle interval after which the queue is automatically deleted. The minimum duration is 5 minutes."
         },
-        "AvailabilityStatus ": {
-          "type": "string",
-          "description": "entity availability status for the queue.",
-          "enum": [
-            "Available",
-            "Limited",
-            "Renaming",
-            "Restoring",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "name": "AvailabilityStatus",
-            "modelAsString": false
-          }
+        "entityAvailabilityStatus ": {
+          "$ref": "#/definitions/EntityAvailabilityStatus",
+          "description": "Entity availability status for the queue."
         },
-        "CreatedAt": {
+        "createdAt": {
           "type": "string",
           "format": "date-time",
           "description": "the exact time the message was created."
         },
-        "DefaultMessageTimeToLive": {
+        "defaultMessageTimeToLive": {
           "type": "string",
-          "format": "duration",
           "description": "the default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
         },
-        "DuplicateDetectionHistoryTimeWindow ": {
+        "duplicateDetectionHistoryTimeWindow ": {
           "type": "string",
-          "format": "duration",
           "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes.."
         },
-        "EnableBatchedOperations": {
+        "enableBatchedOperations": {
           "type": "boolean",
           "description": "value that indicates whether server-side batched operations are enabled.."
         },
-        "EnableDeadLetteringOnMessageExpiration": {
+        "deadLetteringOnMessageExpiration": {
           "type": "boolean",
           "description": "a value that indicates whether this queue has dead letter support when a message expires."
         },
-        "EnableExpress": {
+        "enableExpress": {
           "type": "boolean",
           "description": "a value that indicates whether Express Entities are enabled. An express queue holds a message in memory temporarily before writing it to persistent storage."
         },
-        "EnablePartitioning": {
+        "enablePartitioning": {
           "type": "boolean",
           "description": "value that indicates whether the queue to be partitioned across multiple message brokers is enabled."
         },
-        "ForwardDeadLetteredMessagesTo": {
-          "type": "string",
-          "description": "the path to the recipient to which the dead lettered message is forwarded."
-        },
-        "ForwardTo": {
-          "type": "string",
-          "description": "the path to the recipient to which the message is forwarded."
-        },
-        "IsAnonymousAccessible": {
+        "isAnonymousAccessible": {
           "type": "boolean",
           "description": "a value that indicates whether the message is anonymous accessible."
         },
-        "LockDuration ": {
-          "type": "string",
-          "format": "duration",
-          "description": "the duration of a peek lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute."
-        },
-        "MaxDeliveryCount ": {
+        "maxDeliveryCount ": {
           "format": "int32",
           "type": "integer",
           "description": "the maximum delivery count. A message is automatically deadlettered after this number of deliveries."
         },
-        "MaxSizeInMegabytes ": {
+        "maxSizeInMegabytes": {
           "format": "int64",
           "type": "integer",
           "description": "the maximum size of the queue in megabytes, which is the size of memory allocated for the queue."
         },
-        "MessageCount ": {
+        "messageCount ": {
           "format": "int64",
           "type": "integer",
           "description": "the number of messages in the queue."
         },
-        "MessageCountDetails": {
+        "countDetails": {
           "$ref": "#/definitions/MessageCountDetails"
         },
-        "Path": {
-          "type": "string",
-          "description": "the name of the queue."
-        },
-        "RequiresDuplicateDetection": {
+        "requiresDuplicateDetection": {
           "type": "boolean",
           "description": "the value indicating if this queue requires duplicate detection."
         },
-        "RequiresSession": {
+        "requiresSession": {
           "type": "boolean",
           "description": "a value that indicates whether the queue supports the concept of session."
         },
-        "SizeInBytes ": {
+        "sizeInBytes ": {
           "format": "int64",
           "type": "integer",
           "description": "the size of the queue in bytes."
         },
-        "Status": {
-          "type": "string",
-          "description": "Enumerates the possible values for the status of a messaging entity.",
-          "enum": [
-            "Active",
-            "Creating",
-            "Deleting",
-            "Disabled",
-            "ReceiveDisabled",
-            "Renaming",
-            "Restoring",
-            "SendDisabled",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "name": "EntityStatus",
-            "modelAsString": false
-          }
+        "status": {
+          "$ref": "#/definitions/EntityStatus",
+          "description": "Enumerates the possible values for the status of a messaging entity."
         },
-        "SupportOrdering": {
+        "supportOrdering": {
           "type": "boolean",
           "description": "a value that indicates whether the queue supports ordering."
         },
-        "UpdatedAt": {
+        "updatedAt": {
           "type": "string",
           "format": "date-time",
           "description": "the exact time the message has been updated."
-        },
-        "UserMetadata": {
-          "type": "string",
-          "description": "Represents the metadata description of the queue."
         }
       }
     },
     "MessageCountDetails": {
       "type": "object",
       "properties": {
-        "ActiveMessageCount": {
+        "activeMessageCount": {
           "format": "int64",
           "type": "integer",
           "description": "Number of active messages in the queue, topic, or subscription."
         },
-        "DeadLetterMessageCount": {
+        "deadLetterMessageCount": {
           "format": "int64",
           "type": "integer",
           "description": "Number of messages that are dead letters."
         },
-        "ScheduledMessageCount": {
+        "scheduledMessageCount": {
           "format": "int64",
           "type": "integer",
           "description": "Number scheduled messages."
         },
-        "TransferDeadLetterMessageCount": {
+        "transferDeadLetterMessageCount": {
           "format": "int64",
           "type": "integer",
           "description": "Number of messages transferred into dead letters."
         },
-        "TransferMessageCount": {
+        "transferMessageCount": {
           "format": "int64",
           "type": "integer",
           "description": "Number of messages transferred to another queue, topic, or subscription."
@@ -2440,123 +2395,94 @@
     },
     "TopicProperties": {
       "properties": {
-        "AccessedAt": {
+        "accessedAt": {
           "type": "string",
           "format": "date-time",
           "description": "Last time the message was sent or a request was received for this topic."
         },
-        "AutoDeleteOnIdle": {
+        "autoDeleteOnIdle": {
           "type": "string",
-          "format": "duration",
           "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
         },
-        "AvailabilityStatus ": {
-          "type": "string",
-          "description": "Entity availability status for the topic.",
-          "enum": [
-            "Available",
-            "Limited",
-            "Renaming",
-            "Restoring",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "name": "AvailabilityStatus",
-            "modelAsString": false
-          }
+        "entityAvailabilityStatus ": {
+          "$ref": "#/definitions/EntityAvailabilityStatus",
+          "description": "Entity availability status for the topic."
         },
-        "CreatedAt": {
+        "createdAt": {
           "type": "string",
           "format": "date-time",
           "description": "Exact time the message was created."
         },
-        "DefaultMessageTimeToLive": {
+        "countDetails": {
+          "$ref": "#/definitions/MessageCountDetails"
+        },
+        "defaultMessageTimeToLive": {
           "type": "string",
-          "format": "duration",
           "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
         },
-        "DuplicateDetectionHistoryTimeWindow ": {
+        "duplicateDetectionHistoryTimeWindow ": {
           "type": "string",
-          "format": "duration",
           "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes.."
         },
-        "EnableBatchedOperations": {
+        "enableBatchedOperations": {
           "type": "boolean",
           "description": "Value that indicates whether server-side batched operations are enabled.."
         },
-        "EnableExpress": {
+        "enableExpress": {
           "type": "boolean",
           "description": "Value that indicates whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage."
         },
-        "EnableFilteringMessagesBeforePublishing": {
-          "type": "boolean",
-          "description": "Whether messages should be filtered before publishing."
-        },
-        "EnablePartitioning": {
+        "enablePartitioning": {
           "type": "boolean",
           "description": "Value that indicates whether the topic to be partitioned across multiple message brokers is enabled."
         },
-        "IsAnonymousAccessible": {
+        "enableSubscriptionPartitioning": {
+          "type": "boolean",
+          "description": "Value that indicates whether partitioning is enabled or disabled.."
+        },
+        "filteringMessagesBeforePublishing": {
+          "type": "boolean",
+          "description": "Whether messages should be filtered before publishing."
+        },
+        "isAnonymousAccessible": {
           "type": "boolean",
           "description": "Value that indicates whether the message is anonymous accessible."
         },
-        "MaxSizeInMegabytes ": {
+        "isExpress": {
+          "type": "boolean",
+          "description": ""
+        },
+        "maxSizeInMegabytes": {
           "format": "int64",
           "type": "integer",
           "description": "Maximum size of the topic in megabytes, which is the size of memory allocated for the topic."
         },
-        "MessageCountDetails": {
-          "$ref": "#/definitions/MessageCountDetails"
-        },
-        "Path": {
-          "type": "string",
-          "description": "Name of the topic."
-        },
-        "RequiresDuplicateDetection": {
+        "requiresDuplicateDetection": {
           "type": "boolean",
           "description": "Value indicating if this topic requires duplicate detection."
         },
-        "SizeInBytes ": {
+        "sizeInBytes": {
           "format": "int64",
           "type": "integer",
           "description": "Size of the topic in bytes."
         },
-        "Status": {
-          "type": "string",
-          "description": "Enumerates the possible values for the status of a messaging entity.",
-          "enum": [
-            "Active",
-            "Creating",
-            "Deleting",
-            "Disabled",
-            "ReceiveDisabled",
-            "Renaming",
-            "Restoring",
-            "SendDisabled",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "name": "EntityStatus",
-            "modelAsString": false
-          }
+        "status": {
+          "$ref": "#/definitions/EntityStatus",
+          "description": "Enumerates the possible values for the status of a messaging entity."
         },
-        "SubscriptionCount": {
+        "subscriptionCount": {
           "format": "int32",
           "type": "integer",
           "description": "Number of subscriptions."
         },
-        "SupportOrdering": {
+        "supportOrdering": {
           "type": "boolean",
           "description": "Value that indicates whether the topic supports ordering."
         },
-        "UpdatedAt": {
+        "updatedAt": {
           "type": "string",
           "format": "date-time",
           "description": "The exact time the message has been updated."
-        },
-        "UserMetadata": {
-          "type": "string",
-          "description": "Represents the metadata description of the topic"
         }
       }
     },
@@ -2612,121 +2538,110 @@
     },
     "SubscriptionProperties": {
       "properties": {
-        "AccessedAt": {
+        "accessedAt": {
           "type": "string",
           "format": "date-time",
           "description": "Last time a there was a receive request to this subscription."
         },
-        "AutoDeleteOnIdle": {
+        "autoDeleteOnIdle": {
           "type": "string",
-          "format": "duration",
           "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
         },
-        "AvailabilityStatus ": {
-          "type": "string",
-          "description": "Entity availability status for the topic.",
-          "enum": [
-            "Available",
-            "Limited",
-            "Renaming",
-            "Restoring",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "name": "AvailabilityStatus",
-            "modelAsString": false
-          }
+        "countDetails": {
+          "$ref": "#/definitions/MessageCountDetails"
         },
-        "CreatedAt": {
+        "createdAt": {
           "type": "string",
           "format": "date-time",
           "description": "Exact time the message was created."
         },
-        "DefaultMessageTimeToLive": {
+        "defaultMessageTimeToLive": {
           "type": "string",
-          "format": "duration",
           "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
         },
-        "EnableBatchedOperations": {
-          "type": "boolean",
-          "description": "Value that indicates whether server-side batched operations are enabled.."
-        },
-        "EnableDeadLetteringOnFilterEvaluationExceptions": {
+        "deadLetteringOnFilterEvaluationExceptions": {
           "type": "boolean",
           "description": "Value that indicates if a subscription has dead letter support on Filter evaluation exceptions."
         },
-        "EnableDeadLetteringOnMessageExpiration": {
+        "deadLetteringOnMessageExpiration": {
           "type": "boolean",
           "description": "Value that indicates if a subscription has dead letter support when a message expires."
         },
-        "ForwardDeadLetteredMessagesTo": {
-          "type": "string",
-          "description": "Path to the recipient to which the dead lettered messages are forwarded."
+        "enableBatchedOperations": {
+          "type": "boolean",
+          "description": "Value that indicates whether server-side batched operations are enabled.."
         },
-        "ForwardTo": {
-          "type": "string",
-          "description": "Path to the recipient to which the message is forwarded."
+        "entityAvailabilityStatus": {
+          "$ref": "#/definitions/EntityAvailabilityStatus",
+          "description": "Entity availability status for the topic."
         },
-        "IsReadOnly": {
+        "isReadOnly": {
           "type": "boolean",
           "description": "Value that indicates whether the entity description is read-only."
         },
-        "LockDuration": {
+        "lockDuration": {
           "type": "string",
-          "format": "duration",
           "description": "The lock duration time span for the subscription."
         },
-        "MaxDeliveryCount": {
+        "maxDeliveryCount": {
           "format": "int32",
           "type": "integer",
           "description": "Number of maximum deliveries."
         },
-        "MessageCount": {
+        "messageCount": {
           "format": "int64",
           "type": "integer",
           "description": "Number of messages."
         },
-        "MessageCountDetails": {
-          "$ref": "#/definitions/MessageCountDetails"
-        },
-        "RequiresSession": {
+        "requiresSession": {
           "type": "boolean",
           "description": "Value indicating if a subscription supports the concept of session."
         },
-        "Status": {
-          "type": "string",
-          "description": "Enumerates the possible values for the status of a messaging entity.",
-          "enum": [
-            "Active",
-            "Creating",
-            "Deleting",
-            "Disabled",
-            "ReceiveDisabled",
-            "Renaming",
-            "Restoring",
-            "SendDisabled",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "name": "EntityStatus",
-            "modelAsString": false
-          }
+        "status": {
+          "$ref": "#/definitions/EntityStatus",
+          "description": "Enumerates the possible values for the status of a messaging entity."
         },
-        "TopicPath": {
-          "type": "string",
-          "description": "Path of the topic that this subscription description belongs to."
-        },
-        "UpdatedAt": {
+        "updatedAt": {
           "type": "string",
           "format": "date-time",
           "description": "The exact time the message has been updated."
-        },
-        "UserMetadata": {
-          "type": "string",
-          "description": "Represents the metadata description of the Subscription."
         }
       },
       "description": "Description of Subscription Resource."
+    },
+    "EntityAvailabilityStatus": {
+      "type": "string",
+      "enum": [
+        "Available",
+        "Limited",
+        "Renaming",
+        "Restoring",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "EntityAvailabilityStatus",
+        "modelAsString": false
+      },
+      "description": "Entity availability status."
+    },
+    "EntityStatus": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Creating",
+        "Deleting",
+        "Disabled",
+        "ReceiveDisabled",
+        "Renaming",
+        "Restoring",
+        "SendDisabled",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "EntityStatus",
+        "modelAsString": false
+      },
+      "description": "Entity status."
     }
   },
   "parameters": {

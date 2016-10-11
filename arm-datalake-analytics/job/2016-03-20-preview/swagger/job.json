@@ -53,7 +53,7 @@
             "required": true,
             "type": "string",
             "format": "uuid",
-            "description": "JobInfo ID."
+            "description": "Job Information ID."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -449,6 +449,12 @@
           "format": "date-time",
           "description": "the last update time for the statistics."
         },
+        "finalizingTimeUtc": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "the job finalizing start time."
+        },
         "stages": {
           "type": "array",
           "readOnly": true,
@@ -630,26 +636,6 @@
         }
       }
     },
-    "HiveJobStatementInfo": {
-      "properties": {
-        "logLocation": {
-          "type": "string",
-          "description": "the log location for this statement."
-        },
-        "resultPreviewLocation": {
-          "type": "string",
-          "description": "the result preview location for this statement."
-        },
-        "resultLocation": {
-          "type": "string",
-          "description": "the result location for this statement."
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "the error message for this statement."
-        }
-      }
-    },
     "HiveJobProperties": {
       "x-ms-discriminator-value": "Hive",
       "allOf": [
@@ -658,29 +644,26 @@
         }
       ],
       "properties": {
-        "statementInfo": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HiveJobStatementInfo"
-          },
-          "description": "the statement information for each statement in the script"
-        },
         "logsLocation": {
           "type": "string",
+          "readOnly": true,
           "description": "the Hive logs location"
         },
-        "warehouseLocation": {
+        "outputLocation": {
           "type": "string",
-          "description": "the location of the Hive warehouse"
+          "readOnly": true,
+          "description": "the location of Hive job output files (both execution output and results)"
         },
         "statementCount": {
           "type": "integer",
           "format": "int32",
+          "readOnly": true,
           "description": "the number of statements that will be run based on the script"
         },
         "executedStatementCount": {
           "type": "integer",
           "format": "int32",
+          "readOnly": true,
           "description": "the number of statements that have been run based on the script"
         }
       }

@@ -39,9 +39,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}": {
       "put": {
         "tags": [
-          "Account"
+          "BatchAccount"
         ],
-        "operationId": "Account_Create",
+        "operationId": "BatchAccount_Create",
         "description": "Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.",
         "parameters": [
           {
@@ -85,7 +85,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/AccountResource"
+              "$ref": "#/definitions/BatchAccount"
             }
           }
         },
@@ -93,9 +93,9 @@
       },
       "patch": {
         "tags": [
-          "Account"
+          "BatchAccount"
         ],
-        "operationId": "Account_Update",
+        "operationId": "BatchAccount_Update",
         "description": "Updates the properties of an existing Batch account.",
         "parameters": [
           {
@@ -136,16 +136,16 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/AccountResource"
+              "$ref": "#/definitions/BatchAccount"
             }
           }
         }
       },
       "delete": {
         "tags": [
-          "Account"
+          "BatchAccount"
         ],
-        "operationId": "Account_Delete",
+        "operationId": "BatchAccount_Delete",
         "description": "Deletes the specified Batch account.",
         "parameters": [
           {
@@ -188,9 +188,9 @@
       },
       "get": {
         "tags": [
-          "Account"
+          "BatchAccount"
         ],
-        "operationId": "Account_Get",
+        "operationId": "BatchAccount_Get",
         "description": "Gets information about the specified Batch account.",
         "parameters": [
           {
@@ -222,7 +222,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/AccountResource"
+              "$ref": "#/definitions/BatchAccount"
             }
           }
         }
@@ -231,9 +231,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/batchAccounts": {
       "get": {
         "tags": [
-          "Account"
+          "BatchAccount"
         ],
-        "operationId": "Account_List",
+        "operationId": "BatchAccount_List",
         "description": "Gets information about the Batch accounts associated with the subscription.",
         "parameters": [
           {
@@ -259,9 +259,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts": {
       "get": {
         "tags": [
-          "Account"
+          "BatchAccount"
         ],
-        "operationId": "Account_ListByResourceGroup",
+        "operationId": "BatchAccount_ListByResourceGroup",
         "description": "Gets information about the Batch accounts associated within the specified resource group.",
         "parameters": [
           {
@@ -295,9 +295,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/syncAutoStorageKeys": {
       "post": {
         "tags": [
-          "Account"
+          "BatchAccount"
         ],
-        "operationId": "Account_SynchronizeAutoStorageKeys",
+        "operationId": "BatchAccount_SynchronizeAutoStorageKeys",
         "description": "Synchronizes access keys for the auto storage account configured for the specified Batch account.",
         "parameters": [
           {
@@ -335,9 +335,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/regenerateKeys": {
       "post": {
         "tags": [
-          "Account"
+          "BatchAccount"
         ],
-        "operationId": "Account_RegenerateKey",
+        "operationId": "BatchAccount_RegenerateKey",
         "description": "Regenerates the specified account key for the specified Batch account.",
         "parameters": [
           {
@@ -378,7 +378,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/BatchAccountRegenerateKeyResult"
+              "$ref": "#/definitions/BatchAccountKeys"
             }
           }
         }
@@ -387,10 +387,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/listKeys": {
       "post": {
         "tags": [
-          "Account"
+          "BatchAccount"
         ],
-        "operationId": "Account_ListKeys",
-        "description": "Lists the account keys for the specified Batch account.",
+        "operationId": "BatchAccount_GetKeys",
+        "description": "Gets the account keys for the specified Batch account.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -421,18 +421,18 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/BatchAccountListKeyResult"
+              "$ref": "#/definitions/BatchAccountKeys"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{id}/versions/{version}/activate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationId}/versions/{version}/activate": {
       "post": {
         "tags": [
-          "Application"
+          "ApplicationPackage"
         ],
-        "operationId": "Application_ActivateApplicationPackage",
+        "operationId": "ApplicationPackage_Activate",
         "description": "Activates the specified application package.",
         "parameters": [
           {
@@ -454,7 +454,7 @@
             "description": "The name of the Batch account."
           },
           {
-            "name": "id",
+            "name": "applicationId",
             "in": "path",
             "required": true,
             "type": "string",
@@ -495,7 +495,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Application_AddApplication",
+        "operationId": "Application_Create",
         "description": "Adds an application to the specified Batch account.",
         "parameters": [
           {
@@ -552,7 +552,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Application_DeleteApplication",
+        "operationId": "Application_Delete",
         "description": "Deletes an application.",
         "parameters": [
           {
@@ -597,7 +597,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Application_GetApplication",
+        "operationId": "Application_Get",
         "description": "Gets information about the specified application.",
         "parameters": [
           {
@@ -645,7 +645,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Application_UpdateApplication",
+        "operationId": "Application_Update",
         "description": "Updates settings for the specified application.",
         "parameters": [
           {
@@ -699,9 +699,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationId}/versions/{version}": {
       "put": {
         "tags": [
-          "Application"
+          "ApplicationPackage"
         ],
-        "operationId": "Application_AddApplicationPackage",
+        "operationId": "ApplicationPackage_Create",
         "description": "Creates an application package record.",
         "parameters": [
           {
@@ -747,16 +747,16 @@
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/AddApplicationPackageResult"
+              "$ref": "#/definitions/ApplicationPackage"
             }
           }
         }
       },
       "delete": {
         "tags": [
-          "Application"
+          "ApplicationPackage"
         ],
-        "operationId": "Application_DeleteApplicationPackage",
+        "operationId": "ApplicationPackage_Delete",
         "description": "Deletes an application package record and its associated binary file.",
         "parameters": [
           {
@@ -806,9 +806,9 @@
       },
       "get": {
         "tags": [
-          "Application"
+          "ApplicationPackage"
         ],
-        "operationId": "Application_GetApplicationPackage",
+        "operationId": "ApplicationPackage_Get",
         "description": "Gets information about the specified application package.",
         "parameters": [
           {
@@ -854,7 +854,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GetApplicationPackageResult"
+              "$ref": "#/definitions/ApplicationPackage"
             }
           }
         }
@@ -917,10 +917,10 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationName}/quotas": {
       "get": {
         "tags": [
-          "Subscription"
+          "Location"
         ],
-        "operationId": "Subscription_GetSubscriptionQuotas",
-        "description": "Gets the Batch service quotas for the specified suscription.",
+        "operationId": "Location_GetQuotas",
+        "description": "Gets the Batch service quotas for the specified subscription at the given location.",
         "parameters": [
           {
             "name": "locationName",
@@ -940,7 +940,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/SubscriptionQuotasGetResult"
+              "$ref": "#/definitions/BatchLocationQuota"
             }
           }
         }
@@ -960,7 +960,7 @@
       ],
       "description": "The properties related to auto storage account."
     },
-    "AccountBaseProperties": {
+    "BatchAccountBaseProperties": {
       "properties": {
         "autoStorage": {
           "$ref": "#/definitions/AutoStorageBaseProperties",
@@ -973,7 +973,7 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "The region in which the account is created."
+          "description": "The region in which to create the account."
         },
         "tags": {
           "type": "object",
@@ -984,10 +984,13 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AccountBaseProperties",
+          "$ref": "#/definitions/BatchAccountBaseProperties",
           "description": "The properties of the account."
         }
       },
+      "required": [
+        "location"
+      ],
       "description": "Parameters supplied to the Create operation."
     },
     "AutoStorageProperties": {
@@ -1008,10 +1011,11 @@
       ],
       "description": "Contains information about the auto storage account associated with a Batch account."
     },
-    "AccountProperties": {
+    "BatchAccountProperties": {
       "properties": {
         "accountEndpoint": {
           "type": "string",
+          "readOnly": true,
           "description": "The endpoint used by this account to interact with the Batch services."
         },
         "provisioningState": {
@@ -1026,7 +1030,7 @@
             "Cancelled"
           ],
           "x-ms-enum": {
-            "name": "AccountProvisioningState",
+            "name": "ProvisioningState",
             "modelAsString": false
           }
         },
@@ -1057,11 +1061,11 @@
       ],
       "description": "Account specific properties."
     },
-    "AccountResource": {
+    "BatchAccount": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AccountProperties",
+          "$ref": "#/definitions/BatchAccountProperties",
           "description": "The properties associated with the account."
         }
       },
@@ -1083,7 +1087,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AccountBaseProperties",
+          "$ref": "#/definitions/BatchAccountBaseProperties",
           "description": "The properties of the account."
         }
       },
@@ -1094,9 +1098,9 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AccountResource"
+            "$ref": "#/definitions/BatchAccount"
           },
-          "description": "The collection of returned account resources."
+          "description": "The collection of returned Batch accounts."
         },
         "nextLink": {
           "type": "string",
@@ -1125,7 +1129,7 @@
       ],
       "description": "Parameters supplied to the RegenerateKey operation."
     },
-    "BatchAccountRegenerateKeyResult": {
+    "BatchAccountKeys": {
       "properties": {
         "primary": {
           "type": "string",
@@ -1136,20 +1140,7 @@
           "description": "The secondary key associated with the account."
         }
       },
-      "description": "Values returned by the RegenerateKey operation."
-    },
-    "BatchAccountListKeyResult": {
-      "properties": {
-        "primary": {
-          "type": "string",
-          "description": "The primary key associated with the account."
-        },
-        "secondary": {
-          "type": "string",
-          "description": "The secondary key associated with the account."
-        }
-      },
-      "description": "Values returned by the GetKeys operation."
+      "description": "A set of Azure Batch account keys."
     },
     "ActivateApplicationPackageParameters": {
       "properties": {
@@ -1175,59 +1166,6 @@
         }
       },
       "description": "Parameters for an ApplicationOperations.AddApplication request."
-    },
-    "AddApplicationPackageResult": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The id of the application."
-        },
-        "version": {
-          "type": "string",
-          "description": "The version of the application."
-        },
-        "storageUrl": {
-          "type": "string",
-          "description": "The URL to which the application package binary file should be uploaded."
-        },
-        "storageUrlExpiry": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The UTC time at which the storage URL will expire."
-        }
-      },
-      "description": "Response to an ApplicationOperations.AddApplicationPackage request."
-    },
-    "ApplicationPackage": {
-      "properties": {
-        "version": {
-          "type": "string",
-          "description": "The version of the application package. "
-        },
-        "state": {
-          "type": "string",
-          "description": "The current state of the application package.",
-          "enum": [
-            "pending",
-            "active",
-            "unmapped"
-          ],
-          "x-ms-enum": {
-            "name": "PackageState",
-            "modelAsString": false
-          }
-        },
-        "format": {
-          "type": "string",
-          "description": "The format of the application package, if the package has been activated."
-        },
-        "lastActivationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time at which the package was last activated, if the package is active."
-        }
-      },
-      "description": "Contains information about an application package."
     },
     "Application": {
       "properties": {
@@ -1257,7 +1195,7 @@
       },
       "description": "Contains information about an application in a Batch account."
     },
-    "GetApplicationPackageResult": {
+    "ApplicationPackage": {
       "properties": {
         "id": {
           "type": "string",
@@ -1299,7 +1237,7 @@
           "description": "The time at which the package was last activated, if the package is active."
         }
       },
-      "description": "Response to an ApplicationOperations.GetApplicationPackage request."
+      "description": "An application package which represents a particular version of an application."
     },
     "ListApplicationsResult": {
       "properties": {
@@ -1334,7 +1272,7 @@
       },
       "description": "Parameters for an ApplicationOperations.UpdateApplication request."
     },
-    "SubscriptionQuotasGetResult": {
+    "BatchLocationQuota": {
       "properties": {
         "accountQuota": {
           "type": "integer",
@@ -1342,7 +1280,7 @@
           "description": "The number of Batch accounts that may be created under the subscription in the specified region."
         }
       },
-      "description": "Values returned by the Get Subscription Quotas operation."
+      "description": "Quotas associated with a Batch region for a particular subscription."
     },
     "Resource": {
       "properties": {
@@ -1373,6 +1311,7 @@
           "description": "The tags of the resource"
         }
       },
+      "description": "A definition of an Azure resource.",
       "x-ms-azure-resource": true
     }
   },

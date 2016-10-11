@@ -1033,6 +1033,13 @@
             "$ref": "#/definitions/SharedAccessSignatureAuthorizationRule"
           }
         },
+        "ipFilterRules": {
+          "description": "The IP filter rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpFilterRule"
+          }
+        },
         "hostName": {
           "description": "The name of the host.",
           "type": "string"
@@ -1165,7 +1172,7 @@
         "sasTtlAsIso8601": {
           "description": "SAS time to live. Range: 1 Min (PT1M) - 1 Day (P1D).",
           "type": "string",
-          "format":  "duration"
+          "format": "duration"
         },
         "connectionString": {
           "description": "The account key credentials for storage account selected by customer for uploading files.",
@@ -1184,12 +1191,12 @@
         "lockDurationAsIso8601": {
           "description": "The lock duration. Range: 5 Sec (PT5S) - 5 Min (PT5M).",
           "type": "string",
-          "format":  "duration"
+          "format": "duration"
         },
         "ttlAsIso8601": {
           "description": "The time to live. Range: 1 Min (PT1M) - 2 Days (P2D).",
           "type": "string",
-          "format":  "duration"
+          "format": "duration"
         },
         "maxDeliveryCount": {
           "description": "The max delivery count. Range: 1-100.",
@@ -1214,7 +1221,7 @@
         "defaultTtlAsIso8601": {
           "description": "The default time to live for the device queue. Range : 1 Min (PT1M) - 2 Days (P2D).",
           "type": "string",
-          "format":  "duration"
+          "format": "duration"
         },
         "feedback": {
           "$ref": "#/definitions/FeedbackProperties"
@@ -1238,6 +1245,34 @@
           }
         }
       }
+    },
+    "IpFilterRule": {
+      "description": "IP filter Rule",
+      "type": "object",
+      "properties": {
+        "filterName": {
+          "description": "The name of the IP filter rule.",
+          "type": "string"
+        },
+        "action": {
+          "description": "The action desired - accept or reject.",
+          "enum": [ "Accept", "Reject" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IpFilterActionType",
+            "modelAsString": false
+          }
+        },
+        "ipMask": {
+          "description": "A string containing the IPAddress/range in CIDR notation.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "filterName",
+        "action",
+        "ipMask"
+      ]
     },
     "SharedAccessAuthorizationRule": {
       "type": "object",
@@ -1302,12 +1337,12 @@
         "lockDurationAsIso8601": {
           "description": "The lock duration for the feedback queue. Range: 5 Sec (PT5S) - 5 Min (PT5M).",
           "type": "string",
-          "format":  "duration"
+          "format": "duration"
         },
         "ttlAsIso8601": {
           "description": "The time to live for the feedback queue. Range: 1 Min (PT1M) - 2 Days (P2D).",
           "type": "string",
-          "format":  "duration"
+          "format": "duration"
         },
         "maxDeliveryCount": {
           "description": "The max delivery count. Range : 1-100.",
