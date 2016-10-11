@@ -228,6 +228,191 @@
         }
       }
     },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/trustedIdProviders/{trustedIdProviderName}": {
+	  "put": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "Account_CreateOrUpdateTrustedIdProvider",
+        "description": "Creates or updates the specified trusted identity provider",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure resource group that contains the Data Lake Store account."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store account to which to add the trusted identity provider."
+          },
+          {
+            "name": "trustedIdProviderName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the trusted identity provider. This is used for differentiation of providers in the account."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TrustedIdProvider"
+            },
+            "description": "Parameters supplied to create the create the trusted identity provider."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/TrustedIdProvider"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "Account_DeleteTrustedIdProvider",
+        "description": "Deletes the specified trusted identity provider from the specified Data Lake Store account",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure resource group that contains the Data Lake Store account."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store account from which to delete the trusted identity provider."
+          },
+          {
+            "name": "trustedIdProviderName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the trusted identity provider to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "Account_GetTrustedIdProvider",
+        "description": "Gets the specified Data Lake Store trusted identity provider.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure resource group that contains the Data Lake Store account."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store account from which to get the trusted identity provider."
+          },
+          {
+            "name": "trustedIdProviderName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the trusted identity provider to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/TrustedIdProvider"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/trustedIdProviders": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "Account_ListTrustedIdProviders",
+        "description": "Lists the Data Lake Store trusted identity providers within the specified Data Lake Store account.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure resource group that contains the Data Lake Store account."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store account from which to get the trusted identity providers."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreTrustedIdProviderListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{name}": {
       "put": {
         "tags": [
@@ -678,11 +863,7 @@
         },
         "id": {
           "type": "string",
-          "description": "the firewall rule's subscription ID."
-        },
-        "location": {
-          "type": "string",
-          "description": "the firewall rule's regional location."
+          "description": "the firewall rule's full ID."
         },
         "properties": {
           "$ref": "#/definitions/FirewallRuleProperties",
@@ -690,6 +871,61 @@
         }
       },
       "description": "Data Lake Store firewall rule information"
+    },
+	"TrustedIdProviderProperties": {
+      "properties": {
+        "idProvider": {
+          "type": "string",
+          "description": "The URL of this trusted identity provider"
+        }
+      },
+      "description": "Data Lake Store trusted identity provider properties information"
+    },
+	"TrustedIdProvider": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the trusted identity provider's name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the namespace and type of the trusted identity provider."
+        },
+        "id": {
+          "type": "string",
+          "description": "the trusted identity provider's full ID."
+        },
+        "properties": {
+          "$ref": "#/definitions/TrustedIdProviderProperties",
+          "description": "the properties of the trusted identity provider."
+        }
+      },
+      "description": "Data Lake Store firewall rule information"
+    },
+	"DataLakeStoreTrustedIdProviderListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TrustedIdProvider"
+          },
+          "description": "the results of the list operation"
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the link (url) to the next page of results."
+        },
+        "count": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "the total count of results that are available, but might not be returned in the current page."
+        }
+      },
+      "description": "Data Lake Store trusted identity provider list information."
     },
     "DataLakeStoreFirewallRuleListResult": {
       "properties": {
@@ -862,11 +1098,29 @@
         },
 		"firewallRules": {
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/FirewallRule"
           },
           "description": "The list of firewall rules associated with this Data Lake store account."
+        },
+		"trustedIdProviderState": {
+          "type": "string",
+          "description": "The current state of the trusted identity provider feature for this Data Lake store account.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "TrustedIdProviderState",
+            "modelAsString": false
+          }
+        },
+		"trustedIdProviders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrustedIdProvider"
+          },
+          "description": "The list of trusted identity providers associated with this Data Lake store account."
         },
         "lastModifiedTime": {
           "type": "string",
