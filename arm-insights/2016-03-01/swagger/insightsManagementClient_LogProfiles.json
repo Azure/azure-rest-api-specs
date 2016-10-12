@@ -83,7 +83,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LogProfileCreateOrUpdateParameters"
+              "$ref": "#/definitions/LogProfileResource"
             },
             "description": "Parameters supplied to the operation."
           },
@@ -211,17 +211,7 @@
       "required": [ "enabled", "days" ],
       "description": "Specifies the retention policy for the log."
     },
-    "LogProfileCreateOrUpdateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/LogProfile",
-          "description": "The properties envelope to create a Log Profile."
-        }
-      },
-      "description": "Paramters to create a new Log Profile"
-    },
-    "LogProfile": {
+    "LogProfileProperties": {
       "properties": {
         "storageAccountId": {
           "type": "string",
@@ -236,21 +226,21 @@
           "items": {
             "type": "string"
           },
-          "description": "the locations."
+          "description": "the comma separated list of valid ARM locations plus global. This are the locations where the logs are generated from."
         },
         "categories": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": " the categories."
+          "description": " the categories of the logs. These categories are created as is convenient to the user."
         },
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
           "description": "the retention policy for this log."
         }
       },
-      "description": "The log profile."
+      "description": "The log profile properties."
     },
     "LogProfileResource": {
       "type": "object",
@@ -262,7 +252,7 @@
       "properties": {
        "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/LogProfile"
+          "$ref": "#/definitions/LogProfileProperties"
         }
       },
       "description": "The log profile resource."
@@ -277,6 +267,7 @@
           "description": "the values of the log profiles."
         }
       },
+      "required": ["value"],
       "description": "Represents a collection of log profiles."
     }
   },
