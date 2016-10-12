@@ -50,12 +50,8 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Api version to use."
-          }
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
         ],
         "responses": {
           "200": {
@@ -82,13 +78,6 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Api version to use."
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -96,6 +85,9 @@
               "$ref": "#/definitions/ResourceLink"
             },
             "description": "Create or update resource link parameters."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -129,11 +121,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Api version to use."
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -162,11 +150,7 @@
             "description": "The filter to apply on the list resource links operation. The supported filter for list resource links is targetId."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Api version to use."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -215,11 +199,7 @@
             "description": "The filter to apply on the list resource links operation. To list links only at the specified scope (not below the scope), use Filter.atScope()."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Api version to use."
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -308,6 +288,13 @@
       "required": true,
       "type": "string",
       "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
     }
   }
 }
