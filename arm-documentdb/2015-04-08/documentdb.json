@@ -1,0 +1,773 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DocumentDB",
+    "description": "Rest API for DocumentDB",
+    "version": "2015-04-08"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}?api-version={api-version}": {
+      "get": {
+        "operationId": "DatabaseAccount_Get",
+        "description": "Retrieves the properties of an existing DocumentDB account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccount"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DatabaseAccount_Patch",
+        "description": "Patch the properties of an existing DocumentDB account.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "patchParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountPatchParameters"
+            },
+            "description": "The parameters to provide for the current account."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccount"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccount_CreateOrUpdate",
+        "description": "Create or Update the properties of an existing DocumentDB account.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createUpdateParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current DocumentDB database account."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccount"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatabaseAccount_Delete",
+        "description": "Retrieves the properties of an existing DocumentDB database account.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/failoverPriorityChange?api-version={api-version}": {
+      "post": {
+        "operationId": "DatabaseAccount_FailoverPriorityChange",
+        "description": "Change the failover priority for the DocumentDB database account",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "failoverParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FailoverPolicies"
+            },
+            "description": "The failover policies that the database account should be changed to."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FailoverPolicies"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/databaseAccounts?api-version={api-version}": {
+      "get": {
+        "operationId": "DatabaseAccounts_List",
+        "description": "Lists all the database accounts available under the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountsListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts?api-version={api-version}": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListByResourceGroup",
+        "description": "Lists all the database accounts available under the given resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountsListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/listKeys?api-version={api-version}": {
+      "post": {
+        "operationId": "DatabaseAccounts_ListKeys",
+        "description": "Lists the access keys for the specified database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountListKeysResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/readonlykeys?api-version={api-version}": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListReadOnlyKeys",
+        "description": "Lists the read onlyaccess keys for the specified database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountListReadOnlyKeysResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/regenerateKey?api-version={api-version}": {
+      "post": {
+        "operationId": "DatabaseAccounts_RegenerateKey",
+        "description": "Regenerates the access keys for the specified database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "regenerateKeyParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountRegenerateKeyParameters"
+            },
+            "description": "Specifies name of the key which should be regenerated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountListKeysResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/databaseAccountNames/{accountName}?api-version={api-version}": {
+      "head": {
+        "operationId": "DatabaseAccounts_CheckNameAvailability",
+        "description": "Checks that account name is valid and is not in use.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The account name is valid but already unavailable (already in use)."
+          },
+          "404": {
+            "description": "Not Found. The account name is available and valid."
+          },
+          "400": {
+            "description": "Bad Request. The account name is invalid."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DatabaseAccountsListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseAccount"
+          },
+          "description": "Gets the list of database accounts and their properties."
+        }
+      },
+      "description": "The list database accounts operation response."
+    },
+    "FailoverPolicies": {
+      "type": "array",
+      "description": "List of failover policies.",
+      "items": {
+        "$ref": "#/definitions/FailoverPolicy"
+      }
+    },
+    "FailoverPolicy": {
+      "type": "object",
+      "description": "The Failover policy for a given location of a database account.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The unique identifier of the region within the database account. Example: <accountName>-<locationName>"
+        },
+        "locationName": {
+          "type": "string",
+          "description": "The name of the region location."
+        },
+        "failoverPriority": {
+          "type": "integer",
+          "description": "The failover priority of the region. The write region should have a failover priority of 0. The read regions should have a failover priority greater than 0."
+        }
+      }
+    },
+    "Location": {
+      "description": "The location pertaining to a database account.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the region within the database account. Example: <accountName>-<locationName>"
+        },
+        "locationName": {
+          "type": "string",
+          "description": "The name of the region location."
+        },
+        "documentEndpoint": {
+          "type": "string",
+          "description": "The connection endpoint for the specific region. Example: https://<accountName>-<locationName>.documents.azure.com:443/"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The status of the DocumentDB account at the time the operation was called.",
+          "enum": [
+            "Creating",
+            "Succeeded",
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "failoverPriority": {
+          "description": "The failover priority of the region. The write region should have a failover priority of 0. The read regions should have a failover priority greater than 0.",
+          "format": "int32",
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "An Azure Resource",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the database account."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the DocumentDB database account."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure Resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource group."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags are a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups)."
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "DatabaseAccount": {
+      "description": "A DocumentDB database account.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Indicates the type of DocumentDB account",
+          "type": "string",
+          "default": "GlobalDocumentDB",
+          "enum": [
+            "GlobalDocumentDB",
+            "DocumentDB",
+            "MongoDB",
+            "Parse"
+          ],
+          "x-ms-enum": {
+            "name": "DatabaseAccountKind",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DatabaseAccountProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ConsistencyPolicy": {
+      "type": "object",
+      "description": "The consistency policy for the DocumentDB database account.",
+      "properties": {
+        "defaultConsistencyLevel": {
+          "description": "The default consistency level and configuration settings of the DocumentDB account.",
+          "type": "string",
+          "enum": [
+            "Eventual",
+            "Session",
+            "BoundedStaleness",
+            "Strong"
+          ],
+          "x-ms-enum": {
+            "name": "DefaultConsistencyLevel",
+            "modelAsString": false
+          }
+        },
+        "maxStalenessPrefix": {
+          "description": "Required when defaultConsistencyPolicy is 'BoundedStaleness'. When used with Bounded Staleness consistency, this value represents the number of stale requests tolerated. Accepted range for this value is 1 – 2,147,483,647.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647,
+          "format": "int64"
+        },
+        "maxIntervalInSeconds": {
+          "description": "Required when defaultConsistencyPolicy is 'BoundedStaleness'. When used with Bounded Staleness consistency, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is 1 - 100.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "format": "int32"
+        }
+      },
+      "required": [
+        "defaultConsistencyLevel"
+      ]
+    },
+    "DatabaseAccountProperties": {
+      "description": "Properties for the Database Account.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The status of the DocumentDB account at the time the operation was called. Can be one of: * Creating – the DocumentDB account is being created. When an account is in “Creating” state, only properties that are specified as input for the Create DocumentDB Account operation are returned.* Succeeded – the DocumentDB account is active for use * Updating – the DocumentDB account is being updated * Deleting – the DocumentDB account is being deleted * Failed – the DocumentDB account failed creation",
+          "type": "string",
+          "readOnly": true
+        },
+        "documentEndpoint": {
+          "description": "The connection endpoint for the DocumentDB database account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "databaseAccountOfferType": {
+          "description": "The offer type for the DocumentDB database account.",
+          "type": "string",
+          "enum": [
+            "Standard"
+          ]
+        },
+        "consistencyPolicy": {
+          "description": "The consistency policy for the DocumentDB database account.",
+          "$ref": "#/definitions/ConsistencyPolicy"
+        },
+        "writeLocations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "An array which consists of the write location for the DocumentDB account.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        },
+        "readLocations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "An array which consists of the read locations enabled for the DocumentDB account.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        },
+        "failoverPolicies": {
+          "type": "array",
+          "readOnly": true,
+          "description": "An array which consists of the regions ordered by their failover priorities.",
+          "items": {
+            "$ref": "#/definitions/FailoverPolicy"
+          }
+        }
+      }
+    },
+    "DatabaseAccountCreateUpdateProperties": {
+      "description": "DocumentDB Database Account Create and Update properties.",
+      "type": "object",
+      "properties": {
+        "consistencyPolicy": {
+          "description": "The consistency policy for the DocumentDB database account.",
+          "$ref": "#/definitions/ConsistencyPolicy"
+        },
+        "locations": {
+          "type": "array",
+          "description": "An array which consists of the locations enabled for the DocumentDB account.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        }
+      },
+      "required": [
+        "consistencyPolicy",
+        "locations"
+      ]
+    },
+    "DatabaseAccountCreateUpdateParameters": {
+      "description": "DocumentDB Database Account Create and Update parameters.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "DatabaseAccountPatchProperties": {
+      "description": "DocumentDB Database Account patchable properties.",
+      "type": "object",
+      "properties": {
+        "consistencyPolicy": {
+          "description": "The consistency policy for the DocumentDB database account.",
+          "$ref": "#/definitions/ConsistencyPolicy"
+        },
+        "locations": {
+          "type": "array",
+          "description": "An array which consists of the locations enabled for the DocumentDB account.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        }
+      }
+    },
+    "DatabaseAccountPatchParameters": {
+      "description": "DocumentDB Database Account patchable parameters.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DatabaseAccountPatchProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "DatabaseAccountListReadOnlyKeysResult": {
+      "description": "The read-only access keys for the given database account.",
+      "properties": {
+        "primaryReadonlyMasterKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Base 64 encoded value of the primary read-only key."
+        },
+        "secondaryReadonlyMasterKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Base 64 encoded value of the secondary read-only key."
+        }
+      }
+    },
+    "DatabaseAccountListKeysResult": {
+      "description": "The access keys for the given database account.",
+      "properties": {
+        "primaryMasterKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Base 64 encoded value of the primary read-write key."
+        },
+        "secondaryMasterKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Base 64 encoded value of the secondary read-write key."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DatabaseAccountListReadOnlyKeysResult"
+        }
+      }
+    },
+    "DatabaseAccountRegenerateKeyParameters": {
+      "type": "object",
+      "description": "Parameters to regenerate the keys within the database account.",
+      "properties": {
+        "keyKind": {
+          "type": "string",
+          "description": "The access key to regenerate.",
+          "enum": [
+            "primary",
+            "secondary",
+            "primaryReadonly",
+            "secondaryReadonly"
+          ],
+          "x-ms-enum": {
+            "name": "KeyKind",
+            "modelAsString": true
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. Current version is 2016-04-02"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of an Azure Resource group."
+    },
+    "accountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "description": "DocumentDB database account name.",
+      "required": true,
+      "type": "string"
+    }
+  }  
+}
