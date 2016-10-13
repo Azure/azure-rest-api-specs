@@ -15,7 +15,7 @@
   "produces": [
     "application/json"
   ],
-  "paths": {
+"paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors": {
       "get": {
         "tags": [
@@ -25,11 +25,9 @@
         "operationId": "DatabaseAdvisors_List",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -47,7 +45,6 @@
             "type": "string"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -85,12 +82,13 @@
         "operationId": "DatabaseAdvisors_Get",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "serverName",
@@ -112,10 +110,6 @@
             "description": "The name of the Azure SQL Database Advisor.",
             "required": true,
             "type": "string"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -150,12 +144,13 @@
         "operationId": "DatabaseAdvisors_Update",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "serverName",
@@ -186,10 +181,6 @@
             "schema": {
               "$ref": "#/definitions/AdvisorResource"
             }
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -218,11 +209,9 @@
         "operationId": "DatabaseRecommendedActions_List",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -247,7 +236,6 @@
             "type": "string"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -255,10 +243,7 @@
           "200": {
             "description": "Successfully retrieved the list of database recommended actions.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Microsoft.SqlServer.Management.Service.ResourceProvider.Arm.V20150501.WorkloadInsight.Entities.RecommendedActionResource"
-              }
+              "$ref": "#/definitions/RecommendedActionResourceList"
             }
           },
           "default": {
@@ -280,11 +265,9 @@
         "operationId": "DatabaseRecommendedActions_Get",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -316,7 +299,6 @@
             "type": "string"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -344,11 +326,9 @@
         "operationId": "DatabaseRecommendedActions_Update",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -389,7 +369,6 @@
             }
           },
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -410,127 +389,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditRecords": {
-      "get": {
-        "tags": [
-          "Databases"
-        ],
-        "description": "Get a list of database engine audit records.",
-        "operationId": "Databases_ListEngineAuditRecords",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database for which database engine audit records are retrieved.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The filter to apply on the operation",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of engine audit records.",
-            "schema": {
-              "$ref": "#/definitions/EngineAuditRecordResourceList"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidEngineAuditRecordsQueryParameters - Invalid query parameters\n\n * 400 InvalidEngineAuditRecordsShowSystemRecordsFilter - The ShowSystemRecords property only supports the equal (eq) operation\n\n * 400 InvalidEngineAuditRecordsEndTimeFilter - The EventTime property currently supports only the less than or equal (le) operation, designating the End Time.\n\n * 400 InvalidEngineAuditRecordsShowServerRecordsFilter - The ShowServerRecords property only supports the equal (eq) operation\n\n * 400 InvalidEngineAuditRecordsShowSecurityAlertsRecordsFilter - The ShowSecurityAlerts property only supports the equal (eq) operation\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 405 DatabaseEngineAuditRecordsNotImplemented - Operations on database audit records are not enabled yet\n\n * 500 GetEngineAuditRecordsFailed - Failed to get audit records",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-odata": "#/definitions/EngineAuditRecordsFilterParameters",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/move": {
-      "post": {
-        "tags": [
-          "Databases"
-        ],
-        "description": "Renames an Azure SQL Database.",
-        "operationId": "Databases_Rename",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database to rename.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "definition",
-            "in": "body",
-            "description": "The resource move definition for renaming this database.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResourceMoveDefinition"
-            }
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully renamed the database."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceMoveRequest - The resource move request is invalid.\n\n * 400 InvalidMoveTargetResourceId - The target resource identifier in move request is invalid.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 CannotMoveOrDropJobAccountDatabase - Cannot drop database associated with job account.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/advisors": {
       "get": {
         "tags": [
@@ -540,11 +398,9 @@
         "operationId": "ElasticPoolAdvisors_List",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -562,7 +418,6 @@
             "type": "string"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -577,10 +432,7 @@
           "200": {
             "description": "Successfully retrieved the list of elastic pool advisors.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Microsoft.SqlServer.Management.Service.ResourceProvider.Arm.V20150501.WorkloadInsight.Entities.AdvisorResource"
-              }
+              "$ref": "#/definitions/AdvisorResourceList"
             }
           },
           "default": {
@@ -603,11 +455,9 @@
         "operationId": "ElasticPoolAdvisors_Get",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -632,7 +482,6 @@
             "type": "string"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -668,11 +517,9 @@
         "operationId": "ElasticPoolAdvisors_Update",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -706,7 +553,6 @@
             }
           },
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -736,11 +582,9 @@
         "operationId": "ElasticPoolRecommendedActions_List",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -765,7 +609,6 @@
             "type": "string"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -795,11 +638,9 @@
         "operationId": "ElasticPoolRecommendedActions_Get",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -831,7 +672,6 @@
             "type": "string"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -859,11 +699,9 @@
         "operationId": "ElasticPoolRecommendedActions_Update",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -904,7 +742,6 @@
             }
           },
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -925,1096 +762,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAccounts": {
-      "get": {
-        "tags": [
-          "JobAccounts"
-        ],
-        "description": "Returns information about Azure SQL job accounts.",
-        "operationId": "JobAccounts_List",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of job accounts.",
-            "schema": {
-              "$ref": "#/definitions/JobAccountResourceList"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAccounts/{jobAccountName}": {
-      "get": {
-        "tags": [
-          "JobAccounts"
-        ],
-        "description": "Returns information about an Azure SQL job account.",
-        "operationId": "JobAccounts_Get",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job account is hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the Azure SQL job account to be retrieved.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the specified job account.",
-            "schema": {
-              "$ref": "#/definitions/JobAccountResource"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "JobAccounts"
-        ],
-        "description": "Creating a new Azure SQL job account or updating an existing Azure SQL job account.",
-        "operationId": "JobAccounts_CreateOrUpdate",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job account is hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the Azure SQL job account to be created or updated.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountResource",
-            "in": "body",
-            "description": "The requested job account resource state.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/JobAccountResource"
-            }
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated the job account.",
-            "schema": {
-              "$ref": "#/definitions/JobAccountResource"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidJobAccountCreateOrUpdateRequest - The create or update job account request body is empty or invalid.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 DatabaseDoesNotExist - The requested database was not found\n\n * 400 JobAccountExceededAccountsQuota - Could not create job account because it would exceed the quota.\n\n * 400 JobAccountAlreadyExists - The job account already exists on the server.\n\n * 400 JobAccountDatabaseEditionUnsupported - The specified database's service level objective is not supported for use as a job account database.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SubscriptionNotFound - The requested subscription was not found.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          },
-          "201": {
-            "description": "Successfully created the job account.",
-            "schema": {
-              "$ref": "#/definitions/JobAccountResource"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "tags": [
-          "JobAccounts"
-        ],
-        "description": "Deletes the Azure SQL job account with the given name.",
-        "operationId": "JobAccounts_Delete",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job account is hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the Azure SQL job account to be deleted.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the job account."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          },
-          "204": {
-            "description": "The specified job account does not exist."
-          }
-        },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAccounts/{jobAccountName}/credentials": {
-      "get": {
-        "tags": [
-          "JobCredentials"
-        ],
-        "description": "Returns a list of Elastic jobs credentials.",
-        "operationId": "JobCredentials_List",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the job account.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of job credentials.",
-            "schema": {
-              "$ref": "#/definitions/JobCredentialResourceList"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAccounts/{jobAccountName}/credentials/{credentialName}": {
-      "get": {
-        "tags": [
-          "JobCredentials"
-        ],
-        "description": "Returns information about an Elastic jobs credential.",
-        "operationId": "JobCredentials_Get",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the job account.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "credentialName",
-            "in": "path",
-            "description": "The name of the credential.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the job credential.",
-            "schema": {
-              "$ref": "#/definitions/JobCredentialResource"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "JobCredentials"
-        ],
-        "description": "Creates or updates an Elastic jobs credential.",
-        "operationId": "JobCredentials_CreateOrUpdate",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the job account.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "credentialName",
-            "in": "path",
-            "description": "The name of the credential.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The requested job credential state.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/JobCredentialResource"
-            }
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated the credential.",
-            "schema": {
-              "$ref": "#/definitions/JobCredentialResource"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          },
-          "201": {
-            "description": "Successfully created the credential.",
-            "schema": {
-              "$ref": "#/definitions/JobCredentialResource"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "delete": {
-        "tags": [
-          "JobCredentials"
-        ],
-        "description": "Deletes the Elastic job credential with the given name.",
-        "operationId": "JobCredentials_Delete",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the job account.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "credentialName",
-            "in": "path",
-            "description": "The name of the credential.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the credential."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          },
-          "204": {
-            "description": "A credential with the specified name does not exist."
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAccounts/{jobAccountName}/jobs": {
-      "get": {
-        "tags": [
-          "Jobs"
-        ],
-        "description": "Returns information about Elastic jobs.",
-        "operationId": "Jobs_List",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the job account.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of jobs.",
-            "schema": {
-              "$ref": "#/definitions/JobResourceList"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAccounts/{jobAccountName}/jobs/{jobName}": {
-      "get": {
-        "tags": [
-          "Jobs"
-        ],
-        "description": "Returns information about an Elastic job.",
-        "operationId": "Jobs_Get",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the job account.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job to get.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the job.",
-            "schema": {
-              "$ref": "#/definitions/JobResource"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "Jobs"
-        ],
-        "description": "Creates a new Elastic job or updates an existing Elastic job.",
-        "operationId": "Jobs_CreateOrUpdate",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the job account.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job to get.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The requested job state.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/JobResource"
-            }
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated the job.",
-            "schema": {
-              "$ref": "#/definitions/JobResource"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          },
-          "201": {
-            "description": "Successfully created the job.",
-            "schema": {
-              "$ref": "#/definitions/JobResource"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "delete": {
-        "tags": [
-          "Jobs"
-        ],
-        "description": "Deletes the Elastic job with the given name.",
-        "operationId": "Jobs_Delete",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the job account.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job to delete.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the job account."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          },
-          "204": {
-            "description": "The specified job account does not exist."
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAccounts/{jobAccountName}/jobs/{jobName}/steps": {
-      "get": {
-        "tags": [
-          "Jobs"
-        ],
-        "description": "Returns a list of the steps under an Elastic job.",
-        "operationId": "Jobs_ListJobSteps",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the job account.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job step to get.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of job steps.",
-            "schema": {
-              "$ref": "#/definitions/JobStepResourceList"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "post": {
-        "tags": [
-          "Jobs"
-        ],
-        "description": "Adds a step to an existing Elastic job.",
-        "operationId": "Jobs_CreateJobStep",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the job account.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job step to get.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The requested state of the job step.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/JobStepResource"
-            }
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/System.Object"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          },
-          "201": {
-            "description": "Successfully added the job step.",
-            "schema": {
-              "$ref": "#/definitions/JobStepResource"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAccounts/{jobAccountName}/jobs/{jobName}/steps/{jobStepId}": {
-      "get": {
-        "tags": [
-          "Jobs"
-        ],
-        "description": "Returns information about Elastic job steps.",
-        "operationId": "Jobs_GetJobStep",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the job account.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job step to get.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobStepId",
-            "in": "path",
-            "description": "The id of the job step.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the job step.",
-            "schema": {
-              "$ref": "#/definitions/JobStepResource"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "Jobs"
-        ],
-        "description": "Creates a new step under an Elastic job or updates an existing step.",
-        "operationId": "Jobs_CreateOrUpdateJobStep",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the job account.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job step to get.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobStepId",
-            "in": "path",
-            "description": "The id of the job step.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The requested state of the job step.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/JobStepResource"
-            }
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated the job step.",
-            "schema": {
-              "$ref": "#/definitions/JobStepResource"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 JobStepIdMismatch - Step Id in the specified Job Step URI does not match step id in provided Job Step Resource.\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          },
-          "201": {
-            "description": "Successfully added the job step.",
-            "schema": {
-              "$ref": "#/definitions/JobStepResource"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "delete": {
-        "tags": [
-          "Jobs"
-        ],
-        "description": "Deletes the Elastic job step with the given name.",
-        "operationId": "Jobs_DeleteJobStep",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the job account.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job step to get.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobStepId",
-            "in": "path",
-            "description": "The id of the job step.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the job step."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          },
-          "204": {
-            "description": "The specified job step does not exist."
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/advisors": {
-      "get": {
-        "tags": [
-          "ServerAdvisors"
-        ],
-        "description": "Gets list of Azure SQL Database Server Advisors.",
-        "operationId": "ServerAdvisors_List",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The filter to apply on the operation",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of server advisors.",
-            "schema": {
-              "$ref": "#/definitions/AdvisorResourceList"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-odata": "#/definitions/AdvisorResource"
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/advisors/{advisorName}": {
       "get": {
         "tags": [
@@ -2024,11 +771,9 @@
         "operationId": "ServerAdvisors_Get",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -2046,7 +791,6 @@
             "type": "string"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -2082,11 +826,9 @@
         "operationId": "ServerAdvisors_Update",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -2113,7 +855,6 @@
             }
           },
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -2143,11 +884,9 @@
         "operationId": "ServerRecommendedActions_List",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -2165,7 +904,6 @@
             "type": "string"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -2195,11 +933,9 @@
         "operationId": "ServerRecommendedActions_Get",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -2224,7 +960,6 @@
             "type": "string"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -2252,11 +987,9 @@
         "operationId": "ServerRecommendedActions_Update",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -2290,7 +1023,6 @@
             }
           },
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -2311,109 +1043,85 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAccounts/{jobAccountName}/targetGroups": {
-      "get": {
-        "tags": [
-          "TargetGroups"
-        ],
-        "description": "Returns a list of Elastic jobs target groups.",
-        "operationId": "TargetGroups_List",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the job account.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of target groups.",
-            "schema": {
-              "$ref": "#/definitions/TargetGroupResourceList"
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAccounts": {
+            "get": {
+                "tags": ["JobAccounts"],
+                "description": "Returns information about Azure SQL job accounts.",
+                "operationId": "JobAccounts_List",
+                "parameters": [{
+                    "required": true,
+                    "$ref": "#/parameters/SubscriptionIdParameter"
+                }, {
+                    "required": true,
+                    "$ref": "#/parameters/ResourceGroupParameter"
+                }, {
+                    "name": "serverName",
+                    "in": "path",
+                    "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "required": true,
+                    "$ref": "#/parameters/ApiVersionParameter"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the list of job accounts.",
+                        "schema": {
+                            "$ref": "#/definitions/JobAccountResourceList"
+                        }
+                    },
+                    "default": {
+                        "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found",
+                        "schema": {
+                            "$ref": "#/definitions/ArmErrorResponseMessage"
+                        }
+                    }
+                },
+                "deprecated": false
             }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          }
         },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAccounts/{jobAccountName}/targetGroups/{targetGroupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAccounts/{jobAccountName}": {
       "get": {
         "tags": [
-          "TargetGroups"
+          "JobAccounts"
         ],
-        "description": "Returns a Elastic jobs target group.",
-        "operationId": "TargetGroups_Get",
+        "description": "Returns information about an Azure SQL job account.",
+        "operationId": "JobAccounts_Get",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "name": "serverName",
             "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
+            "description": "The name of the Azure SQL Database Server that the job account is hosted in.",
             "required": true,
             "type": "string"
           },
           {
             "name": "jobAccountName",
             "in": "path",
-            "description": "The name of the job account.",
+            "description": "The name of the Azure SQL job account to be retrieved.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "targetGroupName",
-            "in": "path",
-            "description": "The name of the target group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "required": true,
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the target group.",
+            "description": "Successfully retrieved the specified job account.",
             "schema": {
-              "$ref": "#/definitions/TargetGroupResource"
+              "$ref": "#/definitions/JobAccountResource"
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.",
             "schema": {
               "$ref": "#/definitions/ArmErrorResponseMessage"
             }
@@ -2423,136 +1131,236 @@
       },
       "put": {
         "tags": [
-          "TargetGroups"
+          "JobAccounts"
         ],
-        "description": "Creates or updates an Elastic jobs target group.",
-        "operationId": "TargetGroups_CreateOrUpdate",
+        "description": "Creating a new Azure SQL job account or updating an existing Azure SQL job account.",
+        "operationId": "JobAccounts_CreateOrUpdate",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "name": "serverName",
             "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
+            "description": "The name of the Azure SQL Database Server that the job account is hosted in.",
             "required": true,
             "type": "string"
           },
           {
             "name": "jobAccountName",
             "in": "path",
-            "description": "The name of the job account.",
+            "description": "The name of the Azure SQL job account to be created or updated.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "targetGroupName",
-            "in": "path",
-            "description": "The name of the target group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resource",
+            "name": "jobAccountResource",
             "in": "body",
-            "description": "The requested state of the target group.",
+            "description": "The requested job account resource state.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TargetGroupResource"
+              "$ref": "#/definitions/JobAccountResource"
             }
           },
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully updated the target group.",
+            "description": "Successfully updated the job account.",
             "schema": {
-              "$ref": "#/definitions/JobCredentialResource"
+              "$ref": "#/definitions/JobAccountResource"
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found",
+            "description": "*** Error Responses: ***\n\n * 400 InvalidJobAccountCreateOrUpdateRequest - The create or update job account request body is empty or invalid.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 DatabaseDoesNotExist - The requested database was not found\n\n * 400 JobAccountExceededAccountsQuota - Could not create job account because it would exceed the quota.\n\n * 400 JobAccountAlreadyExists - The job account already exists on the server.\n\n * 400 JobAccountDatabaseEditionUnsupported - The specified database's service level objective is not supported for use as a job account database.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SubscriptionNotFound - The requested subscription was not found.",
             "schema": {
               "$ref": "#/definitions/ArmErrorResponseMessage"
             }
           },
           "201": {
-            "description": "Successfully created the target group.",
+            "description": "Successfully created the job account.",
             "schema": {
-              "$ref": "#/definitions/JobCredentialResource"
+              "$ref": "#/definitions/JobAccountResource"
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
-          "TargetGroups"
+          "JobAccounts"
         ],
-        "description": "Deletes the Elastic job target group with the given name.",
-        "operationId": "TargetGroups_DeleteTargetGroup",
+        "description": "Deletes the Azure SQL job account with the given name.",
+        "operationId": "JobAccounts_Delete",
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "name": "serverName",
             "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
+            "description": "The name of the Azure SQL Database Server that the job account is hosted in.",
             "required": true,
             "type": "string"
           },
           {
             "name": "jobAccountName",
             "in": "path",
-            "description": "The name of the job account.",
+            "description": "The name of the Azure SQL job account to be deleted.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "targetGroupName",
-            "in": "path",
-            "description": "The name of the target group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "required": true,
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully deleted the target group."
+            "description": "Successfully deleted the job account."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.",
             "schema": {
               "$ref": "#/definitions/ArmErrorResponseMessage"
             }
           },
           "204": {
-            "description": "A target group with the specified name does not exist."
+            "description": "The specified job account does not exist."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditRecords": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Get a list of database engine audit records.",
+        "operationId": "Databases_ListEngineAuditRecords",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database for which database engine audit records are retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of engine audit records.",
+            "schema": {
+              "$ref": "#/definitions/EngineAuditRecordResourceList"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidEngineAuditRecordsQueryParameters - Invalid query parameters\n\n * 400 InvalidEngineAuditRecordsShowSystemRecordsFilter - The ShowSystemLogs property only supports the equal (eq) operation\n\n * 400 InvalidEngineAuditRecordsEndTimeFilter - The EventTime property currently supports only the less than or equal (le) operation, designating the End Time.\n\n * 400 InvalidEngineAuditRecordsShowServerRecordsFilter - The ShowServerRecords property only supports the equal (eq) operation\n\n * 400 InvalidEngineAuditRecordsShowSecurityAlertsRecordsFilter - The ShowSecurityAlerts property only supports the equal (eq) operation\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 405 DatabaseEngineAuditRecordsNotImplemented - Operations on database audit records are not enabled yet\n\n * 500 GetEngineAuditRecordsFailed - Failed to get audit records",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/EngineAuditRecordsFilterParameters",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/move": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Renames an Azure SQL Database.",
+        "operationId": "Databases_Rename",
+        "parameters": [
+          {
+            
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database to rename.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "definition",
+            "in": "body",
+            "description": "The resource move definition for renaming this database.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceMoveDefinition"
+            }
+          },
+          {
+            
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully renamed the database."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceMoveRequest - The resource move request is invalid.\n\n * 400 InvalidMoveTargetResourceId - The target resource identifier in move request is invalid.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 CannotMoveOrDropJobAccountDatabase - Cannot drop database associated with job account.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
           }
         },
         "deprecated": false
       }
     }
-  },
-  "definitions": {
+},
+"definitions": {
     "AdvisorResource": {
       "type": "object",
       "properties": {
@@ -2567,9 +1375,6 @@
         },
         "location": {
           "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
         },
         "kind": {
           "enum": [
@@ -2593,27 +1398,17 @@
         }
       }
     },
-    "ArmResourceSku": {
-      "description": "Represents an ARM Resource SKU.",
+    "AdvisorResourceList": {
       "type": "object",
       "properties": {
-        "name": {
-          "description": "The name of the SKU, typically, a letter + Number code, e.g. P3.",
-          "type": "string"
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdvisorResource"
+          }
         },
-        "tier": {
-          "description": "The tier of the particular SKU, e.g. Basic, Premium.",
+        "nextLink": {
           "type": "string"
-        },
-        "size": {
-          "type": "string"
-        },
-        "family": {
-          "type": "string"
-        },
-        "capacity": {
-          "format": "int32",
-          "type": "integer"
         }
       }
     },
@@ -2637,10 +1432,7 @@
           "type": "string"
         },
         "recommendedActions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RecommendedActionResource"
-          }
+          "$ref": "#/definitions/RecommendedActionResourceList"
         }
       }
     },
@@ -2658,9 +1450,6 @@
         },
         "location": {
           "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
         },
         "kind": {
           "enum": [
@@ -2681,6 +1470,20 @@
         },
         "properties": {
           "$ref": "#/definitions/RecommendedActionResourceProperties"
+        }
+      }
+    },
+    "RecommendedActionResourceList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendedActionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -2773,10 +1576,7 @@
           }
         },
         "details": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/System.Object"
-          }
+          "type": "object"
         }
       }
     },
@@ -2863,14 +1663,16 @@
       }
     },
     "ArmErrorResponseMessage": {
-      "description": "Contains information about the error that occured.",
       "type": "object",
+      "description":"represents and error message.",
+      "readOnly": true,
       "properties": {
         "error": {
-          "$ref": "#/definitions/ArmErrorResponseExtendedErrorInfo",
-          "description": "Contains the information about the error."
+          "description" : "Contains the information about the error.",
+          "$ref": "#/definitions/ArmErrorResponseExtendedErrorInfo"
         }
-      }
+      },
+      "required" : ["error"]
     },
     "ArmErrorResponseExtendedErrorInfo": {
       "description": "Contains additional information about the error that occured.",
@@ -2884,15 +1686,8 @@
           }
         },
         "innerError": {
-          "description": "The inner error if available."
-        },
-        "code": {
-          "description": "The error code associated with the failure.",
-          "type": "string"
-        },
-        "message": {
-          "description": "The error message associated with the failure.",
-          "type": "string"
+          "description": "The inner error if available.",
+          "type" : "object"
         },
         "target": {
           "description": "The target of the particular error.",
@@ -2901,138 +1696,20 @@
       }
     },
     "ArmErrorResponseErrorDetail": {
-      "description": "Contains detailed information about the error that occured.",
       "type": "object",
+      "description": "Details about the error that occurred",
       "properties": {
         "code": {
-          "description": "The error code associated with the failure.",
           "type": "string"
         },
         "message": {
-          "description": "The error message associated with the failure.",
           "type": "string"
         },
         "target": {
-          "description": "The target of the particular error.",
           "type": "string"
         }
-      }
-    },
-    "AdvisorResourceList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AdvisorResource"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "EngineAuditRecordsFilterParameters": {
-      "type": "object",
-      "properties": {
-        "eventTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "showSystemRecords": {
-          "type": "boolean"
-        },
-        "showServerRecords": {
-          "type": "boolean"
-        },
-        "showSecurityAlertsRecords": {
-          "type": "boolean"
-        }
-      }
-    },
-    "EngineAuditRecordResourceList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EngineAuditRecordResource"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "EngineAuditRecordResource": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/EngineAuditRecordResourceProperties"
-        }
-      }
-    },
-    "EngineAuditRecordResourceProperties": {
-      "type": "object",
-      "properties": {
-        "actionId": {
-          "type": "string"
-        },
-        "principalName": {
-          "type": "string"
-        },
-        "eventTimeUtc": {
-          "type": "string"
-        },
-        "statement": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        },
-        "additionalInfo": {
-          "type": "string"
-        },
-        "clientIp": {
-          "type": "string"
-        }
-      }
-    },
-    "ResourceMoveDefinition": {
-      "description": "Contains the information necessary to perform a resource move (rename).",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The target ID for the resource",
-          "type": "string"
-        }
-      }
-    },
-    "RecommendedActionResourceList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RecommendedActionResource"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
+      },
+      "required" : ["code", "message"]
     },
     "JobAccountResourceList": {
       "type": "object",
@@ -3071,6 +1748,7 @@
           }
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/JobAccountResourceProperties"
         }
       }
@@ -3085,188 +1763,33 @@
         }
       }
     },
-    "JobCredentialResourceList": {
+    "EngineAuditRecordsFilterParameters": {
       "type": "object",
+      "description": "Supported properties when using $filter",
       "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobCredentialResource"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "JobCredentialResource": {
-      "description": "Contains information about an Azure SQL Database Elastic job credential.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
-        },
-        "kind": {
-          "enum": [
-            "None",
-            "V2",
-            "V12",
-            "User",
-            "System",
-            "Datawarehouse"
-          ],
-          "type": "string"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/JobCredentialResourceProperties"
-        }
-      }
-    },
-    "JobCredentialResourceProperties": {
-      "description": "Properties for an Azure SQL Database Elastic job credential.",
-      "type": "object",
-      "properties": {
-        "username": {
-          "description": "Username for the credential.",
-          "type": "string"
-        },
-        "password": {
-          "description": "Password for the credential.",
-          "type": "string"
-        }
-      }
-    },
-    "JobResourceList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobResource"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "JobResource": {
-      "description": "Contains information about an Azure SQL Database Elastic job.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
-        },
-        "kind": {
-          "enum": [
-            "None",
-            "V2",
-            "V12",
-            "User",
-            "System",
-            "Datawarehouse"
-          ],
-          "type": "string"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/JobResourceProperties"
-        }
-      }
-    },
-    "JobResourceProperties": {
-      "description": "Properties for an Azure SQL Database Elastic job.",
-      "type": "object",
-      "properties": {
-        "versionNumber": {
-          "format": "int32",
-          "description": "Version number of the Elastic job.",
-          "type": "integer"
-        },
-        "schedule": {
-          "$ref": "#/definitions/ScheduleProperties",
-          "description": "Schedule properties for the Elastic job."
-        }
-      }
-    },
-    "ScheduleProperties": {
-      "type": "object",
-      "properties": {
-        "startTime": {
+        "eventTime": {
           "format": "date-time",
-          "description": "Schedule start time.",
           "type": "string"
         },
-        "endTime": {
-          "format": "date-time",
-          "description": "Schedule end time.",
-          "type": "string"
+        "showSystemLogs": {
+          "type": "boolean"
         },
-        "intervalType": {
-          "description": "Schedule interval type (i.e. minutes, hours, days, once)",
-          "enum": [
-            "Once",
-            "Minutes",
-            "Hours",
-            "Days",
-            "Weeks",
-            "Months"
-          ],
-          "type": "string"
+        "showServerRecords": {
+          "type": "boolean"
         },
-        "intervalValue": {
-          "format": "int32",
-          "description": "Value of the schedule's repetition interval (if not once).",
-          "type": "integer"
-        },
-        "enabled": {
-          "description": "Whether or not the job schedule is enabled.",
+        "showSecurityAlertsRecords": {
           "type": "boolean"
         }
       }
     },
-    "JobStepResourceList": {
+    "EngineAuditRecordResourceList": {
       "type": "object",
+      "description": "Represents a list of engine audit records resources",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobStepResource"
+            "$ref": "#/definitions/EngineAuditRecordResource"
           }
         },
         "nextLink": {
@@ -3274,9 +1797,9 @@
         }
       }
     },
-    "JobStepResource": {
-      "description": "Contains information about an Azure SQL Database Elastic job step.",
+    "EngineAuditRecordResource": {
       "type": "object",
+      "description": "Contains an engine auditing record.",
       "properties": {
         "id": {
           "type": "string"
@@ -3290,206 +1813,57 @@
         "location": {
           "type": "string"
         },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
-        },
-        "kind": {
-          "enum": [
-            "None",
-            "V2",
-            "V12",
-            "User",
-            "System",
-            "Datawarehouse"
-          ],
-          "type": "string"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/JobStepResourceProperties"
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EngineAuditRecordResourceProperties"
         }
       }
     },
-    "JobStepResourceProperties": {
-      "description": "Properties for an Azure SQL Database Elastic job step.",
+    "EngineAuditRecordResourceProperties": {
       "type": "object",
+      "description": "The properties of an engine auditing record",
       "properties": {
-        "stepId": {
-          "format": "int32",
-          "description": "The index of the job step.",
-          "type": "integer"
-        },
-        "targetGroup": {
-          "description": "Target group for the job step.",
+        "actionId": {
           "type": "string"
         },
-        "credential": {
-          "description": "Credential of the job step.",
+        "principalName": {
           "type": "string"
         },
-        "action": {
-          "$ref": "#/definitions/ActionProperties",
-          "description": "The action payload of the job step."
-        },
-        "output": {
-          "$ref": "#/definitions/OutputProperties",
-          "description": "Output destination properties of the job step."
-        },
-        "executionOptions": {
-          "$ref": "#/definitions/ExecutionProperties",
-          "description": "Execution options for the job step."
-        }
-      }
-    },
-    "ActionProperties": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type of action being executed by the job step.",
-          "enum": [
-            "Tsql",
-            "Dacpac"
-          ],
+        "eventTimeUtc": {
           "type": "string"
         },
-        "source": {
-          "description": "The source of the action to execute (inline or URI).",
-          "enum": [
-            "Inline",
-            "Uri"
-          ],
+        "statement": {
           "type": "string"
         },
-        "value": {
-          "description": "The action payload for the job step.",
+        "status": {
+          "type": "string"
+        },
+        "additionalInfo": {
+          "type": "string"
+        },
+        "clientIp": {
           "type": "string"
         }
       }
     },
-    "OutputProperties": {
-      "type": "object",
-      "properties": {
-        "database": {
-          "description": "The name of the destination database.",
-          "type": "string"
-        },
-        "schema": {
-          "description": "The name of the destination schema.",
-          "type": "string"
-        },
-        "table": {
-          "description": "The name of the destination table.",
-          "type": "string"
-        },
-        "credential": {
-          "description": "The name of the credential to use to write into the destination database, schema and table.",
-          "type": "string"
-        }
-      }
-    },
-    "ExecutionProperties": {
-      "type": "object",
-      "properties": {
-        "timeoutSeconds": {
-          "format": "int32",
-          "description": "Execution timeout for the job step.",
-          "type": "integer"
-        },
-        "maxAttempts": {
-          "format": "int32",
-          "description": "Maximum number of times the job step will be attempted.",
-          "type": "integer"
-        },
-        "initialRetryDelaySeconds": {
-          "format": "int32",
-          "description": "Initial delay between retries for job step execution.",
-          "type": "integer"
-        },
-        "maximumRetryDelaySeconds": {
-          "format": "int32",
-          "description": "The maximum amount of time to wait between retries for job step execution.",
-          "type": "integer"
-        },
-        "retryDelayBackoffCoefficient": {
-          "format": "double",
-          "description": "The backoff coefficient for the time between retries.",
-          "type": "number"
-        }
-      }
-    },
-    "TargetGroupResourceList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TargetGroupResource"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "TargetGroupResource": {
-      "description": "Contains information about an Azure SQL Database Elastic job target group.",
+    "ResourceMoveDefinition": {
+      "description": "Contains the information necessary to perform a resource move (rename).",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The target ID for the resource",
           "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
-        },
-        "kind": {
-          "enum": [
-            "None",
-            "V2",
-            "V12",
-            "User",
-            "System",
-            "Datawarehouse"
-          ],
-          "type": "string"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/TargetGroupResourceProperties"
         }
       }
-    },
-    "TargetGroupResourceProperties": {
-      "description": "Properties for an Azure SQL Database Elastic job target group.",
-      "type": "object",
-      "properties": {}
     }
-  },
-  "parameters": {
+},
+"parameters": {
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
-      "description": "Subscription ID which uniquely identifies Microsoft Azure subscription.",
+      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription.",
       "required": true,
-      "x-ms-parameter-location": "client",
+      "format": "uuid",
       "type": "string"
     },
     "ApiVersionParameter": {
@@ -3508,5 +1882,6 @@
       "x-ms-parameter-location": "method",
       "type": "string"
     }
-  }
+}
+
 }

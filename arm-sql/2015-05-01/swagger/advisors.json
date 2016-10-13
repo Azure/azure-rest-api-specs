@@ -1060,9 +1060,6 @@
         "location": {
           "type": "string"
         },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
-        },
         "kind": {
           "enum": [
             "None",
@@ -1137,9 +1134,6 @@
         },
         "location": {
           "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
         },
         "kind": {
           "enum": [
@@ -1354,31 +1348,33 @@
     },
     "ArmErrorResponseMessage": {
       "type": "object",
-      "description": "represents and error message.",
+      "description":"represents and error message.",
+      "readOnly": true,
       "properties": {
         "error": {
+          "description" : "Contains the information about the error.",
           "$ref": "#/definitions/ArmErrorResponseExtendedErrorInfo"
         }
-      }
+      },
+      "required" : ["error"]
     },
     "ArmErrorResponseExtendedErrorInfo": {
+      "description": "Contains additional information about the error that occured.",
       "type": "object",
-      "description": "Detailed information about the error that occurred.",
       "properties": {
         "details": {
+          "description": "A list of error details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ArmErrorResponseErrorDetail"
           }
         },
-        "innerError": {},
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
+        "innerError": {
+          "description": "The inner error if available.",
+          "type" : "object"
         },
         "target": {
+          "description": "The target of the particular error.",
           "type": "string"
         }
       }
@@ -1396,29 +1392,8 @@
         "target": {
           "type": "string"
         }
-      }
-    },
-    "ArmResourceSku": {
-      "type": "object",
-      "description": "Represents an ARM Resource SKU",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "tier": {
-          "type": "string"
-        },
-        "size": {
-          "type": "string"
-        },
-        "family": {
-          "type": "string"
-        },
-        "capacity": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
+      },
+      "required" : ["code", "message"]
     }
   },
   "parameters": {
