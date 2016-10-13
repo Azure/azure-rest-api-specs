@@ -473,64 +473,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/move": {
-      "post": {
-        "tags": [
-          "Databases"
-        ],
-        "description": "Renames an Azure SQL Database.",
-        "operationId": "Databases_Rename",
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database to rename.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "definition",
-            "in": "body",
-            "description": "The resource move definition for renaming this database.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResourceMoveDefinition"
-            }
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully renamed the database."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceMoveRequest - The resource move request is invalid.\n\n * 400 InvalidMoveTargetResourceId - The target resource identifier in move request is invalid.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 CannotMoveOrDropJobAccountDatabase - Cannot drop database associated with job account.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/advisors": {
       "get": {
         "tags": [
@@ -2568,9 +2510,6 @@
         "location": {
           "type": "string"
         },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
-        },
         "kind": {
           "enum": [
             "None",
@@ -2590,30 +2529,6 @@
         },
         "properties": {
           "$ref": "#/definitions/AdvisorResourceProperties"
-        }
-      }
-    },
-    "ArmResourceSku": {
-      "description": "Represents an ARM Resource SKU.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the SKU, typically, a letter + Number code, e.g. P3.",
-          "type": "string"
-        },
-        "tier": {
-          "description": "The tier of the particular SKU, e.g. Basic, Premium.",
-          "type": "string"
-        },
-        "size": {
-          "type": "string"
-        },
-        "family": {
-          "type": "string"
-        },
-        "capacity": {
-          "format": "int32",
-          "type": "integer"
         }
       }
     },
@@ -2658,9 +2573,6 @@
         },
         "location": {
           "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
         },
         "kind": {
           "enum": [
@@ -2863,14 +2775,16 @@
       }
     },
     "ArmErrorResponseMessage": {
-      "description": "Contains information about the error that occured.",
       "type": "object",
+      "description":"represents and error message.",
+      "readOnly": true,
       "properties": {
         "error": {
-          "$ref": "#/definitions/ArmErrorResponseExtendedErrorInfo",
-          "description": "Contains the information about the error."
+          "description" : "Contains the information about the error.",
+          "$ref": "#/definitions/ArmErrorResponseExtendedErrorInfo"
         }
-      }
+      },
+      "required" : ["error"]
     },
     "ArmErrorResponseExtendedErrorInfo": {
       "description": "Contains additional information about the error that occured.",
@@ -2884,15 +2798,8 @@
           }
         },
         "innerError": {
-          "description": "The inner error if available."
-        },
-        "code": {
-          "description": "The error code associated with the failure.",
-          "type": "string"
-        },
-        "message": {
-          "description": "The error message associated with the failure.",
-          "type": "string"
+          "description": "The inner error if available.",
+          "type" : "object"
         },
         "target": {
           "description": "The target of the particular error.",
@@ -2901,22 +2808,20 @@
       }
     },
     "ArmErrorResponseErrorDetail": {
-      "description": "Contains detailed information about the error that occured.",
       "type": "object",
+      "description": "Details about the error that occurred",
       "properties": {
         "code": {
-          "description": "The error code associated with the failure.",
           "type": "string"
         },
         "message": {
-          "description": "The error message associated with the failure.",
           "type": "string"
         },
         "target": {
-          "description": "The target of the particular error.",
           "type": "string"
         }
-      }
+      },
+      "required" : ["code", "message"]
     },
     "AdvisorResourceList": {
       "type": "object",
@@ -3084,403 +2989,6 @@
           "type": "string"
         }
       }
-    },
-    "JobCredentialResourceList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobCredentialResource"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "JobCredentialResource": {
-      "description": "Contains information about an Azure SQL Database Elastic job credential.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
-        },
-        "kind": {
-          "enum": [
-            "None",
-            "V2",
-            "V12",
-            "User",
-            "System",
-            "Datawarehouse"
-          ],
-          "type": "string"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/JobCredentialResourceProperties"
-        }
-      }
-    },
-    "JobCredentialResourceProperties": {
-      "description": "Properties for an Azure SQL Database Elastic job credential.",
-      "type": "object",
-      "properties": {
-        "username": {
-          "description": "Username for the credential.",
-          "type": "string"
-        },
-        "password": {
-          "description": "Password for the credential.",
-          "type": "string"
-        }
-      }
-    },
-    "JobResourceList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobResource"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "JobResource": {
-      "description": "Contains information about an Azure SQL Database Elastic job.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
-        },
-        "kind": {
-          "enum": [
-            "None",
-            "V2",
-            "V12",
-            "User",
-            "System",
-            "Datawarehouse"
-          ],
-          "type": "string"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/JobResourceProperties"
-        }
-      }
-    },
-    "JobResourceProperties": {
-      "description": "Properties for an Azure SQL Database Elastic job.",
-      "type": "object",
-      "properties": {
-        "versionNumber": {
-          "format": "int32",
-          "description": "Version number of the Elastic job.",
-          "type": "integer"
-        },
-        "schedule": {
-          "$ref": "#/definitions/ScheduleProperties",
-          "description": "Schedule properties for the Elastic job."
-        }
-      }
-    },
-    "ScheduleProperties": {
-      "type": "object",
-      "properties": {
-        "startTime": {
-          "format": "date-time",
-          "description": "Schedule start time.",
-          "type": "string"
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "Schedule end time.",
-          "type": "string"
-        },
-        "intervalType": {
-          "description": "Schedule interval type (i.e. minutes, hours, days, once)",
-          "enum": [
-            "Once",
-            "Minutes",
-            "Hours",
-            "Days",
-            "Weeks",
-            "Months"
-          ],
-          "type": "string"
-        },
-        "intervalValue": {
-          "format": "int32",
-          "description": "Value of the schedule's repetition interval (if not once).",
-          "type": "integer"
-        },
-        "enabled": {
-          "description": "Whether or not the job schedule is enabled.",
-          "type": "boolean"
-        }
-      }
-    },
-    "JobStepResourceList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobStepResource"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "JobStepResource": {
-      "description": "Contains information about an Azure SQL Database Elastic job step.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
-        },
-        "kind": {
-          "enum": [
-            "None",
-            "V2",
-            "V12",
-            "User",
-            "System",
-            "Datawarehouse"
-          ],
-          "type": "string"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/JobStepResourceProperties"
-        }
-      }
-    },
-    "JobStepResourceProperties": {
-      "description": "Properties for an Azure SQL Database Elastic job step.",
-      "type": "object",
-      "properties": {
-        "stepId": {
-          "format": "int32",
-          "description": "The index of the job step.",
-          "type": "integer"
-        },
-        "targetGroup": {
-          "description": "Target group for the job step.",
-          "type": "string"
-        },
-        "credential": {
-          "description": "Credential of the job step.",
-          "type": "string"
-        },
-        "action": {
-          "$ref": "#/definitions/ActionProperties",
-          "description": "The action payload of the job step."
-        },
-        "output": {
-          "$ref": "#/definitions/OutputProperties",
-          "description": "Output destination properties of the job step."
-        },
-        "executionOptions": {
-          "$ref": "#/definitions/ExecutionProperties",
-          "description": "Execution options for the job step."
-        }
-      }
-    },
-    "ActionProperties": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type of action being executed by the job step.",
-          "enum": [
-            "Tsql",
-            "Dacpac"
-          ],
-          "type": "string"
-        },
-        "source": {
-          "description": "The source of the action to execute (inline or URI).",
-          "enum": [
-            "Inline",
-            "Uri"
-          ],
-          "type": "string"
-        },
-        "value": {
-          "description": "The action payload for the job step.",
-          "type": "string"
-        }
-      }
-    },
-    "OutputProperties": {
-      "type": "object",
-      "properties": {
-        "database": {
-          "description": "The name of the destination database.",
-          "type": "string"
-        },
-        "schema": {
-          "description": "The name of the destination schema.",
-          "type": "string"
-        },
-        "table": {
-          "description": "The name of the destination table.",
-          "type": "string"
-        },
-        "credential": {
-          "description": "The name of the credential to use to write into the destination database, schema and table.",
-          "type": "string"
-        }
-      }
-    },
-    "ExecutionProperties": {
-      "type": "object",
-      "properties": {
-        "timeoutSeconds": {
-          "format": "int32",
-          "description": "Execution timeout for the job step.",
-          "type": "integer"
-        },
-        "maxAttempts": {
-          "format": "int32",
-          "description": "Maximum number of times the job step will be attempted.",
-          "type": "integer"
-        },
-        "initialRetryDelaySeconds": {
-          "format": "int32",
-          "description": "Initial delay between retries for job step execution.",
-          "type": "integer"
-        },
-        "maximumRetryDelaySeconds": {
-          "format": "int32",
-          "description": "The maximum amount of time to wait between retries for job step execution.",
-          "type": "integer"
-        },
-        "retryDelayBackoffCoefficient": {
-          "format": "double",
-          "description": "The backoff coefficient for the time between retries.",
-          "type": "number"
-        }
-      }
-    },
-    "TargetGroupResourceList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TargetGroupResource"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "TargetGroupResource": {
-      "description": "Contains information about an Azure SQL Database Elastic job target group.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
-        },
-        "kind": {
-          "enum": [
-            "None",
-            "V2",
-            "V12",
-            "User",
-            "System",
-            "Datawarehouse"
-          ],
-          "type": "string"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/TargetGroupResourceProperties"
-        }
-      }
-    },
-    "TargetGroupResourceProperties": {
-      "description": "Properties for an Azure SQL Database Elastic job target group.",
-      "type": "object",
-      "properties": {}
     }
   },
   "parameters": {
