@@ -1042,11 +1042,13 @@
         },
         "provisioningState": {
           "description": "The provisioning state.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "hostName": {
           "description": "The name of the host.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "eventHubEndpoints": {
           "description": "The event hub endpoint properties.",
@@ -1140,6 +1142,7 @@
         },
         "partitionIds": {
           "description": "The partition ids.",
+          "readOnly": true,
           "type": "array",
           "items": {
             "type": "string"
@@ -1147,14 +1150,17 @@
         },
         "path": {
           "description": "The eventhub path.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "endpoint": {
           "description": "The endpoint.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "internalAuthorizationPolicies": {
           "description": "The internal authorization rules.",
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SharedAccessAuthorizationRule"
@@ -1162,6 +1168,7 @@
         },
         "authorizationPolicies": {
           "description": "The authorization rules.",
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SharedAccessAuthorizationRule"
