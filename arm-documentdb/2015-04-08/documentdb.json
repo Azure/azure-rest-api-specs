@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DocumentDB",
-    "description": "Rest API for DocumentDB",
+    "description": "Azure DocumentDB Resource Provider REST API",
     "version": "2015-04-08"
   },
   "host": "management.azure.com",
@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}?api-version={api-version}": {
       "get": {
         "operationId": "DatabaseAccount_Get",
-        "description": "Retrieves the properties of an existing DocumentDB account.",
+        "description": "Retrieves the properties of an existing database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -62,8 +62,8 @@
         }
       },
       "patch": {
-        "operationId": "DatabaseAccount_Patch",
-        "description": "Patch the properties of an existing DocumentDB account.",
+        "operationId": "DatabaseAccount_PatchTags",
+        "description": "Patch the tags of an existing database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -79,13 +79,13 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "patchParameters",
+            "name": "newTags",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatabaseAccountPatchParameters"
+              "$ref": "#/definitions/DatabaseAccountPatchTagsParameters"
             },
-            "description": "The parameters to provide for the current account."
+            "description": "The tags parameter to patch for the current database account."
           }
         ],
         "responses": {
@@ -99,7 +99,7 @@
       },
       "put": {
         "operationId": "DatabaseAccount_CreateOrUpdate",
-        "description": "Create or Update the properties of an existing DocumentDB account.",
+        "description": "Create a new database account or update the properties of an existing database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -121,7 +121,7 @@
             "schema": {
               "$ref": "#/definitions/DatabaseAccountCreateUpdateParameters"
             },
-            "description": "The parameters to provide for the current DocumentDB database account."
+            "description": "The parameters to provide for the current database account."
           }
         ],
         "responses": {
@@ -135,7 +135,7 @@
       },
       "delete": {
         "operationId": "DatabaseAccount_Delete",
-        "description": "Retrieves the properties of an existing DocumentDB database account.",
+        "description": "Delete an existing database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -164,7 +164,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/failoverPriorityChange?api-version={api-version}": {
       "post": {
         "operationId": "DatabaseAccount_FailoverPriorityChange",
-        "description": "Change the failover priority for the DocumentDB database account",
+        "description": "Change the failover priority for the database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -186,7 +186,7 @@
             "schema": {
               "$ref": "#/definitions/FailoverPolicies"
             },
-            "description": "The failover policies that the database account should be changed to."
+            "description": "The new failover policies for the database account."
           }
         ],
         "responses": {
@@ -289,7 +289,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/readonlykeys?api-version={api-version}": {
       "get": {
         "operationId": "DatabaseAccounts_ListReadOnlyKeys",
-        "description": "Lists the read onlyaccess keys for the specified database account.",
+        "description": "Lists the read-only access keys for the specified database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -317,7 +317,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/regenerateKey?api-version={api-version}": {
       "post": {
         "operationId": "DatabaseAccounts_RegenerateKey",
-        "description": "Regenerates the access keys for the specified database account.",
+        "description": "Regenerates an access key for the specified database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -332,7 +332,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "regenerateKeyParameters",
+            "name": "keyToRegenerate",
             "in": "body",
             "required": true,
             "schema": {
@@ -389,7 +389,7 @@
           "items": {
             "$ref": "#/definitions/DatabaseAccount"
           },
-          "description": "Gets the list of database accounts and their properties."
+          "description": "List of database account and their properties."
         }
       },
       "description": "The list database accounts operation response."
@@ -403,7 +403,7 @@
     },
     "FailoverPolicy": {
       "type": "object",
-      "description": "The Failover policy for a given location of a database account.",
+      "description": "The failover policy for a given region of a database account.",
       "properties": {
         "id": {
           "type": "string",
@@ -412,16 +412,16 @@
         },
         "locationName": {
           "type": "string",
-          "description": "The name of the region location."
+          "description": "The name of the region in which the database account exists."
         },
         "failoverPriority": {
           "type": "integer",
-          "description": "The failover priority of the region. The write region should have a failover priority of 0. The read regions should have a failover priority greater than 0."
+          "description": "The failover priority of the region. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists."
         }
       }
     },
     "Location": {
-      "description": "The location pertaining to a database account.",
+      "description": "The region pertaining to a database account.",
       "type": "object",
       "properties": {
         "id": {
@@ -430,7 +430,7 @@
         },
         "locationName": {
           "type": "string",
-          "description": "The name of the region location."
+          "description": "The name of the region."
         },
         "documentEndpoint": {
           "type": "string",
@@ -438,7 +438,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "The status of the DocumentDB account at the time the operation was called.",
+          "description": "The status of the database account at the time the operation was called.",
           "enum": [
             "Creating",
             "Succeeded",
@@ -452,7 +452,7 @@
           }
         },
         "failoverPriority": {
-          "description": "The failover priority of the region. The write region should have a failover priority of 0. The read regions should have a failover priority greater than 0.",
+          "description": "The failover priority of the region. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.",
           "format": "int32",
           "type": "integer",
           "minimum": 0
@@ -461,7 +461,7 @@
     },
     "Resource": {
       "type": "object",
-      "description": "An Azure Resource",
+      "description": "A database account resource.",
       "properties": {
         "id": {
           "readOnly": true,
@@ -471,23 +471,19 @@
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of the DocumentDB database account."
+          "description": "The name of the database account."
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of Azure Resource."
+          "description": "The type of Azure resource."
         },
         "location": {
           "type": "string",
-          "description": "The location of the resource group."
+          "description": "The location of the resource group to which the resource belongs."
         },
         "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Tags are a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups)."
+          "$ref": "#/definitions/Tags"
         }
       },
       "required": [
@@ -500,12 +496,11 @@
       "type": "object",
       "properties": {
         "kind": {
-          "description": "Indicates the type of DocumentDB account",
+          "description": "Indicates the type of database account. Only modifiable on database account creation.",
           "type": "string",
           "default": "GlobalDocumentDB",
           "enum": [
             "GlobalDocumentDB",
-            "DocumentDB",
             "MongoDB",
             "Parse"
           ],
@@ -577,11 +572,7 @@
           "readOnly": true
         },
         "databaseAccountOfferType": {
-          "description": "The offer type for the DocumentDB database account.",
-          "type": "string",
-          "enum": [
-            "Standard"
-          ]
+          "$ref": "#/definitions/DatabaseAccountOfferType"
         },
         "consistencyPolicy": {
           "description": "The consistency policy for the DocumentDB database account.",
@@ -611,7 +602,10 @@
             "$ref": "#/definitions/FailoverPolicy"
           }
         }
-      }
+      },
+      "required": [
+        "databaseAccountOfferType"
+      ]
     },
     "DatabaseAccountCreateUpdateProperties": {
       "description": "DocumentDB Database Account Create and Update properties.",
@@ -641,44 +635,30 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
+        },
+        "databaseAccountOfferType": {
+          "$ref": "#/definitions/DatabaseAccountOfferType"
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
+      ],
+      "required": [
+        "databaseAccountOfferType"
       ]
     },
-    "DatabaseAccountPatchProperties": {
-      "description": "DocumentDB Database Account patchable properties.",
+    "DatabaseAccountPatchTagsParameters": {
+      "description": "Database Account parameters for patching tags.",
       "type": "object",
       "properties": {
-        "consistencyPolicy": {
-          "description": "The consistency policy for the DocumentDB database account.",
-          "$ref": "#/definitions/ConsistencyPolicy"
-        },
-        "locations": {
-          "type": "array",
-          "description": "An array which consists of the locations enabled for the DocumentDB account.",
-          "items": {
-            "$ref": "#/definitions/Location"
-          }
-        }
-      }
-    },
-    "DatabaseAccountPatchParameters": {
-      "description": "DocumentDB Database Account patchable parameters.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DatabaseAccountPatchProperties"
+        "tags": {
+          "$ref": "#/definitions/Tags"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
+      "required": [
+        "tags"
       ]
     },
     "DatabaseAccountListReadOnlyKeysResult": {
@@ -734,6 +714,20 @@
           }
         }
       }
+    },
+    "DatabaseAccountOfferType": {
+      "description": "The offer type for the DocumentDB database account.",
+      "type": "string",
+      "enum": [
+        "Standard"
+      ]
+    },
+    "Tags": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Tags are a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
     }
   },
   "parameters": {
