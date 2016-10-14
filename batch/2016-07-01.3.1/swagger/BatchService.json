@@ -8253,6 +8253,156 @@
         }
       }
     },
+    "/jobs/{jobId}/tasks/{taskId}/reactivate": {
+      "post": {
+        "tags": [
+          "Tasks"
+        ],
+        "operationId": "Task_Reactivate",
+        "summary": "Reactivates the specified task.",
+        "description": "Reactivation makes a task eligible to be retried again up to its maximum retry count. This will fail for tasks that are not completed or that previously completed successfully (with an exit code of 0). Additionally, this will fail if the job has completed (or is terminating or deleting).",
+        "x-ms-request-id": "request-id",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the job containing the task."
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the task to reactivate."
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30,
+            "description": "The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            },
+            "x-ms-client-request-id": true
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "boolean",
+            "description": "Whether the server should return the client-request-id identifier in the response.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "description": "The time the request was issued. If not specified, this header will be automatically populated with the current system clock time.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "An ETag is specified. Specify this header to perform the operation only if the resource's ETag is an exact match as specified.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "An ETag is specified. Specify this header to perform the operation only if the resource's ETag does not match the specified ETag.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "If-Modified-Since",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "description": "Specify this header to perform the operation only if the resource has been modified since the specified date/time.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "description": "Specify this header to perform the operation only if the resource has not been modified since the specified date/time.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "headers": {
+              "client-request-id": {
+                "description": "The ClientRequestId provided by the client during the request, if present and requested to be returned.",
+                "type": "string"
+              },
+              "request-id": {
+                "description": "The value that uniquely identifies a request.",
+                "type": "string"
+              },
+              "ETag": {
+                "description": "The content of the ETag HTTP response header.",
+                "type": "string"
+              },
+              "Last-Modified": {
+                "description": "The content of the Last-Modified HTTP response header.",
+                "type": "string",
+                "format": "date-time-rfc1123"
+              },
+              "DataServiceId": {
+                "description": "The OData id of the resource to which the request applied.",
+                "type": "string"
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "description": "The error from the Batch service.",
+            "schema": {
+              "$ref": "#/definitions/BatchError"
+            }
+          }
+        }
+      }
+    },
     "/pools/{poolId}/nodes/{nodeId}/users": {
       "post": {
         "tags": [

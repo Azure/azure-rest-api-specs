@@ -1,0 +1,2961 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DataLakeAnalyticsCatalogManagementClient",
+    "description": "Creates an Azure Data Lake Analytics catalog client.",
+    "version": "2016-06-01-preview",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true,
+      "internalConstructors": true
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{accountName}.{adlaCatalogDnsSuffix}",
+    "parameters": [
+      {
+        "name": "accountName",
+        "description": "The Azure Data Lake Analytics account to execute catalog operations on.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      },
+      {
+        "$ref": "#/parameters/adlaCatalogDnsSuffixInPath"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json",
+    "application/octet-stream"
+  ],
+  "produces": [
+    "application/json",
+    "text/json",
+    "application/octet-stream"
+  ],
+  "paths": {
+    "/catalog/usql/databases/{databaseName}/secrets/{secretName}": {
+      "put": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_CreateSecret",
+        "description": "Creates the specified secret for use with external data sources in the specified database. This is deprecated and will be removed in the next release. Please use CreateCredential instead.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database in which to create the secret."
+          },
+          {
+            "name": "secretName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the secret."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataLakeAnalyticsCatalogSecretCreateOrUpdateParameters"
+            },
+            "description": "The parameters required to create the secret (name and password)"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlSecret"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_UpdateSecret",
+        "description": "Modifies the specified secret for use with external data sources in the specified database. This is deprecated and will be removed in the next release. Please use UpdateCredential instead.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the secret."
+          },
+          {
+            "name": "secretName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the secret."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataLakeAnalyticsCatalogSecretCreateOrUpdateParameters"
+            },
+            "description": "The parameters required to modify the secret (name and password)"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlSecret"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetSecret",
+        "description": "Gets the specified secret in the specified database. This is deprecated and will be removed in the next release. Please use GetCredential instead.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the secret."
+          },
+          {
+            "name": "secretName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the secret to get"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlSecret"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_DeleteSecret",
+        "description": "Deletes the specified secret in the specified database. This is deprecated and will be removed in the next release. Please use DeleteCredential instead.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the secret."
+          },
+          {
+            "name": "secretName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the secret to delete"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/secrets": {
+      "delete": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_DeleteAllSecrets",
+        "description": "Deletes all secrets in the specified database. This is deprecated and will be removed in the next release. In the future, please only drop individual credentials using DeleteCredential",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the secret."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/credentials/{credentialName}": {
+      "put": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_CreateCredential",
+        "description": "Creates the specified credential for use with external data sources in the specified database.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database in which to create the credential."
+          },
+          {
+            "name": "credentialName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the credential."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataLakeAnalyticsCatalogCredentialCreateParameters"
+            },
+            "description": "The parameters required to create the credential (name and password)"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created the credential within the specified database."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_UpdateCredential",
+        "description": "Modifies the specified credential for use with external data sources in the specified database",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the credential."
+          },
+          {
+            "name": "credentialName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the credential."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataLakeAnalyticsCatalogCredentialUpdateParameters"
+            },
+            "description": "The parameters required to modify the credential (name and password)"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified credential's password in the specified database"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetCredential",
+        "description": "Retrieves the specified credential from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the schema."
+          },
+          {
+            "name": "credentialName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the credential."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved and returned the specified credential (name only) from the specified database.",
+            "schema": {
+              "$ref": "#/definitions/USqlCredential"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_DeleteCredential",
+        "description": "Deletes the specified credential in the specified database",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the credential."
+          },
+          {
+            "name": "credentialName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the credential to delete"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataLakeAnalyticsCatalogCredentialDeleteParameters"
+            },
+            "description": "The parameters to delete a credential if the current user is not the account owner."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the specified credential from the specified database."
+          }
+        }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/externaldatasources/{externalDataSourceName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetExternalDataSource",
+        "description": "Retrieves the specified external data source from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the external data source."
+          },
+          {
+            "name": "externalDataSourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the external data source."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlExternalDataSource"
+            }
+          }
+        }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/externaldatasources": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListExternalDataSources",
+        "description": "Retrieves the list of external data sources from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the external data sources."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlExternalDataSourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlExternalDataSource"
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/procedures/{procedureName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetProcedure",
+        "description": "Retrieves the specified procedure from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the procedure."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the procedure."
+          },
+          {
+            "name": "procedureName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the procedure."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlProcedure"
+            }
+          }
+        }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/procedures": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListProcedures",
+        "description": "Retrieves the list of procedures from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the procedures."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the procedures."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlProcedureList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlProcedure"
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetTable",
+        "description": "Retrieves the specified table from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the table."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the table."
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlTable"
+            }
+          }
+        }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListTables",
+        "description": "Retrieves the list of tables from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the tables."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the tables."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlTableList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlTable"
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tabletypes/{tableTypeName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetTableType",
+        "description": "Retrieves the specified table type from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the table type."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the table type."
+          },
+          {
+            "name": "tableTypeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table type to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlTableType"
+            }
+          }
+        }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tabletypes": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListTableTypes",
+        "description": "Retrieves the list of table types from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the table types."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the table types."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlTableTypeList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlTableType"
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/views/{viewName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetView",
+        "description": "Retrieves the specified view from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the view."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the view."
+          },
+          {
+            "name": "viewName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the view."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlView"
+            }
+          }
+        }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/views": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListViews",
+        "description": "Retrieves the list of views from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the views."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the views."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlViewList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlView"
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/statistics/{statisticsName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetTableStatistic",
+        "description": "Retrieves the specified table statistics from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the statistics."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the statistics."
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table containing the statistics."
+          },
+          {
+            "name": "statisticsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table statistics."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlTableStatistics"
+            }
+          }
+        }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/statistics": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListTableStatistics",
+        "description": "Retrieves the list of table statistics from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the statistics."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the statistics."
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table containing the statistics."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlTableStatisticsList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlTableStatistics"
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/partitions/{partitionName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetTablePartition",
+        "description": "Retrieves the specified table partition from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the partition."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the partition."
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table containing the partition."
+          },
+          {
+            "name": "partitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table partition."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlTablePartition"
+            }
+          }
+        }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/partitions": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListTablePartitions",
+        "description": "Retrieves the list of table partitions from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the partitions."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the partitions."
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table containing the partitions."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlTablePartitionList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlTablePartition"
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/types": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListTypes",
+        "description": "Retrieves the list of types within the specified database and schema from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the types."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the types."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlTypeList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlType"
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tablevaluedfunctions/{tableValuedFunctionName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetTableValuedFunction",
+        "description": "Retrieves the specified table valued function from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the table valued function."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the table valued function."
+          },
+          {
+            "name": "tableValuedFunctionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the tableValuedFunction."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlTableValuedFunction"
+            }
+          }
+        }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tablevaluedfunctions": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListTableValuedFunctions",
+        "description": "Retrieves the list of table valued functions from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the table valued functions."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the table valued functions."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlTableValuedFunctionList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlTableValuedFunction"
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/assemblies/{assemblyName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetAssembly",
+        "description": "Retrieves the specified assembly from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the assembly."
+          },
+          {
+            "name": "assemblyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assembly."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlAssembly"
+            }
+          }
+        }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/assemblies": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListAssemblies",
+        "description": "Retrieves the list of assemblies from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the assembly."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlAssemblyList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlAssembly"
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetSchema",
+        "description": "Retrieves the specified schema from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the schema."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlSchema"
+            }
+          }
+        }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListSchemas",
+        "description": "Retrieves the list of schemas from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the schema."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlSchemaList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlSchema"
+      }
+    },
+    "/catalog/usql/databases/{databaseName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetDatabase",
+        "description": "Retrieves the specified database from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlDatabase"
+            }
+          }
+        }
+      }
+    },
+    "/catalog/usql/databases": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListDatabases",
+        "description": "Retrieves the list of databases from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/USqlDatabaseList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlDatabase"
+      }
+    }
+  },
+  "definitions": {
+    "DataLakeAnalyticsCatalogSecretCreateOrUpdateParameters": {
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "the password for the secret to pass in"
+        },
+        "uri": {
+          "type": "string",
+          "description": "the URI identifier for the secret in the format <hostname>:<port>"
+        }
+      },
+      "required": [
+        "password"
+      ],
+      "description": "Data Lake Analytics catalog secret creation and update parameters. This is deprecated and will be removed in the next release. Please use DataLakeAnalyticsCatalogCredentialCreateOrUpdateParameters instead."
+    },
+    "DataLakeAnalyticsCatalogCredentialCreateParameters": {
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "the password for the credential and user with access to the data source."
+        },
+        "uri": {
+          "type": "string",
+          "description": "the URI identifier for the data source this credential can connect to in the format <hostname>:<port>"
+        },
+        "userId": {
+          "type": "string",
+          "description": "the object identifier for the user associated with this credential with access to the data source."
+        }
+      },
+      "required": [
+        "password",
+        "uri",
+        "userId"
+      ],
+      "description": "Data Lake Analytics catalog credential creation parameters."
+    },
+    "DataLakeAnalyticsCatalogCredentialDeleteParameters": {
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "the current password for the credential and user with access to the data source. This is required if the requester is not the account owner."
+        }
+      },
+      "description": "Data Lake Analytics catalog credential deletion parameters."
+    },
+    "DataLakeAnalyticsCatalogCredentialUpdateParameters": {
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "the current password for the credential and user with access to the data source. This is required if the requester is not the account owner."
+        },
+        "newPassword": {
+          "type": "string",
+          "description": "the new password for the credential and user with access to the data source."
+        },
+        "uri": {
+          "type": "string",
+          "description": "the URI identifier for the data source this credential can connect to in the format <hostname>:<port>"
+        },
+        "userId": {
+          "type": "string",
+          "description": "the object identifier for the user associated with this credential with access to the data source."
+        }
+      },
+      "description": "Data Lake Analytics catalog credential update parameters."
+    },
+    "USqlSecret": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "the name of the database."
+        },
+        "secretName": {
+          "type": "string",
+          "x-ms-client-name": "name",
+          "description": "the name of the secret."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "the creation time of the credential object. This is the only information returned about a secret from a GET."
+        },
+        "uri": {
+          "type": "string",
+          "description": "the URI identifier for the secret in the format <hostname>:<port>"
+        },
+        "password": {
+          "type": "string",
+          "description": "the password for the secret to pass in"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL secret item."
+    },
+    "USqlExternalDataSource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "the name of the database."
+        },
+        "externalDataSourceName": {
+          "type": "string",
+          "x-ms-client-name": "name",
+          "description": "the name of the external data source."
+        },
+        "provider": {
+          "type": "string",
+          "description": "the name of the provider for the external data source."
+        },
+        "providerString": {
+          "type": "string",
+          "description": "the name of the provider string for the external data source."
+        },
+        "pushdownTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "the list of types to push down from the external data source."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL external datasource item."
+    },
+    "USqlExternalDataSourceList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/USqlExternalDataSource"
+          },
+          "description": "the list of external data sources in the database"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL external datasource item list."
+    },
+    "USqlCredential": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
+      "properties": {
+        "credentialName": {
+          "type": "string",
+          "x-ms-client-name": "name",
+          "description": "the name of the credential."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL credential item."
+    },
+    "USqlProcedure": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "the name of the database."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "the name of the schema associated with this procedure and database."
+        },
+        "procName": {
+          "type": "string",
+          "x-ms-client-name": "name",
+          "description": "the name of the procedure."
+        },
+        "definition": {
+          "type": "string",
+          "description": "the defined query of the procedure."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL procedure item."
+    },
+    "USqlProcedureList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/USqlProcedure"
+          },
+          "description": "the list of procedure in the database and schema combination"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL procedure item list."
+    },
+    "USqlTableColumn": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the name of the column in the table."
+        },
+        "type": {
+          "type": "string",
+          "description": "the object type of the specified column (such as System.String)."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table column item."
+    },
+    "USqlDirectedColumn": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the name of the index in the table."
+        },
+        "descending": {
+          "type": "boolean",
+          "description": "the switch indicating if the index is descending or not."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL directed column item."
+    },
+    "USqlDistributionInfo": {
+      "properties": {
+        "type": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the type of this distribution."
+        },
+        "keys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlDirectedColumn"
+          },
+          "description": "the list of directed columns in the distribution"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the count of indices using this distribution."
+        },
+        "dynamicCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the dynamic count of indices using this distribution."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL distribution information object."
+    },
+    "USqlIndex": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the name of the index in the table."
+        },
+        "indexKeys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlDirectedColumn"
+          },
+          "description": "the list of directed columns in the index"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "the list of columns in the index"
+        },
+        "distributionInfo": {
+          "$ref": "#/definitions/USqlDistributionInfo",
+          "description": "the distributions info of the index"
+        },
+        "partitionFunction": {
+          "type": "string",
+          "format": "uuid",
+          "description": "partition function ID for the index."
+        },
+        "partitionKeyList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "the list of partion keys in the index"
+        },
+        "streamNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "the list of full paths to the streams that contain this index in the DataLake account."
+        },
+        "isColumnstore": {
+          "type": "boolean",
+          "description": "the switch indicating if this index is a columnstore index."
+        },
+        "indexId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the ID of this index within the table."
+        },
+        "isUnique": {
+          "type": "boolean",
+          "description": "the switch indicating if this index is a unique index."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table index item."
+    },
+    "DdlName": {
+      "properties": {
+        "firstPart": {
+          "type": "string",
+          "description": "the name of the table associated with this database and schema."
+        },
+        "secondPart": {
+          "type": "string",
+          "description": "the name of the table associated with this database and schema."
+        },
+        "thirdPart": {
+          "type": "string",
+          "description": "the name of the table associated with this database and schema."
+        },
+        "server": {
+          "type": "string",
+          "description": "the name of the table associated with this database and schema."
+        }
+      },
+      "description": "A Data Lake Analytics DDL name item."
+    },
+    "EntityId": {
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/DdlName",
+          "description": "the name of the external table associated with this database, schema and table."
+        },
+        "version": {
+          "type": "string",
+          "format": "uuid",
+          "description": "the version of the external data source."
+        }
+      },
+      "description": "A Data Lake Analytics catalog entity identifier object."
+    },
+    "ExternalTable": {
+      "properties": {
+        "tableName": {
+          "type": "string",
+          "description": "the name of the table associated with this database and schema."
+        },
+        "dataSource": {
+          "$ref": "#/definitions/EntityId",
+          "description": "the data source associated with this external table."
+        }
+      },
+      "description": "A Data Lake Analytics catalog external table item."
+    },
+    "TypeFieldInfo": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the name of the field associated with this type."
+        },
+        "type": {
+          "type": "string",
+          "description": "the type of the field."
+        }
+      },
+      "description": "A Data Lake Analytics catalog type field information item."
+    },
+    "USqlTable": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "the name of the database."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "the name of the schema associated with this table and database."
+        },
+        "tableName": {
+          "type": "string",
+          "x-ms-client-name": "name",
+          "description": "the name of the table."
+        },
+        "columnList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlTableColumn"
+          },
+          "description": "the list of columns in this table"
+        },
+        "indexList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlIndex"
+          },
+          "description": "the list of indices in this table"
+        },
+        "partitionKeyList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "the list of partition keys in the table"
+        },
+        "externalTable": {
+          "$ref": "#/definitions/ExternalTable",
+          "description": "the external table associated with the table."
+        },
+        "distributionInfo": {
+          "$ref": "#/definitions/USqlDistributionInfo",
+          "description": "the distributions info of the table"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table item."
+    },
+    "USqlTableList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/USqlTable"
+          },
+          "description": "the list of tables in the database and schema combination"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table item list."
+    },
+    "USqlTableType": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/USqlType"
+        }
+      ],
+      "properties": {
+        "columns": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TypeFieldInfo"
+          },
+          "description": "the type field information associated with this table type."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table type item."
+    },
+    "USqlTableTypeList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/USqlTableType"
+          },
+          "description": "the list of table types in the database and schema combination"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table type item list."
+    },
+    "USqlView": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "the name of the database."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "the name of the schema associated with this view and database."
+        },
+        "viewName": {
+          "type": "string",
+          "x-ms-client-name": "name",
+          "description": "the name of the view."
+        },
+        "definition": {
+          "type": "string",
+          "description": "the defined query of the view."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL view item."
+    },
+    "USqlViewList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/USqlView"
+          },
+          "description": "the list of view in the database and schema combination"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL view item list."
+    },
+    "USqlTablePartition": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "the name of the database."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "the name of the schema associated with this table partition and database."
+        },
+        "partitionName": {
+          "type": "string",
+          "x-ms-client-name": "name",
+          "description": "the name of the table partition."
+        },
+        "parentName": {
+          "$ref": "#/definitions/DdlName",
+          "description": "the Ddl object of the partition's parent."
+        },
+        "indexId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the index ID for this partition."
+        },
+        "label": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "the list of labels associated with this partition."
+        },
+        "createDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "the creation time of the partition"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table partition item."
+    },
+    "USqlTablePartitionList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/USqlTablePartition"
+          },
+          "description": "the list of table partitions in the database, schema and table combination"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table partition item list."
+    },
+    "USqlTableStatistics": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "the name of the database."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "the name of the schema associated with this table and database."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "the name of the table."
+        },
+        "statisticsName": {
+          "type": "string",
+          "x-ms-client-name": "name",
+          "description": "the name of the table statistics."
+        },
+        "userStatName": {
+          "type": "string",
+          "description": "the name of the user statistics."
+        },
+        "statDataPath": {
+          "type": "string",
+          "description": "the path to the statistics data."
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "the creation time of the statistics."
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "the last time the statistics were updated."
+        },
+        "isUserCreated": {
+          "type": "boolean",
+          "description": "the switch indicating if these statistics are user created."
+        },
+        "isAutoCreated": {
+          "type": "boolean",
+          "description": "the switch indicating if these statistics are automatically created."
+        },
+        "hasFilter": {
+          "type": "boolean",
+          "description": "the switch indicating if these statistics have a filter."
+        },
+        "filterDefinition": {
+          "type": "string",
+          "description": "the filter definition for the statistics."
+        },
+        "colNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "the list of column names associated with these statistics."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table statistics item."
+    },
+    "USqlTableStatisticsList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/USqlTableStatistics"
+          },
+          "description": "the list of table statistics in the database, schema and table combination"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table statistics item list."
+    },
+    "USqlType": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "the name of the database."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "the name of the schema associated with this table and database."
+        },
+        "typeName": {
+          "type": "string",
+          "x-ms-client-name": "name",
+          "description": "the name of type for this type."
+        },
+        "typeFamily": {
+          "type": "string",
+          "description": "the type family for this type."
+        },
+        "cSharpName": {
+          "type": "string",
+          "description": "the C# name for this type."
+        },
+        "fullCSharpName": {
+          "type": "string",
+          "description": "the fully qualified C# name for this type."
+        },
+        "systemTypeId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the system type ID for this type."
+        },
+        "userTypeId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the user type ID for this type."
+        },
+        "schemaId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the schema ID for this type."
+        },
+        "principalId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the principal ID for this type."
+        },
+        "isNullable": {
+          "type": "boolean",
+          "description": "the the switch indicating if this type is nullable."
+        },
+        "isUserDefined": {
+          "type": "boolean",
+          "description": "the the switch indicating if this type is user defined."
+        },
+        "isAssemblyType": {
+          "type": "boolean",
+          "description": "the the switch indicating if this type is an assembly type."
+        },
+        "isTableType": {
+          "type": "boolean",
+          "description": "the the switch indicating if this type is a table type."
+        },
+        "isComplexType": {
+          "type": "boolean",
+          "description": "the the switch indicating if this type is a complex type."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL type item."
+    },
+    "USqlTypeList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/USqlType"
+          },
+          "description": "the list of types in the database and schema combination"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL type item list."
+    },
+    "USqlTableValuedFunction": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "the name of the database."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "the name of the schema associated with this database."
+        },
+        "tvfName": {
+          "type": "string",
+          "x-ms-client-name": "name",
+          "description": "the name of the table valued function."
+        },
+        "definition": {
+          "type": "string",
+          "description": "the definition of the table valued function."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table valued function item."
+    },
+    "USqlTableValuedFunctionList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/USqlTableValuedFunction"
+          },
+          "description": "the list of table valued functions in the database and schema combination"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table valued function item list."
+    },
+    "USqlAssemblyFileInfo": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "the assembly file type.",
+          "enum": [
+            "Assembly",
+            "Resource"
+          ],
+          "x-ms-enum": {
+            "name": "FileType",
+            "modelAsString": false
+          }
+        },
+        "originalPath": {
+          "type": "string",
+          "description": "the the original path to the assembly file."
+        },
+        "contentPath": {
+          "type": "string",
+          "description": "the the content path to the assembly file."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL assembly file information item."
+    },
+    "USqlAssemblyDependencyInfo": {
+      "properties": {
+        "entityId": {
+          "$ref": "#/definitions/EntityId",
+          "description": "the EntityId of the dependency."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL dependency information item."
+    },
+    "USqlAssembly": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "the name of the database."
+        },
+        "assemblyName": {
+          "type": "string",
+          "x-ms-client-name": "name",
+          "description": "the name of the assembly."
+        },
+        "clrName": {
+          "type": "string",
+          "description": "the name of the CLR."
+        },
+        "isVisible": {
+          "type": "boolean",
+          "description": "the switch indicating if this assembly is visible or not."
+        },
+        "isUserDefined": {
+          "type": "boolean",
+          "description": "the switch indicating if this assembly is user defined or not."
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlAssemblyFileInfo"
+          },
+          "description": "the list of files associated with the assembly"
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlAssemblyDependencyInfo"
+          },
+          "description": "the list of dependencies associated with the assembly"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL Assembly."
+    },
+    "USqlAssemblyClr": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "the name of the database."
+        },
+        "assemblyClrName": {
+          "type": "string",
+          "x-ms-client-name": "name",
+          "description": "the name of the assembly."
+        },
+        "clrName": {
+          "type": "string",
+          "description": "the name of the CLR."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL assembly CLR item."
+    },
+    "USqlAssemblyList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/USqlAssemblyClr"
+          },
+          "description": "the list of assemblies in the database"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL assembly CLR item list."
+    },
+    "USqlSchema": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "the name of the database."
+        },
+        "schemaName": {
+          "type": "string",
+          "x-ms-client-name": "name",
+          "description": "the name of the schema."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL schema item."
+    },
+    "USqlSchemaList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/USqlSchema"
+          },
+          "description": "the list of schemas in the database"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL schema item list."
+    },
+    "USqlDatabase": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "x-ms-client-name": "name",
+          "description": "the name of the database."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL database item."
+    },
+    "USqlDatabaseList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/USqlDatabase"
+          },
+          "description": "the list of databases"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL database item list."
+    },
+    "CatalogItem": {
+      "properties": {
+        "computeAccountName": {
+          "type": "string",
+          "description": "the name of the Data Lake Analytics account."
+        },
+        "version": {
+          "type": "string",
+          "format": "uuid",
+          "description": "the version of the catalog item."
+        }
+      },
+      "description": "A Data Lake Analytics catalog item."
+    },
+    "CatalogItemList": {
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the count of items in the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "the link to the next page of results."
+        }
+      },
+      "description": "A Data Lake Analytics catalog item list."
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "adlaCatalogDnsSuffixInPath": {
+      "name": "adlaCatalogDnsSuffix",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "default": "azuredatalakeanalytics.net",
+      "x-ms-skip-url-encoding": true,
+      "description": "Gets the DNS suffix used as the base for all Azure Data Lake Analytics Catalog service requests."
+    }
+  }
+}

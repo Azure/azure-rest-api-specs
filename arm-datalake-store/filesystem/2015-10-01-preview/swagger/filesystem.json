@@ -116,6 +116,72 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_SetFileExpiry",
+        "description": "Sets or removes the expiration time on the specified file. This operation can only be executed against files. Folders are not supported.",
+        "parameters": [
+          {
+            "name": "filePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Data Lake Store path (starting with '/') of the file on which to set or remove the expiration time."
+          },
+          {
+            "name": "expiryOption",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "NeverExpire",
+              "RelativeToNow",
+              "RelativeToCreationDate",
+              "Absolute"
+            ],
+            "x-ms-enum": {
+              "name": "ExpiryOptionType",
+              "modelAsString": false
+            },
+            "description": "Indicates the type of expiration to use for the file: 1. NeverExpire: ExpireTime is ignored. 2. RelativeToNow: ExpireTime is an integer in milliseconds representing the expiration date relative to when file expiration is updated. 3. RelativeToCreationDate: ExpireTime is an integer in milliseconds representing the expiration date relative to file creation. 4. Absolute: ExpireTime is an integer in milliseconds, as a Unix timestamp relative to 1/1/1970 00:00:00."
+          },
+          {
+            "name": "expireTime",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The time that the file will expire, corresponding to the ExpiryOption that was set."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "SETEXPIRY"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully set the expiration time on the specified file."
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
+          }
+        }
       }
     },
     "/webhdfs/v1/{path}": {
@@ -465,7 +531,7 @@
             "type": "string",
             "description": "The constant value for the operation.",
             "enum": [
-              "GETFILESTATUS"
+              "MSGETFILESTATUS"
             ]
           },
           {
@@ -872,7 +938,91 @@
         }
       }
     },
+    "/webhdfs/v1/{defaultAclFilePath}": {
+      "put": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_RemoveDefaultAcl",
+        "description": "Removes the existing Default Access Control List (ACL) of the specified directory.",
+        "parameters": [
+          {
+            "name": "defaultAclFilePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Data Lake Store path (starting with '/') of the directory with the default ACL being removed."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "REMOVEDEFAULTACL"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Removed the Default Access Control List on the specified directory."
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
+          }
+        }
+      }
+    },
     "/webhdfs/v1/{aclFilePath}": {
+      "put": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_RemoveAcl",
+        "description": "Removes the existing Access Control List (ACL) of the specified file or directory.",
+        "parameters": [
+          {
+            "name": "aclFilePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Data Lake Store path (starting with '/') of the file or directory with the ACL being removed."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "REMOVEACL"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed the Access Control List on the specified file or directory."
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "FileSystem"
@@ -894,7 +1044,7 @@
             "type": "string",
             "description": "The constant value for the operation.",
             "enum": [
-              "GETACLSTATUS"
+              "MSGETACLSTATUS"
             ]
           },
           {
@@ -1161,8 +1311,14 @@
           "type": "string",
           "description": "the user owner, an AAD Object ID."
         },
+        "permission": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The octal representation of the unnamed user, mask and other permissions."
+        },
         "stickyBit": {
           "type": "boolean",
+          "readOnly": true,
           "description": "the indicator of whether the sticky bit is on or off."
         }
       },
@@ -1235,6 +1391,12 @@
           "readOnly": true,
           "format": "int64",
           "description": "the number of children in the directory."
+        },
+        "expirationTime": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "Gets the expiration time, if any, as ticks since the epoch. If this is set to 0 or DateTime.MaxValue there is no expiration."
         },
         "group": {
           "type": "string",

@@ -2563,7 +2563,7 @@
         },
         "vmScaleSetEnabled": {
           "type": "boolean",
-          "description": "whether the extension can be used on xRP VMScaleSets.By default existing extensions are usable on scalesets, but there might be cases where a publisher wants to explicitly indicate the extension is only enabled for CRP VMs but not VMSS."
+          "description": "whether the extension can be used on xRP VMScaleSets. By default existing extensions are usable on scalesets, but there might be cases where a publisher wants to explicitly indicate the extension is only enabled for CRP VMs but not VMSS."
         },
         "supportsMultipleExtensions": {
           "type": "boolean",
@@ -2759,7 +2759,7 @@
           "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "description": "the LUN number for a data disk.This value is used to identify data disk image inside the VMImage therefore it must be unique for each data disk.The allowed character for the value is digit."
+          "description": "the LUN number for a data disk. This value is used to identify data disk image inside the VMImage therefore it must be unique for each data disk. The allowed character for the value is digit."
         }
       },
       "description": "Contains the data disk images information."
@@ -3089,6 +3089,32 @@
       },
       "description": "Describes the uri of a disk."
     },
+    "Caching": {
+      "type": "string",
+      "description": "the caching type.",
+      "enum": [
+        "None",
+        "ReadOnly",
+        "ReadWrite"
+      ],
+      "x-ms-enum": {
+        "name": "CachingTypes",
+        "modelAsString": false
+      }
+    },
+    "CreateOption": {
+      "type": "string",
+      "description": "the create option.",
+      "enum": [
+        "fromImage",
+        "empty",
+        "attach"
+      ],
+      "x-ms-enum": {
+        "name": "DiskCreateOptionTypes",
+        "modelAsString": false
+      }
+    },
     "OSDisk": {
       "properties": {
         "osType": {
@@ -3117,33 +3143,15 @@
         },
         "image": {
           "$ref": "#/definitions/VirtualHardDisk",
-          "description": "the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist."
+          "description": "the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist."
         },
         "caching": {
-          "type": "string",
-          "description": "the caching type.",
-          "enum": [
-            "None",
-            "ReadOnly",
-            "ReadWrite"
-          ],
-          "x-ms-enum": {
-            "name": "CachingTypes",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/Caching",
+          "description": "the caching type."
         },
         "createOption": {
-          "type": "string",
-          "description": "the create option.",
-          "enum": [
-            "fromImage",
-            "empty",
-            "attach"
-          ],
-          "x-ms-enum": {
-            "name": "DiskCreateOptionTypes",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/CreateOption",
+          "description": "the create option."
         },
         "diskSizeGB": {
           "type": "integer",
@@ -3175,33 +3183,15 @@
         },
         "image": {
           "$ref": "#/definitions/VirtualHardDisk",
-          "description": "the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist."
+          "description": "the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist."
         },
         "caching": {
-          "type": "string",
-          "description": "the caching type.",
-          "enum": [
-            "None",
-            "ReadOnly",
-            "ReadWrite"
-          ],
-          "x-ms-enum": {
-            "name": "CachingTypes",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/Caching",
+          "description": "the caching type."
         },
         "createOption": {
-          "type": "string",
-          "description": "the create option.",
-          "enum": [
-            "fromImage",
-            "empty",
-            "attach"
-          ],
-          "x-ms-enum": {
-            "name": "DiskCreateOptionTypes",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/CreateOption",
+          "description": "the create option."
         },
         "diskSizeGB": {
           "type": "integer",
@@ -3275,7 +3265,7 @@
         },
         "content": {
           "type": "string",
-          "description": "XML formatted content that is added to the unattend.xml file in the specified pass and component.The XML must be less than 4 KB and must include the root element for the setting or feature that is being inserted."
+          "description": "XML formatted content that is added to the unattend.xml file in the specified pass and component. The XML must be less than 4 KB and must include the root element for the setting or feature that is being inserted."
         }
       },
       "description": "additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is a applied."
@@ -3349,7 +3339,7 @@
         },
         "keyData": {
           "type": "string",
-          "description": "Certificate public key used to authenticate with VM through SSH.The certificate must be in Pem format with or without headers."
+          "description": "Certificate public key used to authenticate with VM through SSH. The certificate must be in Pem format with or without headers."
         }
       },
       "description": "Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed."
@@ -3706,6 +3696,9 @@
           "description": "the uri to fetch the next page of VMs. Call ListNext() with this to fetch the next page of Virtual Machines."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The List Virtual Machine operation response."
     },
     "Sku": {
@@ -3786,30 +3779,12 @@
           "description": "the disk name."
         },
         "caching": {
-          "type": "string",
-          "description": "the caching type.",
-          "enum": [
-            "None",
-            "ReadOnly",
-            "ReadWrite"
-          ],
-          "x-ms-enum": {
-            "name": "CachingTypes",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/Caching",
+          "description": "the caching type."
         },
         "createOption": {
-          "type": "string",
-          "description": "the create option.",
-          "enum": [
-            "fromImage",
-            "empty",
-            "attach"
-          ],
-          "x-ms-enum": {
-            "name": "DiskCreateOptionTypes",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/CreateOption",
+          "description": "the create option."
         },
         "osType": {
           "type": "string",
@@ -3825,7 +3800,7 @@
         },
         "image": {
           "$ref": "#/definitions/VirtualHardDisk",
-          "description": "the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist."
+          "description": "the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist."
         },
         "vhdContainers": {
           "type": "array",
@@ -4069,7 +4044,7 @@
           "type": "string",
           "description": "the provisioning state, which only appears in the response."
         },
-        "overProvision": {
+        "overprovision": {
           "type": "boolean",
           "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
         }
@@ -4207,6 +4182,9 @@
           "description": "the uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The List Virtual Machine operation response."
     },
     "VirtualMachineScaleSetListWithLinkResult": {
@@ -4223,6 +4201,9 @@
           "description": "the uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of Virtual Machine Scale Sets."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The List Virtual Machine operation response."
     },
     "VirtualMachineScaleSetSkuCapacity": {
@@ -4284,7 +4265,6 @@
     "VirtualMachineScaleSetListSkusResult": {
       "properties": {
         "value": {
-          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetSku"
@@ -4296,6 +4276,9 @@
           "description": "the uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The Virtual Machine Scale Set List Skus operation response."
     },
     "VirtualMachineScaleSetVMProperties": {
@@ -4444,6 +4427,9 @@
           "description": "the uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs"
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The List Virtual Machine Scale Set VMs operation response."
     },
     "ApiErrorBase": {
@@ -4514,6 +4500,7 @@
       "description": "Compute-specific operation properties, including output"
     },
     "Resource": {
+      "description": "The Resource model definition.",
       "properties": {
         "id": {
           "readOnly": true,
