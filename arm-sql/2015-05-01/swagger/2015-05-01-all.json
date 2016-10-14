@@ -1398,7 +1398,6 @@
         }
       }
     },
-<<<<<<< HEAD
     "AdvisorResourceList": {
       "type": "object",
       "properties": {
@@ -1413,8 +1412,6 @@
         }
       }
     },
-=======
->>>>>>> e53d017dd26ce908be94f9b678dd68d28278f999
     "AdvisorResourceProperties": {
       "type": "object",
       "properties": {
@@ -1640,8 +1637,6 @@
         "changeValueRelative": {
           "format": "double",
           "type": "number"
-<<<<<<< HEAD
-=======
         }
       }
     },
@@ -1676,209 +1671,6 @@
           "description" : "Contains the information about the error.",
           "$ref": "#/definitions/ArmErrorResponseExtendedErrorInfo"
         }
-      },
-      "required" : ["error"]
-    },
-    "ArmErrorResponseExtendedErrorInfo": {
-      "description": "Contains additional information about the error that occured.",
-      "type": "object",
-      "properties": {
-        "details": {
-          "description": "A list of error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ArmErrorResponseErrorDetail"
-          }
-        },
-        "innerError": {
-          "description": "The inner error if available.",
-          "type" : "object"
-        },
-        "target": {
-          "description": "The target of the particular error.",
-          "type": "string"
-        }
-      }
-    },
-    "ArmErrorResponseErrorDetail": {
-      "type": "object",
-      "description": "Details about the error that occurred",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        }
-      },
-      "required" : ["code", "message"]
-    },
-    "AdvisorResourceList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AdvisorResource"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "EngineAuditRecordsFilterParameters": {
-      "type": "object",
-      "properties": {
-        "eventTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "showSystemRecords": {
-          "type": "boolean"
-        },
-        "showServerRecords": {
-          "type": "boolean"
-        },
-        "showSecurityAlertsRecords": {
-          "type": "boolean"
-        }
-      }
-    },
-    "EngineAuditRecordResourceList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EngineAuditRecordResource"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "EngineAuditRecordResource": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/EngineAuditRecordResourceProperties"
-        }
-      }
-    },
-    "EngineAuditRecordResourceProperties": {
-      "type": "object",
-      "properties": {
-        "actionId": {
-          "type": "string"
-        },
-        "principalName": {
-          "type": "string"
-        },
-        "eventTimeUtc": {
-          "type": "string"
-        },
-        "statement": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        },
-        "additionalInfo": {
-          "type": "string"
-        },
-        "clientIp": {
-          "type": "string"
-        }
-      }
-    },
-    "ResourceMoveDefinition": {
-      "description": "Contains the information necessary to perform a resource move (rename).",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The target ID for the resource",
-          "type": "string"
-        }
-      }
-    },
-    "RecommendedActionResourceList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RecommendedActionResource"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "JobAccountResourceList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobAccountResource"
-          }
-        },
-        "nextLink": {
-          "type": "string"
->>>>>>> e53d017dd26ce908be94f9b678dd68d28278f999
-        }
-      }
-    },
-    "MetricInfo": {
-      "type": "object",
-      "properties": {
-        "metricName": {
-          "type": "string"
-        },
-        "unit": {
-          "type": "string"
-        },
-        "timeGrain": {
-          "type": "string"
-        },
-        "startTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "value": {
-          "format": "double",
-          "type": "number"
-        }
-      }
-    },
-    "ArmErrorResponseMessage": {
-      "type": "object",
-      "description":"represents and error message.",
-      "readOnly": true,
-      "properties": {
-        "error": {
-          "description" : "Contains the information about the error.",
-          "$ref": "#/definitions/ArmErrorResponseExtendedErrorInfo"
-        }
-<<<<<<< HEAD
       },
       "required" : ["error"]
     },
@@ -2062,8 +1854,6 @@
           "description": "The target ID for the resource",
           "type": "string"
         }
-=======
->>>>>>> e53d017dd26ce908be94f9b678dd68d28278f999
       }
     }
 },
