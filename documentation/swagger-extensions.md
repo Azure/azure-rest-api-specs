@@ -551,7 +551,7 @@ Field Name | Description
 - When the property is modeled as **`"readonly": false`** then,
   - applying the extension as `"x-ms-mutability": ["read"]` is not allowed.
   - applying the extension as `"x-ms-mutability": ["create", "read", "update"]` or not applying it will have the same effect.
-  - applying the extension with anyother **permissible valid combination** should be fine.
+  - applying the extension with any other **permissible valid combination** should be fine.
 - When this extension is applied on a collection (array, dictionary) then this will have effects on the mutability (adding/removing elements) of the collection. Mutabiility of the collection cannot be applied on its elements. The mutability of the element will be governed based on the mutability defined in the element's definition.
 
 Examples:
@@ -567,11 +567,13 @@ Examples:
         "description": "Resource Id",
         "x-ms-mutability": ["read"]
       },
-      "name": {
+      "name":
+        "readOnly": true,
         "type": "string",
         "description": "Resource name"
       },
       "type": {
+	    "readOnly": true,
         "type": "string",
         "description": "Resource type",
         "x-ms-mutability": ["read"]
