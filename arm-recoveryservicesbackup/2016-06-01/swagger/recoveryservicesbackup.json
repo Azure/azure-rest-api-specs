@@ -2119,7 +2119,7 @@
           }
         },
         "backupManagementType": {
-          "description": "Type of backup managmenent for the job. Possible value: AzureIaasVM.",
+          "description": "Type of backup managmenent for the job.",
           "enum": [
             "Invalid",
             "AzureIaasVM",
@@ -2238,8 +2238,18 @@
           "type": "string"
         },
         "protectionState": {
-          "description": "State of the back up item. Possible values: Protected, NotProtected.",
-          "type": "string"
+          "description": "State of the back up item.",
+          "enum": [
+            "Invalid",
+            "NotProtected",
+            "Protecting",
+            "Protected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProtectionStatus",
+            "modelAsString": false
+          }
         }
       },
       "discriminator": "protectableItemType"
@@ -2750,6 +2760,17 @@
       "properties": {},
       "x-ms-discriminator-value": "DpmBackupEngine"
     },
+    "AzureSqlContainer": {
+      "description": "Azure Sql workload-specific container.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectionContainer"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "AzureSqlContainer"
+    },
     "IaaSVMContainer": {
       "description": "IaaS VM workload-specific container.",
       "type": "object",
@@ -2852,17 +2873,6 @@
         }
       }
     },
-    "AzureSqlContainer": {
-      "description": "Azure Sql workload-specific container.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProtectionContainer"
-        }
-      ],
-      "properties": {},
-      "x-ms-discriminator-value": "AzureSqlContainer"
-    },
     "IaaSVMProtectableItem": {
       "description": "IaaS VM workload-specific backup item.",
       "type": "object",
@@ -2875,118 +2885,6 @@
         "virtualMachineId": {
           "description": "Fully qualified ARM ID of the virtual machine.",
           "type": "string"
-        }
-      }
-    },
-    "AzureSqlProtectedItem": {
-      "description": "Azure SQL workload-specific backup item.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProtectedItem"
-        }
-      ],
-      "properties": {
-        "protectedItemDataId": {
-          "description": "Internal ID of a backup item. Used by Azure SQL Backup engine to contact Recovery Services.",
-          "type": "string"
-        },
-        "protectionState": {
-          "description": "Backup state of the backed up item.",
-          "enum": [
-            "Invalid",
-            "IRPending",
-            "Protected",
-            "ProtectionError",
-            "ProtectionStopped",
-            "ProtectionPaused"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProtectionState",
-            "modelAsString": false
-          }
-        },
-        "extendedInfo": {
-          "$ref": "#/definitions/AzureSqlProtectedItemExtendedInfo",
-          "description": "Additional information for this backup item."
-        }
-      },
-      "x-ms-discriminator-value": "Microsoft.Sql/servers/databases"
-    },
-    "AzureSqlProtectedItemExtendedInfo": {
-      "description": "Additional information on Azure SQL specific backup item.",
-      "type": "object",
-      "properties": {
-        "oldestRecoveryPoint": {
-          "format": "date-time",
-          "description": "The oldest backup copy available for this item in the service.",
-          "type": "string"
-        },
-        "recoveryPointCount": {
-          "format": "int32",
-          "description": "Number of available backup copies associated with this backup item.",
-          "type": "integer"
-        },
-        "policyState": {
-          "description": "State of the backup policy associated with this backup item.",
-          "type": "string"
-        }
-      }
-    },
-    "MabFileFolderProtectedItem": {
-      "description": "MAB workload-specific backup item.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProtectedItem"
-        }
-      ],
-      "properties": {
-        "friendlyName": {
-          "description": "Friendly name of this backup item.",
-          "type": "string"
-        },
-        "computerName": {
-          "description": "Name of the computer associated with this backup item.",
-          "type": "string"
-        },
-        "lastBackupStatus": {
-          "description": "Status of last backup operation.",
-          "type": "string"
-        },
-        "protectionState": {
-          "description": "Protected, ProtectionStopped, IRPending or ProtectionError",
-          "type": "string"
-        },
-        "isScheduledForDeferredDelete": {
-          "type": "boolean"
-        },
-        "extendedInfo": {
-          "$ref": "#/definitions/MabFileFolderProtectedItemExtendedInfo",
-          "description": "Additional information with this backup item."
-        }
-      },
-      "x-ms-discriminator-value": "MabFileFolderProtectedItem"
-    },
-    "MabFileFolderProtectedItemExtendedInfo": {
-      "description": "Additional information on the backed up item.",
-      "type": "object",
-      "properties": {
-        "lastRefreshedAt": {
-          "format": "date-time",
-          "description": "Last time when the agent data synced to service.",
-          "type": "string"
-        },
-        "oldestRecoveryPoint": {
-          "format": "date-time",
-          "description": "The oldest backup copy available.",
-          "type": "string"
-        },
-        "recoveryPointCount": {
-          "format": "int32",
-          "description": "Number of backup copies associated with the backup item.",
-          "type": "integer"
         }
       }
     },
@@ -3063,6 +2961,118 @@
         }
       }
     },
+    "MabFileFolderProtectedItem": {
+      "description": "MAB workload-specific backup item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectedItem"
+        }
+      ],
+      "properties": {
+        "friendlyName": {
+          "description": "Friendly name of this backup item.",
+          "type": "string"
+        },
+        "computerName": {
+          "description": "Name of the computer associated with this backup item.",
+          "type": "string"
+        },
+        "lastBackupStatus": {
+          "description": "Status of last backup operation.",
+          "type": "string"
+        },
+        "protectionState": {
+          "description": "Protected, ProtectionStopped, IRPending or ProtectionError",
+          "type": "string"
+        },
+        "isScheduledForDeferredDelete": {
+          "type": "boolean"
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/MabFileFolderProtectedItemExtendedInfo",
+          "description": "Additional information with this backup item."
+        }
+      },
+      "x-ms-discriminator-value": "MabFileFolderProtectedItem"
+    },
+    "MabFileFolderProtectedItemExtendedInfo": {
+      "description": "Additional information on the backed up item.",
+      "type": "object",
+      "properties": {
+        "lastRefreshedAt": {
+          "format": "date-time",
+          "description": "Last time when the agent data synced to service.",
+          "type": "string"
+        },
+        "oldestRecoveryPoint": {
+          "format": "date-time",
+          "description": "The oldest backup copy available.",
+          "type": "string"
+        },
+        "recoveryPointCount": {
+          "format": "int32",
+          "description": "Number of backup copies associated with the backup item.",
+          "type": "integer"
+        }
+      }
+    },
+    "AzureSqlProtectedItem": {
+      "description": "Azure SQL workload-specific backup item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectedItem"
+        }
+      ],
+      "properties": {
+        "protectedItemDataId": {
+          "description": "Internal ID of a backup item. Used by Azure SQL Backup engine to contact Recovery Services.",
+          "type": "string"
+        },
+        "protectionState": {
+          "description": "Backup state of the backed up item.",
+          "enum": [
+            "Invalid",
+            "IRPending",
+            "Protected",
+            "ProtectionError",
+            "ProtectionStopped",
+            "ProtectionPaused"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProtectedItemState",
+            "modelAsString": false
+          }
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/AzureSqlProtectedItemExtendedInfo",
+          "description": "Additional information for this backup item."
+        }
+      },
+      "x-ms-discriminator-value": "Microsoft.Sql/servers/databases"
+    },
+    "AzureSqlProtectedItemExtendedInfo": {
+      "description": "Additional information on Azure SQL specific backup item.",
+      "type": "object",
+      "properties": {
+        "oldestRecoveryPoint": {
+          "format": "date-time",
+          "description": "The oldest backup copy available for this item in the service.",
+          "type": "string"
+        },
+        "recoveryPointCount": {
+          "format": "int32",
+          "description": "Number of available backup copies associated with this backup item.",
+          "type": "integer"
+        },
+        "policyState": {
+          "description": "State of the backup policy associated with this backup item.",
+          "type": "string"
+        }
+      }
+    },
     "IaasVMBackupRequest": {
       "description": "IaaS VM workload-specific backup request.",
       "type": "object",
@@ -3122,22 +3132,6 @@
       },
       "discriminator": "retentionPolicyType"
     },
-    "AzureSqlProtectionPolicy": {
-      "description": "Azure SQL workload-specific backup policy.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProtectionPolicy"
-        }
-      ],
-      "properties": {
-        "retentionPolicy": {
-          "$ref": "#/definitions/RetentionPolicy",
-          "description": "Retention policy details."
-        }
-      },
-      "x-ms-discriminator-value": "AzureSql"
-    },
     "MabProtectionPolicy": {
       "description": "Mab container-specific backup policy.",
       "type": "object",
@@ -3157,6 +3151,22 @@
         }
       },
       "x-ms-discriminator-value": "MAB"
+    },
+    "AzureSqlProtectionPolicy": {
+      "description": "Azure SQL workload-specific backup policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectionPolicy"
+        }
+      ],
+      "properties": {
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy",
+          "description": "Retention policy details."
+        }
+      },
+      "x-ms-discriminator-value": "AzureSql"
     },
     "IaasVMRecoveryPoint": {
       "description": "IaaS VM workload specific backup copy.",
@@ -3873,17 +3883,6 @@
       },
       "x-ms-discriminator-value": "ExportJobsOperationResultInfo"
     },
-    "AzureIaaSClassicComputeVMContainer": {
-      "description": "IaaS VM workload-specific backup item representing a classic virtual machine.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IaaSVMContainer"
-        }
-      ],
-      "properties": {},
-      "x-ms-discriminator-value": "Microsoft.ClassicCompute/virtualMachines"
-    },
     "AzureIaaSComputeVMContainer": {
       "description": "IaaS VM workload-specific backup item representing an Azure Resource Manager virtual machine.",
       "type": "object",
@@ -3895,12 +3894,12 @@
       "properties": {},
       "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
     },
-    "AzureIaaSClassicComputeVMProtectableItem": {
-      "description": "IaaS VM workload-specific backup item representing the Classic Compute VM.",
+    "AzureIaaSClassicComputeVMContainer": {
+      "description": "IaaS VM workload-specific backup item representing a classic virtual machine.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/IaaSVMProtectableItem"
+          "$ref": "#/definitions/IaaSVMContainer"
         }
       ],
       "properties": {},
@@ -3917,12 +3916,12 @@
       "properties": {},
       "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
     },
-    "AzureIaaSClassicComputeVMProtectedItem": {
+    "AzureIaaSClassicComputeVMProtectableItem": {
       "description": "IaaS VM workload-specific backup item representing the Classic Compute VM.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AzureIaaSVMProtectedItem"
+          "$ref": "#/definitions/IaaSVMProtectableItem"
         }
       ],
       "properties": {},
@@ -3939,6 +3938,17 @@
       "properties": {},
       "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
     },
+    "AzureIaaSClassicComputeVMProtectedItem": {
+      "description": "IaaS VM workload-specific backup item representing the Classic Compute VM.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureIaaSVMProtectedItem"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "Microsoft.ClassicCompute/virtualMachines"
+    },
     "OperationStatusJobExtendedInfo": {
       "description": "Operation status job extended info.",
       "type": "object",
@@ -3954,32 +3964,6 @@
         }
       },
       "x-ms-discriminator-value": "OperationStatusJobExtendedInfo"
-    },
-    "OperationStatusJobsExtendedInfo": {
-      "description": "Operation status extended info for list of jobs.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationStatusExtendedInfo"
-        }
-      ],
-      "properties": {
-        "jobIds": {
-          "description": "IDs of the jobs created for the protected item.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "failedJobsError": {
-          "description": "Stores all the failed jobs along with the corresponding error codes.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "OperationStatusJobsExtendedInfo"
     },
     "OperationStatusProvisionILRExtendedInfo": {
       "description": "Operation status extended info for ILR provision action.",
@@ -4028,6 +4012,32 @@
         }
       }
     },
+    "OperationStatusJobsExtendedInfo": {
+      "description": "Operation status extended info for list of jobs.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationStatusExtendedInfo"
+        }
+      ],
+      "properties": {
+        "jobIds": {
+          "description": "IDs of the jobs created for the protected item.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "failedJobsError": {
+          "description": "Stores all the failed jobs along with the corresponding error codes.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "OperationStatusJobsExtendedInfo"
+    },
     "LongTermSchedulePolicy": {
       "description": "Long term policy schedule.",
       "type": "object",
@@ -4064,7 +4074,20 @@
           "description": "List of days of week this schedule has to be run.",
           "type": "array",
           "items": {
-            "type": "string"
+            "enum": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DayOfWeek",
+              "modelAsString": false
+            }
           }
         },
         "scheduleRunTimes": {
@@ -4179,7 +4202,20 @@
           "description": "List of days of week for weekly retention policy.",
           "type": "array",
           "items": {
-            "type": "string"
+            "enum": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DayOfWeek",
+              "modelAsString": false
+            }
           }
         },
         "retentionTimes": {
