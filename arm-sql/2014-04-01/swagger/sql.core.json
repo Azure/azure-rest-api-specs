@@ -99,7 +99,7 @@
         "tags": [
           "DatabaseBackup"
         ],
-        "operationId": "Databases_ListRestorePoints",
+        "operationId": "Databases_ListRestorePointsByDatabase",
         "description": "Returns a list of Azure SQL database restore points.",
         "parameters": [
           {
@@ -276,7 +276,7 @@
         "tags": [
           "Databases"
         ],
-        "operationId": "Databases_List",
+        "operationId": "Databases_ListByServer",
         "description": "Returns information about an Azure SQL Database.",
         "parameters": [
           {
@@ -311,7 +311,7 @@
         "tags": [
           "Databases"
         ],
-        "operationId": "Databases_ListUsages",
+        "operationId": "Databases_ListUsagesByDatabase",
         "description": "Returns information about Azure SQL Database usages.",
         "parameters": [
           {
@@ -339,6 +339,34 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DatabaseMetricListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/servers": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_ListBySubscription",
+        "description": "Returns information about an Azure SQL Server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
             }
           }
         },
@@ -425,7 +453,7 @@
         "tags": [
           "Servers"
         ],
-        "operationId": "Servers_Get",
+        "operationId": "Servers_GetByResourceGroup",
         "description": "Returns information about an Azure SQL Server.",
         "parameters": [
           {
@@ -456,7 +484,7 @@
         "tags": [
           "Servers"
         ],
-        "operationId": "Servers_List",
+        "operationId": "Servers_ListByResourceGroup",
         "description": "Returns information about an Azure SQL Server.",
         "parameters": [
           {
@@ -1306,7 +1334,7 @@
         "tags": [
           "TransparentDataEncryption"
         ],
-        "operationId": "Databases_TransparentDataEncryption",
+        "operationId": "Databases_GetTransparentDataEncryptionConfiguration",
         "description": "Creates or updates an Azure SQL Database Transparent Data Encryption Operation.",
         "parameters": [
           {
@@ -2274,7 +2302,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The recovery period starte date of the Azure SQL Database. This records the start date and time when recovery is available for this Azure SQL Database."
+          "description": "The recovery period start date of the Azure SQL Database. This records the start date and time when recovery is available for this Azure SQL Database."
         },
         "edition": {
           "type": "string",
@@ -2290,7 +2318,8 @@
             "DataWarehouse"
           ],
           "x-ms-enum": {
-            "name": "DatabaseEditions"
+            "name": "DatabaseEditions",
+            "modelAsString": true
           }
         },
         "maxSizeBytes": {
@@ -2310,7 +2339,6 @@
         "serviceLevelObjective": {
           "readOnly": true,
           "type": "string",
-          "format": "uuid",
           "description": "The Service Level Objective of the Azure SQL Database."
         },
         "status": {
