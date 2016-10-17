@@ -1,11 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "v1",
-    "title": "Swashbuckle Dummy",
-    "x-ms-code-generation-settings": {
-      "internalConstructors": true
-    }
+    "version": "2015_11_10",
+    "title": "SiteRecoveryManagementClient"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -18,19 +15,57 @@
     "application/json"
   ],
   "paths": {
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{ResourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/plannedFailover": {
-      "post": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationJobs": {
+      "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.JobsController"
         ],
-        "operationId": "ReplicationProtectedItemsController_PlannedFailover",
-        "consumes": [
+        "operationId": "JobsController_EnumerateJobs",
+        "consumes": [],
+        "produces": [
           "application/json",
           "text/json",
           "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/xml"
         ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobCollection"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}": {
+      "get": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.FabricsController"
+        ],
+        "operationId": "FabricsController_GetFabric",
+        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -61,149 +96,13 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "protectionContainerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "replicatedProtectedItemName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "failoverInput",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PlannedFailoverInput"
-            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{ResourceNamespace}/{resourceType}/{resourceName}/replicationProtectedItems": {
-      "get": {
-        "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
-        ],
-        "operationId": "ReplicationProtectedItemsController_EnumerateAllReplicationProtectedItems",
-        "consumes": [
-          
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ResourceType"
-          },
-          {
-            "$ref": "#/parameters/ResourceNamespace"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "skipToken",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ReplicationProtectedItemCollection"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{ResourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionContainerMappings/{mappingName}": {
-      "get": {
-        "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ProtectionContainerMappingsController"
-        ],
-        "operationId": "ProtectionContainerMappingsController_GetProtectionContainerMapping",
-        "consumes": [
-          
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ResourceType"
-          },
-          {
-            "$ref": "#/parameters/ResourceNamespace"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "fabricName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "protectionContainerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "mappingName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProtectionContainerMapping"
+              "$ref": "#/definitions/Fabric"
             }
           }
         },
@@ -211,9 +110,9 @@
       },
       "put": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ProtectionContainerMappingsController"
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.FabricsController"
         ],
-        "operationId": "ProtectionContainerMappingsController_CreateProtectionContainerMapping",
+        "operationId": "FabricsController_CreateFabric",
         "consumes": [
           "application/json",
           "text/json",
@@ -253,31 +152,60 @@
             "type": "string"
           },
           {
-            "name": "protectionContainerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "mappingName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "creationInput",
+            "name": "input",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateProtectionContainerMappingInput"
+              "$ref": "#/definitions/FabricCreationInput"
             }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics": {
+      "get": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.FabricsController"
+        ],
+        "operationId": "FabricsController_EnumerateFabrics",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Object"
+              "$ref": "#/definitions/FabricCollection"
             }
           }
         },
@@ -286,7 +214,131 @@
     }
   },
   "definitions": {
-    "ProtectionContainerMapping": {
+    "FabricCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Fabric"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "Fabric": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/FabricProperties"
+        }
+      }
+    },
+    "FabricProperties": {
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "type": "string"
+        },
+        "encryptionDetails": {
+          "$ref": "#/definitions/EncryptionDetails"
+        },
+        "rolloverEncryptionDetails": {
+          "$ref": "#/definitions/EncryptionDetails"
+        },
+        "internalIdentifier": {
+          "type": "string"
+        },
+        "bcdrState": {
+          "type": "string"
+        },
+        "customDetails": {
+          "$ref": "#/definitions/FabricSpecificDetails"
+        }
+      }
+    },
+    "EncryptionDetails": {
+      "type": "object",
+      "properties": {
+        "kekState": {
+          "type": "string"
+        },
+        "kekCertThumbprint": {
+          "type": "string"
+        },
+        "kekCertExpiryDate": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "FabricSpecificDetails": {
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "discriminator": "instanceType"
+    },
+    "FabricCreationInput": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FabricCreationInputProperties"
+        }
+      }
+    },
+    "FabricCreationInputProperties": {
+      "type": "object",
+      "properties": {
+        "customDetails": {
+          "$ref": "#/definitions/FabricSpecificCreationInput"
+        }
+      }
+    },
+    "FabricSpecificCreationInput": {
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "discriminator": "instanceType"
+    },
+    "Object": {
+      "description": "Base of all objects.",
+      "type": "object",
+      "properties": {}
+    },
+    "JobCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Job"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "Job": {
       "type": "object",
       "properties": {
         "id": {
@@ -299,71 +351,195 @@
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/ProtectionContainerMappingProperties"
+          "$ref": "#/definitions/JobProperties"
+        },
+        "status": {
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/ARMException"
+        },
+        "startTime": {
+          "type": "string"
+        },
+        "endTime": {
+          "type": "string"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
-    "ProtectionContainerMappingProperties": {
+    "JobProperties": {
       "type": "object",
       "properties": {
-        "targetProtectionContainerId": {
+        "activityId": {
           "type": "string"
         },
-        "targetProtectionContainerFriendlyName": {
+        "scenarioName": {
           "type": "string"
         },
-        "providerSpecificDetails": {
-          "$ref": "#/definitions/ProtectionContainerMappingProviderSpecificDetails"
-        },
-        "health": {
-          "type": "string"
-        },
-        "healthErrorDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthError"
-          }
-        },
-        "policyId": {
+        "friendlyName": {
           "type": "string"
         },
         "state": {
           "type": "string"
         },
-        "sourceProtectionContainerFriendlyName": {
+        "stateDescription": {
           "type": "string"
         },
-        "sourceFabricFriendlyName": {
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/STask"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobErrorDetails"
+          }
+        },
+        "startTime": {
+          "format": "date-time",
           "type": "string"
         },
-        "targetFabricFriendlyName": {
+        "endTime": {
+          "format": "date-time",
           "type": "string"
         },
-        "policyFriendlyName": {
+        "allowedActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "targetObjectId": {
+          "type": "string"
+        },
+        "targetObjectName": {
+          "type": "string"
+        },
+        "targetInstanceType": {
+          "type": "string"
+        },
+        "customDetails": {
+          "$ref": "#/definitions/JobDetails"
+        }
+      }
+    },
+    "ARMException": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ARMExceptionDetails"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/ARMInnerError"
+        }
+      }
+    },
+    "STask": {
+      "type": "object",
+      "properties": {
+        "taskId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "allowedActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "friendlyName": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "stateDescription": {
+          "type": "string"
+        },
+        "taskType": {
+          "type": "string"
+        },
+        "customDetails": {
+          "$ref": "#/definitions/TaskTypeDetails"
+        },
+        "groupTaskCustomDetails": {
+          "$ref": "#/definitions/GroupTaskDetails"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobErrorDetails"
+          }
+        }
+      }
+    },
+    "JobErrorDetails": {
+      "type": "object",
+      "properties": {
+        "serviceErrorDetails": {
+          "$ref": "#/definitions/ServiceError"
+        },
+        "providerErrorDetails": {
+          "$ref": "#/definitions/ProviderError"
+        },
+        "errorLevel": {
+          "type": "string"
+        },
+        "creationTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "taskId": {
           "type": "string"
         }
       }
     },
-    "ProtectionContainerMappingProviderSpecificDetails": {
+    "JobDetails": {
       "type": "object",
       "properties": {
         "instanceType": {
           "type": "string",
           "readOnly": true
+        },
+        "affectedObjectDetails": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
-    "HealthError": {
+    "ARMExceptionDetails": {
       "type": "object",
       "properties": {
-        "errorLevel": {
+        "code": {
           "type": "string"
         },
-        "errorCode": {
-          "type": "string"
-        },
-        "errorMessage": {
+        "message": {
           "type": "string"
         },
         "possibleCauses": {
@@ -372,41 +548,68 @@
         "recommendedAction": {
           "type": "string"
         },
-        "creationTimeUtc": {
-          "format": "date-time",
+        "clientRequestId": {
           "type": "string"
         },
-        "recoveryProviderErrorMessage": {
+        "activityId": {
           "type": "string"
         },
-        "entityId": {
+        "target": {
           "type": "string"
         }
       }
     },
-    "CreateProtectionContainerMappingInput": {
+    "ARMInnerError": {
       "type": "object",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/CreateProtectionContainerMappingInputProperties"
+        "trace": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "methodStatus": {
+          "$ref": "#/definitions/MethodCallStatus"
+        },
+        "cloudId": {
+          "type": "string"
+        },
+        "hVHostId": {
+          "type": "string"
+        },
+        "hVClusterId": {
+          "type": "string"
+        },
+        "networkId": {
+          "type": "string"
+        },
+        "vmId": {
+          "type": "string"
+        },
+        "fabricId": {
+          "type": "string"
+        },
+        "liveId": {
+          "type": "string"
+        },
+        "containerId": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "resourceName": {
+          "type": "string"
+        },
+        "subscriptionId": {
+          "type": "string"
+        },
+        "serializedSRSLogContext": {
+          "type": "string"
         }
       }
     },
-    "CreateProtectionContainerMappingInputProperties": {
-      "type": "object",
-      "properties": {
-        "targetProtectionContainerId": {
-          "type": "string"
-        },
-        "PolicyId": {
-          "type": "string"
-        },
-        "providerSpecificInput": {
-          "$ref": "#/definitions/ReplicationProviderSpecificContainerMappingInput"
-        }
-      }
-    },
-    "ReplicationProviderSpecificContainerMappingInput": {
+    "TaskTypeDetails": {
       "type": "object",
       "properties": {
         "instanceType": {
@@ -414,178 +617,502 @@
         }
       }
     },
-    "Object": {
-      "description": "Base of all objects.",
+    "GroupTaskDetails": {
       "type": "object",
       "properties": {
-        
-      }
-    },
-    "ReplicationProtectedItemCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
+        "instanceType": {
+          "type": "string"
+        },
+        "childTasks": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ReplicationProtectedItem"
+            "$ref": "#/definitions/STask"
           }
+        }
+      }
+    },
+    "ServiceError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
         },
-        "nextLink": {
+        "message": {
+          "type": "string"
+        },
+        "possibleCauses": {
+          "type": "string"
+        },
+        "recommendedAction": {
+          "type": "string"
+        },
+        "activityId": {
           "type": "string"
         }
       }
     },
-    "ReplicationProtectedItem": {
+    "ProviderError": {
       "type": "object",
       "properties": {
-        "id": {
+        "errorCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "errorMessage": {
           "type": "string"
         },
-        "name": {
+        "errorId": {
           "type": "string"
         },
-        "type": {
+        "possibleCauses": {
           "type": "string"
         },
-        "properties": {
-          "$ref": "#/definitions/ReplicationProtectedItemProperties"
+        "recommendedAction": {
+          "type": "string"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
-    "ReplicationProtectedItemProperties": {
+    "MethodCallStatus": {
       "type": "object",
       "properties": {
-        "friendlyName": {
+        "isVirtual": {
           "type": "string"
         },
-        "protectedItemType": {
-          "type": "string"
-        },
-        "protectableItemId": {
-          "type": "string"
-        },
-        "recoveryServicesProviderId": {
-          "type": "string"
-        },
-        "primaryFabricFriendlyName": {
-          "type": "string"
-        },
-        "recoveryFabricFriendlyName": {
-          "type": "string"
-        },
-        "recoveryFabricId": {
-          "type": "string"
-        },
-        "primaryProtectionContainerFriendlyName": {
-          "type": "string"
-        },
-        "recoveryProtectionContainerFriendlyName": {
-          "type": "string"
-        },
-        "protectionState": {
-          "type": "string"
-        },
-        "protectionStateDescription": {
-          "type": "string"
-        },
-        "activeLocation": {
-          "type": "string"
-        },
-        "testFailoverState": {
-          "type": "string"
-        },
-        "testFailoverStateDescription": {
-          "type": "string"
-        },
-        "allowedOperations": {
+        "parameters": {
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "replicationHealth": {
+        "containsGenericParameters": {
+          "type": "string"
+        }
+      }
+    },
+    "AsrJobDetails": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobDetails"
+        }
+      ],
+      "properties": {}
+    },
+    "TestFailoverJobDetails": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobDetails"
+        }
+      ],
+      "properties": {
+        "testFailoverStatus": {
           "type": "string"
         },
-        "replicationHealthErrors": {
+        "comments": {
+          "type": "string"
+        },
+        "networkName": {
+          "type": "string"
+        },
+        "networkFriendlyName": {
+          "type": "string"
+        },
+        "networkType": {
+          "type": "string"
+        },
+        "protectedItemDetails": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/HealthError"
+            "$ref": "#/definitions/TestFailoverReplicationProtectedItemDetails"
+          }
+        }
+      }
+    },
+    "TestFailoverReplicationProtectedItemDetails": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "friendlyName": {
+          "type": "string"
+        },
+        "testVmName": {
+          "type": "string"
+        },
+        "testVmFriendlyName": {
+          "type": "string"
+        },
+        "networkConnectionStatus": {
+          "type": "string"
+        },
+        "networkFriendlyName": {
+          "type": "string"
+        },
+        "subnet": {
+          "type": "string"
+        }
+      }
+    },
+    "ExportJobDetails": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobDetails"
+        }
+      ],
+      "properties": {
+        "blobUri": {
+          "type": "string"
+        },
+        "sasToken": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureFabricSpecificDetails": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FabricSpecificDetails"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "containerIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "Azure"
+    },
+    "VmmDetails": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FabricSpecificDetails"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "VMM"
+    },
+    "HyperVSiteDetails": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FabricSpecificDetails"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "HyperVSite"
+    },
+    "VMwareDetails": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FabricSpecificDetails"
+        }
+      ],
+      "properties": {
+        "processServers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessServer"
           }
         },
-        "policyId": {
+        "masterTargetServers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MasterTargetServer"
+          }
+        },
+        "runAsAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RunAsAccount"
+          }
+        },
+        "replicationPairCount": {
           "type": "string"
         },
-        "policyFriendlyName": {
+        "processServerCount": {
           "type": "string"
         },
-        "lastSuccessfulFailoverTime": {
+        "agentCount": {
+          "type": "string"
+        },
+        "protectedServers": {
+          "type": "string"
+        },
+        "systemLoad": {
+          "type": "string"
+        },
+        "systemLoadStatus": {
+          "type": "string"
+        },
+        "cpuLoad": {
+          "type": "string"
+        },
+        "cpuLoadStatus": {
+          "type": "string"
+        },
+        "totalMemoryInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "availableMemoryInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "memoryUsageStatus": {
+          "type": "string"
+        },
+        "totalSpaceInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "availableSpaceInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "spaceUsageStatus": {
+          "type": "string"
+        },
+        "webLoad": {
+          "type": "string"
+        },
+        "webLoadStatus": {
+          "type": "string"
+        },
+        "databaseServerLoad": {
+          "type": "string"
+        },
+        "databaseServerLoadStatus": {
+          "type": "string"
+        },
+        "csServiceStatus": {
+          "type": "string"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "agentVersion": {
+          "type": "string"
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "lastHeartbeat": {
           "format": "date-time",
           "type": "string"
         },
-        "lastSuccessfulTestFailoverTime": {
+        "versionStatus": {
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "VMware"
+    },
+    "ProcessServer": {
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "osType": {
+          "type": "string"
+        },
+        "agentVersion": {
+          "type": "string"
+        },
+        "lastHeartbeat": {
           "format": "date-time",
           "type": "string"
         },
-        "currentScenario": {
-          "$ref": "#/definitions/CurrentScenarioDetails"
-        },
-        "failoverRecoveryPointId": {
+        "versionStatus": {
           "type": "string"
         },
-        "providerSpecificDetails": {
-          "$ref": "#/definitions/ReplicationProviderSpecificSettings"
+        "mobilityServiceUpdates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MobilityServiceUpdate"
+          }
+        },
+        "hostId": {
+          "type": "string"
+        },
+        "machineCount": {
+          "type": "string"
+        },
+        "replicationPairCount": {
+          "type": "string"
+        },
+        "systemLoad": {
+          "type": "string"
+        },
+        "systemLoadStatus": {
+          "type": "string"
+        },
+        "cpuLoad": {
+          "type": "string"
+        },
+        "cpuLoadStatus": {
+          "type": "string"
+        },
+        "totalMemoryInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "availableMemoryInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "memoryUsageStatus": {
+          "type": "string"
+        },
+        "totalSpaceInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "availableSpaceInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "spaceUsageStatus": {
+          "type": "string"
+        },
+        "psServiceStatus": {
+          "type": "string"
         }
       }
     },
-    "CurrentScenarioDetails": {
+    "MasterTargetServer": {
       "type": "object",
       "properties": {
-        "scenarioName": {
+        "id": {
           "type": "string"
         },
-        "jobId": {
+        "ipAddress": {
           "type": "string"
         },
-        "startTime": {
+        "name": {
+          "type": "string"
+        },
+        "osType": {
+          "type": "string"
+        },
+        "agentVersion": {
+          "type": "string"
+        },
+        "lastHeartbeat": {
           "format": "date-time",
           "type": "string"
-        }
-      }
-    },
-    "ReplicationProviderSpecificSettings": {
-      "type": "object",
-      "properties": {
-        "instanceType": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PlannedFailoverInput": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PlannedFailoverInputProperties"
-        }
-      }
-    },
-    "PlannedFailoverInputProperties": {
-      "type": "object",
-      "properties": {
-        "failoverDirection": {
+        },
+        "versionStatus": {
           "type": "string"
         },
-        "providerSpecificDetails": {
-          "$ref": "#/definitions/ProviderSpecificFailoverInput"
+        "retentionVolumes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RetentionVolume"
+          }
+        },
+        "dataStores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataStore"
+          }
         }
       }
     },
-    "ProviderSpecificFailoverInput": {
+    "RunAsAccount": {
       "type": "object",
       "properties": {
-        
+        "accountId": {
+          "type": "string"
+        },
+        "accountName": {
+          "type": "string"
+        }
       }
+    },
+    "MobilityServiceUpdate": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "rebootStatus": {
+          "type": "string"
+        },
+        "osType": {
+          "type": "string"
+        }
+      }
+    },
+    "RetentionVolume": {
+      "type": "object",
+      "properties": {
+        "volumeName": {
+          "type": "string"
+        },
+        "capacityInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "freeSpaceInBytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "thresholdPercentage": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "DataStore": {
+      "type": "object",
+      "properties": {
+        "symbolicName": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        },
+        "capacity": {
+          "type": "string"
+        },
+        "freeSpace": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureFabricCreationInput": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FabricSpecificCreationInput"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Azure"
     }
   },
   "parameters": {
@@ -601,7 +1128,6 @@
       "in": "path",
       "description": "The name of the resource group where the recovery services vault is present.",
       "required": true,
-      "x-ms-parameter-location": "method",
       "type": "string"
     },
     "ResourceNamespace": {
@@ -609,7 +1135,6 @@
       "in": "path",
       "description": "The namespace of the resource. Supported are Microsoft.SiteRecovery and Microsoft.RecoveryServices for production.",
       "required": true,
-      "x-ms-parameter-location": "method",
       "type": "string"
     },
     "ResourceType": {
@@ -617,15 +1142,13 @@
       "in": "path",
       "description": "The type of the resource. Supported are SiteRecovery and vault for production.",
       "required": true,
-      "x-ms-parameter-location": "method",
       "type": "string"
     },
     "ResourceName": {
-      "name": "vaultName",
+      "name": "resourceName",
       "in": "path",
       "description": "The name of the recovery services vault.",
       "required": true,
-      "x-ms-parameter-location": "method",
       "type": "string"
     },
     "ApiVersion": {
