@@ -1095,7 +1095,7 @@
             "description": "Origin properties",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OriginParameters"
+              "$ref": "#/definitions/Origin"
             }
           },
           {
@@ -1174,7 +1174,7 @@
             "description": "Origin properties",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OriginParameters"
+              "$ref": "#/definitions/OriginUpdateParameters"
             }
           },
           {
@@ -2047,12 +2047,13 @@
           }
         },
         "provisioningState": {
-          "description": "Provisioning status of the origin.",
-          "$ref": "#/definitions/ProvisioningState"
+          "readOnly": true,          
+          "description": "Provisioning status of the endpoint.",
+          "type": "string"
         }
       }
     },
-    "OriginParameters": {
+    "OriginUpdateParameters": {
       "type": "object",
       "description": "Origin properties needed for origin creation or update.",
       "properties": {
@@ -2064,9 +2065,6 @@
       "x-ms-azure-resource": true
     },
     "OriginPropertiesParameters": {
-      "required": [
-        "hostName"
-      ],
       "properties": {
         "hostName": {
           "description": "The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported.",
