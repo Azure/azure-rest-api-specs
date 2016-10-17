@@ -15,6 +15,56 @@
     "application/json"
   ],
   "paths": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationJobs/{jobName}": {
+      "get": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.JobsController"
+        ],
+        "operationId": "JobsController_GetJob",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationJobs": {
       "get": {
         "tags": [
@@ -46,6 +96,13 @@
           },
           {
             "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -56,7 +113,8 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/JobQueryParameter"
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}": {
@@ -686,6 +744,32 @@
         },
         "containsGenericParameters": {
           "type": "string"
+        }
+      }
+    },
+    "JobQueryParameter": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string"
+        },
+        "endTime": {
+          "type": "string"
+        },
+        "fabricId": {
+          "type": "string"
+        },
+        "affectedObjectTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "jobStatus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
