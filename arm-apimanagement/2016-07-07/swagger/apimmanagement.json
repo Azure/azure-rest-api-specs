@@ -40,7 +40,7 @@
           "Apis"
         ],
         "operationId": "Apis_ListByService",
-        "description": "List all APIs of the Api Management service instance.",
+        "description": "Lists all APIs of the API Management service instance.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/dn781423.aspx"
         },
@@ -88,12 +88,12 @@
               "$ref": "#/definitions/ApiPaged"
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"              
+              "$ref": "#/definitions/ErrorBodyContract"
             }
-          }          
+          }      
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -107,7 +107,7 @@
           "Apis"
         ],
         "operationId": "Apis_Get",
-        "description": "This operation returns the details of the API specified by its identifier.",
+        "description": "Gets the details of the API specified by its identifier.",
         "produces": [
           "application/json",
           "application/vnd.sun.wadl+xml",
@@ -136,18 +136,18 @@
             "description": "The response body contains the specified API entity.",
             "schema": {
               "$ref": "#/definitions/ApiContract"
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"              
-            }
-          },
-		      "404": {
-            "description": "The specified API does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"              
+              "$ref": "#/definitions/ErrorBodyContract"
             }
           }
         }
@@ -157,7 +157,7 @@
           "Apis"
         ],
         "operationId": "Apis_CreateOrUpdate",
-        "description": "Creates new or updates existing specific API of the Api Management service instance.",
+        "description": "Creates new or updates existing specific API of the API Management service instance.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -173,7 +173,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApiCreateOrUpdateParameters"
+              "$ref": "#/definitions/ApiContract"
             },
             "description": "Create or update parameters."
           },
@@ -195,14 +195,8 @@
           "201": {
             "description": "API was successfully created."
           },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-            }
-          },
-		  "409": {
-            "description": "API with same identified already exists.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
@@ -213,8 +207,8 @@
         "tags": [
           "Apis"
         ],
-        "operationId": "Apis_Patch",
-        "description": "Patches specific API of the Api Management service instance.",
+        "operationId": "Apis_Update",
+        "description": "Updates the specific API of the API Management service instance.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -238,7 +232,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the Api Entity. Etag should match current Entity state or it should be * for Unconditional update.",
+            "description": "ETag of the Api Entity. Etag should match current Entity state got in the header response of GET request got in the header response of GET request or it should be * for Unconditional update.",
             "type": "string"
           },
           {
@@ -250,16 +244,10 @@
         ],
         "responses": {
           "204": {
-            "description": "The API was successfully imported."
+            "description": "The API was successfully updated."
           },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-            }
-          },
-		      "404": {
-            "description": "The specified API does not exist.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
@@ -271,7 +259,7 @@
           "Apis"
         ],
         "operationId": "Apis_Delete",
-        "description": "Deletes specific API of the Api Management service instance.",
+        "description": "Deletes specific API of the API Management service instance.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -286,7 +274,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the Api Entity. Etag should match current Entity state or it should be * for Unconditional update.",
+            "description": "ETag of the Api Entity. Etag should match current Entity state got in the header response of GET request or it should be * for Unconditional update.",
             "type": "string"
           },
           {
@@ -300,14 +288,8 @@
           "204": {
             "description": "The API was successfully deleted."
           },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-            }
-          },
-		      "412": {
-            "description": "Returned if the product resource doesn’t pass the condition specified by the If-Match header.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
@@ -321,7 +303,7 @@
           "ApiOperations"
         ],
         "operationId": "ApiOperations_ListByApi",
-        "description": "This operation returns a collection of the operations for the specified API.",
+        "description": "Lists a collection of the operations for the specified API.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -369,8 +351,8 @@
               "$ref": "#/definitions/OperationPaged"
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
@@ -388,7 +370,7 @@
           "ApiOperations"
         ],
         "operationId": "ApiOperations_Get",
-        "description": "This operation returns the details of the API Operation specified by its identifier.",
+        "description": "Gets the details of the API Operation specified by its identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -400,11 +382,7 @@
             "$ref": "#/parameters/ApiIdParameter"
           },
           {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the operation within the API."
+            "$ref": "#/parameters/OperationIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -418,16 +396,16 @@
             "description": "The response body contains the specified Operation entity.",
             "schema": {
               "$ref": "#/definitions/OperationContract"
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
             }
           },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-            }
-          },
-          "404": {
-            "description": "The specified operation does not exist.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
@@ -451,19 +429,14 @@
             "$ref": "#/parameters/ApiIdParameter"
           },
           {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the Operation.",
-			"pattern": "^[^*#&+:<>?]+$"
+            "$ref": "#/parameters/OperationIdParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OperationCreateOrUpdateParameters"
+              "$ref": "#/definitions/OperationContract"
             },
             "description": "Create parameters."
           },
@@ -477,21 +450,9 @@
         "responses": {
           "201": {
             "description": "Operation was successfully created"
-          },          
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-            }
           },
-          "404": {
-            "description": "The specified API does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-            }
-          },
-          "409": {
-            "description": "Operation with same identified already exists.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
@@ -503,7 +464,7 @@
           "ApiOperations"
         ],
         "operationId": "ApiOperations_Update",
-        "description": "This operation updates the details of the operation specified by its identifier.",
+        "description": "Updates the details of the operation specified by its identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -515,18 +476,14 @@
             "$ref": "#/parameters/ApiIdParameter"
           },
           {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the Operation."
+            "$ref": "#/parameters/OperationIdParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OperationCreateOrUpdateParameters"
+              "$ref": "#/definitions/PatchParameters"
             },
             "description": "Update parameters."
           },
@@ -534,7 +491,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the API Operation Entity. Etag should match current Entity state or it should be * for Unconditional update.",
+            "description": "ETag of the API Operation Entity. Etag should match current Entity state got in the header response of GET request or it should be * for Unconditional update.",
             "type": "string"
           },
           {
@@ -548,20 +505,8 @@
           "204": {
             "description": "The operation was successfully updated."
           },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-            }
-          },
-          "404": {
-            "description": "The specified API or operation does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-            }
-          },
-          "412": {
-            "description": "Returned if the operation resource doesn't pass the condition specified by the If-Match header.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
@@ -573,7 +518,7 @@
           "ApiOperations"
         ],
         "operationId": "ApiOperations_Delete",
-        "description": "This operation deletes the specified operation.",
+        "description": "Deletes the specified operation.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -585,17 +530,13 @@
             "$ref": "#/parameters/ApiIdParameter"
           },
           {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identifier of the Operation."
+            "$ref": "#/parameters/OperationIdParameter"
           },
           {
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the API Operation Entity. Etag should match current Entity state or it should be * for Unconditional delete.",
+            "description": "ETag of the API Operation Entity. Etag should match current Entity state got in the header response of GET request or it should be * for Unconditional delete.",
             "type": "string"
           },
           {
@@ -609,20 +550,8 @@
            "204": {
             "description": "The operation was successfully deleted."
           },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-            }
-          },
-          "404": {
-            "description": "The specified API or operation does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-            }
-          },
-          "412": {
-            "description": "Returned if the operation resource doesn't pass the condition specified by the If-Match header.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
@@ -636,7 +565,7 @@
           "ApiProducts"
         ],
         "operationId": "ApiProducts_ListByApi",
-        "description": "List all API associated products.",
+        "description": "Lists all API associated products.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -684,8 +613,8 @@
               "$ref": "#/definitions/ProductPaged"
             }
           },
-          "404": {
-            "description": "The API does not exist.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
@@ -703,7 +632,7 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_ListByService",
-        "description": "List all subscriptions of the Api Management service instance.",
+        "description": "Lists all subscriptions of the API Management service instance.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/dn776325.aspx"
         },
@@ -751,8 +680,8 @@
               "$ref": "#/definitions/SubscriptionPaged"
             }
           },
-          "400": {
-            "description": "The request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
@@ -797,16 +726,16 @@
             "description": "The response body contains the specified Subscription entity.",
             "schema": {
               "$ref": "#/definitions/SubscriptionContract"
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
             }
           },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-            }
-          },
-          "404": {
-            "description": "The specified subscription does not exist.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
@@ -818,7 +747,7 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_CreateOrUpdate",
-        "description": "This operation subscribes the specified user to the specified product.",
+        "description": "Creates or updates the subscription of specified user to the specified product.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -859,17 +788,10 @@
           "204": {
             "description": "The user already subscribed to the product."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-            }
-          },
-          "409": {
-            "description": "Subscription with the same identifier already exists.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -879,7 +801,7 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_Update",
-        "description": "This operation updates the details of a subscription.",
+        "description": "Updates the details of a subscription specificied by its identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -907,7 +829,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the Subscription Entity. Etag should match current Entity state or it should be * for Unconditional update.",
+            "description": "ETag of the Subscription Entity. Etag should match current Entity state got in the header response of GET request or it should be * for Unconditional update.",
             "type": "string"
           },
           {
@@ -921,25 +843,10 @@
            "204": {
             "description": "The subscription details were successfully updated."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified subscription doesn’t exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "412": {
-            "description": "Returned if the resource doesn’t pass the condition specified by the If-Match header.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -949,7 +856,7 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_Delete",
-        "description": "Deletes specific subscription of the Api Management service instance.",
+        "description": "Deletes specific subscription of the API Management service instance.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -968,7 +875,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the Subscription Entity. Etag should match current Entity state or it should be * for Unconditional delete.",
+            "description": "ETag of the Subscription Entity. Etag should match current Entity state got in the header response of GET request or it should be * for Unconditional delete.",
             "type": "string"
           },
           {
@@ -982,18 +889,10 @@
            "204": {
             "description": "The subscription details were successfully deleted."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "412": {
-            "description": "Returned if the resource doesn’t pass the condition specified by the If-Match header.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -1005,7 +904,7 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_RegeneratePrimaryKey",
-        "description": "Regenerates primary key of existing subscription of the Api Management service instance.",
+        "description": "Regenerates primary key of existing subscription of the API Management service instance.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1030,26 +929,11 @@
         "responses": {
           "204": {
             "description": "The primary key was successfully regenerated."
-          },          
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
           },
-          "404": {
-            "description": "The specified subscription does not exist.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "409": {
-            "description": "The operation is not allowed due to the current subscription state.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -1061,7 +945,7 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_RegenerateSecondaryKey",
-        "description": "Regenerates secondary key of existing subscription of the Api Management service instance.",
+        "description": "Regenerates secondary key of existing subscription of the API Management service instance.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1086,26 +970,11 @@
         "responses": {
            "204": {
             "description": "The secondary key was successfully regenerated."
-          },          
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
           },
-          "404": {
-            "description": "The specified subscription does not exist.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "409": {
-            "description": "The operation is not allowed due to the current subscription state.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -1117,7 +986,7 @@
           "Products"
         ],
         "operationId": "Products_ListByService",
-        "description": "This operation returns a collection of products in the specified service instance.",
+        "description": "Lists a collection of products in the specified service instance.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/dn776336.aspx"
         },
@@ -1172,11 +1041,10 @@
               "$ref": "#/definitions/ProductPaged"
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         },
@@ -1192,7 +1060,7 @@
           "Products"
         ],
         "operationId": "Products_Get",
-        "description": "This operation returns the details of the product specified by its identifier.",
+        "description": "Gets the details of the product specified by its identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1215,20 +1083,18 @@
             "description": "The response body contains the specified Product entity.",
             "schema": {
               "$ref": "#/definitions/ProductContract"
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified product does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -1238,7 +1104,7 @@
           "Products"
         ],
         "operationId": "Products_CreateOrUpdate",
-        "description": "This operation creates a new product.",
+        "description": "Creates or Updates a product.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1254,7 +1120,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProductCreateParameters"
+              "$ref": "#/definitions/ProductContract"
             },
             "description": "Create or update parameters."
           },
@@ -1272,18 +1138,10 @@
           "204": {
             "description": "Product already exists."
           },
-          "400": {
-            "description": "Request validation failed.One cause for request validation to fail is if either one or both of the approvalRequired and subscriptionLimit properties are present in the request body along with the subscriptionRequired property set to false.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "409": {
-            "description": "Product with same identifier already exists.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -1317,7 +1175,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the Product Entity. Etag should match current Entity state or it should be * for Unconditional update.",
+            "description": "ETag of the Product Entity. Etag should match current Entity state got in the header response of GET request or it should be * for Unconditional update.",
             "type": "string"
           },
           {
@@ -1331,25 +1189,10 @@
           "204": {
             "description": "No Content in case of Update Successfull."
           },
-          "400": {
-            "description": "Request validation failed.One cause for request validation to fail is if either one or both of the approvalRequired and subscriptionLimit properties are present in the request body along with the subscriptionRequired property set to false.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified product does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "412": {
-            "description": "Returned if the product resource doesn’t pass the condition specified by the If-Match header.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -1381,7 +1224,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the Product Entity. Etag should match current Entity state or it should be * for Unconditional delete.",
+            "description": "ETag of the Product Entity. Etag should match current Entity state got in the header response of GET request or it should be * for Unconditional delete.",
             "type": "string"
           },
           {
@@ -1395,18 +1238,10 @@
           "204": {
             "description": "The product was successfully deleted."
           },
-          "400": {
-            "description": "Request validation failed.One cause for request validation to fail is if either one or both of the approvalRequired and subscriptionLimit properties are present in the request body along with the subscriptionRequired property set to false.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "412": {
-            "description": "Returned if the product resource doesn’t pass the condition specified by the If-Match header.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -1418,7 +1253,7 @@
           "ProductApis"
         ],
         "operationId": "ProductApis_ListByProduct",
-        "description": "This operation lists the APIs associated with a product.",
+        "description": "Lists a collection of the APIs associated with a product.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1466,18 +1301,10 @@
               "$ref": "#/definitions/ApiPaged"
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified product does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         },
@@ -1493,7 +1320,7 @@
           "ProductApis"
         ],
         "operationId": "ProductApis_Add",
-        "description": "This operation adds an API to the specified product.",
+        "description": "Adds an API to the specified product.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1521,18 +1348,10 @@
           "204": {
             "description": "The specified API is already added to the product."
           },
-          "400": {
-            "description": "Request validation failed.This is typically caused by an invalid product or API id.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified product does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -1542,7 +1361,7 @@
           "ProductApis"
         ],
         "operationId": "ProductApis_Remove",
-        "description": "This operation removes the specified API from the specified product.",
+        "description": "Deletes the specified API from the specified product.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1567,17 +1386,10 @@
           "204": {
             "description": "The API was successfully removed from the product."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-            }
-          },
-          "404": {
-            "description": "The specified product does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -1589,7 +1401,7 @@
           "ProductGroups"
         ],
         "operationId": "ProductGroups_ListByProduct",
-        "description": "This operations returns the developer groups associated with the specified product.",
+        "description": "Lists the collection of developer groups associated with the specified product.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1632,23 +1444,15 @@
         ],
         "responses": {
           "200": {
-            "description": "This operation returns a Collection of Group entities.",
+            "description": "Lists a collection of Group entities.",
             "schema": {
               "$ref": "#/definitions/GroupPaged"
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified product does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         },
@@ -1664,7 +1468,7 @@
           "ProductGroups"
         ],
         "operationId": "ProductGroups_Add",
-        "description": "This operation associates the specified developer group with the specified product.",
+        "description": "Adds the association between the specified developer group with the specified product.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1692,11 +1496,10 @@
           "204": {
             "description": "The specified group is already associated with the product."
           },
-          "400": {
-            "description": "Request validation failed.This is typically caused by an invalid product or group id.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -1706,7 +1509,7 @@
           "ProductGroups"
         ],
         "operationId": "ProductGroups_Remove",
-        "description": "This operation removes the association between the specified group and product.",
+        "description": "Deletes the association between the specified group and product.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1734,8 +1537,13 @@
           "400": {
             "description": "Request validation failed.This is typically caused by an invalid product or group id.",
             "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"              
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -1747,7 +1555,7 @@
           "Groups"
         ],
         "operationId": "Groups_ListByService",
-        "description": "This operation returns a collection of groups defined within a service instance.",
+        "description": "Lists a collection of groups defined within a service instance.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/dn776329.aspx"
         },
@@ -1790,7 +1598,7 @@
         ],
         "responses": {
           "200": {
-            "description": "This operation returns a Collection of Group entities.",
+            "description": "Lists a collection of Group entities.",
             "schema": {
               "$ref": "#/definitions/GroupPaged"
             }
@@ -1808,7 +1616,7 @@
           "Groups"
         ],
         "operationId": "Groups_Get",
-        "description": "This operation returns the details of the group specified by its identifier.",
+        "description": "Gets the details of the group specified by its identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1831,20 +1639,18 @@
             "description": "The response body contains the specified Group entity.",
             "schema": {
               "$ref": "#/definitions/GroupContract"
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified group does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -1854,7 +1660,7 @@
           "Groups"
         ],
         "operationId": "Groups_CreateOrUpdate",
-        "description": "This operation creates a new group.",
+        "description": "Creates or Updates a group.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1888,18 +1694,10 @@
           "204": {
             "description": "Group already exists."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "409": {
-            "description": "The group with same identifier already exists.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -1909,7 +1707,7 @@
           "Groups"
         ],
         "operationId": "Groups_Update",
-        "description": "This operation updates the details of the group specified by its identifier.",
+        "description": "Updates the details of the group specified by its identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1933,7 +1731,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the Group Entity. Etag should match current Entity state or it should be * for Unconditional update.",
+            "description": "ETag of the Group Entity. Etag should match current Entity state got in the header response of GET request or it should be * for Unconditional update.",
             "type": "string"
           },
           {
@@ -1947,20 +1745,6 @@
           "204": {
             "description": "The group details were successfully updated."
           },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified group doesn’t exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
           "405": {
             "description": "The specified group cannot be updated because it is a built-in group.",
             "schema": {
@@ -1968,11 +1752,10 @@
               
             }
           },
-          "412": {
-            "description": "Returned if the group resource doesn’t pass the condition specified by the If-Match header.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -1982,7 +1765,7 @@
           "Groups"
         ],
         "operationId": "Groups_Delete",
-        "description": "Deletes specific group of the Api Management service instance.",
+        "description": "Deletes specific group of the API Management service instance.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1997,7 +1780,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the Group Entity. Etag should match current Entity state or it should be * for Unconditional update.",
+            "description": "ETag of the Group Entity. Etag should match current Entity state got in the header response of GET request or it should be * for Unconditional update.",
             "type": "string"
           },
           {
@@ -2011,13 +1794,6 @@
           "204": {
             "description": "The group was successfully deleted."
           },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
           "405": {
             "description": "The specified group cannot be updated because it is a built-in group.",
             "schema": {
@@ -2025,11 +1801,10 @@
               
             }
           },
-          "412": {
-            "description": "Returned if the group resource doesn’t pass the condition specified by the If-Match header.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -2041,7 +1816,7 @@
           "GroupUsers"
         ],
         "operationId": "GroupUsers_ListByGroup",
-        "description": "This operation lists the members of the group, specified by its identifier.",
+        "description": "Lists a collection of the members of the group, specified by its identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -2084,25 +1859,17 @@
         ],
         "responses": {
           "200": {
-            "description": "This operation returns a Collection of user entities associated with the group.",
+            "description": "Lists a collection of user entities associated with the group.",
             "schema": {
               "$ref": "#/definitions/UserPaged"
             }
           },
-           "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
-          },
-          "404": {
-            "description": "The specified group does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          }          
+          }        
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -2116,7 +1883,7 @@
           "GroupUsers"
         ],
         "operationId": "GroupUsers_Add",
-        "description": "This operation adds a user to a group.",
+        "description": "Adds a user to the specified group.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -2144,25 +1911,16 @@
           "204": {
             "description": "The specified user is already a member of the specified group."
           },
-          "400": {
-            "description": "Request validation failed.This is typically caused by an invalid user identifier.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified group doesn’t exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
           "405": {
             "description": "Attempt was made to add a user to a built-in group. Built-in group membership is managed by the system.",
             "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"              
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -2197,25 +1955,17 @@
            "204": {
             "description": "The user was successfully removed from the group.."
           },
-          "400": {
-            "description": "Request validation failed.This is typically caused by an invalid user identifier.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified group doesn’t exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
           "405": {
             "description": "Attempt was made to add a user to a built-in group. Built-in group membership is managed by the system.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
               
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
             }
           }
         }
@@ -2227,7 +1977,7 @@
           "Certificates"
         ],
         "operationId": "Certificates_ListByService",
-        "description": "This operation returns a collection of all certificates in the specified service instance.",
+        "description": "Lists a collection of all certificates in the specified service instance.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/dn783483.aspx"
         },
@@ -2275,11 +2025,10 @@
               "$ref": "#/definitions/CertificatePaged"
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         },
@@ -2295,7 +2044,7 @@
           "Certificates"
         ],
         "operationId": "Certificates_Get",
-        "description": "This operation returns the details of the certificate specified by its identifier.",
+        "description": "Gets the details of the certificate specified by its identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -2322,20 +2071,18 @@
             "description": "The response body contains the specified Certificate entity.",
             "schema": {
               "$ref": "#/definitions/CertificateContract"
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified certificate does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -2345,7 +2092,11 @@
           "Certificates"
         ],
         "operationId": "Certificates_CreateOrUpdate",
-        "description": "This operation adds a new certificate to or updates an existing certificate of the specified API Management service instance.",
+        "description": "Creates or updates the certificate being used for authentication with the backend.",
+        "externalDocs": {
+          "description": "How to secure back-end services using client certificate authentication in Azure API Management",
+          "url": "https://azure.microsoft.com/en-us/documentation/articles/api-management-howto-mutual-certificates/"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -2376,7 +2127,7 @@
             "name": "If-Match",
             "in": "header",
             "required": false,
-            "description": "The entity state version of the Certificate. A value of \"*\" can be used for If-Match to unconditionally apply the operation..",
+            "description": "The entity state (Etag) version of the certificate to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation..",
             "type": "string"
           },
           {
@@ -2390,25 +2141,10 @@
           "201": {
             "description": "The new certificate was successfully added."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "409": {
-            "description": "Certificate with the same identifier already exists.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "412": {
-            "description": "Returned if the resource doesn’t pass the condition specified by the If-Match header.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -2437,7 +2173,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "The entity state version of the certificate. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "description": "The entity state (Etag) version of the certificate to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
             "type": "string"
           },
           {
@@ -2451,18 +2187,10 @@
           "204": {
             "description": "The certificate was successfully deleted."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "412": {
-            "description": "Returned if the resource doesn’t pass the condition specified by the If-Match header.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -2474,7 +2202,7 @@
           "PolicySnippets"
         ],
         "operationId": "PolicySnippets_ListByService",
-        "description": "List all policy snippets.",
+        "description": "Lists all policy snippets.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -2526,7 +2254,7 @@
           "ProductSubscriptions"
         ],
         "operationId": "ProductSubscriptions_ListByProduct",
-        "description": "This operations returns the subscriptions to the specified product.",
+        "description": "Lists the collection of subscriptions to the specified product.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -2569,23 +2297,15 @@
         ],
         "responses": {
           "200": {
-            "description": "This operation returns a Collection of subscription entities.",
+            "description": "Lists a collection of subscription entities.",
             "schema": {
               "$ref": "#/definitions/SubscriptionPaged"
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified product does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         },
@@ -2601,7 +2321,7 @@
           "Users"
         ],
         "operationId": "Users_ListByService",
-        "description": "This operation returns a collection of registered users in the specified service instance.",
+        "description": "Lists a collection of registered users in the specified service instance.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/dn776330.aspx"
         },
@@ -2644,16 +2364,15 @@
         ],
         "responses": {
           "200": {
-            "description": "This operation returns a Collection of User entities.",
+            "description": "Lists a collection of User entities.",
             "schema": {
               "$ref": "#/definitions/UserPaged"
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         },
@@ -2669,7 +2388,7 @@
           "Users"
         ],
         "operationId": "Users_Get",
-        "description": "This operation returns the details of the user specified by its identifier.",
+        "description": "Gets the details of the user specified by its identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -2692,20 +2411,18 @@
             "description": "Gets the specified user entity.",
             "schema": {
               "$ref": "#/definitions/UserContract"
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified user does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -2715,7 +2432,7 @@
           "Users"
         ],
         "operationId": "Users_CreateOrUpdate",
-        "description": "This operation creates a new user.",
+        "description": "Creates or Updates a user.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -2746,18 +2463,10 @@
          "201": {
             "description": "User was successfully created."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "409": {
-            "description": "User with the same identifier already exists.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -2767,7 +2476,7 @@
           "Users"
         ],
         "operationId": "Users_Update",
-        "description": "This operation updates the details of the user specified by its identifier.",
+        "description": "Updates the details of the user specified by its identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -2791,7 +2500,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "The entity state version of the user to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "description": "The entity state (Etag) version of the user to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
             "type": "string"
           },
           {
@@ -2805,32 +2514,16 @@
           "204": {
             "description": "The user details were successfully updated."
           },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified user doesn’t exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
           "405": {
             "description": "Administrator user cannot be modified.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           },
-          "412": {
-            "description": "Returned if the user resource doesn’t pass the condition specified by the If-Match header.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -2862,7 +2555,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "The entity state version of the user to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "description": "The entity state (Etag) version of the user to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
             "type": "string"
           },
           {
@@ -2876,25 +2569,16 @@
           "204": {
             "description": "The user details were successfully deleted."
           },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
           "405": {
             "description": "Administrator user cannot be modified.",
             "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
+              "$ref": "#/definitions/ErrorBodyContract"              
             }
           },
-          "412": {
-            "description": "Returned if the user resource doesn’t pass the condition specified by the If-Match header.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -2906,7 +2590,7 @@
           "Users"
         ],
         "operationId": "Users_GenerateSsoUrl",
-        "description": "This operation retrieves a redirection URL containing an authentication token for signing a given user into the developer portal.",
+        "description": "Retrieves a redirection URL containing an authentication token for signing a given user into the developer portal.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -2928,21 +2612,14 @@
           "200": {
             "description": "The response body contains the single sign-on URL.",
             "schema": {
+              "x-ms-client-flatten": true,
               "$ref": "#/definitions/GenerateSsoUrlResult"
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified user does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -2954,7 +2631,7 @@
           "UserGroups"
         ],
         "operationId": "UserGroups_ListByUser",
-        "description": "List all user groups.",
+        "description": "Lists all user groups.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -2997,23 +2674,15 @@
         ],
         "responses": {
           "200": {
-            "description": "This operation returns a Collection of Group entities.",
+            "description": "Lists a collection of Group entities.",
             "schema": {
               "$ref": "#/definitions/GroupPaged"
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified user does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         },
@@ -3029,7 +2698,7 @@
           "UserSubscriptions"
         ],
         "operationId": "UserSubscriptions_ListByUser",
-        "description": "This operations returns the subscriptions of the specified user.",
+        "description": "Lists the collection of subscriptions of the specified user.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -3072,23 +2741,15 @@
         ],
         "responses": {
           "200": {
-            "description": "This operation returns a Collection of Subscription entities.",
+            "description": "Lists a collection of Subscription entities.",
             "schema": {
               "$ref": "#/definitions/SubscriptionPaged"
             }
           },
-           "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified user does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         },
@@ -3104,7 +2765,7 @@
           "AuthorizationServers"
         ],
         "operationId": "AuthorizationServers_ListByService",
-        "description": "This operation returns a collection of authorization servers defined within a service instance.",
+        "description": "Lists a collection of authorization servers defined within a service instance.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/dn879064.aspx"
         },
@@ -3165,7 +2826,7 @@
           "AuthorizationServers"
         ],
         "operationId": "AuthorizationServers_Get",
-        "description": "This operation returns the details of the authorization server specified by its identifier.",
+        "description": "Gets the details of the authorization server specified by its identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -3173,12 +2834,14 @@
           {
             "$ref": "#/parameters/ServiceNameParameter"
           },
-          {
+           {
             "name": "authsid",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Identifier of the authorization server."
+            "description": "Identifier of the authorization server.",
+            "maxLength": 256,
+            "pattern": "^[^*#&+:<>?]+$"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -3188,21 +2851,22 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "The authorization server settings were successfully updated."
-          },
-          "400": {
-            "description": "Request validation failed.",
+          "200": {
+            "description": "Gets the details of the specified authorization server.",
             "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
+              "$ref": "#/definitions/OAuth2AuthorizationServerContract"
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
             }
           },
-          "412": {
-            "description": "Returned if the resource doesn’t pass the condition specified by the If-Match header.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -3212,7 +2876,7 @@
           "AuthorizationServers"
         ],
         "operationId": "AuthorizationServers_CreateOrUpdate",
-        "description": "Creates new authorization server.",
+        "description": "Creates new authorization server or updates an existing authorization server.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -3227,14 +2891,14 @@
             "type": "string",
             "description": "Identifier of the authorization server.",
             "maxLength": 256,
-			"pattern": "^[^*#&+:<>?]+$"
+            "pattern": "^[^*#&+:<>?]+$"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AuthorizationServerCreateOrUpdateParameters"
+              "$ref": "#/definitions/OAuth2AuthorizationServerContract"
             },
             "description": "Create or update parameters."
           },
@@ -3249,21 +2913,13 @@
           "201": {
             "description": "Authorization server was successfully registered."
           },
-		  "204": {
+          "204": {
             "description": "Authorization server is already registered."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "409": {
-            "description": "Authorization server with the same identifier already exists.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -3273,7 +2929,7 @@
           "AuthorizationServers"
         ],
         "operationId": "AuthorizationServers_Update",
-        "description": "This operation updates the details of the authorization server specified by its identifier.",
+        "description": "Updates the details of the authorization server specified by its identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -3293,15 +2949,15 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AuthorizationServerCreateOrUpdateParameters"
+              "$ref": "#/definitions/OAuth2AuthorizationServerUpdateContract"
             },
-            "description": "Create or update parameters."
+            "description": "OAuth2 Server settings Update parameters."
           },
           {
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "The entity state version of the authorization server to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "description": "The entity state (Etag) version of the authorization server to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
             "type": "string"
           },
           {
@@ -3315,18 +2971,10 @@
           "204": {
             "description": "The authorization server settings were successfully updated."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "412": {
-            "description": "Returned if the resource doesn’t pass the condition specified by the If-Match header.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -3355,7 +3003,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "The entity state version of the authentication server to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "description": "The entity state (Etag) version of the authentication server to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
             "type": "string"
           },
           {
@@ -3369,25 +3017,10 @@
           "204": {
             "description": "The authorization server settings were successfully deleted."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified authorization server does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "412": {
-            "description": "Returned if the resource doesn’t pass the condition specified by the If-Match header.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -3399,7 +3032,7 @@
           "Regions"
         ],
         "operationId": "Regions_ListByService",
-        "description": "List all azure regions in which the service exists.",
+        "description": "Lists all azure regions in which the service exists.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -3416,7 +3049,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of Regions in which the service is deployed.",
+            "description": "Lists of Regions in which the service is deployed.",
             "schema": {
               "$ref": "#/definitions/RegionListResult"
             }
@@ -3433,7 +3066,7 @@
           "UserIdentities"
         ],
         "operationId": "UserIdentities_ListByUser",
-        "description": "List all user identities.",
+        "description": "Lists all user identities.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -3453,7 +3086,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of User Identities.",
+            "description": "Lists of User Identities.",
             "schema": {
               "type": "array",
               "items": {
@@ -3461,11 +3094,10 @@
               }
             }
           },
-          "404": {
-            "description": "The specified user does not exist.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -3544,7 +3176,7 @@
         ],
         "responses": {
           "200": {
-            "description": "This operation returns a Collection of Report record.",
+            "description": "Lists a collection of Report record.",
             "schema": {
               "$ref": "#/definitions/ReportPaged"
             }
@@ -3582,6 +3214,12 @@
             "description": "Tenant Access information.",
             "schema": {
               "$ref": "#/definitions/AccessInformationContract"
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
             }
           }
         }
@@ -3612,7 +3250,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "The entity state version of the tenant access settings to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "description": "The entity state (Etag) version of the tenant access settings to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
             "type": "string"
           },
           {
@@ -3626,25 +3264,10 @@
            "201": {
             "description": "Tenant's access information updated successfully."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "409": {
-            "description": "Entity with the same identifier already exists.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "412": {
-            "description": "Returned if the resource doesn’t pass the condition specified by the If-Match header.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -3675,11 +3298,10 @@
           "204": {
             "description": "The primary key was successfully regenerated."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -3710,11 +3332,10 @@
            "204": {
             "description": "The secondary key was successfully regenerated."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -3726,7 +3347,7 @@
           "Loggers"
         ],
         "operationId": "Loggers_ListByService",
-        "description": "This operation returns a collection of loggers in the specified service instance.",
+        "description": "Lists a collection of loggers in the specified service instance.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt592020.aspx"
         },
@@ -3769,16 +3390,15 @@
         ],
         "responses": {
           "200": {
-            "description": "This operation returns a collection of Logger entities.",
+            "description": "Lists a collection of Logger entities.",
             "schema": {
               "$ref": "#/definitions/LoggerPaged"
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         },
@@ -3794,7 +3414,7 @@
           "Loggers"
         ],
         "operationId": "Loggers_Get",
-        "description": "This operation returns the details of the logger specified by its identifier.",
+        "description": "Gets the details of the logger specified by its identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -3821,20 +3441,18 @@
             "description": "The response body contains the specified Logger entity.",
             "schema": {
               "$ref": "#/definitions/LoggerGetContract"
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified logger does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -3844,7 +3462,7 @@
           "Loggers"
         ],
         "operationId": "Loggers_CreateOrUpdate",
-        "description": "This operation creates a new logger or updates and existing one.",
+        "description": "Creates or Updates a logger.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -3884,18 +3502,10 @@
           "204": {
             "description": "The existing logger was successfully updated."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "409": {
-            "description": "Logger with the same identifier already exists.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -3905,7 +3515,7 @@
           "Loggers"
         ],
         "operationId": "Loggers_Update",
-        "description": "This operation updates an existing logger.",
+        "description": "Updates an existing logger.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -3933,7 +3543,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "The entity state version of the logger to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "description": "The entity state (Etag) version of the logger to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
             "type": "string"
           },
           {
@@ -3947,25 +3557,10 @@
            "204": {
             "description": "The existing logger was successfully updated."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified logger does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "412": {
-            "description": "Returned if the logger resource doesn’t pass the condition specified by the If-Match header.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -3975,7 +3570,7 @@
           "Loggers"
         ],
         "operationId": "Loggers_Delete",
-        "description": "This operation deletes the specified logger.",
+        "description": "Deletes the specified logger.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -3994,7 +3589,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "The entity state version of the logger to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "description": "The entity state (Etag) version of the logger to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
             "type": "string"
           },
           {
@@ -4008,14 +3603,8 @@
           "204": {
             "description": "The logger was successfully deleted."
           },
-          "400": {
-            "description": "The logger cannot be deleted because it is being used by one or more policies.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-            }
-          },
-          "412": {
-            "description": "Returned if the logger resource doesn’t pass the condition specified by the If-Match header.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
@@ -4029,7 +3618,7 @@
           "Property"
         ],
         "operationId": "Property_ListByService",
-        "description": "This operation returns a collection of properties defined within a service instance.",
+        "description": "Lists a collection of properties defined within a service instance.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt651775.aspx"
         },
@@ -4090,7 +3679,7 @@
           "Property"
         ],
         "operationId": "Property_Get",
-        "description": "This operation returns the details of the property specified by its identifier.",
+        "description": "Gets the details of the property specified by its identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -4117,20 +3706,18 @@
             "description": "The response body contains the specified Property entity.",
             "schema": {
               "$ref": "#/definitions/PropertyContract"
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "The specified property does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -4140,7 +3727,7 @@
           "Property"
         ],
         "operationId": "Property_CreateOrUpdate",
-        "description": "Creates new property.",
+        "description": "Creates or updates a property.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -4155,7 +3742,7 @@
             "type": "string",
             "description": "Identifier of the property.",
             "maxLength": 256,
-			"pattern": "^[^*#&+:<>?]+$"
+            "pattern": "^[^*#&+:<>?]+$"
           },
           {
             "name": "parameters",
@@ -4180,18 +3767,10 @@
           "204": {
             "description": "Property was successfully updated."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "409": {
-            "description": "Property with the specified identifier already exists.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -4201,7 +3780,7 @@
           "Property"
         ],
         "operationId": "Property_Update",
-        "description": "Patches specific property.",
+        "description": "Updates the specific property.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -4229,7 +3808,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "The entity state version of the property to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "description": "The entity state (Etag) version of the property to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
             "type": "string"
           },
           {
@@ -4243,25 +3822,10 @@
           "204": {
             "description": "Property was successfully updated."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "Property with the specified identifier does not exists.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "412": {
-            "description": "Returned if the property resource doesn’t pass the condition specified by the If-Match header.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -4271,7 +3835,7 @@
           "Property"
         ],
         "operationId": "Property_Delete",
-        "description": "Deletes specific property from the the Api Management service instance.",
+        "description": "Deletes specific property from the the API Management service instance.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -4290,7 +3854,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "The entity state version of the property to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "description": "The entity state (Etag) version of the property to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
             "type": "string"
           },
           {
@@ -4304,25 +3868,16 @@
           "204": {
             "description": "Property was successfully deleted."
           },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
           "405": {
             "description": "The specified property cannot be deleted because it is in use in a policy. You must remove all references to this property before it can be deleted.",
             "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
+              "$ref": "#/definitions/ErrorBodyContract"              
             }
           },
-          "412": {
-            "description": "Returned if the property resource doesn’t pass the condition specified by the If-Match header.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -4334,7 +3889,7 @@
           "OpenIdConnectProviders"
         ],
         "operationId": "OpenIdConnectProviders_ListByService",
-        "description": "List all OpenID Connect Providers.",
+        "description": "Lists all OpenID Connect Providers.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -4374,7 +3929,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of all the OpenId Connect Providers.",
+            "description": "Lists of all the OpenId Connect Providers.",
             "schema": {
               "$ref": "#/definitions/OpenIdConnectProviderPaged"
             }
@@ -4419,22 +3974,20 @@
             "description": "The response body contains the specified OpenId Connect Provider entity.",
             "schema": {
               "$ref": "#/definitions/OpenidConnectProviderContract"
-            }
-          },           
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
             }
           },
-          "404": {
-            "description": "The specified OpenId Connect Provider does not exist.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
-          }        
+          }      
         }
       },
       "put": {
@@ -4442,7 +3995,7 @@
           "OpenIdConnectProviders"
         ],
         "operationId": "OpenIdConnectProviders_CreateOrUpdate",
-        "description": "Creates new OpenID Connect Provider.",
+        "description": "Creates or updates the OpenID Connect Provider.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -4457,7 +4010,7 @@
             "type": "string",
             "description": "Identifier of the OpenID Connect Provider.",
             "maxLength": 256,
-			"pattern": "^[^*#&+:<>?]+$"
+			      "pattern": "^[^*#&+:<>?]+$"
           },
           {
             "name": "parameters",
@@ -4482,18 +4035,10 @@
           "204": {
             "description": "OpenIdConnect Provider was successfully updated."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "409": {
-            "description": "OpenIdConnect Provider with the specified identifier already exists.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -4503,7 +4048,7 @@
           "OpenIdConnectProviders"
         ],
         "operationId": "OpenIdConnectProviders_Update",
-        "description": "Patches specific OpenID Connect Provider.",
+        "description": "Updates the specific OpenID Connect Provider.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -4531,7 +4076,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "The entity state version of the OpenID Connect Provider to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "description": "The entity state (Etag) version of the OpenID Connect Provider to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
             "type": "string"
           },
           {
@@ -4545,25 +4090,10 @@
           "204": {
             "description": "OpenId Connect Provider was successfully updated."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "404": {
-            "description": "OpenId Connect Provider with the specified identifier does not exists.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
-          "412": {
-            "description": "Returned if the OpenId Connect Provider resource doesn’t pass the condition specified by the If-Match header.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -4573,7 +4103,7 @@
           "OpenIdConnectProviders"
         ],
         "operationId": "OpenIdConnectProviders_Delete",
-        "description": "Deletes specific OpenID Connect Provider of the Api Management service instance.",
+        "description": "Deletes specific OpenID Connect Provider of the API Management service instance.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -4592,7 +4122,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "The entity state version of the OpenID Connect Provider to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "description": "The entity state (Etag) version of the OpenID Connect Provider to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
             "type": "string"
           },
           {
@@ -4606,25 +4136,16 @@
           "204": {
             "description": "OpenId Connect Provider was successfully deleted."
           },
-          "400": {
-            "description": "Request validation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
-            }
-          },
           "405": {
-            "description": "The specified OpenIdConnect Provider cannot be deleted because it is in use in a policy. You must remove all references to this property before it can be deleted..",
+            "description": "The specified OpenIdConnect Provider cannot be deleted because it is in use in a policy. You must remove all references to this property before it can be deleted.",
             "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"
-              
+              "$ref": "#/definitions/ErrorBodyContract"              
             }
           },
-          "412": {
-            "description": "Returned if the OpenId Connect Provider resource doesn’t pass the condition specified by the If-Match header.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -4636,7 +4157,7 @@
           "TenantAccessGit"
         ],
         "operationId": "TenantAccessGit_Get",
-        "description": "This operation returns the Git access configuration for the tenant.",
+        "description": "Gets the Git access configuration for the tenant.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -4656,13 +4177,18 @@
             "description": "Git Access Information for the Service.",
             "schema": {
               "$ref": "#/definitions/AccessInformationContract"
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -4693,11 +4219,10 @@
           "204": {
             "description": "The primary key was successfully regenerated."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         }
@@ -4728,8 +4253,8 @@
           "204": {
             "description": "The secondary key was successfully regenerated."
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
@@ -4744,6 +4269,10 @@
         ],
         "operationId": "TenantConfiguration_Deploy",
         "description": "This operation applies changes from the specified Git branch to the configuration database. This is a long running operation and could take several minutes to complete.",
+        "externalDocs": {
+          "description": "To deploy any service configuration changes to the API Management service instance",
+          "url": "https://azure.microsoft.com/en-us/documentation/articles/api-management-configuration-repository-git/#to-deploy-any-service-configuration-changes-to-the-api-management-service-instance"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -4774,11 +4303,10 @@
               "$ref": "#/definitions/OperationResultContract"
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
-              
             }
           }
         },
@@ -4792,6 +4320,10 @@
         ],
         "operationId": "TenantConfiguration_Save",
         "description": "This operation creates a commit with the current configuration snapshot to the specified branch in the repository. This is a long running operation and could take several minutes to complete.",
+        "externalDocs": {
+          "description": "To save the service configuration to the Git repository",
+          "url": "https://azure.microsoft.com/en-us/documentation/articles/api-management-configuration-repository-git/#to-save-the-service-configuration-to-the-git-repository"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -4822,8 +4354,8 @@
               "$ref": "#/definitions/OperationResultContract"
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
@@ -4869,8 +4401,8 @@
               "$ref": "#/definitions/OperationResultContract"
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorBodyContract"
             }
@@ -4885,7 +4417,7 @@
           "TenantConfigurationSyncState"
         ],
         "operationId": "TenantConfigurationSyncState_Get",
-        "description": "This operation returns the status of the most recent synchronization between the configuration database and the Git repository.",
+        "description": "Gets the status of the most recent synchronization between the configuration database and the Git repository.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -4918,7 +4450,7 @@
           "Apis"
         ],
         "operationId": "Apis_Export",
-        "description": "This operation returns the details of the API specified by its identifier.",
+        "description": "Gets the details of the API specified by its identifier.",
         "parameters": [
            {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -4943,16 +4475,10 @@
               "$ref": "#/definitions/ApiExportResult"
             }
           },
-          "400": {
-            "description": "Request validation failed.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"              
-            }
-          },
-		      "404": {
-            "description": "The specified API does not exist.",
-            "schema": {
-              "$ref": "#/definitions/ErrorBodyContract"              
+              "$ref": "#/definitions/ErrorBodyContract"
             }
           }
         }
@@ -4992,7 +4518,13 @@
           "description": "Subscription key query string parameter name."
         }
       },
-      "description": "Subscription key parameter names details."
+      "description": "Subscription key parameter names details.",
+      "example": {
+        "subscriptionKeyParameterNames" : {
+          "query": "customQueryParameterName",
+          "header": "customHeaderParameterName"
+        }
+      }
     },
     "ApiContract": {
       "properties": {
@@ -5019,7 +4551,7 @@
         },
         "path": {
           "type": "string",
-          "description": "Path for API requests.",
+          "description": "Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API.",
           "minLength": 0,
           "maxLength": 400
         },
@@ -5036,7 +4568,7 @@
               "modelAsString": false
             }
           },
-          "description": "Protocols over which API is made available."
+          "description": "Describes on which protocols the operations in this API can be invoked."
         },
         "authenticationSettings": {
           "$ref": "#/definitions/AuthenticationSettingsContract",
@@ -5065,7 +4597,7 @@
         "path",
         "protocols"
       ],
-      "description": "API details."
+      "description": "API details."      
     },
     "ApiPaged": {
       "properties": {
@@ -5087,18 +4619,6 @@
         }
       },
       "description": "Paged Api list representation."
-    },
-    "ApiCreateOrUpdateParameters": {
-      "properties": {
-        "ApiContract": {
-          "$ref": "#/definitions/ApiContract",
-          "description": "ApiContract."
-        }
-      },
-      "required": [
-        "ApiContract"
-      ],
-      "description": "Parameters supplied to the CreateOrUpdate Api operation."
     },
     "PatchParameters": {
       "properties": {
@@ -5180,11 +4700,11 @@
       "properties": {
         "contentType": {
           "type": "string",
-          "description": "Content type."
+          "description": "Specifies a registered or custom content type for this representation, e.g. application/xml."
         },
         "sample": {
           "type": "string",
-          "description": "Content sample."
+          "description": "An example of the representation."
         }
       },
       "required": [
@@ -5227,7 +4747,9 @@
         "statusCode": {
           "type": "integer",
           "format": "int32",
-          "description": "Operation response status code."
+          "description": "Operation response HTTP status code.",
+          "minimum": 100,
+          "maximum": 599          
         },
         "description": {
           "type": "string",
@@ -5250,7 +4772,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "OperationId path."
+          "description": "Uniquely identifies the operation within the current API Management service instance. The value is a valid relative URL in the format of /apis/{aid}/operations/{id} where {aid} is an API identifier and {id} is an operation identifier.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
@@ -5260,12 +4783,17 @@
         },
         "method": {
           "type": "string",
-          "description": "Operation Method (GET, PUT, POST, etc.)."
+          "description": "A Valid HTTP Operation Method. Typical Http Methods like GET, PUT, POST but not limited by only them.",
+          "externalDocs": {
+            "description": "As defined by RFC.",
+            "url": "http://www.rfc-editor.org/rfc/rfc7230.txt"
+          }          
         },
         "urlTemplate": {
           "type": "string",
-          "description": "Operation URI template. Cannot be more than 400 characters long.",
-          "maxLength": 400
+          "description": "Relative URL template identifying the target resource for this operation. May include parameters. Example: /customers/{cid}/orders/{oid}/?date={date}",
+          "minLength": 1,
+          "maxLength": 1000
         },
         "templateParameters": {
           "type": "array",
@@ -5276,11 +4804,12 @@
         },
         "description": {
           "type": "string",
-          "description": "Operation description."
+          "description": "Description of the operation. May include HTML formatting tags.",
+          "maxLength": 1000
         },
         "request": {
           "$ref": "#/definitions/RequestContract",
-          "description": "Operation request."
+          "description": "An entity containing request details."
         },
         "responses": {
           "type": "array",
@@ -5318,23 +4847,12 @@
       },
       "description": "Paged Operation list representation."
     },
-    "OperationCreateOrUpdateParameters": {
-      "properties": {
-        "OperationContract": {
-          "$ref": "#/definitions/OperationContract",
-          "description": "operation details."
-        }
-      },
-      "required": [
-        "OperationContract"
-      ],
-      "description": "Parameters supplied to the CreateOrUpdate Operation operation."
-    },
     "ProductContract": {
       "properties": {
         "id": {
           "type": "string",
-          "description": "Product identifier path."
+          "description": "Uniquely identifies the product within the current API Management service instance. The value is a valid relative URL in the format of /products/{productId} where {productId} is a product identifier.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
@@ -5344,15 +4862,18 @@
         },
         "description": {
           "type": "string",
-          "description": "Product description. May be 1 to 500 characters long."
+          "description": "Product description. May include HTML formatting tags.",
+          "minLength": 1,
+          "maxLength": 1000
         },
         "terms": {
           "type": "string",
-          "description": "Product terms and conditions. Developer will have to accept these terms before he's allowed to call product API."
+          "description": "Product terms of use. Developers trying to subscribe to the product will be presented and required to accept these terms before they can complete the subscription process."
         },
         "subscriptionRequired": {
           "type": "boolean",
-          "description": "Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as \"protected\" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as \"open\" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it's value is assumed to be true."
+          "description": "Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as \"protected\" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as \"open\" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it's value is assumed to be true.",
+          "default": "true"
         },
         "approvalRequired": {
           "type": "boolean",
@@ -5361,15 +4882,16 @@
         "subscriptionsLimit": {
           "type": "integer",
           "format": "int32",
-          "description": "whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
+          "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
         },
         "state": {
           "type": "string",
-          "description": "whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators.",
+          "description": "whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is NotPublished.",
           "enum": [
             "NotPublished",
             "Published"
           ],
+          "default": "NotPublished",
           "x-ms-enum": {
             "name": "ProductStateContract",
             "modelAsString": false
@@ -5406,23 +4928,26 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Subscription identifier path."
+          "description": "Uniquely identifies the subscription within the current API Management service instance. The value is a valid relative URL in the format of /subscriptions/{sid} where {sid} is a subscription identifier.",
+          "readOnly": true
         },
         "userId": {
           "type": "string",
-          "description": "Subscriber identifier path in form /users/{uid}"
+          "description": "The user resource identifier of the subscription owner. The value is a valid relative URL in the format of /users/{uid} where {uid} is a user identifier."
         },
         "productId": {
           "type": "string",
-          "description": "Product identifier path in form /products/{productid}"
+          "description": "The product resource identifier of the subscribed product. The value is a valid relative URL in the format of /products/{productId} where {productId} is a product identifier."
         },
         "name": {
           "type": "string",
-          "description": "Subscription name."
+          "description": "The name of the subscription, or null if the subscription has no name.",
+          "minLength": 0,
+          "maxLength": 100
         },
         "state": {
           "type": "string",
-          "description": "Subscription state.",
+          "description": "Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
           "enum": [
             "Suspended",
             "Active",
@@ -5439,7 +4964,8 @@
         "createdDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Subscription creation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+          "description": "Subscription creation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n",
+          "readOnly": true
         },
         "startDate": {
           "type": "string",
@@ -5463,15 +4989,19 @@
         },
         "primaryKey": {
           "type": "string",
-          "description": "Subscription primary key."
+          "description": "Subscription primary key.",
+          "minLength": 1,
+          "maxLength": 256
         },
         "secondaryKey": {
           "type": "string",
-          "description": "Subscription secondary key."
+          "description": "Subscription secondary key.",
+          "minLength": 1,
+          "maxLength": 256
         },
         "stateComment": {
           "type": "string",
-          "description": "Subscription State Comment."
+          "description": "Optional subscription comment added by an administrator."
         }
       },
       "description": "Subscription details."
@@ -5509,7 +5039,9 @@
         },
         "name": {
           "type": "string",
-          "description": "Subscription name."
+          "description": "Subscription name.",
+          "minLength": 1,
+          "maxLength": 100
         },
         "primaryKey": {
           "type": "string",
@@ -5525,7 +5057,7 @@
         },
         "state": {
           "type": "string",
-          "description": "Initial subscription state.",
+          "description": "Initial subscription state. If no value is specified, subscription is created with Submitted state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
           "enum": [
             "Suspended",
             "Active",
@@ -5569,18 +5101,18 @@
         "primaryKey": {
           "type": "string",
           "description": "Primary subscription key.",
-		  "minLength": 1,
+		      "minLength": 1,
           "maxLength": 256
         },
         "secondaryKey": {
           "type": "string",
           "description": "Secondary subscription key.",
-		  "minLength": 1,
+		      "minLength": 1,
           "maxLength": 256
         },
         "state": {
           "type": "string",
-          "description": "Initial subscription state.",
+          "description": "Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
           "enum": [
             "Suspended",
             "Active",
@@ -5596,21 +5128,10 @@
         },
         "stateComment": {
           "type": "string",
-          "description": "Comments describing subscription state change."
+          "description": "Comments describing subscription state change by the administrator."
         }
       },
       "description": "Parameters supplied to the Update subscription operation."
-    },
-    "ProductCreateParameters": {
-      "properties": {
-        "ProductContract": {
-          "$ref": "#/definitions/ProductContract"
-        }
-      },
-      "required": [
-        "ProductContract"
-      ],
-      "description": "Parameters supplied to the CreateOrUpdate Product operation."
     },
     "ProductUpdateParameters": {
       "properties": {
@@ -5662,7 +5183,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "group identifier."
+          "description": "Uniquely identifies the group within the current API Management service instance. The value is a valid relative URL in the format of /groups/{groupid} where {groupid} is a group identifier.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
@@ -5672,16 +5194,18 @@
         },
         "description": {
           "type": "string",
-          "description": "Group description."
+          "description": "Group description. Can contain HTML formatting tags.",
+          "maxLength": 1000
         },
         "builtIn": {
           "readOnly": true,
           "type": "boolean",
-          "description": "Group is built in or not."
+          "description": "true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false."
         },
         "type": {
           "type": "string",
           "description": "Group type.",
+          "readOnly": true,
           "enum": [
             "Custom",
             "System",
@@ -5694,7 +5218,8 @@
         },
         "externalId": {
           "type": "string",
-          "description": "Identifier for an external group."
+          "description": "For external groups, this property contains the id of the group from the external identity provider, e.g. Azure Active Directory; otherwise the value is null.",
+          "readOnly": true
         }
       },
       "required": [
@@ -5878,7 +5403,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Certificate identifier path: /certificates/{certificateId}"
+          "description": "Certificate identifier path: /certificates/{certificateId}",
+          "readOnly": true
         },
         "subject": {
           "type": "string",
@@ -5894,6 +5420,11 @@
           "description": "Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         }
       },
+      "required": [
+        "subject",
+        "thumbprint",
+        "expirationDate"
+      ],
       "description": "Certificate details."
     },
     "CertificatePaged": {
@@ -5921,28 +5452,35 @@
       "properties": {
         "data": {
           "type": "string",
-          "description": "Base 64 encoded Certificate"
+          "description": "Base 64 encoded certificate using the application/x-pkcs12 representation."
         },
         "password": {
           "type": "string",
           "description": "Password for the Certificate"
         }
       },
+      "required": [
+        "data",
+        "password"
+      ],
       "description": "Parameters supplied to the CreateOrUpdate certificate operation."
     },
     "PolicySnippetContract": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "Snippet name."
+          "description": "Snippet name.",
+          "readOnly": true
         },
         "content": {
           "type": "string",
-          "description": "Snippet content."
+          "description": "Snippet content.",
+          "readOnly": true
         },
         "toolTip": {
           "type": "string",
-          "description": "Snippet toolTip."
+          "description": "Snippet toolTip.",
+          "readOnly": true
         },
         "scope": {
           "type": "string",
@@ -5954,6 +5492,7 @@
             "Operation",
             "All"
           ],
+          "readOnly": true,
           "x-ms-enum": {
             "name": "PolicyScopeContract",
             "modelAsString": false
@@ -5966,31 +5505,34 @@
       "properties": {
         "email": {
           "type": "string",
-          "description": "Email address."
+          "description": "Email address. Must not be empty and must be unique within the service instance.",
+          "minLength": 1,
+          "maxLength": 254
         },
         "password": {
           "type": "string",
-          "description": "Password."
+          "description": "User Password."
         },
         "firstName": {
           "type": "string",
           "description": "First name.",
-		  "minLength": 1,
+          "minLength": 1,
           "maxLength": 100
         },
         "lastName": {
           "type": "string",
           "description": "Last name.",
-		  "minLength": 1,
+          "minLength": 1,
           "maxLength": 100
         },
         "state": {
           "type": "string",
-          "description": "Account state.",
+          "description": "Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.",
           "enum": [
             "Active",
             "Blocked"
           ],
+          "default": "Active",
           "x-ms-enum": {
             "name": "UserStateContract",
             "modelAsString": false
@@ -5998,7 +5540,7 @@
         },
         "note": {
           "type": "string",
-          "description": "Note about user."
+          "description": "Optional note about a user set by the administrator."
         }
       },
       "required": [
@@ -6022,13 +5564,13 @@
         "firstName": {
           "type": "string",
           "description": "First name.",
-		  "minLength": 1,
+          "minLength": 1,
           "maxLength": 100
         },
         "lastName": {
           "type": "string",
           "description": "Last name.",
-		  "minLength": 1,
+          "minLength": 1,
           "maxLength": 100
         },
         "state": {
@@ -6054,7 +5596,7 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "SSO URL value."
+          "description": "Redirect Url containing the SSO URL value."
         }
       },
       "description": "Generate SSO Url operations response details."
@@ -6070,6 +5612,10 @@
           "description": "body parameter value."
         }
       },
+      "required": [
+        "name",
+        "value"
+      ],
       "description": "OAuth acquire token request body parameter (www-url-form-encoded)."
     },
     "OAuth2AuthorizationServerContract": {
@@ -6077,19 +5623,21 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Authorization server identifier path."
+          "description": "Uniquely identifies the authorization server within the current API Management service instance. The value is a valid relative URL in the format of /authorizationServers/{authsid} where {authsid} is an authorization server identifier."          
         },
         "name": {
           "type": "string",
-          "description": "User-friendly authorization server name."
+          "description": "User-friendly authorization server name.",
+          "minLength": 1,
+          "maxLength": 50
         },
         "description": {
           "type": "string",
-          "description": "User-friendly authorization server name."
+          "description": "Description of the authorization server. Can contain HTML formatting tags."
         },
         "clientRegistrationEndpoint": {
           "type": "string",
-          "description": "Client registration URI that will be shown for developers."
+          "description": "Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced."
         },
         "authorizationEndpoint": {
           "type": "string",
@@ -6114,7 +5662,7 @@
               "modelAsString": false
             }
           },
-          "description": "Supported methods of authorization."
+          "description": "HTTP verbs supported by the authorization endpoint. GET must be always present. POST is optional."
         },
         "clientAuthenticationMethod": {
           "type": "array",
@@ -6129,26 +5677,35 @@
               "modelAsString": false
             }
           },
-          "description": "Supported methods of authorization."
+          "description": "Method of authentication supported by the token endpoint of this authorization server. Possible values are Basic and/or Body. When Body is specified, client credentials and other parameters are passed within the request body in the application/x-www-form-urlencoded format."
         },
         "tokenBodyParameters": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TokenBodyParameterContract"
           },
-          "description": "Token request body parameters."
+          "description": "Additional parameters required by the token endpoint of this authorization server represented as an array of JSON objects with name and value string properties, i.e. {\"name\" : \"name value\", \"value\": \"a value\"}."
         },
         "tokenEndpoint": {
           "type": "string",
-          "description": "OAuth token endpoint. See http://tools.ietf.org/html/rfc6749#section-3.1 ."
+          "description": "OAuth token endpoint. Contains absolute URI to entity being referenced.",
+          "externalDocs": {
+            "url": "http://tools.ietf.org/html/rfc6749#section-3.1"
+          }
         },
         "supportState": {
-          "type": "boolean",
-          "description": "whether Auhtorizatoin Server supports client credentials in body or not. See http://tools.ietf.org/html/rfc6749#section-3.1 ."
+          "type": "boolean",          
+          "description": "If true, authorization server will include state parameter from the authorization request to its response. Client may use state parameter to raise protocol security.",
+          "externalDocs": {
+            "url": "http://tools.ietf.org/html/rfc6749#section-3.1"
+          }
         },
         "defaultScope": {
           "type": "string",
-          "description": "Scope that is going to applied by default on the console page. See http://tools.ietf.org/html/rfc6749#section-3.3 ."
+          "description": "Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.",
+          "externalDocs": {
+            "url": "http://tools.ietf.org/html/rfc6749#section-3.3"
+          }
         },
         "grantTypes": {
           "type": "array",
@@ -6165,7 +5722,10 @@
               "modelAsString": false
             }
           },
-          "description": "Form of an authorization grant, which the client uses to request the access token. See http://tools.ietf.org/html/rfc6749#section-4 ."
+          "description": "Form of an authorization grant, which the client uses to request the access token.",
+          "externalDocs": {
+            "url": "http://tools.ietf.org/html/rfc6749#section-4"
+          }
         },
         "bearerTokenSendingMethods": {
           "type": "array",
@@ -6180,26 +5740,63 @@
               "modelAsString": false
             }
           },
-          "description": "Form of an authorization grant, which the client uses to request the access token. See http://tools.ietf.org/html/rfc6749#section-4 ."
+          "description": "Specifies the mechanism by which access token is passed to the API. ",
+          "externalDocs": {
+            "url": "http://tools.ietf.org/html/rfc6749#section-4"
+          }
         },
         "clientId": {
           "type": "string",
-          "description": "Client ID of developer console which is the client application."
+          "description": "Client or app id registered with this authorization server."
         },
         "clientSecret": {
           "type": "string",
-          "description": "Client Secret of developer console which is the client application."
+          "description": "Client or app secret registered with this authorization server."
         },
         "resourceOwnerUsername": {
           "type": "string",
-          "description": "Username of the resource owner on behalf of whom developer console will make requests."
+          "description": "Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner username."
         },
         "resourceOwnerPassword": {
           "type": "string",
-          "description": "Password of the resource owner on behalf of whom developer console will make requests."
+          "description": "Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner password."
         }
       },
-      "description": "External OAuth authorization server settings."
+      "required": [
+        "name",
+        "clientRegistrationEndpoint",
+        "authorizationEndpoint",
+        "clientId",
+        "grantTypes"
+      ],
+      "description": "External OAuth authorization server settings.",
+      "example": {
+          "id": "/authorizationServers/554be23d0fce600674232c33",
+          "name": "AAD OAuth A/S",
+          "description": null,
+          "clientRegistrationEndpoint": "https://contoso.com/",
+          "authorizationEndpoint": "https://login.microsoftonline.com/55abb68a-8ews-4565-8675-927722a8a005/oauth2/authorize?api-version=1.0",
+          "authorizationMethods": [
+              "GET"
+          ],
+          "clientAuthenticationMethod": [
+              "Body"
+          ],
+          "tokenBodyParameters": [],
+          "tokenEndpoint": "https://login.microsoftonline.com/55abb68a-8ews-4565-8675-927722a8a005/oauth2/token?api-version=1.0",
+          "supportState": false,
+          "defaultScope": null,
+          "grantTypes": [
+            "authorizationCode"
+          ],
+          "bearerTokenSendingMethods": [
+            "authorizationHeader"
+          ],
+          "clientId": "demo",
+          "clientSecret": "demo",
+          "resourceOwnerUsername": null,
+          "resourceOwnerPassword": null       
+      }
     },
     "AuthorizationServerPaged": {
       "properties": {
@@ -6221,19 +5818,148 @@
         }
       },
       "description": "Paged OAuth2 Authorization Servers list representation."
-    },
-    "AuthorizationServerCreateOrUpdateParameters": {
-      "properties": {
-        "OAuth2AuthorizationServerContract": {
-          "$ref": "#/definitions/OAuth2AuthorizationServerContract",
-          "description": "OAuth2 Authorization Server details."
+    },    
+    "OAuth2AuthorizationServerUpdateContract": {
+      "properties": {        
+        "name": {
+          "type": "string",
+          "description": "User-friendly authorization server name.",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the authorization server. Can contain HTML formatting tags."
+        },
+        "clientRegistrationEndpoint": {
+          "type": "string",
+          "description": "Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced."
+        },
+        "authorizationEndpoint": {
+          "type": "string",
+          "description": "OAuth authorization endpoint. See http://tools.ietf.org/html/rfc6749#section-3.2."
+        },
+        "authorizationMethods": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "HEAD",
+              "OPTIONS",
+              "TRACE",
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ],
+            "x-ms-enum": {
+              "name": "MethodContract",
+              "modelAsString": false
+            }
+          },
+          "description": "HTTP verbs supported by the authorization endpoint. GET must be always present. POST is optional."
+        },
+        "clientAuthenticationMethod": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Basic",
+              "Body"
+            ],
+            "x-ms-enum": {
+              "name": "ClientAuthenticationMethodContract",
+              "modelAsString": false
+            }
+          },
+          "description": "Method of authentication supported by the token endpoint of this authorization server. Possible values are Basic and/or Body. When Body is specified, client credentials and other parameters are passed within the request body in the application/x-www-form-urlencoded format."
+        },
+        "tokenBodyParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenBodyParameterContract"
+          },
+          "description": "Additional parameters required by the token endpoint of this authorization server represented as an array of JSON objects with name and value string properties, i.e. {\"name\" : \"name value\", \"value\": \"a value\"}."
+        },
+        "tokenEndpoint": {
+          "type": "string",
+          "description": "OAuth token endpoint. Contains absolute URI to entity being referenced.",
+          "externalDocs": {
+            "url": "http://tools.ietf.org/html/rfc6749#section-3.1"
+          }
+        },
+        "supportState": {
+          "type": "boolean",          
+          "description": "If true, authorization server will include state parameter from the authorization request to its response. Client may use state parameter to raise protocol security.",
+          "externalDocs": {
+            "url": "http://tools.ietf.org/html/rfc6749#section-3.1"
+          }
+        },
+        "defaultScope": {
+          "type": "string",
+          "description": "Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.",
+          "externalDocs": {
+            "url": "http://tools.ietf.org/html/rfc6749#section-3.3"
+          }
+        },
+        "grantTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "authorizationCode",
+              "implicit",
+              "resourceOwnerPassword",
+              "clientCredentials"
+            ],
+            "x-ms-enum": {
+              "name": "GrantTypesContract",
+              "modelAsString": false
+            }
+          },
+          "description": "Form of an authorization grant, which the client uses to request the access token.",
+          "externalDocs": {
+            "url": "http://tools.ietf.org/html/rfc6749#section-4"
+          }
+        },
+        "bearerTokenSendingMethods": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "authorizationHeader",
+              "query"
+            ],
+            "x-ms-enum": {
+              "name": "BearerTokenSendingMethodsContract",
+              "modelAsString": false
+            }
+          },
+          "description": "Specifies the mechanism by which access token is passed to the API. ",
+          "externalDocs": {
+            "url": "http://tools.ietf.org/html/rfc6749#section-4"
+          }
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client or app id registered with this authorization server."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Client or app secret registered with this authorization server."
+        },
+        "resourceOwnerUsername": {
+          "type": "string",
+          "description": "Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner username."
+        },
+        "resourceOwnerPassword": {
+          "type": "string",
+          "description": "Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner password."
         }
       },
-      "required": [
-        "OAuth2AuthorizationServerContract"
-      ],
-      "description": "Parameters supplied to the CreateOrUpdate Authorization Server operation."
-    },
+      "description": "External OAuth authorization server Update settings contract."     
+    },    
     "RegionContract": {
       "properties": {
         "name": {
@@ -6258,10 +5984,10 @@
           "items": {
             "$ref": "#/definitions/RegionContract"
           },
-          "description": "List of Regions."
+          "description": "Lists of Regions."
         }
       },
-      "description": "List Regions operation response details."
+      "description": "Lists Regions operation response details."
     },
     "ReportRecordContract": {
       "properties": {
@@ -6427,28 +6153,29 @@
         },
         "enabled": {
           "type": "boolean",
-          "description": "Tenant access information of the Api Management service."
+          "description": "Tenant access information of the API Management service."
         }
       },
-      "description": "Tenant access information contract of the Api Management service."
+      "description": "Tenant access information contract of the API Management service."
     },
     "AccessInformationUpdateParameters": {
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Tenant access information of the Api Management service."
+          "description": "Tenant access information of the API Management service."
         }
       },
       "required": [
         "enabled"
       ],
-      "description": "Tenant access information update parameters of the Api Management service."
+      "description": "Tenant access information update parameters of the API Management service."
     },
     "LoggerGetContract": {
       "properties": {
         "id": {
           "type": "string",
-          "description": "Logger identifier in form /loggers/{loggerId}"
+          "description": "Uniquely identifies the logger within the current API Management service instance. The value is a valid relative URL in the format of /loggers/{loggerId} where {loggerId} is a logger identifier.",
+          "readOnly": true
         },
         "type": {
           "type": "string",
@@ -6463,22 +6190,29 @@
         },
         "description": {
           "type": "string",
-          "description": "Logger description."
+          "description": "Logger description.",
+          "maxLength": 256
         },
         "credentials": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Logger credentials."
+          "description": "The name and SendRule connection string of the event hub.",
+          "example":{
+            "name" : "Event hub name",
+            "connectionString" : "Endpoint=endpoint and key from Azure classic portal"
+          }         
         },
         "isBuffered": {
           "type": "boolean",
-          "description": "whether records are buffered in the logger before publishing. Default is assumed to be true."
+          "description": "Whether records are buffered in the logger before publishing. Default is assumed to be true.",
+          "default": true          
         }
       },
       "required": [
-        "type"
+        "type",
+        "credentials"
       ],
       "description": "Logger."
     },
@@ -6525,11 +6259,15 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Logger credentials."
+          "description": "The name and SendRule connection string of the event hub.",
+          "example":{
+            "name" : "Event hub name. This is optional.",
+            "connectionString" : "Endpoint=endpoint and key from Azure classic portal. This property in credentials is must."
+          }
         },
         "isBuffered": {
           "type": "boolean",
-          "description": "whether records are buffered in the logger before publishing. Default is assumed to be true."
+          "description": "Whether records are buffered in the logger before publishing. Default is assumed to be true."
         }
       },
       "required": [
@@ -6576,17 +6314,19 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Property identifier path."
+          "description": "Uniquely identifies the property within the current API Management service instance. The value is a valid relative URL in the format of /properties/{propId} where {propId} is a property identifier.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "Unique name of Property.",
+          "description": "Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.",
           "minLength": 1,
-          "maxLength": 256
+          "maxLength": 256,
+          "pattern": "^[A-Z0-9-._]+$"
         },
         "value": {
           "type": "string",
-          "description": "The Value of the Property.",
+          "description": "Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.",
           "minLength": 1,
           "maxLength": 4096
         },
@@ -6595,11 +6335,12 @@
           "items": {
             "type": "string"
           },
-          "description": "Collection of tags associated with a property."
+          "maxItems": 32,
+          "description": "Optional tags that when provided can be used to filter the property list."
         },
         "secret": {
           "type": "boolean",
-          "description": "The value which determines the value should be encrypted or not. Default value is false."
+          "description": "Determines whether the value is a secret and should be encrypted or not. Default value is false."
         }
       },
       "required": [
@@ -6633,14 +6374,15 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Unique name of Property.",
+          "description": "Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.",
+          "minLength": 1,
           "maxLength": 256,
-		  "minLength": 1
+          "pattern": "^[A-Z0-9-._]+$"
         },
         "value": {
           "type": "string",
-          "description": "The Value of the Property.",
-		  "minLength": 1,
+          "description": "Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.",
+          "minLength": 1,
           "maxLength": 4096
         },
         "tags": {
@@ -6648,11 +6390,12 @@
           "items": {
             "type": "string"
           },
-          "description": "Collection of tags associated with a property."
+          "maxItems": 32,
+          "description": "Optional tags that when provided can be used to filter the property list."
         },
         "secret": {
           "type": "boolean",
-          "description": "The value which determines the value should be encrypted or not. Default value is false."
+          "description": "Determines whether the value is a secret and should be encrypted or not. Default value is false."
         }
       },
       "required": [
@@ -6663,16 +6406,17 @@
     },
     "PropertyUpdateParameters": {
       "properties": {
-        "name": {
+         "name": {
           "type": "string",
-          "description": "Unique name of Property.",
-		  "minLength": 1,
-          "maxLength": 256
+          "description": "Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Z0-9-._]+$"
         },
         "value": {
           "type": "string",
-          "description": "The Value of the Property.",
-		  "minLength": 1,
+          "description": "Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.",
+          "minLength": 1,
           "maxLength": 4096
         },
         "tags": {
@@ -6680,11 +6424,12 @@
           "items": {
             "type": "string"
           },
-          "description": "Collection of tags associated with a property."
+          "maxItems": 32,
+          "description": "Optional tags that when provided can be used to filter the property list."
         },
         "secret": {
           "type": "boolean",
-          "description": "The value which determines the value should be encrypted or not. Default value is false."
+          "description": "Determines whether the value is a secret and should be encrypted or not. Default value is false."
         }
       },
       "description": "Parameters supplied to the Update Property operation."
@@ -7012,7 +6757,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Api Management service.",
+      "description": "The name of the API Management service.",
       "minLength": 1,
       "maxLength": 50,
       "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$",
@@ -7036,6 +6781,17 @@
       "maxLength": 256,
       "pattern": "^[^*#&+:<>?]+$",
 	    "x-ms-parameter-location": "method"
+    },    
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Operation identifier within an API. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+	    "x-ms-parameter-location": "method"
     },
     "ProductIdParameter": {
       "name": "productId",
@@ -7047,7 +6803,7 @@
       "maxLength": 256,
       "pattern": "^[^*#&+:<>?]+$",
 	    "x-ms-parameter-location": "method"
-      },
+    },
     "GroupIdParameter": {
       "name": "groupId",
       "in": "path",
@@ -7058,7 +6814,7 @@
       "maxLength": 256,
       "pattern": "^[^*#&+:<>?]+$",
 	    "x-ms-parameter-location": "method"
-      },
+    },
     "UserIdParameter": {
       "name": "uid",
       "in": "path",
@@ -7069,6 +6825,6 @@
       "maxLength": 256,
       "pattern": "^[^*#&+:<>?]+$",
 	    "x-ms-parameter-location": "method"
-      }
+    }
   }
 }
