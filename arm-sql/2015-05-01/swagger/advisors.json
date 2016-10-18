@@ -1047,7 +1047,7 @@
   "definitions": {
     "AdvisorResource": {
       "type": "object",
-      "description":"",
+      "description":"Definition of an advisor.",
       "properties": {
         "id": {
           "type": "string"
@@ -1079,13 +1079,14 @@
           }
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/AdvisorResourceProperties"
         }
       }
     },
     "AdvisorResourceList": {
       "type": "object",
-      "description":"",
+      "description":"Response to a list request for the advisor resource.",
       "properties": {
         "value": {
           "type": "array",
@@ -1100,22 +1101,23 @@
     },
     "AdvisorResourceProperties": {
       "type": "object",
+      "description":"Properties of an advisor Resource.",
       "properties": {
         "advisorStatus": {
           "type": "string",
-          "description":""
+          "description":"Status of the advisor."
         },
         "autoExecuteStatus": {
           "type": "string",
-          "description":""
+          "description":"Auto-execution status of the advisor."
         },
         "autoExecuteStatusInheritedFrom": {
           "type": "string",
-          "description":""
+          "description":"The inheritance parent for the auto-execution status."
         },
         "recommendationsStatus": {
           "type": "string",
-          "description":""
+          "description":"The Recommendations status for the advisor on a resource."
         },
         "lastChecked": {
           "format": "date-time",
@@ -1162,12 +1164,14 @@
         },
         "properties": {
           "$ref": "#/definitions/RecommendedActionResourceProperties",
-          "description":"Properties of the Recommended Action Resource."
+          "description":"Properties of the Recommended Action Resource.",
+          "x-ms-client-flatten": true
         }
       }
     },
     "RecommendedActionResourceList": {
       "type": "object",
+      "description": "Response to a list request for the recommended action resource.",
       "properties": {
         "value": {
           "type": "array",
@@ -1182,6 +1186,7 @@
     },
     "RecommendedActionResourceProperties": {
       "type": "object",
+      "description": "Properties for a recommended action resource.",
       "properties": {
         "recommendationReason": {
           "type": "string"
@@ -1275,6 +1280,7 @@
     },
     "StateInfo": {
       "type": "object",
+      "description": "The state information for a recommended action.",
       "properties": {
         "currentValue": {
           "type": "string"
@@ -1290,6 +1296,7 @@
     },
     "ImplementationInfo": {
       "type": "object",
+      "description": "The implementation information for a recommended action.",
       "properties": {
         "method": {
           "type": "string"
@@ -1301,6 +1308,7 @@
     },
     "ErrorInfo": {
       "type": "object",
+      "description": "The error information for a recommended action.",
       "properties": {
         "errorCode": {
           "type": "string"
@@ -1312,6 +1320,7 @@
     },
     "ImpactRecord": {
       "type": "object",
+      "description": "The observed impact information for a recommended action.",
       "properties": {
         "dimensionName": {
           "type": "string"
@@ -1335,6 +1344,7 @@
     },
     "MetricInfo": {
       "type": "object",
+      "description": "The time series metrics information for a recommended action.",
       "properties": {
         "metricName": {
           "type": "string"
