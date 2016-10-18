@@ -258,7 +258,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, upgradeHint, transparentDataEncryption, advisors, recommendedIndexes."
+            "description": "The comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, upgradeHint, transparentDataEncryption, advisors."
           }
         ],
         "responses": {
@@ -352,7 +352,7 @@
         "tags": [
           "Servers"
         ],
-        "operationId": "Servers_ListBySubscription",
+        "operationId": "Servers_List",
         "description": "Returns information about an Azure SQL Server.",
         "parameters": [
           {
@@ -1466,7 +1466,7 @@
         "dateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time of metric."
+          "description": "The time of metric (ISO8601 format)."
         },
         "dtu": {
           "type": "number",
@@ -1521,13 +1521,13 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The observation period start."
+          "description": "The observation period start (ISO8601 format)."
         },
         "observationPeriodEnd": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The observation period start."
+          "description": "The observation period start (ISO8601 format)."
         },
         "maxObservedDtu": {
           "readOnly": true,
@@ -1636,7 +1636,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The creation date of the Azure SQL Elastic Pool."
+          "description": "The creation date of the Azure SQL Elastic Pool (ISO8601 format)."
         },
         "state": {
           "readOnly": true,
@@ -1717,7 +1717,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The time the operation finished."
+          "description": "The time the operation finished (ISO8601 format)."
         },
         "errorCode": {
           "readOnly": true,
@@ -1795,7 +1795,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The time the operation started."
+          "description": "The time the operation started (ISO8601 format)."
         },
         "state": {
           "readOnly": true,
@@ -1845,7 +1845,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The time the operation finished."
+          "description": "The time the operation finished (ISO8601 format)."
         },
         "errorCode": {
           "readOnly": true,
@@ -1909,7 +1909,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The time the operation started."
+          "description": "The time the operation started (ISO8601 format)."
         },
         "state": {
           "readOnly": true,
@@ -2013,7 +2013,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The schedule time of the Azure SQL Server Upgrade."
+          "description": "The schedule time of the Azure SQL Server Upgrade (ISO8601 format)."
         }
       },
       "description": "Represents the response to a Get request for Upgrade status of an Azure SQL Server."
@@ -2032,7 +2032,7 @@
         "ScheduleUpgradeAfterUtcDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The earliest time to upgrade the Azure SQL Server."
+          "description": "The earliest time to upgrade the Azure SQL Server (ISO8601 format)."
         },
         "DatabaseCollection": {
           "type": "array",
@@ -2156,13 +2156,13 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The UTC datetime showing when this resource was created."
+          "description": "The UTC datetime showing when this resource was created (ISO8601 format)."
         },
         "lastModified": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The UTC datetime of when was this resource last changed."
+          "description": "The UTC datetime of when was this resource last changed (ISO8601 format)."
         },
         "indexType": {
           "readOnly": true,
@@ -2270,7 +2270,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/SqlSubResource"
         }
       ],
       "description": "Represents an Azure SQL Database Transparent Data Encryption ."
@@ -2285,7 +2285,13 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The creation date of the Azure SQL Database."
+          "description": "The creation date of the Azure SQL Database (ISO8601 format)."
+        },
+        "containmentState": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The containment state of the Azure SQL Database."
         },
         "currentServiceObjectiveId": {
           "readOnly": true,
@@ -2302,7 +2308,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The recovery period start date of the Azure SQL Database. This records the start date and time when recovery is available for this Azure SQL Database."
+          "description": "The recovery period start date of the Azure SQL Database. This records the start date and time when recovery is available for this Azure SQL Database (ISO8601 format)."
         },
         "edition": {
           "type": "string",
@@ -2323,9 +2329,9 @@
           }
         },
         "maxSizeBytes": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
-          "description": "The max size of the Azure SQL Database expressed in bytes."
+          "description": "The max size of the Azure SQL Database expressed in bytes. Note: Only the following sizes are supported (in addition to limitations being placed on each edition): { 100 MB | 500 MB |1 GB | 5 GB | 10 GB | 20 GB | 30 GB … 150 GB | 200 GB … 500 GB }"
         },
         "requestedServiceObjectiveId": {
           "type": "string",
@@ -2429,13 +2435,13 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The observation period start."
+          "description": "The observation period start (ISO8601 format)."
         },
         "observationPeriodEnd": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The observation period start."
+          "description": "The observation period start (ISO8601 format)."
         },
         "activeTimeRatio": {
           "readOnly": true,
@@ -2551,7 +2557,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/SqlSubResource"
         }
       ],
       "description": "Represents a Service Tier Advisor."
@@ -2745,13 +2751,13 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "Restore point creation time. Populated when restorePointType = CONTINUOUS. Null otherwise."
+          "description": "Restore point creation time (ISO8601 format). Populated when restorePointType = CONTINUOUS. Null otherwise."
         },
         "earliestRestoreDate": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "Earliest restore time. Populated when restorePointType = DISCRETE. Null otherwise."
+          "description": "Earliest restore time (ISO8601 format). Populated when restorePointType = DISCRETE. Null otherwise."
         }
       },
       "description": "Represents the properties of an Azure SQL Database restore point."
@@ -2817,7 +2823,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The next reset time for the metric."
+          "description": "The next reset time for the metric (ISO8601 format)."
         }
       },
       "description": "Represents Azure SQL Database metrics."
@@ -2868,7 +2874,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The next reset time for the metric."
+          "description": "The next reset time for the metric (ISO8601 format)."
         }
       },
       "description": "Represents Azure SQL Server metrics."
@@ -2939,7 +2945,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/SqlSubResource"
         }
       ],
       "description": "Represents an Azure SQL Database Service Objective."
@@ -2991,7 +2997,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/SqlSubResource"
         }
       ],
       "description": "Represents an Azure SQL Database Transparent Data Encryption Scan."
@@ -3044,7 +3050,7 @@
       ],
       "x-ms-azure-resource": true
     },
-    "SubResource": {
+    "SqlSubResource": {
       "description": "Subresource properties",
       "properties": {
         "name": {

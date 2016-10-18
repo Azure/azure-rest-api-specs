@@ -1047,6 +1047,7 @@
   "definitions": {
     "AdvisorResource": {
       "type": "object",
+      "description":"",
       "properties": {
         "id": {
           "type": "string"
@@ -1084,6 +1085,7 @@
     },
     "AdvisorResourceList": {
       "type": "object",
+      "description":"",
       "properties": {
         "value": {
           "type": "array",
@@ -1100,19 +1102,24 @@
       "type": "object",
       "properties": {
         "advisorStatus": {
-          "type": "string"
+          "type": "string",
+          "description":""
         },
         "autoExecuteStatus": {
-          "type": "string"
+          "type": "string",
+          "description":""
         },
         "autoExecuteStatusInheritedFrom": {
-          "type": "string"
+          "type": "string",
+          "description":""
         },
         "recommendationsStatus": {
-          "type": "string"
+          "type": "string",
+          "description":""
         },
         "lastChecked": {
           "format": "date-time",
+          "description":"(ISO8601 format)",
           "type": "string"
         },
         "recommendedActions": {
@@ -1122,6 +1129,7 @@
     },
     "RecommendedActionResource": {
       "type": "object",
+      "description":"Resource representing a recommended action.",
       "properties": {
         "id": {
           "type": "string"
@@ -1153,7 +1161,8 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/RecommendedActionResourceProperties"
+          "$ref": "#/definitions/RecommendedActionResourceProperties",
+          "description":"Properties of the Recommended Action Resource."
         }
       }
     },
