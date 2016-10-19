@@ -46,10 +46,10 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK"
           },
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -85,10 +85,10 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           },
           "200": {
-            "description": ""
+            "description": "OK"
           }
         },
         "x-ms-long-running-operation": true
@@ -99,7 +99,7 @@
         "tags": [
           "DatabaseBackup"
         ],
-        "operationId": "Databases_ListRestorePointsByDatabase",
+        "operationId": "Databases_ListRestorePointss",
         "description": "Returns a list of Azure SQL database restore points.",
         "parameters": [
           {
@@ -173,7 +173,7 @@
           }
         ],
         "responses": {
-          "202": {
+
             "description": ""
           },
           "200": {
@@ -219,7 +219,7 @@
           }
         ],
         "responses": {
-          "200": {
+
             "description": ""
           },
           "204": {
@@ -258,7 +258,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, upgradeHint, transparentDataEncryption, advisors."
+            "description": "The comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, upgradeHint, transparentDataEncryption."
           }
         ],
         "responses": {
@@ -302,8 +302,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        },
-        "x-ms-odata": "#/definitions/Database"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/usages": {
@@ -311,7 +310,7 @@
         "tags": [
           "Databases"
         ],
-        "operationId": "Databases_ListUsagesByDatabase",
+        "operationId": "Databases_ListUsages",
         "description": "Returns information about Azure SQL Database usages.",
         "parameters": [
           {
@@ -441,7 +440,7 @@
           }
         ],
         "responses": {
-          "200": {
+
             "description": ""
           },
           "204": {
@@ -532,7 +531,7 @@
           }
         ],
         "responses": {
-          "202": {
+
             "description": ""
           }
         }
@@ -564,7 +563,7 @@
               "$ref": "#/definitions/ServerUpgradeGetResult"
             }
           },
-          "202": {
+
             "description": ""
           }
         }
@@ -601,7 +600,7 @@
           }
         ],
         "responses": {
-          "202": {
+
             "description": ""
           }
         }
@@ -679,7 +678,7 @@
           }
         ],
         "responses": {
-          "202": {
+
             "description": ""
           },
           "200": {
@@ -725,7 +724,7 @@
           }
         ],
         "responses": {
-          "200": {
+
             "description": ""
           },
           "204": {
@@ -3072,7 +3071,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "format": "uuid",
       "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
     },
     "ApiVersionParameter": {

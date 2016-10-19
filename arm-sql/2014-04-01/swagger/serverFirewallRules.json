@@ -96,7 +96,7 @@
           }
         ],
         "responses": {
-          "200": {
+
             "description": ""
           },
           "204": {
@@ -200,7 +200,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/SqlSubResource"
         }
       ],
       "description": "Represents an Azure SQL Server Firewall Rule."
@@ -217,7 +217,7 @@
       },
       "description": "Represents the response to a List Firewall Rules request."
     },
-    "SubResource": {
+    "SqlSubResource": {
       "description": "Subresource properties",
       "properties": {
         "name": {
@@ -239,7 +239,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "format": "uuid",
       "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
     },
     "ApiVersionParameter": {

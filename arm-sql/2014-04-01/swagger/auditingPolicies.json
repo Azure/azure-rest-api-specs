@@ -50,7 +50,7 @@
             "schema": {
               "$ref": "#/definitions/DatabaseAuditingPolicy"
             },
-            "description": "The required parameters for createing or updating a Azure SQL Database auditing policy."
+            "description": "The required parameters for creating or updating a Azure SQL Database auditing policy."
           }
         ],
         "responses": {
@@ -245,7 +245,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/SqlSubResource"
         }
       ],
       "description": "Represents an Azure SQL Database auditing policy."
@@ -309,12 +309,12 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/SqlSubResource"
         }
       ],
       "description": "Represents an Azure SQL Server auditing policy."
     },
-    "SubResource": {
+    "SqlSubResource": {
       "description": "Subresource properties",
       "properties": {
         "name": {
@@ -336,7 +336,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "format": "uuid",
       "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
     },
     "ApiVersionParameter": {

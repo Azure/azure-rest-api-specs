@@ -16,6 +16,264 @@
     "application/json"
   ],
 "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAccounts": {
+            "get": {
+                "tags": ["JobAccounts"],
+                "description": "Returns information about Azure SQL job accounts.",
+                "operationId": "JobAccounts_List",
+                "parameters": [{
+                    "required": true,
+                    "$ref": "#/parameters/SubscriptionIdParameter"
+                }, {
+                    "required": true,
+                    "$ref": "#/parameters/ResourceGroupParameter"
+                }, {
+                    "name": "serverName",
+                    "in": "path",
+                    "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "required": true,
+                    "$ref": "#/parameters/ApiVersionParameter"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the list of job accounts.",
+                        "schema": {
+                            "$ref": "#/definitions/JobAccountResourceList"
+                        }
+                    },
+                    "default": {
+                        "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found",
+                        "schema": {
+                            "$ref": "#/definitions/ArmErrorResponseMessage"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAccounts/{jobAccountName}": {
+      "get": {
+        "tags": [
+          "JobAccounts"
+        ],
+        "description": "Returns information about an Azure SQL job account.",
+        "operationId": "JobAccounts_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server that the job account is hosted in.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAccountName",
+            "in": "path",
+            "description": "The name of the Azure SQL job account to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified job account.",
+            "schema": {
+              "$ref": "#/definitions/JobAccountResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "JobAccounts"
+        ],
+        "description": "Creating a new Azure SQL job account or updating an existing Azure SQL job account.",
+        "operationId": "JobAccounts_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server that the job account is hosted in.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAccountName",
+            "in": "path",
+            "description": "The name of the Azure SQL job account to be created or updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAccountResource",
+            "in": "body",
+            "description": "The requested job account resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobAccountResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the job account.",
+            "schema": {
+              "$ref": "#/definitions/JobAccountResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidJobAccountCreateOrUpdateRequest - The create or update job account request body is empty or invalid.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 DatabaseDoesNotExist - The requested database was not found\n\n * 400 JobAccountExceededAccountsQuota - Could not create job account because it would exceed the quota.\n\n * 400 JobAccountAlreadyExists - The job account already exists on the server.\n\n * 400 JobAccountDatabaseEditionUnsupported - The specified database's service level objective is not supported for use as a job account database.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SubscriptionNotFound - The requested subscription was not found.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          },
+          "201": {
+            "description": "Successfully created the job account.",
+            "schema": {
+              "$ref": "#/definitions/JobAccountResource"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "JobAccounts"
+        ],
+        "description": "Deletes the Azure SQL job account with the given name.",
+        "operationId": "JobAccounts_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server that the job account is hosted in.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAccountName",
+            "in": "path",
+            "description": "The name of the Azure SQL job account to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the job account."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          },
+          "204": {
+            "description": "The specified job account does not exist."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditRecords": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Get a list of database engine audit records.",
+        "operationId": "Databases_ListEngineAuditRecords",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database for which database engine audit records are retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of engine audit records.",
+            "schema": {
+              "$ref": "#/definitions/EngineAuditRecordResourceList"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidEngineAuditRecordsQueryParameters - Invalid query parameters\n\n * 400 InvalidEngineAuditRecordsShowSystemRecordsFilter - The ShowSystemLogs property only supports the equal (eq) operation\n\n * 400 InvalidEngineAuditRecordsEndTimeFilter - The EventTime property currently supports only the less than or equal (le) operation, designating the End Time.\n\n * 400 InvalidEngineAuditRecordsShowServerRecordsFilter - The ShowServerRecords property only supports the equal (eq) operation\n\n * 400 InvalidEngineAuditRecordsShowSecurityAlertsRecordsFilter - The ShowSecurityAlerts property only supports the equal (eq) operation\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 405 DatabaseEngineAuditRecordsNotImplemented - Operations on database audit records are not enabled yet\n\n * 500 GetEngineAuditRecordsFailed - Failed to get audit records",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/EngineAuditRecordsFilterParameters",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors": {
       "get": {
         "tags": [
@@ -1043,264 +1301,6 @@
         "deprecated": false
       }
     },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAccounts": {
-            "get": {
-                "tags": ["JobAccounts"],
-                "description": "Returns information about Azure SQL job accounts.",
-                "operationId": "JobAccounts_List",
-                "parameters": [{
-                    "required": true,
-                    "$ref": "#/parameters/SubscriptionIdParameter"
-                }, {
-                    "required": true,
-                    "$ref": "#/parameters/ResourceGroupParameter"
-                }, {
-                    "name": "serverName",
-                    "in": "path",
-                    "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
-                    "required": true,
-                    "type": "string"
-                }, {
-                    "required": true,
-                    "$ref": "#/parameters/ApiVersionParameter"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved the list of job accounts.",
-                        "schema": {
-                            "$ref": "#/definitions/JobAccountResourceList"
-                        }
-                    },
-                    "default": {
-                        "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found",
-                        "schema": {
-                            "$ref": "#/definitions/ArmErrorResponseMessage"
-                        }
-                    }
-                },
-                "deprecated": false
-            }
-        },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAccounts/{jobAccountName}": {
-      "get": {
-        "tags": [
-          "JobAccounts"
-        ],
-        "description": "Returns information about an Azure SQL job account.",
-        "operationId": "JobAccounts_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job account is hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the Azure SQL job account to be retrieved.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the specified job account.",
-            "schema": {
-              "$ref": "#/definitions/JobAccountResource"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "JobAccounts"
-        ],
-        "description": "Creating a new Azure SQL job account or updating an existing Azure SQL job account.",
-        "operationId": "JobAccounts_CreateOrUpdate",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job account is hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the Azure SQL job account to be created or updated.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountResource",
-            "in": "body",
-            "description": "The requested job account resource state.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/JobAccountResource"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated the job account.",
-            "schema": {
-              "$ref": "#/definitions/JobAccountResource"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidJobAccountCreateOrUpdateRequest - The create or update job account request body is empty or invalid.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 DatabaseDoesNotExist - The requested database was not found\n\n * 400 JobAccountExceededAccountsQuota - Could not create job account because it would exceed the quota.\n\n * 400 JobAccountAlreadyExists - The job account already exists on the server.\n\n * 400 JobAccountDatabaseEditionUnsupported - The specified database's service level objective is not supported for use as a job account database.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SubscriptionNotFound - The requested subscription was not found.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          },
-          "201": {
-            "description": "Successfully created the job account.",
-            "schema": {
-              "$ref": "#/definitions/JobAccountResource"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "tags": [
-          "JobAccounts"
-        ],
-        "description": "Deletes the Azure SQL job account with the given name.",
-        "operationId": "JobAccounts_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server that the job account is hosted in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobAccountName",
-            "in": "path",
-            "description": "The name of the Azure SQL job account to be deleted.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the job account."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          },
-          "204": {
-            "description": "The specified job account does not exist."
-          }
-        },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditRecords": {
-      "get": {
-        "tags": [
-          "Databases"
-        ],
-        "description": "Get a list of database engine audit records.",
-        "operationId": "Databases_ListEngineAuditRecords",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database for which database engine audit records are retrieved.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The filter to apply on the operation",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of engine audit records.",
-            "schema": {
-              "$ref": "#/definitions/EngineAuditRecordResourceList"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidEngineAuditRecordsQueryParameters - Invalid query parameters\n\n * 400 InvalidEngineAuditRecordsShowSystemRecordsFilter - The ShowSystemLogs property only supports the equal (eq) operation\n\n * 400 InvalidEngineAuditRecordsEndTimeFilter - The EventTime property currently supports only the less than or equal (le) operation, designating the End Time.\n\n * 400 InvalidEngineAuditRecordsShowServerRecordsFilter - The ShowServerRecords property only supports the equal (eq) operation\n\n * 400 InvalidEngineAuditRecordsShowSecurityAlertsRecordsFilter - The ShowSecurityAlerts property only supports the equal (eq) operation\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 405 DatabaseEngineAuditRecordsNotImplemented - Operations on database audit records are not enabled yet\n\n * 500 GetEngineAuditRecordsFailed - Failed to get audit records",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-odata": "#/definitions/EngineAuditRecordsFilterParameters",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/move": {
       "post": {
         "tags": [
@@ -1361,307 +1361,6 @@
     }
 },
 "definitions": {
-    "AdvisorResource": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "kind": {
-          "enum": [
-            "None",
-            "V2",
-            "V12",
-            "User",
-            "System",
-            "Datawarehouse"
-          ],
-          "type": "string"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/AdvisorResourceProperties"
-        }
-      }
-    },
-    "AdvisorResourceList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AdvisorResource"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "AdvisorResourceProperties": {
-      "type": "object",
-      "properties": {
-        "advisorStatus": {
-          "type": "string"
-        },
-        "autoExecuteStatus": {
-          "type": "string"
-        },
-        "autoExecuteStatusInheritedFrom": {
-          "type": "string"
-        },
-        "recommendationsStatus": {
-          "type": "string"
-        },
-        "lastChecked": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "recommendedActions": {
-          "$ref": "#/definitions/RecommendedActionResourceList"
-        }
-      }
-    },
-    "RecommendedActionResource": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "kind": {
-          "enum": [
-            "None",
-            "V2",
-            "V12",
-            "User",
-            "System",
-            "Datawarehouse"
-          ],
-          "type": "string"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/RecommendedActionResourceProperties"
-        }
-      }
-    },
-    "RecommendedActionResourceList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RecommendedActionResource"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "RecommendedActionResourceProperties": {
-      "type": "object",
-      "properties": {
-        "recommendationReason": {
-          "type": "string"
-        },
-        "validSince": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "lastRefresh": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "state": {
-          "$ref": "#/definitions/StateInfo"
-        },
-        "isExecutableAction": {
-          "type": "boolean"
-        },
-        "isRevertableAction": {
-          "type": "boolean"
-        },
-        "isArchivedAction": {
-          "type": "boolean"
-        },
-        "executeActionStartTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "executeActionDuration": {
-          "type": "string"
-        },
-        "revertActionStartTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "revertActionDuration": {
-          "type": "string"
-        },
-        "executeActionInitiatedBy": {
-          "type": "string"
-        },
-        "executeActionInitiatedTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "revertActionInitiatedBy": {
-          "type": "string"
-        },
-        "revertActionInitiatedTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "score": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "implementationDetails": {
-          "$ref": "#/definitions/ImplementationInfo"
-        },
-        "errorDetails": {
-          "$ref": "#/definitions/ErrorInfo"
-        },
-        "estimatedImpact": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImpactRecord"
-          }
-        },
-        "observedImpact": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImpactRecord"
-          }
-        },
-        "timeSeries": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricInfo"
-          }
-        },
-        "linkedObjects": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "details": {
-          "type": "object"
-        }
-      }
-    },
-    "StateInfo": {
-      "type": "object",
-      "properties": {
-        "currentValue": {
-          "type": "string"
-        },
-        "actionInitiatedBy": {
-          "type": "string"
-        },
-        "lastModified": {
-          "format": "date-time",
-          "type": "string"
-        }
-      }
-    },
-    "ImplementationInfo": {
-      "type": "object",
-      "properties": {
-        "method": {
-          "type": "string"
-        },
-        "script": {
-          "type": "string"
-        }
-      }
-    },
-    "ErrorInfo": {
-      "type": "object",
-      "properties": {
-        "errorCode": {
-          "type": "string"
-        },
-        "isRetryable": {
-          "type": "string"
-        }
-      }
-    },
-    "ImpactRecord": {
-      "type": "object",
-      "properties": {
-        "dimensionName": {
-          "type": "string"
-        },
-        "unit": {
-          "type": "string"
-        },
-        "absoluteValue": {
-          "format": "double",
-          "type": "number"
-        },
-        "changeValueAbsolute": {
-          "format": "double",
-          "type": "number"
-        },
-        "changeValueRelative": {
-          "format": "double",
-          "type": "number"
-        }
-      }
-    },
-    "MetricInfo": {
-      "type": "object",
-      "properties": {
-        "metricName": {
-          "type": "string"
-        },
-        "unit": {
-          "type": "string"
-        },
-        "timeGrain": {
-          "type": "string"
-        },
-        "startTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "value": {
-          "format": "double",
-          "type": "number"
-        }
-      }
-    },
     "ArmErrorResponseMessage": {
       "type": "object",
       "description":"represents and error message.",
@@ -1713,6 +1412,7 @@
     },
     "JobAccountResourceList": {
       "type": "object",
+      "description": "Response to a list request for job accounts.",
       "properties": {
         "value": {
           "type": "array",
@@ -1846,6 +1546,334 @@
         }
       }
     },
+    "AdvisorResource": {
+      "type": "object",
+      "description":"Definition of an advisor.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "None",
+            "V2",
+            "V12",
+            "User",
+            "System",
+            "Datawarehouse"
+          ],
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AdvisorResourceProperties"
+        }
+      }
+    },
+    "AdvisorResourceList": {
+      "type": "object",
+      "description":"Response to a list request for the advisor resource.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdvisorResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "AdvisorResourceProperties": {
+      "type": "object",
+      "description":"Properties of an advisor Resource.",
+      "properties": {
+        "advisorStatus": {
+          "type": "string",
+          "description":"Status of the advisor."
+        },
+        "autoExecuteStatus": {
+          "type": "string",
+          "description":"Auto-execution status of the advisor."
+        },
+        "autoExecuteStatusInheritedFrom": {
+          "type": "string",
+          "description":"The inheritance parent for the auto-execution status."
+        },
+        "recommendationsStatus": {
+          "type": "string",
+          "description":"The Recommendations status for the advisor on a resource."
+        },
+        "lastChecked": {
+          "format": "date-time",
+          "description":"(ISO8601 format)",
+          "type": "string"
+        },
+        "recommendedActions": {
+          "$ref": "#/definitions/RecommendedActionResourceList"
+        }
+      }
+    },
+    "RecommendedActionResource": {
+      "type": "object",
+      "description":"Resource representing a recommended action.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "None",
+            "V2",
+            "V12",
+            "User",
+            "System",
+            "Datawarehouse"
+          ],
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/RecommendedActionResourceProperties",
+          "description":"Properties of the Recommended Action Resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RecommendedActionResourceList": {
+      "type": "object",
+      "description": "Response to a list request for the recommended action resource.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendedActionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "RecommendedActionResourceProperties": {
+      "type": "object",
+      "description": "Properties for a recommended action resource.",
+      "properties": {
+        "recommendationReason": {
+          "type": "string"
+        },
+        "validSince": {
+          "format": "date-time",
+          "description": "Time when this recommended action became valid (ISO8601 Format).",
+          "type": "string"
+        },
+        "lastRefresh": {
+          "format": "date-time",
+          "description": "Time when this recommended action was last refreshed (ISO8601 Format).",
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/definitions/StateInfo"
+        },
+        "isExecutableAction": {
+          "type": "boolean"
+        },
+        "isRevertableAction": {
+          "type": "boolean"
+        },
+        "isArchivedAction": {
+          "type": "boolean"
+        },
+        "executeActionStartTime": {
+          "format": "date-time",
+          "description": "Time when execution of this action began (ISO8601 Format).",
+          "type": "string"
+        },
+        "executeActionDuration": {
+          "type": "string"
+        },
+        "revertActionStartTime": {
+          "format": "date-time",
+          "description": "Time when revert of this action began (ISO8601 Format).",
+          "type": "string"
+        },
+        "revertActionDuration": {
+          "type": "string"
+        },
+        "executeActionInitiatedBy": {
+          "type": "string"
+        },
+        "executeActionInitiatedTime": {
+          "format": "date-time",
+          "description": "Time when action was initiated (ISO8601 Format).",
+          "type": "string"
+        },
+        "revertActionInitiatedBy": {
+          "type": "string"
+        },
+        "revertActionInitiatedTime": {
+          "format": "date-time",
+          "description": "Time when revert of this action was initiated (ISO8601 Format).",
+          "type": "string"
+        },
+        "score": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "implementationDetails": {
+          "$ref": "#/definitions/ImplementationInfo"
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/ErrorInfo"
+        },
+        "estimatedImpact": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImpactRecord"
+          }
+        },
+        "observedImpact": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImpactRecord"
+          }
+        },
+        "timeSeries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricInfo"
+          }
+        },
+        "linkedObjects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "details": {
+          "type": "object"
+        }
+      }
+    },
+    "StateInfo": {
+      "type": "object",
+      "description": "The state information for a recommended action.",
+      "properties": {
+        "currentValue": {
+          "type": "string"
+        },
+        "actionInitiatedBy": {
+          "type": "string"
+        },
+        "lastModified": {
+          "format": "date-time",
+          "description": "Last modified time for recommended action (ISO8601 Format).",
+          "type": "string"
+        }
+      }
+    },
+    "ImplementationInfo": {
+      "type": "object",
+      "description": "The implementation information for a recommended action.",
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "script": {
+          "type": "string"
+        }
+      }
+    },
+    "ErrorInfo": {
+      "type": "object",
+      "description": "The error information for a recommended action.",
+      "properties": {
+        "errorCode": {
+          "type": "string"
+        },
+        "isRetryable": {
+          "type": "string"
+        }
+      }
+    },
+    "ImpactRecord": {
+      "type": "object",
+      "description": "The observed impact information for a recommended action.",
+      "properties": {
+        "dimensionName": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "absoluteValue": {
+          "format": "double",
+          "type": "number"
+        },
+        "changeValueAbsolute": {
+          "format": "double",
+          "type": "number"
+        },
+        "changeValueRelative": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "MetricInfo": {
+      "type": "object",
+      "description": "The time series metrics information for a recommended action.",
+      "properties": {
+        "metricName": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "timeGrain": {
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Start time (ISO8601 Format).",
+          "type": "string"
+        },
+        "value": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
     "ResourceMoveDefinition": {
       "description": "Contains the information necessary to perform a resource move (rename).",
       "type": "object",
@@ -1863,7 +1891,6 @@
       "in": "path",
       "description": "The subscription credentials which uniquely identify Microsoft Azure subscription.",
       "required": true,
-      "format": "uuid",
       "type": "string"
     },
     "ApiVersionParameter": {

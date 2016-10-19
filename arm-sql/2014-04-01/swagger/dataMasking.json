@@ -278,7 +278,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/SqlSubResource"
         }
       ],
       "description": "Represents an Azure SQL Database data masking policy."
@@ -346,7 +346,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/SqlSubResource"
         }
       ],
       "description": "Represents an Azure SQL Database data masking rule."
@@ -363,7 +363,7 @@
       },
       "description": "Represents the response to a List data masking rules request."
     },
-    "SubResource": {
+    "SqlSubResource": {
       "description": "Subresource properties",
       "properties": {
         "name": {
@@ -385,7 +385,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "format": "uuid",
       "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
     },
     "ApiVersionParameter": {

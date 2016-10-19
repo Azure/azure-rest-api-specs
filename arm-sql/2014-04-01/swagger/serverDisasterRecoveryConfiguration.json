@@ -42,9 +42,7 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ServerDisasterRecoveryConfigurationList"
-            },
-          "404": {
-            "description": "NotFound"
+            }
           }
         },
         "x-ms-pageable": {
@@ -117,7 +115,7 @@
           }
         ],
         "responses": {
-          "200": {
+
             "description": ""
           },
           "204": {
@@ -163,7 +161,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           },
           "200": {
             "description": "OK",
@@ -245,7 +243,7 @@
           }
         ],
         "responses": {
-          "200": {
+
             "description": ""
           }
         }
@@ -263,7 +261,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/SqlSubResource"
         }
       ],
       "description": "Represents a server disaster recovery configuration."
@@ -380,7 +378,7 @@
       ],
       "x-ms-azure-resource": true
     },
-    "SubResource": {
+    "SqlSubResource": {
       "description": "Subresource properties",
       "properties": {
         "name": {
@@ -402,7 +400,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "format": "uuid",
       "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
     },
     "ApiVersionParameter": {
