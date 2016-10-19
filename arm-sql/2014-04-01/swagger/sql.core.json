@@ -141,7 +141,7 @@
           "Databases"
         ],
         "operationId": "Databases_CreateOrUpdate",
-        "description": "Creates a new Azure SQL database or updates an existing Azure SQL database.",
+        "description": "Creates a new Azure SQL database or updates an existing Azure SQL database.  Location is a required property in the request body and it must be the same as the location of the Sql Server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -173,9 +173,6 @@
           }
         ],
         "responses": {
-
-            "description": ""
-          },
           "200": {
             "description": "OK",
             "schema": {
@@ -184,6 +181,12 @@
           },
           "201": {
             "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/Database"
             }
@@ -219,11 +222,11 @@
           }
         ],
         "responses": {
-
-            "description": ""
+          "200": {
+            "description": "OK"
           },
           "204": {
-            "description": ""
+            "description": "NoContent"
           }
         }
       },
@@ -440,11 +443,11 @@
           }
         ],
         "responses": {
-
-            "description": ""
+          "200": {
+            "description": "OK"
           },
           "204": {
-            "description": ""
+            "description": "Accepted"
           }
         }
       },
@@ -531,8 +534,11 @@
           }
         ],
         "responses": {
-
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Accepted"
           }
         }
       },
@@ -562,9 +568,6 @@
             "schema": {
               "$ref": "#/definitions/ServerUpgradeGetResult"
             }
-          },
-
-            "description": ""
           }
         }
       }
@@ -600,10 +603,11 @@
           }
         ],
         "responses": {
-
-            "description": ""
+          "202": {
+            "description": "Accepted"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/usages": {
@@ -678,9 +682,6 @@
           }
         ],
         "responses": {
-
-            "description": ""
-          },
           "200": {
             "description": "OK",
             "schema": {
@@ -689,6 +690,12 @@
           },
           "201": {
             "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ElasticPool"
+            }
+          },
+          "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/ElasticPool"
             }
@@ -724,11 +731,11 @@
           }
         ],
         "responses": {
-
-            "description": ""
+          "200": {
+            "description": "OK"
           },
           "204": {
-            "description": ""
+            "description": "Accepted"
           }
         }
       },
@@ -1640,7 +1647,12 @@
         "state": {
           "readOnly": true,
           "type": "string",
-          "description": "The state of the Azure SQL Elastic Pool."
+          "enum": ["Creating", "Ready", "Disabled"],
+          "description": "The state of the Azure SQL Elastic Pool.",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ElasticPoolState"
+          }
         },
         "edition": {
           "type": "string",
@@ -1799,7 +1811,6 @@
         "state": {
           "readOnly": true,
           "type": "string",
-          "enum": ["Creating", "Ready", "Disabled"],
           "description": "The current state of the operation."
         }
       },
@@ -2296,7 +2307,21 @@
           "readOnly": true,
           "type": "string",
           "format": "uuid",
-          "description": "The current Service Level Objective Id of the Azure SQL Database. This is the Id of the Service Level Objective that is currently active."
+          "enum": [
+            "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
+            "f1173c43-91bd-4aaa-973c-54e79e15235b",
+            "1b1ebd4d-d903-4baa-97f9-4ea675f5e928",
+            "455330e1-00cd-488b-b5fa-177c226f28b7",
+            "789681b8-ca10-4eb0-bdf2-e0b050601b40",
+            "7203483a-c4fb-4304-9e9f-17c71c904f5d",
+            "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
+            "a7c4c615-cfb1-464b-b252-925be0a19446"
+            ],
+          "description": "The current Service Level Objective Id of the Azure SQL Database. This is the Id of the Service Level Objective that is currently active.",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ServiceObjectiveId"
+          }
         },
         "databaseId": {
           "readOnly": true,
@@ -2329,22 +2354,63 @@
         },
         "maxSizeBytes": {
           "type": "string",
-          "format": "int64",
           "description": "The max size of the Azure SQL Database expressed in bytes. Note: Only the following sizes are supported (in addition to limitations being placed on each edition): { 100 MB | 500 MB |1 GB | 5 GB | 10 GB | 20 GB | 30 GB … 150 GB | 200 GB … 500 GB }"
         },
         "requestedServiceObjectiveId": {
           "type": "string",
           "format": "uuid",
-          "description": "The configured Service Level Objective Id of the Azure SQL Database. This is the Service Level Objective that is being applied to the Azure SQL Database."
+          "enum": [
+            "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
+            "f1173c43-91bd-4aaa-973c-54e79e15235b",
+            "1b1ebd4d-d903-4baa-97f9-4ea675f5e928",
+            "455330e1-00cd-488b-b5fa-177c226f28b7",
+            "789681b8-ca10-4eb0-bdf2-e0b050601b40",
+            "7203483a-c4fb-4304-9e9f-17c71c904f5d",
+            "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
+            "a7c4c615-cfb1-464b-b252-925be0a19446"
+            ],
+          "description": "The configured Service Level Objective Id of the Azure SQL Database. This is the Service Level Objective that is in the process of being applied to the Azure SQL Database.  Once successfully updated, it will match the value of currentServiceObjectiveId property.",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ServiceObjectiveId"
+          }
         },
         "requestedServiceObjectiveName": {
           "type": "string",
-          "description": "The name of the configured Service Level Objective of the Azure SQL Database. This is the Service Level Objective that is being applied to the Azure SQL Database."
+          "enum": [
+            "Basic",
+            "S0",
+            "S1",
+            "S2",
+            "S3",
+            "P1",
+            "P2",
+            "P3"
+            ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ServiceObjectiveName"
+          },
+          "description": "The name of the configured Service Level Objective of the Azure SQL Database. This is the Service Level Objective that is in the process of being applied to the Azure SQL Database.  Once successfully updated, it will match the value of serviceLevelObjective property."
         },
         "serviceLevelObjective": {
           "readOnly": true,
           "type": "string",
-          "description": "The Service Level Objective of the Azure SQL Database."
+          "enum": [
+            "Basic",
+            "S0",
+            "S1",
+            "S2",
+            "S3",
+            "P1",
+            "P2",
+            "P3"
+            ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ServiceObjectiveName"
+          },
+          "description": "The current Service Level Objective of the Azure SQL Database."
         },
         "status": {
           "readOnly": true,
@@ -2565,12 +2631,40 @@
       "properties": {
         "serviceLevelObjective": {
           "type": "string",
-          "description": "Gets or sets serviceLevelObjective for SLO usage metric."
+          "description": "The serviceLevelObjective for SLO usage metric.",
+          "enum": [
+            "Basic",
+            "S0",
+            "S1",
+            "S2",
+            "S3",
+            "P1",
+            "P2",
+            "P3"
+            ],                      
+            "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ServiceObjectiveName"
+          }
         },
         "serviceLevelObjectiveId": {
           "type": "string",
           "format": "uuid",
-          "description": "Gets or sets serviceLevelObjectiveId for SLO usage metric."
+          "description": "The serviceLevelObjectiveId for SLO usage metric.",
+          "enum": [
+            "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
+            "f1173c43-91bd-4aaa-973c-54e79e15235b",
+            "1b1ebd4d-d903-4baa-97f9-4ea675f5e928",
+            "455330e1-00cd-488b-b5fa-177c226f28b7",
+            "789681b8-ca10-4eb0-bdf2-e0b050601b40",
+            "7203483a-c4fb-4304-9e9f-17c71c904f5d",
+            "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
+            "a7c4c615-cfb1-464b-b252-925be0a19446"
+            ],
+            "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ServiceObjectiveId"
+          },
         },
         "inRangeTimeRatio": {
           "type": "number",
