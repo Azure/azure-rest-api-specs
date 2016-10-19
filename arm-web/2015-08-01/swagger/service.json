@@ -1921,6 +1921,12 @@
             "type": "string"
           },
           {
+            "name": "linuxWorkersEnabled",
+            "in": "query",
+            "description": "Filter only to regions that support linux workers",
+            "type": "boolean"
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -17584,6 +17590,10 @@
               "description": "Resource group of the serverfarm",
               "type": "string",
               "readOnly": true
+            },
+            "reserved": {
+              "description": "Enables creation of a Linux App Service Plan",
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true
@@ -17982,7 +17992,11 @@
               "type": "string"
             },
             "javaContainerVersion": {
-              "description": "Java container version",
+                "description": "Java container version",
+                "type": "string"
+            },
+            "appCommandLine": {
+              "description": "App Command Line to launch",
               "type": "string"
             },
             "managedPipelineMode": {

@@ -36,7 +36,7 @@
     },
     "/$/ReportClusterHealth": {
       "post": {
-        "operationId": "ClusterHealthReports_Send",
+        "operationId": "ClusterHealths_Send",
         "description": "Report cluster healths",
         "produces": [
           "application/json"
@@ -48,31 +48,7 @@
             "description": "The report of the cluster health",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The report of the cluster health",
-              "properties": {
-                "SourceId": {
-                  "type": "string"
-                },
-                "Property": {
-                  "type": "string"
-                },
-                "HealthState": {
-                  "$ref": "#/definitions/HealthState"
-                },
-                "Description": {
-                  "type": "string"
-                },
-                "TimeToLiveInMilliSeconds": {
-                  "type": "string"
-                },
-                "SequenceNumber": {
-                  "type": "string"
-                },
-                "RemoveWhenExpired": {
-                  "type": "boolean"
-                }
-              }
+              "$ref": "#/definitions/ClusterHealthReport"
             }
           },
           {
@@ -81,7 +57,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The cluster health report",
+            "description": "The cluster health",
             "schema": {
               "type": "string"
             }
@@ -216,19 +192,12 @@
             "required": true
           },
           {
-            "name": "node",
+            "name": "disableNode",
             "in": "body",
             "description": "The node",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The node",
-              "properties": {
-                "deactivationIntent": {
-                  "type": "string",
-                  "enum": ["Pause", "Restart", "RemoveData", "RemoveNode"]
-                }
-              }
+              "$ref": "#/definitions/DisableNode"
             }
           },
           {
@@ -793,8 +762,8 @@
     },
     "/Nodes/{nodeName}/$/ReportHealth": {
       "post": {
-        "operationId": "NodeHealthReports_Send",
-        "description": "Send node health reports",
+        "operationId": "NodeHealths_Send",
+        "description": "Send node health",
         "produces": [
           "application/json"
         ],
@@ -812,31 +781,7 @@
             "description": "The report of the node health",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The report of the node health",
-              "properties": {
-                "SourceId": {
-                  "type": "string"
-                },
-                "Property": {
-                  "type": "string"
-                },
-                "HealthState": {
-                  "$ref": "#/definitions/HealthState"
-                },
-                "Description": {
-                  "type": "string"
-                },
-                "TimeToLiveInMilliSeconds": {
-                  "type": "string"
-                },
-                "SequenceNumber": {
-                  "type": "string"
-                },
-                "RemoveWhenExpired": {
-                  "type": "boolean"
-                }
-              }
+              "$ref": "#/definitions/NodeHealthReport"
             }
           },
           {
@@ -845,7 +790,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The node health report",
+            "description": "The node health",
             "schema": {
               "type": "string"
             }
@@ -861,8 +806,8 @@
     },
     "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/ReportHealth": {
       "post": {
-        "operationId": "DeployedApplicationHealthReports_Send",
-        "description": "Send deployed application health reports",
+        "operationId": "DeployedApplicationHealths_Send",
+        "description": "Send deployed application health",
         "produces": [
           "application/json"
         ],
@@ -888,31 +833,7 @@
             "description": "The report of the deployed application health",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The report of the deployed application health",
-              "properties": {
-                "SourceId": {
-                  "type": "string"
-                },
-                "Property": {
-                  "type": "string"
-                },
-                "HealthState": {
-                  "$ref": "#/definitions/HealthState"
-                },
-                "Description": {
-                  "type": "string"
-                },
-                "TimeToLiveInMilliSeconds": {
-                  "type": "string"
-                },
-                "SequenceNumber": {
-                  "type": "string"
-                },
-                "RemoveWhenExpired": {
-                  "type": "boolean"
-                }
-              }
+              "$ref": "#/definitions/DeployedApplicationHealthReport"
             }
           },
           {
@@ -921,7 +842,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The deployed application health report",
+            "description": "The deployed application health",
             "schema": {
               "type": "string"
             }
@@ -937,8 +858,8 @@
     },
     "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetServicePackages/{serviceManifestName}/$/ReportHealth": {
       "post": {
-        "operationId": "DeployedServicePackageHealthReports_Send",
-        "description": "Send deployed service package health reports",
+        "operationId": "DeployedServicePackageHealths_Send",
+        "description": "Send deployed service package health",
         "produces": [
           "application/json"
         ],
@@ -971,31 +892,7 @@
             "description": "The report of the deployed service package health",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The report of the deployed service package health",
-              "properties": {
-                "SourceId": {
-                  "type": "string"
-                },
-                "Property": {
-                  "type": "string"
-                },
-                "HealthState": {
-                  "$ref": "#/definitions/HealthState"
-                },
-                "Description": {
-                  "type": "string"
-                },
-                "TimeToLiveInMilliSeconds": {
-                  "type": "string"
-                },
-                "SequenceNumber": {
-                  "type": "string"
-                },
-                "RemoveWhenExpired": {
-                  "type": "boolean"
-                }
-              }
+              "$ref": "#/definitions/DeployedServiceHealthReport"
             }
           },
           {
@@ -1004,7 +901,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The deployed service package health report",
+            "description": "The deployed service package health",
             "schema": {
               "type": "string"
             }
@@ -1232,18 +1129,12 @@
         ],
         "parameters": [
           {
-            "name": "RegisterApplicationType",
+            "name": "registerApplicationType",
             "in": "body",
             "description": "The type of the register application",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The type of the register application",
-              "properties": {
-                "ApplicationTypeBuildPath": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/RegisterApplicationType"
             }
           },
           {
@@ -1282,18 +1173,12 @@
             "required": true
           },
           {
-            "name": "UnregisterApplicationType",
+            "name": "unregisterApplicationType",
             "in": "body",
             "description": "The type of the unregister application",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The type of the unregister application",
-              "properties": {
-                "ApplicationTypeVersion": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/UnregisterApplicationType"
             }
           },
           {
@@ -1643,8 +1528,8 @@
     },
     "/Applications/{applicationName}/$/ReportHealth": {
       "post": {
-        "operationId": "ApplicationHealthReports_Send",
-        "description": "Send application health reports",
+        "operationId": "ApplicationHealths_Send",
+        "description": "Send application health",
         "produces": [
           "application/json"
         ],
@@ -1663,31 +1548,7 @@
             "description": "The report of the application health",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The report of the application health",
-              "properties": {
-                "SourceId": {
-                  "type": "string"
-                },
-                "Property": {
-                  "type": "string"
-                },
-                "HealthState": {
-                  "$ref": "#/definitions/HealthState"
-                },
-                "Description": {
-                  "type": "string"
-                },
-                "TimeToLiveInMilliSeconds": {
-                  "type": "string"
-                },
-                "SequenceNumber": {
-                  "type": "string"
-                },
-                "RemoveWhenExpired": {
-                  "type": "boolean"
-                }
-              }
+              "$ref": "#/definitions/ApplicationHealthReport"
             }
           },
           {
@@ -1696,7 +1557,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The application health report",
+            "description": "The application health",
             "schema": {
               "type": "string"
             }
@@ -1838,16 +1699,7 @@
             "description": "The template of the service description",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The template of the service description",
-              "properties": {
-                "ServiceName": {
-                  "type": "string"
-                },
-                "ServiceTypeName": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/ServiceDescriptionTemplate"
             }
           },
           {
@@ -1961,16 +1813,7 @@
             "description": "The template of the service description",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The template of the service description",
-              "properties": {
-                "ServiceName": {
-                  "type": "string"
-                },
-                "ServiceTypeName": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/ServiceDescriptionTemplate"
             }
           },
           {
@@ -2206,13 +2049,7 @@
             "description": "The upgrade of the resume application",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The upgrade of the resume application",
-              "properties": {
-                "UpgradeDomainName": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/ResumeApplicationUpgrade"
             }
           },
           {
@@ -2547,31 +2384,7 @@
             "description": "The report of the service health",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The report of the service health",
-              "properties": {
-                "SourceId": {
-                  "type": "string"
-                },
-                "Property": {
-                  "type": "string"
-                },
-                "HealthState": {
-                  "$ref": "#/definitions/HealthState"
-                },
-                "Description": {
-                  "type": "string"
-                },
-                "TimeToLiveInMilliSeconds": {
-                  "type": "string"
-                },
-                "SequenceNumber": {
-                  "type": "string"
-                },
-                "RemoveWhenExpired": {
-                  "type": "boolean"
-                }
-              }
+              "$ref": "#/definitions/ServiceHealthReport"
             }
           },
           {
@@ -2909,8 +2722,8 @@
     },
     "/Partitions/{partitionId}/$/ReportHealth": {
       "post": {
-        "operationId": "PartitionHealthReports_Send",
-        "description": "Send partition health reports",
+        "operationId": "PartitionHealths_Send",
+        "description": "Send partition health",
         "produces": [
           "application/json"
         ],
@@ -2928,31 +2741,7 @@
             "description": "The report of the partition health",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The report of the partition health",
-              "properties": {
-                "SourceId": {
-                  "type": "string"
-                },
-                "Property": {
-                  "type": "string"
-                },
-                "HealthState": {
-                  "$ref": "#/definitions/HealthState"
-                },
-                "Description": {
-                  "type": "string"
-                },
-                "TimeToLiveInMilliSeconds": {
-                  "type": "string"
-                },
-                "SequenceNumber": {
-                  "type": "string"
-                },
-                "RemoveWhenExpired": {
-                  "type": "boolean"
-                }
-              }
+              "$ref": "#/definitions/PartitionHealthReport"
             }
           },
           {
@@ -2961,7 +2750,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The partition health report",
+            "description": "The partition health",
             "schema": {
               "type": "string"
             }
@@ -3052,31 +2841,7 @@
             "description": "The report of the replica health",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The report of the replica health",
-              "properties": {
-                "SourceId": {
-                  "type": "string"
-                },
-                "Property": {
-                  "type": "string"
-                },
-                "HealthState": {
-                  "$ref": "#/definitions/HealthState"
-                },
-                "Description": {
-                  "type": "string"
-                },
-                "TimeToLiveInMilliSeconds": {
-                  "type": "string"
-                },
-                "SequenceNumber": {
-                  "type": "string"
-                },
-                "RemoveWhenExpired": {
-                  "type": "boolean"
-                }
-              }
+              "$ref": "#/definitions/ReplicaHealthReport"
             }
           },
           {
@@ -3361,6 +3126,52 @@
           "items": {
             "$ref": "#/definitions/Node"
           }
+        }
+      }
+    },
+    "HealthReport": {
+      "type": "object",
+      "description": "The report of the health",
+      "properties": {
+        "SourceId": {
+          "type": "string"
+        },
+        "Property": {
+          "type": "string"
+        },
+        "HealthState": {
+          "$ref": "#/definitions/HealthState"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "TimeToLiveInMilliSeconds": {
+          "type": "string"
+        },
+        "SequenceNumber": {
+          "type": "string"
+        },
+        "RemoveWhenExpired": {
+          "type": "boolean"
+        }
+      }
+    },
+    "NodeHealthReport": {
+      "type": "object",
+      "description": "The report of the node health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
+        }
+      ]
+    },
+    "DisableNode": {
+      "type": "object",
+      "description": "The node",
+      "properties": {
+        "DeactivationIntent": {
+          "type": "string",
+          "enum": ["Pause", "Restart", "RemoveData", "RemoveNode"]
         }
       }
     },
@@ -3918,6 +3729,24 @@
         }
       }
     },
+    "RegisterApplicationType": {
+      "type": "object",
+      "description": "The type of the register application",
+      "properties": {
+        "ApplicationTypeBuildPath": {
+          "type": "string"
+        }
+      }
+    },
+    "UnregisterApplicationType": {
+      "type": "object",
+      "description": "The type of the unregister application",
+      "properties": {
+        "ApplicationTypeVersion": {
+          "type": "string"
+        }
+      }
+    },
     "ApplicationTypeHealthEvaluation": {
       "type": "object",
       "description": "The evaluation of the application type health",
@@ -3989,6 +3818,15 @@
           "type": "string"
         }
       }
+    },
+    "DeployedApplicationHealthReport": {
+      "type": "object",
+      "description": "The report of the deployed application health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
+        }
+      ]
     },
     "DeployedServicePackageHealthState": {
       "type": "object",
@@ -4335,6 +4173,15 @@
         }
       }
     },
+    "DeployedServiceHealthReport": {
+      "type": "object",
+      "description": "The report of the deployed service package health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
+        }
+      ]
+    },
     "ApplicationType": {
       "type": "object",
       "description": "The type of the application",
@@ -4497,6 +4344,15 @@
         }
       }
     },
+    "ApplicationHealthReport": {
+      "type": "object",
+      "description": "The report of the application health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
+        }
+      ]
+    },
     "Service": {
       "type": "object",
       "description": "The service",
@@ -4545,6 +4401,15 @@
           }
         }
       }
+    },
+    "ServiceHealthReport": {
+      "type": "object",
+      "description": "The report of the service health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
+        }
+      ]
     },
     "PartitionDescription": {
       "type": "object",
@@ -5049,6 +4914,18 @@
         }
       }
     },
+    "ServiceDescriptionTemplate": {
+      "type": "object",
+      "description": "The template of the service description",
+      "properties": {
+        "ServiceName": {
+          "type": "string"
+        },
+        "ServiceTypeName": {
+          "type": "string"
+        }
+      }
+    },
     "CreateServiceDescription": {
       "type": "object",
       "description": "The description of the create service",
@@ -5369,6 +5246,15 @@
         }
       }
     },
+    "PartitionHealthReport": {
+      "type": "object",
+      "description": "The report of the partition health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
+        }
+      ]
+    },
     "Replica": {
       "type": "object",
       "description": "The replica",
@@ -5416,6 +5302,15 @@
           }
         }
       }
+    },
+    "ReplicaHealthReport": {
+      "type": "object",
+      "description": "The report of the replica health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
+        }
+      ]
     },
     "PartitionHealth": {
       "type": "object",
@@ -5594,6 +5489,15 @@
         }
       }
     },
+    "ClusterHealthReport": {
+      "type": "object",
+      "description": "The report of the cluster health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
+        }
+      ]
+    },
     "ClusterLoadInformation": {
       "type": "object",
       "description": "The information of the cluster load",
@@ -5768,7 +5672,7 @@
           "type": "string"
         },
         "UpgradeKind": {
-          "type": "integer"
+          "type": "string"
         },
         "UpdateDescription": {
           "type": "object",
@@ -5805,6 +5709,15 @@
         },
         "ApplicationHealthPolicy": {
           "$ref": "#/definitions/ApplicationHealthPolicy"
+        }
+      }
+    },
+    "ResumeApplicationUpgrade": {
+      "type": "object",
+      "description": "The upgrade of the resume application",
+      "properties": {
+        "UpgradeDomainName": {
+          "type": "string"
         }
       }
     },
