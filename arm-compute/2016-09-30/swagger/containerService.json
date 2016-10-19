@@ -226,13 +226,36 @@
           ],
           "x-ms-azure-resource": true
         },
+        "ContainerServiceCustomProfile": {
+          "properties": {
+            "orchestrator": {
+              "type": "string",
+              "description": "The name of the custom orchestrator to use"
+            }
+          },
+          "description": "Properties to configure custom clusters"
+        },
+        "ContainerServiceServicePrincipalProfile": {
+          "properties": {
+            "clientId": {
+              "type": "string",
+              "description": "The ID for the service principal"
+            },
+            "secret": {
+              "type": "string",
+              "description": "The secret associated with the service principal"
+            }
+          },
+          "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs"
+        },
         "ContainerServiceOrchestratorProfile": {
           "properties": {
             "orchestratorType": {
               "type": "string",
               "enum": [
                 "Swarm",
-                "DCOS"
+                "DCOS",
+                "Custom"
               ],
               "x-ms-enum": {
                 "name": "ContainerServiceOchestratorTypes",
@@ -472,6 +495,14 @@
             "orchestratorProfile": {
               "$ref": "#/definitions/ContainerServiceOrchestratorProfile",
               "description": "Properties of orchestrator"
+            },
+            "customProfile": {
+              "$ref": "#/definitions/ContainerServiceCustomProfile",
+              "description": "Properties for custom clusters"
+            },
+            "servicePrincipalProfile": {
+              "$ref": "#/definitions/ContainerServiceServicePrincipalProfile",
+              "description": "Properties for cluster service principals"
             },
             "masterProfile": {
               "$ref": "#/definitions/ContainerServiceMasterProfile",
