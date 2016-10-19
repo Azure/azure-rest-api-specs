@@ -2466,6 +2466,7 @@
           "description": "a list containing reference to all Virtual Machines created under this Availability Set."
         },
         "statuses": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
@@ -2862,6 +2863,9 @@
           "description": "the uri to fetch the next page of Compute Resource Usages. Call ListNext() with this to fetch the next page of Compute Resource Usages."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The List Usages operation response."
     },
     "VirtualMachineCaptureParameters": {
