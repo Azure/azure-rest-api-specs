@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -77,11 +77,7 @@
         "operationId": "Profiles_ListByResourceGroup",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -118,11 +114,7 @@
         "operationId": "Profiles_Get",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -161,11 +153,7 @@
         "operationId": "Profiles_Create",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -177,7 +165,7 @@
           {
             "description": "Profile properties needed for creation.",
             "in": "body",
-            "name": "profileProperties",
+            "name": "profile",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Profile"
@@ -226,11 +214,7 @@
         "operationId": "Profiles_Update",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -240,7 +224,7 @@
             "type": "string"
           },
           {
-            "name": "profileProperties",
+            "name": "profileUpdateParameters",
             "in": "body",
             "description": "Profile properties needed for update.",
             "required": true,
@@ -285,11 +269,7 @@
         "operationId": "Profiles_Delete",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -331,11 +311,7 @@
         "operationId": "Profiles_GenerateSsoUri",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -376,11 +352,7 @@
         "operationId": "Endpoints_ListByProfile",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -424,11 +396,7 @@
         "operationId": "Endpoints_Get",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -474,11 +442,7 @@
         "operationId": "Endpoints_Create",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -495,7 +459,7 @@
             "type": "string"
           },
           {
-            "name": "endpointProperties",
+            "name": "endpoint",
             "in": "body",
             "description": "Endpoint properties",
             "required": true,
@@ -546,11 +510,7 @@
         "operationId": "Endpoints_Update",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -567,9 +527,9 @@
             "type": "string"
           },
           {
-            "name": "endpointProperties",
+            "name": "endpointUpdateProperties",
             "in": "body",
-            "description": "Endpoint properties",
+            "description": "Endpoint update properties",
             "required": true,
             "schema": {
               "$ref": "#/definitions/EndpointUpdateParameters"
@@ -612,11 +572,7 @@
         "operationId": "Endpoints_Delete",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -665,11 +621,7 @@
         "operationId": "Endpoints_Start",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -718,11 +670,7 @@
         "operationId": "Endpoints_Stop",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -771,11 +719,7 @@
         "operationId": "Endpoints_PurgeContent",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -830,11 +774,7 @@
         "operationId": "Endpoints_LoadContent",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -889,11 +829,7 @@
         "operationId": "Endpoints_ValidateCustomDomain",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -950,11 +886,7 @@
         "operationId": "Origins_ListByEndpoint",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -1005,11 +937,7 @@
         "operationId": "Origins_Get",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -1062,11 +990,7 @@
         "operationId": "Origins_Create",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -1090,7 +1014,7 @@
             "type": "string"
           },
           {
-            "name": "originProperties",
+            "name": "origin",
             "in": "body",
             "description": "Origin properties",
             "required": true,
@@ -1141,11 +1065,7 @@
         "operationId": "Origins_Update",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -1169,7 +1089,7 @@
             "type": "string"
           },
           {
-            "name": "originProperties",
+            "name": "originUpdateProperties",
             "in": "body",
             "description": "Origin properties",
             "required": true,
@@ -1214,11 +1134,7 @@
         "operationId": "Origins_Delete",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -1277,11 +1193,7 @@
         "operationId": "CustomDomains_ListByEndpoint",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -1332,11 +1244,7 @@
         "operationId": "CustomDomains_Get",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -1389,11 +1297,7 @@
         "operationId": "CustomDomains_Create",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -1468,11 +1372,7 @@
         "operationId": "CustomDomains_Delete",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "profileName",
@@ -1699,55 +1599,22 @@
       "required": [
         "origins"
       ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointPropertiesUpdateParameters"
+        }
+      ],      
       "properties": {
         "hostName": {
           "description": "The host name of the endpoint {endpointName}.{DNSZone}",
           "type": "string",
           "readOnly": true
         },
-        "originHostHeader": {
-          "description": "The host header the CDN provider will send along with content requests to origins. The default value is the host name of the origin.",
-          "type": "string"
-        },
-        "originPath": {
-          "description": "The path used for origin requests.",
-          "type": "string"
-        },
-        "contentTypesToCompress": {
-          "description": "List of content types on which compression will be applied. The value for the elements should be a valid MIME type.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "isCompressionEnabled": {
-          "description": "Indicates whether the compression is enabled. Default value is false. If compression is enabled, the content transferred from cdn endpoint to end user will be compressed. The requested content must be larger than 1 byte and smaller than 1 MB.",
-          "type": "boolean"
-        },
-        "isHttpAllowed": {
-          "description": "Indicates whether HTTP traffic is allowed on the endpoint. Default value is true. At least one protocol (HTTP or HTTPS) must be allowed.",
-          "type": "boolean"
-        },
-        "isHttpsAllowed": {
-          "description": "Indicates whether https traffic is allowed on the endpoint. Default value is true. At least one protocol (HTTP or HTTPS) must be allowed.",
-          "type": "boolean"
-        },
-        "queryStringCachingBehavior": {
-          "description": "Defines the query string caching behavior.",
-          "$ref": "#/definitions/QueryStringCachingBehavior"
-        },
         "origins": {
           "description": "The set of origins for the CDN endpoint. When multiple origins exist, the first origin will be used as primary and rest will be used as failover options.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DeepCreatedOrigin"
-          }
-        },
-        "geoFilters": {
-          "description": "The list of geo filters for the CDN endpoint.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GeoFilter"
           }
         },
         "resourceState": {
@@ -1839,7 +1706,14 @@
         "queryStringCachingBehavior": {
           "description": "Defines the query string caching behavior",
           "$ref": "#/definitions/QueryStringCachingBehavior"
-        }
+        },
+        "geoFilters": {
+          "description": "The list of geo filters for the CDN endpoint.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoFilter"
+          }
+	    }
       }
     },
     "DeepCreatedOrigin": {
@@ -1892,7 +1766,7 @@
       ],
       "properties": {
         "relativePath": {
-          "description": "Relative path apply geo filter.",
+          "description": "Relative path applicable to geo filter.",
           "type": "string"
         },
         "action": {
@@ -2333,6 +2207,17 @@
       "required": true,
       "type": "string",
       "description": "Version of the API to be used with the client request. Current version is 2016-10-02"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$", 
+      "minLength": 1, 
+      "maxLength": 90 ,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Resource group within the Azure subscription."
     }
   }
 }
