@@ -1005,6 +1005,13 @@
             "required": false,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter to apply on the operation.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1017,7 +1024,8 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
+        },
+        "x-ms-odata": "#/definitions/WorkflowTriggerHistoryFilter"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/histories/{historyName}": {
@@ -1379,7 +1387,7 @@
     },
     "Object": {
       "type": "object",
-      "properties": {}
+      "properties": { }
     },
     "ResourceReference": {
       "type": "object",
@@ -1826,6 +1834,15 @@
         }
       }
     },
+    "WorkflowTriggerHistoryFilter": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "description": "Gets or sets the status of workflow trigger history."
+        }
+      }
+    },
     "WorkflowRun": {
       "type": "object",
       "properties": {
@@ -2188,7 +2205,7 @@
       },
       "allOf": [
         {
-          "$ref": "WorkflowParameter"
+          "$ref": "#/definitions/WorkflowParameter"
         }
       ]
     },

@@ -1,0 +1,735 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MediaServicesManagementClient",
+    "description": "Media Services resource management APIs.",
+    "version": "2015-10-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Media/CheckNameAvailability": {
+      "post": {
+        "summary": "Check whether the Media Service resource name is available. The name must be globally unique.",
+        "operationId": "MediaService_CheckNameAvailability",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityOutput"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "CheckNameAvailabilityInput",
+            "description": "Properties needed to check the availability of a name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityInput"
+            }
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices": {
+      "get": {
+        "summary": "List all of the Media Services in a resource group.",
+        "operationId": "MediaService_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "Name of the resource group within the Azure subscription.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MediaServiceCollection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+            "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{mediaServiceName}": {
+      "get": {
+        "summary": "Get a Media Service.",
+        "operationId": "MediaService_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MediaService"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "Name of the resource group within the Azure subscription.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mediaServiceName",
+            "description": "Name of the Media Service.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]",
+            "minLength": 3,
+            "maxLength": 24
+          }
+        ]
+      },
+      "put": {
+        "summary": "Create a Media Service.",
+        "operationId": "MediaService_Create",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MediaService"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MediaService"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "Name of the resource group within the Azure subscription.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mediaServiceName",
+            "description": "Name of the Media Service.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]",
+            "minLength": 3,
+            "maxLength": 24
+          },
+          {
+            "name": "MediaService",
+            "description": "Media Service properties needed for creation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MediaService"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete a Media Service.",
+        "operationId": "MediaService_Delete",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "Name of the resource group within the Azure subscription.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mediaServiceName",
+            "description": "Name of the Media Service.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]",
+            "minLength": 3,
+            "maxLength": 24
+          }
+        ]
+      },
+      "patch": {
+        "summary": "Update a Media Service.",
+        "operationId": "MediaService_Update",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MediaService"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "Name of the resource group within the Azure subscription.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mediaServiceName",
+            "description": "Name of the Media Service.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]",
+            "minLength": 3,
+            "maxLength": 24
+          },
+          {
+            "name": "MediaService",
+            "description": "Media Service properties needed for update.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MediaService"
+            }
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{mediaServiceName}/regenerateKey": {
+      "post": {
+        "summary": "Regenerate the key for a Media Service.",
+        "operationId": "MediaService_RegenerateKey",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RegenerateKeyOutput"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "Name of the resource group within the Azure subscription.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mediaServiceName",
+            "description": "Name of the Media Service.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]",
+            "minLength": 3,
+            "maxLength": 24
+          },
+          {
+            "name": "RegenerateKeyInput",
+            "description": "Properties needed to regenerate the Media Service key.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateKeyInput"
+            }
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{mediaServiceName}/listKeys": {
+      "post": {
+        "summary": "List the keys for a Media Service.",
+        "operationId": "MediaService_ListKeys",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceKeys"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "Name of the resource group within the Azure subscription.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mediaServiceName",
+            "description": "Name of the Media Service.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]",
+            "minLength": 3,
+            "maxLength": 24
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{mediaServiceName}/syncStorageKeys": {
+      "post": {
+        "summary": "Synchronize the keys for a storage account to the Media Service.",
+        "operationId": "MediaService_SyncStorageKeys",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MediaService"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "Name of the resource group within the Azure subscription.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mediaServiceName",
+            "description": "Name of the Media Service.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]",
+            "minLength": 3,
+            "maxLength": 24
+          },
+          {
+            "name": "SyncStorageKeysInput",
+            "description": "Properties needed to sycnronize the keys for a storage account to the Media Service.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SyncStorageKeysInput"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ApiEndpoint": {
+      "description": "The properties for a Media Services REST API endpoint.",
+      "properties": {
+        "endpoint": {
+          "description": "The Media Services REST endpoint.",
+          "type": "string"
+        },
+        "majorVersion": {
+          "description": "The version of Media Services REST API.",
+          "type": "string"
+        }
+      }
+    },
+    "ApiError": {
+    "description": "The error returned from a failed Media Services REST API call.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilityInput": {
+      "description": "The request body for CheckNameAvailability API.",
+      "required": [
+        "name",
+        "type"
+      ],      
+      "properties": {
+        "name": {
+          "description": "The name of the resource. A name must be globally unique.",
+          "type": "string",
+          "pattern": "^[a-z0-9]",
+          "minLength": 3,
+          "maxLength": 24
+        },
+        "type": {
+          "description": "Specifies the type of the resource.",
+          "$ref": "#/definitions/ResourceType"
+        }
+      }
+    },
+    "ResourceType": {
+      "description": "Type of MediaService resource used in CheckNameAvailability.",
+      "readOnly": true,
+      "enum": [
+        "mediaservices"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ResourceType",
+        "modelAsString": false
+      }
+    },    
+    "CheckNameAvailabilityOutput": {
+      "description": "The response body for CheckNameAvailability API.",
+      "properties": {
+        "NameAvailable": {
+          "description": "Specifies if the name is available.",
+          "type": "boolean"
+        },
+        "Reason": {
+          "description": "Specifies the reason if the name is not available.",
+          "type": "string",
+          "enum": [
+            "None",
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "EntityNameUnavailabilityReason",
+            "modelAsString": false
+          }  
+        },
+        "Message": {
+          "description": "Specifies the detailed reason if the name is not available.",
+          "type": "string"
+        }
+      }
+    },
+    "MediaService": {
+      "description": "The properties of a Media Service resource.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MediaServiceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MediaServiceCollection": {
+      "description": "The collection of Media Service resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MediaService"
+          }
+        }
+      }
+    },
+    "MediaServiceProperties": {
+      "description": "The additional properties of a Media Service resource.",
+      "properties": {
+        "apiEndpoints": {
+          "description": "The Media Services REST API endpoints for this resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiEndpoint"
+          }
+        },
+        "storageAccounts": {
+          "description": "The storage accounts for this resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageAccount"
+          }
+        }
+      }
+    },
+    "RegenerateKeyInput": {
+      "description": "The request body for a RegenerateKey API.",
+      "properties": {
+        "keyType": {
+          "description": "The keyType indicating which key you want to regenerate, Primary or Secondary.",
+          "type": "string",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "x-ms-enum": {
+            "name": "KeyType",
+            "modelAsString": false
+          }  
+        }
+      }
+    },
+    "RegenerateKeyOutput": {
+      "description": "The response body for a RegenerateKey API.",
+      "properties": {
+        "key": {
+          "description": "The new value of either the primary or secondary key.",
+          "type": "string"
+        }
+      }
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "description": "The id of the resource.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ServiceKeys": {
+      "description": "The response body for a ListKeys API.",
+      "properties": {
+        "primaryAuthEndpoint": {
+          "description": "The primary Authorization endpoint.",
+          "type": "string"
+        },
+        "secondaryAuthEndpoint": {
+          "description": "The secondary Authorization endpoint.",
+          "type": "string"
+        },
+        "primaryKey": {
+          "description": "The primary resource.",
+          "type": "string"
+        },
+        "secondaryKey": {
+          "description": "The secondary resource.",
+          "type": "string"
+        },
+        "scope": {
+          "description": "The authorization scope.",
+          "type": "string"
+        }
+      }
+    },
+    "StorageAccount": {
+      "description": "The properties of a storage account associated with this resource.",
+      "properties": {
+        "id": {
+          "description": "The id of the storage account resource.",
+          "type": "string"
+        },
+        "isPrimary": {
+          "description": "Is this storage account resource the primary storage account for the Media Service resource.",
+          "type": "boolean"
+        }
+      }
+    },
+    "SyncStorageKeysInput": {
+      "description": "The request  body for a SyncStorageKeys API.",
+      "properties": {
+        "id": {
+          "description": "The id of the storage account resource.",
+          "type": "string"
+        }
+      }
+    },
+    "TrackedResource": {
+      "description": "ARM tracked resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "location",
+        "tags"
+      ],
+      "properties": {
+        "location": {
+          "description": "The location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "The tags of the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure subscription id.",
+      "required": true,
+      "type": "string"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. Current version is 2015-10-01"
+    }
+  }
+}
