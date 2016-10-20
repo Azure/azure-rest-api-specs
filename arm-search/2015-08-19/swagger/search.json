@@ -36,30 +36,25 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/listAdminKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/listAdminKeys": {
       "post": {
         "tags": [
           "AdminKeys"
         ],
-        "operationId": "AdminKeys_List",
-        "description": "Returns the primary and secondary API keys for the given Azure Search service.",
+        "operationId": "AdminKeys_Get",
+        "description": "Gets the primary and secondary admin API keys for the specified Azure Search service.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/library/azure/dn832685.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the current subscription."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "serviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Search service for which to list admin keys."
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -70,38 +65,36 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The admin keys were successfully retrieved and are in the response. You can use either the primary or secondary key as the value of the 'api-key' parameter in the Azure Search Service REST API or SDK to perform any operations on your Search service, including privileged operations. Privileged operations include managing resources like indexes and data sources as well as uploading, modifying, or deleting data in your indexes.",
             "schema": {
               "$ref": "#/definitions/AdminKeyResult"
+            }
+          },
+          "default": {
+            "description": "HTTP 404: The subscription, resource group, or Search service could not be found. HTTP 409: The specified subscription is disabled.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/regenerateAdminKey/{keyKind}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/regenerateAdminKey/{keyKind}": {
       "post": {
         "tags": [
           "AdminKeys"
         ],
         "operationId": "AdminKeys_Regenerate",
-        "description": "Deletes and regenerates either the primary or secondary admin key. You can only regenerate one key at a time.",
+        "description": "Regenerates either the primary or secondary admin API key. You can only regenerate one key at a time.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/library/azure/dn832700.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the current subscription."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "serviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Search service for which to list admin keys."
+            "$ref": "#/parameters/SearchServiceNameParameter"
           },
           {
             "name": "keyKind",
@@ -116,7 +109,10 @@
               "name": "AdminKeyKind",
               "modelAsString": false
             },
-            "description": "Specifies which key to regenerate. Valid values include primary and secondary."
+            "description": "Specifies which key to regenerate. Valid values include 'primary' and 'secondary'."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -127,38 +123,36 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The specified admin key was successfully regenerated. Both admin keys are included in the response, including the newly-regenerated key.",
             "schema": {
               "$ref": "#/definitions/AdminKeyResult"
+            }
+          },
+          "default": {
+            "description": "HTTP 404: The subscription, resource group, or Search service could not be found. HTTP 409: The specified subscription is disabled.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/createQueryKey/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/createQueryKey/{name}": {
       "post": {
         "tags": [
           "QueryKeys"
         ],
         "operationId": "QueryKeys_Create",
-        "description": "Generates a new query key for the Search service. You can create up to 50 query keys per service.",
+        "description": "Generates a new query key for the specified Search service. You can create up to 50 query keys per service.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/library/azure/dn832690.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the current subscription."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "serviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Search service for which to list query keys."
+            "$ref": "#/parameters/SearchServiceNameParameter"
           },
           {
             "name": "name",
@@ -168,6 +162,9 @@
             "description": "The name of the new query API key."
           },
           {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -176,38 +173,42 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The query key was successfully created and is in the response. You can use the query key as the value of the 'api-key' parameter in the Azure Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
             "schema": {
               "$ref": "#/definitions/QueryKey"
+            }
+          },
+          "default": {
+            "description": "HTTP 404: The subscription, resource group, or Search service could not be found. HTTP 409: The specified subscription is disabled.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/listQueryKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/listQueryKeys": {
       "get": {
         "tags": [
           "QueryKeys"
         ],
-        "operationId": "QueryKeys_List",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "operationId": "QueryKeys_ListBySearchService",
         "description": "Returns the list of query API keys for the given Azure Search service.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/library/azure/dn832701.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the current subscription."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "serviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Search service for which to list query keys."
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -218,15 +219,21 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "All query keys for the given Search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in the Azure Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
             "schema": {
               "$ref": "#/definitions/ListQueryKeysResult"
+            }
+          },
+          "default": {
+            "description": "HTTP 404: The subscription, resource group, or Search service could not be found. HTTP 409: The specified subscription is disabled.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/deleteQueryKey/{key}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/deleteQueryKey/{key}": {
       "delete": {
         "tags": [
           "QueryKeys"
@@ -238,25 +245,20 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the current subscription."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "serviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Search service for which to list query keys."
+            "$ref": "#/parameters/SearchServiceNameParameter"
           },
           {
             "name": "key",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The query key to be deleted."
+            "description": "The query key to be deleted. Query keys are identified by value, not by name."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -267,18 +269,24 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "The query key was successfully deleted."
           },
           "204": {
-            "description": ""
+            "description": "The query key was successfully deleted."
           },
           "404": {
-            "description": ""
+            "description": "The subscription, resource group, Search service, or query key could not be found."
+          },
+          "default": {
+            "description": "HTTP 409: The specified subscription is disabled.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}": {
       "put": {
         "tags": [
           "Services"
@@ -290,18 +298,10 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the current subscription."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "serviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Search service to create or update."
+            "$ref": "#/parameters/SearchServiceNameParameter"
           },
           {
             "name": "service",
@@ -311,6 +311,9 @@
               "$ref": "#/definitions/SearchService"
             },
             "description": "The properties to set or update on the Search service."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -345,18 +348,13 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the current subscription."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "serviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Search service to retrieve."
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -385,18 +383,13 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the current subscription."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "serviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Search service to delete."
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -423,18 +416,20 @@
         "tags": [
           "Services"
         ],
-        "operationId": "Services_List",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "operationId": "Services_ListByResourceGroup",
         "description": "Returns a list of all Search services in the given resource group.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/library/azure/dn832688.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the current subscription."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -473,6 +468,9 @@
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityInput"
             }
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -740,7 +738,11 @@
         },
         "location": {
           "type": "string",
-          "description": "The geographic location of the resource."
+          "description": "The geographic location of the resource.",
+          "x-ms-mutability": [
+            "create", 
+            "read"
+          ]
         },
         "tags": {
           "type": "object",
@@ -755,22 +757,82 @@
       ],
       "description": "Base type for all Azure resources.",
       "x-ms-azure-resource": true
+    },
+    "CloudError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "Contains information about an API error.",
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+        "type": "object",
+        "description": "Describes a particular API error with an error code and a message.",
+        "properties": {
+            "code": { 
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            },
+            "target": {
+              "type": "string"
+            },
+            "details": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/CloudErrorBody"
+                }
+            }
+        },
+        "x-ms-external": true
     }
   },
   "parameters": {
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "x-ms-parameter-location": "method"
+    },
+    "SearchServiceNameParameter": {
+      "name": "searchServiceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure Search service associated with the specified resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ClientRequestIdParameter": {
+      "name": "x-ms-client-request-id",
+      "x-ms-client-name": "clientRequestId",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+      "x-ms-client-request-id": true,
+      "x-ms-parameter-grouping": { "name": "search-management-request-options" },
+      "x-ms-parameter-location": "method"
+    },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Gets subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "The unique identifier for a Microsoft Azure subscription. You can obtain this value from the Azure Resource Manager API or the portal."
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "The API version to use for each request. The current version is 2015-08-19."
     }
   }
 }
