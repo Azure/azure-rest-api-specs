@@ -1754,22 +1754,6 @@
       },
       "description": "The alias type. "
     },
-    "ZoneMappingType": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "The location of this zone mapping."
-        },
-        "zones": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The zones in this zone mapping."
-        }
-      },
-      "description": "Zone mapping type. "
-    },
     "ProviderResourceType": {
       "properties": {
         "resourceType": {
@@ -1796,13 +1780,6 @@
             "type": "string"
           },
           "description": "The api version."
-        },
-        "zoneMappings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ZoneMappingType"
-          },
-          "description": "The zone mappings supported by this resource type."
         },
         "properties": {
           "type": "object",
@@ -2459,9 +2436,6 @@
           "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true
     },
     "SubResource": {

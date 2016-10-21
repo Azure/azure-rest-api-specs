@@ -143,7 +143,8 @@
         },
         "x-ms-odata": "#/definitions/Application",
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Applications_ListNext"
         }
       }
     },
@@ -1472,6 +1473,49 @@
         }
       }
     },
+    "/{tenantID}/{nextLink}?Applications_ListNext": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "Applications_ListNext",
+        "description": "Gets list of applications from the current tenant.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Applications_ListNext"
+        }
+      }
+    },
     "/{tenantID}/{nextLink}?ServicePrincipals_ListNext": {
       "get": {
         "tags": [
@@ -1803,6 +1847,10 @@
             "$ref": "#/definitions/Application"
           },
           "description": "Application list."
+        },
+        "odata.nextLink": {
+          "type": "string",
+          "description": "the URL to get the next set of results."
         }
       },
       "description": "Role assignment list operation result."

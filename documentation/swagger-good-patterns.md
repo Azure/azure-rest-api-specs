@@ -1,4 +1,7 @@
 # Swagger recommended patterns
+These are patterns that a spec is expected to follow by default to be included in this repository. Following these patterns lets us generate usable SDKs and CLIs and lets us provide a consistent experience for users across all services, languages and tools. These patterns change over time as we support more functionality in generated code or try to improve the experience for users of the SDKs. Please make sure to check this documentation every time you submit a PR, as it likely has changed since your last spec change.
+
+**Note** that a large number of existing specs do not currently follow all of these patterns. If you are submitting a small change that will not address these issues, please contact our team and we will work with you to come up with a timeframe for updating your spec.
 
  - **Type property as an enum**
 
