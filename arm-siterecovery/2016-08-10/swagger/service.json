@@ -1330,6 +1330,676 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/recoveryPoints/{recoveryPointName}": {
+      "get": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPointsController"
+        ],
+        "operationId": "RecoveryPointsController_GetRecoveryPoint",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "replicatedProtectedItemName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recoveryPointName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryPoint"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/recoveryPoints": {
+      "get": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPointsController"
+        ],
+        "operationId": "RecoveryPointsController_EnumerateRecoveryPoints",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "replicatedProtectedItemName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryPointCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationRecoveryPlans/{recoveryPlanName}/reProtect": {
+      "post": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+        ],
+        "operationId": "RecoveryPlansController_RecoveryPlanReprotect",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "recoveryPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationRecoveryPlans/{recoveryPlanName}/failoverCommit": {
+      "post": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+        ],
+        "operationId": "RecoveryPlansController_RecoveryPlanFailoverCommit",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "recoveryPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationRecoveryPlans/{recoveryPlanName}/testFailover": {
+      "post": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+        ],
+        "operationId": "RecoveryPlansController_RecoveryPlanTestFailover",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "recoveryPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlanTestFailoverInput"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationRecoveryPlans/{recoveryPlanName}/unplannedFailover": {
+      "post": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+        ],
+        "operationId": "RecoveryPlansController_RecoveryPlanUnplannedFailover",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "recoveryPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlanUnplannedFailoverInput"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationRecoveryPlans/{recoveryPlanName}/plannedFailover": {
+      "post": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+        ],
+        "operationId": "RecoveryPlansController_RecoveryPlanPlannedFailover",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "recoveryPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlanPlannedFailoverInput"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationRecoveryPlans/{recoveryPlanName}": {
+      "get": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+        ],
+        "operationId": "RecoveryPlansController_GetRecoveryPlan",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "recoveryPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlan"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+        ],
+        "operationId": "RecoveryPlansController_CreateRecoveryPlan",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "recoveryPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateRecoveryPlanInput"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+        ],
+        "operationId": "RecoveryPlansController_DeleteRecoveryPlan",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "recoveryPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+        ],
+        "operationId": "RecoveryPlansController_UpdateRecoveryPlan",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "recoveryPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateRecoveryPlanInput"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationRecoveryPlans": {
+      "get": {
+        "tags": [
+          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+        ],
+        "operationId": "RecoveryPlansController_EnumerateRecoveryPlans",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlanCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/remove": {
       "post": {
         "tags": [
@@ -3901,16 +4571,12 @@
     },
     "Fabric": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/FabricProperties"
         }
@@ -4079,16 +4745,12 @@
     },
     "Job": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/JobProperties"
         },
@@ -4475,16 +5137,12 @@
     },
     "LogicalNetwork": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "type": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/LogicalNetworkProperties"
         }
@@ -4523,16 +5181,12 @@
     },
     "NetworkMapping": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "type": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/NetworkMappingProperties"
         }
@@ -4582,16 +5236,12 @@
     },
     "Network": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "type": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/NetworkProperties"
         }
@@ -4664,16 +5314,12 @@
     },
     "Policy": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/PolicyProperties"
         }
@@ -4757,16 +5403,12 @@
     },
     "ProtectableItem": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/ProtectableItemProperties"
         }
@@ -4830,16 +5472,12 @@
     },
     "ProtectionContainerMapping": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/ProtectionContainerMappingProperties"
         }
@@ -4995,16 +5633,12 @@
     },
     "ProtectionContainer": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/ProtectionContainerProperties"
         }
@@ -5074,6 +5708,477 @@
       },
       "discriminator": "instanceType"
     },
+    "RecoveryPlanCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPlan"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "RecoveryPlan": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecoveryPlanProperties"
+        }
+      }
+    },
+    "RecoveryPlanProperties": {
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "type": "string"
+        },
+        "primaryFabricId": {
+          "type": "string"
+        },
+        "primaryFabricFriendlyName": {
+          "type": "string"
+        },
+        "recoveryFabricId": {
+          "type": "string"
+        },
+        "recoveryFabricFriendlyName": {
+          "type": "string"
+        },
+        "failoverDeploymentModel": {
+          "type": "string"
+        },
+        "replicationProviders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedOperations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastPlannedFailoverTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastTestFailoverTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "currentScenario": {
+          "$ref": "#/definitions/CurrentScenarioDetails"
+        },
+        "currentScenarioStatus": {
+          "type": "string"
+        },
+        "currentScenarioStatusDescription": {
+          "type": "string"
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPlanGroup"
+          }
+        }
+      }
+    },
+    "CurrentScenarioDetails": {
+      "type": "object",
+      "properties": {
+        "scenarioName": {
+          "type": "string"
+        },
+        "jobId": {
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "RecoveryPlanGroup": {
+      "required": [
+        "groupType"
+      ],
+      "type": "object",
+      "properties": {
+        "groupType": {
+          "enum": [
+            "Shutdown",
+            "Boot",
+            "Failover"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryPlanGroupType",
+            "modelAsString": false
+          }
+        },
+        "replicationProtectedItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPlanProtectedItem"
+          }
+        },
+        "startGroupActions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPlanAction"
+          }
+        },
+        "endGroupActions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPlanAction"
+          }
+        }
+      }
+    },
+    "RecoveryPlanProtectedItem": {
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "virtualMachineId": {
+          "type": "string"
+        }
+      }
+    },
+    "RecoveryPlanAction": {
+      "required": [
+        "actionName",
+        "failoverTypes",
+        "failoverDirections",
+        "customDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "actionName": {
+          "type": "string"
+        },
+        "failoverTypes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "ReverseReplicate",
+              "Commit",
+              "PlannedFailover",
+              "UnplannedFailover",
+              "DisableProtection",
+              "TestFailover",
+              "Failback",
+              "FinalizeFailback",
+              "ChangePit",
+              "RepairReplication",
+              "SwitchProtection",
+              "CompleteMigration"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ReplicationProtectedItemOperation",
+              "modelAsString": false
+            }
+          }
+        },
+        "failoverDirections": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "PrimaryToRecovery",
+              "RecoveryToPrimary"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "PossibleOperationsDirections",
+              "modelAsString": false
+            }
+          }
+        },
+        "customDetails": {
+          "$ref": "#/definitions/RecoveryPlanActionDetails"
+        }
+      }
+    },
+    "RecoveryPlanActionDetails": {
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "type": "string",
+          "readOnly": true
+        },
+        "CanWrite": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "CanRead": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "CreateRecoveryPlanInput": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CreateRecoveryPlanInputProperties"
+        }
+      }
+    },
+    "CreateRecoveryPlanInputProperties": {
+      "required": [
+        "primaryFabricId",
+        "recoveryFabricId",
+        "groups"
+      ],
+      "type": "object",
+      "properties": {
+        "primaryFabricId": {
+          "type": "string"
+        },
+        "recoveryFabricId": {
+          "type": "string"
+        },
+        "failoverDeploymentModel": {
+          "enum": [
+            "NotApplicable",
+            "Classic",
+            "ResourceManager"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FailoverDeploymentModel",
+            "modelAsString": false
+          }
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPlanGroup"
+          }
+        }
+      }
+    },
+    "UpdateRecoveryPlanInput": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateRecoveryPlanInputProperties"
+        }
+      }
+    },
+    "UpdateRecoveryPlanInputProperties": {
+      "type": "object",
+      "properties": {
+        "groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPlanGroup"
+          }
+        }
+      }
+    },
+    "RecoveryPlanPlannedFailoverInput": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecoveryPlanPlannedFailoverInputProperties"
+        }
+      }
+    },
+    "RecoveryPlanPlannedFailoverInputProperties": {
+      "required": [
+        "failoverDirection"
+      ],
+      "type": "object",
+      "properties": {
+        "failoverDirection": {
+          "enum": [
+            "PrimaryToRecovery",
+            "RecoveryToPrimary"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PossibleOperationsDirections",
+            "modelAsString": false
+          }
+        },
+        "providerSpecificDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPlanProviderSpecificFailoverInput"
+          }
+        }
+      }
+    },
+    "RecoveryPlanProviderSpecificFailoverInput": {
+      "type": "object",
+      "properties": {
+        "CanWrite": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "CanRead": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      },
+      "discriminator": "instanceType"
+    },
+    "RecoveryPlanUnplannedFailoverInput": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecoveryPlanUnplannedFailoverInputProperties"
+        }
+      }
+    },
+    "RecoveryPlanUnplannedFailoverInputProperties": {
+      "required": [
+        "failoverDirection",
+        "sourceSiteOperations"
+      ],
+      "type": "object",
+      "properties": {
+        "failoverDirection": {
+          "enum": [
+            "PrimaryToRecovery",
+            "RecoveryToPrimary"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PossibleOperationsDirections",
+            "modelAsString": false
+          }
+        },
+        "sourceSiteOperations": {
+          "enum": [
+            "Required",
+            "NotRequired"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SourceSiteOperations",
+            "modelAsString": false
+          }
+        },
+        "providerSpecificDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPlanProviderSpecificFailoverInput"
+          }
+        }
+      }
+    },
+    "RecoveryPlanTestFailoverInput": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecoveryPlanTestFailoverInputProperties"
+        }
+      }
+    },
+    "RecoveryPlanTestFailoverInputProperties": {
+      "required": [
+        "failoverDirection",
+        "networkType"
+      ],
+      "type": "object",
+      "properties": {
+        "failoverDirection": {
+          "enum": [
+            "PrimaryToRecovery",
+            "RecoveryToPrimary"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PossibleOperationsDirections",
+            "modelAsString": false
+          }
+        },
+        "networkType": {
+          "type": "string"
+        },
+        "networkId": {
+          "type": "string"
+        },
+        "providerSpecificDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPlanProviderSpecificFailoverInput"
+          }
+        }
+      }
+    },
+    "RecoveryPointCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPoint"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "RecoveryPoint": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecoveryPointProperties"
+        }
+      }
+    },
+    "RecoveryPointProperties": {
+      "type": "object",
+      "properties": {
+        "recoveryPointTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "recoveryPointType": {
+          "type": "string"
+        }
+      }
+    },
     "RecoveryServicesProviderCollection": {
       "type": "object",
       "properties": {
@@ -5090,16 +6195,12 @@
     },
     "RecoveryServicesProvider": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/RecoveryServicesProviderProperties"
         }
@@ -5165,16 +6266,12 @@
     },
     "ReplicationProtectedItem": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/ReplicationProtectedItemProperties"
         }
@@ -5265,21 +6362,6 @@
         }
       }
     },
-    "CurrentScenarioDetails": {
-      "type": "object",
-      "properties": {
-        "scenarioName": {
-          "type": "string"
-        },
-        "jobId": {
-          "type": "string"
-        },
-        "startTime": {
-          "format": "date-time",
-          "type": "string"
-        }
-      }
-    },
     "ReplicationProviderSpecificSettings": {
       "type": "object",
       "properties": {
@@ -5360,13 +6442,16 @@
           "type": "string"
         },
         "licenseType": {
-          "format": "int32",
           "enum": [
-            0,
-            1,
-            2
+            "NotSpecified",
+            "NoLicenseType",
+            "WindowsServer"
           ],
-          "type": "integer"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LicenseType",
+            "modelAsString": false
+          }
         }
       }
     },
@@ -5399,12 +6484,15 @@
       "type": "object",
       "properties": {
         "disableProtectionReason": {
-          "format": "int32",
           "enum": [
-            0,
-            1
+            "NotSpecified",
+            "MigrationComplete"
           ],
-          "type": "integer"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DisableProtectionReason",
+            "modelAsString": false
+          }
         },
         "replicationProviderInput": {
           "$ref": "#/definitions/DisableProtectionProviderSpecificInput"
@@ -6581,7 +7669,7 @@
       "type": "object",
       "properties": {
         "Version": {
-          "$ref": "#/definitions/Version"
+          "$ref": "#/definitions/ASRVersion"
         },
         "RoleName": {
           "type": "string"
@@ -6665,7 +7753,7 @@
         }
       }
     },
-    "Version": {
+    "ASRVersion": {
       "type": "object",
       "properties": {
         "_Major": {
@@ -7841,12 +8929,15 @@
           "type": "integer"
         },
         "multiVmSyncStatus": {
-          "format": "int32",
           "enum": [
-            0,
-            1
+            "Enable",
+            "Disable"
           ],
-          "type": "integer"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SetMultiVmSyncStatus",
+            "modelAsString": false
+          }
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2PolicyInput"
@@ -7875,12 +8966,15 @@
           "type": "integer"
         },
         "multiVmSyncStatus": {
-          "format": "int32",
           "enum": [
-            0,
-            1
+            "Enable",
+            "Disable"
           ],
-          "type": "integer"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SetMultiVmSyncStatus",
+            "modelAsString": false
+          }
         }
       },
       "x-ms-discriminator-value": "InMagePolicyInput"
@@ -7913,15 +9007,179 @@
           "type": "integer"
         },
         "multiVmSyncStatus": {
-          "format": "int32",
           "enum": [
-            0,
-            1
+            "Enable",
+            "Disable"
           ],
-          "type": "integer"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SetMultiVmSyncStatus",
+            "modelAsString": false
+          }
         }
       },
       "x-ms-discriminator-value": "A2APolicyCreationInput"
+    },
+    "RecoveryPlanHyperVReplicaAzureFailoverInput": {
+      "required": [
+        "vaultLocation"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPlanProviderSpecificFailoverInput"
+        }
+      ],
+      "properties": {
+        "vaultLocation": {
+          "type": "string"
+        },
+        "primaryKekCertificatePfx": {
+          "type": "string"
+        },
+        "secondaryKekCertificatePfx": {
+          "type": "string"
+        },
+        "recoveryPointType": {
+          "enum": [
+            "Latest",
+            "LatestApplicationConsistent",
+            "LatestProcessed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Azure.RpRecoveryPointType",
+            "modelAsString": false
+          }
+        },
+        "CanWrite": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "CanRead": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "RecoveryPlanHyperVReplicaAzureFailoverInput"
+    },
+    "RecoveryPlanHyperVReplicaAzureFailbackInput": {
+      "required": [
+        "dataSyncOption",
+        "recoveryVmCreationOption"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPlanProviderSpecificFailoverInput"
+        }
+      ],
+      "properties": {
+        "dataSyncOption": {
+          "enum": [
+            "ForDownTime",
+            "ForSynchronization"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataSyncStatus",
+            "modelAsString": false
+          }
+        },
+        "recoveryVmCreationOption": {
+          "enum": [
+            "CreateVmIfNotFound",
+            "NoAction"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlternateLocationRecoveryOption",
+            "modelAsString": false
+          }
+        },
+        "CanWrite": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "CanRead": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "RecoveryPlanHyperVReplicaAzureFailbackInput"
+    },
+    "RecoveryPlanInMageAzureV2FailoverInput": {
+      "required": [
+        "vaultLocation",
+        "recoveryPointType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPlanProviderSpecificFailoverInput"
+        }
+      ],
+      "properties": {
+        "vaultLocation": {
+          "type": "string"
+        },
+        "recoveryPointType": {
+          "enum": [
+            "Latest",
+            "LatestApplicationConsistent",
+            "LatestCrashConsistent",
+            "LatestProcessed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RpRecoveryPointType",
+            "modelAsString": false
+          }
+        },
+        "CanWrite": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "CanRead": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "RecoveryPlanInMageAzureV2FailoverInput"
+    },
+    "RecoveryPlanInMageFailoverInput": {
+      "required": [
+        "recoveryPointType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPlanProviderSpecificFailoverInput"
+        }
+      ],
+      "properties": {
+        "recoveryPointType": {
+          "enum": [
+            "LatestTime",
+            "LatestTag",
+            "Custom"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RpInMageRecoveryPointType",
+            "modelAsString": false
+          }
+        },
+        "CanWrite": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "CanRead": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "RecoveryPlanInMageFailoverInput"
     },
     "AzureFabricSpecificDetails": {
       "type": "object",
@@ -8265,6 +9523,26 @@
         }
       },
       "x-ms-discriminator-value": "Azure"
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "description": "Resource Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource Name",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource Type",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
