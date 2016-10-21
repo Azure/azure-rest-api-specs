@@ -463,7 +463,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the sku name. Required for account creation, optional for update. Note that in older versions, sku name was called accountType.",
+          "description": "Gets or sets the sku name. Required for account creation, optional for update. Note that in older versions, sku name was called accountType. For Blob Storage accounts, only Standard_LRS, Standard_GRS and Standard_RAGRS are supported",
           "enum": [
             "Standard_LRS",
             "Standard_GRS",
@@ -562,7 +562,7 @@
         },
         "accessTier": {
           "type": "string",
-          "description": "Required for StandardBlob accounts. The access tier used for billing. Access tier cannot be changed more than once every 7 days (168 hours). Access tier cannot be set for StandardLRS, StandardGRS, StandardRAGRS, or PremiumLRS account types.",
+          "description": "Required for StandardBlob accounts. The access tier used for billing. Access tier can only be set for Blob Storage Accounts.",
           "enum": [
             "Hot",
             "Cool"
@@ -727,7 +727,7 @@
         "accessTier": {
           "readOnly": true,
           "type": "string",
-          "description": "The access tier used for billing. Access tier cannot be changed more than once every 7 days (168 hours). Access tier cannot be set for StandardLRS, StandardGRS, StandardRAGRS, or PremiumLRS account types.",
+          "description": "The access tier used for billing. Access tier can only be set for Blob Storage Accounts.",
           "enum": [
             "Hot",
             "Cool"
@@ -847,7 +847,7 @@
         },
         "accessTier": {
           "type": "string",
-          "description": "The access tier used for billing. Access tier cannot be changed more than once every 7 days (168 hours). Access tier cannot be set for StandardLRS, StandardGRS, StandardRAGRS, or PremiumLRS account types.",
+          "description": "The access tier used for billing. Access tier can only be set for Blob Storage Accounts.",
           "enum": [
             "Hot",
             "Cool"
