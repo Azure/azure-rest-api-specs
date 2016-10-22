@@ -683,22 +683,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ElasticPool"
-            }
+            "description": "OK"
           },
           "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/ElasticPool"
-            }
+            "description": "Created"
           },
           "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/ElasticPool"
-            }
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -815,7 +806,7 @@
         "tags": [
           "ElasticPools"
         ],
-        "operationId": "ElasticPools_ListActivity",
+        "operationId": "ElasticPoolActivity_ListByElasticPool",
         "description": "Returns information about Azure SQL elastic pool activities.",
         "parameters": [
           {
@@ -856,7 +847,7 @@
         "tags": [
           "ElasticPools"
         ],
-        "operationId": "ElasticPoolsDatabaseActivity_List",
+        "operationId": "ElasticPoolDatabaseActivity_ListByElasticPool",
         "description": "Returns information about activity on Azure SQL databases inside of an Azure SQL elastic pool.",
         "parameters": [
           {
@@ -897,7 +888,7 @@
         "tags": [
           "ElasticPools"
         ],
-        "operationId": "ElasticPools_GetDatabase",
+        "operationId": "ElasticPoolDatabases_Get",
         "description": "Returns information about an Azure SQL database inside of an Azure SQL elastic pool.",
         "parameters": [
           {
@@ -942,7 +933,7 @@
         "tags": [
           "ElasticPools"
         ],
-        "operationId": "ElasticPools_ListDatabases",
+        "operationId": "ElasticPoolDatabases_ListByElasticPool",
         "description": "Returns information about an Azure SQL database inside of an Azure SQL elastic pool.",
         "parameters": [
           {
@@ -1021,7 +1012,7 @@
         "tags": [
           "RecommendedElasticPools"
         ],
-        "operationId": "RecommendedElasticPools_GetDatabases",
+        "operationId": "RecommendedElasticPoolDatabases_Get",
         "description": "Returns information about an Azure SQL Database inside of an Azure SQL Recommended Elastic Pool.",
         "parameters": [
           {
@@ -1100,7 +1091,7 @@
         "tags": [
           "RecommendedElasticPools"
         ],
-        "operationId": "RecommendedElasticPools_ListDatabases",
+        "operationId": "RecommendedElasticPoolDatabases_List",
         "description": "Returns information about an Azure SQL Database inside of an Azure SQL Recommended Elastic Pool.",
         "parameters": [
           {
@@ -1141,7 +1132,7 @@
         "tags": [
           "RecommendedElasticPools"
         ],
-        "operationId": "RecommendedElasticPools_ListMetrics",
+        "operationId": "RecommendedElasticPoolMetrics_List",
         "description": "Returns information about an recommended elastic pool metrics.",
         "parameters": [
           {
@@ -1182,7 +1173,7 @@
         "tags": [
           "ServiceTierAdvisors"
         ],
-        "operationId": "Databases_GetServiceTierAdvisor",
+        "operationId": "DatabaseServiceTierAdvisors_Get",
         "description": "Returns information about a service tier advisor.",
         "parameters": [
           {
@@ -1227,7 +1218,7 @@
         "tags": [
           "ServiceTierAdvisors"
         ],
-        "operationId": "Databases_ListServiceTierAdvisors",
+        "operationId": "DatabaseServiceTierAdvisors_List",
         "description": "Returns information about service tier advisors for specified database.",
         "parameters": [
           {
@@ -1268,7 +1259,7 @@
         "tags": [
           "ServiceObjectives"
         ],
-        "operationId": "Servers_GetServiceObjective",
+        "operationId": "ServerServiceObjectives_Get",
         "description": "Returns information about an Azure SQL Database Service Objective.",
         "parameters": [
           {
@@ -1306,7 +1297,7 @@
         "tags": [
           "ServiceObjectives"
         ],
-        "operationId": "Servers_ListServiceObjectives",
+        "operationId": "ServerServiceObjectives_List",
         "description": "Returns information about Azure SQL Database Service Objectives.",
         "parameters": [
           {
@@ -1340,7 +1331,7 @@
         "tags": [
           "TransparentDataEncryption"
         ],
-        "operationId": "Databases_GetTransparentDataEncryptionConfiguration",
+        "operationId": "DatabaseTransparentDataEncryptionConfigurations_Get",
         "description": "Creates or updates an Azure SQL Database Transparent Data Encryption Operation.",
         "parameters": [
           {
@@ -1391,7 +1382,7 @@
         "tags": [
           "TransparentDataEncryption"
         ],
-        "operationId": "Databases_GetTransparentDataEncryption",
+        "operationId": "DatabaseTransparentDataEncryptions_Get",
         "description": "Returns an Azure SQL Database Transparent Data Encryption Response.",
         "parameters": [
           {
@@ -1429,7 +1420,7 @@
         "tags": [
           "TransparentDataEncryption"
         ],
-        "operationId": "Databases_ListTransparentDataEncryptionActivity",
+        "operationId": "DatabaseTransparentDataEncryptionActivity_List",
         "description": "Returns an Azure SQL Database Transparent Data Encryption Activity Response.",
         "parameters": [
           {
@@ -1668,25 +1659,21 @@
           }
         },
         "dtu": {
-          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "The total shared DTU for the SQL Azure Database Elastic Pool."
         },
         "databaseDtuMax": {
-          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "The maximum DTU any one SQL Azure Database can consume."
         },
         "databaseDtuMin": {
-          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "The minimum DTU all SQL Azure Databases are guaranteed."
         },
         "storageMB": {
-          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "Gets storage limit for the SQL Azure Database Elastic Pool in MB."
@@ -2664,7 +2651,7 @@
             "x-ms-enum": {
             "modelAsString": true,
             "name": "ServiceObjectiveId"
-          },
+          }
         },
         "inRangeTimeRatio": {
           "type": "number",
