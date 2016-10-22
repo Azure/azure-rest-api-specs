@@ -3,7 +3,7 @@
   "info": {
     "title": "KeyVaultClient",
     "description": "Performs cryptographic key operations and vault operations against the Key Vault service.",
-    "version": "2015-06-01"
+    "version": "2016-10-01"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{vaultBaseUrl}",
@@ -826,7 +826,8 @@
             "x-ms-client-flatten": true,
             "schema": {
               "$ref": "#/definitions/SecretUpdateParameters"
-            }
+            },
+            "description": "The parameters for secret update"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1583,7 +1584,8 @@
             "x-ms-client-flatten": true,
             "schema": {
               "$ref": "#/definitions/CertificateUpdateParameters"
-            }
+            },
+            "description": "The parameters for certificate update"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -3049,6 +3051,11 @@
           "type": "string",
           "readOnly": true,
           "description": "The error message."
+        },
+        "innererror": {
+          "x-ms-client-name": "innerError",
+          "readOnly": true,
+          "$ref": "#/definitions/Error"
         }
       },
       "description": "The key vault server error"
