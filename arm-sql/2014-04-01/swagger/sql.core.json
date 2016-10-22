@@ -313,7 +313,7 @@
         "tags": [
           "Databases"
         ],
-        "operationId": "Databases_ListUsages",
+        "operationId": "DatabaseUsages_ListByDatabase",
         "description": "Returns information about Azure SQL Database usages.",
         "parameters": [
           {
@@ -615,7 +615,7 @@
         "tags": [
           "Servers"
         ],
-        "operationId": "ServerUsages_List",
+        "operationId": "ServerUsages_ListByServer",
         "description": "Returns information about Azure SQL Server usage.",
         "parameters": [
           {
@@ -683,13 +683,22 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ElasticPool"
+            }
           },
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ElasticPool"
+            }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ElasticPool"
+            }
           }
         },
         "x-ms-long-running-operation": true
