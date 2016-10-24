@@ -178,45 +178,6 @@
     }
   },
   "definitions": {
-    "DeploymentExtendedFilter": {
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "description": "Gets or sets the provisioning state."
-        }
-      },
-      "description": "Deployment filter."
-    },
-    "GenericResourceFilter": {
-      "properties": {
-        "resourceType": {
-          "type": "string",
-          "description": "Gets or sets the resource type."
-        },
-        "tagname": {
-          "type": "string",
-          "description": "Gets or sets the tag name."
-        },
-        "tagvalue": {
-          "type": "string",
-          "description": "Gets or sets the tag value."
-        }
-      },
-      "description": "Resource filter."
-    },
-    "ResourceGroupFilter": {
-      "properties": {
-        "tagName": {
-          "type": "string",
-          "description": "Gets or sets the tag name."
-        },
-        "tagValue": {
-          "type": "string",
-          "description": "Gets or sets the tag value."
-        }
-      },
-      "description": "Resource group filter."
-    },
     "FeatureProperties": {
       "properties": {
         "state": {
@@ -262,49 +223,6 @@
         }
       },
       "description": "List of previewed features."
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {
