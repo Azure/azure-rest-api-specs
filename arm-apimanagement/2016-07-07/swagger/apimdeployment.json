@@ -34,47 +34,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{sourceResourceGroupName}/moveResources": {
-      "post": {
-        "tags": [
-          "ApiManagementService"
-        ],
-        "operationId": "ApiManagement_MoveResources",
-        "description": "Moves resources from one resource group to another. The resources being moved should all be from the same resource group.",
-        "parameters": [
-          {
-            "name": "sourceResourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the source resource group.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 90
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResourcesMoveInfo"
-            },
-            "description": "Move resources' parameters."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {         
-          "204": {
-            "description": "Successfully moved the resources to the destination resource group."
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/managedeployments": {
       "post": {
         "tags": [
@@ -297,7 +256,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApiManagementServiceUpdateParameters"
+              "$ref": "#/definitions/ApiManagementServiceBaseParameters"
             },
             "description": "Parameters supplied to the CreateOrUpdate API Management service operation."
           },
@@ -429,7 +388,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/service/": {
+	  "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/service/": {
      "get": {
         "tags": [
           "ApiManagementService"
@@ -618,28 +577,6 @@
     }
   },
   "definitions": {
-    "ResourcesMoveInfo": {
-      "description": "Class containing a list of the resources that need to be moved and the resource group they should be moved to.",
-      "externalDocs": {
-        "url": "https://azure.microsoft.com/en-us/documentation/articles/resource-group-move-resources/"
-      },
-      "properties": {        
-        "resources": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "An array of azure resources Ids to move. Azure Resource Id is of the format /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.{Resource Manager}/{type}."
-        },
-        "targetResourceGroup": {
-          "type": "string",
-          "description": "An existing target resource group name to which resources need to be moved.",
-          "pattern": "^[-\\w\\._\\(\\)]+$",
-          "minLength": 1,
-          "maxLength": 90
-        }
-      }
-    },
     "CertificateInformation": {
       "properties": {
         "expiry": {
@@ -1006,24 +943,13 @@
         "etag": {
           "type": "string",
           "description": "ETag of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Tags of the API Management service."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApiManagementServiceProperties",
-          "description": "Properties of the API Management service."
-        },
-        "sku": {
-          "$ref": "#/definitions/ApiManagementServiceSkuProperties",
-          "description": "Sku properties of the API Management service."                   
         }
       },
+      "allOf": [
+          {
+            "$ref" : "#/definitions/ApiManagementServiceBaseParameters"
+          }
+       ],
       "required": [
         "sku",
         "properties",        
@@ -1031,7 +957,7 @@
       ],
       "description": "Description of an API Management service resource."
     },
-    "ApiManagementServiceUpdateParameters": {
+    "ApiManagementServiceBaseParameters": {
       "properties": {        
         "tags": {
           "type": "object",
@@ -1050,7 +976,7 @@
           "description": "Sku properties of the API Management service."
         }
       },
-      "description": "Parameters supplied to the CreateOrUpdate API Management service operation."
+      "description": "Parameters supplied to the Update API Management service operation."
     },
     "ApiManagementServiceListResult": {
       "properties": {
