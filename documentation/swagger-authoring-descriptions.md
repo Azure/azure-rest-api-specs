@@ -42,10 +42,13 @@ Below is a list of common expectations for published description strings that yo
 ## Notes and Caveats
 
 1. Right now, description strings are very limited in their expressiveness. Our tooling does not support the rendering of GFM syntax, nor does it support any documentation-friendly vendor extensions at this time. (This will change.) Some HTML elements are whitelisted (permitted):
-- <p></p>
-- <ol></ol>
-- <ul></ul>
-- <li></li>
+
+> - &lt;p&gt;&lt;/p&gt;
+
+`<p></p>
+>- &lt;ol&gt;&lt;/ol&gt;
+> - &lt;ul&gt;&lt;/ul&gt;
+> - &lt;li&gt;&lt;/li&gt;
 
 Ultimately, though, this means that you must be both efficient and detailed in your prose, and this can be a challenge starting out!
 
