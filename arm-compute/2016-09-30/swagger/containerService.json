@@ -3,7 +3,7 @@
   "info": {
     "title": "ContainerServiceClient",
     "description": "The Container Service Client.",
-    "version": "2016-03-30"
+    "version": "2016-09-30"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -18,13 +18,35 @@
     "text/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/containerServices/{containerServiceName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/containerServices": {
       "put": {
         "tags": [
-          "ContainerService"
+          "ContainerServices"
         ],
-        "operationId": "ContainerService_CreateOrUpdate",
-        "description": "The operation to create or update a container service.",
+        "operationId": "ContainerServices_List",
+        "description": "Lists all container services",
+        "parameters": {
+          "SubscriptionIdParameter": {
+            "ref": "#/parameters/SubscriptionIdParameter"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerService"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/containerServices/{containerServiceName}": {
+      "get": {
+        "tags": [
+          "ContainerServices"
+        ],
+        "operationId": "ContainerServices_CreateOrUpdate",
+        "description": "Creates or updates a container service.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -58,19 +80,19 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ContainerService"
             }
           },
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/ContainerService"
             }
           },
           "202": {
-            "description": "",
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/ContainerService"
             }
@@ -83,7 +105,7 @@
           "ContainerService"
         ],
         "operationId": "ContainerService_Get",
-        "description": "The operation to get a container service.",
+        "description": "Gets the specified container service.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -108,7 +130,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ContainerService"
             }
@@ -145,10 +167,10 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           },
           "204": {
-            "description": ""
+            "description": "Not found"
           }
         },
         "x-ms-long-running-operation": true
@@ -159,7 +181,7 @@
         "tags": [
           "ContainerService"
         ],
-        "operationId": "ContainerService_List",
+        "operationId": "ContainerService_ListByResourceGroup",
         "description": "The operation to list container services.",
         "parameters": [
           {
@@ -178,7 +200,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ContainerServiceListResult"
             }
@@ -230,10 +252,11 @@
           "properties": {
             "orchestrator": {
               "type": "string",
-              "description": "The name of the custom orchestrator to use"
+              "description": "The name of the custom orchestrator to use",
             }
           },
-          "description": "Properties to configure custom clusters"
+          "description": "Properties to configure custom clusters",
+          "required": ["orchestrator"]
         },
         "ContainerServiceServicePrincipalProfile": {
           "properties": {
@@ -243,10 +266,14 @@
             },
             "secret": {
               "type": "string",
-              "description": "The secret associated with the service principal"
+              "description": "The secret password associated with the service principal"
             }
           },
-          "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs"
+          "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs",
+          "required": [
+            "clientId",
+            "secret"
+          ]
         },
         "ContainerServiceOrchestratorProfile": {
           "properties": {
@@ -264,7 +291,8 @@
               "description": "Specifies what orchestrator will be used to manage container cluster resources."
             }
           },
-          "description": "Profile for Orchestrator"
+          "description": "Profile for Orchestrator",
+          "required": [ "orchestratorType" ]
         },
         "ContainerServiceMasterProfile": {
           "properties": {
@@ -276,7 +304,8 @@
                 3,
                 5
               ],
-              "description": "Number of masters (VMs) in the container cluster"
+              "description": "Number of masters (VMs) in the container cluster",
+              "default": 1
             },
             "dnsPrefix": {
               "type": "string",
@@ -304,7 +333,7 @@
               "format": "int32",
               "maximum": 100,
               "minimum": 1,
-              "description": "No. of agents (VMs) that will host docker containers"
+              "description": "Number of agents (VMs) that will host docker containers"
             },
             "vmSize": {
               "type": "string",
@@ -375,7 +404,9 @@
           },
           "required": [
             "name",
-            "dnsPrefix"
+            "dnsPrefix",
+            "count",
+            "vmSize"
           ],
           "description": "Profile for container service agent pool"
         },
@@ -383,11 +414,13 @@
           "properties": {
             "adminUsername": {
               "type": "string",
-              "description": "The administrator username to use for Windows VMs"
+              "description": "The administrator username to use for Windows VMs",
+              "pattern": "^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$"
             },
             "adminPassword": {
               "type": "string",
-              "description": "The administrator password to use for Windows VMs"
+              "description": "The administrator password to use for Windows VMs",
+              "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%\\^&\\*\\(\\)])[a-zA-Z\\d!@#$%\\^&\\*\\(\\)]{12,123}$"
             }
           },
           "required": [
@@ -400,7 +433,8 @@
           "properties": {
             "adminUsername": {
               "type": "string",
-              "description": "The administrator username to use for all Linux VMs"
+              "description": "The administrator username to use for all Linux VMs",
+              "pattern": "^[a-z][a-z0-9_-]*$"
             },
             "ssh": {
               "$ref": "#/definitions/ContainerServiceSshConfiguration",
@@ -423,7 +457,8 @@
               "description": "the list of SSH public keys used to authenticate with Linux based VMs"
             }
           },
-          "description": "SSH configuration for Linux based VMs running on Azure"
+          "description": "SSH configuration for Linux based VMs running on Azure",
+          "required": ["publicKeys"]
         },
         "ContainerServiceSshPublicKey": {
           "properties": {
@@ -443,21 +478,26 @@
               "$ref": "#/definitions/ContainerServiceVMDiagnostics",
               "description": "Profile for container service VM diagnostic agent"
             }
-          }
+          },
+          "required": ["vmDiagnostics"]
         },
         "ContainerServiceVMDiagnostics": {
           "properties": {
             "enabled": {
               "type": "boolean",
-              "description": "whether VM Diagnostic Agent should be provisioned on the Virtual Machine."
+              "description": "Whether VM Diagnostic Agent should be provisioned on the Virtual Machine."
             },
             "storageUri": {
               "readOnly": true,
               "type": "string",
-              "description": "whether VM Diagnostic Agent should be provisioned on the Virtual Machine."
+              "description": "The URI of the storage account where diagnostics will be stored."
             }
           },
-          "description": "Describes VM Diagnostics."
+          "description": "Describes VM Diagnostics.",
+          "required": [
+            "enabled",
+            "storageUri"
+          ]
         },
         "ContainerService": {
           "properties": {
@@ -542,7 +582,7 @@
           "in": "path",
           "required": true,
           "type": "string",
-          "description": "subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+          "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
         },
         "ApiVersionParameter": {
           "name": "api-version",
