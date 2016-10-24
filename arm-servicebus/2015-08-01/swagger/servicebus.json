@@ -1640,7 +1640,7 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_ListAll",
-        "description": "Lsit all the subscriptions under a specified topic",
+        "description": "List all the subscriptions under a specified topic",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639400.aspx"
         },
@@ -1854,6 +1854,253 @@
             "description": "Successfully retrieved queue description.",
             "schema": {
               "$ref": "#/definitions/SubscriptionResource"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/subscriptions/{subscriptionName}/rules": {
+      "get": {
+        "tags": [
+          "Rules"
+        ],
+        "operationId": "Rules_ListAll",
+        "description": "List all the rules",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topic name."
+          },
+          {
+            "name": "subscriptionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The subscriptionName name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved list of Rules.",
+            "schema": {
+              "$ref": "#/definitions/RuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/subscriptions/{subscriptionName}/rules/{ruleName}": {
+      "put": {
+        "tags": [
+          "Rules"
+        ],
+        "operationId": "Rules_CreateOrUpdate",
+        "description": "Creates a new rule",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topicName name."
+          },
+          {
+            "name": "subscriptionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The subscriptionName name."
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The rule name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuleCreateOrUpdateParameters"
+            },
+            "description": "Parameters supplied to create a rules."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Rule created.",
+            "schema": {
+              "$ref": "#/definitions/RuleResource"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Rules"
+        ],
+        "operationId": "Rules_Delete",
+        "description": "Deletes an existing rule.",
+        "externalDocs": {
+          "url": ""
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topic name."
+          },
+          {
+            "name": "subscriptionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The subscription name."
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The rule name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "200": {
+            "description": "Rule deleted."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Rules_Get",
+        "description": "Retrieves the description for the specified rule.",
+        "externalDocs": {
+          "url": ""
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The topic name."
+          },
+          {
+            "name": "subscriptionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The subscription name."
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The rule name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved rule description.",
+            "schema": {
+              "$ref": "#/definitions/RuleResource"
             }
           }
         }
@@ -2642,6 +2889,196 @@
         "modelAsString": false
       },
       "description": "Entity status."
+    },
+    "RuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleResource"
+          },
+          "description": "Result of the List Rules operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of rules"
+        }
+      },
+      "description": "The response of the List rule operation."
+    },
+    "RuleCreateOrUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Rule name."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RuleProperties"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "Parameters supplied to the CreateOrUpdate operation."
+    },
+    "RuleResource": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RuleProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Description of Rule Resource."
+    },
+    "Filter": {
+      "type": "object",
+      "properties": {
+         "RequiresPreprocessing": {
+          "type": "boolean",
+          "description": "Preprocesses the filter expression and returns a preprocessed FilterExpression."
+        },
+		"SqlFilter": {
+          "$ref": "#/definitions/SqlFilter",
+          "description": "Represents a SQL filter which is a composition of an expression and an action that is executed in the pub/sub pipeline."
+        },
+		"CorrelationFilter": {
+          "$ref": "#/definitions/CorrelationFilter",
+          "description": "Represents the correlation filter expression."
+        }
+      },
+      "description": "MessageDescribes a filter expression that is evaluated against a BrokeredMessage."
+    },
+	"SqlFilter": {
+      "type": "object",
+      "properties": {
+         "SqlExpression": {
+          "type": "string",
+          "description": "The SQL expression."
+        },
+		"RequiresPreprocessing": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether the SQL filter expression requires preprocessing."
+        },
+		"CompatibilityLevel": {
+		"format": "int32",
+		"type": "integer",
+          "description": "This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20."
+		}
+      },
+      "description": "Represents a filter which is a composition of an expression and an action that is executed in the pub/sub pipeline."
+    },	
+	"CorrelationFilter": {
+      "type": "object",
+      "properties": {
+         "CorrelationId": {
+          "type": "string",
+          "description": "Gets the identifier of the correlation."
+        },
+		"MessageId": {
+          "type": "string",
+          "description": "Gets the identifier of the message."
+        },		
+		"To": {
+          "type": "string",
+          "description": "Gets the address to send to."
+        },
+		"ReplyTo": {
+		  "type": "string",
+          "description": "Gets the address of the queue to reply to."
+		},		
+		"Label": {
+		  "type": "string",
+          "description": "Gets the application specific label."
+		},
+		"SessionId": {
+		  "type": "string",
+          "description": "Gets the session identifier."
+		},
+		"ReplyToSessionId": {
+		  "type": "string",
+          "description": "Gets the session identifier to reply to."
+		},
+		"ContentType": {
+		  "type": "string",
+          "description": "Gets the content type of the message."
+		},		
+		"RequiresPreprocessing": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether the CorrelationFilter expression requires preprocessing."
+        }
+      },
+      "description": "Represents the correlation filter expression."
+    },
+    "RuleAction": {
+      "type": "object",
+      "properties": {
+         "RequiresPreprocessing": {
+          "type": "boolean",
+          "description": "Gets a value that indicates whether the rule action requires preprocessing."
+        },
+         "Match": {
+          "type": "boolean",
+          "description": "Matches the BrokeredMessage against the FilterExpression."
+        }
+      },
+      "description": "Represents the filter actions which are allowed for the transformation of a message that have been matched by a filter expression."
+    },
+	"SqlRuleAction": {
+      "type": "object",
+      "properties": {
+         "SqlExpression": {
+          "type": "string",
+          "description": "Gets the SQL expression."
+        },
+		"CompatibilityLevel": {
+		"format": "int32",
+		"type": "integer",
+          "description": "This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20."
+		},
+		"RequiresPreprocessing": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether the SQL filter expression requires preprocessing."
+        }
+		},
+      "description": "Represents set of actions written in SQL language-based syntax that is performed against a ServiceBus.Messaging.BrokeredMessage "
+      },
+	"CompositeAction": {
+      "type": "object",
+      "properties": {
+         "RequiresPreprocessing": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether the SQL filter expression requires preprocessing."
+        }
+      },
+      "description": "Represents set of CompositeAction that is performed against a ServiceBus.Messaging.BrokeredMessage "
+    },	
+    "RuleProperties": {
+      "properties": {
+        "Filter": {
+          "$ref": "#/definitions/Filter",
+          "description": "Describes a filter expression that is evaluated against a BrokeredMessage."
+        },
+        "RuleAction": {
+          "$ref": "#/definitions/RuleAction",
+          "description": "Represents the filter actions which are allowed for the transformation of a message that have been matched by a filter expression."
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets creation time of the rule."
+        }
+      },
+      "description": "Description of Subscription Resource."
     }
   },
   "parameters": {
