@@ -21,7 +21,7 @@
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "ServerFirewallRules_CreateOrUpdate",
+        "operationId": "Servers_CreateOrUpdateFirewallRule",
         "description": "Creates or updates an Azure SQL server firewall rule.",
         "parameters": [
           {
@@ -72,7 +72,7 @@
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "ServerFirewallRules_Delete",
+        "operationId": "Servers_DeleteFirewallRule",
         "description": "Deletes an Azure SQL server firewall rule.",
         "parameters": [
           {
@@ -88,7 +88,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "firewallRule",
+            "name": "firewallRuleName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -108,7 +108,7 @@
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "ServerFirewallRules_Get",
+        "operationId": "Servers_GetFirewallRule",
         "description": "Returns an Azure SQL server firewall rule.",
         "parameters": [
           {
@@ -124,7 +124,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "firewallRule",
+            "name": "firewallRuleName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -146,7 +146,7 @@
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "ServerFirewallRules_List",
+        "operationId": "Servers_ListFirewallRules",
         "description": "Returns a list of Azure SQL server firewall rules.",
         "parameters": [
           {
@@ -194,10 +194,12 @@
       "properties": {
         "kind": {
           "type": "string",
+          "description": "Kind of server that contains this firewall rule.",
           "readOnly": true
         },
         "location": {
           "type": "string",
+          "description": "Location of the server that contains this firewall rule.",
           "readOnly": true
         },
         "properties": {
@@ -247,7 +249,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",

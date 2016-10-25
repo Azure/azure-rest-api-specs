@@ -99,7 +99,7 @@
         "tags": [
           "DatabaseBackup"
         ],
-        "operationId": "Databases_ListRestorePointss",
+        "operationId": "Databases_ListRestorePoints",
         "description": "Returns a list of Azure SQL database restore points.",
         "parameters": [
           {
@@ -517,7 +517,7 @@
         "tags": [
           "ServerUpgrades"
         ],
-        "operationId": "ServerUpgrades_Cancel",
+        "operationId": "Servers_CancelUpgrade",
         "description": "Cancel a pending upgrade for the Azure SQL Server.",
         "parameters": [
           {
@@ -546,7 +546,7 @@
         "tags": [
           "ServerUpgrades"
         ],
-        "operationId": "ServerUpgrades_Get",
+        "operationId": "Servers_GetUpgrade",
         "description": "Returns information about Upgrade status of an Azure SQL Server.",
         "parameters": [
           {
@@ -577,7 +577,7 @@
         "tags": [
           "ServerUpgrades"
         ],
-        "operationId": "ServerUpgrades_Start",
+        "operationId": "Servers_StartUpgrade",
         "description": "Start an Azure SQL Server Upgrade.",
         "parameters": [
           {
@@ -615,7 +615,7 @@
         "tags": [
           "Servers"
         ],
-        "operationId": "ServerUsages_List",
+        "operationId": "Servers_ListUsages",
         "description": "Returns information about Azure SQL Server usage.",
         "parameters": [
           {
@@ -856,7 +856,7 @@
         "tags": [
           "ElasticPools"
         ],
-        "operationId": "ElasticPoolsDatabaseActivity_List",
+        "operationId": "ElasticPools_ListDatabaseActivity",
         "description": "Returns information about activity on Azure SQL databases inside of an Azure SQL elastic pool.",
         "parameters": [
           {
@@ -1340,7 +1340,7 @@
         "tags": [
           "TransparentDataEncryption"
         ],
-        "operationId": "Databases_GetTransparentDataEncryptionConfiguration",
+        "operationId": "Databases_CreateOrUpdateTransparentDataEncryptionConfiguration",
         "description": "Creates or updates an Azure SQL Database Transparent Data Encryption Operation.",
         "parameters": [
           {
@@ -1391,7 +1391,7 @@
         "tags": [
           "TransparentDataEncryption"
         ],
-        "operationId": "Databases_GetTransparentDataEncryption",
+        "operationId": "Databases_GetTransparentDataEncryptionConfiguration",
         "description": "Returns an Azure SQL Database Transparent Data Encryption Response.",
         "parameters": [
           {
@@ -1668,25 +1668,21 @@
           }
         },
         "dtu": {
-          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "The total shared DTU for the SQL Azure Database Elastic Pool."
         },
         "databaseDtuMax": {
-          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "The maximum DTU any one SQL Azure Database can consume."
         },
         "databaseDtuMin": {
-          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "The minimum DTU all SQL Azure Databases are guaranteed."
         },
         "storageMB": {
-          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "Gets storage limit for the SQL Azure Database Elastic Pool in MB."
@@ -2664,7 +2660,7 @@
             "x-ms-enum": {
             "modelAsString": true,
             "name": "ServiceObjectiveId"
-          },
+          }
         },
         "inRangeTimeRatio": {
           "type": "number",
@@ -3165,7 +3161,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",
