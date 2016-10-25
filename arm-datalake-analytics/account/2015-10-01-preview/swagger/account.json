@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "DataLakeAnalyticsManagementClient",
+    "title": "DataLakeAnalyticsAccountManagementClient",
     "description": "Creates an Azure Data Lake Analytics account management client.",
     "version": "2015-10-01-preview",
     "x-ms-code-generation-settings": {
@@ -22,13 +22,31 @@
     "text/json",
     "application/octet-stream"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/{storageAccountName}": {
       "get": {
         "tags": [
-          "DataLakeAnalyticsAccount"
+          "Account"
         ],
-        "operationId": "DataLakeAnalyticsAccount_GetStorageAccount",
+        "operationId": "Account_GetStorageAccount",
         "description": "Gets the specified Azure Storage account linked to the given Data Lake Analytics account.",
         "parameters": [
           {
@@ -70,9 +88,9 @@
       },
       "delete": {
         "tags": [
-          "DataLakeAnalyticsAccount"
+          "Account"
         ],
-        "operationId": "DataLakeAnalyticsAccount_DeleteStorageAccount",
+        "operationId": "Account_DeleteStorageAccount",
         "description": "Updates the specified Data Lake Analytics account to remove an Azure Storage account.",
         "parameters": [
           {
@@ -111,9 +129,9 @@
       },
       "patch": {
         "tags": [
-          "DataLakeAnalyticsAccount"
+          "Account"
         ],
-        "operationId": "DataLakeAnalyticsAccount_UpdateStorageAccount",
+        "operationId": "Account_UpdateStorageAccount",
         "description": "Updates the Data Lake Analytics account to replace Azure Storage blob account details, such as the access key and/or suffix.",
         "parameters": [
           {
@@ -161,9 +179,9 @@
       },
       "put": {
         "tags": [
-          "DataLakeAnalyticsAccount"
+          "Account"
         ],
-        "operationId": "DataLakeAnalyticsAccount_AddStorageAccount",
+        "operationId": "Account_AddStorageAccount",
         "description": "Updates the specified Data Lake Analytics account to add an Azure Storage account.",
         "parameters": [
           {
@@ -213,9 +231,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/{storageAccountName}/Containers/{containerName}": {
       "get": {
         "tags": [
-          "DataLakeAnalyticsAccount"
+          "Account"
         ],
-        "operationId": "DataLakeAnalyticsAccount_GetStorageContainer",
+        "operationId": "Account_GetStorageContainer",
         "description": "Gets the specified Azure Storage container associated with the given Data Lake Analytics and Azure Storage accounts.",
         "parameters": [
           {
@@ -266,9 +284,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/{storageAccountName}/Containers": {
       "get": {
         "tags": [
-          "DataLakeAnalyticsAccount"
+          "Account"
         ],
-        "operationId": "DataLakeAnalyticsAccount_ListStorageContainers",
+        "operationId": "Account_ListStorageContainers",
         "description": "Lists the Azure Storage containers, if any, associated with the specified Data Lake Analytics and Azure Storage account combination. The response includes a link to the next page of results, if any.",
         "parameters": [
           {
@@ -312,76 +330,12 @@
         }
       }
     },
-    "/{nextLink}": {
-      "get": {
-        "tags": [
-          "DataLakeAnalyticsAccount"
-        ],
-        "operationId": "DataLakeAnalyticsAccount_StorageContainersListNext",
-        "description": "Gets the next page of Azure Storage containers, if any, within the specified Azure Storage account. The response includes a link to the next page of results, if any.",
-        "parameters": [
-          {
-            "name": "nextLink",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The URL to the next Azure Storage Container page.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ListBlobContainersResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post": {
-        "tags": [
-          "DataLakeAnalyticsAccount"
-        ],
-        "operationId": "DataLakeAnalyticsAccount_SasTokensListNext",
-        "description": "Gets the next page of the SAS token objects within the specified Azure Storage account and container, if any.",
-        "parameters": [
-          {
-            "name": "nextLink",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The URL to the next Azure Storage Container SAS token page.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ListSasTokensResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/{storageAccountName}/Containers/{containerName}/listSasTokens": {
       "post": {
         "tags": [
-          "DataLakeAnalyticsAccount"
+          "Account"
         ],
-        "operationId": "DataLakeAnalyticsAccount_ListSasTokens",
+        "operationId": "Account_ListSasTokens",
         "description": "Gets the SAS token associated with the specified Data Lake Analytics and Azure Storage account and container combination.",
         "parameters": [
           {
@@ -435,9 +389,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/DataLakeStoreAccounts/{dataLakeStoreAccountName}": {
       "get": {
         "tags": [
-          "DataLakeAnalyticsAccount"
+          "Account"
         ],
-        "operationId": "DataLakeAnalyticsAccount_GetDataLakeStoreAccount",
+        "operationId": "Account_GetDataLakeStoreAccount",
         "description": "Gets the specified Data Lake Store account details in the specified Data Lake Analytics account.",
         "parameters": [
           {
@@ -479,9 +433,9 @@
       },
       "delete": {
         "tags": [
-          "DataLakeAnalyticsAccount"
+          "Account"
         ],
-        "operationId": "DataLakeAnalyticsAccount_DeleteDataLakeStoreAccount",
+        "operationId": "Account_DeleteDataLakeStoreAccount",
         "description": "Updates the Data Lake Analytics account specified to remove the specified Data Lake Store account.",
         "parameters": [
           {
@@ -520,9 +474,9 @@
       },
       "put": {
         "tags": [
-          "DataLakeAnalyticsAccount"
+          "Account"
         ],
-        "operationId": "DataLakeAnalyticsAccount_AddDataLakeStoreAccount",
+        "operationId": "Account_AddDataLakeStoreAccount",
         "description": "Updates the specified Data Lake Analytics account to include the additional Data Lake Store account.",
         "parameters": [
           {
@@ -572,9 +526,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/": {
       "get": {
         "tags": [
-          "DataLakeAnalyticsAccount"
+          "Account"
         ],
-        "operationId": "DataLakeAnalyticsAccount_ListStorageAccounts",
+        "operationId": "Account_ListStorageAccounts",
         "description": "Gets the first page of Azure Storage accounts, if any, linked to the specified Data Lake Analytics account. The response includes a link to the next page, if any.",
         "parameters": [
           {
@@ -633,7 +587,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
           },
           {
             "name": "$count",
@@ -680,9 +634,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/DataLakeStoreAccounts/": {
       "get": {
         "tags": [
-          "DataLakeAnalyticsAccount"
+          "Account"
         ],
-        "operationId": "DataLakeAnalyticsAccount_ListDataLakeStoreAccounts",
+        "operationId": "Account_ListDataLakeStoreAccounts",
         "description": "Gets the first page of Data Lake Store accounts linked to the specified Data Lake Analytics account. The response includes a link to the next page, if any.",
         "parameters": [
           {
@@ -741,7 +695,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
           },
           {
             "name": "$count",
@@ -788,9 +742,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts": {
       "get": {
         "tags": [
-          "DataLakeAnalyticsAccount"
+          "Account"
         ],
-        "operationId": "DataLakeAnalyticsAccount_ListByResourceGroup",
+        "operationId": "Account_ListByResourceGroup",
         "description": "Gets the first page of Data Lake Analytics accounts, if any, within a specific resource group. This includes a link to the next page, if any.",
         "parameters": [
           {
@@ -842,7 +796,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
           },
           {
             "name": "$count",
@@ -889,9 +843,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeAnalytics/accounts": {
       "get": {
         "tags": [
-          "DataLakeAnalyticsAccount"
+          "Account"
         ],
-        "operationId": "DataLakeAnalyticsAccount_List",
+        "operationId": "Account_List",
         "description": "Gets the first page of Data Lake Analytics accounts, if any, within the current subscription. This includes a link to the next page, if any.",
         "parameters": [
           {
@@ -936,7 +890,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
           },
           {
             "name": "$count",
@@ -983,9 +937,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}": {
       "get": {
         "tags": [
-          "DataLakeAnalyticsAccount"
+          "Account"
         ],
-        "operationId": "DataLakeAnalyticsAccount_Get",
+        "operationId": "Account_Get",
         "description": "Gets details of the specified Data Lake Analytics account.",
         "parameters": [
           {
@@ -1020,9 +974,9 @@
       },
       "delete": {
         "tags": [
-          "DataLakeAnalyticsAccount"
+          "Account"
         ],
-        "operationId": "DataLakeAnalyticsAccount_Delete",
+        "operationId": "Account_Delete",
         "description": "Begins the delete delete process for the Data Lake Analytics account object specified by the account name.",
         "parameters": [
           {
@@ -1066,10 +1020,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{name}": {
       "put": {
         "tags": [
-          "DataLakeAnalyticsAccount"
+          "Account"
         ],
-        "operationId": "DataLakeAnalyticsAccount_Create",
-        "description": "Begins the creation process for the specified Data Lake Analytics account.This supplies the user with computation services for Data Lake Analytics workloads",
+        "operationId": "Account_Create",
+        "description": "Creates the specified Data Lake Analytics account. This supplies the user with computation services for Data Lake Analytics workloads",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1119,9 +1073,9 @@
       },
       "patch": {
         "tags": [
-          "DataLakeAnalyticsAccount"
+          "Account"
         ],
-        "operationId": "DataLakeAnalyticsAccount_Update",
+        "operationId": "Account_Update",
         "description": "Updates the Data Lake Analytics account object specified by the accountName with the contents of the account object.",
         "parameters": [
           {
@@ -1174,27 +1128,34 @@
   },
   "definitions": {
     "StorageAccountProperties": {
+      "required": [
+        "accessKey"
+      ],
       "properties": {
         "accessKey": {
           "type": "string",
-          "description": "Gets or sets the access key associated with this Azure Storage account that will be used to connect to it."
+          "description": "the access key associated with this Azure Storage account that will be used to connect to it."
         },
         "suffix": {
           "type": "string",
-          "description": "Gets or sets the optional suffix for the Data Lake account."
+          "description": "the optional suffix for the Data Lake account."
         }
       },
       "description": "Azure Storage account properties information."
     },
     "StorageAccountInfo": {
+      "required": [
+        "name",
+        "properties"
+      ],
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the account name associated with the Azure storage account."
+          "description": "the account name associated with the Azure storage account."
         },
         "properties": {
           "$ref": "#/definitions/StorageAccountProperties",
-          "description": "Gets or sets the properties associated with this storage account."
+          "description": "the properties associated with this storage account."
         }
       },
       "description": "Azure Storage account information."
@@ -1202,9 +1163,10 @@
     "BlobContainerProperties": {
       "properties": {
         "lastModifiedTime": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time of the blob container."
+          "description": "the last modified time of the blob container."
         }
       },
       "description": "Azure Storage blob container properties information."
@@ -1213,19 +1175,23 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the blob container."
+          "readOnly": true,
+          "description": "the name of the blob container."
         },
         "id": {
           "type": "string",
-          "description": "Gets or sets the unique identifier of the blob container."
+          "readOnly": true,
+          "description": "the unique identifier of the blob container."
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the type of the blob container."
+          "readOnly": true,
+          "description": "the type of the blob container."
         },
         "properties": {
+          "readOnly": true,
           "$ref": "#/definitions/BlobContainerProperties",
-          "description": "Gets or sets the properties of the blob container."
+          "description": "the properties of the blob container."
         }
       },
       "description": "Azure Storage blob container information."
@@ -1237,11 +1203,13 @@
           "items": {
             "$ref": "#/definitions/BlobContainer"
           },
-          "description": "Gets or set the results of the list operation"
+          "readOnly": true,
+          "description": "the results of the list operation"
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the link (url) to the next page of results."
+          "description": "the link (url) to the next page of results."
         }
       },
       "description": "The list of blob containers associated with the storage account attached to the Data Lake Analytics account."
@@ -1249,8 +1217,9 @@
     "SasTokenInfo": {
       "properties": {
         "accessToken": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the access token for the associated Azure Storage Container."
+          "description": "the access token for the associated Azure Storage Container."
         }
       },
       "description": "SAS token information."
@@ -1261,11 +1230,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SasTokenInfo"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the link (url) to the next page of results."
+          "readOnly": true,
+          "description": "the link (url) to the next page of results."
         }
       },
       "description": "The SAS response that contains the storage account, container and associated SAS token for connection use."
@@ -1274,20 +1245,23 @@
       "properties": {
         "suffix": {
           "type": "string",
-          "description": "Gets or sets the optional suffix for the Data Lake Store account."
+          "description": "the optional suffix for the Data Lake Store account."
         }
       },
       "description": "Data Lake Store account properties information."
     },
     "DataLakeStoreAccountInfo": {
+      "required": [
+        "name"
+      ],
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the account name of the Data Lake Store account."
+          "description": "the account name of the Data Lake Store account."
         },
         "properties": {
           "$ref": "#/definitions/DataLakeStoreAccountInfoProperties",
-          "description": "Gets or sets the properties associated with this Data Lake Store account."
+          "description": "the properties associated with this Data Lake Store account."
         }
       },
       "description": "Data Lake Store account information."
@@ -1299,16 +1273,19 @@
           "items": {
             "$ref": "#/definitions/StorageAccountInfo"
           },
-          "description": "Gets or set the results of the list operation"
+          "readOnly": true,
+          "description": "the results of the list operation"
         },
         "count": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets total number of results."
+          "readOnly": true,
+          "description": "total number of results."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the link (url) to the next page of results."
+          "readOnly": true,
+          "description": "the link (url) to the next page of results."
         }
       },
       "description": "Azure Storage Account list information."
@@ -1320,16 +1297,19 @@
           "items": {
             "$ref": "#/definitions/DataLakeStoreAccountInfo"
           },
-          "description": "Gets or set the results of the list operation"
+          "readOnly": true,
+          "description": "the results of the list operation"
         },
         "count": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets total number of results."
+          "readOnly": true,
+          "description": "total number of results."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the link (url) to the next page of results."
+          "readOnly": true,
+          "description": "the link (url) to the next page of results."
         }
       },
       "description": "Data Lake Account list information."
@@ -1339,7 +1319,7 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the provisioning status of the Data Lake Analytics account.",
+          "description": "the provisioning status of the Data Lake Analytics account.",
           "enum": [
             "Failed",
             "Creating",
@@ -1359,7 +1339,7 @@
         "state": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the state of the Data Lake Analytics account.",
+          "description": "the state of the Data Lake Analytics account.",
           "enum": [
             "active",
             "suspended"
@@ -1371,63 +1351,72 @@
         },
         "defaultDataLakeStoreAccount": {
           "type": "string",
-          "description": "Gets or sets the default data lake storage account associated with this Data Lake Analytics account."
+          "description": "the default data lake storage account associated with this Data Lake Analytics account."
         },
         "maxDegreeOfParallelism": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the maximum supported degree of parallelism for this acocunt."
+          "description": "the maximum supported degree of parallelism for this account."
         },
         "maxJobCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the maximum supported jobs running under the account at the same time."
+          "description": "the maximum supported jobs running under the account at the same time."
         },
         "dataLakeStoreAccounts": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataLakeStoreAccountInfo"
           },
-          "description": "Gets or sets the list of Data Lake storage accounts associated with this account."
+          "description": "the list of Data Lake storage accounts associated with this account."
         },
         "storageAccounts": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/StorageAccountInfo"
           },
-          "description": "Gets or sets the list of Azure Blob storage accounts associated with this account."
+          "description": "the list of Azure Blob storage accounts associated with this account."
         },
         "creationTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
-          "description": "Gets or sets the account creation time."
+          "description": "the account creation time."
         },
         "lastModifiedTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
-          "description": "Gets or sets the account last modified time."
+          "description": "the account last modified time."
         },
         "endpoint": {
           "type": "string",
-          "description": "Gets or sets the full CName endpoint for this account."
+          "readOnly": true,
+          "description": "the full CName endpoint for this account."
         }
       },
       "description": "The account specific properties that are associated with an underlying Data Lake Analytics account."
     },
     "AddDataLakeStoreParameters": {
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/DataLakeStoreAccountInfoProperties",
-          "description": "Gets or sets the properties for the Data Lake Store account being added."
+          "description": "the properties for the Data Lake Store account being added."
         }
       },
       "description": "Additional Data Lake Store parameters."
     },
     "AddStorageAccountParameters": {
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/StorageAccountProperties",
-          "description": "Gets or sets the properties for the Azure Storage account being added."
+          "description": "the properties for the Azure Storage account being added."
         }
       },
       "description": "Additional Azure Storage account parameters."
@@ -1436,30 +1425,32 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Gets or sets the account regional location."
+          "description": "the account regional location."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the account name."
+          "description": "the account name."
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the namespace and type of the account."
+          "readOnly": true,
+          "description": "the namespace and type of the account."
         },
         "id": {
           "type": "string",
-          "description": "Gets or sets the account subscription ID."
+          "readOnly": true,
+          "description": "the account subscription ID."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the value of custom properties."
+          "description": "the value of custom properties."
         },
         "properties": {
           "$ref": "#/definitions/DataLakeAnalyticsAccountProperties",
-          "description": "Gets or sets the properties defined by Data Lake Analytics all properties are specific to each resource provider."
+          "description": "the properties defined by Data Lake Analytics all properties are specific to each resource provider."
         }
       },
       "description": "A Data Lake Analytics account object, containing all information associated with the named Data Lake Analytics account."
@@ -1471,11 +1462,13 @@
           "items": {
             "$ref": "#/definitions/DataLakeAnalyticsAccount"
           },
-          "description": "Gets or set the results of the list operation"
+          "readOnly": true,
+          "description": "the results of the list operation"
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the link (url) to the next page of results."
+          "readOnly": true,
+          "description": "the link (url) to the next page of results."
         }
       },
       "description": "DataLakeAnalytics Account list information."
@@ -1484,15 +1477,18 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Gets or sets the HTTP status code or error code associated with this error"
+          "readOnly": true,
+          "description": "the HTTP status code or error code associated with this error"
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the error message localized based on Accept-Language"
+          "readOnly": true,
+          "description": "the error message localized based on Accept-Language"
         },
         "target": {
           "type": "string",
-          "description": "Gets or sets the target of the particular error (for example, the name of the property in error)."
+          "readOnly": true,
+          "description": "the target of the particular error (for example, the name of the property in error)."
         }
       },
       "description": "Generic resource error details information."
@@ -1501,11 +1497,13 @@
       "properties": {
         "trace": {
           "type": "string",
-          "description": "Gets or sets the stack trace for the error"
+          "readOnly": true,
+          "description": "the stack trace for the error"
         },
         "context": {
           "type": "string",
-          "description": "Gets or sets the context for the error message"
+          "readOnly": true,
+          "description": "the context for the error message"
         }
       },
       "description": "Generic resource inner error information."
@@ -1514,39 +1512,41 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Gets or sets the HTTP status code or error code associated with this error"
+          "readOnly": true,
+          "description": "the HTTP status code or error code associated with this error"
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the error message to display."
+          "readOnly": true,
+          "description": "the error message to display."
         },
         "target": {
           "type": "string",
-          "description": "Gets or sets the target of the error."
+          "readOnly": true,
+          "description": "the target of the error."
         },
         "details": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorDetails"
           },
-          "description": "Gets or sets the list of error details"
+          "readOnly": true,
+          "description": "the list of error details"
         },
         "innerError": {
           "$ref": "#/definitions/InnerError",
-          "description": "Gets or sets the inner exceptions or errors, if any"
+          "readOnly": true,
+          "description": "the inner exceptions or errors, if any"
         }
       },
-      "required": [
-        "code",
-        "message"
-      ],
       "description": "Generic resource error information."
     },
     "AzureAsyncOperationResult": {
       "properties": {
         "status": {
           "type": "string",
-          "description": "Gets or sets the status of the AzureAsuncOperation",
+          "readOnly": true,
+          "description": "the status of the AzureAsuncOperation",
           "enum": [
             "InProgress",
             "Succeeded",
@@ -1558,53 +1558,11 @@
           }
         },
         "error": {
+          "readOnly": true,
           "$ref": "#/definitions/Error"
         }
       },
       "description": "The response body contains the status of the specified asynchronous operation, indicating whether it has succeeded, is inprogress, or has failed. Note that this status is distinct from the HTTP status code returned for the Get Operation Status operation itself. If the asynchronous operation succeeded, the response body includes the HTTP status code for the successful request. If the asynchronous operation failed, the response body includes the HTTP status code for the failed request and error information regarding the failure."
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {
@@ -1613,7 +1571,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Get subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",

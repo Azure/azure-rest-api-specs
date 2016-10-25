@@ -14,6 +14,24 @@
   "produces": [
     "application/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}": {
       "delete": {
@@ -29,7 +47,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
@@ -68,7 +88,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to check. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
@@ -106,7 +128,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
@@ -160,7 +184,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to get. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
@@ -200,7 +226,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
@@ -237,7 +265,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
@@ -291,7 +321,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group to filter by. The name is case insensitive."
+            "description": "The name of the resource group to filter by. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "$filter",
@@ -474,7 +507,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Query parameters. If null is passed returns all resource groups."
+            "description": "Query parameters. If null is passed returns all resource groups.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "$filter",
@@ -526,7 +562,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to check. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -557,7 +595,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to be created or updated.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "parameters",
@@ -603,7 +643,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to be deleted. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -635,7 +677,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to get. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -666,7 +710,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to be created or updated. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "parameters",
@@ -752,7 +798,9 @@
             "required": true,
             "type": "string",
             "description": "Source resource group name.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "parameters",
@@ -839,7 +887,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "resourceProviderNamespace",
@@ -903,7 +953,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "resourceProviderNamespace",
@@ -970,7 +1022,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "resourceProviderNamespace",
@@ -1049,7 +1103,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "resourceProviderNamespace",
@@ -1299,7 +1355,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
@@ -1346,7 +1404,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
@@ -1538,7 +1598,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "The name of the resource group.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "resourceProviderNamespace",
@@ -1609,7 +1672,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource group name."
+            "description": "Resource group name.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "$filter",
@@ -2387,7 +2453,7 @@
         }
       },
       "description": "List of deployments."
-    },     
+    },
     "ProviderListResult": {
       "properties": {
         "value": {
@@ -2417,7 +2483,7 @@
       },
       "allOf": [
         {
-          "$ref": "Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Resource information."
@@ -2781,20 +2847,20 @@
       "x-ms-azure-resource": true
     }
   },
-    "parameters": {
-      "SubscriptionIdParameter": {
-        "name": "subscriptionId",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-      },
-      "ApiVersionParameter": {
-        "name": "api-version",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "description": "Client Api Version."
-      }
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
     }
   }
+}

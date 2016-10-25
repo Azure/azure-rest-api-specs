@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "DataLakeStoreManagementClient",
+    "title": "DataLakeStoreAccountManagementClient",
     "description": "Creates an Azure Data Lake Store account management client.",
     "version": "2015-10-01-preview",
     "x-ms-code-generation-settings": {
@@ -22,13 +22,31 @@
     "text/json",
     "application/octet-stream"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules/{firewallRuleName}": {
       "delete": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_DeleteFirewallRule",
+        "operationId": "Account_DeleteFirewallRule",
         "description": "Deletes the specified firewall rule from the specified Data Lake Store account",
         "parameters": [
           {
@@ -70,9 +88,9 @@
       },
       "get": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_GetFirewallRule",
+        "operationId": "Account_GetFirewallRule",
         "description": "Gets the specified Data Lake Store firewall rule.",
         "parameters": [
           {
@@ -116,9 +134,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules": {
       "get": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_ListFirewallRules",
+        "operationId": "Account_ListFirewallRules",
         "description": "Lists the Data Lake Store firewall rules within the specified Data Lake Store account.",
         "parameters": [
           {
@@ -155,45 +173,12 @@
         }
       }
     },
-    "/{nextLink}": {
-      "get": {
-        "tags": [
-          "DataLakeStoreAccount"
-        ],
-        "operationId": "DataLakeStoreAccount_FirewallRulesListNext",
-        "description": "Gets the next page of Data Lake Store firewall rules, if any, for the specified account. The response includes a link to the next page of results, if any.",
-        "parameters": [
-          {
-            "name": "nextLink",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The URL to the next page of the firewall rules list.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/DataLakeStoreFirewallRuleListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules/{name}": {
       "put": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_CreateOrUpdateFirewallRule",
+        "operationId": "Account_CreateOrUpdateFirewallRule",
         "description": "Creates or updates the specified firewall rule.",
         "parameters": [
           {
@@ -246,9 +231,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{name}": {
       "put": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_Create",
+        "operationId": "Account_Create",
         "description": "Creates the specified Data Lake Store account.",
         "parameters": [
           {
@@ -299,9 +284,9 @@
       },
       "patch": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_Update",
+        "operationId": "Account_Update",
         "description": "Updates the specified Data Lake Store account information.",
         "parameters": [
           {
@@ -354,9 +339,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}": {
       "delete": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_Delete",
+        "operationId": "Account_Delete",
         "description": "Deletes the specified Data Lake Store account.",
         "parameters": [
           {
@@ -398,9 +383,9 @@
       },
       "get": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_Get",
+        "operationId": "Account_Get",
         "description": "Gets the specified Data Lake Store account.",
         "parameters": [
           {
@@ -434,12 +419,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/enableKeyVault": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "Account_EnableKeyVault",
+        "description": "Attempts to enable a user managed key vault for encryption of the specified Data Lake Store account.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure resource group that contains the Data Lake Store account."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store account to attempt to enable the Key Vault for."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully enabled the user managed Key Vault for use encrypting this Data Lake Store account."
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts": {
       "get": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_ListByResourceGroup",
+        "operationId": "Account_ListByResourceGroup",
         "description": "Lists the Data Lake Store accounts within a specific resource group. The response includes a link to the next page of results, if any.",
         "parameters": [
           {
@@ -491,7 +512,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
           },
           {
             "name": "$count",
@@ -538,9 +559,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeStore/accounts": {
       "get": {
         "tags": [
-          "DataLakeStoreAccount"
+          "Account"
         ],
-        "operationId": "DataLakeStoreAccount_List",
+        "operationId": "Account_List",
         "description": "Lists the Data Lake Store accounts within the subscription. The response includes a link to the next page of results, if any.",
         "parameters": [
           {
@@ -585,7 +606,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you’d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
           },
           {
             "name": "$count",
@@ -635,11 +656,11 @@
       "properties": {
         "startIpAddress": {
           "type": "string",
-          "description": "Gets or sets the start IP address for the firewall rule."
+          "description": "the start IP address for the firewall rule."
         },
         "endIpAddress": {
           "type": "string",
-          "description": "Gets or sets the end IP address for the firewall rule."
+          "description": "the end IP address for the firewall rule."
         }
       },
       "description": "Data Lake Store firewall rule properties information"
@@ -648,23 +669,24 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the firewall rule's name."
+          "description": "the firewall rule's name."
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the namespace and type of the firewall Rule."
+          "readOnly": true,
+          "description": "the namespace and type of the firewall Rule."
         },
         "id": {
           "type": "string",
-          "description": "Gets or sets the firewall rule's subscription ID."
+          "description": "the firewall rule's subscription ID."
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the firewall rule's regional location."
+          "description": "the firewall rule's regional location."
         },
         "properties": {
           "$ref": "#/definitions/FirewallRuleProperties",
-          "description": "Gets or sets the properties of the firewall rule."
+          "description": "the properties of the firewall rule."
         }
       },
       "description": "Data Lake Store firewall rule information"
@@ -673,29 +695,95 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/FirewallRule"
           },
-          "description": "Gets or set the results of the list operation"
+          "description": "the results of the list operation"
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the link (url) to the next page of results."
+          "readOnly": true,
+          "description": "the link (url) to the next page of results."
         },
         "count": {
           "type": "integer",
+          "readOnly": true,
           "format": "int64",
-          "description": "Gets or sets the total count of results that are available, but might not be returned in the current page."
+          "description": "the total count of results that are available, but might not be returned in the current page."
         }
       },
       "description": "Data Lake Store firewall rule list information."
+    },
+    "EncryptionIdentity": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of encryption being used. Currently the only supported type is 'SystemAssigned'.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionIdentityType",
+            "modelAsString": false
+          }
+        },
+        "principalId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true,
+          "description": "The principal identifier associated with the encryption."
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true,
+          "description": "The tenant identifier associated with the encryption."
+        }
+      }
+    },
+    "EncryptionConfig": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of encryption configuration being used. Currently the only supported types are 'UserManaged' and 'ServiceManaged'.",
+          "enum": [
+            "UserManaged",
+            "ServiceManaged"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionConfigType",
+            "modelAsString": false
+          }
+        },
+        "keyVaultMetaInfo": {
+          "$ref": "#/definitions/KeyVaultMetaInfo",
+          "description": "The Key vault information for connecting to user managed encryption keys."
+        }
+      }
+    },
+    "KeyVaultMetaInfo": {
+      "properties": {
+        "keyVaultResourceId": {
+          "type": "string",
+          "description": "The resource identifier for the user managed Key Vault being used to encrypt."
+        },
+        "encryptionKeyName": {
+          "type": "string",
+          "description": "The name of the user managed encryption key."
+        },
+        "encryptionKeyVersion": {
+          "type": "string",
+          "description": "The version of the user managed encryption key."
+        }
+      }
     },
     "DataLakeStoreAccountProperties": {
       "properties": {
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the status of the Data Lake Store account while being provisioned.",
+          "description": "the status of the Data Lake Store account while being provisioned.",
           "enum": [
             "Failed",
             "Creating",
@@ -715,7 +803,7 @@
         "state": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the status of the Data Lake Store account after provisioning has completed.",
+          "description": "the status of the Data Lake Store account after provisioning has completed.",
           "enum": [
             "active",
             "suspended"
@@ -727,21 +815,52 @@
         },
         "creationTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
-          "description": "Gets or sets the account creation time."
+          "description": "the account creation time."
+        },
+        "encryptionState": {
+          "type": "string",
+          "description": "The current state of encryption for this Data Lake store account.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionState",
+            "modelAsString": false
+          }
+        },
+        "encryptionProvisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current state of encryption provisioning for this Data Lake store account.",
+          "enum": [
+            "Creating",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "encryptionConfig": {
+          "$ref": "#/definitions/EncryptionConfig",
+          "description": "The Key vault encryption configuration."
         },
         "lastModifiedTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
-          "description": "Gets or sets the account last modified time."
+          "description": "the account last modified time."
         },
         "endpoint": {
           "type": "string",
-          "description": "Gets or sets the gateway host."
+          "description": "the gateway host."
         },
         "defaultGroup": {
           "type": "string",
-          "description": "Gets or sets the default owner group for all new folders and files created in the Data Lake Store account."
+          "description": "the default owner group for all new folders and files created in the Data Lake Store account."
         }
       },
       "description": "Data Lake Store account properties information"
@@ -750,30 +869,36 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Gets or sets the account regional location."
+          "description": "the account regional location."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the account name."
+          "description": "the account name."
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the namespace and type of the account."
+          "readOnly": true,
+          "description": "the namespace and type of the account."
         },
         "id": {
           "type": "string",
-          "description": "Gets or sets the account subscription ID."
+          "readOnly": true,
+          "description": "the account subscription ID."
+        },
+        "identity": {
+          "$ref": "#/definitions/EncryptionIdentity",
+          "description": "The Key vault encryption identity, if any."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the value of custom properties."
+          "description": "the value of custom properties."
         },
         "properties": {
           "$ref": "#/definitions/DataLakeStoreAccountProperties",
-          "description": "Gets or sets the Data Lake Store account properties."
+          "description": "the Data Lake Store account properties."
         }
       },
       "description": "Data Lake Store account information"
@@ -782,19 +907,22 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/DataLakeStoreAccount"
           },
-          "description": "Gets or set the results of the list operation"
+          "description": "the results of the list operation"
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the link (url) to the next page of results."
+          "readOnly": true,
+          "description": "the link (url) to the next page of results."
         },
         "count": {
           "type": "integer",
+          "readOnly": true,
           "format": "int64",
-          "description": "Gets or sets the total count of results that are available, but might not be returned in the current page."
+          "description": "the total count of results that are available, but might not be returned in the current page."
         }
       },
       "description": "Data Lake Store account list information response."
@@ -803,15 +931,18 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Gets or sets the HTTP status code or error code associated with this error"
+          "readOnly": true,
+          "description": "the HTTP status code or error code associated with this error"
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the error message localized based on Accept-Language"
+          "readOnly": true,
+          "description": "the error message localized based on Accept-Language"
         },
         "target": {
           "type": "string",
-          "description": "Gets or sets the target of the particular error (for example, the name of the property in error)."
+          "readOnly": true,
+          "description": "the target of the particular error (for example, the name of the property in error)."
         }
       },
       "description": "Data Lake Store error details information"
@@ -820,11 +951,13 @@
       "properties": {
         "trace": {
           "type": "string",
-          "description": "Gets or sets the stack trace for the error"
+          "readOnly": true,
+          "description": "the stack trace for the error"
         },
         "context": {
           "type": "string",
-          "description": "Gets or sets the context for the error message"
+          "readOnly": true,
+          "description": "the context for the error message"
         }
       },
       "description": "Data Lake Store inner error information"
@@ -833,39 +966,41 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Gets or sets the HTTP status code or error code associated with this error"
+          "readOnly": true,
+          "description": "the HTTP status code or error code associated with this error"
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the error message to display."
+          "readOnly": true,
+          "description": "the error message to display."
         },
         "target": {
           "type": "string",
-          "description": "Gets or sets the target of the error."
+          "readOnly": true,
+          "description": "the target of the error."
         },
         "details": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/ErrorDetails"
           },
-          "description": "Gets or sets the list of error details"
+          "description": "the list of error details"
         },
         "innerError": {
           "$ref": "#/definitions/InnerError",
-          "description": "Gets or sets the inner exceptions or errors, if any"
+          "readOnly": true,
+          "description": "the inner exceptions or errors, if any"
         }
       },
-      "required": [
-        "code",
-        "message"
-      ],
       "description": "Data Lake Store error information"
     },
     "AzureAsyncOperationResult": {
       "properties": {
         "status": {
           "type": "string",
-          "description": "Gets or sets the status of the AzureAsuncOperation",
+          "readOnly": true,
+          "description": "the status of the AzureAsuncOperation",
           "enum": [
             "InProgress",
             "Succeeded",
@@ -877,53 +1012,11 @@
           }
         },
         "error": {
+          "readOnly": true,
           "$ref": "#/definitions/Error"
         }
       },
       "description": "The response body contains the status of the specified asynchronous operation, indicating whether it has succeeded, is in progress, or has failed. Note that this status is distinct from the HTTP status code returned for the Get Operation Status operation itself. If the asynchronous operation succeeded, the response body includes the HTTP status code for the successful request. If the asynchronous operation failed, the response body includes the HTTP status code for the failed request and error information regarding the failure."
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {

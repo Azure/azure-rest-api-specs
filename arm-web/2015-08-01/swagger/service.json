@@ -3,13 +3,864 @@
   "info": {
     "version": "2015-08-01",
     "title": "WebSite Management Client",
-    "description": "Use these APIs to manage Azure Websites resources through the Azure Resource Manager. All task operations conform to the HTTP/1.1 protocol specification and each operation returns an x-ms-request-id header that can be used to obtain information about the request. You must make sure that requests made to these resources are secure. For more information, see <a href=\"https://msdn.microsoft.com/en-us/library/azure/dn790557.aspx\">Authenticating Azure Resource Manager requests.</a>"
+    "description": "Use these APIs to manage Azure Websites resources through the Azure Resource Manager. All task operations conform to the HTTP/1.1 protocol specification and each operation returns an x-ms-request-id header that can be used to obtain information about the request. You must make sure that requests made to these resources are secure. For more information, see https://msdn.microsoft.com/en-us/library/azure/dn790557.aspx."
   },
   "host": "management.azure.com",
   "schemes": [
     "https"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates/{name}": {
+      "get": {
+        "tags": [
+          "CertificateOrders"
+        ],
+        "summary": "Get certificate associated with the certificate order",
+        "operationId": "CertificateOrders_GetCertificate",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "description": "Certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CertificateOrderCertificate"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "CertificateOrders"
+        ],
+        "summary": "Associates a Key Vault secret to a certificate store that will be used for storing the certificate once it's ready",
+        "operationId": "CertificateOrders_CreateOrUpdateCertificate",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "description": "Certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyVaultCertificate",
+            "in": "body",
+            "description": "Key Vault secret csm Id",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateOrderCertificate"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CertificateOrderCertificate"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "CertificateOrders"
+        ],
+        "summary": "Deletes the certificate associated with the certificate order",
+        "operationId": "CertificateOrders_DeleteCertificate",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "description": "Certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "CertificateOrders"
+        ],
+        "summary": "Associates a Key Vault secret to a certificate store that will be used for storing the certificate once it's ready",
+        "operationId": "CertificateOrders_UpdateCertificate",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "description": "Certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyVaultCertificate",
+            "in": "body",
+            "description": "Key Vault secret csm Id",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateOrderCertificate"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CertificateOrderCertificate"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}": {
+      "get": {
+        "tags": [
+          "CertificateOrders"
+        ],
+        "summary": "Get a certificate order",
+        "operationId": "CertificateOrders_GetCertificateOrder",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CertificateOrder"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "CertificateOrders"
+        ],
+        "summary": "Create or update a certificate purchase order",
+        "operationId": "CertificateOrders_CreateOrUpdateCertificateOrder",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateDistinguishedName",
+            "in": "body",
+            "description": "Distinguished name to be used for purchasing certificate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateOrder"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CertificateOrder"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "CertificateOrders"
+        ],
+        "summary": "Delete an existing certificate order",
+        "operationId": "CertificateOrders_DeleteCertificateOrder",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "CertificateOrders"
+        ],
+        "summary": "Create or update a certificate purchase order",
+        "operationId": "CertificateOrders_UpdateCertificateOrder",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateDistinguishedName",
+            "in": "body",
+            "description": "Distinguished name to be used for purchasing certificate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateOrder"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CertificateOrder"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders": {
+      "get": {
+        "tags": [
+          "CertificateOrders"
+        ],
+        "summary": "Get certificate orders in a resource group",
+        "operationId": "CertificateOrders_GetCertificateOrders",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CertificateOrderCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates": {
+      "get": {
+        "tags": [
+          "CertificateOrders"
+        ],
+        "summary": "List all certificates associated with a certificate order (only one certificate can be associated with an order at a time)",
+        "operationId": "CertificateOrders_GetCertificates",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "description": "Certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CertificateOrderCertificateCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/reissue": {
+      "post": {
+        "tags": [
+          "CertificateOrders"
+        ],
+        "summary": "Reissue an existing certificate order",
+        "operationId": "CertificateOrders_ReissueCertificateOrder",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reissueCertificateOrderRequest",
+            "in": "body",
+            "description": "Reissue parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReissueCertificateOrderRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/renew": {
+      "post": {
+        "tags": [
+          "CertificateOrders"
+        ],
+        "summary": "Renew an existing certificate order",
+        "operationId": "CertificateOrders_RenewCertificateOrder",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "renewCertificateOrderRequest",
+            "in": "body",
+            "description": "Renew parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RenewCertificateOrderRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/retrieveCertificateActions": {
+      "post": {
+        "tags": [
+          "CertificateOrders"
+        ],
+        "summary": "Retrieve the list of certificate actions",
+        "operationId": "CertificateOrders_RetrieveCertificateActions",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Certificate order name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CertificateOrderAction"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/retrieveEmailHistory": {
+      "post": {
+        "tags": [
+          "CertificateOrders"
+        ],
+        "summary": "Retrive email history",
+        "operationId": "CertificateOrders_RetrieveCertificateEmailHistory",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Certificate order name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CertificateEmail"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/resendEmail": {
+      "post": {
+        "tags": [
+          "CertificateOrders"
+        ],
+        "summary": "Resend certificate email",
+        "operationId": "CertificateOrders_ResendCertificateEmail",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Certificate order name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/verifyDomainOwnership": {
+      "post": {
+        "tags": [
+          "CertificateOrders"
+        ],
+        "summary": "Verify domain ownership for this certificate order",
+        "operationId": "CertificateOrders_VerifyDomainOwnership",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Certificate order name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/certificates": {
       "get": {
         "tags": [
@@ -45,7 +896,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/certificates/{name}": {
@@ -542,7 +1396,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/classicMobileServices/{name}": {
@@ -672,7 +1529,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}": {
@@ -1055,6 +1915,18 @@
         ],
         "parameters": [
           {
+            "name": "sku",
+            "in": "query",
+            "description": "Filter only to regions that support this sku",
+            "type": "string"
+          },
+          {
+            "name": "linuxWorkersEnabled",
+            "in": "query",
+            "description": "Filter only to regions that support linux workers",
+            "type": "boolean"
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -1069,7 +1941,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/certificates": {
@@ -1100,7 +1975,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/serverfarms": {
@@ -1137,7 +2015,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/sites": {
@@ -1168,7 +2049,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/hostingEnvironments": {
@@ -1199,7 +2083,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/managedHostingEnvironments": {
@@ -1230,7 +2117,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/classicMobileServices": {
@@ -1261,7 +2151,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/premieraddonoffers": {
@@ -1279,46 +2172,6 @@
           "text/xml"
         ],
         "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/ishostingenvironmentnameavailable/{name}": {
-      "get": {
-        "tags": [
-          "Global"
-        ],
-        "summary": "Whether hosting environment name is available",
-        "operationId": "Global_IsHostingEnvironmentWithLegacyNameAvailable",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Hosting environment name",
-            "required": true,
-            "type": "string"
-          },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
@@ -1355,6 +2208,46 @@
           {
             "name": "name",
             "in": "query",
+            "description": "Hosting environment name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/ishostingenvironmentnameavailable/{name}": {
+      "get": {
+        "tags": [
+          "Global"
+        ],
+        "summary": "Whether hosting environment name is available",
+        "operationId": "Global_IsHostingEnvironmentWithLegacyNameAvailable",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
             "description": "Hosting environment name",
             "required": true,
             "type": "string"
@@ -1425,6 +2318,88 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CertificateRegistration/certificateOrders": {
+      "get": {
+        "tags": [
+          "GlobalCertificateOrder"
+        ],
+        "summary": "Lists all domains in a subscription",
+        "operationId": "GlobalCertificateOrder_GetAllCertificateOrders",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CertificateOrderCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CertificateRegistration/validateCertificateRegistrationInformation": {
+      "post": {
+        "tags": [
+          "GlobalCertificateOrder"
+        ],
+        "summary": "Validate certificate purchase information",
+        "operationId": "GlobalCertificateOrder_ValidateCertificatePurchaseInformation",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "certificateOrder",
+            "in": "body",
+            "description": "Certificate order",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateOrder"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/domains": {
       "get": {
         "tags": [
@@ -1453,7 +2428,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/generateSsoRequest": {
@@ -1628,7 +2606,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
@@ -2009,7 +2990,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/capacities/virtualip": {
@@ -2094,7 +3078,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/reboot": {
@@ -2320,7 +3307,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/metricdefinitions": {
@@ -2418,7 +3408,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/metrics": {
@@ -2493,7 +3486,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/metrics": {
@@ -2557,7 +3553,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/metricdefinitions": {
@@ -2602,7 +3601,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/metricdefinitions": {
@@ -2654,7 +3656,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/usages": {
@@ -2699,7 +3704,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/usages": {
@@ -2751,7 +3759,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/sites": {
@@ -2802,52 +3813,10 @@
             }
           }
         },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/serverfarms": {
-      "get": {
-        "tags": [
-          "HostingEnvironments"
-        ],
-        "summary": "Get all serverfarms (App Service Plans) on the hostingEnvironment (App Service Environment).",
-        "operationId": "HostingEnvironments_GetHostingEnvironmentServerFarms",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of hostingEnvironment (App Service Environment)",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerFarmCollection"
-            }
-          }
-        },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/webhostingplans": {
@@ -2892,7 +3861,58 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/serverfarms": {
+      "get": {
+        "tags": [
+          "HostingEnvironments"
+        ],
+        "summary": "Get all serverfarms (App Service Plans) on the hostingEnvironment (App Service Environment).",
+        "operationId": "HostingEnvironments_GetHostingEnvironmentServerFarms",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of hostingEnvironment (App Service Environment)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerFarmCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools": {
@@ -2937,7 +3957,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default": {
@@ -3103,7 +4126,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools": {
@@ -3148,7 +4174,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}": {
@@ -3335,7 +4364,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/instances/{instance}/metrics": {
@@ -3635,7 +4667,10 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/resume": {
@@ -3687,7 +4722,10 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/managedHostingEnvironments/{name}": {
@@ -3901,7 +4939,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/managedHostingEnvironments/{name}/capacities/virtualip": {
@@ -4065,7 +5106,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/managedHostingEnvironments/{name}/webhostingplans": {
@@ -4110,7 +5154,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/managedHostingEnvironments/{name}/serverfarms": {
@@ -4155,7 +5202,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/providers/Microsoft.Web/sourcecontrols": {
@@ -4183,7 +5233,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/providers/Microsoft.Web/sourcecontrols/{sourceControlType}": {
@@ -4342,6 +5395,239 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/recommendations": {
+      "get": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Gets a list of recommendations associated with the specified subscription.",
+        "operationId": "Recommendations_GetRecommendationBySubscription",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "featured",
+            "in": "query",
+            "description": "If set, this API returns only the most critical recommendation among the others. Otherwise this API returns all recommendations available",
+            "type": "boolean"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Return only channels specified in the filter. Filter is specified by using OData syntax. Example: $filter=channels eq 'Api' or channel eq 'Notification'",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Recommendation"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/recommendations/{name}": {
+      "get": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Gets the detailed properties of the recommendation object for the specified web site.",
+        "operationId": "Recommendations_GetRuleDetailsBySiteName",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Recommendation rule name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecommendationRule"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/recommendations": {
+      "get": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Gets a list of recommendations associated with the specified web site.",
+        "operationId": "Recommendations_GetRecommendedRulesForSite",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "featured",
+            "in": "query",
+            "description": "If set, this API returns only the most critical recommendation among the others. Otherwise this API returns all recommendations available",
+            "type": "boolean"
+          },
+          {
+            "name": "siteSku",
+            "in": "query",
+            "description": "The name of site SKU.",
+            "type": "string"
+          },
+          {
+            "name": "numSlots",
+            "in": "query",
+            "description": "The number of site slots associated to the site",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Recommendation"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/recommendationHistory": {
+      "get": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Gets the list of past recommendations optionally specified by the time range.",
+        "operationId": "Recommendations_GetRecommendationHistoryForSite",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "The start time of a time range to query, e.g. $filter=startTime eq '2015-01-01T00:00:00Z' and endTime eq '2015-01-02T00:00:00Z'",
+            "type": "string"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "The end time of a time range to query, e.g. $filter=startTime eq '2015-01-01T00:00:00Z' and endTime eq '2015-01-02T00:00:00Z'",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Recommendation"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms": {
       "get": {
         "tags": [
@@ -4377,7 +5663,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}": {
@@ -4597,7 +5886,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/metricdefinitions": {
@@ -4642,7 +5934,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkConnections": {
@@ -5293,7 +6588,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/workers/{workerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/workers/{workerName}/reboot": {
       "post": {
         "tags": [
           "ServerFarms"
@@ -5325,7 +6620,7 @@
           {
             "name": "workerName",
             "in": "path",
-            "description": "Name of worker machine, typically IP address",
+            "description": "Name of worker machine, typically starts with RD",
             "required": true,
             "type": "string"
           },
@@ -5954,63 +7249,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkFeatures/{view}": {
-      "get": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Retrieves a view of all network features in use on this web app.",
-        "operationId": "Sites_GetSiteNetworkFeatures",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The resource group name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "view",
-            "in": "path",
-            "description": "The type of view. This can either be \"summary\" or \"detailed\".",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/NetworkFeatures"
-            }
-          },
-          "404": {
-            "description": "The requested view does not exist."
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkFeatures/{view}": {
       "get": {
         "tags": [
@@ -6075,13 +7313,13 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/operationresults/{operationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkFeatures/{view}": {
       "get": {
         "tags": [
           "Sites"
         ],
-        "summary": "Gets the operation for a web app",
-        "operationId": "Sites_GetSiteOperation",
+        "summary": "Retrieves a view of all network features in use on this web app.",
+        "operationId": "Sites_GetSiteNetworkFeatures",
         "consumes": [],
         "produces": [
           "application/json",
@@ -6093,21 +7331,21 @@
           {
             "name": "resourceGroupName",
             "in": "path",
-            "description": "Name of resource group",
+            "description": "The resource group name",
             "required": true,
             "type": "string"
           },
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "The name of the web app",
             "required": true,
             "type": "string"
           },
           {
-            "name": "operationId",
+            "name": "view",
             "in": "path",
-            "description": "Id of an operation",
+            "description": "The type of view. This can either be \"summary\" or \"detailed\".",
             "required": true,
             "type": "string"
           },
@@ -6122,8 +7360,11 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Object"
+              "$ref": "#/definitions/NetworkFeatures"
             }
+          },
+          "404": {
+            "description": "The requested view does not exist."
           }
         },
         "deprecated": false
@@ -6169,6 +7410,60 @@
             "name": "slot",
             "in": "path",
             "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/operationresults/{operationId}": {
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Gets the operation for a web app",
+        "operationId": "Sites_GetSiteOperation",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Id of an operation",
             "required": true,
             "type": "string"
           },
@@ -6255,7 +7550,8 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/slotsswap": {
@@ -6330,7 +7626,8 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slotsdiffs": {
@@ -6390,7 +7687,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/slotsdiffs": {
@@ -6457,7 +7757,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/applySlotConfig": {
@@ -6591,6 +7894,53 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/resetSlotConfig": {
+      "post": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Resets the configuration settings of the current slot if they were previously modified by calling ApplySlotConfig API",
+        "operationId": "Sites_ResetProductionSlotConfig",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/resetSlotConfig": {
       "post": {
         "tags": [
@@ -6624,53 +7974,6 @@
             "name": "slot",
             "in": "path",
             "description": "Name of web app slot. If not specified then will default to production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/resetSlotConfig": {
-      "post": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Resets the configuration settings of the current slot if they were previously modified by calling ApplySlotConfig API",
-        "operationId": "Sites_ResetProductionSlotConfig",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
             "required": true,
             "type": "string"
           },
@@ -6845,7 +8148,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites": {
@@ -6901,7 +8207,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}": {
@@ -7347,6 +8656,107 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/iscloneable": {
+      "post": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Creates a new web app or modifies an existing web app.",
+        "operationId": "Sites_IsSiteCloneable",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteCloneability"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/iscloneable": {
+      "post": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Creates a new web app or modifies an existing web app.",
+        "operationId": "Sites_IsSiteCloneableSlot",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteCloneability"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/recover": {
       "post": {
         "tags": [
@@ -7383,9 +8793,9 @@
             "type": "string"
           },
           {
-            "name": "snapshot",
+            "name": "recoveryEntity",
             "in": "body",
-            "description": "Snapshot data used for web app recovery. Snapshot information can be obtained by call GetDeletedSites API.",
+            "description": "Snapshot data used for web app recovery. Snapshot information can be obtained by calling GetDeletedSites or GetSiteSnapshots API.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CsmSiteRecoveryEntity"
@@ -7399,14 +8809,18 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
+          "202": {
+            "description": "Asynchronous operation in progress",
             "schema": {
-              "$ref": "#/definitions/Object"
+              "$ref": "#/definitions/Site"
             }
+          },
+          "404": {
+            "description": "Web app not found"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/recover": {
@@ -7445,9 +8859,9 @@
             "type": "string"
           },
           {
-            "name": "snapshot",
+            "name": "recoveryEntity",
             "in": "body",
-            "description": "Snapshot data used for web app recovery. Snapshot information can be obtained by call GetDeletedSites API.",
+            "description": "Snapshot data used for web app recovery. Snapshot information can be obtained by calling GetDeletedSites or GetSiteSnapshots API.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CsmSiteRecoveryEntity"
@@ -7468,140 +8882,18 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
+          "202": {
+            "description": "Asynchronous operation in progress",
             "schema": {
-              "$ref": "#/definitions/Object"
+              "$ref": "#/definitions/Site"
             }
+          },
+          "404": {
+            "description": "Web app not found"
           }
         },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/restorableSnapshots": {
-      "put": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Returns Snapshots to the user based on their SKU.",
-        "operationId": "Sites_GetSiteSnapshotsOnSkuSlot",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionName",
-            "in": "query",
-            "description": "Azure subscription",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "webspaceName",
-            "in": "query",
-            "description": "Webspace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Website Name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/restorableSnapshots": {
-      "put": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Returns Snapshots to the user based on their SKU.",
-        "operationId": "Sites_GetSiteSnapshotsOnSku",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionName",
-            "in": "query",
-            "description": "Azure subscription",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "webspaceName",
-            "in": "query",
-            "description": "Webspace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Website Name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/snapshots": {
@@ -7620,15 +8912,8 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionName",
-            "in": "query",
-            "description": "Azure subscription",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "webspaceName",
-            "in": "query",
+            "name": "resourceGroupName",
+            "in": "path",
             "description": "Webspace",
             "required": true,
             "type": "string"
@@ -7637,12 +8922,6 @@
             "name": "name",
             "in": "path",
             "description": "Website Name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
             "required": true,
             "type": "string"
           },
@@ -7680,15 +8959,8 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionName",
-            "in": "query",
-            "description": "Azure subscription",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "webspaceName",
-            "in": "query",
+            "name": "resourceGroupName",
+            "in": "path",
             "description": "Webspace",
             "required": true,
             "type": "string"
@@ -7701,14 +8973,9 @@
             "type": "string"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "slot",
             "in": "path",
+            "description": "Website Slot",
             "required": true,
             "type": "string"
           },
@@ -7777,7 +9044,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deployments": {
@@ -7822,7 +9092,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/deployments": {
@@ -7874,7 +9147,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/deployments": {
@@ -7926,7 +9202,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/deployments": {
@@ -7985,16 +9264,19 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/deployments/{id}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/deployments/{id}": {
       "get": {
         "tags": [
           "Sites"
         ],
         "summary": "Get the deployment",
-        "operationId": "Sites_GetInstanceDeploymentSlot",
+        "operationId": "Sites_GetInstanceDeployment",
         "consumes": [],
         "produces": [
           "application/json",
@@ -8021,13 +9303,6 @@
             "name": "id",
             "in": "path",
             "description": "Id of the deployment",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of web app slot. If not specified then will default to production slot.",
             "required": true,
             "type": "string"
           },
@@ -8060,7 +9335,7 @@
           "Sites"
         ],
         "summary": "Create a deployment",
-        "operationId": "Sites_CreateInstanceDeploymentSlot",
+        "operationId": "Sites_CreateInstanceDeployment",
         "consumes": [
           "application/json",
           "text/json",
@@ -8091,13 +9366,6 @@
             "name": "id",
             "in": "path",
             "description": "Id of the deployment",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of web app slot. If not specified then will default to production slot.",
             "required": true,
             "type": "string"
           },
@@ -8139,7 +9407,7 @@
           "Sites"
         ],
         "summary": "Delete the deployment",
-        "operationId": "Sites_DeleteInstanceDeploymentSlot",
+        "operationId": "Sites_DeleteInstanceDeployment",
         "consumes": [],
         "produces": [
           "application/json",
@@ -8166,13 +9434,6 @@
             "name": "id",
             "in": "path",
             "description": "Id of the deployment",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of web app slot. If not specified then will default to production slot.",
             "required": true,
             "type": "string"
           },
@@ -8564,13 +9825,13 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/deployments/{id}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/deployments/{id}": {
       "get": {
         "tags": [
           "Sites"
         ],
         "summary": "Get the deployment",
-        "operationId": "Sites_GetInstanceDeployment",
+        "operationId": "Sites_GetInstanceDeploymentSlot",
         "consumes": [],
         "produces": [
           "application/json",
@@ -8597,6 +9858,13 @@
             "name": "id",
             "in": "path",
             "description": "Id of the deployment",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
             "required": true,
             "type": "string"
           },
@@ -8629,7 +9897,7 @@
           "Sites"
         ],
         "summary": "Create a deployment",
-        "operationId": "Sites_CreateInstanceDeployment",
+        "operationId": "Sites_CreateInstanceDeploymentSlot",
         "consumes": [
           "application/json",
           "text/json",
@@ -8660,6 +9928,13 @@
             "name": "id",
             "in": "path",
             "description": "Id of the deployment",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
             "required": true,
             "type": "string"
           },
@@ -8701,7 +9976,7 @@
           "Sites"
         ],
         "summary": "Delete the deployment",
-        "operationId": "Sites_DeleteInstanceDeployment",
+        "operationId": "Sites_DeleteInstanceDeploymentSlot",
         "consumes": [],
         "produces": [
           "application/json",
@@ -8728,6 +10003,13 @@
             "name": "id",
             "in": "path",
             "description": "Id of the deployment",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
             "required": true,
             "type": "string"
           },
@@ -8798,7 +10080,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances": {
@@ -8850,7 +10135,58 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hostNameBindings": {
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Get web app hostname bindings",
+        "operationId": "Sites_GetSiteHostNameBindings",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HostNameBindingCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/hostNameBindings": {
@@ -8902,52 +10238,10 @@
             }
           }
         },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hostNameBindings": {
-      "get": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Get web app hostname bindings",
-        "operationId": "Sites_GetSiteHostNameBindings",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HostNameBindingCollection"
-            }
-          }
-        },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hostNameBindings/{hostName}": {
@@ -9660,6 +10954,214 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/sourcecontrols/web": {
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Get the source control configuration of web app",
+        "operationId": "Sites_GetSiteSourceControl",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Update the source control configuration of web app",
+        "operationId": "Sites_CreateOrUpdateSiteSourceControl",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteSourceControl",
+            "in": "body",
+            "description": "Request body that contains the source control parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Delete source control configuration of web app",
+        "operationId": "Sites_DeleteSiteSourceControl",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Update the source control configuration of web app",
+        "operationId": "Sites_UpdateSiteSourceControl",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteSourceControl",
+            "in": "body",
+            "description": "Request body that contains the source control parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/sourcecontrols/web": {
       "get": {
         "tags": [
@@ -9896,261 +11398,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/sourcecontrols/web": {
-      "get": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Get the source control configuration of web app",
-        "operationId": "Sites_GetSiteSourceControl",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SiteSourceControl"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Update the source control configuration of web app",
-        "operationId": "Sites_CreateOrUpdateSiteSourceControl",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteSourceControl",
-            "in": "body",
-            "description": "Request body that contains the source control parameters",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SiteSourceControl"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SiteSourceControl"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "delete": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Delete source control configuration of web app",
-        "operationId": "Sites_DeleteSiteSourceControl",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "patch": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Update the source control configuration of web app",
-        "operationId": "Sites_UpdateSiteSourceControl",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteSourceControl",
-            "in": "body",
-            "description": "Request body that contains the source control parameters",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SiteSourceControl"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SiteSourceControl"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/appsettings/list": {
-      "post": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Gets the application settings of web app",
-        "operationId": "Sites_ListSiteAppSettings",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/StringDictionary"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/appsettings/list": {
       "post": {
         "tags": [
@@ -10184,6 +11431,53 @@
             "name": "slot",
             "in": "path",
             "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StringDictionary"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/appsettings/list": {
+      "post": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Gets the application settings of web app",
+        "operationId": "Sites_ListSiteAppSettings",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
             "required": true,
             "type": "string"
           },
@@ -11343,6 +12637,50 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/premieraddons": {
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "operationId": "Sites_ListSitePremierAddOns",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/premieraddons": {
       "get": {
         "tags": [
@@ -11371,50 +12709,6 @@
           },
           {
             "name": "slot",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/premieraddons": {
-      "get": {
-        "tags": [
-          "Sites"
-        ],
-        "operationId": "Sites_ListSitePremierAddOns",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
             "in": "path",
             "required": true,
             "type": "string"
@@ -11872,6 +13166,66 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/backup": {
+      "put": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Updates backup configuration of web app",
+        "operationId": "Sites_UpdateSiteBackupConfiguration",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Information on backup request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupRequest"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/backup": {
       "put": {
         "tags": [
@@ -11939,125 +13293,7 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/backup": {
-      "put": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Updates backup configuration of web app",
-        "operationId": "Sites_UpdateSiteBackupConfiguration",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Information on backup request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BackupRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/BackupRequest"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/backup": {
-      "put": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Creates web app backup",
-        "operationId": "Sites_BackupSiteDeprecated",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Information on backup request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BackupRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/BackupItem"
-            }
-          }
-        },
-        "deprecated": false
-      },
       "post": {
         "tags": [
           "Sites"
@@ -12118,71 +13354,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/backup": {
-      "put": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Creates web app backup",
-        "operationId": "Sites_BackupSiteDeprecatedSlot",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Information on backup request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BackupRequest"
-            }
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of web app slot. If not specified then will default to production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/BackupItem"
-            }
-          }
-        },
-        "deprecated": false
-      },
       "post": {
         "tags": [
           "Sites"
@@ -12418,7 +13589,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/backups": {
@@ -12470,7 +13644,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/backups/{backupId}": {
@@ -12699,73 +13876,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/backups/{backupId}/list": {
-      "post": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Gets status of a web app backup that may be in progress, including secrets associated with the backup, such as the Azure Storage SAS URL. Also can be used to update the SAS URL for the backup if a new URL is passed in the request body.",
-        "operationId": "Sites_GetSiteBackupStatusSecrets",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "backupId",
-            "in": "path",
-            "description": "Id of backup",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Information on backup request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BackupRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/BackupItem"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/backups/{backupId}/list": {
       "post": {
         "tags": [
@@ -12821,6 +13931,73 @@
             "description": "Name of web app slot. If not specified then will default to production slot.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupItem"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/backups/{backupId}/list": {
+      "post": {
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Gets status of a web app backup that may be in progress, including secrets associated with the backup, such as the Azure Storage SAS URL. Also can be used to update the SAS URL for the backup if a new URL is passed in the request body.",
+        "operationId": "Sites_GetSiteBackupStatusSecrets",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupId",
+            "in": "path",
+            "description": "Id of backup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Information on backup request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupRequest"
+            }
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -12904,7 +14081,8 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/backups/{backupId}/restore": {
@@ -12978,552 +14156,8 @@
             }
           }
         },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/backup/config": {
-      "get": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Gets the backup configuration for a web app",
-        "operationId": "Sites_GetSiteBackupConfigurationDeprecated",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/BackupRequest"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Updates backup configuration of web app",
-        "operationId": "Sites_UpdateSiteBackupConfigurationDeprecated",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Information on backup request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BackupRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/BackupRequest"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "post": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Lists all backup configurations for a web app",
-        "operationId": "Sites_ListSiteBackupConfigurationDeprecated",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/BackupRequest"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/backup/config": {
-      "get": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Gets the backup configuration for a web app",
-        "operationId": "Sites_GetSiteBackupConfigurationDeprecatedSlot",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of web app slot. If not specified then will default to production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/BackupRequest"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Updates backup configuration of web app",
-        "operationId": "Sites_UpdateSiteBackupConfigurationDeprecatedSlot",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Information on backup request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BackupRequest"
-            }
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of web app slot. If not specified then will default to production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/BackupRequest"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "post": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Lists all backup configurations for a web app",
-        "operationId": "Sites_ListSiteBackupConfigurationDeprecatedSlot",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of web app slot. If not specified then will default to production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/BackupRequest"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/restore": {
-      "get": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Lists all available backups for web app",
-        "operationId": "Sites_ListSiteBackupsDeprecatedSlot",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of web app slot. If not specified then will default to production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/BackupItemCollection"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/restore": {
-      "get": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Lists all available backups for web app",
-        "operationId": "Sites_ListSiteBackupsDeprecated",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/BackupItemCollection"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/restore/discover": {
-      "put": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Discovers existing web app backups that can be restored",
-        "operationId": "Sites_DiscoverSiteRestoreDeprecated",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Information on restore request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RestoreRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RestoreRequest"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/restore/discover": {
-      "put": {
-        "tags": [
-          "Sites"
-        ],
-        "summary": "Discovers existing web app backups that can be restored",
-        "operationId": "Sites_DiscoverSiteRestoreDeprecatedSlot",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Information on restore request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RestoreRequest"
-            }
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of web app slot. If not specified then will default to production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RestoreRequest"
-            }
-          }
-        },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/usages": {
@@ -13574,7 +14208,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/usages": {
@@ -13632,7 +14269,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/metrics": {
@@ -13689,7 +14329,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/metrics": {
@@ -13753,7 +14396,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/metricdefinitions": {
@@ -13805,7 +14451,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/metricdefinitions": {
@@ -13850,7 +14499,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/publishxml": {
@@ -14311,6 +14963,50 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/sync": {
+      "post": {
+        "tags": [
+          "Sites"
+        ],
+        "operationId": "Sites_SyncSiteRepository",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/sync": {
       "post": {
         "tags": [
@@ -14339,50 +15035,6 @@
           },
           {
             "name": "slot",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/sync": {
-      "post": {
-        "tags": [
-          "Sites"
-        ],
-        "operationId": "Sites_SyncSiteRepository",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
             "in": "path",
             "required": true,
             "type": "string"
@@ -15679,7 +16331,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/topLevelDomains/{name}": {
@@ -15772,7 +16427,10 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web.Admin/environments/{environmentName}/usage": {
@@ -15839,6 +16497,433 @@
     }
   },
   "definitions": {
+    "ArmPlan": {
+      "description": "The plan object in an ARM, represents a marketplace plan",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name",
+          "type": "string"
+        },
+        "publisher": {
+          "description": "The publisher",
+          "type": "string"
+        },
+        "product": {
+          "description": "The product",
+          "type": "string"
+        },
+        "promotionCode": {
+          "description": "The promotion code",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of product",
+          "type": "string"
+        }
+      }
+    },
+    "CertificateOrderCertificate": {
+      "description": "Class representing the Key Vault container for certificate purchased through Azure",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "keyVaultId": {
+              "description": "Key Vault Csm resource Id",
+              "type": "string"
+            },
+            "keyVaultSecretName": {
+              "description": "Key Vault secret name",
+              "type": "string"
+            },
+            "provisioningState": {
+              "description": "Status of the Key Vault secret",
+              "enum": [
+                "Initialized",
+                "WaitingOnCertificateOrder",
+                "Succeeded",
+                "CertificateOrderFailed",
+                "OperationNotPermittedOnKeyVault",
+                "AzureServiceUnauthorizedToAccessKeyVault",
+                "KeyVaultDoesNotExist",
+                "KeyVaultSecretDoesNotExist",
+                "UnknownError",
+                "Unknown"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "KeyVaultSecretStatus",
+                "modelAsString": false
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SkuDescription": {
+      "description": "Describes a sku for a scalable resource",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the resource sku",
+          "type": "string"
+        },
+        "tier": {
+          "description": "Service Tier of the resource sku",
+          "type": "string"
+        },
+        "size": {
+          "description": "Size specifier of the resource sku",
+          "type": "string"
+        },
+        "family": {
+          "description": "Family code of the resource sku",
+          "type": "string"
+        },
+        "capacity": {
+          "format": "int32",
+          "description": "Current number of instances assigned to the resource",
+          "type": "integer"
+        }
+      }
+    },
+    "Object": {
+      "type": "object",
+      "properties": {}
+    },
+    "CertificateOrder": {
+      "description": "Certificate purchase order",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "certificates": {
+              "description": "State of the Key Vault secret",
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/CertificateOrderCertificate"
+              }
+            },
+            "distinguishedName": {
+              "description": "Certificate distinguished name",
+              "type": "string"
+            },
+            "domainVerificationToken": {
+              "description": "Domain Verification Token",
+              "type": "string"
+            },
+            "validityInYears": {
+              "format": "int32",
+              "description": "Duration in years (must be between 1 and 3)",
+              "type": "integer"
+            },
+            "keySize": {
+              "format": "int32",
+              "description": "Certificate Key Size",
+              "type": "integer"
+            },
+            "productType": {
+              "description": "Certificate product type",
+              "enum": [
+                "StandardDomainValidatedSsl",
+                "StandardDomainValidatedWildCardSsl"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "CertificateProductType",
+                "modelAsString": false
+              }
+            },
+            "autoRenew": {
+              "description": "Auto renew",
+              "type": "boolean"
+            },
+            "provisioningState": {
+              "description": "Status of certificate order",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress",
+                "Deleting"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": false
+              }
+            },
+            "status": {
+              "description": "Current order status",
+              "enum": [
+                "Pendingissuance",
+                "Issued",
+                "Revoked",
+                "Canceled",
+                "Denied",
+                "Pendingrevocation",
+                "PendingRekey",
+                "Unused",
+                "Expired",
+                "NotSubmitted"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "CertificateOrderStatus",
+                "modelAsString": false
+              }
+            },
+            "signedCertificate": {
+              "$ref": "#/definitions/CertificateDetails",
+              "description": "Signed certificate"
+            },
+            "csr": {
+              "description": "Last CSR that was created for this order",
+              "type": "string"
+            },
+            "intermediate": {
+              "$ref": "#/definitions/CertificateDetails",
+              "description": "Intermediate certificate"
+            },
+            "root": {
+              "$ref": "#/definitions/CertificateDetails",
+              "description": "Root certificate"
+            },
+            "serialNumber": {
+              "description": "Current serial number of the certificate",
+              "type": "string"
+            },
+            "lastCertificateIssuanceTime": {
+              "format": "date-time",
+              "description": "Certificate last issuance time",
+              "type": "string"
+            },
+            "expirationTime": {
+              "format": "date-time",
+              "description": "Certificate expiration time",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CertificateDetails": {
+      "description": "Certificate Details",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "version": {
+              "format": "int32",
+              "description": "Version",
+              "type": "integer"
+            },
+            "serialNumber": {
+              "description": "Serial Number",
+              "type": "string"
+            },
+            "thumbprint": {
+              "description": "Thumbprint",
+              "type": "string"
+            },
+            "subject": {
+              "description": "Subject",
+              "type": "string"
+            },
+            "notBefore": {
+              "format": "date-time",
+              "description": "Valid from",
+              "type": "string"
+            },
+            "notAfter": {
+              "format": "date-time",
+              "description": "Valid to",
+              "type": "string"
+            },
+            "signatureAlgorithm": {
+              "description": "Signature Algorithm",
+              "type": "string"
+            },
+            "issuer": {
+              "description": "Issuer",
+              "type": "string"
+            },
+            "rawData": {
+              "description": "Raw certificate data",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CertificateOrderCollection": {
+      "description": "Collection of ceritificate orders",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CertificateOrder"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources",
+          "type": "string"
+        }
+      }
+    },
+    "CertificateOrderCertificateCollection": {
+      "description": "Collection of ceritificateorder certificates",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CertificateOrderCertificate"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources",
+          "type": "string"
+        }
+      }
+    },
+    "ReissueCertificateOrderRequest": {
+      "description": "Class representing certificate reissue request",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "keySize": {
+              "format": "int32",
+              "description": "Certificate Key Size",
+              "type": "integer"
+            },
+            "delayExistingRevokeInHours": {
+              "format": "int32",
+              "description": "Delay in hours to revoke existing certificate after the new certificate is issued",
+              "type": "integer"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RenewCertificateOrderRequest": {
+      "description": "Class representing certificate renew request",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "keySize": {
+              "format": "int32",
+              "description": "Certificate Key Size",
+              "type": "integer"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CertificateOrderAction": {
+      "description": "Represents a certificate action",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "description": "Type",
+              "enum": [
+                "CertificateIssued",
+                "CertificateOrderCanceled",
+                "CertificateOrderCreated",
+                "CertificateRevoked",
+                "DomainValidationComplete",
+                "FraudDetected",
+                "OrgNameChange",
+                "OrgValidationComplete",
+                "SanDrop"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "CertificateOrderActionType",
+                "modelAsString": false
+              }
+            },
+            "createdAt": {
+              "format": "date-time",
+              "description": "Time at which the certificate action was performed",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CertificateEmail": {
+      "description": "Certificate Email",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "emailId": {
+              "description": "Email id",
+              "type": "string"
+            },
+            "timeStamp": {
+              "format": "date-time",
+              "description": "Time stamp",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "CertificateCollection": {
       "description": "Collection of certificates",
       "type": "object",
@@ -15932,7 +17017,8 @@
               "$ref": "#/definitions/HostingEnvironmentProfile",
               "description": "Specification for the hosting environment (App Service Environment) to use for the certificate"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -15953,63 +17039,6 @@
           "type": "string"
         }
       }
-    },
-    "ArmPlan": {
-      "description": "The plan object in an ARM, represents a marketplace plan",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name",
-          "type": "string"
-        },
-        "publisher": {
-          "description": "The publisher",
-          "type": "string"
-        },
-        "product": {
-          "description": "The product",
-          "type": "string"
-        },
-        "promotionCode": {
-          "description": "The promotion code",
-          "type": "string"
-        },
-        "version": {
-          "description": "Version of product",
-          "type": "string"
-        }
-      }
-    },
-    "SkuDescription": {
-      "description": "Describes a sku for a scalable resource",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the resource sku",
-          "type": "string"
-        },
-        "tier": {
-          "description": "Service Tier of the resource sku",
-          "type": "string"
-        },
-        "size": {
-          "description": "Size specifier of the resource sku",
-          "type": "string"
-        },
-        "family": {
-          "description": "Family code of the resource sku",
-          "type": "string"
-        },
-        "capacity": {
-          "format": "int32",
-          "description": "Current number of instances assigned to the resource",
-          "type": "integer"
-        }
-      }
-    },
-    "Object": {
-      "type": "object",
-      "properties": {}
     },
     "Csr": {
       "description": "Certificate signing request object",
@@ -16050,7 +17079,8 @@
               "description": "Hosting environment",
               "type": "string"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -16086,7 +17116,8 @@
               "description": "Name of the mobile service",
               "type": "string"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -16171,7 +17202,8 @@
                 "Succeeded",
                 "Failed",
                 "Canceled",
-                "InProgress"
+                "InProgress",
+                "Deleting"
               ],
               "type": "string",
               "x-ms-enum": {
@@ -16223,8 +17255,21 @@
             "consent": {
               "$ref": "#/definitions/DomainPurchaseConsent",
               "description": "Legal agreement consent"
+            },
+            "domainNotRenewableReasons": {
+              "description": "Reasons why domain is not renewable",
+              "type": "array",
+              "items": {
+                "enum": [
+                  "RegistrationStatusNotSupportedForRenewal",
+                  "ExpirationNotInRenewalTimeRange",
+                  "SubscriptionNotActive"
+                ],
+                "type": "string"
+              }
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -16401,8 +17446,13 @@
             "publishingPassword": {
               "description": "Password used for publishing",
               "type": "string"
+            },
+            "scmUri": {
+              "description": "Service Control Manager URI, including username and password",
+              "type": "string"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -16446,7 +17496,8 @@
               "description": "Display name for region",
               "type": "string"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -16483,6 +17534,10 @@
           "properties": {
             "name": {
               "description": "Name for the App Service Plan",
+              "type": "string"
+            },
+            "workerTierName": {
+              "description": "Target worker tier assigned to the App Service Plan",
               "type": "string"
             },
             "status": {
@@ -16535,8 +17590,13 @@
               "description": "Resource group of the serverfarm",
               "type": "string",
               "readOnly": true
+            },
+            "reserved": {
+              "description": "Enables creation of a Linux App Service Plan",
+              "type": "boolean"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         },
         "sku": {
           "$ref": "#/definitions/SkuDescription"
@@ -16707,11 +17767,37 @@
               "type": "string",
               "readOnly": true
             },
+            "containerSize": {
+              "format": "int32",
+              "description": "Size of a function container",
+              "type": "integer"
+            },
+            "maxNumberOfWorkers": {
+              "format": "int32",
+              "description": "Maximum number of workers\r\n            This only applies to function container",
+              "type": "integer"
+            },
             "cloningInfo": {
               "$ref": "#/definitions/CloningInfo",
               "description": "This is only valid for web app creation. If specified, web app is cloned from \r\n            a source web app"
+            },
+            "resourceGroup": {
+              "description": "Resource group web app belongs to",
+              "type": "string",
+              "readOnly": true
+            },
+            "isDefaultContainer": {
+              "description": "Site is a default container",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "defaultHostName": {
+              "description": "Default hostname of the web app",
+              "type": "string",
+              "readOnly": true
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -16809,6 +17895,10 @@
             },
             "pythonVersion": {
               "description": "Version of Python",
+              "type": "string"
+            },
+            "nodeVersion": {
+              "description": "Version of Node",
               "type": "string"
             },
             "requestTracingEnabled": {
@@ -16909,6 +17999,10 @@
               "description": "Java container version",
               "type": "string"
             },
+            "appCommandLine": {
+              "description": "App Command Line to launch",
+              "type": "string"
+            },
             "managedPipelineMode": {
               "description": "Managed pipeline mode",
               "enum": [
@@ -16978,8 +18072,20 @@
             "autoSwapSlotName": {
               "description": "Auto swap slot name",
               "type": "string"
+            },
+            "localMySqlEnabled": {
+              "description": "Local mysql enabled",
+              "type": "boolean"
+            },
+            "ipSecurityRestrictions": {
+              "description": "Ip Security restrictions",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IpSecurityRestriction"
+              }
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -17223,6 +18329,11 @@
             "modelAsString": false
           }
         },
+        "tokenRefreshExtensionHours": {
+          "format": "double",
+          "description": "Gets or sets the number of hours after session token expiration that a session token can be used to\r\n            call the token refresh API. The default is 72 hours.",
+          "type": "number"
+        },
         "clientId": {
           "description": "Gets or sets the Client ID of this relying party application, known as the client_id.\r\n            This setting is required for enabling OpenID Connection authentication with Azure Active Directory or \r\n            other 3rd party OpenID Connect providers.\r\n            More information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html",
           "type": "string"
@@ -17237,6 +18348,13 @@
         },
         "allowedAudiences": {
           "description": "Gets or sets a list of allowed audience values to consider when validating JWTs issued by \r\n            Azure Active Directory. Note that the {Microsoft.Web.Hosting.Administration.SiteAuthSettings.ClientId} value is always considered an\r\n            allowed audience, regardless of this setting.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "additionalLoginParams": {
+          "description": "Gets or sets a list of login parameters to send to the OpenID Connect authorization endpoint when\r\n            a user logs in. Each parameter must be in the form \"key=value\".",
           "type": "array",
           "items": {
             "type": "string"
@@ -17322,6 +18440,20 @@
       "properties": {
         "url": {
           "description": "The URL of the API definition.",
+          "type": "string"
+        }
+      }
+    },
+    "IpSecurityRestriction": {
+      "description": "Represents an ip security restriction on a web app.",
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "description": "IP address the security restriction is valid for",
+          "type": "string"
+        },
+        "subnetMask": {
+          "description": "Subnet mask for the range of IP addresses the restriction is valid for",
           "type": "string"
         }
       }
@@ -17553,6 +18685,21 @@
               "description": "Location of the hostingEnvironment (App Service Environment), e.g. \"West US\"",
               "type": "string"
             },
+            "provisioningState": {
+              "description": "Provisioning state of the hostingEnvironment (App Service Environment)",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress",
+                "Deleting"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": false
+              }
+            },
             "status": {
               "description": "Current status of the hostingEnvironment (App Service Environment)",
               "enum": [
@@ -17699,8 +18846,16 @@
             "suspended": {
               "description": "True/false indicating whether the hostingEnvironment is suspended. The environment can be suspended e.g. when the management endpoint is no longer available\r\n            (most likely because NSG blocked the incoming traffic)",
               "type": "boolean"
+            },
+            "clusterSettings": {
+              "description": "Custom settings for changing the behavior of the hosting environment",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NameValuePair"
+              }
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -17746,7 +18901,8 @@
               "description": "Shared or dedicated web app hosting",
               "enum": [
                 "Shared",
-                "Dedicated"
+                "Dedicated",
+                "Dynamic"
               ],
               "type": "string",
               "x-ms-enum": {
@@ -17770,7 +18926,8 @@
                 "type": "string"
               }
             }
-          }
+          },
+          "x-ms-client-flatten": true
         },
         "sku": {
           "$ref": "#/definitions/SkuDescription"
@@ -17827,7 +18984,8 @@
           "description": "Shared/Dedicated workers",
           "enum": [
             "Shared",
-            "Dedicated"
+            "Dedicated",
+            "Dynamic"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -17838,6 +18996,7 @@
         "workerSize": {
           "description": "Size of the machines",
           "enum": [
+            "Default",
             "Small",
             "Medium",
             "Large"
@@ -17982,7 +19141,8 @@
               "description": "Resource id of the api management account associated with this managed hosting environment (read only)",
               "type": "string"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -18013,7 +19173,7 @@
           "type": "boolean"
         },
         "reason": {
-          "description": "Required if nameAvailable is false. 'Invalid' indicates the name provided does not match Azure WebApp service's naming requirements. 'AlreadyExists' indicates that the name is already in use and is therefore unavailable.",
+          "description": "Required if nameAvailable is false. 'Invalid' indicates the name provided does not match Azure WebApp service’s naming requirements. 'AlreadyExists' indicates that the name is already in use and is therefore unavailable.",
           "type": "string"
         },
         "message": {
@@ -18107,7 +19267,8 @@
                 "Succeeded",
                 "Failed",
                 "Canceled",
-                "InProgress"
+                "InProgress",
+                "Deleting"
               ],
               "type": "string",
               "x-ms-enum": {
@@ -18159,8 +19320,21 @@
             "consent": {
               "$ref": "#/definitions/DomainPurchaseConsent",
               "description": "Legal agreement consent"
+            },
+            "domainNotRenewableReasons": {
+              "description": "Reasons why domain is not renewable",
+              "type": "array",
+              "items": {
+                "enum": [
+                  "RegistrationStatusNotSupportedForRenewal",
+                  "ExpirationNotInRenewalTimeRange",
+                  "SubscriptionNotActive"
+                ],
+                "type": "string"
+              }
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -18465,7 +19639,8 @@
               "description": "Friendly name shown in the UI",
               "type": "string"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -18623,7 +19798,8 @@
               "description": "ComputeMode used for this usage",
               "enum": [
                 "Shared",
-                "Dedicated"
+                "Dedicated",
+                "Dynamic"
               ],
               "type": "string",
               "x-ms-enum": {
@@ -18635,7 +19811,8 @@
               "description": "SiteMode used for this usage",
               "type": "string"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -18765,6 +19942,194 @@
               "description": "OAuth Token Expiration",
               "type": "string"
             }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Recommendation": {
+      "description": "Represents a recommendation result generated by the recommendation engine",
+      "required": [
+        "level",
+        "channels"
+      ],
+      "type": "object",
+      "properties": {
+        "creationTime": {
+          "format": "date-time",
+          "description": "Timestamp when this instance was created.",
+          "type": "string"
+        },
+        "recommendationId": {
+          "description": "A GUID value that each recommendation object is associated with.",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "Full ARM resource ID string that this recommendation object is associated with.",
+          "type": "string"
+        },
+        "resourceScope": {
+          "description": "Name of a resource type this recommendation applies, e.g. Subscription, ServerFarm, Site.",
+          "type": "string"
+        },
+        "ruleName": {
+          "description": "Unique name of the rule",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "UI friendly name of the rule (may not be unique)",
+          "type": "string"
+        },
+        "message": {
+          "description": "Localized text of recommendation, good for UI.",
+          "type": "string"
+        },
+        "level": {
+          "description": "Level indicating how critical this recommendation can impact.",
+          "enum": [
+            "Critical",
+            "Warning",
+            "Information",
+            "NonUrgentSuggestion"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NotificationLevel",
+            "modelAsString": false
+          }
+        },
+        "channels": {
+          "description": "List of channels that this recommendation can apply.",
+          "enum": [
+            "Notification",
+            "Api",
+            "Email",
+            "All"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Channels",
+            "modelAsString": false
+          }
+        },
+        "tags": {
+          "description": "The list of category tags that this recommendation belongs to.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "actionName": {
+          "description": "Name of action recommended by this object.",
+          "type": "string"
+        },
+        "enabled": {
+          "format": "int32",
+          "description": "On/off flag indicating the rule is currently enabled or disabled.",
+          "type": "integer"
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "The beginning time of a range that the recommendation refers to.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "The end time of a range that the recommendation refers to.",
+          "type": "string"
+        },
+        "nextNotificationTime": {
+          "format": "date-time",
+          "description": "When to notify this recommendation next. Null means that this will never be notified anymore.",
+          "type": "string"
+        },
+        "notificationExpirationTime": {
+          "format": "date-time",
+          "description": "Date and time when this notification expires.",
+          "type": "string"
+        },
+        "notifiedTime": {
+          "format": "date-time",
+          "description": "Last timestamp this instance was actually notified. Null means that this recommendation hasn't been notified yet.",
+          "type": "string"
+        },
+        "score": {
+          "format": "double",
+          "description": "A metric value measured by the rule.",
+          "type": "number"
+        }
+      }
+    },
+    "RecommendationRule": {
+      "description": "Represents a recommendation rule that the recommendation engine can perform",
+      "required": [
+        "level",
+        "channels"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Unique name of the rule",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "UI friendly name of the rule",
+          "type": "string"
+        },
+        "message": {
+          "description": "Localized name of the rule (Good for UI)",
+          "type": "string"
+        },
+        "recommendationId": {
+          "description": "Recommendation ID of an associated recommendation object tied to the rule, if exists.\r\n            If such an object doesn't exist, it is set to null.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized detailed description of the rule",
+          "type": "string"
+        },
+        "actionName": {
+          "description": "Name of action that is recommended by this rule in string",
+          "type": "string"
+        },
+        "enabled": {
+          "format": "int32",
+          "description": "On/off flag indicating the rule is currently enabled or disabled.",
+          "type": "integer"
+        },
+        "level": {
+          "description": "Level of impact indicating how critical this rule is.",
+          "enum": [
+            "Critical",
+            "Warning",
+            "Information",
+            "NonUrgentSuggestion"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NotificationLevel",
+            "modelAsString": false
+          }
+        },
+        "channels": {
+          "description": "List of available channels that this rule applies.",
+          "enum": [
+            "Notification",
+            "Api",
+            "Email",
+            "All"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Channels",
+            "modelAsString": false
+          }
+        },
+        "tags": {
+          "description": "An array of category tags that the rule contains.",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -18798,8 +20163,17 @@
               "items": {
                 "$ref": "#/definitions/VnetRoute"
               }
+            },
+            "resyncRequired": {
+              "description": "Flag to determine if a resync is required",
+              "type": "boolean"
+            },
+            "dnsServers": {
+              "description": "Dns servers to be used by this VNET. This should be a comma-separated list of IP addresses.",
+              "type": "string"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -18830,7 +20204,8 @@
               "description": "The type of route this is:\r\n            DEFAULT - By default, every web app has routes to the local address ranges specified by RFC1918\r\n            INHERITED - Routes inherited from the real Virtual Network routes\r\n            STATIC - Static route set on the web app only\r\n            \r\n            These values will be used for syncing a Web App's routes with those from a Virtual Network. This operation will clear all DEFAULT and INHERITED routes and replace them\r\n            with new INHERITED routes.",
               "type": "string"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -18853,7 +20228,8 @@
               "description": "The URI where the Vpn package can be downloaded",
               "type": "string"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -18883,7 +20259,8 @@
                 "$ref": "#/definitions/RelayServiceConnectionEntity"
               }
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -18920,7 +20297,8 @@
             "biztalkUri": {
               "type": "string"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -18994,7 +20372,8 @@
               "description": "Description of the difference",
               "type": "string"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -19023,7 +20402,8 @@
                 "type": "string"
               }
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -19047,6 +20427,63 @@
         }
       }
     },
+    "SiteCloneability": {
+      "description": "Represents whether or not a web app is cloneable",
+      "required": [
+        "result"
+      ],
+      "type": "object",
+      "properties": {
+        "result": {
+          "description": "Name of web app",
+          "enum": [
+            "Cloneable",
+            "PartiallyCloneable",
+            "NotCloneable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CloneAbilityResult",
+            "modelAsString": false
+          }
+        },
+        "blockingFeatures": {
+          "description": "List of features enabled on web app that prevent cloning",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SiteCloneabilityCriterion"
+          }
+        },
+        "unsupportedFeatures": {
+          "description": "List of features enabled on web app that are non-blocking but cannot be cloned. The web app can still be cloned\r\n            but the features in this list will not be set up on cloned web app.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SiteCloneabilityCriterion"
+          }
+        },
+        "blockingCharacteristics": {
+          "description": "List of blocking application characteristics",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SiteCloneabilityCriterion"
+          }
+        }
+      }
+    },
+    "SiteCloneabilityCriterion": {
+      "description": "Represents a site cloneability criterion",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of criterion",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of criterion",
+          "type": "string"
+        }
+      }
+    },
     "CsmSiteRecoveryEntity": {
       "description": "Class containting details about site recovery operation.",
       "type": "object",
@@ -19055,6 +20492,10 @@
           "format": "date-time",
           "description": "Point in time in which the site recover should be attempted.",
           "type": "string"
+        },
+        "recoverConfig": {
+          "description": "If true, then the website's configuration will be reverted to its state at SnapshotTime",
+          "type": "boolean"
         },
         "siteName": {
           "description": "[Optional] Destination web app name into which web app should be recovered. This is case when new web app should be created instead.",
@@ -19235,11 +20676,37 @@
               "type": "string",
               "readOnly": true
             },
+            "containerSize": {
+              "format": "int32",
+              "description": "Size of a function container",
+              "type": "integer"
+            },
+            "maxNumberOfWorkers": {
+              "format": "int32",
+              "description": "Maximum number of workers\r\n            This only applies to function container",
+              "type": "integer"
+            },
             "cloningInfo": {
               "$ref": "#/definitions/CloningInfo",
               "description": "This is only valid for web app creation. If specified, web app is cloned from \r\n            a source web app"
+            },
+            "resourceGroup": {
+              "description": "Resource group web app belongs to",
+              "type": "string",
+              "readOnly": true
+            },
+            "isDefaultContainer": {
+              "description": "Site is a default container",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "defaultHostName": {
+              "description": "Default hostname of the web app",
+              "type": "string",
+              "readOnly": true
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -19314,7 +20781,8 @@
               "description": "Detail",
               "type": "string"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -19350,7 +20818,8 @@
               "description": "Name of instance",
               "type": "string"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -19434,7 +20903,8 @@
                 "modelAsString": false
               }
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -19469,7 +20939,8 @@
               "description": "Mercurial or Git repository type",
               "type": "boolean"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -19487,7 +20958,8 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -19505,7 +20977,8 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ConnStringValueTypePair"
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -19563,7 +21036,8 @@
               "$ref": "#/definitions/EnabledConfig",
               "description": "Detailed error messages configuration"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -19802,7 +21276,8 @@
                 "modelAsString": false
               }
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -19886,6 +21361,11 @@
             "status"
           ],
           "properties": {
+            "id": {
+              "format": "int32",
+              "description": "Id of the backup.",
+              "type": "integer"
+            },
             "storageAccountUrl": {
               "description": "SAS URL for the storage account container which contains this backup",
               "type": "string"
@@ -19962,7 +21442,8 @@
               "description": "Size of the original web app which has been backed up",
               "type": "integer"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -20028,7 +21509,8 @@
               "description": "App Service Environment name, if needed (only when restoring a site to an App Service Environment)",
               "type": "string"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -20064,7 +21546,8 @@
               "description": "When server starts the restore process, it will return an OperationId identifying that particular restore operation",
               "type": "string"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -20114,7 +21597,8 @@
               "description": "If true then the top level domain supports domain privacy",
               "type": "boolean"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -20180,6 +21664,10 @@
           "description": "Resource Name",
           "type": "string"
         },
+        "kind": {
+          "description": "Kind of resource",
+          "type": "string"
+        },
         "location": {
           "description": "Resource Location",
           "type": "string"
@@ -20214,5 +21702,23 @@
       "required": true,
       "type": "string"
     }
-  }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }
