@@ -13,14 +13,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json",
-    "application/octet-stream"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json",
-    "application/octet-stream"
+    "application/json"
   ],
   "security": [
     {
@@ -79,7 +75,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the specified Azure Storage account information.",
             "schema": {
               "$ref": "#/definitions/StorageAccountInfo"
             }
@@ -123,7 +119,7 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully deleted the specified Azure Storage account from the Azure Data Lake Analytics account."
           }
         }
       },
@@ -173,7 +169,7 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully update the specified Azure Storage account in the specified Azure Data Lake Analytics account."
           }
         }
       },
@@ -223,7 +219,7 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully added the specified Azure Storage account to the specified Azure Data Lake Analytics account."
           }
         }
       }
@@ -273,7 +269,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the specified Azure Storage container.",
             "schema": {
               "$ref": "#/definitions/BlobContainer"
             }
@@ -319,7 +315,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of Azure Storage containers under the specified Azure Data Lake Analytics account.",
             "schema": {
               "$ref": "#/definitions/ListBlobContainersResult"
             }
@@ -375,7 +371,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of Storage Account SAS tokens for the specified Azure Storage account.",
             "schema": {
               "$ref": "#/definitions/ListSasTokensResult"
             }
@@ -424,7 +420,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the specified Azure Data Lake Store account.",
             "schema": {
               "$ref": "#/definitions/DataLakeStoreAccountInfo"
             }
@@ -468,7 +464,7 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully removed the specified Azure Data Lake Store account from the specified Azure Data Lake Analytics account."
           }
         }
       },
@@ -518,7 +514,7 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully added the specified Azure Data Lake Store account."
           }
         }
       }
@@ -619,7 +615,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of Azure Storage accounts.",
             "schema": {
               "$ref": "#/definitions/DataLakeAnalyticsAccountListStorageAccountsResult"
             }
@@ -727,7 +723,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of Azure Data Lake Store accounts.",
             "schema": {
               "$ref": "#/definitions/DataLakeAnalyticsAccountListDataLakeStoreResult"
             }
@@ -828,7 +824,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of Azure Data Lake Analytics accounts in the specified resource group.",
             "schema": {
               "$ref": "#/definitions/DataLakeAnalyticsAccountListResult"
             }
@@ -922,7 +918,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of Azure Data Lake Analytics accounts in the current subscription",
             "schema": {
               "$ref": "#/definitions/DataLakeAnalyticsAccountListResult"
             }
@@ -965,7 +961,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the specified Azure Data Lake Analytics account.",
             "schema": {
               "$ref": "#/definitions/DataLakeAnalyticsAccount"
             }
@@ -1002,16 +998,16 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully deleted the specified Azure Data Lake Analytics account."
           },
           "202": {
-            "description": ""
+            "description": "Successfully accepted the delete request for the specified Azure Data Lake Analytics account."
           },
           "404": {
-            "description": ""
+            "description": "The specified Data Lake Analytics account does not exist or has already been deleted."
           },
           "204": {
-            "description": ""
+            "description": "The specified Data Lake Analytics account has already been deleted."
           }
         },
         "x-ms-long-running-operation": true
@@ -1057,13 +1053,13 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "Successfully initatied creation of the specified Azure Data Lake Analytics account.",
             "schema": {
               "$ref": "#/definitions/DataLakeAnalyticsAccount"
             }
           },
           "200": {
-            "description": "",
+            "description": "Successfully created the specified Azure Data Lake Analytics account.",
             "schema": {
               "$ref": "#/definitions/DataLakeAnalyticsAccount"
             }
@@ -1110,13 +1106,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully updated the specified Azure Data Lake Analytics account.",
             "schema": {
               "$ref": "#/definitions/DataLakeAnalyticsAccount"
             }
           },
           "201": {
-            "description": "",
+            "description": "Successfully initatied an update of the specified Azure Data Lake Analytics account.",
             "schema": {
               "$ref": "#/definitions/DataLakeAnalyticsAccount"
             }
