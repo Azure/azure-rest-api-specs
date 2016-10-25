@@ -1014,7 +1014,7 @@
             "type": "string"
           },
           {
-            "name": "origin",
+            "name": "originCreateProperties",
             "in": "body",
             "description": "Origin properties",
             "required": true,
@@ -1750,11 +1750,19 @@
         },
         "httpPort": {
           "description": "The value of the HTTP port. Must be between 1 and 65535",
-          "type": "integer"
+          "type": "integer",
+		  "maximum": 65535,
+		  "exclusiveMaximum": false,
+		  "minimum": 1,
+		  "exclusiveMinimum": false
         },
         "httpsPort": {
           "description": "The value of the HTTPS port. Must be between 1 and 65535",
-          "type": "integer"
+          "type": "integer",
+		  "maximum": 65535,
+		  "exclusiveMaximum": false,
+		  "minimum": 1,
+		  "exclusiveMinimum": false
         }
       },
       "x-ms-azure-resource": true
@@ -1769,7 +1777,7 @@
       ],
       "properties": {
         "relativePath": {
-          "description": "Relative path applicable to geo filter.",
+          "description": "Relative path applicable to geo filter. (e.g. '/mypictures', '/mypicture/kitty.jpg', and etc.)",
           "type": "string"
         },
         "action": {
@@ -1777,7 +1785,7 @@
           "type": "string"
         },
         "countryCodes":    {
-          "description": "Country codes of the geo filter.",
+          "description": "Two letter country codes of the geo filter. (e.g. AU, MX, and etc.)",
           "type": "array",
           "items": {
             "type": "string"
@@ -1843,11 +1851,19 @@
         },
         "httpPort": {
           "description": "The value of the HTTP port. Must be between 1 and 65535.",
-          "type": "integer"
+          "type": "integer",
+		  "maximum": 65535,
+		  "exclusiveMaximum": false,
+		  "minimum": 1,
+		  "exclusiveMinimum": false
         },
         "httpsPort": {
           "description": "The value of the https port. Must be between 1 and 65535.",
-          "type": "integer"
+          "type": "integer",
+		  "maximum": 65535,
+		  "exclusiveMaximum": false,
+		  "minimum": 1,
+		  "exclusiveMinimum": false
         },
         "resourceState": {
           "description": "Resource status of the origin.",
@@ -1889,11 +1905,19 @@
         },
         "httpPort": {
           "description": "The value of the HTTP port. Must be between 1 and 65535.",
-          "type": "integer"
+          "type": "integer",
+		  "maximum": 65535,
+		  "exclusiveMaximum": false,
+		  "minimum": 1,
+		  "exclusiveMinimum": false
         },
         "httpsPort": {
           "description": "The value of the HTTPS port. Must be between 1 and 65535.",
-          "type": "integer"
+          "type": "integer",
+		  "maximum": 65535,
+		  "exclusiveMaximum": false,
+		  "minimum": 1,
+		  "exclusiveMinimum": false
         }
       }
     },
