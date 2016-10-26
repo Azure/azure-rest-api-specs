@@ -1893,7 +1893,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The subscriptionName name."
+            "description": "Subscription name to fetch Rules created"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1965,7 +1965,7 @@
             "schema": {
               "$ref": "#/definitions/RuleCreateOrUpdateParameters"
             },
-            "description": "Parameters supplied to create a rules."
+            "description": "Parameters supplied to create a rule."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1989,9 +1989,6 @@
         ],
         "operationId": "Rules_Delete",
         "description": "Deletes an existing rule.",
-        "externalDocs": {
-          "url": ""
-        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2943,78 +2940,78 @@
     "Filter": {
       "type": "object",
       "properties": {
-         "RequiresPreprocessing": {
+        "RequiresPreprocessing": {
           "type": "boolean",
-          "description": "Preprocesses the filter expression and returns a preprocessed FilterExpression."
+          "description": "Indicating whether the Filter requires preprocessing"
         },
-		"SqlFilter": {
+        "SqlFilter": {
           "$ref": "#/definitions/SqlFilter",
           "description": "Represents a SQL filter which is a composition of an expression and an action that is executed in the pub/sub pipeline."
         },
-		"CorrelationFilter": {
+        "CorrelationFilter": {
           "$ref": "#/definitions/CorrelationFilter",
           "description": "Represents the correlation filter expression."
         }
       },
       "description": "MessageDescribes a filter expression that is evaluated against a BrokeredMessage."
     },
-	"SqlFilter": {
+    "SqlFilter": {
       "type": "object",
       "properties": {
-         "SqlExpression": {
+        "SqlExpression": {
           "type": "string",
-          "description": "The SQL expression."
+          "description": "The SQL expression. e.g. MyProperty='ABC'"
         },
-		"RequiresPreprocessing": {
+        "RequiresPreprocessing": {
           "type": "boolean",
-          "description": "Gets a value indicating whether the SQL filter expression requires preprocessing."
+          "description": "Value indicating whether the SQL filter expression requires preprocessing."
         },
-		"CompatibilityLevel": {
-		"format": "int32",
-		"type": "integer",
+        "CompatibilityLevel": {
+          "format": "int32",
+          "type": "integer",
           "description": "This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20."
-		}
+        }
       },
       "description": "Represents a filter which is a composition of an expression and an action that is executed in the pub/sub pipeline."
-    },	
-	"CorrelationFilter": {
+    },
+    "CorrelationFilter": {
       "type": "object",
       "properties": {
-         "CorrelationId": {
+        "CorrelationId": {
           "type": "string",
-          "description": "Gets the identifier of the correlation."
+          "description": "Identifier of the correlation."
         },
-		"MessageId": {
+        "MessageId": {
           "type": "string",
-          "description": "Gets the identifier of the message."
-        },		
-		"To": {
-          "type": "string",
-          "description": "Gets the address to send to."
+          "description": "Identifier of the message."
         },
-		"ReplyTo": {
-		  "type": "string",
-          "description": "Gets the address of the queue to reply to."
-		},		
-		"Label": {
-		  "type": "string",
-          "description": "Gets the application specific label."
-		},
-		"SessionId": {
-		  "type": "string",
-          "description": "Gets the session identifier."
-		},
-		"ReplyToSessionId": {
-		  "type": "string",
-          "description": "Gets the session identifier to reply to."
-		},
-		"ContentType": {
-		  "type": "string",
-          "description": "Gets the content type of the message."
-		},		
-		"RequiresPreprocessing": {
+        "To": {
+          "type": "string",
+          "description": "Address to send to."
+        },
+        "ReplyTo": {
+          "type": "string",
+          "description": "Address of the queue to reply to."
+        },
+        "Label": {
+          "type": "string",
+          "description": "Application specific label."
+        },
+        "SessionId": {
+          "type": "string",
+          "description": "Session identifier."
+        },
+        "ReplyToSessionId": {
+          "type": "string",
+          "description": "Session identifier to reply to."
+        },
+        "ContentType": {
+          "type": "string",
+          "description": "Content type of the message."
+        },
+        "RequiresPreprocessing": {
           "type": "boolean",
-          "description": "Gets a value indicating whether the CorrelationFilter expression requires preprocessing."
+          "description": "Value indicating whether the CorrelationFilter expression requires preprocessing."
         }
       },
       "description": "Represents the correlation filter expression."
@@ -3022,46 +3019,46 @@
     "RuleAction": {
       "type": "object",
       "properties": {
-         "RequiresPreprocessing": {
+        "RequiresPreprocessing": {
           "type": "boolean",
-          "description": "Gets a value that indicates whether the rule action requires preprocessing."
+          "description": "Value that indicates whether the rule action requires preprocessing."
         },
-         "Match": {
+        "Match": {
           "type": "boolean",
           "description": "Matches the BrokeredMessage against the FilterExpression."
         }
       },
       "description": "Represents the filter actions which are allowed for the transformation of a message that have been matched by a filter expression."
     },
-	"SqlRuleAction": {
+    "SqlRuleAction": {
       "type": "object",
       "properties": {
-         "SqlExpression": {
+        "SqlExpression": {
           "type": "string",
-          "description": "Gets the SQL expression."
+          "description": "SQL expression. e.g. MyProperty='ABC'"
         },
-		"CompatibilityLevel": {
-		"format": "int32",
-		"type": "integer",
+        "CompatibilityLevel": {
+          "format": "int32",
+          "type": "integer",
           "description": "This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20."
-		},
-		"RequiresPreprocessing": {
+        },
+        "RequiresPreprocessing": {
           "type": "boolean",
-          "description": "Gets a value indicating whether the SQL filter expression requires preprocessing."
+          "description": "Value indicating whether the SQL filter expression requires preprocessing."
         }
-		},
-      "description": "Represents set of actions written in SQL language-based syntax that is performed against a ServiceBus.Messaging.BrokeredMessage "
       },
-	"CompositeAction": {
+      "description": "Represents set of actions written in SQL language-based syntax that is performed against a ServiceBus.Messaging.BrokeredMessage "
+    },
+    "CompositeAction": {
       "type": "object",
       "properties": {
-         "RequiresPreprocessing": {
+        "RequiresPreprocessing": {
           "type": "boolean",
-          "description": "Gets a value indicating whether the SQL filter expression requires preprocessing."
+          "description": "Value indicating whether the SQL filter expression requires preprocessing."
         }
       },
       "description": "Represents set of CompositeAction that is performed against a ServiceBus.Messaging.BrokeredMessage "
-    },	
+    },
     "RuleProperties": {
       "properties": {
         "Filter": {
@@ -3075,10 +3072,11 @@
         "CreatedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets creation time of the rule."
+          "description": "Creation time of the rule.",
+          "readonly" : true
         }
       },
-      "description": "Description of Subscription Resource."
+      "description": "Description of Rule Resource."
     }
   },
   "parameters": {
