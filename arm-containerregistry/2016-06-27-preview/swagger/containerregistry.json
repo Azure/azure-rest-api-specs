@@ -50,7 +50,7 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.ContainerRegistry/registries/{registryName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ContainerRegistry/registries/{registryName}": {
       "get": {
         "tags": [
           "Registries"
@@ -219,7 +219,7 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.ContainerRegistry/registries": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ContainerRegistry/registries": {
       "get": {
         "tags": [
           "Registries"
@@ -291,6 +291,46 @@
         ],
         "description": "Gets login credentials for the specified container registry.",
         "operationId": "Registries_GetCredentials",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The container registry name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RegistryCredentials"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ContainerRegistry/registries/{registryName}/regenerateCredentials": {
+      "post": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Regenerates login credentials for the specified container registry.",
+        "operationId": "Registries_RegenerateCredentials",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -414,8 +454,7 @@
       "description": "The storage account properties.",
       "required": [
         "name",
-        "accessKey",
-        "endPointUrl"
+        "accessKey"
       ],
       "properties": {
         "name": {
@@ -424,10 +463,6 @@
         },
         "accessKey": {
           "description": "Storage account access key.",
-          "type": "string"
-        },
-        "endPointUrl": {
-          "description": "Storage account endpoint URL.",
           "type": "string"
         }
       }
