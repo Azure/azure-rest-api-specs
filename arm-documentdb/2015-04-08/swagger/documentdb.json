@@ -36,7 +36,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}": {
       "get": {
-        "operationId": "DatabaseAccount_Get",
+        "operationId": "DatabaseAccounts_Get",
         "description": "Retrieves the properties of an existing database account.",
         "parameters": [
           {
@@ -62,8 +62,8 @@
         }
       },
       "patch": {
-        "operationId": "DatabaseAccount_PatchTags",
-        "description": "Patch the tags of an existing database account.",
+        "operationId": "DatabaseAccounts_Patch",
+        "description": "Patches the properties of an existing database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -83,7 +83,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatabaseAccountPatchTagsParameters"
+              "$ref": "#/definitions/DatabaseAccountPatchParameters"
             },
             "description": "The tags parameter to patch for the current database account."
           }
@@ -98,8 +98,8 @@
         }
       },
       "put": {
-        "operationId": "DatabaseAccount_CreateOrUpdate",
-        "description": "Create a new database account or update the properties of an existing database account.",
+        "operationId": "DatabaseAccounts_CreateOrUpdate",
+        "description": "Creates or Updates a DocumentDB database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -126,7 +126,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/DatabaseAccount"
             }
@@ -134,8 +134,8 @@
         }
       },
       "delete": {
-        "operationId": "DatabaseAccount_Delete",
-        "description": "Delete an existing database account.",
+        "operationId": "DatabaseAccounts_Delete",
+        "description": "Deletes an existing DocumentDB database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -163,8 +163,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/failoverPriorityChange": {
       "post": {
-        "operationId": "DatabaseAccount_FailoverPriorityChange",
-        "description": "Change the failover priority for the database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.",
+        "operationId": "DatabaseAccounts_FailoverPriorityChange",
+        "description": "Changes the failover priority for the DocumentDB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -219,7 +219,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/DatabaseAccountsListResult"
             }
@@ -247,7 +247,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/DatabaseAccountsListResult"
             }
@@ -278,7 +278,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/DatabaseAccountListKeysResult"
             }
@@ -306,7 +306,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/DatabaseAccountListReadOnlyKeysResult"
             }
@@ -343,7 +343,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/DatabaseAccountListKeysResult"
             }
@@ -416,6 +416,8 @@
         },
         "failoverPriority": {
           "type": "integer",
+          "minimum": 0,
+          "format": "int32",
           "description": "The failover priority of the region. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists."
         }
       }
@@ -426,6 +428,7 @@
       "properties": {
         "id": {
           "type": "string",
+          "readOnly": true,
           "description": "The unique identifier of the region within the database account. Example: <accountName>-<locationName>"
         },
         "locationName": {
@@ -434,10 +437,12 @@
         },
         "documentEndpoint": {
           "type": "string",
+          "readOnly": true,
           "description": "The connection endpoint for the specific region. Example: https://<accountName>-<locationName>.documents.azure.com:443/"
         },
         "provisioningState": {
           "type": "string",
+          "readOnly": true,
           "description": "The status of the database account at the time the operation was called.",
           "enum": [
             "Creating",
@@ -562,7 +567,7 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "The status of the DocumentDB account at the time the operation was called. Can be one of: * Creating – the DocumentDB account is being created. When an account is in “Creating” state, only properties that are specified as input for the Create DocumentDB Account operation are returned.* Succeeded – the DocumentDB account is active for use * Updating – the DocumentDB account is being updated * Deleting – the DocumentDB account is being deleted * Failed – the DocumentDB account failed creation",
+          "description": "The status of the DocumentDB account at the time the operation was called. The status can be one of following. 'Creating' – the DocumentDB account is being created. When an account is in Creating state, only properties that are specified as input for the Create DocumentDB Account operation are returned. 'Succeeded' – the DocumentDB account is active for use. 'Updating' – the DocumentDB account is being updated. 'Deleting' – the DocumentDB account is being deleted. 'Failed' – the DocumentDB account failed creation.",
           "type": "string",
           "readOnly": true
         },
@@ -572,6 +577,8 @@
           "readOnly": true
         },
         "databaseAccountOfferType": {
+          "description": "The offer type for the DocumentDB database account. Default value: Standard.",
+          "readOnly": true,
           "$ref": "#/definitions/DatabaseAccountOfferType"
         },
         "consistencyPolicy": {
@@ -602,10 +609,7 @@
             "$ref": "#/definitions/FailoverPolicy"
           }
         }
-      },
-      "required": [
-        "databaseAccountOfferType"
-      ]
+      }
     },
     "DatabaseAccountCreateUpdateProperties": {
       "description": "DocumentDB Database Account Create and Update properties.",
@@ -649,8 +653,8 @@
         "databaseAccountOfferType"
       ]
     },
-    "DatabaseAccountPatchTagsParameters": {
-      "description": "Database Account parameters for patching tags.",
+    "DatabaseAccountPatchParameters": {
+      "description": "Parameters for patching Database Account properties.",
       "type": "object",
       "properties": {
         "tags": {
@@ -743,7 +747,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2016-04-02"
+      "description": "Version of the API to be used with the client request. Current version is 2015-04-08"
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
@@ -759,9 +763,10 @@
     "accountNameParameter": {
       "name": "accountName",
       "in": "path",
-      "description": "DocumentDB database account name.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "DocumentDB database account name."
     }
   }  
 }
