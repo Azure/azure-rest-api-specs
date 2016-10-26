@@ -3985,15 +3985,13 @@
             "type": "string",
             "description": "The name of the virtual network gateway."
           },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualNetworkGateway"
-            },
-            "description": "Parameters supplied to the Begin Reset Virtual Network Gateway operation through Network resource provider."
-          },
+		  { 
+			"name": "gatewayVip",
+            "in": "query",
+            "required": false,
+			"type": "string",
+            "description": "Vip parameter supplied to the Begin Active-Active Reset Virtual Network Gateway operation through Network resource provider."
+          },  
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -7900,6 +7898,43 @@
       },
       "description": "VpnClientParameters"
     },
+    "TunnelConnectionHealth": {
+      "properties": {
+        "tunnel": {
+          "type": "string",
+          "description": "Tunnel name."
+        },
+        "connectionStatus": {
+          "type": "string",
+          "description": "Virtual network Gateway connection status",
+          "enum": [
+            "Unknown",
+            "Connecting",
+            "Connected",
+            "NotConnected"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkGatewayConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "ingressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The Ingress Bytes Transferred in this connection"
+        },
+        "egressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The Egress Bytes Transferred in this connection"
+        },		
+        "lastConnectionEstablishedUtcTime": {
+          "type": "string",
+          "description": "The time at which connection was established in Utc format."
+        },		
+      },
+      "description": "VirtualNetworkGatewayConnection properties"
+    },
     "VirtualNetworkGatewayConnectionPropertiesFormat": {
       "properties": {
         "authorizationKey": {
@@ -7951,6 +7986,13 @@
             "name": "VirtualNetworkGatewayConnectionStatus",
             "modelAsString": true
           }
+        },
+        "tunnelConnectionStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TunnelConnectionHealth"
+          },
+          "description": "Collection of all tunnels' connection health status."
         },
         "egressBytesTransferred": {
           "type": "integer",
