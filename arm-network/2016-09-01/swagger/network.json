@@ -3986,7 +3986,7 @@
             "description": "The name of the virtual network gateway."
           },
           { 
-            "name": "gatewayVip",
+            "name": "gatewayVip",		
             "in": "query",
             "required": false,
             "type": "string",
@@ -7901,10 +7901,12 @@
     "TunnelConnectionHealth": {
       "properties": {
         "tunnel": {
+           "readOnly": true,
           "type": "string",
           "description": "Tunnel name."
         },
         "connectionStatus": {
+          "readOnly": true,
           "type": "string",
           "description": "Virtual network Gateway connection status",
           "enum": [
@@ -7919,16 +7921,19 @@
           }
         },
         "ingressBytesTransferred": {
+          "readOnly": true,		
           "type": "integer",
           "format": "int64",
           "description": "The Ingress Bytes Transferred in this connection"
         },
         "egressBytesTransferred": {
+          "readOnly": true,		
           "type": "integer",
           "format": "int64",
           "description": "The Egress Bytes Transferred in this connection"
         },		
         "lastConnectionEstablishedUtcTime": {
+          "readOnly": true,		
           "type": "string",
           "description": "The time at which connection was established in Utc format."
         }
