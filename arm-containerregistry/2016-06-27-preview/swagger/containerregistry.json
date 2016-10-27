@@ -46,8 +46,7 @@
               "$ref": "#/definitions/RegistryNameStatus"
             }
           }
-        },
-        "deprecated": false
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}": {
@@ -86,8 +85,7 @@
               "$ref": "#/definitions/Registry"
             }
           }
-        },
-        "deprecated": false
+        }
       },
       "put": {
         "tags": [
@@ -133,8 +131,7 @@
               "$ref": "#/definitions/Registry"
             }
           }
-        },
-        "deprecated": false
+        }
       },
       "delete": {
         "tags": [
@@ -168,8 +165,7 @@
           "200": {
             "description": "OK"
           }
-        },
-        "deprecated": false
+        }
       },
       "patch": {
         "tags": [
@@ -215,8 +211,7 @@
               "$ref": "#/definitions/Registry"
             }
           }
-        },
-        "deprecated": false
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries": {
@@ -249,9 +244,8 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -278,9 +272,8 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -320,8 +313,7 @@
               "$ref": "#/definitions/RegistryCredentials"
             }
           }
-        },
-        "deprecated": false
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/regenerateCredentials": {
@@ -360,8 +352,7 @@
               "$ref": "#/definitions/RegistryCredentials"
             }
           }
-        },
-        "deprecated": false
+        }
       }
     }
   },
@@ -467,41 +458,6 @@
         }
       }
     },
-    "Resource": {
-      "description": "Azure resource.",
-      "required": [
-        "location"
-      ],
-      "properties": {
-        "id": {
-          "description": "Resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "Resource location. Once the resource has been created, location cannot be updated.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "RegistryUpdateParameters": {
       "description": "The parameters for updating a container registry.",
       "properties": {
@@ -555,6 +511,41 @@
           "type": "string"
         }
       }
+    },
+    "Resource": {
+      "description": "Azure resource.",
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Resource location. Once the resource has been created, location cannot be updated.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
