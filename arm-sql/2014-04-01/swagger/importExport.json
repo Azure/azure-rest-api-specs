@@ -1,0 +1,528 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure SQL Database API spec",
+    "description": "The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases.",
+    "version": "2014-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/import": {
+      "post": {
+        "tags": [
+          "ImportExport"
+        ],
+        "operationId": "Servers_ImportDatabase",
+        "description": "Imports a bacpac into a new Azure SQL database. ",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportRequestParameters"
+            },
+            "description": "The required parameters for importing a Bacpac into a database."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationStatusResponse"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationStatusResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/import": {
+      "post": {
+        "tags": [
+          "ImportExport"
+        ],
+        "operationId": "Databases_Import",
+        "description": "Imports a bacpac into an existing Azure SQL database. The existing database must be empty.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Database to import into"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportExtensionRequestParameters"
+            },
+            "description": "The required parameters for importing a Bacpac into a database."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationStatusResponse"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationStatusResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/export": {
+      "post": {
+        "tags": [
+          "ImportExport"
+        ],
+        "operationId": "Databases_Export",
+        "description": "Exports a Azure SQL Database to a bacpac.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL database to be exported."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportRequestParameters"
+            },
+            "description": "The required parameters for exporting a database."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationStatusResponse"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationStatusResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/importExportOperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "ImportExport"
+        ],
+        "operationId": "Servers_GetImportStatus",
+        "description": "The status of an import operation given the operation ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "The operation ID associated with the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationStatusResponse"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationStatusResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/importExportOperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "ImportExport"
+        ],
+        "operationId": "Databases_GetImportExportStatus",
+        "description": "The status of an import or export operation on an Azure SQL database given the operation ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL database"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "The operation ID associated with the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationStatusResponse"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationStatusResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ImportExtensionProperties": {
+      "properties": {
+        "operationMode": {
+          "type": "string",
+          "description": "The type of Import/Export opertion being performed",
+          "enum": [
+            "Import",
+            "Export"
+          ],
+          "x-ms-enum": {
+            "name": "ImportExportOperationMode"
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExportRequestParameters"
+        }
+      },
+      "description": "Represents the properties for an import operation"
+    },
+    "ImportExtensionRequestParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extenstion."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the extenstion."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ImportExtensionProperties",
+          "description": "Represents the properties of the resource."
+        }
+      },
+      "description": "Import Azure SQL Database parameters."
+    },
+    "ImportExportOperationStatusResponse": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ImportExportOperationStatusResponseProperties",
+          "description": "The properties of the response."
+        },
+        "id": {
+          "type": "string",
+          "description": "The id returned from the server.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name returned from the server.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type returned from the server.",
+          "readOnly": true
+        }
+      },
+      "description": "Response for Azure SQL Import/Export Status operation."
+    },
+    "ImportExportOperationStatusResponseProperties": {
+      "properties": {
+        "requestType": {
+          "type": "string",
+          "description": "The type of the requested operation.",
+          "enum": [
+            "Import",
+            "Export"
+          ],
+          "x-ms-enum": {
+            "name": "ImportExportOperationMode"
+          }
+        },
+        "requestId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The request id for the operation."
+        },
+        "serverName": {
+          "type": "string",
+          "description": "The name of the Azure SQL Server."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the Azure SQL Database."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status message returned from the server.",
+          "enum": [
+            "Running",
+            "RunningAfterRestart",
+            "Pending",
+            "Completed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ImportExportOperationStatus"
+          }
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "description": "The operation status last modified time."
+        },
+        "queuedTime": {
+          "type": "string",
+          "description": "The operation queued time."
+        },
+        "blobUri": {
+          "type": "string",
+          "description": "The blob uri."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "The error message returned from the server."
+        }
+      },
+      "description": "Response for Azure SQL Import/Export Status operation."
+    },
+    "ImportRequestParameters": {
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the Azure SQL database to import."
+        },
+        "edition": {
+          "type": "string",
+          "description": "The edition for the Azure SQL Database being created.",
+          "enum": [
+            "Basic",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "ImportExportDatabaseEditions"
+          }
+        },
+        "serviceObjectiveName": {
+          "type": "string",
+          "description": "The name of the service objective to assign to the Azure SQL Database."
+        },
+        "maxSizeBytes": {
+          "type": "string",
+          "description": "The maximum size for the newly imported database."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportRequestParameters"
+        }
+      ],
+      "description": "Import Azure SQL Database parameters."
+    },
+    "ExportRequestParameters": {
+      "properties": {
+        "storageKeyType": {
+          "type": "string",
+          "description": "The type of the storage key to use.",
+          "enum": [
+            "StorageAccessKey",
+            "SharedAccessKey"
+          ],
+          "x-ms-enum": {
+            "name": "StorageKeyType"
+          }
+        },
+        "storageKey": {
+          "type": "string",
+          "description": "The storage key to use."
+        },
+        "storageUri": {
+          "type": "string",
+          "description": "The storage uri to use."
+        },
+        "administratorLogin": {
+          "type": "string",
+          "description": "The name of the SQL administrator."
+        },
+        "administratorLoginPassword": {
+          "type": "string",
+          "description": "The password of the SQL administrator."
+        },
+        "authenticationType": {
+          "type": "string",
+          "description": "The authentication type."
+        }
+      },
+      "description": "Export Azure SQL Database parameters."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Resource Group to which the resource belongs.",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure SQL Server",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

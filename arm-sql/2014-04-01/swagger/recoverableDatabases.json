@@ -1,0 +1,351 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure SQL Database API spec",
+    "description": "The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases.",
+    "version": "2014-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recoverableDatabases": {
+      "get": {
+        "tags": [
+          "GeoBackup"
+        ],
+        "operationId": "Databases_ListGeoBackups",
+        "description": "Returns a list of Azure SQL database geo backups.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GeoBackupList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recoverableDatabases/{databaseName}": {
+      "get": {
+        "tags": [
+          "GeoBackup"
+        ],
+        "operationId": "Databases_GetGeoBackup",
+        "description": "Returns an Azure SQL Database geo backup.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Database to retrieve geo backups for."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GeoBackup"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/restorableDroppedDatabases": {
+      "get": {
+        "tags": [
+          "DeletedDatabaseBackup"
+        ],
+        "operationId": "Databases_ListBackupsForDeletedDatabases",
+        "description": "Returns a list of backups for deleted Azure SQL databases (a resource representing a deleted database that can be restored).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeletedDatabaseBackupList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/restorableDroppedDatabases/{databaseName}": {
+      "get": {
+        "tags": [
+          "DeletedDatabaseBackup"
+        ],
+        "operationId": "Databases_GetBackupForDeletedDatabase",
+        "description": "Returns backup information for a deleted Azure SQL database  (a resource representing a deleted database that can be restored).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restorable dropped Azure SQL Database to be retrieved."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeletedDatabaseBackup"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GeoBackup": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GeoBackupProperties",
+          "description": "Gets or sets the properties representing the geo backup."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlSubResource"
+        }
+      ],
+      "description": "Represents an Azure SQL Database geo backup."
+    },
+    "GeoBackupProperties": {
+      "properties": {
+        "edition": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The edition of the Azure SQL Database."
+        },
+        "serviceLevelObjective": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current service level objective name for the database."
+        },
+        "elasticPoolName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The elastic pool name for the database."
+        },
+        "lastAvailableBackupDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The last available backup date (ISO8601 format)."
+        }
+      },
+      "description": "Represents an Azure SQL Database geo backup."
+    },
+    "GeoBackupList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoBackup"
+          },
+          "description": "Gets or sets the list of a given Azure SQL Database geo backups."
+        }
+      },
+      "description": "Represents the response to a List Azure SQL Database geo backups request."
+    },
+    "DeletedDatabaseBackup": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DeletedDatabaseBackupProperties",
+          "description": "Gets or sets the object representing a given Azure SQL Database deleted database backup."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlSubResource"
+        }
+      ],
+      "description": "Represents an Azure SQL Database restorable deleted database."
+    },
+    "DeletedDatabaseBackupProperties": {
+      "properties": {
+        "databaseName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Azure SQL Database name."
+        },
+        "creationDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date of the Azure SQL Database (ISO8601 format)."
+        },
+        "deletionDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The deletion date of the Azure SQL Database (ISO8601 format)."
+        },
+        "earliestRestoreDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The recovery period starte date of the Azure SQL Database. This records the start date and time when recovery is available for this Azure SQL Database (ISO8601 format)."
+        },
+        "edition": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The edition of the Azure SQL Database.",
+          "enum": [
+            "Basic",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "RecoverableDatabaseEditions",
+            "modelAsString": true
+          }
+        },
+        "maxSizeBytes": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The max size of the Azure SQL Database expressed in bytes."
+        },
+        "serviceLevelObjective": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Service Level Objective of the Azure SQL Database."
+        },
+        "elasticPoolName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the Azure SQL Elastic Pool the database is in."
+        }
+      },
+      "description": "Represents the properties of an Azure SQL Database restorable deleted database."
+    },
+    "DeletedDatabaseBackupList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedDatabaseBackup"
+          },
+          "description": "Gets or sets the list of a given Azure SQL Database deleted database backups."
+        }
+      },
+      "description": "Represents the response to a List Azure SQL Database deleted database backups request."
+    },
+    "SqlSubResource": {
+      "description": "Subresource properties",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Resource Group to which the resource belongs.",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure SQL Server",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

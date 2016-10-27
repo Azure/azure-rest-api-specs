@@ -1,0 +1,1451 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors": {
+      "get": {
+        "tags": [
+          "DatabaseAdvisors"
+        ],
+        "description": "Gets list of Azure SQL Database Advisors.",
+        "operationId": "DatabaseAdvisors_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of database advisors.",
+            "schema": {
+              "$ref": "#/definitions/AdvisorResourceList"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/AdvisorResource"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}": {
+      "get": {
+        "tags": [
+          "DatabaseAdvisors"
+        ],
+        "description": "Returns details of an Azure SQL Database Advisor.",
+        "operationId": "DatabaseAdvisors_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved details of specified database advisor.",
+            "schema": {
+              "$ref": "#/definitions/AdvisorResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/AdvisorResource"
+      },
+      "patch": {
+        "tags": [
+          "DatabaseAdvisors"
+        ],
+        "description": "Updates an Azure SQL Database Advisor.",
+        "operationId": "DatabaseAdvisors_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advisor",
+            "in": "body",
+            "description": "The requested advisor resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AdvisorResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified database advisor.",
+            "schema": {
+              "$ref": "#/definitions/AdvisorResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 InvalidAdvisorUpsertRequest - The update advisor request body does not exist or has no properties object.\n\n * 400 InvalidAdvisorAutoExecuteStatus - Specified auto-execute status for the advisor is not allowed.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}/recommendedActions": {
+      "get": {
+        "tags": [
+          "DatabaseRecommendedActions"
+        ],
+        "description": "Gets list of Azure SQL Database Recommended Actions.",
+        "operationId": "DatabaseRecommendedActions_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of database recommended actions.",
+            "schema": {
+              "$ref": "#/definitions/RecommendedActionResourceList"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}/recommendedActions/{recommendedActionName}": {
+      "get": {
+        "tags": [
+          "DatabaseRecommendedActions"
+        ],
+        "description": "Returns details of an Azure SQL Database Recommended Action.",
+        "operationId": "DatabaseRecommendedActions_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendedActionName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Recommended Action.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved details of specified database recommended action.",
+            "schema": {
+              "$ref": "#/definitions/RecommendedActionResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "DatabaseRecommendedActions"
+        ],
+        "description": "Updates an Azure SQL Database Recommended Action.",
+        "operationId": "DatabaseRecommendedActions_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendedActionName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Recommended Action.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendedAction",
+            "in": "body",
+            "description": "The requested recommended action resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecommendedActionResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified database recommended action.",
+            "schema": {
+              "$ref": "#/definitions/RecommendedActionResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 InvalidRecommendedActionUpsertRequest - The update recommended action request body does not exist or has no properties or state object.\n\n * 400 InvalidRecommendedActionState - The specified state for recommended action is invalid\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/advisors": {
+      "get": {
+        "tags": [
+          "ElasticPoolAdvisors"
+        ],
+        "description": "Gets list of Azure SQL Database Elastic Pool Advisors.",
+        "operationId": "ElasticPoolAdvisors_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server to which the Azure SQL Database Elastic Pool belongs.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Elastic Pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of elastic pool advisors.",
+            "schema": {
+              "$ref": "#/definitions/AdvisorResourceList"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/AdvisorResource"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/advisors/{advisorName}": {
+      "get": {
+        "tags": [
+          "ElasticPoolAdvisors"
+        ],
+        "description": "Returns details of an Azure SQL Database Elastic Pool Advisor.",
+        "operationId": "ElasticPoolAdvisors_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server to which the Azure SQL Database Elastic Pool belongs.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Elastic Pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Elastic Pool Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved details of specified elastic pool advisor.",
+            "schema": {
+              "$ref": "#/definitions/AdvisorResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/AdvisorResource"
+      },
+      "patch": {
+        "tags": [
+          "ElasticPoolAdvisors"
+        ],
+        "description": "Updates an Azure SQL Database Elastic Pool Advisor.",
+        "operationId": "ElasticPoolAdvisors_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server to which the Azure SQL Database Elastic Pool belongs.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Elastic Pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Elastic Pool Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advisor",
+            "in": "body",
+            "description": "The requested advisor resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AdvisorResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified elastic pool advisor.",
+            "schema": {
+              "$ref": "#/definitions/AdvisorResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 InvalidAdvisorUpsertRequest - The update advisor request body does not exist or has no properties object.\n\n * 400 InvalidAdvisorAutoExecuteStatus - Specified auto-execute status for the advisor is not allowed.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/advisors/{advisorName}/recommendedActions": {
+      "get": {
+        "tags": [
+          "ElasticPoolRecommendedActions"
+        ],
+        "description": "Gets list of Azure SQL Database Elastic Pool Recommended Actions.",
+        "operationId": "ElasticPoolRecommendedActions_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server to which the Azure SQL Database Elastic Pool belongs.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Elastic Pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Elastic Pool Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of elastic pool recommended actions.",
+            "schema": {
+              "$ref": "#/definitions/RecommendedActionResourceList"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/advisors/{advisorName}/recommendedActions/{recommendedActionName}": {
+      "get": {
+        "tags": [
+          "ElasticPoolRecommendedActions"
+        ],
+        "description": "Returns details of an Azure SQL Database Elastic Pool Recommended Action.",
+        "operationId": "ElasticPoolRecommendedActions_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server to which the Azure SQL Database Elastic Pool belongs.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Elastic Pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Elastic Pool Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendedActionName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Elastic Pool Recommended Action.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved details of specified elastic pool recommended action.",
+            "schema": {
+              "$ref": "#/definitions/RecommendedActionResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "ElasticPoolRecommendedActions"
+        ],
+        "description": "Updates an Azure SQL Database Elastic Pool Recommended Action.",
+        "operationId": "ElasticPoolRecommendedActions_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server to which the Azure SQL Database Elastic Pool belongs.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Elastic Pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Elastic Pool Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendedActionName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Elastic Pool Recommended Action.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendedAction",
+            "in": "body",
+            "description": "The requested recommended action resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecommendedActionResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified elastic pool recommended action.",
+            "schema": {
+              "$ref": "#/definitions/RecommendedActionResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 InvalidRecommendedActionUpsertRequest - The update recommended action request body does not exist or has no properties or state object.\n\n * 400 InvalidRecommendedActionState - The specified state for recommended action is invalid\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/advisors/{advisorName}": {
+      "get": {
+        "tags": [
+          "ServerAdvisors"
+        ],
+        "description": "Returns details of an Azure SQL Database Server Advisor.",
+        "operationId": "ServerAdvisors_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved details of specified server advisor.",
+            "schema": {
+              "$ref": "#/definitions/AdvisorResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/AdvisorResource"
+      },
+      "patch": {
+        "tags": [
+          "ServerAdvisors"
+        ],
+        "description": "Updates an Azure SQL Database Server Advisor.",
+        "operationId": "ServerAdvisors_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advisor",
+            "in": "body",
+            "description": "The requested advisor resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AdvisorResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified server advisor.",
+            "schema": {
+              "$ref": "#/definitions/AdvisorResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 InvalidAdvisorUpsertRequest - The update advisor request body does not exist or has no properties object.\n\n * 400 InvalidAdvisorAutoExecuteStatus - Specified auto-execute status for the advisor is not allowed.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/advisors/{advisorName}/recommendedActions": {
+      "get": {
+        "tags": [
+          "ServerRecommendedActions"
+        ],
+        "description": "Gets list of Azure SQL Database Server Recommended Actions.",
+        "operationId": "ServerRecommendedActions_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of server recommended actions.",
+            "schema": {
+              "$ref": "#/definitions/RecommendedActionResourceList"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/advisors/{advisorName}/recommendedActions/{recommendedActionName}": {
+      "get": {
+        "tags": [
+          "ServerRecommendedActions"
+        ],
+        "description": "Returns details of an Azure SQL Database Server Recommended Action.",
+        "operationId": "ServerRecommendedActions_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendedActionName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server Recommended Action.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved details of specified server recommended action.",
+            "schema": {
+              "$ref": "#/definitions/RecommendedActionResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "ServerRecommendedActions"
+        ],
+        "description": "Updates an Azure SQL Database Server Recommended Action.",
+        "operationId": "ServerRecommendedActions_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advisorName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server Advisor.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendedActionName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server Recommended Action.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendedAction",
+            "in": "body",
+            "description": "The requested recommended action resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecommendedActionResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified server recommended action.",
+            "schema": {
+              "$ref": "#/definitions/RecommendedActionResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 InvalidRecommendedActionUpsertRequest - The update recommended action request body does not exist or has no properties or state object.\n\n * 400 InvalidRecommendedActionState - The specified state for recommended action is invalid\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "AdvisorResource": {
+      "type": "object",
+      "description":"Definition of an advisor.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "None",
+            "V2",
+            "V12",
+            "User",
+            "System",
+            "Datawarehouse"
+          ],
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AdvisorResourceProperties"
+        }
+      }
+    },
+    "AdvisorResourceList": {
+      "type": "object",
+      "description":"Response to a list request for the advisor resource.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdvisorResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "AdvisorResourceProperties": {
+      "type": "object",
+      "description":"Properties of an advisor Resource.",
+      "properties": {
+        "advisorStatus": {
+          "type": "string",
+          "description":"Status of the advisor."
+        },
+        "autoExecuteStatus": {
+          "type": "string",
+          "description":"Auto-execution status of the advisor."
+        },
+        "autoExecuteStatusInheritedFrom": {
+          "type": "string",
+          "description":"The inheritance parent for the auto-execution status."
+        },
+        "recommendationsStatus": {
+          "type": "string",
+          "description":"The Recommendations status for the advisor on a resource."
+        },
+        "lastChecked": {
+          "format": "date-time",
+          "description":"(ISO8601 format)",
+          "type": "string"
+        },
+        "recommendedActions": {
+          "$ref": "#/definitions/RecommendedActionResourceList"
+        }
+      }
+    },
+    "RecommendedActionResource": {
+      "type": "object",
+      "description":"Resource representing a recommended action.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "None",
+            "V2",
+            "V12",
+            "User",
+            "System",
+            "Datawarehouse"
+          ],
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/RecommendedActionResourceProperties",
+          "description":"Properties of the Recommended Action Resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RecommendedActionResourceList": {
+      "type": "object",
+      "description": "Response to a list request for the recommended action resource.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendedActionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "RecommendedActionResourceProperties": {
+      "type": "object",
+      "description": "Properties for a recommended action resource.",
+      "properties": {
+        "recommendationReason": {
+          "type": "string"
+        },
+        "validSince": {
+          "format": "date-time",
+          "description": "Time when this recommended action became valid (ISO8601 Format).",
+          "type": "string"
+        },
+        "lastRefresh": {
+          "format": "date-time",
+          "description": "Time when this recommended action was last refreshed (ISO8601 Format).",
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/definitions/StateInfo"
+        },
+        "isExecutableAction": {
+          "type": "boolean"
+        },
+        "isRevertableAction": {
+          "type": "boolean"
+        },
+        "isArchivedAction": {
+          "type": "boolean"
+        },
+        "executeActionStartTime": {
+          "format": "date-time",
+          "description": "Time when execution of this action began (ISO8601 Format).",
+          "type": "string"
+        },
+        "executeActionDuration": {
+          "type": "string"
+        },
+        "revertActionStartTime": {
+          "format": "date-time",
+          "description": "Time when revert of this action began (ISO8601 Format).",
+          "type": "string"
+        },
+        "revertActionDuration": {
+          "type": "string"
+        },
+        "executeActionInitiatedBy": {
+          "type": "string"
+        },
+        "executeActionInitiatedTime": {
+          "format": "date-time",
+          "description": "Time when action was initiated (ISO8601 Format).",
+          "type": "string"
+        },
+        "revertActionInitiatedBy": {
+          "type": "string"
+        },
+        "revertActionInitiatedTime": {
+          "format": "date-time",
+          "description": "Time when revert of this action was initiated (ISO8601 Format).",
+          "type": "string"
+        },
+        "score": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "implementationDetails": {
+          "$ref": "#/definitions/ImplementationInfo"
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/ErrorInfo"
+        },
+        "estimatedImpact": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImpactRecord"
+          }
+        },
+        "observedImpact": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImpactRecord"
+          }
+        },
+        "timeSeries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricInfo"
+          }
+        },
+        "linkedObjects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "details": {
+          "type": "object"
+        }
+      }
+    },
+    "StateInfo": {
+      "type": "object",
+      "description": "The state information for a recommended action.",
+      "properties": {
+        "currentValue": {
+          "type": "string"
+        },
+        "actionInitiatedBy": {
+          "type": "string"
+        },
+        "lastModified": {
+          "format": "date-time",
+          "description": "Last modified time for recommended action (ISO8601 Format).",
+          "type": "string"
+        }
+      }
+    },
+    "ImplementationInfo": {
+      "type": "object",
+      "description": "The implementation information for a recommended action.",
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "script": {
+          "type": "string"
+        }
+      }
+    },
+    "ErrorInfo": {
+      "type": "object",
+      "description": "The error information for a recommended action.",
+      "properties": {
+        "errorCode": {
+          "type": "string"
+        },
+        "isRetryable": {
+          "type": "string"
+        }
+      }
+    },
+    "ImpactRecord": {
+      "type": "object",
+      "description": "The observed impact information for a recommended action.",
+      "properties": {
+        "dimensionName": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "absoluteValue": {
+          "format": "double",
+          "type": "number"
+        },
+        "changeValueAbsolute": {
+          "format": "double",
+          "type": "number"
+        },
+        "changeValueRelative": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "MetricInfo": {
+      "type": "object",
+      "description": "The time series metrics information for a recommended action.",
+      "properties": {
+        "metricName": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "timeGrain": {
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Start time (ISO8601 Format).",
+          "type": "string"
+        },
+        "value": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "ArmErrorResponseMessage": {
+      "type": "object",
+      "description":"represents and error message.",
+      "readOnly": true,
+      "properties": {
+        "error": {
+          "description" : "Contains the information about the error.",
+          "$ref": "#/definitions/ArmErrorResponseExtendedErrorInfo"
+        }
+      },
+      "required" : ["error"]
+    },
+    "ArmErrorResponseExtendedErrorInfo": {
+      "description": "Contains additional information about the error that occured.",
+      "type": "object",
+      "properties": {
+        "details": {
+          "description": "A list of error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArmErrorResponseErrorDetail"
+          }
+        },
+        "innerError": {
+          "description": "The inner error if available.",
+          "type" : "object"
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string"
+        }
+      }
+    },
+    "ArmErrorResponseErrorDetail": {
+      "type": "object",
+      "description": "Details about the error that occurred",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      },
+      "required" : ["code", "message"]
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "x-ms-parameter-location": "client",
+      "type": "string"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the Resource Group to which the resource belongs.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    }
+  }
+}

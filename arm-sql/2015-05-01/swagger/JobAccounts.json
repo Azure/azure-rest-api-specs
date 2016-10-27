@@ -1,0 +1,347 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAccounts": {
+            "get": {
+                "tags": ["JobAccounts"],
+                "description": "Returns information about Azure SQL job accounts.",
+                "operationId": "JobAccounts_List",
+                "parameters": [{
+                    "required": true,
+                    "$ref": "#/parameters/SubscriptionIdParameter"
+                }, {
+                    "required": true,
+                    "$ref": "#/parameters/ResourceGroupParameter"
+                }, {
+                    "name": "serverName",
+                    "in": "path",
+                    "description": "The name of the Azure SQL Database Server that the job accounts are hosted in.",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "required": true,
+                    "$ref": "#/parameters/ApiVersionParameter"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the list of job accounts.",
+                        "schema": {
+                            "$ref": "#/definitions/JobAccountResourceList"
+                        }
+                    },
+                    "default": {
+                        "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found",
+                        "schema": {
+                            "$ref": "#/definitions/ArmErrorResponseMessage"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAccounts/{jobAccountName}": {
+      "get": {
+        "tags": [
+          "JobAccounts"
+        ],
+        "description": "Returns information about an Azure SQL job account.",
+        "operationId": "JobAccounts_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server that the job account is hosted in.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAccountName",
+            "in": "path",
+            "description": "The name of the Azure SQL job account to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified job account.",
+            "schema": {
+              "$ref": "#/definitions/JobAccountResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "JobAccounts"
+        ],
+        "description": "Creating a new Azure SQL job account or updating an existing Azure SQL job account.",
+        "operationId": "JobAccounts_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server that the job account is hosted in.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAccountName",
+            "in": "path",
+            "description": "The name of the Azure SQL job account to be created or updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAccountResource",
+            "in": "body",
+            "description": "The requested job account resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobAccountResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the job account.",
+            "schema": {
+              "$ref": "#/definitions/JobAccountResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidJobAccountCreateOrUpdateRequest - The create or update job account request body is empty or invalid.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 DatabaseDoesNotExist - The requested database was not found\n\n * 400 JobAccountExceededAccountsQuota - Could not create job account because it would exceed the quota.\n\n * 400 JobAccountAlreadyExists - The job account already exists on the server.\n\n * 400 JobAccountDatabaseEditionUnsupported - The specified database's service level objective is not supported for use as a job account database.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SubscriptionNotFound - The requested subscription was not found.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          },
+          "201": {
+            "description": "Successfully created the job account.",
+            "schema": {
+              "$ref": "#/definitions/JobAccountResource"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "JobAccounts"
+        ],
+        "description": "Deletes the Azure SQL job account with the given name.",
+        "operationId": "JobAccounts_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server that the job account is hosted in.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAccountName",
+            "in": "path",
+            "description": "The name of the Azure SQL job account to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the job account."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 JobAccountNotFound - Specified elastic job account does not exist in the specified logical server.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          },
+          "204": {
+            "description": "The specified job account does not exist."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ArmErrorResponseMessage": {
+      "type": "object",
+      "description":"represents and error message.",
+      "readOnly": true,
+      "properties": {
+        "error": {
+          "description" : "Contains the information about the error.",
+          "$ref": "#/definitions/ArmErrorResponseExtendedErrorInfo"
+        }
+      },
+      "required" : ["error"]
+    },
+    "ArmErrorResponseExtendedErrorInfo": {
+      "description": "Contains additional information about the error that occured.",
+      "type": "object",
+      "properties": {
+        "details": {
+          "description": "A list of error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArmErrorResponseErrorDetail"
+          }
+        },
+        "innerError": {
+          "description": "The inner error if available.",
+          "type" : "object"
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string"
+        }
+      }
+    },
+    "ArmErrorResponseErrorDetail": {
+      "type": "object",
+      "description": "Details about the error that occurred",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      },
+      "required" : ["code", "message"]
+    },
+    "JobAccountResourceList": {
+      "type": "object",
+      "description": "Response to a list request for job accounts.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobAccountResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "JobAccountResource": {
+      "description": "Contains information about an Azure SQL Database Elastic job account.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/JobAccountResourceProperties"
+        }
+      }
+    },
+    "JobAccountResourceProperties": {
+      "description": "Properties for an Azure SQL Database Elastic job account.",
+      "type": "object",
+      "properties": {
+        "databaseId": {
+          "description": "ARM id of the job account control database.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "x-ms-parameter-location": "client",
+      "type": "string"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the Resource Group to which the resource belongs.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    }
+  }
+}

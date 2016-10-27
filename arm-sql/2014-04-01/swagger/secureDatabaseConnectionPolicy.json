@@ -1,0 +1,199 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure SQL Database API spec",
+    "description": "The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases.",
+    "version": "2014-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/connectionPolicies/Default": {
+      "put": {
+        "tags": [
+          "SecureConnection"
+        ],
+        "operationId": "Databases_SetSecureConnectionPolicy",
+        "description": "Creates or updates an Azure SQL Server Firewall rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Database for which the policy applies."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseSecureConnectionPolicy"
+            },
+            "description": "The required parameters for createing or updating a secure connection policy."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseSecureConnectionPolicy"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DatabaseSecureConnectionPolicy"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SecureConnection"
+        ],
+        "operationId": "Databases_GetSecureConnectionPolicy",
+        "description": "Returns an Azure SQL Database secure connection policy.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Database for which the secure connection policy applies."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseSecureConnectionPolicy"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DatabaseSecureConnectionPolicyProperties": {
+      "properties": {
+        "proxyDnsName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Data Security Proxy DNS name."
+        },
+        "proxyPort": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Data Security Proxy port number."
+        },
+        "securityEnabledAccess": {
+          "type": "string",
+          "description": "Whether or not block direct access is applied.",
+          "enum": [
+            "Required",
+            "Optional"
+          ],
+          "x-ms-enum": {
+            "name": "DatabaseSecureConnectionAccess"
+          }
+        }
+      },
+      "description": "Represents the properties of an Azure SQL Database secure connection policy."
+    },
+    "DatabaseSecureConnectionPolicy": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DatabaseSecureConnectionPolicyProperties",
+          "description": "Represents the properties of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlSubResource"
+        }
+      ],
+      "description": "Represents an Azure SQL Database secure connection policy."
+    },
+    "SqlSubResource": {
+      "description": "Subresource properties",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Resource Group to which the resource belongs.",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure SQL Server",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

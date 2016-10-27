@@ -1,0 +1,164 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/move": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Renames an Azure SQL Database.",
+        "operationId": "Databases_Rename",
+        "parameters": [
+          {
+            
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database to rename.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "definition",
+            "in": "body",
+            "description": "The resource move definition for renaming this database.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceMoveDefinition"
+            }
+          },
+          {
+            
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully renamed the database."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceMoveRequest - The resource move request is invalid.\n\n * 400 InvalidMoveTargetResourceId - The target resource identifier in move request is invalid.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 CannotMoveOrDropJobAccountDatabase - Cannot drop database associated with job account.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponseMessage"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "ResourceMoveDefinition": {
+      "description": "Contains the information necessary to perform a resource move (rename).",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The target ID for the resource",
+          "type": "string"
+        }
+      }
+    },
+    "ArmErrorResponseMessage": {
+      "type": "object",
+      "description":"represents and error message.",
+      "readOnly": true,
+      "properties": {
+        "error": {
+          "description" : "Contains the information about the error.",
+          "$ref": "#/definitions/ArmErrorResponseExtendedErrorInfo"
+        }
+      },
+      "required" : ["error"]
+    },
+    "ArmErrorResponseExtendedErrorInfo": {
+      "description": "Contains additional information about the error that occured.",
+      "type": "object",
+      "properties": {
+        "details": {
+          "description": "A list of error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArmErrorResponseErrorDetail"
+          }
+        },
+        "innerError": {
+          "description": "The inner error if available.",
+          "type" : "object"
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string"
+        }
+      }
+    },
+    "ArmErrorResponseErrorDetail": {
+      "type": "object",
+      "description": "Details about the error that occurred",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      },
+      "required" : ["code", "message"]
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "x-ms-parameter-location": "client",
+      "type": "string"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the Resource Group to which the resource belongs.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    }
+  }
+}
