@@ -3990,7 +3990,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Vip parameter supplied to the Begin Active-Active Reset Virtual Network Gateway operation through Network resource provider."
+            "description": "Virtual network gateway vip address supplied to the Begin Reset of Active-Active feature enabled Gateway."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -6493,10 +6493,14 @@
           "description": "Gets or sets resource guid property of the LocalNetworkGateway resource"
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets provisioning state of the LocalNetworkGateway resource Updating/Deleting/Failed"
         }
       },
+      "required": [
+        "localNetworkAddressSpace"
+      ],
       "description": "LocalNetworkGateway properties"
     },
     "LocalNetworkGateway": {
@@ -7796,10 +7800,16 @@
           "description": "Gets or sets resource guid property of the VirtualNetworkGateway resource"
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets provisioning state of the VirtualNetworkGateway resource Updating/Deleting/Failed"
         }
       },
+      "required": [
+        "ipConfigurations",
+        "gatewayType",
+        "vpnType"
+      ],
       "description": "VirtualNetworkGateway properties"
     },
     "VirtualNetworkGateway": {
@@ -7901,7 +7911,7 @@
     "TunnelConnectionHealth": {
       "properties": {
         "tunnel": {
-           "readOnly": true,
+          "readOnly": true,
           "type": "string",
           "description": "Tunnel name."
         },
@@ -7979,6 +7989,7 @@
           "description": "The Ipsec share key."
         },
         "connectionStatus": {
+          "readOnly": true,
           "type": "string",
           "description": "Virtual network Gateway connection status",
           "enum": [
@@ -7993,6 +8004,7 @@
           }
         },
         "tunnelConnectionStatus": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/TunnelConnectionHealth"
@@ -8000,11 +8012,13 @@
           "description": "Collection of all tunnels' connection health status."
         },
         "egressBytesTransferred": {
+          "readOnly": true,
           "type": "integer",
           "format": "int64",
           "description": "The Egress Bytes Transferred in this connection"
         },
         "ingressBytesTransferred": {
+          "readOnly": true,
           "type": "integer",
           "format": "int64",
           "description": "The Ingress Bytes Transferred in this connection"
@@ -8022,10 +8036,15 @@
           "description": "Gets or sets resource guid property of the VirtualNetworkGatewayConnection resource"
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets provisioning state of the VirtualNetworkGatewayConnection resource Updating/Deleting/Failed"
         }
       },
+      "required": [
+        "virtualNetworkGateway1",
+        "connectionType"
+      ],
       "description": "VirtualNetworkGatewayConnection properties"
     },
     "VirtualNetworkGatewayConnection": {
