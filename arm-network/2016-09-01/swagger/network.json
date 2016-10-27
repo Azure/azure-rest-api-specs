@@ -7710,10 +7710,15 @@
           "description": "Gets or sets the reference of the PublicIP resource"
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
+      "required": [
+        "subnet",
+        "publicIPAddress"
+      ],
       "description": "Properties of VirtualNetworkGatewayIPConfiguration"
     },
     "VirtualNetworkGatewayIPConfiguration": {
@@ -7889,6 +7894,10 @@
           "description": "The capacity"
         }
       },
+      "required": [
+        "name",
+        "tier"
+      ],
       "description": "VirtualNetworkGatewaySku details"
     },
     "VpnClientParameters": {
@@ -7906,6 +7915,9 @@
           }
         }
       },
+      "required": [
+        "ProcessorArchitecture"
+      ],
       "description": "VpnClientParameters"
     },
     "TunnelConnectionHealth": {
@@ -8072,6 +8084,7 @@
           "description": "Gets or sets the revoked Vpn client certificate thumbprint"
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets provisioning state of the VPN client revoked certificate resource Updating/Deleting/Failed"
         }
@@ -8107,10 +8120,14 @@
           "description": "Gets or sets the certificate public data"
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets provisioning state of the VPN client root certificate resource Updating/Deleting/Failed"
         }
       },
+      "required": [
+        "publicCertData"
+      ],
       "description": "Properties of SSL certificates of application gateway"
     },
     "VpnClientRootCertificate": {
