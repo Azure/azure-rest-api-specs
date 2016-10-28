@@ -39,7 +39,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Lists the CDN profiles within an Azure subscription.",
+        "description": "Lists all the CDN profiles within an Azure subscription.",
         "operationId": "Profiles_List",
         "parameters": [
           {
@@ -51,7 +51,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "OK.The request has succeeded",
             "schema": {
               "$ref": "#/definitions/ProfileListResult"
             }
@@ -73,7 +73,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Lists the CDN profiles within a resource group.",
+        "description": "Lists all the CDN profiles within a resource group.",
         "operationId": "Profiles_ListByResourceGroup",
         "parameters": [
           {
@@ -88,7 +88,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "OK.The request has succeeded",
             "schema": {
               "$ref": "#/definitions/ProfileListResult"
             }
@@ -110,7 +110,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Gets a CDN profile with the specified parameters.",
+        "description": "Gets a CDN profile with the specified profile name under the specified subscription and resource group.",
         "operationId": "Profiles_Get",
         "parameters": [
           {
@@ -132,7 +132,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "OK. The request has succeeded",
             "schema": {
               "$ref": "#/definitions/Profile"
             }
@@ -149,7 +149,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Creates a new CDN profile with the specified parameters.",
+        "description": "Creates a new CDN profile with a profile name under the specified subscription and resource group.",
         "operationId": "Profiles_Create",
         "parameters": [
           {
@@ -163,7 +163,7 @@
             "type": "string"
           },
           {
-            "description": "Profile properties needed for creation.",
+            "description": "Profile properties needed to create a new profile.",
             "in": "body",
             "name": "profile",
             "required": true,
@@ -180,19 +180,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "OK. The request has succeeded",
             "schema": {
               "$ref": "#/definitions/Profile"
             }
           },
           "201": {
-            "description": "Created.",
+            "description": "Created. The request has been fulfilled and a new profile has been created.",
             "schema": {
               "$ref": "#/definitions/Profile"
             }
           },
           "202": {
-            "description": "Accepted and  the operation will complete asynchronously.",
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Profile"
             }
@@ -210,7 +210,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Updates an existing CDN profile with the specified parameters.",
+        "description": "Updates an existing CDN profile with the specified profile name under the specified subscription and resource group.",
         "operationId": "Profiles_Update",
         "parameters": [
           {
@@ -226,7 +226,7 @@
           {
             "name": "profileUpdateParameters",
             "in": "body",
-            "description": "Profile properties needed for update.",
+            "description": "Profile properties needed to update an existing profile.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ProfileUpdateParameters"
@@ -241,13 +241,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "OK. The request has succeeded",
             "schema": {
               "$ref": "#/definitions/Profile"
             }
           },
           "202": {
-            "description": "Accepted and the operation will complete asynchronously.",
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Profile"
             }
@@ -274,7 +274,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",
+            "description": "Name of the CDN profile which is unique within the resource group.",      
             "required": true,
             "type": "string"
           },
@@ -287,10 +287,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously."
           },
           "204": {
-            "description": "No Content."
+            "description": "No Content. The request has been accepted but the profile was not found."
           },
           "default": {
             "description": "CDN error response describing why the operation failed.",
@@ -307,7 +307,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Generates a dynamic SSO URI used to sign in to the CDN Supplemental Portal used for advanced management tasks, such as Country Filtering, Advanced HTTP Reports, and Real-time Stats and Alerts. The SSO URI changes approximately every 10 minutes.",
+        "description": "Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemnetal portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.",
         "operationId": "Profiles_GenerateSsoUri",
         "parameters": [
           {
@@ -329,7 +329,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "OK. The request has succeeded",
             "schema": {
               "$ref": "#/definitions/SsoUri"
             }
@@ -348,7 +348,7 @@
         "tags": [
           "Endpoints"
         ],
-        "description": "Lists existing CDN endpoints within a profile.",
+        "description": "Lists existing CDN endpoints.",
         "operationId": "Endpoints_ListByProfile",
         "parameters": [
           {
@@ -370,7 +370,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "OK. The request has succeeded",
             "schema": {
               "$ref": "#/definitions/EndpointListResult"
             }
@@ -392,7 +392,7 @@
         "tags": [
           "Endpoints"
         ],
-        "description": "Gets an existing CDN endpoint with the specified parameters.",
+        "description": "Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
         "operationId": "Endpoints_Get",
         "parameters": [
           {
