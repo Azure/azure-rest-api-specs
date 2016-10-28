@@ -1971,11 +1971,11 @@
         },
         "administratorLogin": {
           "type": "string",
-          "description": "Administrator username for the server. Can only be specified when the server is being created."
+          "description": "Administrator username for the server. Can only be specified when the server is being created (and is required for creation)."
         },
         "administratorLoginPassword": {
           "type": "string",
-          "description": "The administrator login password."
+          "description": "The administrator login password (required for server creation)."
         }
       },
       "description": "Represents the properties of an Azure SQL Server."
@@ -2329,6 +2329,27 @@
           "type": "string",
           "format": "date-time",
           "description": "The recovery period start date of the Azure SQL Database. This records the start date and time when recovery is available for this Azure SQL Database (ISO8601 format)."
+        },
+        "createMode": {
+          "type": "string",
+          "description": "Specifies the type of database to create.",
+          "enum": [
+            "Copy",
+            "Default",
+            "NonReadableSecondary",
+            "OnlineSecondary",
+            "PointInTimeRestore",
+            "Recovery",
+            "Restore"
+          ],
+          "x-ms-enum": {
+            "name": "createMode",
+            "modelAsString": true
+          }
+        },
+        "sourceDatabaseId": {
+          "type": "string",
+          "description": "Conditional.  Specifies the resource Id of the source database.  If createMode is not set to Default, then this value must be specified.  The name of the source database must be the same."
         },
         "edition": {
           "type": "string",
@@ -3161,7 +3182,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "The subscription id that identifies an Azure subscription."
     },
     "ApiVersionParameter": {
       "name": "api-version",
