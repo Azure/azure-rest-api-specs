@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure SQL Database API spec",
-    "description": "The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases.",
+    "title": "Azure SQL Replication Link API spec",
+    "description": "Provides read and delete functionality for database replication links, as well as failover functionality.",
     "version": "2014-04-01"
   },
   "host": "management.azure.com",
@@ -22,7 +22,7 @@
           "DatabaseReplicationLinks"
         ],
         "operationId": "Databases_DeleteReplicationLink",
-        "description": "Deletes the Azure SQL Database Replication Link with the given id.",
+        "description": "Deletes the Azure SQL Database Replication Link with the given id.  Cannot be done during failover.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
