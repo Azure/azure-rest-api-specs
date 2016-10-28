@@ -3700,7 +3700,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/ConnectionSharedKeyResult"
+              "$ref": "#/definitions/ConnectionSharedKey"
             }
           }
         }
@@ -8162,15 +8162,6 @@
       ],
       "description": "VPN client root certificate of virtual network gateway"
     },
-    "ConnectionSharedKeyResult": {
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The virtual network connection shared key value"
-        }
-      },
-      "description": "Response for CheckConnectionSharedKey Api service call"
-    },
     "VirtualNetworkGatewayConnectionListResult": {
       "properties": {
         "value": {
@@ -8203,6 +8194,9 @@
           "description": "The virtual network connection shared key value"
         }
       },
+      "required": [
+        "value"
+      ],	  
       "description": "Response for GetConnectionSharedKey Api service call"
     },
     "VirtualNetworkGatewayListResult": {
