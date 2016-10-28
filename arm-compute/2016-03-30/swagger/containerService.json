@@ -381,7 +381,6 @@
           "required": [
             "name",
             "dnsPrefix",
-            "count",
             "vmSize"
           ],
           "description": "Profile for container service agent pool"
@@ -390,13 +389,11 @@
           "properties": {
             "adminUsername": {
               "type": "string",
-              "description": "The administrator username to use for Windows VMs",
-              "pattern": "^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$"
+              "description": "The administrator username to use for Windows VMs"
             },
             "adminPassword": {
               "type": "string",
-              "description": "The administrator password to use for Windows VMs",
-              "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%\\^&\\*\\(\\)])[a-zA-Z\\d!@#$%\\^&\\*\\(\\)]{12,123}$"
+              "description": "The administrator password to use for Windows VMs"
             }
           },
           "required": [
@@ -409,8 +406,7 @@
           "properties": {
             "adminUsername": {
               "type": "string",
-              "description": "The administrator username to use for all Linux VMs",
-              "pattern": "^[a-z][a-z0-9_-]*$"
+              "description": "The administrator username to use for all Linux VMs"
             },
             "ssh": {
               "$ref": "#/definitions/ContainerServiceSshConfiguration",
