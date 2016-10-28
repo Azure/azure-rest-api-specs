@@ -1518,7 +1518,7 @@
       ]
     },
     "ProfileProperties": {
-      "description": "<TODO>",
+      "description": "The JSON object that contains the properties of the profile to create.",
       "properties": {
         "resourceState": {
           "description": "Resource status of the profile.",
@@ -1543,7 +1543,7 @@
       }
     },
     "ProfileListResult": {
-      "description":"<TODO",
+      "description":"Result of the request to list profiles. It contains a list of profile objects and a URL link to get next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -1554,7 +1554,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "URL to get the next set of results."
+          "description": "URL to get the next set of profile objects if there are any."
         }
       }
     },
@@ -1601,7 +1601,7 @@
       }
     },
     "EndpointProperties": {
-      "description":"<TODO>",
+      "description":"The JSON object that contains the properties of the endpoint to create.",
       "required": [
         "origins"
       ],
@@ -1648,7 +1648,7 @@
       }
     },
     "EndpointListResult": {
-      "description": "<TODO>",
+      "description": "Result of the request to list endpoints. It contains a list of endpoint objects and a URL link to get next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -1659,7 +1659,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "URL to get the next set of results."
+          "description": "URL to get the next set of endpoint objects if there are any."
         }
       }
     },
@@ -1682,7 +1682,7 @@
       "x-ms-azure-resource": true
     },
     "EndpointPropertiesUpdateParameters": {
-      "description":"<TODO>",
+      "description":"Result of the request to list endpoints. It contains a list of endpoints and a URL link to get next set of results.",
       "properties": {
         "originHostHeader": {
           "description": "The host header the CDN provider will send along with content requests to origins. The default value is the host name of the origin.",
@@ -1725,7 +1725,7 @@
       }
     },
     "DeepCreatedOrigin": {
-      "description": "Deep created origins within a CDN endpoint.",
+      "description": "Origins to be added when creating CDN endpoint.",
       "type": "object",
       "required": [
         "name"
@@ -1743,7 +1743,7 @@
       "x-ms-azure-resource": true
     },
     "DeepCreatedOriginProperties": {
-      "description": "Properties of deep created origin on a CDN endpoint.",
+      "description": "Properties of origins created origin on a CDN endpoint.",
       "type": "object",
       "required": [
         "hostName"
@@ -1846,7 +1846,7 @@
       }
     },
     "OriginProperties": {
-      "description":"<TODO>",
+      "description":"The JSON object that contains the properties of the origin to create.",
       "required": [
         "hostName"
       ],
@@ -1904,7 +1904,7 @@
       "x-ms-azure-resource": true
     },
     "OriginPropertiesParameters": {
-      "description": "<TODO>",
+      "description": "The JSON object that contains the properties of the origin to create.",
       "properties": {
         "hostName": {
           "description": "The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported.",
@@ -1929,7 +1929,7 @@
       }
     },
     "OriginListResult": {
-      "description":"<TODO>",
+      "description":"Result of the request to list origins. It contains a list of origin objects and a URL link to get next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -1940,7 +1940,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "URL to get the next set of results."
+          "description": "URL to get the next set of origin objects if there are any."
         }
       }
     },
@@ -1960,7 +1960,7 @@
       }
     },
     "CustomDomainProperties": {
-      "description": "<TODO>",
+      "description": "The JSON object that contains the properties of the custom domain to create.",
       "required": [
         "hostName"
       ],
@@ -1991,7 +1991,7 @@
       }
     },
     "CustomDomainParameters": {
-      "description": "CustomDomain properties required for custom domain creation or update.",
+      "description": "CustomDomain object required for custom domain creation or update.",
       "type": "object",
       "properties": {
         "properties": {
@@ -2001,7 +2001,7 @@
       }
     },
     "CustomDomainPropertiesParameters": {
-      "description": "<TODO>",
+      "description": "The JSON object that contains the properties of the custom domain to create.",
       "required": [
         "hostName"
       ],
@@ -2013,7 +2013,7 @@
       }
     },
     "CustomDomainListResult": {
-      "description": "<TODO>",
+      "description": "Result of the request to list custom domains. It contains a list of custom domain objects and a URL link to get next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -2024,7 +2024,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "URL to get the next set of results."
+          "description": "URL to get the next set of custom domain objects if there are any."
         }
       }
     },
@@ -2115,7 +2115,7 @@
           "type": "string"
         },
         "display": {
-          "description": "<TODO>",
+          "description": "The object represents the operation.",
           "properties": {
             "provider": {
               "description": "Service provider: Microsoft.Cdn",
@@ -2134,7 +2134,7 @@
       }
     },
     "OperationListResult": {
-     "description": "<TODO>",
+     "description": "Result of the request to list CDN operations. It contains a list of operations and a URL link to get next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -2145,7 +2145,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "URL to get the next set of results."
+          "description": "URL to get the next set of operation list results if there are any."
         }
       }
     },
@@ -2220,7 +2220,7 @@
       "type": "object"
     },
     "ErrorResponse": {
-      "description": "<TODO>",
+      "description": "Error reponse indicates CDN service is not able to process the incoming request. Reason provided in error message.",
       "type": "object",
       "properties": {
         "code": {
