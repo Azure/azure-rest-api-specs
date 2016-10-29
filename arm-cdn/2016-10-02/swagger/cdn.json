@@ -982,81 +982,6 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "Origins"
-        ],
-        "description": "Creates a new CDN origin within an endpoint.",
-        "operationId": "Origins_Create",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the CDN profile within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint within the CDN profile.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "originName",
-            "in": "path",
-            "description": "Name of the origin, an arbitrary value but it needs to be unique under endpoint",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "origin",
-            "in": "body",
-            "description": "Origin properties",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Origin"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Origin"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/Origin"
-            }
-          },
-          "202": {
-            "description": "Accepted and the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/Origin"
-            }
-          },
-          "default": {
-            "description": "CDN error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
       "patch": {
         "tags": [
           "Origins"
@@ -1116,63 +1041,6 @@
             "schema": {
               "$ref": "#/definitions/Origin"
             }
-          },
-          "default": {
-            "description": "CDN error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "tags": [
-          "Origins"
-        ],
-        "description": "Deletes an existing CDN origin within an endpoint.",
-        "operationId": "Origins_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the CDN profile within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint within the CDN profile.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "originName",
-            "in": "path",
-            "description": "Name of the origin. Must be unique within endpoint.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted and the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/Origin"
-            }
-          },
-          "204": {
-            "description": "No Content"
           },
           "default": {
             "description": "CDN error response describing why the operation failed.",
@@ -1512,7 +1380,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProfileProperties"
         }
-      }
+      },
+      "required": [
+        "sku"
+      ]
     },
     "ProfileProperties": {
       "properties": {
@@ -1747,11 +1618,19 @@
         },
         "httpPort": {
           "description": "The value of the HTTP port. Must be between 1 and 65535",
-          "type": "integer"
+          "type": "integer",
+          "maximum": 65535,
+          "exclusiveMaximum": false,
+          "minimum": 1,
+          "exclusiveMinimum": false
         },
         "httpsPort": {
           "description": "The value of the HTTPS port. Must be between 1 and 65535",
-          "type": "integer"
+          "type": "integer",
+          "maximum": 65535,
+          "exclusiveMaximum": false,
+          "minimum": 1,
+          "exclusiveMinimum": false
         }
       },
       "x-ms-azure-resource": true
@@ -1766,7 +1645,7 @@
       ],
       "properties": {
         "relativePath": {
-          "description": "Relative path applicable to geo filter.",
+          "description": "Relative path applicable to geo filter. (e.g. '/mypictures', '/mypicture/kitty.jpg', and etc.)",
           "type": "string"
         },
         "action": {
@@ -1774,7 +1653,7 @@
           "type": "string"
         },
         "countryCodes":    {
-          "description": "Country codes of the geo filter.",
+          "description": "Two letter country codes of the geo filter. (e.g. AU, MX, and etc.)",
           "type": "array",
           "items": {
             "type": "string"
@@ -1840,11 +1719,19 @@
         },
         "httpPort": {
           "description": "The value of the HTTP port. Must be between 1 and 65535.",
-          "type": "integer"
+          "type": "integer",
+          "maximum": 65535,
+          "exclusiveMaximum": false,
+          "minimum": 1,
+          "exclusiveMinimum": false
         },
         "httpsPort": {
           "description": "The value of the https port. Must be between 1 and 65535.",
-          "type": "integer"
+          "type": "integer",
+          "maximum": 65535,
+          "exclusiveMaximum": false,
+          "minimum": 1,
+          "exclusiveMinimum": false
         },
         "resourceState": {
           "description": "Resource status of the origin.",
@@ -1886,11 +1773,19 @@
         },
         "httpPort": {
           "description": "The value of the HTTP port. Must be between 1 and 65535.",
-          "type": "integer"
+          "type": "integer",
+          "maximum": 65535,
+          "exclusiveMaximum": false,
+          "minimum": 1,
+          "exclusiveMinimum": false
         },
         "httpsPort": {
           "description": "The value of the HTTPS port. Must be between 1 and 65535.",
-          "type": "integer"
+          "type": "integer",
+          "maximum": 65535,
+          "exclusiveMaximum": false,
+          "minimum": 1,
+          "exclusiveMinimum": false
         }
       }
     },
