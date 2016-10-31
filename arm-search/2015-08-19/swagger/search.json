@@ -70,8 +70,10 @@
               "$ref": "#/definitions/AdminKeyResult"
             },
             "examples": {
-              "primaryKey": "<your primary admin API key>",  
-              "secondaryKey": "<your secondary admin API key>"  
+              "application/json": {
+                "primaryKey": "<your primary admin API key>",  
+                "secondaryKey": "<your secondary admin API key>"
+              }  
             }
           },
           "default": {
@@ -132,8 +134,10 @@
               "$ref": "#/definitions/AdminKeyResult"
             },
             "examples": {
-              "primaryKey": "<your primary admin API key>",  
-              "secondaryKey": "<your secondary admin API key>"  
+              "application/json": {
+                "primaryKey": "<your primary admin API key>",  
+                "secondaryKey": "<your secondary admin API key>"
+              }  
             }
           },
           "default": {
@@ -186,8 +190,10 @@
               "$ref": "#/definitions/QueryKey"
             },
             "examples": {
-              "name": "Query key for browser-based clients",  
-              "key": "<a query API key>"
+              "application/json": {
+                "name": "Query key for browser-based clients",  
+                "key": "<a query API key>"
+              }
             }  
           },
           "default": {
@@ -236,17 +242,19 @@
               "$ref": "#/definitions/ListQueryKeysResult"
             },
             "examples": {
-              "value": [  
-                  {  
-                    "name": "Query key for browser-based clients",
-                    "key": "<a query API key>"
-                  },
-                  {  
-                    "name": "Query key for mobile clients",
-                    "key": "<another query API key>"
-                  }
-              ],
-              "nextLink": null
+              "application/json": {
+                "value": [  
+                    {  
+                      "name": "Query key for browser-based clients",
+                      "key": "<a query API key>"
+                    },
+                    {  
+                      "name": "Query key for mobile clients",
+                      "key": "<another query API key>"
+                    }
+                ],
+                "nextLink": null
+              }
             }
           },
           "default": {
@@ -358,23 +366,25 @@
               "$ref": "#/definitions/SearchService"
             },
             "examples": {
-              "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/azs-test",
-              "name": "azs-test",
-              "location": "westus",
-              "type": "Microsoft.Search/searchServices",
-              "tags": {  
-                  "app-name": "My e-commerce app"
-              },
-              "sku": {  
-                  "name": "standard"
-              },
-              "properties":{  
-                  "replicaCount": 3,
-                  "partitionCount": 1,
-                  "status": "provisioning",
-                  "statusDetails": "",
-                  "hostingMode": "default",
-                  "provisioningState": "provisioning"
+              "application/json": {
+                "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/azs-test",
+                "name": "azs-test",
+                "location": "westus",
+                "type": "Microsoft.Search/searchServices",
+                "tags": {  
+                    "app-name": "My e-commerce app"
+                },
+                "sku": {  
+                    "name": "standard"
+                },
+                "properties":{  
+                    "replicaCount": 3,
+                    "partitionCount": 1,
+                    "status": "provisioning",
+                    "statusDetails": "",
+                    "hostingMode": "default",
+                    "provisioningState": "provisioning"
+                }
               }
             }
           },
@@ -384,23 +394,25 @@
               "$ref": "#/definitions/SearchService"
             },
             "examples": {
-              "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/azs-test",
-              "name": "azs-test",
-              "location": "westus",
-              "type": "Microsoft.Search/searchServices",
-              "tags": {  
-                  "app-name": "My e-commerce app"
-              },
-              "sku": {  
-                  "name": "standard"
-              },
-              "properties":{  
-                  "replicaCount": 3,
-                  "partitionCount": 1,
-                  "status": "provisioning",
-                  "statusDetails": "",
-                  "hostingMode": "default",
-                  "provisioningState": "provisioning"
+              "application/json": {
+                "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/azs-test",
+                "name": "azs-test",
+                "location": "westus",
+                "type": "Microsoft.Search/searchServices",
+                "tags": {  
+                    "app-name": "My e-commerce app"
+                },
+                "sku": {  
+                    "name": "standard"
+                },
+                "properties":{  
+                    "replicaCount": 3,
+                    "partitionCount": 1,
+                    "status": "provisioning",
+                    "statusDetails": "",
+                    "hostingMode": "default",
+                    "provisioningState": "provisioning"
+                }
               }
             }
           },
@@ -445,23 +457,25 @@
               "$ref": "#/definitions/SearchService"
             },
             "examples": {
-              "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/azs-test",
-              "name": "azs-test",
-              "location": "westus",
-              "type": "Microsoft.Search/searchServices",
-              "tags": {  
-                  "app-name": "My e-commerce app"
-              },
-              "sku": {  
-                  "name": "standard"
-              },
-              "properties":{  
-                  "replicaCount": 3,
-                  "partitionCount": 1,
-                  "status": "running",
-                  "statusDetails": "",
-                  "hostingMode": "default",
-                  "provisioningState": "succeeded"
+              "application/json": {
+                "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/azs-test",
+                "name": "azs-test",
+                "location": "westus",
+                "type": "Microsoft.Search/searchServices",
+                "tags": {  
+                    "app-name": "My e-commerce app"
+                },
+                "sku": {  
+                    "name": "standard"
+                },
+                "properties":{  
+                    "replicaCount": 3,
+                    "partitionCount": 1,
+                    "status": "running",
+                    "statusDetails": "",
+                    "hostingMode": "default",
+                    "provisioningState": "succeeded"
+                }
               }
             }
           },
@@ -552,48 +566,50 @@
               "$ref": "#/definitions/SearchServiceListResult"
             },
             "examples": {
-              "value": [
-                {
-                  "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/azs-test",
-                  "name": "azs-test",
-                  "location": "westus",
-                  "type": "Microsoft.Search/searchServices",
-                  "tags": {  
-                      "app-name": "My e-commerce app"
+              "application/json": {
+                "value": [
+                  {
+                    "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/azs-test",
+                    "name": "azs-test",
+                    "location": "westus",
+                    "type": "Microsoft.Search/searchServices",
+                    "tags": {  
+                        "app-name": "My e-commerce app"
+                    },
+                    "sku": {  
+                        "name": "standard"
+                    },
+                    "properties":{  
+                        "replicaCount": 3,
+                        "partitionCount": 1,
+                        "status": "running",
+                        "statusDetails": "",
+                        "hostingMode": "default",
+                        "provisioningState": "succeeded"
+                    }
                   },
-                  "sku": {  
-                      "name": "standard"
-                  },
-                  "properties":{  
-                      "replicaCount": 3,
-                      "partitionCount": 1,
-                      "status": "running",
-                      "statusDetails": "",
-                      "hostingMode": "default",
-                      "provisioningState": "succeeded"
+                  {
+                    "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/azs-test-backup",
+                    "name": "azs-test-backup",
+                    "location": "eastus",
+                    "type": "Microsoft.Search/searchServices",
+                    "tags": {  
+                        "app-name": "My e-commerce app"
+                    },
+                    "sku": {  
+                        "name": "basic"
+                    },
+                    "properties":{  
+                        "replicaCount": 1,
+                        "partitionCount": 1,
+                        "status": "running",
+                        "statusDetails": "",
+                        "hostingMode": "default",
+                        "provisioningState": "succeeded"
+                    }
                   }
-                },
-                {
-                  "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/azs-test-backup",
-                  "name": "azs-test-backup",
-                  "location": "eastus",
-                  "type": "Microsoft.Search/searchServices",
-                  "tags": {  
-                      "app-name": "My e-commerce app"
-                  },
-                  "sku": {  
-                      "name": "basic"
-                  },
-                  "properties":{  
-                      "replicaCount": 1,
-                      "partitionCount": 1,
-                      "status": "running",
-                      "statusDetails": "",
-                      "hostingMode": "default",
-                      "provisioningState": "succeeded"
-                  }
-                }
-              ]
+                ]
+              }
             }
           },
           "default": {
@@ -643,9 +659,11 @@
               "$ref": "#/definitions/CheckNameAvailabilityOutput"
             },
             "examples": {
-              "nameAvailable": false,  
-              "reason": "AlreadyExists",  
-              "message": ""  
+              "application/json": {
+                "nameAvailable": false,  
+                "reason": "AlreadyExists",  
+                "message": ""
+              }  
             }
           },
           "default": {
