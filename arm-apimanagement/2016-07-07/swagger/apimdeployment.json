@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -55,7 +55,7 @@
             "schema": {
               "$ref": "#/definitions/ApiManagementServiceManageDeploymentsParameters"
             },
-            "description": "Parameters supplied to ManageDeployments operation."
+            "description": "Parameters supplied to the ManageDeployments operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -72,10 +72,10 @@
             }
           },
           "202": {
-            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+            "description": "Accepted. The location header contains the URL where the status of the long running operation can be checked."
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -90,7 +90,7 @@
           "ApiManagementService"
         ],
         "operationId": "ApiManagementServices_Restore",
-        "description": "Restores a backup of an API Management service created using ApiManagementServices_Backup operation on current service. This is a long running operation and could take several minutes to complete.",
+        "description": "Restores a backup of an API Management service created using the ApiManagementServices_Backup operation on the current service. This is a long running operation and could take several minutes to complete.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -125,7 +125,7 @@
             "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -175,7 +175,7 @@
             "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -216,7 +216,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The service was successfully Setup.",
+            "description": "The service was successfully set up.",
             "schema": {
               "$ref": "#/definitions/ApiManagementServiceResource"
             }
@@ -231,7 +231,7 @@
             "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -278,7 +278,7 @@
             "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -377,7 +377,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Return the Api Service List.",
+            "description": "The API Management service list.",
             "schema": {
               "$ref": "#/definitions/ApiManagementServiceListResult"
             }
@@ -394,7 +394,7 @@
           "ApiManagementService"
         ],
         "operationId": "ApiManagementServices_List",
-        "description": "Lists all API Management services within an Azure Subscription.",
+        "description": "Lists all API Management services within an Azure subscription.",
         "parameters": [          
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -405,7 +405,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Return the Api Service List.",
+            "description": "The API Management service list.",
             "schema": {
               "$ref": "#/definitions/ApiManagementServiceListResult"
             }
@@ -422,7 +422,7 @@
           "ApiManagementService"
         ],
         "operationId": "ApiManagementServices_GetSsoToken",
-        "description": "Gets the Single Sign On token for the API Management Service which is valid for 5 Minutes.",
+        "description": "Gets the Single-Sign-On token for the API Management Service which is valid for 5 Minutes.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -439,7 +439,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns 200 OK if successful with the SSO Redirect URI.",
+            "description": "OK if successful with the SSO Redirect URI.",
             "schema": {
               "x-ms-client-flatten": true,
               "$ref": "#/definitions/ApiManagementServiceGetSsoTokenResult"
@@ -474,7 +474,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Return the result of check name availability.",
+            "description": "The result of check name availability.",
             "schema": {
               "$ref": "#/definitions/ApiManagementServiceNameAvailabilityResult"
             }
@@ -520,7 +520,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -534,7 +534,7 @@
           "ApiManagementService"
         ],
         "operationId": "ApiManagementServices_UpdateHostname",
-        "description": "Creates, updates or deletes the custom hostnames for an API Management service. The custom hostname can be applied to Proxy and Portal endpoint. This is a long running operation and could take several minutes to complete.",
+        "description": "Creates, updates, or deletes the custom hostnames for an API Management service. The custom hostname can be applied to the Proxy and Portal endpoint. This is a long running operation and could take several minutes to complete.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -566,7 +566,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -582,7 +582,7 @@
         "expiry": {
           "type": "string",
           "format": "date-time",
-          "description": "Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+          "description": "Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard."
         },
         "thumbprint": {
           "type": "string",
@@ -637,7 +637,7 @@
         "vnetid": {
           "readOnly": true,
           "type": "string",
-          "description": "The virtual network id. This is typically a GUID. Expect a null guid by default."
+          "description": "The virtual network ID. This is typically a GUID. Expect a null GUID by default."
         },
         "subnetname": {
           "readOnly": true,
@@ -646,7 +646,7 @@
         },
         "subnetResourceId": {
           "type": "string",
-          "description": "The name of the subnet Resource Id. This is of the format /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/{virtual network name}/subnets/{subnet name}."
+          "description": "The name of the subnet Resource ID. This has format /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/{virtual network name}/subnets/{subnet name}."
         },
         "location": {
           "type": "string",
@@ -663,7 +663,7 @@
         },
         "skuType": {
           "type": "string",
-          "description": "The Sku type in the location.",          
+          "description": "The SKU type in the location.",          
           "enum": [
             "Developer",
             "Standard",
@@ -677,7 +677,7 @@
         "skuUnitCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The Sku Unit count at the location. The maximum Sku Unit count depends on the SkuType. Maximum allowed for Developer Sku is 1, for Standard Sku is 4 and for Premium Sku is 10, at a location.",
+          "description": "The SKU Unit count at the location. The maximum SKU Unit count depends on the SkuType. Maximum allowed for Developer SKU is 1, for Standard SKU is 4, and for Premium SKU is 10, at a location.",
           "default": 1,
           "maximum": 10
         },
@@ -687,7 +687,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "description": "Static IP addresses of the location virtual machines."
+          "description": "Static IP addresses of the location's virtual machines."
         },
         "vpnconfiguration": {
           "$ref": "#/definitions/VirtualNetworkConfiguration",
@@ -698,7 +698,7 @@
         "location",
         "skuType"
       ],
-      "description": "Description of an additional ApiService resource location."
+      "description": "Description of an additional API Management resource location."
     },
     "ApiManagementServiceManageDeploymentsParameters": {
       "properties": {
@@ -708,7 +708,7 @@
         },
         "skuType": {
           "type": "string",
-          "description": "Sku type of the API Management service.",
+          "description": "SKU type of the API Management service.",
           "enum": [
             "Developer",
             "Standard",
@@ -722,7 +722,7 @@
         "skuUnitCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Sku Unit count of the API Management service. Default value is 1.",
+          "description": "SKU Unit count of the API Management service. Default value is 1.",
           "default": 1
         },
         "additionalLocations": {
@@ -738,7 +738,7 @@
         },
         "vpnType": {
           "type": "string",
-          "description": "The type of Vpn in which API Managemet service needs to be configured in. None (Default Value) API Management service is not part of any Virtual Network, External means API Management deployment is setup inside a Virtual Network having an Internet Facing Endpoint and    Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only. When vpnconfiguration are specified, vpnType must be specified.",
+          "description": "The type of VPN in which API Managemet service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that the API Management service deployment is set up inside a Virtual Network having an Intranet Facing Endpoint only. When vpnConfiguration is specified, vpnType must be specified.",
           "default": "None",
           "enum": [
             "None",
@@ -797,38 +797,38 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "The current Provisioning state of the API Management service which can be among Created/Activating/Succeeded/Updating/Failed/Stopped/Terminating/TerminationFailed/Deleted.",
+          "description": "The current provisioning state of the API Management service which can be one of the following: Created/Activating/Succeeded/Updating/Failed/Stopped/Terminating/TerminationFailed/Deleted.",
           "readOnly": true
         },
         "targetProvisioningState": {
           "type": "string",
-          "description": "The Provisioning state of the API Management service, which is targeted by the Long Running operation started on the service.",
+          "description": "The provisioning state of the API Management service, which is targeted by the long running operation started on the service.",
           "readOnly": true
         },
         "createdAtUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "Creation UTC date of the API Management service.The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n",
+          "description": "Creation UTC date of the API Management service.The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.",
           "readOnly": true
         },
         "runtimeUrl": {
           "type": "string",
-          "description": "Proxy endpoint Url of the API Management service.",
+          "description": "Proxy endpoint URL of the API Management service.",
           "readOnly": true          
         },
         "portalUrl": {
           "type": "string",
-          "description": "management portal endpoint Url of the API Management service.",
+          "description": "Publisher portal endpoint Url of the API Management service.",
           "readOnly": true
         },
         "managementApiUrl": {
           "type": "string",
-          "description": "management api endpoint Url of the API Management service.",
+          "description": "Management API endpoint URL of the API Management service.",
           "readOnly": true
         },
         "scmUrl": {
           "type": "string",
-          "description": "Scm endpoint Url of the API Management service.",
+          "description": "SCM endpoint URL of the API Management service.",
           "readOnly": true
         },
         "addresserEmail": {
@@ -848,7 +848,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "description": "Static ip addresses of the API Management service virtual machines. Available only for Standard and Premium Sku."
+          "description": "Static IP addresses of the API Management service virtual machines. Available only for Standard and Premium SKU."
         },
         "vpnconfiguration": {
           "$ref": "#/definitions/VirtualNetworkConfiguration",
@@ -859,18 +859,18 @@
           "items": {
             "$ref": "#/definitions/AdditionalRegion"
           },
-          "description": "Additional datacenter locations description of the API Management service."
+          "description": "Additional datacenter locations of the API Management service."
         },
         "customProperties": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Custom properties of the API Management service like diabling TLS 1.0."
+          "description": "Custom properties of the API Management service, like disabling TLS 1.0."
         },
         "vpnType": {
           "type": "string",
-          "description": "The type of Vpn in which API Managemet service needs to be configured in. None (Default Value) API Management service is not part of any Virtual Network, External means API Management deployment is setup inside a Virtual Network having an Internet Facing Endpoint and    Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.",
+          "description": "The type of VPN in which API Managemet service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.",
           "default": "None",
           "enum": [
             "None",
@@ -910,20 +910,20 @@
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "Capacity of the Sku (number of deployed units of the Sku). Default value is 1.",
+          "description": "Capacity of the SKU (number of deployed units of the SKU). The default value is 1.",
           "default": 1
         }
       },
       "required": [
         "name"
       ],
-      "description": "API Management service resource Sku properties."
+      "description": "API Management service resource SKU properties."
     },
     "ApiManagementServiceResource": {
       "properties": {
         "id": {
           "type": "string",
-          "description": "The id of the created API Management service.",
+          "description": "The ID of the created API Management service.",
           "readOnly": true
         },
         "location": {
@@ -964,7 +964,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "API Management service tags. A maximum of 10 tags can be provided for a resource, and each tag must have a key no greater than 128 characters (and value no greater than 256 characters)"
+          "description": "API Management service tags. A maximum of 10 tags can be provided for a resource, and each tag must have a key no greater than 128 characters (and a value no greater than 256 characters)."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -973,7 +973,7 @@
         },
         "sku": {
           "$ref": "#/definitions/ApiManagementServiceSkuProperties",
-          "description": "Sku properties of the API Management service."
+          "description": "SKU properties of the API Management service."
         }
       },
       "description": "Parameters supplied to the Update API Management service operation."
@@ -1001,7 +1001,7 @@
       "properties": {
         "redirect_uri": {
           "type": "string",
-          "description": "Redirect url containing the SSO token."
+          "description": "Redirect URL containing the SSO token."
         }
       },
       "description": "The response of the GetSsoToken operation."
@@ -1022,11 +1022,11 @@
       "properties": {
         "nameAvailable": {
           "type": "boolean",
-          "description": "True if the name is available and can be used to create new API Management service. Otherwise false."
+          "description": "True if the name is available and can be used to create a new API Management service; otherwise false."
         },
         "message": {
           "type": "string",
-          "description": "If reason == invalid, provide the user with the reason why the given name is invalid, and provide the resource naming requirements so that the user can select a valid name.  If reason == AlreadyExists, explain that <resourceName> is already in use, and direct them to select a different name."
+          "description": "If reason == invalid, provide the user with the reason why the given name is invalid, and provide the resource naming requirements so that the user can select a valid name. If reason == AlreadyExists, explain that <resourceName> is already in use, and direct them to select a different name."
         },
         "reason": {
           "type": "string",
@@ -1086,7 +1086,7 @@
           "items": {
             "$ref": "#/definitions/HostnameConfiguration"
           },
-          "description": "Hostnames to create of update."
+          "description": "Hostnames to create or update."
         },
         "delete": {
           "type": "array",
@@ -1111,7 +1111,7 @@
     "ErrorResponse": {     
       "properties": {
         "code": {
-          "description": "Error code",
+          "description": "Error code.",
           "type": "string"
         },
         "message": {
@@ -1128,7 +1128,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",

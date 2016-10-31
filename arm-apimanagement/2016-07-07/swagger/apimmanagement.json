@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ApiManagementClient",
-    "description": "Use these REST APIs for performing operations on entities like API, Product, Subscription associated with the Azure Api Management deployment.",
+    "description": "Use these REST APIs for performing operations on entities like API, Product, and Subscription associated with your Azure API Management deployment.",
     "version": "2016-07-07"
   },
   "host": "management.azure.com",
@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -157,7 +157,7 @@
           "Apis"
         ],
         "operationId": "Apis_CreateOrUpdate",
-        "description": "Creates new or updates existing specific API of the API Management service instance.",
+        "description": "Creates new or updates existing specified API of the API Management service instance.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -182,7 +182,7 @@
             "in": "header",
             "required": false,
             "type": "string",
-            "description": "ETag of the Api Entity. For Create Api Etag should not be specified. For Update Etag should match the existing Entity or it can be * for Unconditional Update."
+            "description": "ETag of the Api Entity. For Create Api Etag should not be specified. For Update Etag should match the existing Entity or it can be * for unconditional update."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -211,7 +211,7 @@
           "Apis"
         ],
         "operationId": "Apis_Update",
-        "description": "Updates the specific API of the API Management service instance.",
+        "description": "Updates the specified API of the API Management service instance.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -235,7 +235,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the Api Entity. Etag should match current Entity state got in the header response of GET request got in the header response of GET request or it should be * for Unconditional update.",
+            "description": "ETag of the API entity. ETag should match the current entity state in the header response of the GET request or it should be * for unconditional update.",
             "type": "string"
           },
           {
@@ -262,7 +262,7 @@
           "Apis"
         ],
         "operationId": "Apis_Delete",
-        "description": "Deletes specific API of the API Management service instance.",
+        "description": "Deletes the specified API of the API Management service instance.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -277,7 +277,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the Api Entity. Etag should match current Entity state got in the header response of GET request or it should be * for Unconditional update.",
+            "description": "ETag of the API Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
             "type": "string"
           },
           {
@@ -420,7 +420,7 @@
           "ApiOperations"
         ],
         "operationId": "ApiOperations_CreateOrUpdate",
-        "description": "Creates new API operation or updates an existing one.",
+        "description": "Creates a new API operation or updates an existing one.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -452,7 +452,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Operation was successfully created"
+            "description": "Operation was successfully created."
           },
           "204":{
             "description": "Operation was successfully updated."
@@ -497,7 +497,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the API Operation Entity. Etag should match current Entity state got in the header response of GET request or it should be * for Unconditional update.",
+            "description": "ETag of the API Operation Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
             "type": "string"
           },
           {
@@ -542,7 +542,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the API Operation Entity. Etag should match current Entity state got in the header response of GET request or it should be * for Unconditional delete.",
+            "description": "ETag of the API Operation Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
             "type": "string"
           },
           {
@@ -681,7 +681,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A Collection of the Subscription entities for the specified API Management service instance.",
+            "description": "A collection of the Subscription entities for the specified API Management service instance.",
             "schema": {
               "$ref": "#/definitions/SubscriptionPaged"
             }
@@ -705,7 +705,7 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_Get",
-        "description": "The response body contains the specified Subscription entity.",
+        "description": "Gets the specified Subscription entity.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -835,7 +835,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the Subscription Entity. Etag should match current Entity state got in the header response of GET request or it should be * for Unconditional update.",
+            "description": "ETag of the Subscription Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
             "type": "string"
           },
           {
@@ -862,7 +862,7 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_Delete",
-        "description": "Deletes specific subscription of the API Management service instance.",
+        "description": "Deletes the specified subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -881,7 +881,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the Subscription Entity. Etag should match current Entity state got in the header response of GET request or it should be * for Unconditional delete.",
+            "description": "ETag of the Subscription Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
             "type": "string"
           },
           {
@@ -1181,7 +1181,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the Product Entity. Etag should match current Entity state got in the header response of GET request or it should be * for Unconditional update.",
+            "description": "ETag of the Product Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
             "type": "string"
           },
           {
@@ -1230,7 +1230,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the Product Entity. Etag should match current Entity state got in the header response of GET request or it should be * for Unconditional delete.",
+            "description": "ETag of the Product Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
             "type": "string"
           },
           {
@@ -1737,7 +1737,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the Group Entity. Etag should match current Entity state got in the header response of GET request or it should be * for Unconditional update.",
+            "description": "ETag of the Group Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
             "type": "string"
           },
           {
@@ -1786,7 +1786,7 @@
             "name": "If-Match",
             "in": "header",
             "required": true,
-            "description": "ETag of the Group Entity. Etag should match current Entity state got in the header response of GET request or it should be * for Unconditional update.",
+            "description": "ETag of the Group Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
             "type": "string"
           },
           {
