@@ -416,12 +416,6 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/MediaService"
-            }
-          },
-          "202": {
-            "description": "Accepted"
           },
           "default": {
             "description": "Detailed error information.",
@@ -602,6 +596,7 @@
         "keyType": {
           "description": "The keyType indicating which key you want to regenerate, Primary or Secondary.",
           "type": "string",
+          "required": true,
           "enum": [
             "Primary",
             "Secondary"
