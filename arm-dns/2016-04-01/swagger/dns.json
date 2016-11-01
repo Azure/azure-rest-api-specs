@@ -22,7 +22,7 @@
           "RecordSets"
         ],
         "operationId": "RecordSets_Update",
-        "description": "Updates a RecordSet within a DNS zone.",
+        "description": "Updates a Recordset within a DNS zone.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -43,7 +43,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the RecordSet, relative to the name of the zone.",
+            "description": "The name of the Recordset, relative to the name of the zone.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -102,13 +102,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Recordse has been updated successfully",
+            "description": "Recordset has been updated successfully.",
             "schema": {
               "$ref": "#/definitions/RecordSet"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "description": "Default response. It will be deserialized as per the Error defintion.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -120,7 +120,7 @@
           "RecordSets"
         ],
         "operationId": "RecordSets_CreateOrUpdate",
-        "description": "Creates or Updates a RecordSet within a DNS zone.",
+        "description": "Creates or Updates a Recordset within a DNS zone.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -141,7 +141,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the RecordSet, relative to the name of the zone.",
+            "description": "The name of the Recordset, relative to the name of the zone.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -200,19 +200,19 @@
         ],
         "responses": {
           "201": {
-            "description": "Record set has been created",
+            "description": "Recordset has been created.",
             "schema": {
               "$ref": "#/definitions/RecordSet"
             }
           },
           "200": {
-            "description": "Record set has been updated",
+            "description": "Recordset has been updated.",
             "schema": {
               "$ref": "#/definitions/RecordSet"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "description": "Default response. It will be deserialized as per the Error defintion.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -224,7 +224,7 @@
           "RecordSets"
         ],
         "operationId": "RecordSets_Delete",
-        "description": "Removes a RecordSet from a DNS zone.",
+        "description": "Removes a Recordset from a DNS zone.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -245,7 +245,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the RecordSet, relative to the name of the zone.",
+            "description": "The name of the Recordset, relative to the name of the zone.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -295,13 +295,13 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No Content. Recordset was not found."
           },
           "200": {
-            "description": "OK"
+            "description": "OK. Deleted successfully."
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "description": "Default response. It will be deserialized as per the Error defintion.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -313,7 +313,7 @@
           "RecordSets"
         ],
         "operationId": "RecordSets_Get",
-        "description": "Gets a RecordSet.",
+        "description": "Gets a Recordset.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -334,7 +334,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the RecordSet, relative to the name of the zone.",
+            "description": "The name of the Recordset, relative to the name of the zone.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -368,13 +368,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. Recordset was found.",
             "schema": {
               "$ref": "#/definitions/RecordSet"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "description": "Default response. It will be deserialized as per the Error defintion.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -388,7 +388,7 @@
           "RecordSets"
         ],
         "operationId": "RecordSets_ListByType",
-        "description": "Lists the RecordSets of a specified type in a DNS zone.",
+        "description": "Lists the Recordsets of a specified type in a DNS zone.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -402,7 +402,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the zone from which to enumerate RecordsSets."
+            "description": "The name of the zone from which to enumerate Recordsets."
           },
           {
             "name": "recordType",
@@ -443,13 +443,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. Enumeration was successful.",
             "schema": {
               "$ref": "#/definitions/RecordSetListResult"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "description": "Default response. It will be deserialized as per the Error defintion.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -466,7 +466,7 @@
           "RecordSets"
         ],
         "operationId": "RecordSets_ListByDnsZone",
-        "description": "Lists all RecordSets in a DNS zone.",
+        "description": "Lists all Recordsets in a DNS zone.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -480,7 +480,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the zone from which to enumerate RecordSets."
+            "description": "The name of the zone from which to enumerate Recordsets."
           },
           {
             "name": "$top",
@@ -499,13 +499,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. Enumeration was successful.",
             "schema": {
               "$ref": "#/definitions/RecordSetListResult"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "description": "Default response. It will be deserialized as per the Error defintion.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -572,19 +572,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. Zone was found and updated.",
             "schema": {
               "$ref": "#/definitions/Zone"
             }
           },
           "201": {
-            "description": "Created",
+            "description": "Zone was created.",
             "schema": {
               "$ref": "#/definitions/Zone"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "description": "Default response. It will be deserialized as per the Error defintion.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -637,19 +637,19 @@
         ],
         "responses": {
           "204": {
-            "description": "Zone does not exist"
+            "description": "Zone does not exist."
           },
           "202": {
-            "description": "Accepted and will complete asynchronously"
+            "description": "Accepted and will complete asynchronously."
           },
           "200": {
-            "description": "OK",
+            "description": "OK. Zone was deleted synchronously.",
             "schema": {
               "$ref": "#/definitions/ZoneDeleteResult"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "description": "Default response. It will be deserialized as per the Error defintion.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -687,13 +687,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. Zone was found.",
             "schema": {
               "$ref": "#/definitions/Zone"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "description": "Default response. It will be deserialized as per the Error defintion.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -733,13 +733,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. Enumeration was successful.",
             "schema": {
               "$ref": "#/definitions/ZoneListResult"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "description": "Default response. It will be deserialized as per the Error defintion.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -775,13 +775,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. Enumeration was successful.",
             "schema": {
               "$ref": "#/definitions/ZoneListResult"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion",
+            "description": "Default response. It will be deserialized as per the Error defintion.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -940,14 +940,14 @@
         "TTL": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the TTL of the records in the RecordSet."
+          "description": "Gets or sets the TTL of the records in the Recordset."
         },
         "ARecords": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ARecord"
           },
-          "description": "Gets or sets the list of A records in the RecordSet."
+          "description": "Gets or sets the list of A records in the Recordset."
         },
         "AAAARecords": {
           "type": "array",
@@ -955,7 +955,7 @@
           "items": {
             "$ref": "#/definitions/AaaaRecord"
           },
-          "description": "Gets or sets the list of AAAA records in the RecordSet."
+          "description": "Gets or sets the list of AAAA records in the Recordset."
         },
         "MXRecords": {
           "type": "array",
@@ -963,7 +963,7 @@
           "items": {
             "$ref": "#/definitions/MxRecord"
           },
-          "description": "Gets or sets the list of MX records in the RecordSet."
+          "description": "Gets or sets the list of MX records in the Recordset."
         },
         "NSRecords": {
           "type": "array",
@@ -979,7 +979,7 @@
           "items": {
             "$ref": "#/definitions/PtrRecord"
           },
-          "description": "Gets or sets the list of PTR records in the RecordSet."
+          "description": "Gets or sets the list of PTR records in the Recordset."
         },
         "SRVRecords": {
           "type": "array",
@@ -987,7 +987,7 @@
           "items": {
             "$ref": "#/definitions/SrvRecord"
           },
-          "description": "Gets or sets the list of SRV records in the RecordSet."
+          "description": "Gets or sets the list of SRV records in the Recordset."
         },
         "TXTRecords": {
           "type": "array",
@@ -995,20 +995,20 @@
           "items": {
             "$ref": "#/definitions/TxtRecord"
           },
-          "description": "Gets or sets the list of TXT records in the RecordSet."
+          "description": "Gets or sets the list of TXT records in the Recordset."
         },
         "CNAMERecord": {
           "$ref": "#/definitions/CnameRecord",
           "x-ms-client-name": "CnameRecord",
-          "description": "Gets or sets the CNAME record in the RecordSet."
+          "description": "Gets or sets the CNAME record in the Recordset."
         },
         "SOARecord": {
           "$ref": "#/definitions/SoaRecord",
           "x-ms-client-name": "SoaRecord",
-          "description": "Gets or sets the SOA record in the RecordSet."
+          "description": "Gets or sets the SOA record in the Recordset."
         }
       },
-      "description": "Represents the properties of the records in the RecordSet."
+      "description": "Represents the properties of the records in the Recordset."
     },
     "RecordSet": {
       "properties": {
@@ -1026,24 +1026,24 @@
         },
         "etag": {
           "type": "string",
-          "description": "Gets or sets the ETag of the RecordSet."
+          "description": "Gets or sets the ETag of the Recordset."
         },
         "properties": {
           "$ref": "#/definitions/RecordSetProperties",
           "x-ms-client-flatten": true,
-          "description": "Gets or sets the properties of the RecordSet."
+          "description": "Gets or sets the properties of the Recordset."
         }
       },
-      "description": "Describes a DNS RecordSet (a set of DNS records with the same name and type)."
+      "description": "Describes a DNS Recordset (a set of DNS records with the same name and type)."
     },
     "RecordSetUpdateParameters": {
       "properties": {
         "RecordSet": {
           "$ref": "#/definitions/RecordSet",
-          "description": "Gets or sets information about the RecordSet being updated."
+          "description": "Gets or sets information about the Recordset being updated."
         }
       },
-      "description": "Parameters supplied to update a RecordSet."
+      "description": "Parameters supplied to update a Recordset."
     },
     "RecordSetListResult": {
       "properties": {
@@ -1052,26 +1052,26 @@
           "items": {
             "$ref": "#/definitions/RecordSet"
           },
-          "description": "Gets or sets information about the RecordSets in the response."
+          "description": "Gets or sets information about the Recordsets in the response."
         },
         "nextLink": {
           "type": "string",
           "description": "Gets or sets the continuation token for the next page."
         }
       },
-      "description": "The response to a RecordSet List operation."
+      "description": "The response to a Recordset List operation."
     },
     "ZoneProperties": {
       "properties": {
         "maxNumberOfRecordSets": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the maximum number of record sets that can be created in this zone."
+          "description": "Gets or sets the maximum number of recordsets that can be created in this zone."
         },
         "numberOfRecordSets": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the current number of record sets in this zone."
+          "description": "Gets or sets the current number of recordsets in this zone."
         },
         "nameServers": {
           "type": "array",
@@ -1107,7 +1107,7 @@
       "properties": {
         "azureAsyncOperation": {
           "type": "string",
-          "description": "Users can perform a Get on Azure-AsyncOperation to get the status of their delete Zone operations"
+          "description": "Users can perform a Get on Azure-AsyncOperation to get the status of their delete Zone operations."
         },
         "status": {
           "type": "string",
