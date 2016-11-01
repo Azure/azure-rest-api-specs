@@ -9815,21 +9815,22 @@
       "properties": {
         "poolId": {
           "type": "string",
-          "title": "The ID of the pool whose metrics are being aggregated."
+          "title": "The ID of the pool whose metrics are aggregated in this entry."
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "title": "The start time of the aggregation interval."
+          "title": "The start time of the aggregation interval covered by this entry."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "title": "The end time of the aggregation interval."
+          "title": "The end time of the aggregation interval covered by this entry."
         },
         "vmSize": {
           "type": "string",
-          "title": "The size of virtual machines in the pool. All VMs in a pool are the same size."
+          "title": "The size of virtual machines in the pool. All VMs in a pool are the same size.",
+          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "totalCoreHours": {
           "type": "number",
@@ -9839,16 +9840,16 @@
         "dataIngressGiB": {
           "type": "number",
           "format": "double",
-          "title": "The cross data center network ingress in GiB to the pool during this interval."
+          "title": "The cross data center network ingress to the pool during this interval, in GiB."
         },
         "dataEgressGiB": {
           "type": "number",
           "format": "double",
-          "title": "The cross data center network egress in GiB from the pool during this interval."
+          "title": "The cross data center network egress from the pool during this interval, in GiB."
         }
       },
       "required": ["poolId","startTime","endTime","vmSize","totalCoreHours","dataIngressGiB","dataEgressGiB"],
-      "description": "Usage metrics for a pool across an aggregation interval."
+      "title": "Usage metrics for a pool across an aggregation interval."
     },
     "PoolListPoolUsageMetricsResult": {
       "properties": {
@@ -9864,13 +9865,13 @@
           "title": "The URL to get the next set of results."
         }
       },
-      "title": "Response to an AccountOperation.ListPoolUsageMetrics request."
+      "title": "The result of a listing the usage metrics for an account."
     },
     "NodeAgentSku": {
       "properties": {
         "id": {
           "type": "string",
-          "title": "The node agent SKU id."
+          "title": "The ID of the node agent SKU."
         },
         "verifiedImageReferences": {
           "type": "array",
@@ -9882,7 +9883,7 @@
         },
         "osType": {
           "type": "string",
-          "title": "The type of operating system compatible with the node agent SKU.",
+          "title": "The type of operating system (e.g. Windows or Linux) compatible with the node agent SKU.",
           "enum": [
             "linux",
             "windows",
@@ -9905,10 +9906,10 @@
         },
         "odata.nextLink": {
           "type": "string",
-          "description": "The URL to get the next set of results."
+          "title": "The URL to get the next set of results."
         }
       },
-      "title": "Response to an AccountOperation.ListNodeAgentSkus request."
+      "title": "The result of listing the supported node agent SKUs."
     },
     "UsageStatistics": {
       "properties": {
@@ -10074,22 +10075,24 @@
         "readIOGiB": {
           "type": "number",
           "format": "double",
-          "title": "The total gibibytes read from disk by all tasks in the job."
+          "title": "The total amount of data in GiB read from disk by all tasks in the job."
         },
         "writeIOGiB": {
           "type": "number",
           "format": "double",
-          "title": "The total gibibytes written to disk by all tasks in the job."
+          "title": "The total amount of data in GiB written to disk by all tasks in the job."
         },
         "numSucceededTasks": {
           "type": "integer",
           "format": "int64",
-          "title": "The total number of tasks successfully completed in the job during the given time range."
+          "title": "The total number of tasks successfully completed in the job during the given time range.",
+          "description": "A task completes successfully if it returns exit code 0."
         },
         "numFailedTasks": {
           "type": "integer",
           "format": "int64",
-          "title": "The total number of tasks in the job that failed during the given time range."
+          "title": "The total number of tasks in the job that failed during the given time range.",
+          "description": "A task fails if it exhausts its maximum retry count without returning exit code 0."
         },
         "numTaskRetries": {
           "type": "integer",
@@ -10100,7 +10103,7 @@
           "type": "string",
           "format": "duration",
           "title": "The total wait time of all tasks in the job.",
-          "description": "The wait time for a task is defined as the elapsed time between the creation of the task and the start of task execution. (If the task is retried due to failures, the wait time is the time to the most recent task execution.)"
+          "description": "The wait time for a task is defined as the elapsed time between the creation of the task and the start of task execution. (If the task is retried due to failures, the wait time is the time to the most recent task execution.) This value is only reported in the account lifetime statistics; it is not included in the job statistics."
         }
       },
       "required": ["url","startTime","lastUpdateTime","userCPUTime","kernelCPUTime","wallClockTime","readIOps","writeIOps","readIOGiB","writeIOGiB","numSucceededTasks","numFailedTasks","numTaskRetries","waitTime"],
@@ -10134,7 +10137,8 @@
           "items": {
             "$ref": "#/definitions/NameValuePair"
           },
-          "title": "A list of additional error details related to the certificate deletion error."
+          "title": "A list of additional error details related to the certificate deletion error.",
+          "description": "This list includes details such as the active pools and nodes referencing this certificate. However, if a large number of resources reference the certificate, the list contains only about the first hundred."
         }
       },
       "title": "An error encountered by the Batch service when deleting a certificate."
@@ -10143,11 +10147,11 @@
       "properties": {
         "thumbprint": {
           "type": "string",
-          "title": "The X.509 thumbprint of the certificate. This is a sequence of up to 40 hex digits (it may include spaces but these are removed)."
+          "title": "The X.509 thumbprint of the certificate. This is a sequence of up to 40 hex digits."
         },
         "thumbprintAlgorithm": {
           "type": "string",
-          "title": "The algorithm used to derive the thumbprint. This must be sha1."
+          "title": "The algorithm used to derive the thumbprint."
         },
         "url": {
           "type": "string",
@@ -10192,7 +10196,7 @@
         "deleteCertificateError": {
           "$ref": "#/definitions/DeleteCertificateError",
           "title": "The error that occurred on the last attempt to delete this certificate.",
-          "description": " This property is set only if the certificate is in the DeleteFailed state."
+          "description": "This property is set only if the certificate is in the DeleteFailed state."
         }
       },
       "description": "A certificate that can be installed on compute nodes and can be used to authenticate operations on the machine."
@@ -10205,7 +10209,8 @@
         },
         "version": {
           "type": "string",
-          "title": "The version of the application to deploy. If omitted, the default version is deployed."
+          "title": "The version of the application to deploy. If omitted, the default version is deployed.",
+          "description": "If this is omitted, and no default version is specified for this application, the request fails with the error code InvalidApplicationPackageReferences. If you are calling the REST API directly, the HTTP status code is 409."
         }
       },
       "required": ["applicationId"],
@@ -10258,7 +10263,8 @@
         },
         "password": {
           "type": "string",
-          "title": "The password to access the certificate's private key."
+          "title": "The password to access the certificate's private key.",
+          "description": "This is required if the certificate format is pfx. It should be omitted if the certificate format is cer."
         }
       },
       "required": ["thumbprint", "thumbprintAlgorithm", "data"],
@@ -10278,7 +10284,7 @@
           "title": "The URL to get the next set of results."
         }
       },
-      "title": "Response to a CertificateOperation.List request."
+      "title": "The result of listing the certificates in the account."
     },
     "FileProperties": {
       "properties": {
@@ -10286,7 +10292,7 @@
           "type": "string",
           "format": "date-time",
           "title": "The file creation time.",
-          "description": "This property is not returned from Linux compute nodes."
+          "description": "The creation time is not returned for files on Linux compute nodes."
         },
         "lastModified": {
           "type": "string",
@@ -10305,7 +10311,7 @@
         "fileMode": {
           "type": "string",
           "title": "The file mode attribute in octal format.",
-          "description": "This property will be returned only from a Linux compute node."
+          "description": "The file mode is returned only for files on Linux compute nodes."
         }
       },
       "required": ["lastModified","contentLength"],
@@ -10346,7 +10352,7 @@
           "title": "The URL to get the next set of results."
         }
       },
-      "title": "Response to a FileOperation.ListFromComputeNode or FileOperation.ListFromTask request."
+      "title": "The result of listing the files on a compute node, or the files associated with a task on a node."
     },
     "Schedule": {
       "properties": {
@@ -10359,18 +10365,20 @@
         "doNotRunAfter": {
           "type": "string",
           "format": "date-time",
-          "title": "A time after which no job will be created under this job schedule. The schedule will move to the completed state as soon as this deadline is past and there is no active job under this job schedule."
+          "title": "A time after which no job will be created under this job schedule. The schedule will move to the completed state as soon as this deadline is past and there is no active job under this job schedule.",
+          "description": "If you do not specify a doNotRunAfter time, and you are creating a recurring job schedule, the job schedule will remain active until you explicitly terminate it."
         },
         "startWindow": {
           "type": "string",
           "format": "duration",
           "title": "The time interval, starting from the time at which the schedule indicates a job should be created, within which a job must be created.",
-          "description": "If a job is not created within the startWindow interval, then the 'opportunity' is lost; no job will be created until the next recurrence of the schedule."
+          "description": "If a job is not created within the startWindow interval, then the 'opportunity' is lost; no job will be created until the next recurrence of the schedule. If the schedule is recurring, and the startWindow is longer than the recurrence interval, then this is equivalent to an infinite startWindow, because the job that is 'due' in one recurrenceInterval is not carried forward into the next recurrence interval. The default is infinite. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
         "recurrenceInterval": {
           "type": "string",
           "format": "duration",
-          "title": "The time interval between the start times of two successive jobs under the job schedule. A job schedule can have at most one active job under it at any given time."
+          "title": "The time interval between the start times of two successive jobs under the job schedule. A job schedule can have at most one active job under it at any given time.",
+          "description": "Because a job schedule can have at most one active job under it at any given time, if it is time to create a new job under a job schedule, but the previous job is still running, the Batch service will not create the new job until the previous job finishes. If the previous job does not finish within the startWindow period of the new recurrenceInterval, then no new job will be scheduled for that interval. For recurring jobs, you should normally specify a jobManagerTask in the jobSpecification. If you do not use jobManagerTask, you will need an external process to monitor when jobs are created, add tasks to the jobs and terminate the jobs ready for the next recurrence. The default is that the schedule does not recur: one job is created, within the startWindow after the doNotRunUntil time, and the schedule is complete as soon as that job finishes. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         }
       },
       "title": "The schedule according to which jobs will be created"
@@ -10380,35 +10388,37 @@
         "maxWallClockTime": {
           "type": "string",
           "format": "duration",
-          "title": "The maximum elapsed time that the job may run, measured from the time the job starts. If the job does not complete within the time limit, the Batch service terminates it and any tasks that are still running."
+          "title": "The maximum elapsed time that the job may run, measured from the time the job is created.",
+          "description": "If the job does not complete within the time limit, the Batch service terminates it and any tasks that are still running. In this case, the termination reason will be MaxWallClockTimeExpiry. If this property is not specified, there is no time limit on how long the job may run."
         },
         "maxTaskRetryCount": {
           "type": "integer",
           "format": "int32",
-          "title": "The maximum number of times each task may be retried. The Batch service retries a task if its exit code is nonzero."
+          "title": "The maximum number of times each task may be retried. The Batch service retries a task if its exit code is nonzero.",
+          "description": "Note that this value specifically controls the number of retries. The Batch service will try each task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries a task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry tasks. If the maximum retry count is -1, the Batch service retries tasks without limit. The default value is 0 (no retries)."
         }
       },
-      "title": "Specifies the execution constraints for jobs created on a schedule."
+      "title": "The execution constraints for a job."
     },
     "ResourceFile": {
       "properties": {
         "blobSource": {
           "type": "string",
-          "title": "The URL of the file within Azure Blob Storage. This URL should include a shared access signature if the blob is not publicly readable.",
-          "description": "This URL should be properly URL encoded."
+          "title": "The URL of the file within Azure Blob Storage.",
+          "description": "This URL must be readable using anonymous access; that is, the Batch service does not present any credentials when downloading the blob. There are two ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, or set the ACL for the blob or its container to allow public access."
         },
         "filePath": {
           "type": "string",
-          "title": "The location to which to download the file, relative to the task's working directory."
+          "title": "The location on the compute node to which to download the file, relative to the task's working directory."
         },
         "fileMode": {
           "type": "string",
-          "title": "The file mode attribute in octal format.",
-          "description": "This property will be ignored if it is specified for a resourceFile which will be downloaded to a Windows compute node."
+          "title": "The file permission mode attribute in octal format.",
+          "description": "This property applies only to files being downloaded to Linux compute nodes. It will be ignored if it is specified for a resourceFile which will be downloaded to a Windows node. If this property is not specified for a Linux node, then a default value of 0770 is applied to the file."
         }
       },
       "required": ["blobSource", "filePath"],
-      "description": "A file to be downloaded from Azure blob storage to a compute node."
+      "title": "A file to be downloaded from Azure blob storage to a compute node."
     },
     "EnvironmentSetting": {
       "properties": {
@@ -10431,39 +10441,40 @@
           "items": {
             "$ref": "#/definitions/ExitCodeMapping"
           },
-          "description": "A list of individual task exit codes and how the Batch service should respond to them."
+          "title": "A list of individual task exit codes and how the Batch service should respond to them."
         },
         "exitCodeRanges": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExitCodeRangeMapping"
           },
-          "description": "A list of task exit codes ranges and how the Batch service should respond to them."
+          "title": "A list of task exit code ranges and how the Batch service should respond to them."
         },
         "schedulingError": {
           "$ref": "#/definitions/ExitOptions",
-          "description": "How the Batch service should respond if the task fails with a scheduling error."
+          "title": "How the Batch service should respond if the task fails with a scheduling error."
         },
         "default": {
           "$ref": "#/definitions/ExitOptions",
-          "description": "How the Batch service should respond if the task fails with an exit condition not covered by any of the other properties – that is, any nonzero exit code not listed in the exitCodes or exitCodeRanges collection, or a scheduling error if the schedulingError property is not present."
+          "title": "How the Batch service should respond if the task fails with an exit condition not covered by any of the other properties – that is, any nonzero exit code not listed in the exitCodes or exitCodeRanges collection, or a scheduling error if the schedulingError property is not present.",
+          "description": "Note that the default condition does not include exit code 0. If you want non-default behaviour on exit code 0, you must list it explicitly using the exitCodes or exitCodeRanges collection."
         }
       },
-      "description": "Specifies how the Batch service should respond when the task completes."
+      "title": "Specifies how the Batch service should respond when the task completes."
     },
     "ExitCodeMapping": {
       "properties": {
         "code": {
           "type": "integer",
           "format": "int32",
-          "description": "A process exit code."
+          "title": "A process exit code."
         },
         "exitOptions": {
           "$ref": "#/definitions/ExitOptions",
-          "description": "How the Batch service should respond if the task exits with this exit code."
+          "title": "How the Batch service should respond if the task exits with this exit code."
         }
       },
-      "description": "How the Batch service should respond if a task exits with a particular exit code.",
+      "title": "How the Batch service should respond if a task exits with a particular exit code.",
       "required": ["code","exitOptions"]
     },
     "ExitCodeRangeMapping": {
@@ -10471,19 +10482,19 @@
         "start": {
           "type": "integer",
           "format": "int32",
-          "description": "The first exit code in the range."
+          "title": "The first exit code in the range."
         },
         "end": {
           "type": "integer",
           "format": "int32",
-          "description": "The last exit code in the range."
+          "title": "The last exit code in the range."
         },
         "exitOptions": {
           "$ref": "#/definitions/ExitOptions",
-          "description": "An exitOptions specifying how the Batch service should respond if the task exits with an exit code in the range start to end."
+          "title": "How the Batch service should respond if the task exits with an exit code in the range start to end (inclusive)."
         }
       },
-      "description": "A range of exit codes and how the Batch service should respond to exit codes within that range.",
+      "title": "A range of exit codes and how the Batch service should respond to exit codes within that range.",
       "required": ["start", "end","exitOptions"]
 
     },
@@ -10491,7 +10502,8 @@
       "properties": {
         "jobAction": {
           "type": "string",
-          "description": "An action to take on the job containing the task, if the task completes with the given exit condition and the job's onTaskFailed property is 'performexitoptionsjobaction'.",
+          "title": "An action to take on the job containing the task, if the task completes with the given exit condition and the job’s onTaskFailed property is 'performexitoptionsjobaction'.",
+          "description": "The default is none for exit code 0 and terminate for all other exit conditions. It is an error to specify this if the job's onTaskFailed is noaction. The add task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).",
           "enum": [
             "none",
             "disable",
@@ -10500,38 +10512,42 @@
           "x-ms-enum": { "name": "JobAction", "modelAsString": false }
         }        
       },
-      "description": "How the Batch service should respond to a particular exit condition."
+      "title": "How the Batch service should respond to a particular exit condition."
     },
     "TaskConstraints": {
       "properties": {
         "maxWallClockTime": {
           "type": "string",
           "format": "duration",
-          "title": "The maximum elapsed time that the task may run, measured from the time the task starts. If the task does not complete within the time limit, the Batch service terminates it."
+          "title": "The maximum elapsed time that the task may run, measured from the time the task starts. If the task does not complete within the time limit, the Batch service terminates it.",
+          "description": "If this is not specified, there is no time limit on how long the task may run."
         },
         "retentionTime": {
           "type": "string",
           "format": "duration",
-          "title": "The minimum time to retain the working directory for the task on the compute node where it ran, from the time it completes execution. After this time, the Batch service may delete the working directory and all its contents.",
-          "description": "The default is infinite."
+          "title": "The minimum time to retain the task directory on the compute node where it ran, from the time it completes execution. After this time, the Batch service may delete the task directory and all its contents.",
+          "description": "The default is infinite, i.e. the task directory will be retained until the compute node is removed or reimaged."
         },
         "maxTaskRetryCount": {
           "type": "integer",
           "format": "int32",
-          "title": "The maximum number of times the task may be retried. The Batch service retries a task if its exit code is nonzero."
+          "title": "The maximum number of times the task may be retried. The Batch service retries a task if its exit code is nonzero.",
+          "description": "Note that this value specifically controls the number of retries. The Batch service will try the task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the task. If the maximum retry count is -1, the Batch service retries the task without limit."
         }
       },
-      "title": "Constraints to apply to the Job Manager task."
+      "title": "Execution constraints to apply to a task."
     },
     "JobManagerTask": {
       "properties": {
         "id": {
           "type": "string",
-          "title": "A string that uniquely identifies the Job Manager task."
+          "title": "A string that uniquely identifies the Job Manager taskwithin the job.",
+          "description": "The id can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters."
         },
         "displayName": {
           "type": "string",
-          "title": "The display name of the Job Manager task."
+          "title": "The display name of the Job Manager task.",
+          "description": "It need not be unique and can contain any Unicode characters up to a maximum length of 1024."
         },
         "commandLine": {
           "type": "string",
@@ -10543,7 +10559,8 @@
           "items": {
             "$ref": "#/definitions/ResourceFile"
           },
-          "title": "A list of files that the Batch service will download to the compute node before running the command line."
+          "title": "A list of files that the Batch service will download to the compute node before running the command line.",
+          "description": "Files listed under this element are located in the task's working directory."
         },
         "environmentSettings": {
           "type": "array",
@@ -10559,7 +10576,7 @@
         "killJobOnCompletion": {
           "type": "boolean",
           "title": "Whether completion of the Job Manager task signifies completion of the entire job.",
-          "description": "If the user specifies that the job should not terminate when the Job Manager task completes, then the job completes only when explicitly terminated by the user unless configured to automatically complete."
+          "description": "If true, when the Job Manager task completes, the Batch service marks the job as complete. If any tasks are still running at this time (other than Job Release), those tasks are terminated. If false, the completion of the Job Manager task does not affect the job status. In this case, you should either use the onAllTasksComplete attribute to terminate the job, or have a client or user terminate the job explicitly. An example of this is if the Job Manager creates a set of tasks but then takes no further role in their execution. The default value is true. If you are using the onAllTasksComplete and onTaskFailure attributes to control job lifetime, and using the job manager task only to create the tasks for the job (not to monitor progress), then it is important to set killJobOnCompletion to false."
         },
         "runElevated": {
           "type": "boolean",
@@ -10568,14 +10585,15 @@
         "runExclusive": {
           "type": "boolean",
           "title": "Whether the Job Manager task requires exclusive use of the compute node where it runs.",
-          "description": "If true, no other tasks will run on the same compute node for as long as the Job Manager is running. If false, other tasks can run simultaneously with the Job Manager on a compute node. The Job Manager task counts normally against the node's concurrent task limit, so this is only relevant if the node allows multiple concurrent tasks."
+          "description": "If true, no other tasks will run on the same compute node for as long as the Job Manager is running. If false, other tasks can run simultaneously with the Job Manager on a compute node. The Job Manager task counts normally against the node's concurrent task limit, so this is only relevant if the node allows multiple concurrent tasks. The default value is true."
         },
         "applicationPackageReferences": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationPackageReference"
           },
-          "title": "A list of application packages that the Batch service will deploy to the compute node before running the command line."
+          "title": "A list of application packages that the Batch service will deploy to the compute node before running the command line.",
+          "description": "Application packages are downloaded and deployed to a shared directory, not the task directory. Therefore, if a referenced package is already on the compute node, and is up to date, then it is not re-downloaded; the existing copy on the compute node is used. If a referenced application package cannot be installed, for example because the package has been deleted or because download failed, the task fails with a scheduling error. This property is currently not supported on jobs running on pools created using the virtualMachineConfiguration (IaaS) property. If a task specifying applicationPackageReferences runs on such a pool, it fails with a scheduling error with code TaskSchedulingConstraintFailed."
         }
       },
       "required": ["id", "commandLine"],
@@ -10586,7 +10604,7 @@
         "id": {
           "type": "string",
           "title": "A string that uniquely identifies the job preparation task within the job.",
-          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters."
+          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobpreparation'. No other task in the job can have the same id as the Job Preparation task. If you try to submit a task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobPreparationTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict)."
         },
         "commandLine": {
           "type": "string",
@@ -10598,7 +10616,8 @@
           "items": {
             "$ref": "#/definitions/ResourceFile"
           },
-          "title": "A list of files that the Batch service will download to the compute node before running the command line."
+          "title": "A list of files that the Batch service will download to the compute node before running the command line.",
+          "description": "Files listed under this element are located in the task's working directory."
         },
         "environmentSettings": {
           "type": "array",
@@ -10613,7 +10632,8 @@
         },
         "waitForSuccess": {
           "type": "boolean",
-          "title": "Whether the Batch service should wait for the Job Preparation task to complete successfully before scheduling any other tasks of the job on the compute node."
+          "title": "Whether the Batch service should wait for the Job Preparation task to complete successfully before scheduling any other tasks of the job on the compute node.",
+          "description": "If true and the Job Preparation task fails on a compute node, the Batch service retries the Job Preparation task up to its maximum retry count (as specified in the constraints element). If the task has still not completed successfully after all retries, then the Batch service will not schedule tasks of the job to the compute node. The compute node remains active and eligible to run tasks of other jobs. If false, the Batch service will not wait for the Job Preparation task to complete. In this case, other tasks of the job can start executing on the compute node while the Job Preparation task is still running; and even if the Job Preparation task fails, new tasks will continue to be scheduled on the node. The default value is true."
         },
         "runElevated": {
           "type": "boolean",
@@ -10622,7 +10642,7 @@
         "rerunOnNodeRebootAfterSuccess": {
           "type": "boolean",
           "title": "Whether the Batch service should rerun the Job Preparation task after a compute node reboots.",
-          "description": "Note that the Job Preparation task should still be written to be idempotent because it can be rerun if the compute node is rebooted while Job Preparation task is still running. The default value is true."
+          "description": "The Job Preparation task is always rerun if a compute node is reimaged, or if the Job Preparation task did not complete (e.g. because the reboot occurred while the task was running). Therefore, you should always write a Job Preparation task to be idempotent and to behave correctly if run multiple times. The default value is true."
         }
       },
       "required": ["commandLine"],
@@ -10633,7 +10653,7 @@
         "id": {
           "type": "string",
           "title": "A string that uniquely identifies the Job Release task within the job.",
-          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters."
+          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobrelease'. No other task in the job can have the same id as the Job Release task. If you try to submit a task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobReleaseTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict)."
         },
         "commandLine": {
           "type": "string",
@@ -10645,7 +10665,8 @@
           "items": {
             "$ref": "#/definitions/ResourceFile"
           },
-          "title": "A list of files that the Batch service will download to the compute node before running the command line."
+          "title": "A list of files that the Batch service will download to the compute node before running the command line.",
+          "description": "Files listed under this element are located in the task's working directory."
         },
         "environmentSettings": {
           "type": "array",
@@ -10657,13 +10678,13 @@
         "maxWallClockTime": {
           "type": "string",
           "format": "duration",
-          "title": "The maximum elapsed time that the Job Release task may run on a given compute node, measured from the time the task starts. If the task does not complete within the time limit, the Batch service terminates it. The default value is 15 minutes."
+          "title": "The maximum elapsed time that the Job Release task may run on a given compute node, measured from the time the task starts. If the task does not complete within the time limit, the Batch service terminates it. The default value is 15 minutes. You may not specify a timeout longer than 15 minutes. If you do, the Batch service rejects it with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
         "retentionTime": {
           "type": "string",
           "format": "duration",
-          "title": "The minimum time to retain the working directory for the Job Release task on the compute node. After this time, the Batch service may delete the working directory and all its contents.",
-          "description": " The default is infinite."
+          "title": "The minimum time to retain the task directory for the Job Release task on the compute node. After this time, the Batch service may delete the task directory and all its contents.",
+          "description": "The default is infinite, i.e. the task directory will be retained until the compute node is removed or reimaged."
         },
         "runElevated": {
           "type": "boolean",
@@ -10718,11 +10739,13 @@
         "maxTaskRetryCount": {
           "type": "integer",
           "format": "int32",
-          "title": "The maximum number of times the task may be retried."
+          "title": "The maximum number of times the task may be retried.",
+          "description": "The Batch service retries a task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the task. If the maximum retry count is -1, the Batch service retries the task without limit."
         },
         "waitForSuccess": {
           "type": "boolean",
-          "title": "Whether the Batch service should wait for the start task to complete successfully (that is, to exit with exit code 0) before scheduling any tasks on the compute node."
+          "title": "Whether the Batch service should wait for the start task to complete successfully (that is, to exit with exit code 0) before scheduling any tasks on the compute node.",
+          "description": "If true and the start task fails on a compute node, the Batch service retries the start task up to its maximum retry count (maxTaskRetryCount). If the task has still not completed successfully after all retries, then the Batch service marks the compute node unusable, and will not schedule tasks to it. This condition can be detected via the node state and scheduling error detail. If false, the Batch service will not wait for the start task to complete. In this case, other tasks can start executing on the compute node while the start task is still running; and even if the start task fails, new tasks will continue to be scheduled on the node. The default is false."
         }
       },
       "required": ["commandLine"],
@@ -10741,7 +10764,7 @@
         "storeLocation": {
           "type": "string",
           "title": "The location of the certificate store on the compute node into which to install the certificate.",
-          "description": "The default value is CurrentUser.",
+          "description": "The default value is CurrentUser. This property is applicable only for pools configured with Windows nodes (that is, created with cloudServiceConfiguration, or with virtualMachineConfiguration using a Windows image reference). For Linux compute nodes, the certificates are stored in a directory inside the task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the task to query for this location. For certificates with visibility of remoteuser, a certs directory is created in the user's home directory (e.g., /home/<user-name>/certs) where certificates are placed.",
           "enum": [
             "currentuser",
             "localmachine",
@@ -10752,7 +10775,7 @@
         "storeName": {
           "type": "string",
           "title": "The name of the certificate store on the compute node into which to install the certificate.",
-          "description": "The default value is My."
+          "description": "The default value is My. This property is applicable only for pools configured with Windows nodes (that is, created with cloudServiceConfiguration, or with virtualMachineConfiguration using a Windows image reference)."
         },
         "visibility": {
           "type": "array",
@@ -10792,26 +10815,29 @@
       "properties": {
         "displayName": {
           "type": "string",
-          "title": "The display name for the pool."
+          "title": "The display name for the pool.",
+          "description": "The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024."
         },
         "vmSize": {
           "type": "string",
-          "title": "The size of the virtual machines in the pool. All virtual machines in a pool are the same size."
+          "title": "The size of the virtual machines in the pool. All virtual machines in a pool are the same size.",
+          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "cloudServiceConfiguration": {
           "$ref": "#/definitions/CloudServiceConfiguration",
           "title": "The cloud service configuration for the pool.",
-          "description": "This property and VirtualMachineConfiguration are mutually exclusive and one of the properties must be specified."
+          "description": "This property must be specified if the pool needs to be created with Azure PaaS VMs. This property and virtualMachineConfiguration are mutually exclusive and one of the properties must be specified. If neither is specified then the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
         "virtualMachineConfiguration": {
           "$ref": "#/definitions/VirtualMachineConfiguration",
           "title": "The virtual machine configuration for the pool.",
-          "description": "This property and CloudServiceConfiguration are mutually exclusive and one of the properties must be specified."
+          "description": "This property must be specified if the pool needs to be created with Azure IaaS VMs. This property and cloudServiceConfiguration are mutually exclusive and one of the properties must be specified. If neither is specified then the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
         "maxTasksPerNode": {
           "type": "integer",
           "format": "int32",
-          "title": "The maximum number of tasks that can run concurrently on a single compute node in the pool."
+          "title": "The maximum number of tasks that can run concurrently on a single compute node in the pool.",
+          "description": "The default value is 1. The maximum value of this setting depends on the size of the compute nodes in the pool (the vmSize setting)."
         },
         "taskSchedulingPolicy": {
           "$ref": "#/definitions/TaskSchedulingPolicy",
@@ -10820,30 +10846,35 @@
         "resizeTimeout": {
           "type": "string",
           "format": "duration",
-          "title": "The timeout for allocation of compute nodes to the pool."
+          "title": "The timeout for allocation of compute nodes to the pool.",
+          "description": "This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
         "targetDedicated": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of compute nodes in the pool."
+          "title": "The desired number of compute nodes in the pool.",
+          "description": "This property must not be specified if enableAutoScale is set to true. It is required if enableAutoScale is set to false."
         },
         "enableAutoScale": {
           "type": "boolean",
-          "title": "Whether the pool size should automatically adjust over time."
+          "title": "Whether the pool size should automatically adjust over time.",
+          "description": "If false, the targetDedicated element is required. If true, the autoScaleFormula element is required. The pool automatically resizes according to the formula. The default value is false."
         },
         "autoScaleFormula": {
           "type": "string",
-          "title": "The formula for the desired number of compute nodes in the pool."
+          "title": "The formula for the desired number of compute nodes in the pool.",
+          "description": "This property must not be specified if enableAutoScale is set to false. It is required if enableAutoScale is set to true. The formula is checked for validity before the pool is created. If the formula is not valid, the Batch service rejects the request with detailed error information."
         },
         "autoScaleEvaluationInterval": {
           "type": "string",
           "format": "duration",
-          "title": "A time interval for the desired AutoScale evaluation period in the pool."
+          "title": "The time interval at which to automatically adjust the pool size according to the autoscale formula.",
+          "description": "The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
         "enableInterNodeCommunication": {
           "type": "boolean",
           "title": "Whether the pool permits direct communication between nodes.",
-          "description": "This imposes restrictions on which nodes can be assigned to the pool. Specifying this value can reduce the chance of the requested number of nodes to be allocated in the pool."
+          "description": "Enabling inter-node communication limits the maximum size of the pool due to deployment restrictions on the nodes of the pool. This may result in the pool not reaching its desired size. The default value is false."
         },
         "networkConfiguration": {
           "$ref": "#/definitions/NetworkConfiguration",
@@ -10866,14 +10897,16 @@
           "items": {
             "$ref": "#/definitions/ApplicationPackageReference"
           },
-          "title": "The list of application packages to be installed on each compute node in the pool."
+          "title": "The list of application packages to be installed on each compute node in the pool.",
+          "description": "This property is currently not supported on auto pools created with the virtualMachineConfiguration (IaaS) property."
         },
         "metadata": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetadataItem"
           },
-          "title": "A list of name-value pairs associated with the pool as metadata."
+          "title": "A list of name-value pairs associated with the pool as metadata.",
+          "description": "The Batch service does not assign any meaning to metadata; it is solely for the use of user code."
         }
       },
       "required": ["vmSize"],
@@ -10884,7 +10917,7 @@
         "autoPoolIdPrefix": {
           "type": "string",
           "title": "A prefix to be added to the unique identifier when a pool is automatically created.",
-          "description": "The prefix can be up to 20 characters long."
+          "description": "The Batch service assigns each auto pool a unique identifier on creation. To distinguish between pools created for different purposes, you can specify this element to add a prefix to the id that is assigned. The prefix can be up to 20 characters long."
         },
         "poolLifetimeOption": {
           "type": "string",
@@ -10899,7 +10932,8 @@
         },
         "keepAlive": {
           "type": "boolean",
-          "title": "Whether to keep an auto pool alive after its lifetime expires."
+          "title": "Whether to keep an auto pool alive after its lifetime expires.",
+          "description": "If false, the Batch service deletes the pool once its lifetime (as determined by the poolLifetimeOption setting) expires; that is, when the job or job schedule completes. If true, the Batch service does not delete the pool automatically. It is up to the user to delete auto pools created with this option."
         },
         "pool": {
           "$ref": "#/definitions/PoolSpecification",
@@ -10941,28 +10975,52 @@
           "type": "boolean",
           "title": "The flag that determines if this job will use tasks with dependencies."
         },
+        "onAllTasksComplete": {
+          "type": "string",
+          "title": "The action the Batch service should take when all tasks in a job created under this schedule are in the completed state.",
+          "description": "Note that if a job contains no tasks, then all tasks are considered complete. This option is therefore most commonly used with a job manager task; if you want to use automatic job termination without a job manager, you should initially set onAllTasksComplete to noaction and update the job properties to set onAllTasksComplete to terminatejob once you have finished adding tasks. The default is noaction.",
+          "enum": [
+            "noAction",
+            "terminateJob"
+          ],
+          "x-ms-enum": { "name": "OnAllTasksComplete", "modelAsString": false }
+        },
+        "onTaskFailure": {
+          "type": "string",
+          "title": "The action the Batch service should take when any task fails in a job created under this schedule. A task is considered to have failed if it completes with a non-zero exit code and has exhausted its retry count, or if it had a scheduling error.",
+          "description": "The default is noaction.",
+          "enum": [
+            "noAction",
+            "performExitOptionsJobAction"
+          ],
+          "x-ms-enum": { "name": "OnTaskFailure", "modelAsString": false }
+        },
         "constraints": {
           "$ref": "#/definitions/JobConstraints",
           "title": "The execution constraints for jobs created under this schedule."
         },
         "jobManagerTask": {
           "$ref": "#/definitions/JobManagerTask",
-          "title": "The details of a Job Manager task to be launched when a job is started under this schedule."
+          "title": "The details of a Job Manager task to be launched when a job is started under this schedule.",
+          "description": "If the job does not specify a Job Manager task, the user must explicitly add tasks to the job using the Task API. If the job does specify a Job Manager task, the Batch service creates the Job Manager task when the job is created, and will try to schedule the Job Manager task before scheduling other tasks in the job."
         },
         "jobPreparationTask": {
           "$ref": "#/definitions/JobPreparationTask",
-          "title": "The Job Preparation task for jobs created under this schedule."
+          "title": "The Job Preparation task for jobs created under this schedule.",
+          "description": "If a job has a Job Preparation task, the Batch service will run the Job Preparation task on a compute node before starting any tasks of that job on that compute node."
         },
         "jobReleaseTask": {
           "$ref": "#/definitions/JobReleaseTask",
-          "title": "The Job Release task for jobs created under this schedule."
+          "title": "The Job Release task for jobs created under this schedule.",
+          "description": "The primary purpose of the Job Release task is to undo changes to compute nodes made by the Job Preparation task. Example activities include deleting local files, or shutting down services that were started as part of job preparation. A Job Release task cannot be specified without also specifying a Job Preparation task for the job. The Batch service runs the Job Release task on the compute nodes that have run the Job Preparation task."
         },
         "commonEnvironmentSettings": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
           },
-          "title": "A list of common environment variable settings. These environment variables are set for all tasks in jobs created under this schedule (including the Job Manager, Job Preparation and Job Release tasks)."
+          "title": "A list of common environment variable settings. These environment variables are set for all tasks in jobs created under this schedule (including the Job Manager, Job Preparation and Job Release tasks).",
+          "description": "Individual tasks can override an environment setting specified here by specifying the same setting name with a different value."
         },
         "poolInfo": {
           "$ref": "#/definitions/PoolInformation",
@@ -10973,7 +11031,8 @@
           "items": {
             "$ref": "#/definitions/MetadataItem"
           },
-          "title": "A list of name-value pairs associated with each job created under this schedule as metadata."
+          "title": "A list of name-value pairs associated with each job created under this schedule as metadata.",
+          "description": "The Batch service does not assign any meaning to metadata; it is solely for the use of user code."
         }
       },
       "required": ["poolInfo"],
@@ -10997,11 +11056,13 @@
         "nextRunTime": {
           "type": "string",
           "format": "date-time",
-          "title": "The next time at which a job will be created under this schedule."
+          "title": "The next time at which a job will be created under this schedule.",
+          "description": "This property is meaningful only if the schedule is in the active state when the time comes around. For example, if the schedule is disabled, no job will be created at nextRunTime unless the job is enabled before then."
         },
         "recentJob": {
           "$ref": "#/definitions/RecentJob",
-          "title": "Information about the most recent job under the job schedule."
+          "title": "Information about the most recent job under the job schedule.",
+          "description": "This property is present only if the at least one job has run under the schedule."
         },
         "endTime": {
           "type": "string",
@@ -11010,7 +11071,7 @@
           "description": "This property is set only if the job schedule is in the completed state."
         }
       },
-      "title": "Specifies how tasks should be run in a job associated with a job schedule."
+      "title": "Contains information about jobs that have been and will be run under a job schedule."
     },
     "JobScheduleStatistics": {
       "properties": {
@@ -11041,7 +11102,8 @@
         "wallClockTime": {
           "type": "string",
           "format": "duration",
-          "title": "The total wall clock time of all the tasks in all the jobs created under the schedule."
+          "title": "The total wall clock time of all the tasks in all the jobs created under the schedule.",
+          "description": "The wall clock time is the elapsed time from when the task started running on a compute node to when it finished (or to the last time the statistics were updated, if the task had not finished by then). If a task was retried, this includes the wall clock time of all the task retries."
         },
         "readIOps": {
           "type": "integer",
@@ -11081,7 +11143,8 @@
         "waitTime": {
           "type": "string",
           "format": "duration",
-          "title": "The total wait time of all tasks in all jobs created under the schedule. The wait time for a task is defined as the elapsed time between the creation of the task and the start of task execution. (If the task is retried due to failures, the wait time is the time to the most recent task execution.)"
+          "title": "The total wait time of all tasks in all jobs created under the schedule. The wait time for a task is defined as the elapsed time between the creation of the task and the start of task execution. (If the task is retried due to failures, the wait time is the time to the most recent task execution.)",
+          "description": "This value is only reported in the account lifetime statistics; it is not included in the job statistics."
         }
       },
       "required": ["url","startTime","lastUpdateTime","userCPUTime","kernelCPUTime","wallClockTime","readIOps","writeIOps","readIOGiB","writeIOGiB","numSucceededTasks","numFailedTasks","numTaskRetries", "waitTime"],
@@ -11104,12 +11167,14 @@
         },
         "eTag": {
           "type": "string",
-          "title": "The ETag of the job schedule."
+          "title": "The ETag of the job schedule.",
+          "description": "This is an opaque string. You can use it to detect whether the job schedule has changed between requests. In particular, you can be pass the ETag with an Update Job Schedule request to specify that your changes should take effect only if nobody else has modified the schedule in the meantime."
         },
         "lastModified": {
           "type": "string",
           "format": "date-time",
-          "title": "The last modified time of the job schedule."
+          "title": "The last modified time of the job schedule.",
+          "description": "This is the last time at which the schedule level data, such as the job specification or recurrence information, changed. It does not factor in job-level changes such as new jobs being created or jobs changing state."
         },
         "creationTime": {
           "type": "string",
@@ -11136,6 +11201,7 @@
         "previousState": {
           "type": "string",
           "title": "The previous state of the job schedule.",
+          "description": "This property is not present if the job schedule is in its initial active state.",
           "enum": [
             "active",
             "completed",
@@ -11148,7 +11214,8 @@
         "previousStateTransitionTime": {
           "type": "string",
           "format": "date-time",
-          "title": "The time at which the job schedule entered its previous state."
+          "title": "The time at which the job schedule entered its previous state.",
+          "description": "This property is not present if the job schedule is in its initial active state."
         },
         "schedule": {
           "$ref": "#/definitions/Schedule",
@@ -11167,7 +11234,8 @@
           "items": {
             "$ref": "#/definitions/MetadataItem"
           },
-          "title": "A list of name-value pairs associated with the schedule as metadata."
+          "title": "A list of name-value pairs associated with the schedule as metadata.",
+          "description": "The Batch service does not assign any meaning to metadata; it is solely for the use of user code."
         },
         "stats": {
           "$ref": "#/definitions/JobScheduleStatistics",
@@ -11180,11 +11248,13 @@
       "properties": {
         "id": {
           "type": "string",
-          "title": "A string that uniquely identifies the schedule within the account."
+          "title": "A string that uniquely identifies the schedule within the account.",
+          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The id is case-preserving and case-insensitive (that is, you may not have two ids within an account that differ only by case)."
         },
         "displayName": {
           "type": "string",
-          "title": "The display name for the schedule."
+          "title": "The display name for the schedule.",
+          "description": "The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024."
         },
         "schedule": {
           "$ref": "#/definitions/Schedule",
@@ -11199,7 +11269,8 @@
           "items": {
             "$ref": "#/definitions/MetadataItem"
           },
-          "title": "A list of name-value pairs associated with the schedule as metadata."
+          "title": "A list of name-value pairs associated with the schedule as metadata.",
+          "description": "The Batch service does not assign any meaning to metadata; it is solely for the use of user code."
         }
       },
       "required": ["id", "schedule", "jobSpecification"],
@@ -11219,7 +11290,7 @@
           "title": "The URL to get the next set of results."
         }
       },
-      "title": "Response to a CloudJobScheduleOperation.List request."
+      "title": "The result of listing the job schedules in an account."
     },
     "JobSchedulingError": {
       "properties": {
@@ -11257,7 +11328,8 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "title": "The start time of the job."
+          "title": "The start time of the job.",
+          "description": "This is the time at which the job was created."
         },
         "endTime": {
           "type": "string",
@@ -11267,15 +11339,18 @@
         },
         "poolId": {
           "type": "string",
-          "title": "The ID of the pool to which this job is assigned."
+          "title": "The ID of the pool to which this job is assigned.",
+          "description": "This element contains the actual pool where the job is assigned. When you get job details from the service, they also contain a poolInfo element, which contains the pool configuration data from when the job was added or updated. That poolInfo element may also contain a poolId element. If it does, the two IDs are the same. If it does not, it means the job ran on an auto pool, and this property contains the id of that auto pool."
         },
         "schedulingError": {
           "$ref": "#/definitions/JobSchedulingError",
-          "title": "Details of any error encountered by the service in starting the job."
+          "title": "Details of any error encountered by the service in starting the job.",
+          "description": "This property is not set if there was no error starting the job."
         },
         "terminateReason": {
           "type": "string",
-          "title": "A string describing the reason the job ended."
+          "title": "A string describing the reason the job ended.",
+          "description": "This property is set only if the job is in the completed state. If the Batch service terminates the job, it sets the reason as follows: JMComplete – the Job Manager task completed, and killJobOnCompletion was set to true. MaxWallClockTimeExpiry – the job reached its maxWallClockTime constraint. TerminateJobSchedule – the job ran as part of a schedule, and the schedule terminated. AllTasksComplete – the job's onAllTasksComplete attribute is set to terminatejob, and all tasks in the job are complete. TaskFailed – the job's onTaskFailure attribute is set to performexitoptionsjobaction, and a task in the job failed with an exit condition that specified a jobAction of terminatejob. Any other string is a user-defined reason specified in a call to the 'Terminate a job' operation."
         }
       },
       "required": ["startTime"],
@@ -11302,12 +11377,14 @@
         },
         "eTag": {
           "type": "string",
-          "title": "The ETag of the job."
+          "title": "The ETag of the job.",
+          "description": "This is an opaque string. You can use it to detect whether the job has changed between requests. In particular, you can be pass the ETag when updating a job to specify that your changes should take effect only if nobody else has modified the job in the meantime."
         },
         "lastModified": {
           "type": "string",
           "format": "date-time",
-          "title": "The last modified time of the job."
+          "title": "The last modified time of the job.",
+          "description": "This is the last time at which the job level data, such as the job state or priority, changed. It does not factor in task-level changes such as adding new tasks or tasks changing state."
         },
         "creationTime": {
           "type": "string",
@@ -11358,7 +11435,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The priority of the job.",
-          "description": " Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0."
+          "description": "Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0."
         },
         "constraints": {
           "$ref": "#/definitions/JobConstraints",
@@ -11370,11 +11447,13 @@
         },
         "jobPreparationTask": {
           "$ref": "#/definitions/JobPreparationTask",
-          "title": "The Job Preparation task."
+          "title": "The Job Preparation task.",
+          "description": "The Job Preparation task is a special task run on each node before any other task of the job."
         },
         "jobReleaseTask": {
           "$ref": "#/definitions/JobReleaseTask",
-          "title": "The Job Release task."
+          "title": "The Job Release task.",
+          "description": "The Job Release task is a special task run at the end of the job on each node that has run any other task of the job."
         },
         "commonEnvironmentSettings": {
           "type": "array",
@@ -11385,11 +11464,12 @@
         },
         "poolInfo": {
           "$ref": "#/definitions/PoolInformation",
-          "title": "The pool on which the Batch service runs the job's tasks."
+          "title": "The pool settings associated with the job."
         },
         "onAllTasksComplete": {
           "type": "string",
-          "description": "The action the Batch service should take when all tasks in the job are in the completed state.",
+          "title": "The action the Batch service should take when all tasks in the job are in the completed state.",
+          "description": "Permitted values are: noaction – do nothing. The job remains active unless terminated or disabled by some other means. terminatejob – terminate the job. The job's terminateReason is set to 'AllTasksComplete'. The default is noaction.",
           "enum": [
             "noAction",
             "terminateJob"
@@ -11398,7 +11478,8 @@
         },
         "onTaskFailure": {
           "type": "string",
-          "description": "The action the Batch service should take when any task in the job fails. A task is considered to have failed if it completes with a non-zero exit code and has exhausted its retry count, or if it had a scheduling error.",
+          "title": "The action the Batch service should take when any task in the job fails. A task is considered to have failed if it completes with a non-zero exit code and has exhausted its retry count, or if it had a scheduling error.",
+          "description": "Permitted values are: noaction – do nothing. performexitoptionsjobaction – take the action associated with the task exit condition in the task's exitConditions collection. (This may still result in no action being taken, if that is what the task specifies.) The default is noaction.",
           "enum": [
             "noAction",
             "performExitOptionsJobAction"
@@ -11410,7 +11491,8 @@
           "items": {
             "$ref": "#/definitions/MetadataItem"
           },
-          "title": "A list of name-value pairs associated with the job as metadata."
+          "title": "A list of name-value pairs associated with the job as metadata.",
+          "description": "The Batch service does not assign any meaning to metadata; it is solely for the use of user code."
         },
         "executionInfo": {
           "$ref": "#/definitions/JobExecutionInformation",
@@ -11432,7 +11514,8 @@
         },
         "displayName": {
           "type": "string",
-          "title": "The display name for the job."
+          "title": "The display name for the job.",
+          "description": "The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024."
         },
         "priority": {
           "type": "integer",
@@ -11446,15 +11529,18 @@
         },
         "jobManagerTask": {
           "$ref": "#/definitions/JobManagerTask",
-          "title": "Details of a Job Manager task to be launched when the job is started."
+          "title": "Details of a Job Manager task to be launched when the job is started.",
+          "description": "If the job does not specify a Job Manager task, the user must explicitly add tasks to the job. If the job does specify a Job Manager task, the Batch service creates the Job Manager task when the job is created, and will try to schedule the Job Manager task before scheduling other tasks in the job. The Job Manager task's typical purpose is to control and/or monitor job execution, for example by deciding what additional tasks to run, determining when the work is complete, etc. (However, a Job Manager task is not restricted to these activities – it is a fully-fledged task in the system and perform whatever actions are required for the job.) For example, a Job Manager task might download a file specified as a parameter, analyze the contents of that file and submit additional tasks based on those contents."
         },
         "jobPreparationTask": {
           "$ref": "#/definitions/JobPreparationTask",
-          "title": "The Job Preparation task."
+          "title": "The Job Preparation task.",
+          "description": "If a job has a Job Preparation task, the Batch service will run the Job Preparation task on a compute node before starting any tasks of that job on that compute node."
         },
         "jobReleaseTask": {
           "$ref": "#/definitions/JobReleaseTask",
-          "title": "The Job Release task."
+          "title": "The Job Release task.",
+          "description": "A Job Release task cannot be specified without also specifying a Job Preparation task for the job. The Batch service runs the Job Release task on the compute nodes that have run the Job Preparation task. The primary purpose of the Job Release task is to undo changes to compute nodes made by the Job Preparation task. Example activities include deleting local files, or shutting down services that were started as part of job preparation."
         },
         "commonEnvironmentSettings": {
           "type": "array",
@@ -11469,7 +11555,8 @@
         },
         "onAllTasksComplete": {
           "type": "string",
-          "description": "The action the Batch service should take when all tasks in the job are in the completed state.",
+          "title": "The action the Batch service should take when all tasks in the job are in the completed state.",
+          "description": "Note that if a job contains no tasks, then all tasks are considered complete. This option is therefore most commonly used with a job manager task; if you want to use automatic job termination without a job manager, you should initially set onAllTasksComplete to noaction and update the job properties to set onAllTasksComplete to terminatejob once you have finished adding tasks. Permitted values are: noaction – do nothing. The job remains active unless terminated or disabled by some other means. terminatejob – terminate the job. The job’s terminateReason is set to 'AllTasksComplete'. The default is noaction.",
           "enum": [
             "noAction",
             "terminateJob"
@@ -11478,7 +11565,8 @@
         },
         "onTaskFailure": {
           "type": "string",
-          "description": "The action the Batch service should take when any task in the job fails. A task is considered to have failed if it completes with a non-zero exit code and has exhausted its retry count, or if it had a scheduling error.",
+          "title": "The action the Batch service should take when any task in the job fails. A task is considered to have failed if it completes with a non-zero exit code and has exhausted its retry count, or if it had a scheduling error.",
+          "description": "Permitted values are: noaction – do nothing. performexitoptionsjobaction – take the action associated with the task exit condition in the task's exitConditions collection. (This may still result in no action being taken, if that is what the task specifies.) The default is noaction.",
           "enum": [
             "noAction",
             "performExitOptionsJobAction"
@@ -11490,7 +11578,8 @@
           "items": {
             "$ref": "#/definitions/MetadataItem"
           },
-          "title": "A list of name-value pairs associated with the job as metadata."
+          "title": "A list of name-value pairs associated with the job as metadata.",
+          "description": "The Batch service does not assign any meaning to metadata; it is solely for the use of user code."
         },
         "usesTaskDependencies": {
           "type": "boolean",
@@ -11514,7 +11603,7 @@
           "title": "The URL to get the next set of results."
         }
       },
-      "title": "Response to a CloudJobOperation.List or ListFromJobSchedule request."
+      "title": "The result of listing the jobs in an account."
     },
     "TaskSchedulingError": {
       "properties": {
@@ -11563,7 +11652,8 @@
         },
         "state": {
           "type": "string",
-          "title": "The current state of the Job Preparation task.",
+          "title": "The current state of the Job Preparation task on the compute node.",
+          "description": "Possible values are: running – the task is currently running (including retrying). completed – the task has exited with exit code 0, or the task has exhausted its retry limit, or the Batch service was unable to start the task due to scheduling errors",
           "enum": [
             "running",
             "completed"
@@ -11597,7 +11687,7 @@
           "type": "string",
           "format": "date-time",
           "title": "The most recent time at which a retry of the Job Preparation task started running.",
-          "description": "This property is set only if the task was retried (i.e. retryCount is nonzero)."
+          "description": "This property is set only if the task was retried (i.e. retryCount is nonzero). If present, this is typically the same as startTime, but may be different if the task has been restarted for reasons other than retry; for example, if the compute node was rebooted during a retry, then the startTime is updated but the lastRetryTime is not."
         }
       },
       "required": ["startTime","retryCount","state"],
@@ -11618,7 +11708,8 @@
         },
         "state": {
           "type": "string",
-          "title": "The current state of the Job Release task.",
+          "title": "The current state of the Job Release task on the compute node.",
+          "description": "Possible values are: running – the task is currently running (including retrying). completed – the task has exited, or the Batch service was unable to start the task due to scheduling errors.",
           "enum": [
             "running",
             "completed"
@@ -11641,7 +11732,7 @@
         },
         "schedulingError": {
           "$ref": "#/definitions/TaskSchedulingError",
-          "title": "The scheduling error encountered by the Batch service when starting the task."
+          "title": "The error encountered by the Batch service when starting the task."
         }
       },
       "required": ["startTime","state"],
@@ -11687,7 +11778,7 @@
           "title": "The URL to get the next set of results."
         }
       },
-      "title": "Response to a CloudJobOperations.ListPreparationAndReleaseTaskStatus request."
+      "title": "The result of listing the status of the job preparation and job release tasks for a job."
     },
     "AutoScaleRunError": {
       "properties": {
@@ -11753,7 +11844,8 @@
       "properties": {
         "osFamily": {
           "type": "string",
-          "title": "The Azure Guest OS family to be installed on the virtual machines in the pool."
+          "title": "The Azure Guest OS family to be installed on the virtual machines in the pool.",
+          "description": "Possible values are: 2 – OS Family 2, equivalent to Windows Server 2008 R2 SP1. 3 – OS Family 3, equivalent to Windows Server 2012. 4 – OS Family 4, equivalent to Windows Server 2012 R2. For more information, see Azure Guest OS Releases (https://azure.microsoft.com/documentation/articles/cloud-services-guestos-update-matrix/#releases)."
         },
         "targetOSVersion": {
           "type": "string",
@@ -11762,7 +11854,8 @@
         },
         "currentOSVersion": {
           "type": "string",
-          "title": "The Azure Guest OS Version currently installed on the virtual machines in the pool. This may differ from targetOSVersion if the pool state is Upgrading."
+          "title": "The Azure Guest OS Version currently installed on the virtual machines in the pool.",
+          "description": "This may differ from targetOSVersion if the pool state is Upgrading. In this case some virtual machines may be on the targetOSVersion and some may be on the currentOSVersion during the upgrade process. Once all virtual machines have upgraded, currentOSVersion is updated to be the same as targetOSVersion."
         }
       },
       "required": ["osFamily"],
@@ -11792,7 +11885,7 @@
         }
       },
       "required": ["publisher", "offer", "sku"],
-      "title": "A reference to an Azure Virtual Machines Marketplace image."
+      "title": "A reference to an Azure Virtual Machines Marketplace image. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation."
     },
     "WindowsConfiguration": {
       "properties": {
@@ -11812,8 +11905,8 @@
         },
         "nodeAgentSKUId": {
           "type": "string",
-          "title": "The SKU of Batch Node Agent to be provisioned on the compute node.",
-          "description": "The Batch node agent is a program that runs on each node in the pool, and provides the command-and-control interface between the node and the Batch service. There are different implementations of the node agent, known as SKUs, for different operating systems."
+          "title": "The SKU of the Batch node agent to be provisioned on compute nodes in the pool.",
+          "description": "The Batch node agent is a program that runs on each node in the pool, and provides the command-and-control interface between the node and the Batch service. There are different implementations of the node agent, known as SKUs, for different operating systems. You must specify a node agent SKU which matches the selected image reference. To get the list of supported node agent SKUs along with their list of verified image references, see the 'List supported node agent SKUs' operation."
         },
         "windowsConfiguration": {
           "$ref": "#/definitions/WindowsConfiguration",
@@ -11828,8 +11921,8 @@
       "properties": {
         "subnetId": {
           "type": "string",
-          "title": "The ARM resource identifier of the virtual network subnet which the compute nodes of the pool will join.",
-          "description": "The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes, and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. This property can only be specified for pools created with a cloud service configuration.",
+          "title": "The ARM resource identifier of the virtual network subnet which the compute nodes of the pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.",
+          "description": "The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes, and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. This property can only be specified for pools created with a cloudServiceConfiguration.",
           "externalDocs": {
             "url": "https://azure.microsoft.com/en-us/documentation/articles/role-based-access-built-in-roles/#classic-virtual-machine-contributor",
             "description": "Setting up RBAC for Azure Batch VNETs"
@@ -11847,7 +11940,8 @@
         },
         "displayName": {
           "type": "string",
-          "title": "The display name for the pool."
+          "title": "The display name for the pool.",
+          "description": "The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024."
         },
         "url": {
           "type": "string",
@@ -11855,12 +11949,14 @@
         },
         "eTag": {
           "type": "string",
-          "title": "The ETag of the pool."
+          "title": "The ETag of the pool.",
+          "description": "This is an opaque string. You can use it to detect whether the pool has changed between requests. In particular, you can be pass the ETag when updating a pool to specify that your changes should take effect only if nobody else has modified the pool in the meantime."
         },
         "lastModified": {
           "type": "string",
           "format": "date-time",
-          "title": "The last modified time of the pool."
+          "title": "The last modified time of the pool.",
+          "description": "This is the last time at which the pool level data, such as the targetDedicated or enableAutoscale settings, changed. It does not factor in node-level changes such as a compute node changing state."
         },
         "creationTime": {
           "type": "string",
@@ -11870,6 +11966,7 @@
         "state": {
           "type": "string",
           "title": "The current state of the pool.",
+          "description": "Possible values are: active – The pool is available to run tasks subject to the availability of compute nodes. deleting – The user has requested that the pool be deleted, but the delete operation has not yet completed. upgrading – The user has requested that the operating system of the pool's nodes be upgraded, but the upgrade operation has not yet completed (that is, some nodes in the pool have not yet been upgraded). While upgrading, the pool may be able to run tasks (with reduced capacity) but this is not guaranteed.",
           "enum": [
             "active",
             "deleting",
@@ -11885,6 +11982,7 @@
         "allocationState": {
           "type": "string",
           "title": "Whether the pool is resizing.",
+          "description": "Possible values are: steady – The pool is not resizing. There are no changes to the number of nodes in the pool in progress. A pool enters this state when it is created and when no operations are being performed on the pool to change the number of dedicated nodes. resizing - The pool is resizing; that is, compute nodes are being added to or removed from the pool. stopping - The pool was resizing, but the user has requested that the resize be stopped, but the stop request has not yet been completed.",
           "enum": [
             "steady",
             "resizing",
@@ -11899,7 +11997,8 @@
         },
         "vmSize": {
           "type": "string",
-          "title": "The size of virtual machines in the pool. All virtual machines in a pool are the same size."
+          "title": "The size of virtual machines in the pool. All virtual machines in a pool are the same size.",
+          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "cloudServiceConfiguration": {
           "$ref": "#/definitions/CloudServiceConfiguration",
@@ -11915,7 +12014,7 @@
           "type": "string",
           "format": "duration",
           "title": "The timeout for allocation of compute nodes to the pool.",
-          "description": "This is the timeout for the most recent resize operation. The default value is 10 minutes."
+          "description": "This is the timeout for the most recent resize operation. (The initial sizing when the pool is created counts as a resize.) The default value is 15 minutes."
         },
         "resizeError": {
           "$ref": "#/definitions/ResizeError",
@@ -11931,7 +12030,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The desired number of compute nodes in the pool.",
-          "description": "This property must have the default value if enableAutoScale is true. It is required if enableAutoScale is false."
+          "description": "This property is not set if enableAutoScale is true. It is required if enableAutoScale is false."
         },
         "enableAutoScale": {
           "type": "boolean",
@@ -11940,16 +12039,19 @@
         },
         "autoScaleFormula": {
           "type": "string",
-          "title": "A formula for the desired number of compute nodes in the pool."
+          "title": "A formula for the desired number of compute nodes in the pool.",
+          "description": "This property is set only if the pool automatically scales, i.e. enableAutoScale is true."
         },
         "autoScaleEvaluationInterval": {
           "type": "string",
           "format": "duration",
-          "title": "A time interval for the desired AutoScale evaluation period in the pool."
+          "title": "The time interval at which to automatically adjust the pool size according to the autoscale formula.",
+          "description": "This property is set only if the pool automatically scales, i.e. enableAutoScale is true."
         },
         "autoScaleRun": {
           "$ref": "#/definitions/AutoScaleRun",
-          "title": "The results and errors from the last execution of the autoscale formula."
+          "title": "The results and errors from the last execution of the autoscale formula.",
+          "description": "This property is set only if the pool automatically scales, i.e. enableAutoScale is true."
         },
         "enableInterNodeCommunication": {
           "type": "boolean",
@@ -12007,20 +12109,22 @@
         "id": {
           "type": "string",
           "title": "A string that uniquely identifies the pool within the account.",
-          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. It is common to use a GUID for the id."
+          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two pool IDs within an account that differ only by case)."
         },
         "displayName": {
           "type": "string",
-          "title": "The display name for the pool."
+          "title": "The display name for the pool.",
+          "description": "The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024."
         },
         "vmSize": {
           "type": "string",
-          "title": "The size of virtual machines in the pool. All virtual machines in a pool are the same size."
+          "title": "The size of virtual machines in the pool. All virtual machines in a pool are the same size.",
+          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "cloudServiceConfiguration": {
           "$ref": "#/definitions/CloudServiceConfiguration",
           "title": "The cloud service configuration for the pool.",
-          "description": " This property and virtualMachineConfiguration are mutually exclusive and one of the properties must be specified."
+          "description": "This property and virtualMachineConfiguration are mutually exclusive and one of the properties must be specified."
         },
         "virtualMachineConfiguration": {
           "$ref": "#/definitions/VirtualMachineConfiguration",
@@ -12031,7 +12135,7 @@
           "type": "string",
           "format": "duration",
           "title": "The timeout for allocation of compute nodes to the pool.",
-          "description": "The default value is 10 minutes."
+          "description": "This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
         "targetDedicated": {
           "type": "integer",
@@ -12042,21 +12146,23 @@
         "enableAutoScale": {
           "type": "boolean",
           "title": "Whether the pool size should automatically adjust over time.",
-          "description": "If true, the autoScaleFormula property must be set. If false, the targetDedicated property must be set."
+          "description": "If true, the autoScaleFormula property must be set. If false, the targetDedicated property must be set. The default value is false."
         },
         "autoScaleFormula": {
           "type": "string",
-          "title": "A formula for the desired number of compute nodes in the pool."
+          "title": "A formula for the desired number of compute nodes in the pool.",
+          "description": "This property must not be specified if enableAutoScale is set to false. It is required if enableAutoScale is set to true. The formula is checked for validity before the pool is created. If the formula is not valid, the Batch service rejects the request with detailed error information. For more information about specifying this formula, see 'Automatically scale compute nodes in an Azure Batch pool' (https://azure.microsoft.com/documentation/articles/batch-automatic-scaling/)."
         },
         "autoScaleEvaluationInterval": {
           "type": "string",
           "format": "duration",
-          "title": "A time interval for the desired autoscale evaluation period in the pool."
+          "title": "The time interval at which to automatically adjust the pool size according to the autoscale formula.",
+          "description": "The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
         "enableInterNodeCommunication": {
           "type": "boolean",
           "title": "Whether the pool permits direct communication between nodes.",
-          "description": "This imposes restrictions on which nodes can be assigned to the pool. Specifying this value can reduce the chance of the requested number of nodes to be allocated in the pool."
+          "description": "Enabling inter-node communication limits the maximum size of the pool due to deployment restrictions on the nodes of the pool. This may result in the pool not reaching its desired size. The default value is false."
         },
         "networkConfiguration": {
           "$ref": "#/definitions/NetworkConfiguration",
@@ -12064,7 +12170,8 @@
         },
         "startTask": {
           "$ref": "#/definitions/StartTask",
-          "title": "A task specified to run on each compute node as it joins the pool."
+          "title": "A task specified to run on each compute node as it joins the pool.",
+          "description": "The task runs when the node is added to the pool or when the node is restarted."
         },
         "certificateReferences": {
           "type": "array",
@@ -12079,12 +12186,14 @@
           "items": {
             "$ref": "#/definitions/ApplicationPackageReference"
           },
-          "title": "The list of application packages to be installed on each compute node in the pool."
+          "title": "The list of application packages to be installed on each compute node in the pool.",
+          "description": "This property is currently not supported on pools created using the virtualMachineConfiguration (IaaS) property."
         },
         "maxTasksPerNode": {
           "type": "integer",
           "format": "int32",
-          "title": "The maximum number of tasks that can run concurrently on a single compute node in the pool."
+          "title": "The maximum number of tasks that can run concurrently on a single compute node in the pool.",
+          "description": "The default value is 1. The maximum value of this setting depends on the size of the compute nodes in the pool (the vmSize setting)."
         },
         "taskSchedulingPolicy": {
           "$ref": "#/definitions/TaskSchedulingPolicy",
@@ -12095,7 +12204,8 @@
           "items": {
             "$ref": "#/definitions/MetadataItem"
           },
-          "title": "A list of name-value pairs associated with the pool as metadata."
+          "title": "A list of name-value pairs associated with the pool as metadata.",
+          "description": "The Batch service does not assign any meaning to metadata; it is solely for the use of user code."
         }
       },
       "required": ["id", "vmSize"],
@@ -12115,7 +12225,7 @@
           "title": "The URL to get the next set of results."
         }
       },
-      "title": "Response to a ApplicationOperations.List request."
+      "title": "The result of listing the applications available in an account."
     },
     "CloudPoolListResult": {
       "properties": {
@@ -12131,7 +12241,7 @@
           "title": "The URL to get the next set of results."
         }
       },
-      "title": "Response to a CloudPoolOperations.List request."
+      "title": "The result of listing the pools in an account."
     },
     "AffinityInformation": {
       "properties": {
@@ -12150,7 +12260,7 @@
           "type": "string",
           "format": "date-time",
           "title": "The time at which the task started running.",
-          "description": "If the task has been restarted or retried, this is the most recent time at which the task started running."
+          "description": "'Running' corresponds to the running state, so if the task specifies resource files or application packages, then the start time reflects the time at which the task started downloading or deploying these. If the task has been restarted or retried, this is the most recent time at which the task started running. This property is present only for tasks that are in the running or completed state."
         },
         "endTime": {
           "type": "string",
@@ -12162,31 +12272,36 @@
           "type": "integer",
           "format": "int32",
           "title": "The exit code of the program specified on the task command line.",
-          "description": "This parameter is returned only if the task is in the completed state. The exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. Note that the exit code may also be generated by the compute node operating system, such as when a process is forcibly terminated."
+          "description": "This property is set only if the task is in the completed state. In general, the exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. However, if the Batch service terminates the task (due to timeout, or user termination via the API) you may see an operating system-defined exit code."
         },
         "schedulingError": {
           "$ref": "#/definitions/TaskSchedulingError",
-          "title": "Details of any error encountered scheduling the task."
+          "title": "Details of any error encountered scheduling the task.",
+          "description": "This property is set only if the task is in the completed state."
         },
         "retryCount": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of times the task has been retried by the Batch service."
+          "title": "The number of times the task has been retried by the Batch service.",
+          "description": "The task is retried if it exits with a nonzero exit code, up to the specified maxTaskRetryCount."
         },
         "lastRetryTime": {
           "type": "string",
           "format": "date-time",
-          "title": "The most recent time at which a retry of the task started running."
+          "title": "The most recent time at which a retry of the task started running.",
+          "description": "This element is present only if the task was retried (i.e. retryCount is nonzero). If present, this is typically the same as startTime, but may be different if the task has been restarted for reasons other than retry; for example, if the compute node was rebooted during a retry, then the startTime is updated but the lastRetryTime is not."
         },
         "requeueCount": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of times the task has been requeued by the Batch service as the result of a user request."
+          "title": "The number of times the task has been requeued by the Batch service as the result of a user request.",
+          "description": "When the user removes nodes from a pool (by resizing/shrinking the pool) or when the job is being disabled, the user can specify that running tasks on the nodes be requeued for execution. This count tracks how many times the task has been requeued for these reasons."
         },
         "lastRequeueTime": {
           "type": "string",
           "format": "date-time",
-          "title": "The most recent time at which the task has been requeued by the Batch service as the result of a user request."
+          "title": "The most recent time at which the task has been requeued by the Batch service as the result of a user request.",
+          "description": "This property is set only if the requeueCount is nonzero."
         }
       },
       "required": ["requeueCount","retryCount"],
@@ -12226,11 +12341,12 @@
         "numberOfInstances": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of compute nodes required by the multi-instance task."
+          "title": "The number of compute nodes required by the task."
         },
         "coordinationCommandLine": {
           "type": "string",
-          "title": "The command to run on the compute node instances for coordinating among the subtasks."
+          "title": "The command line to run on all the compute nodes to enable them to coordinate when the primary runs the main task command.",
+          "description": "A typical coordination command line launches a background service and verifies that the service is ready to process inter-node messages."
         },
         "commonResourceFiles": {
           "type": "array",
@@ -12274,7 +12390,8 @@
         "wallClockTime": {
           "type": "string",
           "format": "duration",
-          "title": "The total wall clock time of the task."
+          "title": "The total wall clock time of the task.",
+          "description": "The wall clock time is the elapsed time from when the task started running on a compute node to when it finished (or to the last time the statistics were updated, if the task had not finished by then). If the task was retried, this includes the wall clock time of all the task retries."
         },
         "readIOps": {
           "type": "integer",
@@ -12312,14 +12429,14 @@
           "items": {
             "type": "string"
           },
-          "title": "The list of task ids that must complete before this task can be scheduled."
+          "title": "The list of task IDs that this task depends on. All tasks in this list must complete successfully before the dependent task can be scheduled."
         },
         "taskIdRanges": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TaskIdRange"
           },
-          "title": "The list of task ranges that must complete before this task can be scheduled."
+          "title": "The list of task ID ranges that this task depends on. All tasks in all ranges must complete successfully before the dependent task can be scheduled."
         }
       },
       "title": "Specifies any dependencies of a task. Any task that is explicitly specified or within a dependency range must complete before the dependant task will be scheduled."
@@ -12337,7 +12454,8 @@
           "title": "The last task ID in the range."
         }
       },
-      "title": "A range of task ids that a task can depend on. All tasks with ids in the range must complete successfully before the dependent task can be scheduled.",
+      "title": "A range of task IDs that a task can depend on. All tasks with IDs in the range must complete successfully before the dependent task can be scheduled.",
+      "description": "The start and end of the range are inclusive. For example, if a range has start 9 and end 12, then it represents tasks '9', '10', '11' and '12'.",
       "required": ["start", "end"]
     },
     "CloudTask": {
@@ -12345,11 +12463,12 @@
         "id": {
           "type": "string",
           "title": "A string that uniquely identifies the task within the job.",
-          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. It is common to use a GUID for the id."
+          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters."
         },
         "displayName": {
           "type": "string",
-          "title": "A display name for the task."
+          "title": "A display name for the task.",
+          "description": "The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024."
         },
         "url": {
           "type": "string",
@@ -12357,7 +12476,8 @@
         },
         "eTag": {
           "type": "string",
-          "title": "The ETag of the task."
+          "title": "The ETag of the task.",
+          "description": "This is an opaque string. You can use it to detect whether the task has changed between requests. In particular, you can be pass the ETag when updating a task to specify that your changes should take effect only if nobody else has modified the task in the meantime."
         },
         "lastModified": {
           "type": "string",
@@ -12410,7 +12530,7 @@
         "commandLine": {
           "type": "string",
           "title": "The command line of the task.",
-          "description": "For multi-instance tasks, the command line is executed on the primary subtask after all the subtasks have finished executing the coordianation command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux."
+          "description": "For multi-instance tasks, the command line is executed as the primary task, after the primary task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux."
         },
         "resourceFiles": {
           "type": "array",
@@ -12418,7 +12538,7 @@
             "$ref": "#/definitions/ResourceFile"
           },
           "title": "A list of files that the Batch service will download to the compute node before running the command line.",
-          "description": "For multi-instance tasks, the resource files will only be downloaded to the compute node on which the primary subtask is executed."
+          "description": "For multi-instance tasks, the resource files will only be downloaded to the compute node on which the primary task is executed."
         },
         "environmentSettings": {
           "type": "array",
@@ -12449,7 +12569,7 @@
         },
         "multiInstanceSettings": {
           "$ref": "#/definitions/MultiInstanceSettings",
-          "title": "Information about how to run the multi-instance task."
+          "title": "An object that indicates that the task is a multi-instance task, and contains information about how to run the multi-instance task."
         },
         "stats": {
           "$ref": "#/definitions/TaskStatistics",
@@ -12457,7 +12577,8 @@
         },
         "dependsOn": {
           "$ref": "#/definitions/TaskDependencies",
-          "title": "Any dependencies this task has."
+          "title": "The tasks that this task depends on.",
+          "description": "The task will not be scheduled until all depended-on tasks have completed successfully. (If any depended-on tasks fail and exhaust their retry counts, the task will never be scheduled.)"
         },
         "applicationPackageReferences": {
           "type": "array",
@@ -12474,16 +12595,17 @@
         "id": {
           "type": "string",
           "title": "A string that uniquely identifies the task within the job.",
-          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. It is common to use a GUID for the id."
+          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within a job that differ only by case)."
         },
         "displayName": {
           "type": "string",
-          "title": "A display name for the task."
+          "title": "A display name for the task.",
+          "description": "The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024."
         },
         "commandLine": {
           "type": "string",
-          "title": "The command line of the task. For multi-instance tasks, the command line is executed on the primary subtask after all the subtasks have finished executing the coordianation command line.",
-          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux."
+          "title": "The command line of the task.",
+          "description": "For multi-instance tasks, the command line is executed as the primary task, after the primary task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux."
         },
         "exitConditions": {
           "$ref": "#/definitions/ExitConditions",
@@ -12495,7 +12617,7 @@
             "$ref": "#/definitions/ResourceFile"
           },
           "title": "A list of files that the Batch service will download to the compute node before running the command line.",
-          "description": "For multi-instance tasks, the resource files will only be downloaded to the compute node on which the primary subtask is executed."
+          "description": "For multi-instance tasks, the resource files will only be downloaded to the compute node on which the primary task is executed."
         },
         "environmentSettings": {
           "type": "array",
@@ -12510,19 +12632,22 @@
         },
         "constraints": {
           "$ref": "#/definitions/TaskConstraints",
-          "title": "The execution constraints that apply to this task."
+          "title": "The execution constraints that apply to this task.",
+          "description": "If you do not specify constraints, the maxTaskRetryCount is the maxTaskRetryCount specified for the job, and the maxWallClockTime and retentionTime are infinite."
         },
         "runElevated": {
           "type": "boolean",
-          "title": "Whether to run the task in elevated mode."
+          "title": "Whether to run the task in elevated mode.",
+          "description": "The default value is false."
         },
         "multiInstanceSettings": {
           "$ref": "#/definitions/MultiInstanceSettings",
-          "title": "Information about how to run the multi-instance task."
+          "title": "An object that indicates that the task is a multi-instance task, and contains information about how to run the multi-instance task."
         },
         "dependsOn": {
           "$ref": "#/definitions/TaskDependencies",
-          "title": "Any other tasks that this task depends on."
+          "title": "The tasks that this task depends on.",
+          "description": "The task will not be scheduled until all depended-on tasks have completed successfully. (If any depended-on tasks fail and exhaust their retry counts, the task will never be scheduled.) If the job does not have usesTaskDependencies set to true, and this element is present, the request fails with error code TaskDependenciesNotSpecifiedOnJob."
         },
         "applicationPackageReferences": {
           "type": "array",
@@ -12597,7 +12722,7 @@
           "title": "The results of the add task collection operation."
         }
       },
-      "title": "Response to a TaskOperations.AddCollection request."
+      "title": "The result of adding a collection of tasks to a job."
     },
     "SubtaskInformation": {
       "properties": {
@@ -12625,7 +12750,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The exit code of the program specified on the subtask command line.",
-          "description": "This parameter is returned only if the subtask is in the completed state. The exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. Note that the exit code may also be generated by the compute node operating system, such as when a process is forcibly terminated."
+          "description": "This property is set only if the subtask is in the completed state. In general, the exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. However, if the Batch service terminates the subtask (due to timeout, or user termination via the API) you may see an operating system-defined exit code."
         },
         "schedulingError": {
           "$ref": "#/definitions/TaskSchedulingError",
@@ -12650,7 +12775,7 @@
         "previousState": {
           "type": "string",
           "title": "The previous state of the subtask.",
-          "description": "This property is not set if the subtask is in its initial Active state.",
+          "description": "This property is not set if the subtask is in its initial running state.",
           "enum": [
             "active",
             "preparing",
@@ -12663,7 +12788,7 @@
           "type": "string",
           "format": "date-time",
           "title": "The time at which the subtask entered its previous state.",
-          "description": "This property is not set if the subtask is in its initial Active state."
+          "description": "This property is not set if the subtask is in its initial running state."
         }
       },
       "title": "Information about an Azure Batch subtask."
@@ -12675,10 +12800,10 @@
           "items": {
             "$ref": "#/definitions/SubtaskInformation"
           },
-          "title": "The list of information of subtasks."
+          "title": "The list of subtasks."
         }
       },
-      "title": "Response to a CloudTaskOperations.ListSubtasks request."
+      "title": "The result of listing the subtasks of a task."
     },
     "CloudTaskListResult": {
       "properties": {
@@ -12694,7 +12819,7 @@
           "title": "The URL to get the next set of results."
         }
       },
-      "title": "Response to a CloudTaskOperations.List request."
+      "title": "The result of listing the tasks in a job."
     },
     "TaskInformation": {
       "properties": {
@@ -12739,6 +12864,7 @@
         "state": {
           "type": "string",
           "title": "The state of the start task on the compute node.",
+          "description": "Possible values are: running – The start task is currently running. completed – The start task has exited with exit code 0, or the start task has failed and the retry limit has reached, or the start task process did not run due to scheduling errors.",
           "enum": [
             "running",
             "completed"
@@ -12748,18 +12874,20 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "title": "The time at which the start task started running."
+          "title": "The time at which the start task started running.",
+          "description": "This value is reset every time the task is restarted or retried (that is, this is the most recent time at which the start task started running)."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "title": "The time at which the start task stopped running."
+          "title": "The time at which the start task stopped running.",
+          "description": "This is the end time of the most recent run of the start task, if that run has completed (even if that run failed and a retry is pending). This element is not present if the start task is currently running."
         },
         "exitCode": {
           "type": "integer",
           "format": "int32",
-          "title": "The exit code of the program specified on the task command line.",
-          "description": "This parameter is returned only if the task is in the completed state. The exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. Note that the exit code may also be generated by the compute node operating system, such as when a process is forcibly terminated."
+          "title": "The exit code of the program specified on the start task command line.",
+          "description": "This property is set only if the start task is in the completed state. In general, the exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. However, if the Batch service terminates the start task (due to timeout, or user termination via the API) you may see an operating system-defined exit code."
         },
         "schedulingError": {
           "$ref": "#/definitions/TaskSchedulingError",
@@ -12768,12 +12896,14 @@
         "retryCount": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of times the task has been retried by the Batch service."
+          "title": "The number of times the task has been retried by the Batch service.",
+          "description": "The task is retried if it exits with a nonzero exit code, up to the specified MaxTaskRetryCount."
         },
         "lastRetryTime": {
           "type": "string",
           "format": "date-time",
-          "title": "The most recent time at which a retry of the task started running."
+          "title": "The most recent time at which a retry of the task started running.",
+          "description": "This element is present only if the task was retried (i.e. retryCount is nonzero). If present, this is typically the same as startTime, but may be different if the task has been restarted for reasons other than retry; for example, if the compute node was rebooted during a retry, then the startTime is updated but the lastRetryTime is not."
         }
       },
       "required": ["state","startTime","retryCount"],
@@ -12831,7 +12961,8 @@
         },
         "schedulingState": {
           "type": "string",
-          "title": "Whether the compute node should be available for task scheduling.",
+          "title": "Whether the compute node is available for task scheduling.",
+          "description": "Possible values are: enabled – Tasks can be scheduled on the node. disabled – No new tasks will be scheduled on the node. Tasks already running on the node may still run to completion. All nodes start with scheduling enabled.",
           "enum": [
             "enabled",
             "disabled"
@@ -12846,7 +12977,8 @@
         "lastBootTime": {
           "type": "string",
           "format": "date-time",
-          "title": "The time at which the compute node was started."
+          "title": "The time at which the compute node was started.",
+          "description": "This property may not be present if the node state is unusable."
         },
         "allocationTime": {
           "type": "string",
@@ -12860,11 +12992,12 @@
         },
         "affinityId": {
           "type": "string",
-          "title": "An identifier which can be passed in the Add Task API to request that the task be scheduled close to this compute node."
+          "title": "An identifier which can be passed when adding a task to request that the task be scheduled close to this compute node."
         },
         "vmSize": {
           "type": "string",
-          "title": "The size of the virtual machine hosting the compute node."
+          "title": "The size of the virtual machine hosting the compute node.",
+          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "totalTasksRun": {
           "type": "integer",
@@ -12928,7 +13061,7 @@
           "title": "The URL to get the next set of results."
         }
       },
-      "title": "Response to a ComputeNodeOperation.List request."
+      "title": "The result of listing the compute nodes in a pool."
     },
     "ComputeNodeUser": {
       "properties": {
@@ -12938,21 +13071,24 @@
         },
         "isAdmin": {
           "type": "boolean",
-          "title": "Whether the account should be an administrator on the compute node."
+          "title": "Whether the account should be an administrator on the compute node.",
+          "description": "The default value is false."
         },
         "expiryTime": {
           "type": "string",
           "format": "date-time",
           "title": "The time at which the account should expire.",
-          "description": "If omitted, the default is 1 day from the current time."
+          "description": "If omitted, the default is 1 day from the current time. For Linux compute nodes, the expiryTime has a precision up to a day."
         },
         "password": {
           "type": "string",
-          "title": "The password of the account."
+          "title": "The password of the account.",
+          "description": "The password is required for Windows nodes (those created with 'cloudServiceConfiguration', or created with 'virtualMachineConfiguration' using a Windows image reference). For Linux compute nodes, the password can optionally be specified along with the sshPublicKey property."
         },
         "sshPublicKey": {
           "type": "string",
-          "title": "The SSH public key that can be used for remote login to the compute node."
+          "title": "The SSH public key that can be used for remote login to the compute node.",
+          "description": "The public key should be compatible with OpenSSH encoding and should be base 64 encoded. This property can be specified only for Linux nodes. If this is specified for a Windows node, then the Batch service rejects the request; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         }
       },
       "required": ["name"],
@@ -12971,13 +13107,14 @@
         }
       },
       "required": ["remoteLoginIPAddress","remoteLoginPort"],
-      "title": "Response to a ComputeNodeOperation.GetRemoteLoginSettings request."
+      "title": "The remote login settings for a compute node."
     },
     "JobSchedulePatchParameter": {
       "properties": {
         "schedule": {
           "$ref": "#/definitions/Schedule",
-          "title": "The schedule according to which jobs will be created."
+          "title": "The schedule according to which jobs will be created.",
+          "description": "If you do not specify this element, the existing schedule is left unchanged."
         },
         "jobSpecification": {
           "$ref": "#/definitions/JobSpecification",
@@ -12989,10 +13126,11 @@
           "items": {
             "$ref": "#/definitions/MetadataItem"
           },
-          "title": "A list of name-value pairs associated with the job schedule as metadata."
+          "title": "A list of name-value pairs associated with the job schedule as metadata.",
+          "description": "If you do not specify this element, existing metadata is left unchanged."
         }
       },
-      "title": "Parameters for a CloudJobScheduleOperations.Patch request."
+      "title": "The set of changes to be made to a job schedule."
     },
     "JobScheduleUpdateParameter": {
       "properties": {
@@ -13016,13 +13154,14 @@
         }
       },
       "required": ["schedule", "jobSpecification"],
-      "title": "Parameters for a CloudJobScheduleOperations.Update request."
+      "title": "The set of changes to be made to a job schedule."
     },
     "JobDisableParameter": {
       "properties": {
         "disableTasks": {
           "type": "string",
           "title": "What to do with active tasks associated with the job.",
+          "description": "Possible values are: requeue – Terminate running tasks and requeue them. The tasks will run again when the job is enabled. terminate – Terminate running tasks. The tasks will not run again. wait – Allow currently running tasks to complete.",
           "enum": [
             "requeue",
             "terminate",
@@ -13032,7 +13171,7 @@
         }
       },
       "required": ["disableTasks"],
-      "title": "Parameters for a CloudJobOperations.Disable request."
+      "title": "Options when disabling a job."
     },
     "JobTerminateParameter": {
       "properties": {
@@ -13041,7 +13180,7 @@
           "title": "The text you want to appear as the job's TerminateReason. The default is 'UserTerminate'."
         }
       },
-      "title": "Parameters for a CloudJobOperations.Terminate request."
+      "title": "Options when terminating a job."
     },
     "JobPatchParameter": {
       "properties": {
@@ -13053,7 +13192,8 @@
         },
         "onAllTasksComplete": {
           "type": "string",
-          "description": "Specifies an action the Batch service should take when all tasks in the job are in the completed state.",
+          "title": "Specifies an action the Batch service should take when all tasks in the job are in the completed state.",
+          "description": "If omitted, the completion behavior is left unchanged. You may not change the value from terminatejob to noaction – that is, once you have engaged automatic job termination, you cannot turn it off again. If you try to do this, the request fails with an 'invalid property value' error response; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).",
           "enum": [
             "noAction",
             "terminateJob"
@@ -13079,7 +13219,7 @@
           "description": "If omitted, the existing job metadata is left unchanged."
         }
       },
-      "title": "Parameters for a CloudJobOperations.Patch request."
+      "title": "The set of changes to be made to a job."
     },
     "JobUpdateParameter": {
       "properties": {
@@ -13109,7 +13249,8 @@
         },
         "onAllTasksComplete": {
           "type": "string",
-          "description": "Specifies an action the Batch service should take when all tasks in the job are in the completed state.",
+          "title": "Specifies an action the Batch service should take when all tasks in the job are in the completed state.",
+          "description": "If omitted, the completion behavior is set to noaction. If the current value is terminatejob, this is an error because a job's completion behavior may not be changed from terminatejob to noaction.",
           "enum": [
             "noAction",
             "terminateJob"
@@ -13118,32 +13259,34 @@
         }
       },
       "required": ["poolInfo"],
-      "title": "Parameters for a CloudJobOperations.Update request."
+      "title": "The set of changes to be made to a job."
     },
     "PoolEnableAutoScaleParameter": {
       "properties": {
         "autoScaleFormula": {
           "type": "string",
-          "title": "The formula for the desired number of compute nodes in the pool."
+          "title": "The formula for the desired number of compute nodes in the pool.",
+          "description": "The formula is checked for validity before it is applied to the pool. If the formula is not valid, the Batch service rejects the request with detailed error information. For more information about specifying this formula, see Automatically scale compute nodes in an Azure Batch pool (https://azure.microsoft.com/en-us/documentation/articles/batch-automatic-scaling)."
         },
         "autoScaleEvaluationInterval": {
           "type": "string",
           "format": "duration",
-          "title": "A time interval for the desired autoscale evaluation period in the pool.",
-          "description": "If you specify a new interval, then the existing autoscale evaluation schedule will be stopped and a new autoscale evaluation schedule will be started, with its starting time being the time when this request was issued."
+          "title": "The time interval at which to automatically adjust the pool size according to the autoscale formula.",
+          "description": "The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). If you specify a new interval, then the existing autoscale evaluation schedule will be stopped and a new autoscale evaluation schedule will be started, with its starting time being the time when this request was issued."
         }
       },
-      "title": "Parameters for a CloudPoolOperations.EnableAutoScale request."
+      "title": "Options for enabling automatic scaling on a pool."
     },
     "PoolEvaluateAutoScaleParameter": {
       "properties": {
         "autoScaleFormula": {
           "type": "string",
-          "title": "A formula for the desired number of compute nodes in the pool."
+          "title": "The formula for the desired number of compute nodes in the pool.",
+          "description": "The formula is validated and its results calculated, but it is not applied to the pool. To apply the formula to the pool, 'Enable automatic scaling on a pool'. For more information about specifying this formula, see Automatically scale compute nodes in an Azure Batch pool (https://azure.microsoft.com/en-us/documentation/articles/batch-automatic-scaling)."
         }
       },
       "required": ["autoScaleFormula"],
-      "title": "Parameters for a CloudJobOperations.EvaluateAutoScale request."
+      "title": "Options for evaluating an automatic scaling formula on a pool."
     },
     "PoolResizeParameter": {
       "properties": {
@@ -13156,11 +13299,12 @@
           "type": "string",
           "format": "duration",
           "title": "The timeout for allocation of compute nodes to the pool or removal of compute nodes from the pool.",
-          "description": "The default value is 10 minutes."
+          "description": "The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
         "nodeDeallocationOption": {
           "type": "string",
           "title": "When nodes may be removed from the pool, if the pool size is decreasing.",
+          "description": "The default value is requeue.",
           "enum": [
             "requeue",
             "terminate",
@@ -13171,14 +13315,14 @@
         }
       },
       "required": ["targetDedicated"],
-      "title": "Parameters for a CloudPoolOperations.Resize request."
+      "title": "Options for changing the size of a pool."
     },
     "PoolUpdatePropertiesParameter": {
       "properties": {
         "startTask": {
           "$ref": "#/definitions/StartTask",
-          "title": "A task to run on each compute node as it joins the pool.",
-          "description": "If omitted, any existing start task is removed from the pool."
+          "title": "A task to run on each compute node as it joins the pool. The task runs when the node is added to the pool or when the node is restarted.",
+          "description": "If this element is present, it overwrites any existing start task. If omitted, any existing start task is removed from the pool."
         },
         "certificateReferences": {
           "type": "array",
@@ -13194,7 +13338,7 @@
             "$ref": "#/definitions/ApplicationPackageReference"
           },
           "title": "A list of application packages to be installed on each compute node in the pool.",
-          "description": "If you specify an empty collection, any existing application packages references are removed from the pool."
+          "description": "Changes to application package references affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged. The list replaces any existing application package references. If omitted, or if you specify an empty collection, any existing application packages references are removed from the pool."
         },
         "metadata": {
           "type": "array",
@@ -13202,11 +13346,11 @@
             "$ref": "#/definitions/MetadataItem"
           },
           "title": "A list of name-value pairs associated with the pool as metadata.",
-          "description": "If you specify an empty collection, any existing metadata is removed from the pool."
+          "description": "This list replaces any existing metadata configured on the pool. If omitted, or if you specify an empty collection, any existing metadata is removed from the pool."
         }
       },
       "required": ["certificateReferences", "metadata", "applicationPackageReferences"],
-      "title": "Parameters for a CloudPoolOperations.UpdateProperties request."
+      "title": "The set of changes to be made to a pool."
     },
     "PoolUpgradeOSParameter": {
       "properties": {
@@ -13216,13 +13360,13 @@
         }
       },
       "required": ["targetOSVersion"],
-      "title": "Parameters for a CloudPoolOperations.UpgradeOS request."
+      "title": "Options for upgrading the operating system of compute nodes in a pool."
     },
     "PoolPatchParameter": {
       "properties": {
         "startTask": {
           "$ref": "#/definitions/StartTask",
-          "title": "A task to run on each compute node as it joins the pool.",
+          "title": "A task to run on each compute node as it joins the pool. The task runs when the node is added to the pool or when the node is restarted.",
           "description": "If omitted, any existing start task is left unchanged."
         },
         "certificateReferences": {
@@ -13239,7 +13383,7 @@
             "$ref": "#/definitions/ApplicationPackageReference"
           },
           "title": "A list of application packages to be installed on each compute node in the pool.",
-          "description": "If omitted, any existing application package references are left unchanged."
+          "description": "Changes to application package references affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged. If this element is present, it replaces any existing application package references. If you specify an empty collection, then all application package references are removed from the pool. If omitted, any existing application package references are left unchanged."
         },
         "metadata": {
           "type": "array",
@@ -13247,10 +13391,10 @@
             "$ref": "#/definitions/MetadataItem"
           },
           "title": "A list of name-value pairs associated with the pool as metadata.",
-          "description": "If omitted, any existing metadata is left unchanged."
+          "description": "If this element is present, it replaces any existing metadata configured on the pool. If you specify an empty collection, any metadata is removed from the pool. If omitted, any existing metadata is left unchanged."
         }
       },
-      "title": "Parameters for a CloudPoolOperations.Patch request."
+      "title": "The set of changes to be made to a pool."
     },
     "TaskUpdateParameter": {
       "properties": {
@@ -13260,26 +13404,28 @@
           "description": "If omitted, the task is given the default constraints."
         }
       },
-      "title": "Parameters for a CloudTaskOperations.Update request."
+      "title": "The set of changes to be made to a task."
     },
     "NodeUpdateUserParameter": {
       "properties": {
         "password": {
           "type": "string",
-          "title": "The password of the account."
+          "title": "The password of the account.",
+          "description": "The password is required for Windows nodes (those created with 'cloudServiceConfiguration', or created with 'virtualMachineConfiguration' using a Windows image reference). For Linux compute nodes, the password can optionally be specified along with the sshPublicKey property. If omitted, any existing password is removed."
         },
         "expiryTime": {
           "type": "string",
           "format": "date-time",
           "title": "The time at which the account should expire.",
-          "description": "If omitted, the default is 1 day from the current time."
+          "description": "If omitted, the default is 1 day from the current time. For Linux compute nodes, the expiryTime has a precision up to a day."
         },
         "sshPublicKey": {
           "type": "string",
-          "title": "The SSH public key that can be used for remote login to the compute node."
+          "title": "The SSH public key that can be used for remote login to the compute node.",
+          "description": "The public key should be compatible with OpenSSH encoding and should be base 64 encoded. This property can be specified only for Linux nodes. If this is specified for a Windows node, then the Batch service rejects the request; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). If omitted, any existing SSH public key is removed."
         }
       },
-      "title": "Parameters for a ComputeNodeOperations.UpdateUser request."
+      "title": "The set of changes to be made to a user account on a node."
     },
     "NodeRebootParameter": {
       "properties": {
@@ -13296,7 +13442,7 @@
           "x-ms-enum": { "name": "ComputeNodeRebootOption", "modelAsString": false }
         }
       },
-      "title": "Parameters for a ComputeNodeOperations.Reboot request."
+      "title": "Options for rebooting a compute node."
     },
     "NodeReimageParameter": {
       "properties": {
@@ -13313,13 +13459,13 @@
           "x-ms-enum": { "name": "ComputeNodeReimageOption", "modelAsString": false }
         }
       },
-      "title": "Parameters for a ComputeNodeOperations.Reimage request."
+      "title": "Options for reimaging a compute node."
     },
     "NodeDisableSchedulingParameter": {
       "properties": {
         "nodeDisableSchedulingOption": {
           "type": "string",
-          "title": "What to do with currently running tasks when disable task scheduling on the compute node.",
+          "title": "What to do with currently running tasks when disabling task scheduling on the compute node.",
           "description": "The default value is requeue.",
           "enum": [
             "requeue",
@@ -13329,7 +13475,7 @@
           "x-ms-enum": { "name": "DisableComputeNodeSchedulingOption", "modelAsString": false }
         }
       },
-      "title": "Parameters for a ComputeNodeOperations.DisableScheduling request."
+      "title": "Options for disabling scheduling on a compute node."
     },
     "NodeRemoveParameter": {
       "properties": {
@@ -13345,11 +13491,12 @@
           "type": "string",
           "format": "duration",
           "title": "The timeout for removal of compute nodes to the pool.",
-          "description": "The default value is 10 minutes."
+          "description": "The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
         "nodeDeallocationOption": {
           "type": "string",
-          "title": "When compute nodes may be removed from the pool.",
+          "title": "When to remove compute nodes and what to do with currently running tasks.",
+          "description": "The default value is requeue.",
           "enum": [
             "requeue",
             "terminate",
@@ -13360,7 +13507,7 @@
         }
       },
       "required": ["nodeList"],
-      "title": "Parameters for a ComputeNodeOperations.Remove request."
+      "title": "Options for removing compute nodes from a pool."
     },
     "ErrorMessage": {
       "properties": {
