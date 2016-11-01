@@ -247,7 +247,8 @@
             "required": false,
             "type": "string",
             "enum": [
-              "status"
+              "status",
+              "download"
             ],
             "x-ms-enum": {
               "name": "GatewayExpandOption",
@@ -1580,6 +1581,16 @@
               "type": "string",
               "format": "date-time",
               "description": "the date/time of the last published gateway"
+            },
+            "installerDownload": {
+              "type": "string",
+              "readOnly": true,
+              "description": "installer download uri"
+            },
+            "minimumVersion": {
+              "type": "string",
+              "readOnly": true,
+              "description": "minimum gateway version"
             }
           }
         }
