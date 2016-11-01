@@ -29,7 +29,7 @@
       "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
-        "user_impersonation": "impersonate your user account"
+        "user_impersonation": "Impersonate your user account"
       }
     }
   },
@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}": {
       "get": {
         "operationId": "DatabaseAccounts_Get",
-        "description": "Retrieves the properties of an existing database account.",
+        "description": "Retrieves the properties of an existing Azure DocumentDB database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -54,7 +54,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful",
+            "description": "The database account properties were retrieved successfully.",
             "schema": {
               "$ref": "#/definitions/DatabaseAccount"
             }
@@ -63,7 +63,7 @@
       },
       "patch": {
         "operationId": "DatabaseAccounts_Patch",
-        "description": "Patches the properties of an existing database account.",
+        "description": "Patches the properties of an existing Azure DocumentDB database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -90,7 +90,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful",
+            "description": "The properties of the database account were patched successfully.",
             "schema": {
               "$ref": "#/definitions/DatabaseAccount"
             }
@@ -99,7 +99,7 @@
       },
       "put": {
         "operationId": "DatabaseAccounts_CreateOrUpdate",
-        "description": "Creates or Updates a DocumentDB database account.",
+        "description": "Creates or updates an Azure DocumentDB database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -126,7 +126,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The database account was created or updated successfully.",
             "schema": {
               "$ref": "#/definitions/DatabaseAccount"
             }
@@ -135,7 +135,7 @@
       },
       "delete": {
         "operationId": "DatabaseAccounts_Delete",
-        "description": "Deletes an existing DocumentDB database account.",
+        "description": "Deletes an existing Azure DocumentDB database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -153,10 +153,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "The database account was deleted successfully."
           },
           "204": {
-            "description": "No Content"
+            "description": "The specified account does not exist in the subscription."
           }
         }
       }
@@ -164,7 +164,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/failoverPriorityChange": {
       "post": {
         "operationId": "DatabaseAccounts_FailoverPriorityChange",
-        "description": "Changes the failover priority for the DocumentDB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.",
+        "description": "Changes the failover priority for the Azure DocumentDB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -191,7 +191,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The failover policy change was successful.",
             "schema": {
               "$ref": "#/definitions/FailoverPolicies"
             }
@@ -208,7 +208,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/databaseAccounts": {
       "get": {
         "operationId": "DatabaseAccounts_List",
-        "description": "Lists all the database accounts available under the subscription.",
+        "description": "Lists all the Azure DocumentDB database accounts available under the subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -219,7 +219,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DatabaseAccountsListResult"
             }
@@ -233,7 +233,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts": {
       "get": {
         "operationId": "DatabaseAccounts_ListByResourceGroup",
-        "description": "Lists all the database accounts available under the given resource group.",
+        "description": "Lists all the Azure DocumentDB database accounts available under the given resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -247,7 +247,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DatabaseAccountsListResult"
             }
@@ -261,7 +261,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/listKeys": {
       "post": {
         "operationId": "DatabaseAccounts_ListKeys",
-        "description": "Lists the access keys for the specified database account.",
+        "description": "Lists the access keys for the specified Azure DocumentDB database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -278,7 +278,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DatabaseAccountListKeysResult"
             }
@@ -289,7 +289,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/readonlykeys": {
       "get": {
         "operationId": "DatabaseAccounts_ListReadOnlyKeys",
-        "description": "Lists the read-only access keys for the specified database account.",
+        "description": "Lists the read-only access keys for the specified Azure DocumentDB database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -306,7 +306,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DatabaseAccountListReadOnlyKeysResult"
             }
@@ -317,7 +317,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/regenerateKey": {
       "post": {
         "operationId": "DatabaseAccounts_RegenerateKey",
-        "description": "Regenerates an access key for the specified database account.",
+        "description": "Regenerates an access key for the specified Azure DocumentDB database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -338,12 +338,12 @@
             "schema": {
               "$ref": "#/definitions/DatabaseAccountRegenerateKeyParameters"
             },
-            "description": "Specifies name of the key which should be regenerated."
+            "description": "The name of the key to regenerate."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The access key was regenerated successfully.",
             "schema": {
               "$ref": "#/definitions/DatabaseAccountListKeysResult"
             }
@@ -354,7 +354,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/databaseAccountNames/{accountName}": {
       "head": {
         "operationId": "DatabaseAccounts_CheckNameAvailability",
-        "description": "Checks that account name is valid and is not in use.",
+        "description": "Checks that the Azure DocumentDB account name is valid and is not in use.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -368,13 +368,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The account name is valid but already unavailable (already in use)."
+            "description": "OK. The account name is valid but is already in use."
           },
           "404": {
             "description": "Not Found. The account name is available and valid."
           },
           "400": {
-            "description": "Bad Request. The account name is invalid."
+            "description": "Bad Request. The account name is invalid. The account name may contain only lowercase letters, numbers, and the '-' character, and must be between 3 and 50 characters."
           }
         }
       }
@@ -392,7 +392,7 @@
           "description": "List of database account and their properties."
         }
       },
-      "description": "The list database accounts operation response."
+      "description": "The List operation response, that contains the database accounts and their properties."
     },
     "FailoverPolicies": {
       "type": "array",
@@ -408,7 +408,7 @@
         "id": {
           "type": "string",
           "readOnly": true,
-          "description": "The unique identifier of the region within the database account. Example: <accountName>-<locationName>"
+          "description": "The unique identifier of the region in which the database account replicates to. Example: &lt;accountName&gt;-&lt;locationName&gt;."
         },
         "locationName": {
           "type": "string",
@@ -423,13 +423,13 @@
       }
     },
     "Location": {
-      "description": "The region pertaining to a database account.",
+      "description": "A region in which the Azure DocumentDB database account is deployed.",
       "type": "object",
       "properties": {
         "id": {
           "type": "string",
           "readOnly": true,
-          "description": "The unique identifier of the region within the database account. Example: <accountName>-<locationName>"
+          "description": "The unique identifier of the region within the database account. Example: &lt;accountName&gt;-&lt;locationName&gt;."
         },
         "locationName": {
           "type": "string",
@@ -438,7 +438,7 @@
         "documentEndpoint": {
           "type": "string",
           "readOnly": true,
-          "description": "The connection endpoint for the specific region. Example: https://<accountName>-<locationName>.documents.azure.com:443/"
+          "description": "The connection endpoint for the specific region. Example: https://&lt;accountName&gt;-&lt;locationName&gt;.documents.azure.com:443/"
         },
         "provisioningState": {
           "type": "string",
@@ -501,7 +501,7 @@
       "type": "object",
       "properties": {
         "kind": {
-          "description": "Indicates the type of database account. Only modifiable on database account creation.",
+          "description": "Indicates the type of database account. This can only be set at database account creation.",
           "type": "string",
           "default": "GlobalDocumentDB",
           "enum": [
@@ -544,14 +544,14 @@
           }
         },
         "maxStalenessPrefix": {
-          "description": "Required when defaultConsistencyPolicy is 'BoundedStaleness'. When used with Bounded Staleness consistency, this value represents the number of stale requests tolerated. Accepted range for this value is 1 – 2,147,483,647.",
+          "description": "When used with the Bounded Staleness consistency level, this value represents the number of stale requests tolerated. Accepted range for this value is 1 – 2,147,483,647. Required when defaultConsistencyPolicy is set to 'BoundedStaleness'.",
           "type": "integer",
           "minimum": 1,
           "maximum": 2147483647,
           "format": "int64"
         },
         "maxIntervalInSeconds": {
-          "description": "Required when defaultConsistencyPolicy is 'BoundedStaleness'. When used with Bounded Staleness consistency, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is 1 - 100.",
+          "description": "When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is 1 - 100. Required when defaultConsistencyPolicy is set to 'BoundedStaleness'.",
           "type": "integer",
           "minimum": 1,
           "maximum": 100,
@@ -563,11 +563,11 @@
       ]
     },
     "DatabaseAccountProperties": {
-      "description": "Properties for the Database Account.",
+      "description": "Properties for the database account.",
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "The status of the DocumentDB account at the time the operation was called. The status can be one of following. 'Creating' – the DocumentDB account is being created. When an account is in Creating state, only properties that are specified as input for the Create DocumentDB Account operation are returned. 'Succeeded' – the DocumentDB account is active for use. 'Updating' – the DocumentDB account is being updated. 'Deleting' – the DocumentDB account is being deleted. 'Failed' – the DocumentDB account failed creation.",
+          "description": "The status of the DocumentDB account at the time the operation was called. The status can be one of following. 'Creating' – the DocumentDB account is being created. When an account is in Creating state, only properties that are specified as input for the Create DocumentDB account operation are returned. 'Succeeded' – the DocumentDB account is active for use. 'Updating' – the DocumentDB account is being updated. 'Deleting' – the DocumentDB account is being deleted. 'Failed' – the DocumentDB account failed creation.",
           "type": "string",
           "readOnly": true
         },
@@ -588,7 +588,7 @@
         "writeLocations": {
           "type": "array",
           "readOnly": true,
-          "description": "An array which consists of the write location for the DocumentDB account.",
+          "description": "An array that contains the write location for the DocumentDB account.",
           "items": {
             "$ref": "#/definitions/Location"
           }
@@ -596,7 +596,7 @@
         "readLocations": {
           "type": "array",
           "readOnly": true,
-          "description": "An array which consists of the read locations enabled for the DocumentDB account.",
+          "description": "An array that contains of the read locations enabled for the DocumentDB account.",
           "items": {
             "$ref": "#/definitions/Location"
           }
@@ -604,7 +604,7 @@
         "failoverPolicies": {
           "type": "array",
           "readOnly": true,
-          "description": "An array which consists of the regions ordered by their failover priorities.",
+          "description": "An array that contains the regions ordered by their failover priorities.",
           "items": {
             "$ref": "#/definitions/FailoverPolicy"
           }
@@ -612,16 +612,16 @@
       }
     },
     "DatabaseAccountCreateUpdateProperties": {
-      "description": "DocumentDB Database Account Create and Update properties.",
+      "description": "Properties to create and update Azure DocumentDB database accounts.",
       "type": "object",
       "properties": {
         "consistencyPolicy": {
-          "description": "The consistency policy for the DocumentDB database account.",
+          "description": "The consistency policy for the DocumentDB account.",
           "$ref": "#/definitions/ConsistencyPolicy"
         },
         "locations": {
           "type": "array",
-          "description": "An array which consists of the locations enabled for the DocumentDB account.",
+          "description": "An array that contains the georeplication locations enabled for the DocumentDB account.",
           "items": {
             "$ref": "#/definitions/Location"
           }
@@ -633,7 +633,7 @@
       ]
     },
     "DatabaseAccountCreateUpdateParameters": {
-      "description": "DocumentDB Database Account Create and Update parameters.",
+      "description": "Parameters to create and update DocumentDB database accounts.",
       "type": "object",
       "properties": {
         "properties": {
@@ -654,7 +654,7 @@
       ]
     },
     "DatabaseAccountPatchParameters": {
-      "description": "Parameters for patching Database Account properties.",
+      "description": "Parameters for patching Azure DocumentDB database account properties.",
       "type": "object",
       "properties": {
         "tags": {
@@ -735,14 +735,14 @@
       "additionalProperties": {
         "type": "string"
       },
-      "description": "Tags are a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
+      "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
     }
   },
   "parameters": {
     "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
-      "description": "Azure Subscription ID.",
+      "description": "Azure subscription ID.",
       "required": true,
       "type": "string"
     },
@@ -751,7 +751,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2015-04-08"
+      "description": "Version of the API to be used with the client request. The current version is 2015-04-08."
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
@@ -762,7 +762,7 @@
       "minLength": 1,
       "maxLength": 90,
       "x-ms-parameter-location": "method",
-      "description": "Name of an Azure Resource group."
+      "description": "Name of an Azure resource group."
     },
     "accountNameParameter": {
       "name": "accountName",
