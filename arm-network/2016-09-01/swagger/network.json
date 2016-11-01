@@ -3613,8 +3613,61 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{connectionSharedKeyName}/sharedkey": {
+    },    
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey": {
+      "put": {
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "operationId": "VirtualNetworkGatewayConnections_SetSharedKey",
+        "description": "The Put VirtualNetworkGatewayConnectionSharedKey operation sets the virtual network gateway connection shared key for passed virtual network gateway connection in the specified resource group through Network resource provider.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The virtual network gateway connection name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
+            },
+            "description": "Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
       "get": {
         "tags": [
           "VirtualNetworkGatewayConnections"
@@ -3630,7 +3683,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "connectionSharedKeyName",
+            "name": "virtualNetworkGatewayConnectionName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -3647,13 +3700,13 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/ConnectionSharedKeyResult"
+              "$ref": "#/definitions/ConnectionSharedKey"
             }
           }
         }
-      }
+      }	  
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections": {
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections": {
       "get": {
         "tags": [
           "VirtualNetworkGatewayConnections"
@@ -3735,61 +3788,6 @@
           },
           "202": {
             "description": ""
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey": {
-      "put": {
-        "tags": [
-          "VirtualNetworkGatewayConnections"
-        ],
-        "operationId": "VirtualNetworkGatewayConnections_SetSharedKey",
-        "description": "The Put VirtualNetworkGatewayConnectionSharedKey operation sets the virtual network gateway connection shared key for passed virtual network gateway connection in the specified resource group through Network resource provider.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "virtualNetworkGatewayConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The virtual network gateway connection name."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConnectionSharedKey"
-            },
-            "description": "Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ConnectionSharedKey"
-            }
-          },
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ConnectionSharedKey"
-            }
           }
         },
         "x-ms-long-running-operation": true
@@ -3985,14 +3983,12 @@
             "type": "string",
             "description": "The name of the virtual network gateway."
           },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualNetworkGateway"
-            },
-            "description": "Parameters supplied to the Begin Reset Virtual Network Gateway operation through Network resource provider."
+          { 
+            "name": "gatewayVip",		
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Virtual network gateway vip address supplied to the Begin Reset of Active-Active feature enabled Gateway."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -5708,9 +5704,6 @@
           "description": "path ."
         }
       },
-      "required": [
-        "nextHopType"
-      ],
       "description": "The routes table associated with the ExpressRouteCircuit"
     },
     "ExpressRouteCircuitsRoutesTableListResult": {
@@ -6495,10 +6488,14 @@
           "description": "Gets or sets resource guid property of the LocalNetworkGateway resource"
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets provisioning state of the LocalNetworkGateway resource Updating/Deleting/Failed"
         }
       },
+      "required": [
+        "localNetworkAddressSpace"
+      ],
       "description": "LocalNetworkGateway properties"
     },
     "LocalNetworkGateway": {
@@ -6516,6 +6513,9 @@
         {
           "$ref": "#/definitions/Resource"
         }
+      ],
+      "required": [
+        "properties"
       ],
       "description": "A common class for general resource information"
     },
@@ -7708,10 +7708,15 @@
           "description": "Gets or sets the reference of the PublicIP resource"
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       },
+      "required": [
+        "subnet",
+        "publicIPAddress"
+      ],
       "description": "Properties of VirtualNetworkGatewayIPConfiguration"
     },
     "VirtualNetworkGatewayIPConfiguration": {
@@ -7733,6 +7738,9 @@
         {
           "$ref": "#/definitions/SubResource"
         }
+      ],
+      "required": [
+        "properties"
       ],
       "description": "IpConfiguration for Virtual network gateway"
     },
@@ -7798,10 +7806,16 @@
           "description": "Gets or sets resource guid property of the VirtualNetworkGateway resource"
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets provisioning state of the VirtualNetworkGateway resource Updating/Deleting/Failed"
         }
       },
+      "required": [
+        "ipConfigurations",
+        "gatewayType",
+        "vpnType"
+      ],
       "description": "VirtualNetworkGateway properties"
     },
     "VirtualNetworkGateway": {
@@ -7819,6 +7833,9 @@
         {
           "$ref": "#/definitions/Resource"
         }
+      ],
+      "required": [
+        "properties"
       ],
       "description": "A common class for general resource information"
     },
@@ -7881,6 +7898,10 @@
           "description": "The capacity"
         }
       },
+      "required": [
+        "name",
+        "tier"
+      ],
       "description": "VirtualNetworkGatewaySku details"
     },
     "VpnClientParameters": {
@@ -7898,7 +7919,52 @@
           }
         }
       },
+      "required": [
+        "ProcessorArchitecture"
+      ],
       "description": "VpnClientParameters"
+    },
+    "TunnelConnectionHealth": {
+      "properties": {
+        "tunnel": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Tunnel name."
+        },
+        "connectionStatus": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Virtual network Gateway connection status",
+          "enum": [
+            "Unknown",
+            "Connecting",
+            "Connected",
+            "NotConnected"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkGatewayConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "ingressBytesTransferred": {
+          "readOnly": true,		
+          "type": "integer",
+          "format": "int64",
+          "description": "The Ingress Bytes Transferred in this connection"
+        },
+        "egressBytesTransferred": {
+          "readOnly": true,		
+          "type": "integer",
+          "format": "int64",
+          "description": "The Egress Bytes Transferred in this connection"
+        },		
+        "lastConnectionEstablishedUtcTime": {
+          "readOnly": true,		
+          "type": "string",
+          "description": "The time at which connection was established in Utc format."
+        }
+      },
+      "description": "VirtualNetworkGatewayConnection properties"
     },
     "VirtualNetworkGatewayConnectionPropertiesFormat": {
       "properties": {
@@ -7939,6 +8005,7 @@
           "description": "The Ipsec share key."
         },
         "connectionStatus": {
+          "readOnly": true,
           "type": "string",
           "description": "Virtual network Gateway connection status",
           "enum": [
@@ -7952,12 +8019,22 @@
             "modelAsString": true
           }
         },
+        "tunnelConnectionStatus": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TunnelConnectionHealth"
+          },
+          "description": "Collection of all tunnels' connection health status."
+        },
         "egressBytesTransferred": {
+          "readOnly": true,
           "type": "integer",
           "format": "int64",
           "description": "The Egress Bytes Transferred in this connection"
         },
         "ingressBytesTransferred": {
+          "readOnly": true,
           "type": "integer",
           "format": "int64",
           "description": "The Ingress Bytes Transferred in this connection"
@@ -7975,10 +8052,15 @@
           "description": "Gets or sets resource guid property of the VirtualNetworkGatewayConnection resource"
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets provisioning state of the VirtualNetworkGatewayConnection resource Updating/Deleting/Failed"
         }
       },
+      "required": [
+        "virtualNetworkGateway1",
+        "connectionType"
+      ],
       "description": "VirtualNetworkGatewayConnection properties"
     },
     "VirtualNetworkGatewayConnection": {
@@ -7997,6 +8079,9 @@
           "$ref": "#/definitions/Resource"
         }
       ],
+      "required": [
+        "properties"
+      ],
       "description": "A common class for general resource information"
     },
     "VpnClientRevokedCertificatePropertiesFormat": {
@@ -8006,6 +8091,7 @@
           "description": "Gets or sets the revoked Vpn client certificate thumbprint"
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets provisioning state of the VPN client revoked certificate resource Updating/Deleting/Failed"
         }
@@ -8041,10 +8127,14 @@
           "description": "Gets or sets the certificate public data"
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets provisioning state of the VPN client root certificate resource Updating/Deleting/Failed"
         }
       },
+      "required": [
+        "publicCertData"
+      ],
       "description": "Properties of SSL certificates of application gateway"
     },
     "VpnClientRootCertificate": {
@@ -8067,16 +8157,10 @@
           "$ref": "#/definitions/SubResource"
         }
       ],
+      "required": [
+        "properties"
+      ],
       "description": "VPN client root certificate of virtual network gateway"
-    },
-    "ConnectionSharedKeyResult": {
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The virtual network connection shared key value"
-        }
-      },
-      "description": "Response for CheckConnectionSharedKey Api service call"
     },
     "VirtualNetworkGatewayConnectionListResult": {
       "properties": {
@@ -8098,10 +8182,15 @@
       "properties": {
         "keyLength": {
           "type": "integer",
-          "format": "int64",
-          "description": "The virtual network connection reset shared key length"
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 128,
+          "description": "The virtual network connection reset shared key length, should between 1 and 128."
         }
-      }
+      },
+      "required": [
+        "keyLength"
+      ]
     },
     "ConnectionSharedKey": {
       "properties": {
@@ -8110,6 +8199,9 @@
           "description": "The virtual network connection shared key value"
         }
       },
+      "required": [
+        "value"
+      ],	  
       "description": "Response for GetConnectionSharedKey Api service call"
     },
     "VirtualNetworkGatewayListResult": {
