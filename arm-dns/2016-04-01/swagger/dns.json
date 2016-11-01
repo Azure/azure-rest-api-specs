@@ -2,6 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DnsManagementClient",
+    "description": "The DNS Management Client.",
     "version": "2016-04-01"
   },
   "host": "management.azure.com",
@@ -9,12 +10,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnszones/{zoneName}/{recordType}/{relativeRecordSetName}": {
@@ -296,10 +295,10 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "No Content"
           },
           "200": {
-            "description": ""
+            "description": "OK"
           },
           "default": {
             "description": "Default Response. It will be deserialized as per the Error defintion",
@@ -369,7 +368,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/RecordSet"
             }
@@ -431,8 +430,9 @@
             "name": "$top",
             "in": "query",
             "required": false,
-            "type": "string",
-            "description": "Query parameters. If null is passed returns the default number of zones."
+            "type": "integer",
+            "format": "int32",
+            "description": "Query parameters. If not specified returns the default number of recordsets."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -443,7 +443,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/RecordSetListResult"
             }
@@ -465,7 +465,7 @@
         "tags": [
           "RecordSets"
         ],
-        "operationId": "RecordSets_ListAllInResourceGroup",
+        "operationId": "RecordSets_ListByDnsZone",
         "description": "Lists all RecordSets in a DNS zone.",
         "parameters": [
           {
@@ -486,8 +486,9 @@
             "name": "$top",
             "in": "query",
             "required": false,
-            "type": "string",
-            "description": "Query parameters. If null is passed returns the default number of zones."
+            "type": "integer",
+            "format": "int32",
+            "description": "Query parameters. If not specified returns the default number of zones."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -498,7 +499,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/RecordSetListResult"
             }
@@ -571,13 +572,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Zone"
             }
           },
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/Zone"
             }
@@ -639,10 +640,10 @@
             "description": "Zone does not exist"
           },
           "202": {
-            "description": ""
+            "description": "Accepted and will complete asynchronously"
           },
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ZoneDeleteResult"
             }
@@ -686,7 +687,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Zone"
             }
@@ -705,7 +706,7 @@
         "tags": [
           "Zones"
         ],
-        "operationId": "Zones_ListInResourceGroup",
+        "operationId": "Zones_ListByResourceGroup",
         "description": "Lists the DNS zones within a resource group.",
         "parameters": [
           {
@@ -719,8 +720,9 @@
             "name": "$top",
             "in": "query",
             "required": false,
-            "type": "string",
-            "description": "Query parameters. If null is passed returns the default number of zones."
+            "type": "integer",
+            "format": "int32",
+            "description": "Query parameters. If not specified returns the default number of zones."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -731,7 +733,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ZoneListResult"
             }
@@ -753,15 +755,16 @@
         "tags": [
           "Zones"
         ],
-        "operationId": "Zones_ListInSubscription",
-        "description": "Lists the DNS zones within a resource group.",
+        "operationId": "Zones_List",
+        "description": "Lists the DNS zones within subscription.",
         "parameters": [
           {
             "name": "$top",
             "in": "query",
             "required": false,
-            "type": "string",
-            "description": "Query parameters. If null is passed returns the default number of zones."
+            "type": "integer",
+            "format": "int32",
+            "description": "Query parameters. If not specified returns the default number of zones."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -772,7 +775,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ZoneListResult"
             }
@@ -1170,7 +1173,7 @@
             "HttpVersionNotSupported"
           ],
           "x-ms-enum": {
-            "name": "HtpStatusCode",
+            "name": "HttpStatusCode",
             "modelAsString": false
           }
         },
