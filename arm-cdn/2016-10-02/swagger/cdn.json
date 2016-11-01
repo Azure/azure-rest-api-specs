@@ -1655,7 +1655,15 @@
         },
         "action": {
           "description": "Action of the geo filter.",
-          "type": "string"
+          "enum": [
+		    "Block",
+            "Allow"
+		  ],
+		  "type": "string",
+		  "x-ms-enum": {
+			"name": "action",
+            "modelAsString": false
+          }
         },
         "countryCodes":    {
           "description": "Two letter country codes of the geo filter. (e.g. AU, MX, and etc.)",
