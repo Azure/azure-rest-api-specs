@@ -441,20 +441,7 @@
           "description": "The connection endpoint for the specific region. Example: https://&lt;accountName&gt;-&lt;locationName&gt;.documents.azure.com:443/"
         },
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The status of the database account at the time the operation was called.",
-          "enum": [
-            "Creating",
-            "Succeeded",
-            "Updating",
-            "Deleting",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ProvisioningState"
         },
         "failoverPriority": {
           "description": "The failover priority of the region. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.",
@@ -567,9 +554,7 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "The status of the DocumentDB account at the time the operation was called. The status can be one of following. 'Creating' – the DocumentDB account is being created. When an account is in Creating state, only properties that are specified as input for the Create DocumentDB account operation are returned. 'Succeeded' – the DocumentDB account is active for use. 'Updating' – the DocumentDB account is being updated. 'Deleting' – the DocumentDB account is being deleted. 'Failed' – the DocumentDB account failed creation.",
-          "type": "string",
-          "readOnly": true
+          "$ref": "#/definitions/ProvisioningState"
         },
         "documentEndpoint": {
           "description": "The connection endpoint for the DocumentDB database account.",
@@ -736,6 +721,11 @@
         "type": "string"
       },
       "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The status of the DocumentDB account at the time the operation was called. The status can be one of following. 'Creating' – the DocumentDB account is being created. When an account is in Creating state, only properties that are specified as input for the Create DocumentDB account operation are returned. 'Succeeded' – the DocumentDB account is active for use. 'Updating' – the DocumentDB account is being updated. 'Deleting' – the DocumentDB account is being deleted. 'Failed' – the DocumentDB account failed creation."
     }
   },
   "parameters": {
