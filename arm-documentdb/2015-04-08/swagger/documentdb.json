@@ -79,7 +79,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "newTags",
+            "name": "newProperties",
             "in": "body",
             "required": true,
             "schema": {
@@ -190,14 +190,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The failover policy change operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/FailoverPolicies"
-            }
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted. The failover policy change operation will complete asynchronously."
           },
           "204": {
             "description": "No Content"
@@ -635,7 +629,8 @@
         }
       ],
       "required": [
-        "databaseAccountOfferType"
+        "databaseAccountOfferType",
+        "properties"
       ]
     },
     "DatabaseAccountPatchParameters": {
@@ -702,7 +697,10 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "required": [
+       "keyKind"
+      ]
     },
     "DatabaseAccountOfferType": {
       "description": "The offer type for the DocumentDB database account.",
