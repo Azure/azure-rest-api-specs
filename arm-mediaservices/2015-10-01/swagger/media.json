@@ -596,7 +596,6 @@
         "keyType": {
           "description": "The keyType indicating which key you want to regenerate, Primary or Secondary.",
           "type": "string",
-          "required": true,
           "enum": [
             "Primary",
             "Secondary"
@@ -606,7 +605,10 @@
             "modelAsString": false
           }  
         }
-      }
+      },
+      "required": [
+        "keyType"
+      ]
     },
     "RegenerateKeyOutput": {
       "description": "The response body for a RegenerateKey API.",
