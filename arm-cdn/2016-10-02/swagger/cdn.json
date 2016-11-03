@@ -1583,6 +1583,10 @@
           "description": "Defines the query string caching behavior",
           "$ref": "#/definitions/QueryStringCachingBehavior"
         },
+        "optimizationType": {
+          "description": "Customer can specify what scenario they want this CDN endpoint to optimize. (e.g. Download, Media services, and etc.) With this information we can apply scenario driven optimization.",
+          "type": "string"
+        },
         "geoFilters": {
           "description": "The list of geo filters for the CDN endpoint.",
           "type": "array",
@@ -1858,6 +1862,10 @@
             "name": "CustomDomainResourceState",
             "modelAsString": true
           }
+        },
+        "validationData": {
+          "description": "Special validation or data may be required when delivering CDN to some regions due to local compliance reasons. (e.g. ICP license number of a custom domain is required to deliver content in China.)",
+          "type": "string"
         },
         "provisioningState": {
           "readOnly": true,          
