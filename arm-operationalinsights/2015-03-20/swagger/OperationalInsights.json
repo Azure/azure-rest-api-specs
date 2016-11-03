@@ -1,0 +1,1146 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Operational InsightsManagement Client for LinkTargets, StorageInsightConfigs and SavedSearches.",
+    "description": ".Net client wrapper for the REST API for Azure Operational Insights",
+    "version": "2015-03-20"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/storageInsightConfigs/{name}": {
+      "put": {
+        "tags": [
+          "StorageInsights"
+        ],
+        "operationId": "StorageInsights_CreateOrUpdate",
+        "description": "Create or update a storage insight.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the storage insight."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the parent workspace that will contain the storage insight"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parameters required to create or update a storage insight."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageInsight"
+            },
+            "description": "The parameters required to create or update a storage insight."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created response definition.",
+            "schema": {
+              "$ref": "#/definitions/StorageInsight"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/StorageInsight"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/storageInsightConfigs/{storageInsightName}": {
+      "get": {
+        "tags": [
+          "StorageInsights"
+        ],
+        "operationId": "StorageInsights_Get",
+        "description": "Gets a storage insight instance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the storage insight."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workspace that contains the storage insight."
+          },
+          {
+            "name": "storageInsightName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the storage insight"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/StorageInsight"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "StorageInsights"
+        ],
+        "operationId": "StorageInsights_Delete",
+        "description": "Deletes a storage insight instance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the storage insight."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workspace that contains the storage insight."
+          },
+          {
+            "name": "storageInsightName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the storage insight."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "204": {
+            "description": "NoContent response definition."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/storageInsightConfigs": {
+      "get": {
+        "tags": [
+          "StorageInsights"
+        ],
+        "operationId": "StorageInsights_ListInWorkspace",
+        "description": "Gets the first page of storage insight instances in a workspace with the link to the next page.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the storage insights."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The workspace that contains the storage insights."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/StorageInsightListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/linkTargets": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_ListLinkTargets",
+        "description": "Gets a list of accounts with administrator privileges that are not associated with an existing workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Account"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches/{savedSearchId}": {
+      "delete": {
+        "tags": [
+          "Search"
+        ],
+        "operationId": "Search_DeleteSavedSearch",
+        "description": "Deletes the specified saved search in a given workspace.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspace."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A unique workspace instance name."
+          },
+          {
+            "name": "savedSearchId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the saved search."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Search"
+        ],
+        "operationId": "Search_CreateOrUpdateSavedSearch",
+        "description": "Creates or updates a saved search for a given workspace.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspace."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A unique workspace instance name."
+          },
+          {
+            "name": "savedSearchId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the saved search."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchCreateOrUpdateSavedSearchParameters"
+            },
+            "description": "The parameters required to save a search."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "operationId": "Search_GetSavedSearch",
+        "description": "Gets the specified saved search for a given workspace.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspace."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A unique workspace instance name."
+          },
+          {
+            "name": "savedSearchId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the saved search."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/SearchGetSavedSearchResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "operationId": "Search_ListSavedSearches",
+        "description": "Gets the saved searches for a given workspace.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspace."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A unique workspace instance name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/SearchListSavedSearchResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches/{savedSearchId}/results": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "operationId": "Search_GetSavedSearchResults",
+        "description": "Gets the results from a saved search for a given workspace.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspace."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A unique workspace instance name."
+          },
+          {
+            "name": "savedSearchId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the saved search."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/SearchGetSearchResultsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/schema": {
+      "post": {
+        "tags": [
+          "Search"
+        ],
+        "operationId": "Search_GetSchema",
+        "description": "Gets the schema for a given workspace.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspace."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A unique workspace instance name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/SearchGetSchemaResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/search": {
+      "post": {
+        "tags": [
+          "Search"
+        ],
+        "operationId": "Search_GetSearchResults",
+        "description": "Gets the search results for a given workspace.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspace."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A unique workspace instance name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchGetSearchResultsParameters"
+            },
+            "description": "The parameters required to execute a search query."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/SearchGetSearchResultsResponse"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/search/{id}": {
+      "post": {
+        "tags": [
+          "Search"
+        ],
+        "operationId": "Search_UpdateSearchResults",
+        "description": "Gets updated search results for a given search query.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspace."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A unique workspace instance name."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the search that will have results updated."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/SearchGetSearchResultsResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Account": {
+      "properties": {
+        "customerId": {
+          "type": "string",
+          "description": "Gets or sets the unique ID of the account."
+        },
+        "accountName": {
+          "type": "string",
+          "description": "Gets or sets the name of the account."
+        },
+        "workspaceName": {
+          "type": "string",
+          "description": "Gets or sets the DNS valid workspace name associated with the account."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the Azure region that the account was created in."
+        }
+      },
+      "description": "Metadata for an Operational Insights account that isn't linked to a workspace."
+    },
+    "Tag": {
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "Gets or sets the tag name."
+        },
+        "Value": {
+          "type": "string",
+          "description": "Gets or sets the tag value."
+        }
+      },
+      "description": "A tag of a saved search."
+    },
+    "SavedSearchProperties": {
+      "properties": {
+        "Category": {
+          "type": "string",
+          "description": "Gets or sets the category."
+        },
+        "DisplayName": {
+          "type": "string",
+          "description": "Gets or sets the display name."
+        },
+        "Query": {
+          "type": "string",
+          "description": "Gets or sets the query."
+        },
+        "Version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the version number."
+        },
+        "Tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "description": "Gets or sets the tags attached to the saved search."
+        }
+      },
+      "description": "Value object for saved search results."
+    },
+    "SearchCreateOrUpdateSavedSearchParameters": {
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Gets or sets the etag of the saved search."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SavedSearchProperties",
+          "description": "Gets or sets properties of the saved search."
+        }
+      },
+      "description": "Parameters for putting a saved search."
+    },
+    "SearchGetSavedSearchResult": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id of the saved search."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets or sets the etag of the saved search."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SavedSearchProperties",
+          "description": "Gets or sets properties of the saved search."
+        }
+      },
+      "description": "Value object for saved search results."
+    },
+    "CoreSummary": {
+      "properties": {
+        "Status": {
+          "type": "string",
+          "description": "Gets or sets the status of a core summary."
+        },
+        "NumberOfDocuments": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the number of documents of a core summary."
+        }
+      },
+      "description": "The core summary of a search."
+    },
+    "SearchSort": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the field the search query is sorted on."
+        },
+        "order": {
+          "type": "string",
+          "description": "Gets or sets the sort order of the search."
+        }
+      },
+      "description": "The sort parameters for search."
+    },
+    "MetadataSchema": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name."
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the version."
+        }
+      },
+      "description": "Metadata items for saved search items."
+    },
+    "SearchMetadata": {
+      "properties": {
+        "RequestId": {
+          "type": "string",
+          "description": "Gets or sets the request id of the search."
+        },
+        "resultType": {
+          "type": "string",
+          "description": "Gets or sets the search result type."
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the total search results."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the number of top search results."
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id of the search results request."
+        },
+        "CoreSummaries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CoreSummary"
+          },
+          "description": "Gets or sets the core summaries."
+        },
+        "Status": {
+          "type": "string",
+          "description": "Gets or sets the status of the search results."
+        },
+        "StartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the start time for the search."
+        },
+        "LastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the time of last update."
+        },
+        "ETag": {
+          "type": "string",
+          "description": "Gets or sets the ETag of the search results."
+        },
+        "sort": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchSort"
+          },
+          "description": "Gets or sets sort."
+        },
+        "requestTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the request time."
+        },
+        "aggregatedValueField": {
+          "type": "string",
+          "description": "Gets or sets the aggregated value field."
+        },
+        "aggregatedGroupingFields": {
+          "type": "string",
+          "description": "Gets or sets the aggregated grouping fields."
+        },
+        "sum": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the sum."
+        },
+        "max": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the max."
+        },
+        "schema": {
+          "$ref": "#/definitions/MetadataSchema",
+          "description": "Gets or sets the schema."
+        }
+      },
+      "description": "Metadata for search results."
+    },
+    "SavedSearchValue": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id of the saved search."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets or sets the etag of the saved search."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SavedSearchProperties",
+          "description": "Gets or sets properties of the saved search."
+        }
+      },
+      "description": "Value object for saved search results."
+    },
+    "SearchListSavedSearchResult": {
+      "properties": {
+        "__metadata": {
+          "$ref": "#/definitions/SearchMetadata",
+          "description": "Gets or sets the metadata from search results."
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SavedSearchValue"
+          },
+          "description": "Gets or sets the array of result values."
+        }
+      },
+      "description": "The saved search operation response."
+    },
+    "SearchError": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the error type."
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets or sets the error message."
+        }
+      },
+      "description": "Details for a search error."
+    },
+    "SearchGetSearchResultsResponse": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id of the search, which includes the full url."
+        },
+        "__metadata": {
+          "$ref": "#/definitions/SearchMetadata",
+          "description": "Gets or sets the metadata from search results."
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Gets or sets the array of result values."
+        },
+        "error": {
+          "$ref": "#/definitions/SearchError",
+          "description": "Gets or sets the error."
+        }
+      },
+      "description": "The get search result operation response."
+    },
+    "SchemaValue": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the display name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the type."
+        },
+        "indexed": {
+          "type": "boolean",
+          "description": "Gets or sets the boolean that indicates the field is searchable as free text."
+        },
+        "stored": {
+          "type": "boolean",
+          "description": "Gets or sets the boolean that indicates whether or not the field is stored."
+        },
+        "facet": {
+          "type": "boolean",
+          "description": "Gets or sets the boolean that indicates whether or not the field is a facet."
+        },
+        "ownerType": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the array of workflows containing the field."
+        }
+      },
+      "description": "Value object for schema results."
+    },
+    "SearchGetSchemaResponse": {
+      "properties": {
+        "__metadata": {
+          "$ref": "#/definitions/SearchMetadata",
+          "description": "Gets or sets the metadata from search results."
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SchemaValue"
+          },
+          "description": "Gets or sets the array of result values."
+        }
+      },
+      "description": "The get schema operation response."
+    },
+    "Highlight": {
+      "properties": {
+        "pre": {
+          "type": "string",
+          "description": "Gets or sets the string that is put before a matched result."
+        },
+        "post": {
+          "type": "string",
+          "description": "Gets or sets the string that is put after a matched result."
+        }
+      },
+      "description": "Highlight details."
+    },
+    "SearchGetSearchResultsParameters": {
+      "properties": {
+        "top": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the number to get from the top."
+        },
+        "highlight": {
+          "$ref": "#/definitions/Highlight",
+          "description": "Gets or sets the highlight that looks for all occurences of a string."
+        },
+        "query": {
+          "type": "string",
+          "description": "Gets or sets the query to search."
+        },
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the start date filter, so the only query results returned are after this date."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the end date filter, so the only query results returned are before this date."
+        }
+      },
+      "description": "Parameters specifying the search query and range."
+    },
+    "StorageAccount": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the Azure Resource Manager ID of the storage account resource."
+        },
+        "key": {
+          "type": "string",
+          "description": "Gets or sets the storage account key."
+        }
+      },
+      "description": "Describes a storage account connection."
+    },
+    "StorageInsightStatus": {
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "Gets or sets the state of the storage insight connection to the workspace"
+        }
+      },
+      "description": "The status of the storage insight."
+    },
+    "StorageInsightProperties": {
+      "properties": {
+        "containers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the names of the blob containers that the workspace should read"
+        },
+        "tables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the names of the Azure tables that the workspace should read"
+        },
+        "storageAccount": {
+          "$ref": "#/definitions/StorageAccount",
+          "description": "Gets or sets the storage account connection details"
+        },
+        "status": {
+          "$ref": "#/definitions/StorageInsightStatus",
+          "description": "Gets or sets the status of the storage insight"
+        }
+      },
+      "required": [
+        "storageAccount"
+      ],
+      "description": "Storage insight properties."
+    },
+    "StorageInsight": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageInsightProperties"
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Gets or sets the ETag of the storage insight."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "The top level storage insight resource container."
+    },
+    "StorageInsightListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageInsight"
+          },
+          "description": "Gets or sets a list of storage insight instances."
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "Gets or sets the link (url) to the next page of results."
+        }
+      },
+      "description": "The list storage insights operation response."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The resource definition.",
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}

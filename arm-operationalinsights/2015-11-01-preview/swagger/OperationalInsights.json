@@ -1,0 +1,1270 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "OperationalInsightsManagementClient",
+    "description": ".Net client wrapper for the REST API for Azure Operational Insights",
+    "version": "2015-11-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices/{name}": {
+      "put": {
+        "tags": [
+          "LinkedServices"
+        ],
+        "operationId": "LinkedServices_CreateOrUpdate",
+        "description": "Create or update a linked service.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the linked service."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the parent workspace that will contain the linked service"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parameters required to create or update a linked service."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkedService"
+            },
+            "description": "The parameters required to create or update a linked service."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/LinkedService"
+            }
+          },
+          "201": {
+            "description": "Created response definition.",
+            "schema": {
+              "$ref": "#/definitions/LinkedService"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices/{linkedServiceName}": {
+      "delete": {
+        "tags": [
+          "LinkedServices"
+        ],
+        "operationId": "LinkedServices_Delete",
+        "description": "Deletes a linked service instance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the linked service."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workspace that contains the linked service."
+          },
+          {
+            "name": "linkedServiceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the linked service."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "204": {
+            "description": "NoContent response definition."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "LinkedServices"
+        ],
+        "operationId": "LinkedServices_Get",
+        "description": "Gets a linked service instance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the linked service."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workspace that contains the linked service."
+          },
+          {
+            "name": "linkedServiceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the linked service."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/LinkedService"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices": {
+      "get": {
+        "tags": [
+          "LinkedServices"
+        ],
+        "operationId": "LinkedServices_List",
+        "description": "Gets the first page of linked services instances in a workspace with the link to the next page.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the linked services."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The workspace that contains the linked services."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/dataSources/{name}": {
+      "put": {
+        "tags": [
+          "DataSources"
+        ],
+        "operationId": "DataSources_CreateOrUpdate",
+        "description": "Create or update a data source.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the data source."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the parent workspace that will contain the data source"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parameters required to create or update a data source."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            },
+            "description": "The parameters required to create or update a data source."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          },
+          "201": {
+            "description": "Created response definition.",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/dataSources/{dataSourceName}": {
+      "delete": {
+        "tags": [
+          "DataSources"
+        ],
+        "operationId": "DataSources_Delete",
+        "description": "Deletes a data source instance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the data source."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workspace that contains the data source."
+          },
+          {
+            "name": "dataSourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the data source."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "204": {
+            "description": "NoContent response definition."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DataSources"
+        ],
+        "operationId": "DataSources_Get",
+        "description": "Gets a data source instance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the data source."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workspace that contains the data source."
+          },
+          {
+            "name": "dataSourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the data source"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/dataSources": {
+      "get": {
+        "tags": [
+          "DataSources"
+        ],
+        "operationId": "DataSources_ListInWorkspace",
+        "description": "Gets the first page of data source instances in a workspace with the link to the next page.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the data sources."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The workspace that contains the data sources."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Token for paging support."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/DataSourceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/DataSourceFilter"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks/{intelligencePackName}/Disable": {
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_DisableIntelligencePack",
+        "description": "Disables an intelligence back for a given workspace.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspace."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A unique workspace instance name."
+          },
+          {
+            "name": "intelligencePackName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the intelligence pack to be disabled."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks/{intelligencePackName}/Enable": {
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_EnableIntelligencePack",
+        "description": "Enables an intelligence back for a given workspace.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspace."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A unique workspace instance name."
+          },
+          {
+            "name": "intelligencePackName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the intelligence pack to be enabled."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_ListIntelligencePacks",
+        "description": "Lists all the intelligence packs possible and whether they are enabled or disabled for a given workspace.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspace."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A unique workspace instance name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IntelligencePack"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/sharedKeys": {
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_GetSharedKeys",
+        "description": "Gets the shared keys for a workspace.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspace."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A unique workspace name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/SharedKeys"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/usages": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_ListUsages",
+        "description": "Gets a list of usage metrics for a workspace.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspace."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workspace."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListUsagesResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/managementGroups": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_ListManagementGroups",
+        "description": "Gets a list of management groups connected to a workspace.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspace."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workspace."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListManagementGroupsResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_ListInResourceGroup",
+        "description": "Gets the first page of workspace instances in a resource group with the link to the next page.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspaces."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_ListInSubscription",
+        "description": "Gets the first page of workspace instances in a subscription with the link to the next page.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}": {
+      "delete": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_Delete",
+        "description": "Deletes a workspace instance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspace."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A unique workspace instance name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "204": {
+            "description": "NoContent response definition."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_Get",
+        "description": "Gets a workspace instance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspace."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A unique workspace instance name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{name}": {
+      "put": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_CreateOrUpdate",
+        "description": "Create or update a workspace.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspace."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parameters required to create or update a workspace."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "description": "The parameters required to create or update a workspace."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "201": {
+            "description": "Created response definition.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "LinkedServiceProperties": {
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Gets or sets the resource id of the resource that will be linked to the workspace."
+        }
+      },
+      "required": [
+        "resourceId"
+      ],
+      "description": "Linked service properties."
+    },
+    "LinkedService": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LinkedServiceProperties",
+          "description": "Gets or sets the properties of the linked service."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "The top level Linked service resource container."
+    },
+    "LinkedServiceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedService"
+          },
+          "description": "Gets or sets a list of linked service instances."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the link (url) to the next page of results."
+        }
+      },
+      "description": "The list linked service operation response."
+    },
+    "DataSource": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Object",
+          "description": "Gets or sets the data source properties in raw json format, each kind of data source have it's own schema."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Gets or sets the ETag of the data source."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Gets or sets the kind of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Data sources under OMS Workspace."
+    },
+    "DataSourceFilter": {
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The datasource kind."
+        }
+      },
+      "description": "DataSource filter."
+    },
+    "DataSourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSource"
+          },
+          "description": "Gets or sets a list of data source instances."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the link (url) to the next page of results."
+        }
+      },
+      "description": "The list data source operation response."
+    },
+    "IntelligencePack": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the intelligence pack."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Gets or sets the enabled boolean for the intelligence pack."
+        }
+      },
+      "description": "Intelligence Pack containing a string name and boolean indicating if it's enabled."
+    },
+    "SharedKeys": {
+      "properties": {
+        "primarySharedKey": {
+          "type": "string",
+          "description": "Gets or sets the primary shared key of a workspace."
+        },
+        "secondarySharedKey": {
+          "type": "string",
+          "description": "Gets or sets the secondary shared key of a workspace."
+        }
+      },
+      "description": "The shared keys for a workspace."
+    },
+    "MetricName": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Gets or sets the system name of the metric."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "Gets or sets the localized name of the metric."
+        }
+      },
+      "description": "The name of a metric."
+    },
+    "UsageMetric": {
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/MetricName",
+          "description": "Gets or sets the name of the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Gets or sets the units used for the metric."
+        },
+        "currentValue": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the current value of the metric."
+        },
+        "limit": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the quota limit for the metric."
+        },
+        "nextResetTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the time that the metric's value will reset."
+        },
+        "quotaPeriod": {
+          "type": "string",
+          "description": "Gets or sets the quota period that determines the length of time between value resets."
+        }
+      },
+      "description": "A metric describing the usage of a resource."
+    },
+    "WorkspaceListUsagesResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UsageMetric"
+          },
+          "description": "Gets or sets a list of usage metrics for a workspace."
+        }
+      },
+      "description": "The list workspace usages operation response."
+    },
+    "ManagementGroupProperties": {
+      "properties": {
+        "serverCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of servers connected to the management group."
+        },
+        "isGateway": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether the management group is a gateway."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the management group."
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the unique ID of the management group."
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the datetime that the management group was created."
+        },
+        "dataReceived": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last datetime that the management group received data."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of System Center that is managing the management group."
+        },
+        "sku": {
+          "type": "string",
+          "description": "Gets or sets the SKU of System Center that is managing the management group."
+        }
+      },
+      "description": "Management group properties."
+    },
+    "ManagementGroup": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ManagementGroupProperties",
+          "description": "Gets or sets the properties of the management group."
+        }
+      },
+      "description": "A management group that is connected to a workspace"
+    },
+    "WorkspaceListManagementGroupsResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagementGroup"
+          },
+          "description": "Gets or sets a list of management groups attached to the workspace."
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "Gets or sets the link (url) to the next page of results."
+        }
+      },
+      "description": "The list workspace managmement groups operation response."
+    },
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the SKU.",
+          "enum": [
+            "Free",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "SkuNameEnum",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The SKU (tier) of a workspace."
+    },
+    "WorkspaceProperties": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets the provisioning state of the workspace.",
+          "enum": [
+            "Creating",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Deleting",
+            "ProvisioningAccount"
+          ],
+          "x-ms-enum": {
+            "name": "EntityStatus",
+            "modelAsString": true
+          }
+        },
+        "source": {
+          "type": "string",
+          "description": "Gets or set the source of the workspace.  Source defines where the workspace was created. 'Azure' implies it was created in Azure.  'External' implies it was created via the Operational Insights Portal. This value is set on the service side and read-only on the client side."
+        },
+        "customerId": {
+          "type": "string",
+          "description": "Gets or sets the ID associated with the workspace.  Setting this value at creation time allows the workspace being created to be linked to an existing workspace."
+        },
+        "portalUrl": {
+          "type": "string",
+          "description": "Gets or sets the URL of the Operational Insights portal for this workspace.  This value is set on the service side and read-only on the client side."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Gets or sets the SKU of the workspace."
+        }
+      },
+      "description": "Workspace properties."
+    },
+    "Workspace": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkspaceProperties"
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Gets or sets the ETag of the workspace."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],    
+      "description": "The top level Workspace resource container."
+    },
+    "WorkspaceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          },
+          "description": "Gets or sets a list of workspace instances."
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "Gets or sets the link (url) to the next page of results."
+        }
+      },
+      "description": "The list workspaces operation response."
+    },
+    "Object": {
+      "type": "object",
+      "properties": {}
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The resource definition.",
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}
