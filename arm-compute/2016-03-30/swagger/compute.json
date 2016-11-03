@@ -946,13 +946,19 @@
             "description": "The name of the virtual machine."
           },
           {
-            "name": "parameters",
+            "name": "properties",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VirtualMachine"
             },
             "description": "Parameters supplied to the Create Virtual Machine operation."
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/TagsParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -4562,6 +4568,28 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "body",
+      "schema":{
+        "type":"string"
+      },
+      "required": true,
+      "type": "string",
+      "description": "The Azure location."
+    },
+    "TagsParameter": {
+      "name": "tags",
+      "in": "body",
+      "required": false,
+      "schema": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "description": "Resource tags."
     }
   }
 }

@@ -1,4 +1,4 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
     "title": "NetworkManagementClient",
@@ -1713,13 +1713,19 @@
             "description": "The name of the network interface."
           },
           {
-            "name": "parameters",
+            "name": "properties",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NetworkInterface"
             },
             "description": "Parameters supplied to the create/update NetworkInterface operation"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/TagsParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2356,7 +2362,7 @@
             "description": "The name of the publicIpAddress."
           },
           {
-            "name": "parameters",
+            "name": "properties",
             "in": "body",
             "required": true,
             "schema": {
@@ -2365,11 +2371,18 @@
             "description": "Parameters supplied to the create/update PublicIPAddress operation"
           },
           {
+            "$ref": "#/parameters/TagsParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
+
         ],
         "responses": {
           "201": {
@@ -8435,6 +8448,28 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "body",
+      "schema":{
+        "type":"string"
+      },
+      "required": true,
+      "type": "string",
+      "description": "The Azure location."
+    },
+    "TagsParameter": {
+      "name": "tags",
+      "in": "body",
+      "required": false,
+      "schema": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "description": "Resource tags."
     }
   }
 }
