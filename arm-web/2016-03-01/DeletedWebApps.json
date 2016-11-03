@@ -2,21 +2,21 @@
   "swagger": "2.0",
   "info": {
     "version": "2016-03-01",
-    "title": "TopLevelDomains API Swagger"
+    "title": "DeletedWebApps API Swagger"
   },
   "host": "management.azure.com",
   "schemes": [
     "https"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/topLevelDomains": {
-      "get": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/deletedSites": {
+      "post": {
         "tags": [
-          "TopLevelDomains"
+          "DeletedWebApps"
         ],
-        "summary": "Lists all top level domains supported for registration",
-        "description": "Lists all top level domains supported for registration",
-        "operationId": "TopLevelDomains_List",
+        "summary": "Gets all deleted Web Apps for a subscription",
+        "description": "Gets all deleted Web Apps for a subscription",
+        "operationId": "DeletedWebApps_List",
         "consumes": [],
         "produces": [
           "application/json",
@@ -34,7 +34,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TopLevelDomainCollection"
+              "$ref": "#/definitions/DeletedWebAppCollection"
             }
           }
         },
@@ -43,81 +43,32 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/topLevelDomains/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/deletedSites": {
       "get": {
         "tags": [
-          "TopLevelDomains"
+          "DeletedWebApps"
         ],
-        "summary": "Gets details of a top level domain",
-        "description": "Gets details of a top level domain",
-        "operationId": "TopLevelDomains_Get",
+        "summary": "Gets deleted web apps in subscription",
+        "description": "Gets deleted web apps in subscription",
+        "operationId": "DeletedWebApps_ListByResourceGroup",
         "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the top level domain",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TopLevelDomain"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/topLevelDomains/{name}/listAgreements": {
-      "post": {
-        "tags": [
-          "TopLevelDomains"
-        ],
-        "summary": "Lists legal agreements that user needs to accept before purchasing domain",
-        "description": "Lists legal agreements that user needs to accept before purchasing domain",
-        "operationId": "TopLevelDomains_ListAgreements",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
         "produces": [
           "application/json",
           "text/json"
         ],
         "parameters": [
           {
-            "name": "name",
+            "name": "resourceGroupName",
             "in": "path",
-            "description": "Name of the top level domain",
+            "description": "Name of resource group",
             "required": true,
             "type": "string"
           },
           {
-            "name": "agreementOption",
-            "in": "body",
-            "description": "Domain agreement options",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TopLevelDomainAgreementOption"
-            }
+            "name": "propertiesToInclude",
+            "in": "query",
+            "description": "Additional web app properties included in the response",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -130,7 +81,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TldLegalAgreementCollection"
+              "$ref": "#/definitions/DeletedWebAppCollection"
             }
           }
         },
@@ -1728,6 +1679,23 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DeletedWebAppCollection": {
+      "description": "Collection of deleted sites",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedSite"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources",
+          "type": "string"
         }
       }
     },
@@ -3778,23 +3746,6 @@
         }
       }
     },
-    "TldLegalAgreementCollection": {
-      "description": "Collection of Tld Legal Agreements",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TldLegalAgreement"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources",
-          "type": "string"
-        }
-      }
-    },
     "TopLevelDomain": {
       "description": "A top level domain object",
       "type": "object",
@@ -3819,33 +3770,6 @@
             }
           },
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "TopLevelDomainAgreementOption": {
-      "description": "Options for retrieving the list of top level domain legal agreements",
-      "type": "object",
-      "properties": {
-        "includePrivacy": {
-          "description": "If true then the list of agreements will inclue agreements for domain privacy as well.",
-          "type": "boolean"
-        }
-      }
-    },
-    "TopLevelDomainCollection": {
-      "description": "Collection of Top Level Domains",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TopLevelDomain"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources",
-          "type": "string"
         }
       }
     },
