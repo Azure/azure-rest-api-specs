@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "KeyVaultClient",
-    "description": "Performs cryptographic key operations and vault operations against the Key Vault service.",
+    "description": "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
     "version": "2016-10-01"
   },
   "x-ms-parameterized-host": {
@@ -12,7 +12,7 @@
     "parameters": [
       {
         "name": "vaultBaseUrl",
-        "description": "The vault name, e.g. https://myvault.vault.azure.net",
+        "description": "The vault name, for example https://myvault.vault.azure.net.",
         "required": true,
         "type": "string",
         "in": "path",
@@ -41,7 +41,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z-]+$",
-            "description": "The name of the key"
+            "description": "The name of the key."
           },
           {
             "name": "parameters",
@@ -51,7 +51,7 @@
             "schema": {
               "$ref": "#/definitions/KeyCreateParameters"
             },
-            "description": "The parameters to create key."
+            "description": "The parameters to create a key."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -59,13 +59,13 @@
         ],
         "responses": {
           "200": {
-            "description": "A key bundle containing the result of the create request",
+            "description": "A key bundle containing the result of the create key request.",
             "schema": {
               "$ref": "#/definitions/KeyBundle"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -79,7 +79,7 @@
           "Keys"
         ],
         "operationId": "ImportKey",
-        "description": "Imports a key into the specified vault",
+        "description": "Imports a key into the specified vault.",
         "parameters": [
           {
             "name": "key-name",
@@ -87,7 +87,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z-]+$",
-            "description": "The name of the key"
+            "description": "The name of the key."
           },
           {
             "name": "parameters",
@@ -97,7 +97,7 @@
             "schema": {
               "$ref": "#/definitions/KeyImportParameters"
             },
-            "description": "The parameters to import key."
+            "description": "The parameters to import a key."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -105,13 +105,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Imported key bundle to the vault",
+            "description": "Imported key bundle to the vault.",
             "schema": {
               "$ref": "#/definitions/KeyBundle"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -123,14 +123,14 @@
           "Keys"
         ],
         "operationId": "DeleteKey",
-        "description": "Deletes the specified key",
+        "description": "Deletes the specified key.",
         "parameters": [
           {
             "name": "key-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the key"
+            "description": "The name of the key."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -138,13 +138,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The public part of the deleted key",
+            "description": "The public part of the deleted key.",
             "schema": {
               "$ref": "#/definitions/KeyBundle"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -158,21 +158,21 @@
           "Keys"
         ],
         "operationId": "UpdateKey",
-        "description": "Updates the Key Attributes associated with the specified key",
+        "description": "Updates the key attributes associated with the specified key.",
         "parameters": [
           {
             "name": "key-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the key"
+            "description": "The name of the key."
           },
           {
             "name": "key-version",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The version of the key"
+            "description": "The version of the key."
           },
           {
             "name": "parameters",
@@ -182,7 +182,7 @@
             "schema": {
               "$ref": "#/definitions/KeyUpdateParameters"
             },
-            "description": "The parameters to update key."
+            "description": "The parameters for the key to update."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -190,13 +190,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The updated key",
+            "description": "The updated key.",
             "schema": {
               "$ref": "#/definitions/KeyBundle"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -208,21 +208,21 @@
           "Keys"
         ],
         "operationId": "GetKey",
-        "description": "Retrieves the public portion of a key plus its attributes",
+        "description": "Retrieves the public portion of a key plus its attributes.",
         "parameters": [
           {
             "name": "key-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the key"
+            "description": "The name of the key."
           },
           {
             "name": "key-version",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The version of the key"
+            "description": "The version of the key."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -230,13 +230,13 @@
         ],
         "responses": {
           "200": {
-            "description": "A Key bundle of the key and its attributes",
+            "description": "A key bundle containing the key and its attributes.",
             "schema": {
               "$ref": "#/definitions/KeyBundle"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -250,14 +250,14 @@
           "Keys"
         ],
         "operationId": "GetKeyVersions",
-        "description": "List the versions of the specified key",
+        "description": "List the versions of the specified key.",
         "parameters": [
           {
             "name": "key-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the key"
+            "description": "The name of the key."
           },
           {
             "name": "maxresults",
@@ -275,13 +275,13 @@
         ],
         "responses": {
           "200": {
-            "description": "A response message containing a list of keys along with a link to the next page of keys",
+            "description": "A response message containing a list of keys along with a link to the next page of keys.",
             "schema": {
               "$ref": "#/definitions/KeyListResult"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -298,7 +298,7 @@
           "Keys"
         ],
         "operationId": "GetKeys",
-        "description": "List keys in the specified vault",
+        "description": "List keys in the specified vault.",
         "parameters": [
           {
             "name": "maxresults",
@@ -316,13 +316,13 @@
         ],
         "responses": {
           "200": {
-            "description": "A response message containing a list of keys in the vault along with a link to the next page of keys",
+            "description": "A response message containing a list of keys in the vault along with a link to the next page of keys.",
             "schema": {
               "$ref": "#/definitions/KeyListResult"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -346,7 +346,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the key"
+            "description": "The name of the key."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -354,13 +354,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The backup blob containing the backed up key",
+            "description": "The backup blob containing the backed up key.",
             "schema": {
               "$ref": "#/definitions/BackupKeyResult"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -374,7 +374,7 @@
           "Keys"
         ],
         "operationId": "RestoreKey",
-        "description": "Restores the backup key in to a vault",
+        "description": "Restores a backed up key to a vault.",
         "parameters": [
           {
             "name": "parameters",
@@ -384,7 +384,7 @@
             "schema": {
               "$ref": "#/definitions/KeyRestoreParameters"
             },
-            "description": "The parameters to restore key"
+            "description": "The parameters to restore the key."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -392,13 +392,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Restored key bundle in the vault",
+            "description": "Restored key bundle in the vault.",
             "schema": {
               "$ref": "#/definitions/KeyBundle"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -412,21 +412,21 @@
           "Keys"
         ],
         "operationId": "encrypt",
-        "description": "Encrypts an arbitrary sequence of bytes using an encryption key that is stored in Azure Key Vault.",
+        "description": "Encrypts an arbitrary sequence of bytes using an encryption key that is stored in a key vault.",
         "parameters": [
           {
             "name": "key-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the key"
+            "description": "The name of the key."
           },
           {
             "name": "key-version",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The version of the key"
+            "description": "The version of the key."
           },
           {
             "name": "parameters",
@@ -436,7 +436,7 @@
             "schema": {
               "$ref": "#/definitions/KeyOperationsParameters"
             },
-            "description": "The parameters for key operations."
+            "description": "The parameters for the encryption operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -444,13 +444,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The encryption result",
+            "description": "The encryption result.",
             "schema": {
               "$ref": "#/definitions/KeyOperationResult"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -464,21 +464,21 @@
           "Keys"
         ],
         "operationId": "decrypt",
-        "description": "Decrypts a single block of encrypted data",
+        "description": "Decrypts a single block of encrypted data.",
         "parameters": [
           {
             "name": "key-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the key"
+            "description": "The name of the key."
           },
           {
             "name": "key-version",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The version of the key"
+            "description": "The version of the key."
           },
           {
             "name": "parameters",
@@ -488,7 +488,7 @@
             "schema": {
               "$ref": "#/definitions/KeyOperationsParameters"
             },
-            "description": "The parameters for key operations."
+            "description": "The parameters for the decryption operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -496,13 +496,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The decryption result",
+            "description": "The decryption result.",
             "schema": {
               "$ref": "#/definitions/KeyOperationResult"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -516,21 +516,21 @@
           "Keys"
         ],
         "operationId": "sign",
-        "description": "Creates a signature from a digest using the specified key in the vault",
+        "description": "Creates a signature from a digest using the specified key.",
         "parameters": [
           {
             "name": "key-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the key"
+            "description": "The name of the key."
           },
           {
             "name": "key-version",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The version of the key"
+            "description": "The version of the key."
           },
           {
             "name": "parameters",
@@ -540,7 +540,7 @@
             "schema": {
               "$ref": "#/definitions/KeySignParameters"
             },
-            "description": "The parameters for key operations."
+            "description": "The parameters for the signing operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -548,13 +548,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The signature value",
+            "description": "The signature value.",
             "schema": {
               "$ref": "#/definitions/KeyOperationResult"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -568,21 +568,21 @@
           "Keys"
         ],
         "operationId": "verify",
-        "description": "Verifies a signature using the specified key",
+        "description": "Verifies a signature using a specified key.",
         "parameters": [
           {
             "name": "key-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the key"
+            "description": "The name of the key."
           },
           {
             "name": "key-version",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The version of the key"
+            "description": "The version of the key."
           },
           {
             "name": "parameters",
@@ -592,7 +592,7 @@
             "schema": {
               "$ref": "#/definitions/KeyVerifyParameters"
             },
-            "description": "The parameters for key operations."
+            "description": "The parameters for verify operations."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -600,13 +600,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The verification result",
+            "description": "The verification result.",
             "schema": {
               "$ref": "#/definitions/KeyVerifyResult"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -620,21 +620,21 @@
           "Keys"
         ],
         "operationId": "wrapKey",
-        "description": "Wraps a symmetric key using the specified key",
+        "description": "Wraps a symmetric key using a specified key.",
         "parameters": [
           {
             "name": "key-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the key"
+            "description": "The name of the key."
           },
           {
             "name": "key-version",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The version of the key"
+            "description": "The version of the key."
           },
           {
             "name": "parameters",
@@ -644,7 +644,7 @@
             "schema": {
               "$ref": "#/definitions/KeyOperationsParameters"
             },
-            "description": "The parameters for key operations."
+            "description": "The parameters for wrap operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -652,13 +652,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The wrapped symmetric key",
+            "description": "The wrapped symmetric key.",
             "schema": {
               "$ref": "#/definitions/KeyOperationResult"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -672,21 +672,21 @@
           "Keys"
         ],
         "operationId": "unwrapKey",
-        "description": "Unwraps a symmetric key using the specified key in the vault that has initially been used for wrapping the key.",
+        "description": "Unwraps a symmetric key using the specified key that was initially used for wrapping that key.",
         "parameters": [
           {
             "name": "key-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the key"
+            "description": "The name of the key."
           },
           {
             "name": "key-version",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The version of the key"
+            "description": "The version of the key."
           },
           {
             "name": "parameters",
@@ -696,7 +696,7 @@
             "schema": {
               "$ref": "#/definitions/KeyOperationsParameters"
             },
-            "description": "The parameters for key operations."
+            "description": "The parameters for the key operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -704,13 +704,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The unwrapped symmetric key",
+            "description": "The unwrapped symmetric key.",
             "schema": {
               "$ref": "#/definitions/KeyOperationResult"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -724,7 +724,7 @@
           "Secrets"
         ],
         "operationId": "SetSecret",
-        "description": "Sets a secret in the specified vault.",
+        "description": "Sets a secret in a specified key vault.",
         "parameters": [
           {
             "name": "secret-name",
@@ -732,7 +732,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z-]+$",
-            "description": "The name of the secret in the given vault"
+            "description": "The name of the secret."
           },
           {
             "name": "parameters",
@@ -742,7 +742,7 @@
             "schema": {
               "$ref": "#/definitions/SecretSetParameters"
             },
-            "description": "The parameters for secret set"
+            "description": "The parameters for setting the secret."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -750,13 +750,13 @@
         ],
         "responses": {
           "200": {
-            "description": "A secret bundle containing the result of the secret set request",
+            "description": "A secret bundle containing the result of the set secret request.",
             "schema": {
               "$ref": "#/definitions/SecretBundle"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -768,14 +768,14 @@
           "Secrets"
         ],
         "operationId": "DeleteSecret",
-        "description": "Deletes a secret from the specified vault.",
+        "description": "Deletes a secret from a specified key vault.",
         "parameters": [
           {
             "name": "secret-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the secret in the given vault"
+            "description": "The name of the secret."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -783,13 +783,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The deleted secret",
+            "description": "The deleted secret.",
             "schema": {
               "$ref": "#/definitions/SecretBundle"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -803,21 +803,21 @@
           "Secrets"
         ],
         "operationId": "UpdateSecret",
-        "description": "Updates the attributes associated with the specified secret",
+        "description": "Updates the attributes associated with a specified secret in a given key vault.",
         "parameters": [
           {
             "name": "secret-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the secret in the given vault"
+            "description": "The name of the secret."
           },
           {
             "name": "secret-version",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The version of the secret"
+            "description": "The version of the secret."
           },
           {
             "name": "parameters",
@@ -827,7 +827,7 @@
             "schema": {
               "$ref": "#/definitions/SecretUpdateParameters"
             },
-            "description": "The parameters for secret update"
+            "description": "The parameters for update secret operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -835,13 +835,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The updated secret",
+            "description": "The updated secret.",
             "schema": {
               "$ref": "#/definitions/SecretBundle"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -853,21 +853,21 @@
           "Secrets"
         ],
         "operationId": "GetSecret",
-        "description": "Gets a secret.",
+        "description": "Get a specified secret from a given key vault.",
         "parameters": [
           {
             "name": "secret-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the secret in the given vault"
+            "description": "The name of the secret."
           },
           {
             "name": "secret-version",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The version of the secret"
+            "description": "The version of the secret."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -875,13 +875,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The retrieved secret",
+            "description": "The retrieved secret.",
             "schema": {
               "$ref": "#/definitions/SecretBundle"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -895,7 +895,7 @@
           "Secrets"
         ],
         "operationId": "GetSecrets",
-        "description": "List secrets in the specified vault",
+        "description": "List secrets in a specified key vault",
         "parameters": [
           {
             "name": "maxresults",
@@ -913,13 +913,13 @@
         ],
         "responses": {
           "200": {
-            "description": "A response message containing a list of secrets in the vault along with a link to the next page of secrets",
+            "description": "A response message containing a list of secrets in the vault along with a link to the next page of secrets.",
             "schema": {
               "$ref": "#/definitions/SecretListResult"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -936,14 +936,14 @@
           "Secrets"
         ],
         "operationId": "GetSecretVersions",
-        "description": "List the versions of the specified secret",
+        "description": "List the versions of the specified secret.",
         "parameters": [
           {
             "name": "secret-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the secret in the given vault"
+            "description": "The name of the secret."
           },
           {
             "name": "maxresults",
@@ -967,7 +967,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -984,7 +984,7 @@
           "Certificates"
         ],
         "operationId": "GetCertificates",
-        "description": "List certificates in the specified vault",
+        "description": "List certificates in a specified key vault",
         "parameters": [
           {
             "name": "maxresults",
@@ -1002,13 +1002,13 @@
         ],
         "responses": {
           "200": {
-            "description": "A response message containing a list of certificates in the vault along with a link to the next page of certificates",
+            "description": "A response message containing a list of certificates along with a link to the next page of certificates.",
             "schema": {
               "$ref": "#/definitions/CertificateListResult"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1025,14 +1025,14 @@
           "Certificates"
         ],
         "operationId": "DeleteCertificate",
-        "description": "Deletes a certificate from the specified vault.",
+        "description": "Deletes a certificate from a specified key vault.",
         "parameters": [
           {
             "name": "certificate-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the certificate in the given vault"
+            "description": "The name of the certificate."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1040,13 +1040,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The deleted certificate",
+            "description": "The deleted certificate.",
             "schema": {
               "$ref": "#/definitions/CertificateBundle"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1060,7 +1060,7 @@
           "Certificates"
         ],
         "operationId": "SetCertificateContacts",
-        "description": "Sets the certificate contacts for the specified vault.",
+        "description": "Sets the certificate contacts for the specified key vault.",
         "parameters": [
           {
             "name": "contacts",
@@ -1069,7 +1069,7 @@
             "schema": {
               "$ref": "#/definitions/Contacts"
             },
-            "description": "The contacts for the vault certificates."
+            "description": "The contacts for the key vault certificate."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1077,13 +1077,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The contacts for the vault certificates.",
+            "description": "The contacts for the vault certificate.",
             "schema": {
               "$ref": "#/definitions/Contacts"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1095,7 +1095,7 @@
           "Certificates"
         ],
         "operationId": "GetCertificateContacts",
-        "description": "Gets the certificate contacts for the specified vault.",
+        "description": "Gets the certificate contacts for a specified key vault.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1103,13 +1103,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The contacts for the vault certificates.",
+            "description": "The contacts for the key vault certificate.",
             "schema": {
               "$ref": "#/definitions/Contacts"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1121,7 +1121,7 @@
           "Certificates"
         ],
         "operationId": "DeleteCertificateContacts",
-        "description": "Deletes the certificate contacts for the specified vault.",
+        "description": "Deletes the certificate contacts for a specified key vault.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1129,13 +1129,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The contacts for the vault certificates.",
+            "description": "The contacts for the key vault certificate.",
             "schema": {
               "$ref": "#/definitions/Contacts"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1149,7 +1149,7 @@
           "Certificates"
         ],
         "operationId": "GetCertificateIssuers",
-        "description": "List certificate issuers for the specified vault.",
+        "description": "List certificate issuers for a specified key vault.",
         "parameters": [
           {
             "name": "maxresults",
@@ -1167,13 +1167,13 @@
         ],
         "responses": {
           "200": {
-            "description": "A response message containing a list of certificates issuers in the vault along with a link to the next page of certificate issuers",
+            "description": "A response message containing a list of certificate issuers in a key vault along with a link to the next page of certificate issuers.",
             "schema": {
               "$ref": "#/definitions/CertificateIssuerListResult"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1215,13 +1215,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The issuer for the vault certificates.",
+            "description": "The issuer for the key vault certificate.",
             "schema": {
               "$ref": "#/definitions/IssuerBundle"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1258,13 +1258,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The issuer for the vault certificates.",
+            "description": "The issuer for the key vault certificate.",
             "schema": {
               "$ref": "#/definitions/IssuerBundle"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1291,13 +1291,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The issuer for the vault certificates.",
+            "description": "The issuer for the key vault certificate.",
             "schema": {
               "$ref": "#/definitions/IssuerBundle"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1324,13 +1324,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The issuer for the vault certificates.",
+            "description": "The issuer for the key vault certificate.",
             "schema": {
               "$ref": "#/definitions/IssuerBundle"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1352,7 +1352,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z-]+$",
-            "description": "The name of the certificate"
+            "description": "The name of the certificate."
           },
           {
             "name": "parameters",
@@ -1362,7 +1362,7 @@
             "schema": {
               "$ref": "#/definitions/CertificateCreateParameters"
             },
-            "description": "The parameters to create certificate."
+            "description": "The parameters to create a certificate."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1370,13 +1370,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Created certificate bundle to the vault",
+            "description": "Created certificate bundle.",
             "schema": {
               "$ref": "#/definitions/CertificateOperation"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1390,7 +1390,7 @@
           "Certificates"
         ],
         "operationId": "ImportCertificate",
-        "description": "Imports a certificate into the specified vault",
+        "description": "Imports a certificate into a specified key vault.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1398,7 +1398,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z-]+$",
-            "description": "The name of the certificate"
+            "description": "The name of the certificate."
           },
           {
             "name": "parameters",
@@ -1408,7 +1408,7 @@
             "schema": {
               "$ref": "#/definitions/CertificateImportParameters"
             },
-            "description": "The parameters to import certificate."
+            "description": "The parameters to import the certificate."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1416,13 +1416,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Imported certificate bundle to the vault",
+            "description": "Imported certificate bundle to the vault.",
             "schema": {
               "$ref": "#/definitions/CertificateBundle"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1443,7 +1443,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the certificate"
+            "description": "The name of the certificate."
           },
           {
             "name": "maxresults",
@@ -1461,13 +1461,13 @@
         ],
         "responses": {
           "200": {
-            "description": "A response message containing a list of certificates in the vault along with a link to the next page of keys",
+            "description": "A response message containing a list of certificates in the key vault along with a link to the next page of keys.",
             "schema": {
               "$ref": "#/definitions/CertificateListResult"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1491,7 +1491,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the certificate in the given vault."
+            "description": "The name of the certificate in the given key vault."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1499,13 +1499,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The certificate policy",
+            "description": "The certificate policy.",
             "schema": {
               "$ref": "#/definitions/CertificatePolicy"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
+            "description": "Default response. It will be deserialized as per the error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
