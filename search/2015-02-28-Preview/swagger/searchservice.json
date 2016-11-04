@@ -1344,13 +1344,15 @@
           "type": "integer",
           "format": "int32",
           "default": 1,
-          "description": "The minimum n-gram length. Default is 1."
+          "maximum": 300,
+          "description": "The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram."
         },
         "maxGram": {
           "type": "integer",
           "format": "int32",
           "default": 2,
-          "description": "The maximum n-gram length. Default is 2."
+          "maximum": 300,
+          "description": "The maximum n-gram length. Default is 2. Maximum is 300."
         },
         "tokenChars": {
           "type": "array",
@@ -1384,7 +1386,29 @@
       "description": "Emits the entire input as a single token. This tokenizer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/KeywordTokenizer.html"
-      }
+      },
+      "x-ms-external": true
+    },
+   "KeywordTokenizerV2": {
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.KeywordTokenizerV2",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Tokenizer"
+        }
+      ],
+      "properties": {
+        "maxTokenLength": {
+          "type": "integer",
+          "format": "int32",
+          "default": 256,
+          "maximum": 300,
+          "description": "The maximum token length. Default is 256. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters."
+        }
+      },
+      "description": "Emits the entire input as a single token.",
+      "externalDocs": {
+        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/KeywordTokenizer.html"
+      }      
     },
     "MicrosoftTokenizerLanguage": {
       "type": "string",
@@ -1559,13 +1583,15 @@
           "type": "integer",
           "format": "int32",
           "default": 1,
-          "description": "The minimum n-gram length. Default is 1."
+          "maximum": 300,
+          "description": "The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram."
         },
         "maxGram": {
           "type": "integer",
           "format": "int32",
           "default": 2,
-          "description": "The maximum n-gram length. Default is 2."
+          "maximum": 300,
+          "description": "The maximum n-gram length. Default is 2. Maximum is 300."
         },
         "tokenChars": {
           "type": "array",
@@ -1629,6 +1655,55 @@
       },
       "x-ms-external": true
     },
+    "PathHierarchyTokenizerV2": {
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.PathHierarchyTokenizerV2",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Tokenizer"
+        }
+      ],
+      "properties": {
+        "delimiter": {
+          "type": "string",
+          "default": "/",
+          "maxLength": 1,
+          "minLength": 1,
+          "description": "The delimiter character to use. Default is \"/\"."
+        },
+        "replacement": {
+          "type": "string",
+          "default": "/",
+          "maxLength": 1,
+          "minLength": 1,
+          "description": "A value that, if set, replaces the delimiter character. Default is \"/\"."
+        },
+        "maxTokenLength": {
+          "type": "integer",
+          "format": "int32",
+          "default": 300,
+          "maximum": 300,
+          "description": "The maximum token length. Default and maximum is 300."
+        },
+        "reverse": {
+          "x-ms-client-name": "ReverseTokenOrder",
+          "type": "boolean",
+          "default": false,
+          "description": "A value indicating whether to generate tokens in reverse order. Default is false."
+        },
+        "skip": {
+          "x-ms-client-name": "NumberOfTokensToSkip",
+          "type": "integer",
+          "format": "int32",
+          "default": 0,
+          "description": "The number of initial tokens to skip. Default is 0."
+        }
+      },
+      "description": "Tokenizer for path-like hierarchies. This tokenizer is implemented using Apache Lucene.",
+      "externalDocs": {
+        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/path/PathHierarchyTokenizer.html"
+      },
+      "x-ms-external": true
+    },
     "PatternTokenizer": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.PatternTokenizer",
       "allOf": [
@@ -1660,6 +1735,27 @@
     },
     "StandardTokenizer": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StandardTokenizer",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Tokenizer"
+        }
+      ],
+      "properties": {
+        "maxTokenLength": {
+          "type": "integer",
+          "format": "int32",
+          "default": 255,          
+          "description": "The maximum token length. Default is 255. Tokens longer than the maximum length are split"
+        }
+      },
+      "description": "Breaks text following the Unicode Text Segmentation rules. This tokenizer is implemented using Apache Lucene.",
+      "externalDocs": {
+        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/StandardTokenizer.html"
+      },
+      "x-ms-external": true
+    },
+    "StandardTokenizerV2": {
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.StandardTokenizerV2",
       "allOf": [
         {
           "$ref": "#/definitions/Tokenizer"
@@ -1832,19 +1928,22 @@
           "type": "integer",
           "format": "int32",
           "default": 5,
-          "description": "The minimum word size. Only words longer than this get processed. Default is 5."
+          "maximum": 300,
+          "description": "The minimum word size. Only words longer than this get processed. Default is 5. Maximum is 300."
         },
         "minSubwordSize": {
           "type": "integer",
           "format": "int32",
           "default": 2,
-          "description": "The minimum subword size. Only subwords longer than this are outputted. Default is 2."
+          "maximum": 300,
+          "description": "The minimum subword size. Only subwords longer than this are outputted. Default is 2. Maximum is 300."
         },
         "maxSubwordSize": {
           "type": "integer",
           "format": "int32",
           "default": 15,
-          "description": "The maximum subword size. Only subwords shorter than this are outputted. Default is 15."
+          "maximum": 300,
+          "description": "The maximum subword size. Only subwords shorter than this are outputted. Default is 15. Maximum is 300."
         },
         "onlyLongestMatch": {
           "type": "boolean",
@@ -1884,13 +1983,47 @@
           "type": "integer",
           "format": "int32",
           "default": 1,
-          "description": "The minimum n-gram length. Default is 1."
+          "description": "The minimum n-gram length. Default is 1. Must be less than the value of maxGram."
         },
         "maxGram": {
           "type": "integer",
           "format": "int32",
           "default": 2,
           "description": "The maximum n-gram length. Default is 2."
+        },
+        "side": {
+          "$ref": "#/definitions/EdgeNGramTokenFilterSide",
+          "default": "front",
+          "description": "Specifies which side of the input the n-gram should be generated from. Default is \"front\"."
+        }
+      },
+      "description": "Generates n-grams of the given size(s) starting from the front or the back of an input token. This token filter is implemented using Apache Lucene.",
+      "externalDocs": {
+        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/EdgeNGramTokenFilter.html"
+      },
+      "x-ms-external": true
+    },
+    "EdgeNGramTokenFilterV2": {
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.EdgeNGramTokenFilterV2",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TokenFilter"
+        }
+      ],
+      "properties": {
+        "minGram": {
+          "type": "integer",
+          "format": "int32",
+          "default": 1,
+          "maximum": 300,
+          "description": "The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram."
+        },
+        "maxGram": {
+          "type": "integer",
+          "format": "int32",
+          "default": 2,
+          "maximum": 300,
+          "description": "The maximum n-gram length. Default is 2. Maximum is 300."
         },
         "side": {
           "$ref": "#/definitions/EdgeNGramTokenFilterSide",
@@ -1995,13 +2128,15 @@
           "type": "integer",
           "format": "int32",
           "default": 0,
-          "description": "The minimum length in characters. Default is 0."
+          "maximum": 300,
+          "description": "The minimum length in characters. Default is 0. Maximum is 300. Must be less than the value of max."
         },
         "max": {
           "type": "integer",
           "format": "int32",
-          "default": 2147483647,
-          "description": "The maximum length in characters. Default is 2147483647 (2^31-1)."
+          "default": 300,
+          "maximum": 300,
+          "description": "The maximum length in characters. Default and maximum is 300."
         }
       },
       "description": "Removes words that are too long or too short. This token filter is implemented using Apache Lucene.",
@@ -2046,13 +2181,42 @@
           "type": "integer",
           "format": "int32",
           "default": 1,
-          "description": "The minimum n-gram length. Default is 1."
+          "description": "The minimum n-gram length. Default is 1. Must be less than the value of maxGram."
         },
         "maxGram": {
           "type": "integer",
           "format": "int32",
           "default": 2,
           "description": "The maximum n-gram length. Default is 2."
+        }
+      },
+      "description": "Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.",
+      "externalDocs": {
+        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/NGramTokenFilter.html"
+      },
+      "x-ms-external": true
+    },
+    "NGramTokenFilterV2": {
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.NGramTokenFilterV2",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TokenFilter"
+        }
+      ],
+      "properties": {
+        "minGram": {
+          "type": "integer",
+          "format": "int32",
+          "default": 1,
+          "maximum": 300,
+          "description": "The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram."
+        },
+        "maxGram": {
+          "type": "integer",
+          "format": "int32",
+          "default": 2,
+          "maximum": 300,
+          "description": "The maximum n-gram length. Default is 2. Maximum is 300."
         }
       },
       "description": "Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.",
@@ -2173,13 +2337,15 @@
           "type": "integer",
           "format": "int32",
           "default": 2,
-          "description": "The maximum shingle size. Default is 2."
+          "minimum": 2,
+          "description": "The maximum shingle size. Default and minimum value is 2."
         },
         "minShingleSize": {
           "type": "integer",
           "format": "int32",
           "default": 2,
-          "description": "The minimum shingle size. Default is 2."
+          "minimum": 2,
+          "description": "The minimum shingle size. Default and minimum value is 2. Must be less than the value of maxShingleSize."
         },
         "outputUnigrams": {
           "type": "boolean",
@@ -2493,7 +2659,8 @@
           "type": "integer",
           "format": "int32",
           "default": 300,
-          "description": "The length at which terms will be truncated. Default is 300."
+          "maximum": 300,
+          "description": "The length at which terms will be truncated. Default and maximum is 300."
         }
       },
       "description": "Truncates the terms to a specific length. This token filter is implemented using Apache Lucene.",
