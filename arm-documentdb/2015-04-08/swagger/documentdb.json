@@ -601,11 +601,15 @@
           "items": {
             "$ref": "#/definitions/Location"
           }
+        },
+        "databaseAccountOfferType": {
+          "$ref": "#/definitions/DatabaseAccountOfferType"
         }
       },
       "required": [
         "consistencyPolicy",
-        "locations"
+        "locations",
+        "databaseAccountOfferType"
       ]
     },
     "DatabaseAccountCreateUpdateParameters": {
@@ -615,9 +619,6 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
-        },
-        "databaseAccountOfferType": {
-          "$ref": "#/definitions/DatabaseAccountOfferType"
         }
       },
       "allOf": [
@@ -626,7 +627,6 @@
         }
       ],
       "required": [
-        "databaseAccountOfferType",
         "properties"
       ]
     },
