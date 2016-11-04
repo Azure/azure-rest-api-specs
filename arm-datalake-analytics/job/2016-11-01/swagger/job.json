@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "DataLakeAnalyticsJobManagementClient",
+    "title": "DataLakeAnalyticsJobsManagementClient",
     "description": "Creates an Azure Data Lake Analytics job client.",
     "version": "2016-11-01",
     "x-ms-code-generation-settings": {
@@ -241,6 +241,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to return. Optional."
           },
           {
@@ -249,14 +250,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
@@ -278,20 +273,6 @@
             "required": false,
             "type": "boolean",
             "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
-          },
-          {
-            "name": "$search",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "A free form search. A free-text search expression to match for whether a particular entry should be included in the feed, e.g. Categories?$search=blue OR green. Optional."
-          },
-          {
-            "name": "$format",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The return format. Return the response in particular formatxii without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -532,7 +513,6 @@
             "VertexResourceInUserFolder",
             "JobManagerResourceInUserFolder",
             "StatisticsResourceInUserFolder"
-
           ],
           "x-ms-enum": {
             "name": "JobResourceType",
@@ -619,7 +599,7 @@
         },
         "compileMode": {
           "type": "string",
-          "description": "the compile mode for the job.",
+          "description": "Optionally enforces a specific compilation mode for the job during execution. If this is not specified during submission, the server will determine the optimal compilation mode.",
           "enum": [
             "Semantic",
             "Full",
@@ -898,6 +878,7 @@
         "jobId": {
           "type": "string",
           "format": "uuid",
+          "readOnly": true,
           "description": "the job's unique identifier (a GUID)."
         },
         "name": {
@@ -918,6 +899,7 @@
         },
         "submitter": {
           "type": "string",
+          "readOnly": true,
           "description": "the user or account that submitted the job."
         },
         "errorMessage": {
@@ -930,6 +912,8 @@
         },
         "degreeOfParallelism": {
           "type": "integer",
+          "minimum": 1,
+          "default": 1,
           "format": "int32",
           "description": "the degree of parallelism used for this job. This must be greater than 0."
         },
@@ -1038,12 +1022,6 @@
           "type": "string",
           "readOnly": true,
           "description": "the link (url) to the next page of results."
-        },
-        "count": {
-          "type": "integer",
-          "readOnly": true,
-          "format": "int64",
-          "description": "the total count of results that are available, but might not be returned in the current page."
         }
       },
       "description": "List of jobInfo items."

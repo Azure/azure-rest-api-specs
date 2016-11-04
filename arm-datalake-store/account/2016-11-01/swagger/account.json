@@ -38,11 +38,64 @@
   },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules/{firewallRuleName}": {
+      "put": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_CreateOrUpdate",
+        "description": "Creates or updates the specified firewall rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure resource group that contains the Data Lake Store account."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store account to which to add the firewall rule."
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule to create or update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            },
+            "description": "Parameters supplied to create the create firewall rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
-          "Account"
+          "FirewallRules"
         ],
-        "operationId": "Account_DeleteFirewallRule",
+        "operationId": "FirewallRules_Delete",
         "description": "Deletes the specified firewall rule from the specified Data Lake Store account",
         "parameters": [
           {
@@ -84,9 +137,9 @@
       },
       "get": {
         "tags": [
-          "Account"
+          "FirewallRules"
         ],
-        "operationId": "Account_GetFirewallRule",
+        "operationId": "FirewallRules_Get",
         "description": "Gets the specified Data Lake Store firewall rule.",
         "parameters": [
           {
@@ -130,9 +183,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules": {
       "get": {
         "tags": [
-          "Account"
+          "FirewallRules"
         ],
-        "operationId": "Account_ListFirewallRules",
+        "operationId": "FirewallRules_List",
         "description": "Lists the Data Lake Store firewall rules within the specified Data Lake Store account.",
         "parameters": [
           {
@@ -169,67 +222,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/trustedIdProviders/{trustedIdProviderName}": {
       "put": {
         "tags": [
-          "Account"
+          "TrustedIdProviders"
         ],
-        "operationId": "Account_CreateOrUpdateFirewallRule",
-        "description": "Creates or updates the specified firewall rule.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Store account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to which to add the firewall rule."
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the firewall rule to create or update."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FirewallRule"
-            },
-            "description": "Parameters supplied to create the create firewall rule."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/FirewallRule"
-            }
-          }
-        }
-      }
-    },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/trustedIdProviders/{trustedIdProviderName}": {
-	  "put": {
-        "tags": [
-          "Account"
-        ],
-        "operationId": "Account_CreateOrUpdateTrustedIdProvider",
+        "operationId": "TrustedIdProviders_CreateOrUpdate",
         "description": "Creates or updates the specified trusted identity provider",
         "parameters": [
           {
@@ -280,9 +278,9 @@
       },
       "delete": {
         "tags": [
-          "Account"
+          "TrustedIdProviders"
         ],
-        "operationId": "Account_DeleteTrustedIdProvider",
+        "operationId": "TrustedIdProviders_Delete",
         "description": "Deletes the specified trusted identity provider from the specified Data Lake Store account",
         "parameters": [
           {
@@ -324,9 +322,9 @@
       },
       "get": {
         "tags": [
-          "Account"
+          "TrustedIdProviders"
         ],
-        "operationId": "Account_GetTrustedIdProvider",
+        "operationId": "TrustedIdProviders_Get",
         "description": "Gets the specified Data Lake Store trusted identity provider.",
         "parameters": [
           {
@@ -370,9 +368,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/trustedIdProviders": {
       "get": {
         "tags": [
-          "Account"
+          "TrustedIdProviders"
         ],
-        "operationId": "Account_ListTrustedIdProviders",
+        "operationId": "TrustedIdProviders_List",
         "description": "Lists the Data Lake Store trusted identity providers within the specified Data Lake Store account.",
         "parameters": [
           {
@@ -664,6 +662,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to return. Optional."
           },
           {
@@ -672,14 +671,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
@@ -701,20 +694,6 @@
             "required": false,
             "type": "boolean",
             "description": "A Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
-          },
-          {
-            "name": "$search",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "A free form search. A free-text search expression to match for whether a particular entry should be included in the feed, e.g. Categories?$search=blue OR green. Optional."
-          },
-          {
-            "name": "$format",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The desired return format. Return the response in particular formatxii without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -758,6 +737,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to return. Optional."
           },
           {
@@ -766,14 +746,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories/$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
@@ -795,20 +769,6 @@
             "required": false,
             "type": "boolean",
             "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
-          },
-          {
-            "name": "$search",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "A free form search. A free-text search expression to match for whether a particular entry should be included in the feed, e.g. Categories?$search=blue OR green. Optional."
-          },
-          {
-            "name": "$format",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The desired return format. Return the response in particular formatxii without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -834,6 +794,10 @@
   },
   "definitions": {
     "FirewallRuleProperties": {
+      "required": [
+        "startIpAddress",
+        "endIpAddress"
+      ],
       "properties": {
         "startIpAddress": {
           "type": "string",
@@ -847,28 +811,24 @@
       "description": "Data Lake Store firewall rule properties information"
     },
     "FirewallRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "the firewall rule's name."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the namespace and type of the firewall Rule."
-        },
-        "id": {
-          "type": "string",
-          "description": "the firewall rule's full ID."
-        },
         "properties": {
           "$ref": "#/definitions/FirewallRuleProperties",
-          "description": "the properties of the firewall rule."
+          "description": "the properties of the firewall rule.",
+          "x-ms-client-flatten": true
         }
       },
       "description": "Data Lake Store firewall rule information"
     },
-	"TrustedIdProviderProperties": {
+    "TrustedIdProviderProperties": {
+      "required": [
+        "idProvider"
+      ],
       "properties": {
         "idProvider": {
           "type": "string",
@@ -877,29 +837,25 @@
       },
       "description": "Data Lake Store trusted identity provider properties information"
     },
-	"TrustedIdProvider": {
+    "TrustedIdProvider": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "the trusted identity provider's name."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the namespace and type of the trusted identity provider."
-        },
-        "id": {
-          "type": "string",
-          "description": "the trusted identity provider's full ID."
-        },
         "properties": {
           "$ref": "#/definitions/TrustedIdProviderProperties",
-          "description": "the properties of the trusted identity provider."
+          "description": "the properties of the trusted identity provider.",
+          "x-ms-client-flatten": true
         }
       },
       "description": "Data Lake Store firewall rule information"
     },
-	"DataLakeStoreTrustedIdProviderListResult": {
+    "DataLakeStoreTrustedIdProviderListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -913,12 +869,6 @@
           "type": "string",
           "readOnly": true,
           "description": "the link (url) to the next page of results."
-        },
-        "count": {
-          "type": "integer",
-          "readOnly": true,
-          "format": "int64",
-          "description": "the total count of results that are available, but might not be returned in the current page."
         }
       },
       "description": "Data Lake Store trusted identity provider list information."
@@ -937,17 +887,14 @@
           "type": "string",
           "readOnly": true,
           "description": "the link (url) to the next page of results."
-        },
-        "count": {
-          "type": "integer",
-          "readOnly": true,
-          "format": "int64",
-          "description": "the total count of results that are available, but might not be returned in the current page."
         }
       },
       "description": "Data Lake Store firewall rule list information."
     },
     "EncryptionIdentity": {
+      "required": [
+        "type"
+      ],
       "properties": {
         "type": {
           "type": "string",
@@ -976,6 +923,9 @@
       "description": "The encryption identity properties."
     },
     "EncryptionConfig": {
+      "required": [
+        "type"
+      ],
       "properties": {
         "type": {
           "type": "string",
@@ -997,6 +947,11 @@
       "description": "The encryption configuration for the account."
     },
     "KeyVaultMetaInfo": {
+      "required": [
+        "keyVaultResourceId",
+        "encryptionKeyName",
+        "encryptionKeyVersion"
+      ],
       "properties": {
         "keyVaultResourceId": {
           "type": "string",
@@ -1083,7 +1038,7 @@
           "$ref": "#/definitions/EncryptionConfig",
           "description": "The Key vault encryption configuration."
         },
-		"firewallState": {
+        "firewallState": {
           "type": "string",
           "description": "The current state of the IP address firewall for this Data Lake store account.",
           "enum": [
@@ -1095,14 +1050,14 @@
             "modelAsString": false
           }
         },
-		"firewallRules": {
+        "firewallRules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/FirewallRule"
           },
           "description": "The list of firewall rules associated with this Data Lake store account."
         },
-		"trustedIdProviderState": {
+        "trustedIdProviderState": {
           "type": "string",
           "description": "The current state of the trusted identity provider feature for this Data Lake store account.",
           "enum": [
@@ -1114,7 +1069,7 @@
             "modelAsString": false
           }
         },
-		"trustedIdProviders": {
+        "trustedIdProviders": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TrustedIdProvider"
@@ -1139,39 +1094,20 @@
       "description": "Data Lake Store account properties information"
     },
     "DataLakeStoreAccount": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "the account regional location."
-        },
-        "name": {
-          "type": "string",
-          "description": "the account name."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the namespace and type of the account."
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the account subscription ID."
-        },
         "identity": {
           "$ref": "#/definitions/EncryptionIdentity",
           "description": "The Key vault encryption identity, if any."
         },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "the value of custom properties."
-        },
         "properties": {
           "$ref": "#/definitions/DataLakeStoreAccountProperties",
-          "description": "the Data Lake Store account properties."
+          "description": "the Data Lake Store account properties.",
+          "x-ms-client-flatten": true
         }
       },
       "description": "Data Lake Store account information"
@@ -1190,12 +1126,6 @@
           "type": "string",
           "readOnly": true,
           "description": "the link (url) to the next page of results."
-        },
-        "count": {
-          "type": "integer",
-          "readOnly": true,
-          "format": "int64",
-          "description": "the total count of results that are available, but might not be returned in the current page."
         }
       },
       "description": "Data Lake Store account list information response."
@@ -1268,28 +1198,61 @@
       },
       "description": "Data Lake Store error information"
     },
-    "AzureAsyncOperationResult": {
+    "Resource": {
+      "description": "The Resource model definition.",
       "properties": {
-        "status": {
+        "id": {
+          "readOnly": true,
           "type": "string",
-          "readOnly": true,
-          "description": "the status of the AzureAsuncOperation",
-          "enum": [
-            "InProgress",
-            "Succeeded",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "OperationStatus",
-            "modelAsString": false
-          }
+          "description": "Resource Id"
         },
-        "error": {
+        "name": {
           "readOnly": true,
-          "$ref": "#/definitions/Error"
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         }
       },
-      "description": "The response body contains the status of the specified asynchronous operation, indicating whether it has succeeded, is in progress, or has failed. Note that this status is distinct from the HTTP status code returned for the Get Operation Status operation itself. If the asynchronous operation succeeded, the response body includes the HTTP status code for the successful request. If the asynchronous operation failed, the response body includes the HTTP status code for the failed request and error information regarding the failure."
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "description": "The Resource model definition for a nested resource.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
