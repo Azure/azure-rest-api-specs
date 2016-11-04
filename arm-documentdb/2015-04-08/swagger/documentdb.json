@@ -347,8 +347,8 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/databaseAccountNames/{accountName}": {
       "head": {
-        "operationId": "DatabaseAccounts_CheckNameAvailability",
-        "description": "Checks that the Azure DocumentDB account name is valid and is not in use.",
+        "operationId": "DatabaseAccounts_CheckNameExists",
+        "description": "Checks that the Azure DocumentDB account name already exists. A valid account name may contain only lowercase letters, numbers, and the '-' character, and must be between 3 and 50 characters.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -366,9 +366,6 @@
           },
           "404": {
             "description": "Not Found. The account name is available and valid."
-          },
-          "400": {
-            "description": "Bad Request. The account name is invalid. The account name may contain only lowercase letters, numbers, and the '-' character, and must be between 3 and 50 characters."
           }
         }
       }
