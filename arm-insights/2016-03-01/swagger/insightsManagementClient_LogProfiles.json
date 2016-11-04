@@ -70,7 +70,7 @@
           "LogProfiles"
         ],
         "operationId": "LogProfiles_CreateOrUpdate",
-        "description": "Create or update the log profile.",
+        "description": "Create or update a log profile in Azure Monitoring REST API.",
         "parameters": [
           {
             "$ref": "#/parameters/LogProfileNameParameter"
@@ -173,7 +173,7 @@
         "days": {
           "type": "integer",
           "format": "int32",
-          "description": "the number of days for the retention."
+          "description": "the number of days for the retention in days. A value of 0 will retain the events indefinitely."
         }
       },
       "required": [ "enabled", "days" ],
@@ -184,29 +184,29 @@
       "properties": {
         "storageAccountId": {
           "type": "string",
-          "description": "the resource id of the storage account."
+          "description": "the resource id of the storage account to which you would like to send the Activity Log."
         },
         "serviceBusRuleId": {
           "type": "string",
-          "description": "the resource id of the service bus rule."
+          "description": "The service bus rule ID of the service bus namespace in which you would like to have Event Hubs created for streaming the Activity Log. The rule ID is of the format: '{service bus resource ID}/authorizationrules/{key name}'."
         },
         "locations": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "the comma separated list of valid ARM locations plus global. This are the locations where the logs are generated from."
+          "description": "List of regions for which Activity Log events should be stored or streamed. It is a comma separated list of valid ARM locations including the 'global' location."
         },
         "categories": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": " the categories of the logs. These categories are created as is convenient to the user."
+          "description": "the categories of the logs. These categories are created as is convenient to the user. Some values are: 'Write', 'Delete', and/or 'Action.'"
         },
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
-          "description": "the retention policy for this log."
+          "description": "the retention policy for the events in the log."
         }
       },
       "description": "The log profile properties."

@@ -21,7 +21,7 @@
           "Events"
         ],
         "operationId": "Events_List",
-        "description": "Provides the list of events.",
+        "description": "Provides the list of events. The **$filter** is very restricted and allows only the following patterns. - List events for a resource group: $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation' and resourceGroupName eq '<ResourceGroupName>'. - List events for resource: $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation' and resourceUri eq '<ResourceURI>'. - List events for a subscription: $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation'. -List events for a resource provider: $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation' and resourceProvider eq '<ResourceProviderName>'. - List events for a correlation Id: api-version=2014-04-01&$filter=eventTimestamp ge '2014-07-16T04:36:37.6407898Z' and eventTimestamp le '2014-07-20T04:36:37.6407898Z' and eventChannels eq 'Admin, Operation' and correlationId eq '<CorrelationID>'. No other syntax is allowed.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -112,7 +112,7 @@
       "properties": {
         "authorization": {
           "$ref": "#/definitions/SenderAuthorization",
-          "description": "the authorization used by the user who has performed the operation that led to this event."
+          "description": "the authorization used by the user who has performed the operation that led to this event. This captures the RBAC properties of the event. These usually include the 'action', 'role' and the 'scope'"
         },
         "channels": {
           "type": "string",
@@ -153,7 +153,7 @@
         },
         "correlationId": {
           "type": "string",
-          "description": "the correlation Id. The correlation Id is shared among the events that belong to the same deployment."
+          "description": "the correlation Id, usually a GUID in the string format. The correlation Id is shared among the events that belong to the same uber operation."
         },
         "eventName": {
           "$ref": "#/definitions/LocalizableString",
@@ -165,7 +165,7 @@
         },
         "httpRequest": {
           "$ref": "#/definitions/HttpRequestInfo",
-          "description": "the HTTP request info. The client IP address of the user who initiated the event is captured as part of the HTTP request info."
+          "description": "the HTTP request info. Usually includes the 'clientRequestId', 'clientIpAddress' (IP address of the user who initiated the event) and 'method' (HTTP method e.g. PUT)."
         },
         "level": {
           "type": "string",
@@ -187,21 +187,21 @@
             "url": "http://msdn.microsoft.com/en-us/library/azure/dn790546.aspx"
           },
           "type": "string",
-          "description": "the resource group name."
+          "description": "the resource group name of the impacted resource."
         },
         "resourceProviderName": {
           "$ref": "#/definitions/LocalizableString",
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/azure/dn790572.aspx"
           },
-          "description": "the resource provider name."
+          "description": "the resource provider name of the impacted resource."
         },
         "resourceId": {
           "externalDocs": {
             "url": "http://msdn.microsoft.com/en-us/library/azure/dn790569.aspx"
           },
           "type": "string",
-          "description": "the resource uri"
+          "description": "the resource uri that uniquely identifies the resource."
         },
         "resourceType": {
           "$ref": "#/definitions/LocalizableString",
@@ -223,29 +223,29 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "the property bag that includes details about the event."
+          "description": "the set of <Key, Value> pairs (usually a Dictionary<String, String>) that includes details about the event."
         },
         "status": {
           "$ref": "#/definitions/LocalizableString",
-          "description": "the event status. Some typical values are: Started, Succeeded, Failed. For more information see: https://msdn.microsoft.com/en-us/library/azure/dn931934.aspx"
+          "description": "a string describing the status of the operation. Some typical values are: Started, In progress, Succeeded, Failed, Resolved."
         },
         "subStatus": {
           "$ref": "#/definitions/LocalizableString",
-          "description": "the event sub status. Most of the time, when included, this captures the HTTP status code. For more information see: https://msdn.microsoft.com/en-us/library/azure/dn931934.aspx"
+          "description": "the event sub status. Most of the time, when included, this captures the HTTP status code of the REST call. Common values are: OK (HTTP Status Code: 200), Created (HTTP Status Code: 201), Accepted (HTTP Status Code: 202), No Content (HTTP Status Code: 204), Bad Request(HTTP Status Code: 400), Not Found (HTTP Status Code: 404), Conflict (HTTP Status Code: 409), Internal Server Error (HTTP Status Code: 500), Service Unavailable (HTTP Status Code:503), Gateway Timeout (HTTP Status Code: 504)"
         },
         "eventTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "the occurrence time of event in ISO 8601 format"
+          "description": "the timestamp of when the event was generated by the Azure service processing the request corresponding the event. It in ISO 8601 format."
         },
         "submissionTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "the event submission time in ISO 8601 format. This value should not be confused eventTimestamp. As there might be a delay between the occurence time of the event, and the time that the event is submitted to the Azure logging infrastructure."
+          "description": "the timestamp of when the event became available for querying via this API. It is in ISO 8601 format. This value should not be confused eventTimestamp. As there might be a delay between the occurence time of the event, and the time that the event is submitted to the Azure logging infrastructure."
         },
         "subscriptionId": {
           "type": "string",
-          "description": "the Azure subscription Id"
+          "description": "the Azure subscription Id usually a GUID."
         },
         "tenantId": {
           "type": "string",
@@ -292,7 +292,7 @@
       "in": "query",
       "type": "string",
       "required": false,
-      "description": "The filter to apply on the operation. For more information please see https://msdn.microsoft.com/en-us/library/azure/dn931934.aspx",
+      "description": "Reduces the set of data collected. The syntax allowed depends on the operation. See the operation's description for details.",
       "x-ms-parameter-location": "method"
     },
     "SelectParameter": {
@@ -300,7 +300,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The comma separated list of property names to be returned. Possible values are: authorization, channels, claims, correlationId, description, eventDataId, eventName, eventTimestamp, httpRequest, level, operationId, operationName, properties, resourceGroupName, resourceProviderName, resourceId, status, submissionTimestamp, subStatus, subscriptionId",
+      "description": "Used to fetch events with only the given properties. The filter is a comma separated list of property names to be returned. Possible values are: authorization, channels, claims, correlationId, description, eventDataId, eventName, eventTimestamp, httpRequest, level, operationId, operationName, properties, resourceGroupName, resourceProviderName, resourceId, status, submissionTimestamp, subStatus, subscriptionId",
       "x-ms-parameter-location": "method"
     }
   }
