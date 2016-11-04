@@ -2466,6 +2466,7 @@
           "description": "a list containing reference to all Virtual Machines created under this Availability Set."
         },
         "statuses": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
@@ -2862,6 +2863,9 @@
           "description": "the uri to fetch the next page of Compute Resource Usages. Call ListNext() with this to fetch the next page of Compute Resource Usages."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The List Usages operation response."
     },
     "VirtualMachineCaptureParameters": {
@@ -4500,33 +4504,33 @@
       "description": "Compute-specific operation properties, including output"
     },
     "Resource": {
-      "description": "The Resource model definition.",
+      "description": "The resource model definition.",
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource Id"
+          "description": "Resource ID."
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource name"
+          "description": "Resource name."
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource type"
+          "description": "Resource type."
         },
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags"
+          "description": "Resource tags."
         }
       },
       "required": [
@@ -4550,14 +4554,14 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Subscription credentials that uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "Client API Version."
     }
   }
 }
