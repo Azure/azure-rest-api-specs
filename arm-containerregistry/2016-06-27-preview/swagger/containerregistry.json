@@ -20,7 +20,7 @@
         "tags": [
           "Operation"
         ],
-        "description": "Checks whether the container registry name is available for use.",
+        "description": "Checks whether the container registry name is available for use. The name must contain only alphanumeric characters, be globally unique, and between 5 and 60 characters in length.",
         "operationId": "Registries_CheckNameAvailability",
         "parameters": [
           {
@@ -41,7 +41,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful.",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/RegistryNameStatus"
             }
@@ -72,7 +72,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful.",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/Registry"
             }
@@ -110,7 +110,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful.",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/Registry"
             }
@@ -139,7 +139,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful."
+            "description": "The request was successful; the request was well-formed and received properly."
           }
         }
       },
@@ -174,7 +174,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful.",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/Registry"
             }
@@ -202,7 +202,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful.",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/RegistryListResult"
             }
@@ -230,7 +230,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful.",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/RegistryListResult"
             }
@@ -264,7 +264,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful.",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/RegistryCredentials"
             }
@@ -385,12 +385,12 @@
         },
         "storageAccount": {
           "$ref": "#/definitions/StorageAccountProperties",
-          "description": "The storage account properties. If specified, the storage account must be in the same physical location as the container registry."
+          "description": "The properties of the storage account for the container registry. If specified, the storage account must be in the same physical location as the container registry."
         }
       }
     },
     "StorageAccountProperties": {
-      "description": "The properties of a storage account.",
+      "description": "The properties of a storage account for a container registry.",
       "required": [
         "name",
         "accessKey"
@@ -432,7 +432,7 @@
         },
         "storageAccount": {
           "$ref": "#/definitions/StorageAccountProperties",
-          "description": "The properties of a storage account. If specified, the storage account must be in the same physical location as the container registry."
+          "description": "The properties of a storage account for the container registry. If specified, the storage account must be in the same physical location as the container registry."
         }
       }
     },
