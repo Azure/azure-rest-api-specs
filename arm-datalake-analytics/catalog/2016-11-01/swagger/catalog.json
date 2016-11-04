@@ -14,7 +14,7 @@
     "parameters": [
       {
         "name": "accountName",
-        "description": "The Azure Data Lake Analytics account to execute catalog operations on.",
+        "description": "The Azure Data Lake Analytics account upon which to execute catalog operations.",
         "required": true,
         "type": "string",
         "in": "path",
@@ -72,7 +72,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully created the specified secret in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlSecret"
             }
@@ -115,7 +115,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully updated the details of the specified secret in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlSecret"
             }
@@ -149,7 +149,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved details of the specified secret in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlSecret"
             }
@@ -183,7 +183,7 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully deleted the specified secret from the specified database."
           }
         }
       }
@@ -209,7 +209,7 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully deleted all secrets from the specified database."
           }
         }
       }
@@ -322,7 +322,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved and returned the specified credential (name only) from the specified database.",
+            "description": "Successfully retrieved the specified credential (name only) from the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlCredential"
             }
@@ -437,7 +437,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of credentials in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlCredentialList"
             }
@@ -477,7 +477,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved details of the specified external data source in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlExternalDataSource"
             }
@@ -552,7 +552,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of external data sources in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlExternalDataSourceList"
             }
@@ -681,7 +681,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of procedures in the specified database and schema.",
             "schema": {
               "$ref": "#/definitions/USqlProcedureList"
             }
@@ -810,7 +810,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of tables in the specified database and schema.",
             "schema": {
               "$ref": "#/definitions/USqlTableList"
             }
@@ -939,7 +939,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of table types in the specified database and schema.",
             "schema": {
               "$ref": "#/definitions/USqlTableTypeList"
             }
@@ -1068,7 +1068,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of views in the specified database and schema.",
             "schema": {
               "$ref": "#/definitions/USqlViewList"
             }
@@ -1122,7 +1122,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the details of the specified table statistics in the specified database and schema.",
             "schema": {
               "$ref": "#/definitions/USqlTableStatistics"
             }
@@ -1211,7 +1211,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of table statistics in the specified database and schema.",
             "schema": {
               "$ref": "#/definitions/USqlTableStatisticsList"
             }
@@ -1265,7 +1265,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the details of the specified table partition in the specified database, schema, and table.",
             "schema": {
               "$ref": "#/definitions/USqlTablePartition"
             }
@@ -1354,7 +1354,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of table partitions in the specified database, schema, and table.",
             "schema": {
               "$ref": "#/definitions/USqlTablePartitionList"
             }
@@ -1440,7 +1440,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of types in the specified database and schema.",
             "schema": {
               "$ref": "#/definitions/USqlTypeList"
             }
@@ -1487,7 +1487,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the details of the specified table valued function in the specified database and schema.",
             "schema": {
               "$ref": "#/definitions/USqlTableValuedFunction"
             }
@@ -1569,7 +1569,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of table valued functions in the specified database and schema.",
             "schema": {
               "$ref": "#/definitions/USqlTableValuedFunctionList"
             }
@@ -1609,7 +1609,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the details of the specified assembly in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlAssembly"
             }
@@ -1684,7 +1684,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of assemblies in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlAssemblyList"
             }
@@ -1724,7 +1724,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the details of the specified schema in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlSchema"
             }
@@ -1799,7 +1799,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of schemas in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlSchemaList"
             }
@@ -1832,7 +1832,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the details of the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlDatabase"
             }
@@ -1900,7 +1900,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of databases.",
             "schema": {
               "$ref": "#/definitions/USqlDatabaseList"
             }
