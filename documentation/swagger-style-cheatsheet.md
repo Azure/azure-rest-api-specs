@@ -1,12 +1,12 @@
 # Swagger spec style guide
 
-Less style guide and more "cheat sheet," the following sections describe which fields or content are currently supported by [docs.microsoft.com](http://docs.microsoft.com), the toolchain, and the Swagger specification.
+Less style guide and more "cheat sheet," the following sections describe which fields or content are currently supported by [docs.microsoft.com](http://docs.microsoft.com), the toolchain, and the [Swagger/OpenAPI specification](http://swagger.io/specification/).
 
 This document will be updated as features and support are added to the toolchain and docs.microsoft.com.
 
 ## Documentation field support by object type
 
-Not all Swagger documentation fields (summary, description, title) are supported by all Swagger object types. This is a Swagger specification restriction, not a docs.ms.com or toolchain restriction. The following table specifies which fields can be used for which object types in a Swagger *.json.
+Not all Swagger documentation fields (summary, description, title) are supported by all Swagger object types. This is an [OpenAPI](http://swagger.io/specification/) specification restriction, not a docs.ms.com or toolchain restriction. The following table specifies which fields can be used for which object types in a Swagger *.json.
 
 | Object type | summary | description | title |
 |-------------:|:-----------:|:-----------:|:-----------:|
