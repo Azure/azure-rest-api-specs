@@ -170,6 +170,125 @@
         }
       }
     },
+    "/{resourceId}/providers/Microsoft.Authorization/locks/{lockName}": {
+      "put": {
+        "tags": [
+          "ManagementLocks"
+        ],
+        "operationId": "ManagementLocks_CreateOrUpdateById",
+        "description": "Create or update a management lock by resource id.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource id. "
+          },
+          {
+            "name": "lockName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of lock."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagementLockObject"
+            },
+            "description": "Create or update management lock parameters."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+           "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagementLockObject"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ManagementLockObject"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagementLocks"
+        ],
+        "operationId": "ManagementLocks_DeleteById",
+        "description": "Delete a management lock by resource id.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource id. "
+          },
+          {
+            "name": "lockName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of lock."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ManagementLocks"
+        ],
+        "operationId": "ManagementLocks_GetById",
+        "description": "Get a management lock by resource id.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource id. "
+          },
+          {
+            "name": "lockName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of lock."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagementLockObject"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/locks/{lockName}": {
       "put": {
         "tags": [
@@ -193,14 +312,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource identity."
+            "description": "The namespace of the resource provider."
           },
           {
             "name": "parentResourcePath",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource identity.",
+            "description": "An extra path parameter needed in some services, like SQL Databases.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -208,7 +327,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource identity.",
+            "description": "The type of the resource.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -216,7 +335,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource identity."
+            "description": "The name of the resource."
           },
           {
             "name": "lockName",
@@ -278,14 +397,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource identity."
+            "description": "The namespace of the resource provider."
           },
           {
             "name": "parentResourcePath",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource identity.",
+            "description": "An extra path parameter needed in some services, like SQL Databases.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -293,7 +412,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource identity.",
+            "description": "The type of the resource.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -301,7 +420,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource identity."
+            "description": "The name of the resource."
           },
           {
             "name": "lockName",
@@ -348,14 +467,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource identity."
+            "description": "The namespace of the resource provider."
           },
           {
             "name": "parentResourcePath",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource identity.",
+            "description": "An extra path parameter needed in some services, like SQL Databases.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -363,7 +482,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource identity.",
+            "description": "The type of the resource.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -371,7 +490,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource identity."
+            "description": "The name of the resource."
           },
           {
             "name": "lockName",
@@ -573,14 +692,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource identity."
+            "description": "The namespace of the resource provider."
           },
           {
             "name": "parentResourcePath",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource identity.",
+            "description": "An extra path parameter needed in some services, like SQL Databases.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -588,7 +707,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource identity.",
+            "description": "The type of the resource.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -596,7 +715,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource identity."
+            "description": "The name of the resource."
           },
           {
             "name": "$filter",
