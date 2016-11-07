@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure SQL Database API spec",
-    "description": "The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases.",
+    "description": "Provides create, read, update and delete functionality for Azure SQL resources including servers, databases, elastic pools, recommendations, operations, and usage metrics.",
     "version": "2014-04-01"
   },
   "host": "management.azure.com",
@@ -235,7 +235,7 @@
           "Databases"
         ],
         "operationId": "Databases_Get",
-        "description": "Returns information about an Azure SQL database.",
+        "description": "Gets information about an Azure SQL database.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -427,7 +427,7 @@
           "Servers"
         ],
         "operationId": "Servers_Delete",
-        "description": "Returns information about an Azure SQL Server.",
+        "description": "Deletes a SQL server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -456,7 +456,7 @@
           "Servers"
         ],
         "operationId": "Servers_GetByResourceGroup",
-        "description": "Returns information about an Azure SQL Server.",
+        "description": "Gets information about an Azure SQL Server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -547,7 +547,7 @@
           "ServerUpgrades"
         ],
         "operationId": "Servers_GetUpgrade",
-        "description": "Returns information about Upgrade status of an Azure SQL Server.",
+        "description": "Gets information about Upgrade status of an Azure SQL Server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -744,7 +744,7 @@
           "ElasticPools"
         ],
         "operationId": "ElasticPools_Get",
-        "description": "Returns information about an Azure SQL elastic pool.",
+        "description": "Gets information about an Azure SQL elastic pool.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -898,7 +898,7 @@
           "ElasticPools"
         ],
         "operationId": "ElasticPools_GetDatabase",
-        "description": "Returns information about an Azure SQL database inside of an Azure SQL elastic pool.",
+        "description": "Gets information about an Azure SQL database inside of an Azure SQL elastic pool.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -984,7 +984,7 @@
           "RecommendedElasticPools"
         ],
         "operationId": "RecommendedElasticPools_Get",
-        "description": "Returns information about an Azure SQL Recommended Elastic Pool.",
+        "description": "Gets information about an Azure SQL Recommended Elastic Pool.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1022,7 +1022,7 @@
           "RecommendedElasticPools"
         ],
         "operationId": "RecommendedElasticPools_GetDatabases",
-        "description": "Returns information about an Azure SQL Database inside of an Azure SQL Recommended Elastic Pool.",
+        "description": "Gets information about an Azure SQL Database inside of an Azure SQL Recommended Elastic Pool.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1183,7 +1183,7 @@
           "ServiceTierAdvisors"
         ],
         "operationId": "Databases_GetServiceTierAdvisor",
-        "description": "Returns information about a service tier advisor.",
+        "description": "Gets information about a service tier advisor.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1269,7 +1269,7 @@
           "ServiceObjectives"
         ],
         "operationId": "Servers_GetServiceObjective",
-        "description": "Returns information about an Azure SQL Database Service Objective.",
+        "description": "Gets information about an Azure SQL Database Service Objective.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1392,7 +1392,7 @@
           "TransparentDataEncryption"
         ],
         "operationId": "Databases_GetTransparentDataEncryptionConfiguration",
-        "description": "Returns an Azure SQL Database Transparent Data Encryption Response.",
+        "description": "Gets an Azure SQL Database Transparent Data Encryption Response.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1971,11 +1971,11 @@
         },
         "administratorLogin": {
           "type": "string",
-          "description": "Administrator username for the server. Can only be specified when the server is being created."
+          "description": "Administrator username for the server. Can only be specified when the server is being created (and is required for creation)."
         },
         "administratorLoginPassword": {
           "type": "string",
-          "description": "The administrator login password."
+          "description": "The administrator login password (required for server creation)."
         }
       },
       "description": "Represents the properties of an Azure SQL Server."
@@ -2329,6 +2329,27 @@
           "type": "string",
           "format": "date-time",
           "description": "The recovery period start date of the Azure SQL Database. This records the start date and time when recovery is available for this Azure SQL Database (ISO8601 format)."
+        },
+        "createMode": {
+          "type": "string",
+          "description": "Specifies the type of database to create.",
+          "enum": [
+            "Copy",
+            "Default",
+            "NonReadableSecondary",
+            "OnlineSecondary",
+            "PointInTimeRestore",
+            "Recovery",
+            "Restore"
+          ],
+          "x-ms-enum": {
+            "name": "createMode",
+            "modelAsString": true
+          }
+        },
+        "sourceDatabaseId": {
+          "type": "string",
+          "description": "Conditional.  Specifies the resource Id of the source database.  If createMode is not set to Default, then this value must be specified.  The name of the source database must be the same.  NOTE: Collation, Edition, and MaxSizeBytes must remain the same while the link is active.  Values specified for these parameters will be ignored."
         },
         "edition": {
           "type": "string",
@@ -3161,7 +3182,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "The subscription id that identifies an Azure subscription."
     },
     "ApiVersionParameter": {
       "name": "api-version",
