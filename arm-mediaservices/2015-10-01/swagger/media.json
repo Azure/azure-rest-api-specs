@@ -474,7 +474,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{mediaServiceName}/syncStorageKeys": {
       "post": {
         "operationId": "MediaService_SyncStorageKeys",
-        "description": "Synchronizes the keys for a storage account to the Media Service.",
+        "description": "Synchronizes storage account keys for a storage account associated with the Media Service account.",
         "externalDocs": {
           "url": "https://aka.ms/media-manage"
         },
@@ -733,6 +733,9 @@
     },
     "SyncStorageKeysInput": {
       "description": "The request  body for a SyncStorageKeys API.",
+      "required": [
+        "id"
+      ],
       "properties": {
         "id": {
           "description": "The id of the storage account resource.",
