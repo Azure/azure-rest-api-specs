@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "OperationalInsightsManagementClient",
-    "description": ".Net client wrapper for the REST API for Azure Operational Insights",
+    "title": "Azure Log Analytics Client",
+    "description": ".Net client wrapper for the REST API for Azure Log Analytics",
     "version": "2015-11-01-preview"
   },
   "host": "management.azure.com",
@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices/{name}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices/{linkedServiceName}": {
       "put": {
         "tags": [
           "LinkedServices"
@@ -49,17 +49,17 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the linked service."
+            "description": "Resource Group name of the Log Analytics Workspace containing the linkedServices resource"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the parent workspace that will contain the linked service"
+            "description": "Name of the Log Analytics Workspace that will contain the linkedServices resource"
           },
           {
-            "name": "name",
+            "name": "linkedServiceName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -95,9 +95,7 @@
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices/{linkedServiceName}": {
+      },
       "delete": {
         "tags": [
           "LinkedServices"
@@ -110,14 +108,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the linked service."
+            "description": "Resource Group name of the Log Analytics Workspace containing the linkedServices resource"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the workspace that contains the linked service."
+            "description": "Name of the Log Analytics Workspace that will contain the linkedServices resource"
           },
           {
             "name": "linkedServiceName",
@@ -154,14 +152,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the linked service."
+            "description": "Resource Group name of the Log Analytics Workspace containing the linkedServices resource"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the workspace that contains the linked service."
+            "description": "Name of the Log Analytics Workspace that will contain the linkedServices resource"
           },
           {
             "name": "linkedServiceName",
@@ -229,12 +227,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/dataSources/{name}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/dataSources/{dataSourceName}": {
       "put": {
         "tags": [
           "DataSources"
         ],
-        "operationId": "DataSources_CreateOrUpdate",
+        "operationId": "DataSource_CreateOrUpdate",
         "description": "Create or update a data source.",
         "parameters": [
           {
@@ -252,7 +250,7 @@
             "description": "The name of the parent workspace that will contain the data source"
           },
           {
-            "name": "name",
+            "name": "dataSourceName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -288,14 +286,12 @@
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/dataSources/{dataSourceName}": {
+      },
       "delete": {
         "tags": [
           "DataSources"
         ],
-        "operationId": "DataSources_Delete",
+        "operationId": "DataSource_Delete",
         "description": "Deletes a data source instance.",
         "parameters": [
           {
@@ -339,7 +335,7 @@
         "tags": [
           "DataSources"
         ],
-        "operationId": "DataSources_Get",
+        "operationId": "DataSource_Get",
         "description": "Gets a data source instance.",
         "parameters": [
           {
@@ -385,7 +381,7 @@
         "tags": [
           "DataSources"
         ],
-        "operationId": "DataSources_ListInWorkspace",
+        "operationId": "DataSource_ListInWorkspace",
         "description": "Gets the first page of data source instances in a workspace with the link to the next page.",
         "parameters": [
           {
@@ -752,6 +748,59 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}": {
+      "put": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_CreateOrUpdate",
+        "description": "Create or update a workspace.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the workspace."
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parameters required to create or update a workspace."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "description": "The parameters required to create or update a workspace."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "201": {
+            "description": "Created response definition.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "tags": [
           "Workspaces"
@@ -825,61 +874,6 @@
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{name}": {
-      "put": {
-        "tags": [
-          "Workspaces"
-        ],
-        "operationId": "Workspaces_CreateOrUpdate",
-        "description": "Create or update a workspace.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource group name of the workspace."
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The parameters required to create or update a workspace."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Workspace"
-            },
-            "description": "The parameters required to create or update a workspace."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/Workspace"
-            }
-          },
-          "201": {
-            "description": "Created response definition.",
-            "schema": {
-              "$ref": "#/definitions/Workspace"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
       }
     }
   },
@@ -1185,7 +1179,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/WorkspaceProperties"
+          "$ref": "#/definitions/WorkspaceProperties",
+          "description":"Workspace properties." 
         },
         "eTag": {
           "type": "string",
@@ -1217,7 +1212,8 @@
     },
     "Object": {
       "type": "object",
-      "properties": {}
+      "properties": {},
+      "description": "JSON object"
     },
     "Resource": {
       "properties": {

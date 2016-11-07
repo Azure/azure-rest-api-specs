@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Operational InsightsManagement Client for LinkTargets, StorageInsightConfigs and SavedSearches.",
-    "description": ".Net client wrapper for the REST API for Azure Operational Insights",
+    "title": "Azure Log Analytics Client for LinkTargets, StorageInsightConfigs and SavedSearches.",
+    "description": ".Net client wrapper for the REST API for Azure Log Analytics",
     "version": "2015-03-20"
   },
   "host": "management.azure.com",
@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/storageInsightConfigs/{name}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/storageInsightConfigs/{storageInsightName}": {
       "put": {
         "tags": [
           "StorageInsights"
@@ -49,21 +49,21 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the storage insight."
+            "description": "Resource Group name of the Log Analytics Workspace"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the parent workspace that will contain the storage insight"
+            "description": "Log Analytics Workspace name that will contain the storageInsightsConfigs resource"
           },
           {
-            "name": "name",
+            "name": "storageInsightName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The parameters required to create or update a storage insight."
+            "description": "Name of the storageInsightsConfigs resource"
           },
           {
             "name": "parameters",
@@ -95,9 +95,7 @@
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/storageInsightConfigs/{storageInsightName}": {
+      },
       "get": {
         "tags": [
           "StorageInsights"
@@ -110,7 +108,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the storage insight."
+            "description": "Resource Group name of the Log Analytics Workspace"
           },
           {
             "name": "workspaceName",
@@ -124,7 +122,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the storage insight"
+            "description": "Name of the storageInsightsConfigs resource"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -147,28 +145,28 @@
           "StorageInsights"
         ],
         "operationId": "StorageInsights_Delete",
-        "description": "Deletes a storage insight instance.",
+        "description": "Deletes a storageInsightsConfigs resource",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the storage insight."
+            "description": "Resource Group name of the Log Analytics Workspace"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the workspace that contains the storage insight."
+            "description": "Log Analytics Workspace name that will contain the storageInsightsConfigs resource"
           },
           {
             "name": "storageInsightName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the storage insight."
+            "description": "Name of the storageInsightsConfigs resource"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -200,14 +198,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the storage insights."
+            "description": "Resource Group name of the Log Analytics Workspace"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The workspace that contains the storage insights."
+            "description": "Log Analytics Workspace name that will contain the storageInsightsConfigs resource"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -260,7 +258,7 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches/{savedSearchId}": {
       "delete": {
         "tags": [
-          "Search"
+          "SavedSearch"
         ],
         "operationId": "Search_DeleteSavedSearch",
         "description": "Deletes the specified saved search in a given workspace.",
@@ -270,14 +268,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the workspace."
+            "description": "Resource Group name of the Log Analytics Workspace"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "A unique workspace instance name."
+            "description": "Log Analytics workspace name"
           },
           {
             "name": "savedSearchId",
@@ -296,9 +294,6 @@
         "responses": {
           "200": {
             "description": "OK response definition."
-          },
-          "202": {
-            "description": ""
           }
         }
       },
@@ -314,14 +309,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the workspace."
+            "description": "Resource Group name of the Log Analytics Workspace"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "A unique workspace instance name."
+            "description": "Log Analytics workspace name"
           },
           {
             "name": "savedSearchId",
@@ -335,7 +330,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchCreateOrUpdateSavedSearchParameters"
+              "$ref": "#/definitions/SavedSearchCreateOrUpdateParameters"
             },
             "description": "The parameters required to save a search."
           },
@@ -364,14 +359,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the workspace."
+            "description": "Resource Group name of the Log Analytics Workspace"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "A unique workspace instance name."
+            "description": "Log Analytics workspace name"
           },
           {
             "name": "savedSearchId",
@@ -391,7 +386,7 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "#/definitions/SearchGetSavedSearchResult"
+              "$ref": "#/definitions/GetSavedSearchResult"
             }
           }
         }
@@ -403,21 +398,21 @@
           "Search"
         ],
         "operationId": "Search_ListSavedSearches",
-        "description": "Gets the saved searches for a given workspace.",
+        "description": "Gets the saved searches for a given Log Analytics Workspace",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the workspace."
+            "description": "Resource Group name of the Log Analytics Workspace"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "A unique workspace instance name."
+            "description": "Log Analytics workspace name"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -449,14 +444,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the workspace."
+            "description": "Resource Group name of the Log Analytics Workspace"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "A unique workspace instance name."
+            "description": "Log Analytics workspace name"
           },
           {
             "name": "savedSearchId",
@@ -476,7 +471,7 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "#/definitions/SearchGetSearchResultsResponse"
+              "$ref": "#/definitions/SearchResultResponse"
             }
           }
         }
@@ -495,14 +490,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the workspace."
+            "description": "Resource Group name of the Log Analytics Workspace"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "A unique workspace instance name."
+            "description": "Log Analytics workspace name"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -534,21 +529,21 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the workspace."
+            "description": "Resource Group name of the Log Analytics Workspace"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "A unique workspace instance name."
+            "description": "Log Analytics workspace name"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchGetSearchResultsParameters"
+              "$ref": "#/definitions/SearchParameters"
             },
             "description": "The parameters required to execute a search query."
           },
@@ -563,11 +558,11 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "#/definitions/SearchGetSearchResultsResponse"
+              "$ref": "#/definitions/SearchResultResponse"
             }
           },
           "202": {
-            "description": ""
+            "description": "Accepted response definition"
           }
         }
       }
@@ -585,14 +580,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the workspace."
+            "description": "Resource Group name of the Log Analytics Workspace"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "A unique workspace instance name."
+            "description": "Log Analytics workspace name"
           },
           {
             "name": "id",
@@ -612,7 +607,7 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "#/definitions/SearchGetSearchResultsResponse"
+              "$ref": "#/definitions/SearchResultResponse"
             }
           }
         },
@@ -686,7 +681,7 @@
       },
       "description": "Value object for saved search results."
     },
-    "SearchCreateOrUpdateSavedSearchParameters": {
+    "SavedSearchCreateOrUpdateParameters": {
       "properties": {
         "etag": {
           "type": "string",
@@ -698,9 +693,9 @@
           "description": "Gets or sets properties of the saved search."
         }
       },
-      "description": "Parameters for putting a saved search."
+      "description": "Parameters for creating/updating a saved search"
     },
-    "SearchGetSavedSearchResult": {
+    "GetSavedSearchResult": {
       "properties": {
         "id": {
           "type": "string",
@@ -745,7 +740,7 @@
       },
       "description": "The sort parameters for search."
     },
-    "MetadataSchema": {
+    "SavedSearchMetadataSchema": {
       "properties": {
         "name": {
           "type": "string",
@@ -839,7 +834,7 @@
           "description": "Gets or sets the max."
         },
         "schema": {
-          "$ref": "#/definitions/MetadataSchema",
+          "$ref": "#/definitions/SavedSearchMetadataSchema",
           "description": "Gets or sets the schema."
         }
       },
@@ -892,7 +887,7 @@
       },
       "description": "Details for a search error."
     },
-    "SearchGetSearchResultsResponse": {
+    "SearchResultResponse": {
       "properties": {
         "id": {
           "type": "string",
@@ -968,7 +963,7 @@
       },
       "description": "The get schema operation response."
     },
-    "Highlight": {
+    "SearchHighlight": {
       "properties": {
         "pre": {
           "type": "string",
@@ -981,7 +976,7 @@
       },
       "description": "Highlight details."
     },
-    "SearchGetSearchResultsParameters": {
+    "SearchParameters": {
       "properties": {
         "top": {
           "type": "integer",
@@ -989,7 +984,7 @@
           "description": "Gets or sets the number to get from the top."
         },
         "highlight": {
-          "$ref": "#/definitions/Highlight",
+          "$ref": "#/definitions/SearchHighlight",
           "description": "Gets or sets the highlight that looks for all occurences of a string."
         },
         "query": {
@@ -1065,7 +1060,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/StorageInsightProperties"
+          "$ref": "#/definitions/StorageInsightProperties",
+          "description": "Storage insight properties."
         },
         "eTag": {
           "type": "string",
