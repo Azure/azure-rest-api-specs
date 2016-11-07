@@ -487,7 +487,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataLakeStoreAccount"
+              "$ref": "#/definitions/DataLakeStoreAccountUpdateParameters"
             },
             "description": "Parameters supplied to update the Data Lake Store account."
           },
@@ -1084,6 +1084,7 @@
         },
         "endpoint": {
           "type": "string",
+          "readOnly": true,
           "description": "the gateway host."
         },
         "defaultGroup": {
@@ -1092,6 +1093,56 @@
         }
       },
       "description": "Data Lake Store account properties information"
+    },
+    "UpdateDataLakeStoreAccountProperties": {
+      "properties": {
+        "firewallState": {
+          "type": "string",
+          "description": "The current state of the IP address firewall for this Data Lake store account. Disabling the firewall does not remove existing rules, they will just be ignored until the firewall is re-enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallState",
+            "modelAsString": false
+          }
+        },
+        "trustedIdProviderState": {
+          "type": "string",
+          "description": "The current state of the trusted identity provider feature for this Data Lake store account. Disabling trusted identity provider functionality does not remove the providers, they will just be ignored until this feature is re-enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "TrustedIdProviderState",
+            "modelAsString": false
+          }
+        },
+        "defaultGroup": {
+          "type": "string",
+          "description": "the default owner group for all new folders and files created in the Data Lake Store account."
+        }
+      },
+      "description": "Data Lake Store account properties information to be updated."
+    },
+    "DataLakeStoreAccountUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "$ref": "#/definitions/UpdateDataLakeStoreAccountProperties",
+          "description": "the Data Lake Store account properties to update.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "Data Lake Store account information to update"
     },
     "DataLakeStoreAccount": {
       "allOf": [
