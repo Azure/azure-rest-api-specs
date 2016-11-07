@@ -1,0 +1,572 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2016-06-27-preview",
+    "title": "ContainerRegistryManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Operation"
+        ],
+        "description": "Checks whether the container registry name is available.",
+        "operationId": "Registries_CheckNameAvailability",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "registryNameCheckRequest",
+            "in": "body",
+            "description": "The request to check whether the container registry name is available.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegistryNameCheckRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RegistryNameStatus"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}": {
+      "get": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Gets the properties for the specified container registry.",
+        "operationId": "Registries_GetProperties",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The container registry name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Registry"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Creates or updates a container registry with the specified parameters. The storage account provided in this operation should be in the same location as the container registry.",
+        "operationId": "Registries_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The container registry name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registry",
+            "in": "body",
+            "description": "The container registry.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Registry"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Registry"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Deletes a container registry from the given subscription and resource group.",
+        "operationId": "Registries_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The container registry name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Updates a container registry with the specified parameters. The storage account provided in this operation should be in the same location as the container registry.",
+        "operationId": "Registries_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The container registry name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registryUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a container registry.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegistryUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Registry"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries": {
+      "get": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Lists all the container registries available under the given resource group.",
+        "operationId": "Registries_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RegistryListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry/registries": {
+      "get": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Lists all the container registries available under the subscription.",
+        "operationId": "Registries_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RegistryListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/getCredentials": {
+      "post": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Gets login credentials for the specified container registry.",
+        "operationId": "Registries_GetCredentials",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The container registry name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RegistryCredentials"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/regenerateCredentials": {
+      "post": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Regenerates login credentials for the specified container registry.",
+        "operationId": "Registries_RegenerateCredentials",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The container registry name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RegistryCredentials"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RegistryNameCheckRequest": {
+      "description": "The request to check whether the container registry name is available.",
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "description": "The container registry name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The container registry resource type.",
+          "enum": [
+            "Microsoft.ContainerRegistry/registries"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ContainerRegistryResourceType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "RegistryNameStatus": {
+      "description": "The result of checking name availability.",
+      "properties": {
+        "nameAvailable": {
+          "description": "The boolean value that indicates whether the name is available.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "The reason that the container registry name could not be used.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message that explains the reason value in more detail.",
+          "type": "string"
+        }
+      }
+    },
+    "Registry": {
+      "description": "The container registry.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegistryProperties",
+          "description": "The container registry properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RegistryProperties": {
+      "description": "The container registry properties.",
+      "required": [
+        "storageAccount"
+      ],
+      "properties": {
+        "loginServer": {
+          "description": "The URL to log into the container registry.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of the container registry in ISO8601 format.",
+          "type": "string",
+          "readOnly": true
+        },
+        "adminUserEnabled": {
+          "description": "The boolean value that indicates whether admin user is enabled. Default value is false.",
+          "default": false,
+          "type": "boolean"
+        },
+        "storageAccount": {
+          "$ref": "#/definitions/StorageAccountProperties",
+          "description": "The storage account properties."
+        }
+      }
+    },
+    "StorageAccountProperties": {
+      "description": "The storage account properties.",
+      "required": [
+        "name",
+        "accessKey"
+      ],
+      "properties": {
+        "name": {
+          "description": "Storage account name.",
+          "type": "string"
+        },
+        "accessKey": {
+          "description": "Storage account access key.",
+          "type": "string"
+        }
+      }
+    },
+    "RegistryUpdateParameters": {
+      "description": "The parameters for updating a container registry.",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/RegistryPropertiesUpdateParameters",
+          "description": "The parameters for updating container registry properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RegistryPropertiesUpdateParameters": {
+      "description": "The parameters for updating container registry properties.",
+      "properties": {
+        "adminUserEnabled": {
+          "description": "The boolean value that indicates whether admin user is enabled. Default value is false.",
+          "type": "boolean"
+        },
+        "storageAccount": {
+          "$ref": "#/definitions/StorageAccountProperties",
+          "description": "The storage account properties."
+        }
+      }
+    },
+    "RegistryListResult": {
+      "description": "The result of listing container registries.",
+      "properties": {
+        "value": {
+          "description": "The result of listing container registries.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Registry"
+          }
+        },
+        "nextLink": {
+          "description": "The uri to fetch the next set of container registries.",
+          "type": "string"
+        }
+      }
+    },
+    "RegistryCredentials": {
+      "description": "The result of showing admin user credentials.",
+      "properties": {
+        "username": {
+          "description": "Admin username.",
+          "type": "string"
+        },
+        "password": {
+          "description": "Admin password.",
+          "type": "string"
+        }
+      }
+    },
+    "Resource": {
+      "description": "Azure resource.",
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Resource location. Once the resource has been created, location cannot be updated.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Microsoft Azure subscription id.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string"
+    }
+  }
+}

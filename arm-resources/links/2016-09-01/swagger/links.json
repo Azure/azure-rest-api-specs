@@ -1,0 +1,309 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ManagementLinkClient",
+    "version": "2016-09-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{linkId}": {
+      "delete": {
+        "tags": [
+          "ResourceLinks"
+        ],
+        "operationId": "ResourceLinks_Delete",
+        "description": "Deletes a resource link.",
+        "parameters": [
+          {
+            "name": "linkId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ResourceLinks"
+        ],
+        "operationId": "ResourceLinks_CreateOrUpdate",
+        "description": "Create a resource link.",
+        "parameters": [
+          {
+            "name": "linkId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceLink"
+            },
+            "description": "Create or update resource link parameters."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ResourceLink"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceLink"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ResourceLinks"
+        ],
+        "operationId": "ResourceLinks_Get",
+        "description": "Gets a resource link.",
+        "parameters": [
+          {
+            "name": "linkId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceLink"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/links": {
+      "get": {
+        "tags": [
+          "ResourceLinks"
+        ],
+        "operationId": "ResourceLinks_ListAtSubscription",
+        "description": "Gets a list of resource links under the subscription.",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the list resource links operation. The supported filter for list resource links is targetId."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceLinkResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/ResourceLinkFilter"
+      }
+    },
+    "/{scope}/providers/Microsoft.Resources/links": {
+      "get": {
+        "tags": [
+          "ResourceLinks"
+        ],
+        "operationId": "ResourceLinks_ListAtSourceScope",
+        "description": "Gets a list of resource links at and below the specified source scope. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified Id of the source resource scope. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "enum": ["atScope()"],
+            "x-ms-enum": {
+              "name": "Filter",
+              "modelAsString": false
+            },
+            "type": "string",
+            "description": "The filter to apply on the list resource links operation. To list links only at the specified scope (not below the scope), use Filter.atScope()."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceLinkResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/ResourceLinkFilter"
+      }
+    }
+  },
+  "definitions": {
+    "ResourceLinkFilter": {
+      "properties": {
+        "targetId": {
+          "type": "string",
+          "description": "The target Id of the resource."
+        }
+      },
+      "required": [
+        "targetId"
+      ],
+      "description": "Resource link filter."
+    },
+    "ResourceLinkResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          },
+          "description": "The list of resource links."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "List of resource links."
+    },
+    "ResourceLink": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The fully qualified Id of the resource link."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource link."
+        },
+        "properties": {
+          "$ref": "#/definitions/ResourceLinkProperties"
+        }
+      },
+      "description": "The resource link."
+    },
+    "ResourceLinkProperties": {
+      "properties": {
+        "sourceId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The fully qualified source resource Id. "
+        },
+        "targetId": {
+          "type": "string",
+          "description": "The fully qualified target resource Id. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite."
+        },
+        "notes": {
+          "type": "string",
+          "description": "The resource link notes."
+        }
+      },
+      "required": [
+        "targetId"
+      ],
+      "description": "The resource link properties."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}
