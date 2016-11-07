@@ -100,6 +100,12 @@
               "$ref": "#/definitions/IotHubDescription"
             }
           },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IotHubDescription"
+            }
+          },
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
@@ -144,6 +150,21 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/IotHubDescription"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IotHubDescription"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
             }
           },
           "default": {
@@ -1020,7 +1041,11 @@
             "modelAsString": false
           }
         }
-      }
+      },
+      "required": [
+        "keyName",
+        "rights"
+      ]
     },
     "IotHubProperties": {
       "description": "The Iot Hub properties.",
@@ -1051,21 +1076,21 @@
           "readOnly": true
         },
         "eventHubEndpoints": {
-          "description": "The event hub endpoint properties.",
+          "description": "The event hub endpoint properties. The possible keys to this dictionary are events and operationsMonitoringEvents. Both of these keys have to be present in the dictionary while making create or update calls for the IoT hub.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/EventHubProperties"
           }
         },
         "storageEndpoints": {
-          "description": "The list of storage end points where files can be uploaded. Currently only one storage account can be configured.",
+          "description": "The list of storage end points where files can be uploaded. Currently only one storage account can be configured and that MUST have its key as $default. Specifying more than one storage account causes an error to be thrown.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/StorageEndpointProperties"
           }
         },
         "messagingEndpoints": {
-          "description": "The list of messaging end points configured.",
+          "description": "The list of messaging end points configured. Currently only one storage account can be configured and that MUST have its key as fileNotifications. Specifying more than one endpoint causes an error to be thrown.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/MessagingEndpointProperties"
@@ -1124,7 +1149,11 @@
           "description": "The number of units being provisioned. Range of values [For F1: 1-1, S1: 1-200, S2: 1-200, S3: 1-10]. To go above this range, call support.",
           "type": "integer"
         }
-      }
+      },
+      "required": [
+        "name",
+        "capacity"
+      ]
     },
     "EventHubProperties": {
       "description": "The properties of the provisioned event hub used by the Iot Hub.",
@@ -1157,22 +1186,6 @@
           "description": "The endpoint.",
           "type": "string",
           "readOnly": true
-        },
-        "internalAuthorizationPolicies": {
-          "description": "The internal authorization rules.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SharedAccessAuthorizationRule"
-          }
-        },
-        "authorizationPolicies": {
-          "description": "The authorization rules.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SharedAccessAuthorizationRule"
-          }
         }
       }
     },
@@ -1190,10 +1203,14 @@
           "type": "string"
         },
         "containerName": {
-          "description": "The root container name where all files will be uploaded.",
+          "description": "The root container name where all files will be uploaded. The container need not exist but should be creatable using the connectionString specified.",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "connectionString",
+        "containerName"
+      ]
     },
     "MessagingEndpointProperties": {
       "description": "The properties of the Messaging Endpoints used by this IoT Hub.",
@@ -1240,7 +1257,7 @@
       }
     },
     "OperationsMonitoringProperties": {
-      "description": "The Operation Monitoring properties.",
+      "description": "The Operation Monitoring properties. The possible keys to the dictionary are Connections, DeviceTelemetry, C2DCommands, DeviceIdentityOperations, FileUploadOperations",
       "type": "object",
       "properties": {
         "events": {
@@ -1284,62 +1301,6 @@
         "action",
         "ipMask"
       ]
-    },
-    "SharedAccessAuthorizationRule": {
-      "type": "object",
-      "properties": {
-        "KeyName": {
-          "description": "The key name.",
-          "type": "string"
-        },
-        "PrimaryKey": {
-          "description": "The primary key.",
-          "type": "string"
-        },
-        "IssuerName": {
-          "description": "The issuer name.",
-          "type": "string"
-        },
-        "SecondaryKey": {
-          "description": "The secondary key.",
-          "type": "string"
-        },
-        "ClaimType": {
-          "description": "The claim type.",
-          "type": "string"
-        },
-        "ClaimValue": {
-          "description": "The claim value.",
-          "type": "string"
-        },
-        "Rights": {
-          "type": "array",
-          "description": "The rights.",
-          "items": {
-            "enum": [ "Manage", "Send", "Listen", "ManageNotificationHub" ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "SBAccessRights",
-              "modelAsString": false
-            }
-          }
-        },
-        "CreatedTime": {
-          "description": "The created time.",
-          "format": "date-time",
-          "type": "string"
-        },
-        "ModifiedTime": {
-          "description": "The modified time.",
-          "format": "date-time",
-          "type": "string"
-        },
-        "Revision": {
-          "description": "The revision.",
-          "format": "int64",
-          "type": "integer"
-        }
-      }
     },
     "FeedbackProperties": {
       "description": "The Feedback Queue properties.",
@@ -1391,6 +1352,11 @@
         {
           "$ref": "#/definitions/Resource"
         }
+      ],
+      "required": [
+        "subscriptionid",
+        "resourcegroup",
+        "sku"
       ]
     },
     "Resource": {
@@ -1423,7 +1389,10 @@
           "description": "The Resource tags."
         }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "required": [
+        "location"
+      ]
     },
     "SharedAccessSignatureAuthorizationRuleListResult": {
       "description": "The list of authorization rules with a next link.",
@@ -1538,7 +1507,11 @@
         "capacity": {
           "$ref": "#/definitions/IotHubCapacity"
         }
-      }
+      },
+      "required": [
+        "sku",
+        "capacity"
+      ]
     },
     "IotHubCapacity": {
       "description": "The properties related to the capacity information.",
@@ -1671,10 +1644,6 @@
         },
         "statusMessage": {
           "description": "The status message for the job.",
-          "type": "string"
-        },
-        "deviceId": {
-          "description": "The deviceId related to this response.",
           "type": "string"
         },
         "parentJobId": {
