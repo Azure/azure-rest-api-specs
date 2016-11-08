@@ -375,6 +375,7 @@
             }
           }
         }
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/domainOwnershipIdentifiers": {
@@ -419,6 +420,8 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+=======
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/domainOwnershipIdentifiers/{name}": {
@@ -518,15 +521,105 @@
           {
             "$ref": "#/parameters/apiVersionParameter"
           }
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Identifier"
+=======
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Address": {
+      "description": "Address information for domain registration",
+      "type": "object",
+      "properties": {
+        "address1": {
+          "description": "Address 1",
+          "type": "string"
+        },
+        "address2": {
+          "description": "Address 2",
+          "type": "string"
+        },
+        "city": {
+          "description": "City",
+          "type": "string"
+        },
+        "country": {
+          "description": "Country",
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "Postal code",
+          "type": "string"
+        },
+        "state": {
+          "description": "State",
+          "type": "string"
+        }
+      }
+    },
+    "ApiDefinitionInfo": {
+      "description": "Information about the formal API definition for the web app.",
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "The URL of the API definition.",
+          "type": "string"
+        }
+      }
+    },
+    "AppServiceCertificate": {
+      "description": "Class representing the Key Vault container for certificate purchased through Azure",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ARM envelope properties",
+          "properties": {
+            "keyVaultId": {
+              "description": "Key Vault Csm resource Id",
+              "type": "string"
+            },
+            "keyVaultSecretName": {
+              "description": "Key Vault secret name",
+              "type": "string"
+            },
+            "provisioningState": {
+              "description": "Status of the Key Vault secret",
+              "enum": [
+                "Initialized",
+                "WaitingOnCertificateOrder",
+                "Succeeded",
+                "CertificateOrderFailed",
+                "OperationNotPermittedOnKeyVault",
+                "AzureServiceUnauthorizedToAccessKeyVault",
+                "KeyVaultDoesNotExist",
+                "KeyVaultSecretDoesNotExist",
+                "UnknownError",
+                "ExternalPrivateKey",
+                "Unknown"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "KeyVaultSecretStatus",
+                "modelAsString": false
+              }
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
             }
           }
         }
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
       },
       "delete": {
         "tags": [
@@ -794,6 +887,8 @@
         {
           "$ref": "#/definitions/Resource"
         }
+=======
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
       ],
       "properties": {
         "properties": {
@@ -803,14 +898,22 @@
           ],
           "properties": {
             "certificates": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "State of the Key Vault secret.",
+=======
+              "description": "State of the Key Vault secret",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "object",
               "additionalProperties": {
                 "$ref": "#/definitions/AppServiceCertificate"
               }
             },
             "distinguishedName": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Certificate distinguished name.",
+=======
+              "description": "Certificate distinguished name",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -818,13 +921,21 @@
               ]
             },
             "domainVerificationToken": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Domain Verification Token.",
+=======
+              "description": "Domain Verification Token",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "validityInYears": {
               "format": "int32",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Duration in years (must be between 1 and 3).",
+=======
+              "description": "Duration in years (must be between 1 and 3)",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "default": 1,
               "type": "integer",
               "x-ms-mutability": [
@@ -834,7 +945,11 @@
             },
             "keySize": {
               "format": "int32",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Certificate Key Size.",
+=======
+              "description": "Certificate Key Size",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "default": 2048,
               "type": "integer",
               "x-ms-mutability": [
@@ -859,7 +974,11 @@
               ]
             },
             "autoRenew": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Auto renew.",
+=======
+              "description": "Auto renew",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "default": true,
               "type": "boolean"
             },
@@ -902,11 +1021,19 @@
             },
             "signedCertificate": {
               "$ref": "#/definitions/CertificateDetails",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Signed certificate.",
               "readOnly": true
             },
             "csr": {
               "description": "Last CSR that was created for this order.",
+=======
+              "description": "Signed certificate",
+              "readOnly": true
+            },
+            "csr": {
+              "description": "Last CSR that was created for this order",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -915,28 +1042,48 @@
             },
             "intermediate": {
               "$ref": "#/definitions/CertificateDetails",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Intermediate certificate.",
+=======
+              "description": "Intermediate certificate",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "readOnly": true
             },
             "root": {
               "$ref": "#/definitions/CertificateDetails",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Root certificate.",
               "readOnly": true
             },
             "serialNumber": {
               "description": "Current serial number of the certificate.",
+=======
+              "description": "Root certificate",
+              "readOnly": true
+            },
+            "serialNumber": {
+              "description": "Current serial number of the certificate",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "lastCertificateIssuanceTime": {
               "format": "date-time",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Certificate last issuance time.",
+=======
+              "description": "Certificate last issuance time",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "expirationTime": {
               "format": "date-time",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Certificate expiration time.",
+=======
+              "description": "Certificate expiration time",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
@@ -1068,12 +1215,20 @@
             },
             "upgradeDomains": {
               "format": "int32",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Number of upgrade domains of this hostingEnvironment (App Service Environment).",
+=======
+              "description": "Number of upgrade domains of this hostingEnvironment (App Service Environment)",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "integer",
               "readOnly": true
             },
             "subscriptionId": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Subscription of the hostingEnvironment (App Service Environment).",
+=======
+              "description": "Subscription of the hostingEnvironment (App Service Environment)",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
@@ -1082,28 +1237,48 @@
               "type": "string"
             },
             "lastAction": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Last deployment action on this hostingEnvironment (App Service Environment).",
+=======
+              "description": "Last deployment action on this hostingEnvironment (App Service Environment)",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "lastActionResult": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Result of the last deployment action on this hostingEnvironment (App Service Environment).",
+=======
+              "description": "Result of the last deployment action on this hostingEnvironment (App Service Environment)",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "allowedMultiSizes": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "List of comma separated strings describing which VM sizes are allowed for front-ends.",
+=======
+              "description": "List of comma separated strings describing which VM sizes are allowed for front-ends",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "allowedWorkerSizes": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "List of comma separated strings describing which VM sizes are allowed for workers.",
+=======
+              "description": "List of comma separated strings describing which VM sizes are allowed for workers",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "maximumNumberOfMachines": {
               "format": "int32",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Maximum number of VMs in this hostingEnvironment (App Service Environment).",
+=======
+              "description": "Maximum number of VMs in this hostingEnvironment (App Service Environment)",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "integer",
               "readOnly": true
             },
@@ -1131,17 +1306,29 @@
               }
             },
             "environmentIsHealthy": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "True/false indicating whether the hostingEnvironment (App Service Environment) is healthy.",
+=======
+              "description": "True/false indicating whether the hostingEnvironment (App Service Environment) is healthy",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "boolean",
               "readOnly": true
             },
             "environmentStatus": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Detailed message about with results of the last check of the hostingEnvironment (App Service Environment).",
+=======
+              "description": "Detailed message about with results of the last check of the hostingEnvironment (App Service Environment)",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "resourceGroup": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Resource group of the hostingEnvironment (App Service Environment).",
+=======
+              "description": "Resource group of the hostingEnvironment (App Service Environment)",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
@@ -1210,7 +1397,11 @@
               }
             },
             "subscription": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "App Service Plan Subscription.",
+=======
+              "description": "App Service Plan Subscription",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
@@ -1220,7 +1411,11 @@
             },
             "hostingEnvironmentProfile": {
               "$ref": "#/definitions/HostingEnvironmentProfile",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Specification for the hosting environment (App Service Environment) to use for the App Service Plan.",
+=======
+              "description": "Specification for the hosting environment (App Service Environment) to use for the App Service Plan",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "x-ms-mutability": [
                 "create",
                 "read"
@@ -1228,43 +1423,75 @@
             },
             "maximumNumberOfWorkers": {
               "format": "int32",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Maximum number of instances that can be assigned to this App Service Plan.",
+=======
+              "description": "Maximum number of instances that can be assigned to this App Service Plan",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "integer",
               "readOnly": true
             },
             "geoRegion": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Geographical location for the App Service Plan.",
+=======
+              "description": "Geographical location for the App Service Plan",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "perSiteScaling": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "If True apps assigned to this App Service Plan can be scaled independently.\r\n            If False apps assigned to this App Service Plan will scale to all instances of the plan",
+=======
+              "description": "If True apps assigned to this App Service Plan can be scaled independently\r\n            If False apps assigned to this App Service Plan will scale to all instances of the plan",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "default": false,
               "type": "boolean"
             },
             "numberOfSites": {
               "format": "int32",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Number of web apps assigned to this App Service Plan.",
+=======
+              "description": "Number of web apps assigned to this App Service Plan",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "integer",
               "readOnly": true
             },
             "resourceGroup": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Resource group of the serverfarm.",
+=======
+              "description": "Resource group of the serverfarm",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "targetWorkerCount": {
               "format": "int32",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Scaling Worker Count.",
+=======
+              "description": "Scaling Worker Count",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "integer"
             },
             "targetWorkerSizeId": {
               "format": "int32",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Scaling Worker Size Id .",
               "type": "integer"
             },
             "provisioningState": {
               "description": "Provisioning state of the hostingEnvironment (App Service Environment).",
+=======
+              "description": "Scaling Worker Size Id",
+              "type": "integer"
+            },
+            "provisioningState": {
+              "description": "Provisioning state of the hostingEnvironment (App Service Environment)",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "enum": [
                 "Succeeded",
                 "Failed",
@@ -1505,17 +1732,29 @@
               "readOnly": true
             },
             "storageAccountUrl": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "SAS URL for the storage account container which contains this backup.",
+=======
+              "description": "SAS URL for the storage account container which contains this backup",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "blobName": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Name of the blob which contains data for this backup.",
+=======
+              "description": "Name of the blob which contains data for this backup",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "name": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Name of this backup.",
+=======
+              "description": "Name of this backup",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
@@ -1542,13 +1781,21 @@
             },
             "sizeInBytes": {
               "format": "int64",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Size of the backup in bytes.",
+=======
+              "description": "Size of the backup in bytes",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "integer",
               "readOnly": true
             },
             "created": {
               "format": "date-time",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Timestamp of the backup creation.",
+=======
+              "description": "Timestamp of the backup creation",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
@@ -1589,7 +1836,11 @@
             },
             "websiteSizeInBytes": {
               "format": "int64",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Size of the original web app which has been backed up.",
+=======
+              "description": "Size of the original web app which has been backed up",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "integer",
               "readOnly": true
             }
@@ -1674,12 +1925,20 @@
           ],
           "properties": {
             "friendlyName": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Friendly name of the certificate.",
+=======
+              "description": "Friendly name of the certificate",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "subjectName": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Subject name of the certificate.",
+=======
+              "description": "Subject name of the certificate",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
@@ -1695,46 +1954,78 @@
               "type": "string"
             },
             "siteName": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "App name.",
+=======
+              "description": "App name",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "selfLink": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Self link.",
+=======
+              "description": "Self link",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "issuer": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Certificate issuer.",
+=======
+              "description": "Certificate issuer",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "issueDate": {
               "format": "date-time",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Certificate issue Date.",
+=======
+              "description": "Certificate issue Date",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "expirationDate": {
               "format": "date-time",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Certificate expriration date.",
+=======
+              "description": "Certificate expriration date",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "password": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Certificate password.",
+=======
+              "description": "Certificate password",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "x-ms-mutability": [
                 "create"
               ]
             },
             "thumbprint": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Certificate thumbprint.",
+=======
+              "description": "Certificate thumbprint",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "valid": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Is the certificate valid?.",
+=======
+              "description": "Is the certificate valid?",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "boolean",
               "readOnly": true
             },
@@ -1743,17 +2034,29 @@
               "type": "string"
             },
             "publicKeyHash": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Public key hash.",
+=======
+              "description": "Public key hash",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "hostingEnvironmentProfile": {
               "$ref": "#/definitions/HostingEnvironmentProfile",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Specification for the hosting environment (App Service Environment) to use for the certificate.",
               "readOnly": true
             },
             "keyVaultSecretStatus": {
               "description": "Status of the Key Vault secret.",
+=======
+              "description": "Specification for the hosting environment (App Service Environment) to use for the certificate",
+              "readOnly": true
+            },
+            "keyVaultSecretStatus": {
+              "description": "Status of the Key Vault secret",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "enum": [
                 "Initialized",
                 "WaitingOnCertificateOrder",
@@ -1773,10 +2076,13 @@
                 "name": "KeyVaultSecretStatus",
                 "modelAsString": false
               }
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
             },
             "serverFarmId": {
               "description": "Resource ID of the associated App Service plan, formatted as: \"/subscriptions/{subscriptionID}/resourceGroups/{groupName}/providers/Microsoft.Web/serverfarms/{appServicePlanName}\".",
               "type": "string"
+=======
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
             }
           },
           "x-ms-client-flatten": true
@@ -1797,49 +2103,85 @@
           "properties": {
             "version": {
               "format": "int32",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Version.",
+=======
+              "description": "Version",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "integer",
               "readOnly": true
             },
             "serialNumber": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Serial Number.",
+=======
+              "description": "Serial Number",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "thumbprint": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Thumbprint.",
+=======
+              "description": "Thumbprint",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "subject": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Subject.",
+=======
+              "description": "Subject",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "notBefore": {
               "format": "date-time",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Valid from.",
+=======
+              "description": "Valid from",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "notAfter": {
               "format": "date-time",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Valid to.",
+=======
+              "description": "Valid to",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "signatureAlgorithm": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Signature Algorithm.",
+=======
+              "description": "Signature Algorithm",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "issuer": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Issuer.",
+=======
+              "description": "Issuer",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "rawData": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Raw certificate data.",
+=======
+              "description": "Raw certificate data",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             }
@@ -1861,7 +2203,11 @@
           "description": "ARM envelope properties",
           "properties": {
             "name": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Name of the mobile service.",
+=======
+              "description": "Name of the mobile service",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             }
@@ -1923,7 +2269,11 @@
       }
     },
     "ConnStringValueTypePair": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
       "description": "Database connection string value to type pair.",
+=======
+      "description": "Database connection string value to type pair",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
       "type": "object",
       "properties": {
         "value": {
@@ -2144,7 +2494,11 @@
               "type": "string"
             },
             "reserved": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Reserved.",
+=======
+              "description": "Reserved",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "default": false,
               "type": "boolean",
               "x-ms-mutability": [
@@ -2194,7 +2548,11 @@
               ]
             },
             "microService": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Micro services like WebSites, Logic Apps.",
+=======
+              "description": "Micro services like WebSites, Logic Apps",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "default": false,
               "type": "string",
               "x-ms-mutability": [
@@ -2203,7 +2561,11 @@
               ]
             },
             "gatewaySiteName": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Name of gateway app associated with web app .",
+=======
+              "description": "Name of gateway app associated with web app",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -2239,13 +2601,21 @@
             },
             "suspendedTill": {
               "format": "date-time",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Site suspended till in case memory-time quota is exceeded.",
+=======
+              "description": "Site suspended till in case memory-time quota is exceeded",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "maxNumberOfWorkers": {
               "format": "int32",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Maximum number of workers.\r\n            This only applies to function container",
+=======
+              "description": "Maximum number of workers\r\n            This only applies to function container",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "integer",
               "readOnly": true
             },
@@ -2289,7 +2659,11 @@
           "description": "ARM envelope properties",
           "properties": {
             "id": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Id.",
+=======
+              "description": "Id",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -2302,6 +2676,7 @@
               "type": "integer"
             },
             "message": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Message.",
               "type": "string"
             },
@@ -2315,15 +2690,35 @@
             },
             "author_email": {
               "description": "AuthorEmail.",
+=======
+              "description": "Message",
+              "type": "string"
+            },
+            "author": {
+              "description": "Author",
+              "type": "string"
+            },
+            "deployer": {
+              "description": "Deployer",
+              "type": "string"
+            },
+            "author_email": {
+              "description": "AuthorEmail",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string"
             },
             "start_time": {
               "format": "date-time",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "StartTime.",
+=======
+              "description": "StartTime",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string"
             },
             "end_time": {
               "format": "date-time",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "EndTime.",
               "type": "string"
             },
@@ -2333,10 +2728,22 @@
             },
             "details": {
               "description": "Detail.",
+=======
+              "description": "EndTime",
+              "type": "string"
+            },
+            "active": {
+              "description": "Active",
+              "type": "boolean"
+            },
+            "details": {
+              "description": "Detail",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string"
             }
           },
           "x-ms-client-flatten": true
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
         }
       }
     },
@@ -2604,6 +3011,275 @@
         }
       }
     },
+=======
+        }
+      }
+    },
+    "Domain": {
+      "description": "Represents a domain",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ARM envelope properties",
+          "required": [
+            "contactAdmin",
+            "contactBilling",
+            "contactRegistrant",
+            "contactTech",
+            "consent"
+          ],
+          "properties": {
+            "contactAdmin": {
+              "$ref": "#/definitions/Contact",
+              "description": "Admin contact information",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "contactBilling": {
+              "$ref": "#/definitions/Contact",
+              "description": "Billing contact information",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "contactRegistrant": {
+              "$ref": "#/definitions/Contact",
+              "description": "Registrant contact information",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "contactTech": {
+              "$ref": "#/definitions/Contact",
+              "description": "Technical contact information",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "registrationStatus": {
+              "description": "Domain registration status",
+              "enum": [
+                "Active",
+                "Awaiting",
+                "Cancelled",
+                "Confiscated",
+                "Disabled",
+                "Excluded",
+                "Expired",
+                "Failed",
+                "Held",
+                "Locked",
+                "Parked",
+                "Pending",
+                "Reserved",
+                "Reverted",
+                "Suspended",
+                "Transferred",
+                "Unknown",
+                "Unlocked",
+                "Unparked",
+                "Updated",
+                "JsonConverterFailed"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "DomainStatus",
+                "modelAsString": false
+              }
+            },
+            "provisioningState": {
+              "description": "Domain provisioning state",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress",
+                "Deleting"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": false
+              }
+            },
+            "nameServers": {
+              "description": "Name servers",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "privacy": {
+              "description": "If true then domain privacy is enabled for this domain",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "createdTime": {
+              "format": "date-time",
+              "description": "Domain creation timestamp",
+              "type": "string",
+              "readOnly": true
+            },
+            "expirationTime": {
+              "format": "date-time",
+              "description": "Domain expiration timestamp",
+              "type": "string",
+              "readOnly": true
+            },
+            "lastRenewedTime": {
+              "format": "date-time",
+              "description": "Timestamp when the domain was renewed last time",
+              "type": "string",
+              "readOnly": true
+            },
+            "autoRenew": {
+              "description": "If true then domain will renewed automatically",
+              "default": true,
+              "type": "boolean"
+            },
+            "readyForDnsRecordManagement": {
+              "description": "If true then Azure can assign this domain to Web Apps. This value will be true if domain registration status is active and it is hosted on name servers Azure has programmatic access to",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "managedHostNames": {
+              "description": "All hostnames derived from the domain and assigned to Azure resources",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HostName"
+              }
+            },
+            "consent": {
+              "$ref": "#/definitions/DomainPurchaseConsent",
+              "description": "Legal agreement consent",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "domainNotRenewableReasons": {
+              "description": "Reasons why domain is not renewable",
+              "type": "array",
+              "items": {
+                "enum": [
+                  "RegistrationStatusNotSupportedForRenewal",
+                  "ExpirationNotInRenewalTimeRange",
+                  "SubscriptionNotActive"
+                ],
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DomainAvailablilityCheckResult": {
+      "description": "Domain availablility check result",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the domain",
+          "type": "string"
+        },
+        "available": {
+          "description": "If true then domain can be purchased using CreateDomain Api",
+          "type": "boolean"
+        },
+        "domainType": {
+          "description": "Domain type",
+          "enum": [
+            "Regular",
+            "SoftDeleted"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DomainType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "DomainCollection": {
+      "description": "Collection of domains",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Domain"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources",
+          "type": "string"
+        }
+      }
+    },
+    "DomainControlCenterSsoRequest": {
+      "description": "Single sign on request information for domain management",
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "Url where the single sign on request is to be made",
+          "type": "string"
+        },
+        "postParameterKey": {
+          "description": "Post parameter key",
+          "type": "string"
+        },
+        "postParameterValue": {
+          "description": "Post parameter value. Client should use 'application/x-www-form-urlencoded' encoding for this value.",
+          "type": "string"
+        }
+      }
+    },
+    "DomainPurchaseConsent": {
+      "description": "Domain purchase consent object representing acceptance of applicable legal agreements",
+      "type": "object",
+      "properties": {
+        "agreementKeys": {
+          "description": "List of applicable legal agreement keys. This list can be retrieved using ListLegalAgreements Api under TopLevelDomain resource",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "agreedBy": {
+          "description": "Client IP address",
+          "type": "string"
+        },
+        "agreedAt": {
+          "format": "date-time",
+          "description": "Timestamp when the agreements were accepted",
+          "type": "string"
+        }
+      }
+    },
+    "DomainRecommendationSearchParameters": {
+      "description": "Domain recommendation search parameters",
+      "type": "object",
+      "properties": {
+        "keywords": {
+          "description": "Keywords to be used for generating domain recommendations",
+          "type": "string"
+        },
+        "maxDomainRecommendations": {
+          "format": "int32",
+          "description": "Maximum number of recommendations",
+          "type": "integer"
+        }
+      }
+    },
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
     "EnabledConfig": {
       "description": "Enabled configuration.",
       "type": "object",
@@ -2717,17 +3393,29 @@
           "description": "ARM envelope properties",
           "properties": {
             "name": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Region name.",
+=======
+              "description": "Region name",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "description": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Region description.",
+=======
+              "description": "Region description",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "displayName": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Display name for region.",
+=======
+              "description": "Display name for region",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             }
@@ -2827,7 +3515,11 @@
           ],
           "properties": {
             "name": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Hostname.",
+=======
+              "description": "Hostname",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -2835,7 +3527,11 @@
               ]
             },
             "siteName": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Web app name.",
+=======
+              "description": "Web app name",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -2843,7 +3539,11 @@
               ]
             },
             "domainId": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Fully qualified ARM domain resource URI.",
+=======
+              "description": "Fully qualified ARM domain resource URI",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -2851,7 +3551,11 @@
               ]
             },
             "azureResourceName": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Azure resource name.",
+=======
+              "description": "Azure resource name",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -3115,17 +3819,29 @@
           "description": "ARM envelope properties",
           "properties": {
             "name": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Name of the metric.",
+=======
+              "description": "Name of the metric",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "unit": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Unit of the metric.",
+=======
+              "description": "Unit of the metric",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "primaryAggregationType": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Primary aggregation type.",
+=======
+              "description": "Primary aggregation type",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
@@ -3138,7 +3854,11 @@
               "readOnly": true
             },
             "displayName": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Friendly name shown in the UI .",
+=======
+              "description": "Friendly name shown in the UI",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             }
@@ -3664,7 +4384,11 @@
               "type": "string"
             },
             "reserved": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Reserved.",
+=======
+              "description": "Reserved",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "default": false,
               "type": "boolean",
               "x-ms-mutability": [
@@ -3714,7 +4438,11 @@
               ]
             },
             "microService": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Micro services like WebSites, Logic Apps.",
+=======
+              "description": "Micro services like WebSites, Logic Apps",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "default": false,
               "type": "string",
               "x-ms-mutability": [
@@ -3723,7 +4451,11 @@
               ]
             },
             "gatewaySiteName": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Name of gateway app associated with web app .",
+=======
+              "description": "Name of gateway app associated with web app",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -3759,13 +4491,21 @@
             },
             "suspendedTill": {
               "format": "date-time",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Site suspended till in case memory-time quota is exceeded.",
+=======
+              "description": "Site suspended till in case memory-time quota is exceeded",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "maxNumberOfWorkers": {
               "format": "int32",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Maximum number of workers.\r\n            This only applies to function container",
+=======
+              "description": "Maximum number of workers\r\n            This only applies to function container",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "integer",
               "readOnly": true
             },
@@ -3835,7 +4575,11 @@
               }
             },
             "netFrameworkVersion": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Net Framework Version.",
+=======
+              "description": "Net Framework Version",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "default": "v4.6",
               "type": "string"
             },
@@ -3887,7 +4631,11 @@
             },
             "machineKey": {
               "$ref": "#/definitions/SiteMachineKey",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Site MachineKey.",
+=======
+              "description": "Site MachineKey",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "readOnly": true
             },
             "handlerMappings": {
@@ -3902,7 +4650,11 @@
               "type": "string"
             },
             "scmType": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "SCM type.",
+=======
+              "description": "SCM type",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
@@ -3989,7 +4741,11 @@
               "type": "string"
             },
             "vnetName": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Vnet name.",
+=======
+              "description": "Vnet name",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -4013,7 +4769,11 @@
               "type": "string"
             },
             "localMySqlEnabled": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Local mysql enabled.",
+=======
+              "description": "Local mysql enabled",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "default": false,
               "type": "boolean"
             },
@@ -4042,7 +4802,11 @@
           "description": "ARM envelope properties",
           "properties": {
             "name": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Name of instance.",
+=======
+              "description": "Name of instance",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             }
@@ -4200,7 +4964,11 @@
               "readOnly": true
             },
             "settingType": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "The type of the setting: General, AppSetting or ConnectionString.",
+=======
+              "description": "The type of the setting: General, AppSetting or ConnectionString",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
@@ -4267,7 +5035,11 @@
           "properties": {
             "time": {
               "format": "date-time",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "The time the snapshot was taken.",
+=======
+              "description": "The time the snapshot was taken",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             }
@@ -4447,12 +5219,20 @@
           "description": "ARM envelope properties",
           "properties": {
             "name": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Name of the top level domain.",
+=======
+              "description": "Name of the top level domain",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "privacy": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "If true then the top level domain supports domain privacy.",
+=======
+              "description": "If true then the top level domain supports domain privacy",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "boolean",
               "readOnly": true
             }
@@ -4474,40 +5254,68 @@
           "description": "ARM envelope properties",
           "properties": {
             "displayName": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Friendly name shown in the UI .",
+=======
+              "description": "Friendly name shown in the UI",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "name": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Name of the quota .",
+=======
+              "description": "Name of the quota",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "resourceName": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Name of the quota resource.",
+=======
+              "description": "Name of the quota resource",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "unit": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Units of measurement for the quota resource.",
+=======
+              "description": "Units of measurement for the quota resource",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
             "currentValue": {
               "format": "int64",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "The current value of the resource counter.",
+=======
+              "description": "The current value of the resource counter",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "integer",
               "readOnly": true
             },
             "limit": {
               "format": "int64",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "The resource limit.",
+=======
+              "description": "The resource limit",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "integer",
               "readOnly": true
             },
             "nextResetTime": {
               "format": "date-time",
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Next reset time for the resource counter.",
+=======
+              "description": "Next reset time for the resource counter",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
@@ -4526,7 +5334,11 @@
               }
             },
             "siteMode": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "SiteMode used for this usage.",
+=======
+              "description": "SiteMode used for this usage",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             }
@@ -4548,7 +5360,11 @@
           "type": "string"
         },
         "needLinuxWorkers": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
           "description": "Whether server farm is for Linux workers.",
+=======
+          "description": "Whether server farm is for Linux workers",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
           "type": "boolean"
         },
         "capacity": {
@@ -4680,7 +5496,11 @@
               "type": "string"
             },
             "certThumbprint": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "The client certificate thumbprint.",
+=======
+              "description": "The client certificate thumbprint",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "string",
               "readOnly": true
             },
@@ -4697,7 +5517,11 @@
               "readOnly": true
             },
             "resyncRequired": {
+<<<<<<< HEAD:arm-web/2015-04-01/Domains.json
               "description": "Flag to determine if a resync is required.",
+=======
+              "description": "Flag to determine if a resync is required",
+>>>>>>> 4867acfd4ba2271c73c8e2bf5904ff806185bd62:arm-web/2016-03-01/Domains.json
               "type": "boolean",
               "readOnly": true
             },
