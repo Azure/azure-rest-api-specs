@@ -654,6 +654,23 @@
             "description": "The optional offset in the stream to begin the append operation. Default is to append at the end of the stream."
           },
           {
+            "name": "syncFlag",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "CLOSE",
+            "description": "Optionally indicates what to do after completion of the append. DATA indicates more data is coming so no sync takes place, METADATA indicates a sync should be done to refresh metadata of the file only. CLOSE indicates that both the stream and metadata should be refreshed upon append completion.",
+            "enum": [
+              "DATA",
+              "METADATA",
+              "CLOSE"
+            ],
+            "x-ms-enum": {
+            "name": "SyncFlag",
+            "modelAsString": false
+            }
+          },
+          {
             "name": "op",
             "in": "query",
             "required": true,
