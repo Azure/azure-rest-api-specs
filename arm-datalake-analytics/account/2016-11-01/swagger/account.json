@@ -1055,10 +1055,23 @@
         },
         "suffix": {
           "type": "string",
-          "description": "the optional suffix for the Data Lake account."
+          "description": "the optional suffix for the storage account."
         }
       },
       "description": "Azure Storage account properties information."
+    },
+    "UpdateStorageAccountProperties": {
+      "properties": {
+        "accessKey": {
+          "type": "string",
+          "description": "the updated access key associated with this Azure Storage account that will be used to connect to it."
+        },
+        "suffix": {
+          "type": "string",
+          "description": "the optional suffix for the storage account."
+        }
+      },
+      "description": "Azure Storage account properties information to update."
     },
     "StorageAccountInfo": {
       "properties": {
@@ -1401,7 +1414,7 @@
     "UpdateStorageAccountParameters": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/StorageAccountProperties",
+          "$ref": "#/definitions/UpdateStorageAccountProperties",
           "description": "the properties for the Azure Storage account being updated.",
           "x-ms-client-flatten": true
         }
