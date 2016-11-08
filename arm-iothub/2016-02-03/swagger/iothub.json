@@ -568,8 +568,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/jobs": {
       "get": {
         "tags": [ "GET" ],
-        "summary": "Get a list of all the jobs in an IoT hub.",
-        "description": "Get a list of all the jobs in an IoT hub.",
+        "summary": "Get a list of all the jobs in an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.",
+        "description": "Get a list of all the jobs in an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.",
         "operationId": "IotHubResource_ListJobs",
         "consumes": [ ],
         "produces": [ "application/json", "text/json" ],
@@ -618,8 +618,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/jobs/{jobId}": {
       "get": {
         "tags": [ "GET" ],
-        "summary": "Get the details of a job from an IoT hub.",
-        "description": "Get the details of a job from an IoT hub.",
+        "summary": "Get the details of a job from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.",
+        "description": "Get the details of a job from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.",
         "operationId": "IotHubResource_GetJob",
         "consumes": [ ],
         "produces": [ "application/json", "text/json" ],
@@ -764,8 +764,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/listkeys": {
       "post": {
         "tags": [ "POST" ],
-        "summary": "Get the security metadata for an IoT hub.",
-        "description": "Get the security metadata for an IoT hub.",
+        "summary": "Get the security metadata for an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.",
+        "description": "Get the security metadata for an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.",
         "operationId": "IotHubResource_ListKeys",
         "consumes": [ ],
         "produces": [ "application/json", "text/json" ],
@@ -814,8 +814,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/IotHubKeys/{keyName}/listkeys": {
       "post": {
         "tags": [ "POST" ],
-        "summary": "Get a shared access policy by name from an IoT hub.",
-        "description": "Get a shared access policy by name from an IoT hub.",
+        "summary": "Get a shared access policy by name from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.",
+        "description": "Get a shared access policy by name from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.",
         "operationId": "IotHubResource_GetKeysForKeyName",
         "consumes": [ ],
         "produces": [ "application/json", "text/json" ],
@@ -868,8 +868,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/exportDevices": {
       "post": {
         "tags": [ "POST" ],
-        "summary": "Exports all the device identities in the IoT hub identity registry to an Azure Storage blob container.",
-        "description": "Exports all the device identities in the IoT hub identity registry to an Azure Storage blob container.",
+        "summary": "Exports all the device identities in the IoT hub identity registry to an Azure Storage blob container. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.",
+        "description": "Exports all the device identities in the IoT hub identity registry to an Azure Storage blob container. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.",
         "operationId": "IotHubResource_ExportDevices",
         "consumes": [ "application/json", "text/json" ],
         "produces": [ "application/json", "text/json" ],
@@ -924,8 +924,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/importDevices": {
       "post": {
         "tags": [ "POST" ],
-        "summary": "Import, update, or delete device identities in the IoT hub identity registry from a blob.",
-        "description": "Import, update, or delete device identities in the IoT hub identity registry from a blob.",
+        "summary": "Import, update, or delete device identities in the IoT hub identity registry from a blob. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.",
+        "description": "Import, update, or delete device identities in the IoT hub identity registry from a blob. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.",
         "operationId": "IotHubResource_ImportDevices",
         "consumes": [ "application/json", "text/json" ],
         "produces": [ "application/json", "text/json" ],
@@ -1115,7 +1115,7 @@
         },
         "capacity": {
           "format": "int64",
-          "description": "The number of provisioned IoT Hub units. Range of values [For F1: 1-1, S1: 1-200, S2: 1-200, S3: 1-10]. To go above this range, call support.",
+          "description": "The number of provisioned IoT Hub units. See: https://docs.microsoft.com/azure/azure-subscription-service-limits#iot-hub-limits.",
           "type": "integer"
         }
       }
@@ -1126,12 +1126,12 @@
       "properties": {
         "retentionTimeInDays": {
           "format": "int64",
-          "description": "The retention time for device-to-cloud messages in days. Range of values [For F1: 1-1, S1: 1-7, S2: 1-7, S3: 1-7].",
+          "description": "The retention time for device-to-cloud messages in days. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#device-to-cloud-messages",
           "type": "integer"
         },
         "partitionCount": {
           "format": "int32",
-          "description": "The number of paritions for receiving device-to-cloud messages in the Event Hub-compatible endpoint. Range of values [For F1: 2-2, S1: 2-128, S2: 2-128, S3: 2-128].",
+          "description": "The number of paritions for receiving device-to-cloud messages in the Event Hub-compatible endpoint. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#device-to-cloud-messages.",
           "type": "integer"
         },
         "partitionIds": {
@@ -1170,7 +1170,7 @@
       "type": "object",
       "properties": {
         "sasTtlAsIso8601": {
-          "description": "The period of time for which the the SAS URI generated by IoT Hub fo file upload is valid. Range: 1 Min (PT1M) - 1 Day (P1D).",
+          "description": "The period of time for which the the SAS URI generated by IoT Hub for file upload is valid. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-file-upload#file-upload-notification-configuration-options.",
           "type": "string",
           "format": "duration"
         },
@@ -1189,17 +1189,17 @@
       "type": "object",
       "properties": {
         "lockDurationAsIso8601": {
-          "description": "The lock duration. Range: 5 Sec (PT5S) - 5 Min (PT5M).",
+          "description": "The lock duration. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#cloud-to-device-messages.",
           "type": "string",
           "format": "duration"
         },
         "ttlAsIso8601": {
-          "description": "The period of time for which a message is available to consume before it is expired by the IoT hub. Range: 1 Min (PT1M) - 2 Days (P2D).",
+          "description": "The period of time for which a message is available to consume before it is expired by the IoT hub. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#cloud-to-device-messages.",
           "type": "string",
           "format": "duration"
         },
         "maxDeliveryCount": {
-          "description": "The number of times the IoT hub attempts to deliver a message. Range: 1-100.",
+          "description": "The number of times the IoT hub attempts to deliver a message. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#cloud-to-device-messages.",
           "format": "int32",
           "type": "integer",
           "minimum": 1,
@@ -1212,14 +1212,14 @@
       "type": "object",
       "properties": {
         "maxDeliveryCount": {
-          "description": "The max delivery count for cloud-to-device messages in the device queue. Range : 1-100.",
+          "description": "The max delivery count for cloud-to-device messages in the device queue. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#cloud-to-device-messages.",
           "format": "int32",
           "type": "integer",
           "minimum": 1,
           "maximum": 100
         },
         "defaultTtlAsIso8601": {
-          "description": "The default time to live for cloud-to-device messages in the device queue. Range : 1 Min (PT1M) - 2 Days (P2D).",
+          "description": "The default time to live for cloud-to-device messages in the device queue. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#cloud-to-device-messages.",
           "type": "string",
           "format": "duration"
         },
@@ -1335,17 +1335,17 @@
       "type": "object",
       "properties": {
         "lockDurationAsIso8601": {
-          "description": "The lock duration for the feedback queue. Range: 5 Sec (PT5S) - 5 Min (PT5M).",
+          "description": "The lock duration for the feedback queue. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#cloud-to-device-messages.",
           "type": "string",
           "format": "duration"
         },
         "ttlAsIso8601": {
-          "description": "The period of time for which a message is available to consume before it is expired by the IoT hub. Range: 1 Min (PT1M) - 2 Days (P2D).",
+          "description": "The period of time for which a message is available to consume before it is expired by the IoT hub. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#cloud-to-device-messages.",
           "type": "string",
           "format": "duration"
         },
         "maxDeliveryCount": {
-          "description": "The number of times the IoT hub attempts to deliver a message on the feedback queue. Range : 1-100.",
+          "description": "The number of times the IoT hub attempts to deliver a message on the feedback queue. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#cloud-to-device-messages.",
           "format": "int32",
           "type": "integer",
           "minimum": 1,
