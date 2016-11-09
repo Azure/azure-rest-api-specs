@@ -4453,6 +4453,259 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends": {
+      "get": {
+        "tags": [
+          "Backends"
+        ],
+        "operationId": "Backends_ListByService",
+        "description": "Lists a collection of backends in the specified service instance.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/dn935030.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field | Supported operators    | Supported functions                         ||-------|------------------------|---------------------------------------------|| id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith || host  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of records to return."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of records to skip."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists a collection of Backend entities.",
+            "schema": {
+              "$ref": "#/definitions/BackendPaged"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/BackendGetContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendid}": {
+      "get": {
+        "tags": [
+          "Backends"
+        ],
+        "operationId": "Backends_Get",
+        "description": "Gets the details of the backend specified by its identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackendIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified Backend entity.",
+            "schema": {
+              "$ref": "#/definitions/BackendGetContract"
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Backends"
+        ],
+        "operationId": "Backends_CreateOrUpdate",
+        "description": "Creates or Updates a backend.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackendIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackendCreateParameters"
+            },
+            "description": "Create parameters."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Backend was successfully created."
+          },
+          "204": {
+            "description": "The existing backend was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Backends"
+        ],
+        "operationId": "Backends_Update",
+        "description": "Updates an existing backend.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackendIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackendParameters"
+            },
+            "description": "Update parameters."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the backend to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+           "204": {
+            "description": "The existing backend was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Backends"
+        ],
+        "operationId": "Backends_Delete",
+        "description": "Deletes the specified backend.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackendIdParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the backend to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The backend was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      }
     }
   },
   "x-ms-paths": {
@@ -6321,6 +6574,73 @@
         "type"
       ],
       "description": "Parameters supplied to the Update Logger operation."
+    },    
+    "BackendGetContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Uniquely identifies the backend within the current API Management service instance. The value is a valid relative URL in the format of /backends/{backendId} where {backendId} is a backend identifier.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackendParameters"
+        }
+      ],
+      "required": [
+        "host",
+        "skipCertificateChainValidation"
+      ],
+      "description": "Backend."
+    },
+    "BackendPaged": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackendGetContract"
+          },
+          "description": "Backend values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total records count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Backend list representation."
+    },
+    "BackendCreateParameters": {      
+      "allOf": [
+          {
+            "$ref" : "#/definitions/BackendParameters"
+          }
+       ],
+      "required": [
+        "host"
+      ],
+      "description": "Parameters supplied to the Create Backend operation."
+    },
+    "BackendParameters": {
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "Host attribute of the backend. Host is a pure hostname without a port or suffix, for example backend.contoso.com. Must not be empty.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "skipCertificateChainValidation": {
+          "type": "boolean",
+          "description": "Flag indicating whether SSL certificate chain validation should be skipped when using self-signed certificates for this backend host.",
+          "default": false          
+        }
+      },
+      "description": "Parameters supplied to the Backend Update operation."
     },
     "PropertyContract": {
       "properties": {
@@ -6835,6 +7155,17 @@
       "description": "User identifier. Must be unique in the current API Management service instance.",
       "minLength": 1,
       "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+	    "x-ms-parameter-location": "method"
+    },
+    "BackendIdParameter": {
+      "name": "backendid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "User identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 255,
       "pattern": "^[^*#&+:<>?]+$",
 	    "x-ms-parameter-location": "method"
     }
