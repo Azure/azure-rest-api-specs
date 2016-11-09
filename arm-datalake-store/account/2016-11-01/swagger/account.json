@@ -43,7 +43,7 @@
           "FirewallRules"
         ],
         "operationId": "FirewallRules_CreateOrUpdate",
-        "description": "Creates or updates the specified firewall rule. In this case of update, the firewall rule with the specified name will be replaced with this new firewall rule.",
+        "description": "Creates or updates the specified firewall rule. During update, the firewall rule with the specified name will be replaced with this new firewall rule.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -73,7 +73,7 @@
             "schema": {
               "$ref": "#/definitions/FirewallRule"
             },
-            "description": "Parameters supplied to create the create firewall rule."
+            "description": "Parameters supplied to create or update the firewall rule."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -228,7 +228,7 @@
           "TrustedIdProviders"
         ],
         "operationId": "TrustedIdProviders_CreateOrUpdate",
-        "description": "Creates or updates the specified trusted identity provider. In this case of update, the trusted identity provider with the specified name will be replaced with this new provider",
+        "description": "Creates or updates the specified trusted identity provider. During update, the trusted identity provider with the specified name will be replaced with this new provider",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -808,6 +808,9 @@
       "description": "Data Lake Store firewall rule properties information"
     },
     "FirewallRule": {
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -835,6 +838,9 @@
       "description": "Data Lake Store trusted identity provider properties information"
     },
     "TrustedIdProvider": {
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -992,8 +998,8 @@
           "type": "string",
           "description": "the status of the Data Lake Store account after provisioning has completed.",
           "enum": [
-            "active",
-            "suspended"
+            "Active",
+            "Suspended"
           ],
           "x-ms-enum": {
             "name": "DataLakeStoreAccountState",

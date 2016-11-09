@@ -271,7 +271,7 @@
           "200": {
             "description": "Successfully retrieved the specified Azure Storage container information.",
             "schema": {
-              "$ref": "#/definitions/BlobContainer"
+              "$ref": "#/definitions/StorageContainer"
             }
           }
         }
@@ -317,7 +317,7 @@
           "200": {
             "description": "Successfully retrieved the list of Azure Storage containers under the specified Azure Data Lake Analytics account.",
             "schema": {
-              "$ref": "#/definitions/ListBlobContainersResult"
+              "$ref": "#/definitions/ListStorageContainersResult"
             }
           }
         },
@@ -1106,7 +1106,7 @@
       },
       "description": "Azure Storage account information to add to the Data Lake analytics account being created."
     },
-    "BlobContainerProperties": {
+    "StorageContainerProperties": {
       "properties": {
         "lastModifiedTime": {
           "readOnly": true,
@@ -1117,7 +1117,7 @@
       },
       "description": "Azure Storage blob container properties information."
     },
-    "BlobContainer": {
+    "StorageContainer": {
       "properties": {
         "name": {
           "type": "string",
@@ -1136,19 +1136,19 @@
         },
         "properties": {
           "readOnly": true,
-          "$ref": "#/definitions/BlobContainerProperties",
+          "$ref": "#/definitions/StorageContainerProperties",
           "description": "the properties of the blob container.",
           "x-ms-client-flatten": true
         }
       },
       "description": "Azure Storage blob container information."
     },
-    "ListBlobContainersResult": {
+    "ListStorageContainersResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BlobContainer"
+            "$ref": "#/definitions/StorageContainer"
           },
           "readOnly": true,
           "description": "the results of the list operation"
@@ -1281,8 +1281,8 @@
           "type": "string",
           "description": "the state of the Data Lake Analytics account.",
           "enum": [
-            "active",
-            "suspended"
+            "Active",
+            "Suspended"
           ],
           "x-ms-enum": {
             "name": "DataLakeAnalyticsAccountState",

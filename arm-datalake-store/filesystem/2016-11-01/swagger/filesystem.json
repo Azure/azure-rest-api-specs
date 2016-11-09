@@ -551,72 +551,6 @@
         }
       }
     },
-    "/webhdfs/v1/{flushFilePath}": {
-      "post": {
-        "tags": [
-          "FileSystem"
-        ],
-        "consumes": [
-          "application/octet-stream"
-        ],
-        "operationId": "FileSystem_Flush",
-        "description": "Flushes the specified file to the store. This forces an update to the metadata of the file (returned from GetFileStatus), and is required by ConcurrentAppend once the file is done to populate finalized metadata.",
-        "parameters": [
-          {
-            "name": "flushFilePath",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Data Lake Store path (starting with '/') of the file to which to flush."
-          },
-          {
-            "name": "op",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The constant value for the operation.",
-            "enum": [
-              "APPEND"
-            ]
-          },
-          {
-            "name": "append",
-            "in": "query",
-            "required": true,
-            "description": "The constant value that avoids redirects.",
-            "type": "string",
-            "enum": [
-              "true"
-            ]
-          },
-          {
-            "name": "syncFlag",
-            "in": "query",
-            "required": true,
-            "description": "The constant value initiating the flush (close of the stream).",
-            "type": "string",
-            "enum": [
-              "close"
-            ]
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully flushed the specified file."
-          },
-          "default": {
-            "description": "An unexpected error from the server.",
-            "schema":
-            {
-              "$ref": "#/definitions/AdlsError"
-            }
-          }
-        }
-      }
-    },
     "/webhdfs/v1/{directFilePath}": {
       "post": {
         "tags": [
@@ -740,6 +674,23 @@
             "required": false,
             "type": "boolean",
             "description": "The indication of if the file should be overwritten."
+          },
+          {
+            "name": "syncFlag",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "CLOSE",
+            "description": "Optionally indicates what to do after completion of the append. DATA indicates more data is coming so no sync takes place, METADATA indicates a sync should be done to refresh metadata of the file only. CLOSE indicates that both the stream and metadata should be refreshed upon append completion.",
+            "enum": [
+              "DATA",
+              "METADATA",
+              "CLOSE"
+            ],
+            "x-ms-enum": {
+            "name": "SyncFlag",
+            "modelAsString": false
+            }
           },
           {
             "name": "op",
