@@ -138,9 +138,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The public part of the deleted key.",
+            "description": "The public part of the deleted key and deletion information on when the key will be purged.",
             "schema": {
-              "$ref": "#/definitions/KeyBundle"
+              "$ref": "#/definitions/DeletedKeyBundle"
             }
           },
           "default": {
@@ -718,6 +718,147 @@
         }
       }
     },
+    "/deletedkeys": {
+      "get": {
+        "tags": [
+          "DeletedKeys"
+        ],
+        "operationId": "GetDeletedKeys",
+        "description": "List deleted keys in the specified vault",
+        "parameters": [
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A response message containing a list of deleted keys in the vault along with a link to the next page of deleted keys",
+            "schema": {
+              "$ref": "#/definitions/DeletedKeyListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deletedkeys/{key-name}": {
+      "get": {
+        "tags": [
+          "DeletedKeys"
+        ],
+        "operationId": "GetDeletedKey",
+        "description": "Retrieves the deleted key information plus its attributes",
+        "parameters": [
+          {
+            "name": "key-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the key"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A DeletedKeyBundle consisting of a WebKey plus its Attributes and deletion info",
+            "schema": {
+              "$ref": "#/definitions/DeletedKeyBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DeletedKeys"
+        ],
+        "operationId": "PurgeDeletedKey",
+        "description": "Deletes the specified key forever. aka purges the key.",
+        "parameters": [
+          {
+            "name": "key-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the key"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content signaling that the key was purged forever."
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/deletedkeys/{key-name}/recover": {
+      "post": {
+        "tags": [
+          "DeletedKeys"
+        ],
+        "operationId": "RecoverDeletedKey",
+        "description": "Recovers the deleted key back to its current version under /keys",
+        "parameters": [
+          {
+            "name": "key-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the deleted key"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Key bundle of the original key and its attributes",
+            "schema": {
+              "$ref": "#/definitions/KeyBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
     "/secrets/{secret-name}": {
       "put": {
         "tags": [
@@ -783,9 +924,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The deleted secret.",
+            "description": "The deleted secret and information on when the secret will be deleted, and how to recover the deleted secret.",
             "schema": {
-              "$ref": "#/definitions/SecretBundle"
+              "$ref": "#/definitions/DeletedSecretBundle"
             }
           },
           "default": {
@@ -975,6 +1116,147 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deletedsecrets": {
+      "get": {
+        "tags": [
+          "DeletedSecrets"
+        ],
+        "operationId": "GetDeletedSecrets",
+        "description": "List deleted secrets in the specified vault",
+        "parameters": [
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A response message containing a list of deleted secrets in the vault along with a link to the next page of deleted secrets",
+            "schema": {
+              "$ref": "#/definitions/DeletedSecretListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deletedsecrets/{secret-name}": {
+      "get": {
+        "tags": [
+          "DeletedSecrets"
+        ],
+        "operationId": "GetDeletedSecret",
+        "description": "Retrieves the deleted secret information plus its attributes",
+        "parameters": [
+          {
+            "name": "secret-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the secret"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Secret bundle of the secret and its attributes",
+            "schema": {
+              "$ref": "#/definitions/DeletedSecretBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DeletedSecrets"
+        ],
+        "operationId": "PurgeDeletedSecret",
+        "description": "Deletes the specified secret forever. aka purges the secret.",
+        "parameters": [
+          {
+            "name": "secret-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the secret"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content signaling that the secret was purged forever."
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/deletedsecrets/{secret-name}/recover": {
+      "post": {
+        "tags": [
+          "DeletedSecrets"
+        ],
+        "operationId": "RecoverDeletedSecret",
+        "description": "Recovers the deleted secret back to its current version under /secrets",
+        "parameters": [
+          {
+            "name": "secret-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the deleted secret"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Secret bundle of the original secret and its attributes",
+            "schema": {
+              "$ref": "#/definitions/SecretBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
         }
       }
     },
@@ -1975,6 +2257,58 @@
       },
       "description": "The key item containing key metadata."
     },
+    "DeletedKeyBundle": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/KeyBundle"
+        }
+      ],
+      "properties": {
+        "recoveryId": {
+          "type": "string",
+          "description": "The url of the recovery object, used to identify and recover the deleted key."
+        },
+        "scheduledPurgeDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the key is scheduled to be purged, in UTC"
+        },
+        "deletedDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the key was deleted, in UTC"
+        }
+      },
+      "description": "A DeletedKeyBundle consisting of a WebKey plus its Attributes and deletion info"
+    },
+    "DeletedKeyItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/KeyItem"
+        }
+      ],
+      "properties": {
+        "recoveryId": {
+          "type": "string",
+          "description": "The url of the recovery object, used to identify and recover the deleted key."
+        },
+        "scheduledPurgeDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the key is scheduled to be purged, in UTC"
+        },
+        "deletedDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the key was deleted, in UTC"
+        }
+      },
+      "description": "The deleted key item containing the deleted key metadata and information about deletion."
+    },
     "SecretBundle": {
       "properties": {
         "value": {
@@ -2041,6 +2375,58 @@
         }
       },
       "description": "The secret item containing secret metadata."
+    },
+    "DeletedSecretBundle": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretBundle"
+        }
+      ],
+      "properties": {
+        "recoveryId": {
+          "type": "string",
+          "description": "The url of the recovery object, used to identify and recover the deleted secret."
+        },
+        "scheduledPurgeDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the secret is scheduled to be purged, in UTC"
+        },
+        "deletedDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the secret was deleted, in UTC"
+        }
+      },
+      "description": "A Deleted Secret consisting of its previous id, attributes and its tags, as well as information on when it will be purged."
+    },
+    "DeletedSecretItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretItem"
+        }
+      ],
+      "properties": {
+        "recoveryId": {
+          "type": "string",
+          "description": "The url of the recovery object, used to identify and recover the deleted secret."
+        },
+        "scheduledPurgeDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the secret is scheduled to be purged, in UTC"
+        },
+        "deletedDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the secret was deleted, in UTC"
+        }
+      },
+      "description": "The deleted secret item containing metadata about the deleted secret."
     },
     "SecretAttributes": {
       "allOf": [
@@ -2956,6 +3342,24 @@
       },
       "description": "The key list result."
     },
+    "DeletedKeyListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedKeyItem"
+          },
+          "readOnly": true,
+          "description": "A response message containing a list of deleted keys in the vault along with a link to the next page of deleted keys"
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of deleted keys."
+        }
+      },
+      "description": "A list of keys that have been deleted in this vault."
+    },
     "SecretListResult": {
       "properties": {
         "value": {
@@ -2973,6 +3377,24 @@
         }
       },
       "description": "The secret list result."
+    },
+    "DeletedSecretListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedSecretItem"
+          },
+          "readOnly": true,
+          "description": "A response message containing a list of the deleted secrets in the vault along with a link to the next page of deleted secrets"
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of deleted secrets."
+        }
+      },
+      "description": "The deleted secret list result"
     },
     "CertificateListResult": {
       "properties": {
