@@ -2134,7 +2134,7 @@
           ],
           "description": "The proposed index action. We suggest user to create missing index, drop unused index or to rebuild already existing index to improve its performance. Possible values are 'Create', 'Drop', 'Rebuild'.",
           "x-ms-enum": {
-           "name": "RecommendedIndexActions" 
+           "name": "RecommendedIndexActions"
           }
         },
         "state": {
@@ -2155,7 +2155,7 @@
           "type": "string",
           "description": "The state recommendation is in. Current options are: 'Active', 'Pending', 'Executing', 'Verifying', 'Pending Revert', 'Reverting', 'Reverted', 'Ignored', 'Expired', 'Blocked', 'Success'.",
           "x-ms-enum": {
-           "name": "RecommendedIndexStates" 
+           "name": "RecommendedIndexStates"
           }
         },
         "created": {
@@ -2181,7 +2181,7 @@
           "type": "string",
           "description": "The type of index (CLUSTERED, NONCLUSTERED, COLUMNSTORE, CLUSTERED COLUMNSTORE)",
           "x-ms-enum": {
-           "name": "RecommendedIndexTypes" 
+           "name": "RecommendedIndexTypes"
           }
         },
         "schema": {
@@ -2658,7 +2658,7 @@
             "P1",
             "P2",
             "P3"
-            ],                      
+            ],
             "x-ms-enum": {
             "modelAsString": true,
             "name": "ServiceObjectiveName"
@@ -3189,14 +3189,14 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "The API version to use for the request."
     },
     "ResourceGroupParameter": {
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Resource Group to which the resource belongs.",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
       "x-ms-parameter-location": "method"
     },
     "ServerNameParameter": {
@@ -3204,7 +3204,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Azure SQL Server",
+      "description": "The name of the Azure SQL Server.",
       "x-ms-parameter-location": "method"
     }
   }
