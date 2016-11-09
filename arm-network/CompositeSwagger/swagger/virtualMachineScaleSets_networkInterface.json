@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2016-10-01"
+    "version": "2016-09-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}": {
       "get": {
         "tags": [
           "NetworkInterfaces"
@@ -73,10 +73,10 @@
             "description": "The name of the network interface."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../CompositeSwagger/swagger/Network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../CompositeSwagger/swagger/Network.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "$expand",
@@ -95,41 +95,6 @@
           }
         }
       }
-    }
-  },
-  "definitions": {
-	"PublicIPAddressDnsSettings": {
-      "properties": {
-        "domainNameLabel": {
-          "type": "string",
-          "description": "Gets or sets the Domain name label.The concatenation of the domain name label and the regionalized DNS zone make up the fully qualified domain name associated with the public IP address. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system."
-        },
-        "fqdn": {
-          "type": "string",
-          "description": "Gets the FQDN, Fully qualified domain name of the A DNS record associated with the public IP. This is the concatenation of the domainNameLabel and the regionalized DNS zone."
-        },
-        "reverseFqdn": {
-          "type": "string",
-          "description": "Gets or Sets the Reverse FQDN. A user-visible, fully qualified domain name that resolves to this public IP address. If the reverseFqdn is specified, then a PTR DNS record is created pointing from the IP address in the in-addr.arpa domain to the reverse FQDN. "
-        }
-      },
-      "description": "Contains FQDN of the DNS record associated with the public IP address"
-    }
-	},
-	"parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
     }
   }
 }
