@@ -4634,7 +4634,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BackendParameters"
+              "$ref": "#/definitions/BackendUpdateParameters"
             },
             "description": "Update parameters."
           },
@@ -6465,8 +6465,8 @@
           },
           "description": "The name and SendRule connection string of the event hub.",
           "example":{
-            "name" : "Event hub name",
-            "connectionString" : "Endpoint=endpoint and key from Azure classic portal"
+            "name" : "apim",
+            "connectionString" : "Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=..."
           }         
         },
         "isBuffered": {
@@ -6479,7 +6479,7 @@
         "type",
         "credentials"
       ],
-      "description": "Logger."
+      "description": "The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs."
     },
     "LoggerPaged": {
       "properties": {
@@ -6585,14 +6585,10 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/BackendParameters"
+          "$ref": "#/definitions/BackendCreateParameters"
         }
       ],
-      "required": [
-        "host",
-        "skipCertificateChainValidation"
-      ],
-      "description": "Backend."
+      "description": "The Backend entity in API Management represents a backend service that is configured to skip certification chain validation when using a self-signed certificate to test mutual certificate authentication."
     },
     "BackendPaged": {
       "properties": {
@@ -6616,17 +6612,6 @@
       "description": "Paged Backend list representation."
     },
     "BackendCreateParameters": {      
-      "allOf": [
-          {
-            "$ref" : "#/definitions/BackendParameters"
-          }
-       ],
-      "required": [
-        "host"
-      ],
-      "description": "Parameters supplied to the Create Backend operation."
-    },
-    "BackendParameters": {
       "properties": {
         "host": {
           "type": "string",
@@ -6640,7 +6625,26 @@
           "default": false          
         }
       },
-      "description": "Parameters supplied to the Backend Update operation."
+      "required": [
+        "host"
+      ],
+      "description": "Parameters supplied to the Create Backend operation."
+    },
+    "BackendUpdateParameters": {
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "Host attribute of the backend. Host is a pure hostname without a port or suffix, for example backend.contoso.com. Must not be empty.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "skipCertificateChainValidation": {
+          "type": "boolean",
+          "description": "Flag indicating whether SSL certificate chain validation should be skipped when using self-signed certificates for this backend host.",
+          "default": false          
+        }
+      },
+      "description": "Parameters supplied to the Update Backend operation."
     },
     "PropertyContract": {
       "properties": {
@@ -7112,7 +7116,7 @@
       "minLength": 1,
       "maxLength": 256,
       "pattern": "^[^*#&+:<>?]+$",
-	    "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method"
     },    
     "OperationIdParameter": {
       "name": "operationId",
@@ -7123,7 +7127,7 @@
       "minLength": 1,
       "maxLength": 256,
       "pattern": "^[^*#&+:<>?]+$",
-	    "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method"
     },
     "ProductIdParameter": {
       "name": "productId",
@@ -7134,7 +7138,7 @@
       "minLength": 1,
       "maxLength": 256,
       "pattern": "^[^*#&+:<>?]+$",
-	    "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method"
     },
     "GroupIdParameter": {
       "name": "groupId",
@@ -7145,7 +7149,7 @@
       "minLength": 1,
       "maxLength": 256,
       "pattern": "^[^*#&+:<>?]+$",
-	    "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method"
     },
     "UserIdParameter": {
       "name": "uid",
@@ -7156,7 +7160,7 @@
       "minLength": 1,
       "maxLength": 256,
       "pattern": "^[^*#&+:<>?]+$",
-	    "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method"
     },
     "BackendIdParameter": {
       "name": "backendid",
@@ -7167,7 +7171,7 @@
       "minLength": 1,
       "maxLength": 255,
       "pattern": "^[^*#&+:<>?]+$",
-	    "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method"
     }
   }
 }
