@@ -141,7 +141,7 @@
           "Databases"
         ],
         "operationId": "Databases_CreateOrUpdate",
-        "description": "Creates a new Azure SQL database or updates an existing Azure SQL database.  Location is a required property in the request body and it must be the same as the location of the Sql Server.",
+        "description": "Creates a new Azure SQL database or updates an existing Azure SQL database. Location is a required property in the request body, and it must be the same as the location of the SQL Server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -404,7 +404,7 @@
             "schema": {
               "$ref": "#/definitions/Server"
             },
-            "description": "The required parameters for createing or updating a server."
+            "description": "The required parameters for creating or updating a server."
           }
         ],
         "responses": {
@@ -678,7 +678,7 @@
             "schema": {
               "$ref": "#/definitions/ElasticPool"
             },
-            "description": "The required parameters for createing or updating an Elastic Pool."
+            "description": "The required parameters for creating or updating an Elastic Pool."
           }
         ],
         "responses": {
@@ -1477,7 +1477,7 @@
         "dtu": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the DTUs (Database Transaction Units).  See https://azure.microsoft.com/en-us/documentation/articles/sql-database-what-is-a-dtu/"
+          "description": "Gets or sets the DTUs (Database Transaction Units). See https://azure.microsoft.com/en-us/documentation/articles/sql-database-what-is-a-dtu/"
         },
         "sizeGB": {
           "type": "number",
@@ -2132,7 +2132,7 @@
             "Drop",
             "Rebuild"
           ],
-          "description": "The proposed index action. We suggest user to create missing index, drop unused index or to rebuild already existing index to improve its performance. Possible values are 'Create', 'Drop', 'Rebuild'.",
+          "description": "The proposed index action. You can create a missing index, drop an unused index, or rebuild an existing index to improve its performance. Possible values are 'Create', 'Drop', 'Rebuild'.",
           "x-ms-enum": {
            "name": "RecommendedIndexActions"
           }
@@ -2153,7 +2153,7 @@
             "Success"
           ],
           "type": "string",
-          "description": "The state recommendation is in. Current options are: 'Active', 'Pending', 'Executing', 'Verifying', 'Pending Revert', 'Reverting', 'Reverted', 'Ignored', 'Expired', 'Blocked', 'Success'.",
+          "description": "The current recommendation state. Current options are: 'Active', 'Pending', 'Executing', 'Verifying', 'Pending Revert', 'Reverting', 'Reverted', 'Ignored', 'Expired', 'Blocked', 'Success'.",
           "x-ms-enum": {
            "name": "RecommendedIndexStates"
           }
@@ -2313,7 +2313,7 @@
             "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
             "a7c4c615-cfb1-464b-b252-925be0a19446"
             ],
-          "description": "The current Service Level Objective Id of the Azure SQL Database. This is the Id of the Service Level Objective that is currently active.",
+          "description": "The current Service Level Objective ID of the Azure SQL Database. This is the ID of the Service Level Objective that is currently active.",
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ServiceObjectiveId"
@@ -2322,7 +2322,7 @@
         "databaseId": {
           "readOnly": true,
           "type": "string",
-          "description": "The Id of the Azure SQL Database."
+          "description": "The ID of the Azure SQL Database."
         },
         "earliestRestoreDate": {
           "readOnly": true,
@@ -2349,11 +2349,11 @@
         },
         "sourceDatabaseId": {
           "type": "string",
-          "description": "Conditional.  Specifies the resource Id of the source database.  If createMode is not set to Default, then this value must be specified.  The name of the source database must be the same.  NOTE: Collation, Edition, and MaxSizeBytes must remain the same while the link is active.  Values specified for these parameters will be ignored."
+          "description": "Conditional. Specifies the resource ID of the source database. If createMode is not set to Default, then this value must be specified. The name of the source database must be the same. NOTE: Collation, Edition, and MaxSizeBytes must remain the same while the link is active. Values specified for these parameters will be ignored."
         },
         "edition": {
           "type": "string",
-          "description": "The edition of the Azure SQL Database.  The DatabaseEditions enumeration contains all the valid editions.",
+          "description": "The edition of the Azure SQL Database. The DatabaseEditions enumeration contains all the valid editions.",
           "enum": [
             "Web",
             "Business",
@@ -2386,7 +2386,7 @@
             "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
             "a7c4c615-cfb1-464b-b252-925be0a19446"
             ],
-          "description": "The configured Service Level Objective Id of the Azure SQL Database. This is the Service Level Objective that is in the process of being applied to the Azure SQL Database.  Once successfully updated, it will match the value of currentServiceObjectiveId property.",
+          "description": "The configured Service Level Objective ID of the Azure SQL Database. This is the Service Level Objective that is in the process of being applied to the Azure SQL Database. Once successfully updated, it will match the value of currentServiceObjectiveId property.",
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ServiceObjectiveId"
@@ -2408,7 +2408,7 @@
             "modelAsString": true,
             "name": "ServiceObjectiveName"
           },
-          "description": "The name of the configured Service Level Objective of the Azure SQL Database. This is the Service Level Objective that is in the process of being applied to the Azure SQL Database.  Once successfully updated, it will match the value of serviceLevelObjective property."
+          "description": "The name of the configured Service Level Objective of the Azure SQL Database. This is the Service Level Objective that is in the process of being applied to the Azure SQL Database. Once successfully updated, it will match the value of serviceLevelObjective property."
         },
         "serviceLevelObjective": {
           "readOnly": true,
@@ -3136,7 +3136,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource Id"
+          "description": "Resource ID"
         },
         "type": {
           "readOnly": true,
@@ -3171,7 +3171,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource Id"
+          "description": "The resource ID."
         }
       }
     }
@@ -3182,7 +3182,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The subscription id that identifies an Azure subscription."
+      "description": "The subscription ID that identifies an Azure subscription."
     },
     "ApiVersionParameter": {
       "name": "api-version",
