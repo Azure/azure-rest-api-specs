@@ -22,7 +22,7 @@
           "CommitmentAssociations"
         ],
         "operationId": "CommitmentAssociations_Get",
-        "description": "Gets a commitment association.",
+        "description": "Get a commitment association.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -93,7 +93,7 @@
           "CommitmentAssociations"
         ],
         "operationId": "CommitmentAssociations_Move",
-        "description": "Re-parents a commitment association from one commitment plan to another.",
+        "description": "Re-parent a commitment association from one commitment plan to another.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -151,7 +151,7 @@
           "CommitmentPlans"
         ],
         "operationId": "CommitmentPlans_CreateOrUpdate",
-        "description": "Creates a new Azure ML commitment plan resource or updates an existing one.",
+        "description": "Create a new Azure ML commitment plan resource or updates an existing one.",
         "parameters": [
           {
             "name": "createOrUpdatePayload",
@@ -199,7 +199,7 @@
         "parameters": [
           {
             "name": "patchPayload",
-            "description": "The payload to patch the Azure ML commitment plan with. Only tags and SKU may be modified on an existing commitment plan.",
+            "description": "The payload to use to patch the Azure ML commitment plan. Only tags and SKU may be modified on an existing commitment plan.",
             "in": "body",
             "required": true,
             "schema": {
@@ -306,7 +306,7 @@
           "CommitmentPlans"
         ],
         "operationId": "UsageHistory_List",
-        "description": "Retrieves the usage history for an Azure ML commitment plan.",
+        "description": "Retrieve the usage history for an Azure ML commitment plan.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -610,7 +610,7 @@
         },
         "suspendPlanOnOverage": {
           "type": "boolean",
-          "description": "Indicates whether this commitment plan will be moved into a suspended state if usage beyond the commitment plan's included quantities is incurred.",
+          "description": "Indicates whether this commitment plan will be moved into a suspended state if usage goes beyond the commitment plan's included quantities.",
           "readOnly": true
         }
       }
