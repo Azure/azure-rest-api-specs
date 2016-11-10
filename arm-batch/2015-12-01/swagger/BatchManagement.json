@@ -79,13 +79,30 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": ""
-          },
           "200": {
-            "description": "",
+            "description": "The operation was successful. The response contains the Batch account entity.",
             "schema": {
               "$ref": "#/definitions/BatchAccount"
+            }
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
             }
           }
         },
@@ -134,9 +151,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The operation was successful. The response contains the Batch account entity.",
             "schema": {
               "$ref": "#/definitions/BatchAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
             }
           }
         }
@@ -174,14 +197,28 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": ""
-          },
-          "204": {
-            "description": ""
-          },
           "200": {
-            "description": ""
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -220,9 +257,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The operation was successful. The response contains the Batch account entity.",
             "schema": {
               "$ref": "#/definitions/BatchAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
             }
           }
         }
@@ -245,9 +288,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The operation was successful. The response contains a list of Batch account entities associated with the subscription.",
             "schema": {
               "$ref": "#/definitions/BatchAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
             }
           }
         },
@@ -281,9 +330,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The operation was successful. The response contains a list of Batch account entities associated with the resource group.",
             "schema": {
               "$ref": "#/definitions/BatchAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
             }
           }
         },
@@ -327,7 +382,13 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "The operation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
+            }
           }
         }
       }
@@ -338,7 +399,7 @@
           "BatchAccount"
         ],
         "operationId": "BatchAccount_RegenerateKey",
-        "description": "Regenerates the specified account key for the specified Batch account.",
+        "description": "Regenerates the specified account key for the Batch account.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -376,9 +437,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The operation was successful. The response contains the keys of the Batch account.",
             "schema": {
               "$ref": "#/definitions/BatchAccountKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
             }
           }
         }
@@ -419,9 +486,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The operation was successful. The response contains the keys of the Batch account.",
             "schema": {
               "$ref": "#/definitions/BatchAccountKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
             }
           }
         }
@@ -458,7 +531,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The id of the application."
+            "description": "The ID of the application."
           },
           {
             "name": "version",
@@ -485,7 +558,13 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "The operation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
+            }
           }
         }
       }
@@ -521,7 +600,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The id of the application."
+            "description": "The ID of the application."
           },
           {
             "name": "parameters",
@@ -541,9 +620,15 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "The operation was successful. The response contains the application entity.",
             "schema": {
               "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
             }
           }
         }
@@ -578,7 +663,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The id of the application."
+            "description": "The ID of the application."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -589,7 +674,13 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "The operation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
+            }
           }
         }
       },
@@ -623,7 +714,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The id of the application."
+            "description": "The ID of the application."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -634,9 +725,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The operation was successful. The response contains the application entity.",
             "schema": {
               "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
             }
           }
         }
@@ -671,7 +768,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The id of the application."
+            "description": "The ID of the application."
           },
           {
             "name": "parameters",
@@ -691,7 +788,13 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "The operation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
+            }
           }
         }
       }
@@ -727,7 +830,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The id of the application."
+            "description": "The ID of the application."
           },
           {
             "name": "version",
@@ -745,9 +848,15 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "The operation was successful. The response contains the application package entity.",
             "schema": {
               "$ref": "#/definitions/ApplicationPackage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
             }
           }
         }
@@ -782,7 +891,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The id of the application."
+            "description": "The ID of the application."
           },
           {
             "name": "version",
@@ -800,7 +909,13 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "The operation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
+            }
           }
         }
       },
@@ -834,7 +949,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The id of the application."
+            "description": "The ID of the application."
           },
           {
             "name": "version",
@@ -852,9 +967,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The operation was successful. The response contains the application package entity.",
             "schema": {
               "$ref": "#/definitions/ApplicationPackage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
             }
           }
         }
@@ -903,9 +1024,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The operation was successful. The response contains a list of the application entities associated with the specified account.",
             "schema": {
               "$ref": "#/definitions/ListApplicationsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
             }
           }
         },
@@ -938,9 +1065,15 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The operation was successful. The response contains the Batch service quotas of the subscription.",
             "schema": {
               "$ref": "#/definitions/BatchLocationQuota"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBody"
             }
           }
         }
@@ -952,7 +1085,7 @@
       "properties": {
         "storageAccountId": {
           "type": "string",
-          "description": "The resource id of the storage account to be used for auto storage account."
+          "description": "The resource ID of the storage account to be used for auto storage account."
         }
       },
       "required": [
@@ -997,7 +1130,7 @@
       "properties": {
         "storageAccountId": {
           "type": "string",
-          "description": "The resource id of the storage account to be used for auto storage account."
+          "description": "The resource ID of the storage account to be used for auto storage account."
         },
         "lastKeySync": {
           "type": "string",
@@ -1199,7 +1332,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The id of the application."
+          "description": "The ID of the application."
         },
         "version": {
           "type": "string",
@@ -1287,7 +1420,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The id of the resource"
+          "description": "The ID of the resource"
         },
         "name": {
           "readOnly": true,
@@ -1313,6 +1446,47 @@
       },
       "description": "A definition of an Azure resource.",
       "x-ms-azure-resource": true
+    },
+    "ErrorDetail": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        }
+      },
+      "description": "Specific detail about an error."
+    },
+    "ErrorBody": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Batch service."
     }
   },
   "parameters": {
@@ -1321,14 +1495,14 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "A unique identifier of a Microsoft Azure subscription. The subscription id forms part of the URI for every service call."
+      "description": "A unique identifier of a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },  
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client API Version."
+      "description": "The API version to be used with the HTTP request."
     }
   }
 }
