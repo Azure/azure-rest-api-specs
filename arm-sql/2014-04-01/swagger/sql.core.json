@@ -141,7 +141,7 @@
           "Databases"
         ],
         "operationId": "Databases_CreateOrUpdate",
-        "description": "Creates a new Azure SQL database or updates an existing Azure SQL database. Location is a required property in the request body, and it must be the same as the location of the SQL Server.",
+        "description": "Creates a new Azure SQL database or updates an existing Azure SQL database. Location is a required property in the request body, and it must be the same as the location of the SQL server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -355,7 +355,7 @@
           "Servers"
         ],
         "operationId": "Servers_List",
-        "description": "Returns information about an Azure SQL Server.",
+        "description": "Returns information about an Azure SQL server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -383,7 +383,7 @@
           "Servers"
         ],
         "operationId": "Servers_CreateOrUpdate",
-        "description": "Creates a new Azure SQL Server.",
+        "description": "Creates a new Azure SQL server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -456,7 +456,7 @@
           "Servers"
         ],
         "operationId": "Servers_GetByResourceGroup",
-        "description": "Gets information about an Azure SQL Server.",
+        "description": "Gets information about an Azure SQL server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -487,7 +487,7 @@
           "Servers"
         ],
         "operationId": "Servers_ListByResourceGroup",
-        "description": "Returns information about an Azure SQL Server.",
+        "description": "Returns information about an Azure SQL server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -518,7 +518,7 @@
           "ServerUpgrades"
         ],
         "operationId": "Servers_CancelUpgrade",
-        "description": "Cancel a pending upgrade for the Azure SQL Server.",
+        "description": "Cancel a pending upgrade for the Azure SQL server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -547,7 +547,7 @@
           "ServerUpgrades"
         ],
         "operationId": "Servers_GetUpgrade",
-        "description": "Gets information about Upgrade status of an Azure SQL Server.",
+        "description": "Gets information about Upgrade status of an Azure SQL server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -578,7 +578,7 @@
           "ServerUpgrades"
         ],
         "operationId": "Servers_StartUpgrade",
-        "description": "Start an Azure SQL Server Upgrade.",
+        "description": "Start an Azure SQL server upgrade.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -599,7 +599,7 @@
             "schema": {
               "$ref": "#/definitions/ServerUpgradeStartParameters"
             },
-            "description": "The required parameters for the Azure SQL Server Upgrade."
+            "description": "The required parameters for the Azure SQL server upgrade."
           }
         ],
         "responses": {
@@ -616,7 +616,7 @@
           "Servers"
         ],
         "operationId": "Servers_ListUsages",
-        "description": "Returns information about Azure SQL Server usage.",
+        "description": "Returns information about Azure SQL server usage.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1796,7 +1796,7 @@
         "serverName": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of the Azure SQL Server the Elastic Pool is in."
+          "description": "The name of the Azure SQL server the Elastic Pool is in."
         },
         "startTime": {
           "readOnly": true,
@@ -1909,7 +1909,7 @@
         "serverName": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of the Azure SQL Server the Elastic Pool is in."
+          "description": "The name of the Azure SQL server the Elastic Pool is in."
         },
         "startTime": {
           "readOnly": true,
@@ -1978,7 +1978,7 @@
           "description": "The administrator login password (required for server creation)."
         }
       },
-      "description": "Represents the properties of an Azure SQL Server."
+      "description": "Represents the properties of an Azure SQL server."
     },
     "Server": {
       "properties": {
@@ -1993,7 +1993,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Represents an Azure SQL Server."
+      "description": "Represents an Azure SQL server."
     },
     "ServerListResult": {
       "properties": {
@@ -2002,34 +2002,34 @@
           "items": {
             "$ref": "#/definitions/Server"
           },
-          "description": "The list of Azure SQL Servers."
+          "description": "The list of Azure SQL servers."
         }
       },
       "required": ["value"],
-      "description": "Represents the response to a Get Azure SQL Server request."
+      "description": "Represents the response to a Get Azure SQL server request."
     },
     "ServerUpgradeGetResult": {
       "properties": {
         "status": {
           "readOnly": true,
           "type": "string",
-          "description": "The status of the Azure SQL Server Upgrade."
+          "description": "The status of the Azure SQL server upgrade."
         },
         "scheduleUpgradeAfterTime": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The schedule time of the Azure SQL Server Upgrade (ISO8601 format)."
+          "description": "The schedule time of the Azure SQL server upgrade (ISO8601 format)."
         }
       },
-      "description": "Represents the response to a Get request for Upgrade status of an Azure SQL Server."
+      "description": "Represents the response to a Get request for upgrade status of an Azure SQL server."
     },
     "ServerUpgradeProperties": {
       "properties": {
         "Version": {
           "type": "string",
           "enum": ["12.0"],
-          "description": "The version for the Azure SQL Server being upgraded.",
+          "description": "The version for the Azure SQL server being upgraded.",
           "x-ms-enum": {
               "name": "ServerUpgradeVersion",
               "modelAsString": true
@@ -2038,40 +2038,40 @@
         "ScheduleUpgradeAfterUtcDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The earliest time to upgrade the Azure SQL Server (ISO8601 format)."
+          "description": "The earliest time to upgrade the Azure SQL server (ISO8601 format)."
         },
         "DatabaseCollection": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecommendedDatabaseProperties"
           },
-          "description": "The collection of recommended database properties to upgrade the Azure SQL Server."
+          "description": "The collection of recommended database properties to upgrade the Azure SQL server."
         },
         "ElasticPoolCollection": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/UpgradeRecommendedElasticPoolProperties"
           },
-          "description": "The collection of recommended elastic pool properties to upgrade the Azure SQL Server."
+          "description": "The collection of recommended elastic pool properties to upgrade the Azure SQL server."
         }
       },
       "required": [
         "Version"
       ],
-      "description": "Start Azure SQL Server Upgrade properties."
+      "description": "Start Azure SQL server upgrade properties."
     },
     "ServerUpgradeStartParameters": {
       "properties": {
         "serverUpgradeProperties": {
           "$ref": "#/definitions/ServerUpgradeProperties",
-          "description": "The properties of the Azure SQL Server Upgrade.",
+          "description": "The properties of the Azure SQL server upgrade.",
           "x-ms-client-flatten": true
         }
       },
       "required": [
         "serverUpgradeProperties"
       ],
-      "description": "Start Azure SQL Server Upgrade parameters."
+      "description": "Start Azure SQL server upgrade parameters."
     },
     "UpgradeRecommendedElasticPoolProperties": {
       "properties": {
@@ -2987,7 +2987,7 @@
           "description": "The next reset time for the metric (ISO8601 format)."
         }
       },
-      "description": "Represents Azure SQL Server metrics."
+      "description": "Represents Azure SQL server metrics."
     },
     "ServerMetricListResult": {
       "properties": {
@@ -2996,11 +2996,11 @@
           "items": {
             "$ref": "#/definitions/ServerMetric"
           },
-          "description": "The list of Azure SQL Server metrics for the server."
+          "description": "The list of Azure SQL server metrics for the server."
         }
       },
       "required": ["value"],
-      "description": "Represents the response to a List Azure SQL Server metrics request."
+      "description": "Represents the response to a List Azure SQL server metrics request."
     },
     "ServiceTierAdvisorListResult": {
       "properties": {
@@ -3204,7 +3204,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Azure SQL Server.",
+      "description": "The name of the Azure SQL server.",
       "x-ms-parameter-location": "method"
     }
   }
