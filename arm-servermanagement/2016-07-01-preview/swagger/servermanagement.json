@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ServerManagement",
-    "description": "REST API for Azure Server Management Service",
+    "description": "REST API for Azure Server Management Service.",
     "version": "2016-07-01-preview"
   },
   "host": "management.azure.com",
@@ -29,7 +29,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -82,19 +82,19 @@
         ],
         "responses": {
           "200": {
-            "description": "the operation completed successfully",
+            "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/GatewayResource"
             }
           },
           "201": {
-            "description": "the operation completed successfully",
+            "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/GatewayResource"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -150,10 +150,10 @@
             }
           },
           "202": {
-            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+            "description": "Accepted: The location header contains the URL where the status of the long running operation can be checked."
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -196,13 +196,13 @@
         ],
         "responses": {
           "200": {
-            "description": "the object exists and was deleted successfully."
+            "description": "The object exists and was deleted successfully."
           },
           "204": {
-            "description": "the resource does not exist and the request is well formed"
+            "description": "The request is well formed but the resource does not exist."
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -214,7 +214,7 @@
           "Gateways"
         ],
         "operationId": "Gateway_Get",
-        "description": "Returns a gateway",
+        "description": "Gets a gateway.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -259,13 +259,13 @@
         ],
         "responses": {
           "200": {
-            "description": "the operation completed successfully.",
+            "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/GatewayResource"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -279,7 +279,7 @@
           "Gateways"
         ],
         "operationId": "Gateway_List",
-        "description": "Returns gateways in a subscription",
+        "description": "Returns gateways in a subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -290,13 +290,13 @@
         ],
         "responses": {
           "200": {
-            "description": "the operation completed successfully.",
+            "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/GatewayResources"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -313,7 +313,7 @@
           "Gateways"
         ],
         "operationId": "Gateway_ListForResourceGroup",
-        "description": "Returns gateways in a resource group",
+        "description": "Returns gateways in a resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -333,13 +333,13 @@
         ],
         "responses": {
           "200": {
-            "description": "the operation completed successfully.",
+            "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/GatewayResources"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -356,7 +356,7 @@
           "Gateways"
         ],
         "operationId": "Gateway_Upgrade",
-        "description": "Upgrade a gateway",
+        "description": "Upgrades a gateway.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -386,13 +386,13 @@
         ],
         "responses": {
           "200": {
-            "description": "the operation completed successfully."
+            "description": "The operation completed successfully."
           },
           "202": {
             "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -437,13 +437,13 @@
         ],
         "responses": {
           "200": {
-            "description": "the operation completed successfully."
+            "description": "The operation completed successfully."
           },
           "202": {
             "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -458,7 +458,7 @@
           "Gateways"
         ],
         "operationId": "Gateway_GetProfile",
-        "description": "Gets a gateway profile",
+        "description": "Gets a gateway profile.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -488,7 +488,7 @@
         ],
         "responses": {
           "200": {
-            "description": "the operation completed successfully.",
+            "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/GatewayProfile"
             }
@@ -497,7 +497,7 @@
             "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -512,7 +512,7 @@
           "Nodes"
         ],
         "operationId": "Node_Create",
-        "description": "Creates or updates a management node",
+        "description": "Creates or updates a management node.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -552,13 +552,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation completed successfully",
+            "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/NodeResource"
             }
           },
           "201": {
-            "description": "The operation completed successfully",
+            "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/NodeResource"
             }
@@ -567,7 +567,7 @@
             "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -580,7 +580,7 @@
           "Nodes"
         ],
         "operationId": "Node_Update",
-        "description": "Updates a management node",
+        "description": "Updates a management node.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -629,7 +629,7 @@
             "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -672,13 +672,13 @@
         ],
         "responses": {
           "200": {
-            "description": "the object exists and was deleted successfully."
+            "description": "The object exists and was deleted successfully."
           },
           "204": {
-            "description": "the resource does not exist and the request is well formed"
+            "description": "The request is well formed but the resource does not exist."
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -690,7 +690,7 @@
           "Nodes"
         ],
         "operationId": "Node_Get",
-        "description": "gets a management node",
+        "description": "Gets a management node.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -720,13 +720,13 @@
         ],
         "responses": {
           "200": {
-            "description": "the object exists and was deleted successfully.",
+            "description": "The object exists and was deleted successfully.",
             "schema": {
               "$ref": "#/definitions/NodeResource"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -740,7 +740,7 @@
           "Nodes"
         ],
         "operationId": "Node_List",
-        "description": "Returns nodes in a subscription",
+        "description": "Lists nodes in a subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -751,13 +751,13 @@
         ],
         "responses": {
           "200": {
-            "description": "the operation completed successfully.",
+            "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/NodeResources"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -774,7 +774,7 @@
           "Nodes"
         ],
         "operationId": "Node_ListForResourceGroup",
-        "description": "Returns nodes in a resource group",
+        "description": "Lists nodes in a resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -794,13 +794,13 @@
         ],
         "responses": {
           "200": {
-            "description": "the operation completed successfully.",
+            "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/NodeResources"
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -817,7 +817,7 @@
           "Sessions"
         ],
         "operationId": "Session_Create",
-        "description": "Creates a session for a node",
+        "description": "Creates a session for a node.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -849,7 +849,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The sessionId from the user"
+            "description": "The sessionId from the user."
           },
           {
             "name": "SessionParameters",
@@ -864,13 +864,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation completed successfully",
+            "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SessionResource"
             }
           },
           "201": {
-            "description": "Created: the session has been created",
+            "description": "Created: the session was created.",
             "schema": {
               "$ref": "#/definitions/SessionResource"
             }
@@ -879,7 +879,7 @@
             "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -892,7 +892,7 @@
           "Sessions"
         ],
         "operationId": "Session_Delete",
-        "description": "Deletes a session for a node",
+        "description": "Deletes a session for a node.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -924,7 +924,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The sessionId from the user"
+            "description": "The sessionId from the user."
           }
         ],
         "responses": {
@@ -932,10 +932,10 @@
             "description": "The operation completed successfully."
           },
           "204": {
-            "description": "the resource does not exist and the request is well formed"
+            "description": "The request is well formed but the resource does not exist."
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -947,7 +947,7 @@
           "Sessions"
         ],
         "operationId": "Session_Get",
-        "description": "Gets a session for a node",
+        "description": "Gets a session for a node.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -979,7 +979,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The sessionId from the user"
+            "description": "The sessionId from the user."
           }
         ],
         "responses": {
@@ -990,7 +990,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1036,7 +1036,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The sessionId from the user"
+            "description": "The sessionId from the user."
           }
         ],
         "responses": {
@@ -1047,7 +1047,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1061,7 +1061,7 @@
           "PowerShell"
         ],
         "operationId": "PowerShell_CreateSession",
-        "description": "Creates a PowerShell session",
+        "description": "Creates a PowerShell session.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1093,14 +1093,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The sessionId from the user"
+            "description": "The sessionId from the user."
           },
           {
             "name": "pssession",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The PowerShell sessionId from the user"
+            "description": "The PowerShell sessionId from the user."
           }
         ],
         "responses": {
@@ -1114,7 +1114,7 @@
             "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1159,14 +1159,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The sessionId from the user"
+            "description": "The sessionId from the user."
           },
           {
             "name": "pssession",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The PowerShell sessionId from the user"
+            "description": "The PowerShell sessionId from the user."
           },
           {
             "name": "$expand",
@@ -1191,7 +1191,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1203,7 +1203,7 @@
           "PowerShell"
         ],
         "operationId": "PowerShell_UpdateCommand",
-        "description": "updates a running PowerShell command with more data.",
+        "description": "Updates a running PowerShell command with more data.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1235,14 +1235,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The sessionId from the user"
+            "description": "The sessionId from the user."
           },
           {
             "name": "pssession",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The PowerShell sessionId from the user"
+            "description": "The PowerShell sessionId from the user."
           }
         ],
         "responses": {
@@ -1256,7 +1256,7 @@
             "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1303,14 +1303,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The sessionId from the user"
+            "description": "The sessionId from the user."
           },
           {
             "name": "pssession",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The PowerShell sessionId from the user"
+            "description": "The PowerShell sessionId from the user."
           },
           {
             "name": "PowerShellCommandParameters",
@@ -1334,7 +1334,7 @@
             "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1381,14 +1381,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The sessionId from the user"
+            "description": "The sessionId from the user."
           },
           {
             "name": "pssession",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The PowerShell sessionId from the user"
+            "description": "The PowerShell sessionId from the user."
           }
         ],
         "responses": {
@@ -1402,7 +1402,7 @@
             "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1417,7 +1417,7 @@
           "PowerShell"
         ],
         "operationId": "PowerShell_TabCompletion",
-        "description": "gets tab completion values for a command.",
+        "description": "Gets tab completion values for a command.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1449,14 +1449,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The sessionId from the user"
+            "description": "The sessionId from the user."
           },
           {
             "name": "pssession",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The PowerShell sessionId from the user"
+            "description": "The PowerShell sessionId from the user."
           },
           {
             "name": "PowerShellTabCompletionParamters",
@@ -1477,7 +1477,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema, and an exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1489,34 +1489,34 @@
   "definitions": {
     "Resource": {
       "x-ms-azure-resource": true,
-      "description": "ARM Resource Information",
+      "description": "ARM Resource Information.",
       "properties": {
         "id": {
           "type": "string",
           "readOnly": true,
-          "description": "ARM Resource ID"
+          "description": "ARM Resource ID."
         },
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "ARM Resource Type"
+          "description": "ARM Resource Type."
         },
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "ARM Resource Name"
+          "description": "ARM Resource Name."
         },
         "location": {
           "type": "string",
           "readOnly": true,
-          "description": "ARM Resource Location"
+          "description": "ARM Resource Location."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "ARM Resource Tags"
+          "description": "ARM Resource Tags."
         },
         "etag": {
           "type": "string"
@@ -1529,22 +1529,22 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "data model for an arm gateway resource",
+      "description": "Data model for an arm gateway resource.",
       "properties": {
         "properties": {
-          "description": "collection of properties",
+          "description": "Collection of properties.",
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
             "created": {
               "type": "string",
               "format": "date-time",
-              "description": "UTC date and time when gateway was first added to management service"
+              "description": "UTC date and time when gateway was first added to management service."
             },
             "updated": {
               "type": "string",
               "format": "date-time",
-              "description": "UTC date and time when node was last updated"
+              "description": "UTC date and time when node was last updated."
             },
             "upgradeMode": {
               "type": "string",
@@ -1560,37 +1560,37 @@
             },
             "desiredVersion": {
               "type": "string",
-              "description": "latest available msi version"
+              "description": "Latest available msi version."
             },
             "instances": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/GatewayStatus"
               },
-              "description": "names of the nodes in the gateway"
+              "description": "Names of the nodes in the gateway."
             },
             "activeMessageCount": {
               "type": "integer",
-              "description": "number of active messages"
+              "description": "Number of active messages."
             },
             "latestPublishedMsiVersion": {
               "type": "string",
-              "description": "last published msi version"
+              "description": "Last published msi version."
             },
             "publishedTimeUtc": {
               "type": "string",
               "format": "date-time",
-              "description": "the date/time of the last published gateway"
+              "description": "The date/time of the last published gateway."
             },
             "installerDownload": {
               "type": "string",
               "readOnly": true,
-              "description": "installer download uri"
+              "description": "Installer download uri."
             },
             "minimumVersion": {
               "type": "string",
               "readOnly": true,
-              "description": "minimum gateway version"
+              "description": "Minimum gateway version."
             }
           }
         }
@@ -1598,23 +1598,23 @@
     },
     "GatewayResources": {
       "type": "object",
-      "description": "collection of Gateway Resources",
+      "description": "Collection of Gateway Resources.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/GatewayResource"
           },
-          "description": "collection of Gateway Resources"
+          "description": "Collection of Gateway Resources."
         },
         "nextLink": {
           "type": "string",
-          "description": "the URL to the next set of resources"
+          "description": "The URL to the next set of resources."
         }
       }
     },
     "GatewayStatus": {
-      "description": "Expanded gateway status information",
+      "description": "Expanded gateway status information.",
       "properties": {
         "availableMemoryMByte": {
           "type": "number",
@@ -1642,7 +1642,7 @@
         "installedDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The date the gateway was installed"
+          "description": "The date the gateway was installed."
         },
         "logicalProcessorCount": {
           "type": "integer",
@@ -1654,7 +1654,7 @@
         },
         "gatewayId": {
           "type": "string",
-          "description": "The gateway resource id."
+          "description": "The gateway resource ID."
         },
         "gatewayWorkingSetMByte": {
           "type": "number",
@@ -1663,48 +1663,48 @@
         "statusUpdated": {
           "type": "string",
           "format": "date-time",
-          "description": "UTC date and time when gateway status was last updated"
+          "description": "UTC date and time when gateway status was last updated."
         },
         "groupPolicyError": {
           "type": "string",
-          "description": "The group policy error"
+          "description": "The group policy error."
         },
         "allowGatewayGroupPolicyStatus": {
           "type": "boolean",
-          "description": "Status of the allowGatewayGroupPolicy setting"
+          "description": "Status of the allowGatewayGroupPolicy setting."
         },
         "requireMfaGroupPolicyStatus": {
           "type": "boolean",
-          "description": "Status of the requireMfaGroupPolicy setting"
+          "description": "Status of the requireMfaGroupPolicy setting."
         },
         "encryptionCertificateThumbprint": {
           "type": "string",
-          "description": "Thumbprint of the encryption certificate"
+          "description": "Thumbprint of the encryption certificate."
         },
         "secondaryEncryptionCertificateThumbprint": {
           "type": "string",
-          "description": "Secondary thumbprint of the encryption certificate"
+          "description": "Secondary thumbprint of the encryption certificate."
         },
         "encryptionJwk": {
           "$ref": "#/definitions/EncryptionJwkResource",
-          "description": "The encryption cerfiticate key"
+          "description": "The encryption cerfiticate key."
         },
         "secondaryEncryptionJwk": {
           "$ref": "#/definitions/EncryptionJwkResource",
-          "description": "The secondary encryption cerfiticate key"
+          "description": "The secondary encryption cerfiticate key."
         },
         "activeMessageCount": {
           "type": "integer",
-          "description": "active message count"
+          "description": "Active message count."
         },
         "latestPublishedMsiVersion": {
           "type": "string",
-          "description": "latest published version of the gateway install msi"
+          "description": "Latest published version of the gateway install msi."
         },
         "publishedTimeUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "gateway install msi published time"
+          "description": "Gateway install msi published time."
         }
       }
     },
@@ -1713,59 +1713,59 @@
       "properties": {
         "dataPlaneServiceBaseAddress": {
           "type": "string",
-          "description": "the Dataplane connection URL"
+          "description": "The Dataplane connection URL."
         },
         "gatewayId": {
           "type": "string",
-          "description": "the ID of the gateway"
+          "description": "The ID of the gateway."
         },
         "environment": {
           "type": "string",
-          "description": "the environment for the gateway (DEV, DogFood, or Production)"
+          "description": "The environment for the gateway (DEV, DogFood, or Production)."
         },
         "upgradeManifestUrl": {
           "type": "string",
-          "description": "Gateway upgrade manifest URL"
+          "description": "Gateway upgrade manifest URL."
         },
         "messagingNamespace": {
           "type": "string",
-          "description": "Messaging namespace"
+          "description": "Messaging namespace."
         },
         "messagingAccount": {
           "type": "string",
-          "description": "Messaging Account"
+          "description": "Messaging Account."
         },
         "messagingKey": {
           "type": "string",
-          "description": "Messaging Key"
+          "description": "Messaging Key."
         },
         "requestQueue": {
           "type": "string",
-          "description": "Request queue name"
+          "description": "Request queue name."
         },
         "responseTopic": {
           "type": "string",
-          "description": "Response topic name"
+          "description": "Response topic name."
         },
         "statusBlobSignature": {
           "type": "string",
-          "description": "The gateway status blob SAS url"
+          "description": "The gateway status blob SAS URL."
         }
       }
     },
     "GatewayParameters": {
-      "description": "collection of parameters for operations on a gateway resource",
+      "description": "Collection of parameters for operations on a gateway resource.",
       "properties": {
         "location": {
           "type": "string",
-          "description": "location of the resource"
+          "description": "Location of the resource."
         },
         "tags": {
           "type": "object",
-          "description": "resource tags"
+          "description": "Resource tags."
         },
         "properties": {
-          "description": "collection of properties",
+          "description": "Collection of properties.",
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
@@ -1786,7 +1786,7 @@
       }
     },
     "NodeResource": {
-      "description": "A Node Resource",
+      "description": "A Node Resource.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -1794,13 +1794,13 @@
       ],
       "properties": {
         "properties": {
-          "description": "collection of properties",
+          "description": "Collection of properties.",
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
             "gatewayId": {
               "type": "string",
-              "description": "Id of the gateway"
+              "description": "ID of the gateway."
             },
             "connectionName": {
               "type": "string",
@@ -1809,7 +1809,7 @@
             "created": {
               "type": "string",
               "format": "date-time",
-              "description": "UTC date and time when node was first added to management service"
+              "description": "UTC date and time when node was first added to management service."
             },
             "updated": {
               "type": "string",
@@ -1822,40 +1822,40 @@
     },
     "NodeResources": {
       "type": "object",
-      "description": "a collection of node resource objects",
+      "description": "A collection of node resource objects.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/NodeResource"
           },
-          "description": "Collection of Node Resources"
+          "description": "Collection of Node Resources."
         },
         "nextLink": {
           "type": "string",
-          "description": "the URL to the next set of resources"
+          "description": "The URL to the next set of resources."
         }
       }
     },
     "NodeParameters": {
-      "description": "parameter collection for operations on arm node resource",
+      "description": "Parameter collection for operations on arm node resource.",
       "properties": {
         "location": {
           "type": "string",
-          "description": "location of the resource?"
+          "description": "Location of the resource."
         },
         "tags": {
           "type": "object",
-          "description": "resource tags"
+          "description": "Resource tags."
         },
         "properties": {
-          "description": "collection of properties",
+          "description": "Collection of properties.",
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
             "gatewayId": {
               "type": "string",
-              "description": "Gateway id which will manage this node"
+              "description": "Gateway ID which will manage this node."
             },
             "connectionName": {
               "type": "string",
@@ -1863,19 +1863,19 @@
             },
             "userName": {
               "type": "string",
-              "description": "User name to be used to connect to node"
+              "description": "User name to be used to connect to node."
             },
             "password": {
               "type": "string",
               "format": "password",
-              "description": "Password associated with user name"
+              "description": "Password associated with user name."
             }
           }
         }
       }
     },
     "SessionResource": {
-      "description": "the session object",
+      "description": "The session object.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -1883,18 +1883,18 @@
       ],
       "properties": {
         "properties": {
-          "description": "collection of properties",
+          "description": "Collection of properties.",
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
             "userName": {
               "type": "string",
-              "description": "the username connecting to the session"
+              "description": "The username connecting to the session."
             },
             "created": {
               "type": "string",
               "format": "date-time",
-              "description": "UTC date and time when node was first added to management service"
+              "description": "UTC date and time when node was first added to management service."
             },
             "updated": {
               "type": "string",
@@ -1906,24 +1906,24 @@
       }
     },
     "SessionParameters": {
-      "description": "parameter collection for creation and other operations on sessions",
+      "description": "Parameter collection for creation and other operations on sessions.",
       "properties": {
         "properties": {
-          "description": "collection of properties",
+          "description": "Collection of properties",
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
             "userName": {
               "type": "string",
-              "description": "encrypted User name to be used to connect to node"
+              "description": "Encrypted User name to be used to connect to node."
             },
             "password": {
               "type": "string",
-              "description": "encrypted Password associated with user name"
+              "description": "Encrypted Password associated with user name."
             },
             "retentionPeriod": {
               "type": "string",
-              "description": "session retention period",
+              "description": "Session retention period.",
               "enum": [
                 "Session",
                 "Persistent"
@@ -1935,7 +1935,7 @@
             },
             "credentialDataFormat": {
               "type": "string",
-              "description": "credential data format",
+              "description": "Credential data format.",
               "enum": [
                 "RsaEncrypted"
               ],
@@ -1946,7 +1946,7 @@
             },
             "EncryptionCertificateThumbprint": {
               "type": "string",
-              "description": "encryption certificate thumbprint"
+              "description": "Encryption certificate thumbprint."
             }
           }
         }
@@ -1958,16 +1958,16 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "A powershell session resource (practically equivalent to a runspace instance)",
+      "description": "A powershell session resource (practically equivalent to a runspace instance).",
       "properties": {
         "properties": {
-          "description": "collection of properties",
+          "description": "Collection of properties.",
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
             "sessionId": {
               "type": "string",
-              "description": "the PowerShell Session Id."
+              "description": "The PowerShell Session ID."
             },
             "state": {
               "type": "string",
@@ -1992,14 +1992,14 @@
             },
             "name": {
               "type": "string",
-              "description": "Name of the runspace"
+              "description": "Name of the runspace."
             }
           }
         }
       }
     },
     "PowerShellCommandStatus": {
-      "description": "result status from invoking a powershell command",
+      "description": "Result status from invoking a powershell command.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2013,36 +2013,36 @@
       }
     },
     "Version": {
-      "description": "A multipart-numeric version number",
+      "description": "A multipart-numeric version number.",
       "properties": {
         "major": {
           "type": "integer",
-          "description": "the leftmost number of the version"
+          "description": "The leftmost number of the version."
         },
         "minor": {
           "type": "integer",
-          "description": "the second leftmost number of the version"
+          "description": "The second leftmost number of the version."
         },
         "build": {
           "type": "integer",
-          "description": "the third number of the version"
+          "description": "The third number of the version."
         },
         "revision": {
           "type": "integer",
-          "description": "the fourth number of the version"
+          "description": "The fourth number of the version."
         },
         "majorRevision": {
           "type": "integer",
-          "description": "the MSW of the fourth part"
+          "description": "The MSW of the fourth part."
         },
         "minorRevision": {
           "type": "integer",
-          "description": "the LSW of the fourth part"
+          "description": "The LSW of the fourth part."
         }
       }
     },
     "PowerShellSessionResources": {
-      "description": "a collaction of powershell session resources",
+      "description": "A collaction of powershell session resources",
       "type": "object",
       "properties": {
         "value": {
@@ -2050,32 +2050,32 @@
           "items": {
             "$ref": "#/definitions/PowerShellSessionResource"
           },
-          "description": "Colleciton of powershell session resources"
+          "description": "Colleciton of powershell session resources."
         },
         "nextLink": {
           "type": "string",
-          "description": "the URL to the next set of resources"
+          "description": "The URL to the next set of resources."
         }
       }
     },
     "PowerShellCommandParameters": {
-      "description": "the parameters to a powershell script execution command",
+      "description": "The parameters to a powershell script execution command.",
       "properties": {
         "properties": {
-          "description": "collection of properties",
+          "description": "Collection of properties.",
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
             "command": {
               "type": "string",
-              "description": "Script to execute"
+              "description": "Script to execute."
             }
           }
         }
       }
     },
     "PowerShellCommandResults": {
-      "description": "a collection of results from a powershell command",
+      "description": "A collection of results from a powershell command.",
       "type": "object",
       "properties": {
         "results": {
@@ -2096,47 +2096,47 @@
       }
     },
     "PowerShellCommandResult": {
-      "description": "results from invoking a powershell command",
+      "description": "Results from invoking a powershell command.",
       "properties": {
         "messageType": {
-          "description": "the type of message",
+          "description": "The type of message.",
           "type": "integer"
         },
         "foregroundColor": {
-          "description": "the HTML color string representing the foreground color.",
+          "description": "The HTML color string representing the foreground color.",
           "type": "string"
         },
         "backgroundColor": {
-          "description": "the HTML color string representing the background color.",
+          "description": "The HTML color string representing the background color.",
           "type": "string"
         },
         "value": {
-          "description": "actual result text from the PowerShell Command",
+          "description": "Actual result text from the PowerShell Command.",
           "type": "string"
         },
         "prompt": {
-          "description": "The interactive prompt message",
+          "description": "The interactive prompt message.",
           "type": "string"
         },
         "exitCode": {
-          "description": "the exit code from a executable that was called from powershell.",
+          "description": "The exit code from a executable that was called from powershell.",
           "type": "integer"
         },
         "id": {
           "type": "integer",
-          "description": "ID of the prompt message"
+          "description": "ID of the prompt message."
         },
         "caption": {
           "type": "string",
-          "description": "text that precedes the prompt."
+          "description": "Text that precedes the prompt."
         },
         "message": {
           "type": "string",
-          "description": "text of the prompt."
+          "description": "Text of the prompt."
         },
         "descriptions": {
           "type": "array",
-          "description": "collection of PromptFieldDescription objects that contains the user input",
+          "description": "Collection of PromptFieldDescription objects that contains the user input.",
           "items": {
             "$ref": "#/definitions/PromptFieldDescription"
           }
@@ -2147,19 +2147,19 @@
       "description": "Field description for the implementation of PSHostUserInterface.Prompt",
       "properties": {
         "name": {
-          "description": "the name of the prompt",
+          "description": "The name of the prompt.",
           "type": "string"
         },
         "label": {
-          "description": "the label text of the prompt",
+          "description": "The label text of the prompt.",
           "type": "string"
         },
         "helpMessage": {
-          "description": "the help message of the prompt",
+          "description": "The help message of the prompt.",
           "type": "string"
         },
         "promptFieldTypeIsList": {
-          "description": "when set to 'true' the prompt field type is a list of values",
+          "description": "When set to 'true' the prompt field type is a list of values.",
           "type": "boolean"
         },
         "promptFieldType": {
@@ -2177,10 +2177,10 @@
       }
     },
     "PromptMessageResponse": {
-      "description": "the response to a prompt message",
+      "description": "The response to a prompt message.",
       "properties": {
         "response": {
-          "description": "the list of responses a cmdlet expects",
+          "description": "The list of responses a cmdlet expects.",
           "type": "array",
           "items": {
             "type": "string"
@@ -2189,7 +2189,7 @@
       }
     },
     "PowerShellTabCompletionParameters": {
-      "description": "collection of parameters for powershell tab completion",
+      "description": "Collection of parameters for powershell tab completion.",
       "properties": {
         "command": {
           "type": "string",
@@ -2198,7 +2198,7 @@
       }
     },
     "PowerShellTabCompletionResults": {
-      "description": "an array of strings representing the different values that can be tabbed thru",
+      "description": "An array of strings representing the different values that can be tabbed through.",
       "properties": {
         "results": {
           "type": "array",
@@ -2209,7 +2209,7 @@
       }
     },
     "Error": {
-      "description": "Error message",
+      "description": "Error message.",
       "properties": {
         "code": {
           "type": "integer",
@@ -2224,7 +2224,7 @@
       }
     },
     "EncryptionJwkResource": {
-      "description": "the public key of the gateway",
+      "description": "The public key of the gateway.",
       "type": "object",
       "properties": {
         "kty": {
@@ -2255,7 +2255,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "Client API Version."
     }
   }
 }
