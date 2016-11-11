@@ -3290,7 +3290,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -3391,7 +3392,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -3469,7 +3471,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -3536,7 +3539,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -4423,7 +4427,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -5869,7 +5874,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -11054,6 +11060,12 @@
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
           }
         },
         "deprecated": false
@@ -11273,6 +11285,12 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
@@ -14312,7 +14330,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -14379,7 +14398,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -17897,6 +17917,10 @@
               "description": "Version of Python",
               "type": "string"
             },
+            "nodeVersion": {
+              "description": "Version of Node",
+              "type": "string"
+            },
             "requestTracingEnabled": {
               "description": "Enable request tracing",
               "type": "boolean"
@@ -17992,8 +18016,8 @@
               "type": "string"
             },
             "javaContainerVersion": {
-                "description": "Java container version",
-                "type": "string"
+              "description": "Java container version",
+              "type": "string"
             },
             "appCommandLine": {
               "description": "App Command Line to launch",
