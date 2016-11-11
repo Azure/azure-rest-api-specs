@@ -119,7 +119,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure SQL Database from which to retrieve available restore points."
+            "description": "The name of the Azure SQL database from which to retrieve available restore points."
           }
         ],
         "responses": {
@@ -160,7 +160,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure SQL Database to be operated on (Updated or created)."
+            "description": "The name of the Azure SQL database to be operated on (updated or created)."
           },
           {
             "name": "parameters",
@@ -218,7 +218,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure SQL Database to be deleted."
+            "description": "The name of the Azure SQL database to be deleted."
           }
         ],
         "responses": {
@@ -254,7 +254,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure SQL Database to be retrieved."
+            "description": "The name of the Azure SQL database to be retrieved."
           },
           {
             "name": "$expand",
@@ -280,7 +280,7 @@
           "Databases"
         ],
         "operationId": "Databases_ListByServer",
-        "description": "Returns information about an Azure SQL Database.",
+        "description": "Returns information about an Azure SQL database.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -314,7 +314,7 @@
           "Databases"
         ],
         "operationId": "Databases_ListUsages",
-        "description": "Returns information about Azure SQL Database usages.",
+        "description": "Returns information about Azure SQL database usages.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -333,7 +333,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure SQL Database."
+            "description": "The name of the Azure SQL database."
           }
         ],
         "responses": {
@@ -924,7 +924,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure SQL Database to be retrieved."
+            "description": "The name of the Azure SQL database to be retrieved."
           }
         ],
         "responses": {
@@ -1022,7 +1022,7 @@
           "RecommendedElasticPools"
         ],
         "operationId": "RecommendedElasticPools_GetDatabases",
-        "description": "Gets information about an Azure SQL Database inside of an Azure SQL Recommended Elastic Pool.",
+        "description": "Gets information about an Azure SQL database inside of an Azure SQL Recommended Elastic Pool.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1048,7 +1048,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure SQL Database to be retrieved."
+            "description": "The name of the Azure SQL database to be retrieved."
           }
         ],
         "responses": {
@@ -1101,7 +1101,7 @@
           "RecommendedElasticPools"
         ],
         "operationId": "RecommendedElasticPools_ListDatabases",
-        "description": "Returns information about an Azure SQL Database inside of an Azure SQL Recommended Elastic Pool.",
+        "description": "Returns information about an Azure SQL database inside of an Azure SQL Recommended Elastic Pool.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1269,7 +1269,7 @@
           "ServiceObjectives"
         ],
         "operationId": "Servers_GetServiceObjective",
-        "description": "Gets information about an Azure SQL Database Service Objective.",
+        "description": "Gets information about an Azure SQL database Service Objective.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1307,7 +1307,7 @@
           "ServiceObjectives"
         ],
         "operationId": "Servers_ListServiceObjectives",
-        "description": "Returns information about Azure SQL Database Service Objectives.",
+        "description": "Returns information about Azure SQL database Service Objectives.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1360,7 +1360,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure SQL Database for which setting the Transparent Data Encryption applies."
+            "description": "The name of the Azure SQL database for which setting the Transparent Data Encryption applies."
           },
           {
             "name": "parameters",
@@ -1411,7 +1411,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure SQL Database for which the Transparent Data Encryption applies."
+            "description": "The name of the Azure SQL database for which the Transparent Data Encryption applies."
           }
         ],
         "responses": {
@@ -1449,7 +1449,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure SQL Database for which the Transparent Data Encryption applies."
+            "description": "The name of the Azure SQL database for which the Transparent Data Encryption applies."
           }
         ],
         "responses": {
@@ -1611,11 +1611,11 @@
       "properties": {
         "Name": {
           "type": "string",
-          "description": "The name of the Azure SQL Database being upgraded."
+          "description": "The name of the Azure SQL database being upgraded."
         },
         "TargetEdition": {
           "type": "string",
-          "description": "The target edition for the Azure SQL Database being upgraded.",
+          "description": "The target edition for the Azure SQL database being upgraded.",
           "enum": [
               "Basic",
               "Standard",
@@ -1631,7 +1631,7 @@
         },
         "TargetServiceLevelObjective": {
           "type": "string",
-          "description": "The target Service Level Objective for the Azure SQL Database being upgraded."
+          "description": "The target Service Level Objective for the Azure SQL database being upgraded."
         }
       },
       "description": "Represents the properties of a recommended Azure SQL Database being upgraded."
@@ -2285,19 +2285,19 @@
       "properties": {
         "collation": {
           "type": "string",
-          "description": "The collation of the Azure SQL Database."
+          "description": "The collation of the Azure SQL database."
         },
         "creationDate": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The creation date of the Azure SQL Database (ISO8601 format)."
+          "description": "The creation date of the Azure SQL database (ISO8601 format)."
         },
         "containmentState": {
           "readOnly": true,
           "type": "integer",
           "format": "int64",
-          "description": "The containment state of the Azure SQL Database."
+          "description": "The containment state of the Azure SQL database."
         },
         "currentServiceObjectiveId": {
           "readOnly": true,
@@ -2313,7 +2313,7 @@
             "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
             "a7c4c615-cfb1-464b-b252-925be0a19446"
             ],
-          "description": "The current Service Level Objective ID of the Azure SQL Database. This is the ID of the Service Level Objective that is currently active.",
+          "description": "The current Service Level Objective ID of the Azure SQL database. This is the ID of the Service Level Objective that is currently active.",
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ServiceObjectiveId"
@@ -2322,13 +2322,13 @@
         "databaseId": {
           "readOnly": true,
           "type": "string",
-          "description": "The ID of the Azure SQL Database."
+          "description": "The ID of the Azure SQL database."
         },
         "earliestRestoreDate": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The recovery period start date of the Azure SQL Database. This records the start date and time when recovery is available for this Azure SQL Database (ISO8601 format)."
+          "description": "The recovery period start date of the Azure SQL database. This records the start date and time when recovery is available for this Azure SQL Database (ISO8601 format)."
         },
         "createMode": {
           "type": "string",
@@ -2353,7 +2353,7 @@
         },
         "edition": {
           "type": "string",
-          "description": "The edition of the Azure SQL Database. The DatabaseEditions enumeration contains all the valid editions.",
+          "description": "The edition of the Azure SQL database. The DatabaseEditions enumeration contains all the valid editions.",
           "enum": [
             "Web",
             "Business",
@@ -2371,7 +2371,7 @@
         },
         "maxSizeBytes": {
           "type": "string",
-          "description": "The max size of the Azure SQL Database expressed in bytes. Note: Only the following sizes are supported (in addition to limitations being placed on each edition): { 100 MB | 500 MB |1 GB | 5 GB | 10 GB | 20 GB | 30 GB … 150 GB | 200 GB … 500 GB }"
+          "description": "The max size of the Azure SQL database expressed in bytes. Note: Only the following sizes are supported (in addition to limitations being placed on each edition): { 100 MB | 500 MB |1 GB | 5 GB | 10 GB | 20 GB | 30 GB … 150 GB | 200 GB … 500 GB }"
         },
         "requestedServiceObjectiveId": {
           "type": "string",
@@ -2386,7 +2386,7 @@
             "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
             "a7c4c615-cfb1-464b-b252-925be0a19446"
             ],
-          "description": "The configured Service Level Objective ID of the Azure SQL Database. This is the Service Level Objective that is in the process of being applied to the Azure SQL Database. Once successfully updated, it will match the value of currentServiceObjectiveId property.",
+          "description": "The configured Service Level Objective ID of the Azure SQL database. This is the Service Level Objective that is in the process of being applied to the Azure SQL database. Once successfully updated, it will match the value of currentServiceObjectiveId property.",
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ServiceObjectiveId"
@@ -2408,7 +2408,7 @@
             "modelAsString": true,
             "name": "ServiceObjectiveName"
           },
-          "description": "The name of the configured Service Level Objective of the Azure SQL Database. This is the Service Level Objective that is in the process of being applied to the Azure SQL Database. Once successfully updated, it will match the value of serviceLevelObjective property."
+          "description": "The name of the configured Service Level Objective of the Azure SQL database. This is the Service Level Objective that is in the process of being applied to the Azure SQL database. Once successfully updated, it will match the value of serviceLevelObjective property."
         },
         "serviceLevelObjective": {
           "readOnly": true,
@@ -2427,12 +2427,12 @@
             "modelAsString": true,
             "name": "ServiceObjectiveName"
           },
-          "description": "The current Service Level Objective of the Azure SQL Database."
+          "description": "The current Service Level Objective of the Azure SQL database."
         },
         "status": {
           "readOnly": true,
           "type": "string",
-          "description": "The status of the Azure SQL Database."
+          "description": "The status of the Azure SQL database."
         },
         "elasticPoolName": {
           "type": "string",
@@ -2848,7 +2848,7 @@
         "restorePointType": {
           "readOnly": true,
           "type": "string",
-          "description": "The restore point type of the Azure SQL Database restore point.",
+          "description": "The restore point type of the Azure SQL database restore point.",
           "enum": [
             "DISCRETE",
             "CONTINUOUS"
@@ -3078,7 +3078,7 @@
         "status": {
           "readOnly": true,
           "type": "string",
-          "description": "The status of the Azure SQL Database.",
+          "description": "The status of the Azure SQL database.",
           "enum": [
             "Encrypting",
             "Decrypting"

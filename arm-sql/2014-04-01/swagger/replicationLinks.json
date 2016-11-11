@@ -22,7 +22,7 @@
           "DatabaseReplicationLinks"
         ],
         "operationId": "Databases_DeleteReplicationLink",
-        "description": "Deletes the Azure SQL Database Replication Link with the given ID. Cannot be done during failover.",
+        "description": "Deletes the Azure SQL database replication link with the given ID. Cannot be done during failover.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -41,7 +41,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure SQL Database that has the replication link to be dropped."
+            "description": "The name of the Azure SQL database that has the replication link to be dropped."
           },
           {
             "name": "linkId",
@@ -65,7 +65,7 @@
           "DatabaseReplicationLinks"
         ],
         "operationId": "Databases_GetReplicationLink",
-        "description": "Gets information about an Azure SQL Database Replication Link.",
+        "description": "Gets information about an Azure SQL database replication link.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -84,7 +84,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure SQL Database to get the link for."
+            "description": "The name of the Azure SQL database to get the link for."
           },
           {
             "name": "linkId",
@@ -110,7 +110,7 @@
           "DatabaseReplicationLinks"
         ],
         "operationId": "Databases_FailoverReplicationLink",
-        "description": "Failover the Azure SQL Database Replication Link with the given ID.",
+        "description": "Failover the Azure SQL database replication link with the given ID.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -129,7 +129,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure SQL Database that has the replication link to be failed over."
+            "description": "The name of the Azure SQL database that has the replication link to be failed over."
           },
           {
             "name": "linkId",
@@ -156,7 +156,7 @@
           "DatabaseReplicationLinks"
         ],
         "operationId": "Databases_FailoverReplicationLinkAllowDataLoss",
-        "description": "Force failover the Azure SQL Database Replication Link with the given ID which may result in data loss.",
+        "description": "Force failover the Azure SQL database replication link with the given ID which may result in data loss.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -175,7 +175,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure SQL Database that has the replication link to be failed over."
+            "description": "The name of the Azure SQL database that has the replication link to be failed over."
           },
           {
             "name": "linkId",
@@ -202,7 +202,7 @@
           "DatabaseReplicationLinks"
         ],
         "operationId": "Databases_ListReplicationLinks",
-        "description": "Gets information about Azure SQL Database Replication Links.",
+        "description": "Gets information about Azure SQL database replication links.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -221,7 +221,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure SQL Database to retrieve links for."
+            "description": "The name of the Azure SQL database to retrieve links for."
           }
         ],
         "responses": {
@@ -259,7 +259,7 @@
         "role": {
           "readOnly": true,
           "type": "string",
-          "description": "The role of the Azure SQL Database in the replication link.",
+          "description": "The role of the Azure SQL database in the replication link.",
           "enum": [
             "Primary",
             "Secondary",
@@ -314,7 +314,7 @@
           }
         }
       },
-      "description": "Represents the properties of an Azure SQL Database Replication Link."
+      "description": "Represents the properties of an Azure SQL database replication link."
     },
     "ReplicationLink": {
       "properties": {
@@ -329,7 +329,7 @@
           "$ref": "#/definitions/SqlSubResource"
         }
       ],
-      "description": "Represents an Azure SQL Database Replication Link."
+      "description": "Represents an Azure SQL database replication link."
     },
     "ReplicationLinkListResult": {
       "properties": {
@@ -338,10 +338,10 @@
           "items": {
             "$ref": "#/definitions/ReplicationLink"
           },
-          "description": "The list of Azure SQL Database Replication Links housed in the database."
+          "description": "The list of Azure SQL database replication links housed in the database."
         }
       },
-      "description": "Represents the response to a List Azure SQL Database Replication Link request."
+      "description": "Represents the response to a List Azure SQL database replication link request."
     },
     "SqlSubResource": {
       "description": "Subresource properties",
