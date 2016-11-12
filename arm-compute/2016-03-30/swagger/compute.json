@@ -1414,7 +1414,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_CreateOrUpdate",
-        "description": "Allows you to create or update a virtual machine scale set by providing parameters or a path to pre-configured parameter file.",
+        "description": "Create or update a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1428,7 +1428,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Parameters supplied to the Create Virtual Machine Scale Set operation."
+            "description": "The name of the VM scale set to create or update."
           },
           {
             "name": "parameters",
@@ -1437,7 +1437,7 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSet"
             },
-            "description": "Parameters supplied to the Create Virtual Machine Scale Set operation."
+            "description": "The scale set object."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1469,7 +1469,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Deallocate",
-        "description": "Allows you to deallocate virtual machines in a virtual machine scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set uses.",
+        "description": "Deallocates specific virtual machines in a VM scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set deallocates.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1483,7 +1483,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "vmInstanceIDs",
@@ -1492,7 +1492,7 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
             },
-            "description": "The list of virtual machine scale set instance IDs."
+            "description": "A list of virtual machine instance IDs from the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1515,7 +1515,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Delete",
-        "description": "Allows you to delete a virtual machine scale set.",
+        "description": "Deletes a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1529,7 +1529,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1570,7 +1570,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1595,7 +1595,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_DeleteInstances",
-        "description": "Allows you to delete virtual machines in a virtual machine scale set.",
+        "description": "Deletes virtual machines in a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1609,7 +1609,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "vmInstanceIDs",
@@ -1618,7 +1618,7 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceRequiredIDs"
             },
-            "description": "The list of virtual machine scale set instance IDs."
+            "description": "A list of virtual machine instance IDs from the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1641,7 +1641,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_GetInstanceView",
-        "description": "Displays status of a virtual machine scale set instance.",
+        "description": "Gets the status of a VM scale set instance.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1655,7 +1655,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1680,7 +1680,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_List",
-        "description": "Lists all virtual machine scale sets under a resource group.",
+        "description": "Gets a list of all VM scale sets under a resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1715,7 +1715,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_ListAll",
-        "description": "Lists all Virtual Machine Scale Sets in the subscription. Use nextLink property in the response to get the next page of Virtual Machine Scale Sets. Do this till nextLink is not null to fetch all the Virtual Machine Scale Sets.",
+        "description": "Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is not null to fetch all the VM Scale Sets.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1743,7 +1743,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_ListSkus",
-        "description": "Displays available skus for your virtual machine scale set including the minimum and maximum vm instances allowed for a particular sku.",
+        "description": "Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1757,7 +1757,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1785,7 +1785,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_PowerOff",
-        "description": "Allows you to power off (stop) virtual machines in a virtual machine scale set. Note that resources are still attached and you are getting charged for the resources. Use deallocate to release resources.",
+        "description": "Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1799,7 +1799,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "vmInstanceIDs",
@@ -1808,7 +1808,7 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
             },
-            "description": "The list of virtual machine scale set instance IDs."
+            "description": "A list of virtual machine instance IDs from the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1831,7 +1831,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Restart",
-        "description": "Allows you to restart virtual machines in a virtual machine scale set.",
+        "description": "Restarts one or more virtual machines in a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1845,7 +1845,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "vmInstanceIDs",
@@ -1854,7 +1854,7 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
             },
-            "description": "The list of virtual machine scale set instance IDs."
+            "description": "A list of virtual machine instance IDs from the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1877,7 +1877,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Start",
-        "description": "Allows you to start virtual machines in a virtual machine scale set.",
+        "description": "Starts one or more virtual machines in a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1891,7 +1891,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "vmInstanceIDs",
@@ -1900,7 +1900,7 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
             },
-            "description": "The list of virtual machine scale set instance IDs."
+            "description": "A list of virtual machine instance IDs from the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1923,7 +1923,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_UpdateInstances",
-        "description": "Allows you to manually upgrade virtual machines in a virtual machine scale set.",
+        "description": "Upgrades one or more virtual machines to the latest SKU set in the VM scale set model.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1937,7 +1937,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "vmInstanceIDs",
@@ -1946,7 +1946,7 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceRequiredIDs"
             },
-            "description": "The list of virtual machine scale set instance IDs."
+            "description": "A list of virtual machine instance IDs from the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1969,7 +1969,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Reimage",
-        "description": "Allows you to re-image(update the version of the installed operating system) virtual machines in a virtual machine scale set.",
+        "description": "Reimages (upgrade the operating system) one or more virtual machines in a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1983,7 +1983,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2006,7 +2006,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Reimage",
-        "description": "Allows you to re-image(update the version of the installed operating system) a virtual machine scale set instance.",
+        "description": "Reimages (upgrade the operating system) a specific virtual machine in a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2020,14 +2020,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "instanceId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The instance id of the virtual machine."
+            "description": "The instance ID of the virtual machine."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2050,7 +2050,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Deallocate",
-        "description": "Allows you to deallocate a virtual machine scale set virtual machine. Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses.",
+        "description": "Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2064,14 +2064,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "instanceId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The instance id of the virtual machine."
+            "description": "The instance ID of the virtual machine."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2094,7 +2094,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Delete",
-        "description": "Allows you to delete a virtual machine scale set.",
+        "description": "Deletes a virtual machine from a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2108,14 +2108,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "instanceId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The instance id of the virtual machine."
+            "description": "The instance ID of the virtual machine."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2142,7 +2142,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Get",
-        "description": "Displays information about a virtual machine scale set virtual machine.",
+        "description": "Gets a virtual machine from a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2156,14 +2156,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "instanceId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The instance id of the virtual machine."
+            "description": "The instance ID of the virtual machine."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2188,7 +2188,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_GetInstanceView",
-        "description": "Displays the status of a virtual machine scale set virtual machine.",
+        "description": "Gets the status of a virtual machine from a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2202,14 +2202,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "instanceId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The instance id of the virtual machine."
+            "description": "The instance ID of the virtual machine."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2234,7 +2234,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_List",
-        "description": "Lists all virtual machines in a VM scale sets.",
+        "description": "Gets a list of all virtual machines in a VM scale sets.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2248,14 +2248,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "The filter to apply to the operation."
           },
           {
             "name": "$select",
@@ -2269,7 +2269,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation."
+            "description": "The expand expression to apply to the operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2298,7 +2298,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_PowerOff",
-        "description": "Allows you to power off (stop) a virtual machine in a VM scale set.",
+        "description": "Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2312,14 +2312,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "instanceId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The instance id of the virtual machine."
+            "description": "The instance ID of the virtual machine."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2342,7 +2342,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Restart",
-        "description": "Allows you to restart a virtual machine in a VM scale set.",
+        "description": "Restarts a virtual machine in a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2356,14 +2356,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "instanceId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The instance id of the virtual machine."
+            "description": "The instance ID of the virtual machine."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2386,7 +2386,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Start",
-        "description": "Allows you to start a virtual machine in a VM scale set.",
+        "description": "Starts a virtual machine in a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2400,14 +2400,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "instanceId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The instance id of the virtual machine."
+            "description": "The instance ID of the virtual machine."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -4098,7 +4098,7 @@
           "description": "the virtual machine scale set instance ids."
         }
       },
-      "description": "Specifies the list of virtual machine scale set instance IDs."
+      "description": "Specifies a list of virtual machine instance IDs from the VM scale set."
     },
     "VirtualMachineScaleSetVMInstanceRequiredIDs": {
       "properties": {
@@ -4113,7 +4113,7 @@
       "required": [
         "instanceIds"
       ],
-      "description": "Specifies the list of virtual machine scale set instance IDs."
+      "description": "Specifies a list of virtual machine instance IDs from the VM scale set."
     },
     "VirtualMachineStatusCodeCount": {
       "properties": {
@@ -4353,12 +4353,12 @@
         "instanceId": {
           "readOnly": true,
           "type": "string",
-          "description": "the virtual machine instance id."
+          "description": "The virtual machine instance ID."
         },
         "sku": {
           "$ref": "#/definitions/Sku",
           "readOnly": true,
-          "description": "the virtual machine sku."
+          "description": "The virtual machine SKU."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -4366,7 +4366,7 @@
         },
         "plan": {
           "$ref": "#/definitions/Plan",
-          "description": "the purchase plan when deploying virtual machine from VM Marketplace images."
+          "description": "The purchase plan when deploying virtual machine from VM Marketplace images."
         },
         "resources": {
           "readOnly": true,
