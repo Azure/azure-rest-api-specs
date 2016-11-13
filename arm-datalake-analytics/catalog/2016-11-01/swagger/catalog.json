@@ -3,7 +3,7 @@
   "info": {
     "title": "DataLakeAnalyticsCatalogManagementClient",
     "description": "Creates an Azure Data Lake Analytics catalog client.",
-    "version": "2016-06-01-preview",
+    "version": "2016-11-01",
     "x-ms-code-generation-settings": {
       "useDateTimeOffset": true,
       "internalConstructors": true
@@ -14,7 +14,7 @@
     "parameters": [
       {
         "name": "accountName",
-        "description": "The Azure Data Lake Analytics account to execute catalog operations on.",
+        "description": "The Azure Data Lake Analytics account upon which to execute catalog operations.",
         "required": true,
         "type": "string",
         "in": "path",
@@ -29,14 +29,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json",
-    "application/octet-stream"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json",
-    "application/octet-stream"
+    "application/json"
   ],
   "paths": {
     "/catalog/usql/databases/{databaseName}/secrets/{secretName}": {
@@ -76,7 +72,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully created the specified secret in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlSecret"
             }
@@ -119,7 +115,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully updated the details of the specified secret in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlSecret"
             }
@@ -153,7 +149,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved details of the specified secret in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlSecret"
             }
@@ -187,7 +183,7 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully deleted the specified secret from the specified database."
           }
         }
       }
@@ -213,7 +209,7 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully deleted all secrets from the specified database."
           }
         }
       }
@@ -326,7 +322,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved and returned the specified credential (name only) from the specified database.",
+            "description": "Successfully retrieved the specified credential (name only) from the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlCredential"
             }
@@ -357,7 +353,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/DataLakeAnalyticsCatalogCredentialDeleteParameters"
             },
@@ -372,6 +368,85 @@
             "description": "Successfully deleted the specified credential from the specified database."
           }
         }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/credentials": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListCredentials",
+        "description": "Retrieves the list of credentials from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the schema."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of credentials in the specified database.",
+            "schema": {
+              "$ref": "#/definitions/USqlCredentialList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlCredential"
       }
     },
     "/catalog/usql/databases/{databaseName}/externaldatasources/{externalDataSourceName}": {
@@ -402,7 +477,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved details of the specified external data source in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlExternalDataSource"
             }
@@ -438,6 +513,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to return. Optional."
           },
           {
@@ -446,15 +522,9 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
-          },
+          },          
           {
             "name": "$select",
             "in": "query",
@@ -482,7 +552,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of external data sources in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlExternalDataSourceList"
             }
@@ -529,7 +599,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the specified procedure from the underlying database and schema combination.",
             "schema": {
               "$ref": "#/definitions/USqlProcedure"
             }
@@ -572,6 +642,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to return. Optional."
           },
           {
@@ -580,14 +651,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
@@ -616,7 +681,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of procedures in the specified database and schema.",
             "schema": {
               "$ref": "#/definitions/USqlProcedureList"
             }
@@ -663,7 +728,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the specified table from the underying database and schema combination",
             "schema": {
               "$ref": "#/definitions/USqlTable"
             }
@@ -706,6 +771,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to return. Optional."
           },
           {
@@ -714,14 +780,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
@@ -750,7 +810,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of tables in the specified database and schema.",
             "schema": {
               "$ref": "#/definitions/USqlTableList"
             }
@@ -797,7 +857,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the specified table type from the underying database and schema combination",
             "schema": {
               "$ref": "#/definitions/USqlTableType"
             }
@@ -840,6 +900,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to return. Optional."
           },
           {
@@ -848,14 +909,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
@@ -884,7 +939,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of table types in the specified database and schema.",
             "schema": {
               "$ref": "#/definitions/USqlTableTypeList"
             }
@@ -931,7 +986,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the specified view from the underying database and schema combination",
             "schema": {
               "$ref": "#/definitions/USqlView"
             }
@@ -974,6 +1029,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to return. Optional."
           },
           {
@@ -982,14 +1038,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
@@ -1018,7 +1068,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of views in the specified database and schema.",
             "schema": {
               "$ref": "#/definitions/USqlViewList"
             }
@@ -1072,7 +1122,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the details of the specified table statistics in the specified database and schema.",
             "schema": {
               "$ref": "#/definitions/USqlTableStatistics"
             }
@@ -1122,6 +1172,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to return. Optional."
           },
           {
@@ -1130,14 +1181,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
@@ -1166,7 +1211,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of table statistics in the specified database and schema.",
             "schema": {
               "$ref": "#/definitions/USqlTableStatisticsList"
             }
@@ -1220,7 +1265,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the details of the specified table partition in the specified database, schema, and table.",
             "schema": {
               "$ref": "#/definitions/USqlTablePartition"
             }
@@ -1270,6 +1315,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to return. Optional."
           },
           {
@@ -1278,14 +1324,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
@@ -1314,7 +1354,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of table partitions in the specified database, schema, and table.",
             "schema": {
               "$ref": "#/definitions/USqlTablePartitionList"
             }
@@ -1361,6 +1401,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to return. Optional."
           },
           {
@@ -1369,14 +1410,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
@@ -1405,7 +1440,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of types in the specified database and schema.",
             "schema": {
               "$ref": "#/definitions/USqlTypeList"
             }
@@ -1452,7 +1487,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the details of the specified table valued function in the specified database and schema.",
             "schema": {
               "$ref": "#/definitions/USqlTableValuedFunction"
             }
@@ -1495,6 +1530,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to return. Optional."
           },
           {
@@ -1503,14 +1539,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
@@ -1539,7 +1569,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of table valued functions in the specified database and schema.",
             "schema": {
               "$ref": "#/definitions/USqlTableValuedFunctionList"
             }
@@ -1579,7 +1609,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the details of the specified assembly in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlAssembly"
             }
@@ -1615,6 +1645,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to return. Optional."
           },
           {
@@ -1623,14 +1654,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
@@ -1659,7 +1684,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of assemblies in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlAssemblyList"
             }
@@ -1699,7 +1724,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the details of the specified schema in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlSchema"
             }
@@ -1735,6 +1760,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to return. Optional."
           },
           {
@@ -1743,14 +1769,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
@@ -1779,7 +1799,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of schemas in the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlSchemaList"
             }
@@ -1812,7 +1832,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the details of the specified database.",
             "schema": {
               "$ref": "#/definitions/USqlDatabase"
             }
@@ -1841,6 +1861,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to return. Optional."
           },
           {
@@ -1849,14 +1870,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
+            "minimum": 1,
             "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData expansion. Expand related resources in line with the retrieved resources, e.g. Categories?$expand=Products would expand Product data in line with each Category entry. Optional."
           },
           {
             "name": "$select",
@@ -1885,7 +1900,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the list of databases.",
             "schema": {
               "$ref": "#/definitions/USqlDatabaseList"
             }
@@ -2050,6 +2065,24 @@
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL external datasource item list."
+    },
+    "USqlCredentialList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/USqlCredential"
+          },
+          "description": "the list of credentials in the database"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL credential item list."
     },
     "USqlCredential": {
       "allOf": [
@@ -2927,11 +2960,6 @@
     },
     "CatalogItemList": {
       "properties": {
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "the count of items in the list."
-        },
         "nextLink": {
           "type": "string",
           "description": "the link to the next page of results."

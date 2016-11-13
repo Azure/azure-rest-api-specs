@@ -238,6 +238,47 @@ Note:
 }
 ```
 
+- After using the `"x-ms-parameter-location": "method"` extension the generated client will have a method that looks like this:
+  - Notice that `resourceGroupName` is the method parameter and not a client property
+```csharp
+public static StorageAccount Create(this IStorageAccountsOperations operations, string resourceGroupName, string accountName, StorageAccountCreateParameters parameters);
+```
+- The client constructor looks like this:
+```csharp
+public partial class StorageManagementClient : ServiceClient<StorageManagementClient>, IStorageManagementClient, IAzureClient
+{
+    
+    public string SubscriptionId { get; set; } //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    public string ApiVersion { get; private set; }  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    public StorageManagementClient(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+    {
+        if (baseUri == null)
+        {
+            throw new ArgumentNullException("baseUri");
+        }
+        if (credentials == null)
+        {
+            throw new ArgumentNullException("credentials");
+        }
+        this.Credentials = credentials;
+        if (this.Credentials != null)
+        {
+            this.Credentials.InitializeServiceClient(this);
+        }
+    }
+
+    private void Initialize()
+    {
+        this.StorageAccounts = new StorageAccountsOperations(this);
+        this.Usage = new UsageOperations(this);
+        this.BaseUri = new Uri("https://management.azure.com");
+        this.ApiVersion = "2016-01-01";
+        . . .
+    }    
+}
+```
 ## x-ms-paths
 
 Swagger 2.0 has a built-in limitation on paths. Only one operation can be mapped to a path and http method. There are some APIs, however, where multiple distinct operations are mapped to the same path and same http method. For example `GET /mypath/query-drive?op=file` and `GET /mypath/query-drive?op=folder` may return two different model types (stream in the first example and JSON model representing Folder in the second). Since Swagger does not treat query parameters as part of the path the above 2 operations may not co-exist in the standard "paths" element.
