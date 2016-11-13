@@ -2,7 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "FeatureClient",
-    "version": "2015-12-01"
+    "version": "2015-12-01",
+    "description": "Azure Feature Exposure Control (AFEC) provides a mechanism for the resource providers to control feature exposure to users. Resource providers typically use this mechanism to provide public/private preview for new features prior to making them generally available. Users need to explicitly register for AFEC features to get access to such functionality."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -41,7 +42,7 @@
           "Features"
         ],
         "operationId": "Features_ListAll",
-        "description": "Gets a list of previewed features for all the providers in the current subscription.",
+        "description": "Gets all the preview features that are available through AFEC for the subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -52,7 +53,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK - Returns an array containing metadata for each feature. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.",
             "schema": {
               "$ref": "#/definitions/FeatureOperationsListResult"
             }
@@ -69,14 +70,14 @@
           "Features"
         ],
         "operationId": "Features_List",
-        "description": "Gets a list of previewed features of a resource provider.",
+        "description": "Gets all the preview features in a provider namespace that are available through AFEC for the subscription.",
         "parameters": [
           {
             "name": "resourceProviderNamespace",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace of the resource provider."
+            "description": "The namespace of the resource provider for getting features."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -87,7 +88,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK - Returns an array containing metadata for each feature in the resource provider. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.",
             "schema": {
               "$ref": "#/definitions/FeatureOperationsListResult"
             }
@@ -104,21 +105,21 @@
           "Features"
         ],
         "operationId": "Features_Get",
-        "description": "Get all features under the subscription.",
+        "description": "Gets the preview feature with the specified name.",
         "parameters": [
           {
             "name": "resourceProviderNamespace",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Namespace of the resource provider."
+            "description": "The resource provider namespace for the feature."
           },
           {
             "name": "featureName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Previewed feature name in the resource provider."
+            "description": "The name of the feature to get."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -129,7 +130,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK - Returns metadata about the feature. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.",
             "schema": {
               "$ref": "#/definitions/FeatureResult"
             }
@@ -143,21 +144,21 @@
           "Features"
         ],
         "operationId": "Features_Register",
-        "description": "Registers for a previewed feature of a resource provider.",
+        "description": "Registers the preview feature for the subscription.",
         "parameters": [
           {
             "name": "resourceProviderNamespace",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Namespace of the resource provider."
+            "description": "The namespace of the resource provider."
           },
           {
             "name": "featureName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Previewed feature name in the resource provider."
+            "description": "The name of the feature to register."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -168,7 +169,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK - Returns metadata about the registerd feature. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.",
             "schema": {
               "$ref": "#/definitions/FeatureResult"
             }
@@ -182,28 +183,28 @@
       "properties": {
         "state": {
           "type": "string",
-          "description": "Gets or sets the state of the previewed feature."
+          "description": "The registration state of the feature for the subscription."
         }
       },
-      "description": "Previewed feature information."
+      "description": "Information about feature."
     },
     "FeatureResult": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the feature."
+          "description": "The name of the feature."
         },
         "properties": {
           "$ref": "#/definitions/FeatureProperties",
-          "description": "Gets or sets the properties of the previewed feature."
+          "description": "Properties of the previewed feature."
         },
         "id": {
           "type": "string",
-          "description": "Gets or sets the Id of the feature."
+          "description": "The resource ID of the feature."
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the type of the feature."
+          "description": "The resource type of the feature."
         }
       },
       "description": "Previewed feature information."
@@ -215,11 +216,11 @@
           "items": {
             "$ref": "#/definitions/FeatureResult"
           },
-          "description": "Gets or sets the list of Features."
+          "description": "The array of features."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "The URL to use for getting the next set of results."
         }
       },
       "description": "List of previewed features."
@@ -231,14 +232,14 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "The ID of the target subscription."
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "The API version to use for this operation."
     }
   }
 }
