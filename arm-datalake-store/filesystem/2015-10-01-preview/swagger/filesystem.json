@@ -47,7 +47,7 @@
           "application/octet-stream"
         ],
         "operationId": "FileSystem_ConcurrentAppend",
-        "description": "Appends to the specified file. This method supports multiple concurrent appends to the file. NOTE: Concurrent append and normal (serial) append CANNOT be used interchangeably. Once a file has been appended to using either append option, it can only be appended to using that append option.",
+        "description": "Appends to the specified file. This method supports multiple concurrent appends to the file. NOTE: ConcurrentAppend and normal (serial) Append CANNOT be used interchangeably; once a file has been appended to using either of these append options, it can only be appended to using that append option. ConcurrentAppend DOES NOT guarantee order and can result in duplicated data landing in the target file. In order to close a file after using ConcurrentAppend, call the Flush method.",
         "parameters": [
           {
             "name": "filePath",
@@ -555,6 +555,72 @@
         }
       }
     },
+    "/webhdfs/v1/{flushFilePath}": {
+      "post": {
+        "tags": [
+          "FileSystem"
+        ],
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "operationId": "FileSystem_Flush",
+        "description": "Flushes the specified file to the store. This forces an update to the metadata of the file (returned from GetFileStatus), and is required by ConcurrentAppend once the file is done to populate finalized metadata.",
+        "parameters": [
+          {
+            "name": "flushFilePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Data Lake Store path (starting with '/') of the file to which to flush."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "APPEND"
+            ]
+          },
+          {
+            "name": "append",
+            "in": "query",
+            "required": true,
+            "description": "The constant value that avoids redirects.",
+            "type": "string",
+            "enum": [
+              "true"
+            ]
+          },
+          {
+            "name": "flush",
+            "in": "query",
+            "required": true,
+            "description": "The constant value initiating the flush.",
+            "type": "string",
+            "enum": [
+              "true"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully flushed the specified file."
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
+          }
+        }
+      }
+    },
     "/webhdfs/v1/{directFilePath}": {
       "post": {
         "tags": [
@@ -609,16 +675,6 @@
             "type": "string",
             "enum": [
               "true"
-            ]
-          },
-          {
-            "name": "Transfer-Encoding",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Indicates the data being sent to the server is being streamed in chunks.",
-            "enum": [
-              "chunked"
             ]
           },
           {
@@ -690,16 +746,6 @@
             "description": "The constant value for the operation.",
             "enum": [
               "true"
-            ]
-          },
-          {
-            "name": "Transfer-Encoding",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "Indicates the data being sent to the server is being streamed in chunks.",
-            "enum": [
-              "chunked"
             ]
           },
           {
