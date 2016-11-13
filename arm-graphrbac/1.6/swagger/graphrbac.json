@@ -2050,7 +2050,7 @@
         },
         "odata.nextLink": {
           "type": "string",
-          "description": "the URL to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
       "description": "Server response for Get tenant groups API call"
@@ -2059,13 +2059,13 @@
       "properties": {
         "securityEnabledOnly": {
           "type": "boolean",
-          "description": "If true only membership in security enabled groups should be checked. Otherwise membership in all groups should be checked "
+          "description": "If true, only membership in security-enabled groups should be checked. Otherwise, membership in all groups should be checked."
         }
       },
       "required": [
         "securityEnabledOnly"
       ],
-      "description": "Request parameters for GetMemberGroups API call"
+      "description": "Request parameters for GetMemberGroups API call."
     },
     "GroupGetMemberGroupsResult": {
       "properties": {
@@ -2074,10 +2074,10 @@
           "items": {
             "type": "string"
           },
-          "description": "Group Ids of which the group is a member"
+          "description": "A collection of group IDs of which the group is a member."
         }
       },
-      "description": "Server response for GetMemberGroups API call"
+      "description": "Server response for GetMemberGroups API call."
     },
     "CheckGroupMembershipParameters": {
       "properties": {
@@ -2094,13 +2094,13 @@
         "groupId",
         "memberId"
       ],
-      "description": "Request parameters for IsMemberOf API call"
+      "description": "Request parameters for IsMemberOf API call."
     },
     "CheckGroupMembershipResult": {
       "properties": {
         "value": {
           "type": "boolean",
-          "description": "true if the specified user, group, contact, or service principal has either direct or transitive membership in the specified group; otherwise, false."
+          "description": "True if the specified user, group, contact, or service principal has either direct or transitive membership in the specified group; otherwise, false."
         }
       },
       "description": "Server response for IsMemberOf API call"
@@ -2113,56 +2113,56 @@
         },
         "accountEnabled": {
           "type": "boolean",
-          "description": "Specifies if the account is enabled"
+          "description": "Whether the account is enabled"
         },
         "keyCredentials": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyCredential"
           },
-          "description": "the list of KeyCredential objects"
+          "description": "A collection of KeyCredential objects."
         },
         "passwordCredentials": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PasswordCredential"
           },
-          "description": "the list of PasswordCredential objects"
+          "description": "A collection of PasswordCredential objects"
         }
       },
       "required": [
         "appId",
         "accountEnabled"
       ],
-      "description": "Request parameters for create a new service principal"
+      "description": "Request parameters for creating a new service principal."
     },
     "ServicePrincipal": {
       "properties": {
         "objectId": {
           "type": "string",
-          "description": "object Id"
+          "description": "The object ID."
         },
         "objectType": {
           "type": "string",
-          "description": "object type"
+          "description": "The object type."
         },
         "displayName": {
           "type": "string",
-          "description": "service principal display name"
+          "description": "The display name of the service principal."
         },
         "appId": {
           "type": "string",
-          "description": "app id"
+          "description": "The application ID."
         },
         "servicePrincipalNames": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "the list of names."
+          "description": "A collection of service principal names."
         }
       },
-      "description": "Active Directory service principal information"
+      "description": "Active Directory service principal information."
     },
     "ServicePrincipalListResult": {
       "properties": {
@@ -2178,7 +2178,7 @@
           "description": "the URL to get the next set of results."
         }
       },
-      "description": "Server response for get tenant service principals API call"
+      "description": "Server response for get tenant service principals API call."
     },
     "PasswordProfile": {
       "properties": {
@@ -2188,23 +2188,23 @@
         },
         "forceChangePasswordNextLogin": {
           "type": "boolean",
-          "description": "Force change password on next login"
+          "description": "Whether to force a password change on next login."
         }
       },
       "required": [
         "password"
       ],
-      "description": "Contains the password profile associated with a user."
+      "description": "The password profile associated with a user."
     },
     "UserCreateParameters": {
       "properties": {
         "accountEnabled": {
           "type": "boolean",
-          "description": "Enable the account. If it is enabled then true else false."
+          "description": "Whether the account is enabled."
         },
         "displayName": {
           "type": "string",
-          "description": "User display name"
+          "description": "The display name of the user."
         },
         "passwordProfile": {
           "$ref": "#/definitions/PasswordProfile",
@@ -2216,11 +2216,11 @@
         },
         "mailNickname": {
           "type": "string",
-          "description": "The mail alias for the user"
+          "description": "The mail alias for the user."
         },
         "immutableId": {
           "type": "string",
-          "description": "Needs to be specified if you are using a federated domain for the user's userPrincipalName (UPN) property while creating a new user account. It is used to associate an on-premises Active Directory user account to their Azure AD user object."
+          "description": "This must be specified if you are using a federated domain for the user's userPrincipalName (UPN) property when creating a new user account. It is used to associate an on-premises Active Directory user account with their Azure AD user object."
         }
       },
       "required": [
@@ -2230,73 +2230,73 @@
         "userPrincipalName",
         "mailNickname"
       ],
-      "description": "Request parameters for create a new work or school account user"
+      "description": "Request parameters for creating a new work or school account user."
     },
     "UserUpdateParameters": {
       "properties": {
         "accountEnabled": {
           "type": "boolean",
-          "description": "Enable the account. If it is enabled then true else false."
+          "description": "Whether the account is enabled."
         },
         "displayName": {
           "type": "string",
-          "description": "User display name"
+          "description": "The display name of the user."
         },
         "passwordProfile": {
           "$ref": "#/definitions/PasswordProfile",
-          "description": "Password Profile"
+          "description": "The password profile of the user."
         },
         "mailNickname": {
           "type": "string",
-          "description": "The mail alias for the user"
+          "description": "The mail alias for the user."
         }
       },
-      "description": "Request parameters for updating an existing work or school account user"
+      "description": "Request parameters for updating an existing work or school account user."
     },
     "User": {
       "properties": {
         "objectId": {
           "type": "string",
-          "description": "object Id"
+          "description": "The object ID."
         },
         "objectType": {
           "type": "string",
-          "description": "object type"
+          "description": "The object type."
         },
         "userPrincipalName": {
           "type": "string",
-          "description": "user principal name"
+          "description": "The principal name of the user."
         },
         "displayName": {
           "type": "string",
-          "description": "user display name"
+          "description": "The display name of the user."
         },
         "signInName": {
           "type": "string",
-          "description": "user signIn name"
+          "description": "The sign-in name of the user."
         },
         "mail": {
           "type": "string",
-          "description": "user mail"
+          "description": "The primary email address of the user."
         },
         "mailNickname": {
           "type": "string",
-          "description": "The mail alias for the user"
+          "description": "The mail alias for the user."
         }
       },
-      "description": "Active Directory user information"
+      "description": "Active Directory user information."
     },
     "UserGetMemberGroupsParameters": {
       "properties": {
         "securityEnabledOnly": {
           "type": "boolean",
-          "description": "If true only membership in security enabled groups should be checked. Otherwise membership in all groups should be checked "
+          "description": "If true, only membership in security-enabled groups should be checked. Otherwise, membership in all groups should be checked."
         }
       },
       "required": [
         "securityEnabledOnly"
       ],
-      "description": "Request parameters for GetMemberGroups API call"
+      "description": "Request parameters for GetMemberGroups API call."
     },
     "UserGetMemberGroupsResult": {
       "properties": {
@@ -2305,10 +2305,10 @@
           "items": {
             "type": "string"
           },
-          "description": "Group Ids of which the user is a member"
+          "description": "A collection of group IDs of which the user is a member."
         }
       },
-      "description": "Server response for GetMemberGroups API call"
+      "description": "Server response for GetMemberGroups API call."
     },
     "UserListResult": {
       "properties": {
@@ -2321,10 +2321,10 @@
         },
         "odata.nextLink": {
           "type": "string",
-          "description": "the URL to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
-      "description": "Server response for Get tenant users API call"
+      "description": "Server response for Get tenant users API call."
     }
   },
   "parameters": {
