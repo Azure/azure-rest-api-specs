@@ -42,7 +42,7 @@
           "Objects"
         ],
         "operationId": "Objects_GetObjectsByObjectIds",
-        "description": "Gets AD group membership by provided AD object Ids",
+        "description": "Gets AD group membership for the specified AD object IDs.",
         "parameters": [
           {
             "name": "parameters",
@@ -62,7 +62,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The operation was successful.",
             "schema": {
               "$ref": "#/definitions/GetObjectsResult"
             }
@@ -82,14 +82,14 @@
           "Objects"
         ],
         "operationId": "Objects_GetObjectsByObjectIdsNext",
-        "description": "Gets AD group membership by provided AD object Ids",
+        "description": "Gets AD group membership for the specified AD object IDs.",
         "parameters": [
           {
             "name": "nextLink",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Next link for list operation.",
+            "description": "Next link for the list operation.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -101,7 +101,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The operation was successful.",
             "schema": {
               "$ref": "#/definitions/GetObjectsResult"
             }
@@ -122,72 +122,72 @@
           "items": {
             "type": "string"
           },
-          "description": "Requested object Ids"
+          "description": "The requested object IDs."
         },
         "types": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Requested object types"
+          "description": "The requested object types."
         },
         "includeDirectoryObjectReferences": {
           "type": "boolean",
-          "description": "If true, also searches for object ids in the partner tenant"
+          "description": "If true, also searches for object IDs in the partner tenant."
         }
       },
       "required": [
         "includeDirectoryObjectReferences"
       ],
-      "description": "Request parameters for GetObjectsByObjectIds API call"
+      "description": "Request parameters for the GetObjectsByObjectIds API."
     },
     "AADObject": {
       "properties": {
         "objectId": {
           "type": "string",
-          "description": "object Id"
+          "description": "The ID of the object."
         },
         "objectType": {
           "type": "string",
-          "description": "object type"
+          "description": "The type of AAD object."
         },
         "displayName": {
           "type": "string",
-          "description": "object display name"
+          "description": "The display name of the object."
         },
         "userPrincipalName": {
           "type": "string",
-          "description": "principal name"
+          "description": "The principal name of the object."
         },
         "mail": {
           "type": "string",
-          "description": "mail"
+          "description": "The primary email address of the object."
         },
         "mailEnabled": {
           "type": "boolean",
-          "description": "MailEnabled field"
+          "description": "Whether the AAD object is mail-enabled."
         },
         "securityEnabled": {
           "type": "boolean",
-          "description": "SecurityEnabled field"
+          "description": "Whether the AAD object is security-enabled."
         },
         "signInName": {
           "type": "string",
-          "description": "signIn name"
+          "description": "The sign-in name of the object."
         },
         "servicePrincipalNames": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "the list of service principal names."
+          "description": "A collection of service principal names associated with the object."
         },
         "userType": {
           "type": "string",
-          "description": "the user type"
+          "description": "The user type of the object."
         }
       },
-      "description": "Active Directory object information"
+      "description": "The properties of an Active Directory object."
     },
     "GetObjectsResult": {
       "properties": {
@@ -196,14 +196,14 @@
           "items": {
             "$ref": "#/definitions/AADObject"
           },
-          "description": "Collection of Active Directory object"
+          "description": "A collection of Active Directory objects."
         },
         "odata.nextLink": {
           "type": "string",
-          "description": "the URL to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
-      "description": "Server response for Active Directory objects inquiry API calls"
+      "description": "The response to an Active Directory object inquiry API request."
     }
   },
   "parameters": {
@@ -212,14 +212,14 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "Client API version."
     },
     "tenantIDInPath": {
       "name": "tenantID",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "the tenant Id."
+      "description": "The tenant ID."
     }
   }
 }
