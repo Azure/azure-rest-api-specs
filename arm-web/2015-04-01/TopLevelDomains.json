@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2015-04-01",
-    "title": "TopLevelDomains API Swagger"
+    "title": "TopLevelDomains API Client"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -14,8 +14,8 @@
         "tags": [
           "TopLevelDomains"
         ],
-        "summary": "Lists all top level domains supported for registration.",
-        "description": "Lists all top level domains supported for registration.",
+        "summary": "Get all top-level domains supported for registration.",
+        "description": "Get all top-level domains supported for registration.",
         "operationId": "TopLevelDomains_List",
         "consumes": [],
         "produces": [
@@ -48,8 +48,8 @@
         "tags": [
           "TopLevelDomains"
         ],
-        "summary": "Gets details of a top level domain.",
-        "description": "Gets details of a top level domain.",
+        "summary": "Get details of a top-level domain.",
+        "description": "Get details of a top-level domain.",
         "operationId": "TopLevelDomains_Get",
         "consumes": [],
         "produces": [
@@ -62,7 +62,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the top level domain",
+            "description": "Name of the top-level domain.",
             "required": true,
             "type": "string"
           },
@@ -88,8 +88,8 @@
         "tags": [
           "TopLevelDomains"
         ],
-        "summary": "Lists legal agreements that user needs to accept before purchasing domain.",
-        "description": "Lists legal agreements that user needs to accept before purchasing domain.",
+        "summary": "Gets all legal agreements that user needs to accept before purchasing a domain.",
+        "description": "Gets all legal agreements that user needs to accept before purchasing a domain.",
         "operationId": "TopLevelDomains_ListAgreements",
         "consumes": [
           "application/json",
@@ -106,14 +106,14 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the top level domain",
+            "description": "Name of the top-level domain.",
             "required": true,
             "type": "string"
           },
           {
             "name": "agreementOption",
             "in": "body",
-            "description": "Domain agreement options",
+            "description": "Domain agreement options.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TopLevelDomainAgreementOption"
@@ -172,7 +172,7 @@
       }
     },
     "ApiDefinitionInfo": {
-      "description": "Information about the formal API definition for the web app.",
+      "description": "Information about the formal API definition for the app.",
       "type": "object",
       "properties": {
         "url": {
@@ -182,7 +182,7 @@
       }
     },
     "AppServiceCertificate": {
-      "description": "Class representing the Key Vault container for certificate purchased through Azure.",
+      "description": "Key Vault container for a certificate that is purchased through Azure.",
       "type": "object",
       "allOf": [
         {
@@ -229,7 +229,7 @@
       }
     },
     "AppServiceCertificateOrder": {
-      "description": "Certificate purchase order.",
+      "description": "SSL certificate purchase order.",
       "type": "object",
       "allOf": [
         {
@@ -259,7 +259,7 @@
               ]
             },
             "domainVerificationToken": {
-              "description": "Domain Verification Token.",
+              "description": "Domain verification token.",
               "type": "string",
               "readOnly": true
             },
@@ -275,7 +275,7 @@
             },
             "keySize": {
               "format": "int32",
-              "description": "Certificate Key Size.",
+              "description": "Certificate key size.",
               "default": 2048,
               "type": "integer",
               "x-ms-mutability": [
@@ -300,7 +300,7 @@
               ]
             },
             "autoRenew": {
-              "description": "Auto renew.",
+              "description": "<code>true</code> if the certificate should be automatically renewed when it expires; otherwise, <code>false</code>.",
               "default": true,
               "type": "boolean"
             },
@@ -382,7 +382,7 @@
               "readOnly": true
             },
             "isPrivateKeyExternal": {
-              "description": "Is Private Key External.",
+              "description": "<code>true</code> if private key is external; otherwise, <code>false</code>.",
               "type": "boolean"
             }
           },
@@ -391,7 +391,7 @@
       }
     },
     "AppServiceEnvironment": {
-      "description": "Description of an hostingEnvironment (App Service Environment).",
+      "description": "Description of an App Service Environment.",
       "type": "object",
       "allOf": [
         {
@@ -409,15 +409,15 @@
           ],
           "properties": {
             "name": {
-              "description": "Name of the hostingEnvironment (App Service Environment).",
+              "description": "Name of the App Service Environment.",
               "type": "string"
             },
             "location": {
-              "description": "Location of the hostingEnvironment (App Service Environment), e.g. \"West US\"",
+              "description": "Location of the App Service Environment, e.g. \"West US\".",
               "type": "string"
             },
             "provisioningState": {
-              "description": "Provisioning state of the hostingEnvironment (App Service Environment).",
+              "description": "Provisioning state of the App Service Environment.",
               "enum": [
                 "Succeeded",
                 "Failed",
@@ -433,7 +433,7 @@
               }
             },
             "status": {
-              "description": "Current status of the hostingEnvironment (App Service Environment).",
+              "description": "Current status of the App Service Environment.",
               "enum": [
                 "Preparing",
                 "Ready",
@@ -448,23 +448,23 @@
               }
             },
             "vnetName": {
-              "description": "Name of the hostingEnvironment's (App Service Environment) virtual network.",
+              "description": "Name of the Virtual Network for the App Service Environment.",
               "type": "string"
             },
             "vnetResourceGroupName": {
-              "description": "Resource group of the hostingEnvironment's (App Service Environment) virtual network.",
+              "description": "Resource group of the Virtual Network.",
               "type": "string"
             },
             "vnetSubnetName": {
-              "description": "Subnet of the hostingEnvironment's (App Service Environment) virtual network.",
+              "description": "Subnet of the Virtual Network.",
               "type": "string"
             },
             "virtualNetwork": {
               "$ref": "#/definitions/VirtualNetworkProfile",
-              "description": "Description of the hostingEnvironment's (App Service Environment) virtual network."
+              "description": "Description of the Virtual Network."
             },
             "internalLoadBalancingMode": {
-              "description": "Specifies which endpoints to serve internally in the hostingEnvironment's (App Service Environment) VNET.",
+              "description": "Specifies which endpoints to serve internally in the Virtual Network for the App Service Environment.",
               "enum": [
                 "None",
                 "Web",
@@ -477,7 +477,7 @@
               }
             },
             "multiSize": {
-              "description": "Front-end VM size, e.g. \"Medium\", \"Large\"",
+              "description": "Front-end VM size, e.g. \"Medium\", \"Large\".",
               "type": "string"
             },
             "multiRoleCount": {
@@ -486,7 +486,7 @@
               "type": "integer"
             },
             "workerPools": {
-              "description": "Description of worker pools with worker size ids, VM sizes, and number of workers in each pool.",
+              "description": "Description of worker pools with worker size IDs, VM sizes, and number of workers in each pool.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/WorkerPool"
@@ -494,41 +494,41 @@
             },
             "ipsslAddressCount": {
               "format": "int32",
-              "description": "Number of IP SSL addresses reserved for this hostingEnvironment (App Service Environment).",
+              "description": "Number of IP SSL addresses reserved for the App Service Environment.",
               "type": "integer"
             },
             "databaseEdition": {
-              "description": "Edition of the metadata database for the hostingEnvironment (App Service Environment) e.g. \"Standard\"",
+              "description": "Edition of the metadata database for the App Service Environment, e.g. \"Standard\".",
               "type": "string",
               "readOnly": true
             },
             "databaseServiceObjective": {
-              "description": "Service objective of the metadata database for the hostingEnvironment (App Service Environment) e.g. \"S0\"",
+              "description": "Service objective of the metadata database for the App Service Environment, e.g. \"S0\".",
               "type": "string",
               "readOnly": true
             },
             "upgradeDomains": {
               "format": "int32",
-              "description": "Number of upgrade domains of this hostingEnvironment (App Service Environment).",
+              "description": "Number of upgrade domains of the App Service Environment.",
               "type": "integer",
               "readOnly": true
             },
             "subscriptionId": {
-              "description": "Subscription of the hostingEnvironment (App Service Environment).",
+              "description": "Subscription of the App Service Environment.",
               "type": "string",
               "readOnly": true
             },
             "dnsSuffix": {
-              "description": "DNS suffix of the hostingEnvironment (App Service Environment).",
+              "description": "DNS suffix of the App Service Environment.",
               "type": "string"
             },
             "lastAction": {
-              "description": "Last deployment action on this hostingEnvironment (App Service Environment).",
+              "description": "Last deployment action on the App Service Environment.",
               "type": "string",
               "readOnly": true
             },
             "lastActionResult": {
-              "description": "Result of the last deployment action on this hostingEnvironment (App Service Environment).",
+              "description": "Result of the last deployment action on the App Service Environment.",
               "type": "string",
               "readOnly": true
             },
@@ -544,12 +544,12 @@
             },
             "maximumNumberOfMachines": {
               "format": "int32",
-              "description": "Maximum number of VMs in this hostingEnvironment (App Service Environment).",
+              "description": "Maximum number of VMs in the App Service Environment.",
               "type": "integer",
               "readOnly": true
             },
             "vipMappings": {
-              "description": "Description of IP SSL mapping for this hostingEnvironment (App Service Environment).",
+              "description": "Description of IP SSL mapping for the App Service Environment.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VirtualIPMapping"
@@ -565,45 +565,51 @@
               "readOnly": true
             },
             "networkAccessControlList": {
-              "description": "Access control list for controlling traffic to the hostingEnvironment (App Service Environment).",
+              "description": "Access control list for controlling traffic to the App Service Environment.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/NetworkAccessControlEntry"
               }
             },
             "environmentIsHealthy": {
-              "description": "True/false indicating whether the hostingEnvironment (App Service Environment) is healthy.",
+              "description": "True/false indicating whether the App Service Environment is healthy.",
               "type": "boolean",
               "readOnly": true
             },
             "environmentStatus": {
-              "description": "Detailed message about with results of the last check of the hostingEnvironment (App Service Environment).",
+              "description": "Detailed message about with results of the last check of the App Service Environment.",
               "type": "string",
               "readOnly": true
             },
             "resourceGroup": {
-              "description": "Resource group of the hostingEnvironment (App Service Environment).",
+              "description": "Resource group of the App Service Environment.",
               "type": "string",
               "readOnly": true
             },
             "frontEndScaleFactor": {
               "format": "int32",
-              "description": "Scale Factor for FrontEnds.",
+              "description": "Scale factor for front-ends.",
+              "type": "integer"
+            },
+            "defaultFrontEndScaleFactor": {
+              "format": "int32",
+              "description": "Default Scale Factor for FrontEnds.",
               "type": "integer"
             },
             "apiManagementAccountId": {
+              "description": "API Management Account associated with the App Service Environment.",
               "type": "string"
             },
             "suspended": {
-              "description": "True/false indicating whether the hostingEnvironment is suspended. The environment can be suspended e.g. when the management endpoint is no longer available\r\n            (most likely because NSG blocked the incoming traffic)",
+              "description": "<code>true</code> if the App Service Environment is suspended; otherwise, <code>false</code>. The environment can be suspended, e.g. when the management endpoint is no longer available\r\n            (most likely because NSG blocked the incoming traffic).",
               "type": "boolean"
             },
             "dynamicCacheEnabled": {
-              "description": "True/false indicating whether the hostingEnvironment is suspended. The environment can be suspended e.g. when the management endpoint is no longer available\r\n            (most likely because NSG blocked the incoming traffic)",
+              "description": "True/false indicating whether the App Service Environment is suspended. The environment can be suspended e.g. when the management endpoint is no longer available\r\n            (most likely because NSG blocked the incoming traffic).",
               "type": "boolean"
             },
             "clusterSettings": {
-              "description": "Custom settings for changing the behavior of the hosting environment.",
+              "description": "Custom settings for changing the behavior of the App Service Environment.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/NameValuePair"
@@ -615,7 +621,7 @@
       }
     },
     "AppServicePlan": {
-      "description": "App Service Plan Model.",
+      "description": "App Service plan.",
       "type": "object",
       "allOf": [
         {
@@ -630,15 +636,15 @@
           ],
           "properties": {
             "name": {
-              "description": "Name for the App Service Plan.",
+              "description": "Name for the App Service plan.",
               "type": "string"
             },
             "workerTierName": {
-              "description": "Target worker tier assigned to the App Service Plan.",
+              "description": "Target worker tier assigned to the App Service plan.",
               "type": "string"
             },
             "status": {
-              "description": "App Service Plan Status.",
+              "description": "App Service plan status.",
               "enum": [
                 "Ready",
                 "Pending"
@@ -651,17 +657,17 @@
               }
             },
             "subscription": {
-              "description": "App Service Plan Subscription.",
+              "description": "App Service plan subscription.",
               "type": "string",
               "readOnly": true
             },
             "adminSiteName": {
-              "description": "App Service Plan administration site.",
+              "description": "App Service plan administration site.",
               "type": "string"
             },
             "hostingEnvironmentProfile": {
               "$ref": "#/definitions/HostingEnvironmentProfile",
-              "description": "Specification for the hosting environment (App Service Environment) to use for the App Service Plan.",
+              "description": "Specification for the App Service Environment to use for the App Service plan.",
               "x-ms-mutability": [
                 "create",
                 "read"
@@ -669,43 +675,43 @@
             },
             "maximumNumberOfWorkers": {
               "format": "int32",
-              "description": "Maximum number of instances that can be assigned to this App Service Plan.",
+              "description": "Maximum number of instances that can be assigned to this App Service plan.",
               "type": "integer",
               "readOnly": true
             },
             "geoRegion": {
-              "description": "Geographical location for the App Service Plan.",
+              "description": "Geographical location for the App Service plan.",
               "type": "string",
               "readOnly": true
             },
             "perSiteScaling": {
-              "description": "If True apps assigned to this App Service Plan can be scaled independently.\r\n            If False apps assigned to this App Service Plan will scale to all instances of the plan",
+              "description": "If <code>true</code>, apps assigned to this App Service plan can be scaled independently.\r\n            If <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.",
               "default": false,
               "type": "boolean"
             },
             "numberOfSites": {
               "format": "int32",
-              "description": "Number of web apps assigned to this App Service Plan.",
+              "description": "Number of apps assigned to this App Service plan.",
               "type": "integer",
               "readOnly": true
             },
             "resourceGroup": {
-              "description": "Resource group of the serverfarm.",
+              "description": "Resource group of the App Service plan.",
               "type": "string",
               "readOnly": true
             },
             "targetWorkerCount": {
               "format": "int32",
-              "description": "Scaling Worker Count.",
+              "description": "Scaling worker count.",
               "type": "integer"
             },
             "targetWorkerSizeId": {
               "format": "int32",
-              "description": "Scaling Worker Size Id .",
+              "description": "Scaling worker size ID.",
               "type": "integer"
             },
             "provisioningState": {
-              "description": "Provisioning state of the hostingEnvironment (App Service Environment).",
+              "description": "Provisioning state of the App Service Environment.",
               "enum": [
                 "Succeeded",
                 "Failed",
@@ -773,11 +779,11 @@
       }
     },
     "AutoHealActions": {
-      "description": "AutoHealActions - Describes the actions which can be\r\n            taken by the auto-heal module when a rule is triggered.",
+      "description": "Actions which to take by the auto-heal module when a rule is triggered.",
       "type": "object",
       "properties": {
         "actionType": {
-          "description": "ActionType - predefined action to be taken.",
+          "description": "Predefined action to be taken.",
           "enum": [
             "Recycle",
             "LogEvent",
@@ -791,16 +797,16 @@
         },
         "customAction": {
           "$ref": "#/definitions/AutoHealCustomAction",
-          "description": "CustomAction - custom action to be taken."
+          "description": "Custom action to be taken."
         },
         "minProcessExecutionTime": {
-          "description": "MinProcessExecutionTime - minimum time the process must execute\r\n            before taking the action",
+          "description": "Minimum time the process must execute\r\n            before taking the action",
           "type": "string"
         }
       }
     },
     "AutoHealCustomAction": {
-      "description": "AutoHealCustomAction - Describes the custom action to be executed\r\n            when an auto heal rule is triggered.",
+      "description": "Custom action to be executed\r\n            when an auto heal rule is triggered.",
       "type": "object",
       "properties": {
         "exe": {
@@ -814,34 +820,34 @@
       }
     },
     "AutoHealRules": {
-      "description": "AutoHealRules - describes the rules which can be defined for auto-heal.",
+      "description": "Rules that can be defined for auto-heal.",
       "type": "object",
       "properties": {
         "triggers": {
           "$ref": "#/definitions/AutoHealTriggers",
-          "description": "Triggers - Conditions that describe when to execute the auto-heal actions."
+          "description": "Conditions that describe when to execute the auto-heal actions."
         },
         "actions": {
           "$ref": "#/definitions/AutoHealActions",
-          "description": "Actions - Actions to be executed when a rule is triggered."
+          "description": "Actions to be executed when a rule is triggered."
         }
       }
     },
     "AutoHealTriggers": {
-      "description": "AutoHealTriggers - describes the triggers for auto-heal.",
+      "description": "Triggers for auto-heal.",
       "type": "object",
       "properties": {
         "requests": {
           "$ref": "#/definitions/RequestsBasedTrigger",
-          "description": "Requests - Defines a rule based on total requests."
+          "description": "A rule based on total requests."
         },
         "privateBytesInKB": {
           "format": "int32",
-          "description": "PrivateBytesInKB - Defines a rule based on private bytes.",
+          "description": "A rule based on private bytes.",
           "type": "integer"
         },
         "statusCodes": {
-          "description": "StatusCodes - Defines a rule based on status codes.",
+          "description": "A rule based on status codes.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/StatusCodesBasedTrigger"
@@ -849,7 +855,7 @@
         },
         "slowRequests": {
           "$ref": "#/definitions/SlowRequestsBasedTrigger",
-          "description": "SlowRequests - Defines a rule based on request execution time."
+          "description": "A rule based on request execution time."
         }
       }
     },
@@ -903,7 +909,7 @@
       }
     },
     "AzureTableStorageApplicationLogsConfig": {
-      "description": "Application logs to azure table storage configuration.",
+      "description": "Application logs to Azure table storage configuration.",
       "type": "object",
       "properties": {
         "level": {
@@ -922,7 +928,7 @@
           }
         },
         "sasUrl": {
-          "description": "SAS url to an azure table with add/query/delete permissions.",
+          "description": "SAS URL to an Azure table with add/query/delete permissions.",
           "type": "string"
         }
       }
@@ -1076,31 +1082,31 @@
         },
         "lastExecutionTime": {
           "format": "date-time",
-          "description": "The last time when this schedule was triggered.",
+          "description": "Last time when this schedule was triggered.",
           "type": "string"
         }
       }
     },
     "Capability": {
-      "description": "Description of a Sku Capability.",
+      "description": "Description of a SKU Capability.",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the sku capability.",
+          "description": "Name of the SKU capability.",
           "type": "string"
         },
         "value": {
-          "description": "Value of the sku capability.",
+          "description": "Value of the SKU capability.",
           "type": "string"
         },
         "reason": {
-          "description": "Reason of the sku capability.",
+          "description": "Reason of the SKU capability.",
           "type": "string"
         }
       }
     },
     "Certificate": {
-      "description": "App certificate.",
+      "description": "SSL certificate for an app.",
       "type": "object",
       "allOf": [
         {
@@ -1125,7 +1131,7 @@
               "readOnly": true
             },
             "hostNames": {
-              "description": "Host names the certificate applies to .",
+              "description": "Host names the certificate applies to.",
               "type": "array",
               "items": {
                 "type": "string"
@@ -1190,7 +1196,7 @@
             },
             "hostingEnvironmentProfile": {
               "$ref": "#/definitions/HostingEnvironmentProfile",
-              "description": "Specification for the hosting environment (App Service Environment) to use for the certificate.",
+              "description": "Specification for the App Service Environment to use for the certificate.",
               "readOnly": true
             },
             "keyVaultSecretStatus": {
@@ -1225,7 +1231,7 @@
       }
     },
     "CertificateDetails": {
-      "description": "Certificate Details.",
+      "description": "SSL certificate details.",
       "type": "object",
       "allOf": [
         {
@@ -1270,7 +1276,7 @@
               "readOnly": true
             },
             "signatureAlgorithm": {
-              "description": "Signature Algorithm.",
+              "description": "Signature algorithm.",
               "type": "string",
               "readOnly": true
             },
@@ -1312,53 +1318,53 @@
       }
     },
     "CloningInfo": {
-      "description": "Represents information needed for cloning operation.",
+      "description": "Information needed for cloning operation.",
       "required": [
         "sourceWebAppId"
       ],
       "type": "object",
       "properties": {
         "correlationId": {
-          "description": "Correlation Id of cloning operation. This id ties multiple cloning operations\r\n            together to use the same snapshot",
+          "description": "Correlation ID of cloning operation. This ID ties multiple cloning operations\r\n            together to use the same snapshot.",
           "type": "string"
         },
         "overwrite": {
-          "description": "Overwrite destination web app.",
+          "description": "<code>true</code> to overwrite destination app; otherwise, <code>false</code>.",
           "type": "boolean"
         },
         "cloneCustomHostNames": {
-          "description": "If true, clone custom hostnames from source web app.",
+          "description": "<code>true</code> to clone custom hostnames from source app; otherwise, <code>false</code>.",
           "type": "boolean"
         },
         "cloneSourceControl": {
-          "description": "Clone source control from source web app.",
+          "description": "<code>true</code> to clone source control from source app; otherwise, <code>false</code>.",
           "type": "boolean"
         },
         "sourceWebAppId": {
-          "description": "ARM resource id of the source web app. Web app resource id is of the form \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots",
+          "description": "ARM resource ID of the source app. App resource ID is of the form \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
           "type": "string"
         },
         "hostingEnvironment": {
-          "description": "Hosting environment.",
+          "description": "App Service Environment.",
           "type": "string"
         },
         "appSettingsOverrides": {
-          "description": "Application settings overrides for cloned web app. If specified these settings will override the settings cloned \r\n            from source web app. If not specified, application settings from source web app are retained.",
+          "description": "Application setting overrides for cloned app. If specified, these settings override the settings cloned \r\n            from source app. Otherwise, application settings from source app are retained.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "configureLoadBalancing": {
-          "description": "If specified configure load balancing for source and clone site.",
+          "description": "<code>true</code> to configure load balancing for source and destination app.",
           "type": "boolean"
         },
         "trafficManagerProfileId": {
-          "description": "ARM resource id of the traffic manager profile to use if it exists. Traffic manager resource id is of the form \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}",
+          "description": "ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}.",
           "type": "string"
         },
         "trafficManagerProfileName": {
-          "description": "Name of traffic manager profile to create. This is only needed if traffic manager profile does not already exist",
+          "description": "Name of Traffic Manager profile to create. This is only needed if Traffic Manager profile does not already exist.",
           "type": "string"
         }
       }
@@ -1394,7 +1400,7 @@
       }
     },
     "Contact": {
-      "description": "Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information will be  be made publicly available through the Whois directories as per ICANN requirements.",
+      "description": "Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information is made publicly available through the Whois \r\n            directories as per ICANN requirements.",
       "type": "object",
       "properties": {
         "addressMailing": {
@@ -1436,7 +1442,7 @@
       }
     },
     "CorsSettings": {
-      "description": "Cross-Origin Resource Sharing (CORS) settings for the web app.",
+      "description": "Cross-Origin Resource Sharing (CORS) settings for the app.",
       "type": "object",
       "properties": {
         "allowedOrigins": {
@@ -1478,11 +1484,11 @@
       }
     },
     "DatabaseBackupSetting": {
-      "description": "Note: properties are serialized in JSON format and stored in DB. \r\n            If new properties are added they might not be in the previous data rows so please handle nulls.",
+      "description": "Database backup settings.",
       "type": "object",
       "properties": {
         "databaseType": {
-          "description": "SqlAzure / MySql.",
+          "description": "Database type (e.g. SqlAzure / MySql).",
           "type": "string"
         },
         "name": {
@@ -1493,13 +1499,13 @@
           "type": "string"
         },
         "connectionString": {
-          "description": "Contains a connection string to a database which is being backed up/restored. If the restore should happen to a new database, the database name inside is the new one.",
+          "description": "Contains a connection string to a database which is being backed up or restored. If the restore should happen to a new database, the database name inside is the new one.",
           "type": "string"
         }
       }
     },
     "DeletedSite": {
-      "description": "Represents a deleted app.",
+      "description": "A deleted app.",
       "type": "object",
       "allOf": [
         {
@@ -1548,7 +1554,7 @@
               }
             },
             "enabled": {
-              "description": "True if the app is enabled; otherwise, false. Setting this value to false disables the app (takes the app offline).",
+              "description": "<code>true</code> if the app is enabled; otherwise, <code>false</code>. Setting this value to false disables the app (takes the app offline).",
               "type": "boolean"
             },
             "enabledHostNames": {
@@ -1560,7 +1566,7 @@
               "readOnly": true
             },
             "availabilityState": {
-              "description": "Management information availability state for the web app. Read-only.",
+              "description": "Management information availability state for the app. Read-only.",
               "enum": [
                 "Normal",
                 "Limited",
@@ -1574,7 +1580,7 @@
               }
             },
             "hostNameSslStates": {
-              "description": "Hostname SSL states are  used to manage the SSL bindings for site's hostnames.",
+              "description": "Hostname SSL states are used to manage the SSL bindings for app's hostnames.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/HostNameSslState"
@@ -1585,7 +1591,7 @@
               "type": "string"
             },
             "reserved": {
-              "description": "Reserved.",
+              "description": "<code>true</code> if reserved; otherwise, <code>false</code>.",
               "default": false,
               "type": "boolean",
               "x-ms-mutability": [
@@ -1612,17 +1618,17 @@
               "readOnly": true
             },
             "premiumAppDeployed": {
-              "description": "Indicates whether web app is deployed as a premium app. Read-only.",
+              "description": "Indicates whether app is deployed as a premium app. Read-only.",
               "type": "boolean",
               "readOnly": true
             },
             "scmSiteAlsoStopped": {
-              "description": "Specify \"true\" to stop SCM (KUDU) site when the app is stopped. Default is false.",
+              "description": "<code>true</code> to stop SCM (KUDU) site when the app is stopped; otherwise, <code>false</code>. The default is <code>false</code>.",
               "type": "boolean",
               "readOnly": true
             },
             "targetSwapSlot": {
-              "description": "Specifies which slot this app will swap into. Read-only.",
+              "description": "Specifies which deployment slot this app will swap into. Read-only.",
               "type": "string",
               "readOnly": true
             },
@@ -1635,7 +1641,7 @@
               ]
             },
             "microService": {
-              "description": "Micro services like WebSites, Logic Apps.",
+              "description": "Micro services like apps, logic apps.",
               "default": false,
               "type": "string",
               "x-ms-mutability": [
@@ -1644,7 +1650,7 @@
               ]
             },
             "gatewaySiteName": {
-              "description": "Name of gateway app associated with web app .",
+              "description": "Name of gateway app associated with the app.",
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -1652,15 +1658,15 @@
               ]
             },
             "clientAffinityEnabled": {
-              "description": "Specify \"false\" to stop sending session affinity cookies, which route client requests in the same session to the same instance. Default is true.",
+              "description": "<code>true</code> to enable client affinity; <code>false</code> to stop sending session affinity cookies, which route client requests in the same session to the same instance. Default is <code>true</code>.",
               "type": "boolean"
             },
             "clientCertEnabled": {
-              "description": "Specify \"true\"  to enable client certificate authentication (TLS mutual authentication). Default is false.",
+              "description": "<code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.",
               "type": "boolean"
             },
             "hostNamesDisabled": {
-              "description": "Specifies if the public hostnames are disabled the web app.\r\n            If set to true the app is only accessible via API Management process",
+              "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\r\n            If <code>true</code>, the app is only accessible via API management process.",
               "type": "boolean"
             },
             "outboundIpAddresses": {
@@ -1675,18 +1681,18 @@
             },
             "dailyMemoryTimeQuota": {
               "format": "int32",
-              "description": "Maximum allowed daily memory-time quota (applicable on dynamic sites only).",
+              "description": "Maximum allowed daily memory-time quota (applicable on dynamic apps only).",
               "type": "integer"
             },
             "suspendedTill": {
               "format": "date-time",
-              "description": "Site suspended till in case memory-time quota is exceeded.",
+              "description": "App suspended till in case memory-time quota is exceeded.",
               "type": "string",
               "readOnly": true
             },
             "maxNumberOfWorkers": {
               "format": "int32",
-              "description": "Maximum number of workers.\r\n            This only applies to function container",
+              "description": "Maximum number of workers.\r\n            This only applies to Functions container.",
               "type": "integer",
               "readOnly": true
             },
@@ -1703,13 +1709,18 @@
               "readOnly": true
             },
             "isDefaultContainer": {
-              "description": "Indicates whether the app is a default container. Read-only.",
+              "description": "<code>true</code> if the app is a default container; otherwise, <code>false</code>. Read-only.",
               "type": "boolean",
               "readOnly": true
             },
             "defaultHostName": {
               "description": "Default hostname of the app. Read-only.",
               "type": "string",
+              "readOnly": true
+            },
+            "slotSwapStatus": {
+              "$ref": "#/definitions/SlotSwapStatus",
+              "description": "Status of the last deployment slot swap operation.",
               "readOnly": true
             }
           },
@@ -1718,7 +1729,7 @@
       }
     },
     "Deployment": {
-      "description": "Represents user crendentials used for publishing activity.",
+      "description": "User crendentials used for publishing activity.",
       "type": "object",
       "allOf": [
         {
@@ -1730,7 +1741,7 @@
           "description": "ARM envelope properties",
           "properties": {
             "id": {
-              "description": "Id.",
+              "description": "ID.",
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -1755,17 +1766,17 @@
               "type": "string"
             },
             "author_email": {
-              "description": "AuthorEmail.",
+              "description": "Author email.",
               "type": "string"
             },
             "start_time": {
               "format": "date-time",
-              "description": "StartTime.",
+              "description": "Start time.",
               "type": "string"
             },
             "end_time": {
               "format": "date-time",
-              "description": "EndTime.",
+              "description": "End time.",
               "type": "string"
             },
             "active": {
@@ -1782,7 +1793,7 @@
       }
     },
     "Domain": {
-      "description": "Represents a domain.",
+      "description": "Information about a domain.",
       "type": "object",
       "allOf": [
         {
@@ -1802,28 +1813,28 @@
           "properties": {
             "contactAdmin": {
               "$ref": "#/definitions/Contact",
-              "description": "Admin contact information.",
+              "description": "Administrative contact.",
               "x-ms-mutability": [
                 "create"
               ]
             },
             "contactBilling": {
               "$ref": "#/definitions/Contact",
-              "description": "Billing contact information.",
+              "description": "Billing contact.",
               "x-ms-mutability": [
                 "create"
               ]
             },
             "contactRegistrant": {
               "$ref": "#/definitions/Contact",
-              "description": "Registrant contact information.",
+              "description": "Registrant contact.",
               "x-ms-mutability": [
                 "create"
               ]
             },
             "contactTech": {
               "$ref": "#/definitions/Contact",
-              "description": "Technical contact information.",
+              "description": "Technical contact.",
               "x-ms-mutability": [
                 "create"
               ]
@@ -1884,7 +1895,7 @@
               }
             },
             "privacy": {
-              "description": "If true then domain privacy is enabled for this domain.",
+              "description": "<code>true</code> if domain privacy is enabled for this domain; otherwise, <code>false</code>.",
               "type": "boolean",
               "readOnly": true
             },
@@ -1907,12 +1918,12 @@
               "readOnly": true
             },
             "autoRenew": {
-              "description": "If true then domain will renewed automatically.",
+              "description": "<code>true</code> if the domain should be automatically renewed; otherwise, <code>false</code>.",
               "default": true,
               "type": "boolean"
             },
             "readyForDnsRecordManagement": {
-              "description": "If true then Azure can assign this domain to Web Apps. This value will be true if domain registration status is active and it is hosted on name servers Azure has programmatic access to",
+              "description": "<code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and \r\n            it is hosted on name servers Azure has programmatic access to.",
               "type": "boolean",
               "readOnly": true
             },
@@ -1947,19 +1958,29 @@
         }
       }
     },
+    "DomainOwnershipIdentifier": {
+      "description": "Domain ownership Identifier.",
+      "type": "object",
+      "properties": {
+        "ownershipId": {
+          "description": "Ownership Id.",
+          "type": "string"
+        }
+      }
+    },
     "DomainPurchaseConsent": {
-      "description": "Domain purchase consent object representing acceptance of applicable legal agreements.",
+      "description": "Domain purchase consent object, representing acceptance of applicable legal agreements.",
       "type": "object",
       "properties": {
         "agreementKeys": {
-          "description": "List of applicable legal agreement keys. This list can be retrieved using ListLegalAgreements Api under TopLevelDomain resource",
+          "description": "List of applicable legal agreement keys. This list can be retrieved using ListLegalAgreements API under <code>TopLevelDomain</code> resource.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "agreedBy": {
-          "description": "Client IP address .",
+          "description": "Client IP address.",
           "type": "string"
         },
         "agreedAt": {
@@ -2016,11 +2037,11 @@
       }
     },
     "Experiments": {
-      "description": "Class containing Routing in production experiments.",
+      "description": "Routing rules in production experiments.",
       "type": "object",
       "properties": {
         "rampUpRules": {
-          "description": "List of {Microsoft.Web.Hosting.Administration.RampUpRule} objects.",
+          "description": "List of ramp-up rules.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RampUpRule"
@@ -2101,8 +2122,40 @@
         }
       }
     },
+    "GlobalCsmSkuDescription": {
+      "description": "A Global SKU Description.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the resource SKU.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "Service Tier of the resource SKU.",
+          "type": "string"
+        },
+        "capacity": {
+          "$ref": "#/definitions/SkuCapacity",
+          "description": "Min, max, and default scale values of the SKU."
+        },
+        "locations": {
+          "description": "Locations of the SKU.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "capabilities": {
+          "description": "Capabilities of the SKU, e.g., is traffic manager enabled?",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          }
+        }
+      }
+    },
     "HandlerMapping": {
-      "description": "The IIS handler mappings used to define which handler processes HTTP requests with certain extension. \r\n            For example it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension.",
+      "description": "The IIS handler mappings used to define which handler processes HTTP requests with certain extension. \r\n            For example, it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension.",
       "type": "object",
       "properties": {
         "extension": {
@@ -2128,14 +2181,14 @@
           "type": "string"
         },
         "siteNames": {
-          "description": "List of sites the hostname is assigned to. This list will have more than one site only if the hostname is pointing to a Traffic Manager",
+          "description": "List of apps the hostname is assigned to. This list will have more than one app only if the hostname is pointing to a Traffic Manager.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "azureResourceName": {
-          "description": "Name of the Azure resource the hostname is assigned to. If it is assigned to a traffic manager then it will be the traffic manager name otherwise it will be the website name",
+          "description": "Name of the Azure resource the hostname is assigned to. If it is assigned to a Traffic Manager then it will be the Traffic Manager name otherwise it will be the app name.",
           "type": "string"
         },
         "azureResourceType": {
@@ -2151,7 +2204,7 @@
           }
         },
         "customHostNameDnsRecordType": {
-          "description": "Type of the Dns record.",
+          "description": "Type of the DNS record.",
           "enum": [
             "CName",
             "A"
@@ -2177,7 +2230,7 @@
       }
     },
     "HostNameBinding": {
-      "description": "A host name binding object.",
+      "description": "A hostname binding object.",
       "type": "object",
       "allOf": [
         {
@@ -2200,7 +2253,7 @@
               ]
             },
             "siteName": {
-              "description": "Web app name.",
+              "description": "App Service app name.",
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -2256,7 +2309,7 @@
               ]
             },
             "hostNameType": {
-              "description": "Host name type.",
+              "description": "Hostname type.",
               "enum": [
                 "Verified",
                 "Managed"
@@ -2277,11 +2330,11 @@
       }
     },
     "HostNameSslState": {
-      "description": "Object that represents a SSL-enabled host name.",
+      "description": "SSL-enabled hostname.",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Host name.",
+          "description": "Hostname.",
           "type": "string"
         },
         "sslState": {
@@ -2298,33 +2351,33 @@
           }
         },
         "virtualIP": {
-          "description": "Virtual IP address assigned to the host name if IP based SSL is enabled.",
+          "description": "Virtual IP address assigned to the hostname if IP based SSL is enabled.",
           "type": "string"
         },
         "thumbprint": {
-          "description": "SSL cert thumbprint.",
+          "description": "SSL certificate thumbprint.",
           "type": "string"
         },
         "toUpdate": {
-          "description": "Set this flag to update existing host name.",
+          "description": "Set to <code>true</code> to update existing hostname.",
           "type": "boolean"
         }
       }
     },
     "HostingEnvironmentProfile": {
-      "description": "Specification for a hostingEnvironment (App Service Environment) to use for this resource.",
+      "description": "Specification for an App Service Environment to use for this resource.",
       "type": "object",
       "properties": {
         "id": {
-          "description": "Resource id of the hostingEnvironment (App Service Environment).",
+          "description": "Resource ID of the App Service Environment.",
           "type": "string"
         },
         "name": {
-          "description": "Name of the hostingEnvironment (App Service Environment) (read only).",
+          "description": "Name of the App Service Environment (read only).",
           "type": "string"
         },
         "type": {
-          "description": "Resource type of the hostingEnvironment (App Service Environment) (read only).",
+          "description": "Resource type of the App Service Environment (read only).",
           "type": "string"
         }
       }
@@ -2356,7 +2409,7 @@
           "description": "ARM envelope properties",
           "properties": {
             "serviceBusNamespace": {
-              "description": "The name of the Service Bus Namespace.",
+              "description": "The name of the Service Bus namespace.",
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -2364,7 +2417,7 @@
               ]
             },
             "relayName": {
-              "description": "The name of the Service Bus Relay.",
+              "description": "The name of the Service Bus relay.",
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -2372,7 +2425,7 @@
               ]
             },
             "relayArmUri": {
-              "description": "The ARM URI to the Service Bus Relay.",
+              "description": "The ARM URI to the Service Bus relay.",
               "type": "string"
             },
             "hostname": {
@@ -2397,16 +2450,8 @@
         }
       }
     },
-    "Identifier": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        }
-      }
-    },
     "IpSecurityRestriction": {
-      "description": "Represents an ip security restriction on a web app.",
+      "description": "IP security restriction on an app.",
       "required": [
         "ipAddress"
       ],
@@ -2423,11 +2468,11 @@
       }
     },
     "LocalizableString": {
-      "description": "LocalizableString object containing the name and a localized value.",
+      "description": "Localizable string object containing the name and a localized value.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Non localized name.",
+          "description": "Non-localized name.",
           "type": "string"
         },
         "localizedValue": {
@@ -2437,61 +2482,16 @@
       }
     },
     "MetricAvailabilily": {
-      "description": "Class repesenting metrics availability and retention.",
+      "description": "Metric availability and retention.",
       "type": "object",
       "properties": {
         "timeGrain": {
-          "description": "Time grain .",
+          "description": "Time grain.",
           "type": "string"
         },
         "retention": {
-          "description": "Retention period for the current {Microsoft.Web.Hosting.Administration.MetricAvailabilily.TimeGrain}.",
+          "description": "Retention period for the current time grain.",
           "type": "string"
-        }
-      }
-    },
-    "MetricDefinition": {
-      "description": "Class repesenting metadata for the metrics.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "ARM envelope properties",
-          "properties": {
-            "name": {
-              "description": "Name of the metric.",
-              "type": "string",
-              "readOnly": true
-            },
-            "unit": {
-              "description": "Unit of the metric.",
-              "type": "string",
-              "readOnly": true
-            },
-            "primaryAggregationType": {
-              "description": "Primary aggregation type.",
-              "type": "string",
-              "readOnly": true
-            },
-            "metricAvailabilities": {
-              "description": "List of time grains supported for the metric together with retention period.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/MetricAvailabilily"
-              },
-              "readOnly": true
-            },
-            "displayName": {
-              "description": "Friendly name shown in the UI .",
-              "type": "string",
-              "readOnly": true
-            }
-          },
-          "x-ms-client-flatten": true
         }
       }
     },
@@ -2520,10 +2520,11 @@
       }
     },
     "NetworkAccessControlEntry": {
-      "description": "Network Access control entry.",
+      "description": "Network access control entry.",
       "type": "object",
       "properties": {
         "action": {
+          "description": "Action object.",
           "enum": [
             "Permit",
             "Deny"
@@ -2535,13 +2536,16 @@
           }
         },
         "description": {
+          "description": "Description.",
           "type": "string"
         },
         "order": {
           "format": "int32",
+          "description": "Order of precedence.",
           "type": "integer"
         },
         "remoteSubnet": {
+          "description": "Remote subnet.",
           "type": "string"
         }
       }
@@ -2551,25 +2555,25 @@
       "properties": {}
     },
     "PerfMonResponse": {
-      "description": "Represents the perf monitor api reponse.",
+      "description": "Performance monitor API response.",
       "type": "object",
       "properties": {
         "code": {
-          "description": "Gets or sets the response code.",
+          "description": "The response code.",
           "type": "string"
         },
         "message": {
-          "description": "Gets or sets the message.",
+          "description": "The message.",
           "type": "string"
         },
         "data": {
           "$ref": "#/definitions/PerfMonSet",
-          "description": "Gets or sets the perf mon counters."
+          "description": "The performance monitor counters."
         }
       }
     },
     "PerfMonSample": {
-      "description": "Class representing a Perf Mon Sample.",
+      "description": "Performance monitor sample in a set.",
       "type": "object",
       "properties": {
         "time": {
@@ -2583,13 +2587,13 @@
         },
         "value": {
           "format": "double",
-          "description": "Value of Counter at certain time .",
+          "description": "Value of counter at a certain time.",
           "type": "number"
         }
       }
     },
     "PerfMonSet": {
-      "description": "Class containing metric information.",
+      "description": "Metric information.",
       "type": "object",
       "properties": {
         "name": {
@@ -2619,8 +2623,82 @@
         }
       }
     },
+    "PremierAddOnOffer": {
+      "description": "Premier add-on offer.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ARM envelope properties",
+          "properties": {
+            "sku": {
+              "description": "SKU.",
+              "type": "string"
+            },
+            "product": {
+              "description": "Product.",
+              "type": "string"
+            },
+            "vendor": {
+              "description": "Vendor.",
+              "type": "string"
+            },
+            "name": {
+              "description": "Name.",
+              "type": "string"
+            },
+            "promoCodeRequired": {
+              "description": "<code>true</code> if promotion code is required; otherwise, <code>false</code>.",
+              "type": "boolean"
+            },
+            "quota": {
+              "format": "int32",
+              "description": "Quota.",
+              "type": "integer"
+            },
+            "webHostingPlanRestrictions": {
+              "description": "App Service plans this offer is restricted to.",
+              "enum": [
+                "None",
+                "Free",
+                "Shared",
+                "Basic",
+                "Standard",
+                "Premium"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "AppServicePlanRestrictions",
+                "modelAsString": false
+              }
+            },
+            "privacyPolicyUrl": {
+              "description": "Privacy policy URL.",
+              "type": "string"
+            },
+            "legalTermsUrl": {
+              "description": "Legal terms URL.",
+              "type": "string"
+            },
+            "marketplacePublisher": {
+              "description": "Marketplace publisher.",
+              "type": "string"
+            },
+            "marketplaceOffer": {
+              "description": "Marketplace offer.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "PushSettings": {
-      "description": "Push settings for the Web App.",
+      "description": "Push settings for the App.",
       "type": "object",
       "properties": {
         "isPushEnabled": {
@@ -2646,17 +2724,17 @@
       "type": "object",
       "properties": {
         "actionHostName": {
-          "description": "Hostname of a slot to which the traffic will be redirected if decided to. E.g. mysite-stage.azurewebsites.net.",
+          "description": "Hostname of a slot to which the traffic will be redirected if decided to. E.g. myapp-stage.azurewebsites.net.",
           "type": "string"
         },
         "reroutePercentage": {
           "format": "double",
-          "description": "Percentage of the traffic which will be redirected to {Microsoft.Web.Hosting.Administration.RampUpRule.ActionHostName}.",
+          "description": "Percentage of the traffic which will be redirected to <code>ActionHostName</code>.",
           "type": "number"
         },
         "changeStep": {
           "format": "double",
-          "description": "[Optional] In auto ramp up scenario this is the step to to add/remove from {Microsoft.Web.Hosting.Administration.RampUpRule.ReroutePercentage} until it reaches \r\n            {Microsoft.Web.Hosting.Administration.RampUpRule.MinReroutePercentage} or {Microsoft.Web.Hosting.Administration.RampUpRule.MaxReroutePercentage}. Site metrics are checked every N minutes specificed in {Microsoft.Web.Hosting.Administration.RampUpRule.ChangeIntervalInMinutes}.\r\n            Custom decision algorithm can be provided in TiPCallback site extension which Url can be specified in {Microsoft.Web.Hosting.Administration.RampUpRule.ChangeDecisionCallbackUrl}.",
+          "description": "[Optional] In auto ramp up scenario this is the step to to add/remove from <code>ReroutePercentage</code> until it reaches \r\n            <code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specificed in <code>ChangeIntervalInMinutes</code>.\r\n            Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
           "type": "number"
         },
         "changeIntervalInMinutes": {
@@ -2675,7 +2753,7 @@
           "type": "number"
         },
         "changeDecisionCallbackUrl": {
-          "description": "Custom decision algorithm can be provided in TiPCallback site extension which Url can be specified. See TiPCallback site extension for the scaffold and contracts.\r\n            https://www.siteextensions.net/packages/TiPCallback/",
+          "description": "Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified. See TiPCallback site extension for the scaffold and contracts.\r\n            https://www.siteextensions.net/packages/TiPCallback/",
           "type": "string"
         },
         "name": {
@@ -2685,7 +2763,7 @@
       }
     },
     "RelayServiceConnectionEntity": {
-      "description": "Class that represents a Biztalk Hybrid Connection.",
+      "description": "Hybrid Connection for an App Service app.",
       "type": "object",
       "allOf": [
         {
@@ -2724,7 +2802,7 @@
       }
     },
     "RequestsBasedTrigger": {
-      "description": "RequestsBasedTrigger.",
+      "description": "Trigger based on total requests.",
       "type": "object",
       "properties": {
         "count": {
@@ -2733,7 +2811,7 @@
           "type": "integer"
         },
         "timeInterval": {
-          "description": "TimeInterval.",
+          "description": "Time interval.",
           "type": "string"
         }
       }
@@ -2835,6 +2913,80 @@
         }
       }
     },
+    "ResourceMetricAvailability": {
+      "description": "Metrics availability and retention.",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "description": "Time grain .",
+          "type": "string",
+          "readOnly": true
+        },
+        "retention": {
+          "description": "Retention period for the current time grain.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceMetricDefinition": {
+      "description": "Metadata for the metrics.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ARM envelope properties",
+          "properties": {
+            "name": {
+              "$ref": "#/definitions/ResourceMetricName",
+              "description": "Name of the metric.",
+              "readOnly": true
+            },
+            "unit": {
+              "description": "Unit of the metric.",
+              "type": "string",
+              "readOnly": true
+            },
+            "primaryAggregationType": {
+              "description": "Primary aggregation type.",
+              "type": "string",
+              "readOnly": true
+            },
+            "metricAvailabilities": {
+              "description": "List of time grains supported for the metric together with retention period.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResourceMetricAvailability"
+              },
+              "readOnly": true
+            },
+            "resourceUri": {
+              "description": "Resource URI.",
+              "type": "string",
+              "readOnly": true
+            },
+            "id": {
+              "description": "Resource ID.",
+              "type": "string",
+              "readOnly": true
+            },
+            "properties": {
+              "description": "Properties.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "ResourceMetricName": {
       "description": "Name of a metric for any resource .",
       "type": "object",
@@ -2915,7 +3067,7 @@
       }
     },
     "Site": {
-      "description": "Represents a web app, a mobile app backend, or an API app.",
+      "description": "A web app, a mobile app backend, or an API app.",
       "type": "object",
       "allOf": [
         {
@@ -2958,7 +3110,7 @@
               }
             },
             "enabled": {
-              "description": "True if the app is enabled; otherwise, false. Setting this value to false disables the app (takes the app offline).",
+              "description": "<code>true</code> if the app is enabled; otherwise, <code>false</code>. Setting this value to false disables the app (takes the app offline).",
               "type": "boolean"
             },
             "enabledHostNames": {
@@ -2970,7 +3122,7 @@
               "readOnly": true
             },
             "availabilityState": {
-              "description": "Management information availability state for the web app. Read-only.",
+              "description": "Management information availability state for the app. Read-only.",
               "enum": [
                 "Normal",
                 "Limited",
@@ -2984,7 +3136,7 @@
               }
             },
             "hostNameSslStates": {
-              "description": "Hostname SSL states are  used to manage the SSL bindings for site's hostnames.",
+              "description": "Hostname SSL states are used to manage the SSL bindings for app's hostnames.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/HostNameSslState"
@@ -2995,7 +3147,7 @@
               "type": "string"
             },
             "reserved": {
-              "description": "Reserved.",
+              "description": "<code>true</code> if reserved; otherwise, <code>false</code>.",
               "default": false,
               "type": "boolean",
               "x-ms-mutability": [
@@ -3022,17 +3174,17 @@
               "readOnly": true
             },
             "premiumAppDeployed": {
-              "description": "Indicates whether web app is deployed as a premium app. Read-only.",
+              "description": "Indicates whether app is deployed as a premium app. Read-only.",
               "type": "boolean",
               "readOnly": true
             },
             "scmSiteAlsoStopped": {
-              "description": "Specify \"true\" to stop SCM (KUDU) site when the app is stopped. Default is false.",
+              "description": "<code>true</code> to stop SCM (KUDU) site when the app is stopped; otherwise, <code>false</code>. The default is <code>false</code>.",
               "type": "boolean",
               "readOnly": true
             },
             "targetSwapSlot": {
-              "description": "Specifies which slot this app will swap into. Read-only.",
+              "description": "Specifies which deployment slot this app will swap into. Read-only.",
               "type": "string",
               "readOnly": true
             },
@@ -3045,7 +3197,7 @@
               ]
             },
             "microService": {
-              "description": "Micro services like WebSites, Logic Apps.",
+              "description": "Micro services like apps, logic apps.",
               "default": false,
               "type": "string",
               "x-ms-mutability": [
@@ -3054,7 +3206,7 @@
               ]
             },
             "gatewaySiteName": {
-              "description": "Name of gateway app associated with web app .",
+              "description": "Name of gateway app associated with the app.",
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -3062,15 +3214,15 @@
               ]
             },
             "clientAffinityEnabled": {
-              "description": "Specify \"false\" to stop sending session affinity cookies, which route client requests in the same session to the same instance. Default is true.",
+              "description": "<code>true</code> to enable client affinity; <code>false</code> to stop sending session affinity cookies, which route client requests in the same session to the same instance. Default is <code>true</code>.",
               "type": "boolean"
             },
             "clientCertEnabled": {
-              "description": "Specify \"true\"  to enable client certificate authentication (TLS mutual authentication). Default is false.",
+              "description": "<code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.",
               "type": "boolean"
             },
             "hostNamesDisabled": {
-              "description": "Specifies if the public hostnames are disabled the web app.\r\n            If set to true the app is only accessible via API Management process",
+              "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\r\n            If <code>true</code>, the app is only accessible via API management process.",
               "type": "boolean"
             },
             "outboundIpAddresses": {
@@ -3085,18 +3237,18 @@
             },
             "dailyMemoryTimeQuota": {
               "format": "int32",
-              "description": "Maximum allowed daily memory-time quota (applicable on dynamic sites only).",
+              "description": "Maximum allowed daily memory-time quota (applicable on dynamic apps only).",
               "type": "integer"
             },
             "suspendedTill": {
               "format": "date-time",
-              "description": "Site suspended till in case memory-time quota is exceeded.",
+              "description": "App suspended till in case memory-time quota is exceeded.",
               "type": "string",
               "readOnly": true
             },
             "maxNumberOfWorkers": {
               "format": "int32",
-              "description": "Maximum number of workers.\r\n            This only applies to function container",
+              "description": "Maximum number of workers.\r\n            This only applies to Functions container.",
               "type": "integer",
               "readOnly": true
             },
@@ -3113,13 +3265,18 @@
               "readOnly": true
             },
             "isDefaultContainer": {
-              "description": "Indicates whether the app is a default container. Read-only.",
+              "description": "<code>true</code> if the app is a default container; otherwise, <code>false</code>. Read-only.",
               "type": "boolean",
               "readOnly": true
             },
             "defaultHostName": {
               "description": "Default hostname of the app. Read-only.",
               "type": "string",
+              "readOnly": true
+            },
+            "slotSwapStatus": {
+              "$ref": "#/definitions/SlotSwapStatus",
+              "description": "Status of the last deployment slot swap operation.",
               "readOnly": true
             }
           },
@@ -3128,7 +3285,7 @@
       }
     },
     "SiteCloneabilityCriterion": {
-      "description": "Represents a site cloneability criterion .",
+      "description": "An app cloneability criterion.",
       "type": "object",
       "properties": {
         "name": {
@@ -3142,7 +3299,7 @@
       }
     },
     "SiteConfig": {
-      "description": "Configuration of Azure web site.",
+      "description": "Configuration of an App Service app.",
       "type": "object",
       "allOf": [
         {
@@ -3166,7 +3323,7 @@
               }
             },
             "netFrameworkVersion": {
-              "description": "Net Framework Version.",
+              "description": ".NET Framework version.",
               "default": "v4.6",
               "type": "string"
             },
@@ -3179,11 +3336,11 @@
               "type": "string"
             },
             "nodeVersion": {
-              "description": "Version of Node.",
+              "description": "Version of Node.js.",
               "type": "string"
             },
             "requestTracingEnabled": {
-              "description": "Enable request tracing.",
+              "description": "<code>true</code> if request tracing is enabled; otherwise, <code>false</code>.",
               "type": "boolean"
             },
             "requestTracingExpirationTime": {
@@ -3192,24 +3349,24 @@
               "type": "string"
             },
             "remoteDebuggingEnabled": {
-              "description": "Remote Debugging Enabled.",
+              "description": "<code>true</code> if remote debugging is enabled; otherwise, <code>false</code>.",
               "type": "boolean"
             },
             "remoteDebuggingVersion": {
-              "description": "Remote Debugging Version.",
+              "description": "Remote debugging version.",
               "type": "string"
             },
             "httpLoggingEnabled": {
-              "description": "HTTP logging Enabled.",
+              "description": "<code>true</code> if HTTP logging is enabled; otherwise, <code>false</code>.",
               "type": "boolean"
             },
             "logsDirectorySizeLimit": {
               "format": "int32",
-              "description": "HTTP Logs Directory size limit.",
+              "description": "HTTP logs directory size limit.",
               "type": "integer"
             },
             "detailedErrorLoggingEnabled": {
-              "description": "Detailed error logging enabled.",
+              "description": "<code>true</code> if detailed error logging is enabled; otherwise, <code>false</code>.",
               "type": "boolean"
             },
             "publishingUsername": {
@@ -3238,15 +3395,15 @@
               "readOnly": true
             },
             "use32BitWorkerProcess": {
-              "description": "Use 32 bit worker process.",
+              "description": "<code>true</code> to use 32-bit worker process; otherwise, <code>false</code>.",
               "type": "boolean"
             },
             "webSocketsEnabled": {
-              "description": "Web socket enabled.",
+              "description": "<code>true</code> if WebSocket is enabled; otherwise, <code>false</code>.",
               "type": "boolean"
             },
             "alwaysOn": {
-              "description": "Always On.",
+              "description": "<code>true</code> if Always On is enabled; otherwise, <code>false</code>.",
               "type": "boolean"
             },
             "javaVersion": {
@@ -3254,7 +3411,7 @@
               "type": "string"
             },
             "javaContainer": {
-              "description": "Java container .",
+              "description": "Java container.",
               "type": "string"
             },
             "javaContainerVersion": {
@@ -3262,7 +3419,7 @@
               "type": "string"
             },
             "appCommandLine": {
-              "description": "App Command Line to launch.",
+              "description": "App command line to launch.",
               "type": "string"
             },
             "managedPipelineMode": {
@@ -3308,19 +3465,19 @@
               "description": "Site limits."
             },
             "autoHealEnabled": {
-              "description": "Auto heal enabled.",
+              "description": "<code>true</code> if Auto Heal is enabled; otherwise, <code>false</code>.",
               "type": "boolean"
             },
             "autoHealRules": {
               "$ref": "#/definitions/AutoHealRules",
-              "description": "Auto heal rules."
+              "description": "Auto Heal rules."
             },
             "tracingOptions": {
               "description": "Tracing options.",
               "type": "string"
             },
             "vnetName": {
-              "description": "Vnet name.",
+              "description": "Virtual Network name.",
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -3337,19 +3494,19 @@
             },
             "apiDefinition": {
               "$ref": "#/definitions/ApiDefinitionInfo",
-              "description": "Information about the formal API definition for the web app."
+              "description": "Information about the formal API definition for the app."
             },
             "autoSwapSlotName": {
-              "description": "Auto swap slot name.",
+              "description": "Auto-swap slot name.",
               "type": "string"
             },
             "localMySqlEnabled": {
-              "description": "Local mysql enabled.",
+              "description": "<code>true</code> to enable local MySQL; otherwise, <code>false</code>.",
               "default": false,
               "type": "boolean"
             },
             "ipSecurityRestrictions": {
-              "description": "Ip Security restrictions.",
+              "description": "IP security restrictions.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/IpSecurityRestriction"
@@ -3361,7 +3518,7 @@
       }
     },
     "SiteInstance": {
-      "description": "Instance of a web app.",
+      "description": "Instance of an app.",
       "type": "object",
       "allOf": [
         {
@@ -3383,7 +3540,7 @@
       }
     },
     "SiteLimits": {
-      "description": "Represents metric limits set on a web app.",
+      "description": "Metric limits set on an app.",
       "type": "object",
       "properties": {
         "maxPercentageCpu": {
@@ -3404,15 +3561,15 @@
       }
     },
     "SiteMachineKey": {
-      "description": "MachineKey of Azure web site.",
+      "description": "MachineKey of an app.",
       "type": "object",
       "properties": {
         "validation": {
-          "description": "MachineKeyValidation.",
+          "description": "MachineKey validation.",
           "type": "string"
         },
         "validationKey": {
-          "description": "ValidationKey.",
+          "description": "Validation key.",
           "type": "string"
         },
         "decryption": {
@@ -3420,54 +3577,54 @@
           "type": "string"
         },
         "decryptionKey": {
-          "description": "DecryptionKey.",
+          "description": "Decryption key.",
           "type": "string"
         }
       }
     },
     "SkuCapacity": {
-      "description": "Description of the App Service Plan scale options.",
+      "description": "Description of the App Service plan scale options.",
       "type": "object",
       "properties": {
         "minimum": {
           "format": "int32",
-          "description": "Minimum number of Workers for this App Service Plan SKU.",
+          "description": "Minimum number of workers for this App Service plan SKU.",
           "type": "integer"
         },
         "maximum": {
           "format": "int32",
-          "description": "Maximum number of Workers for this App Service Plan SKU.",
+          "description": "Maximum number of workers for this App Service plan SKU.",
           "type": "integer"
         },
         "default": {
           "format": "int32",
-          "description": "Default number of Workers for this App Service Plan SKU.",
+          "description": "Default number of workers for this App Service plan SKU.",
           "type": "integer"
         },
         "scaleType": {
-          "description": "Available scale configurations for an App Service Plan.",
+          "description": "Available scale configurations for an App Service plan.",
           "type": "string"
         }
       }
     },
     "SkuDescription": {
-      "description": "Describes a sku for a scalable resource.",
+      "description": "Description of a SKU for a scalable resource.",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the resource sku.",
+          "description": "Name of the resource SKU.",
           "type": "string"
         },
         "tier": {
-          "description": "Service Tier of the resource sku.",
+          "description": "Service tier of the resource SKU.",
           "type": "string"
         },
         "size": {
-          "description": "Size specifier of the resource sku.",
+          "description": "Size specifier of the resource SKU.",
           "type": "string"
         },
         "family": {
-          "description": "Family code of the resource sku.",
+          "description": "Family code of the resource SKU.",
           "type": "string"
         },
         "capacity": {
@@ -3477,17 +3634,17 @@
         },
         "skuCapacity": {
           "$ref": "#/definitions/SkuCapacity",
-          "description": "Min, max, and default scale values of the sku."
+          "description": "Min, max, and default scale values of the SKU."
         },
         "locations": {
-          "description": "Locations of the sku.",
+          "description": "Locations of the SKU.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "capabilities": {
-          "description": "Capabilities of the sku, eg., is traffic manager enabled?",
+          "description": "Capabilities of the SKU, e.g., is traffic manager enabled?",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Capability"
@@ -3496,25 +3653,25 @@
       }
     },
     "SkuInfo": {
-      "description": "Sku discovery information.",
+      "description": "SKU discovery information.",
       "type": "object",
       "properties": {
         "resourceType": {
-          "description": "Resource type that this sku applies to.",
+          "description": "Resource type that this SKU applies to.",
           "type": "string"
         },
         "sku": {
           "$ref": "#/definitions/SkuDescription",
-          "description": "Name and tier of the sku."
+          "description": "Name and tier of the SKU."
         },
         "capacity": {
           "$ref": "#/definitions/SkuCapacity",
-          "description": "Min, max, and default scale values of the sku."
+          "description": "Min, max, and default scale values of the SKU."
         }
       }
     },
     "SlotDifference": {
-      "description": "Represents a setting difference between two slots of an app.",
+      "description": "A setting difference between two deployment slots of an app.",
       "type": "object",
       "allOf": [
         {
@@ -3565,12 +3722,34 @@
         }
       }
     },
+    "SlotSwapStatus": {
+      "description": "The status of the last successfull slot swap operation.",
+      "type": "object",
+      "properties": {
+        "timestampUtc": {
+          "format": "date-time",
+          "description": "The time the last successful slot swap completed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sourceSlotName": {
+          "description": "The source slot of the last swap operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "destinationSlotName": {
+          "description": "The destination slot of the last swap operation.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "SlowRequestsBasedTrigger": {
-      "description": "SlowRequestsBasedTrigger.",
+      "description": "Trigger based on request execution time.",
       "type": "object",
       "properties": {
         "timeTaken": {
-          "description": "TimeTaken.",
+          "description": "Time taken.",
           "type": "string"
         },
         "count": {
@@ -3579,13 +3758,13 @@
           "type": "integer"
         },
         "timeInterval": {
-          "description": "TimeInterval.",
+          "description": "Time interval.",
           "type": "string"
         }
       }
     },
     "Snapshot": {
-      "description": "A snapshot of a web app.",
+      "description": "A snapshot of an app.",
       "type": "object",
       "allOf": [
         {
@@ -3608,7 +3787,7 @@
       }
     },
     "SourceControl": {
-      "description": "Describes the Source Control OAuth Token.",
+      "description": "The source control OAuth token.",
       "type": "object",
       "allOf": [
         {
@@ -3620,24 +3799,24 @@
           "description": "ARM envelope properties",
           "properties": {
             "name": {
-              "description": "Name or Source Control Type.",
+              "description": "Name or source control type.",
               "type": "string"
             },
             "token": {
-              "description": "OAuth Access Token.",
+              "description": "OAuth access token.",
               "type": "string"
             },
             "tokenSecret": {
-              "description": "OAuth Access Token Secret.",
+              "description": "OAuth access token secret.",
               "type": "string"
             },
             "refreshToken": {
-              "description": "OAuth Refresh Token.",
+              "description": "OAuth refresh token.",
               "type": "string"
             },
             "expirationTime": {
               "format": "date-time",
-              "description": "OAuth Token Expiration.",
+              "description": "OAuth token expiration.",
               "type": "string"
             }
           },
@@ -3646,7 +3825,7 @@
       }
     },
     "StampCapacity": {
-      "description": "Class containing stamp capacity information.",
+      "description": "Stamp capacity information.",
       "type": "object",
       "properties": {
         "name": {
@@ -3655,12 +3834,12 @@
         },
         "availableCapacity": {
           "format": "int64",
-          "description": "Available capacity (# of machines, bytes of storage etc...)",
+          "description": "Available capacity (# of machines, bytes of storage etc...).",
           "type": "integer"
         },
         "totalCapacity": {
           "format": "int64",
-          "description": "Total capacity (# of machines, bytes of storage etc...)",
+          "description": "Total capacity (# of machines, bytes of storage etc...).",
           "type": "integer"
         },
         "unit": {
@@ -3668,7 +3847,7 @@
           "type": "string"
         },
         "computeMode": {
-          "description": "Shared/Dedicated workers.",
+          "description": "Shared/dedicated workers.",
           "enum": [
             "Shared",
             "Dedicated",
@@ -3696,15 +3875,15 @@
         },
         "workerSizeId": {
           "format": "int32",
-          "description": "Size Id of machines: \r\n            0 - Small\r\n            1 - Medium\r\n            2 - Large",
+          "description": "Size ID of machines: \r\n            0 - Small\r\n            1 - Medium\r\n            2 - Large",
           "type": "integer"
         },
         "excludeFromCapacityAllocation": {
-          "description": "If true it includes basic sites\r\n            Basic sites are not used for capacity allocation.",
+          "description": "If <code>true</code>, it includes basic apps.\r\n            Basic apps are not used for capacity allocation.",
           "type": "boolean"
         },
         "isApplicableForAllComputeModes": {
-          "description": "Is capacity applicable for all sites?.",
+          "description": "<code>true</code> if capacity is applicable for all apps; otherwise, <code>false</code>.",
           "type": "boolean"
         },
         "siteMode": {
@@ -3714,7 +3893,7 @@
       }
     },
     "StatusCodesBasedTrigger": {
-      "description": "StatusCodeBasedTrigger.",
+      "description": "Trigger based on status code.",
       "type": "object",
       "properties": {
         "status": {
@@ -3738,13 +3917,13 @@
           "type": "integer"
         },
         "timeInterval": {
-          "description": "TimeInterval.",
+          "description": "Time interval.",
           "type": "string"
         }
       }
     },
     "TldLegalAgreement": {
-      "description": "Represents a legal agreement for top level domain.",
+      "description": "Legal agreement for a top level domain.",
       "type": "object",
       "properties": {
         "agreementKey": {
@@ -3760,13 +3939,16 @@
           "type": "string"
         },
         "url": {
-          "description": "Url where a copy of the agreement details is hosted.",
+          "description": "URL where a copy of the agreement details is hosted.",
           "type": "string"
         }
       }
     },
     "TldLegalAgreementCollection": {
-      "description": "Collection of Tld Legal Agreements.",
+      "description": "Collection of top-level domain legal agreements.",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
@@ -3800,7 +3982,7 @@
               "readOnly": true
             },
             "privacy": {
-              "description": "If true then the top level domain supports domain privacy.",
+              "description": "If <code>true</code>, then the top level domain supports domain privacy; otherwise, <code>false</code>.",
               "type": "boolean",
               "readOnly": true
             }
@@ -3814,13 +3996,16 @@
       "type": "object",
       "properties": {
         "includePrivacy": {
-          "description": "If true then the list of agreements will inclue agreements for domain privacy as well.",
+          "description": "If <code>true</code>, then the list of agreements will inclue agreements for domain privacy as well; otherwise, <code>false</code>.",
           "type": "boolean"
         }
       }
     },
     "TopLevelDomainCollection": {
-      "description": "Collection of Top Level Domains.",
+      "description": "Collection of Top-level domains.",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
@@ -3837,7 +4022,7 @@
       }
     },
     "Usage": {
-      "description": "Class that represents usage of the quota resource.",
+      "description": "Usage of the quota resource.",
       "type": "object",
       "allOf": [
         {
@@ -3849,12 +4034,12 @@
           "description": "ARM envelope properties",
           "properties": {
             "displayName": {
-              "description": "Friendly name shown in the UI .",
+              "description": "Friendly name shown in the UI.",
               "type": "string",
               "readOnly": true
             },
             "name": {
-              "description": "Name of the quota .",
+              "description": "Name of the quota.",
               "type": "string",
               "readOnly": true
             },
@@ -3887,7 +4072,7 @@
               "readOnly": true
             },
             "computeMode": {
-              "description": "ComputeMode used for this usage.",
+              "description": "Compute mode used for this usage.",
               "enum": [
                 "Shared",
                 "Dedicated",
@@ -3901,7 +4086,7 @@
               }
             },
             "siteMode": {
-              "description": "SiteMode used for this usage.",
+              "description": "Site mode used for this usage.",
               "type": "string",
               "readOnly": true
             }
@@ -3911,28 +4096,28 @@
       }
     },
     "ValidateProperties": {
-      "description": "Site properties used for validation.",
+      "description": "App properties used for validation.",
       "type": "object",
       "properties": {
         "serverFarmId": {
-          "description": "ARM resource id of an app service plan that would host the web app.",
+          "description": "ARM resource ID of an App Service plan that would host the app.",
           "type": "string"
         },
         "skuName": {
-          "description": "Name of the target SKU for the server farm.",
+          "description": "Name of the target SKU for the App Service plan.",
           "type": "string"
         },
         "needLinuxWorkers": {
-          "description": "Whether server farm is for Linux workers.",
+          "description": "<code>true</code> if App Service plan is for Linux workers; otherwise, <code>false</code>.",
           "type": "boolean"
         },
         "capacity": {
           "format": "int32",
-          "description": "Target capacity of the server farm (number of VM's).",
+          "description": "Target capacity of the App Service plan (number of VM's).",
           "type": "integer"
         },
         "hostingEnvironment": {
-          "description": "Name of app service environment where site or server farm should be created.",
+          "description": "Name of App Service Environment where app or App Service plan should be created.",
           "type": "string"
         }
       }
@@ -3952,11 +4137,11 @@
       }
     },
     "VirtualApplication": {
-      "description": "Virtual application under web app.",
+      "description": "Virtual application in an app.",
       "type": "object",
       "properties": {
         "virtualPath": {
-          "description": "Virtual path .",
+          "description": "Virtual path.",
           "type": "string"
         },
         "physicalPath": {
@@ -3964,11 +4149,11 @@
           "type": "string"
         },
         "preloadEnabled": {
-          "description": "Is preload enabled.",
+          "description": "<code>true</code> if preloading is enabled; otherwise, <code>false</code>.",
           "type": "boolean"
         },
         "virtualDirectories": {
-          "description": "Virtual Directories for virtual application.",
+          "description": "Virtual directories for virtual application.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualDirectory"
@@ -3985,13 +4170,13 @@
           "type": "string"
         },
         "physicalPath": {
-          "description": "Physical path .",
+          "description": "Physical path.",
           "type": "string"
         }
       }
     },
     "VirtualIPMapping": {
-      "description": "Class that represents a VIP mapping.",
+      "description": "Virtual IP mapping.",
       "type": "object",
       "properties": {
         "virtualIP": {
@@ -4009,37 +4194,37 @@
           "type": "integer"
         },
         "inUse": {
-          "description": "Is VIP mapping in use.",
+          "description": "Is virtual IP mapping in use.",
           "type": "boolean"
         }
       }
     },
     "VirtualNetworkProfile": {
-      "description": "Specification for using a virtual network.",
+      "description": "Specification for using a Virtual Network.",
       "type": "object",
       "properties": {
         "id": {
-          "description": "Resource id of the virtual network.",
+          "description": "Resource id of the Virtual Network.",
           "type": "string"
         },
         "name": {
-          "description": "Name of the virtual network (read-only).",
+          "description": "Name of the Virtual Network (read-only).",
           "type": "string",
           "readOnly": true
         },
         "type": {
-          "description": "Resource type of the virtual network (read-only).",
+          "description": "Resource type of the Virtual Network (read-only).",
           "type": "string",
           "readOnly": true
         },
         "subnet": {
-          "description": "Subnet within the virtual network.",
+          "description": "Subnet within the Virtual Network.",
           "type": "string"
         }
       }
     },
     "VnetInfo": {
-      "description": "VNETInfo contract. This contract is public and is a stripped down version of VNETInfoInternal.",
+      "description": "Virtual Network information contract.",
       "type": "object",
       "allOf": [
         {
@@ -4051,7 +4236,7 @@
           "description": "ARM envelope properties",
           "properties": {
             "vnetResourceId": {
-              "description": "The vnet resource id.",
+              "description": "The Virtual Network's resource ID.",
               "type": "string"
             },
             "certThumbprint": {
@@ -4064,7 +4249,7 @@
               "type": "string"
             },
             "routes": {
-              "description": "The routes that this virtual network connection uses.",
+              "description": "The routes that this Virtual Network connection uses.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VnetRoute"
@@ -4072,12 +4257,12 @@
               "readOnly": true
             },
             "resyncRequired": {
-              "description": "Flag to determine if a resync is required.",
+              "description": "<code>true</code> if a resync is required; otherwise, <code>false</code>.",
               "type": "boolean",
               "readOnly": true
             },
             "dnsServers": {
-              "description": "Dns servers to be used by this VNET. This should be a comma-separated list of IP addresses.",
+              "description": "DNS servers to be used by this Virtual Network. This should be a comma-separated list of IP addresses.",
               "type": "string"
             }
           },
@@ -4086,7 +4271,7 @@
       }
     },
     "VnetRoute": {
-      "description": "VnetRoute contract used to pass routing information for a vnet.",
+      "description": "Virtual Network route contract used to pass routing information for a Virtual Network.",
       "type": "object",
       "allOf": [
         {
@@ -4114,7 +4299,7 @@
               "type": "string"
             },
             "routeType": {
-              "description": "The type of route this is:\r\n            DEFAULT - By default, every web app has routes to the local address ranges specified by RFC1918\r\n            INHERITED - Routes inherited from the real Virtual Network routes\r\n            STATIC - Static route set on the web app only\r\n            \r\n            These values will be used for syncing a Web App's routes with those from a Virtual Network. This operation will clear all DEFAULT and INHERITED routes and replace them\r\n            with new INHERITED routes.",
+              "description": "The type of route this is:\r\n            DEFAULT - By default, every app has routes to the local address ranges specified by RFC1918\r\n            INHERITED - Routes inherited from the real Virtual Network routes\r\n            STATIC - Static route set on the app only\r\n            \r\n            These values will be used for syncing an app's routes with those from a Virtual Network. This operation will clear all DEFAULT and INHERITED routes and replace them\r\n            with new INHERITED routes.",
               "type": "string"
             }
           },
@@ -4123,7 +4308,7 @@
       }
     },
     "WorkerPool": {
-      "description": "Worker pool of a hostingEnvironment (App Service Environment).",
+      "description": "Worker pool of an App Service Environment.",
       "type": "object",
       "allOf": [
         {
@@ -4136,11 +4321,11 @@
           "properties": {
             "workerSizeId": {
               "format": "int32",
-              "description": "Worker size id for referencing this worker pool.",
+              "description": "Worker size ID for referencing this worker pool.",
               "type": "integer"
             },
             "computeMode": {
-              "description": "Shared or dedicated web app hosting.",
+              "description": "Shared or dedicated app hosting.",
               "enum": [
                 "Shared",
                 "Dedicated",
@@ -4182,9 +4367,19 @@
     "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
-      "description": "Subscription Id",
+      "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
       "required": true,
       "type": "string"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Name of the resource group to which the resource belongs.",
+      "required": true,
+      "type": "string",
+      "maxLength": 90,
+      "minLength": 1,
+      "pattern": "^[-\\\\w\\\\._\\\\(\\\\)]+[^\\\\.]$"
     },
     "apiVersionParameter": {
       "name": "api-version",
