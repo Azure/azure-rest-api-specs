@@ -245,7 +245,7 @@
                         "description": "The job collection has been successfully deleted."
                     },
                     "202": {
-                        "description": "Accepted and the delete job collection operation will complete asynchronously."
+                        "description": "The delete operation for the job collection has been accepted and will complete asynchronously."
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -608,7 +608,7 @@
                         "type": "integer",
                         "minimum": 1,
                         "maximum": 100,
-                        "description": "The number of jobs to request, in the of range [1..100]."
+                        "description": "The number of jobs to request, in the of range of [1..100]."
                     },
                     {
                         "name": "$skip",
@@ -679,7 +679,7 @@
                         "type": "integer",
                         "minimum": 1,
                         "maximum": 100,
-                        "description": "the number of job history to request, in the of range [1..100]."
+                        "description": "the number of job history to request, in the of range of [1..100]."
                     },
                     {
                         "name": "$skip",
@@ -1048,11 +1048,11 @@
             "properties": {
                 "authentication": {
                     "$ref": "#/definitions/HttpAuthentication",
-                    "description": "Gets or sets the http authentication."
+                    "description": "Gets or sets the authentication method of the request."
                 },
                 "uri": {
                     "type": "string",
-                    "description": "Gets or sets the Uri."
+                    "description": "Gets or sets the URI of the request."
                 },
                 "method": {
                     "type": "string",
@@ -1075,11 +1075,11 @@
             "properties": {
                 "password": {
                     "type": "string",
-                    "description": "Gets or sets the password."
+                    "description": "Gets or sets the certificate password, return value will always be empty."
                 },
                 "pfx": {
                     "type": "string",
-                    "description": "Gets or sets the pfx."
+                    "description": "Gets or sets the pfx certificate. Accepts certification in base64 encoding, return value will always be empty."
                 },
                 "certificateThumbprint": {
                     "type": "string",
@@ -1109,7 +1109,7 @@
                 },
                 "password": {
                     "type": "string",
-                    "description": "Gets or sets the password."
+                    "description": "Gets or sets the password, return value will always be empty."
                 }
             },
             "allOf": [
@@ -1122,7 +1122,7 @@
             "properties": {
                 "secret": {
                     "type": "string",
-                    "description": "Gets or sets the secret."
+                    "description": "Gets or sets the secret, return value will always be empty."
                 },
                 "tenant": {
                     "type": "string",
@@ -1147,7 +1147,7 @@
             "properties": {
                 "type": {
                     "type": "string",
-                    "description": "Gets or sets the http authentication type.",
+                    "description": "Gets or sets the HTTP authentication type.",
                     "enum": [
                         "NotSpecified",
                         "ClientCertificate",
@@ -1208,7 +1208,7 @@
             "properties": {
                 "authentication": {
                     "$ref": "#/definitions/ServiceBusAuthentication",
-                    "description": "Gets or sets the authentication."
+                    "description": "Gets or sets the Service Bus authentication."
                 },
                 "brokeredMessageProperties": {
                     "$ref": "#/definitions/ServiceBusBrokeredMessageProperties",
@@ -1270,7 +1270,7 @@
                 },
                 "correlationId": {
                     "type": "string",
-                    "description": "Gets or sets the correlation id."
+                    "description": "Gets or sets the correlation ID."
                 },
                 "forcePersistence": {
                     "type": "boolean",
@@ -1282,7 +1282,7 @@
                 },
                 "messageId": {
                     "type": "string",
-                    "description": "Gets or sets the message id."
+                    "description": "Gets or sets the message ID."
                 },
                 "partitionKey": {
                     "type": "string",
@@ -1294,7 +1294,7 @@
                 },
                 "replyToSessionId": {
                     "type": "string",
-                    "description": "Gets or sets the reply to session id."
+                    "description": "Gets or sets the reply to session ID."
                 },
                 "scheduledEnqueueTimeUtc": {
                     "type": "string",
@@ -1303,7 +1303,7 @@
                 },
                 "sessionId": {
                     "type": "string",
-                    "description": "Gets or sets the session id."
+                    "description": "Gets or sets the session ID."
                 },
                 "timeToLive": {
                     "type": "string",
@@ -1334,7 +1334,7 @@
                 "retryInterval": {
                     "type": "string",
                     "format": "duration",
-                    "description": "Gets or sets the retry interval between retries."
+                    "description": "Gets or sets the retry interval between retries, specify duration in ISO 8601 format."
                 },
                 "retryCount": {
                     "type": "integer",
