@@ -43,9 +43,6 @@
         ],
         "operationId": "Namespaces_CheckAvailability",
         "description": "Checks the availability of the given service namespace across all Azure subscriptions. This is useful because the domain name is created based on the service namespace name.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj870968.aspx"
-        },
         "parameters": [
           {
             "name": "parameters",
@@ -65,7 +62,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Checks if the Namespace name is a valid availabile name",
+            "description": "Checks if the Namespace name is a valid availabile name.",
             "schema": {
               "$ref": "#/definitions/CheckAvailabilityResult"
             }
@@ -80,23 +77,20 @@
         ],
         "operationId": "Namespaces_CreateOrUpdate",
         "description": "Creates/Updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj856303.aspx"
-        },
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name."
+            "description": "Namespace name"
           },
           {
             "name": "parameters",
@@ -105,7 +99,7 @@
             "schema": {
               "$ref": "#/definitions/NamespaceCreateOrUpdateParameters"
             },
-            "description": "Parameters supplied to create a Namespace Resource."
+            "description": "Parameters supplied to create a Namespace Resource"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -129,75 +123,26 @@
           }
         }
       },
-      "patch": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_Patch",
-        "description": "Patches the existing namespace",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NamespacePatchParameters"
-            },
-            "description": "Parameters supplied to patch a Namespace Resource."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespace is Updated",
-            "schema": {
-              "$ref": "#/definitions/NamespaceResource"
-            }
-          }
-        }
-      },
       "delete": {
         "tags": [
           "Namespaces"
         ],
         "operationId": "Namespaces_Delete",
-        "description": "Deletes an existing namespace. This operation also removes all associated notificationHubs under the namespace.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj856296.aspx"
-        },
+        "description": "Deletes an existing namespace and removes all associated notificationHubs under the namespace.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name."
+            "description": "Namespace name"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -208,13 +153,13 @@
         ],
         "responses": {
           "204": {
-            "description": "Namespace is already Deleted"
+            "description": "This namespace has already been deleted."
           },
           "200": {
-            "description": "Namespace is deleted"
+            "description": "This namespace is successfully deleted."
           },
           "202": {
-            "description": "Namespace delete request has been accepted"
+            "description": "The namespace delete request has been accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -224,24 +169,21 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_Get",
-        "description": "Returns the description for the specified namespace.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/library/azure/dn140232.aspx"
-        },
+        "description": "Gets the requested namespace and returns its description",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name."
+            "description": "Namespace name"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -252,7 +194,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get Namespace",
+            "description": "The Namespace was successfully found and returned.",
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
             }
@@ -266,28 +208,28 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_CreateOrUpdateAuthorizationRule",
-        "description": "Creates an authorization rule for a namespace",
+        "description": "Creates an authorization rule for a namespace.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name."
+            "description": "Namespace name"
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Aauthorization Rule Name."
+            "description": "Authorization rule name"
           },
           {
             "name": "parameters",
@@ -296,7 +238,7 @@
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
             },
-            "description": "The shared access authorization rule."
+            "description": "Shared access authorization rule"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -307,7 +249,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace Authorization Rule is Created/Updated",
+            "description": "Namespace Authorization Rule is created/updated.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -319,28 +261,28 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_DeleteAuthorizationRule",
-        "description": "Deletes a namespace authorization rule",
+        "description": "Deletes a namespace authorization rule.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name."
+            "description": "Namespace name"
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Authorization Rule Name."
+            "description": "Authorization rule name"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -351,10 +293,10 @@
         ],
         "responses": {
           "204": {
-            "description": "Namespace AuthorizationRule is already deleted"
+            "description": "This Namespace Authorization Rule is already deleted."
           },
           "200": {
-            "description": "Namespace AuthorizationRule is deleted"
+            "description": "The Namespace Authorization Rule is successfully deleted."
           }
         }
       },
@@ -370,21 +312,21 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name"
+            "description": "Namespace name"
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Authorization rule name."
+            "description": "Authorization rule name"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -395,7 +337,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get the Namespace AuthorizationRule",
+            "description": "This Namespace Authorization Rule is successfully retrieved.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -409,17 +351,14 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_List",
-        "description": "Lists the available namespaces within a resourceGroup.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/azure/hh780759.aspx"
-        },
+        "description": "Lists the available namespaces within a resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group. If resourceGroupName value is null the method lists all the namespaces within subscription"
+            "description": "Resource group name. If resourceGroupName value is null, the method lists all the namespaces within subscription."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -430,7 +369,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists all Namespaces with the ResourceGroup",
+            "description": "Namespaces are successfully retrieved in the resource group.",
             "schema": {
               "$ref": "#/definitions/NamespaceListResult"
             }
@@ -447,10 +386,7 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_ListAll",
-        "description": "Lists all the available namespaces within the subscription irrespective of the resourceGroups.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/azure/hh780759.aspx"
-        },
+        "description": "Lists all the available namespaces within the subscription irrespective of the resource groups.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -461,7 +397,7 @@
         ],
         "responses": {
           "200": {
-            "description": " Gets all the Namespaces within the subscription irrespective of the ResourceGroup",
+            "description": "Namespaces are successfully retrieved within the subscription irrespective of the resource group.",
             "schema": {
               "$ref": "#/definitions/NamespaceListResult"
             }
@@ -478,21 +414,21 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_ListAuthorizationRules",
-        "description": "Gets the authorization rules for a namespace.",
+        "description": "Gets all authorization rules for a namespace.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name"
+            "description": "Namespace name"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -503,7 +439,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get the Namespace AuthorizationRule",
+            "description": "The authorization rule associated with this namespace is successfully retrieved.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
             }
@@ -520,31 +456,28 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_ListKeys",
-        "description": "Gets the Primary and Secondary ConnectionStrings to the namespace ",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx"
-        },
+        "description": "Gets the primary and secondary connection strings to the namespace.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name."
+            "description": "Namespace name"
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The connection string of the namespace for the specified authorizationRule."
+            "description": "Authorization rule name"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -555,7 +488,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Gets the Namespace AuthorizationRule's Primary keys and Secondary keys along with the ConnectionStrings",
+            "description": "The primary and secondary keys with connection strings are successfully retrieved for this authorization rule.",
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
             }
@@ -569,31 +502,28 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_RegenerateKeys",
-        "description": "Regenerates the Primary/Secondary Keys to the Namespace Authorization Rule",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx"
-        },
+        "description": "Regenerates the primary/Secondary keys to the namespace authorization rule.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name."
+            "description": "Namespace name"
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The connection string of the namespace for the specified authorizationRule."
+            "description": "Authorization rule name"
           },
           {
             "name": "parameters",
@@ -602,7 +532,7 @@
             "schema": {
               "$ref": "#/definitions/PolicykeyResource"
             },
-            "description": "Parameters supplied to regenerate the Namespace Authorization Rule Key."
+            "description": "Parameters supplied to regenerate the namespace authorization rule key"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -613,7 +543,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Regenerate the Primary/Secondary Key and returns the Keys and the connection string",
+            "description": "The primary/secondary keys are successfully regenerated and connection strings are returned.",
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
             }
@@ -627,24 +557,21 @@
           "NotificationHubs"
         ],
         "operationId": "NotificationHubs_CheckAvailability",
-        "description": "Checks the availability of the given notificationHub in a namespace.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj870968.aspx"
-        },
+        "description": "Checks the availability of the given notification hub in a namespace.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name."
+            "description": "Namespace name"
           },
           {
             "name": "parameters",
@@ -653,7 +580,7 @@
             "schema": {
               "$ref": "#/definitions/CheckAvailabilityParameters"
             },
-            "description": "The notificationHub name."
+            "description": "Notification hub name"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -664,7 +591,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Checks if the NotificationHub name is a valid availabile name",
+            "description": "The validation of Notification Hub name is successfully completed.",
             "schema": {
               "$ref": "#/definitions/CheckAvailabilityResult"
             }
@@ -678,31 +605,28 @@
           "NotificationHubs"
         ],
         "operationId": "NotificationHubs_CreateOrUpdate",
-        "description": "Creates/Update a NotificationHub in a namespace.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj856303.aspx"
-        },
+        "description": "Creates/updates a notification hub in a namespace.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name."
+            "description": "Namespace name"
           },
           {
             "name": "notificationHubName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The notification hub name."
+            "description": "Notification hub name"
           },
           {
             "name": "parameters",
@@ -711,7 +635,7 @@
             "schema": {
               "$ref": "#/definitions/NotificationHubCreateOrUpdateParameters"
             },
-            "description": "Parameters supplied to the create/update a NotificationHub Resource."
+            "description": "Parameters supplied to the create/update a notification hub resource"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -722,13 +646,13 @@
         ],
         "responses": {
           "200": {
-            "description": "NotificationHub is Created/Updated",
+            "description": "Notification hub is successfully created/updated.",
             "schema": {
               "$ref": "#/definitions/NotificationHubResource"
             }
           },
           "201": {
-            "description": "NotificationHub is Created/Updated",
+            "description": "Notification hub is successfully created/updated.",
             "schema": {
               "$ref": "#/definitions/NotificationHubResource"
             }
@@ -740,28 +664,28 @@
           "NotificationHubs"
         ],
         "operationId": "NotificationHubs_Delete",
-        "description": "Deletes a notification hub associated with a namespace.",
+        "description": "Deletes a notification hub.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name."
+            "description": "Namespace name"
           },
           {
             "name": "notificationHubName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The notification hub name."
+            "description": "Notification hub name"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -772,7 +696,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace is deleted"
+            "description": "Notification hub is deleted successfully."
           }
         }
       },
@@ -788,21 +712,21 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name."
+            "description": "Namespace name"
           },
           {
             "name": "notificationHubName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The notification hub name."
+            "description": "Notification hub name"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -813,7 +737,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get the NotificationHub",
+            "description": "The notification hubs associated with this namespace are successfully retrieved.",
             "schema": {
               "$ref": "#/definitions/NotificationHubResource"
             }
@@ -827,35 +751,35 @@
           "NotificationHubs"
         ],
         "operationId": "NotificationHubs_CreateOrUpdateAuthorizationRule",
-        "description": "Creates/Updates an authorization rule for a NotificationHub",
+        "description": "Creates/updates an authorization rule for a notification hub.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name."
+            "description": "Namespace name"
           },
           {
             "name": "notificationHubName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The notification hub name."
+            "description": "Notification hub name"
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Authorization Rule Name."
+            "description": "Authorization rule name"
           },
           {
             "name": "parameters",
@@ -864,7 +788,7 @@
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
             },
-            "description": "The shared access authorization rule."
+            "description": "Shared access authorization rule"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -875,7 +799,7 @@
         ],
         "responses": {
           "200": {
-            "description": "NotificationHub AuthorizationRule is Created/Updated",
+            "description": "Notification hub authorization rule is successfully created/updated.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -887,35 +811,35 @@
           "NotificationHubs"
         ],
         "operationId": "NotificationHubs_DeleteAuthorizationRule",
-        "description": "Deletes a notificationHub authorization rule",
+        "description": "Deletes a notification hub authorization rule.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name."
+            "description": "Namespace name"
           },
           {
             "name": "notificationHubName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The notification hub name."
+            "description": "Notification hub name"
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Authorization Rule Name."
+            "description": "Authorization rule name"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -926,10 +850,10 @@
         ],
         "responses": {
           "204": {
-            "description": "NotificationHub AuthorizationRule is already deleted"
+            "description": "Notification hub authorization rule has already been deleted."
           },
           "200": {
-            "description": "NotificationHub AuthorizationRule is deleted"
+            "description": "Notification hub authorization rule is successfully deleted."
           }
         }
       },
@@ -938,35 +862,35 @@
           "NotificationHubs"
         ],
         "operationId": "NotificationHubs_GetAuthorizationRule",
-        "description": "Gets an authorization rule for a NotificationHub by name.",
+        "description": "Gets an authorization rule for a notification hub by name.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name"
+            "description": "Namespace name"
           },
           {
             "name": "notificationHubName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The notification hub name."
+            "description": "Notification hub name"
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "authorization rule name."
+            "description": "Authorization rule name"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -977,7 +901,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get NotificationHub AuthorizationRule",
+            "description": "Notification hub authorization rule was successfully retrieved.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -991,21 +915,21 @@
           "NotificationHubs"
         ],
         "operationId": "NotificationHubs_List",
-        "description": "Lists the notification hubs associated with a namespace.",
+        "description": "Lists all notification hubs associated with a namespace.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name."
+            "description": "Namespace name"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1016,7 +940,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get all NotificationHubs within a Namespace",
+            "description": "All notification hubs within the namespace has been successfully retrieved.",
             "schema": {
               "$ref": "#/definitions/NotificationHubListResult"
             }
@@ -1033,28 +957,28 @@
           "NotificationHubs"
         ],
         "operationId": "NotificationHubs_ListAuthorizationRules",
-        "description": "Gets the authorization rules for a NotificationHub.",
+        "description": "Gets all authorization rules for a specific notification hub.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name"
+            "description": "Namespace name"
           },
           {
             "name": "notificationHubName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The notification hub name."
+            "description": "Notification hub name"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1065,7 +989,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get all NotificationHub AuthorizationRules",
+            "description": "All authorization rules associated with the hub have been successfully retrieved.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
             }
@@ -1082,38 +1006,35 @@
           "NotificationHubs"
         ],
         "operationId": "NotificationHubs_ListKeys",
-        "description": "Gets the Primary and Secondary ConnectionStrings to the NotificationHub ",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx"
-        },
+        "description": "Gets the primary and secondary connection strings to the notification hub.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name."
+            "description": "Namespace name"
           },
           {
             "name": "notificationHubName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The notification hub name."
+            "description": "Notification hub name"
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The connection string of the NotificationHub for the specified authorizationRule."
+            "description": "Authorization rule name"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1124,7 +1045,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Gets the Namespace AuthorizationRule's Primary keys and Secondary keys along with the ConnectionStrings",
+            "description": "The primary and secondary keys with their connection strings are successfully retrieved.",
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
             }
@@ -1138,38 +1059,35 @@
           "NotificationHubs"
         ],
         "operationId": "NotificationHubs_RegenerateKeys",
-        "description": "Regenerates the Primary/Secondary Keys to the NotificationHub Authorization Rule",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx"
-        },
+        "description": "Regenerates the primary/secondary keys to the notificationHub authorization rule.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name."
+            "description": "Namespace name"
           },
           {
             "name": "notificationHubName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The notification hub name."
+            "description": "Notification hub name"
           },
           {
             "name": "authorizationRuleName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The connection string of the NotificationHub for the specified authorizationRule."
+            "description": "Authorization rule name"
           },
           {
             "name": "parameters",
@@ -1178,7 +1096,7 @@
             "schema": {
               "$ref": "#/definitions/PolicykeyResource"
             },
-            "description": "Parameters supplied to regenerate the NotificationHub Authorization Rule Key."
+            "description": "Parameters supplied to regenerate the Notification Hub authorization rule key"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1189,7 +1107,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Regenerate the Primary/Secondary Key and returns the Keys and the connection string",
+            "description": "The primary/secondary key generation is successful.",
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
             }
@@ -1203,28 +1121,28 @@
           "NotificationHubs"
         ],
         "operationId": "NotificationHubs_GetPnsCredentials",
-        "description": "Lists the PNS Credentials associated with a notification hub .",
+        "description": "Lists all Platform Notification System credentials associated with a notification hub.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "Resource group name"
           },
           {
             "name": "namespaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The namespace name."
+            "description": "Namespace name"
           },
           {
             "name": "notificationHubName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The notification hub name."
+            "description": "Notification hub name"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1235,7 +1153,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Gets all the NotificationHub PNS credentials",
+            "description": "All Platform Notification System credentials associated with the given hub are successfully retrieved.",
             "schema": {
               "$ref": "#/definitions/PnsCredentialsResource"
             }
@@ -1247,51 +1165,26 @@
   "definitions": {
     "CheckAvailabilityParameters": {
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The sku of the created namespace"
-        },
         "isAvailiable": {
           "type": "boolean",
-          "description": "True if the name is available and can be used to create new Namespace/NotificationHub. Otherwise false."
+          "description": "True if the name is available and can be used to create new namespace/notification hub, otherwise false"
         }
       },
       "required": [
-        "name",
-        "location"
+        "name"
       ],
-      "description": "Parameters supplied to the Check Name Availability for Namespace and NotificationHubs."
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Parameters supplied to the check name availability for namespace and notification hubs"
     },
     "CheckAvailabilityResult": {
       "properties": {
         "isAvailiable": {
           "type": "boolean",
-          "description": "True if the name is available and can be used to create new Namespace/NotificationHub. Otherwise false."
+          "description": "True if the name is available and can be used to create new namespace/notification hub, otherwise false"
         }
       },
       "allOf": [
@@ -1299,47 +1192,38 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Description of a CheckAvailibility resource."
+      "description": "Description of a CheckAvailibility resource"
     },
     "NamespaceProperties": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the namespace."
+          "description": "Namespace name"
         },
         "provisioningState": {
           "type": "string",
-          "description": "Provisioning state of the Namespace."
+          "description": "Provisioning state of the namespace"
         },
         "region": {
-          "externalDocs": {
-            "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx"
-          },
           "type": "string",
-          "description": "Specifies the targeted region in which the namespace should be created. It can be any of the following values: Australia EastAustralia SoutheastCentral USEast USEast US 2West USNorth Central USSouth Central USEast AsiaSoutheast AsiaBrazil SouthJapan EastJapan WestNorth EuropeWest Europe"
+          "description": "Specifies the targeted region in which the namespace should be created. It can be any of the following values: Australia EastAustralia SoutheastCentral USEast USEast US 2West USNorth Central USSouth Central USEast AsiaSoutheast AsiaBrazil SouthJapan EastJapan WestNorth EuropeWest Europe."
         },
         "status": {
-          "externalDocs": {
-            "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx"
-          },
           "type": "string",
-          "description": "Status of the namespace. It can be any of these values:1 = Created/Active2 = Creating3 = Suspended4 = Deleting"
+          "description": "Status of the namespace. It can be any of these values:1 = Created/Active2 = Creating3 = Suspended4 = Deleting."
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the namespace was created."
+          "description": "The time the namespace was created at"
         },
         "serviceBusEndpoint": {
-          "externalDocs": {
-            "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx"
-          },
           "type": "string",
-          "description": "Endpoint you can use to perform NotificationHub operations."
+          "description": "Endpoint to perform notification hub operations"
         },
         "subscriptionId": {
           "type": "string",
-          "description": "The Id of the Azure subscription associated with the namespace."
+          "description": "The ID of the Azure subscription associated with the namespace"
         },
         "scaleUnit": {
           "type": "string",
@@ -1347,15 +1231,15 @@
         },
         "enabled": {
           "type": "boolean",
-          "description": "Whether or not the namespace is currently enabled."
+          "description": "Whether or not the namespace is currently enabled"
         },
         "critical": {
           "type": "boolean",
-          "description": "Whether or not the namespace is set as Critical."
+          "description": "Whether or not the namespace is set as critical"
         },
         "namespaceType": {
           "type": "string",
-          "description": "The namespace type.",
+          "description": "Namespace type",
           "enum": [
             "Messaging",
             "NotificationHub"
@@ -1366,14 +1250,14 @@
           }
         }
       },
-      "description": "Namespace properties."
+      "description": "Namespace properties"
     },
     "NamespaceCreateOrUpdateParameters": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NamespaceProperties",
-          "description": "Properties of the Namespace."
+          "description": "Namespace properties"
         }
       },
       "required": [
@@ -1384,30 +1268,14 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Parameters supplied to the CreateOrUpdate Namespace operation."
-    },
-    "NamespacePatchParameters": {
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The sku of the created namespace"
-        }
-      },
-      "description": "Parameters supplied to the Patch Namespace operation."
+      "description": "Parameters supplied to the CreateOrUpdate namespace operation"
     },
     "NamespaceResource": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NamespaceProperties",
-          "description": "Properties of the Namespace."
+          "description": "Namespace properties"
         }
       },
       "allOf": [
@@ -1415,7 +1283,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Description of a Namespace resource."
+      "description": "Description of a Namespace resource"
     },
     "SharedAccessAuthorizationRuleProperties": {
       "properties": {
@@ -1433,16 +1301,16 @@
               "modelAsString": false
             }
           },
-          "description": "The rights associated with the rule."
+          "description": "The access rights associated with the rule"
         }
       },
-      "description": "SharedAccessAuthorizationRule properties."
+      "description": "SharedAccessAuthorizationRule properties"
     },
     "SharedAccessAuthorizationRuleCreateOrUpdateParameters": {
       "properties": {
-        "properties": {
+        "properties": {          
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties",
-          "description": "Properties of the Namespace AuthorizationRules."
+          "description": "Properties of the Namespace AuthorizationRules"
         }
       },
       "required": [
@@ -1453,14 +1321,14 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Parameters supplied to the CreateOrUpdate Namespace AuthorizationRules."
+      "description": "Parameters supplied to the CreateOrUpdate of namespace authorization rules"
     },
     "SharedAccessAuthorizationRuleResource": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties",
-          "description": "Pproperties of the Namespace AuthorizationRule."
+          "description": "Properties of the namespace authorization rule"
         }
       },
       "allOf": [
@@ -1468,7 +1336,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Description of a Namespace AuthorizationRules."
+      "description": "Description of a namespace authorization rule"
     },
     "NamespaceListResult": {
       "properties": {
@@ -1477,11 +1345,11 @@
           "items": {
             "$ref": "#/definitions/NamespaceResource"
           },
-          "description": "Result of the List Namespace operation."
+          "description": "Result of the List Namespace operation"
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces"
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces."
         }
       },
       "description": "The response of the List Namespace operation."
@@ -1493,11 +1361,11 @@
           "items": {
             "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
           },
-          "description": "Result of the List AuthorizationRules operation."
+          "description": "Result of the list authorization rules operation."
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of AuthorizationRules"
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of authorization rules"
         }
       },
       "description": "The response of the List Namespace operation."
@@ -1506,7 +1374,7 @@
       "properties": {
         "primaryConnectionString": {
           "type": "string",
-          "description": "PrimaryConnectionString of the AuthorizationRule."
+          "description": "PrimaryConnectionString of the AuthorizationRule"
         },
         "secondaryConnectionString": {
           "type": "string",
@@ -1514,7 +1382,7 @@
         },
         "primaryKey": {
           "type": "string",
-          "description": "PrimaryKey of the created AuthorizationRule."
+          "description": "PrimaryKey of the created AuthorizationRule"
         },
         "secondaryKey": {
           "type": "string",
@@ -1540,38 +1408,38 @@
       "properties": {
         "apnsCertificate": {
           "type": "string",
-          "description": "The APNS certificate."
+          "description": "The APNS certificate"
         },
         "certificateKey": {
           "type": "string",
-          "description": "The certificate key."
+          "description": "The certificate key"
         },
         "endpoint": {
           "type": "string",
-          "description": "The endpoint of this credential."
+          "description": "The endpoint of this credential"
         },
         "thumbprint": {
           "type": "string",
-          "description": "The Apns certificate Thumbprint"
+          "description": "The APNS certificate thumbprint"
         }
       },
-      "description": "Description of a NotificationHub ApnsCredential."
+      "description": "Properties of a notification hub APNS credential"
     },
     "ApnsCredential": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApnsCredentialProperties",
-          "description": "Properties of NotificationHub ApnsCredential."
+          "description": "Properties of a notification hub APNS credential"
         }
       },
-      "description": "Description of a NotificationHub ApnsCredential."
+      "description": "Description of a notification hub APNS credential"
     },
     "WnsCredentialProperties": {
       "properties": {
         "packageSid": {
           "type": "string",
-          "description": "The package ID for this credential."
+          "description": "The package ID for this credential"
         },
         "secretKey": {
           "type": "string",
@@ -1582,131 +1450,131 @@
           "description": "The Windows Live endpoint."
         }
       },
-      "description": "Description of a NotificationHub WnsCredential."
+      "description": "Description of a notification hub WNS Credential"
     },
     "WnsCredential": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/WnsCredentialProperties",
-          "description": "Properties of NotificationHub WnsCredential."
+          "description": "Properties of notification hub WNS Credential"
         }
       },
-      "description": "Description of a NotificationHub WnsCredential."
+      "description": "Description of a notification hub WNS Credential"
     },
     "GcmCredentialProperties": {
       "properties": {
         "gcmEndpoint": {
           "type": "string",
-          "description": "The GCM endpoint."
+          "description": "The GCM endpoint"
         },
         "googleApiKey": {
           "type": "string",
-          "description": "The Google API key."
+          "description": "The Google API key"
         }
       },
-      "description": "Description of a NotificationHub GcmCredential."
+      "description": "Description of a notification hub GCM credential"
     },
     "GcmCredential": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/GcmCredentialProperties",
-          "description": "Properties of NotificationHub GcmCredential."
+          "description": "Properties of a notification hub GCM credential"
         }
       },
-      "description": "Description of a NotificationHub GcmCredential."
+      "description": "Description of a notification hub GCM credential"
     },
     "MpnsCredentialProperties": {
       "properties": {
         "mpnsCertificate": {
           "type": "string",
-          "description": "The MPNS certificate."
+          "description": "The MPNS certificate"
         },
         "certificateKey": {
           "type": "string",
-          "description": "The certificate key for this credential."
+          "description": "The certificate key for this credential"
         },
         "thumbprint": {
           "type": "string",
           "description": "The Mpns certificate Thumbprint"
         }
       },
-      "description": "Description of a NotificationHub MpnsCredential."
+      "description": "Description of a notification hub MPNS credential"
     },
     "MpnsCredential": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/MpnsCredentialProperties",
-          "description": "Properties of NotificationHub MpnsCredential."
+          "description": "Properties of a notification hub MPNS credential"
         }
       },
-      "description": "Description of a NotificationHub MpnsCredential."
+      "description": "Description of a notification hub MPNS credential"
     },
     "AdmCredentialProperties": {
       "properties": {
         "clientId": {
           "type": "string",
-          "description": "The client identifier."
+          "description": "The client identifier"
         },
         "clientSecret": {
           "type": "string",
-          "description": "The credential secret access key."
+          "description": "The credential secret access key"
         },
         "authTokenUrl": {
           "type": "string",
-          "description": "The URL of the authorization token."
+          "description": "The URL of the authorization token"
         }
       },
-      "description": "Description of a NotificationHub AdmCredential."
+      "description": "Description of a notification hub ADM credential"
     },
     "AdmCredential": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AdmCredentialProperties",
-          "description": "Properties of NotificationHub AdmCredential."
+          "description": "Properties of a notification hub ADM credential"
         }
       },
-      "description": "Description of a NotificationHub AdmCredential."
+      "description": "Description of a notification hub ADM credential"
     },
     "BaiduCredentialProperties": {
       "properties": {
         "baiduApiKey": {
           "type": "string",
-          "description": "Baidu Api Key."
+          "description": "Baidu Api Key"
         },
         "baiduEndPoint": {
           "type": "string",
-          "description": "Baidu Endpoint."
+          "description": "Baidu Endpoint"
         },
         "baiduSecretKey": {
           "type": "string",
           "description": "Baidu Secret Key"
         }
       },
-      "description": "Description of a NotificationHub BaiduCredential."
+      "description": "Description of a notification hub Baidu credential"
     },
     "BaiduCredential": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BaiduCredentialProperties",
-          "description": "Properties of NotificationHub BaiduCredential."
+          "description": "Properties of a notification hub Baidu credential"
         }
       },
-      "description": "Description of a NotificationHub BaiduCredential."
+      "description": "Description of a notification hub Baidu credential"
     },
     "NotificationHubProperties": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "The NotificationHub name."
+          "description": "The NotificationHub name"
         },
         "registrationTtl": {
           "type": "string",
-          "description": "The RegistrationTtl of the created NotificationHub"
+          "description": "The registration time to live of the created notification hub"
         },
         "authorizationRules": {
           "type": "array",
@@ -1717,37 +1585,37 @@
         },
         "apnsCredential": {
           "$ref": "#/definitions/ApnsCredential",
-          "description": "The ApnsCredential of the created NotificationHub"
+          "description": "The APNS Credential of the created notification hub"
         },
         "wnsCredential": {
           "$ref": "#/definitions/WnsCredential",
-          "description": "The WnsCredential of the created NotificationHub"
+          "description": "The WNS Credential of the created notification hub"
         },
         "gcmCredential": {
           "$ref": "#/definitions/GcmCredential",
-          "description": "The GcmCredential of the created NotificationHub"
+          "description": "The GCM Credential of the created notification hub"
         },
         "mpnsCredential": {
           "$ref": "#/definitions/MpnsCredential",
-          "description": "The MpnsCredential of the created NotificationHub"
+          "description": "The MPNS Credential of the created notification hub"
         },
         "admCredential": {
           "$ref": "#/definitions/AdmCredential",
-          "description": "The AdmCredential of the created NotificationHub"
+          "description": "The ADM Credential of the created notification hub"
         },
         "baiduCredential": {
           "$ref": "#/definitions/BaiduCredential",
-          "description": "The BaiduCredential of the created NotificationHub"
+          "description": "The Baidu Credential of the created notification hub"
         }
       },
-      "description": "NotificationHub properties."
+      "description": "Notification Hub properties"
     },
     "NotificationHubCreateOrUpdateParameters": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NotificationHubProperties",
-          "description": "Properties of the NotificationHub."
+          "description": "Notification Hub properties"
         }
       },
       "required": [
@@ -1759,14 +1627,14 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Parameters supplied to the CreateOrUpdate NotificationHub operation."
+      "description": "Parameters supplied to the CreateOrUpdate notification hub operation"
     },
     "NotificationHubResource": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NotificationHubProperties",
-          "description": "Properties of the NotificationHub."
+          "description": "Notification hub properties"
         }
       },
       "allOf": [
@@ -1774,14 +1642,14 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Description of a NotificationHub Resource."
+      "description": "Description of a notification hub Resource"
     },
     "PnsCredentialsResource": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PnsCredentialsProperties",
-          "description": "NotificationHub PNS Credentials."
+          "description": "notification hub Platform Notification System Credentials"
         }
       },
       "allOf": [
@@ -1789,36 +1657,36 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Description of a NotificationHub PNS Credentials."
+      "description": "Description of a notification hub Platform Notification System Credentials"
     },
     "PnsCredentialsProperties": {
       "properties": {
         "apnsCredential": {
           "$ref": "#/definitions/ApnsCredential",
-          "description": "The ApnsCredential of the created NotificationHub"
+          "description": "The APNS Credential of the created notification hub"
         },
         "wnsCredential": {
           "$ref": "#/definitions/WnsCredential",
-          "description": "The WnsCredential of the created NotificationHub"
+          "description": "The WNS Credential of the created notification hub"
         },
         "gcmCredential": {
           "$ref": "#/definitions/GcmCredential",
-          "description": "The GcmCredential of the created NotificationHub"
+          "description": "The GCM Credential of the created notification hub"
         },
         "mpnsCredential": {
           "$ref": "#/definitions/MpnsCredential",
-          "description": "The MpnsCredential of the created NotificationHub"
+          "description": "The MPNS Credential of the created notification hub"
         },
         "admCredential": {
           "$ref": "#/definitions/AdmCredential",
-          "description": "The AdmCredential of the created NotificationHub"
+          "description": "The ADM Credential of the created notification hub"
         },
         "baiduCredential": {
           "$ref": "#/definitions/BaiduCredential",
-          "description": "The BaiduCredential of the created NotificationHub"
+          "description": "The Baidu Credential of the created notification hub"
         }
       },
-      "description": "Description of a NotificationHub PNS Credentials."
+      "description": "Description of a notification hub Platform Notification System Credentials."
     },
     "NotificationHubListResult": {
       "properties": {
@@ -1827,21 +1695,21 @@
           "items": {
             "$ref": "#/definitions/NotificationHubResource"
           },
-          "description": "Result of the List NotificationHub operation."
+          "description": "Result of the List notification hub operation."
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of NotificationHub"
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of notification hubs"
         }
       },
-      "description": "The response of the List NotificationHub operation."
+      "description": "The response of the List notification hub operation."
     },
     "Resource": {
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource Id"
+          "description": "Resource ID"
         },
         "name": {
           "readOnly": true,
@@ -1863,10 +1731,6 @@
             "type": "string"
           },
           "description": "Resource tags"
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The sku of the created namespace"
         }
       },
       "required": [
@@ -1878,47 +1742,10 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Resource Id"
+          "description": "Resource ID"
         }
       },
       "x-ms-azure-resource": true
-    },
-    "Sku": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the notification hub sku",
-          "enum": [
-            "Free",
-            "Basic",
-            "Standard"
-          ],
-          "x-ms-enum": {
-            "name": "SkuName",
-            "modelAsString": true
-          }
-        },
-        "tier": {
-          "type": "string",
-          "description": "The tier of particular sku"
-        },
-        "size": {
-          "type": "string",
-          "description": "The Sku size"
-        },
-        "family": {
-          "type": "string",
-          "description": "The Sku Family"
-        },
-        "capacity": {
-          "type": "integer",
-          "description": "The capacity of the resource"
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "description": "The Sku description for a namespace"
     }
   },
   "parameters": {
