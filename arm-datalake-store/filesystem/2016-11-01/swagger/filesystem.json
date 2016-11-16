@@ -1575,6 +1575,15 @@
       ],
       "description": "A WebHDFS exception thrown indicating that access is denied due to insufficient permissions. Thrown when a 403 error response code is returned (forbidden)."
     },
+    "AdlsThrottledException": {
+      "x-ms-discriminator-value": "ThrottledException",
+      "allOf": [ 
+        { 
+          "$ref":  "#/definitions/AdlsRemoteException" 
+        } 
+      ],
+      "description": "A WebHDFS exception thrown indicating that the request is being throttled. Reducing the number of requests or request size helps to mitigate this error."
+    },
     "AdlsRemoteException": {
       "discriminator": "exception",
       "required": [
