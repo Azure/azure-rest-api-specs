@@ -41,6 +41,52 @@
             "description": "Successful request to get the list of metric definitions",
             "schema": {
               "$ref": "#/definitions/MetricDefinitionCollection"
+            },
+            "examples": {
+              "application/json": {
+                "value": [
+                  {
+                    "resourceId": "/subscriptions/1ef6a1b6-06c8-4dae-8ace-b6bc3f7394a3/resourceGroups/myResourceGroup/providers/Microsoft.Logic/workflows/myLogicApp",
+                    "name": {
+                      "value": "RunsStarted",
+                      "localizedValue": "Runs Started"
+                    },
+                    "unit": "Count",
+                    "primaryAggregationType": "Total",
+                    "metricAvailabilities": [
+                        {
+                          "timeGrain": "PT1M",
+                          "retention": "P30D"
+                        },
+                        {
+                          "timeGrain": "PT1H",
+                          "retention": "P30D"
+                        }
+                    ],
+                    "id": "/subscriptions/1ef6a1b6-06c8-4dae-8ace-b6bc3f7394a3/resourceGroups/myResourceGroup/providers/Microsoft.Logic/workflows/myLogicApp/providers/microsoft.insights/metricdefinitions/RunsStarted"
+                  },
+                  {
+                    "resourceId": "/subscriptions/1ef6a1b6-06c8-4dae-8ace-b6bc3f7394a3/resourceGroups/myResourceGroup/providers/Microsoft.Logic/workflows/myLogicApp",
+                    "name": {
+                      "value": "RunsCompleted",
+                      "localizedValue": "Runs Completed"
+                    },
+                    "unit": "Count",
+                    "primaryAggregationType": "Total",
+                    "metricAvailabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "retention": "P30D"
+                      },
+                      {
+                        "timeGrain": "PT1H",
+                        "retention": "P30D"
+                      }
+                    ],
+                    "id": "/subscriptions/1ef6a1b6-06c8-4dae-8ace-b6bc3f7394a3/resourceGroups/myResourceGroup/providers/Microsoft.Logic/workflows/myLogicApp/providers/microsoft.insights/metricdefinitions/RunsCompleted"
+                  }
+                ]
+              }
             }
           }
         },
@@ -53,6 +99,7 @@
   },
   "definitions": {
     "LocalizableString": {
+      "required": [ "value" ],
       "properties": {
         "value": {
           "type": "string",

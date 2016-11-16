@@ -89,7 +89,7 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{ruleName}": {
       "put": {
-        "description": "Creates or updates an alert rule.\r\nRequest method: PUT\t\tRequest URI: https://management.azure.com/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/microsoft.insights/alertRules/{alert-rule-name}?api-version={api-version}\r\nExample:\r\n{\r\n\t\"location\": \"eastus\",\r\n\t\"tags\": { },\r\n\t\"properties\": {\r\n\t\t\"name\": \"CPUHigh Plan\",\r\n\t\t\"description\": \"The average CPU is high across all the instances of Plan\",\r\n\t\t\"isEnabled\": true,\r\n\t\t\"condition\": {\r\n\t\t\t\"odata.type\": \"Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition\",\r\n\t\t\t\"dataSource\": {\r\n\t\t\t\t\"odata.type\": \"Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource\",\r\n\t\t\t\t\"resourceUri\": \"/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/Default-Storage-NorthCentralUS/providers/Microsoft.Web/serverfarms/Plan\",\r\n\t\t\t\t\"metricName\": \"CpuPercentage\",\r\n\t\t\t\t\"operator\": \"GreaterThan\"\r\n\t\t\t},\r\n\t\t\t\"threshold\": 90,\r\n\t\t\t\"windowSize\": \"PT15M\",\r\n\t\t\t\"timeAggregation\": \"Average\"\r\n\t\t},\r\n\t\t\"actions\": [\r\n\t\t\t{\r\n\t\t\t\t\"odata.type\": \"Microsoft.Azure.Management.Insights.Models.RuleEmailAction\",\r\n\t\t\t\t\"sendToServiceOwners\": true,\r\n\t\t\t\t\"customEmails\": [\"email1@contoso.com\",\"email2@contoso.com\" ]\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t\"odata.type\": \"Microsoft.Azure.Management.Insights.Models.RuleWebhookAction\",\r\n\t\t\t\t\"serviceUri\": \"http://contoso.com/\",\r\n\t\t\t\t\"properties\": { }\r\n\t\t\t}\r\n\t\t]\r\n\t}\r\n}",
+        "description": "Creates or updates an alert rule.\r\nRequest method: PUT\t\tRequest URI: https://management.azure.com/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/microsoft.insights/alertRules/{alert-rule-name}?api-version={api-version}",
         "tags": [
           "AlertRules"
         ],
@@ -122,12 +122,78 @@
             "description": "Successful request to create or update an alert rule",
             "schema": {
               "$ref": "#/definitions/AlertRuleResource"
+            },
+            "examples": {
+              "application/json": {
+                "location": "eastus",
+                "tags": { },
+                "name": "CPUHigh Plan",
+                "description": "The average CPU is high across all the instances of Plan",
+                "isEnabled": true,
+                "condition": {
+                  "odata.type": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+                  "dataSource": {
+                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+                    "resourceUri": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/Default-Storage-NorthCentralUS/providers/Microsoft.Web/serverfarms/Plan",
+                    "metricName": "CpuPercentage",
+                    "operator": "GreaterThan"
+                  },
+                  "threshold": 90,
+                  "windowSize": "PT15M",
+                  "timeAggregation": "Average"
+                },
+                "actions": [
+                  {
+                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleEmailAction",
+                    "sendToServiceOwners": true,
+                    "customEmails": ["email1@contoso.com","email2@contoso.com" ]
+                  },
+                  {
+                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleWebhookAction",
+                    "serviceUri": "http://contoso.com/",
+                    "properties": { }
+                  }
+                ]
+              }
             }
           },
           "201": {
             "description": "Created alert rule",
             "schema": {
               "$ref": "#/definitions/AlertRuleResource"
+            },
+            "examples": {
+              "application/json": {
+                "location": "eastus",
+                "tags": { },
+                "name": "CPUHigh Plan",
+                "description": "The average CPU is high across all the instances of Plan",
+                "isEnabled": true,
+                "condition": {
+                  "odata.type": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+                  "dataSource": {
+                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+                    "resourceUri": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/Default-Storage-NorthCentralUS/providers/Microsoft.Web/serverfarms/Plan",
+                    "metricName": "CpuPercentage",
+                    "operator": "GreaterThan"
+                  },
+                  "threshold": 90,
+                  "windowSize": "PT15M",
+                  "timeAggregation": "Average"
+                },
+                "actions": [
+                  {
+                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleEmailAction",
+                    "sendToServiceOwners": true,
+                    "customEmails": ["email1@contoso.com","email2@contoso.com" ]
+                  },
+                  {
+                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleWebhookAction",
+                    "serviceUri": "http://contoso.com/",
+                    "properties": { }
+                  }
+                ]
+              }
             }
           }
         }
@@ -186,6 +252,42 @@
             "description": "Successful request to get an alert rule",
             "schema": {
               "$ref": "#/definitions/AlertRuleResource"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/Default-Web-NorthCentralUS/providers/microsoft.insights/alertrules/CPUHigh%20Plan",
+                "location": "eastus",
+                "tags": { },
+                "name": "CPUHigh Plan",
+                "description": "The average CPU is high across all the instances of Plan",
+                "isEnabled": true,
+                "condition": {
+                  "odata.type": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+                  "dataSource": {
+                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+                    "resourceUri": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/Default-Storage-NorthCentralUS/providers/Microsoft.Web/serverfarms/Plan",
+                    "metricName": "CpuPercentage",
+                    "operator": "GreaterThan"
+                  },
+                  "threshold": 90,
+                  "windowSize": "PT15M",
+                  "timeAggregation": "Average"
+                },
+                "actions": [
+                  {
+                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleEmailAction",
+                    "sendToServiceOwners": true,
+                    "customEmails": ["email1@contoso.com","email2@contoso.com" ]
+                  },
+                  {
+                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleWebhookAction",
+                    "serviceUri": "http://contoso.com/",
+                    "properties": { }
+                  }
+                ],
+                "lastUpdatedTime": "2015-01-24T00:21:53.3323416Z",
+                "provisioningState": "Succeeded"
+              }
             }
           }
         }
@@ -217,6 +319,46 @@
             "description": "Successful request for a list of alert rules",
             "schema": {
               "$ref": "#/definitions/AlertRuleResourceCollection"
+            },
+            "examples": {
+              "application/json": {
+                "value": [
+                  {
+                    "id": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/Default-Web-NorthCentralUS/providers/microsoft.insights/alertrules/CPUHigh%20Plan",
+                    "location": "eastus",
+                    "tags": { },
+                    "name": "CPUHigh Plan",
+                    "description": "The average CPU is high across all the instances of Plan",
+                    "isEnabled": true,
+                    "condition": {
+                      "odata.type": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+                      "dataSource": {
+                        "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+                        "resourceUri": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/Default-Storage-NorthCentralUS/providers/Microsoft.Web/serverfarms/Plan",
+                        "metricName": "CpuPercentage",
+                        "operator": "GreaterThan"
+                      },
+                      "threshold": 90,
+                      "windowSize": "PT15M",
+                      "timeAggregation": "Average"
+                    },
+                    "actions": [
+                      {
+                        "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleEmailAction",
+                        "sendToServiceOwners": true,
+                        "customEmails": ["email1@contoso.com","email2@contoso.com" ]
+                      },
+                      {
+                        "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleWebhookAction",
+                        "serviceUri": "http://contoso.com/",
+                        "properties": { }
+                      }
+                    ],
+                    "lastUpdatedTime": "2015-01-24T00:21:53.3323416Z",
+                    "provisioningState": "Succeeded"
+                  }
+                ]
+              }
             }
           }
         },
@@ -437,7 +579,8 @@
           "description": "the time aggregation operator. How the data that are collected should be combined over time. The default value is the PrimaryAggregationType of the Metric."
         }
       },
-      "description": "A rule condition based on a metric crossing a threshold."
+      "description": "A rule condition based on a metric crossing a threshold.",
+      "example": "\"condition\": {\r\n\t\"odata.type\": \"Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition\",\r\n\t\"dataSource\": {\r\n\t\"odata.type\": \"Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource\",\r\n\t\"resourceUri\":\r\n\t\"/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/Default-Storage-NorthCentralUS/providers/Microsoft.Web/serverfarms/Plan\",\r\n\t\"metricName\": \"CpuPercentage\",\r\n\t\"operator\": \"GreaterThan\"\r\n\t},\r\n\t\"threshold\": 90,\r\n\t\"windowSize\": \"PT15M\",\r\n\t\"timeAggregation\": \"Average\"}"
     },
     "LocationThresholdRuleCondition": {
       "x-ms-discriminator-value": "Microsoft.Azure.Management.Insights.Models.LocationThresholdRuleCondition",
@@ -464,7 +607,8 @@
         }
       },
       "required": [ "failedLocationCount" ],
-      "description": "A rule condition based on a certain number of locations failing."
+      "description": "A rule condition based on a certain number of locations failing.",
+      "example": "{\r\n\t\"odata.type\": \"Microsoft.Azure.Management.Insights.Models.LocationThresholdRuleCondition\",\r\n\t\"dataSource\": {\r\n\t\t\"odata.type\": \"Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource\",\r\n\t\t\"resourceUri\": \"/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourcegroups/Default-Web-CentralUS/providers/microsoft.insights/webtests/homepagetest-newrelapp2\",r\n\t\t\"metricName\": \"GSMT_AvRaW\"\r\n\t},\r\n\t\"windowSize\": \"PT5M\",\r\n\t\"failedLocationCount\": 1\r\n}"
     },
     "ManagementEventAggregationCondition": {
       "properties": {
@@ -503,7 +647,8 @@
           "description": "How the data that is collected should be combined over time and when the alert is activated. Note that for management event alerts aggregation is optional – if it is not provided then any event will cause the alert to activate."
         }
       },
-      "description": "A management event rule condition."
+      "description": "A management event rule condition.",
+      "example": "{\r\n\t\"odata.type\": \"Microsoft.Azure.Management.Insights.Models.ManagementEventRuleCondition\",\r\n\t\"dataSource\": {\r\n\t\t\"odata.type\": \"Microsoft.Azure.Management.Insights.Models.RuleManagementEventDataSource\",\r\n\t\t\"operationName\": \"\",\r\n\t\t\"resourceUri\": \"/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/Default-Web-CentralUS/providers/Microsoft.Web/sites/TestLatestWebsite\",\r\n\t\t\"status\": \"failed\",\r\n\t\t\"claims\": { }\r\n\t},\r\n\t\"aggregation\": {\r\n\t\t\"threshold\": 1,\r\n\t\t\"windowSize\": \"PT5M\"\r\n\t}\r\n}"
     },
     "RuleAction": {
       "type": "object",
@@ -538,7 +683,8 @@
             "description": "the list of administrator's custom email addresses notifiy of the activation of the alert."
         }
       },
-      "description": "Specifies the action to send email when the rule condition is evaluated. The discriminator is always RuleEmailAction in this case."
+      "description": "Specifies the action to send email when the rule condition is evaluated. The discriminator is always RuleEmailAction in this case.",
+      "example": "{\r\n\t\"odata.type\": \"Microsoft.Azure.Management.Insights.Models.RuleEmailAction\",\r\n\t\"sendToServiceOwners\": true,\r\n\t\"customEmails\": [\"email1@contoso.com\",\"email2@contoso.com\" ]\r\n}"
     },
     "RuleWebhookAction": {
       "x-ms-discriminator-value": "Microsoft.Azure.Management.Insights.Models.RuleWebhookAction",
@@ -561,7 +707,8 @@
            "description": "the dictionary of custom properties to include with the post operation. These data are appended to the webhook payload."
          }
       },
-      "description": "Specifies the action to post to service when the rule condition is evaluated. The discriminator is always RuleWebhookAction in this case."
+      "description": "Specifies the action to post to service when the rule condition is evaluated. The discriminator is always RuleWebhookAction in this case.",
+      "example": "{\r\n\t\"odata.type\": \"Microsoft.Azure.Management.Insights.Models.RuleWebhookAction\",\r\n\t\"serviceUri\": \"http://contoso.com/\",\r\n\t\"properties\": { }\r\n}"
     },
     "AlertRule": {
       "required": [

@@ -41,6 +41,84 @@
             "description": "Successful request for a list of autoscale settings",
             "schema": {
               "$ref": "#/definitions/AutoscaleSettingResourceCollection"
+            },
+            "examples": {
+              "application/json": {
+                "value": [ {
+                  "id": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/norapp/providers/Microsoft.insights/autoscalesettings/webfrontend-norapp-norapp",
+                  "name": "webfrontend-norapp-norapp",
+                  "type": "Microsoft.Insights/autoscaleSettings",
+                  "location": "East US",
+                  "tags": { },
+                  "profiles": [ {
+                    "name": "Day",
+                    "capacity": {
+                      "minimum": "1",
+                      "maximum": "5",
+                      "default": "4"
+                    },
+                    "rules": [ {
+                      "metricTrigger": {
+                        "metricName": "Percentage CPU",
+                        "metricNamespace": "",
+                        "metricResourceUri": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/norapp/providers/microsoft.classicCompute/domainNames/norapp/availabilitySets/webfrontend",
+                        "timeGrain": "PT5M",
+                        "statistic": "Average",
+                        "timeWindow": "PT45M",
+                        "timeAggregation": "Average",
+                        "operator": "GreaterThanOrEqual",
+                        "threshold": 60
+                      },
+                      "scaleAction": {
+                        "direction": "Increase",
+                        "type": "ChangeCount",
+                        "value": "2",
+                        "cooldown": "PT20M"
+                      }
+                    } ],
+                    "recurrence": {
+                      "frequency": "Week",
+                      "schedule": {
+                        "timeZone": "Pacific Standard Time",
+                        "days": [
+                          "Monday",
+                          "Tuesday",
+                          "Wednesday",
+                          "Thursday",
+                          "Friday"
+                        ],
+                        "hours": [ 8 ],
+                        "minutes": [ 0 ]
+                      }
+                    }
+                  } ],
+                  "enabled": true,
+                  "targetResourceUri": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/norapp/providers/icrosoft.classicCompute/domainNames/norapp/availabilitySets/webfrontend",
+                  "notifications": [
+                    {
+                      "operation": "Scale",
+                      "email": {
+                        "sendToSubscriptionAdministrator": false,
+                        "sendToSubscriptionCoAdministrators": false,
+                        "customEmails": [
+                            "user1@mycompany.com",
+                            "user2@mycompany.com"
+                            ]
+                      },
+                      "webhooks": [
+                        {
+                          "serviceUri": "https://foo.webhook.example.com?token=abcd1234",
+                          "properties": {
+                            "optional_key1": "optional_value1",
+                            "optional_key2": "optional_value2"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }],
+                "nextLink": "https://management.azure.com/########-####-####-####-############$skiptoken=######"
+              }
             }
           }
         },
@@ -85,12 +163,162 @@
             "description": "Successful request to create or update an autoscale setting",
             "schema": {
               "$ref": "#/definitions/AutoscaleSettingResource"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/norapp/providers/microsoft.insights/autoscalesettings/webfrontend-norapp-norapp",
+                "name": "webfrontend-norapp-norapp",
+                "type": "Microsoft.Insights/autoscaleSettings",
+                "location": "East US",
+                "tags": { },
+                "profiles": [ {
+                  "name": "Day",
+                  "capacity": {
+                    "minimum": "1",
+                    "maximum": "5",
+                    "default": "4"
+                  },
+                  "rules": [ {
+                    "metricTrigger": {
+                      "metricName": "Percentage CPU",
+                      "metricNamespace": "",
+                      "metricResourceUri": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/norapp/providers/microsoft.classicCompute/domainNames/norapp/availabilitySets/webfrontend",
+                      "timeGrain": "PT5M",
+                      "statistic": "Average",
+                      "timeWindow": "PT45M",
+                      "timeAggregation": "Average",
+                      "operator": "GreaterThanOrEqual",
+                      "threshold": 60
+                    },
+                    "scaleAction": {
+                      "direction": "Increase",
+                      "type": "ChangeCount",
+                      "value": "2",
+                      "cooldown": "PT20M"
+                    }
+                  } ],
+                  "recurrence": {
+                    "frequency": "Week",
+                    "schedule": {
+                      "timeZone": "Pacific Standard Time",
+                      "days": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday"
+                      ],
+                      "hours": [ 8 ],
+                      "minutes": [ 0 ]
+                    }
+                  }
+                } ],
+                "enabled": true,
+                "targetResourceUri": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/norapp/providers/microsoft.classicCompute/domainNames/norapp/availabilitySets/webfrontend",
+                "notifications": [
+                  {
+                    "operation": "Scale",
+                    "email": {
+                      "sendToSubscriptionAdministrator": false,
+                      "sendToSubscriptionCoAdministrators": false,
+                      "customEmails": [
+                          "user1@mycompany.com",
+                          "user2@mycompany.com"
+                          ]
+                    },
+                    "webhooks": [
+                      {
+                        "serviceUri": "https://foo.webhook.example.com?token=abcd1234",
+                        "properties": {
+                          "optional_key1": "optional_value1",
+                          "optional_key2": "optional_value2"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
             }
           },
           "201": {
             "description": "Created autoscale setting",
             "schema": {
               "$ref": "#/definitions/AutoscaleSettingResource"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/norapp/providers/microsoft.insights/autoscalesettings/webfrontend-norapp-norapp",
+                "name": "webfrontend-norapp-norapp",
+                "type": "Microsoft.Insights/autoscaleSettings",
+                "location": "East US",
+                "tags": { },
+                "profiles": [ {
+                  "name": "Day",
+                  "capacity": {
+                    "minimum": "1",
+                    "maximum": "5",
+                    "default": "4"
+                  },
+                  "rules": [ {
+                    "metricTrigger": {
+                      "metricName": "Percentage CPU",
+                      "metricNamespace": "",
+                      "metricResourceUri": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/norapp/providers/microsoft.classicCompute/domainNames/norapp/availabilitySets/webfrontend",
+                      "timeGrain": "PT5M",
+                      "statistic": "Average",
+                      "timeWindow": "PT45M",
+                      "timeAggregation": "Average",
+                      "operator": "GreaterThanOrEqual",
+                      "threshold": 60
+                    },
+                    "scaleAction": {
+                      "direction": "Increase",
+                      "type": "ChangeCount",
+                      "value": "2",
+                      "cooldown": "PT20M"
+                    }
+                  } ],
+                  "recurrence": {
+                    "frequency": "Week",
+                    "schedule": {
+                      "timeZone": "Pacific Standard Time",
+                      "days": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday"
+                      ],
+                      "hours": [ 8 ],
+                      "minutes": [ 0 ]
+                    }
+                  }
+                } ],
+                "enabled": true,
+                "targetResourceUri": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/norapp/providers/microsoft.classicCompute/domainNames/norapp/availabilitySets/webfrontend",
+                "notifications": [
+                  {
+                    "operation": "Scale",
+                    "email": {
+                      "sendToSubscriptionAdministrator": false,
+                      "sendToSubscriptionCoAdministrators": false,
+                      "customEmails": [
+                          "user1@mycompany.com",
+                          "user2@mycompany.com"
+                          ]
+                    },
+                    "webhooks": [
+                      {
+                        "serviceUri": "https://foo.webhook.example.com?token=abcd1234",
+                        "properties": {
+                          "optional_key1": "optional_value1",
+                          "optional_key2": "optional_value2"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
             }
           }
         }
@@ -149,6 +377,81 @@
             "description": "Successful request to get one autoscale setting",
             "schema": {
               "$ref": "#/definitions/AutoscaleSettingResource"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/norapp/providers/Microsoft.insights/autoscalesettings/webfrontend-norapp-norapp",
+                "name": "webfrontend-norapp-norapp",
+                "type": "Microsoft.Insights/autoscaleSettings",
+                "location": "East US",
+                "tags": { },
+                "profiles": [ {
+                  "name": "Day",
+                  "capacity": {
+                    "minimum": "1",
+                    "maximum": "5",
+                    "default": "4"
+                  },
+                  "rules": [ {
+                    "metricTrigger": {
+                      "metricName": "Percentage CPU",
+                      "metricNamespace": "",
+                      "metricResourceUri": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/norapp/providers/icrosoft.classicCompute/domainNames/norapp/availabilitySets/webfrontend",
+                      "timeGrain": "PT5M",
+                      "statistic": "Average",
+                      "timeWindow": "PT45M",
+                      "timeAggregation": "Average",
+                      "operator": "GreaterThanOrEqual",
+                      "threshold": 60
+                    },
+                    "scaleAction": {
+                      "direction": "Increase",
+                      "type": "ChangeCount",
+                      "value": "2",
+                      "cooldown": "PT20M"
+                    }
+                  } ],
+                  "recurrence": {
+                    "frequency": "Week",
+                    "schedule": {
+                      "timeZone": "Pacific Standard Time",
+                      "days": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday"
+                      ],
+                      "hours": [ 8 ],
+                      "minutes": [ 0 ]
+                    }
+                  }
+                } ],
+                "enabled": true,
+                "targetResourceUri": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/norapp/providers/icrosoft.classicCompute/domainNames/norapp/availabilitySets/webfrontend",
+                "notifications": [
+                  {
+                    "operation": "Scale",
+                    "email": {
+                      "sendToSubscriptionAdministrator": false,
+                      "sendToSubscriptionCoAdministrators": false,
+                      "customEmails": [
+                          "user1@mycompany.com",
+                          "user2@mycompany.com"
+                          ]
+                    },
+                    "webhooks": [
+                      {
+                        "serviceUri": "https://foo.webhook.example.com?token=abcd1234",
+                        "properties": {
+                          "optional_key1": "optional_value1",
+                          "optional_key2": "optional_value2"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              } 
             }
           }
         }

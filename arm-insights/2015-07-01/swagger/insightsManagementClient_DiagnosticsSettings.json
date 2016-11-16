@@ -37,6 +37,41 @@
             "description": "Successful request to get more information about service diagnostic setting",
             "schema": {
               "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+            },
+            "examples": {
+              "application/json": {
+                "storageAccountId": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/testStorageAcct",
+                "serviceBusRuleId": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.ServiceBus/namespaces/testNamespace/authorizationrules/RootManageSharedAccessKey",
+                "workspaceId": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.OperationalInsights/workspaces/myWorkspace",
+                "metrics": [
+                    {
+                        "timeGrain": "PT1M",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": 0
+                        }
+                    }
+                ],
+                "logs": [
+                    {
+                        "category": "NetworkSecurityGroupEvent",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": 0
+                        }
+                    },
+                    {
+                        "category": "NetworkSecurityGroupRuleCounter",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": 0
+                        }
+                    }
+                ]
+              }
             }
           }
         }
@@ -72,6 +107,41 @@
             "description": "Successful request to create a service diagnostic setting",
             "schema": {
               "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+            },
+            "examples": {
+              "application/json": {
+                "storageAccountId": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/testStorageAcct",
+                "serviceBusRuleId": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.ServiceBus/namespaces/testNamespace/authorizationrules/RootManageSharedAccessKey",
+                "workspaceId": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.OperationalInsights/workspaces/myWorkspace",
+                "metrics": [
+                    {
+                        "timeGrain": "PT1M",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": 0
+                        }
+                    }
+                ],
+                "logs": [
+                    {
+                        "category": "NetworkSecurityGroupEvent",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": 0
+                        }
+                    },
+                    {
+                        "category": "NetworkSecurityGroupRuleCounter",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": 0
+                        }
+                    }
+                ]
+              }
             }
           }
         }

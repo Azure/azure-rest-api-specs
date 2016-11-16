@@ -41,6 +41,37 @@
             "description": "Successful request to get the list of metric values",
             "schema": {
               "$ref": "#/definitions/MetricCollection"
+            },
+            "examples": {
+              "application/json": {
+                "value": [
+                  {
+                    "data": [
+                      {
+                        "timeStamp": "2016-09-21T19:59:00Z",
+                        "total": 4.0
+                      },
+                      {
+                        "timeStamp": "2016-09-21T20:00:00Z",
+                        "average": 3.8
+                      },
+                      {
+                        "timeStamp": "2016-09-21T20:01:00Z",
+                        "minimum": 0.0
+                      },
+                      {
+                        "timeStamp": "2016-09-21T20:02:00Z",
+                        "maximum": 5.0
+                      }
+                    ],
+                    "name": {
+                      "value": "RunsStarted",
+                      "localizedValue": "Runs Started"
+                    },
+                    "unit": "Count"
+                  }
+                ]
+              }
             }
           }
         },
@@ -53,6 +84,7 @@
   },
   "definitions": {
     "LocalizableString": {
+      "required": [ "value" ],
       "properties": {
         "value": {
           "type": "string",
