@@ -551,6 +551,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -573,6 +576,13 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Machine resource name."
           },
           {
             "name": "processName",
@@ -864,6 +874,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -994,9 +1007,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1065,7 +1075,7 @@
         "tags": [
           "Client Groups"
         ],
-        "operationId": "ClientGroups_CountMembers",
+        "operationId": "ClientGroups_GetMembersCount",
         "description": "Returns the approximate number of members in the client group.",
         "parameters": [
           {
@@ -1117,9 +1127,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1165,13 +1172,21 @@
             "type": "string",
             "format": "date-time",
             "description": "UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Page size to use"
           }
         ],
         "responses": {
           "200": {
             "description": "The operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ClientGroupMemberCollection"
+              "$ref": "#/definitions/ClientGroupMembersCollection"
             }
           },
           "default": {
@@ -1377,7 +1392,6 @@
         }
       ],
       "discriminator": "kind",
-      "x-ms-external": true,
       "required": [
         "kind"
       ]
@@ -1533,7 +1547,7 @@
             },
             "portNumber": {
               "type": "integer",
-              "format": "uint16",
+              "format": "int32",
               "description": "Port number."
             }
           }
@@ -2105,7 +2119,7 @@
       },
       "required": [
         "family",
-        "name",
+        "fullName",
         "bitness"
       ]
     },
@@ -2322,7 +2336,6 @@
         }
       },
       "required": [
-        "resourceId",
         "startTime",
         "endTime",
         "live"
