@@ -610,9 +610,12 @@
         },
         "type": {
           "type": "string",
-          "description": "the type of action that should occur, this must be set to ChangeCount, the only value supported.",
+          "description": "the type of action that should occur when the scale rule fires.",
           "enum": [
-            "ChangeCount"
+            "ChangeCount",
+            "ChangeSize",
+            "PercentChangeCount",
+            "ExactCount"
           ],
           "x-ms-enum": {
             "name": "ScaleType",
