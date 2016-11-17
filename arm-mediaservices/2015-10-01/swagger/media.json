@@ -68,9 +68,9 @@
               "application/json": {
                 "value": [
                   {  
-                    "NameAvailable": false,
-                    "Reason": "AlreadyExists",
-                    "Message": "Already in use by another Media Service instance. Please try again with a name that is not likely to be in use."
+                    "nameAvailable": false,
+                    "reason": "AlreadyExists",
+                    "message": "Already in use by another Media Service instance. Please try again with a name that is not likely to be in use."
                   }  
                 ]
               }  
@@ -117,7 +117,6 @@
                     "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-media/providers/Microsoft.Media/mediaservices/contosomedia",
                     "type": "Microsoft.Media/mediaservices",
                     "location": "West US",
-                    "tags":null,
                     "properties":{  
                       "apiEndpoints":[  
                         {  
@@ -182,7 +181,6 @@
                 "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-media/providers/Microsoft.Media/mediaservices/contosomedia",
                 "type": "Microsoft.Media/mediaservices",
                 "location": "West US",
-                "tags":null,
                 "properties":{  
                   "apiEndpoints":[  
                     {  
@@ -249,7 +247,6 @@
                 "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-media/providers/Microsoft.Media/mediaservices/contosomedia",
                 "type": "Microsoft.Media/mediaservices",
                 "location": "West US",
-                "tags":null,
                 "properties":{  
                   "apiEndpoints":[  
                     {  
@@ -351,7 +348,6 @@
                 "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-media/providers/Microsoft.Media/mediaservices/contosomedia",
                 "type": "Microsoft.Media/mediaservices",
                 "location": "West US",
-                "tags":null,
                 "properties":{  
                   "apiEndpoints":[  
                     {  
@@ -582,7 +578,6 @@
     },
     "ResourceType": {
       "description": "Type of MediaService resource.",
-      "readOnly": true,
       "enum": [
         "mediaservices"
       ],
@@ -597,28 +592,26 @@
        "example": { 
          "value": [
            {
-             "NameAvailable": true,
-             "Reason": null,
-             "Message": null
+             "nameAvailable": true
            }, 
            {  
-             "NameAvailable": false,
-             "Reason": "AlreadyExists",
-             "Message": "Already in use by another Media Service instance. Please try again with a name that is not likely to be in use."
+             "nameAvailable": false,
+             "reason": "AlreadyExists",
+             "message": "Already in use by another Media Service instance. Please try again with a name that is not likely to be in use."
            },
            {
-             "NameAvailable": false,
-             "Reason": "Invalid",
-             "Message": "The media service name should be between 3 and 24 characters and may contain only lowercase letters and numbers."
+             "nameAvailable": false,
+             "reason": "Invalid",
+             "message": "The media service name should be between 3 and 24 characters and may contain only lowercase letters and numbers."
            }  
          ]
       },  
       "properties": {
-        "NameAvailable": {
+        "nameAvailable": {
           "description": "Specifies if the name is available.",
           "type": "boolean"
         },
-        "Reason": {
+        "reason": {
           "description": "Specifies the reason if the name is not available.",
           "type": "string",
           "enum": [
@@ -631,7 +624,7 @@
             "modelAsString": false
           }  
         },
-        "Message": {
+        "message": {
           "description": "Specifies the detailed reason if the name is not available.",
           "type": "string"
         }
@@ -651,18 +644,6 @@
         }
       },
       "properties": {
-        "name": {
-          "description": "Then name of the Media Service resource.",
-          "type": "string"
-        },
-        "id": {
-          "description": "The Azure Resource Manager identifier.",
-          "type": "string"
-        },
-        "type": {
-           "description": "The type of the Media Service resource.",
-          "type": "string"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/MediaServiceProperties"
@@ -670,7 +651,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -757,6 +738,17 @@
           "description": "The type of the resource",
           "readOnly": true,
           "type": "string"
+        },
+        "location": {
+          "type": "string",
+          "description": "The geographic location of the resource. This must be one of the supported and registered Azure Geo Regions (for example, West US, East US, Southeast Asia, and so forth)."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags to help categorize the resource in the Azure portal."
         }
       },
       "x-ms-azure-resource": true
@@ -799,6 +791,10 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-media/providers/Microsoft.Storage/storageAccounts/contosomedia",
         "isPrimary": true
       },
+      "required": [
+        "id",
+        "isPrimary"
+      ],
       "properties": {
         "id": {
           "description": "The id of the storage account resource. Media Services relies on tables and queues as well as blobs, so the primary storage account must be a Standard Storage account (either Microsoft.ClassicStorage or Microsoft.Storage). Blob only storage accounts can be added as secondary storage accounts (isPrimary false).",
@@ -822,31 +818,6 @@
         "id": {
           "description": "The id of the storage account resource.",
           "type": "string"
-        }
-      }
-    },
-    "TrackedResource": {
-      "description": "ARM tracked resource",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "required": [
-        "location"
-      ],
-      "properties": {
-        "location": {
-          "description": "The location of the resource.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "The tags of the resource.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     }
