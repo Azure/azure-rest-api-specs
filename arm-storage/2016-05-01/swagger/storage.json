@@ -3,7 +3,7 @@
   "info": {
     "title": "StorageManagementClient",
     "description": "The Storage Management Client.",
-    "version": "2016-01-01"
+    "version": "2016-05-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -411,6 +411,106 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/ListAccountSas": {
+      "post": {
+        "tags": [
+          "StorageAccounts"
+        ],
+        "operationId": "StorageAccounts_ListAccountSas",
+        "description": "List SAS credentials of a storage account.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group within the user's subscription."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
+            "maxLength": 24,
+            "minLength": 3
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountSasParameters"
+            },
+            "description": "The parameters to provide to list SAS credentials for the storage account."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ListAccountSasResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/ListServiceSas": {
+      "post": {
+        "tags": [
+          "StorageAccounts"
+        ],
+        "operationId": "StorageAccounts_ListServiceSas",
+        "description": "List service SAS credentials of a specific resource.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group within the user's subscription."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
+            "maxLength": 24,
+            "minLength": 3
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceSasParameters"
+            },
+            "description": "The parameters to provide to list service SAS credentials."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ListServiceSasResponse"
+            }
+          }
         }
       }
     }
@@ -975,6 +1075,231 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "AccountSasParameters": {
+      "properties": {
+        "signedServices": {
+          "type": "string",
+          "enum": [
+            "b",
+            "q",
+            "t",
+            "f"
+          ],
+          "x-ms-client-name": "Services",
+          "description": "Sets the signed services accessible with the account SAS."
+        },
+        "signedResourceTypes": {
+          "type": "string",
+          "enum": [
+            "s",
+            "c",
+            "o"
+          ],
+          "x-ms-client-name": "ResourceTypes",
+          "description": "Sets the signed resource types that are accessible with the account SAS."
+        },
+        "signedPermission": {
+          "type": "string",
+          "enum": [
+            "r",
+            "d",
+            "w",
+            "l",
+            "a",
+            "c",
+            "u",
+            "p"
+          ],
+          "x-ms-client-name": "Permissions",
+          "description": "Sets the signed permissions for the account SAS."
+        },
+        "signedIp": {
+          "type": "string",
+          "x-ms-client-name": "IPAddressOrRange",
+          "description": "Sets an IP address or a range of IP addresses from which to accept requests."
+        },
+        "signedProtocol": {
+          "type": "string",
+          "enum": [
+            "https,http",
+            "https"
+          ],
+          "x-ms-enum": {
+            "name": "HttpProtocol",
+            "modelAsString": false
+          },
+          "x-ms-client-name": "Protocols",
+          "description": "Sets the protocol permitted for a request made with the account SAS."
+        },
+        "signedStart": {
+          "type": "string",
+          "format": "date-time",
+          "x-ms-client-name": "SharedAccessStartTime",
+          "description": "Sets the time at which the SAS becomes valid."
+        },
+        "signedExpiry": {
+          "type": "string",
+          "format": "date-time",
+          "x-ms-client-name": "SharedAccessExpiryTime",
+          "description": "Sets the time at which the shared access signature becomes invalid."
+        },
+        "keyToSign": {
+          "type": "string",
+          "description": "Sets the key to sign the account SAS token with."
+        }
+      },
+      "required": [
+        "signedServices",
+        "signedResourceTypes",
+        "signedPermission",
+        "signedExpiry"
+      ],
+      "description": "The parameters to list sas credentials of a storage account."
+    },
+    "ListAccountSasResponse": {
+      "properties": {
+        "accountSasToken": {
+          "readOnly": true,
+          "type": "string",
+          "description": "List SAS credentials of storage account."
+        }
+      },
+      "description": "The List sas credentials operation response."
+    },
+    "ServiceSasParameters": {
+      "properties": {
+        "canonicalizedResource": {
+          "type": "string",
+          "x-ms-client-name": "CanonicalizedResource",
+          "description" : "Sets the canonical path to the signed resource."
+        },
+        "signedResource": {
+          "type": "string",
+          "enum": [
+            "b",
+            "c",
+            "f",
+            "s"
+          ],
+          "x-ms-client-name": "Resource",
+          "description": "Sets the signed services accessible with the service SAS."
+        },
+        "signedPermission": {
+          "type": "string",
+          "enum": [
+            "r",
+            "d",
+            "w",
+            "l",
+            "a",
+            "c",
+            "u",
+            "p"
+          ],
+          "x-ms-client-name": "Permissions",
+          "description": "Sets the signed permissions for the service SAS."
+        },
+        "signedIp": {
+          "type": "string",
+          "x-ms-client-name": "IPAddressOrRange",
+          "description": "Sets an IP address or a range of IP addresses from which to accept requests."
+        },
+        "signedProtocol": {
+          "type": "string",
+          "enum": [
+            "https,http",
+            "https"
+          ],
+          "x-ms-enum": {
+            "name": "HttpProtocol",
+            "modelAsString": false
+          },
+          "x-ms-client-name": "Protocols",
+          "description": "Sets the protocol permitted for a request made with the account SAS."
+        },
+        "signedStart": {
+          "type": "string",
+          "format": "date-time",
+          "x-ms-client-name": "SharedAccessStartTime",
+          "description": "Sets the time at which the SAS becomes valid."
+        },
+        "signedExpiry": {
+          "type": "string",
+          "format": "date-time",
+          "x-ms-client-name": "SharedAccessExpiryTime",
+          "description": "Sets the time at which the shared access signature becomes invalid."
+        },
+        "signedIdentifier": {
+          "type": "string",
+          "x-ms-client-name": "Identifier",
+          "description": "Sets a unique value up to 64 characters in length that correlates to an access policy specified for the container, queue, or table."
+        },
+        "startPk": {
+          "type": "string",
+          "x-ms-client-name": "PartitionKeyStart",
+          "description": "Sets the start of partition key."
+        },
+        "endPk": {
+          "type": "string",
+          "x-ms-client-name": "PartitionKeyEnd",
+          "description": "Sets the end of partition key."
+        },
+        "startRk": {
+          "type": "string",
+          "x-ms-client-name": "RowKeyStart",
+          "description": "Sets the start of row key."
+        },
+        "endRk": {
+          "type": "string",
+          "x-ms-client-name": "RowKeyEnd",
+          "description": "Sets the end of row key."
+        },
+        "keyToSign": {
+          "type": "string",
+          "description": "Sets the key to sign the account SAS token with."
+        },
+        "rscc": {
+          "type": "string",
+          "x-ms-client-name": "CacheControl",
+          "description": "Sets the response header override for cache control."
+        },
+        "rscd": {
+          "type": "string",
+          "x-ms-client-name": "ContentDisposition",
+          "description": "Sets the response header override for content disposition."
+        },
+        "rsce": {
+          "type": "string",
+          "x-ms-client-name": "ContentEncoding",
+          "description": "Sets the response header override for content encoding."
+        },
+        "rscl": {
+          "type": "string",
+          "x-ms-client-name": "ContentLanguage",
+          "description": "Sets the response header override for content language."
+        },
+        "rsct": {
+          "type": "string",
+          "x-ms-client-name": "ContentType",
+          "description": "Sets the response header override for content type."
+        }
+      },
+      "required": [
+        "canonicalizedResrouce",
+        "signedResource"
+      ],
+      "description": "The parameters to list service SAS credentials of a speicific resource."
+    },
+    "ListServiceSasResponse": {
+      "properties": {
+        "serviceSasToken": {
+          "readOnly": true,
+          "type": "string",
+          "description": "List service SAS credentials of speicific resource."
+        }
+      },
+      "description": "The List service SAS credentials operation response."
     }
   },
   "parameters": {
