@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Log Analytics Client for LinkTargets, StorageInsightConfigs and SavedSearches.",
-    "description": ".Net client wrapper for the REST API for Azure Log Analytics",
+    "title": "Azure Log Analytics",
+    "description": "Azure Log Analytics API reference for LinkTargets, StorageInsightConfigs and SavedSearches.",
     "version": "2015-03-20"
   },
   "host": "management.azure.com",
@@ -10,12 +10,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -45,11 +43,7 @@
         "description": "Create or update a storage insight.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource Group name of the Log Analytics Workspace"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -104,11 +98,7 @@
         "description": "Gets a storage insight instance.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource Group name of the Log Analytics Workspace"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -148,11 +138,7 @@
         "description": "Deletes a storageInsightsConfigs resource",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource Group name of the Log Analytics Workspace"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -190,15 +176,11 @@
         "tags": [
           "StorageInsights"
         ],
-        "operationId": "StorageInsights_ListInWorkspace",
-        "description": "Gets the first page of storage insight instances in a workspace with the link to the next page.",
+        "operationId": "StorageInsights_ListByWorkspace",
+        "description": "Lists the storage insight instances within a workspace",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource Group name of the Log Analytics Workspace"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -233,7 +215,7 @@
           "Workspaces"
         ],
         "operationId": "Workspaces_ListLinkTargets",
-        "description": "Gets a list of accounts with administrator privileges that are not associated with an existing workspace.",
+        "description": "Get a list of workspaces which the current user has administrator privileges and are not associated with an Azure Subscription. The subscriptionId parameter in the Url is ignored.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -248,27 +230,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Account"
+                "$ref": "#/definitions/LinkTarget"
               }
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches/{savedSearchId}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches/{savedSearchName}": {
       "delete": {
         "tags": [
-          "SavedSearch"
+          "SavedSearches"
         ],
-        "operationId": "Search_DeleteSavedSearch",
+        "operationId": "SavedSearches_Delete",
         "description": "Deletes the specified saved search in a given workspace.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource Group name of the Log Analytics Workspace"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -278,11 +256,11 @@
             "description": "Log Analytics workspace name"
           },
           {
-            "name": "savedSearchId",
+            "name": "savedSearchName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The id of the saved search."
+            "description": "Name of the saved search."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -299,17 +277,13 @@
       },
       "put": {
         "tags": [
-          "Search"
+          "SavedSearches"
         ],
-        "operationId": "Search_CreateOrUpdateSavedSearch",
+        "operationId": "SavedSearches_CreateOrUpdate",
         "description": "Creates or updates a saved search for a given workspace.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource Group name of the Log Analytics Workspace"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -319,7 +293,7 @@
             "description": "Log Analytics workspace name"
           },
           {
-            "name": "savedSearchId",
+            "name": "savedSearchName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -343,23 +317,22 @@
         ],
         "responses": {
           "200": {
-            "description": "OK response definition."
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/SavedSearch"
+            }
           }
         }
       },
       "get": {
         "tags": [
-          "Search"
+          "SavedSearches"
         ],
-        "operationId": "Search_GetSavedSearch",
+        "operationId": "SavedSearches_Get",
         "description": "Gets the specified saved search for a given workspace.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource Group name of the Log Analytics Workspace"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -369,7 +342,7 @@
             "description": "Log Analytics workspace name"
           },
           {
-            "name": "savedSearchId",
+            "name": "savedSearchName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -386,7 +359,7 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "#/definitions/GetSavedSearchResult"
+              "$ref": "#/definitions/SavedSearch"
             }
           }
         }
@@ -395,17 +368,13 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches": {
       "get": {
         "tags": [
-          "Search"
+          "SavedSearches"
         ],
-        "operationId": "Search_ListSavedSearches",
+        "operationId": "SavedSearches_ListByWorkspace",
         "description": "Gets the saved searches for a given Log Analytics Workspace",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource Group name of the Log Analytics Workspace"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -425,26 +394,22 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "#/definitions/SearchListSavedSearchResult"
+              "$ref": "#/definitions/SavedSearchesListResult"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches/{savedSearchId}/results": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches/{savedSearchName}/results": {
       "get": {
         "tags": [
-          "Search"
+          "SavedSearches"
         ],
-        "operationId": "Search_GetSavedSearchResults",
+        "operationId": "SavedSearches_GetResults",
         "description": "Gets the results from a saved search for a given workspace.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource Group name of the Log Analytics Workspace"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -454,11 +419,11 @@
             "description": "Log Analytics workspace name"
           },
           {
-            "name": "savedSearchId",
+            "name": "savedSearchName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The id of the saved search."
+            "description": "The name of the saved search."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -471,7 +436,7 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "#/definitions/SearchResultResponse"
+              "$ref": "#/definitions/SearchResultsResponse"
             }
           }
         }
@@ -480,17 +445,13 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/schema": {
       "post": {
         "tags": [
-          "Search"
+          "Workspaces"
         ],
-        "operationId": "Search_GetSchema",
+        "operationId": "Workspaces_GetSchema",
         "description": "Gets the schema for a given workspace.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource Group name of the Log Analytics Workspace"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -519,17 +480,13 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/search": {
       "post": {
         "tags": [
-          "Search"
+          "Workspaces"
         ],
-        "operationId": "Search_GetSearchResults",
-        "description": "Gets the search results for a given workspace.",
+        "operationId": "Workspaces_GetSearchResults",
+        "description": "Submit a search for a given workspace. The response will contain an id to track the search. User can use the id to poll the search status and get the full search result later if the search takes long time to finish. ",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource Group name of the Log Analytics Workspace"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -558,7 +515,7 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "#/definitions/SearchResultResponse"
+              "$ref": "#/definitions/SearchResultsResponse"
             }
           },
           "202": {
@@ -570,17 +527,13 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/search/{id}": {
       "post": {
         "tags": [
-          "Search"
+          "Workspaces"
         ],
-        "operationId": "Search_UpdateSearchResults",
+        "operationId": "Workspaces_UpdateSearchResults",
         "description": "Gets updated search results for a given search query.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource Group name of the Log Analytics Workspace"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -594,7 +547,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The id of the search that will have results updated."
+            "description": "The id of the search that will have results updated. You can get the id from the response of the response of the GetResults call."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -607,85 +560,95 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "#/definitions/SearchResultResponse"
+              "$ref": "#/definitions/SearchResultsResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     }
   },
   "definitions": {
-    "Account": {
+    "LinkTarget": {
       "properties": {
         "customerId": {
           "type": "string",
-          "description": "Gets or sets the unique ID of the account."
+          "description": "The GUID that uniquely identifies the workspace. "
         },
         "accountName": {
           "type": "string",
-          "description": "Gets or sets the name of the account."
+          "description": "The display name of the workspace.",
+          "x-ms-client-name": "DisplayName"
         },
         "workspaceName": {
           "type": "string",
-          "description": "Gets or sets the DNS valid workspace name associated with the account."
+          "description": "The DNS valid workspace name."
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the Azure region that the account was created in."
+          "description": "The location of the workspace."
         }
       },
-      "description": "Metadata for an Operational Insights account that isn't linked to a workspace."
+      "description": "Metadata for a workspace that isn't linked to an Azure subscription."
     },
     "Tag": {
       "properties": {
         "Name": {
           "type": "string",
-          "description": "Gets or sets the tag name."
+          "description": "The tag name."
         },
         "Value": {
           "type": "string",
-          "description": "Gets or sets the tag value."
+          "description": "The tag value."
         }
       },
+      "required": [
+        "Name",
+        "Value"
+      ],
       "description": "A tag of a saved search."
     },
     "SavedSearchProperties": {
       "properties": {
         "Category": {
           "type": "string",
-          "description": "Gets or sets the category."
+          "description": "The category of the saved search. This helps the user to find a saved search faster. "
         },
         "DisplayName": {
           "type": "string",
-          "description": "Gets or sets the display name."
+          "description": "Saved search display name."
         },
         "Query": {
           "type": "string",
-          "description": "Gets or sets the query."
+          "description": "The query expression for the saved search. Please see https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-search-reference for reference."
         },
         "Version": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the version number."
+          "minimum": 1,
+          "maximum": 1,
+          "description": "The version number of the query lanuage. Only verion 1 is allowed here."
         },
         "Tags": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Tag"
           },
-          "description": "Gets or sets the tags attached to the saved search."
+          "description": "The tags attached to the saved search."
         }
       },
+      "required":[
+        "Category",
+        "DisplayName",
+        "Query",
+        "Version"
+      ],
       "description": "Value object for saved search results."
     },
     "SavedSearchCreateOrUpdateParameters": {
       "properties": {
         "etag": {
           "type": "string",
-          "description": "Gets or sets the etag of the saved search."
+          "description": "The etag of the saved search."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -695,61 +658,46 @@
       },
       "description": "Parameters for creating/updating a saved search"
     },
-    "GetSavedSearchResult": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the id of the saved search."
-        },
-        "etag": {
-          "type": "string",
-          "description": "Gets or sets the etag of the saved search."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SavedSearchProperties",
-          "description": "Gets or sets properties of the saved search."
-        }
-      },
-      "description": "Value object for saved search results."
-    },
     "CoreSummary": {
       "properties": {
         "Status": {
           "type": "string",
-          "description": "Gets or sets the status of a core summary."
+          "description": "The status of a core summary."
         },
         "NumberOfDocuments": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the number of documents of a core summary."
+          "description": "The number of documents of a core summary."
         }
       },
+      "required": [
+        "NumberOfDocuments" 
+      ],
       "description": "The core summary of a search."
     },
     "SearchSort": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the field the search query is sorted on."
+          "description": "The name of the field the search query is sorted on."
         },
         "order": {
           "type": "string",
-          "description": "Gets or sets the sort order of the search."
+          "description": "The sort order of the search."
         }
       },
       "description": "The sort parameters for search."
     },
-    "SavedSearchMetadataSchema": {
+    "SearchMetadataSchema": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the name."
+          "description": "The name."
         },
         "version": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the version."
+          "description": "The version."
         }
       },
       "description": "Metadata items for saved search items."
@@ -757,51 +705,52 @@
     "SearchMetadata": {
       "properties": {
         "RequestId": {
+          "x-ms-client-name": "SearchId",
           "type": "string",
-          "description": "Gets or sets the request id of the search."
+          "description": "The request id of the search."
         },
         "resultType": {
           "type": "string",
-          "description": "Gets or sets the search result type."
+          "description": "The search result type."
         },
         "total": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the total search results."
+          "description": "The total search results."
         },
         "top": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the number of top search results."
+          "description": "The number of top search results."
         },
         "id": {
           "type": "string",
-          "description": "Gets or sets the id of the search results request."
+          "description": "The id of the search results request."
         },
         "CoreSummaries": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/CoreSummary"
           },
-          "description": "Gets or sets the core summaries."
+          "description": "The core summaries."
         },
         "Status": {
           "type": "string",
-          "description": "Gets or sets the status of the search results."
+          "description": "The status of the search results."
         },
         "StartTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start time for the search."
+          "description": "The start time for the search."
         },
         "LastUpdated": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the time of last update."
+          "description": "The time of last update."
         },
         "ETag": {
           "type": "string",
-          "description": "Gets or sets the ETag of the search results."
+          "description": "The ETag of the search results."
         },
         "sort": {
           "type": "array",
@@ -813,42 +762,42 @@
         "requestTime": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the request time."
+          "description": "The request time."
         },
         "aggregatedValueField": {
           "type": "string",
-          "description": "Gets or sets the aggregated value field."
+          "description": "The aggregated value field."
         },
         "aggregatedGroupingFields": {
           "type": "string",
-          "description": "Gets or sets the aggregated grouping fields."
+          "description": "The aggregated grouping fields."
         },
         "sum": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the sum."
+          "description": "The sum."
         },
         "max": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the max."
+          "description": "The max."
         },
         "schema": {
-          "$ref": "#/definitions/SavedSearchMetadataSchema",
-          "description": "Gets or sets the schema."
+          "$ref": "#/definitions/SearchMetadataSchema",
+          "description": "The schema."
         }
       },
       "description": "Metadata for search results."
     },
-    "SavedSearchValue": {
+    "SavedSearch": {
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the id of the saved search."
+          "description": "The id of the saved search."
         },
         "etag": {
           "type": "string",
-          "description": "Gets or sets the etag of the saved search."
+          "description": "The etag of the saved search."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -858,18 +807,19 @@
       },
       "description": "Value object for saved search results."
     },
-    "SearchListSavedSearchResult": {
+    "SavedSearchesListResult": {
       "properties": {
         "__metadata": {
+          "x-ms-client-name": "Metadata",
           "$ref": "#/definitions/SearchMetadata",
-          "description": "Gets or sets the metadata from search results."
+          "description": "The metadata from search results."
         },
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SavedSearchValue"
+            "$ref": "#/definitions/SavedSearch"
           },
-          "description": "Gets or sets the array of result values."
+          "description": "The array of result values."
         }
       },
       "description": "The saved search operation response."
@@ -878,35 +828,36 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "Gets or sets the error type."
+          "description": "The error type."
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the error message."
+          "description": "The error message."
         }
       },
       "description": "Details for a search error."
     },
-    "SearchResultResponse": {
+    "SearchResultsResponse": {
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the id of the search, which includes the full url."
+          "description": "The id of the search, which includes the full url."
         },
         "__metadata": {
+          "x-ms-client-name": "Metadata",
           "$ref": "#/definitions/SearchMetadata",
-          "description": "Gets or sets the metadata from search results."
+          "description": "The metadata from search results."
         },
         "value": {
           "type": "array",
           "items": {
             "type": "object"
           },
-          "description": "Gets or sets the array of result values."
+          "description": "The array of result values."
         },
         "error": {
           "$ref": "#/definitions/SearchError",
-          "description": "Gets or sets the error."
+          "description": "The error."
         }
       },
       "description": "The get search result operation response."
@@ -915,50 +866,56 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the name."
+          "description": "The name."
         },
         "displayName": {
           "type": "string",
-          "description": "Gets or sets the display name."
+          "description": "The display name."
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the type."
+          "description": "The type."
         },
         "indexed": {
           "type": "boolean",
-          "description": "Gets or sets the boolean that indicates the field is searchable as free text."
+          "description": "The boolean that indicates the field is searchable as free text."
         },
         "stored": {
           "type": "boolean",
-          "description": "Gets or sets the boolean that indicates whether or not the field is stored."
+          "description": "The boolean that indicates whether or not the field is stored."
         },
         "facet": {
           "type": "boolean",
-          "description": "Gets or sets the boolean that indicates whether or not the field is a facet."
+          "description": "The boolean that indicates whether or not the field is a facet."
         },
         "ownerType": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the array of workflows containing the field."
+          "description": "The array of workflows containing the field."
         }
       },
+      "required": [
+        "facet",
+        "stored",
+        "indexed"
+      ],
       "description": "Value object for schema results."
     },
     "SearchGetSchemaResponse": {
       "properties": {
         "__metadata": {
+          "x-ms-client-name": "Metadata",
           "$ref": "#/definitions/SearchMetadata",
-          "description": "Gets or sets the metadata from search results."
+          "description": "The metadata from search results."
         },
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SearchSchemaValue"
           },
-          "description": "Gets or sets the array of result values."
+          "description": "The array of result values."
         }
       },
       "description": "The get schema operation response."
@@ -967,11 +924,11 @@
       "properties": {
         "pre": {
           "type": "string",
-          "description": "Gets or sets the string that is put before a matched result."
+          "description": "The string that is put before a matched result."
         },
         "post": {
           "type": "string",
-          "description": "Gets or sets the string that is put after a matched result."
+          "description": "The string that is put after a matched result."
         }
       },
       "description": "Highlight details."
@@ -981,25 +938,25 @@
         "top": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the number to get from the top."
+          "description": "The number to get from the top."
         },
         "highlight": {
           "$ref": "#/definitions/SearchHighlight",
-          "description": "Gets or sets the highlight that looks for all occurences of a string."
+          "description": "The highlight that looks for all occurences of a string."
         },
         "query": {
           "type": "string",
-          "description": "Gets or sets the query to search."
+          "description": "The query to search."
         },
         "start": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start date filter, so the only query results returned are after this date."
+          "description": "The start date filter, so the only query results returned are after this date."
         },
         "end": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the end date filter, so the only query results returned are before this date."
+          "description": "The end date filter, so the only query results returned are before this date."
         }
       },
       "description": "Parameters specifying the search query and range."
@@ -1008,11 +965,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the Azure Resource Manager ID of the storage account resource."
+          "description": "The Azure Resource Manager ID of the storage account resource."
         },
         "key": {
           "type": "string",
-          "description": "Gets or sets the storage account key."
+          "description": "The storage account key."
         }
       },
       "description": "Describes a storage account connection."
@@ -1021,7 +978,7 @@
       "properties": {
         "state": {
           "type": "string",
-          "description": "Gets or sets the state of the storage insight connection to the workspace"
+          "description": "The state of the storage insight connection to the workspace"
         }
       },
       "description": "The status of the storage insight."
@@ -1033,22 +990,22 @@
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the names of the blob containers that the workspace should read"
+          "description": "The names of the blob containers that the workspace should read"
         },
         "tables": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the names of the Azure tables that the workspace should read"
+          "description": "The names of the Azure tables that the workspace should read"
         },
         "storageAccount": {
           "$ref": "#/definitions/StorageAccount",
-          "description": "Gets or sets the storage account connection details"
+          "description": "The storage account connection details"
         },
         "status": {
           "$ref": "#/definitions/StorageInsightStatus",
-          "description": "Gets or sets the status of the storage insight"
+          "description": "The status of the storage insight"
         }
       },
       "required": [
@@ -1065,7 +1022,7 @@
         },
         "eTag": {
           "type": "string",
-          "description": "Gets or sets the ETag of the storage insight."
+          "description": "The ETag of the storage insight."
         }
       },
       "allOf": [
@@ -1086,7 +1043,7 @@
         },
         "@odata.nextLink": {
           "type": "string",
-          "description": "Gets or sets the link (url) to the next page of results."
+          "description": "The link (url) to the next page of results."
         }
       },
       "description": "The list storage insights operation response."
@@ -1137,6 +1094,17 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+        "name": "resourceGroupName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method",
+        "description": "The name of the resource group to get. The name is case insensitive.",
+        "pattern": "^[-\\w\\._\\(\\)]+$",
+        "minLength": 1,
+        "maxLength": 90
     }
   }
 }
