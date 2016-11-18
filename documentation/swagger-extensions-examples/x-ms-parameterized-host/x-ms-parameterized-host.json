@@ -1,0 +1,76 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Swagger Petstore",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{petStoreBaseUrl}",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "name": "petStoreBaseUrl",
+        "description": "PetStore base url eg. https://mydomain.petstore.com/",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+},
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/pets": {
+      "put": {
+        "description": "Add a pet",
+        "summary": "Add a pet",
+        "operationId": "addPet",
+        "tags": [
+          "pets"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/Pet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Pet": {
+      "description": "The pet model",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "petType": {
+          "type": "string"
+        }
+      },
+      "discriminator": "name",
+      "required": [
+        "name",
+        "petType"
+      ]
+    }
+  }
+}
