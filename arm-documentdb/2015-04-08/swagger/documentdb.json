@@ -312,6 +312,7 @@
       "post": {
         "operationId": "DatabaseAccounts_RegenerateKey",
         "description": "Regenerates an access key for the specified Azure DocumentDB database account.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -336,6 +337,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted. The regenerate key operation will complete asynchronously."
           }
@@ -380,11 +384,16 @@
       "description": "The List operation response, that contains the database accounts and their properties."
     },
     "FailoverPolicies": {
-      "type": "array",
-      "description": "List of failover policies.",
-      "items": {
-        "$ref": "#/definitions/FailoverPolicy"
-      }
+      "properties": {
+        "failoverPolicies": {
+          "type": "array",
+          "description": "List of failover policies.",
+          "items": {
+            "$ref": "#/definitions/FailoverPolicy"
+          }
+        }
+      },
+      "description": "The list of new failover policies for the failover priority change."
     },
     "FailoverPolicy": {
       "type": "object",
