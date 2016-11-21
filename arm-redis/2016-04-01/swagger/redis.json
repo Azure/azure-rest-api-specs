@@ -692,6 +692,10 @@
           "format": "int32",
           "description": "The number of shards to be created on a Premium Cluster Cache."
         },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the Redis cache to deploy."
+        },
         "subnetId": {
           "type": "string",
           "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$",
@@ -707,12 +711,6 @@
       "x-ms-external": true
     },
     "RedisCreateProperties" : {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU of the Redis cache to deploy."
-        }
-      },
       "required": [
         "sku"
       ],
@@ -725,10 +723,6 @@
     },
     "RedisUpdateProperties" : {
       "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU of the Redis cache to deploy."
-        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -850,12 +844,13 @@
           "type": "integer",
           "format": "int32",
           "description": "Redis SSL port."
-        },
-        "properties": {
-          "$ref": "#/definitions/RedisCreateProperties",
-          "x-ms-client-flatten": true
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RedisProperties"
+        }
+      ],
       "description": "Parameters describing a Redis instance."
     },
     "RedisResource": {
