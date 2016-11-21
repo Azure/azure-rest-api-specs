@@ -100,6 +100,12 @@
               "$ref": "#/definitions/IotHubDescription"
             }
           },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IotHubDescription"
+            }
+          },
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
@@ -144,6 +150,21 @@
             "description": "The Iot Hub resource provider always returns a 202 Accepted status code with valid Location and Retry-After headers. The resource provider also sets the Azure-AsyncOperation header with a URL that points to the operation resource for this operation. Subsequent GET attempts on the resource after a DELETE operation return a resource representation that indicates a transitional provisioning state (such as Terminating). To retrieve the status of the operation, a client can either poll the URL returned in the Location header after the Retry-After interval, get the IoT Hub service status directly, or query the operation resource.",
             "schema": {
               "$ref": "#/definitions/IotHubDescription"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IotHubDescription"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
             }
           },
           "default": {
@@ -1020,7 +1041,11 @@
             "modelAsString": false
           }
         }
-      }
+      },
+      "required": [
+        "keyName",
+        "rights"
+      ]
     },
     "IotHubProperties": {
       "description": "The properties of an IoT hub.",
@@ -1051,21 +1076,21 @@
           "readOnly": true
         },
         "eventHubEndpoints": {
-          "description": "The Event Hub-compatible endpoint properties.",
+          "description": "The Event Hub-compatible endpoint properties. The possible keys to this dictionary are events and operationsMonitoringEvents. Both of these keys have to be present in the dictionary while making create or update calls for the IoT hub.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/EventHubProperties"
           }
         },
         "storageEndpoints": {
-          "description": "The list of Azure Storage endpoints where you can upload files. Currently you can configure only one Azure Storage account.",
+          "description": "The list of Azure Storage endpoints where you can upload files. Currently you can configure only one Azure Storage account and that MUST have its key as $default. Specifying more than one storage account causes an error to be thrown.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/StorageEndpointProperties"
           }
         },
         "messagingEndpoints": {
-          "description": "The list of the configured feedback messaging endpoints.",
+          "description": "The list of the configured feedback messaging endpoints. Currently only one feedback messaging endpoint is configured and that has its key as fileNotifications. Specifying more than one endpoint causes an error to be thrown.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/MessagingEndpointProperties"
@@ -1124,7 +1149,11 @@
           "description": "The number of provisioned IoT Hub units. See: https://docs.microsoft.com/azure/azure-subscription-service-limits#iot-hub-limits.",
           "type": "integer"
         }
-      }
+      },
+      "required": [
+        "name",
+        "capacity"
+      ]
     },
     "EventHubProperties": {
       "description": "The properties of the provisioned Event Hub-compatible endpoint used by the IoT hub.",
@@ -1157,22 +1186,6 @@
           "description": "The Event Hub-compatible endpoint.",
           "type": "string",
           "readOnly": true
-        },
-        "internalAuthorizationPolicies": {
-          "description": "The internal authorization rules.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SharedAccessAuthorizationRule"
-          }
-        },
-        "authorizationPolicies": {
-          "description": "The authorization rules.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SharedAccessAuthorizationRule"
-          }
         }
       }
     },
@@ -1190,10 +1203,14 @@
           "type": "string"
         },
         "containerName": {
-          "description": "The name of the root container where you upload files.",
+          "description": "The name of the root container where you upload files. The container need not exist but should be creatable using the connectionString specified.",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "connectionString",
+        "containerName"
+      ]
     },
     "MessagingEndpointProperties": {
       "description": "The properties of the messaging endpoints used by this IoT hub.",
@@ -1240,7 +1257,7 @@
       }
     },
     "OperationsMonitoringProperties": {
-      "description": "The operations monitoring properties for the IoT hub.",
+      "description": "The operations monitoring properties for the IoT hub. The possible keys to the dictionary are Connections, DeviceTelemetry, C2DCommands, DeviceIdentityOperations, FileUploadOperations.",
       "type": "object",
       "properties": {
         "events": {
@@ -1284,62 +1301,6 @@
         "action",
         "ipMask"
       ]
-    },
-    "SharedAccessAuthorizationRule": {
-      "type": "object",
-      "properties": {
-        "KeyName": {
-          "description": "The shared access policy name.",
-          "type": "string"
-        },
-        "PrimaryKey": {
-          "description": "The shared access primary key.",
-          "type": "string"
-        },
-        "IssuerName": {
-          "description": "The issuer name.",
-          "type": "string"
-        },
-        "SecondaryKey": {
-          "description": "The shared access secondary key.",
-          "type": "string"
-        },
-        "ClaimType": {
-          "description": "The claim type.",
-          "type": "string"
-        },
-        "ClaimValue": {
-          "description": "The claim value.",
-          "type": "string"
-        },
-        "Rights": {
-          "type": "array",
-          "description": "The rights.",
-          "items": {
-            "enum": [ "Manage", "Send", "Listen", "ManageNotificationHub" ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "SBAccessRights",
-              "modelAsString": false
-            }
-          }
-        },
-        "CreatedTime": {
-          "description": "The created time.",
-          "format": "date-time",
-          "type": "string"
-        },
-        "ModifiedTime": {
-          "description": "The modified time.",
-          "format": "date-time",
-          "type": "string"
-        },
-        "Revision": {
-          "description": "The revision number.",
-          "format": "int64",
-          "type": "integer"
-        }
-      }
     },
     "FeedbackProperties": {
       "description": "The properties of the feedback queue for cloud-to-device messages.",
@@ -1391,6 +1352,11 @@
         {
           "$ref": "#/definitions/Resource"
         }
+      ],
+      "required": [
+        "subscriptionid",
+        "resourcegroup",
+        "sku"
       ]
     },
     "Resource": {
@@ -1423,7 +1389,10 @@
           "description": "The resource tags."
         }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "required": [
+        "location"
+      ]
     },
     "SharedAccessSignatureAuthorizationRuleListResult": {
       "description": "The list of shared access policies with a next link.",
@@ -1538,7 +1507,11 @@
         "capacity": {
           "$ref": "#/definitions/IotHubCapacity"
         }
-      }
+      },
+      "required": [
+        "sku",
+        "capacity"
+      ]
     },
     "IotHubCapacity": {
       "description": "IoT Hub capacity information.",
@@ -1671,10 +1644,6 @@
         },
         "statusMessage": {
           "description": "The status message for the job.",
-          "type": "string"
-        },
-        "deviceId": {
-          "description": "The device identifier related to this response.",
           "type": "string"
         },
         "parentJobId": {
