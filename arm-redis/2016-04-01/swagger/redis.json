@@ -174,10 +174,10 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully deleted the cache."
           },
           "204": {
-            "description": ""
+            "description": "Successfully deleted the cache."
           }
         }
       },
@@ -214,7 +214,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully found the cache",
             "schema": {
               "$ref": "#/definitions/RedisResource"
             }
@@ -287,7 +287,7 @@
           }
         },
         "x-ms-pageable": {
-            "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -541,6 +541,213 @@
           },
           "204": {
             "description": "Export operation succeeded."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/firewallRules/": {
+      "get": {
+        "tags": [
+          "Redis",
+          "FirewallRules"
+        ],
+        "operationId": "RedisFirewallRules_List",
+        "description": "Gets all firewall rules in the specified redis cache.",
+        "x-ms-examples": { 
+          "RedisCacheFirewallRulesList": { "$ref": "../examples/RedisCacheFirewallRulesList.json" } 
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the current rules",
+            "schema": {
+              "$ref": "#/definitions/RedisFirewallRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{cacheName}/firewallRules/{rule}": {
+      "put": {
+        "tags": [
+          "Redis",
+          "FirewallRules"
+        ],
+        "operationId": "RedisFirewallRule_CreateOrUpdate",
+        "description": "Create or update a redis cache firewall rule",
+        "x-ms-examples": { 
+          "RedisCacheFirewallRuleCreate": { "$ref": "../examples/RedisCacheFirewallRuleCreate.json" }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisFirewallRule"
+            },
+            "description": "Parameters supplied to the create or update redis firewall rule operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource was successfully updated",
+            "schema": {
+              "$ref": "#/definitions/RedisFirewallRule"
+            }
+          },
+          "201": {
+            "description": "Resource was successfully created",
+            "schema": {
+              "$ref": "#/definitions/RedisFirewallRule"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Redis",
+          "FirewallRules"
+        ],
+        "operationId": "RedisFirewallRule_Get",
+        "description": "Gets a single firewall rule in a specified redis cache.",
+        "x-ms-examples": { 
+          "RedisCacheFirewallRuleGet": { "$ref": "../examples/RedisCacheFirewallRuleGet.json" }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully found the rule",
+            "schema": {
+              "$ref": "#/definitions/RedisFirewallRule"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Redis",
+          "FirewallRules"
+        ],
+        "operationId": "RedisFirewallRule_Delete",
+        "description": "Deletes a single firewall rule in a specified redis cache.",
+        "x-ms-examples": { 
+          "RedisCacheFirewallRuleDelete": { "$ref": "../examples/RedisCacheFirewallRuleDelete.json" }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the rule"
+          },
+          "204": {
+            "description": "Successfully deleted the rule"
           }
         }
       }
@@ -863,7 +1070,7 @@
         }
       },
       "description": "Parameters supplied to the Update Redis operation."
-    },    
+    },
     "RedisAccessKeys": {
       "properties": {
         "primaryKey": {
@@ -878,6 +1085,70 @@
         }
       },
       "description": "Redis cache access keys."
+    },
+    "RedisFirewallRule": {
+      "description": "A firewall rule on a redis cache has a name, and describes a contiguous range of IP addresses permitted to connect",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "resource ID (of the firewall rule)"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "name of the firewall rule"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "type (of the firewall rule resource = 'Microsoft.Cache/redis/firewallRule')"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisFirewallRuleProperties",
+          "description": "redis cache firewall rule properties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "RedisFirewallRuleProperties": {
+      "description": "Specifies a range of IP addresses permitted to connect to the cache",
+      "properties": {
+        "startIP": {
+          "type": "string",
+          "description": "lowest IP address included in the range"
+        },
+        "endIP": {
+          "type": "string",
+          "description": "highest IP address included in the range"
+        }
+      },
+      "required": [
+        "startIP",
+        "endIP"
+      ]
+    },
+    "RedisFirewallRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisFirewallRule"
+          },
+          "description": "Results of the list firewall rules operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link for next set of locations."
+        }
+      },
+      "description": "The response of list firewall rules Redis operation.",
+      "required": [
+        "value"
+      ]
     },
     "RedisResourceProperties": {
       "properties": {
