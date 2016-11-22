@@ -4506,6 +4506,229 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identityProviders": {
+      "get": {
+        "tags": [
+          "IdentityProvider"
+        ],
+        "operationId": "IdentityProviders_ListByService",
+        "description": "Lists a collection of Identity Provider configured in the specified service instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }          
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists a collection of Identity Providers.",
+            "schema": {
+              "$ref": "#/definitions/IdentityProviderList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identityProviders/{identityProviderName}": {
+      "get": {
+        "tags": [
+          "IdentityProvider"
+        ],
+        "operationId": "IdentityProviders_Get",
+        "description": "Gets the configuration details of the identity Provider configured in specified service instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IdentityProviderNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified IdentityProvider entity configuration details.",
+            "schema": {
+              "$ref": "#/definitions/IdentityProviderGetContract"
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IdentityProvider"
+        ],
+        "operationId": "IdentityProviders_CreateOrUpdate",
+        "description": "Creates or Updates the IdentityProvider configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IdentityProviderNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IdentityProviderCreateParameters"
+            },
+            "description": "Create parameters."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "IdentityProvider configuration were successfully created."
+          },
+          "204": {
+            "description": "The existing Identity Provider was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "IdentityProviders"
+        ],
+        "operationId": "IdentityProviders_Update",
+        "description": "Updates an existing IdentityProvider configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IdentityProviderNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IdentityProviderUpdateParameters"
+            },
+            "description": "Update parameters."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the identity provider configuration to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+           "204": {
+            "description": "The existing identity provider configuration was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IdentityProvider"
+        ],
+        "operationId": "IdentityProviders_Delete",
+        "description": "Deletes the specified identity provider configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IdentityProviderNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the backend to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The identity provider configuration was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      }
     }
   },
   "x-ms-paths": {
@@ -6446,6 +6669,79 @@
       },
       "description": "Parameters supplied to the Update Backend operation."
     },
+    "IdentityProviderGetContract": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/IdentityProviderCreateParameters"
+        }
+      ],
+      "description": "The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users."
+    },
+    "IdentityProviderList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IdentityProviderGetContract"
+          },
+          "description": "Identity Provider configuration values."
+        }
+      },
+      "description": "List of all the Identity Providers configured on the service instance."
+    },
+    "IdentityProviderCreateParameters": {
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-aad#how-to-authorize-developer-accounts-using-azure-active-directory"
+      },
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.",
+          "minLength": 1
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.",
+          "minLength": 1
+        },
+        "allowedTenants": {
+         "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 32,
+          "description": "List of Allowed Tenants when configuring Azure Active Directory login."
+        }
+      },
+      "required": [
+        "clientId",
+        "clientSecret"
+      ],
+      "description": "Parameters supplied to the Create Identity Provider operation."
+    },
+    "IdentityProviderUpdateParameters": {
+      "properties": {
+       "clientId": {
+          "type": "string",
+          "description": "Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.",
+          "minLength": 1
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.",
+          "minLength": 1
+        },
+        "allowedTenants": {
+         "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 32,
+          "description": "List of Allowed Tenants when configuring Azure Active Directory login."
+        }
+      },
+      "description": "Parameters supplied to the Update Identity Provider operation."
+    },
     "PropertyContract": {
       "properties": {
         "id": {
@@ -6991,6 +7287,25 @@
       "format": "int32",
       "description": "Number of records to return.",
       "minimum": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "IdentityProviderNameParameter": {
+      "name": "identityProviderName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "facebook",
+        "google",
+        "microsoft",
+        "twitter",
+        "aad"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityProviderNameType",
+        "modelAsString": true
+      },
+      "description": "Identity Provider Type identifier.",
       "x-ms-parameter-location": "method"
     }
   }
