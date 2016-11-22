@@ -12,7 +12,6 @@ var swaggerSchemaUrl = "http://json.schemastore.org/swagger-2.0";
 var swaggerSchemaAltUrl = "http://swagger.io/v2/schema.json";
 var schemaUrl = "http://json-schema.org/draft-04/schema";
 var jsonSchemaFile = path.resolve(__dirname, "./JsonSchemaDraft4.json");
-console.log(jsonSchemaFile);
 var swaggerSchema; 
 var extensionSwaggerSchema;
 var schema4;
