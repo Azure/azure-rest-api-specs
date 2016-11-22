@@ -11,7 +11,7 @@ var extensionSwaggerSchemaUrl = "https://raw.githubusercontent.com/Azure/autores
 var swaggerSchemaUrl = "http://json.schemastore.org/swagger-2.0";
 var swaggerSchemaAltUrl = "http://swagger.io/v2/schema.json";
 var schemaUrl = "http://json-schema.org/draft-04/schema";
-var jsonSchemaFile = "./test/JsonSchemaDraft4.json"; 
+var jsonSchemaFile = "./JsonSchemaDraft4.json"; 
 var swaggerSchema; 
 var extensionSwaggerSchema;
 var schema4;
@@ -57,7 +57,7 @@ describe('Azure Swagger Schema Validation', function() {
           done();
         }
         var validator = new z();
-        validator.setRemoteReference(schemaUrl, schema4);
+        //validator.setRemoteReference(schemaUrl, schema4);
         validator.setRemoteReference(swaggerSchemaUrl, swaggerSchema);
         var valid = validator.validate(JSON.parse(stripBOM(data)), extensionSwaggerSchema);
         if (!valid) {
