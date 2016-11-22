@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2016-03-01",
+    "version": "2015-04-01",
     "title": "Domains API Client"
   },
   "host": "management.azure.com",
@@ -852,8 +852,7 @@
             },
             "privacy": {
               "description": "<code>true</code> if domain privacy is enabled for this domain; otherwise, <code>false</code>.",
-              "type": "boolean",
-              "readOnly": true
+              "type": "boolean"
             },
             "createdTime": {
               "format": "date-time",
@@ -981,10 +980,21 @@
     "DomainOwnershipIdentifier": {
       "description": "Domain ownership Identifier.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "ownershipId": {
-          "description": "Ownership Id.",
-          "type": "string"
+        "properties": {
+          "description": "ARM envelope properties",
+          "properties": {
+            "ownershipId": {
+              "description": "Ownership Id.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -1184,6 +1194,7 @@
       "in": "path",
       "description": "Name of the resource group to which the resource belongs.",
       "required": true,
+      "x-ms-parameter-location": "method",
       "type": "string",
       "maxLength": 90,
       "minLength": 1,
