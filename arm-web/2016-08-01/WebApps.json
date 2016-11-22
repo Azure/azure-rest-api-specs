@@ -2012,7 +2012,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DomainOwnershipIdentifierCollection"
+              "$ref": "#/definitions/IdentifierCollection"
             }
           }
         },
@@ -2065,7 +2065,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DomainOwnershipIdentifier"
+              "$ref": "#/definitions/Identifier"
             }
           }
         }
@@ -6413,7 +6413,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DomainOwnershipIdentifierCollection"
+              "$ref": "#/definitions/IdentifierCollection"
             }
           }
         },
@@ -6473,7 +6473,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DomainOwnershipIdentifier"
+              "$ref": "#/definitions/Identifier"
             }
           }
         }
@@ -11737,47 +11737,6 @@
         }
       }
     },
-    "DomainOwnershipIdentifier": {
-      "description": "Domain ownership Identifier.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "ARM envelope properties",
-          "properties": {
-            "ownershipId": {
-              "description": "Ownership Id.",
-              "type": "string"
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "DomainOwnershipIdentifierCollection": {
-      "description": "Collection of domain ownership identifiers.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DomainOwnershipIdentifier"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string"
-        }
-      }
-    },
     "EnabledConfig": {
       "description": "Enabled configuration.",
       "type": "object",
@@ -12182,6 +12141,26 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "IdentifierCollection": {
+      "description": "Collection of identifiers.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Identifier"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
         }
       }
     },
