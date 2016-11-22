@@ -589,6 +589,14 @@
               "description": "Specification for the App Service Environment to use for the certificate.",
               "readOnly": true
             },
+            "keyVaultId": {
+              "description": "Key Vault Csm resource Id.",
+              "type": "string"
+            },
+            "keyVaultSecretName": {
+              "description": "Key Vault secret name.",
+              "type": "string"
+            },
             "keyVaultSecretStatus": {
               "description": "Status of the Key Vault secret.",
               "enum": [
@@ -755,6 +763,7 @@
       "in": "path",
       "description": "Name of the resource group to which the resource belongs.",
       "required": true,
+      "x-ms-parameter-location": "method",
       "type": "string",
       "maxLength": 90,
       "minLength": 1,
