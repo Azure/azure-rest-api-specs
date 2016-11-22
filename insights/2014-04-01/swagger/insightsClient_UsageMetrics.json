@@ -31,7 +31,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "Client Api Version."
+            "description": "Client Api Version. NOTE: This is not a client property, it must be explicit in the call and there is no default value."
           },
           {
             "name": "$filter",
@@ -61,6 +61,7 @@
   },
   "definitions": {
     "LocalizableString": {
+      "required": [ "value" ],
       "properties": {
         "value": {
           "type": "string",
