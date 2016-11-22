@@ -419,7 +419,7 @@
         "tags": [
           "StorageAccounts"
         ],
-        "operationId": "StorageAccounts_ListAccountSas",
+        "operationId": "StorageAccounts_ListAccountSAS",
         "description": "List SAS credentials of a storage account.",
         "parameters": [
           {
@@ -456,7 +456,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- returned the account sas created for the storage account requested.",
+            "description": "OK -- returned the account SAS created for the storage account requested.",
             "schema": {
               "$ref": "#/definitions/ListAccountSasResponse"
             }
@@ -469,7 +469,7 @@
         "tags": [
           "StorageAccounts"
         ],
-        "operationId": "StorageAccounts_ListServiceSas",
+        "operationId": "StorageAccounts_ListServiceSAS",
         "description": "List service SAS credentials of a specific resource.",
         "parameters": [
           {
@@ -484,7 +484,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
             "maxLength": 24,
             "minLength": 3
           },
@@ -506,7 +506,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- returned the service sas created for the storage service requested.",
+            "description": "OK -- returned the service SAS created for the storage service requested.",
             "schema": {
               "$ref": "#/definitions/ListServiceSasResponse"
             }
@@ -529,7 +529,8 @@
       "required": [
         "name",
         "type"
-      ]
+      ],
+      "description": "The parameters used to check the availabity of storage account name."
     },
     "CheckNameAvailabilityResult": {
       "properties": {
@@ -672,7 +673,8 @@
             "modelAsString": false
           }
         }
-      }
+      },
+      "description": "The parameters used to create storage account."
     },
     "StorageAccountCreateParameters": {
       "properties": {
@@ -837,7 +839,8 @@
             "modelAsString": false
           }
         }
-      }
+      },
+      "description": "Properties of storage account."
     },
     "StorageAccount": {
       "properties": {
@@ -933,7 +936,8 @@
       },
       "required": [
         "keyName"
-      ]
+      ],
+      "description": "The parameters used to regenerate storage account key."
     },
     "StorageAccountPropertiesUpdateParameters": {
       "properties": {
@@ -957,7 +961,8 @@
             "modelAsString": false
           }
         }
-      }
+      },
+      "description": "The parameters used when updating a storage account."
     },
     "StorageAccountUpdateParameters": {
       "properties": {
@@ -1074,7 +1079,8 @@
           "description": "Tags assigned to a resource; can be used for viewing and grouping a resource (across resource groups)."
         }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "description": "Describes storage resource."
     },
     "AccountSasParameters": {
       "properties": {
@@ -1155,7 +1161,7 @@
         "signedPermission",
         "signedExpiry"
       ],
-      "description": "The parameters to list sas credentials of a storage account."
+      "description": "The parameters to list SAS credentials of a storage account."
     },
     "ListAccountSasResponse": {
       "properties": {
@@ -1165,7 +1171,7 @@
           "description": "List SAS credentials of storage account."
         }
       },
-      "description": "The List sas credentials operation response."
+      "description": "The List SAS credentials operation response."
     },
     "ServiceSasParameters": {
       "properties": {
@@ -1286,7 +1292,7 @@
         }
       },
       "required": [
-        "canonicalizedResrouce",
+        "canonicalizedResource",
         "signedResource"
       ],
       "description": "The parameters to list service SAS credentials of a speicific resource."
