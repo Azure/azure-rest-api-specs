@@ -11,7 +11,7 @@ var extensionSwaggerSchemaUrl = "https://raw.githubusercontent.com/Azure/autores
 var swaggerSchemaUrl = "http://json.schemastore.org/swagger-2.0";
 var swaggerSchemaAltUrl = "http://swagger.io/v2/schema.json";
 var schemaUrl = "http://json-schema.org/draft-04/schema";
-var jsonSchemaFile = "./JsonSchemaDraft4.json"; 
+var jsonSchemaFile = path.resolve(__dirname, schemaUrl);
 var swaggerSchema; 
 var extensionSwaggerSchema;
 var schema4;
