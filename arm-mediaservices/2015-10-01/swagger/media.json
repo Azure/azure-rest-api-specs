@@ -415,13 +415,7 @@
         "operationId": "MediaService_SyncStorageKeys",
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/MediaService"
-            }
-          },
-          "202": {
-            "description": "Accepted"
+            "description": "OK"
           },
           "default": {
             "description": "Detailed error information.",
@@ -611,7 +605,10 @@
             "modelAsString": false
           }  
         }
-      }
+      },
+      "required": [
+        "keyType"
+      ]
     },
     "RegenerateKeyOutput": {
       "description": "The response body for a RegenerateKey API.",
@@ -687,7 +684,10 @@
           "description": "The id of the storage account resource.",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "id"
+      ]
     },
     "TrackedResource": {
       "description": "ARM tracked resource",
