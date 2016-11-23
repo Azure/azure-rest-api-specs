@@ -155,6 +155,9 @@
         "responses": {
           "202": {
             "description": "Accepted. Note that a 202 status is returned even if the service did not exist."
+          },
+          "204": {
+            "description": "No Content."
           }
         },
         "x-ms-long-running-operation": true
@@ -196,6 +199,9 @@
         "tags": [
           "WebServices"
         ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "operationId": "WebServices_ListInResourceGroup",
         "description": "Gets the web services in the specified resource group.",
         "parameters": [
@@ -231,6 +237,9 @@
         "tags": [
           "WebServices"
         ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "operationId": "WebServices_List",
         "description": "Gets the web services in the specified subscription.",
         "parameters": [
