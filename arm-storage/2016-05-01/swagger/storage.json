@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "StorageManagementClient",
-    "description": "The Storage Management Client.",
+    "title": "StorageManagement",
+    "description": "The Azure Storage Management API.",
     "version": "2016-05-01"
   },
   "host": "management.azure.com",
@@ -10,8 +10,7 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
     "application/json",
@@ -61,11 +60,7 @@
         "description": "Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
@@ -113,11 +108,7 @@
         "description": "Deletes a storage account in Microsoft Azure.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
@@ -152,11 +143,7 @@
         "description": "Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
@@ -191,11 +178,7 @@
         "description": "The update operation can be used to update the SKU, encryption, access tier, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account; the replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value can be set. The update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
@@ -269,11 +252,7 @@
         "description": "Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -304,11 +283,7 @@
         "description": "Lists the access keys for the specified storage account.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
@@ -345,11 +320,7 @@
         "description": "Regenerates one of the access keys for the specified storage account.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
@@ -423,11 +394,7 @@
         "description": "List SAS credentials of a storage account.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
@@ -473,11 +440,7 @@
         "description": "List service SAS credentials of a specific resource.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
@@ -530,7 +493,7 @@
         "name",
         "type"
       ],
-      "description": "The parameters used to check the availabity of storage account name."
+      "description": "The parameters used to check the availabity of the storage account name."
     },
     "CheckNameAvailabilityResult": {
       "properties": {
@@ -674,7 +637,7 @@
           }
         }
       },
-      "description": "The parameters used to create storage account."
+      "description": "The parameters used to create the storage account."
     },
     "StorageAccountCreateParameters": {
       "properties": {
@@ -840,7 +803,7 @@
           }
         }
       },
-      "description": "Properties of storage account."
+      "description": "Properties of the storage account."
     },
     "StorageAccount": {
       "properties": {
@@ -937,7 +900,7 @@
       "required": [
         "keyName"
       ],
-      "description": "The parameters used to regenerate storage account key."
+      "description": "The parameters used to regenerate the storage account key."
     },
     "StorageAccountPropertiesUpdateParameters": {
       "properties": {
@@ -1080,7 +1043,7 @@
         }
       },
       "x-ms-azure-resource": true,
-      "description": "Describes storage resource."
+      "description": "Describes a storage resource."
     },
     "AccountSasParameters": {
       "properties": {
@@ -1093,7 +1056,7 @@
             "f"
           ],
           "x-ms-client-name": "Services",
-          "description": "Sets the signed services accessible with the account SAS."
+          "description": "The signed services accessible with the account SAS. Possible values include: Blob (b), Queue (q), Table (t), File (f)."
         },
         "signedResourceTypes": {
           "type": "string",
@@ -1103,7 +1066,7 @@
             "o"
           ],
           "x-ms-client-name": "ResourceTypes",
-          "description": "Sets the signed resource types that are accessible with the account SAS."
+          "description": "The signed resource types that are accessible with the account SAS. Service (s): Access to service-level APIs; Container (c): Access to container-level APIs; Object (o): Access to object-level APIs for blobs, queue messages, table entities, and files."
         },
         "signedPermission": {
           "type": "string",
@@ -1118,12 +1081,12 @@
             "p"
           ],
           "x-ms-client-name": "Permissions",
-          "description": "Sets the signed permissions for the account SAS."
+          "description": "The signed permissions for the account SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p)."
         },
         "signedIp": {
           "type": "string",
           "x-ms-client-name": "IPAddressOrRange",
-          "description": "Sets an IP address or a range of IP addresses from which to accept requests."
+          "description": "An IP address or a range of IP addresses from which to accept requests."
         },
         "signedProtocol": {
           "type": "string",
@@ -1136,23 +1099,23 @@
             "modelAsString": false
           },
           "x-ms-client-name": "Protocols",
-          "description": "Sets the protocol permitted for a request made with the account SAS."
+          "description": "The protocol permitted for a request made with the account SAS."
         },
         "signedStart": {
           "type": "string",
           "format": "date-time",
           "x-ms-client-name": "SharedAccessStartTime",
-          "description": "Sets the time at which the SAS becomes valid."
+          "description": "The time at which the SAS becomes valid."
         },
         "signedExpiry": {
           "type": "string",
           "format": "date-time",
           "x-ms-client-name": "SharedAccessExpiryTime",
-          "description": "Sets the time at which the shared access signature becomes invalid."
+          "description": "The time at which the shared access signature becomes invalid."
         },
         "keyToSign": {
           "type": "string",
-          "description": "Sets the key to sign the account SAS token with."
+          "description": "The key to sign the account SAS token with."
         }
       },
       "required": [
@@ -1177,8 +1140,7 @@
       "properties": {
         "canonicalizedResource": {
           "type": "string",
-          "x-ms-client-name": "CanonicalizedResource",
-          "description" : "Sets the canonical path to the signed resource."
+          "description" : "The canonical path to the signed resource."
         },
         "signedResource": {
           "type": "string",
@@ -1189,7 +1151,7 @@
             "s"
           ],
           "x-ms-client-name": "Resource",
-          "description": "Sets the signed services accessible with the service SAS."
+          "description": "The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s)."
         },
         "signedPermission": {
           "type": "string",
@@ -1204,12 +1166,12 @@
             "p"
           ],
           "x-ms-client-name": "Permissions",
-          "description": "Sets the signed permissions for the service SAS."
+          "description": "The signed permissions for the service SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p)."
         },
         "signedIp": {
           "type": "string",
           "x-ms-client-name": "IPAddressOrRange",
-          "description": "Sets an IP address or a range of IP addresses from which to accept requests."
+          "description": "An IP address or a range of IP addresses from which to accept requests."
         },
         "signedProtocol": {
           "type": "string",
@@ -1222,73 +1184,74 @@
             "modelAsString": false
           },
           "x-ms-client-name": "Protocols",
-          "description": "Sets the protocol permitted for a request made with the account SAS."
+          "description": "The protocol permitted for a request made with the account SAS."
         },
         "signedStart": {
           "type": "string",
           "format": "date-time",
           "x-ms-client-name": "SharedAccessStartTime",
-          "description": "Sets the time at which the SAS becomes valid."
+          "description": "The time at which the SAS becomes valid."
         },
         "signedExpiry": {
           "type": "string",
           "format": "date-time",
           "x-ms-client-name": "SharedAccessExpiryTime",
-          "description": "Sets the time at which the shared access signature becomes invalid."
+          "description": "The time at which the shared access signature becomes invalid."
         },
         "signedIdentifier": {
           "type": "string",
+          "maxLength": 64,
           "x-ms-client-name": "Identifier",
-          "description": "Sets a unique value up to 64 characters in length that correlates to an access policy specified for the container, queue, or table."
+          "description": "A unique value up to 64 characters in length that correlates to an access policy specified for the container, queue, or table."
         },
         "startPk": {
           "type": "string",
           "x-ms-client-name": "PartitionKeyStart",
-          "description": "Sets the start of partition key."
+          "description": "The start of partition key."
         },
         "endPk": {
           "type": "string",
           "x-ms-client-name": "PartitionKeyEnd",
-          "description": "Sets the end of partition key."
+          "description": "The end of partition key."
         },
         "startRk": {
           "type": "string",
           "x-ms-client-name": "RowKeyStart",
-          "description": "Sets the start of row key."
+          "description": "The start of row key."
         },
         "endRk": {
           "type": "string",
           "x-ms-client-name": "RowKeyEnd",
-          "description": "Sets the end of row key."
+          "description": "The end of row key."
         },
         "keyToSign": {
           "type": "string",
-          "description": "Sets the key to sign the account SAS token with."
+          "description": "The key to sign the account SAS token with."
         },
         "rscc": {
           "type": "string",
           "x-ms-client-name": "CacheControl",
-          "description": "Sets the response header override for cache control."
+          "description": "The response header override for cache control."
         },
         "rscd": {
           "type": "string",
           "x-ms-client-name": "ContentDisposition",
-          "description": "Sets the response header override for content disposition."
+          "description": "The response header override for content disposition."
         },
         "rsce": {
           "type": "string",
           "x-ms-client-name": "ContentEncoding",
-          "description": "Sets the response header override for content encoding."
+          "description": "The response header override for content encoding."
         },
         "rscl": {
           "type": "string",
           "x-ms-client-name": "ContentLanguage",
-          "description": "Sets the response header override for content language."
+          "description": "The response header override for content language."
         },
         "rsct": {
           "type": "string",
           "x-ms-client-name": "ContentType",
-          "description": "Sets the response header override for content type."
+          "description": "The response header override for content type."
         }
       },
       "required": [
@@ -1322,6 +1285,17 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
     }
   }
 }
