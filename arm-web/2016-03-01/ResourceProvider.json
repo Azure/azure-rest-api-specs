@@ -14,7 +14,6 @@
         "summary": "Gets the source controls available for Azure websites.",
         "description": "Gets the source controls available for Azure websites.",
         "operationId": "ListSourceControls",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
@@ -63,7 +62,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ResourceNameAvailabilityRequest"
-            }
+            },
+            "x-ms-client-flatten": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -83,11 +83,10 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/geoRegions": {
-      "get": {
+      "post": {
         "summary": "Get a list of available geographical regions.",
         "description": "Get a list of available geographical regions.",
-        "operationId": "GetSubscriptionGeoRegions",
-        "consumes": [],
+        "operationId": "ListGeoRegions",
         "produces": [
           "application/json",
           "text/json"
@@ -97,7 +96,8 @@
             "name": "sku",
             "in": "query",
             "description": "Name of SKU used to filter the regions.",
-            "type": "string"
+            "type": "string",
+            "pattern": ""
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -124,7 +124,6 @@
         "summary": "List all premier add-on offers.",
         "description": "List all premier add-on offers.",
         "operationId": "ListPremierAddOnOffers",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
@@ -155,7 +154,6 @@
         "summary": "Get the publishing credentials for the subscription owner.",
         "description": "Get the publishing credentials for the subscription owner.",
         "operationId": "GetPublishingCredentials",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -226,7 +224,6 @@
         "summary": "List all SKUs.",
         "description": "List all SKUs.",
         "operationId": "ListSkus",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -263,8 +260,14 @@
           "text/xml",
           "application/x-www-form-urlencoded"
         ],
-        "produces": [],
         "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "moveResourceEnvelope",
             "in": "body",
@@ -276,9 +279,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -311,6 +311,13 @@
         ],
         "parameters": [
           {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "validateRequest",
             "in": "body",
             "description": "Request with the resources to validate.",
@@ -321,9 +328,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -351,8 +355,14 @@
           "text/xml",
           "application/x-www-form-urlencoded"
         ],
-        "produces": [],
         "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "moveResourceEnvelope",
             "in": "body",
@@ -364,9 +374,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -382,7 +389,7 @@
   },
   "definitions": {
     "Capability": {
-      "description": "Description of a SKU Capability.",
+      "description": "Describes the capabilities/features allowed for a specific SKU.",
       "type": "object",
       "properties": {
         "name": {
@@ -531,7 +538,6 @@
               "type": "boolean"
             },
             "quota": {
-              "format": "int32",
               "description": "Quota.",
               "type": "integer"
             },
@@ -595,8 +601,7 @@
     "Resource": {
       "description": "Azure resource.",
       "required": [
-        "location",
-        "name"
+        "location"
       ],
       "properties": {
         "id": {
@@ -640,7 +645,15 @@
         },
         "reason": {
           "description": "<code>Invalid</code> indicates the name provided does not match Azure App Service naming requirements. <code>AlreadyExists</code> indicates that the name is already in use and is therefore unavailable.",
-          "type": "string"
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InAvailabilityReasonType",
+            "modelAsString": true
+          }
         },
         "message": {
           "description": "If reason == invalid, provide the user with the reason why the given name is invalid, and provide the resource naming requirements so that the user can select a valid name. If reason == AlreadyExists, explain that resource name is already in use, and direct them to select a different name.",
@@ -650,6 +663,10 @@
     },
     "ResourceNameAvailabilityRequest": {
       "description": "Resource name availability request content.",
+      "required": [
+        "name",
+        "type"
+      ],
       "type": "object",
       "properties": {
         "name": {
@@ -680,17 +697,14 @@
       "type": "object",
       "properties": {
         "minimum": {
-          "format": "int32",
           "description": "Minimum number of workers for this App Service plan SKU.",
           "type": "integer"
         },
         "maximum": {
-          "format": "int32",
           "description": "Maximum number of workers for this App Service plan SKU.",
           "type": "integer"
         },
         "default": {
-          "format": "int32",
           "description": "Default number of workers for this App Service plan SKU.",
           "type": "integer"
         },
@@ -746,7 +760,6 @@
               "type": "string"
             },
             "expirationTime": {
-              "format": "date-time",
               "description": "OAuth token expiration.",
               "type": "string"
             }
@@ -786,24 +799,31 @@
       "properties": {
         "properties": {
           "description": "ARM envelope properties",
+          "required": [
+            "publishingUserName"
+          ],
           "properties": {
             "name": {
-              "description": "Username (internal).",
-              "type": "string"
+              "description": "Username",
+              "type": "string",
+              "x-ms-client-name": "UserName"
             },
             "publishingUserName": {
               "description": "Username used for publishing.",
               "type": "string"
             },
             "publishingPassword": {
+              "format": "password",
               "description": "Password used for publishing.",
               "type": "string"
             },
             "publishingPasswordHash": {
+              "format": "password",
               "description": "Password hash used for publishing.",
               "type": "string"
             },
             "publishingPasswordHashSalt": {
+              "format": "password",
               "description": "Password hash salt used for publishing.",
               "type": "string"
             }
@@ -829,8 +849,8 @@
           "type": "boolean"
         },
         "capacity": {
-          "format": "int32",
           "description": "Target capacity of the App Service plan (number of VM's).",
+          "minimum": 1,
           "type": "integer"
         },
         "hostingEnvironment": {
@@ -841,6 +861,12 @@
     },
     "ValidateRequest": {
       "description": "Resource validation request content.",
+      "required": [
+        "name",
+        "type",
+        "location",
+        "properties"
+      ],
       "type": "object",
       "properties": {
         "name": {
@@ -865,7 +891,8 @@
         },
         "properties": {
           "$ref": "#/definitions/ValidateProperties",
-          "description": "Properties of the resource to validate."
+          "description": "Properties of the resource to validate.",
+          "x-ms-client-flatten": true
         }
       }
     },

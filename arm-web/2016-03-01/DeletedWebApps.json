@@ -17,7 +17,6 @@
         "summary": "Get all deleted apps for a subscription.",
         "description": "Get all deleted apps for a subscription.",
         "operationId": "DeletedWebApps_List",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
@@ -51,23 +50,20 @@
         "summary": "Gets deleted web apps in subscription.",
         "description": "Gets deleted web apps in subscription.",
         "operationId": "DeletedWebApps_ListByResourceGroup",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
         ],
         "parameters": [
           {
-            "name": "propertiesToInclude",
-            "in": "query",
-            "description": "Additional web app properties included in the response",
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of resource group",
+            "required": true,
             "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -120,7 +116,7 @@
           "description": "Custom action to be taken."
         },
         "minProcessExecutionTime": {
-          "description": "Minimum time the process must execute\r\n            before taking the action",
+          "description": "Minimum time the process must execute\n before taking the action",
           "type": "string"
         }
       }
@@ -162,7 +158,6 @@
           "description": "A rule based on total requests."
         },
         "privateBytesInKB": {
-          "format": "int32",
           "description": "A rule based on private bytes.",
           "type": "integer"
         },
@@ -187,7 +182,7 @@
       "type": "object",
       "properties": {
         "correlationId": {
-          "description": "Correlation ID of cloning operation. This ID ties multiple cloning operations\r\n            together to use the same snapshot.",
+          "description": "Correlation ID of cloning operation. This ID ties multiple cloning operations\n together to use the same snapshot.",
           "type": "string"
         },
         "overwrite": {
@@ -203,7 +198,7 @@
           "type": "boolean"
         },
         "sourceWebAppId": {
-          "description": "ARM resource ID of the source app. App resource ID is of the form \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
+          "description": "ARM resource ID of the source app. App resource ID is of the form \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
           "type": "string"
         },
         "hostingEnvironment": {
@@ -211,7 +206,7 @@
           "type": "string"
         },
         "appSettingsOverrides": {
-          "description": "Application setting overrides for cloned app. If specified, these settings override the settings cloned \r\n            from source app. Otherwise, application settings from source app are retained.",
+          "description": "Application setting overrides for cloned app. If specified, these settings override the settings cloned \n from source app. Otherwise, application settings from source app are retained.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -222,7 +217,7 @@
           "type": "boolean"
         },
         "trafficManagerProfileId": {
-          "description": "ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}.",
+          "description": "ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}.",
           "type": "string"
         },
         "trafficManagerProfileName": {
@@ -236,7 +231,7 @@
       "type": "object",
       "properties": {
         "allowedOrigins": {
-          "description": "Gets or sets the list of origins that should be allowed to make cross-origin\r\n            calls (for example: http://example.com:12345). Use \"*\" to allow all.",
+          "description": "Gets or sets the list of origins that should be allowed to make cross-origin\n calls (for example: http://example.com:12345). Use \"*\" to allow all.",
           "type": "array",
           "items": {
             "type": "string"
@@ -257,7 +252,6 @@
           "description": "ARM envelope properties",
           "properties": {
             "deletedTimestamp": {
-              "format": "date-time",
               "description": "Time when the app was deleted.",
               "type": "string",
               "readOnly": true
@@ -298,7 +292,7 @@
               "type": "boolean"
             },
             "enabledHostNames": {
-              "description": "Enabled hostnames for the app. Read-only. Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,\r\n            the app is not served on those hostnames.",
+              "description": "Enabled hostnames for the app. Read-only. Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,\n the app is not served on those hostnames.",
               "type": "array",
               "items": {
                 "type": "string"
@@ -340,7 +334,6 @@
               ]
             },
             "lastModifiedTimeUtc": {
-              "format": "date-time",
               "description": "Last time the app was modified, in UTC. Read-only.",
               "type": "string",
               "readOnly": true
@@ -406,7 +399,7 @@
               "type": "boolean"
             },
             "hostNamesDisabled": {
-              "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\r\n            If <code>true</code>, the app is only accessible via API management process.",
+              "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\n If <code>true</code>, the app is only accessible via API management process.",
               "type": "boolean"
             },
             "outboundIpAddresses": {
@@ -415,24 +408,23 @@
               "readOnly": true
             },
             "containerSize": {
-              "format": "int32",
               "description": "Size of the function container.",
               "type": "integer"
             },
             "dailyMemoryTimeQuota": {
-              "format": "int32",
               "description": "Maximum allowed daily memory-time quota (applicable on dynamic apps only).",
               "type": "integer"
             },
             "suspendedTill": {
-              "format": "date-time",
               "description": "App suspended till in case memory-time quota is exceeded.",
               "type": "string",
               "readOnly": true
             },
+            "advancedRoutingEnabled": {
+              "type": "boolean"
+            },
             "maxNumberOfWorkers": {
-              "format": "int32",
-              "description": "Maximum number of workers.\r\n            This only applies to Functions container.",
+              "description": "Maximum number of workers.\n This only applies to Functions container.",
               "type": "integer",
               "readOnly": true
             },
@@ -563,12 +555,14 @@
           "type": "string"
         },
         "name": {
-          "description": "Name of the App Service Environment (read only).",
-          "type": "string"
+          "description": "Name of the App Service Environment.",
+          "type": "string",
+          "readOnly": true
         },
         "type": {
-          "description": "Resource type of the App Service Environment (read only).",
-          "type": "string"
+          "description": "Resource type of the App Service Environment.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -591,6 +585,9 @@
     },
     "PushSettings": {
       "description": "Push settings for the App.",
+      "required": [
+        "isPushEnabled"
+      ],
       "type": "object",
       "properties": {
         "isPushEnabled": {
@@ -602,7 +599,7 @@
           "type": "string"
         },
         "tagsRequiringAuth": {
-          "description": "Gets or sets a JSON string containing a list of tags that require user authentication to be used in the push registration endpoint.",
+          "description": "Gets or sets a JSON string containing a list of tags that require user authentication to be used in the push registration endpoint.\n Tags can consist of alphanumeric characters and the following:\n '_', '@', '#', '.', ':', '-'. \n Validation should be performed at the PushRequestHandler.",
           "type": "string"
         },
         "dynamicTagsJson": {
@@ -620,32 +617,27 @@
           "type": "string"
         },
         "reroutePercentage": {
-          "format": "double",
           "description": "Percentage of the traffic which will be redirected to <code>ActionHostName</code>.",
           "type": "number"
         },
         "changeStep": {
-          "format": "double",
-          "description": "[Optional] In auto ramp up scenario this is the step to to add/remove from <code>ReroutePercentage</code> until it reaches \r\n            <code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specificed in <code>ChangeIntervalInMinutes</code>.\r\n            Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
+          "description": "In auto ramp up scenario this is the step to to add/remove from <code>ReroutePercentage</code> until it reaches \n <code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specificed in <code>ChangeIntervalInMinutes</code>.\n Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
           "type": "number"
         },
         "changeIntervalInMinutes": {
-          "format": "int32",
-          "description": "[Optional] Specifies interval in mimuntes to reevaluate ReroutePercentage.",
+          "description": "Specifies interval in mimuntes to reevaluate ReroutePercentage.",
           "type": "integer"
         },
         "minReroutePercentage": {
-          "format": "double",
-          "description": "[Optional] Specifies lower boundary above which ReroutePercentage will stay.",
+          "description": "Specifies lower boundary above which ReroutePercentage will stay.",
           "type": "number"
         },
         "maxReroutePercentage": {
-          "format": "double",
-          "description": "[Optional] Specifies upper boundary below which ReroutePercentage will stay.",
+          "description": "Specifies upper boundary below which ReroutePercentage will stay.",
           "type": "number"
         },
         "changeDecisionCallbackUrl": {
-          "description": "Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified. See TiPCallback site extension for the scaffold and contracts.\r\n            https://www.siteextensions.net/packages/TiPCallback/",
+          "description": "Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified. See TiPCallback site extension for the scaffold and contracts.\n https://www.siteextensions.net/packages/TiPCallback/",
           "type": "string"
         },
         "name": {
@@ -659,7 +651,6 @@
       "type": "object",
       "properties": {
         "count": {
-          "format": "int32",
           "description": "Count.",
           "type": "integer"
         },
@@ -672,8 +663,7 @@
     "Resource": {
       "description": "Azure resource.",
       "required": [
-        "location",
-        "name"
+        "location"
       ],
       "properties": {
         "id": {
@@ -720,7 +710,6 @@
           "description": "ARM envelope properties",
           "properties": {
             "numberOfWorkers": {
-              "format": "int32",
               "description": "Number of workers.",
               "type": "integer"
             },
@@ -753,7 +742,6 @@
               "type": "boolean"
             },
             "requestTracingExpirationTime": {
-              "format": "date-time",
               "description": "Request tracing expiration time.",
               "type": "string"
             },
@@ -770,7 +758,6 @@
               "type": "boolean"
             },
             "logsDirectorySizeLimit": {
-              "format": "int32",
               "description": "HTTP logs directory size limit.",
               "type": "integer"
             },
@@ -920,6 +907,10 @@
               "items": {
                 "$ref": "#/definitions/IpSecurityRestriction"
               }
+            },
+            "advancedRoutingEnabled": {
+              "description": "Advanced routing enabled",
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true
@@ -931,17 +922,14 @@
       "type": "object",
       "properties": {
         "maxPercentageCpu": {
-          "format": "double",
           "description": "Maximum allowed CPU usage percentage.",
           "type": "number"
         },
         "maxMemoryInMb": {
-          "format": "int64",
           "description": "Maximum allowed memory usage in MB.",
           "type": "integer"
         },
         "maxDiskSizeInMb": {
-          "format": "int64",
           "description": "Maximum allowed disk size usage in MB.",
           "type": "integer"
         }
@@ -974,7 +962,6 @@
       "type": "object",
       "properties": {
         "timestampUtc": {
-          "format": "date-time",
           "description": "The time the last successful slot swap completed.",
           "type": "string",
           "readOnly": true
@@ -1000,7 +987,6 @@
           "type": "string"
         },
         "count": {
-          "format": "int32",
           "description": "Count.",
           "type": "integer"
         },
@@ -1015,22 +1001,18 @@
       "type": "object",
       "properties": {
         "status": {
-          "format": "int32",
           "description": "HTTP status code.",
           "type": "integer"
         },
         "subStatus": {
-          "format": "int32",
           "description": "SubStatus.",
           "type": "integer"
         },
         "win32Status": {
-          "format": "int32",
           "description": "Win32 error code.",
           "type": "integer"
         },
         "count": {
-          "format": "int32",
           "description": "Count.",
           "type": "integer"
         },
