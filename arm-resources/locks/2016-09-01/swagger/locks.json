@@ -173,20 +173,20 @@
         }
       }
     },
-    "/{resourceId}/providers/Microsoft.Authorization/locks/{lockName}": {
+    "/{scope}/providers/Microsoft.Authorization/locks/{lockName}": {
       "put": {
         "tags": [
           "ManagementLocks"
         ],
-        "operationId": "ManagementLocks_CreateOrUpdateById",
-        "description": "Create or update a management lock by resource id.",
+        "operationId": "ManagementLocks_CreateOrUpdateByScope",
+        "description": "Create or update a management lock by scope.",
         "parameters": [
           {
-            "name": "resourceId",
+            "name": "scope",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource id. "
+            "description": "The scope for the lock. "
           },
           {
             "name": "lockName",
@@ -227,15 +227,15 @@
         "tags": [
           "ManagementLocks"
         ],
-        "operationId": "ManagementLocks_DeleteById",
-        "description": "Delete a management lock by resource id.",
+        "operationId": "ManagementLocks_DeleteByScope",
+        "description": "Delete a management lock by scope.",
         "parameters": [
           {
-            "name": "resourceId",
+            "name": "scope",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource id. "
+            "description": "The scope for the lock. "
           },
           {
             "name": "lockName",
@@ -261,15 +261,15 @@
         "tags": [
           "ManagementLocks"
         ],
-        "operationId": "ManagementLocks_GetById",
-        "description": "Get a management lock by resource id.",
+        "operationId": "ManagementLocks_GetByScope",
+        "description": "Get a management lock by scope.",
         "parameters": [
           {
-            "name": "resourceId",
+            "name": "scope",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource id. "
+            "description": "The scope for the lock. "
           },
           {
             "name": "lockName",
