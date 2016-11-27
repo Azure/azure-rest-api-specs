@@ -1,342 +1,342 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "InsightsClient",
-        "description": "Azure Application Insights client",
-        "version": "2014-04-01"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
-        }
-    ],
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
-            }
-        }
-    },
-    "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{name}": {
-            "delete": {
-                "description": "Deletes an Application Insights instance",
-                "operationId": "Insights_Delete",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/NameParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful request when deleting an Application Insights instance"
-                    },
-                    "404": {
-                        "description": "Unsuccessful request when the specified Application Insights instance doesn't exist"
-                    }
-                }
-            },
-            "get": {
-                "description": "Returns an Application Insights instance",
-                "operationId": "Insights_Get",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/NameParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful request when retrieving an Application Insights instance",
-                        "schema": {
-                            "$ref": "#/definitions/Resource"
-                        },
-                        "examples": {
-                            "application/json": {
-                                "value": [
-                                    {
-                                        "id": "/subscriptions/d386467e-33de-44ff-b324-641549c30383/resourceGroups/sots-rg/providers/microsoft.insights/components/tha-demo2",
-                                        "name": "tha-demo2",
-                                        "type": "Microsoft.Insights/components",
-                                        "location": "West Europe",
-                                        "tags": {},
-                                        "kind": "web",
-                                        "properties": {
-                                            "Ver": "v2",
-                                            "ApplicationId": "tharvey-demo2",
-                                            "AppId": "00000000-0000-0000-0000-000000000000",
-                                            "Application_Type": "web",
-                                            "Flow_Type": null,
-                                            "Request_Source": null,
-                                            "InstrumentationKey": "00000000-0000-0000-0000-000000000000",
-                                            "Name": "tha-demo2",
-                                            "CreationDate": "2016-11-22T20:42:42.299Z",
-                                            "PackageId": null,
-                                            "TenantId": "00000000-0000-0000-0000-000000000000",
-                                            "HockeyAppId": null,
-                                            "HockeyAppToken": null,
-                                            "provisioningState": "Succeeded"
-                                        }
-                                    }
-                                ],
-                                "nextLink": "https://management.azure.com/########-####-####-####-############$skiptoken=######"
-                            }
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                },
-                "x-ms-odata": "#/definitions/Resource"
-            },
-            "put": {
-                "description": "Creates or Updates an Application Insights instance",
-                "operationId": "Insights_CreateOrUpdate",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/NameParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful request when Creating or Updating an Application Insights instance",
-                        "schema": {
-                            "$ref": "#/definitions/Resource"
-                        },
-                        "examples": {
-                            "application/json": {
-                                "value": [
-                                    {
-                                        "id": "/subscriptions/d386467e-33de-44ff-b324-641549c30383/resourceGroups/sots-rg/providers/microsoft.insights/components/tha-demo2",
-                                        "name": "tha-demo2",
-                                        "type": "Microsoft.Insights/components",
-                                        "location": "West Europe",
-                                        "tags": {},
-                                        "kind": "web",
-                                        "properties": {
-                                            "Ver": "v2",
-                                            "ApplicationId": "tharvey-demo2",
-                                            "AppId": "00000000-0000-0000-0000-000000000000",
-                                            "Application_Type": "web",
-                                            "Flow_Type": null,
-                                            "Request_Source": null,
-                                            "InstrumentationKey": "00000000-0000-0000-0000-000000000000",
-                                            "Name": "tha-demo2",
-                                            "CreationDate": "2016-11-22T20:42:42.299Z",
-                                            "PackageId": null,
-                                            "TenantId": "00000000-0000-0000-0000-000000000000",
-                                            "HockeyAppId": null,
-                                            "HockeyAppToken": null,
-                                            "provisioningState": "Succeeded"
-                                        }
-                                    }
-                                ],
-                                "nextLink": "https://management.azure.com/########-####-####-####-############$skiptoken=######"
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Failed request when the specified Application Insights instance couldn't be found"
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                },
-                "x-ms-odata": "#/definitions/Resource"
-            }
-        }
-    },
-    "definitions": {
-        "Resource": {
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "Azure resource Id"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "Azure resource name"
-                },
-                "type": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "Azure resource type"
-                },
-                "location": {
-                    "type": "string",
-                    "description": "Resource location"
-                },
-                "kind": {
-                    "type": "string",
-                    "description": "Application Insights Kind"
-                },
-                "properties": {
-                    "$ref": "#/definitions/Properties",
-                    "description": "the parameters for the scaling action."
-                },
-                "tags": {
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags"
-                }
-            },
-            "required": [
-                "location",
-                "kind"
-            ],
-            "x-ms-azure-resource": true,
-            "description": "An azure resource object"
-        },
-        "Properties": {
-            "properties": {
-                "ver": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "Application Insights Version"
-                },
-                "applicationId": {
-                    "type": "string",
-                    "description": "An internal reference for your application"
-                },
-                "appId": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "Application Insights Unique ID for your Application"
-                },
-                "application_Type": {
-                    "type": "string",
-                    "description": "Application Type",
-                    "enum": [
-                        "Web",
-                        "Other"
-                    ],
-                    "x-ms-enum": {
-                        "name": "ApplicationType",
-                        "modelAsString": false
-                    }
-                },
-                "flow_Type": {
-                    "type": "string",
-                    "description": "Flow Type"
-                },
-                "request_Source": {
-                    "type": "string",
-                    "description": "Request Source"
-                },
-                "instrumentationKey": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "Application Insights Instrumentation Key"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "Name of the Application Insights instance"
-                },
-                "creationDate": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "Creation Date for the Resource",
-                    "format": "date-time"
-                },
-                "packageId": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "HockeyApp Package ID?"
-                },
-                "tenantId": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "Azure Tenant ID"
-                },
-                "hockeyAppId": {
-                    "type": "string",
-                    "description": "HockeyApp Application ID"
-                },
-                "hockeyAppToken": {
-                    "type": "string",
-                    "description": "HockeyApp Token"
-                }
-            },
-            "required": [
-                "applicationId",
-                "application_Type"
-            ],
-            "x-ms-azure-resource": true,
-            "description": "An azure resource object"
-        }
-    },
-    "parameters": {
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Azure subscription Id."
-        },
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version."
-        },
-        "ResourceGroupNameParameter": {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-        },
-        "NameParameter": {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Application Insights instance"
+  "swagger": "2.0",
+  "info": {
+    "title": "InsightsClient",
+    "description": "Azure Application Insights client",
+    "version": "2014-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
         }
     }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{name}": {
+      "delete": {
+        "description": "Deletes an Application Insights instance",
+        "operationId": "Insights_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/NameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request when deleting an Application Insights instance"
+          },
+          "404": {
+            "description": "Unsuccessful request when the specified Application Insights instance doesn't exist"
+          }
+        }
+      },
+      "get": {
+        "description": "Returns an Application Insights instance",
+        "operationId": "Insights_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/NameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request when retrieving an Application Insights instance",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            },
+            "examples": {
+              "application/json": {
+                "value": [
+                  {
+                    "id": "/subscriptions/d386467e-33de-44ff-b324-641549c30383/resourceGroups/sots-rg/providers/microsoft.insights/components/tha-demo2",
+                    "name": "tha-demo2",
+                    "type": "Microsoft.Insights/components",
+                    "location": "West Europe",
+                    "tags": {},
+                    "kind": "web",
+                    "properties": {
+                      "Ver": "v2",
+                      "ApplicationId": "tharvey-demo2",
+                      "AppId": "00000000-0000-0000-0000-000000000000",
+                      "Application_Type": "web",
+                      "Flow_Type": null,
+                      "Request_Source": null,
+                      "InstrumentationKey": "00000000-0000-0000-0000-000000000000",
+                      "Name": "tha-demo2",
+                      "CreationDate": "2016-11-22T20:42:42.299Z",
+                      "PackageId": null,
+                      "TenantId": "00000000-0000-0000-0000-000000000000",
+                      "HockeyAppId": null,
+                      "HockeyAppToken": null,
+                      "provisioningState": "Succeeded"
+                    }
+                  }
+                ],
+                "nextLink": "https://management.azure.com/########-####-####-####-############$skiptoken=######"
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/Resource"
+      },
+      "put": {
+        "description": "Creates or Updates an Application Insights instance",
+        "operationId": "Insights_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/NameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request when Creating or Updating an Application Insights instance",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            },
+            "examples": {
+              "application/json": {
+                "value": [
+                  {
+                    "id": "/subscriptions/d386467e-33de-44ff-b324-641549c30383/resourceGroups/sots-rg/providers/microsoft.insights/components/tha-demo2",
+                    "name": "tha-demo2",
+                    "type": "Microsoft.Insights/components",
+                    "location": "West Europe",
+                    "tags": {},
+                    "kind": "web",
+                    "properties": {
+                      "Ver": "v2",
+                      "ApplicationId": "tharvey-demo2",
+                      "AppId": "00000000-0000-0000-0000-000000000000",
+                      "Application_Type": "web",
+                      "Flow_Type": null,
+                      "Request_Source": null,
+                      "InstrumentationKey": "00000000-0000-0000-0000-000000000000",
+                      "Name": "tha-demo2",
+                      "CreationDate": "2016-11-22T20:42:42.299Z",
+                      "PackageId": null,
+                      "TenantId": "00000000-0000-0000-0000-000000000000",
+                      "HockeyAppId": null,
+                      "HockeyAppToken": null,
+                      "provisioningState": "Succeeded"
+                    }
+                  }
+                ],
+                "nextLink": "https://management.azure.com/########-####-####-####-############$skiptoken=######"
+              }
+            }
+          },
+          "404": {
+            "description": "Failed request when the specified Application Insights instance couldn't be found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/Resource"
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Application Insights Kind"
+        },
+        "properties": {
+          "$ref": "#/definitions/Properties",
+          "description": "the parameters for the scaling action."
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location",
+        "kind"
+      ],
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    },
+    "Properties": {
+      "properties": {
+        "ver": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Application Insights Version"
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "An internal reference for your application"
+        },
+        "appId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Application Insights Unique ID for your Application"
+        },
+        "application_Type": {
+          "type": "string",
+          "description": "Application Type",
+          "enum": [
+            "Web",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationType",
+            "modelAsString": false
+          }
+        },
+        "flow_Type": {
+          "type": "string",
+          "description": "Flow Type"
+        },
+        "request_Source": {
+          "type": "string",
+          "description": "Request Source"
+        },
+        "instrumentationKey": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Application Insights Instrumentation Key"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Application Insights instance"
+        },
+        "creationDate": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Creation Date for the Resource",
+          "format": "date-time"
+        },
+        "packageId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "HockeyApp Package ID?"
+        },
+        "tenantId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure Tenant ID"
+        },
+        "hockeyAppId": {
+          "type": "string",
+          "description": "HockeyApp Application ID"
+        },
+        "hockeyAppToken": {
+          "type": "string",
+          "description": "HockeyApp Token"
+        }
+      },
+      "required": [
+        "applicationId",
+        "application_Type"
+      ],
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription Id."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group."
+    },
+    "NameParameter": {
+      "name": "name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Application Insights instance"
+    }
+  }
 }
