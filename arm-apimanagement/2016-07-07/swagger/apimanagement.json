@@ -4387,7 +4387,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BackendCreateParameters"
+              "$ref": "#/definitions/BackendContract"
             },
             "description": "Create parameters."
           },
@@ -4572,7 +4572,7 @@
           "200": {
             "description": "The response body contains the specified IdentityProvider entity configuration details.",
             "schema": {
-              "$ref": "#/definitions/IdentityProviderGetContract"
+              "$ref": "#/definitions/IdentityProviderContract"
             },
             "headers": {              
               "ETag": {
@@ -4610,7 +4610,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IdentityProviderCreateParameters"
+              "$ref": "#/definitions/IdentityProviderContract"
             },
             "description": "Create parameters."
           },
@@ -4720,6 +4720,188 @@
         "responses": {
           "204": {
             "description": "The identity provider configuration was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}": {
+      "get": {
+        "tags": [
+          "QuotaByCounterKeys"
+        ],
+        "operationId": "QuotaByCounterKeys_ListByService",
+        "description": "Lists a collection of current quota counter periods associated with the counter-key configured in the policy on the specified service instance. The api does not support paging yet.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-product-with-rules#a-namepolicies-ato-configure-call-rate-limit-and-quota-policies",
+          "description": "Document describing how to configure the quota policies."
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaCounterKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists a collection of the quota counter values.",
+            "schema": {
+              "$ref": "#/definitions/QuotaCounterPaged"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "QuotaByCounterKeys"
+        ],
+        "operationId": "QuotaByCounterKeys_Update",
+        "description": "Updates all the quota counter values specified with the existing quota counter key to a value in the specified service instance. This should be used for reset of the quota counter values.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaCounterKeyParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaCounterValueContract"
+            },
+            "description": "The value of the quota counter to be applied to all quota counter periods."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+           "204": {
+            "description": "All the quota counter periods were successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/{quotaPeriodKey}": {
+      "get": {
+        "tags": [
+          "QuotaByPeriodKeys"
+        ],
+        "operationId": "QuotaByPeriodKeys_Get",
+        "description": "Gets the value of the quota counter associated with the counter-key in the policy for the specific period in service instance.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-product-with-rules#a-namepolicies-ato-configure-call-rate-limit-and-quota-policies",
+          "description": "Document describing how to configure the quota policies."
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaCounterKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaPeriodKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the Quota counter details for the specified period.",
+            "schema": {
+              "$ref": "#/definitions/QuotaCounterContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "QuotaByPeriodKeys"
+        ],
+        "operationId": "QuotaByPeriodKeys_Update",
+        "description": "Updates an existing quota counter value in the specified service instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaCounterKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaPeriodKeyParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaCounterValueContract"
+            },
+            "description": "The value of the Quota counter to be applied on the specified period."
+          },          
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+           "204": {
+            "description": "The quota counter value was successfully updated."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -6608,7 +6790,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/BackendCreateParameters"
+          "$ref": "#/definitions/BackendContract"
         }
       ],
       "description": "The Backend entity in API Management represents a backend service that is configured to skip certification chain validation when using a self-signed certificate to test mutual certificate authentication."
@@ -6634,7 +6816,7 @@
       },
       "description": "Paged Backend list representation."
     },
-    "BackendCreateParameters": {      
+    "BackendContract": {      
       "properties": {
         "host": {
           "type": "string",
@@ -6669,27 +6851,19 @@
       },
       "description": "Parameters supplied to the Update Backend operation."
     },
-    "IdentityProviderGetContract": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/IdentityProviderCreateParameters"
-        }
-      ],
-      "description": "The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users."
-    },
     "IdentityProviderList": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IdentityProviderGetContract"
+            "$ref": "#/definitions/IdentityProviderContract"
           },
           "description": "Identity Provider configuration values."
         }
       },
       "description": "List of all the Identity Providers configured on the service instance."
     },
-    "IdentityProviderCreateParameters": {
+    "IdentityProviderContract": {
       "externalDocs": {
         "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-aad#how-to-authorize-developer-accounts-using-azure-active-directory"
       },
@@ -6704,6 +6878,21 @@
           "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.",
           "minLength": 1
         },
+        "type": {
+          "type": "string",
+          "enum": [
+            "facebook",
+            "google",
+            "microsoft",
+            "twitter",
+            "aad"
+          ],
+         "x-ms-enum": {
+           "name": "IdentityProviderNameType",
+           "modelAsString": true
+          },
+         "description": "Identity Provider Type identifier."
+        },
         "allowedTenants": {
          "type": "array",
           "items": {
@@ -6717,7 +6906,7 @@
         "clientId",
         "clientSecret"
       ],
-      "description": "Parameters supplied to the Create Identity Provider operation."
+      "description": "The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users."
     },
     "IdentityProviderUpdateParameters": {
       "properties": {
@@ -7167,6 +7356,78 @@
         }
       },
       "description": "Tenant Configuration Synchronization State."
+    },
+    "QuotaCounterPaged": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaCounterContract"
+          },
+          "description": "Quota counter values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total records count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Quota Counter list representation."
+    },
+    "QuotaCounterContract": {      
+      "properties": {
+        "counterKey": {
+          "type": "string",
+          "description": "The Key value of the Counter. Must not be empty.",
+          "minLength": 1
+        },
+        "periodKey": {
+          "type": "string",
+          "description": "Identifier of the Period for which the counter was collected. Must not be empty.",
+          "minLength": 1
+        },
+        "periodStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date of the start of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "periodEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date of the end of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/QuotaCounterValueContract"
+        }
+      ],
+      "required": [
+        "counterKey",
+        "periodKey",
+        "periodStartTime",
+        "periodEndTime"
+      ],
+      "description": "Quota counter details."
+    },
+    "QuotaCounterValueContract": {      
+      "properties": {
+        "callsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of times Counter was called."
+        },
+        "kbTransferred": {
+          "type": "number",
+          "format": "double",
+          "description": "Data Transferred in KiloBytes."
+        }
+      },
+      "description": "Quota counter value details."
     }
   },
   "parameters": {
@@ -7306,6 +7567,22 @@
         "modelAsString": true
       },
       "description": "Identity Provider Type identifier.",
+      "x-ms-parameter-location": "method"
+    },
+    "QuotaCounterKeyParameter": {
+      "name": "quotaCounterKey",
+      "in": "path",
+      "required": true,
+      "type": "string",      
+      "description": "Quota counter key identifier.",      
+      "x-ms-parameter-location": "method"
+    },
+    "QuotaPeriodKeyParameter": {
+      "name": "quotaPeriodKey",
+      "in": "path",
+      "required": true,
+      "type": "string",      
+      "description": "Quota period key identifier.",      
       "x-ms-parameter-location": "method"
     }
   }
