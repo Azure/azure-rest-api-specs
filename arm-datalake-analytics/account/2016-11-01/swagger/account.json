@@ -1074,10 +1074,17 @@
       "description": "Azure Storage account properties information to update."
     },
     "StorageAccountInfo": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
       "properties": {
         "name": {
           "type": "string",
-          "readOnly": true,
           "description": "the account name associated with the Azure storage account."
         },
         "properties": {
@@ -1087,24 +1094,6 @@
         }
       },
       "description": "Azure Storage account information."
-    },
-    "CreateStorageAccountInfo": {
-      "required": [
-        "properties",
-        "name"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "the account name associated with the Azure storage account to add to the Data Lake analytics account being created."
-        },
-        "properties": {
-          "$ref": "#/definitions/StorageAccountProperties",
-          "description": "the properties associated with this storage account to add to the Data Lake analytics account being created.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "Azure Storage account information to add to the Data Lake analytics account being created."
     },
     "StorageContainerProperties": {
       "properties": {
@@ -1198,8 +1187,10 @@
       "description": "Data Lake Store account properties information."
     },
     "DataLakeStoreAccountInfo": {
-      "required": [
-        "name"
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
       ],
       "properties": {
         "name": {
@@ -1571,6 +1562,29 @@
       },
       "required": [
         "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "description": "The Sub Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "required": [
+        "name"
       ],
       "x-ms-azure-resource": true
     }
