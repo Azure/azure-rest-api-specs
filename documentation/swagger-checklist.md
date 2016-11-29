@@ -5,8 +5,8 @@
 Latest version: [https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md)
 
 Editors:
-"XXX", Microsoft
-"YYY", Microsoft
+"XXX", Microsoft</br>
+"YYY", Microsoft</br>
 "ZZZ", Microsoft
 
 
