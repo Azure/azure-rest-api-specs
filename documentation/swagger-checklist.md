@@ -29,7 +29,7 @@ Please direct feedback and kudios to [swagger-checklist@microsoft.com](mailto:sw
 Introduction</br>
 Notational Conventions</br>
 Checklist</br>
-[Appendix A: References](#Appendix-A-References)</br>
+[Appendix A: References](#appendix-a-references)</br>
 Appendix B: Acknowledgments</br>
 Appendix C: Revision History
 
