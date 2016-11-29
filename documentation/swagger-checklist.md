@@ -26,11 +26,11 @@ Please direct feedback and kudios to [swagger-checklist@microsoft.com](mailto:sw
 
 ## Table of Contents ##
 
-Introduction
-Notational Conventions
-Checklist
-[Appendix A: References](#Appendix-A-References)
-Appendix B: Acknowledgments
+Introduction</br>
+Notational Conventions</br>
+Checklist</br>
+[Appendix A: References](#Appendix-A-References)</br>
+Appendix B: Acknowledgments</br>
 Appendix C: Revision History
 
 ## Introduction ##
