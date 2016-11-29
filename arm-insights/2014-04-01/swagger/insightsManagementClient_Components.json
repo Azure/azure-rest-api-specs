@@ -30,7 +30,7 @@
       "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
-        }
+      }
     }
   },
   "paths": {
@@ -82,7 +82,7 @@
           "200": {
             "description": "Successful request when retrieving an Application Insights instance",
             "schema": {
-              "$ref": "#/definitions/Resource"
+              "$ref": "#/definitions/ApplicationInsightsResource"
             },
             "examples": {
               "application/json": {
@@ -120,7 +120,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/Resource"
+        "x-ms-odata": "#/definitions/ApplicationInsightsResource"
       },
       "put": {
         "description": "Creates or Updates an Application Insights instance",
@@ -143,7 +143,7 @@
           "200": {
             "description": "Successful request when Creating or Updating an Application Insights instance",
             "schema": {
-              "$ref": "#/definitions/Resource"
+              "$ref": "#/definitions/ApplicationInsightsResource"
             },
             "examples": {
               "application/json": {
@@ -184,12 +184,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/Resource"
+        "x-ms-odata": "#/definitions/ApplicationInsightsResource"
       }
     }
   },
   "definitions": {
-    "Resource": {
+    "ApplicationInsightsResource": {
       "properties": {
         "id": {
           "type": "string",
@@ -214,7 +214,7 @@
           "description": "Application Insights Kind"
         },
         "properties": {
-          "$ref": "#/definitions/Properties",
+          "$ref": "#/definitions/ApplicationInsightsProperties",
           "description": "the parameters for the scaling action."
         },
         "tags": {
@@ -231,7 +231,7 @@
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
-    "Properties": {
+    "ApplicationInsightsProperties": {
       "properties": {
         "ver": {
           "type": "string",
