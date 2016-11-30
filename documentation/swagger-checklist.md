@@ -47,63 +47,63 @@ The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SH
 
 Normative statements of the checklist are presented in the following manner:
 
-*Mnnnn*: checklist text here.
+&#x2610; *Mnnnn*: checklist text here.
 
 OR
 
-*Snnnn*: checklist text here.
+&#x2610; *Snnnn*: checklist text here.
 
 Where "M" stands for 'MUST' or 'MUST NOT' requirement. "S" stands for 'SHOULD' or 'SHOULD NOT' requirement. And, "nnnn" is replaced by a number that is unique among all the requirements in the checklist, thereby "nnnn" becomes a unique requirement identifier.
 
 
 ## Naming - Swagger Checklist ##
 
-*M1000*: Plural names MUST only be used to represent collections.
+&#x2610; *M1000*: Plural names MUST only be used to represent collections.
 
-*M1001*: List operations MUST be prefixed with "List" and MUST not be named as "GetXXXX" operations.
+&#x2610; *M1001*: List operations MUST be prefixed with "List" and MUST not be named as "GetXXXX" operations.
 
-*M1002*: Terminology in Swagger and Azure Portal MUST be the same.
+&#x2610; *M1002*: Terminology in Swagger and Azure Portal MUST be the same.
 
 
 
 ## Operation Semantics - Swagger Checklist ##
 
-*M2000*: A Swagger specification MUST be accompanied with a document that describes management scenarios that can be realized using operations described in the Swagger.
+&#x2610; *M2000*: A Swagger specification MUST be accompanied with a document that describes management scenarios that can be realized using operations described in the Swagger.
 
-*M2001*: Read only parameters MUST be labeled as read only in Swagger.
+&#x2610; *M2001*: Read only parameters MUST be labeled as read only in Swagger.
 
-*M2002*: Boolean parameters MUST be represented as boolean in Swagger. Boolean parameters MUST NOT be represented as strings. Similarly, this requirements applies to other primitive data types such as integer, float and double. These primitive data types MUST be represented using [Swagger primitive data types](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types).
+&#x2610; *M2002*: Boolean parameters MUST be represented as boolean in Swagger. Boolean parameters MUST NOT be represented as strings. Similarly, this requirements applies to other primitive data types such as integer, float and double. These primitive data types MUST be represented using [Swagger primitive data types](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types).
 
-*M2003*: Long running operations MUST be modeled as [long running operations](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/creating-swagger.md#longrunning) in Swagger.
+&#x2610; *M2003*: Long running operations MUST be modeled as [long running operations](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/creating-swagger.md#longrunning) in Swagger.
 
-*M2004*: Required parameters MUST be labeled as required in Swagger.
+&#x2610; *M2004*: Required parameters MUST be labeled as required in Swagger.
 
-*M2005*: A collection of references that are read only MUST be marked as read only in Swagger.
+&#x2610; *M2005*: A collection of references that are read only MUST be marked as read only in Swagger.
 
-*M2006*: Mutability of properties MUST be marked up using [`x-ms-mutability` extension](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-mutability).
+&#x2610; *M2006*: Mutability of properties MUST be marked up using [`x-ms-mutability` extension](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-mutability).
 
-*M2007*: Error definitions MUST be abstracted, modeled and reused instead of introducing a plethora of error definitions that look the same with different names.
+&#x2610; *M2007*: Error definitions MUST be abstracted, modeled and reused instead of introducing a plethora of error definitions that look the same with different names.
 
-*M2008*: A Swagger spec MUST NOT define operations or properties or parameters for functionalities that MAY work in the future.
+&#x2610; *M2008*: A Swagger spec MUST NOT define operations or properties or parameters for functionalities that MAY work in the future.
 
 For example, `OutBoundNATRule` is a model that exists in a the networking Swagger but it is not supported by the Networking RP.
 
-*M2009*: A collection model in Swagger MUST support adding more than one element to the collection.
+&#x2610; *M2009*: A collection model in Swagger MUST support adding more than one element to the collection.
 
-*M2010*: Operations that are exposed through private previews MUST not be described in Swaggers in the [public GitHub repository](https://github.com/Azure/azure-rest-api-specs).
+&#x2610; *M2010*: Operations that are exposed through private previews MUST not be described in Swaggers in the [public GitHub repository](https://github.com/Azure/azure-rest-api-specs).
 
 
 ## Operational - Swagger Checklist ##
 
-*M3000*: Swagger authoring MUST NOT be assigned to engineers who do not have an intimate knowledge of a service endpoint and its developer experience to avoid feeding inefficiencies into teams that focus on Azure developer experiences and the rest of the Azure eco system.
+&#x2610; *M3000*: Swagger authoring MUST NOT be assigned to engineers who do not have an intimate knowledge of a service endpoint and its developer experience to avoid feeding inefficiencies into teams that focus on Azure developer experiences and the rest of the Azure eco system.
 
 For example, if Swagger authoring were assigned to new hires or vendors it would feed inefficiencies into downstream consumption and developer experiences.
 
-*M3001*: Each operation described in a Swagger specification MUST be tested prior to opening a pull request against the preview branch of the [Azure REST API Specs](https://github.com/azure/azure-rest-api-specs/) GitHub repo.
+&#x2610; *M3001*: Each operation described in a Swagger specification MUST be tested prior to opening a pull request against the preview branch of the [Azure REST API Specs](https://github.com/azure/azure-rest-api-specs/) GitHub repo.
 
 ## Documentation - Swagger Checklist ##
 
-*M4000*: Descriptions MUST NOT contain spelling errors, grammatical errors, run off sentences and dummy texts.
+&#x2610; *M4000*: Descriptions MUST NOT contain spelling errors, grammatical errors, run off sentences and dummy texts.
 
 Here are some [basic rules for public documentation](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-authoring-descriptions.md#basic-rules-for-public-docs-descriptions):
 
