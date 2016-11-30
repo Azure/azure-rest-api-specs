@@ -1418,7 +1418,8 @@
       "properties": {
         "Code": {
           "description": "The error code.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "HttpStatusCode": {
           "description": "The HTTP status code.",
@@ -1427,13 +1428,19 @@
         },
         "Message": {
           "description": "The error message.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "Details": {
           "description": "The error details.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "Code",
+        "Message"
+      ]
     },
     "IotHubQuotaMetricInfoListResult": {
       "description": "The JSON-serialized array of IotHubQuotaMetricInfo objects with a next link.",
@@ -1460,19 +1467,27 @@
         "totalDeviceCount": {
           "format": "int64",
           "description": "The total count of devices in the identity registry.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "enabledDeviceCount": {
           "format": "int64",
           "description": "The count of enabled devices in the identity registry.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "disabledDeviceCount": {
           "format": "int64",
           "description": "The count of disabled devices in the identity registry.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "totalDeviceCount",
+        "enabledDeviceCount",
+        "disabledDeviceCount"
+      ]
     },
     "JobResponseListResult": {
       "description": "The JSON-serialized array of JobResponse objects with a next link.",
@@ -1522,28 +1537,38 @@
           "description": "The minimum number of units.",
           "type": "integer",
           "minimum": 1,
-          "maximum": 1
+          "maximum": 1,
+          "readOnly": true
         },
         "maximum": {
           "format": "int64",
           "description": "The maximum number of units.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "default": {
           "format": "int64",
           "description": "The default number of units.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "scaleType": {
           "description": "The type of the scaling enabled.",
           "enum": [ "Automatic", "Manual", "None" ],
+          "readOnly": true,
           "type": "string",
           "x-ms-enum": {
             "name": "IotHubScaleType",
             "modelAsString": false
           }
         }
-      }
+      },
+      "required": [
+        "minimum",
+        "maximum",
+        "default",
+        "scaleType"
+      ]
     },
     "EventHubConsumerGroupsListResult": {
       "description": "The JSON-serialized array of Event Hub-compatible consumer group names with a next link.",
@@ -1608,22 +1633,26 @@
       "properties": {
         "jobId": {
           "description": "The job identifier.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "startTimeUtc": {
           "format": "date-time-rfc1123",
           "description": "The start time of the Job.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "endTimeUtc": {
           "format": "date-time-rfc1123",
           "description": "The time the job stopped processing.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "type": {
           "description": "The type of the job.",
           "enum": [ "unknown", "export", "import", "backup", "readDeviceProperties", "writeDeviceProperties", "updateDeviceConfiguration", "rebootDevice", "factoryResetDevice", "firmwareUpdate" ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "JobType",
             "modelAsString": true
@@ -1633,6 +1662,7 @@
           "description": "The status of the job.",
           "enum": [ "unknown", "enqueued", "running", "completed", "failed", "cancelled" ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "JobStatus",
             "modelAsString": false
@@ -1640,17 +1670,26 @@
         },
         "failureReason": {
           "description": "If status == failed, this string containing the reason for the failure.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "statusMessage": {
           "description": "The status message for the job.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "parentJobId": {
           "description": "The job identifier of the parent job, if any.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "jobId",
+        "startTimeUtc",
+        "type",
+        "status"
+      ]
     },
     "IotHubDescriptionListResult": {
       "description": "The JSON-serialized array of IotHubDescription objects with a next link.",
@@ -1676,19 +1715,27 @@
       "properties": {
         "Name": {
           "description": "The name of the quota metric.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "CurrentValue": {
           "format": "int64",
           "description": "The current value for the quota metric.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "MaxValue": {
           "format": "int64",
           "description": "The maximum value of the quota metric.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "Name",
+        "CurrentValue",
+        "MaxValue"
+      ]
     },
     "OperationInputs": {
       "description": "Input values.",
@@ -1709,12 +1756,14 @@
       "properties": {
         "nameAvailable": {
           "description": "The value which indicates whether the provided name is available.",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         },
         "reason": {
           "description": "The reason for unavailability.",
           "enum": [ "Invalid", "AlreadyExists" ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "IotHubNameUnavailabilityReason",
             "modelAsString": false
@@ -1724,7 +1773,10 @@
           "description": "The detailed reason message.",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "nameAvailable"
+      ]
     },
     "ExportDevicesRequest": {
       "description": "Use to provide parameters when requesting an export of all devices in the IoT hub.",
