@@ -1204,54 +1204,6 @@
       },
       "description": "Data Lake Store error details information"
     },
-    "InnerError": {
-      "properties": {
-        "trace": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the stack trace for the error"
-        },
-        "context": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the context for the error message"
-        }
-      },
-      "description": "Data Lake Store inner error information"
-    },
-    "Error": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the HTTP status code or error code associated with this error"
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the error message to display."
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the target of the error."
-        },
-        "details": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/ErrorDetails"
-          },
-          "description": "the list of error details"
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerError",
-          "readOnly": true,
-          "description": "the inner exceptions or errors, if any"
-        }
-      },
-      "description": "Data Lake Store error information"
-    },
     "Resource": {
       "description": "The Resource model definition.",
       "properties": {
