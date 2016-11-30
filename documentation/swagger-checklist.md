@@ -136,6 +136,8 @@ This checklist is prepared and will be approved by Microsoft. Contributors to th
 
 - Doug Erickson, Microsoft
 - Tamra Myers, Microsoft
+- AA, Microsoft
+- BB, Microsoft
 
 ## Appendix C: Revision History ##
 
