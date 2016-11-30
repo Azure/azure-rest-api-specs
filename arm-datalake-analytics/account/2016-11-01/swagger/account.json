@@ -931,9 +931,7 @@
           }
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{name}": {
+      },
       "put": {
         "tags": [
           "Account"
@@ -1472,54 +1470,6 @@
         }
       },
       "description": "Generic resource error details information."
-    },
-    "InnerError": {
-      "properties": {
-        "trace": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the stack trace for the error"
-        },
-        "context": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the context for the error message"
-        }
-      },
-      "description": "Generic resource inner error information."
-    },
-    "Error": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the HTTP status code or error code associated with this error"
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the error message to display."
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the target of the error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetails"
-          },
-          "readOnly": true,
-          "description": "The list of error details"
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerError",
-          "readOnly": true,
-          "description": "The inner exceptions or errors, if any"
-        }
-      },
-      "description": "Generic resource error information."
     },
     "Resource": {
       "description": "The Resource model definition.",
