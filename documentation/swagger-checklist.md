@@ -62,7 +62,13 @@ Where "M" stands for 'MUST' or 'MUST NOT' requirement. "S" stands for 'SHOULD' o
 
 &#x25a2; *M1001*: List operations MUST be prefixed with "List" and MUST not be named as "GetXXXX" operations.
 
-&#x25a2; *M1002*: Terminology in Swagger and Azure Portal MUST be the same.
+&#x25a2; *M1002*: List operations MUST use consistent names and semantics. List operations MUST NOT use any other names.
+
+- `List()` - lists all resources under a subscription.
+- `ListByResourceGroup()` - list all resources in a resource group within a subscription.
+- `ListByParent()` - where "Parent" is a context specific name. It lists all resource under a parent.
+
+&#x25a2; *M1003*: Terminology in Swagger and Azure Portal MUST be the same.
 
 
 
