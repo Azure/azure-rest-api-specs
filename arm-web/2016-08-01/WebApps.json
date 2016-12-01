@@ -2012,7 +2012,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DomainOwnershipIdentifierCollection"
+              "$ref": "#/definitions/IdentifierCollection"
             }
           }
         },
@@ -2065,7 +2065,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DomainOwnershipIdentifier"
+              "$ref": "#/definitions/Identifier"
             }
           }
         }
@@ -2109,7 +2109,7 @@
             "description": "A JSON representation of the domain ownership properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DomainOwnershipIdentifier"
+              "$ref": "#/definitions/Identifier"
             }
           },
           {
@@ -2126,7 +2126,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DomainOwnershipIdentifier"
+              "$ref": "#/definitions/Identifier"
             }
           }
         }
@@ -2213,7 +2213,7 @@
             "description": "A JSON representation of the domain ownership properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DomainOwnershipIdentifier"
+              "$ref": "#/definitions/Identifier"
             }
           },
           {
@@ -2230,7 +2230,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DomainOwnershipIdentifier"
+              "$ref": "#/definitions/Identifier"
             }
           }
         }
@@ -6413,7 +6413,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DomainOwnershipIdentifierCollection"
+              "$ref": "#/definitions/IdentifierCollection"
             }
           }
         },
@@ -6473,7 +6473,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DomainOwnershipIdentifier"
+              "$ref": "#/definitions/Identifier"
             }
           }
         }
@@ -6517,7 +6517,7 @@
             "description": "A JSON representation of the domain ownership properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DomainOwnershipIdentifier"
+              "$ref": "#/definitions/Identifier"
             }
           },
           {
@@ -6541,7 +6541,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DomainOwnershipIdentifier"
+              "$ref": "#/definitions/Identifier"
             }
           }
         }
@@ -6635,7 +6635,7 @@
             "description": "A JSON representation of the domain ownership properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DomainOwnershipIdentifier"
+              "$ref": "#/definitions/Identifier"
             }
           },
           {
@@ -6659,7 +6659,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DomainOwnershipIdentifier"
+              "$ref": "#/definitions/Identifier"
             }
           }
         }
@@ -11737,36 +11737,6 @@
         }
       }
     },
-    "DomainOwnershipIdentifier": {
-      "description": "Domain ownership Identifier.",
-      "type": "object",
-      "properties": {
-        "ownershipId": {
-          "description": "Ownership Id.",
-          "type": "string"
-        }
-      }
-    },
-    "DomainOwnershipIdentifierCollection": {
-      "description": "Collection of domain ownership identifiers.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DomainOwnershipIdentifier"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string"
-        }
-      }
-    },
     "EnabledConfig": {
       "description": "Enabled configuration.",
       "type": "object",
@@ -12150,6 +12120,47 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Identifier": {
+      "description": "Identifier.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ARM envelope properties",
+          "properties": {
+            "id": {
+              "description": "ID.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "IdentifierCollection": {
+      "description": "Collection of identifiers.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Identifier"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
         }
       }
     },
@@ -13083,8 +13094,8 @@
             },
             "scmSiteAlsoStopped": {
               "description": "<code>true</code> to stop SCM (KUDU) site when the app is stopped; otherwise, <code>false</code>. The default is <code>false</code>.",
-              "type": "boolean",
-              "readOnly": true
+              "default": false,
+              "type": "boolean"
             },
             "targetSwapSlot": {
               "description": "Specifies which deployment slot this app will swap into. Read-only.",
@@ -14349,6 +14360,7 @@
       "in": "path",
       "description": "Name of the resource group to which the resource belongs.",
       "required": true,
+      "x-ms-parameter-location": "method",
       "type": "string",
       "maxLength": 90,
       "minLength": 1,

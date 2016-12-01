@@ -35,12 +35,9 @@ describe('Azure Swagger Schema Validation', function() {
   before(function(done) {
     request({url: extensionSwaggerSchemaUrl, json:true}, function (error, response, extensionSwaggerSchemaBody) {        
       request({url: swaggerSchemaAltUrl, json:true}, function (error, response, swaggerSchemaBody) {
-        request({url: schemaUrl, json:true}, function (error, response, schemaBody) {
-          extensionSwaggerSchema = extensionSwaggerSchemaBody;
-          swaggerSchema = swaggerSchemaBody;
-          schema4 = schemaBody;
-          done();
-        });
+        extensionSwaggerSchema = extensionSwaggerSchemaBody;
+        swaggerSchema = swaggerSchemaBody;
+        done();
       });
     });
   });
@@ -56,7 +53,6 @@ describe('Azure Swagger Schema Validation', function() {
           done();
         }
         var validator = new z();
-        validator.setRemoteReference(schemaUrl, schema4);
         validator.setRemoteReference(swaggerSchemaUrl, swaggerSchema);
         var valid = validator.validate(JSON.parse(stripBOM(data)), extensionSwaggerSchema);
         if (!valid) {
