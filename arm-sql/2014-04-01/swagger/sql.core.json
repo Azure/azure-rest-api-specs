@@ -762,13 +762,6 @@
         "description": "Returns information about activity on Azure SQL databases inside of an Azure SQL elastic pool.",
         "parameters": [
           {
-            "name": "elasticPoolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure SQL Elastic Pool."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -779,6 +772,13 @@
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Elastic Pool."
           }
         ],
         "responses": {
@@ -2403,7 +2403,6 @@
         "currentServiceLevelObjective": {
           "readOnly": true,
           "type": "string",
-          "format": "uuid",
           "description": "Gets or sets currentServiceLevelObjective for service tier advisor."
         },
         "currentServiceLevelObjectiveId": {
@@ -2526,11 +2525,6 @@
           "description": "Gets or sets inRangeTimeRatio for SLO usage metric."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "description": "Represents a Slo Usage Metric."
     },
     "UpgradeHint": {
@@ -2545,11 +2539,6 @@
           "description": "TargetServiceLevelObjectiveId for upgrade hint."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "description": "Represents a Upgrade Hint."
     },
     "TableProperties": {
