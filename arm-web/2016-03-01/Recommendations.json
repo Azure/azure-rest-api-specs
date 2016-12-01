@@ -181,6 +181,7 @@
             "in": "query",
             "description": "If greater than zero, this operation scans the last active live site symptoms and dynamically generate on-the-fly recommendations.",
             "type": "integer",
+            "format": "int32",
             "minimum": 0
           },
           {
@@ -338,6 +339,7 @@
       "type": "object",
       "properties": {
         "creationTime": {
+          "format": "date-time",
           "description": "Timestamp when this instance was created.",
           "type": "string"
         },
@@ -415,26 +417,32 @@
           "type": "string"
         },
         "startTime": {
+          "format": "date-time",
           "description": "The beginning time in UTC of a range that the recommendation refers to.",
           "type": "string"
         },
         "endTime": {
+          "format": "date-time",
           "description": "The end time in UTC of a range that the recommendation refers to.",
           "type": "string"
         },
         "nextNotificationTime": {
+          "format": "date-time",
           "description": "When to notify this recommendation next in UTC. Null means that this will never be notified anymore.",
           "type": "string"
         },
         "notificationExpirationTime": {
+          "format": "date-time",
           "description": "Date and time in UTC when this notification expires.",
           "type": "string"
         },
         "notifiedTime": {
+          "format": "date-time",
           "description": "Last timestamp in UTC this instance was actually notified. Null means that this recommendation hasn't been notified yet.",
           "type": "string"
         },
         "score": {
+          "format": "double",
           "description": "A metric value measured by the rule.",
           "type": "number"
         }
@@ -562,7 +570,7 @@
       "type": "string",
       "maxLength": 90,
       "minLength": 1,
-      "pattern": "^[-\\\\w\\\\._\\\\(\\\\)]+[^\\\\.]$"
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$"
     },
     "apiVersionParameter": {
       "name": "api-version",

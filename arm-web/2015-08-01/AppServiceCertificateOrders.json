@@ -814,6 +814,7 @@
               "readOnly": true
             },
             "validityInYears": {
+              "format": "int32",
               "description": "Duration in years (must be between 1 and 3).",
               "default": 1,
               "maximum": 3,
@@ -825,6 +826,7 @@
               ]
             },
             "keySize": {
+              "format": "int32",
               "description": "Certificate key size.",
               "default": 2048,
               "type": "integer",
@@ -920,11 +922,13 @@
               "readOnly": true
             },
             "lastCertificateIssuanceTime": {
+              "format": "date-time",
               "description": "Certificate last issuance time.",
               "type": "string",
               "readOnly": true
             },
             "expirationTime": {
+              "format": "date-time",
               "description": "Certificate expiration time.",
               "type": "string",
               "readOnly": true
@@ -971,6 +975,7 @@
           "description": "ARM envelope properties",
           "properties": {
             "version": {
+              "format": "int32",
               "description": "Version.",
               "type": "integer",
               "readOnly": true
@@ -991,11 +996,13 @@
               "readOnly": true
             },
             "notBefore": {
+              "format": "date-time",
               "description": "Valid from.",
               "type": "string",
               "readOnly": true
             },
             "notAfter": {
+              "format": "date-time",
               "description": "Valid to.",
               "type": "string",
               "readOnly": true
@@ -1037,6 +1044,7 @@
               "type": "string"
             },
             "timeStamp": {
+              "format": "date-time",
               "description": "Time stamp.",
               "type": "string"
             }
@@ -1079,6 +1087,7 @@
               }
             },
             "createdAt": {
+              "format": "date-time",
               "description": "Time at which the certificate action was performed.",
               "type": "string"
             }
@@ -1100,10 +1109,12 @@
           "description": "ARM envelope properties",
           "properties": {
             "keySize": {
+              "format": "int32",
               "description": "Certificate Key Size.",
               "type": "integer"
             },
             "delayExistingRevokeInHours": {
+              "format": "int32",
               "description": "Delay in hours to revoke existing certificate after the new certificate is issued.",
               "type": "integer"
             },
@@ -1133,6 +1144,7 @@
           "description": "ARM envelope properties",
           "properties": {
             "keySize": {
+              "format": "int32",
               "description": "Certificate Key Size.",
               "type": "integer"
             },
@@ -1204,7 +1216,7 @@
       "type": "string",
       "maxLength": 90,
       "minLength": 1,
-      "pattern": "^[-\\\\w\\\\._\\\\(\\\\)]+[^\\\\.]$"
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$"
     },
     "apiVersionParameter": {
       "name": "api-version",

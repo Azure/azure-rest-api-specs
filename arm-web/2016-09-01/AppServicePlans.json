@@ -1470,6 +1470,7 @@
               ]
             },
             "maximumNumberOfWorkers": {
+              "format": "int32",
               "description": "Maximum number of instances that can be assigned to this App Service plan.",
               "type": "integer",
               "readOnly": true
@@ -1485,6 +1486,7 @@
               "type": "boolean"
             },
             "numberOfSites": {
+              "format": "int32",
               "description": "Number of apps assigned to this App Service plan.",
               "type": "integer",
               "readOnly": true
@@ -1495,10 +1497,12 @@
               "readOnly": true
             },
             "targetWorkerCount": {
+              "format": "int32",
               "description": "Scaling worker count.",
               "type": "integer"
             },
             "targetWorkerSizeId": {
+              "format": "int32",
               "description": "Scaling worker size ID.",
               "type": "integer"
             },
@@ -1574,7 +1578,7 @@
       }
     },
     "AutoHealCustomAction": {
-      "description": "Custom action to be executed\r\n            when an auto heal rule is triggered.",
+      "description": "Custom action to be executed\n when an auto heal rule is triggered.",
       "type": "object",
       "properties": {
         "exe": {
@@ -1610,6 +1614,7 @@
           "description": "A rule based on total requests."
         },
         "privateBytesInKB": {
+          "format": "int32",
           "description": "A rule based on private bytes.",
           "type": "integer"
         },
@@ -1723,7 +1728,7 @@
       }
     },
     "HandlerMapping": {
-      "description": "The IIS handler mappings used to define which handler processes HTTP requests with certain extension. \r\n            For example, it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension.",
+      "description": "The IIS handler mappings used to define which handler processes HTTP requests with certain extension. \n For example, it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension.",
       "type": "object",
       "properties": {
         "extension": {
@@ -1832,6 +1837,7 @@
               "type": "string"
             },
             "port": {
+              "format": "int32",
               "description": "The port of the endpoint.",
               "type": "integer"
             },
@@ -1908,11 +1914,13 @@
           "description": "ARM envelope properties",
           "properties": {
             "current": {
+              "format": "int32",
               "description": "The current number of Hybrid Connections.",
               "type": "integer",
               "readOnly": true
             },
             "maximum": {
+              "format": "int32",
               "description": "The maximum number of Hybrid Connections allowed.",
               "type": "integer",
               "readOnly": true
@@ -1973,22 +1981,27 @@
           "type": "string"
         },
         "reroutePercentage": {
+          "format": "double",
           "description": "Percentage of the traffic which will be redirected to <code>ActionHostName</code>.",
           "type": "number"
         },
         "changeStep": {
+          "format": "double",
           "description": "In auto ramp up scenario this is the step to to add/remove from <code>ReroutePercentage</code> until it reaches \n <code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specificed in <code>ChangeIntervalInMinutes</code>.\n Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
           "type": "number"
         },
         "changeIntervalInMinutes": {
+          "format": "int32",
           "description": "Specifies interval in mimuntes to reevaluate ReroutePercentage.",
           "type": "integer"
         },
         "minReroutePercentage": {
+          "format": "double",
           "description": "Specifies lower boundary above which ReroutePercentage will stay.",
           "type": "number"
         },
         "maxReroutePercentage": {
+          "format": "double",
           "description": "Specifies upper boundary below which ReroutePercentage will stay.",
           "type": "number"
         },
@@ -2007,6 +2020,7 @@
       "type": "object",
       "properties": {
         "count": {
+          "format": "int32",
           "description": "Count.",
           "type": "integer"
         },
@@ -2093,11 +2107,13 @@
           "readOnly": true
         },
         "startTime": {
+          "format": "date-time",
           "description": "Metric start time.",
           "type": "string",
           "readOnly": true
         },
         "endTime": {
+          "format": "date-time",
           "description": "Metric end time.",
           "type": "string",
           "readOnly": true
@@ -2284,26 +2300,31 @@
           "readOnly": true
         },
         "average": {
+          "format": "float",
           "description": "Value average.",
           "type": "number",
           "readOnly": true
         },
         "minimum": {
+          "format": "float",
           "description": "Value minimum.",
           "type": "number",
           "readOnly": true
         },
         "maximum": {
+          "format": "float",
           "description": "Value maximum.",
           "type": "number",
           "readOnly": true
         },
         "total": {
+          "format": "float",
           "description": "Value total.",
           "type": "number",
           "readOnly": true
         },
         "count": {
+          "format": "float",
           "description": "Value count.",
           "type": "number",
           "readOnly": true
@@ -2331,12 +2352,12 @@
           "description": "ARM envelope properties",
           "properties": {
             "state": {
-              "description": "Current state of the app. Read-only.",
+              "description": "Current state of the app.",
               "type": "string",
               "readOnly": true
             },
             "hostNames": {
-              "description": "Hostnames associated with the app. Read-only.",
+              "description": "Hostnames associated with the app.",
               "type": "array",
               "items": {
                 "type": "string"
@@ -2344,7 +2365,7 @@
               "readOnly": true
             },
             "repositorySiteName": {
-              "description": "Name of the repository site. Read-only.",
+              "description": "Name of the repository site.",
               "type": "string",
               "readOnly": true
             },
@@ -2366,7 +2387,7 @@
               "type": "boolean"
             },
             "enabledHostNames": {
-              "description": "Enabled hostnames for the app. Read-only. Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,\n the app is not served on those hostnames.",
+              "description": "Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,\n the app is not served on those hostnames.",
               "type": "array",
               "items": {
                 "type": "string"
@@ -2374,7 +2395,7 @@
               "readOnly": true
             },
             "availabilityState": {
-              "description": "Management information availability state for the app. Read-only.",
+              "description": "Management information availability state for the app.",
               "enum": [
                 "Normal",
                 "Limited",
@@ -2408,6 +2429,7 @@
               ]
             },
             "lastModifiedTimeUtc": {
+              "format": "date-time",
               "description": "Last time the app was modified, in UTC. Read-only.",
               "type": "string",
               "readOnly": true
@@ -2425,7 +2447,7 @@
               "readOnly": true
             },
             "premiumAppDeployed": {
-              "description": "Indicates whether app is deployed as a premium app. Read-only.",
+              "description": "Indicates whether app is deployed as a premium app.",
               "type": "boolean",
               "readOnly": true
             },
@@ -2482,22 +2504,23 @@
               "readOnly": true
             },
             "containerSize": {
+              "format": "int32",
               "description": "Size of the function container.",
               "type": "integer"
             },
             "dailyMemoryTimeQuota": {
+              "format": "int32",
               "description": "Maximum allowed daily memory-time quota (applicable on dynamic apps only).",
               "type": "integer"
             },
             "suspendedTill": {
+              "format": "date-time",
               "description": "App suspended till in case memory-time quota is exceeded.",
               "type": "string",
               "readOnly": true
             },
-            "advancedRoutingEnabled": {
-              "type": "boolean"
-            },
             "maxNumberOfWorkers": {
+              "format": "int32",
               "description": "Maximum number of workers.\n This only applies to Functions container.",
               "type": "integer",
               "readOnly": true
@@ -2515,7 +2538,7 @@
               "readOnly": true
             },
             "isDefaultContainer": {
-              "description": "<code>true</code> if the app is a default container; otherwise, <code>false</code>. Read-only.",
+              "description": "<code>true</code> if the app is a default container; otherwise, <code>false</code>.",
               "type": "boolean",
               "readOnly": true
             },
@@ -2547,6 +2570,7 @@
           "description": "ARM envelope properties",
           "properties": {
             "numberOfWorkers": {
+              "format": "int32",
               "description": "Number of workers.",
               "type": "integer"
             },
@@ -2579,6 +2603,7 @@
               "type": "boolean"
             },
             "requestTracingExpirationTime": {
+              "format": "date-time",
               "description": "Request tracing expiration time.",
               "type": "string"
             },
@@ -2595,6 +2620,7 @@
               "type": "boolean"
             },
             "logsDirectorySizeLimit": {
+              "format": "int32",
               "description": "HTTP logs directory size limit.",
               "type": "integer"
             },
@@ -2744,10 +2770,6 @@
               "items": {
                 "$ref": "#/definitions/IpSecurityRestriction"
               }
-            },
-            "advancedRoutingEnabled": {
-              "description": "Advanced routing enabled",
-              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true
@@ -2759,14 +2781,17 @@
       "type": "object",
       "properties": {
         "maxPercentageCpu": {
+          "format": "double",
           "description": "Maximum allowed CPU usage percentage.",
           "type": "number"
         },
         "maxMemoryInMb": {
+          "format": "int64",
           "description": "Maximum allowed memory usage in MB.",
           "type": "integer"
         },
         "maxDiskSizeInMb": {
+          "format": "int64",
           "description": "Maximum allowed disk size usage in MB.",
           "type": "integer"
         }
@@ -2799,14 +2824,17 @@
       "type": "object",
       "properties": {
         "minimum": {
+          "format": "int32",
           "description": "Minimum number of workers for this App Service plan SKU.",
           "type": "integer"
         },
         "maximum": {
+          "format": "int32",
           "description": "Maximum number of workers for this App Service plan SKU.",
           "type": "integer"
         },
         "default": {
+          "format": "int32",
           "description": "Default number of workers for this App Service plan SKU.",
           "type": "integer"
         },
@@ -2837,6 +2865,7 @@
           "type": "string"
         },
         "capacity": {
+          "format": "int32",
           "description": "Current number of instances assigned to the resource.",
           "type": "integer"
         },
@@ -2865,6 +2894,7 @@
       "type": "object",
       "properties": {
         "timestampUtc": {
+          "format": "date-time",
           "description": "The time the last successful slot swap completed.",
           "type": "string",
           "readOnly": true
@@ -2890,6 +2920,7 @@
           "type": "string"
         },
         "count": {
+          "format": "int32",
           "description": "Count.",
           "type": "integer"
         },
@@ -2904,18 +2935,22 @@
       "type": "object",
       "properties": {
         "status": {
+          "format": "int32",
           "description": "HTTP status code.",
           "type": "integer"
         },
         "subStatus": {
+          "format": "int32",
           "description": "SubStatus.",
           "type": "integer"
         },
         "win32Status": {
+          "format": "int32",
           "description": "Win32 error code.",
           "type": "integer"
         },
         "count": {
+          "format": "int32",
           "description": "Count.",
           "type": "integer"
         },
@@ -3132,7 +3167,7 @@
       "type": "string",
       "maxLength": 90,
       "minLength": 1,
-      "pattern": "^[-\\\\w\\\\._\\\\(\\\\)]+[^\\\\.]$"
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$"
     },
     "apiVersionParameter": {
       "name": "api-version",

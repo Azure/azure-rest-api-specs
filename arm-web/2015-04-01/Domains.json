@@ -646,7 +646,13 @@
       }
     },
     "Contact": {
-      "description": "Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information is made publicly available through the Whois \r\n            directories as per ICANN requirements.",
+      "description": "Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information is made publicly available through the Whois \n directories as per ICANN requirements.",
+      "required": [
+        "email",
+        "nameFirst",
+        "nameLast",
+        "phone"
+      ],
       "type": "object",
       "properties": {
         "addressMailing": {
@@ -794,16 +800,19 @@
               "type": "boolean"
             },
             "createdTime": {
+              "format": "date-time",
               "description": "Domain creation timestamp.",
               "type": "string",
               "readOnly": true
             },
             "expirationTime": {
+              "format": "date-time",
               "description": "Domain expiration timestamp.",
               "type": "string",
               "readOnly": true
             },
             "lastRenewedTime": {
+              "format": "date-time",
               "description": "Timestamp when the domain was renewed last time.",
               "type": "string",
               "readOnly": true
@@ -973,6 +982,7 @@
           "type": "string"
         },
         "agreedAt": {
+          "format": "date-time",
           "description": "Timestamp when the agreements were accepted.",
           "type": "string"
         }
@@ -987,6 +997,7 @@
           "type": "string"
         },
         "maxDomainRecommendations": {
+          "format": "int32",
           "description": "Maximum number of recommendations.",
           "type": "integer"
         }
@@ -1134,7 +1145,7 @@
       "type": "string",
       "maxLength": 90,
       "minLength": 1,
-      "pattern": "^[-\\\\w\\\\._\\\\(\\\\)]+[^\\\\.]$"
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$"
     },
     "apiVersionParameter": {
       "name": "api-version",
