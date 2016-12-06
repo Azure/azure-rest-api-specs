@@ -5,7 +5,7 @@
     "description": "The Microsoft Azure Storage Import/Export Resource Provider API.",
     "version": "2016-11-01"
   },
-  "host": "api-dogfood.resources.windows-int.net",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -665,7 +665,12 @@
         },
         "state": {
           "type": "string",
-          "description": "If specified, the value must be Shipping, which tells the Import/Export service that the package for the job has been shipped. The ReturnAddress and DeliveryPackage properties must have been set either in this request or in a previous request, otherwise the request will fail."
+          "description": "If specified, the value must be Shipping, which tells the Import/Export service that the package for the job has been shipped. The ReturnAddress and DeliveryPackage properties must have been set either in this request or in a previous request, otherwise the request will fail.",
+          "enum": [ "Shipping" ],
+          "x-ms-enum": {
+            "name": "MutableJobState",
+            "modelAsString": true
+          }
         },
         "returnAddress": {
           "description": "Specifies the return address information for the job.",
@@ -790,7 +795,12 @@
         "state": {
           "type": "string",
           "readOnly": true,
-          "description": "Current state of the job."
+          "description": "Current state of the job.",
+          "enum": [ "Creating", "Shipping", "Received", "Transferring", "Packaging", "Closed", "Completed" ],
+          "x-ms-enum": {
+            "name": "JobState",
+            "modelAsString": true
+          }
         },
         "cancelRequested": {
           "type": "boolean",
@@ -1096,7 +1106,12 @@
       "properties": {
         "state": {
           "type": "string",
-          "description": "The drive's current state."
+          "description": "The drive's current state.",
+          "enum": [ "Specified", "Received", "NeverReceived", "Transferring", "Completed", "CompletedMoreInfo", "ShippedBack" ],
+          "x-ms-enum": {
+            "name": "DriveState",
+            "modelAsString": true
+          }
         },
         "copyStatus": {
           "type": "string",
