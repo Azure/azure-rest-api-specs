@@ -58,58 +58,72 @@ Where "M" stands for 'MUST' or 'MUST NOT' requirement. "S" stands for 'SHOULD' o
 
 ## Naming - Swagger Checklist ##
 
-&#x25a2; *M1000*: Plural names MUST only be used to represent collections.
+- [ ] *M1000*: Plural names in parameters and model properties MUST only be used to represent collections.
 
-&#x25a2; *M1001*: List operations MUST be prefixed with "List" and MUST not be named as "GetXXXX" operations.
+- [ ] *M1001*: Each operation must contain an OperationId of the form "RESOURCE_METHOD" where "RESOURCE" represents the resource or object the operation addresses, and METHOD is a short name for the operation being performed "Get, Start, Remove", etc.
 
-&#x25a2; *M1002*: List operations MUST use consistent names and semantics. List operations MUST NOT use any other names. Consistent names and semantics are:
+- [ ] *M1002*: List operations MUST use the METHOD prefix "List" and MUST not be named as "GetXXXX" operations.
 
-- `List()` - lists all resources under a subscription.
-- `ListByResourceGroup()` - list all resources in a resource group within a subscription.
-- `ListByParent()` - where "Parent" is a context specific suffix. It lists all resource under a parent.
+- [ ] *M1003*: List operations MUST use consistent names and semantics. List operations MUST NOT use any other names. Consistent names and semantics are:
+  - `List()` - lists all resources under a subscription.
+  - `ListByResourceGroup()` - list all resources in a resource group within a subscription.
+  - `ListByParent()` - where "Parent" is a context specific suffix. It lists all resource under a parent.
+  
+- [ ] *M1006*: Get operations MUST use the METHOD name "Get"
 
-&#x25a2; *M1003*: Terminology in Swagger and Azure Portal MUST be the same.
+- [ ] *M1007*: PUT operations MUST use the METHOD Name "Create"
+
+- [ ] *M1008*: PATCH operations MUST use the METHOD Name "Update"
+
+- [ ] *M1008*: POST operations MUST use a METHOD Name that matches the semantic operation on the resource, for example "Start" or "Stop"
+
+- [ ] *M1009*: DELETE operations MUST use the METHOD Name "Delete"
+
+- [ ] *M1010*: Terminology in Swagger and Azure Portal MUST be the same.  Property names must match proeprty names as displayed in the portal.  Paremeter names musst match value names displayed in the poral.
 
 
 
 ## Operation Semantics - Swagger Checklist ##
 
-&#x25a2; *M2000*: A Swagger specification MUST be accompanied with a document that describes management scenarios that can be realized using operations described in the Swagger.
+- [ ] *M2000*: A Swagger specification MUST be accompanied with a document that describes management scenarios that can be realized using operations described in the Swagger.
 
-&#x25a2; *M2001*: Read only parameters MUST be labeled as read only in Swagger.
+- [ ] *M2001*: Read only parameters and model properties MUST be labeled as read only in Swagger.
 
-&#x25a2; *M2002*: Boolean parameters MUST be represented as boolean in Swagger. Boolean parameters MUST NOT be represented as strings. Similarly, this requirements applies to other primitive data types such as integer, float and double. These primitive data types MUST be represented using [Swagger primitive data types](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types).
+- [ ] *M2002*: Boolean parameters MUST be represented as boolean in Swagger. Boolean parameters MUST NOT be represented as strings. Similarly, this requirements applies to other primitive data types such as integer, float and double. These primitive data types MUST be represented using [Swagger primitive data types](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types).
 
-&#x25a2; *M2003*: Long running operations MUST be modeled as [long running operations](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/creating-swagger.md#longrunning) in Swagger.
+- [ ] *M2003*: Long running operations MUST be modeled as [long running operations](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/creating-swagger.md#longrunning) in Swagger.
 
-&#x25a2; *M2004*: Required parameters MUST be labeled as required in Swagger.
+- [ ] *M2004*: Required parameters MUST be labeled as required in Swagger.
 
-&#x25a2; *M2005*: A collection of references that are read only MUST be marked as read only in Swagger.
+- [ ] *M2005*: A collection of references that are read only MUST be marked as read only in Swagger.
 
-&#x25a2; *M2006*: Mutability of properties MUST be marked up using [`x-ms-mutability` extension](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-mutability).
+- [ ] *M2006*: Mutability of properties MUST be marked up using [`x-ms-mutability` extension](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-mutability).
 
-&#x25a2; *M2007*: Error definitions MUST be abstracted, modeled and reused instead of introducing a plethora of error definitions that look the same with different names.
+- [ ] *M2007*: Error definitions MUST be abstracted, modeled and reused instead of introducing a plethora of error definitions that look the same with different names.
 
-&#x25a2; *M2008*: A Swagger spec MUST NOT define operations or properties or parameters for functionalities that MAY work in the future.
+- [ ] *M2008*: A Swagger spec MUST NOT define operations or properties or parameters for functionalities that MAY work in the future.
 
 For example, `OutBoundNATRule` is a model that exists in a the networking Swagger but it is not supported by the Networking RP.
 
-&#x25a2; *M2009*: A collection model in Swagger MUST support adding more than one element to the collection.
+- [ ] *M2009*: A collection model in Swagger MUST support adding more than one element to the collection.
 
-&#x25a2; *M2010*: Operations that are exposed through private previews MUST not be described in Swaggers in the [public GitHub repository](https://github.com/Azure/azure-rest-api-specs).
+- [ ] *M2010*: Operations that are exposed through private previews MUST not be described in Swaggers in the [public GitHub repository](https://github.com/Azure/azure-rest-api-specs).
+
+
+- [ ] *M2012*: 
 
 
 ## Operational - Swagger Checklist ##
 
-&#x25a2; *M3000*: Swagger authoring MUST NOT be assigned to engineers who do not have an intimate knowledge of a service endpoint and its developer experience to avoid feeding inefficiencies into teams that focus on Azure developer experiences and the rest of the Azure eco system.
+- [ ] *M3000*: Swagger authoring MUST NOT be assigned to engineers who do not have an intimate knowledge of a service endpoint and its developer experience to avoid feeding inefficiencies into teams that focus on Azure developer experiences and the rest of the Azure eco system.
 
 For example, if Swagger authoring were assigned to new hires or vendors it would feed inefficiencies into downstream consumption and developer experiences.
 
-&#x25a2; *M3001*: Each operation described in a Swagger specification MUST be tested prior to opening a pull request against the preview branch of the [Azure REST API Specs](https://github.com/azure/azure-rest-api-specs/) GitHub repo.
+- [ ] *M3001*: Each operation described in a Swagger specification MUST be tested prior to opening a pull request against the preview branch of the [Azure REST API Specs](https://github.com/azure/azure-rest-api-specs/) GitHub repo.
 
 ## Documentation - Swagger Checklist ##
 
-&#x25a2; *M4000*: Descriptions MUST NOT contain spelling errors, grammatical errors, run off sentences and dummy texts.
+- [ ] *M4000*: Descriptions MUST NOT contain spelling errors, grammatical errors, run off sentences and dummy texts.
 
 Here are some [basic rules for public documentation](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-authoring-descriptions.md#basic-rules-for-public-docs-descriptions):
 
