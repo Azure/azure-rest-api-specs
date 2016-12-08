@@ -51,13 +51,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The locations were successfully retrieved and are in the response.",
             "schema": {
               "$ref": "#/definitions/LocationsListResult"
             }
           },
           "default": {
-            "description": "An error occurs.",
+            "description": "An error occurred during the operation.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -76,7 +76,7 @@
           {
             "name": "locationName",
             "in": "path",
-            "description": "The name of the location. For example, “West US” or “westus”.",
+            "description": "The name of the location. For example, 'West US' or 'westus'.",
             "required": true,
             "type": "string"
           },
@@ -89,13 +89,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The location was successfully retrieved and is in the response.",
             "schema": {
               "$ref": "#/definitions/Location"
             }
           },
           "default": {
-            "description": "An error occurs.",
+            "description": "An error occurred during the operation.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -139,13 +139,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The jobs were successfully retrieved and are in the response.",
             "schema": {
               "$ref": "#/definitions/JobListResult"
             }
           },
           "default": {
-            "description": "An error occurs.",
+            "description": "An error occurred during the operation.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -195,13 +195,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The jobs were successfully retrieved and are in the response.",
             "schema": {
               "$ref": "#/definitions/JobListResult"
             }
           },
           "default": {
-            "description": "An error occurs.",
+            "description": "An error occurred during the operation.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -242,13 +242,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The job was successfully retrieved and is in the response.",
             "schema": {
               "$ref": "#/definitions/Job"
             }
           },
           "default": {
-            "description": "An error occurs.",
+            "description": "An error occurred during the operation.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -277,7 +277,7 @@
           },
           {
             "name": "jobProperties",
-            "description": "iImport/export job properties that need to be updated.",
+            "description": "Import/export job properties that need to be updated.",
             "in": "body",
             "required": true,
             "schema": {
@@ -293,13 +293,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The job was successfully updated.",
             "schema": {
               "$ref": "#/definitions/Job"
             }
           },
           "default": {
-            "description": "An error occurs.",
+            "description": "An error occurred during the operation.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -344,19 +344,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The job was successfully updated.",
             "schema": {
               "$ref": "#/definitions/Job"
             }
           },
           "201": {
-            "description": "Created.",
+            "description": "The job was successfully created.",
             "schema": {
               "$ref": "#/definitions/Job"
             }
           },
           "default": {
-            "description": "An error occurs.",
+            "description": "An error occurred during the operation.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -392,10 +392,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK."
+            "description": "The job was successfully deleted."
           },
           "default": {
-            "description": "An error occurs.",
+            "description": "An error occurred during the operation.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -435,10 +435,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK."
+            "description": "The job was successfully moved to the specified resource group."
           },
           "default": {
-            "description": "An error occurs.",
+            "description": "An error occurred during the operation.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -452,7 +452,7 @@
           "StorageImportExport"
         ],
         "operationId": "Jobs_ListBitLockerKeys",
-        "description": "Lists the BitLocker Keys for all drives in the specified import/export job.",
+        "description": "Lists the BitLocker keys for all drives in the specified import/export job.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -476,13 +476,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The BitLocker keys were successfully retrieved and are in the response.",
             "schema": {
               "$ref": "#/definitions/BitLockerKeysListResult"
             }
           },
           "default": {
-            "description": "An error occurs.",
+            "description": "An error occurred during the operation.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -507,13 +507,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The supported operations were successfully retrieved and are in the response.",
             "schema": {
               "$ref": "#/definitions/SupportedOperationsListResult"
             }
           },
           "default": {
-            "description": "An error occurs.",
+            "description": "An error occurred during the operation.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -567,10 +567,10 @@
       }
     },
     "BitLockerKeysListResult": {
-      "description": "List of bitLocker keys for the specified import/export job.",
+      "description": "List of BitLocker keys for the specified import/export job.",
       "properties": {
         "value": {
-          "description": "List of bitLocker keys for the specified import/export job.",
+          "description": "List of BitLocker keys for the specified import/export job.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DriveStatus"
@@ -587,11 +587,11 @@
       "properties": {
         "targetResourceGroup": {
           "type": "string",
-          "description": "Specifies the target resource group id to move the jobs to."
+          "description": "Specifies the target resource group ID to move the jobs to."
         },
         "resources": {
           "type": "array",
-          "description": "Specifies the list of jobs to move to the target resource group.  The jobs must be from the current resource group from the request URL.",
+          "description": "Specifies the list of jobs to move to the target resource group. The jobs must be from the current resource group from the request URL.",
           "items": {
             "type": "string"
           }
@@ -648,7 +648,7 @@
       ]
     },
     "ErrorResponse": {
-      "description": "It describes the model for Error Response",
+      "description": "Describes the model for Error Response.",
       "properties": {
         "error": {
           "description": "Describes the error information",
@@ -677,7 +677,7 @@
           "$ref": "#/definitions/ReturnAddress"
         },
         "returnShipping": {
-          "description": "Specifies the return carrier and customer’s account with the carrier.",
+          "description": "Specifies the return carrier and customer's account with the carrier.",
           "$ref": "#/definitions/ReturnShipping"
         },
         "deliveryPackage": {
@@ -701,7 +701,7 @@
           "type": "object"
         },
         "properties": {
-          "description": "Specifies the properties of a UpdateJob.",
+          "description": "Specifies the properties of an UpdateJob.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/MutableJobProperties"
         }
@@ -740,7 +740,7 @@
         },
         "containerSas": {
           "type": "string",
-          "description": "The container SAS to be used to import or export data to or from the storage account."
+          "description": "The container shared access signature (SAS) to be used to import or export data to or from the storage account."
         },
         "jobType": {
           "type": "string",
@@ -756,7 +756,7 @@
           "$ref": "#/definitions/ReturnAddress"
         },
         "returnShipping": {
-          "description": "Specifies the return carrier and customer’s account with the carrier.",
+          "description": "Specifies the return carrier and customer's account with the carrier.",
           "$ref": "#/definitions/ReturnShipping"
         },
         "shippingInformation": {
@@ -837,13 +837,13 @@
       }
     },
     "Job": {
-      "description": "Describes an import/export job",
+      "description": "Describes an import/export job.",
       "required": [
         "properties"
       ],
       "properties": {
         "properties": {
-          "description": "Import/export job properties",
+          "description": "Import/export job properties.",
           "$ref": "#/definitions/JobProperties",
           "x-ms-client-flatten": true
         }
@@ -855,14 +855,14 @@
       ]
     },
     "OperationDisplayInformation": {
-      "description": "Display Information about the operation.",
+      "description": "Display information about the operation.",
       "properties": {
         "provider": {
-          "description": "The resource provider name to which the operation belongs to.",
+          "description": "The resource provider name to which the operation belongs.",
           "type": "string"
         },
         "resource": {
-          "description": "The name of the resource to which the operation belongs to.",
+          "description": "The name of the resource to which the operation belongs.",
           "type": "string"
         },
         "operation": {
@@ -870,7 +870,7 @@
           "type": "string"
         },
         "description": {
-          "description": "Short Description of the operation.",
+          "description": "Short description of the operation.",
           "type": "string"
         }
       }
@@ -880,11 +880,11 @@
       "required": ["name", "display"],
       "properties": {
         "name": {
-          "description": "name of the operation.",
+          "description": "Name of the operation.",
           "type": "string"
         },
         "display": {
-          "description": "Display Information about the operation.",
+          "description": "Display information about the operation.",
           "$ref": "#/definitions/OperationDisplayInformation",
           "x-ms-client-flatten": true
         }
@@ -957,7 +957,7 @@
           "type": "string"
         },
         "properties": {
-          "description": "Describes the properties of a Location.",
+          "description": "Describes the properties of a location.",
           "$ref": "#/definitions/LocationProperties",
           "x-ms-client-flatten": true
         }
@@ -1005,7 +1005,7 @@
         },
         "phone": {
           "type": "string",
-          "description": "Phone number of the recipient of the returned drives. Is there any requirement for the country code? Is there any specific format that the server expects?"
+          "description": "Phone number of the recipient of the returned drives."
         },
         "email": {
           "type": "string",
@@ -1014,7 +1014,7 @@
       }
     },
     "ReturnShipping": {
-      "description": "Specifies the return carrier and customer’s account with the carrier.",
+      "description": "Specifies the return carrier and customer's account with the carrier.",
       "required": [
         "carrierName",
         "carrierAccountNumber"
@@ -1022,11 +1022,11 @@
       "properties": {
         "carrierName": {
           "type": "string",
-          "description": "The carrier’s name."
+          "description": "The carrier's name."
         },
         "carrierAccountNumber": {
           "type": "string",
-          "description": "The customer’s account number with the carrier."
+          "description": "The customer's account number with the carrier."
         }
       }
     },
@@ -1070,7 +1070,7 @@
         },
         "shipDate": {
           "type": "string",
-          "description": "The date when the package is shipped."
+          "description": "The date the package is shipped."
         }
       }
     },
@@ -1102,7 +1102,7 @@
       }
     },
     "DriveStatus": {
-      "description": "Provides information about the drives status.",
+      "description": "Provides information about the drive's status.",
       "properties": {
         "state": {
           "type": "string",
@@ -1165,7 +1165,7 @@
         },
         "blobListblobPath": {
           "type": "string",
-          "description": "The relative URI to the block blob that contains the list of blob paths or blob path prefixes as defined above, beginning with the container name. If the blob is in root container, the URI must begin with $root."
+          "description": "The relative URI to the block blob that contains the list of blob paths or blob path prefixes as defined above, beginning with the container name. If the blob is in the root container, the URI must begin with $root."
         }
       }
     }
