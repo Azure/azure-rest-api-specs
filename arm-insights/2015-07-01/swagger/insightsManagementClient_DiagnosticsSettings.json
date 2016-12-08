@@ -37,6 +37,41 @@
             "description": "Successful request to get more information about service diagnostic setting",
             "schema": {
               "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+            },
+            "examples": {
+              "application/json": {
+                "storageAccountId": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/testStorageAcct",
+                "serviceBusRuleId": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.ServiceBus/namespaces/testNamespace/authorizationrules/RootManageSharedAccessKey",
+                "workspaceId": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.OperationalInsights/workspaces/myWorkspace",
+                "metrics": [
+                    {
+                        "timeGrain": "PT1M",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": 0
+                        }
+                    }
+                ],
+                "logs": [
+                    {
+                        "category": "NetworkSecurityGroupEvent",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": 0
+                        }
+                    },
+                    {
+                        "category": "NetworkSecurityGroupRuleCounter",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": 0
+                        }
+                    }
+                ]
+              }
             }
           }
         }
@@ -59,7 +94,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServiceDiagnosticSettingsCreateOrUpdateParameters"
+              "$ref": "#/definitions/ServiceDiagnosticSettings"
             },
             "description": "Parameters supplied to the operation."
           },
@@ -72,6 +107,41 @@
             "description": "Successful request to create a service diagnostic setting",
             "schema": {
               "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+            },
+            "examples": {
+              "application/json": {
+                "storageAccountId": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/testStorageAcct",
+                "serviceBusRuleId": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.ServiceBus/namespaces/testNamespace/authorizationrules/RootManageSharedAccessKey",
+                "workspaceId": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.OperationalInsights/workspaces/myWorkspace",
+                "metrics": [
+                    {
+                        "timeGrain": "PT1M",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": 0
+                        }
+                    }
+                ],
+                "logs": [
+                    {
+                        "category": "NetworkSecurityGroupEvent",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": 0
+                        }
+                    },
+                    {
+                        "category": "NetworkSecurityGroupRuleCounter",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": 0
+                        }
+                    }
+                ]
+              }
             }
           }
         }
@@ -121,7 +191,7 @@
         "days": {
           "type": "integer",
           "format": "int32",
-          "description": "the number of days for the retention."
+          "description": "the number of days for the retention in days. A value of 0 will retain the events indefinitely."
         }
       },
       "required": [ "enabled", "days" ],
@@ -150,7 +220,7 @@
       "properties": {
         "category": {
           "type": "string",
-          "description": "the name of the logs to which this setting is applied."
+          "description": "Name of a Diagnostic Log category for a resource type this setting is applied to. To obtain the list of Diagnostic Log categories for a resource, first perform a GET diagnostic settings operation."
         },
         "enabled": {
           "type": "boolean",
@@ -168,29 +238,29 @@
       "properties": {
         "storageAccountId": {
           "type": "string",
-          "description": "the resource id of the storage account."
+          "description": "The resource ID of the storage account to which you would like to send Diagnostic Logs."
         },
         "serviceBusRuleId": {
           "type": "string",
-          "description": "the id of the service bus rule."
+          "description": "The service bus rule ID of the service bus namespace in which you would like to have Event Hubs created for streaming Diagnostic Logs. The rule ID is of the format: '{service bus resource ID}/authorizationrules/{key name}'."
         },
         "metrics": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSettings"
           },
-          "description": "the list of metrics."
+          "description": "the list of metric settings."
         },
         "logs": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogSettings"
           },
-          "description": "the list of logs."
+          "description": "the list of logs settings."
         },
         "workspaceId": {
           "type": "string",
-          "description": "the OMS workspace Id."
+          "description": "The workspace ID (resource ID of a Log Analytics workspace) for a Log Analytics workspace to which you would like to send Diagnostic Logs. Example: /subscriptions/4b9e8510-67ab-4e9a-95a9-e2f1e570ea9c/resourceGroups/insights-integration/providers/Microsoft.OperationalInsights/workspaces/viruela2"
         }
       },
       "description": "The diagnostic settings for service."
@@ -209,16 +279,6 @@
         }
       },
       "description": "Description of a service diagnostic setting"
-    },
-    "ServiceDiagnosticSettingsCreateOrUpdateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ServiceDiagnosticSettings",
-          "description": "the public configuration settings."
-        }
-      },
-      "description": "Parameters supplied to the Create or Update service configuration."
     }
   },
   "parameters": {

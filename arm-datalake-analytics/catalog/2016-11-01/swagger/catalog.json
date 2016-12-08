@@ -72,10 +72,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully created the specified secret in the specified database.",
-            "schema": {
-              "$ref": "#/definitions/USqlSecret"
-            }
+            "description": "Successfully created the specified secret in the specified database."
           }
         }
       },
@@ -358,6 +355,14 @@
               "$ref": "#/definitions/DataLakeAnalyticsCatalogCredentialDeleteParameters"
             },
             "description": "The parameters to delete a credential if the current user is not the account owner."
+          },
+          {
+            "name": "cascade",
+            "in": "query",
+            "required": false,
+            "description": "Indicates if the delete should be a cascading delete (which deletes all resources dependent on the credential as well as the credential) or not. If false will fail if there are any resources relying on the credential.",
+            "type": "boolean",
+            "default": false
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"

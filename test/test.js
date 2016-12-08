@@ -70,12 +70,9 @@ describe('Azure Open API spec validation for', function() {
   before(function(done) {
     request({url: extensionSwaggerSchemaUrl, json:true}, function (error, response, extensionSwaggerSchemaBody) {        
       request({url: swaggerSchemaAltUrl, json:true}, function (error, response, swaggerSchemaBody) {
-        request({url: schemaUrl, json:true}, function (error, response, schemaBody) {
-          extensionSwaggerSchema = extensionSwaggerSchemaBody;
-          swaggerSchema = swaggerSchemaBody;
-          schema4 = schemaBody;
-          done();
-        });
+        extensionSwaggerSchema = extensionSwaggerSchemaBody;
+        swaggerSchema = swaggerSchemaBody;
+        done();
       });
     });
   });
@@ -91,7 +88,6 @@ describe('Azure Open API spec validation for', function() {
           done();
         }
         var validator = new z();
-        validator.setRemoteReference(schemaUrl, schema4);
         validator.setRemoteReference(swaggerSchemaUrl, swaggerSchema);
         var valid = validator.validate(data, extensionSwaggerSchema);
         if (!valid) {

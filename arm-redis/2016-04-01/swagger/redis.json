@@ -669,7 +669,7 @@
     },
     "RedisProperties": {
       "properties": {
-        "RedisConfiguration": {
+        "redisConfiguration": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -824,7 +824,11 @@
     },
     "RedisResourceProperties": {
       "properties": {
-        "RedisVersion": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the Redis cache to deploy."
+        },
+        "redisVersion": {
           "readOnly": true,
           "type": "string",
           "description": "Redis version."
@@ -850,12 +854,13 @@
           "type": "integer",
           "format": "int32",
           "description": "Redis SSL port."
-        },
-        "properties": {
-          "$ref": "#/definitions/RedisCreateProperties",
-          "x-ms-client-flatten": true
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RedisProperties"
+        }
+      ],
       "description": "Parameters describing a Redis instance."
     },
     "RedisResource": {
