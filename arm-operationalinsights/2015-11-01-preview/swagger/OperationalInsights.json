@@ -57,7 +57,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The parameters required to create or update a linked service."
+            "description": "Name of the linkedServices resource"
           },
           {
             "name": "parameters",
@@ -105,7 +105,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Name of the Log Analytics Workspace that will contain the linkedServices resource"
+            "description": "Name of the Log Analytics Workspace that contains the linkedServices resource"
           },
           {
             "name": "linkedServiceName",
@@ -145,7 +145,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Name of the Log Analytics Workspace that will contain the linkedServices resource"
+            "description": "Name of the Log Analytics Workspace that contains the linkedServices resource"
           },
           {
             "name": "linkedServiceName",
@@ -203,6 +203,9 @@
               "$ref": "#/definitions/LinkedServiceListResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -277,7 +280,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Name of the Log Analytics Workspace that will contains the datasource."
+            "description": "Name of the Log Analytics Workspace that contains the datasource."
           },
           {
             "name": "dataSourceName",
@@ -317,7 +320,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Name of the Log Analytics Workspace that contain the the datasource."
+            "description": "Name of the Log Analytics Workspace that contains the datasource."
           },
           {
             "name": "dataSourceName",
@@ -373,7 +376,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Token for paging support."
+            "description": "Starting point of the collection of data source instances."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -402,7 +405,7 @@
           "Workspaces"
         ],
         "operationId": "Workspaces_DisableIntelligencePack",
-        "description": "Disables an intelligence back for a given workspace.",
+        "description": "Disables an intelligence pack for a given workspace.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -441,7 +444,7 @@
           "Workspaces"
         ],
         "operationId": "Workspaces_EnableIntelligencePack",
-        "description": "Enables an intelligence back for a given workspace.",
+        "description": "Enables an intelligence pack for a given workspace.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -617,6 +620,9 @@
               "$ref": "#/definitions/WorkspaceListManagementGroupsResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -645,6 +651,9 @@
               "$ref": "#/definitions/WorkspaceListResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -670,6 +679,9 @@
               "$ref": "#/definitions/WorkspaceListResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },

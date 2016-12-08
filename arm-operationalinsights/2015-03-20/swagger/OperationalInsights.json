@@ -105,7 +105,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the workspace that contains the storage insight."
+            "description": "Log Analytics Workspace name that contains the storageInsightsConfigs resource"
           },
           {
             "name": "storageInsightName",
@@ -145,7 +145,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Log Analytics Workspace name that will contain the storageInsightsConfigs resource"
+            "description": "Log Analytics Workspace name that contains the storageInsightsConfigs resource"
           },
           {
             "name": "storageInsightName",
@@ -304,7 +304,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SavedSearchCreateOrUpdateParameters"
+              "$ref": "#/definitions/SavedSearch"
             },
             "description": "The parameters required to save a search."
           },
@@ -547,7 +547,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The id of the search that will have results updated. You can get the id from the response of the response of the GetResults call."
+            "description": "The id of the search that will have results updated. You can get the id from the response of the GetResults call."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -572,6 +572,7 @@
       "properties": {
         "customerId": {
           "type": "string",
+          "format": "uuid",
           "description": "The GUID that uniquely identifies the workspace. "
         },
         "accountName": {
@@ -644,20 +645,6 @@
       ],
       "description": "Value object for saved search results."
     },
-    "SavedSearchCreateOrUpdateParameters": {
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "The etag of the saved search."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SavedSearchProperties",
-          "description": "Gets or sets properties of the saved search."
-        }
-      },
-      "description": "Parameters for creating/updating a saved search"
-    },
     "CoreSummary": {
       "properties": {
         "Status": {
@@ -683,7 +670,15 @@
         },
         "order": {
           "type": "string",
-          "description": "The sort order of the search."
+          "description": "The sort order of the search.",
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "x-ms-enum": {
+            "name": "SearchSortEnum",
+            "modelAsString": true
+          }
         }
       },
       "description": "The sort parameters for search."
@@ -692,15 +687,15 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name."
+          "description": "The name of the metadata schema."
         },
         "version": {
           "type": "integer",
           "format": "int32",
-          "description": "The version."
+          "description": "The version of the metadata schema."
         }
       },
-      "description": "Metadata items for saved search items."
+      "description": "Schema metadata for search."
     },
     "SearchMetadata": {
       "properties": {
@@ -716,7 +711,7 @@
         "total": {
           "type": "integer",
           "format": "int64",
-          "description": "The total search results."
+          "description": "The total number of search results."
         },
         "top": {
           "type": "integer",
@@ -757,7 +752,7 @@
           "items": {
             "$ref": "#/definitions/SearchSort"
           },
-          "description": "Gets or sets sort."
+          "description": "How the results are sorted."
         },
         "requestTime": {
           "type": "integer",
@@ -775,12 +770,12 @@
         "sum": {
           "type": "integer",
           "format": "int64",
-          "description": "The sum."
+          "description": "The sum of all aggregates returned in the result set."
         },
         "max": {
           "type": "integer",
           "format": "int64",
-          "description": "The max."
+          "description": "The max of all aggregates returned in the result set."
         },
         "schema": {
           "$ref": "#/definitions/SearchMetadataSchema",
@@ -793,6 +788,7 @@
       "properties": {
         "id": {
           "type": "string",
+          "readOnly": true,
           "description": "The id of the saved search."
         },
         "etag": {
@@ -841,6 +837,7 @@
       "properties": {
         "id": {
           "type": "string",
+          "readOnly": true,
           "description": "The id of the search, which includes the full url."
         },
         "__metadata": {
@@ -866,11 +863,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name."
+          "description": "The name of the schema."
         },
         "displayName": {
           "type": "string",
-          "description": "The display name."
+          "description": "The display name of the schema."
         },
         "type": {
           "type": "string",
@@ -959,6 +956,9 @@
           "description": "The end date filter, so the only query results returned are before this date."
         }
       },
+      "required": [
+        "query"
+      ],
       "description": "Parameters specifying the search query and range."
     },
     "StorageAccount": {
@@ -972,15 +972,34 @@
           "description": "The storage account key."
         }
       },
+      "required": [
+        "id",
+        "key"
+      ],
       "description": "Describes a storage account connection."
     },
     "StorageInsightStatus": {
       "properties": {
         "state": {
           "type": "string",
-          "description": "The state of the storage insight connection to the workspace"
+          "description": "The state of the storage insight connection to the workspace",
+          "enum": [
+            "OK",
+            "ERROR"
+          ],
+          "x-ms-enum": {
+            "name": "StorageInsightState",
+            "modelAsString": true
+          }
+        },
+        "description":{
+          "type": "string",
+          "description": "Description of the state of the storage insight."
         }
       },
+      "required": [
+        "state"
+      ],
       "description": "The status of the storage insight."
     },
     "StorageInsightProperties": {
@@ -1005,7 +1024,8 @@
         },
         "status": {
           "$ref": "#/definitions/StorageInsightStatus",
-          "description": "The status of the storage insight"
+          "description": "The status of the storage insight",
+          "readOnly": true
         }
       },
       "required": [
@@ -1043,7 +1063,8 @@
         },
         "@odata.nextLink": {
           "type": "string",
-          "description": "The link (url) to the next page of results."
+          "description": "The link (url) to the next page of results.",
+          "x-ms-client-name": "odataNextLink"
         }
       },
       "description": "The list storage insights operation response."
