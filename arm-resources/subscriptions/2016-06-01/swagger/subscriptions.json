@@ -2,7 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "SubscriptionClient",
-    "version": "2016-06-01"
+    "version": "2016-06-01",
+    "description": "All resource groups and resources exist within subscriptions. These operation enable you get information about your subscriptions and tenants. A tenant is a dedicated instance of Azure Active Directory (Azure AD) for your organization."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -39,14 +40,15 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_ListLocations",
-        "description": "Gets a list of the subscription locations.",
+        "summary": "Gets all available geo-locations.",
+        "description": "This operation provides all the locations that are available for resource providers; however, each resource provider may support a subset of this list.",
         "parameters": [
           {
             "name": "subscriptionId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Id of the subscription"
+            "description": "The ID of the target subscription."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -54,7 +56,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK - Returns an array of locations.",
             "schema": {
               "$ref": "#/definitions/LocationListResult"
             }
@@ -71,14 +73,14 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_Get",
-        "description": "Gets details about particular subscription.",
+        "description": "Gets details about a specified subscription.",
         "parameters": [
           {
             "name": "subscriptionId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Id of the subscription."
+            "description": "The ID of the target subscription."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -86,7 +88,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK - Returns information about the subscription.",
             "schema": {
               "$ref": "#/definitions/Subscription"
             }
@@ -100,7 +102,7 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_List",
-        "description": "Gets a list of subscriptions.",
+        "description": "Gets all subscriptions for a tenant.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -108,7 +110,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK - Returns an array of subscriptions.",
             "schema": {
               "$ref": "#/definitions/SubscriptionListResult"
             }
@@ -125,7 +127,7 @@
           "Tenants"
         ],
         "operationId": "Tenants_List",
-        "description": "Gets a list of tenants.",
+        "description": "Gets the tenants for your account.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -133,7 +135,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK - Returns an array of tenants.",
             "schema": {
               "$ref": "#/definitions/TenantListResult"
             }
@@ -151,12 +153,12 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The fully qualified Id of the location. For example, /subscriptions/00000000-0000-0000-0000-000000000000/locations/westus."
+          "description": "The fully qualified ID of the location. For example, /subscriptions/00000000-0000-0000-0000-000000000000/locations/westus."
         },
         "subscriptionId": {
           "readOnly": true,
           "type": "string",
-          "description": "The subscription Id."
+          "description": "The subscription ID."
         },
         "name": {
           "readOnly": true,
@@ -188,7 +190,7 @@
           "items": {
             "$ref": "#/definitions/Location"
           },
-          "description": "The locations."
+          "description": "An array of locations."
         }
       },
       "description": "Location list operation response."
@@ -198,17 +200,17 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The fully qualified Id. For example, /subscriptions/00000000-0000-0000-0000-000000000000."
+          "description": "The fully qualified ID for the subscription. For example, /subscriptions/00000000-0000-0000-0000-000000000000."
         },
         "subscriptionId": {
           "readOnly": true,
           "type": "string",
-          "description": "The subscription Id."
+          "description": "The subscription ID."
         },
         "tenantId": {
           "readOnly": true,
           "type": "string",
-          "description": "The tenant Id."
+          "description": "The tenant ID."
         },
         "displayName": {
           "readOnly": true,
@@ -218,7 +220,7 @@
         "state": {
           "readOnly": true,
           "type": "string",
-          "description": "The subscription state.",
+          "description": "The subscription state. Possible values are Enabled, Warned, PastDue, Disabled, and Deleted.",
           "enum": [
             "Enabled",
             "Warned",
@@ -247,12 +249,12 @@
         "locationPlacementId": {
           "readOnly": true,
           "type": "string",
-          "description": "The subscription location placement Id. The Id indicates which regions are visible for a subscription. For example, a subscription with a location placement Id of Public_2014-09-01 has access to Azure public regions."
+          "description": "The subscription location placement ID. The ID indicates which regions are visible for a subscription. For example, a subscription with a location placement Id of Public_2014-09-01 has access to Azure public regions."
         },
         "quotaId": {
           "readOnly": true,
           "type": "string",
-          "description": "The subscription quota Id."
+          "description": "The subscription quota ID."
         },
         "spendingLimit": {
           "readOnly": true,
@@ -278,7 +280,7 @@
           "items": {
             "$ref": "#/definitions/Subscription"
           },
-          "description": "The subscriptions."
+          "description": "An array of subscriptions."
         },
         "nextLink": {
           "type": "string",
@@ -295,12 +297,12 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The fully qualified Id. For example, /tenants/00000000-0000-0000-0000-000000000000."
+          "description": "The fully qualified ID of the tenant. For example, /tenants/00000000-0000-0000-0000-000000000000."
         },
         "tenantId": {
           "readOnly": true,
           "type": "string",
-          "description": "The tenantId. For example, 00000000-0000-0000-0000-000000000000."
+          "description": "The tenant ID. For example, 00000000-0000-0000-0000-000000000000."
         }
       },
       "description": "Tenant Id information."
@@ -312,11 +314,11 @@
           "items": {
             "$ref": "#/definitions/TenantIdDescription"
           },
-          "description": "The tenant Ids."
+          "description": "An array of tenants."
         },
         "nextLink": {
           "type": "string",
-          "description": "The URL to get the next set of results."
+          "description": "The URL to use for getting the next set of results."
         }
       },
       "required": [
@@ -331,7 +333,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "The API version to use for the operation."
     }
   }
 }
