@@ -1745,7 +1745,157 @@
         "x-ms-long-running-operation": true
       }
     },
-      
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces": {
+      "get": {
+        "tags": [
+          "NetworkInterfaces"
+        ],
+        "operationId": "NetworkInterfaces_ListVirtualMachineScaleSetVMNetworkInterfaces",
+        "description": "The list network interface operation retrieves information about all network interfaces in a virtual machine from a virtual machine scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualMachineScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine scale set."
+          },
+          {
+            "name": "virtualmachineIndex",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The virtual machine index."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/NetworkInterfaceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/networkInterfaces": {
+      "get": {
+        "tags": [
+          "NetworkInterfaces"
+        ],
+        "operationId": "NetworkInterfaces_ListVirtualMachineScaleSetNetworkInterfaces",
+        "description": "The list network interface operation retrieves information about all network interfaces in a virtual machine scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualMachineScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine scale set."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/NetworkInterfaceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}": {
+      "get": {
+        "tags": [
+          "NetworkInterfaces"
+        ],
+        "operationId": "NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface",
+        "description": "The Get network interface operation retrieves information about the specified network interface in a virtual machine scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualMachineScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine scale set."
+          },
+          {
+            "name": "virtualmachineIndex",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The virtual machine index."
+          },
+          {
+            "name": "networkInterfaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network interface."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "expand references resources."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/NetworkInterface"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkInterfaces": {
       "get": {
         "tags": [
@@ -6891,6 +7041,23 @@
       },
       "description": "Response for ListNetworkSecurityGroups Api service call"
     },
+    "PublicIPAddressDnsSettings": {
+      "properties": {
+        "domainNameLabel": {
+          "type": "string",
+          "description": "Gets or sets the Domain name label.The concatenation of the domain name label and the regionalized DNS zone make up the fully qualified domain name associated with the public IP address. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system."
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "Gets the FQDN, Fully qualified domain name of the A DNS record associated with the public IP. This is the concatenation of the domainNameLabel and the regionalized DNS zone."
+        },
+        "reverseFqdn": {
+          "type": "string",
+          "description": "Gets or Sets the Reverse FQDN. A user-visible, fully qualified domain name that resolves to this public IP address. If the reverseFqdn is specified, then a PTR DNS record is created pointing from the IP address in the in-addr.arpa domain to the reverse FQDN. "
+        }
+      },
+      "description": "Contains FQDN of the DNS record associated with the public IP address"
+    },
     "PublicIPAddressPropertiesFormat": {
       "properties": {
         "publicIPAllocationMethod": {
@@ -6922,7 +7089,7 @@
           "$ref": "#/definitions/IPConfiguration"
         },
         "dnsSettings": {
-          "$ref": "../CompositeSwagger/swagger/Network2.json#/definitions/PublicIPAddressDnsSettings",
+          "$ref": "#/definitions/PublicIPAddressDnsSettings",
           "description": "Gets or sets FQDN of the DNS record associated with the public IP address"
         },
         "ipAddress": {
