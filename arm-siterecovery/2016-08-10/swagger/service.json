@@ -15,26 +15,1069 @@
     "application/json"
   ],
   "paths": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationvCenters/{vCenterName}/operationresults/{jobName}": {
+      "get": {
+        "tags": [
+          "VCenters"
+        ],
+        "summary": "Tracks the provider async operation.",
+        "description": "Deletes the site.",
+        "operationId": "VCenters_TrackAsyncOperation",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vCenterName",
+            "in": "path",
+            "description": "vCenter name to work on.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "job name to track.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VCenter"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationvCenters/{vCenterName}": {
+      "get": {
+        "tags": [
+          "VCenters"
+        ],
+        "summary": "Gets the details of a vCenter.",
+        "description": "Deletes the site.",
+        "operationId": "VCenters_Get",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "The name of the fabric containing the vCenter.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vCenterName",
+            "in": "path",
+            "description": "vCenter name of interest.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VCenter"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "VCenters"
+        ],
+        "summary": "Perform Add vCenter operation.",
+        "description": "Deletes the site.",
+        "operationId": "VCenters_Create",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "The name of the fabric containing the vCenter.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vCenterName",
+            "in": "path",
+            "description": "The name of the vCenter.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "addVCenterRequest",
+            "in": "body",
+            "description": "The input to the add vCenter operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddVCenterRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VCenter"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "VCenters"
+        ],
+        "summary": "Perform remove vCenter operation.",
+        "description": "Deletes the site.",
+        "operationId": "VCenters_Delete",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "The name of the fabric containing the vCenter.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vCenterName",
+            "in": "path",
+            "description": "The name of the vCenter which is to be removed.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "VCenters"
+        ],
+        "summary": "Perform update vCenter operation.",
+        "description": "Deletes the site.",
+        "operationId": "VCenters_Update",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "The name of the fabric containing the process server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vCenterName",
+            "in": "path",
+            "description": "The name of the vCenter which is to be updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateVCenterRequest",
+            "in": "body",
+            "description": "The input for update vCenter operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateVCenterRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VCenter"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationvCenters": {
+      "get": {
+        "tags": [
+          "VCenters"
+        ],
+        "summary": "Gets the list of vCenter registered under a fabric.",
+        "description": "Deletes the site.",
+        "operationId": "VCenters_ListByFabric",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name of interest.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VCenterCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationvCenters": {
+      "get": {
+        "tags": [
+          "VCenters"
+        ],
+        "summary": "Gets the list of vCenter registered under the vault.",
+        "description": "Deletes the site.",
+        "operationId": "VCenters_List",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VCenterCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationStorageClassifications/{storageClassificationName}/replicationStorageClassificationMappings/{storageClassificationMappingName}/operationresults/{jobName}": {
+      "get": {
+        "tags": [
+          "StorageClassificationMappings"
+        ],
+        "summary": "Tracks async operations.",
+        "description": "Deletes the site.",
+        "operationId": "StorageClassificationMappings_TrackAsyncOperation",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Site name of interest.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "storageClassificationName",
+            "in": "path",
+            "description": "Name of the storage.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "storageClassificationMappingName",
+            "in": "path",
+            "description": "Name of the mapping object.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "job id to track.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageClassificationMapping"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationStorageClassifications/{storageClassificationName}/replicationStorageClassificationMappings/{storageClassificationMappingName}": {
+      "get": {
+        "tags": [
+          "StorageClassificationMappings"
+        ],
+        "summary": "Gets the details of a storage classification mapping.",
+        "description": "Deletes the site.",
+        "operationId": "StorageClassificationMappings_Get",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Site name of interest.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "storageClassificationName",
+            "in": "path",
+            "description": "Name of the storage.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "storageClassificationMappingName",
+            "in": "path",
+            "description": "Name of the mapping object to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageClassificationMapping"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "StorageClassificationMappings"
+        ],
+        "summary": "Pairs two storage objects",
+        "description": "Deletes the site.",
+        "operationId": "StorageClassificationMappings_Create",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Site name of interest.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "storageClassificationName",
+            "in": "path",
+            "description": "Name of the storage.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "storageClassificationMappingName",
+            "in": "path",
+            "description": "Name of the mapping object.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pairingInput",
+            "in": "body",
+            "description": "Pairing input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageClassificationMappingInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageClassificationMapping"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "StorageClassificationMappings"
+        ],
+        "summary": "Pairs two storage objects",
+        "description": "Deletes the site.",
+        "operationId": "StorageClassificationMappings_Delete",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Site name of interest.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "storageClassificationName",
+            "in": "path",
+            "description": "Name of the storage.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "storageClassificationMappingName",
+            "in": "path",
+            "description": "Name of the mapping object.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationStorageClassifications/{storageClassificationName}/replicationStorageClassificationMappings": {
+      "get": {
+        "tags": [
+          "StorageClassificationMappings"
+        ],
+        "summary": "Gets the list of storage classification mappings objects under a storage.",
+        "description": "Deletes the site.",
+        "operationId": "StorageClassificationMappings_ListByStorageClassification",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Site name of interest.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "storageClassificationName",
+            "in": "path",
+            "description": "Name of the storage classfication.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageClassificationMappingCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationStorageClassificationMappings": {
+      "get": {
+        "tags": [
+          "StorageClassificationMappings"
+        ],
+        "summary": "Gets the list of storage classification mappings objects under a vault.",
+        "description": "Deletes the site.",
+        "operationId": "StorageClassificationMappings_List",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageClassificationMappingCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationStorageClassifications/{storageClassificationName}": {
+      "get": {
+        "tags": [
+          "StorageClassifications"
+        ],
+        "summary": "Gets the details of a storage classification.",
+        "description": "Deletes the site.",
+        "operationId": "StorageClassifications_Get",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Site name of interest.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "storageClassificationName",
+            "in": "path",
+            "description": "Name of storage classification to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageClassification"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationStorageClassifications": {
+      "get": {
+        "tags": [
+          "StorageClassifications"
+        ],
+        "summary": "Gets the list of storage classification objects under a fabric.",
+        "description": "Deletes the site.",
+        "operationId": "StorageClassifications_ListByFabric",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Site name of interest.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageClassificationCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationStorageClassifications": {
+      "get": {
+        "tags": [
+          "StorageClassifications"
+        ],
+        "summary": "Gets the list of storage classification objects under a vault.",
+        "description": "Deletes the site.",
+        "operationId": "StorageClassifications_List",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageClassificationCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/operationresults/{jobId}": {
+      "get": {
+        "tags": [
+          "ReplicationProtectedItems"
+        ],
+        "summary": "Tracks the Replication protected item async operation.",
+        "description": "Deletes the site.",
+        "operationId": "ReplicationProtectedItems_TrackAsyncOperation",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Unique fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "replicatedProtectedItemName",
+            "in": "path",
+            "description": "Replication protected item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "job id to track.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItem"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/applyRecoveryPoint": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
+          "ReplicationProtectedItems"
         ],
         "summary": "Applies recovery point.",
         "description": "Deletes the site.",
         "operationId": "ReplicationProtectedItems_ApplyRecoveryPoint",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -87,6 +1130,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItem"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -98,17 +1147,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/repairReplication": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
+          "ReplicationProtectedItems"
         ],
         "summary": "Repairs replication.",
         "description": "Deletes the site.",
         "operationId": "ReplicationProtectedItems_RepairReplication",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -152,6 +1198,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItem"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -163,23 +1215,18 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/updateMobilityService": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
+          "ReplicationProtectedItems"
         ],
         "summary": "Update the mobility service on a protected machine.",
         "description": "Deletes the site.",
         "operationId": "ReplicationProtectedItems_UpdateMobilityService",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -232,6 +1279,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItem"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -243,23 +1296,18 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/reProtect": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
+          "ReplicationProtectedItems"
         ],
         "summary": "Execute Reverse Replication\\Reprotect",
         "description": "Deletes the site.",
         "operationId": "ReplicationProtectedItems_Reprotect",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -312,6 +1360,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItem"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -323,17 +1377,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/failoverCommit": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
+          "ReplicationProtectedItems"
         ],
         "summary": "Execute commit failover",
         "description": "Deletes the site.",
         "operationId": "ReplicationProtectedItems_FailoverCommit",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -377,6 +1428,93 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItem"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/testFailoverCleanup": {
+      "post": {
+        "tags": [
+          "ReplicationProtectedItems"
+        ],
+        "summary": "Execute test failover cleanup.",
+        "description": "Deletes the site.",
+        "operationId": "ReplicationProtectedItems_TestFailoverCleanup",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Unique fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "replicatedProtectedItemName",
+            "in": "path",
+            "description": "Replication protected item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cleanupInput",
+            "in": "body",
+            "description": "Test failover cleanup input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestFailoverCleanupInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItem"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -388,23 +1526,18 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/testFailover": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
+          "ReplicationProtectedItems"
         ],
         "summary": "Execute test failover",
         "description": "Deletes the site.",
         "operationId": "ReplicationProtectedItems_TestFailover",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -449,7 +1582,7 @@
           {
             "name": "failoverInput",
             "in": "body",
-            "description": "Disable protection input.",
+            "description": "Test failover input.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TestFailoverInput"
@@ -457,6 +1590,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItem"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -468,23 +1607,18 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/unplannedFailover": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
+          "ReplicationProtectedItems"
         ],
         "summary": "Execute unplanned failover",
         "description": "Deletes the site.",
         "operationId": "ReplicationProtectedItems_UnplannedFailover",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -537,6 +1671,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItem"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -548,23 +1688,18 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/plannedFailover": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
+          "ReplicationProtectedItems"
         ],
         "summary": "Execute planned failover",
         "description": "Deletes the site.",
         "operationId": "ReplicationProtectedItems_PlannedFailover",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -617,6 +1752,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItem"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -628,23 +1769,18 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/remove": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
+          "ReplicationProtectedItems"
         ],
         "summary": "Disables protection.",
         "description": "Deletes the site.",
         "operationId": "ReplicationProtectedItems_Delete",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -699,6 +1835,9 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
           }
         },
         "deprecated": false,
@@ -708,17 +1847,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
+          "ReplicationProtectedItems"
         ],
         "summary": "Gets the details of a Replication protected item.",
         "description": "Deletes the site.",
         "operationId": "ReplicationProtectedItems_Get",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -773,23 +1909,18 @@
       },
       "put": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
+          "ReplicationProtectedItems"
         ],
         "summary": "Enables protection.",
         "description": "Deletes the site.",
         "operationId": "ReplicationProtectedItems_Create",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -842,6 +1973,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItem"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -851,17 +1988,14 @@
       },
       "delete": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
+          "ReplicationProtectedItems"
         ],
         "summary": "Purges protection.",
         "description": "Deletes the site.",
         "operationId": "ReplicationProtectedItems_Purge",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -907,6 +2041,9 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
           }
         },
         "deprecated": false,
@@ -914,23 +2051,18 @@
       },
       "patch": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
+          "ReplicationProtectedItems"
         ],
         "summary": "Updates protection.",
         "description": "Deletes the site.",
         "operationId": "ReplicationProtectedItems_Update",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -983,6 +2115,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItem"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -994,17 +2132,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
+          "ReplicationProtectedItems"
         ],
         "summary": "Gets the list of Replication protected items.",
         "description": "Deletes the site.",
         "operationId": "ReplicationProtectedItems_ListByProtectionContainer",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -1057,17 +2192,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationProtectedItems": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationProtectedItemsController"
+          "ReplicationProtectedItems"
         ],
         "summary": "Gets the list of replication protected items.",
         "description": "Deletes the site.",
         "operationId": "ReplicationProtectedItems_List",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -1110,20 +2242,87 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationRecoveryServicesProviders/{providerName}/operationresults/{jobName}": {
+      "get": {
+        "tags": [
+          "RecoveryServicesProviders"
+        ],
+        "summary": "Tracks the provider async operation.",
+        "description": "Deletes the site.",
+        "operationId": "RecoveryServicesProviders_TrackAsyncOperation",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Unique fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Site name to work on.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "job id to track.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryServicesProvider"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationRecoveryServicesProviders/{providerName}/refreshProvider": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryServicesProviderController"
+          "RecoveryServicesProviders"
         ],
         "summary": "Refresh the data on the provider.",
         "description": "Deletes the site.",
-        "operationId": "RecoveryServicesProvider_RefreshProvider",
-        "consumes": [],
+        "operationId": "RecoveryServicesProviders_RefreshProvider",
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -1160,6 +2359,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryServicesProvider"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -1171,17 +2376,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationRecoveryServicesProviders/{providerName}/remove": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryServicesProviderController"
+          "RecoveryServicesProviders"
         ],
         "summary": "Deletes provider from fabric.\r\n            Note: Deleting provider for any fabric other than SingleHost is unsupported. To\r\n            maintain backward compatibility for released clients the object \"deleteRspInput\" is\r\n            used (if the object is empty we assume that it is old client and continue the old\r\n            behavior).",
         "description": "Deletes the site.",
-        "operationId": "RecoveryServicesProvider_Delete",
-        "consumes": [],
+        "operationId": "RecoveryServicesProviders_Delete",
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -1220,6 +2422,9 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
           }
         },
         "deprecated": false,
@@ -1229,17 +2434,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationRecoveryServicesProviders/{providerName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryServicesProviderController"
+          "RecoveryServicesProviders"
         ],
         "summary": "Gets the details of a server.",
         "description": "Deletes the site.",
-        "operationId": "RecoveryServicesProvider_Get",
-        "consumes": [],
+        "operationId": "RecoveryServicesProviders_Get",
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -1287,17 +2489,14 @@
       },
       "delete": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryServicesProviderController"
+          "RecoveryServicesProviders"
         ],
         "summary": "Purges provider from fabric",
         "description": "Deletes the site.",
-        "operationId": "RecoveryServicesProvider_Purge",
-        "consumes": [],
+        "operationId": "RecoveryServicesProviders_Purge",
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -1336,6 +2535,9 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
           }
         },
         "deprecated": false,
@@ -1345,17 +2547,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationRecoveryServicesProviders": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryServicesProviderController"
+          "RecoveryServicesProviders"
         ],
         "summary": "Gets the list of servers registered.",
         "description": "Deletes the site.",
-        "operationId": "RecoveryServicesProvider_ListByFabric",
-        "consumes": [],
+        "operationId": "RecoveryServicesProviders_ListByFabric",
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -1401,17 +2600,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationRecoveryServicesProviders": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryServicesProviderController"
+          "RecoveryServicesProviders"
         ],
         "summary": "Gets the list of servers registered across fabrics.\r\n            This is view only api.",
         "description": "Deletes the site.",
-        "operationId": "RecoveryServicesProvider_List",
-        "consumes": [],
+        "operationId": "RecoveryServicesProviders_List",
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -1450,17 +2646,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/recoveryPoints/{recoveryPointName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPointsController"
+          "RecoveryPoints"
         ],
         "summary": "Get a recovery point.",
         "description": "Deletes the site.",
-        "operationId": "RecoveryPointsController_GetRecoveryPoint",
-        "consumes": [],
+        "operationId": "RecoveryPoints_Get",
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -1524,17 +2717,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/recoveryPoints": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPointsController"
+          "RecoveryPoints"
         ],
         "summary": "Get recovery points for a protected entity.",
         "description": "Deletes the site.",
-        "operationId": "RecoveryPointsController_EnumerateRecoveryPoints",
-        "consumes": [],
+        "operationId": "RecoveryPoints_ListByReplicationProtectedItem",
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -1591,20 +2781,80 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationRecoveryPlans/{recoveryPlanName}/operationresults/{jobName}": {
+      "get": {
+        "tags": [
+          "RecoveryPlans"
+        ],
+        "summary": "Tracks the recovery plan async operation.",
+        "description": "Deletes the site.",
+        "operationId": "RecoveryPlans_TrackAsyncOperation",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "recoveryPlanName",
+            "in": "path",
+            "description": "Recovery plan name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "ARM name of the job.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlan"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationRecoveryPlans/{recoveryPlanName}/reProtect": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+          "RecoveryPlans"
         ],
         "summary": "Execute reprotect of the recovery plan.",
         "description": "Deletes the site.",
         "operationId": "RecoveryPlans_Reprotect",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -1634,6 +2884,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlan"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -1645,17 +2901,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationRecoveryPlans/{recoveryPlanName}/failoverCommit": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+          "RecoveryPlans"
         ],
         "summary": "Execute commit failover of the recovery plan.",
         "description": "Deletes the site.",
         "operationId": "RecoveryPlans_FailoverCommit",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -1685,6 +2938,79 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlan"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationRecoveryPlans/{recoveryPlanName}/testFailoverCleanup": {
+      "post": {
+        "tags": [
+          "RecoveryPlans"
+        ],
+        "summary": "Execute test failover cleanup of the recovery plan.",
+        "description": "Deletes the site.",
+        "operationId": "RecoveryPlans_TestFailoverCleanup",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "recoveryPlanName",
+            "in": "path",
+            "description": "Recovery plan name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "description": "Test failover cleanup input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlanTestFailoverCleanupInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlan"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -1696,23 +3022,18 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationRecoveryPlans/{recoveryPlanName}/testFailover": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+          "RecoveryPlans"
         ],
         "summary": "Execute test failover of the recovery plan.",
         "description": "Deletes the site.",
         "operationId": "RecoveryPlans_TestFailover",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -1751,6 +3072,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlan"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -1762,23 +3089,18 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationRecoveryPlans/{recoveryPlanName}/unplannedFailover": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+          "RecoveryPlans"
         ],
         "summary": "Execute unplanned failover of the recovery plan.",
         "description": "Deletes the site.",
         "operationId": "RecoveryPlans_UnplannedFailover",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -1817,6 +3139,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlan"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -1828,23 +3156,18 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationRecoveryPlans/{recoveryPlanName}/plannedFailover": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+          "RecoveryPlans"
         ],
         "summary": "Execute planned failover of the recovery plan.",
         "description": "Deletes the site.",
         "operationId": "RecoveryPlans_PlannedFailover",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -1883,6 +3206,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlan"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -1894,17 +3223,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationRecoveryPlans/{recoveryPlanName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+          "RecoveryPlans"
         ],
         "summary": "Gets the requested recovery plan.",
         "description": "Deletes the site.",
         "operationId": "RecoveryPlans_Get",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -1945,23 +3271,18 @@
       },
       "put": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+          "RecoveryPlans"
         ],
         "summary": "Creates a recovery plan with the given details.",
         "description": "Deletes the site.",
         "operationId": "RecoveryPlans_Create",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -2000,6 +3321,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlan"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -2009,17 +3336,14 @@
       },
       "delete": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+          "RecoveryPlans"
         ],
         "summary": "Deletes the specified recovery plan.",
         "description": "Deletes the site.",
         "operationId": "RecoveryPlans_Delete",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -2051,6 +3375,9 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
           }
         },
         "deprecated": false,
@@ -2058,23 +3385,18 @@
       },
       "patch": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+          "RecoveryPlans"
         ],
         "summary": "Updates the given recovery plan.",
         "description": "Deletes the site.",
         "operationId": "RecoveryPlans_Update",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -2113,6 +3435,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryPlan"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -2124,17 +3452,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationRecoveryPlans": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.RecoveryPlansController"
+          "RecoveryPlans"
         ],
         "summary": "Gets the list of recovery plans.",
         "description": "Deletes the site.",
         "operationId": "RecoveryPlans_List",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -2170,20 +3495,91 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/switchprotection": {
+      "post": {
+        "tags": [
+          "ProtectionContainers"
+        ],
+        "summary": "Switches protection from one container to another or one replication provider to\r\n            another.",
+        "description": "Deletes the site.",
+        "operationId": "ProtectionContainers_SwitchProtection",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Unique fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "switchInput",
+            "in": "body",
+            "description": "Switch protection input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwitchProtectionInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectionContainer"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/remove": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ProtectionContainersController"
+          "ProtectionContainers"
         ],
         "summary": "Removes a protection container.",
         "description": "Deletes the site.",
-        "operationId": "ProtectionContainers_Remove",
-        "consumes": [],
+        "operationId": "ProtectionContainers_Delete",
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -2222,6 +3618,153 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/operationresults/{jobId}": {
+      "get": {
+        "tags": [
+          "ProtectionContainers"
+        ],
+        "summary": "Tracks the provider async operation.",
+        "description": "Deletes the site.",
+        "operationId": "ProtectionContainers_TrackAsyncOperation",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Unique fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Site name to work on.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "job id to track.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectionContainer"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/discoverProtectableItem": {
+      "post": {
+        "tags": [
+          "ProtectionContainers"
+        ],
+        "summary": "Adds a protectable item inside the replication protection container.",
+        "description": "Deletes the site.",
+        "operationId": "ProtectionContainers_DiscoverProtectableItem",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "The name of the fabric.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "The name of the container.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "discoverProtectableItemRequest",
+            "in": "body",
+            "description": "The request object to add a protectable\r\n            item.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiscoverProtectableItemRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectionContainer"
+            }
+          },
+          "202": {
+            "description": "Accepted"
           }
         },
         "deprecated": false,
@@ -2231,17 +3774,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ProtectionContainersController"
+          "ProtectionContainers"
         ],
         "summary": "Gets the protection container details.",
         "description": "Deletes the site.",
         "operationId": "ProtectionContainers_Get",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -2289,23 +3829,18 @@
       },
       "put": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ProtectionContainersController"
+          "ProtectionContainers"
         ],
         "summary": "Create a protection container.",
         "description": "Deletes the site.",
         "operationId": "ProtectionContainers_Create",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -2351,6 +3886,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectionContainer"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -2362,17 +3903,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ProtectionContainersController"
+          "ProtectionContainers"
         ],
         "summary": "Gets the list of protection container.",
         "description": "Deletes the site.",
         "operationId": "ProtectionContainers_ListByFabric",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -2418,17 +3956,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationProtectionContainers": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ProtectionContainersController"
+          "ProtectionContainers"
         ],
         "summary": "Gets the list of all protection containers in a vault.",
         "description": "Deletes the site.",
         "operationId": "ProtectionContainers_List",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -2464,26 +3999,98 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionContainerMappings/{mappingName}/operationresults/{jobId}": {
+      "get": {
+        "tags": [
+          "ProtectionContainerMappings"
+        ],
+        "summary": "Tracks the protection container mapping async operation.",
+        "description": "Deletes the site.",
+        "operationId": "ProtectionContainerMappings_TrackAsyncOperation",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Unique fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "description": "Container mapping ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "job id to track.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectionContainerMapping"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionContainerMappings/{mappingName}/remove": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ProtectionContainerMappingsController"
+          "ProtectionContainerMappings"
         ],
         "summary": "Remove container mapping.",
         "description": "Deletes the site.",
         "operationId": "ProtectionContainerMappings_Delete",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -2538,6 +4145,9 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
           }
         },
         "deprecated": false,
@@ -2547,17 +4157,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionContainerMappings/{mappingName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ProtectionContainerMappingsController"
+          "ProtectionContainerMappings"
         ],
         "summary": "Gets the list of mappings under a container.",
         "description": "Deletes the site.",
         "operationId": "ProtectionContainerMappings_Get",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -2612,23 +4219,18 @@
       },
       "put": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ProtectionContainerMappingsController"
+          "ProtectionContainerMappings"
         ],
         "summary": "Create protection container mapping.",
         "description": "Deletes the site.",
         "operationId": "ProtectionContainerMappings_Create",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -2681,6 +4283,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectionContainerMapping"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -2690,17 +4298,14 @@
       },
       "delete": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ProtectionContainerMappingsController"
+          "ProtectionContainerMappings"
         ],
         "summary": "Purges protection container mapping.",
         "description": "Deletes the site.",
         "operationId": "ProtectionContainerMappings_Purge",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -2746,6 +4351,9 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
           }
         },
         "deprecated": false,
@@ -2755,17 +4363,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionContainerMappings": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ProtectionContainerMappingsController"
+          "ProtectionContainerMappings"
         ],
         "summary": "Gets the list of mappings under a container.",
         "description": "Deletes the site.",
         "operationId": "ProtectionContainerMappings_ListByProtectionContainer",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -2818,17 +4423,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationProtectionContainerMappings": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ProtectionContainerMappingsController"
+          "ProtectionContainerMappings"
         ],
         "summary": "Gets the list of all protection container mappings in a vault.",
         "description": "Deletes the site.",
         "operationId": "ProtectionContainerMappings_List",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -2867,17 +4469,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectableItems/{protectableItemName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ProtectableItemsController"
+          "ProtectableItems"
         ],
         "summary": "Gets the details of a protection entity.",
         "description": "Deletes the site.",
         "operationId": "ProtectableItems_Get",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -2934,17 +4533,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectableItems": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.ProtectableItemsController"
+          "ProtectableItems"
         ],
         "summary": "Gets the list of protection entities.",
         "description": "Deletes the site.",
         "operationId": "ProtectableItems_ListByProtectionContainer",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -2994,20 +4590,80 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationPolicies/{policyName}/operationresults/{jobName}": {
+      "get": {
+        "tags": [
+          "Policies"
+        ],
+        "summary": "Tracks the protection profiles async operation.",
+        "description": "Deletes the site.",
+        "operationId": "Policies_TrackAsyncOperation",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "Policy Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "job id to track.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationPolicies/{policyName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.PolicyController"
+          "Policies"
         ],
         "summary": "Gets the requested policy.",
         "description": "Deletes the site.",
         "operationId": "Policies_Get",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -3048,23 +4704,18 @@
       },
       "put": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.PolicyController"
+          "Policies"
         ],
         "summary": "Creates the policy.",
         "description": "Deletes the site.",
         "operationId": "Policies_Create",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -3103,6 +4754,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -3112,17 +4769,14 @@
       },
       "delete": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.PolicyController"
+          "Policies"
         ],
         "summary": "Delete the policy.",
         "description": "Deletes the site.",
         "operationId": "Policies_Delete",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -3154,6 +4808,9 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
           }
         },
         "deprecated": false,
@@ -3161,23 +4818,18 @@
       },
       "patch": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.PolicyController"
+          "Policies"
         ],
         "summary": "Updates the protection profile.",
         "description": "Deletes the site.",
         "operationId": "Policies_Update",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -3216,6 +4868,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -3227,17 +4885,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationPolicies": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.PolicyController"
+          "Policies"
         ],
         "summary": "Gets the list of policies",
         "description": "Deletes the site.",
         "operationId": "Policies_List",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -3276,17 +4931,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationNetworks": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.NetworksController"
+          "Networks"
         ],
         "summary": "Gets the list of networks. View-only API.",
         "description": "Deletes the site.",
         "operationId": "Networks_List",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -3325,17 +4977,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationNetworks": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.NetworksController"
+          "Networks"
         ],
         "summary": "Gets the list of networks under a fabric.",
         "description": "Deletes the site.",
         "operationId": "Networks_ListByFabric",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -3381,17 +5030,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationNetworks/{networkName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.NetworksController"
+          "Networks"
         ],
         "summary": "Gets a network with specified server id and network name.",
         "description": "Deletes the site.",
         "operationId": "Networks_Get",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -3441,17 +5087,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationNetworks/{networkName}/replicationNetworkMappings/{networkMappingName}/operationresults/{jobName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.NetworkMappingsController"
+          "NetworkMappings"
         ],
         "summary": "Tracks the provider async operation.",
         "description": "Deletes the site.",
         "operationId": "NetworkMappings_TrackAsyncOperation",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -3503,7 +5146,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkMapping"
+            }
           },
           "202": {
             "description": "Accepted"
@@ -3518,17 +5164,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationNetworkMappings": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.NetworkMappingsController"
+          "NetworkMappings"
         ],
         "summary": "Gets all the network mappings under a vault.",
         "description": "Deletes the site.",
         "operationId": "NetworkMappings_List",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -3567,17 +5210,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationNetworks/{networkName}/replicationNetworkMappings": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.NetworkMappingsController"
+          "NetworkMappings"
         ],
         "summary": "Gets all the network mappings under a network.",
         "description": "Deletes the site.",
         "operationId": "NetworkMappings_ListByFabric",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -3630,17 +5270,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationNetworks/{networkName}/replicationNetworkMappings/{networkMappingName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.NetworkMappingsController"
+          "NetworkMappings"
         ],
         "summary": "Gets network mapping by name.",
         "description": "Deletes the site.",
         "operationId": "NetworkMappings_Get",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -3695,23 +5332,18 @@
       },
       "put": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.NetworkMappingsController"
+          "NetworkMappings"
         ],
         "summary": "Creates network mapping.",
         "description": "Deletes the site.",
         "operationId": "NetworkMappings_Create",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -3764,6 +5396,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkMapping"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -3773,17 +5411,14 @@
       },
       "delete": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.NetworkMappingsController"
+          "NetworkMappings"
         ],
         "summary": "Delete network mapping.",
         "description": "Deletes the site.",
         "operationId": "NetworkMappings_Delete",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -3829,6 +5464,9 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
           }
         },
         "deprecated": false,
@@ -3838,17 +5476,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationLogicalNetworks": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.LogicalNetworksController"
+          "LogicalNetworks"
         ],
         "summary": "Gets the list of logical networks under a fabric.",
         "description": "Deletes the site.",
         "operationId": "LogicalNetworks_ListByFabric",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -3894,17 +5529,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/replicationLogicalNetworks/{logicalNetworkName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.LogicalNetworksController"
+          "LogicalNetworks"
         ],
         "summary": "Gets a logical network with specified server id and logical network name.",
         "description": "Deletes the site.",
         "operationId": "LogicalNetworks_Get",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -3954,17 +5586,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationJobs/{name}/operationresults/{jobName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.JobsController"
+          "Jobs"
         ],
         "summary": "Tracks the Site async operation.",
         "description": "Only for InitialReplicationTypeContract.Export.",
         "operationId": "Jobs_TrackAsyncOperation",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -4002,7 +5631,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
           },
           "202": {
             "description": "Accepted"
@@ -4017,23 +5649,18 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationJobs/{jobName}/resume": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.JobsController"
+          "Jobs"
         ],
         "summary": "Resumes the specified job.",
         "description": "Only for InitialReplicationTypeContract.Export.",
-        "operationId": "Jobs_DeployProcessServerImage",
+        "operationId": "Jobs_Resume",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -4072,6 +5699,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -4083,17 +5716,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationJobs/{jobName}/restart": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.JobsController"
+          "Jobs"
         ],
         "summary": "Restarts the specified job.",
         "description": "Deletes the site.",
         "operationId": "Jobs_Restart",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -4123,6 +5753,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -4134,17 +5770,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationJobs/{jobName}/cancel": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.JobsController"
+          "Jobs"
         ],
         "summary": "Cancels the specified job.",
         "description": "Deletes the site.",
         "operationId": "Jobs_Cancel",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -4174,6 +5807,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -4185,17 +5824,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationJobs/{jobName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.JobsController"
+          "Jobs"
         ],
         "summary": "Gets the job details.",
         "description": "Deletes the site.",
         "operationId": "Jobs_Get",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -4238,23 +5874,18 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationJobs/export": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.JobsController"
+          "Jobs"
         ],
         "summary": "Gets \"ExportJobs\" workflow details.\r\n            Old method: Two APIs were exposed for performing export jobs, one api\r\n            (subscriptions/workflow/computeWorkflowHistory) to trigger the export jobs workflow and\r\n            another api to get the blob information after the workflow has completed successfully\r\n            (subscriptions/workflow/{workflowId}/blobUrlWithSASKey)\r\n            New Method: Only one API is exposed to trigger export jobs workflow, which will trigger\r\n            the export jobs workflow, however in order to store the blob information(blobUri and\r\n            sas token) the CustomDetails field associated with the JobProperties (in Job Object)\r\n            is being used. This will be set once the export jobs workflow completes successfully.\r\n            Within custom details, instanceType is set to \"ExportJobsDetails\" and fields\r\n            \"blobUri\" and \"sasToken\" contains the required information that is necessary to access\r\n            exported jobs data.\r\n            Note:\r\n            1. Current Implementation only supports one type of AffectedObjectType and one value\r\n            for WorkflowStatus for the filer. Hence the current implementation only uses the first\r\n            value in the corresponding lists.\r\n            2. A dummy Job Entity is created in the Jobs table (this is marked as internal job)\r\n            This job entity can be identified by the Scenario Name which is set to\r\n            \"ScenarioName.ExportsJobs\".",
         "description": "Deletes the site.",
         "operationId": "Jobs_Export",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -4286,6 +5917,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -4297,17 +5934,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationJobs": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.JobsController"
+          "Jobs"
         ],
         "summary": "Gets the list of jobs.",
         "description": "Deletes the site.",
         "operationId": "Jobs_List",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -4354,17 +5988,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/operationresults/{jobName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.FabricsController"
+          "Fabrics"
         ],
         "summary": "Tracks the Site async operation.",
         "description": "Deletes the site.",
         "operationId": "Fabrics_TrackAsyncOperation",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -4420,23 +6051,18 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/reassociateGateway": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.FabricsController"
+          "Fabrics"
         ],
         "summary": "Perform failover of the process server.",
         "description": "Deletes the site.",
-        "operationId": "Fabrics_FailoverProcessServer",
+        "operationId": "Fabrics_ReassociateGateway",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -4475,6 +6101,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Fabric"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -4486,23 +6118,18 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/deployProcessServerImage": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.FabricsController"
+          "Fabrics"
         ],
         "summary": "Deploys a Process Server.",
         "description": "Deletes the site.",
         "operationId": "Fabrics_DeployProcessServerImage",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -4541,6 +6168,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Fabric"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -4552,17 +6185,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/renewcertificate": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.FabricsController"
+          "Fabrics"
         ],
         "summary": "Renews certificate for the site.",
         "description": "Deletes the site.",
         "operationId": "Fabrics_RenewCertificate",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -4592,6 +6222,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Fabric"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -4603,17 +6239,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/checkConsistency": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.FabricsController"
+          "Fabrics"
         ],
         "summary": "Checks the consistency of the site.",
         "description": "Creates the site.",
         "operationId": "Fabrics_CheckConsistency",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -4643,6 +6276,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Fabric"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -4654,17 +6293,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}/remove": {
       "post": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.FabricsController"
+          "Fabrics"
         ],
         "summary": "Deletes the site.\r\n            TODO: put a code based DebugAssert to ensure all HttpPosts have Operation entry made.",
         "description": "Deletes the site.",
         "operationId": "Fabrics_Delete",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -4696,6 +6332,9 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
           }
         },
         "deprecated": false,
@@ -4705,17 +6344,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics/{fabricName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.FabricsController"
+          "Fabrics"
         ],
         "summary": "Gets the details of a Site.",
         "description": "bksdfj kjdfs ajkgdhkg asjhg.",
         "operationId": "Fabrics_Get",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -4756,23 +6392,18 @@
       },
       "put": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.FabricsController"
+          "Fabrics"
         ],
         "summary": "Creates the site.",
         "description": "klklfd the site.",
         "operationId": "Fabrics_Create",
         "consumes": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "text/json"
         ],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -4826,17 +6457,14 @@
       },
       "delete": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.FabricsController"
+          "Fabrics"
         ],
         "summary": "Purges the site.",
         "description": "Deletes the site.",
         "operationId": "Fabrics_Purge",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -4868,6 +6496,9 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
           }
         },
         "deprecated": false,
@@ -4877,17 +6508,14 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationFabrics": {
       "get": {
         "tags": [
-          "Microsoft.Azure.SiteRecovery.V2015_11_10.FabricsController"
+          "Fabrics"
         ],
         "summary": "Gets the list of Site registered.",
         "description": "registered sites hjg.",
         "operationId": "Fabrics_List",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
@@ -4922,9 +6550,491 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationEvents/{eventName}": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Get a monitoring event.",
+        "description": "Deletes the site.",
+        "operationId": "Events_Get",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "eventName",
+            "in": "path",
+            "description": "The name of the event to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationEvents": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Gets the list of monitoring events.",
+        "description": "Deletes the site.",
+        "operationId": "Events_List",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EventCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationAlertSettings/{alertSettingName}": {
+      "get": {
+        "tags": [
+          "AlertSettings"
+        ],
+        "summary": "Gets an alert setting.",
+        "description": "Deletes the site.",
+        "operationId": "AlertSettings_Get",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "alertSettingName",
+            "in": "path",
+            "description": "The name of the alert setting.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "AlertSettings"
+        ],
+        "summary": "Configures the alerts for this vault.",
+        "description": "Deletes the site.",
+        "operationId": "AlertSettings_Create",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "alertSettingName",
+            "in": "path",
+            "description": "The name of the alert\r\n            setting.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The input to configure the alerts.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigureAlertRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/replicationAlertSettings": {
+      "get": {
+        "tags": [
+          "AlertSettings"
+        ],
+        "summary": "Gets the list of alerts.",
+        "description": "Deletes the site.",
+        "operationId": "AlertSettings_List",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceType"
+          },
+          {
+            "$ref": "#/parameters/ResourceNamespace"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
+    "AlertCollection": {
+      "description": "Collection of alerts.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of alerts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Alert"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "Alert": {
+      "description": "Implements the Alert class.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlertProperties",
+          "description": "Gets or sets Alert related data."
+        }
+      }
+    },
+    "AlertProperties": {
+      "description": "The proprties of an alert.",
+      "type": "object",
+      "properties": {
+        "sendToOwners": {
+          "description": "Gets or sets a value indicating whether to send email to subscription administrator.",
+          "type": "string"
+        },
+        "customEmailAddresses": {
+          "description": "Gets or sets the custom email address for sending emails.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locale": {
+          "description": "Gets or sets the locale for the email notification.",
+          "type": "string"
+        }
+      }
+    },
+    "ConfigureAlertRequest": {
+      "description": "Request to configure alerts for the system.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigureAlertRequestProperties",
+          "description": "Gets or sets the properties of a configure alert request."
+        }
+      }
+    },
+    "ConfigureAlertRequestProperties": {
+      "description": "Properties of a configure alert request.",
+      "type": "object",
+      "properties": {
+        "sendToOwners": {
+          "description": "Gets or sets a value indicating whether to send email to subscription administrator.",
+          "type": "string"
+        },
+        "customEmailAddresses": {
+          "description": "Gets or sets the custom email address for sending emails.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locale": {
+          "description": "Gets or sets the locale for the email notification.",
+          "type": "string"
+        }
+      }
+    },
+    "EventCollection": {
+      "description": "Collection of fabric details.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of events.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Event"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "Event": {
+      "description": "Implements the Event class.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventProperties",
+          "description": "Gets or sets Event related data."
+        }
+      }
+    },
+    "EventProperties": {
+      "description": "The properties of a monitoring event.",
+      "type": "object",
+      "properties": {
+        "eventCode": {
+          "description": "Gets or sets the Id of the monitoring event.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Gets or sets the event name.",
+          "type": "string"
+        },
+        "eventType": {
+          "description": "Gets or sets the type of the event.\r\n            for example: VM Health, Server Health, Job Failure etc.",
+          "type": "string"
+        },
+        "affectedObjectFriendlyName": {
+          "description": "Gets or sets the friendly name of the source of the event on which it \r\n            is raised (for example, VM, VMM etc).",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Gets or sets the severity of the event.",
+          "type": "string"
+        },
+        "timeOfOccurrence": {
+          "format": "date-time",
+          "description": "Gets or sets the time of occurence of the event.",
+          "type": "string"
+        },
+        "fabricId": {
+          "description": "Gets or sets the ARM ID of the fabric.",
+          "type": "string"
+        },
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/EventProviderSpecificDetails",
+          "description": "Gets or sets the provider specific settings."
+        },
+        "eventSpecificDetails": {
+          "$ref": "#/definitions/EventSpecificDetails",
+          "description": "Gets or sets the event specific settings."
+        },
+        "healthErrors": {
+          "description": "Gets or sets the list of errors / warnings capturing details associated with the\r\n            issue(s).",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthError"
+          }
+        }
+      }
+    },
+    "EventProviderSpecificDetails": {
+      "description": "Model class for provider specific details for an event.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets the class type. Overriden in derived classes.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "discriminator": "instanceType"
+    },
+    "EventSpecificDetails": {
+      "description": "Model class for event specific details for an event.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets the class type. Overriden in derived classes.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "discriminator": "instanceType"
+    },
+    "HealthError": {
+      "description": "Health Error",
+      "type": "object",
+      "properties": {
+        "errorLevel": {
+          "description": "Gets or sets Level of error.",
+          "type": "string"
+        },
+        "errorCode": {
+          "description": "Gets or sets error code.",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "Gets or sets error message.",
+          "type": "string"
+        },
+        "possibleCauses": {
+          "description": "Gets or sets possible causes of error.",
+          "type": "string"
+        },
+        "recommendedAction": {
+          "description": "Gets or sets recommended action to resolve error.",
+          "type": "string"
+        },
+        "creationTimeUtc": {
+          "format": "date-time",
+          "description": "Gets or sets Error creation time (UTC)",
+          "type": "string"
+        },
+        "recoveryProviderErrorMessage": {
+          "description": "Gets or sets DRA error message.",
+          "type": "string"
+        },
+        "entityId": {
+          "description": "Gets or sets ID of the entity.",
+          "type": "string"
+        }
+      }
+    },
     "FabricCollection": {
       "description": "Collection of fabric details.",
       "type": "object",
@@ -4984,6 +7094,17 @@
         "customDetails": {
           "$ref": "#/definitions/FabricSpecificDetails",
           "description": "Gets or sets fabric specific settings."
+        },
+        "healthErrorDetails": {
+          "description": "Gets or sets fabric health error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthError"
+          }
+        },
+        "health": {
+          "description": "Gets or sets Health of fabric.",
+          "type": "string"
         }
       }
     },
@@ -6144,45 +8265,6 @@
         }
       }
     },
-    "HealthError": {
-      "description": "Health Error",
-      "type": "object",
-      "properties": {
-        "errorLevel": {
-          "description": "Gets or sets Level of error.",
-          "type": "string"
-        },
-        "errorCode": {
-          "description": "Gets or sets error code.",
-          "type": "string"
-        },
-        "errorMessage": {
-          "description": "Gets or sets error message.",
-          "type": "string"
-        },
-        "possibleCauses": {
-          "description": "Gets or sets possible causes of error.",
-          "type": "string"
-        },
-        "recommendedAction": {
-          "description": "Gets or sets recommended action to resolve error.",
-          "type": "string"
-        },
-        "creationTimeUtc": {
-          "format": "date-time",
-          "description": "Gets or sets Error creation time (UTC)",
-          "type": "string"
-        },
-        "recoveryProviderErrorMessage": {
-          "description": "Gets or sets DRA error message.",
-          "type": "string"
-        },
-        "entityId": {
-          "description": "Gets or sets ID of the entity.",
-          "type": "string"
-        }
-      }
-    },
     "CreateProtectionContainerMappingInput": {
       "description": "Configure pairing input.",
       "type": "object",
@@ -6362,6 +8444,69 @@
         }
       },
       "discriminator": "instanceType"
+    },
+    "DiscoverProtectableItemRequest": {
+      "description": "Request to add a physical machine as a protectable item in a container.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiscoverProtectableItemRequestProperties",
+          "description": "Gets or sets the properties of a discover protectable item request."
+        }
+      }
+    },
+    "DiscoverProtectableItemRequestProperties": {
+      "description": "Discover protectable item properties.",
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "description": "Gets or sets the friendly name of the physical machine.",
+          "type": "string"
+        },
+        "ipAddress": {
+          "description": "Gets or sets the IP address of the physical machine to be discovered.",
+          "type": "string"
+        },
+        "osType": {
+          "description": "Gets or sets the OS type on the physical machine.",
+          "type": "string"
+        }
+      }
+    },
+    "SwitchProtectionInput": {
+      "description": "Switch protection input.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SwitchProtectionInputProperties",
+          "description": "Gets or sets switch protection properties"
+        }
+      }
+    },
+    "SwitchProtectionInputProperties": {
+      "description": "Switch protection input properties.",
+      "type": "object",
+      "properties": {
+        "replicationProtectedItemName": {
+          "description": "Gets or sets the unique replication protected item name.",
+          "type": "string"
+        },
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/SwitchProtectionProviderSpecificInput",
+          "description": "Gets or sets Provider specific switch protection input."
+        }
+      }
+    },
+    "SwitchProtectionProviderSpecificInput": {
+      "description": "Provider specific switch protection input.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets the Instance type.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "RecoveryPlanCollection": {
       "description": "Recovery plan collection details.",
@@ -6572,6 +8717,7 @@
               "UnplannedFailover",
               "DisableProtection",
               "TestFailover",
+              "TestFailoverCleanup",
               "Failback",
               "FinalizeFailback",
               "ChangePit",
@@ -6858,12 +9004,39 @@
           "description": "Gets or sets the Id of the network to be used for test failover.",
           "type": "string"
         },
+        "skipTestFailoverCleanup": {
+          "description": "Gets or sets a value indicating whether the test failover cleanup is to be skipped.\r\n            ToDo(LShai): Change such that we do not expose this property separately.",
+          "type": "boolean"
+        },
         "providerSpecificDetails": {
           "description": "Gets or sets the provider specific properties.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecoveryPlanProviderSpecificFailoverInput"
           }
+        }
+      }
+    },
+    "RecoveryPlanTestFailoverCleanupInput": {
+      "description": "Recovery plan test failover cleanup input.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecoveryPlanTestFailoverCleanupInputProperties",
+          "description": "Gets or sets the recovery plan test failover cleanup input properties."
+        }
+      }
+    },
+    "RecoveryPlanTestFailoverCleanupInputProperties": {
+      "description": "Recovery plan test failover cleanup input properties.",
+      "type": "object",
+      "properties": {
+        "comments": {
+          "description": "Gets or sets the test failover cleanup comments.",
+          "type": "string"
         }
       }
     },
@@ -7413,9 +9586,36 @@
           "description": "Gets or sets the id of the network to be used for test failover",
           "type": "string"
         },
+        "skipTestFailoverCleanup": {
+          "description": "Gets or sets a value indicating whether the test failover cleanup is to be skipped.\r\n            ToDo(LShai): Change such that we do not expose this property separately.",
+          "type": "boolean"
+        },
         "providerSpecificDetails": {
           "$ref": "#/definitions/ProviderSpecificFailoverInput",
           "description": "Gets or sets Provider specific settings"
+        }
+      }
+    },
+    "TestFailoverCleanupInput": {
+      "description": "Input definition for test failover cleanup.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TestFailoverCleanupInputProperties",
+          "description": "Gets or sets test failover cleanup input properties."
+        }
+      }
+    },
+    "TestFailoverCleanupInputProperties": {
+      "description": "Input definition for test failover cleanup input properties.",
+      "type": "object",
+      "properties": {
+        "comments": {
+          "description": "Gets or sets test failover cleanup comments.",
+          "type": "string"
         }
       }
     },
@@ -7508,6 +9708,489 @@
         }
       },
       "discriminator": "instanceType"
+    },
+    "StorageClassificationCollection": {
+      "description": "Collection of storage details.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the storage details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageClassification"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "StorageClassification": {
+      "description": "Storage object definition.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageClassificationProperties",
+          "description": "Gets or sets proprties of the storage object."
+        }
+      }
+    },
+    "StorageClassificationProperties": {
+      "description": "Storage object properties.",
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "description": "Gets or sets friendly name of the Storage classification.",
+          "type": "string"
+        }
+      }
+    },
+    "StorageClassificationMappingCollection": {
+      "description": "Collection of storage mapping details.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the storage details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageClassificationMapping"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "StorageClassificationMapping": {
+      "description": "Storage mapping object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageClassificationMappingProperties",
+          "description": "Gets or sets proprties of the storage mappping object."
+        }
+      }
+    },
+    "StorageClassificationMappingProperties": {
+      "description": "Storage mapping properties.",
+      "type": "object",
+      "properties": {
+        "targetStorageClassificationId": {
+          "description": "Gets or sets target storage object Id.",
+          "type": "string"
+        }
+      }
+    },
+    "StorageClassificationMappingInput": {
+      "description": "Storage mapping input.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageMappingInputProperties",
+          "description": "Gets or sets storage mapping input properties."
+        }
+      }
+    },
+    "StorageMappingInputProperties": {
+      "description": "Storage mapping input properties.",
+      "type": "object",
+      "properties": {
+        "targetStorageClassificationId": {
+          "description": "Gets or sets the ID of the storage object.",
+          "type": "string"
+        }
+      }
+    },
+    "VCenterCollection": {
+      "description": "Collection of vCenter details.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the vCenter details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VCenter"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "VCenter": {
+      "description": "vCenter definition.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VCenterProperties",
+          "description": "Gets or sets vCenter related data."
+        }
+      }
+    },
+    "VCenterProperties": {
+      "description": "vCenter properties.",
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "description": "Gets or sets Friendly name of the vCenter.",
+          "type": "string"
+        },
+        "internalId": {
+          "description": "Gets or sets vCenter internal ID.",
+          "type": "string"
+        },
+        "lastHeartbeat": {
+          "format": "date-time",
+          "description": "Gets or sets the time when the last heartbeat was reveived by vCenter.",
+          "type": "string"
+        },
+        "discoveryStatus": {
+          "description": "Gets or sets the VCenter discovery status.",
+          "type": "string"
+        },
+        "processServerId": {
+          "description": "Gets or sets the process server Id.",
+          "type": "string"
+        },
+        "ipAddress": {
+          "description": "Gets or sets the IP address of the vCenter.",
+          "type": "string"
+        },
+        "infrastructureId": {
+          "description": "Gets or sets the infrastructure Id of vCenter.",
+          "type": "string"
+        },
+        "port": {
+          "description": "Gets or sets the port number for discovery.",
+          "type": "string"
+        },
+        "runAsAccountId": {
+          "description": "Gets or sets the account Id which has privileges to discover the vCenter.",
+          "type": "string"
+        },
+        "fabricArmResourceName": {
+          "description": "Gets or sets the ARM resource name of the fabric containing this VCenter.",
+          "type": "string"
+        }
+      }
+    },
+    "AddVCenterRequest": {
+      "description": "Input required to add vCenter.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AddVCenterRequestProperties",
+          "description": "Gets or sets the properties of an add vCenter request."
+        }
+      }
+    },
+    "AddVCenterRequestProperties": {
+      "description": "The properties of an add vCenter request.",
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "description": "Gets or sets the friendly name of the vCenter.",
+          "type": "string"
+        },
+        "ipAddress": {
+          "description": "Gets or sets the IP address of the vCenter to be discovered.",
+          "type": "string"
+        },
+        "processServerId": {
+          "description": "Gets or sets the process server Id from where the discovery is orchestrated.",
+          "type": "string"
+        },
+        "port": {
+          "description": "Gets or sets the port number for discovery.",
+          "type": "string"
+        },
+        "runAsAccountId": {
+          "description": "Gets or sets the account Id which has privileges to discover the vCenter.",
+          "type": "string"
+        }
+      }
+    },
+    "UpdateVCenterRequest": {
+      "description": "Input required to update vCenter.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateVCenterRequestProperties",
+          "description": "Gets or sets the update VCenter Request Properties."
+        }
+      }
+    },
+    "UpdateVCenterRequestProperties": {
+      "description": "The properties of an update vCenter request.",
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "description": "Gets or sets the friendly name of the vCenter.",
+          "type": "string"
+        },
+        "ipAddress": {
+          "description": "Gets or sets the IP address of the vCenter to be discovered.",
+          "type": "string"
+        },
+        "processServerId": {
+          "description": "Gets or sets the process server Id from where the update can be orchestrated.",
+          "type": "string"
+        },
+        "port": {
+          "description": "Gets or sets the port number for discovery.",
+          "type": "string"
+        },
+        "runAsAccountId": {
+          "description": "Gets or sets the CS account Id which has priviliges to update the vCenter.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureFabricCreationInput": {
+      "description": "Fabric provider specific settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FabricSpecificCreationInput"
+        }
+      ],
+      "properties": {
+        "location": {
+          "description": "Gets or sets the Location.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AzureFabricCreationInput"
+    },
+    "HyperVReplicaBaseEventDetails": {
+      "description": "Abstract model class for event details of a HyperVReplica E2E event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventProviderSpecificDetails"
+        }
+      ],
+      "properties": {
+        "containerName": {
+          "description": "Gets or sets the container friendly name.",
+          "type": "string"
+        },
+        "fabricName": {
+          "description": "Gets or sets the fabric friendly name.",
+          "type": "string"
+        },
+        "remoteContainerName": {
+          "description": "Gets or sets the remote container name.",
+          "type": "string"
+        },
+        "remoteFabricName": {
+          "description": "Gets or sets the remote fabric name.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "HyperVReplicaBaseEventDetails"
+    },
+    "HyperVReplica2012EventDetails": {
+      "description": "Model class for event details of a HyperVReplica E2E event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventProviderSpecificDetails"
+        }
+      ],
+      "properties": {
+        "containerName": {
+          "description": "Gets or sets the container friendly name.",
+          "type": "string"
+        },
+        "fabricName": {
+          "description": "Gets or sets the fabric friendly name.",
+          "type": "string"
+        },
+        "remoteContainerName": {
+          "description": "Gets or sets the remote container name.",
+          "type": "string"
+        },
+        "remoteFabricName": {
+          "description": "Gets or sets the remote fabric name.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "HyperVReplica2012EventDetails"
+    },
+    "HyperVReplica2012R2EventDetails": {
+      "description": "Model class for event details of a HyperVReplica blue E2E event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventProviderSpecificDetails"
+        }
+      ],
+      "properties": {
+        "containerName": {
+          "description": "Gets or sets the container friendly name.",
+          "type": "string"
+        },
+        "fabricName": {
+          "description": "Gets or sets the fabric friendly name.",
+          "type": "string"
+        },
+        "remoteContainerName": {
+          "description": "Gets or sets the remote container name.",
+          "type": "string"
+        },
+        "remoteFabricName": {
+          "description": "Gets or sets the remote fabric name.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "HyperVReplica2012R2EventDetails"
+    },
+    "HyperVReplicaAzureEventDetails": {
+      "description": "Model class for event details of a HyperVReplica E2A event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventProviderSpecificDetails"
+        }
+      ],
+      "properties": {
+        "containerName": {
+          "description": "Gets or sets the container friendly name.",
+          "type": "string"
+        },
+        "fabricName": {
+          "description": "Gets or sets the fabric friendly name.",
+          "type": "string"
+        },
+        "remoteContainerName": {
+          "description": "Gets or sets the remote container name.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "HyperVReplicaAzureEventDetails"
+    },
+    "A2AEventDetails": {
+      "description": "Model class for event details of a A2A event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventProviderSpecificDetails"
+        }
+      ],
+      "properties": {
+        "protectedItemName": {
+          "description": "Gets or sets the protected item arm name.",
+          "type": "string"
+        },
+        "fabricObjectId": {
+          "description": "Gets or sets the azure vm arm id.",
+          "type": "string"
+        },
+        "fabricName": {
+          "description": "Gets or sets fabric arm name.",
+          "type": "string"
+        },
+        "fabricLocation": {
+          "description": "Gets or sets the fabric location.",
+          "type": "string"
+        },
+        "remoteFabricName": {
+          "description": "Gets or sets remote fabric arm name.",
+          "type": "string"
+        },
+        "remoteFabricLocation": {
+          "description": "Gets or sets remote fabric location.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "A2AEventDetails"
+    },
+    "InMageAzureV2EventDetails": {
+      "description": "Model class for event details of a VMwareAzureV2 event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventProviderSpecificDetails"
+        }
+      ],
+      "properties": {
+        "eventType": {
+          "description": "Gets or sets InMage Event type.\r\n            Takes one of the values of {InMageDataContract.InMageMonitoringEventType}.",
+          "type": "string"
+        },
+        "category": {
+          "description": "Gets or sets InMage Event Category.",
+          "type": "string"
+        },
+        "component": {
+          "description": "Gets or sets InMage Event Component.",
+          "type": "string"
+        },
+        "correctiveAction": {
+          "description": "Gets or sets Corrective Action string for the event.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Gets or sets InMage Event Details.",
+          "type": "string"
+        },
+        "summary": {
+          "description": "Gets or sets InMage Event Summary.",
+          "type": "string"
+        },
+        "siteName": {
+          "description": "Gets or sets VMware Site name.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "InMageAzureV2EventDetails"
+    },
+    "JobStatusEventDetails": {
+      "description": "Model class for event details of a job status event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventSpecificDetails"
+        }
+      ],
+      "properties": {
+        "jobId": {
+          "description": "Gets or sets job arm id for the event.",
+          "type": "string"
+        },
+        "jobFriendlyName": {
+          "description": "Gets or sets JobName for the Event.",
+          "type": "string"
+        },
+        "jobStatus": {
+          "description": "Gets or sets JobStatus for the  Event.",
+          "type": "string"
+        },
+        "affectedObjectType": {
+          "description": "Gets or sets AffectedObjectType for the event.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "JobStatusEventDetails"
     },
     "HyperVVirtualMachineDetails": {
       "description": "Hyper V replica provider specific settings",
@@ -9084,6 +11767,10 @@
         "recoveryPointId": {
           "description": "Gets or sets the recovery point id to be passed to failover to a particular recovery \r\n            point. In case of latest recovery point, null should be passed.",
           "type": "string"
+        },
+        "cloudServiceCreationOption": {
+          "description": "Gets or sets a value indicating whether to use recovery cloud service for TFO or not.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "A2AFailoverProviderInput"
@@ -10353,11 +13040,6 @@
         }
       ],
       "properties": {
-        "recoveryPointThresholdInMinutes": {
-          "format": "int32",
-          "description": "Gets or sets the recovery point threshold in minutes.",
-          "type": "integer"
-        },
         "recoveryPointHistory": {
           "format": "int32",
           "description": "Gets or sets the duration in minutes until which the recovery points need to be \r\n            stored.",
@@ -10855,6 +13537,16 @@
         "versionStatus": {
           "description": "Gets or sets version status",
           "type": "string"
+        },
+        "sslCertExpiryDate": {
+          "format": "date-time",
+          "description": "Gets or sets CS SSL cert expiry date.",
+          "type": "string"
+        },
+        "sslCertExpiryRemainingDays": {
+          "format": "int32",
+          "description": "Gets or sets CS SSL cert expiry date.",
+          "type": "integer"
         }
       },
       "x-ms-discriminator-value": "VMwareDetails"
@@ -10958,6 +13650,16 @@
         "psServiceStatus": {
           "description": "Gets or sets the PS service status.",
           "type": "string"
+        },
+        "sslCertExpiryDate": {
+          "format": "date-time",
+          "description": "Gets or sets the PS SSL cert expiry date.",
+          "type": "string"
+        },
+        "sslCertExpiryRemainingDays": {
+          "format": "int32",
+          "description": "Gets or sets CS SSL cert expiry date.",
+          "type": "integer"
         }
       }
     },
@@ -11092,22 +13794,6 @@
           "type": "string"
         }
       }
-    },
-    "AzureFabricCreationInput": {
-      "description": "Fabric provider specific settings.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FabricSpecificCreationInput"
-        }
-      ],
-      "properties": {
-        "location": {
-          "description": "Gets or sets the Location.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "AzureFabricCreationInput"
     },
     "Resource": {
       "description": "Azure resource.",
