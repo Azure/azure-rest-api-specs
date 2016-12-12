@@ -605,8 +605,9 @@ operationName | `string` | Optional (default: `<operationName>Next`). Specifies 
 
 **Parent element**:  [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
 
-**Example 1: Canonical**:
-Simple use of `x-ms-pageable`
+**Example 1: Canonical**
+
+Basic use of `x-ms-pageable`:
 ```YAML
 swagger: '2.0'
 info:
@@ -638,16 +639,20 @@ definitions:
       nextLink:                                 # next page URL (referred to by "nextLinkName")
         type: string
 ```
-Generated code (signatures)
+Generated signatures:
 ```C#
 IPage<int?>       List(ISimpleAPIClient operations);
 Task<IPage<int?>> ListAsync(ISimpleAPIClient operations, CancellationToken cancellationToken);
 IPage<int?>       ListNext(ISimpleAPIClient operations, string nextPageLink);
 Task<IPage<int?>> ListNextAsync(ISimpleAPIClient operations, string nextPageLink, CancellationToken cancellationToken);
 ```
+Full code:
+[example1.yaml](x-ms-pageable/example1.yaml),
+[example1.cs](x-ms-pageable/example1.cs)
 
-**Example 2: Customized**:
-Customizing code generation
+**Example 2: Customized**
+
+Customizing code generation:
 ```YAML
 swagger: '2.0'
 info:
@@ -681,16 +686,20 @@ definitions:
       nextIntegersUrl:                          # next page URL (referred to by "nextLinkName")
         type: string
 ```
-Generated code (signatures)
+Generated signatures:
 ```C#
 IPage<int?>       List(ISimpleAPIClient operations);
 Task<IPage<int?>> ListAsync(ISimpleAPIClient operations, CancellationToken cancellationToken);
 IPage<int?>       ListMore(ISimpleAPIClient operations, string nextPageLink);
 Task<IPage<int?>> ListMoreAsync(ISimpleAPIClient operations, string nextPageLink, CancellationToken cancellationToken);
 ```
+Full code:
+[example2.yaml](x-ms-pageable/example2.yaml),
+[example2.cs](x-ms-pageable/example2.cs)
 
-**Example 3: Single page result**:
-Customizing code generation
+**Example 3: Single page result**
+
+Providing a better user experience for single page response models:
 ```YAML
 swagger: '2.0'
 info:
@@ -721,11 +730,14 @@ definitions:
         items:
           type: integer
 ```
-Generated code (signatures)
+Generated signatures:
 ```C#
 IEnumerable<int?>       List(ISimpleAPIClient operations);
 Task<IEnumerable<int?>> ListAsync(ISimpleAPIClient operations, CancellationToken cancellationToken);
 ```
+Full code:
+[example3.yaml](x-ms-pageable/example3.yaml),
+[example3.cs](x-ms-pageable/example3.cs)
 
 
 ##x-ms-long-running-operation
