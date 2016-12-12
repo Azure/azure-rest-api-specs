@@ -592,56 +592,140 @@ When present the `x-ms-odata` extensions indicates the operation includes one or
 ```
 
 ##x-ms-pageable
-The REST API guidelines define a common pattern for paging through lists of data. The operation response is modeled in Swagger as the list of items and the nextLink. Tag the operation as `x-ms-pageable` and the generated code will include methods for navigating between pages.
+The REST API guidelines define a common pattern for paging through lists of data. The operation response is modeled in Swagger as a list of items (a "page") and a link to the next page, effectively resembling a singly linked list. Tag the operation as `x-ms-pageable` and the generated code will include methods for navigating between pages.
 
 **Schema**:
 
 Field Name | Type | Description
 ---|:---:|---
-nextLinkName| `string` | Specifies the name of the property that provides the nextLink. **If the model does not have the nextLink property then specify null. This will be useful for the services that return an object that has an array referenced by the itemName. The object is flattened in a way that the array is directly returned. Since the nextLinkName is explicitly specified to null, the generated code will not implement paging. However, you get the benefit of flattening. Thus providing a better client side API to the end user.**
-itemName | `string` | Specifies the name of the property that provides the collection of pageable items. Default value is 'value'.{Postfix}`.
-operationName | `string` | Specifies the name of the Next operation. Default value is 'XXXNext' where XXX is the name of the operation
+itemName | `string` | Optional (default: `value`). Specifies the name of the property that provides the collection of pageable items.
+nextLinkName| `string` | Required. Specifies the name of the property that provides the next link (common: `nextLink`). If the model does not have a next link property then specify `null`. This is useful for services that return an object that has an array referenced by `itemName`. The object is then flattened in a way that the array is *directly* returned, no paging is used. This provides a better client side API to the end user.
+operationName | `string` | Optional (default: `<operationName>Next`). Specifies the name of the operation for retrieving the next page.
 
 **Parent element**:  [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
 
-**Example**:
-x-ms-pageable operation definition
-```js
-"paths": {
-  "/products": {
-    "get": {
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      },
-      "operationId": "products_list",
-      "description": "A pageable list of Products.",
-      "responses": {
-        "200": {
-          "schema": {
-            "$ref": "#/definitions/ProductListResult"
-          }
-        }
-      }
-    }
-  }
-}
+**Example 1: Canonical**:
+Simple use of `x-ms-pageable`
+```YAML
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+produces:
+  - application/json
+paths:
+  /getIntegers:
+    get:
+      operationId: list
+      description: "Gets those integers."
+      x-ms-pageable:
+        nextLinkName: nextLink
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/PagedIntegerCollection'
+definitions:
+  PagedIntegerCollection:
+    description: "Page of integers."
+    type: object
+    properties:
+      value:
+        type: array
+        items:
+          type: integer
+      nextLink:
+        type: string
 ```
-x-ms-pageable model definition
-```js
-"ProductListResult": {
-  "properties": {
-    "value": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Product"
-      }
-    },
-    "nextLink": {
-      "type": "string"
-    }
-  }
-}
+Generated code (signatures)
+```C#
+IPage<int?>       List(ISimpleAPIClient operations);
+Task<IPage<int?>> ListAsync(ISimpleAPIClient operations, CancellationToken cancellationToken);
+IPage<int?>       ListNext(ISimpleAPIClient operations, string nextPageLink);
+Task<IPage<int?>> ListNextAsync(ISimpleAPIClient operations, string nextPageLink, CancellationToken cancellationToken);
 ```
+
+**Example 2: Customized**:
+Customizing code generation
+```YAML
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+produces:
+  - application/json
+paths:
+  /getIntegers:
+    get:
+      operationId: list
+      description: "Gets those integers."
+      x-ms-pageable:
+        nextLinkName: nextIntegersUrl
+	value: payload
+        operationName: listMore
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/PagedIntegerCollection'
+definitions:
+  PagedIntegerCollection:
+    description: "Page of integers."
+    type: object
+    properties:
+      payload:
+        type: array
+        items:
+          type: integer
+      nextIntegersUrl:
+        type: string
+```
+Generated code (signatures)
+```C#
+IPage<int?>       List(ISimpleAPIClient operations);
+Task<IPage<int?>> ListAsync(ISimpleAPIClient operations, CancellationToken cancellationToken);
+IPage<int?>       ListMore(ISimpleAPIClient operations, string nextPageLink);
+Task<IPage<int?>> ListMoreAsync(ISimpleAPIClient operations, string nextPageLink, CancellationToken cancellationToken);
+```
+
+**Example 3: Single page result**:
+Customizing code generation
+```YAML
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+produces:
+  - application/json
+paths:
+  /getIntegers:
+    get:
+      operationId: list
+      description: "Gets those integers."
+      x-ms-pageable:
+        nextLinkName: null
+	value: payload
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/PagedIntegerCollection'
+definitions:
+  PagedIntegerCollection:
+    description: "Page of integers."
+    type: object
+    properties:
+      payload:
+        type: array
+        items:
+          type: integer
+```
+Generated code (signatures)
+```C#
+IEnumerable<int?>       List(ISimpleAPIClient operations);
+Task<IEnumerable<int?>> ListAsync(ISimpleAPIClient operations, CancellationToken cancellationToken);
+```
+
 
 ##x-ms-long-running-operation
 Some requests like creating/deleting a resource cannot be carried out immediately. In such a situation, the server sends a 201 (Created) or 202 (Accepted) and provides a link to monitor the status of the request. When such an operation is marked with extension `"x-ms-long-running-operation": true`, in Swagger, the generated code will know how to fetch the link to monitor the status. It will keep on polling at regular intervals till the request reaches one of the terminal states: Succeeded, Failed, or Canceled.
