@@ -1,3 +1,4 @@
+
 # AutoRest Extensions for Swagger 2.0
 
 ## Introduction
@@ -618,8 +619,8 @@ paths:
     get:
       operationId: list
       description: "Gets those integers."
-      x-ms-pageable:
-        nextLinkName: nextLink
+      x-ms-pageable:                            # EXTENSION
+        nextLinkName: nextLink                  # property name for next page URL
       responses:
         200:
           description: OK
@@ -630,11 +631,11 @@ definitions:
     description: "Page of integers."
     type: object
     properties:
-      value:
+      value:                                    # the current page
         type: array
         items:
           type: integer
-      nextLink:
+      nextLink:                                 # next page URL (referred to by "nextLinkName")
         type: string
 ```
 Generated code (signatures)
@@ -659,10 +660,10 @@ paths:
     get:
       operationId: list
       description: "Gets those integers."
-      x-ms-pageable:
-        nextLinkName: nextIntegersUrl
-	value: payload
-        operationName: listMore
+      x-ms-pageable:                            # EXTENSION
+        nextLinkName: nextIntegersUrl           # property name for next page URL
+        value: payload                          # property name for current page (overrides "value")
+        operationName: listMore                 # method name for retrieving next page (overrides "listNext")
       responses:
         200:
           description: OK
@@ -673,11 +674,11 @@ definitions:
     description: "Page of integers."
     type: object
     properties:
-      payload:
+      payload:                                  # the current page (referred to by "value")
         type: array
         items:
           type: integer
-      nextIntegersUrl:
+      nextIntegersUrl:                          # next page URL (referred to by "nextLinkName")
         type: string
 ```
 Generated code (signatures)
@@ -703,8 +704,8 @@ paths:
       operationId: list
       description: "Gets those integers."
       x-ms-pageable:
-        nextLinkName: null
-	value: payload
+        nextLinkName: null                      # there are no further pages
+        value: payload                          # property name for the "page" (overrides "value")
       responses:
         200:
           description: OK
@@ -715,7 +716,7 @@ definitions:
     description: "Page of integers."
     type: object
     properties:
-      payload:
+      payload:                                  # the only "page" (referred to by "value")
         type: array
         items:
           type: integer
