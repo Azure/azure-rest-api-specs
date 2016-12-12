@@ -27,16 +27,10 @@
         "description": "Create or update a web service. This call will overwrite an existing web service. Note that there is no warning or confirmation. This is a nonrecoverable operation. If your intent is to create a new web service, call the Get operation first to verify that it does not exist.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WebServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
           },
           {
             "in": "body",
@@ -46,7 +40,13 @@
             "schema": {
               "$ref": "#/definitions/WebService"
             }
-          }                
+          },                
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -72,9 +72,6 @@
         "description": "Gets the Web Service Definiton as specified by a subscription, resource group, and name. Note that the storage credentials and web service keys are not returned by this call. To get the web service access keys, call List Keys.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -82,7 +79,10 @@
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
-          }        
+          },        
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -101,16 +101,10 @@
         "description": "Modifies an existing web service resource. The PATCH API call is an asynchronous operation. To determine whether it has completed successfully, you must perform a Get operation.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WebServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
           },
           {
             "in": "body",
@@ -120,6 +114,12 @@
             "schema": {
               "$ref": "#/definitions/WebService"
             }
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -140,9 +140,6 @@
         "description": "Deletes the specified web service.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -150,11 +147,17 @@
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
-          }        
+          },        
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
         ],
         "responses": {
           "202": {
             "description": "Accepted. Note that a 202 status is returned even if the service did not exist."
+          },
+          "204": {
+            "description": "No Content."
           }
         },
         "x-ms-long-running-operation": true
@@ -169,9 +172,6 @@
         "description": "Gets the access keys for the specified web service.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -179,6 +179,9 @@
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -196,17 +199,14 @@
         "tags": [
           "WebServices"
         ],
-        "operationId": "WebServices_ListInResourceGroup",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "operationId": "WebServices_ListByResourceGroup",
         "description": "Gets the web services in the specified resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
           },
           {
             "in": "query",
@@ -214,6 +214,12 @@
             "type": "string",
             "description": "Continuation token for pagination.",
             "required": false
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -231,21 +237,24 @@
         "tags": [
           "WebServices"
         ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "operationId": "WebServices_List",
         "description": "Gets the web services in the specified subscription.",
         "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          },
           {
             "in": "query",
             "name": "$skiptoken",
             "type": "string",
             "description": "Continuation token for pagination.",
             "required": false
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {

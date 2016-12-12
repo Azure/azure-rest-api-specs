@@ -3361,8 +3361,8 @@
             },
             "scmSiteAlsoStopped": {
               "description": "<code>true</code> to stop SCM (KUDU) site when the app is stopped; otherwise, <code>false</code>. The default is <code>false</code>.",
-              "type": "boolean",
-              "readOnly": true
+              "default": false,
+              "type": "boolean"
             },
             "targetSwapSlot": {
               "description": "Specifies which deployment slot this app will swap into. Read-only.",
@@ -4284,6 +4284,7 @@
       "in": "path",
       "description": "Name of the resource group to which the resource belongs.",
       "required": true,
+      "x-ms-parameter-location": "method",
       "type": "string",
       "maxLength": 90,
       "minLength": 1,
