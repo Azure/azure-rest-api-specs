@@ -97,6 +97,23 @@
             ]
           },
           {
+            "name": "syncFlag",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "DATA",
+            "description": "Optionally indicates what to do after completion of the concurrent append. DATA indicates more data is coming so no sync takes place, METADATA indicates a sync should be done to refresh metadata of the file only. CLOSE indicates that both the stream and metadata should be refreshed upon append completion.",
+            "enum": [
+              "DATA",
+              "METADATA",
+              "CLOSE"
+            ],
+            "x-ms-enum": {
+            "name": "SyncFlag",
+            "modelAsString": false
+            }
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
