@@ -349,7 +349,7 @@
           "Profiles"
         ],
         "description": "Checks the quota and actual usage of endpoints under the given CDN profile.",
-        "operationId": "Profiles_CheckResourceUsage",
+        "operationId": "Profiles_ListResourceUsage",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -372,7 +372,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CheckResourceUsageOutput"
+              "$ref": "#/definitions/ResourceUsageListResult"
             }
           },
           "default": {
@@ -927,7 +927,7 @@
           "Endpoints"
         ],
         "description": "Checks the quota and usage of geo filters and custom domains under the given endpoint.",
-        "operationId": "Endpoints_CheckResourceUsage",
+        "operationId": "Endpoints_ListResourceUsage",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -957,7 +957,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CheckResourceUsageOutput"
+              "$ref": "#/definitions/ResourceUsageListResult"
             }
           },
           "default": {
@@ -1444,7 +1444,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CheckResourceUsageOutput"
+              "$ref": "#/definitions/ResourceUsageListResult"
             }
           },
           "default": {
@@ -1495,8 +1495,8 @@
         "tags": [
           "Edgenodes"
         ],
-        "description": "Lists all of the CDN IP address.",
-        "operationId": "ListEdgenodes",
+        "description": "Lists all the edge nodes of a CDN service.",
+        "operationId": "EdgeNodes_List",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2136,7 +2136,7 @@
         }
       }
     },
-    "CheckResourceUsageOutput": {
+    "ResourceUsageListResult": {
       "description": "Output of check resource usage API.",
       "properties": {
         "value": {
@@ -2290,7 +2290,7 @@
       "type": "object",
       "properties": {
         "baseIpAddress": {
-          "description": "Ip adress itselft.",
+          "description": "Ip adress itself.",
           "type": "string"
         },
         "prefixLength": {
