@@ -223,6 +223,40 @@
         }
       }
     },
+    "ConnStringInfo": {
+      "description": "Database connection string information.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of connection string.",
+          "type": "string"
+        },
+        "connectionString": {
+          "description": "Connection string value.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of database.",
+          "enum": [
+            "MySql",
+            "SQLServer",
+            "SQLAzure",
+            "Custom",
+            "NotificationHub",
+            "ServiceBus",
+            "EventHub",
+            "ApiHub",
+            "DocDb",
+            "RedisCache"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ConnectionStringType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
     "CorsSettings": {
       "description": "Cross-Origin Resource Sharing (CORS) settings for the app.",
       "type": "object",
@@ -583,6 +617,20 @@
         }
       }
     },
+    "NameValuePair": {
+      "description": "Name value pair.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Pair name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Pair value.",
+          "type": "string"
+        }
+      }
+    },
     "PushSettings": {
       "description": "Push settings for the App.",
       "required": [
@@ -777,6 +825,20 @@
             "publishingUsername": {
               "description": "Publishing user name.",
               "type": "string"
+            },
+            "appSettings": {
+              "description": "Application settings.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NameValuePair"
+              }
+            },
+            "connectionStrings": {
+              "description": "Connection strings.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ConnStringInfo"
+              }
             },
             "machineKey": {
               "$ref": "#/definitions/SiteMachineKey",

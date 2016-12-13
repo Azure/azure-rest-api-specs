@@ -8882,12 +8882,6 @@
         "summary": "Deletes the source control configuration of an app.",
         "description": "Deletes the source control configuration of an app.",
         "operationId": "WebApps_DeleteSourceControlSlot",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -8915,16 +8909,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted source control for web app.",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
+            "description": "Succesfully deleted source control for web app."
           },
           "202": {
-            "description": "Source control delete operation in progress.",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
+            "description": "Source control delete operation in progress."
           },
           "404": {
             "description": "Source control does not exist."
@@ -9881,12 +9869,6 @@
         "summary": "Deletes the source control configuration of an app.",
         "description": "Deletes the source control configuration of an app.",
         "operationId": "WebApps_DeleteSourceControl",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -9907,16 +9889,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted source control for web app.",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
+            "description": "Succesfully deleted source control for web app."
           },
           "202": {
-            "description": "Source control delete operation in progress.",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
+            "description": "Source control delete operation in progress."
           },
           "404": {
             "description": "Source control does not exist."
@@ -11005,6 +10981,40 @@
         }
       }
     },
+    "ConnStringInfo": {
+      "description": "Database connection string information.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of connection string.",
+          "type": "string"
+        },
+        "connectionString": {
+          "description": "Connection string value.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of database.",
+          "enum": [
+            "MySql",
+            "SQLServer",
+            "SQLAzure",
+            "Custom",
+            "NotificationHub",
+            "ServiceBus",
+            "EventHub",
+            "ApiHub",
+            "DocDb",
+            "RedisCache"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ConnectionStringType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
     "ConnStringValueTypePair": {
       "description": "Database connection string value to type pair.",
       "required": [
@@ -11603,6 +11613,38 @@
                 "create",
                 "read"
               ]
+            },
+            "sslState": {
+              "description": "SSL type",
+              "enum": [
+                "Disabled",
+                "SniEnabled",
+                "IpBasedEnabled"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "SslState",
+                "modelAsString": false
+              },
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "thumbprint": {
+              "description": "SSL certificate thumbprint",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "virtualIP": {
+              "description": "Virtual IP address assigned to the hostname if IP based SSL is enabled.",
+              "type": "string",
+              "x-ms-mutability": [
+                "read"
+              ]
             }
           },
           "x-ms-client-flatten": true
@@ -11875,6 +11917,20 @@
         }
       }
     },
+    "NameValuePair": {
+      "description": "Name value pair.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Pair name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Pair value.",
+          "type": "string"
+        }
+      }
+    },
     "NetworkFeatures": {
       "description": "Full view of network features for an app (presently VNET integration and Hybrid Connections).",
       "type": "object",
@@ -11917,10 +11973,6 @@
           "x-ms-client-flatten": true
         }
       }
-    },
-    "Object": {
-      "type": "object",
-      "properties": {}
     },
     "Operation": {
       "description": "Operation.",
@@ -13133,6 +13185,20 @@
             "publishingUsername": {
               "description": "Publishing user name.",
               "type": "string"
+            },
+            "appSettings": {
+              "description": "Application settings.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NameValuePair"
+              }
+            },
+            "connectionStrings": {
+              "description": "Connection strings.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ConnStringInfo"
+              }
             },
             "machineKey": {
               "$ref": "#/definitions/SiteMachineKey",

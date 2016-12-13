@@ -318,74 +318,6 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Update a Hybrid Connection in use in an App Service plan. This operation will fail if the Hybrid Connection does not already exist.",
-        "description": "Update a Hybrid Connection in use in an App Service plan. This operation will fail if the Hybrid Connection does not already exist.",
-        "operationId": "AppServicePlans_UpdateHybridConnection",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "Name of the Service Bus namespace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "relayName",
-            "in": "path",
-            "description": "Name of the Service Bus relay.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connection",
-            "in": "body",
-            "description": "The Hybrid Connection entity.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/HybridConnection"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HybridConnection"
-            }
-          }
-        }
-      },
       "delete": {
         "tags": [
           "AppServicePlans"
@@ -1496,6 +1428,15 @@
               "type": "string",
               "readOnly": true
             },
+            "reserved": {
+              "description": "Reserved.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
             "targetWorkerCount": {
               "format": "int32",
               "description": "Scaling worker count.",
@@ -1698,6 +1639,40 @@
         "trafficManagerProfileName": {
           "description": "Name of Traffic Manager profile to create. This is only needed if Traffic Manager profile does not already exist.",
           "type": "string"
+        }
+      }
+    },
+    "ConnStringInfo": {
+      "description": "Database connection string information.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of connection string.",
+          "type": "string"
+        },
+        "connectionString": {
+          "description": "Connection string value.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of database.",
+          "enum": [
+            "MySql",
+            "SQLServer",
+            "SQLAzure",
+            "Custom",
+            "NotificationHub",
+            "ServiceBus",
+            "EventHub",
+            "ApiHub",
+            "DocDb",
+            "RedisCache"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ConnectionStringType",
+            "modelAsString": false
+          }
         }
       }
     },
@@ -1943,6 +1918,20 @@
         },
         "subnetMask": {
           "description": "Subnet mask for the range of IP addresses the restriction is valid for.",
+          "type": "string"
+        }
+      }
+    },
+    "NameValuePair": {
+      "description": "Name value pair.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Pair name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Pair value.",
           "type": "string"
         }
       }
@@ -2631,6 +2620,20 @@
             "publishingUsername": {
               "description": "Publishing user name.",
               "type": "string"
+            },
+            "appSettings": {
+              "description": "Application settings.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NameValuePair"
+              }
+            },
+            "connectionStrings": {
+              "description": "Connection strings.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ConnStringInfo"
+              }
             },
             "machineKey": {
               "$ref": "#/definitions/SiteMachineKey",

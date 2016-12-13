@@ -586,6 +586,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/resendRequestEmails": {
+      "post": {
+        "tags": [
+          "AppServiceCertificateOrders"
+        ],
+        "summary": "Verify domain ownership for this certificate order.",
+        "description": "Verify domain ownership for this certificate order.",
+        "operationId": "AppServiceCertificateOrders_ResendRequestEmails",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Certificate order name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nameIdentifier",
+            "in": "body",
+            "description": "Email address",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NameIdentifier"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/retrieveCertificateActions": {
       "post": {
         "tags": [
@@ -671,6 +720,64 @@
               "items": {
                 "$ref": "#/definitions/CertificateEmail"
               }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/retrieveSiteSeal": {
+      "post": {
+        "tags": [
+          "AppServiceCertificateOrders"
+        ],
+        "summary": "Verify domain ownership for this certificate order.",
+        "description": "Verify domain ownership for this certificate order.",
+        "operationId": "AppServiceCertificateOrders_RetrieveSiteSeal",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Certificate order name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteSealRequest",
+            "in": "body",
+            "description": "Site seal request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteSealRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteSeal"
             }
           }
         }
@@ -965,65 +1072,54 @@
     "CertificateDetails": {
       "description": "SSL certificate details.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "description": "ARM envelope properties",
-          "properties": {
-            "version": {
-              "format": "int32",
-              "description": "Version.",
-              "type": "integer",
-              "readOnly": true
-            },
-            "serialNumber": {
-              "description": "Serial Number.",
-              "type": "string",
-              "readOnly": true
-            },
-            "thumbprint": {
-              "description": "Thumbprint.",
-              "type": "string",
-              "readOnly": true
-            },
-            "subject": {
-              "description": "Subject.",
-              "type": "string",
-              "readOnly": true
-            },
-            "notBefore": {
-              "format": "date-time",
-              "description": "Valid from.",
-              "type": "string",
-              "readOnly": true
-            },
-            "notAfter": {
-              "format": "date-time",
-              "description": "Valid to.",
-              "type": "string",
-              "readOnly": true
-            },
-            "signatureAlgorithm": {
-              "description": "Signature algorithm.",
-              "type": "string",
-              "readOnly": true
-            },
-            "issuer": {
-              "description": "Issuer.",
-              "type": "string",
-              "readOnly": true
-            },
-            "rawData": {
-              "description": "Raw certificate data.",
-              "type": "string",
-              "readOnly": true
-            }
-          },
-          "x-ms-client-flatten": true
+        "version": {
+          "format": "int32",
+          "description": "Version.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "serialNumber": {
+          "description": "Serial Number.",
+          "type": "string",
+          "readOnly": true
+        },
+        "thumbprint": {
+          "description": "Thumbprint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subject": {
+          "description": "Subject.",
+          "type": "string",
+          "readOnly": true
+        },
+        "notBefore": {
+          "format": "date-time",
+          "description": "Valid from.",
+          "type": "string",
+          "readOnly": true
+        },
+        "notAfter": {
+          "format": "date-time",
+          "description": "Valid to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "signatureAlgorithm": {
+          "description": "Signature algorithm.",
+          "type": "string",
+          "readOnly": true
+        },
+        "issuer": {
+          "description": "Issuer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "rawData": {
+          "description": "Raw certificate data.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1078,6 +1174,9 @@
                 "OrgValidationComplete",
                 "SanDrop",
                 "FraudCleared",
+                "CertificateExpired",
+                "CertificateExpirationWarning",
+                "FraudDocumentationRequired",
                 "Unknown"
               ],
               "type": "string",
@@ -1093,6 +1192,16 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NameIdentifier": {
+      "description": "Identifies an object.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the object.",
+          "type": "string"
         }
       }
     },
@@ -1197,6 +1306,34 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "SiteSeal": {
+      "description": "Site seal",
+      "required": [
+        "html"
+      ],
+      "type": "object",
+      "properties": {
+        "html": {
+          "description": "HTML snippet",
+          "type": "string",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SiteSealRequest": {
+      "description": "Site seal request.",
+      "type": "object",
+      "properties": {
+        "lightTheme": {
+          "description": "Theme",
+          "type": "boolean"
+        },
+        "locale": {
+          "description": "Locale",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {

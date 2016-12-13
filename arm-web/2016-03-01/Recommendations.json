@@ -164,27 +164,6 @@
             "type": "boolean"
           },
           {
-            "name": "webAppSku",
-            "in": "query",
-            "description": "SKU of the app.",
-            "type": "string"
-          },
-          {
-            "name": "numSlots",
-            "in": "query",
-            "description": "Number of deployment slots in the app.",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "liveHours",
-            "in": "query",
-            "description": "If greater than zero, this operation scans the last active live site symptoms and dynamically generate on-the-fly recommendations.",
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
             "name": "$filter",
             "in": "query",
             "description": "Return only channels specified in the filter. Filter is specified by using OData syntax. Example: $filter=channels eq 'Api' or channel eq 'Notification'",
@@ -514,43 +493,6 @@
           }
         }
       }
-    },
-    "Resource": {
-      "description": "Azure resource.",
-      "required": [
-        "location"
-      ],
-      "properties": {
-        "id": {
-          "description": "Resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource Name.",
-          "type": "string"
-        },
-        "kind": {
-          "description": "Kind of resource.",
-          "type": "string"
-        },
-        "location": {
-          "description": "Resource Location.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {
