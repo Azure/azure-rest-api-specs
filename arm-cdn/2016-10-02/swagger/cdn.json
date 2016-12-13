@@ -343,6 +343,50 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/checkResourceUsage": {
+      "post": {
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Checks the quota and actual usage of endpoints under the given CDN profile.",
+        "operationId": "Profiles_ListResourceUsage",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ResourceUsageListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints": {
       "get": {
         "tags": [
@@ -877,6 +921,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/checkResourceUsage": {
+      "post": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Checks the quota and usage of geo filters and custom domains under the given endpoint.",
+        "operationId": "Endpoints_ListResourceUsage",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ResourceUsageListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/origins": {
       "get": {
         "tags": [
@@ -1330,6 +1425,40 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/checkResourceUsage": {
+      "post": {
+        "tags": [
+          "CheckResourceUsage"
+        ],
+        "description": "Check the quota and actual usage of the CDN profiles under the given subscription.",
+        "operationId": "CheckResourceUsage",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ResourceUsageListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Cdn/operations": {
       "get": {
         "tags": [
@@ -1358,6 +1487,34 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Cdn/edgenodes": {
+      "get": {
+        "tags": [
+          "Edgenodes"
+        ],
+        "description": "Lists all the edge nodes of a CDN service.",
+        "operationId": "EdgeNodes_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EdgenodeResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     }
@@ -1593,7 +1750,7 @@
           "items": {
             "$ref": "#/definitions/GeoFilter"
           }
-	    }
+        }
       }
     },
     "DeepCreatedOrigin": {
@@ -1662,7 +1819,7 @@
           "enum": [
             "Block",
             "Allow"
-		  ],
+          ],
           "type": "string",
           "x-ms-enum": {
           "name": "GeoFilterActions",
@@ -1979,6 +2136,44 @@
         }
       }
     },
+    "ResourceUsageListResult": {
+      "description": "Output of check resource usage API.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceUsage"
+          },
+          "description": "List of resource usages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of custom domain objects if there are any."
+        }
+      }
+    },
+    "ResourceUsage": {
+      "description": "Output of check resource usage API.",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Resource type of the usages."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit of the usage. e.g. Count."
+        },
+        "currentValue": {
+          "type": "integer",
+          "description": "Actual value of the resource type."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Quota of the resource type."
+        }
+      }
+    },
     "ResourceType": {
       "description": "Type of CDN resource used in CheckNameAvailability.",
       "enum": [
@@ -2030,6 +2225,77 @@
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "EdgenodeResult": {
+     "description": "Result of the request to list CDN edgenodes. It contains a list of ip address group and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/EdgeNode"
+          },
+          "description": "Edge node of CDN service."
+        }
+      }
+    },
+    "EdgeNode": {
+      "description": "Edge node of CDN service.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Ip adress group that contains Ipv4 and Ipv6 addresses",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "The resource group of the edge node.",
+          "type": "string"
+        },
+        "ipAddressGroups": {
+          "description": "List of ip address groups.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpAddressGroup"
+          }
+        }
+      }
+    },
+    "IpAddressGroup": {
+      "description": "CDN Ip address group",
+      "type": "object",
+      "properties": {
+        "deliveryRegion": {
+          "description": "The delivery region of the ip address group",
+          "type": "string"
+        },
+        "ipv4Addresses": {
+          "description": "The list of ip v4 addresses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cidrIpAddress"
+          }
+        },
+        "ipv6Addresses": {
+          "description": "The list of ip v6 addresses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cidrIpAddress"
+          }
+        }
+      }
+    },
+    "cidrIpAddress": {
+      "description": "CIDR Ip address",
+      "type": "object",
+      "properties": {
+        "baseIpAddress": {
+          "description": "Ip adress itself.",
+          "type": "string"
+        },
+        "prefixLength": {
+          "description": "The length of the prefix of the ip address.",
+          "type": "string"
         }
       }
     },
