@@ -158,7 +158,7 @@
         "tags": [
           "PolicyAssignments"
         ],
-        "operationId": "PolicyAssignments_ListByResourceGroup",
+        "operationId": "PolicyAssignments_ListForResourceGroup",
         "description": "Gets policy assignments for the resource group.",
         "parameters": [
           {
@@ -197,6 +197,119 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      }
+    },  
+     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/policyassignments": {
+      "get": {
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "operationId": "PolicyAssignments_ListForResource",
+        "description": "Gets policy assignments for a resource.",
+        "deprecated": true,
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group containing the resource. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "name": "parentResourcePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parent resource path.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource type.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource with policy assignments."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of policy assignments.",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignmentListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/PolicyAssignment"
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyassignments": {
+      "get": {
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "operationId": "PolicyAssignments_List",
+        "description": "Gets all the policy assignments for a subscription.",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of policy assignments.",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignmentListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/PolicyAssignment"
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyassignments": {
