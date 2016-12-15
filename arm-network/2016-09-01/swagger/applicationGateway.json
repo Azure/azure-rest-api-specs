@@ -414,7 +414,7 @@
         "description": "IP address or FQDN of backend server."
         },	  
         "ipConfiguration": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "Reference of IP configuration of backend server."
         },	  
         "health": {
@@ -495,7 +495,7 @@
     "ApplicationGatewayIPConfigurationPropertiesFormat": {
       "properties": {
         "subnet": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "Reference of the subnet resource. A subnet from where application gateway gets its private address."
         },
         "provisioningState": {
@@ -522,7 +522,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
         }
       ],
       "description": "IP configuration of an application gateway. Currently 1 public and 1 private IP configuration is allowed."
@@ -557,7 +557,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
         }
       ],
       "description": "Authentication certificates of an application gateway."
@@ -600,7 +600,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
         }
       ],
       "description": "SSL certificates of an application gateway."
@@ -624,11 +624,11 @@
           }
         },
         "subnet": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "Reference of the subnet resource."
         },
         "publicIPAddress": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "Reference of the PublicIP resource."
         },
         "provisioningState": {
@@ -655,7 +655,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
         }
       ],
       "description": "Frontend IP configuration of an application gateway."
@@ -691,7 +691,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
         }
       ],
       "description": "Frontend port of an application gateway."
@@ -749,7 +749,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
         }
       ],
       "description": "Backend Address Pool of an application gateway."
@@ -791,13 +791,13 @@
           "description": "Request timeout in seconds. Application Gateway will fail the request if response is not received within RequestTimeout. Acceptable values are from 1 second to 86400 seconds."
         },
         "probe": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "Probe resource of an application gateway."
         },
         "authenticationCertificates": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
           },
           "description": "Array of references to application gateway authentication certificates."
         },
@@ -825,7 +825,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
         }
       ],
       "description": "Backend address pool settings of an application gateway."
@@ -833,11 +833,11 @@
     "ApplicationGatewayHttpListenerPropertiesFormat": {
       "properties": {
         "frontendIPConfiguration": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "Frontend IP configuration resource of an application gateway."
         },
         "frontendPort": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "Frontend port resource of an application gateway."
         },
         "protocol": {
@@ -857,7 +857,7 @@
           "description": "Host name of HTTP listener."
         },
         "sslCertificate": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "SSL certificate resource of an application gateway."
         },
         "requireServerNameIndication": {
@@ -888,7 +888,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
         }
       ],
       "description": "Http listener of an application gateway."
@@ -903,11 +903,11 @@
           "description": "Path rules of URL path map."
         },
         "backendAddressPool": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "Backend address pool resource of URL path map."
         },
         "backendHttpSettings": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "Backend http settings resource of URL path map."
         },
         "provisioningState": {
@@ -934,7 +934,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
         }
       ],
       "description": "Path rule of URL path map of an application gateway."
@@ -1000,7 +1000,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
         }
       ],
       "description": "Probe of the application gateway."
@@ -1020,19 +1020,19 @@
           }
         },
         "backendAddressPool": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "Backend address pool resource of the application gateway. "
         },
         "backendHttpSettings": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "Frontend port resource of the application gateway."
         },
         "httpListener": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "Http listener resource of the application gateway. "
         },
         "urlPathMap": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "URL path map resource of the application gateway."
         },
         "provisioningState": {
@@ -1059,7 +1059,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
         }
       ],
       "description": "Request routing rule of an application gateway."
@@ -1194,7 +1194,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/Resource"
         }
       ],
       "description": "Application gateway resource"
@@ -1218,11 +1218,11 @@
     "ApplicationGatewayUrlPathMapPropertiesFormat": {
       "properties": {
         "defaultBackendAddressPool": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "Default backend address pool resource of URL path map."
         },
         "defaultBackendHttpSettings": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "Default backend http settings resource of URL path map."
         },
         "pathRules": {
@@ -1256,7 +1256,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
         }
       ],
       "description": "UrlPathMaps give a url path to the backend mapping information for PathBasedRouting."
@@ -1284,45 +1284,6 @@
         "enabled"
       ],
       "description": "Application gateway web application firewall configuration."
-    },
-	"Resource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        }
-      },
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {

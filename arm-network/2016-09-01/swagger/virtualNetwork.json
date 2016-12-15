@@ -719,7 +719,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
         }
       ],
       "description": "ResourceNavigationLink resource."
@@ -778,7 +778,7 @@
           "description": "If remote gateways can be used on this virtual network. If the flag is set to true, and allowGatewayTransit on remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway."
         },
         "remoteVirtualNetwork": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "The reference of the remote virtual network."
         },
         "peeringState": {
@@ -817,7 +817,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
         }
       ],
       "description": "Subnet in a virtual network resource."
@@ -839,7 +839,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
         }
       ],
       "description": "Peerings in a virtual network resource."
@@ -923,7 +923,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/Resource"
         }
       ],
       "description": "Virtual Network resource."
@@ -983,45 +983,6 @@
         }
       },
       "description": "Response for CheckIPAddressAvailability API service call"
-    },
-	"Resource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        }
-      },
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {

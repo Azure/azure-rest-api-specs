@@ -410,7 +410,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
         }
       ],
       "description": "IPConfiguration in a network interface."
@@ -449,7 +449,7 @@
     "NetworkInterfacePropertiesFormat": {
       "properties": {
         "virtualMachine": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "The reference of a virtual machine."
         },
         "networkSecurityGroup": {
@@ -507,7 +507,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/Resource"
         }
       ],
       "description": "A network interface in a resource group."
@@ -531,7 +531,7 @@
     "EffectiveNetworkSecurityGroup": {
       "properties": {
         "networkSecurityGroup": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "The ID of network security group that is applied."
         },
         "association": {
@@ -550,11 +550,11 @@
     "EffectiveNetworkSecurityGroupAssociation": {
       "properties": {
         "subnet": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "The ID of the subnet if assigned."
         },
         "networkInterface": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
           "description": "The ID of the network interface if assigned."
         }
       },
@@ -787,49 +787,10 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
         }
       ],
       "description": "IPConfiguration"
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        }
-      },
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {

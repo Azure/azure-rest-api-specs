@@ -489,7 +489,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
         }
       ],
       "description": "Route resource"
@@ -531,7 +531,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./2016-09-01/swagger/network.json#/definitions/Resource"
         }
       ],
       "description": "Route table resource."
@@ -567,45 +567,6 @@
         }
       },
       "description": "Response for the ListRoute API service call"
-    },
-	"Resource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        }
-      },
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {
