@@ -1402,42 +1402,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/usages": {
-      "get": {
-        "tags": [
-          "Usages"
-        ],
-        "operationId": "Usages_List",
-        "description": "Lists compute usages for a subscription.",
-        "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The location where resource usage is queried.",
-            "pattern": "^[-\\w\\._]+$"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of Usage resources.",
-            "schema": {
-              "$ref": "#/definitions/UsagesListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}": {
       "put": {
         "tags": [
@@ -2011,42 +1975,6 @@
             "description": "VPN client package URL.",
             "schema": {
               "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/CheckDnsNameAvailability": {
-      "get": {
-        "operationId": "CheckDnsNameAvailability",
-        "description": "Checks whether a domain name in the cloudapp.net zone is available for use.",
-        "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The location of the domain name."
-          },
-          {
-            "name": "domainNameLabel",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. Returns whether the DNS name is available.",
-            "schema": {
-              "$ref": "#/definitions/DnsNameAvailabilityResult"
             }
           }
         }
@@ -3646,71 +3574,6 @@
       },
       "description": "Response for ListLocalNetworkGateways API service call."
     },
-    "UsageName": {
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "A string describing the resource name."
-        },
-        "localizedValue": {
-          "type": "string",
-          "description": "A localized string describing the resource name."
-        }
-      },
-      "description": "The usage names."
-    },
-    "Usage": {
-      "properties": {
-        "unit": {
-          "type": "string",
-          "description": "An enum describing the unit of measurement.",
-          "enum": [
-            "Count"
-          ],
-          "x-ms-enum": {
-            "name": "UsageUnit",
-            "modelAsString": true
-          }
-        },
-        "currentValue": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The current value of the usage."
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The limit of usage."
-        },
-        "name": {
-          "$ref": "#/definitions/UsageName",
-          "description": "The name of the type of usage."
-        }
-      },
-      "required": [
-        "unit",
-        "currentValue",
-        "limit",
-        "name"
-      ],
-      "description": "Describes network resource usage."
-    },
-    "UsagesListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Usage"
-          },
-          "description": "The list network resource usages."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of results."
-        }
-      },
-      "description": "The list usages operation response."
-    },
     "VirtualNetworkGatewayIPConfigurationPropertiesFormat": {
       "properties": {
         "privateIPAllocationMethod": {
@@ -4245,15 +4108,6 @@
         }
       },
       "description": "Response for the ListVirtualNetworkGateways API service call."
-    },
-    "DnsNameAvailabilityResult": {
-      "properties": {
-        "available": {
-          "type": "boolean",
-          "description": "Domain availability (True/False)."
-        }
-      },
-      "description": "Response for the CheckDnsNameAvailability API service call."
     },
     "ErrorDetails": {
       "properties": {
