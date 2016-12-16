@@ -64,7 +64,7 @@ OR
 
 Where "M" stands for '*MUST*' or '*MUST NOT*' requirement. "S" stands for '*SHOULD*' or '*SHOULD NOT*' requirement. And, "nnnn" is replaced by a number that is unique among all the requirements in the checklist, thereby "nnnn" becomes a unique requirement identifier.
 
-## Swagger Checklist Validation Tools ##
+## Validation Tools for Swagger Checklist ##
 
 [Samer to intro tools and describe each of them and how these tools would help them to validate Swaggers against this checklist]
 
