@@ -34,6 +34,7 @@ Please direct feedback and kudos to [swagger-checklist@microsoft.com](mailto:swa
 
 [Introduction](#introduction)</br>
 [Notational Conventions](#notational-conventions)</br>
+[Validation Tools for Swagger Checklist](#validation-tools-for-swagger-checklist)</br>
 [Naming - Swagger Checklist](#naming---swagger-checklist)</br>
 [Operation Semantics [MUST]- Swagger Checklist](#must)</br>
 [Operation Semantics [SHOULD] - Swagger Checklist](#should)</br>
