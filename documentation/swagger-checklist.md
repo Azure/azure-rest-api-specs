@@ -1,13 +1,15 @@
 # Swagger Checklist for Microsoft Azure #
 
-*Version 0.1, 12-12-2016*
+*Version 0.1, 12-15-2016*
 ----------
 Latest version: [https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md)
 
 Editors:</br>
-"XXX", Microsoft</br>
-"YYY", Microsoft</br>
-"ZZZ", Microsoft
+Asir Selvasingh, Microsoft</br>
+Amar Zavery, Microsoft</br>
+Mark Cowlishaw, Microsoft</br>
+Johan Stenberg, Microsoft</br>
+Kirthi Krishnamraju, Microsoft</br>
 
 
 ## Executive Summary ##
@@ -296,8 +298,6 @@ This checklist is prepared and will be approved by Microsoft. Contributors to th
 
 - Doug Erickson, Microsoft
 - Tamra Myers, Microsoft
-- AA, Microsoft
-- BB, Microsoft
 
 ## Appendix C: Revision History ##
 
