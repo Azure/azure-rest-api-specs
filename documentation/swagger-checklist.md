@@ -100,7 +100,7 @@ Where "M" stands for '*MUST*' or '*MUST NOT*' requirement. "S" stands for '*SHOU
 
 ### MUST
 
-- [ ] **M2000**: TODO: A Swagger specification *MUST* be accompanied with a document that describes management scenarios (what does this mean? x-ms-examples or a multi operation scenario?) that can be realized using operations described in the Swagger.
+- [ ] **M2000**: A Swagger specification *MUST* be accompanied with a document that describes end-to-end management scenarios that can be realized using operations described in the Swagger.
 
 - [ ] **M2001**: Read only parameters and model properties *MUST* be labeled as `"readOnly": true` in Swagger.
 
@@ -126,7 +126,9 @@ Where "M" stands for '*MUST*' or '*MUST NOT*' requirement. "S" stands for '*SHOU
 
 - [ ] **M2009**: A Swagger spec *MUST NOT* define operations or properties or parameters for functionalities that are not currently supported by the service in the given api-version. The primary goal of the spec is that it *MUST* correctly and completely represent the underlying REST API.
 
-- [ ] **M2010**: A collection model in Swagger *MUST* support adding more than one element to the collection. TODO: Ask for clarity.
+- [ ] **M2010**: A collection model in Swagger *MUST* support adding more than one element to the collection.
+
+For example, [NetworkInterface.ipConfigurations](https://github.com/Azure/azure-rest-api-specs/blob/4131049f9bdb477c4aea6f4e3f588a7153fc5606/arm-network/2016-06-01/swagger/network.json#L6516) is described as a collection. However, it does not support adding more than one IP configuration. 
 
 - [ ] **M2011**: Operations that are exposed through private previews *MUST NOT* be described in the [public GitHub repository](https://github.com/Azure/azure-rest-api-specs). They *MUST* be described in the [private GitHub repository](https://github.com/Azure/azure-rest-api-specs-pr) instead.
 
