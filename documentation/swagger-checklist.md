@@ -34,7 +34,7 @@ Please direct feedback and kudos to [swagger-checklist@microsoft.com](mailto:swa
 [Operation Semantics [MUST]- Swagger Checklist](#must)</br>
 [Operation Semantics [SHOULD] - Swagger Checklist](#should)</br>
 [Operational - Swagger Checklist](#operational---swagger-checklist)</br>
-[Documentation - Swagger Checklist](documentation---swagger-checklist)</br>
+[Documentation - Swagger Checklist](#documentation---swagger-checklist)</br>
 [Structural - Swagger Checklist](#structural---swagger-checklist)</br>
 [Appendix A: References](#appendix-a-references)</br>
 [Appendix B: Acknowledgments](#appendix-b-acknowledgments)</br>
