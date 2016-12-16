@@ -16,9 +16,13 @@ Kirthi Krishnamraju, Microsoft</br>
 
 This document defines a Swagger checklist for Microsoft Azure, along with clarifications, refinements, interpretations and amplifications of the Swagger specification to promote interoperability and usability in tools and libraries.
 
+### Intended Audience ###
+
+This checklist is for any software engineer or Azure service team who develops and offers a REST API for managing or accessing Azure resources.
+
 ## Status of this Checklist ##
 
-This is a working draft.
+This is a **working draft**.
 
 ## Feedback ##
 
@@ -60,6 +64,9 @@ OR
 
 Where "M" stands for '*MUST*' or '*MUST NOT*' requirement. "S" stands for '*SHOULD*' or '*SHOULD NOT*' requirement. And, "nnnn" is replaced by a number that is unique among all the requirements in the checklist, thereby "nnnn" becomes a unique requirement identifier.
 
+## Swagger Checklist Validation Tools ##
+
+[Samer to intro tools and describe each of them and how these tools would help them to validate Swaggers against this checklist]
 
 ## Naming - Swagger Checklist ##
 
