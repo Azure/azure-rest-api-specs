@@ -61,9 +61,9 @@ Where "M" stands for '*MUST*' or '*MUST NOT*' requirement. "S" stands for '*SHOU
 
 ## Naming - Swagger Checklist ##
 
-- [] *M1000*: Plural names *MUST* only be used to represent collections.
+- [ ] *M1000*: Plural names in parameters and model properties MUST only be used to represent collections.
 
-- [] *M1001*: Each operation must contain an OperationId of the form "RESOURCE_METHOD" a.k.a "NOUN_VERB", where "RESOURCE" represents the resource or object the operation addresses, and METHOD is a short name for the operation being performed "Get, Start, Delete, Create, List", etc.
+- [] *M1001*: Each operation *MUST* contain an OperationId of the form "RESOURCE_METHOD" a.k.a "NOUN_VERB", where "RESOURCE" represents the resource or object the operation addresses, and METHOD is a short name for the operation being performed "Get, Start, Delete, Create, List", etc.
 
 - [] *M1002*: If the NOUN in the OperationId "NOUN_VERB" matches with the name of the Model definition then the NOUN in the operationId *MUST* use the plural form of NOUN to avoid collision in the namespace.
 
@@ -136,7 +136,7 @@ Where "M" stands for '*MUST*' or '*MUST NOT*' requirement. "S" stands for '*SHOU
 
 - [] *M2015*: For PATCH operation, every property in the model for the request body *MUST* be optional and the property *MUST NOT* provide any default value. The absence of defualt values applies recursively to complex properties in the model definition.
 
-- [] *M2016*: The model definition for the body parameter and the response must be the same for a PUT operation. This ensures that the same entity will be reusable between GET and PUT.
+- [] *M2016*: The model definition for the body parameter and the response *MUST* be the same for a PUT operation. This ensures that the same entity will be reusable between GET and PUT.
 
 - [] *M2017*: A parameter or a model property having an `"enum": []` constraint, *MUST* have an  ["x-ms-enum"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-enum) extension and the extension's "modelAsString" property *MUST* be set to `false` where applicable.
 
