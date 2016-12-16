@@ -257,25 +257,25 @@ For example, [NetworkInterface.ipConfigurations](https://github.com/Azure/azure-
 
 - [ ] **M4001**: Descriptions *MUST* NOT contain spelling errors, grammatical errors, run off sentences and dummy texts.
 
-- [ ] **M4002**: Here are some [basic rules for public documentation](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-authoring-descriptions.md#basic-rules-for-public-docs-descriptions):
+Here are some [basic rules for public documentation](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-authoring-descriptions.md#basic-rules-for-public-docs-descriptions):
 
-- [ ] **M4003**: Every description *MUST* start with a capital letter and end it with a period (".").
+- [ ] **M4002**: Every description *MUST* start with a capital letter and end it with a period (".").
 
-- [ ] **M4004**: The description/summary *MUST* use correct English spelling and grammar.
+- [ ] **M4003**: The description/summary *MUST* use correct English spelling and grammar.
 
-- [ ] **M4005**: One *MUST NOT* use the API's code-symbol capitalization style for acronyms. For example, use "URL", *NOT* "Url"; and use "ID", *NOT* "Id".
+- [ ] **M4004**: One *MUST NOT* use the API's code-symbol capitalization style for acronyms. For example, use "URL", *NOT* "Url"; and use "ID", *NOT* "Id".
 
-- [ ] **M4006**: The description for every operation *MUST* start with a verb phrase.
+- [ ] **M4005**: The description for every operation *MUST* start with a verb phrase.
 
-- [ ] **M4007**: The HTTP status codes returned by every REST operation *MUST* be documented.
+- [ ] **M4006**: The HTTP status codes returned by every REST operation *MUST* be documented.
 
-- [ ] **M4009**: The documentation of model properties *MUST NOT* start with the phrase "Gets or sets ..", "Gets ..", "Sets .."
+- [ ] **M4007**: The documentation of model properties *MUST NOT* start with the phrase "Gets or sets ..", "Gets ..", "Sets .."
 
-- [ ] **M4010**: The "title" and "description" property of the "info" object in the swagger specification *MUST NOT* have the phrase client or .NET in it. The specification is used for different purposes and is used for generating REST clients in different languages.
+- [ ] **M4008**: The "title" and "description" property of the "info" object in the swagger specification *MUST NOT* have the phrase client or .NET in it. The specification is used for different purposes and is used for generating REST clients in different languages.
 
-- [ ] **M4011** The description *MUST* specify the units of quantifiable properties/parameters. Example properties like size *MUST* specify the units (bytes, MB, GB, etc.)
+- [ ] **M4009** The description *MUST* specify the units of quantifiable properties/parameters. Example properties like size *MUST* specify the units (bytes, MB, GB, etc.)
 
-- [ ] **M4012**: All the negative response status code descriptions *MUST* be defined in the description of the "default" status code (if the intention is for documentation purpose only). Example: `"description": "'404' - 'Not found'.\n'400' - 'Bad request'.\n'500': 'Internal Server Error'."'`
+- [ ] **M4010**: All the negative response status code descriptions *MUST* be defined in the description of the "default" status code (if the intention is for documentation purpose only). Example: `"description": "'404' - 'Not found'.\n'400' - 'Bad request'.\n'500': 'Internal Server Error'."'`
 
 ## Structural - Swagger Checklist ##
 
