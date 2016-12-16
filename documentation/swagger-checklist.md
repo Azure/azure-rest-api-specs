@@ -51,6 +51,8 @@ This document defines a Swagger checklist for Microsoft Azure, along with clarif
 
 Each section addresses a dimension of Swagger authoring and its effectiveness for delivering the best Azure developer experiences through tools and libraries built using a Swagger specification.
 
+This checklist is a current snapshot of requirements for developing Swagger specifications. The checklist will be continuously updated to reflect issues uncovered during Swagger specification reviews.
+
 ## Notational Conventions ##
 
 The keywords "*MUST*", "*MUST NOT*", "REQUIRED", "SHALL", "SHALL NOT", "*SHOULD*", "*SHOULD NOT*", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC2119](http://www.ietf.org/rfc/rfc2119.txt).
