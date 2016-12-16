@@ -11,9 +11,11 @@ var extensionSwaggerSchemaUrl = "https://raw.githubusercontent.com/Azure/autores
 var swaggerSchemaUrl = "http://json.schemastore.org/swagger-2.0";
 var swaggerSchemaAltUrl = "http://swagger.io/v2/schema.json";
 var schemaUrl = "http://json-schema.org/draft-04/schema";
+var exampleSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json";
 var swaggerSchema; 
 var extensionSwaggerSchema;
 var schema4;
+var exampleSchema;
 
 var globPath = path.join(__dirname, '../', '/**/swagger/*.json');
 var swaggers = _(glob.sync(globPath));
@@ -34,11 +36,11 @@ function stripBOM(content) {
 describe('Azure Swagger Schema Validation', function() {
   before(function(done) {
     request({url: extensionSwaggerSchemaUrl, json:true}, function (error, response, extensionSwaggerSchemaBody) {        
-      request({url: swaggerSchemaAltUrl, json:true}, function (error, response, swaggerSchemaBody) {
-        request({url: schemaUrl, json:true}, function (error, response, schemaBody) {
+      request({ url: swaggerSchemaAltUrl, json: true }, function (error, response, swaggerSchemaBody) {
+        request({ url: exampleSchemaUrl, json: true }, function (error, response, exampleSchemaBody) {
           extensionSwaggerSchema = extensionSwaggerSchemaBody;
           swaggerSchema = swaggerSchemaBody;
-          schema4 = schemaBody;
+          exampleSchema = exampleSchemaBody;
           done();
         });
       });
@@ -47,7 +49,7 @@ describe('Azure Swagger Schema Validation', function() {
 
   _(swaggers).each(function(swagger){
     it(swagger + ' should be valid Swagger', function(done){
-      fs.readFile(swagger, 'utf8', function(err, data){
+      fs.readFile(swagger, 'utf8', function(err, data) {
         if(err) { done(err); }
         
         var parsedData = JSON.parse(stripBOM(data));
@@ -55,15 +57,17 @@ describe('Azure Swagger Schema Validation', function() {
           console.log(util.format('Skipping the test for \'%s\' document as it seems to be a composite swagger doc.', swagger));
           done();
         }
-        var validator = new z();
-        validator.setRemoteReference(schemaUrl, schema4);
+        var validator = new z({
+          breakOnFirstError: false
+        });
         validator.setRemoteReference(swaggerSchemaUrl, swaggerSchema);
+        validator.setRemoteReference(exampleSchemaUrl, exampleSchema);
         var valid = validator.validate(JSON.parse(stripBOM(data)), extensionSwaggerSchema);
         if (!valid) {
             var error = validator.getLastErrors();
             throw new Error("Schema validation failed: " + JSON.stringify(error, null, "\t"));
         }
-        assert(valid == true);
+        assert(valid === true);
         done();
       });
     });

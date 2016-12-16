@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "RedisManagementClient",
-    "description": "REST API for Azure Redis Cache Service",
+    "description": "REST API for Azure Redis Cache Service.",
     "version": "2016-04-01"
   },
   "host": "management.azure.com",
@@ -29,7 +29,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -41,8 +41,12 @@
         "tags": [
           "Redis"
         ],
-        "operationId": "Redis_CreateOrUpdate",
-        "description": "Create a redis cache, or replace (overwrite/recreate, with potential downtime) an existing cache",
+        "operationId": "Redis_Create",
+        "x-ms-examples": { 
+          "RedisCacheCreate": { "$ref": "../examples/RedisCacheCreate.json" } 
+        },
+        "description": "Create or replace (overwrite/recreate, with potential downtime) an existing Redis cache.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -56,16 +60,16 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the redis cache."
+            "description": "The name of the Redis cache."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RedisCreateOrUpdateParameters"
+              "$ref": "#/definitions/RedisCreateParameters"
             },
-            "description": "Parameters supplied to the CreateOrUpdate redis operation."
+            "description": "Parameters supplied to the Create Redis operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -78,23 +82,27 @@
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/RedisResourceWithAccessKey"
+              "$ref": "#/definitions/RedisResource"
             }
           },
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/RedisResourceWithAccessKey"
+              "$ref": "#/definitions/RedisResource"
             }
           }
         }
       },
-      "delete": {
+      "patch": {
         "tags": [
           "Redis"
         ],
-        "operationId": "Redis_Delete",
-        "description": "Deletes a redis cache. This operation takes a while to complete.",
+        "operationId": "Redis_Update",
+        "x-ms-examples": { 
+          "RedisCacheUpdate": { "$ref": "../examples/RedisCacheUpdate.json" } 
+        },
+        "description": "Update an existing Redis cache.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -108,7 +116,57 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the redis cache."
+            "description": "The name of the Redis cache."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisUpdateParameters"
+            },
+            "description": "Parameters supplied to the Update Redis operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RedisResource"
+            }
+          }
+        }
+      },      
+      "delete": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_Delete",
+        "x-ms-examples": { 
+          "RedisCacheDelete": { "$ref": "../examples/RedisCacheDelete.json" } 
+        },
+        "description": "Deletes a Redis cache.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -131,7 +189,10 @@
           "Redis"
         ],
         "operationId": "Redis_Get",
-        "description": "Gets a redis cache (resource description).",
+        "x-ms-examples": { 
+          "RedisCacheGet": { "$ref": "../examples/RedisCacheGet.json" } 
+        },
+        "description": "Gets a Redis cache (resource description).",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -145,7 +206,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the redis cache."
+            "description": "The name of the Redis cache."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -170,7 +231,10 @@
           "Redis"
         ],
         "operationId": "Redis_ListByResourceGroup",
-        "description": "Gets all redis caches in a resource group.",
+        "x-ms-examples": { 
+          "RedisCacheListByResourceGroup": { "$ref": "../examples/RedisCacheListByResourceGroup.json" } 
+        },
+        "description": "Lists all Redis caches in a resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -205,7 +269,10 @@
           "Redis"
         ],
         "operationId": "Redis_List",
-        "description": "Gets all redis caches in the specified subscription.",
+        "x-ms-examples": { 
+          "RedisCacheList": { "$ref": "../examples/RedisCacheList.json" } 
+        },
+        "description": "Gets all Redis caches in the specified subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -233,7 +300,10 @@
           "Redis"
         ],
         "operationId": "Redis_ListKeys",
-        "description": "Retrieve a redis cache's access keys. This operation requires write permission to the cache resource.",
+        "x-ms-examples": { 
+          "RedisCacheListKeys": { "$ref": "../examples/RedisCacheListKeys.json" } 
+        },
+        "description": "Retrieve a Redis cache's access keys. This operation requires write permission to the cache resource.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -247,7 +317,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the redis cache."
+            "description": "The name of the Redis cache."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -258,9 +328,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists the keys for Redis Cache",
+            "description": "Lists the keys for the specified Redis cache.",
             "schema": {
-              "$ref": "#/definitions/RedisListKeysResult"
+              "$ref": "#/definitions/RedisAccessKeys"
             }
           }
         }
@@ -272,7 +342,10 @@
           "Redis"
         ],
         "operationId": "Redis_RegenerateKey",
-        "description": "Regenerate redis cache's access keys. This operation requires write permission to the cache resource.",
+        "x-ms-examples": { 
+          "RedisCacheRegenerateKey": { "$ref": "../examples/RedisCacheRegenerateKey.json" } 
+        },
+        "description": "Regenerate Redis cache's access keys. This operation requires write permission to the cache resource.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -286,7 +359,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the redis cache."
+            "description": "The name of the Redis cache."
           },
           {
             "name": "parameters",
@@ -295,7 +368,7 @@
             "schema": {
               "$ref": "#/definitions/RedisRegenerateKeyParameters"
             },
-            "description": "Specifies which key to reset."
+            "description": "Specifies which key to regenerate."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -308,7 +381,7 @@
           "200": {
             "description": "Lists the regenerated keys for Redis Cache",
             "schema": {
-              "$ref": "#/definitions/RedisListKeysResult"
+              "$ref": "#/definitions/RedisAccessKeys"
             }
           }
         }
@@ -320,7 +393,10 @@
           "Redis"
         ],
         "operationId": "Redis_ForceReboot",
-        "description": "Reboot specified redis node(s). This operation requires write permission to the cache resource. There can be potential data loss.",
+        "x-ms-examples": { 
+          "RedisCacheForceReboot": { "$ref": "../examples/RedisCacheForceReboot.json" } 
+        },
+        "description": "Reboot specified Redis node(s). This operation requires write permission to the cache resource. There can be potential data loss.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -334,7 +410,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the redis cache."
+            "description": "The name of the Redis cache."
           },
           {
             "name": "parameters",
@@ -343,7 +419,7 @@
             "schema": {
               "$ref": "#/definitions/RedisRebootParameters"
             },
-            "description": "Specifies which redis node(s) to reboot."
+            "description": "Specifies which Redis node(s) to reboot."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -367,9 +443,12 @@
         "tags": [
           "Redis"
         ],
-        "operationId": "Redis_import",
+        "operationId": "Redis_ImportData",
+        "x-ms-examples": { 
+          "RedisCacheImport": { "$ref": "../examples/RedisCacheImport.json" } 
+        },
         "x-ms-long-running-operation": true,
-        "description": "Import data into redis cache.",
+        "description": "Import data into Redis cache.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -383,7 +462,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the redis cache."
+            "description": "The name of the Redis cache."
           },
           {
             "name": "parameters",
@@ -392,7 +471,7 @@
             "schema": {
               "$ref": "#/definitions/ImportRDBParameters"
             },
-            "description": "Parameters for redis import operation."
+            "description": "Parameters for Redis import operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -413,9 +492,12 @@
         "tags": [
           "Redis"
         ],
-        "operationId": "Redis_export",
+        "operationId": "Redis_ExportData",
+        "x-ms-examples": { 
+          "RedisCacheExport": { "$ref": "../examples/RedisCacheExport.json" } 
+        },
         "x-ms-long-running-operation": true,
-        "description": "Import data into redis cache.",
+        "description": "Export data from the redis cache to blobs in a container.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -429,7 +511,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the redis cache."
+            "description": "The name of the Redis cache."
           },
           {
             "name": "parameters",
@@ -438,7 +520,7 @@
             "schema": {
               "$ref": "#/definitions/ExportRDBParameters"
             },
-            "description": "Parameters for redis export operation."
+            "description": "Parameters for Redis export operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -460,7 +542,10 @@
           "Redis"
         ],
         "operationId": "PatchSchedules_CreateOrUpdate",
-        "description": "Create or replace the patching schedule for redis cache.",
+        "x-ms-examples": { 
+          "RedisCachePatchSchedulesCreateOrUpdate": { "$ref": "../examples/RedisCachePatchSchedulesCreateOrUpdate.json" } 
+        },
+        "description": "Create or replace the patching schedule for Redis cache (requires Premium SKU).",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -474,16 +559,16 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the redis cache."
+            "description": "The name of the Redis cache."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RedisPatchSchedulesRequest"
+              "$ref": "#/definitions/RedisPatchSchedule"
             },
-            "description": "Parameters to set patch schedules for redis cache."
+            "description": "Parameters to set the patching schedule for Redis cache."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -496,7 +581,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/RedisPatchSchedulesResponse"
+              "$ref": "#/definitions/RedisPatchSchedule"
             }
           }
         }
@@ -506,7 +591,10 @@
           "Redis"
         ],
         "operationId": "PatchSchedules_Delete",
-        "description": "Deletes the patching schedule for redis cache.",
+        "x-ms-examples": { 
+          "RedisCachePatchSchedulesDelete": { "$ref": "../examples/RedisCachePatchSchedulesDelete.json" } 
+        },
+        "description": "Deletes the patching schedule of a redis cache (requires Premium SKU).",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -531,7 +619,10 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Success."
+          },
+          "204": {
+            "description": "Success."
           }
         }
       },
@@ -540,7 +631,10 @@
           "Redis"
         ],
         "operationId": "PatchSchedules_Get",
-        "description": "Gets the patching schedule for redis cache.",
+        "x-ms-examples": { 
+          "RedisCachePatchSchedulesGet": { "$ref": "../examples/RedisCachePatchSchedulesGet.json" } 
+        },
+        "description": "Gets the patching schedule of a redis cache (requires Premium SKU).",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -565,9 +659,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Response of Get patch schedules.",
+            "description": "Response of get patch schedules.",
             "schema": {
-              "$ref": "#/definitions/RedisPatchSchedulesResponse"
+              "$ref": "#/definitions/RedisPatchSchedule"
             }
           }
         }
@@ -579,7 +673,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "What type of redis cache to deploy. Valid values: (Basic, Standard, Premium)",
+          "description": "The type of Redis cache to deploy. Valid values: (Basic, Standard, Premium)",
           "enum": [
             "Basic",
             "Standard",
@@ -592,7 +686,7 @@
         },
         "family": {
           "type": "string",
-          "description": "Which family to use. Valid values: (C, P)",
+          "description": "The SKU family to use. Valid values: (C, P). (C = Basic/Standard, P = Premium).",
           "enum": [
             "C",
             "P"
@@ -605,7 +699,7 @@
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "What size of redis cache to deploy. Valid values: for C family (0, 1, 2, 3, 4, 5, 6), for P family (1, 2, 3, 4)"
+          "description": "The size of the Redis cache to deploy. Valid values: for C (Basic/Standard) family (0, 1, 2, 3, 4, 5, 6), for P (Premium) family (1, 2, 3, 4)."
         }
       },
       "required": [
@@ -613,18 +707,10 @@
         "family",
         "capacity"
       ],
-      "description": "Sku parameters supplied to the create redis operation."
+      "description": "SKU parameters supplied to the create Redis operation."
     },
     "RedisProperties": {
       "properties": {
-        "redisVersion": {
-          "type": "string",
-          "description": "RedisVersion parameter has been deprecated. As such, it is no longer necessary to provide this parameter and any value specified is ignored."
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "What sku of redis cache to deploy."
-        },
         "redisConfiguration": {
           "type": "object",
           "additionalProperties": {
@@ -634,7 +720,7 @@
         },
         "enableNonSslPort": {
           "type": "boolean",
-          "description": "If the value is true, then the non-ssl redis server port (6379) will be enabled."
+          "description": "Specifies whether the non-ssl Redis server port (6379) is enabled."
         },
         "tenantSettings": {
           "type": "object",
@@ -651,46 +737,83 @@
         "subnetId": {
           "type": "string",
           "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$",
-          "description": "The full resource ID of a subnet in a virtual network to deploy the redis cache in. Example format: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1"
+          "description": "The full resource ID of a subnet in a virtual network to deploy the Redis cache in. Example format: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1"
         },
         "staticIP": {
           "type": "string",
           "pattern": "^\\d+\\.\\d+\\.\\d+\\.\\d+$",
-          "description": "Required when deploying a redis cache inside an existing Azure Virtual Network."
+          "description": "Static IP address. Required when deploying a Redis cache inside an existing Azure Virtual Network."
+        }
+      },
+      "description": "Properties supplied to Create or Update Redis operation.",
+      "x-ms-external": true
+    },
+    "RedisCreateProperties" : {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the Redis cache to deploy."
         }
       },
       "required": [
         "sku"
       ],
-      "description": "Properties supplied to CreateOrUpdate redis operation."
+      "allOf": [
+        {
+          "$ref": "#/definitions/RedisProperties"
+        }
+      ],
+      "description": "Properties supplied to Create Redis operation."
     },
-    "Resource": {
+    "RedisUpdateProperties" : {
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the Redis cache to deploy."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags"
+          "description": "Resource tags."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RedisProperties"
+        }
+      ],
+      "description": "Properties supplied to Update Redis operation."
+    },
+    "Resource": {
+      "description": "The Resource definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
         }
       },
       "required": [
@@ -698,11 +821,11 @@
       ],
       "x-ms-azure-resource": true
     },
-    "RedisCreateOrUpdateParameters": {
+    "RedisCreateParameters": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RedisProperties",
+          "$ref": "#/definitions/RedisCreateProperties",
           "description": "Redis cache properties."
         }
       },
@@ -714,40 +837,65 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Parameters supplied to the CreateOrUpdate Redis operation."
+      "description": "Parameters supplied to the Create Redis operation."
     },
+    "RedisUpdateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisUpdateProperties",
+          "description": "Redis cache properties."
+        }
+      },
+      "description": "Parameters supplied to the Update Redis operation."
+    },    
     "RedisAccessKeys": {
       "properties": {
         "primaryKey": {
+          "readOnly": true,
           "type": "string",
-          "description": "The current primary key that clients can use to authenticate with redis cache."
+          "description": "The current primary key that clients can use to authenticate with Redis cache."
         },
         "secondaryKey": {
+          "readOnly": true,
           "type": "string",
-          "description": "The current secondary key that clients can use to authenticate with redis cache."
+          "description": "The current secondary key that clients can use to authenticate with Redis cache."
         }
       },
       "description": "Redis cache access keys."
     },
-    "RedisReadableProperties": {
+    "RedisResourceProperties": {
       "properties": {
-        "provisioningState": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the Redis cache to deploy."
+        },
+        "redisVersion": {
+          "readOnly": true,
           "type": "string",
-          "description": "Redis instance provisioning status"
+          "description": "Redis version."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Redis instance provisioning status."
         },
         "hostName": {
+          "readOnly": true,
           "type": "string",
-          "description": "Redis host name"
+          "description": "Redis host name."
         },
         "port": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "description": "Redis non-ssl port"
+          "description": "Redis non-SSL port."
         },
         "sslPort": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "description": "Redis ssl port"
+          "description": "Redis SSL port."
         }
       },
       "allOf": [
@@ -755,43 +903,14 @@
           "$ref": "#/definitions/RedisProperties"
         }
       ],
-      "description": "Parameters describing a redis instance"
-    },
-    "RedisReadablePropertiesWithAccessKey": {
-      "properties": {
-        "accessKeys": {
-          "$ref": "#/definitions/RedisAccessKeys",
-          "description": "Redis cache access keys."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/RedisReadableProperties"
-        }
-      ],
-      "description": "Properties generated only in response to CreateOrUpdate redis operation."
-    },
-    "RedisResourceWithAccessKey": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RedisReadablePropertiesWithAccessKey",
-          "description": "Redis cache properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "A redis item in CreateOrUpdate Operation response."
+      "description": "Parameters describing a Redis instance."
     },
     "RedisResource": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RedisReadableProperties",
-          "description": "Redis cache properties"
+          "$ref": "#/definitions/RedisResourceProperties",
+          "description": "Redis cache properties."
         }
       },
       "allOf": [
@@ -799,7 +918,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "A single redis item in List or Get Operation."
+      "description": "A single Redis item in List or Get Operation."
     },
     "RedisListResult": {
       "properties": {
@@ -808,33 +927,20 @@
           "items": {
             "$ref": "#/definitions/RedisResource"
           },
-          "description": "Results of the list operation"
+          "description": "List of Redis cache instances."
         },
         "nextLink": {
           "type": "string",
           "description": "Link for next set of locations."
         }
       },
-      "description": "The response of list redis operation."
-    },
-    "RedisListKeysResult": {
-      "properties": {
-        "primaryKey": {
-          "type": "string",
-          "description": "The current primary key that clients can use to authenticate with redis cache."
-        },
-        "secondaryKey": {
-          "type": "string",
-          "description": "The current secondary key that clients can use to authenticate with redis cache."
-        }
-      },
-      "description": "The response of redis list keys operation."
+      "description": "The response of list Redis operation."
     },
     "RedisRegenerateKeyParameters": {
       "properties": {
         "keyType": {
           "type": "string",
-          "description": "Which redis access key to reset",
+          "description": "The Redis access key to regenerate.",
           "enum": [
             "Primary",
             "Secondary"
@@ -848,13 +954,13 @@
       "required": [
         "keyType"
       ],
-      "description": "Specifies which redis access keys to reset."
+      "description": "Specifies which Redis access keys to reset."
     },
     "RedisRebootParameters": {
       "properties": {
         "rebootType": {
           "type": "string",
-          "description": "Which redis node(s) to reboot. Depending on this value data loss is possible.",
+          "description": "Which Redis node(s) to reboot. Depending on this value data loss is possible.",
           "enum": [
             "PrimaryNode",
             "SecondaryNode",
@@ -868,13 +974,13 @@
         "shardId": {
           "type": "integer",
           "format": "int32",
-          "description": "In case of cluster cache, this specifies shard id which should be rebooted."
+          "description": "If clustering is enabled, the ID of the shard to be rebooted."
         }
       },
       "required": [
         "rebootType"
       ],
-      "description": "Specifies which redis node(s) to reboot."
+      "description": "Specifies which Redis node(s) to reboot."
     },
     "ExportRDBParameters": {
       "properties": {
@@ -884,7 +990,7 @@
         },
         "prefix": {
           "type": "string",
-          "description": "Prifix to use for exported files."
+          "description": "Prefix to use for exported files."
         },
         "container": {
           "type": "string",
@@ -895,7 +1001,7 @@
         "container",
         "prefix"
       ],
-      "description": "Parameters for redis export operation."
+      "description": "Parameters for Redis export operation."
     },
     "ImportRDBParameters": {
       "properties": {
@@ -905,7 +1011,7 @@
         },
         "files": {
           "type": "array",
-          "description": "files to import",
+          "description": "files to import.",
           "items": {
             "type": "string"
           }
@@ -914,13 +1020,13 @@
       "required": [
         "files"
       ],
-      "description": "Parameters for redis import operation."
+      "description": "Parameters for Redis import operation."
     },
     "ScheduleEntry": {
       "properties": {
         "dayOfWeek": {
           "type": "string",
-          "description": "Day of week when cache can be patched.",
+          "description": "Day of the week when a cache can be patched.",
           "enum": [
             "Monday",
             "Tuesday",
@@ -928,11 +1034,13 @@
             "Thursday",
             "Friday",
             "Saturday",
-            "Sunday"
+            "Sunday",
+            "Everyday",
+            "Weekend"
           ],
           "x-ms-enum": {
             "name": "DayOfWeek",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "startHourUtc": {
@@ -949,7 +1057,8 @@
       "required": [
         "dayOfWeek",
         "startHourUtc"
-      ]
+      ],
+      "description": "Patch schedule entry for a Premium Redis Cache."
     },
     "ScheduleEntries": {
       "properties": {
@@ -958,55 +1067,46 @@
           "items": {
             "$ref": "#/definitions/ScheduleEntry"
           },
-          "description": "List of patch schedules for redis cache."
+          "description": "List of patch schedules for a Redis cache."
         }
       },
       "required": [
         "scheduleEntries"
       ],
-      "description": "List of patch schedules for redis cache."
+      "description": "List of patch schedules for a Redis cache."
     },
-    "RedisPatchSchedulesRequest": {
+    "RedisPatchSchedule": {
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource location."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ScheduleEntries",
-          "description": "List of patch schedules for redis cache."
+          "description": "List of patch schedules for a Redis cache."
         }
       },
       "required": [
         "properties"
       ],
-      "description": "Parameters to set patch schedules for redis cache."
-    },
-    "RedisPatchSchedulesResponse": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ScheduleEntries",
-          "description": "List of patch schedules for redis cache."
-        }
-      },
-      "description": "Response to put/get patch schedules for redis cache."
+      "description": "Response to put/get patch schedules for Redis cache."
     }
   },
   "parameters": {
@@ -1015,7 +1115,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Gets subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",

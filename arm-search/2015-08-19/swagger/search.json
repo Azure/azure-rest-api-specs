@@ -1,0 +1,1058 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SearchManagementClient",
+    "description": "Client that can be used to manage Azure Search services and API keys.",
+    "version": "2015-08-19"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/listAdminKeys": {
+      "post": {
+        "tags": [
+          "AdminKeys"
+        ],
+        "operationId": "AdminKeys_Get",
+        "description": "Gets the primary and secondary admin API keys for the specified Azure Search service.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The admin keys were successfully retrieved and are in the response. You can use either the primary or secondary key as the value of the 'api-key' parameter in the Azure Search Service REST API or SDK to perform any operations on your Search service, including privileged operations. Privileged operations include managing resources like indexes and data sources as well as uploading, modifying, or deleting data in your indexes.",
+            "schema": {
+              "$ref": "#/definitions/AdminKeyResult"
+            },
+            "examples": {
+              "application/json": {
+                "primaryKey": "<your primary admin API key>",  
+                "secondaryKey": "<your secondary admin API key>"
+              }  
+            }
+          },
+          "default": {
+            "description": "HTTP 404 (Not Found): The subscription, resource group, or Search service could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/regenerateAdminKey/{keyKind}": {
+      "post": {
+        "tags": [
+          "AdminKeys"
+        ],
+        "operationId": "AdminKeys_Regenerate",
+        "description": "Regenerates either the primary or secondary admin API key. You can only regenerate one key at a time.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "name": "keyKind",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "primary",
+              "secondary"
+            ],
+            "x-ms-enum": {
+              "name": "AdminKeyKind",
+              "modelAsString": false
+            },
+            "description": "Specifies which key to regenerate. Valid values include 'primary' and 'secondary'."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The specified admin key was successfully regenerated. Both admin keys are included in the response, including the newly-regenerated key.",
+            "schema": {
+              "$ref": "#/definitions/AdminKeyResult"
+            },
+            "examples": {
+              "application/json": {
+                "primaryKey": "<your primary admin API key>",  
+                "secondaryKey": "<your secondary admin API key>"
+              }  
+            }
+          },
+          "default": {
+            "description": "HTTP 404 (Not Found): The subscription, resource group, or Search service could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/createQueryKey/{name}": {
+      "post": {
+        "tags": [
+          "QueryKeys"
+        ],
+        "operationId": "QueryKeys_Create",
+        "description": "Generates a new query key for the specified Search service. You can create up to 50 query keys per service.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the new query API key."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The query key was successfully created and is in the response. You can use the query key as the value of the 'api-key' parameter in the Azure Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
+            "schema": {
+              "$ref": "#/definitions/QueryKey"
+            },
+            "examples": {
+              "application/json": {
+                "name": "Query key for browser-based clients",  
+                "key": "<a query API key>"
+              }
+            }  
+          },
+          "default": {
+            "description": "HTTP 404 (Not Found): The subscription, resource group, or Search service could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/listQueryKeys": {
+      "get": {
+        "tags": [
+          "QueryKeys"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "operationId": "QueryKeys_ListBySearchService",
+        "description": "Returns the list of query API keys for the given Azure Search service.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All query keys for the given Search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in the Azure Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
+            "schema": {
+              "$ref": "#/definitions/ListQueryKeysResult"
+            },
+            "examples": {
+              "application/json": {
+                "value": [  
+                    {  
+                      "name": "Query key for browser-based clients",
+                      "key": "<a query API key>"
+                    },
+                    {  
+                      "name": "Query key for mobile clients",
+                      "key": "<another query API key>"
+                    }
+                ],
+                "nextLink": null
+              }
+            }
+          },
+          "default": {
+            "description": "HTTP 404 (Not Found): The subscription, resource group, or Search service could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/deleteQueryKey/{key}": {
+      "delete": {
+        "tags": [
+          "QueryKeys"
+        ],
+        "operationId": "QueryKeys_Delete",
+        "description": "Deletes the specified query key. Unlike admin keys, query keys are not regenerated. The process for regenerating a query key is to delete and then recreate it.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The query key to be deleted. Query keys are identified by value, not by name."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The query key was successfully deleted."
+          },
+          "204": {
+            "description": "The query key was successfully deleted."
+          },
+          "404": {
+            "description": "The subscription, resource group, Search service, or query key could not be found."
+          },
+          "default": {
+            "description": "HTTP 409 (Conflict): The specified subscription is disabled.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}": {
+      "put": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_CreateOrUpdate",
+        "description": "Creates or updates a Search service in the given resource group. If the Search service already exists, all properties will be updated with the given values.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure Search service to create or update. Search service names must only contain lowercase letters, digits or dashes, cannot use dash as the first two or last one characters, cannot contain consecutive dashes, and must be between 2 and 60 characters in length. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net). You cannot change the service name after the service is created."
+          },
+          {
+            "name": "service",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchService"
+            },
+            "description": "The definition of the Search service to create or update."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The existing service definition was successfully updated. If you changed the number of replicas or partitions, the scale operation will happen asynchronously. You can periodically get your service definition and monitor progress via the provisioningState property.",
+            "schema": {
+              "$ref": "#/definitions/SearchService"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/your-service-name-here",
+                "name": "your-service-name-here",
+                "location": "westus",
+                "type": "Microsoft.Search/searchServices",
+                "tags": {  
+                    "app-name": "My e-commerce app"
+                },
+                "sku": {  
+                    "name": "standard"
+                },
+                "properties":{  
+                    "replicaCount": 3,
+                    "partitionCount": 1,
+                    "status": "provisioning",
+                    "statusDetails": "",
+                    "hostingMode": "default",
+                    "provisioningState": "provisioning"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "If you requested creation of a free Search service, the service is now provisioned and ready to use, subject to DNS propagation delay. For other SKU types, provisioning happens asynchronously. You can periodically get your service definition and monitor progress via the provisioningState property.",
+            "schema": {
+              "$ref": "#/definitions/SearchService"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/your-service-name-here",
+                "name": "your-service-name-here",
+                "location": "westus",
+                "type": "Microsoft.Search/searchServices",
+                "tags": {  
+                    "app-name": "My e-commerce app"
+                },
+                "sku": {  
+                    "name": "standard"
+                },
+                "properties":{  
+                    "replicaCount": 3,
+                    "partitionCount": 1,
+                    "status": "provisioning",
+                    "statusDetails": "",
+                    "hostingMode": "default",
+                    "provisioningState": "provisioning"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "HTTP 400 (Bad Request): The given service name or service definition is invalid; See the error code and message in the response for details. HTTP 404 (Not Found): The subscription or resource group could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_Get",
+        "description": "Gets the Search service with the given name in the given resource group.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Search service definition was successfully retrieved and is in the response. If you are polling for the completion of a provisioning or scale operation, you can check its status via the provisioningState property.",
+            "schema": {
+              "$ref": "#/definitions/SearchService"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/your-service-name-here",
+                "name": "your-service-name-here",
+                "location": "westus",
+                "type": "Microsoft.Search/searchServices",
+                "tags": {  
+                    "app-name": "My e-commerce app"
+                },
+                "sku": {  
+                    "name": "standard"
+                },
+                "properties":{  
+                    "replicaCount": 3,
+                    "partitionCount": 1,
+                    "status": "running",
+                    "statusDetails": "",
+                    "hostingMode": "default",
+                    "provisioningState": "succeeded"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "HTTP 404 (Not Found): The subscription, resource group, or Search service name could not be found.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_Delete",
+        "description": "Deletes a Search service in the given resource group, along with its associated resources.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Search service was successfully deleted."
+          },
+          "204": {
+            "description": "The Search service was successfully deleted."
+          },
+          "404": {
+            "description": "The subscription, resource group, or Search service could not be found."
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices": {
+      "get": {
+        "tags": [
+          "Services"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "operationId": "Services_ListByResourceGroup",
+        "description": "Gets a list of all Search services in the given resource group.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation succeeded. The response contains the list of all Search service definitions for the given resource group.",
+            "schema": {
+              "$ref": "#/definitions/SearchServiceListResult"
+            },
+            "examples": {
+              "application/json": {
+                "value": [
+                  {
+                    "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/your-service-name-here",
+                    "name": "your-service-name-here",
+                    "location": "westus",
+                    "type": "Microsoft.Search/searchServices",
+                    "tags": {  
+                        "app-name": "My e-commerce app"
+                    },
+                    "sku": {  
+                        "name": "standard"
+                    },
+                    "properties":{  
+                        "replicaCount": 3,
+                        "partitionCount": 1,
+                        "status": "running",
+                        "statusDetails": "",
+                        "hostingMode": "default",
+                        "provisioningState": "succeeded"
+                    }
+                  },
+                  {
+                    "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/your-second-service-name-here",
+                    "name": "your-second-service-name-here",
+                    "location": "eastus",
+                    "type": "Microsoft.Search/searchServices",
+                    "tags": {  
+                        "app-name": "My e-commerce app"
+                    },
+                    "sku": {  
+                        "name": "basic"
+                    },
+                    "properties":{  
+                        "replicaCount": 1,
+                        "partitionCount": 1,
+                        "status": "running",
+                        "statusDetails": "",
+                        "hostingMode": "default",
+                        "provisioningState": "succeeded"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Search/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Services"
+        ],
+        "description": "Checks whether or not the given Search service name is available for use. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net).",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "operationId": "Services_CheckNameAvailability",
+        "parameters": [
+          {
+            "name": "checkNameAvailabilityInput",
+            "in": "body",
+            "description": "The resource name and type to check.",
+            "x-ms-client-flatten": true,
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityInput"
+            }
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The name check completed. The response contains details of whether the name is valid and available. If the name is invalid, the response also contains a message explaining why not.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityOutput"
+            },
+            "examples": {
+              "application/json": {
+                "nameAvailable": false,  
+                "reason": "AlreadyExists",  
+                "message": ""
+              }  
+            }
+          },
+          "default": {
+            "description": "HTTP 400 (Bad Request): The given resource type is not 'searchServices'.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CheckNameAvailabilityInput": {
+      "type": "object",
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "description": "The Search service name to validate. Search service names must only contain lowercase letters, digits or dashes, cannot use dash as the first two or last one characters, cannot contain consecutive dashes, and must be between 2 and 60 characters in length.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource whose name is to be validated. This value must always be 'searchServices'.",
+          "type": "string",
+          "enum": [
+            "searchServices"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Input of check name availability API.",
+      "example": {
+        "name": "your-service-name-here",  
+        "type": "searchServices"  
+      }
+    },
+    "CheckNameAvailabilityOutput": {
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "x-ms-client-name": "IsNameAvailable",
+          "description": "A value indicating whether the name is available.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "The reason why the name is not available. 'Invalid' indicates the name provided does not match the naming requirements (incorrect length, unsupported characters, etc.). 'AlreadyExists' indicates that the name is already in use and is therefore unavailable.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "UnavailableNameReason",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "A message that explains why the name is invalid and provides resource naming requirements. Available only if 'Invalid' is returned in the 'reason' property.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "Output of check name availability API."
+    },
+    "AdminKeyResult": {
+      "properties": {
+        "primaryKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The primary admin API key of the Search service."
+        },
+        "secondaryKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The secondary admin API key of the Search service."
+        }
+      },
+      "description": "Response containing the primary and secondary admin API keys for a given Azure Search service."
+    },
+    "QueryKey": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the query API key; may be empty."
+        },
+        "key": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The value of the query API key."
+        }
+      },
+      "description": "Describes an API key for a given Azure Search service that has permissions for query operations only."
+    },
+    "ListQueryKeysResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryKey"
+          },
+          "description": "The query keys for the Azure Search service."
+        }
+      },
+      "description": "Response containing the query API keys for a given Azure Search service.",
+      "x-ms-external": true
+    },
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The SKU of the Search service. Valid values include: 'free': Shared service. 'basic': Dedicated service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12 replicas. 'standard2': Similar to standard, but with more capacity per search unit. 'standard3': Offers maximum capacity per search unit with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity').",
+          "enum": [
+            "free",
+            "basic",
+            "standard",
+            "standard2",
+            "standard3"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Defines the SKU of an Azure Search Service, which determines price tier and capacity limits.",
+      "externalDocs": {
+        "url": "https://azure.microsoft.com/documentation/articles/search-sku-tier/"
+      }
+    },
+    "SearchService" : {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SearchServiceProperties",
+          "description": "Properties of the Search service."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the Search Service, which determines price tier and capacity limits.",
+          "externalDocs": {
+            "url": "https://azure.microsoft.com/documentation/articles/search-sku-tier/"
+          }
+        }
+      },
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Describes an Azure Search service and its current state.",
+      "example": {
+        "location": "westus",
+        "tags":{  
+            "app-name": "My e-commerce app"
+        },
+        "sku":{  
+            "name": "standard"
+        },
+        "properties":{  
+            "replicaCount": 3,
+            "partitionCount": 1,
+            "hostingMode": "default"
+        }
+      }
+    },
+    "SearchServiceProperties": {
+      "properties": {
+        "replicaCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 12,
+          "default": 1,
+          "description": "The number of replicas in the Search service. If specified, it must be a value between 1 and 12 inclusive for standard SKUs or between 1 and 3 inclusive for basic SKU."
+        },
+        "partitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 12,
+          "default": 1,
+          "description": "The number of partitions in the Search service; if specified, it can be 1, 2, 3, 4, 6, or 12. Values greater than 1 are only valid for standard SKUs. For 'standard3' services with hostingMode set to 'highDensity', the allowed values are between 1 and 3."
+        },
+        "hostingMode": {
+          "type": "string",
+          "default": "default",
+          "description": "Applicable only for the standard3 SKU. You can set this property to enable up to 3 high density partitions that allow up to 1000 indexes, which is much higher than the maximum indexes allowed for any other SKU. For the standard3 SKU, the value is either 'default' or 'highDensity'. For all other SKUs, this value must be 'default'.",
+          "enum": [
+            "default",
+            "highDensity"
+          ],
+          "x-ms-enum": {
+            "name": "HostingMode",
+            "modelAsString": false
+          }
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The status of the Search service. Possible values include: 'running': The Search service is running and no provisioning operations are underway. 'provisioning': The Search service is being provisioned or scaled up or down. 'deleting': The Search service is being deleted. 'degraded': The Search service is degraded. This can occur when the underlying search units are not healthy. The Search service is most likely operational, but performance might be slow and some requests might be dropped. 'disabled': The Search service is disabled. In this state, the service will reject all API requests. 'error': The Search service is in an error state. If your service is in the degraded, disabled, or error states, it means the Azure Search team is actively investigating the underlying issue. Dedicated services in these states are still chargeable based on the number of search units provisioned.",
+          "enum": [
+            "running",
+            "provisioning",
+            "deleting",
+            "degraded",
+            "disabled",
+            "error"
+          ],
+          "x-ms-enum": {
+            "name": "SearchServiceStatus",
+            "modelAsString": false
+          }
+        },
+        "statusDetails": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The details of the Search service status."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The state of the last provisioning operation performed on the Search service. Provisioning is an intermediate state that occurs while service capacity is being established. After capacity is set up, provisioningState changes to either 'succeeded' or 'failed'. Client applications can poll provisioning status (the recommended polling interval is from 30 seconds to one minute) by using the Get Search Service operation to see when an operation is completed. If you are using the free service, this value tends to come back as 'succeeded' directly in the call to Create Search service. This is because the free service uses capacity that is already set up.",
+          "enum": [
+            "succeeded",
+            "provisioning",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Properties of the Search service."
+    },
+    "SearchServiceListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchService"
+          },
+          "description": "The list of Search services."
+        }
+      },
+      "description": "Response containing a list of Azure Search services.",
+      "x-ms-external": true
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the resource. This can be used with the Azure Resource Manager to link resources together.",
+          "externalDocs": {
+            "url": "https://aka.ms/search-linked-resources"
+          }
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource.",
+          "externalDocs": {
+            "url": "https://aka.ms/search-naming-rules"
+          }
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geographic location of the resource. This must be one of the supported and registered Azure Geo Regions (for example, West US, East US, Southeast Asia, and so forth).",
+          "externalDocs": {
+            "url": "https://aka.ms/search-rp-info"
+          },
+          "x-ms-mutability": [
+            "create", 
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags to help categorize the resource in the Azure portal."
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "Base type for all Azure resources.",
+      "x-ms-azure-resource": true
+    },
+    "CloudError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "Contains information about an API error.",
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+        "type": "object",
+        "description": "Describes a particular API error with an error code and a message.",
+        "properties": {
+            "code": { 
+              "type": "string",
+              "description": "An error code that describes the error condition more precisely than an HTTP status code. Can be used to programatically handle specific error cases."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message that describes the error in detail and provides debugging information." 
+            },
+            "target": {
+              "type": "string",
+              "description": "The target of the particular error (for example, the name of the property in error)."
+            },
+            "details": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/CloudErrorBody"
+                },
+                "description": "Contains nested errors that are related to this error."
+            }
+        },
+        "x-ms-external": true
+    }
+  },
+  "parameters": {
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "x-ms-parameter-location": "method"
+    },
+    "SearchServiceNameParameter": {
+      "name": "searchServiceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure Search service associated with the specified resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ClientRequestIdParameter": {
+      "name": "x-ms-client-request-id",
+      "x-ms-client-name": "clientRequestId",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+      "x-ms-client-request-id": true,
+      "x-ms-parameter-grouping": { "name": "search-management-request-options" },
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The unique identifier for a Microsoft Azure subscription. You can obtain this value from the Azure Resource Manager API or the portal."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for each request. The current version is 2015-08-19."
+    }
+  }
+}

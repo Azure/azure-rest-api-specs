@@ -2,7 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "PolicyClient",
-    "version": "2016-04-01"
+    "version": "2016-04-01",
+    "description": "To manage and control access to your resources, you can define customized policies and assign them at a scope."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -41,14 +42,14 @@
           "PolicyAssignments"
         ],
         "operationId": "PolicyAssignments_Delete",
-        "description": "Delete policy assignment.",
+        "description": "Deletes a policy assignment.",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Scope of the policy assignment.",
+            "description": "The scope of the policy assignment.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -56,18 +57,15 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Policy assignment name."
+            "description": "The name of the policy assignment to delete."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK - Returns information about the deleted assignment.",
             "schema": {
               "$ref": "#/definitions/PolicyAssignment"
             }
@@ -79,14 +77,15 @@
           "PolicyAssignments"
         ],
         "operationId": "PolicyAssignments_Create",
-        "description": "Create policy assignment.",
+        "summary": "Creates a policy assignment.",
+        "description": "Policy assignments are inherited by child resources. For example, when you apply a policy to a resource group that policy is assigned to all resources in the group.",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Scope of the policy assignment.",
+            "description": "The scope of the policy assignment.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -94,7 +93,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Policy assignment name."
+            "description": "The name of the policy assignment."
           },
           {
             "name": "parameters",
@@ -103,18 +102,15 @@
             "schema": {
               "$ref": "#/definitions/PolicyAssignment"
             },
-            "description": "Policy assignment."
+            "description": "Parameters for the policy assignment."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "Created - Returns information about the new policy assignment.",
             "schema": {
               "$ref": "#/definitions/PolicyAssignment"
             }
@@ -126,14 +122,14 @@
           "PolicyAssignments"
         ],
         "operationId": "PolicyAssignments_Get",
-        "description": "Get single policy assignment.",
+        "description": "Gets a policy assignment.",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Scope of the policy assignment.",
+            "description": "The scope of the policy assignment.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -141,18 +137,15 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Policy assignment name."
+            "description": "The name of the policy assignment to get."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK - Returns information about the policy assignment.",
             "schema": {
               "$ref": "#/definitions/PolicyAssignment"
             }
@@ -166,14 +159,14 @@
           "PolicyAssignments"
         ],
         "operationId": "PolicyAssignments_ListForResourceGroup",
-        "description": "Gets policy assignments of the resource group.",
+        "description": "Gets policy assignments for the resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource group name.",
+            "description": "The name of the resource group that contains policy assignments.",
             "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
@@ -195,7 +188,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK - Returns an array of policy assignments.",
             "schema": {
               "$ref": "#/definitions/PolicyAssignmentListResult"
             }
@@ -212,14 +205,14 @@
           "PolicyAssignments"
         ],
         "operationId": "PolicyAssignments_ListForResource",
-        "description": "Gets policy assignments of the resource.",
+        "description": "Gets policy assignments for a resource.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group. The name is case insensitive.",
+            "description": "The name of the resource group containing the resource. The name is case insensitive.",
             "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
@@ -229,7 +222,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource provider namespace."
+            "description": "The namespace of the resource provider."
           },
           {
             "name": "parentResourcePath",
@@ -252,7 +245,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource name."
+            "description": "The name of the resource with policy assignments."
           },
           {
             "name": "$filter",
@@ -270,7 +263,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK - Returns an array of policy assignments.",
             "schema": {
               "$ref": "#/definitions/PolicyAssignmentListResult"
             }
@@ -288,7 +281,7 @@
           "PolicyAssignments"
         ],
         "operationId": "PolicyAssignments_List",
-        "description": "Gets all the policy assignments of a subscription.",
+        "description": "Gets all the policy assignments for a subscription.",
         "parameters": [
           {
             "name": "$filter",
@@ -306,7 +299,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK - Returns an array of policy assignments.",
             "schema": {
               "$ref": "#/definitions/PolicyAssignmentListResult"
             }
@@ -324,26 +317,24 @@
           "PolicyAssignments"
         ],
         "operationId": "PolicyAssignments_DeleteById",
-        "description": "Delete policy assignment.",
+        "summary": "Deletes a policy assignment by ID.",
+        "description": "When providing a scope for the assigment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.",
         "parameters": [
           {
             "name": "policyAssignmentId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Policy assignment Id",
+            "description": "The ID of the policy assignment to delete. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'.",
             "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK - Returns information about the policy assignment.",
             "schema": {
               "$ref": "#/definitions/PolicyAssignment"
             }
@@ -355,14 +346,15 @@
           "PolicyAssignments"
         ],
         "operationId": "PolicyAssignments_CreateById",
-        "description": "Create policy assignment by Id.",
+        "summary": "Creates a policy assignment by ID.",
+        "description": "Policy assignments are inherited by child resources. For example, when you apply a policy to a resource group that policy is assigned to all resources in the group. When providing a scope for the assigment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.",
         "parameters": [
           {
             "name": "policyAssignmentId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Policy assignment Id",
+            "description": "The ID of the policy assignment to create. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -372,18 +364,15 @@
             "schema": {
               "$ref": "#/definitions/PolicyAssignment"
             },
-            "description": "Policy assignment."
+            "description": "Parameters for policy assignment."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "Created - Returns information about the policy assignment.",
             "schema": {
               "$ref": "#/definitions/PolicyAssignment"
             }
@@ -395,26 +384,24 @@
           "PolicyAssignments"
         ],
         "operationId": "PolicyAssignments_GetById",
-        "description": "Get single policy assignment.",
+        "summary": "Gets a policy assignment by ID.",
+        "description": "When providing a scope for the assigment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.",
         "parameters": [
           {
             "name": "policyAssignmentId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Policy assignment Id",
+            "description": "The ID of the policy assignment to get. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'.",
             "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK - Returns information about the policy assignment.",
             "schema": {
               "$ref": "#/definitions/PolicyAssignment"
             }
@@ -428,14 +415,14 @@
           "PolicyDefinitions"
         ],
         "operationId": "PolicyDefinitions_CreateOrUpdate",
-        "description": "Create or update a policy definition.",
+        "description": "Creates or updates a policy definition.",
         "parameters": [
           {
             "name": "policyDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The policy definition name."
+            "description": "The name of the policy definition to create."
           },
           {
             "name": "parameters",
@@ -455,7 +442,7 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "Created - Returns information about the policy definition.",
             "schema": {
               "$ref": "#/definitions/PolicyDefinition"
             }
@@ -467,14 +454,14 @@
           "PolicyDefinitions"
         ],
         "operationId": "PolicyDefinitions_Delete",
-        "description": "Deletes the policy definition.",
+        "description": "Deletes a policy definition.",
         "parameters": [
           {
             "name": "policyDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The policy definition name."
+            "description": "The name of the policy definition to delete."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -485,10 +472,10 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "No Content"
           },
           "200": {
-            "description": ""
+            "description": "OK"
           }
         }
       },
@@ -504,7 +491,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The policy definition name."
+            "description": "The name of the policy definition to get."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -515,7 +502,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK - Returns information about the policy definition.",
             "schema": {
               "$ref": "#/definitions/PolicyDefinition"
             }
@@ -529,7 +516,7 @@
           "PolicyDefinitions"
         ],
         "operationId": "PolicyDefinitions_List",
-        "description": "Gets all the policy definitions of a subscription.",
+        "description": "Gets all the policy definitions for a subscription.",
         "parameters": [
           {
             "name": "$filter",
@@ -547,7 +534,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK - Returns ana array of policy definitions.",
             "schema": {
               "$ref": "#/definitions/PolicyDefinitionListResult"
             }
@@ -565,7 +552,7 @@
       "properties": {
         "policyType": {
           "type": "string",
-          "description": "Gets or sets policy definition policy type.",
+          "description": "The type of policy definition. Possible values are NotSpecified, BuiltIn, and Custom.",
           "enum": [
             "NotSpecified",
             "BuiltIn",
@@ -578,15 +565,15 @@
         },
         "displayName": {
           "type": "string",
-          "description": "Gets or sets the policy definition display name."
+          "description": "The display name of the policy definition."
         },
         "description": {
           "type": "string",
-          "description": "Gets or sets the policy definition description."
+          "description": "The policy definition description."
         },
         "policyRule": {
           "type": "object",
-          "description": "Gets or sets the policy rule."
+          "description": "The policy rule."
         }
       },
       "description": "The policy definition properties."
@@ -596,15 +583,15 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PolicyDefinitionProperties",
-          "description": "Gets or sets the policy definition properties."
+          "description": "The policy definition properties."
         },
         "id": {
           "type": "string",
-          "description": "Gets or sets the Id of the policy definition."
+          "description": "The ID of the policy definition."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the policy definition."
+          "description": "The name of the policy definition. If you do not specify a value for name, the value is inferred from the name value in the request URI."
         }
       },
       "description": "The policy definition.",
@@ -617,11 +604,11 @@
           "items": {
             "$ref": "#/definitions/PolicyDefinition"
           },
-          "description": "Gets or sets the list of policy definitions."
+          "description": "An array of policy definitions."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "The URL to use for getting the next set of results."
         }
       },
       "description": "List of policy definitions."
@@ -630,15 +617,15 @@
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "Gets or sets the policy assignment display name."
+          "description": "The display name of the policy assignment."
         },
         "policyDefinitionId": {
           "type": "string",
-          "description": "Gets or sets the policy definition Id."
+          "description": "The ID of the policy definition."
         },
         "scope": {
           "type": "string",
-          "description": "Gets or sets the scope at which the policy assignment exists."
+          "description": "The scope for the policy assignment."
         }
       },
       "description": "The policy assignment properties."
@@ -648,19 +635,19 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PolicyAssignmentProperties",
-          "description": "Gets or sets the policy assignment properties."
+          "description": "Properties for the policy assignment."
         },
         "id": {
           "type": "string",
-          "description": "Gets or sets the Id of the policy assignment."
+          "description": "The ID of the policy assignment."
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the type of the policy assignment."
+          "description": "The type of the policy assignment."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the policy assignment."
+          "description": "The name of the policy assignment."
         }
       },
       "description": "The policy definition.",
@@ -673,11 +660,11 @@
           "items": {
             "$ref": "#/definitions/PolicyAssignment"
           },
-          "description": "Gets or sets the list of policy assignments."
+          "description": "An array of policy assignments."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "The URL to use for getting the next set of results."
         }
       },
       "description": "List of policy assignments."
@@ -689,14 +676,14 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "The ID of the target subscription."
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "The API version to use for the operation."
     }
   }
 }
