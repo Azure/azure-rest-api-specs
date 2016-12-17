@@ -66,4 +66,25 @@ These are patterns that a spec is expected to follow by default to be included i
  - **Specify units in Description**
  
    - It is a good practice to specify units in description for properties like size
- - **Add a link to MSDN Rest Api Docs whenever possible.**
+ 
+ - **Add a link to MSDN Rest Api Docs/examples whenever possible.**
+ 
+ - **Mutability**
+ 
+	- Use [x-ms-mutability extension](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-mutability) to document mutability aspects of models.
+	- `Readonly: true` should be applied on all read-only properties. Read-only values include server generated values. The provisioning state is a canonical example of a read-only property.
+ 
+ - **Required properties**
+ 
+	- All required properties should be indicated by name in the `required` array attribute.
+ 
+ - **Correct data types**
+
+	- Use correct data types for properties. A lot of times boolean properties are marked as string
+ 
+ - **Resource should include all the properties per ARM standard**
+	- Please refer to [Resource definitions](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/resource-definitions.md) for version V1 and version V2 definitions.   
+ 
+ - **Response Codes**
+	
+	- Include all the positive response codes for an operation.
