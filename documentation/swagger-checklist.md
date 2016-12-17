@@ -69,7 +69,12 @@ Where "M" stands for '*MUST*' or '*MUST NOT*' requirement. "S" stands for '*SHOU
 
 ## Validation Tools for Swagger Checklist ##
 
-[Samer to intro tools and describe each of them and how these tools would help them to validate Swaggers against this checklist]
+There are currently two tools that can help with validating that some of guidelines and rules provided in this checklist have been properly implemented in your swaggers. install these tools on your local machine and use them to validate your swagger as you build it it's important again to note that Not all the rules and guidelines are covered in these tools.
+
+-	[AutoRest Linter](https://github.com/Azure/autorest/wiki/linting) – Swagger Linting is the process of running a program that will statically analyze a swagger for potential errors, in addition to enforce some of azure’s swagger guidelines. This tool should be run whenever swagger updates are introduced or when we have new rules or guidelines to enforce on existing swaggers.
+
+-	[Swagger model Validator](https://github.com/Azure/openapi-validation-tools/issues/44) - this tool Validates that models defined for body parameters and responses and match them against the expected input & output of the service. To increase the effectiveness of this type of validation tools, examples are requested to be integrated into the swagger for each path and operation defined in the swagger.	The examples are integrated into the swagger using the [“x-ms-examples” extension](https://github.com/Azure/azure-rest-api-specs/issues/648), which contains that will be used to match against the defined models. A live sample of the of this extension can be found in the Redis service swagger.  
+
 
 ## Naming - Swagger Checklist ##
 
