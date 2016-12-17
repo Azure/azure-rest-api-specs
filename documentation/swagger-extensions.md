@@ -15,6 +15,7 @@ The following documents describes AutoRest specific vendor extensions for [Swagg
 * [x-ms-discriminator-value](#x-ms-discriminator-value) - maps discriminator value on the wire with the definition name.
 * [x-ms-client-flatten](#x-ms-client-flatten) - flattens client model property or parameter.
 * [x-ms-parameterized-host](#x-ms-parameterized-host) - replaces the Swagger host with a host template that can be replaced with variable parameters.
+* [x-ms-examples](#x-ms-examples) - describes the format for specifying examples for request and response of an operation in a swagger spec.
 
 ## Microsoft Azure Extensions
 * [x-ms-odata](#x-ms-odata) - indicates the operation includes one or more [OData](http://www.odata.org/) query parameters.
@@ -571,6 +572,11 @@ parameters | [Array of Parameter Objects](https://github.com/OAI/OpenAPI-Specifi
     ]
   }
 ```
+
+##x-ms-examples
+Describes the format for specifying examples for request and response of an operation in a swagger spec. It is a **dictonary** of different variations of the examples for a given operation.
+
+More information about this extension can be found [here](https://github.com/Azure/azure-rest-api-specs/tree/master/documentation/x-ms-examples.md).
 
 ##x-ms-odata
 When present the `x-ms-odata` extensions indicates the operation includes one or more [OData](http://www.odata.org/) query parameters. These parameters inlude `$filter`, `$top`, `$orderby`,  `$skip`,  and `$expand`. In some languages the generated method will expose these parameters as strongly types OData type.
