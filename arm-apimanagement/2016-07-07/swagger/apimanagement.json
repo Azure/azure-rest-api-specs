@@ -59,20 +59,10 @@
             "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| serviceUrl  | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| path        | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |"
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -85,7 +75,7 @@
           "200": {
             "description": "Paged Result reponse of Apis.",
             "schema": {
-              "$ref": "#/definitions/ApiPaged"
+              "$ref": "#/definitions/ApiCollection"
             }
           },
           "default": {
@@ -325,20 +315,10 @@
             "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n| name        | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| method      | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| urlTemplate | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |"
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -351,7 +331,7 @@
           "200": {
             "description": "A collection of operation summary entities at the API level.",
             "schema": {
-              "$ref": "#/definitions/OperationPaged"
+              "$ref": "#/definitions/OperationCollection"
             }
           },
           "default": {
@@ -590,20 +570,10 @@
             "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -616,7 +586,7 @@
           "200": {
             "description": "The operation returns a collection of products which have the Api entity.",
             "schema": {
-              "$ref": "#/definitions/ProductPaged"
+              "$ref": "#/definitions/ProductCollection"
             }
           },
           "default": {
@@ -657,20 +627,10 @@
             "description": "| Field        | Supported operators    | Supported functions                         |\n|--------------|------------------------|---------------------------------------------|\n| id           | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| userId       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| productId    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state        | eq                     |                                             |"
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -683,7 +643,7 @@
           "200": {
             "description": "A collection of the Subscription entities for the specified API Management service instance.",
             "schema": {
-              "$ref": "#/definitions/SubscriptionPaged"
+              "$ref": "#/definitions/SubscriptionCollection"
             }
           },
           "default": {
@@ -1011,20 +971,10 @@
             "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| terms       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state       | eq                     |                                             |"
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "name": "expandGroups",
@@ -1044,7 +994,7 @@
           "200": {
             "description": "A Collection of the Product entities for the specified API Management service instance.",
             "schema": {
-              "$ref": "#/definitions/ProductPaged"
+              "$ref": "#/definitions/ProductCollection"
             }
           },
           "default": {
@@ -1278,20 +1228,10 @@
             "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| serviceUrl  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| path        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n"
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1304,7 +1244,7 @@
           "200": {
             "description": "The response body contains a collection of Api entities in the product.",
             "schema": {
-              "$ref": "#/definitions/ApiPaged"
+              "$ref": "#/definitions/ApiCollection"
             }
           },
           "default": {
@@ -1426,20 +1366,10 @@
             "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| type        | eq, ne                 | N/A                                         |"
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1452,7 +1382,7 @@
           "200": {
             "description": "Lists a collection of Group entities.",
             "schema": {
-              "$ref": "#/definitions/GroupPaged"
+              "$ref": "#/definitions/GroupCollection"
             }
           },
           "default": {
@@ -1580,20 +1510,10 @@
             "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| type        | eq, ne                 | N/A                                         |"
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1606,7 +1526,7 @@
           "200": {
             "description": "Lists a collection of Group entities.",
             "schema": {
-              "$ref": "#/definitions/GroupPaged"
+              "$ref": "#/definitions/GroupCollection"
             }
           }
         },
@@ -1841,20 +1761,10 @@
             "description": "| Field            | Supported operators    | Supported functions               |\n|------------------|------------------------|-----------------------------------|\n| id               | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| firstName        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| lastName         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| email            | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state            | eq                     | N/A                               |\n| registrationDate | ge, le, eq, ne, gt, lt | N/A                               |\n| note             | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1867,7 +1777,7 @@
           "200": {
             "description": "Lists a collection of user entities associated with the group.",
             "schema": {
-              "$ref": "#/definitions/UserPaged"
+              "$ref": "#/definitions/UserCollection"
             }
           },
           "default": {
@@ -2002,20 +1912,10 @@
             "description": "| Field          | Supported operators    | Supported functions                         |\n|----------------|------------------------|---------------------------------------------|\n| id             | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| subject        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| thumbprint     | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| expirationDate | ge, le, eq, ne, gt, lt | N/A                                         |"
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2028,7 +1928,7 @@
           "200": {
             "description": "Returns a collection of Certificate entity.",
             "schema": {
-              "$ref": "#/definitions/CertificatePaged"
+              "$ref": "#/definitions/CertificateCollection"
             }
           },
           "default": {
@@ -2282,20 +2182,10 @@
             "description": "| Field        | Supported operators    | Supported functions                         |\n|--------------|------------------------|---------------------------------------------|\n| id           | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| userId       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| productId    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state        | eq                     |                                             |"
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2308,7 +2198,7 @@
           "200": {
             "description": "Lists a collection of subscription entities.",
             "schema": {
-              "$ref": "#/definitions/SubscriptionPaged"
+              "$ref": "#/definitions/SubscriptionCollection"
             }
           },
           "default": {
@@ -2349,20 +2239,10 @@
             "description": "| Field            | Supported operators    | Supported functions               |\n|------------------|------------------------|-----------------------------------|\n| id               | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| firstName        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| lastName         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| email            | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state            | eq                     | N/A                               |\n| registrationDate | ge, le, eq, ne, gt, lt | N/A                               |\n| note             | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2375,7 +2255,7 @@
           "200": {
             "description": "Lists a collection of User entities.",
             "schema": {
-              "$ref": "#/definitions/UserPaged"
+              "$ref": "#/definitions/UserCollection"
             }
           },
           "default": {
@@ -2662,20 +2542,10 @@
             "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2688,7 +2558,7 @@
           "200": {
             "description": "Lists a collection of Group entities.",
             "schema": {
-              "$ref": "#/definitions/GroupPaged"
+              "$ref": "#/definitions/GroupCollection"
             }
           },
           "default": {
@@ -2729,20 +2599,10 @@
             "description": "| Field        | Supported operators    | Supported functions                         |\n|--------------|------------------------|---------------------------------------------|\n| id           | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| userId       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| productId    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state        | eq                     |                                             |"
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2755,7 +2615,7 @@
           "200": {
             "description": "Lists a collection of Subscription entities.",
             "schema": {
-              "$ref": "#/definitions/SubscriptionPaged"
+              "$ref": "#/definitions/SubscriptionCollection"
             }
           },
           "default": {
@@ -2796,20 +2656,10 @@
             "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"            
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2822,7 +2672,7 @@
           "200": {
             "description": "A Collection of the Authorization Server entities for the specified API Management service instance.",
             "schema": {
-              "$ref": "#/definitions/AuthorizationServerPaged"
+              "$ref": "#/definitions/AuthorizationServerCollection"
             }
           }         
         },
@@ -3157,20 +3007,10 @@
             "description": "The filter to apply on the operation."
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "name": "interval",
@@ -3190,7 +3030,7 @@
           "200": {
             "description": "Lists a collection of Report record.",
             "schema": {
-              "$ref": "#/definitions/ReportPaged"
+              "$ref": "#/definitions/ReportCollection"
             }
           }
         },
@@ -3378,20 +3218,10 @@
             "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| type  | eq                     |                                             |"
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -3404,7 +3234,7 @@
           "200": {
             "description": "Lists a collection of Logger entities.",
             "schema": {
-              "$ref": "#/definitions/LoggerPaged"
+              "$ref": "#/definitions/LoggerCollection"
             }
           },
           "default": {
@@ -3417,7 +3247,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/LoggerGetContract"
+        "x-ms-odata": "#/definitions/LoggerResponse"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers/{loggerid}": {
@@ -3452,7 +3282,7 @@
           "200": {
             "description": "The response body contains the specified Logger entity.",
             "schema": {
-              "$ref": "#/definitions/LoggerGetContract"
+              "$ref": "#/definitions/LoggerResponse"
             },
             "headers": {              
               "ETag": {
@@ -3489,7 +3319,7 @@
             "type": "string",
             "description": "Identifier of the logger.",
             "maxLength": 256,
-			"pattern": "^[^*#&+:<>?]+$"
+            "pattern": "^[^*#&+:<>?]+$"
           },
           {
             "name": "parameters",
@@ -3649,20 +3479,10 @@
             "description": "| Field | Supported operators    | Supported functions                                   |\n|-------|------------------------|-------------------------------------------------------|\n| tags  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith, any, all |\n| name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith           |"
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -3675,7 +3495,7 @@
           "200": {
             "description": "A Collection of the Property entities for the specified API Management service instance.",
             "schema": {
-              "$ref": "#/definitions/PropertyPaged"
+              "$ref": "#/definitions/PropertyCollection"
             }
           }
         },
@@ -3917,20 +3737,10 @@
             "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
           },
           {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to return."
+            "$ref": "#/parameters/TopQueryParameter"
           },
           {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of records to skip."
+            "$ref": "#/parameters/SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -3943,7 +3753,7 @@
           "200": {
             "description": "Lists of all the OpenId Connect Providers.",
             "schema": {
-              "$ref": "#/definitions/OpenIdConnectProviderPaged"
+              "$ref": "#/definitions/OpenIdConnectProviderCollection"
             }
           }
         },
@@ -4453,6 +4263,654 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends": {
+      "get": {
+        "tags": [
+          "Backends"
+        ],
+        "operationId": "Backends_ListByService",
+        "description": "Lists a collection of backends in the specified service instance.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/dn935030.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| host  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists a collection of Backend entities.",
+            "schema": {
+              "$ref": "#/definitions/BackendCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/BackendResponse"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendid}": {
+      "get": {
+        "tags": [
+          "Backends"
+        ],
+        "operationId": "Backends_Get",
+        "description": "Gets the details of the backend specified by its identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackendIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified Backend entity.",
+            "schema": {
+              "$ref": "#/definitions/BackendResponse"
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Backends"
+        ],
+        "operationId": "Backends_CreateOrUpdate",
+        "description": "Creates or Updates a backend.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackendIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackendContract"
+            },
+            "description": "Create parameters."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Backend was successfully created."
+          },
+          "204": {
+            "description": "The existing backend was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Backends"
+        ],
+        "operationId": "Backends_Update",
+        "description": "Updates an existing backend.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackendIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackendUpdateParameters"
+            },
+            "description": "Update parameters."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the backend to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+           "204": {
+            "description": "The existing backend was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Backends"
+        ],
+        "operationId": "Backends_Delete",
+        "description": "Deletes the specified backend.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackendIdParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the backend to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The backend was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identityProviders": {
+      "get": {
+        "tags": [
+          "IdentityProvider"
+        ],
+        "operationId": "IdentityProviders_ListByService",
+        "description": "Lists a collection of Identity Provider configured in the specified service instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }          
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists a collection of Identity Providers.",
+            "schema": {
+              "$ref": "#/definitions/IdentityProviderList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identityProviders/{identityProviderName}": {
+      "get": {
+        "tags": [
+          "IdentityProvider"
+        ],
+        "operationId": "IdentityProviders_Get",
+        "description": "Gets the configuration details of the identity Provider configured in specified service instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IdentityProviderNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified IdentityProvider entity configuration details.",
+            "schema": {
+              "$ref": "#/definitions/IdentityProviderContract"
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IdentityProvider"
+        ],
+        "operationId": "IdentityProviders_CreateOrUpdate",
+        "description": "Creates or Updates the IdentityProvider configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IdentityProviderNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IdentityProviderContract"
+            },
+            "description": "Create parameters."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "IdentityProvider configuration were successfully created."
+          },
+          "204": {
+            "description": "The existing Identity Provider was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "IdentityProviders"
+        ],
+        "operationId": "IdentityProviders_Update",
+        "description": "Updates an existing IdentityProvider configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IdentityProviderNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IdentityProviderUpdateParameters"
+            },
+            "description": "Update parameters."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the identity provider configuration to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+           "204": {
+            "description": "The existing identity provider configuration was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IdentityProvider"
+        ],
+        "operationId": "IdentityProviders_Delete",
+        "description": "Deletes the specified identity provider configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IdentityProviderNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the backend to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The identity provider configuration was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}": {
+      "get": {
+        "tags": [
+          "QuotaByCounterKeys"
+        ],
+        "operationId": "QuotaByCounterKeys_ListByService",
+        "description": "Lists a collection of current quota counter periods associated with the counter-key configured in the policy on the specified service instance. The api does not support paging yet.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-product-with-rules#a-namepolicies-ato-configure-call-rate-limit-and-quota-policies",
+          "description": "Document describing how to configure the quota policies."
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaCounterKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists a collection of the quota counter values.",
+            "schema": {
+              "$ref": "#/definitions/QuotaCounterCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "QuotaByCounterKeys"
+        ],
+        "operationId": "QuotaByCounterKeys_Update",
+        "description": "Updates all the quota counter values specified with the existing quota counter key to a value in the specified service instance. This should be used for reset of the quota counter values.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaCounterKeyParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaCounterValueContract"
+            },
+            "description": "The value of the quota counter to be applied to all quota counter periods."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+           "204": {
+            "description": "All the quota counter periods were successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/{quotaPeriodKey}": {
+      "get": {
+        "tags": [
+          "QuotaByPeriodKeys"
+        ],
+        "operationId": "QuotaByPeriodKeys_Get",
+        "description": "Gets the value of the quota counter associated with the counter-key in the policy for the specific period in service instance.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-product-with-rules#a-namepolicies-ato-configure-call-rate-limit-and-quota-policies",
+          "description": "Document describing how to configure the quota policies."
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaCounterKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaPeriodKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the Quota counter details for the specified period.",
+            "schema": {
+              "$ref": "#/definitions/QuotaCounterContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "QuotaByPeriodKeys"
+        ],
+        "operationId": "QuotaByPeriodKeys_Update",
+        "description": "Updates an existing quota counter value in the specified service instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaCounterKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaPeriodKeyParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaCounterValueContract"
+            },
+            "description": "The value of the Quota counter to be applied on the specified period."
+          },          
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+           "204": {
+            "description": "The quota counter value was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      }
     }
   },
   "x-ms-paths": {
@@ -4611,7 +5069,7 @@
       ],
       "description": "API details."      
     },
-    "ApiPaged": {
+    "ApiCollection": {
       "properties": {
         "value": {
           "type": "array",
@@ -4838,7 +5296,7 @@
       ],
       "description": "Api Operation details."
     },
-    "OperationPaged": {
+    "OperationCollection": {
       "properties": {
         "value": {
           "type": "array",
@@ -4885,7 +5343,7 @@
         "subscriptionRequired": {
           "type": "boolean",
           "description": "Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as \"protected\" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as \"open\" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it's value is assumed to be true.",
-          "default": "true"
+          "default": true
         },
         "approvalRequired": {
           "type": "boolean",
@@ -4915,7 +5373,7 @@
       ],
       "description": "Product profile."
     },
-    "ProductPaged": {
+    "ProductCollection": {
       "properties": {
         "value": {
           "type": "array",
@@ -5018,7 +5476,7 @@
       },
       "description": "Subscription details."
     },
-    "SubscriptionPaged": {
+    "SubscriptionCollection": {
       "properties": {
         "value": {
           "type": "array",
@@ -5239,7 +5697,7 @@
       ],
       "description": "Developer group."
     },
-    "GroupPaged": {
+    "GroupCollection": {
       "properties": {
         "value": {
           "type": "array",
@@ -5390,7 +5848,7 @@
       },
       "description": "User profile."
     },
-    "UserPaged": {
+    "UserCollection": {
       "properties": {
         "value": {
           "type": "array",
@@ -5439,7 +5897,7 @@
       ],
       "description": "Certificate details."
     },
-    "CertificatePaged": {
+    "CertificateCollection": {
       "properties": {
         "value": {
           "type": "array",
@@ -5810,7 +6268,7 @@
           "resourceOwnerPassword": null       
       }
     },
-    "AuthorizationServerPaged": {
+    "AuthorizationServerCollection": {
       "properties": {
         "value": {
           "type": "array",
@@ -6128,7 +6586,7 @@
       },
       "description": "Report data."
     },
-    "ReportPaged": {
+    "ReportCollection": {
       "properties": {
         "value": {
           "type": "array",
@@ -6182,7 +6640,7 @@
       ],
       "description": "Tenant access information update parameters of the API Management service."
     },
-    "LoggerGetContract": {
+    "LoggerResponse": {
       "properties": {
         "id": {
           "type": "string",
@@ -6212,8 +6670,8 @@
           },
           "description": "The name and SendRule connection string of the event hub.",
           "example":{
-            "name" : "Event hub name",
-            "connectionString" : "Endpoint=endpoint and key from Azure classic portal"
+            "name" : "apim",
+            "connectionString" : "Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=..."
           }         
         },
         "isBuffered": {
@@ -6226,14 +6684,14 @@
         "type",
         "credentials"
       ],
-      "description": "Logger."
+      "description": "The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs."
     },
-    "LoggerPaged": {
+    "LoggerCollection": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LoggerGetContract"
+            "$ref": "#/definitions/LoggerResponse"
           },
           "description": "Logger values."
         },
@@ -6321,6 +6779,157 @@
         "type"
       ],
       "description": "Parameters supplied to the Update Logger operation."
+    },    
+    "BackendResponse": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Uniquely identifies the backend within the current API Management service instance. The value is a valid relative URL in the format of /backends/{backendId} where {backendId} is a backend identifier.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackendContract"
+        }
+      ],
+      "description": "The Backend entity in API Management represents a backend service that is configured to skip certification chain validation when using a self-signed certificate to test mutual certificate authentication."
+    },
+    "BackendCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackendResponse"
+          },
+          "description": "Backend values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total records count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Backend list representation."
+    },
+    "BackendContract": {      
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "Host attribute of the backend. Host is a pure hostname without a port or suffix, for example backend.contoso.com. Must not be empty.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "skipCertificateChainValidation": {
+          "type": "boolean",
+          "description": "Flag indicating whether SSL certificate chain validation should be skipped when using self-signed certificates for this backend host.",
+          "default": false          
+        }
+      },
+      "required": [
+        "host"
+      ],
+      "description": "Parameters supplied to the Create Backend operation."
+    },
+    "BackendUpdateParameters": {
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "Host attribute of the backend. Host is a pure hostname without a port or suffix, for example backend.contoso.com. Must not be empty.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "skipCertificateChainValidation": {
+          "type": "boolean",
+          "description": "Flag indicating whether SSL certificate chain validation should be skipped when using self-signed certificates for this backend host.",
+          "default": false          
+        }
+      },
+      "description": "Parameters supplied to the Update Backend operation."
+    },
+    "IdentityProviderList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IdentityProviderContract"
+          },
+          "description": "Identity Provider configuration values."
+        }
+      },
+      "description": "List of all the Identity Providers configured on the service instance."
+    },
+    "IdentityProviderContract": {
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-aad#how-to-authorize-developer-accounts-using-azure-active-directory"
+      },
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.",
+          "minLength": 1
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "facebook",
+            "google",
+            "microsoft",
+            "twitter",
+            "aad"
+          ],
+         "x-ms-enum": {
+           "name": "IdentityProviderNameType",
+           "modelAsString": true
+          },
+         "description": "Identity Provider Type identifier."
+        },
+        "allowedTenants": {
+         "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 32,
+          "description": "List of Allowed Tenants when configuring Azure Active Directory login."
+        }
+      },
+      "required": [
+        "clientId",
+        "clientSecret"
+      ],
+      "description": "The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users."
+    },
+    "IdentityProviderUpdateParameters": {
+      "properties": {
+       "clientId": {
+          "type": "string",
+          "description": "Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.",
+          "minLength": 1
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.",
+          "minLength": 1
+        },
+        "allowedTenants": {
+         "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 32,
+          "description": "List of Allowed Tenants when configuring Azure Active Directory login."
+        }
+      },
+      "description": "Parameters supplied to the Update Identity Provider operation."
     },
     "PropertyContract": {
       "properties": {
@@ -6361,7 +6970,7 @@
       ],
       "description": "Property details."
     },
-    "PropertyPaged": {
+    "PropertyCollection": {
       "properties": {
         "value": {
           "type": "array",
@@ -6481,7 +7090,7 @@
       ],
       "description": "OpenID Connect Providers Contract."
     },
-    "OpenIdConnectProviderPaged": {
+    "OpenIdConnectProviderCollection": {
       "properties": {
         "value": {
           "type": "array",
@@ -6747,6 +7356,78 @@
         }
       },
       "description": "Tenant Configuration Synchronization State."
+    },
+    "QuotaCounterCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaCounterContract"
+          },
+          "description": "Quota counter values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total records count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Quota Counter list representation."
+    },
+    "QuotaCounterContract": {      
+      "properties": {
+        "counterKey": {
+          "type": "string",
+          "description": "The Key value of the Counter. Must not be empty.",
+          "minLength": 1
+        },
+        "periodKey": {
+          "type": "string",
+          "description": "Identifier of the Period for which the counter was collected. Must not be empty.",
+          "minLength": 1
+        },
+        "periodStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date of the start of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "periodEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date of the end of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/QuotaCounterValueContract"
+        }
+      ],
+      "required": [
+        "counterKey",
+        "periodKey",
+        "periodStartTime",
+        "periodEndTime"
+      ],
+      "description": "Quota counter details."
+    },
+    "QuotaCounterValueContract": {      
+      "properties": {
+        "callsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of times Counter was called."
+        },
+        "kbTransferred": {
+          "type": "number",
+          "format": "double",
+          "description": "Data Transferred in KiloBytes."
+        }
+      },
+      "description": "Quota counter value details."
     }
   },
   "parameters": {
@@ -6792,7 +7473,7 @@
       "minLength": 1,
       "maxLength": 256,
       "pattern": "^[^*#&+:<>?]+$",
-	    "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method"
     },    
     "OperationIdParameter": {
       "name": "operationId",
@@ -6803,7 +7484,7 @@
       "minLength": 1,
       "maxLength": 256,
       "pattern": "^[^*#&+:<>?]+$",
-	    "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method"
     },
     "ProductIdParameter": {
       "name": "productId",
@@ -6814,7 +7495,7 @@
       "minLength": 1,
       "maxLength": 256,
       "pattern": "^[^*#&+:<>?]+$",
-	    "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method"
     },
     "GroupIdParameter": {
       "name": "groupId",
@@ -6825,7 +7506,7 @@
       "minLength": 1,
       "maxLength": 256,
       "pattern": "^[^*#&+:<>?]+$",
-	    "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method"
     },
     "UserIdParameter": {
       "name": "uid",
@@ -6836,7 +7517,73 @@
       "minLength": 1,
       "maxLength": 256,
       "pattern": "^[^*#&+:<>?]+$",
-	    "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method"
+    },
+    "BackendIdParameter": {
+      "name": "backendid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "User identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "SkipQueryParameter": {
+      "name": "$skip",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of records to skip.",
+      "minimum": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "TopQueryParameter": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of records to return.",
+      "minimum": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "IdentityProviderNameParameter": {
+      "name": "identityProviderName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "facebook",
+        "google",
+        "microsoft",
+        "twitter",
+        "aad"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityProviderNameType",
+        "modelAsString": true
+      },
+      "description": "Identity Provider Type identifier.",
+      "x-ms-parameter-location": "method"
+    },
+    "QuotaCounterKeyParameter": {
+      "name": "quotaCounterKey",
+      "in": "path",
+      "required": true,
+      "type": "string",      
+      "description": "Quota counter key identifier.",      
+      "x-ms-parameter-location": "method"
+    },
+    "QuotaPeriodKeyParameter": {
+      "name": "quotaPeriodKey",
+      "in": "path",
+      "required": true,
+      "type": "string",      
+      "description": "Quota period key identifier.",      
+      "x-ms-parameter-location": "method"
     }
   }
 }
