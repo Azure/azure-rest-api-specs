@@ -73,15 +73,15 @@ Today, there are tools available for validating a sizable portion of this checkl
 
 -	[AutoRest Linter](https://github.com/Azure/autorest/wiki/linting) – Linter statically analyzes a Swagger for errors and violations of requirements outlined in this checklist. Linter should be run when Swaggers are created or updated. Linter will be continously updated to validate newer requirements.
 
--	[Swagger Model Validator](https://github.com/Azure/openapi-validation-tools) - Model Validator validates models defined for body parameters and responses, and matches them against the expected input and output of an operation. To make this real, test examples are required to be specified in a Swagger for every operation defined in a Swagger. Test examples are integrated into a Swagger using the [“x-ms-examples”](https://github.com/Azure/azure-rest-api-specs/issues/648) extension, which will be used to test against the defined models. Sample test examples for this extension can be found in the [Redis Cache Swagger](https://github.com/Azure/azure-rest-api-specs/blob/master/arm-redis/2016-04-01/swagger/redis.json ). 
+-	[Swagger Model Validator](https://github.com/Azure/openapi-validation-tools) - Model Validator validates models defined for body parameters and responses, and matches them against the expected input and output of an operation. To make this real, test examples are required to be specified in a Swagger for every operation defined in a Swagger. Test examples are integrated into a Swagger using the ["x-ms-examples"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/x-ms-examples.md) extension, which will be used to test against the defined models. Sample test examples for this extension can be found in the [Redis Cache Swagger](https://github.com/Azure/azure-rest-api-specs/blob/master/arm-redis/2016-04-01/swagger/redis.json ). 
 
 The Azure Developer Experience team will continue to deliver rich tools to validate this checklist.
 
 ## Naming - Swagger Checklist ##
 
-- [ ] *M1000*: Plural names in parameters and model properties MUST only be used to represent collections.
+- [ ] **M1000**: Plural names in parameters and model properties MUST only be used to represent collections.
 
-- [] *M1001*: Each operation *MUST* contain an OperationId of the form "RESOURCE_METHOD" a.k.a "NOUN_VERB", where "RESOURCE" represents the resource or object the operation addresses, and METHOD is a short name for the operation being performed "Get, Start, Delete, Create, List", etc.
+- [ ] **M1001**: Each operation *MUST* contain an OperationId of the form "RESOURCE_METHOD" a.k.a "NOUN_VERB", where "RESOURCE" represents the resource or object the operation addresses, and METHOD is a short name for the operation being performed "Get, Start, Delete, Create, List", etc.
 
 - [ ] **M1002**: If the NOUN in the OperationId "NOUN_VERB" matches with the name of the Model definition then the NOUN in the operationId *MUST* use the plural form of NOUN to avoid collision in the namespace.
 
@@ -133,110 +133,110 @@ The Azure Developer Experience team will continue to deliver rich tools to valid
    This will indicate the code generator, how to deserialize the final success response after the polling is done. If the response has a response body then it *MUST* be modeled in the terminal status code.
 </br>
 
-- [ ] **M2005**: Required parameters *MUST* be accurately labeled as `"required": true` in Swagger.
+- [ ] **M2006**: Required parameters *MUST* be accurately labeled as `"required": true` in Swagger.
 
-- [ ] **M2006**: Required properties of a model definition *MUST* be accurately labeled as `"required": [ "propertyName1" ]` in Swagger.
+- [ ] **M2007**: Required properties of a model definition *MUST* be accurately labeled as `"required": [ "propertyName1" ]` in Swagger.
 
-- [ ] **M2007**: Mutability of properties *MUST* be marked up using [`x-ms-mutability` extension](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-mutability).
+- [ ] **M2008**: Mutability of properties *MUST* be marked up using [`x-ms-mutability` extension](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-mutability).
 
-- [ ] **M2008**: Error definitions *MUST* be abstracted, modeled and reused.
+- [ ] **M2009**: Error definitions *MUST* be abstracted, modeled and reused.
 
-- [ ] **M2009**: A Swagger spec *MUST NOT* define operations or properties or parameters for functionalities that are not currently supported by the service in the given api-version. The primary goal of the spec is that it *MUST* correctly and completely represent the underlying REST API.
+- [ ] **M2010**: A Swagger spec *MUST NOT* define operations or properties or parameters for functionalities that are not currently supported by the service in the given api-version. The primary goal of the spec is that it *MUST* correctly and completely represent the underlying REST API.
 
-- [ ] **M2010**: A collection model in Swagger *MUST* support adding more than one element to the collection.
+- [ ] **M2011**: A collection model in Swagger *MUST* support adding more than one element to the collection.
 
 For example, [NetworkInterface.ipConfigurations](https://github.com/Azure/azure-rest-api-specs/blob/4131049f9bdb477c4aea6f4e3f588a7153fc5606/arm-network/2016-06-01/swagger/network.json#L6516) is described as a collection. However, it does not support adding more than one IP configuration. 
 
-- [ ] **M2011**: Operations that are exposed through private previews *MUST NOT* be described in the [public GitHub repository](https://github.com/Azure/azure-rest-api-specs). They *MUST* be described in the [private GitHub repository](https://github.com/Azure/azure-rest-api-specs-pr) instead.
+- [ ] **M2012**: Operations that are exposed through private previews *MUST NOT* be described in the [public GitHub repository](https://github.com/Azure/azure-rest-api-specs). They *MUST* be described in the [private GitHub repository](https://github.com/Azure/azure-rest-api-specs-pr) instead.
 
-- [ ] **M2012**: The value of the ["x-ms-client-name"](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-client-name) and ["x-ms-discriminator-value"](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-discriminator-value) *MUST NOT* be the same as the model property or the model name, otherwise the purpose is defeated.
+- [ ] **M2013**: The value of the ["x-ms-client-name"](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-client-name) and ["x-ms-discriminator-value"](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-discriminator-value) *MUST NOT* be the same as the model property or the model name, otherwise the purpose is defeated.
 
-- [ ] **M2013**: For specifications describing the Management Plane of ARM, "subscriptionId" & "api-version" *MUST* always be defined in the global parameters section.
+- [ ] **M2014**: For specifications describing the Management Plane of ARM, "subscriptionId" & "api-version" *MUST* always be defined in the global parameters section.
 
-- [ ] **M2014**: For a Given Resource, GET/PUT/PATCH *MUST* return the same "Resource" Model.
+- [ ] **M2015**: For a Given Resource, GET/PUT/PATCH *MUST* return the same "Resource" Model.
 
-- [ ] **M2015**: For PATCH operation, every property in the model for the request body *MUST* be optional and the property *MUST NOT* provide any default value. The absence of default values applies recursively to complex properties in the model definition.
+- [ ] **M2016**: For PATCH operation, every property in the model for the request body *MUST* be optional and the property *MUST NOT* provide any default value. The absence of default values applies recursively to complex properties in the model definition.
 
-- [] *M2016*: The model definition for the body parameter and the response *MUST* be the same for a PUT operation. This ensures that the same entity will be reusable between GET and PUT.
+- [ ] **M2017**: The model definition for the body parameter and the response *MUST* be the same for a PUT operation. This ensures that the same entity will be reusable between GET and PUT.
 
-- [ ] **M2017**: A parameter or a model property having an `"enum": []` constraint, *MUST* have an  ["x-ms-enum"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-enum) extension and the extension's "modelAsString" property *MUST* be set to `false` where applicable.
+- [ ] **M2018**: A parameter or a model property having an `"enum": []` constraint, *MUST* have an  ["x-ms-enum"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-enum) extension and the extension's "modelAsString" property *MUST* be set to `false` where applicable.
 
-- [ ] **M2018**: Every "Resource" Model *MUST* be tagged with ["x-ms-azure-resource"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-azure-resource). This will indicate Autorest to make the Resource model inherit from the Resource definition in the client runtime.
+- [ ] **M2019**: Every "Resource" Model *MUST* be tagged with ["x-ms-azure-resource"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-azure-resource). This will indicate Autorest to make the Resource model inherit from the Resource definition in the client runtime.
 
-- [ ] **M2019**: The "Resource" model definition in ARM, *MUST* have "id", "name" and "type" properties marked as `"readOnly": true`.
+- [ ] **M2020**: The "Resource" model definition in ARM, *MUST* have "id", "name" and "type" properties marked as `"readOnly": true`.
 
-- [ ] **M2020**: The "location" property of "Resource" model definition in ARM, *MUST* have ["x-ms-mutability": ["create", "read"]](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-mutability) extension. Usually the "location" property is also a required property of the model definition.
+- [ ] **M2021**: The "location" property of "Resource" model definition in ARM, *MUST* have ["x-ms-mutability": ["create", "read"]](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-mutability) extension. Usually the "location" property is also a required property of the model definition.
 
-- [ ] **M2021**: Every operation in the swagger specification *MUST* have an ["x-ms-examples"](https://github.com/Azure/azure-rest-api-specs/issues/648) extension applied with scenarios that provide the *MINIMUM* AND *MAXIMUM* properties of the request and response payload. Please feel free to provide more example scenarios for a particular operation.
+- [ ] **M2022**: Every operation in the swagger specification *MUST* have an ["x-ms-examples"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/x-ms-examples.md) extension applied with scenarios that provide the *MINIMUM* AND *MAXIMUM* properties of the request and response payload. Please feel free to provide more example scenarios for a particular operation.
 
-- [ ] **M2022**: a Swagger specification *MUST* use `"x-ms-codegeneration-settings": { "name": "<ServiceName>Client" }` for providing a better name to the generated client.
+- [ ] **M2023**: a Swagger specification *MUST* use `"x-ms-codegeneration-settings": { "name": "<ServiceName>Client" }` for providing a better name to the generated client.
 
-- [ ] **M2023**: Operations that return a single page and have the response schema {"value": [Array of items] }, *MUST* apply the ["x-ms-pageable"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-pageable) with it's `"nextLinkName"` property explicitly set to `"null"`. This will ensure that value property gets unwrapped into an IEnumerable.
+- [ ] **M2024**: Operations that return a single page and have the response schema {"value": [Array of items] }, *MUST* apply the ["x-ms-pageable"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-pageable) with it's `"nextLinkName"` property explicitly set to `"null"`. This will ensure that value property gets unwrapped into an IEnumerable.
 
-- [ ] **M2024**: If the `"nextLinkName"` property of the ["x-ms-pageable"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-pageable) extension is defined with a value, then the Model definition *MUST* also have a property named with the same value for nextLink.
+- [ ] **M2025**: If the `"nextLinkName"` property of the ["x-ms-pageable"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-pageable) extension is defined with a value, then the Model definition *MUST* also have a property named with the same value for nextLink.
 
-- [ ] **M2025**: Model types (request body, response body, complex model properties) *MUST NOT* be defined inline. They *MUST* be defined explicitly in the `"defintions: { . . . }` section of the swagger specification.
+- [ ] **M2026**: Model types (request body, response body, complex model properties) *MUST NOT* be defined inline. They *MUST* be defined explicitly in the `"defintions: { . . . }` section of the swagger specification.
 
-- [ ] **M2026**: If a property or a parameter has an `"enum": []` constraint and it also has a `"default"` value then the default value *MUST* be one of the values specified in the enum. It is *RECOMMENDED* that the default value be the first element in the "enum" array.
+- [ ] **M2027**: If a property or a parameter has an `"enum": []` constraint and it also has a `"default"` value then the default value *MUST* be one of the values specified in the enum. It is *RECOMMENDED* that the default value be the first element in the "enum" array.
 
-- [ ] **M2027**: The value of [`x-ms-client-name` extension](https://github.com/Azure/autorest/blob/master/Documentation/swagger-extensions.md#x-ms-client-name) *MUST NOT* be an empty string, because it will be used as the identifier of the artifact in the generated client.
+- [ ] **M2028**: The value of [`x-ms-client-name` extension](https://github.com/Azure/autorest/blob/master/Documentation/swagger-extensions.md#x-ms-client-name) *MUST NOT* be an empty string, because it will be used as the identifier of the artifact in the generated client.
 
-- [ ] **M2028**: Every path in the `"paths": { . . . }` object *MUST* be unique and *MUST NOT* be equivalent. 
+- [ ] **M2029**: Every path in the `"paths": { . . . }` object *MUST* be unique and *MUST NOT* be equivalent. 
   - `/paths/path1/{param1}` and `/paths/path1/{param2}` are equivalent paths and are *NOT* allowed.
 
-- [ ] **M2029**: Properties that are marked as `"required"` *MUST* exist in the `properties: { }` object of the model definition ([Schema Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schemaObject)) or one of its ancestors.
+- [ ] **M2030**: Properties that are marked as `"required"` *MUST* exist in the `properties: { }` object of the model definition ([Schema Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schemaObject)) or one of its ancestors.
 
-- [ ] **M2030**: Every model defined in the definitions section of the swagger specification *MUST* have a `"type"` property. The list of supported data types in 2.0 swagger specification can be found [here](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types).
+- [ ] **M2031**: Every model defined in the definitions section of the swagger specification *MUST* have a `"type"` property. The list of supported data types in 2.0 swagger specification can be found [here](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types).
 
-- [ ] **M2031**: Operations *MUST NOT* have both a `body` parameter and a `formData` parameter.
+- [ ] **M2032**: Operations *MUST NOT* have both a `body` parameter and a `formData` parameter.
 
-- [ ] **M2032**: Operations *MUST* have **exactly one** `body` parameter.
+- [ ] **M2033**: Operations *MUST* have **exactly one** `body` parameter.
 
-- [ ] **M2033**: Operations *MUST* have unique (name + in combination) parameters.
+- [ ] **M2034**: Operations *MUST* have unique (name + in combination) parameters.
 
-- [ ] **M2034**: Operations *MUST* have a unique operationId in the swagger specification.
+- [ ] **M2035**: Operations *MUST* have a unique operationId in the swagger specification.
 
-- [ ] **M2035**: Path parameters declared in the path string *MUST* have matching parameter definitions (either at the path-level or the operation) and vice-versa (extra definitions or declarations are *NOT* allowed).
+- [ ] **M2036**: Path parameters declared in the path string *MUST* have matching parameter definitions (either at the path-level or the operation) and vice-versa (extra definitions or declarations are *NOT* allowed).
 
-- [ ] **M2036**: Path parameter declarations *MUST NOT* allow empty names (/path/{} is not valid).
+- [ ] **M2037**: Path parameter declarations *MUST NOT* allow empty names (/path/{} is not valid).
 
-- [ ] **M2037**: Paths *MUST* have unique (name + in combination) parameters.
+- [ ] **M2038**: Paths *MUST* have unique (name + in combination) parameters.
 
-- [ ] **M2038**: Any local (model or parameter) reference *MUST* start with `"#"`. Example `"#/parameters/subscriptionId"` or `"#/definitions/Resource"`.
+- [ ] **M2039**: Any local (model or parameter) reference *MUST* start with `"#"`. Example `"#/parameters/subscriptionId"` or `"#/definitions/Resource"`.
 
-- [ ] **M2039**: Any external (model or parameter) reference, whether a relative or absolute file or URL reference *MUST* adhere to the [JSON pointer reference syntax](https://tools.ietf.org/html/rfc6901). `"<(absolute|relative) (file|url) path>#<(definitions|parameters|or any other key that needs to be accessed in the json object at that location)"`. The pointer reference traverses ahead with a forward slash. Example: `"$ref": "./spec2.json#/definitions/Model1"`.
+- [ ] **M2040**: Any external (model or parameter) reference, whether a relative or absolute file or URL reference *MUST* adhere to the [JSON pointer reference syntax](https://tools.ietf.org/html/rfc6901). `"<(absolute|relative) (file|url) path>#<(definitions|parameters|or any other key that needs to be accessed in the json object at that location)"`. The pointer reference traverses ahead with a forward slash. Example: `"$ref": "./spec2.json#/definitions/Model1"`.
 
-- [ ] **M2040**: Circular composition/inheritance for Schema Objects *MUST NOT* be present. A specification can have circular references everywhere except in composition/inheritance.
+- [ ] **M2041**: Circular composition/inheritance for Schema Objects *MUST NOT* be present. A specification can have circular references everywhere except in composition/inheritance.
 
-- [ ] **M2041**: The items property for Schema Objects, or schema-like objects (non-body parameters), *MUST* be required when type is set to array. More details can be found [here](https://github.com/OAI/OpenAPI-Specification/issues/174).
+- [ ] **M2042**: The items property for Schema Objects, or schema-like objects (non-body parameters), *MUST* be required when type is set to array. More details can be found [here](https://github.com/OAI/OpenAPI-Specification/issues/174).
 
-- [ ] **M2042**: The  schemes array in the swagger spec for any HTTP protocol based Azure REST service *MUST* only have "https" as the supported scheme. It *MUST* be `"schemes": ["https"]`
+- [ ] **M2043**: The  schemes array in the swagger spec for any HTTP protocol based Azure REST service *MUST* only have "https" as the supported scheme. It *MUST* be `"schemes": ["https"]`
 
-- [ ] **M2043**: A swagger specification *MUST NOT* have any operation with an HTTP verb outside this (case-insensitive) list ["DELETE", "GET", "PUT", "PATCH", "HEAD", "OPTIONS", "POST"].
+- [ ] **M2044**: A swagger specification *MUST NOT* have any operation with an HTTP verb outside this (case-insensitive) list ["DELETE", "GET", "PUT", "PATCH", "HEAD", "OPTIONS", "POST"].
 
-- [ ] **M2044**: An example specified in a specification as per the swagger specification for a response *MUST* be in the response object keyed on the "MIME-TYPE". More details can be found [here](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#exampleObject).
+- [ ] **M2045**: An example specified in a specification as per the swagger specification for a response *MUST* be in the response object keyed on the "MIME-TYPE". More details can be found [here](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#exampleObject).
 
-- [ ] **M2045**: An example specified in a specification as per the swagger specification for a model in the request body *MUST* be specified in the free-form example property of that model definition. More details can be found [here](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#fixed-fields-13).
+- [ ] **M2046**: An example specified in a specification as per the swagger specification for a model in the request body *MUST* be specified in the free-form example property of that model definition. More details can be found [here](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#fixed-fields-13).
 
-- [ ] **M2046**: A parameter object *MUST* have a `"name"` property defined with a non-empty string as its value.
+- [ ] **M2047**: A parameter object *MUST* have a `"name"` property defined with a non-empty string as its value.
 
-- [ ] **M2047**: A parameter object *MUST* have an `"in"` property defined with a non-empty string. The value can be one of "query", "header", "path", "body", "formData".
+- [ ] **M2048**: A parameter object *MUST* have an `"in"` property defined with a non-empty string. The value can be one of "query", "header", "path", "body", "formData".
 
-- [ ] **M2048**: Every operation *MUST* have a "default" status code in the "responses" section. The "default" corresponds to the error returned by the operation.
+- [ ] **M2049**: Every operation *MUST* have a "default" status code in the "responses" section. The "default" corresponds to the error returned by the operation.
 
-- [ ] **M2049**: "externalDocs" property *MUST* have both "url" and "description" accurately provided. More details can be found [here](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#external-documentation-object).
+- [ ] **M2050**: "externalDocs" property *MUST* have both "url" and "description" accurately provided. More details can be found [here](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#external-documentation-object).
 
-- [ ] **M2050**: Odata parameters like "$filter" *MUST* document the properties on which the object can be filtered on  and the supported operators in the description.
+- [ ] **M2051**: Odata parameters like "$filter" *MUST* document the properties on which the object can be filtered on  and the supported operators in the description.
 
-- [ ] **M2050**: Odata parameters like "$filter" *MUST* have an externalDocs that provides good examples of how the "$filter" parameter can be used.
+- [ ] **M2052**: Odata parameters like "$filter" *MUST* have an externalDocs that provides good examples of how the "$filter" parameter can be used.
 
-- [ ] **M2051**: Parameters or properties that can only accept one value *MUST* be marked as "required" and they *MUST* have an "enum" array constraint with one valid value in it.
+- [ ] **M2053**: Parameters or properties that can only accept one value *MUST* be marked as "required" and they *MUST* have an "enum" array constraint with one valid value in it.
 
-- [ ] **M2052**: Every swagger spec *MUST* have a "securityDefinitions" object accurately defined. An example can be found over [here](https://github.com/Azure/azure-rest-api-specs/blob/master/arm-analysisservices/2016-05-16/swagger/analysisservices.json#L26).
+- [ ] **M2054**: Every swagger spec *MUST* have a "securityDefinitions" object accurately defined. An example can be found over [here](https://github.com/Azure/azure-rest-api-specs/blob/master/arm-analysisservices/2016-05-16/swagger/analysisservices.json#L26).
 
-- [ ] **M2053**: An operationId in the swagger spec *MUST NOT* be split by more than one underscore. Please use the "tags" array for adding extra names.
+- [ ] **M2055**: An operationId in the swagger spec *MUST NOT* be split by more than one underscore. Please use the "tags" array for adding extra names.
 
-- [ ] **M2054**: If the service (in Azure) only supports PATCHING tags on a Resource in the PATCH operation and has a PUT on the same resource which is named as "CreateOrUpdate", then it *MUST NOT* expose the "PATCH" operation in the swagger spec. 
+- [ ] **M2056**: If the service (in Azure) only supports PATCHING tags on a Resource in the PATCH operation and has a PUT on the same resource which is named as "CreateOrUpdate", then it *MUST NOT* expose the "PATCH" operation in the swagger spec. 
 
 ### SHOULD
 
@@ -291,7 +291,7 @@ Here are some [basic rules for public documentation](https://github.com/Azure/az
 
 - [ ] **M5001**: Every specification *MUST* have a swagger folder in its file path.
 
-- [ ] **M5003**: Examples provided using the ["x-ms-examples"](https://github.com/Azure/azure-rest-api-specs/issues/648) extension MUST be present in the examples folder under the api-version folder. Example: `<service-name>/<api-version>/examples/<scenario-name>.json`.
+- [ ] **M5003**: Examples provided using the ["x-ms-examples"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/x-ms-examples.md) extension MUST be present in the examples folder under the api-version folder. Example: `<service-name>/<api-version>/examples/<scenario-name>.json`.
 
 - [ ] **M5004**: The top level property of a specification that describes the version of the swagger specification that the specification adheres to, *MUST* be set to `"swagger": "2.0"`.
 
