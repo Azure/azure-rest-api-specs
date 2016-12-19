@@ -1,4 +1,4 @@
-Describes the format for specifying examples for request and response of an operation in a swagger spec. It is a **dictonary** of different variations of the examples for a given operation.
+Describes the format for specifying examples for request and response of an operation in a swagger spec. It is a **dictionary** of different variations of the examples for a given operation.
 
 ## Why "x-ms-examples"?
 We looked at the current mechanism/format provided by swagger specification to provide examples.

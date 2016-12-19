@@ -574,7 +574,7 @@ parameters | [Array of Parameter Objects](https://github.com/OAI/OpenAPI-Specifi
 ```
 
 ##x-ms-examples
-Describes the format for specifying examples for request and response of an operation in a swagger spec. It is a **dictonary** of different variations of the examples for a given operation.
+Describes the format for specifying examples for request and response of an operation in a swagger spec. It is a **dictionary** of different variations of the examples for a given operation.
 
 More information about this extension can be found [here](https://github.com/Azure/azure-rest-api-specs/tree/master/documentation/x-ms-examples.md).
 
