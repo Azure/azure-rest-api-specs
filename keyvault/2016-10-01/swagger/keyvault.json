@@ -33,7 +33,7 @@
           "Keys"
         ],
         "operationId": "CreateKey",
-        "description": "Creates a new, named, key in the specified vault.",
+        "description": "Creates a new key, stores it, then returns key parameters and attributes to the client. The create key operation can be used to create any key type in Azure Key Vault. If the named key already exists, Azure Key Vault creates a new version of the key. Authorization: Requires the keys/create permission.",
         "parameters": [
           {
             "name": "key-name",
@@ -41,7 +41,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z-]+$",
-            "description": "The name of the key."
+            "description": "The name for the new key. The system will generate the version name for the new key."
           },
           {
             "name": "parameters",
@@ -79,7 +79,7 @@
           "Keys"
         ],
         "operationId": "ImportKey",
-        "description": "Imports a key into the specified vault.",
+        "description": "Imports an externally created key, stores it, and returns key parameters and attributes to the client. The import key operation may be used to import any key type into an Azure Key Vault. If the named key already exists, Azure Key Vault creates a new version of the key. Authorization: requires the keys/import permission. ",
         "parameters": [
           {
             "name": "key-name",
@@ -87,7 +87,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z-]+$",
-            "description": "The name of the key."
+            "description": "Name for the imported key."
           },
           {
             "name": "parameters",
@@ -111,7 +111,7 @@
             }
           },
           "default": {
-            "description": "Default response. It will be deserialized as per the error definition specified in the schema. An exception will be thrown.",
+            "description": "Default response. It will be deserialized per the error definition specified in the schema. An exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -123,14 +123,14 @@
           "Keys"
         ],
         "operationId": "DeleteKey",
-        "description": "Deletes the specified key.",
+        "description": "Deletes a key of any type from storage in Azure Key Vault. The delete key operation cannot be used to remove individual versions of a key. This operation removes the cryptographic material associated with the key, which means the key is not usable for Sign/Verify, Wrap/Unwrap or Encrypt/Decrypt operations. Authorization: Requires the keys/delete permission",
         "parameters": [
           {
             "name": "key-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the key."
+            "description": "The name of the key to delete."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -158,21 +158,21 @@
           "Keys"
         ],
         "operationId": "UpdateKey",
-        "description": "Updates the key attributes associated with the specified key.",
+        "description": "The update key operation changes specified attributes of a stored key and can be applied to any key type and key version stored in Azure Key Vault. The cryptographic material of a key itself cannot be changed. In order to perform this operation, the key must already exist in the Key Vault. Authorization: requires the keys/update permission.",
         "parameters": [
           {
             "name": "key-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the key."
+            "description": "The name of key to update."
           },
           {
             "name": "key-version",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The version of the key."
+            "description": "The version of the key to update."
           },
           {
             "name": "parameters",
@@ -208,21 +208,21 @@
           "Keys"
         ],
         "operationId": "GetKey",
-        "description": "Retrieves the public portion of a key plus its attributes.",
+        "description": "Gets the public part of a stored key. The get key operation is applicable to all key types. If the requested key is symmetric, then no key material is released in the response. Authorization: Requires the keys/get permission.",
         "parameters": [
           {
             "name": "key-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the key."
+            "description": "The name of the key to get."
           },
           {
             "name": "key-version",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The version of the key."
+            "description": "Adding the key-version parameter retrieves a specific version of a key."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -250,7 +250,7 @@
           "Keys"
         ],
         "operationId": "GetKeyVersions",
-        "description": "List the versions of the specified key.",
+        "description": "Retrieves a list of individual key versions with the same key name. The full key identifier, attributes, and tags are provided in the response. Authorization: Requires the keys/list permission.",
         "parameters": [
           {
             "name": "key-name",
@@ -2547,7 +2547,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "description": "JSON web key operations. For more information, see JsonWebKeyOperation.",
+            "description": "JSON web key operations. The default is all operations. For more information, see JsonWebKeyOperation.",
             "enum": [ "encrypt", "decrypt", "sign", "verify", "wrapKey", "unwrapKey" ],
             "x-ms-enum": {
               "name": "JsonWebKeyOperation",
@@ -2564,7 +2564,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Application specific metadata in the form of key-value pairs."
+          "description": "Application specific metadata in the form of key-value pairs. The element keyword and braces, ‘{‘ ‘}’, are required even if there are no attributes."
         }
       },
       "description": "The key create parameters.",
@@ -3067,7 +3067,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "Client API version."
     }
   }
 }
