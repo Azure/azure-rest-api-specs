@@ -719,7 +719,7 @@
       },
       "allOf": [
         {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResource"
         }
       ],
       "description": "ResourceNavigationLink resource."
@@ -731,18 +731,18 @@
           "description": "The address prefix for the subnet."
         },
         "networkSecurityGroup": {
-          "$ref": "./2016-09-01/swagger/networkSecurityGroup.json#/definitions/NetworkSecurityGroup",
+          "$ref": "./networkSecurityGroup.json#/definitions/NetworkSecurityGroup",
           "description": "The reference of the NetworkSecurityGroup resource."
         },
         "routeTable": {
-          "$ref": "./2016-09-01/swagger/routeTable.json#/definitions/RouteTable",
+          "$ref": "./routeTable.json#/definitions/RouteTable",
           "description": "The reference of the RouteTable resource."
         },
         "ipConfigurations": {
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./2016-09-01/swagger/networkInterface.json#/definitions/IPConfiguration"
+            "$ref": "./networkInterface.json#/definitions/IPConfiguration"
           },
           "description": "Gets an array of references to the network interface IP configurations using subnet."
         },
@@ -778,7 +778,7 @@
           "description": "If remote gateways can be used on this virtual network. If the flag is set to true, and allowGatewayTransit on remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway."
         },
         "remoteVirtualNetwork": {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the remote virtual network."
         },
         "peeringState": {
@@ -817,7 +817,7 @@
       },
       "allOf": [
         {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResource"
         }
       ],
       "description": "Subnet in a virtual network resource."
@@ -839,7 +839,7 @@
       },
       "allOf": [
         {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResource"
         }
       ],
       "description": "Peerings in a virtual network resource."
@@ -923,7 +923,7 @@
       },
       "allOf": [
         {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/Resource"
+          "$ref": "./network.json#/definitions/Resource"
         }
       ],
       "description": "Virtual Network resource."

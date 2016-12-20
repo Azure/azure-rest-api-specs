@@ -247,7 +247,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "Read only. Inbound rules URIs that use this frontend IP."
         },
@@ -255,7 +255,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "Read only. Inbound pools URIs that use this frontend IP."
         },
@@ -263,7 +263,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "Read only. Outbound rules URIs that use this frontend IP."
         },
@@ -271,7 +271,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "Gets load balancing rules URIs that use this frontend IP."
         },
@@ -292,11 +292,11 @@
           }
         },
         "subnet": {
-          "$ref": "./2016-09-01/swagger/virtualNetwork.json#/definitions/Subnet",
+          "$ref": "./virtualNetwork.json#/definitions/Subnet",
           "description": "The reference of the subnet resource."
         },
         "publicIPAddress": {
-          "$ref": "./2016-09-01/swagger/publicIpAddress.json#/definitions/PublicIPAddress",
+          "$ref": "./publicIpAddress.json#/definitions/PublicIPAddress",
           "description": "The reference of the Public IP resource."
         },
         "provisioningState": {
@@ -323,7 +323,7 @@
       },
       "allOf": [
         {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResource"
         }
       ],
       "description": "Frontend IP address of the load balancer."
@@ -334,7 +334,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./2016-09-01/swagger/networkInterface.json#/definitions/NetworkInterfaceIPConfiguration"
+            "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration"
           },
           "description": "Gets collection of references to IP addresses defined in network interfaces."
         },
@@ -342,13 +342,13 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "Gets load balancing rules that use this backend address pool."
         },
         "outboundNatRule": {
           "readOnly": true,
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "Gets outbound rules that use this backend address pool."
         },
         "provisioningState": {
@@ -375,7 +375,7 @@
       },
       "allOf": [
         {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResource"
         }
       ],
       "description": "Pool of backend IP addresses."
@@ -383,15 +383,15 @@
     "LoadBalancingRulePropertiesFormat": {
       "properties": {
         "frontendIPConfiguration": {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "A reference to frontend IP addresses."
         },
         "backendAddressPool": {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "A reference to a pool of DIPs. Inbound traffic is randomly load balanced across IPs in the backend IPs."
         },
         "probe": {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the load balancer probe used by the load balancing rule."
         },
         "protocol": {
@@ -466,7 +466,7 @@
       },
       "allOf": [
         {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResource"
         }
       ],
       "description": "A loag balancing rule for a load balancer."
@@ -477,7 +477,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "The load balancer rules that use this probe."
         },
@@ -539,7 +539,7 @@
       },
       "allOf": [
         {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResource"
         }
       ],
       "description": "A load balancer probe."
@@ -547,12 +547,12 @@
     "InboundNatRulePropertiesFormat": {
       "properties": {
         "frontendIPConfiguration": {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "A reference to frontend IP addresses."
         },
         "backendIPConfiguration": {
           "readOnly": true,
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/NetworkInterfaceIPConfiguration",
+          "$ref": "./network.json#/definitions/NetworkInterfaceIPConfiguration",
           "description": "A reference to a private IP address defined on a network interface of a VM. Traffic sent to the frontend port of each of the frontend IP configurations is forwarded to the backed IP."
         },
         "protocol": {
@@ -610,7 +610,7 @@
       },
       "allOf": [
         {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResource"
         }
       ],
       "description": "Inbound NAT rule of the load balancer."
@@ -618,7 +618,7 @@
     "InboundNatPoolPropertiesFormat": {
       "properties": {
         "frontendIPConfiguration": {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "A reference to frontend IP addresses."
         },
         "protocol": {
@@ -678,7 +678,7 @@
       },
       "allOf": [
         {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResource"
         }
       ],
       "description": "Inbound NAT pool of the load balancer."
@@ -693,12 +693,12 @@
         "frontendIPConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "The Frontend IP addresses of the load balancer."
         },
         "backendAddressPool": {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "A reference to a pool of DIPs. Outbound traffic is randomly load balanced across IPs in the backend IPs."
         },
         "provisioningState": {
@@ -728,7 +728,7 @@
       },
       "allOf": [
         {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResource"
         }
       ],
       "description": "Outbound NAT pool of the load balancer."
@@ -808,7 +808,7 @@
       },
       "allOf": [
         {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/Resource"
+          "$ref": "./network.json#/definitions/Resource"
         }
       ],
       "description": "LoadBalancer resource"

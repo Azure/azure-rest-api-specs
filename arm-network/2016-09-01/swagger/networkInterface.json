@@ -332,21 +332,21 @@
         "applicationGatewayBackendAddressPools": {
           "type": "array",
           "items": {
-            "$ref": "./2016-09-01/swagger/applicationGateway.json#/definitions/ApplicationGatewayBackendAddressPool"
+            "$ref": "./applicationGateway.json#/definitions/ApplicationGatewayBackendAddressPool"
           },
           "description": "The reference of ApplicationGatewayBackendAddressPool resource."
         },
         "loadBalancerBackendAddressPools": {
           "type": "array",
           "items": {
-            "$ref": "./2016-09-01/swagger/loadBalancer.json#/definitions/BackendAddressPool"
+            "$ref": "./loadBalancer.json#/definitions/BackendAddressPool"
           },
           "description": "The reference of LoadBalancerBackendAddressPool resource."
         },
         "loadBalancerInboundNatRules": {
           "type": "array",
           "items": {
-            "$ref": "./2016-09-01/swagger/loadBalancer.json#/definitions/InboundNatRule"
+            "$ref": "./loadBalancer.json#/definitions/InboundNatRule"
           },
           "description": "A list of references of LoadBalancerInboundNatRules."
         },
@@ -378,14 +378,14 @@
           }
         },
         "subnet": {
-          "$ref": "./2016-09-01/swagger/virtualNetwork.json#/definitions/Subnet"
+          "$ref": "./virtualNetwork.json#/definitions/Subnet"
         },
         "primary": {
           "type": "boolean",
           "description": "Gets whether this is a primary customer address on the network interface."
         },
         "publicIPAddress": {
-          "$ref": "./2016-09-01/swagger/publicIpAddress.json#/definitions/PublicIPAddress"
+          "$ref": "./publicIpAddress.json#/definitions/PublicIPAddress"
         },
         "provisioningState": {
           "type": "string"
@@ -410,7 +410,7 @@
       },
       "allOf": [
         {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResource"
         }
       ],
       "description": "IPConfiguration in a network interface."
@@ -449,11 +449,11 @@
     "NetworkInterfacePropertiesFormat": {
       "properties": {
         "virtualMachine": {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of a virtual machine."
         },
         "networkSecurityGroup": {
-          "$ref": "./2016-09-01/swagger/networkSecurityGroup.json#/definitions/NetworkSecurityGroup",
+          "$ref": "./networkSecurityGroup.json#/definitions/NetworkSecurityGroup",
           "description": "The reference of the NetworkSecurityGroup resource."
         },
         "ipConfigurations": {
@@ -507,7 +507,7 @@
       },
       "allOf": [
         {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/Resource"
+          "$ref": "./network.json#/definitions/Resource"
         }
       ],
       "description": "A network interface in a resource group."
@@ -531,7 +531,7 @@
     "EffectiveNetworkSecurityGroup": {
       "properties": {
         "networkSecurityGroup": {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The ID of network security group that is applied."
         },
         "association": {
@@ -550,11 +550,11 @@
     "EffectiveNetworkSecurityGroupAssociation": {
       "properties": {
         "subnet": {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The ID of the subnet if assigned."
         },
         "networkInterface": {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The ID of the network interface if assigned."
         }
       },
@@ -756,11 +756,11 @@
           }
         },
         "subnet": {
-          "$ref": "./2016-09-01/swagger/virtualNetwork.json#/definitions/Subnet",
+          "$ref": "./virtualNetwork.json#/definitions/Subnet",
           "description": "The reference of the subnet resource."
         },
         "publicIPAddress": {
-          "$ref": "./2016-09-01/swagger/publicIpAddress.json#/definitions/PublicIPAddress",
+          "$ref": "./publicIpAddress.json#/definitions/PublicIPAddress",
           "description": "The reference of the public IP resource."
         },
         "provisioningState": {
@@ -787,7 +787,7 @@
       },
       "allOf": [
         {
-          "$ref": "./2016-09-01/swagger/network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResource"
         }
       ],
       "description": "IPConfiguration"
