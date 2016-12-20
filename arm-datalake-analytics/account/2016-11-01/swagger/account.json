@@ -1337,6 +1337,45 @@
           "type": "string",
           "readOnly": true,
           "description": "the full CName endpoint for this account."
+        },
+        "newTier": {
+          "type": "string",
+          "enum": [
+            "Consumption",
+            "Commitment_100AUHours",
+            "Commitment_500AUHours",
+            "Commitment_1000AUHours",
+            "Commitment_5000AUHours",
+            "Commitment_10000AUHours",
+            "Commitment_50000AUHours",
+            "Commitment_100000AUHours",
+            "Commitment_500000AUHours"
+          ],
+          "x-ms-enum": {
+            "name": "PricingTierType",
+            "modelAsString": false
+          },
+          "description": "the billing tier to use for next month."
+        },
+        "currentTier": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Consumption",
+            "Commitment_100AUHours",
+            "Commitment_500AUHours",
+            "Commitment_1000AUHours",
+            "Commitment_5000AUHours",
+            "Commitment_10000AUHours",
+            "Commitment_50000AUHours",
+            "Commitment_100000AUHours",
+            "Commitment_500000AUHours"
+          ],
+          "x-ms-enum": {
+            "name": "PricingTierType",
+            "modelAsString": false
+          },
+          "description": "the billing tier in use for the current month."
         }
       },
       "description": "The account specific properties that are associated with an underlying Data Lake Analytics account."
@@ -1361,6 +1400,25 @@
           "format": "int32",
           "minimum": 1,
           "description": "the maximum supported jobs running under the account at the same time."
+        },
+        "newTier": {
+          "type": "string",
+          "enum": [
+            "Consumption",
+            "Commitment_100AUHours",
+            "Commitment_500AUHours",
+            "Commitment_1000AUHours",
+            "Commitment_5000AUHours",
+            "Commitment_10000AUHours",
+            "Commitment_50000AUHours",
+            "Commitment_100000AUHours",
+            "Commitment_500000AUHours"
+          ],
+          "x-ms-enum": {
+            "name": "PricingTierType",
+            "modelAsString": false
+          },
+          "description": "the billing tier to use for next month."
         }
       },
       "description": "The properties to update that are associated with an underlying Data Lake Analytics account to."
