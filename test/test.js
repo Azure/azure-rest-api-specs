@@ -10,6 +10,7 @@ var assert = require("assert"),
   z = require('z-schema'),
   request = require('request'),
   async = require('async'),
+  RefParser = require('json-schema-ref-parser'),
   util = require('util');
 
 var extensionSwaggerSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json";
@@ -126,8 +127,8 @@ describe('Azure Swagger Schema Validation', function () {
                     docUrl + ' from the documents list. The error is ' + util.inspect(error, { depth: null }));
                 }
                 if (response.statusCode !== 200) {
-                  messages.push('\'File Not Found\': error occurred while accessing the swagger doc ' +
-                    docUrl + ' from the documents list. The received statusCode is: \'' + response.statusCode + '\'.');
+                  messages.push('\'' + response.statusCode + '\': \'File Not Found\'- error occurred while accessing the swagger doc ' +
+                    docUrl + ' from the documents list.');
                 }
                 loopCallback();
               });
@@ -151,6 +152,22 @@ describe('Azure Swagger Schema Validation', function () {
         } else {
           done();
         }
+      });
+    });
+  }).value();
+});
+
+describe('External file or url references ("$ref") in a swagger spec', function () {
+  var swaggersToProcess = swaggers.concat(compositeSwaggers);
+  _(swaggersToProcess).each(function(swagger) {
+    it(swagger + ' should be completely resolvable.', function(done) {
+      RefParser.bundle(swagger, function(bundleErr, bundleResult) {
+        if (bundleErr) {
+          var msg = swagger + ' has references that cannot be resolved. They are as follows: \n' + util.inspect(bundleErr.message, {depth : null});
+          console.log(msg);
+          throw new Error (msg);
+        }
+        done();
       });
     });
   }).value();
