@@ -9,6 +9,7 @@ var assert = require("assert"),
   _ = require('lodash'),
   z = require('z-schema'),
   request = require('request'),
+  async = require('async'),
   util = require('util');
 
 var extensionSwaggerSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json";
@@ -18,7 +19,7 @@ var schemaUrl = "http://json-schema.org/draft-04/schema";
 var exampleSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json";
 var compositeSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/composite-swagger.json";
 
-var swaggerSchema, extensionSwaggerSchema, schema4, exampleSchema, compositeSchema, 
+var swaggerSchema, extensionSwaggerSchema, schema4, exampleSchema, compositeSchema,
     globPath, compositeGlobPath, swaggers, compositeSwaggers, validator;
 
 globPath = path.join(__dirname, '../', '/**/swagger/*.json');
@@ -46,9 +47,9 @@ function stripBOM(content) {
   return content;
 }
 
-describe('Azure Swagger Schema Validation', function() {
-  before(function(done) {
-    request({url: extensionSwaggerSchemaUrl, json:true}, function (error, response, extensionSwaggerSchemaBody) {        
+describe('Azure Swagger Schema Validation', function () {
+  before(function (done) {
+    request({ url: extensionSwaggerSchemaUrl, json: true }, function (error, response, extensionSwaggerSchemaBody) {
       request({ url: swaggerSchemaAltUrl, json: true }, function (error, response, swaggerSchemaBody) {
         request({ url: exampleSchemaUrl, json: true }, function (error, response, exampleSchemaBody) {
           request({ url: compositeSchemaUrl, json: true }, function (error, response, compositeSchemaBody) {
@@ -67,25 +68,25 @@ describe('Azure Swagger Schema Validation', function() {
     });
   });
 
-  _(swaggers).each(function(swagger){
-    it(swagger + ' should be a valid Swagger document.', function(done){
-      fs.readFile(swagger, 'utf8', function(err, data) {
-        if(err) { done(err); }
+  _(swaggers).each(function (swagger) {
+    it(swagger + ' should be a valid Swagger document.', function (done) {
+      fs.readFile(swagger, 'utf8', function (err, data) {
+        if (err) { done(err); }
         var parsedData;
         try {
           parsedData = JSON.parse(stripBOM(data));
         } catch (err) {
-          throw new Error("swagger " + swagger + " is an invalid JSON. " + util.inspect(err, {depth: null}));
+          throw new Error("swagger " + swagger + " is an invalid JSON. " + util.inspect(err, { depth: null }));
         }
-        
+
         if (parsedData.documents && util.isArray(parsedData.documents)) {
           console.log(util.format('Skipping the test for \'%s\' document as it seems to be a composite swagger doc.', swagger));
           done();
         }
         var valid = validator.validate(parsedData, extensionSwaggerSchema);
         if (!valid) {
-            var error = validator.getLastErrors();
-            throw new Error("Schema validation failed: " + util.inspect(error, {depth: null}));
+          var error = validator.getLastErrors();
+          throw new Error("Schema validation failed: " + util.inspect(error, { depth: null }));
         }
         assert(valid === true);
         done();
@@ -93,23 +94,63 @@ describe('Azure Swagger Schema Validation', function() {
     });
   }).value();
 
-  _(compositeSwaggers).each(function(compositeSwagger){
-    it('composite: ' + compositeSwagger + ' should be a valid Composite Swagger document.', function(done){
-      fs.readFile(compositeSwagger, 'utf8', function(err, data) {
-        if(err) { done(err); }
+  _(compositeSwaggers).each(function (compositeSwagger) {
+    it('composite: ' + compositeSwagger + ' should be a valid Composite Swagger document.', function (done) {
+      fs.readFile(compositeSwagger, 'utf8', function (err, data) {
+        if (err) { done(err); }
         var parsedData;
         try {
           parsedData = JSON.parse(stripBOM(data));
         } catch (err) {
-          throw new Error("compositeSwagger " + compositeSwagger + " is an invalid JSON. " + util.inspect(err, {depth: null}));
+          throw new Error("compositeSwagger " + compositeSwagger + " is an invalid JSON. " + util.inspect(err, { depth: null }));
         }
         var valid = validator.validate(parsedData, compositeSchema);
         if (!valid) {
-            var error = validator.getLastErrors();
-            throw new Error("Schema validation for Composite Swagger failed: " + util.inspect(error, {depth: null}));
+          var error = validator.getLastErrors();
+          throw new Error("Schema validation for Composite Swagger failed: " + util.inspect(error, { depth: null }));
         }
         assert(valid === true);
-        done();
+        var compositeSwaggerDir = path.dirname(compositeSwagger);
+        var messages = [];
+        if (parsedData.documents && parsedData.documents.length > 0) {
+          async.eachSeries(parsedData.documents, function (docUrl, loopCallback) {
+            //construct the absolue path if the item in the documents array is a relative path
+            if (!path.isAbsolute(docUrl) && !docUrl.startsWith('http')) {
+              docUrl = path.join(compositeSwaggerDir, docUrl);
+            }
+            //make a request if it is a url
+            if (docUrl.startsWith('http')) {
+              request({ url: docUrl, json: true }, function (error, response, responseBody) {
+                if (error) {
+                  messages.push('An error occurred while accessing the swagger doc ' +
+                    docUrl + ' from the documents list. The error is ' + util.inspect(error, { depth: null }));
+                }
+                if (response.statusCode !== 200) {
+                  messages.push('\'File Not Found\': error occurred while accessing the swagger doc ' +
+                    docUrl + ' from the documents list. The received statusCode is: \'' + response.statusCode + '\'.');
+                }
+                loopCallback();
+              });
+            } else {
+              //check whether the file exists
+              if (!fs.existsSync(docUrl)) {
+                messages.push('\'File Not Found\': error occurred while accessing the swagger doc ' +
+                  docUrl + ' from the documents list on the host filesystem.');
+              }
+              loopCallback();
+            }
+          }, function (err) {
+            if (err) {
+              throw err;
+            }
+            if (messages.length > 0) {
+              throw new Error(JSON.stringify(messages));
+            }
+            done();
+          });
+        } else {
+          done();
+        }
       });
     });
   }).value();
