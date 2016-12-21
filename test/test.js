@@ -158,8 +158,7 @@ describe('Azure Swagger Schema Validation', function () {
 });
 
 describe('External file or url references ("$ref") in a swagger spec', function () {
-  var swaggersToProcess = swaggers.concat(compositeSwaggers);
-  _(swaggersToProcess).each(function(swagger) {
+  _(swaggers).each(function(swagger) {
     it(swagger + ' should be completely resolvable.', function(done) {
       RefParser.bundle(swagger, function(bundleErr, bundleResult) {
         if (bundleErr) {
