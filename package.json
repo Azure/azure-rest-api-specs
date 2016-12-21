@@ -1,5 +1,5 @@
 {
-  "name": "azure-rest-specs-tests",
+  "name": "azure-rest-api-specs-tests",
   "private": true,
   "author": {
     "name": "Microsoft Corporation",
@@ -8,11 +8,9 @@
   },
   "version": "0.1.0",
   "description": "Tests for Azure REST API Specifications",
-  "engines": {
-    "node": ">= 0.8.26"
-  },
   "license": "MIT",
   "dependencies": {
+    "async": "^2.1.4",
     "glob": "^5.0.14",
     "lodash": "^3.10.1",
     "request": "^2.61.0",
@@ -30,6 +28,6 @@
     "url": "http://github.com/azure/azure-rest-api-specs/issues"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha -t 10000"
   }
 }
