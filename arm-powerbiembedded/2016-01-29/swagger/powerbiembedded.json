@@ -4,7 +4,7 @@
   "info": {
     "version": "2016-01-29",
     "title": "Power BI Embedded Management Client",
-    "description": "Client to manage your Power BI embedded workspace collections and retrieve workspaces."
+    "description": "Client to manage your Power BI Embedded workspace collections and retrieve workspaces."
   },
   "schemes": [
     "https",
@@ -44,7 +44,7 @@
           {
             "name": "workspaceCollectionName",
             "in": "path",
-            "description": "Power BI Embedded workspace collection name",
+            "description": "Power BI Embedded Workspace Collection name",
             "required": true,
             "type": "string"
           },
@@ -72,7 +72,7 @@
           "WorkspaceCollections"
         ],
         "operationId": "WorkspaceCollections_create",
-        "description": "Creates a new Power BI Workspace Collection with the specified properties. A Power BI Workspace Collection contains one or more Power BI Workspaces and can be used to provision keys that provide API access to those Power BI Workspaces.",
+        "description": "Creates a new Power BI Workspace Collection with the specified properties. A Power BI Workspace Collection contains one or more workspaces, and can be used to provision keys that provide API access to those workspaces.",
         "consumes": [
           "application/json"
         ],
@@ -93,7 +93,7 @@
           {
             "name": "workspaceCollectionName",
             "in": "path",
-            "description": "Power BI Embedded workspace collection name",
+            "description": "Power BI Embedded Workspace Collection name",
             "required": true,
             "type": "string"
           },
@@ -151,7 +151,7 @@
           {
             "name": "workspaceCollectionName",
             "in": "path",
-            "description": "Power BI Embedded workspace collection name",
+            "description": "Power BI Embedded Workspace Collection name",
             "required": true,
             "type": "string"
           },
@@ -210,7 +210,7 @@
           {
             "name": "workspaceCollectionName",
             "in": "path",
-            "description": "Power BI Embedded workspace collection name",
+            "description": "Power BI Embedded Workspace Collection name",
             "required": true,
             "type": "string"
           },
@@ -237,7 +237,7 @@
           "WorkspaceCollections"
         ],
         "operationId": "WorkspaceCollections_checkNameAvailability",
-        "description": "Check that the specified Power BI Workspace Collection name is valid and not in use.",
+        "description": "Verify the specified Power BI Workspace Collection name is valid and not already in use.",
         "consumes": [
           "application/json"
         ],
@@ -293,7 +293,7 @@
           "WorkspaceCollections"
         ],
         "operationId": "WorkspaceCollections_listByResourceGroup",
-        "description": "Retrieves all existing Power BI Workspace Collections in the specified resource group.",
+        "description": "Retrieves all existing Power BI workspace collections in the specified resource group.",
         "consumes": [
           "application/json"
         ],
@@ -340,7 +340,7 @@
           "WorkspaceCollections"
         ],
         "operationId": "WorkspaceCollections_listBySubscription",
-        "description": "Retrieves all existing Power BI Workspace Collections in the specified subscription.",
+        "description": "Retrieves all existing Power BI workspace collections in the specified subscription.",
         "consumes": [
           "application/json"
         ],
@@ -398,7 +398,7 @@
           {
             "name": "workspaceCollectionName",
             "in": "path",
-            "description": "Power BI Embedded workspace collection name",
+            "description": "Power BI Embedded Workspace Collection name",
             "required": true,
             "type": "string"
           },
@@ -449,7 +449,7 @@
           {
             "name": "workspaceCollectionName",
             "in": "path",
-            "description": "Power BI Embedded workspace collection name",
+            "description": "Power BI Embedded Workspace Collection name",
             "required": true,
             "type": "string"
           },
@@ -525,7 +525,7 @@
           "Workspaces"
         ],
         "operationId": "Workspaces_List",
-        "description": "Retrieves all existing Power BI Workspaces in the specified Workspace Collection.",
+        "description": "Retrieves all existing Power BI workspaces in the specified workspace collection.",
         "consumes": [
           "application/json"
         ],
@@ -546,7 +546,7 @@
           {
             "name": "workspaceCollectionName",
             "in": "path",
-            "description": "Power BI Embedded workspace collection name",
+            "description": "Power BI Embedded Workspace Collection name",
             "required": true,
             "type": "string"
           },
@@ -872,7 +872,7 @@
         },
         "message": {
           "type": "string",
-          "description": "Message indicating an unavailable name due to a conflict or a description of the naming rules that are violated."
+          "description": "Message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated."
         }
       }
     },
@@ -881,7 +881,7 @@
       "properties": {
         "targetResourceGroup": {
           "type": "string",
-          "description": "Name of the resource group that the Power BI Workspace Collections will be migrated to."
+          "description": "Name of the resource group the Power BI workspace collections will be migrated to."
         },
         "resources": {
           "type": "array",
@@ -896,7 +896,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the operation being performed on this particular object. It should match the action name that appears in RBAC / the event service."
+          "description": "The name of the operation being performed on this particular object. This name should match the action name that appears in RBAC / the event service."
         },
         "display": {
           "$ref": "#/definitions/Display"
@@ -908,19 +908,19 @@
       "properties": {
         "provider": {
           "type": "string",
-          "description": "The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with “Microsoft” for 1st party services."
+          "description": "The localized friendly form of the resource provider name. This form is also expected to include the publisher/company responsible. Use Title Casing. Begin with “Microsoft” for 1st party services."
         },
         "resource": {
           "type": "string",
-          "description": "The localized friendly form of the resource type related to this action/operation – it should match the public documentation for the resource provider. It should use Title Casing – for examples, please refer to the “name” section."
+          "description": "The localized friendly form of the resource type related to this action/operation. This form should match the public documentation for the resource provider. Use Title Casing. For examples, refer to the “name” section."
         },
         "operation": {
           "type": "string",
-          "description": "The localized friendly name for the operation, as it should be shown to the user. It should be concise (to fit in drop downs) but clear (i.e. self-documenting). It should use Title Casing and include the entity/resource to which it applies."
+          "description": "The localized friendly name for the operation as shown to the user. This name should be concise (to fit in drop downs), but clear (self-documenting). Use Title Casing and include the entity/resource to which it applies."
         },
         "description": {
           "type": "string",
-          "description": "The localized friendly description for the operation, as it should be shown to the user. It should be thorough, yet concise – it will be used in tool tips and detailed views."
+          "description": "The localized friendly description for the operation as shown to the user. This description should be thorough, yet concise. It will be used in tool-tips and detailed views."
         },
         "origin": {
           "type": "string",
@@ -935,7 +935,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Gets subscription credentials which uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",
