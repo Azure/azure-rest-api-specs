@@ -99,13 +99,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK, when the gallery item already exists and trying to upload the same item returns this response",
             "schema": {
               "$ref": "#/definitions/ResourceDefinition"
             }
           },
           "201": {
-            "description": "Created",
+            "description": "Created, When a new gallery item is uploaded, this response is returned",
             "schema": {
               "$ref": "#/definitions/ResourceDefinition"
             }
@@ -174,10 +174,10 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No Content, This response is returned when the provided gallery item does not exist"
           },
           "200": {
-            "description": "OK"
+            "description": "OK, This response is returned when the provided gallery item is successfully deleted"
           }
         }
       }
@@ -261,13 +261,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK, This response is returned when the provided registration already exists",
             "schema": {
               "$ref": "#/definitions/ResourceDefinition"
             }
           },
           "201": {
-            "description": "Created",
+            "description": "Created, This response is returned when new registration is provided",
             "schema": {
               "$ref": "#/definitions/ResourceDefinition"
             }
@@ -279,7 +279,7 @@
           "ProviderGalleryRegistrations"
         ],
         "description": "Deletes a specific gallery registration",
-        "operationId": "ProviderGalleryRegistrations.Delete",
+        "operationId": "ProviderGalleryRegistrations_Delete",
         "consumes": [],
         "produces": [
           "application/json",
@@ -304,11 +304,11 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content, This response is returned when the provided gallery registration does not exist"
+          },
           "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object"
-            }
+            "description": "OK, This response is returned when the provided gallery registration is successfully deleted"
           }
         }
       }
@@ -352,11 +352,11 @@
   },
   "definitions": {
      "GalleryItemUriPayload": {
-      "description": "Gallery item URI, Points to the http or https uri where the galery package is located, typically a blob uri",
+      "description": "Gallery item URI, Points to the http or https uri where the gallery package is located, typically a blob uri",
       "type": "object",
       "properties": {
         "GalleryItemUri": {
-          "description": "Gets or sets the gallery item URI.",
+          "description": "The gallery item URI.",
           "type": "string"
         }
       }
@@ -478,7 +478,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Get subscription credentials which uniquely identify Azure stack subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Subscription credentials which uniquely identify Azure stack subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",
