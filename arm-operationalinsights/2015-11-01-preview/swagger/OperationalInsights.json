@@ -839,6 +839,9 @@
           "description": "The properties of the linked service."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -898,7 +901,8 @@
         }
       },
       "required": [
-        "kind"
+        "kind",
+        "properties"
       ],
       "allOf": [
         {
@@ -1188,6 +1192,7 @@
           "description": "Resource Id"
         },
         "name": {
+          "readOnly": true,
           "type": "string",
           "description": "Resource name"
         },
