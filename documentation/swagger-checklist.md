@@ -118,7 +118,7 @@ The Azure Developer Experience team will continue to deliver rich tools to valid
 
 - [ ] **M2000**: A Swagger specification *MUST* be accompanied with a document that describes end-to-end management scenarios that can be realized using operations described in the Swagger.
 
-- [ ] **M2001**: Read only parameters and model properties *MUST* be labeled as `"readOnly": true` in Swagger.
+- [ ] **M2001**: Read only parameters of the model properties *MUST* be labeled as `"readOnly": true` in Swagger.
 
 - [ ] **M2002**: Boolean parameters *MUST* be represented as boolean in Swagger. Boolean parameters *MUST* NOT be represented as strings. Similarly, this requirements applies to other primitive data types such as integer, float and double. These primitive data types *MUST* be represented using [Swagger primitive data types](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types).
 
