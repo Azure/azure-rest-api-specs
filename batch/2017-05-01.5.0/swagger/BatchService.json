@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BatchService",
-    "version": "2017-01-01.4.0",
+    "version": "2017-05-01.5.0",
     "description": "A client for issuing REST requests to the Azure Batch service.",
     "x-ms-code-generation-settings": {
       "name": "BatchServiceClient"
@@ -10227,7 +10227,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of virtual machines in the pool. All VMs in a pool are the same size.",
-          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2 and A2V2. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "totalCoreHours": {
           "type": "number",
@@ -10283,8 +10283,7 @@
           "title": "The type of operating system (e.g. Windows or Linux) compatible with the node agent SKU.",
           "enum": [
             "linux",
-            "windows",
-            "unmapped"
+            "windows"
           ],
           "x-ms-enum": {
             "name": "OSType",
@@ -10664,8 +10663,7 @@
           "title": "The format of the certificate data.",
           "enum": [
             "pfx",
-            "cer",
-            "unmapped"
+            "cer"
           ],
           "x-ms-enum": {
             "name": "CertificateFormat",
@@ -10861,14 +10859,19 @@
           },
           "title": "A list of task exit code ranges and how the Batch service should respond to them."
         },
-        "schedulingError": {
+        "preProcessingError": {
           "$ref": "#/definitions/ExitOptions",
-          "title": "How the Batch service should respond if the task fails with a scheduling error."
+          "title": "How the Batch service should respond if the task fails to start due to an error."
+        },
+        "fileUploadError": {
+          "$ref": "#/definitions/ExitOptions",
+          "title": "How the Batch service should respond if a file upload error occurs.",
+          "description": "If the task exited with an exit code that was specified via exitCodes or exitCodeRanges, and then encountered a file upload error, then the action specified by the exit code takes precedence."
         },
         "default": {
           "$ref": "#/definitions/ExitOptions",
-          "title": "How the Batch service should respond if the task fails with an exit condition not covered by any of the other properties - that is, any nonzero exit code not listed in the exitCodes or exitCodeRanges collection, or a scheduling error if the schedulingError property is not present.",
-          "description": "Note that the default condition does not include exit code 0. If you want non-default behaviour on exit code 0, you must list it explicitly using the exitCodes or exitCodeRanges collection."
+          "title": "How the Batch service should respond if the task fails with an exit condition not covered by any of the other properties.",
+          "description": "This value is used if the task exits with any nonzero exit code not listed in the exitCodes or exitCodeRanges collection, with a pre-processing error if the preProcessingError property is not present, or with a file upload error if the fileUploadError property is not present. If you want non-default behaviour on exit code 0, you must list it explicitly using the exitCodes or exitCodeRanges collection."
         }
       },
       "title": "Specifies how the Batch service should respond when the task completes."
@@ -10980,6 +10983,28 @@
       "title": "The definition of the user identity under which the task is run.",
       "description": "Specify either the userName or autoUser property, but not both."
     },
+    "LinuxUserConfiguration": {
+      "properties": {
+        "uid": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The user ID of the user account.",
+          "description": "The uid and gid properties must be specified together or not at all. If not specified the underlying operating system picks the uid."
+        },
+        "gid": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The group ID for the user account.",
+          "description": "The uid and gid properties must be specified together or not at all. If not specified the underlying operating system picks the gid."
+        },
+        "sshPrivateKey": {
+          "type": "string",
+          "title": "The SSH private key for the user account.",
+          "description": "The SSH private key establishes password-less SSH between nodes in a Linux pool when the pool's enableInterNodeCommunication property is true. If not specified, password-less SSH is not established between nodes."
+        }
+      },
+      "title": "Properties used to create a user account on a Linux node."
+    },
     "UserAccount": {
       "properties": {
         "name": {
@@ -10995,14 +11020,14 @@
           "description": "nonAdmin - The auto user is a standard user without elevated access. admin - The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.",
           "$ref": "#/definitions/ElevationLevel"
         },
-        "sshPrivateKey": {
-          "type": "string",
-          "title": "The SSH private key for the user account.",
-          "description": "The SSH private key establishes password-less SSH between nodes in a Linux pool when the pool's enableInterNodeCommunication property is true. This property will be ignored in a Windows pool."
+        "linuxUserConfiguration": {
+          "title": "The Linux-specific user configuration for the user account.",
+          "description": "This property is ignored if specified on a Windows pool. If not specified, the user is created with the default options.",
+          "$ref": "#/definitions/LinuxUserConfiguration"
         }
       },
       "required": [ "name", "password" ],
-      "title": "Properties used to create a user on an Azure Batch node."
+      "title": "Properties used to create a user used to execute tasks on an Azure Batch node."
     },
     "TaskConstraints": {
       "properties": {
@@ -11052,6 +11077,13 @@
           "title": "A list of files that the Batch service will download to the compute node before running the command line.",
           "description": "Files listed under this element are located in the task's working directory."
         },
+       "outputFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutputFile"
+          },
+          "title": "A list of files that the Batch service will upload from the compute node after running the command line."
+        },
         "environmentSettings": {
           "type": "array",
           "items": {
@@ -11090,6 +11122,11 @@
           "title": "The settings for an authentication token that the task can use to perform Batch service operations.",
           "description": "If this property is set, the Batch service provides the task with an authentication token which can be used to authenticate Batch service operations without requiring an account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the task can carry out using the token depend on the settings. For example, a task can request job permissions in order to add other tasks to the job, or check the status of the job or of other tasks under the job.",
           "$ref": "#/definitions/AuthenticationTokenSettings"
+        },
+        "allowLowPriorityNode": {
+          "type": "boolean",
+          "title": "Whether the Job Manager task may run on a low-priority compute node.",
+          "description": "The default value is false."
         }
       },
       "required": [ "id", "commandLine" ],
@@ -11199,8 +11236,7 @@
           "title": "How tasks should be distributed across compute nodes.",
           "enum": [
             "spread",
-            "pack",
-            "unmapped"
+            "pack"
           ],
           "x-ms-enum": {
             "name": "ComputeNodeFillType",
@@ -11268,8 +11304,7 @@
           "description": "The default value is currentUser. This property is applicable only for pools configured with Windows nodes (that is, created with cloudServiceConfiguration, or with virtualMachineConfiguration using a Windows image reference). For Linux compute nodes, the certificates are stored in a directory inside the task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the task to query for this location. For certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and certificates are placed in that directory.",
           "enum": [
             "currentUser",
-            "localMachine",
-            "unmapped"
+            "localMachine"
           ],
           "x-ms-enum": {
             "name": "CertificateStoreLocation",
@@ -11288,8 +11323,7 @@
             "enum": [
               "startTask",
               "task",
-              "remoteUser",
-              "unmapped"
+              "remoteUser"
             ],
             "x-ms-enum": {
               "name": "CertificateVisibility",
@@ -11328,7 +11362,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of the virtual machines in the pool. All virtual machines in a pool are the same size.",
-          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2 and A2V2. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "cloudServiceConfiguration": {
           "$ref": "#/definitions/CloudServiceConfiguration",
@@ -11356,11 +11390,17 @@
           "title": "The timeout for allocation of compute nodes to the pool.",
           "description": "This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
-        "targetDedicated": {
+        "targetDedicatedNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of compute nodes in the pool.",
-          "description": "This property must not be specified if enableAutoScale is set to true. It is required if enableAutoScale is set to false."
+          "title": "The desired number of dedicated compute nodes in the pool.",
+          "description": "This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both."
+        },
+        "targetLowPriorityNodes": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The desired number of low-priority compute nodes in the pool.",
+          "description": "This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both."
         },
         "enableAutoScale": {
           "type": "boolean",
@@ -11407,6 +11447,14 @@
           "title": "The list of application packages to be installed on each compute node in the pool.",
           "description": "This property is currently not supported on auto pools created with the virtualMachineConfiguration (IaaS) property."
         },
+        "applicationLicenses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+            },
+          "title": "The list of application licenses the Batch service will make available on each compute node in the pool.",
+          "description": "The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, pool creation will fail."
+        },
         "userAccounts": {
           "type": "array",
           "items": {
@@ -11439,8 +11487,7 @@
           "description": "When the pool lifetime scope is jobSchedule level, the Batch service keeps track of the last autopool created for the job schedule, and deletes that pool when the job schedule completes. Batch will also delete this pool if the user updates the auto pool specification in a way that changes this lifetime.",
           "enum": [
             "jobSchedule",
-            "job",
-            "unmapped"
+            "job"
           ],
           "x-ms-enum": {
             "name": "PoolLifetimeOption",
@@ -11787,7 +11834,7 @@
       "properties": {
         "category": {
           "title": "The category of the job scheduling error.",
-          "$ref": "#/definitions/SchedulingErrorCategory"
+          "$ref": "#/definitions/ErrorCategory"
         },
         "code": {
           "type": "string",
@@ -12050,30 +12097,30 @@
       },
       "title": "The result of listing the jobs in an account."
     },
-    "TaskSchedulingError": {
+    "TaskFailureInformation": {
       "properties": {
         "category": {
-          "title": "The category of the task scheduling error.",
-          "$ref": "#/definitions/SchedulingErrorCategory"
+          "title": "The category of the task error.",
+          "$ref": "#/definitions/ErrorCategory"
         },
         "code": {
           "type": "string",
-          "title": "An identifier for the task scheduling error. Codes are invariant and are intended to be consumed programmatically."
+          "title": "An identifier for the task error. Codes are invariant and are intended to be consumed programmatically."
         },
         "message": {
           "type": "string",
-          "title": "A message describing the task scheduling error, intended to be suitable for display in a user interface."
+          "title": "A message describing the task error, intended to be suitable for display in a user interface."
         },
         "details": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/NameValuePair"
           },
-          "title": "The list of additional error details related to the scheduling error."
+          "title": "A list of additional details related to the error."
         }
       },
       "required": [ "category" ],
-      "title": "Information about an error when scheduling a task."
+      "title": "Information about a task failure."
     },
     "JobPreparationTaskExecutionInformation": {
       "properties": {
@@ -12116,9 +12163,10 @@
           "title": "The exit code of the program specified on the task command line.",
           "description": "This parameter is returned only if the task is in the completed state. The exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. Note that the exit code may also be generated by the compute node operating system, such as when a process is forcibly terminated."
         },
-        "schedulingError": {
-          "$ref": "#/definitions/TaskSchedulingError",
-          "title": "The error encountered by the Batch service when starting the task."
+        "failureInfo": {
+          "$ref": "#/definitions/TaskFailureInformation",
+          "title": "Information describing the task failure.",
+          "description": "This property is set only if the task is in the completed state."
         },
         "retryCount": {
           "type": "integer",
@@ -12130,6 +12178,11 @@
           "format": "date-time",
           "title": "The most recent time at which a retry of the Job Preparation task started running.",
           "description": "This property is set only if the task was retried (i.e. retryCount is nonzero). If present, this is typically the same as startTime, but may be different if the task has been restarted for reasons other than retry; for example, if the compute node was rebooted during a retry, then the startTime is updated but the lastRetryTime is not."
+        },
+        "result": {
+          "$ref": "#/definitions/TaskExecutionResult",
+          "title": "The result of the task execution.",
+          "description": "If the value is 'failed', then the details of the failure can be found in the failureInfo property."
         }
       },
       "required": [ "startTime", "retryCount", "state" ],
@@ -12175,9 +12228,15 @@
           "title": "The exit code of the program specified on the task command line.",
           "description": "This parameter is returned only if the task is in the completed state. The exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. Note that the exit code may also be generated by the compute node operating system, such as when a process is forcibly terminated."
         },
-        "schedulingError": {
-          "$ref": "#/definitions/TaskSchedulingError",
-          "title": "The error encountered by the Batch service when starting the task."
+        "failureInfo": {
+          "$ref": "#/definitions/TaskFailureInformation",
+          "title": "Information describing the task failure.",
+          "description": "This property is set only if the task is in the completed state."
+        },
+        "result": {
+          "$ref": "#/definitions/TaskExecutionResult",
+          "title": "The result of the task execution.",
+          "description": "If the value is 'failed', then the details of the failure can be found in the failureInfo property."
         }
       },
       "required": [ "startTime", "state" ],
@@ -12401,7 +12460,7 @@
         "subnetId": {
           "type": "string",
           "title": "The ARM resource identifier of the virtual network subnet which the compute nodes of the pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.",
-          "description": "The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes, and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. This property can only be specified for pools created with a cloudServiceConfiguration.",
+          "description": "The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes, and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. For pools created via virtualMachineConfiguration the Batch account must have poolAllocationMode userSubscription in order to use a VNet.",
           "externalDocs": {
             "url": "https://azure.microsoft.com/en-us/documentation/articles/role-based-access-built-in-roles/#classic-virtual-machine-contributor",
             "description": "Setting up RBAC for Azure Batch VNETs"
@@ -12483,7 +12542,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of virtual machines in the pool. All virtual machines in a pool are the same size.",
-          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2 and A2V2. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "cloudServiceConfiguration": {
           "$ref": "#/definitions/CloudServiceConfiguration",
@@ -12501,26 +12560,38 @@
           "title": "The timeout for allocation of compute nodes to the pool.",
           "description": "This is the timeout for the most recent resize operation. (The initial sizing when the pool is created counts as a resize.) The default value is 15 minutes."
         },
-        "resizeError": {
-          "$ref": "#/definitions/ResizeError",
-          "title": "Details of any error encountered while performing the last resize on the pool.",
-          "description": "This property is set only if an error occurred during the last pool resize, and only when the pool allocationState is Steady."
+        "resizeErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResizeError"
+          },
+          "title": "A list of errors encountered while performing the last resize on the pool.",
+          "description": "This property is set only if one or more errors occurred during the last pool resize, and only when the pool allocationState is Steady."
         },
-        "currentDedicated": {
+        "currentDedicatedNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of compute nodes currently in the pool."
+          "title": "The number of dedicated compute nodes currently in the pool."
         },
-        "targetDedicated": {
+        "currentLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of compute nodes in the pool.",
-          "description": "This property is not set if enableAutoScale is true. It is required if enableAutoScale is false."
+          "title": "The number of low-priority compute nodes currently in the pool."
+        },
+        "targetDedicatedNodes": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The desired number of dedicated compute nodes in the pool."
+        },
+        "targetLowPriorityNodes": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The desired number of low-priority compute nodes in the pool."
         },
         "enableAutoScale": {
           "type": "boolean",
           "title": "Whether the pool size should automatically adjust over time.",
-          "description": "If true, the autoScaleFormula property must be set. If false, the targetDedicated property must be set."
+          "description": "If false, at least one of targetDedicateNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula property is required and the pool automatically resizes according to the formula. The default value is false."
         },
         "autoScaleFormula": {
           "type": "string",
@@ -12565,6 +12636,14 @@
             "$ref": "#/definitions/ApplicationPackageReference"
           },
           "title": "The list of application packages to be installed on each compute node in the pool."
+        },
+        "applicationLicenses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+            },
+          "title": "The list of application licenses the Batch service will make available on each compute node in the pool.",
+          "description": "The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, pool creation will fail."
         },
         "maxTasksPerNode": {
           "type": "integer",
@@ -12611,7 +12690,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of virtual machines in the pool. All virtual machines in a pool are the same size.",
-          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2 and A2V2. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "cloudServiceConfiguration": {
           "$ref": "#/definitions/CloudServiceConfiguration",
@@ -12629,16 +12708,22 @@
           "title": "The timeout for allocation of compute nodes to the pool.",
           "description": "This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
-        "targetDedicated": {
+        "targetDedicatedNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of compute nodes in the pool.",
-          "description": "This property must have the default value if enableAutoScale is true. It is required if enableAutoScale is false."
+          "title": "The desired number of dedicated compute nodes in the pool.",
+          "description": "This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both."
+        },
+        "targetLowPriorityNodes": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The desired number of low-priority compute nodes in the pool.",
+          "description": "This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both."
         },
         "enableAutoScale": {
           "type": "boolean",
           "title": "Whether the pool size should automatically adjust over time.",
-          "description": "If true, the autoScaleFormula property must be set. If false, the targetDedicated property must be set. The default value is false."
+          "description": "If false, at least one of targetDedicateNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula property is required and the pool automatically resizes according to the formula. The default value is false."
         },
         "autoScaleFormula": {
           "type": "string",
@@ -12680,6 +12765,14 @@
           },
           "title": "The list of application packages to be installed on each compute node in the pool.",
           "description": "This property is currently not supported on pools created using the virtualMachineConfiguration (IaaS) property."
+        },
+        "applicationLicenses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+            },
+          "title": "The list of application licenses the Batch service will make available on each compute node in the pool.",
+          "description": "The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, pool creation will fail."
         },
         "maxTasksPerNode": {
           "type": "integer",
@@ -12773,9 +12866,9 @@
           "title": "The exit code of the program specified on the task command line.",
           "description": "This property is set only if the task is in the completed state. In general, the exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. However, if the Batch service terminates the task (due to timeout, or user termination via the API) you may see an operating system-defined exit code."
         },
-        "schedulingError": {
-          "$ref": "#/definitions/TaskSchedulingError",
-          "title": "Details of any error encountered scheduling the task.",
+        "failureInfo": {
+          "$ref": "#/definitions/TaskFailureInformation",
+          "title": "Information describing the task failure.",
           "description": "This property is set only if the task is in the completed state."
         },
         "retryCount": {
@@ -12801,6 +12894,11 @@
           "format": "date-time",
           "title": "The most recent time at which the task has been requeued by the Batch service as the result of a user request.",
           "description": "This property is set only if the requeueCount is nonzero."
+        },
+        "result": {
+          "$ref": "#/definitions/TaskExecutionResult",
+          "title": "The result of the task execution.",
+          "description": "If the value is 'failed', then the details of the failure can be found in the failureInfo property."
         }
       },
       "required": [ "requeueCount", "retryCount" ],
@@ -13025,6 +13123,14 @@
           "title": "A list of files that the Batch service will download to the compute node before running the command line.",
           "description": "For multi-instance tasks, the resource files will only be downloaded to the compute node on which the primary task is executed."
         },
+        "outputFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutputFile"
+          },
+          "title": "A list of files that the Batch service will upload from the compute node after running the command line.",
+          "description": "For multi-instance tasks, the files will only be uploaded from the compute node on which the primary task is executed."
+        },
         "environmentSettings": {
           "type": "array",
           "items": {
@@ -13110,6 +13216,14 @@
           "title": "A list of files that the Batch service will download to the compute node before running the command line.",
           "description": "For multi-instance tasks, the resource files will only be downloaded to the compute node on which the primary task is executed."
         },
+        "outputFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutputFile"
+          },
+          "title": "A list of files that the Batch service will upload from the compute node after running the command line.",
+          "description": "For multi-instance tasks, the files will only be uploaded from the compute node on which the primary task is executed."
+        },
         "environmentSettings": {
           "type": "array",
           "items": {
@@ -13178,8 +13292,7 @@
           "enum": [
             "success",
             "clientError",
-            "serverError",
-            "unmapped"
+            "serverError"
           ],
           "x-ms-enum": { "name": "TaskAddStatus" }
         },
@@ -13248,9 +13361,10 @@
           "title": "The exit code of the program specified on the subtask command line.",
           "description": "This property is set only if the subtask is in the completed state. In general, the exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. However, if the Batch service terminates the subtask (due to timeout, or user termination via the API) you may see an operating system-defined exit code."
         },
-        "schedulingError": {
-          "$ref": "#/definitions/TaskSchedulingError",
-          "title": "Details of any error encountered scheduling the subtask."
+        "failureInfo": {
+          "$ref": "#/definitions/TaskFailureInformation",
+          "title": "Information describing the task failure.",
+          "description": "This property is set only if the task is in the completed state."
         },
         "state": {
           "title": "The current state of the subtask.",
@@ -13271,6 +13385,11 @@
           "format": "date-time",
           "title": "The time at which the subtask entered its previous state.",
           "description": "This property is not set if the subtask is in its initial running state."
+        },
+        "result": {
+          "$ref": "#/definitions/TaskExecutionResult",
+          "title": "The result of the task execution.",
+          "description": "If the value is 'failed', then the details of the failure can be found in the failureInfo property."
         }
       },
       "title": "Information about an Azure Batch subtask."
@@ -13367,9 +13486,10 @@
           "title": "The exit code of the program specified on the start task command line.",
           "description": "This property is set only if the start task is in the completed state. In general, the exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. However, if the Batch service terminates the start task (due to timeout, or user termination via the API) you may see an operating system-defined exit code."
         },
-        "schedulingError": {
-          "$ref": "#/definitions/TaskSchedulingError",
-          "title": "Any error encountered scheduling the start task."
+        "failureInfo": {
+          "$ref": "#/definitions/TaskFailureInformation",
+          "title": "Information describing the task failure.",
+          "description": "This property is set only if the task is in the completed state."
         },
         "retryCount": {
           "type": "integer",
@@ -13382,6 +13502,11 @@
           "format": "date-time",
           "title": "The most recent time at which a retry of the task started running.",
           "description": "This element is present only if the task was retried (i.e. retryCount is nonzero). If present, this is typically the same as startTime, but may be different if the task has been restarted for reasons other than retry; for example, if the compute node was rebooted during a retry, then the startTime is updated but the lastRetryTime is not."
+        },
+        "result": {
+          "$ref": "#/definitions/TaskExecutionResult",
+          "title": "The result of the task execution.",
+          "description": "If the value is 'failed', then the details of the failure can be found in the failureInfo property."
         }
       },
       "required": [ "state", "startTime", "retryCount" ],
@@ -13433,7 +13558,8 @@
             "startTaskFailed",
             "unknown",
             "leavingPool",
-            "offline"
+            "offline",
+            "preempted"
           ],
           "x-ms-enum": {
             "name": "ComputeNodeState",
@@ -13481,7 +13607,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of the virtual machine hosting the compute node.",
-          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2 and A2V2. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "totalTasksRun": {
           "type": "integer",
@@ -13527,6 +13653,10 @@
             "$ref": "#/definitions/ComputeNodeError"
           },
           "title": "The list of errors that are currently being encountered by the compute node."
+        },
+        "isDedicated": {
+          "type": "boolean",
+          "title": "Whether this compute node is a dedicated node. If false, the node is a low-priority node."
         }
       },
       "title": "A compute node in the Batch service."
@@ -13767,10 +13897,15 @@
     },
     "PoolResizeParameter": {
       "properties": {
-        "targetDedicated": {
+        "targetDedicatedNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of compute nodes in the pool."
+          "title": "The desired number of dedicated compute nodes in the pool."
+        },
+        "targetLowPriorityNodes": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The desired number of low-priority compute nodes in the pool."
         },
         "resizeTimeout": {
           "type": "string",
@@ -13784,7 +13919,6 @@
           "$ref": "#/definitions/ComputeNodeDeallocationOption"
         }
       },
-      "required": [ "targetDedicated" ],
       "title": "Options for changing the size of a pool."
     },
     "PoolUpdatePropertiesParameter": {
@@ -13981,6 +14115,61 @@
       "required": [ "nodeList" ],
       "title": "Options for removing compute nodes from a pool."
     },
+    "OutputFile": {
+      "properties": {
+        "filePattern": {
+          "type": "string",
+          "title": "A pattern indicating which file(s) to upload.",
+          "description": "Both relative and absolute paths are supported. Relative paths are relative to the task working directory. For wildcards, use * to match any character and ** to match any directory. For example, **\\*.txt matches any file ending in .txt in the task working directory or any subdirectory. Note that \\ and / are treated interchangeably and mapped to the correct directory separator on the compute node operating system."
+        },
+        "destination": {
+          "title": "The destination for the output file(s).",
+          "$ref": "#/definitions/OutputFileDestination"
+        },
+        "uploadOptions": {
+          "title": "Additional options for the upload operation, including under what conditions to perform the upload.",
+          "$ref": "#/definitions/OutputFileUploadOptions"
+        }
+      },
+      "required": [ "filePattern", "destination", "uploadOptions" ],
+      "title": "A specification for uploading files from an Azure Batch node to another location after the Batch service has finished executing the task process."
+    },
+    "OutputFileDestination": {
+      "properties": {
+        "container": {
+          "title": "A location in Azure blob storage to which files are uploaded.",
+          "$ref": "#/definitions/OutputFileBlobContainerDestination"
+        }
+      },
+      "title": "The destination to which a file should be uploaded."
+    },
+    "OutputFileBlobContainerDestination": {
+      "properties": {
+        "path": {
+          "type": "string",
+          "title": "The destination blob or virtual directory within the Azure Storage container.",
+          "description": "If filePattern contains one or more wildcards, then path is the name of the blob virtual directory (blob name prefix). If filePattern contains no wildcards, then path is the name of the blob."
+        },
+        "containerUrl": {
+          "type": "string",
+          "title": "A SAS URL granting write access to the Azure storage container.",
+          "description": "The Batch service uses the SAS URL to authenticate to Azure Storage in order to write the output files to the container."
+        }
+      },
+      "required": [ "containerUrl" ],
+      "title": "Specifies a file upload destination within an Azure blob storage container."
+    },
+    "OutputFileUploadOptions": {
+      "properties": {
+        "uploadCondition": {
+          "title": "The conditions under which the task output file or set of files should be uploaded.",
+          "description": "The default is taskCompletion.",
+          "$ref": "#/definitions/OutputFileUploadCondition"
+        }
+      },
+      "required": [ "uploadCondition" ],
+      "title": "Details about file upload, including under what conditions to perform the upload."
+    },
     "ErrorMessage": {
       "properties": {
         "lang": {
@@ -14111,16 +14300,15 @@
         "modelAsString": false
       }
     },
-    "SchedulingErrorCategory": {
+    "ErrorCategory": {
       "type": "string",
-      "title": "The category of the scheduling error.",
+      "title": "The category of the error.",
       "enum": [
         "userError",
-        "serverError",
-        "unmapped"
+        "serverError"
       ],
       "x-ms-enum": {
-        "name": "SchedulingErrorCategory",
+        "name": "ErrorCategory",
         "modelAsString": false
       }
     },
@@ -14162,6 +14350,33 @@
       ],
       "x-ms-enum": {
         "name": "ComputeNodeDeallocationOption",
+        "modelAsString": false
+      }
+    },
+    "OutputFileUploadCondition": {
+      "type": "string",
+      "title": "The conditions under which a task output file or set of files should be uploaded.",
+      "description": "taskSuccess: Upload the file(s) only after the task process exits with an exit code of 0. taskFailure: Upload the file(s) only after the task process exits with a nonzero exit code. taskCompletion: Upload the file(s) after the task process exits, no matter what the exit code was.",
+      "enum": [
+        "taskSuccess",
+        "taskFailure",
+        "taskCompletion"
+      ],
+      "x-ms-enum": {
+        "name": "OutputFileUploadCondition",
+        "modelAsString": false
+      }
+    },
+    "TaskExecutionResult": {
+      "type": "string",
+      "title": "The result of task execution.",
+      "description": "success - The task ran successfully. failure - There was an error during processing of the task. The failure may have occurred before the task process was launched, while the task process was executing, or after the task process exited.",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "x-ms-enum": {
+        "name": "TaskExecutionResult",
         "modelAsString": false
       }
     }
