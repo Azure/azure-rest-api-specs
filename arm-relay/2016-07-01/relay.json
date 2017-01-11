@@ -1,9 +1,10 @@
 ﻿{
   "swagger": "2.0",
   "info": {
-    "title": "ServiceBusManagementClient",
-    "description": "Azure Service Bus client",
-    "version": "2016-07-01"
+    "title": "Relay API",
+    "description": "Use these API to manage Azure Relay resources through Azure Resources Manager.",
+    "version": "2016-07-01",
+    "x-ms-code-generation-settings": { "name": "RelayManagementClient" }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -64,7 +65,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NamespaceCreateParameters"
+              "$ref": "#/definitions/NamespaceResource"
             },
             "description": "Parameters supplied to create a Namespace Resource."
           },
@@ -76,28 +77,22 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Namespace create request succeeded",
+            "schema": {
+              "$ref": "#/definitions/NamespaceResource"
+            }
+          },
           "201": {
             "description": "Namespace create request accepted",
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
             }
           },
-          "400": {
-            "description": "Invalid request body.",
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/NamespaceResource"
-            }
-          },
-          "409": {
-            "description": "Conflict. Namespace Already exists",
-            "schema": {
-              "$ref": "#/definitions/NamespaceResource"
-            }
-          },
-          "500": {
-            "description": "Internal error. ",
-            "schema": {
-              "$ref": "#/definitions/NamespaceResource"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -108,7 +103,7 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_patch",
-        "description": "Updates properties in a Azure Relay namespace.",
+        "description": "Updates properties of Azure Relay namespace.",
 
         "parameters": [
           {
@@ -130,7 +125,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NamespaceCreateParameters"
+              "$ref": "#/definitions/NamespaceResource"
             },
             "description": "Parameters supplied to create a Namespace Resource."
           },
@@ -148,22 +143,10 @@
               "$ref": "#/definitions/NamespaceResource"
             }
           },
-          "400": {
-            "description": "Invalid request body.",
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/NamespaceResource"
-            }
-          },
-          "409": {
-            "description": "Conflict. Namespace Already exists",
-            "schema": {
-              "$ref": "#/definitions/NamespaceResource"
-            }
-          },
-          "500": {
-            "description": "Internal error. ",
-            "schema": {
-              "$ref": "#/definitions/NamespaceResource"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -198,14 +181,20 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
           "200": {
-            "description": "Namespace delete successful"
+            "description": "Namespace delete Request succeeded"
           },
           "202": {
-            "description": "Namespace delete request has been accepted"
+            "description": "Namespace delete request has been accepted for processing and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Namespace delete request has been accepted, but the Namespace not found"
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -244,6 +233,12 @@
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
             }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -253,7 +248,7 @@
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Namespaces_ListBySubscription",
+        "operationId": "Namespaces_List",
         "description": "Lists all the available namespaces within the subscription irrespective of the resourceGroups.",
         "parameters": [
           {
@@ -268,6 +263,53 @@
             "description": "Namespaces returned successfully",
             "schema": {
               "$ref": "#/definitions/NamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListByResourceGroup",
+        "description": "Lists all the available namespaces within the ResourceGroup.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespaces by resourcegroup returned successfully",
+            "schema": {
+              "$ref": "#/definitions/NamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -311,6 +353,12 @@
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
             }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -324,7 +372,7 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_CreateOrUpdateAuthorizationRule",
-        "description": "Creates an authorization rule for a namespace",
+        "description": "Creates or Updates an authorization rule for a namespace",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639410.aspx"
         },
@@ -368,9 +416,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace Authorization rule created",
+            "description": "Request to create Namespace Authorization rule succeeded",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -411,11 +465,17 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
           "200": {
-            "description": "Namespace Authorization rule deleted"
+            "description": "Request to delete Namespace Authorization rule succeeded."
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the Namespace Authorization rule was not found."
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -459,6 +519,12 @@
             "description": "Namespace Authorization rule returned successfully",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -505,6 +571,12 @@
             "description": "Successful",
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -561,6 +633,12 @@
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
             }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -571,7 +649,7 @@
           "HybridConnection"
         ],
         "operationId": "HybridConnections_CreateOrUpdate",
-        "description": "Creates/Updates a service HybridConnections. This operation is idempotent.",
+        "description": "Creates or Updates a service HybridConnections. This operation is idempotent.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -612,9 +690,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Hybrid Connections created",
+            "description": "Request to Create Hybrid Connections succeeded",
             "schema": {
               "$ref": "#/definitions/HybridConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -655,11 +739,17 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
           "200": {
-            "description": "Hybrid Connections deleted."
+            "description": "Request to delete Hybrid Connections succeeded."
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the Hybrid Connections was not found."
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -667,7 +757,7 @@
         "tags": [
           "HybridConnection"
         ],
-        "operationId": "HybridConnection_Get",
+        "operationId": "HybridConnections_Get",
         "description": "Returns the description for the specified HybridConnection.",
         "parameters": [
           {
@@ -705,16 +795,10 @@
               "$ref": "#/definitions/HybridConnectionListResult"
             }
           },
-          "204": {
-            "description": "HybridConnection not found",
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/HybridConnectionListResult"
-            }
-          },
-          "500": {
-            "description": "Internal error",
-            "schema": {
-              "$ref": "#/definitions/HybridConnectionListResult"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -728,7 +812,7 @@
         "tags": [
           "HybridConnection"
         ],
-        "operationId": "HybridConnection_ListAll",
+        "operationId": "HybridConnections_ListByNameSpace",
         "description": "Lists the HybridConnection within the namespace.",
         "parameters": [
           {
@@ -758,6 +842,12 @@
             "schema": {
               "$ref": "#/definitions/HybridConnectionListResult"
             }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -771,7 +861,7 @@
           "HybridConnection"
         ],
         "operationId": "HybridConnections_CreateOrUpdateAuthorizationRule",
-        "description": "Creates an authorization rule for a HybridConnections",
+        "description": "Creates or Updates an authorization rule for a HybridConnections",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -824,16 +914,10 @@
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           },
-          "400": {
-            "description": "Invalid request body.",
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
-            }
-          },
-          "500": {
-            "description": "Internal error.",
-            "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -881,8 +965,8 @@
           }
         ],
         "responses": {
-          "500": {
-            "description": "Internal error.",
+          "200": {
+            "description": "HybridConnections authorizationRule deleted",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -893,10 +977,10 @@
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           },
-          "200": {
-            "description": "HybridConnections authorizationRule deleted",
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -950,10 +1034,10 @@
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           },
-          "500": {
-            "description": "Internal error.",
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1013,6 +1097,12 @@
             "description": "Does not exist",
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1076,6 +1166,12 @@
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
             }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1086,7 +1182,7 @@
           "WCFRelays"
         ],
         "operationId": "WCFRelays_CreateOrUpdate",
-        "description": "Creates/Updates a service WCFRelays. This operation is idempotent.",
+        "description": "Creates or Updates a service WCFRelays. This operation is idempotent.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1114,7 +1210,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HybridConnectionListResult"
+              "$ref": "#/definitions/WcfRelaysListResult"
             },
             "description": "Parameters supplied to create a WCFRelays."
           },
@@ -1129,25 +1225,13 @@
           "200": {
             "description": "Hybrid Connections created",
             "schema": {
-              "$ref": "#/definitions/HybridConnectionListResult"
+              "$ref": "#/definitions/WcfRelaysListResult"
             }
           },
-          "400": {
-            "description": "Invalid request body",
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/HybridConnectionListResult"
-            }
-          },
-          "409": {
-            "description": "Conflict. Relay Already exists",
-            "schema": {
-              "$ref": "#/definitions/HybridConnectionListResult"
-            }
-          },
-          "500": {
-            "description": "Internal error.",
-            "schema": {
-              "$ref": "#/definitions/HybridConnectionListResult"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1188,14 +1272,17 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
           "200": {
             "description": "Hybrid Connections deleted."
           },
-          "500": {
-            "description": "Internal error."
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1238,7 +1325,7 @@
           "200": {
             "description": "Successfully retrieved WCFRelays description",
             "schema": {
-              "$ref": "#/definitions/HybridConnectionListResult"
+              "$ref": "#/definitions/WcfRelaysListResult"
             }
           },
           "204": {
@@ -1247,10 +1334,10 @@
               "$ref": "#/definitions/HybridConnectionListResult"
             }
           },
-          "500": {
-            "description": "Internal error",
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/HybridConnectionListResult"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1264,7 +1351,7 @@
         "tags": [
           "WCFRelays"
         ],
-        "operationId": "WCFRelays_ListAll",
+        "operationId": "WCFRelays_ListByNameSpace",
         "description": "Lists the WCFRelays within the namespace.",
         "parameters": [
           {
@@ -1292,13 +1379,13 @@
           "200": {
             "description": "WCF Relays returned successfully",
             "schema": {
-              "$ref": "#/definitions/HybridConnectionListResult"
+              "$ref": "#/definitions/WcfRelaysListResult"
             }
           },
-          "500": {
-            "description": "Internal error",
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/HybridConnectionListResult"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1313,7 +1400,7 @@
           "WCFRelays"
         ],
         "operationId": "WCFRelays_CreateOrUpdateAuthorizationRule",
-        "description": "Creates an authorization rule for a WCFRelays",
+        "description": "Creates or Updates an authorization rule for a WCFRelays",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1366,16 +1453,10 @@
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           },
-          "400": {
-            "description": "Invalid request body.",
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
-            }
-          },
-          "500": {
-            "description": "Internal error.",
-            "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1423,22 +1504,22 @@
           }
         ],
         "responses": {
-          "500": {
-            "description": "Internal error.",
+          "200": {
+            "description": "Request to delete HybridConnections authorizationRule succeeded",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           },
           "204": {
-            "description": "Authorization rule does not exist",
+            "description": "Request accepted but Authorization rule does not exist",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           },
-          "200": {
-            "description": "HybridConnections authorizationRule deleted",
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1487,15 +1568,15 @@
         ],
         "responses": {
           "200": {
-            "description": "WCFRelays AuthorizationRule returned successfully",
+            "description": "Request for WCFRelays AuthorizationRule succeeded",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           },
-          "500": {
-            "description": "Internal error.",
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1557,10 +1638,10 @@
               "$ref": "#/definitions/ResourceListKeys"
             }
           },
-          "500": {
-            "description": "Internal error",
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ResourceListKeys"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1625,16 +1706,10 @@
               "$ref": "#/definitions/ResourceListKeys"
             }
           },
-          "400": {
-            "description": "Invalid request body. ",
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ResourceListKeys"
-            }
-          },
-          "500": {
-            "description": "Internal error.",
-            "schema": {
-              "$ref": "#/definitions/ResourceListKeys"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1654,11 +1729,6 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
         },
         "location": {
           "type": "string",
@@ -1695,6 +1765,17 @@
     },
     "HybridConnectionResource": {
       "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Relay/HybridConnections"
+          ],
+          "x-ms-enum": {
+            "name": "HybridConnectionsResourceType",
+            "modelAsString": false
+          },
+          "description": "Resource type"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NamespaceProperties"
@@ -1707,36 +1788,46 @@
       ],
       "description": "Description of HybridConnection Resource."
     },
-
-    "NamespaceCreateParameters": {
+    "WcfRelaysListResult": {
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Namespace location."
-        },
-        "kind": {
-          "type": "string",
-          "description": "This is to specify the namespaceType eg: Relay."
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WcfRelaysResource"
           },
-          "description": "Namespace tags."
+          "description": "Result of the List WcfRelays ."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of WcfRelays operation"
+        }
+      },
+      "description": "The response of the List WcfRelays operation."
+    },
+    "WcfRelaysResource": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Relay/WcfRelays"
+          ],
+          "x-ms-enum": {
+            "name": "WcfRelaysResourceType",
+            "modelAsString": false
+          },
+          "description": "Resource type"
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NamespaceProperties"
         }
       },
-      "required": [
-        "location"
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
       ],
-      "description": "Parameters supplied to the CreateOrUpdate Namespace operation."
+      "description": "Description of WcfRelays Resource."
     },
     "NamespaceListResult": {
       "properties": {
@@ -1759,6 +1850,17 @@
         "sku": {
           "$ref": "#/definitions/Sku"
         },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Realy/Namespaces"
+          ],
+          "x-ms-enum": {
+            "name": "NameSpaceResourceType",
+            "modelAsString": false
+          },
+          "description": "Resource type"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NamespaceProperties"
@@ -1773,13 +1875,13 @@
     },
     "NamespaceProperties": {
       "properties": {
-        "Path": {
+        "path": {
           "type": "string",
           "description": "The path of the relay."
         },
-        "RelayType": {
+        "relayType": {
           "type": "string",
-          "description": "Relay Type.",
+          "description": "Relay NameSpace Type.",
           "enum": [
             "NetTcp",
             "Http"
@@ -1792,38 +1894,40 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The time the namespace was created."
         },
         "updatedAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The time the namespace was updated."
         },
-        "ListenerCount": {
+        "listenerCount": {
           "format": "int32",
           "type": "integer",
-          "description": "The number of listeners for this relay"
+          "description": "The number of listeners for this relay. min : 1 and max:25 supported"
         },
-        "RequiresClientAuthorization": {
+        "requiresClientAuthorization": {
           "type": "boolean",
           "description": "true if client authorization is needed for this relay; otherwise, false."
         },
-        "AuthorizationRules": {
+        "authorizationRules": {
           "$ref": "#/definitions/AuthorizationRules"
         },
-        "RequiresTransportSecurity": {
+        "requiresTransportSecurity": {
           "type": "boolean",
           "description": "true if transport security is needed for this relay; otherwise, false."
         },
-        "IsDynamic": {
+        "isDynamic": {
           "type": "boolean",
           "description": "true if the relay is dynamic; otherwise, false."
         },
-        "UserMetadata": {
+        "userMetadata": {
           "type": "string",
           "description": "TheThe user metadata associated with this instance."
         },
-        "CollectionName": {
+        "collectionName": {
           "type": "string",
           "description": "The name of the collection associated with the relay."
         }
@@ -1867,11 +1971,11 @@
     "AuthorizationRules": {
       "type": "object",
       "properties": {
-        "RequiresEncryption": {
+        "requiresEncryption": {
           "type": "boolean",
           "description": "true if authorization rule requires encryption; otherwise, false."
         },
-        "Count": {
+        "count": {
           "format": "int32",
           "type": "integer",
           "description": "The number of authorization rule"
@@ -1894,7 +1998,7 @@
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
         }
       },
-      "description": "Parameters supplied to the CreateOrUpdate  AuthorizationRules."
+      "description": "Parameters supplied to the Create or Update  AuthorizationRules."
     },
     "SharedAccessAuthorizationRuleListResult": {
       "properties": {
@@ -1914,6 +2018,19 @@
     },
     "SharedAccessAuthorizationRuleResource": {
       "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Relay/NameSpaces/AuthorizationRules",
+            "Microsoft.Relay/HybridConnections/AuthorizationRules",
+            "Microsoft.Relay/WcfRelays/AuthorizationRules"
+          ],
+          "x-ms-enum": {
+            "name": "NameSpaceResourceType",
+            "modelAsString": false
+          },
+          "description": "Resource type"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
@@ -1930,6 +2047,7 @@
       "properties": {
         "rights": {
           "type": "array",
+          "uniqueItems": true,
           "items": {
             "type": "string",
             "enum": [
@@ -1977,7 +2095,7 @@
     },
     "RegenerateKeysParameters": {
       "properties": {
-        "Policykey": {
+        "policykey": {
           "type": "string",
           "description": "Key that needs to be regenerated .",
           "enum": [
@@ -1991,8 +2109,21 @@
         }
       },
       "description": "Parameters supplied to the Regenerate Auth Rule."
+    },
+    "ErrorResponse": {
+      "description": "Error reponse indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
     }
-
   },
   "parameters": {
     "SubscriptionIdParameter": {
