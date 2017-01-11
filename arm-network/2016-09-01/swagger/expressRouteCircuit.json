@@ -1098,9 +1098,9 @@
           "$ref": "#/definitions/ExpressRouteCircuitPeeringConfig",
           "description": "The Microsoft peering configuration."
         },
-        "routeFilterConfigId": {
-          "type": "string",
-          "description": "The route filter reference id."
+        "routeFilter": {
+          "$ref": "./routeFilter.json#/definitions/RouteFilter",
+          "description": "The reference of the RouteFilter resource."
         },
         "stats": {
           "$ref": "#/definitions/ExpressRouteCircuitStats",
@@ -1397,9 +1397,6 @@
           "description": "Current state of the BGP session, and the number of prefixes that have been received from a neighbor or peer group."
         }
       },
-      "required": [
-        "nextHopType"
-      ],
       "description": "The routes table associated with the ExpressRouteCircuit."
     },
     "ExpressRouteCircuitsRoutesTableSummaryListResult": {
