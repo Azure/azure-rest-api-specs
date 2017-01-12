@@ -49,7 +49,7 @@
             "in": "query",
             "required": false,
             "type": "boolean",
-            "description": "This is an optional Boolean flag. `True` returns usage data in instance-level detail, `false` causes server-side aggregation with fewer details. For example, if you have 3 website instances, by default you will get 3 line items for website consumption. If you specify showDetails = false, the data will be aggregated as a single line item for website consumption within the time period (for the given subscriptionId, meterId, usageStartTime and usageEndTime)."
+            "description": "`True` returns usage data in instance-level detail, `false` causes server-side aggregation with fewer details. For example, if you have 3 website instances, by default you will get 3 line items for website consumption. If you specify showDetails = false, the data will be aggregated as a single line item for website consumption within the time period (for the given subscriptionId, meterId, usageStartTime and usageEndTime)."
           },
           {
             "name": "aggregationGranularity",
@@ -57,7 +57,7 @@
             "required": false,
             "type": "string",
             "default": "Daily",
-            "description": "This is an optional parameter with two discrete values. `Daily` (default) returns the data in daily granularity, `Hourly` returns the data in hourly granularity.",
+            "description": "`Daily` (default) returns the data in daily granularity, `Hourly` returns the data in hourly granularity.",
             "enum": [
               "Daily",
               "Hourly"
@@ -72,7 +72,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "This is an optional parameter, used when a continuation token string is provided in the response body of the previous call, enabling paging through a large result set. If not present, the data is retrieved from the beginning of the day/hour (based on the granularity) passed in. "
+            "description": "Used when a continuation token string is provided in the response body of the previous call, enabling paging through a large result set. If not present, the data is retrieved from the beginning of the day/hour (based on the granularity) passed in. "
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
