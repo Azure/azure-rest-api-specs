@@ -499,7 +499,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -1036,7 +1036,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -1130,7 +1130,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -1314,7 +1314,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -1357,7 +1357,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -1400,7 +1400,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -1443,7 +1443,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -1550,7 +1550,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -1590,7 +1590,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           },
           "202": {
@@ -1685,7 +1685,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -1881,7 +1881,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -1933,7 +1933,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -1985,7 +1985,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -2037,7 +2037,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -2080,7 +2080,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -2130,7 +2130,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -2180,7 +2180,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -2227,7 +2227,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           },
           "202": {
@@ -2437,7 +2437,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -2487,7 +2487,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -2537,7 +2537,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JobResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           }
         },
@@ -4682,31 +4682,37 @@
       },
       "x-ms-azure-resource": true
     },
-    "JobResponse": {
-      "properties": {
-        "status": {
+    "OperationStatusResponse": {
+       "properties": {
+        "name": {
+          "readOnly": true,
           "type": "string",
-          "description": "Status of the response",
-          "readOnly": true
+          "description": "Operation ID"
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation status"
         },
         "startTime": {
+          "readOnly": true,
           "type": "string",
-          "format": "date-time-rfc1123",
-          "description": "Start time of the request",
-          "readOnly": true
+          "format": "date-time",
+          "description": "Start time of the operation"
         },
         "endTime": {
+          "readOnly": true,
           "type": "string",
-          "format": "date-time-rfc1123",
-          "description": "End time of the request",
-          "readOnly": true
+          "format": "date-time",
+          "description": "End time of the operation"
         },
-        "name": {
-          "type": "string",
-          "description": "The Job name.",
-          "readOnly": true
+        "error": {
+          "readOnly": true,
+          "$ref": "#/definitions/ApiError",
+          "description": "Api error"
         }
-      }
+      },
+       "description": "Operation status response"
     }
   },
   "parameters": {
