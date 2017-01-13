@@ -2243,15 +2243,24 @@
     "EdgeNode": {
       "description": "Edge node of CDN service.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "name": {
-          "description": "Ip adress group that contains Ipv4 and Ipv6 addresses",
-          "type": "string"
-        },
-        "resourceGroup": {
-          "description": "The resource group of the edge node.",
-          "type": "string"
-        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EdgeNodeProperties"
+        }
+      }
+    },
+    "EdgeNodeProperties": {
+      "description":"The JSON object that contains the properties required to create an edgenode.",
+      "required": [
+        "ipAddressGroups"
+      ],    
+      "properties": {
         "ipAddressGroups": {
           "description": "List of ip address groups.",
           "type": "array",
@@ -2295,7 +2304,7 @@
         },
         "prefixLength": {
           "description": "The length of the prefix of the ip address.",
-          "type": "string"
+          "type": "integer"
         }
       }
     },
