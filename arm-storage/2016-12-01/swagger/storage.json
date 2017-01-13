@@ -3,7 +3,10 @@
   "info": {
     "title": "StorageManagement",
     "description": "The Azure Storage Management API.",
-    "version": "2016-05-01"
+    "version": "2016-12-01",
+    "x-ms-code-generation-settings": {
+      "name": "StorageManagementClient"
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -595,6 +598,20 @@
         "blob": {
           "$ref": "#/definitions/EncryptionService",
           "description": "The encryption function of the blob storage service."
+        },
+        "file": {
+          "$ref": "#/definitions/EncryptionService",
+          "description": "The encryption function of the file storage service."
+        },
+        "table": {
+          "$ref": "#/definitions/EncryptionService",
+          "readOnly": true,
+          "description": "The encryption function of the table storage service."
+        },
+        "queue": {
+          "$ref": "#/definitions/EncryptionService",
+          "readOnly": true,
+          "description": "The encryption function of the queue storage service."
         }
       },
       "description": "A list of services that support encryption."
