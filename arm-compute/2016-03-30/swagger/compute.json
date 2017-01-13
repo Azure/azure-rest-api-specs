@@ -499,7 +499,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -1036,7 +1036,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -1130,7 +1130,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -1314,7 +1314,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -1357,7 +1357,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -1400,7 +1400,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -1443,7 +1443,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -1550,7 +1550,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -1590,7 +1590,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           },
           "202": {
@@ -1685,7 +1685,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -1881,7 +1881,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -1933,7 +1933,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -1985,7 +1985,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -2037,7 +2037,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -2080,7 +2080,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -2130,7 +2130,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -2180,7 +2180,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -2227,7 +2227,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           },
           "202": {
@@ -2437,7 +2437,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -2487,7 +2487,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -2537,7 +2537,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GenericOkResponse"
+              "$ref": "#/definitions/JobResponse"
             }
           }
         },
@@ -4682,11 +4682,29 @@
       },
       "x-ms-azure-resource": true
     },
-    "GenericOkResponse": {
+    "JobResponse": {
       "properties": {
         "status": {
           "type": "string",
-          "description": "Status of the response"
+          "description": "Status of the response",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time-rfc1123",
+          "description": "Start time of the request",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time-rfc1123",
+          "description": "End time of the request",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The Job name.",
+          "readOnly": true
         }
       }
     }
