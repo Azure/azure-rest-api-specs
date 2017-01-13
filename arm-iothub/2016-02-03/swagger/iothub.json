@@ -1082,6 +1082,9 @@
             "$ref": "#/definitions/EventHubProperties"
           }
         },
+        "routing": {
+          "$ref": "#/definitions/RoutingProperties"
+        },
         "storageEndpoints": {
           "description": "The list of Azure Storage endpoints where you can upload files. Currently you can configure only one Azure Storage account and that MUST have its key as $default. Specifying more than one storage account causes an error to be thrown. Not specifying a value for this property when the enableFileUploadNotifications property is set to True, causes an error to be thrown.",
           "type": "object",
@@ -1325,6 +1328,160 @@
         }
       }
     },
+    "RoutingProperties": {
+      "description": "The routing related properties of the IoT hub. See: https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messaging",
+      "type": "object",
+      "properties": {
+        "endpoints": {
+          "$ref": "#/definitions/RoutingEndpoints"
+        },
+        "routes": {
+          "description": "The list of routing rules that users can provide, which the IoT hub uses to route messages to various in-built and user-provided endpoints. A maximum of 100 routing rules is allowed for paid hubs and a maximum of 5 routing rules is allowed for free hubs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouteProperties"
+          }
+        },
+        "fallbackRoute": {
+          "description": "The properties of the route that will be used as a fallback route when none of the conditions specified in the 'routes' section are met.",
+          "$ref": "#/definitions/RouteProperties"
+        }
+      }
+    },
+    "RoutingEndpoints": {
+      "description": "The properties related to the user-provided endpoints to which IoT hub routes the messages to, based on the routing rules. A maximum of 10 endpoints is allowed across all endpoint types for paid hubs and a maximum of 1 endpoint is allowed across all endpoint types for free hubs.",      
+      "type": "object",
+      "properties": {
+        "serviceBusQueues": {
+          "description": "The list of service bus queue endpoints to which IoT hub routes the messages to, based on the routing rules.",      
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoutingMessagingEndpointProperties"
+          }
+        },
+        "serviceBusTopics": {
+          "description": "The list of service bus topic endpoints to which IoT hub routes the messages to, based on the routing rules.",      
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoutingMessagingEndpointProperties"
+          }
+        },
+        "eventHubs": {
+          "description": "The list of eventhub endpoints to which IoT hub routes the messages to, based on the routing rules. This list should not include the in-built eventhub endpoint.",      
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoutingEventHubProperties"
+          }
+        }
+      }
+    },
+    "RoutingMessagingEndpointProperties": {
+      "description": "The properties related to service bus queue or topic endpoint types.",
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connectionstring of the service bus queue or topic endpoint.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the service bus queue or topic endpoint. The endpoint name cannot be null or whitespace and should not start with a '$'. The endpoint name should not exceed 64 characters. The following names are reserved;  events, operationsMonitoringEvents, fileNotifications, $default. Endpoint names have to be unique across endpoint types.",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9-._]{1,64}$"
+        },
+        "id": {
+          "description": "The identifier of the endpoint. This will be set by the server. Modifying this value causes create or update IoT hub operations to fail. Pass id as null when specifying a new endpoint. Pass the same id that you get for an endpoint from the service when specifying an existing endpoint during update operations.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "The subscription identifier of the service bus queue or topic endpoint.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "The name of the resource group of the service bus queue or topic endpoint.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "connectionString"
+      ]      
+    },
+    "RoutingEventHubProperties": {
+      "description": "The properties related to an event hub endpoint.",
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connectionstring of the event hub endpoint. ",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the event hub endpoint. The endpoint name cannot be null or whitespace and should not start with a '$'. The endpoint name should not exceed 64 characters. The following names are reserved;  events, operationsMonitoringEvents, fileNotifications, $default. Endpoint names have to be unique across endpoint types.",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9-._]{1,64}$"
+        },
+        "id": {
+          "description": "The identifier of the endpoint. This will be set by the server. Modifying this value causes create or update IoT hub operations to fail. Pass id as null when specifying a new endpoint. Pass the same id that you get for an endpoint from the service when specifying an existing endpoint during update operations.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "The subscription identifier of the event hub endpoint.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "The name of the resource group of the event hub endpoint.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "connectionString"
+      ]      
+    },    
+    "RouteProperties": {
+      "description": "The properties related to a routing rule based on which the IoT hub routes messages to endpoints.",      
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the route. The name has to be unique and cannot start with a $, also the route name should not exceed 64 characters.",      
+          "type": "string",
+          "pattern": "^[A-Za-z0-9-._]{1,64}$"
+        },
+        "source": {
+          "description": "The source to which the routing rule is to be applied to. e.g. DeviceMessages",      
+          "enum": ["DeviceMessages"],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RoutingSource",
+            "modelAsString": true
+          }
+        },
+        "condition": {
+          "description": "The condition which is evaluated in order to apply the routing rule. If the condition is not provided it will evaluate to true by default. For grammar, See: https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-query-language",      
+          "type": "string"
+        },
+        "endpointNames": {
+          "description": "The list of endpoints to which the messages that satisfy the condition are routed to. Currently only 1 endpoint is allowed.",
+          "minItems": 1,      
+          "maxItems": 1,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isEnabled": {
+          "description": "Used to specify whether a route is enabled or not.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "endpointNames",
+        "source",
+        "isEnabled"
+      ]
+    },
     "IotHubDescription": {
       "description": "The description of the IoT hub.",
       "type": "object",
@@ -1360,6 +1517,7 @@
       ]
     },
     "Resource": {
+      "description": "The common properties of an azure resource.",
       "properties": {
         "id": {
           "readOnly": true,
