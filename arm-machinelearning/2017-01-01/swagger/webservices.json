@@ -100,39 +100,6 @@
           }
         }
       },
-      "post": {
-        "tags": [
-          "WebServices"
-        ],
-        "operationId": "WebServices_CreateRegionalWebServiceProperties",
-        "description": "Generate regional web service properties. This is especially important to encrypted credential information in parameters.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WebServiceNameParameter"
-          },
-          {
-            "in": "query",
-            "name": "region",
-            "type": "string",
-            "description": "The region of the web service",
-            "required": true
-          },        
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted.  The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more informationFor more information about Asynchronous Operations, see https://msdn.microsoft.com/en-us/library/mt742920.aspx."
-          }
-        }
-      },
       "patch": {
         "tags": [
           "WebServices"
@@ -201,6 +168,41 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}/CreateRegionalBlob":{
+      "post": {
+        "tags": [
+          "WebServices"
+        ],
+        "operationId": "WebServices_CreateRegionalWebServiceProperties",
+        "description": "Generate regional web service properties. This is especially important to encrypted credential information in parameters.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebServiceNameParameter"
+          },
+          {
+            "in": "query",
+            "name": "region",
+            "type": "string",
+            "description": "The region of the web service",
+            "required": true
+          },        
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.  The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more informationFor more information about Asynchronous Operations, see https://msdn.microsoft.com/en-us/library/mt742920.aspx."
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}/listKeys": {
