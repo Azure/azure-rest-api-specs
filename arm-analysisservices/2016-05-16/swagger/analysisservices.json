@@ -410,10 +410,51 @@
       "description": "Properties of Analysis Services resource.",
       "type": "object",
       "properties": {
+        "state": {
+          "type": "string",
+           "enum": [
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Paused",
+            "Suspended",
+            "Provisioning",
+            "Updating",
+            "Suspending",
+            "Pausing",
+            "Resuming",
+            "Preparing",
+            "Scaling"
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current state of Analysis Services resource. The state is to indicate more states outside of resource provisioning."
+        },
         "provisioningState": {
           "type": "string",
+           "enum": [
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Paused",
+            "Suspended",
+            "Provisioning",
+            "Updating",
+            "Suspending",
+            "Pausing",
+            "Resuming",
+            "Preparing",
+            "Scaling"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
           "readOnly": true,
-          "description": "The current deployment state of Analysis Services resource."
+          "description": "The current deployment state of Analysis Services resource. The provisioningState is to indicate states for resource provisioning."
         },
         "serverFullName": {
           "type": "string",
