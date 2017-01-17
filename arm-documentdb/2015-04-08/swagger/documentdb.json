@@ -560,6 +560,10 @@
           "readOnly": true,
           "$ref": "#/definitions/DatabaseAccountOfferType"
         },
+        "ipRangeFilter": {
+          "description": "DocumentDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.",
+          "$ref": "#/definitions/IPRangeFilter"
+        },
         "consistencyPolicy": {
           "description": "The consistency policy for the DocumentDB database account.",
           "$ref": "#/definitions/ConsistencyPolicy"
@@ -607,6 +611,10 @@
         },
         "databaseAccountOfferType": {
           "$ref": "#/definitions/DatabaseAccountOfferType"
+        },
+        "ipRangeFilter": {
+          "description": "DocumentDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.",
+          "$ref": "#/definitions/IPRangeFilter"
         }
       },
       "required": [
@@ -723,6 +731,10 @@
       "type": "string",
       "readOnly": true,
       "description": "The status of the DocumentDB account at the time the operation was called. The status can be one of following. 'Creating' – the DocumentDB account is being created. When an account is in Creating state, only properties that are specified as input for the Create DocumentDB account operation are returned. 'Succeeded' – the DocumentDB account is active for use. 'Updating' – the DocumentDB account is being updated. 'Deleting' – the DocumentDB account is being deleted. 'Failed' – the DocumentDB account failed creation."
+    },
+    "IPRangeFilter": {
+      "type": "string",
+      "description": "DocumentDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces."
     }
   },
   "parameters": {
