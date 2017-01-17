@@ -114,7 +114,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
             "description": "The filter to apply on the operation. It ONLY supports the 'eq' and 'and' logical operators at this time. All the 4 query parameters 'OfferDurableId',  'Currency', 'Locale', 'Region' are required to be a part of the $filter."
           },
@@ -284,17 +284,6 @@
           "description": "All rates are pretax, so this will always be returned as 'false'.",
           "type": "boolean"
         },
-        "MeterRegion": {
-          "description": "The region in which the Azure service is available.",
-          "type": "string"
-        },
-        "Tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Provides additional meter data. 'Third Party' indicates a meter with no discount. Blanks indicate First Party."
-        },
         "OfferTerms": {
           "type": "array",
           "items": {
@@ -335,6 +324,17 @@
           "description": "The unit in which the meter consumption is charged, e.g., 'Hours', 'GB', etc.",
           "type": "string"
         },
+        "MeterTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Provides additional meter data. 'Third Party' indicates a meter with no discount. Blanks indicate First Party."
+        },
+        "MeterRegion": {
+          "description": "The region in which the Azure service is available.",
+          "type": "string"
+        },
         "MeterRates": {
           "description": "The list of key/value pairs for the meter rates, in the format 'key':'value' where key = the meter quantity, and value = the corresponding price",
           "type": "object",
@@ -344,7 +344,7 @@
           }
         },
         "EffectiveDate": {
-          "description": "Indicates the date from which the meter rate or offer term is effective.",
+          "description": "Indicates the date from which the meter rate is effective.",
           "type": "string",
           "format": "date-time"
         },
@@ -361,13 +361,34 @@
       "required": [ "Name" ],
       "properties": {
         "Name": {
-          "description": "Name of the offer term. For example: 'Monetary Credit', 'Monetary Commitment",
-          "type": "string"
+          "description": "Name of the offer term",
+          "type": "string",
+          "enum": [
+            "Recurring Charge",
+            "Monetary Commitment",
+            "Monetary Credit"
+          ]
         },
         "EffectiveDate": {
-          "description": "Indicates the date from which the meter rate or offer term is effective.",
+          "description": "Indicates the date from which the offer term is effective.",
           "type": "string",
           "format": "date-time"
+        }
+      }
+    },
+    "MonetaryCredit": {
+      "x-ms-discriminator-value": "Monetary Credit",
+      "description": "Indicates that a that this is a monetary credit offer.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OfferTermInfo"
+        }
+      ],
+      "properties": {
+        "Credit": {
+          "description": "The amount of credit provided under the terms of the given offer level.",
+          "type": "number",
+          "format": "decimal"
         },
         "ExcludedMeterIds": {
           "description": "An array of meter ids that are excluded from the given offer terms.",
@@ -379,23 +400,9 @@
         }
       }
     },
-    "MonetaryCredit": {
-      "x-ms-discriminator-value": "Monetary Credit",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OfferTermInfo"
-        }
-      ],
-      "properties": {
-        "Credit": {
-          "description": "The amount of credit provided under the terms of the given offer level. This field is used only by offer terms of type 'MonetaryCredit'.",
-          "type": "number",
-          "format": "decimal"
-        }
-      }
-    },
     "MonetaryCommitment": {
       "x-ms-discriminator-value": "Monetary Commitment",
+      "description": "Indicates that a monetary commitment is required for this offer",
       "allOf": [
         {
           "$ref": "#/definitions/OfferTermInfo"
@@ -409,11 +416,20 @@
             "type": "number",
             "format": "decimal"
           }
+        },
+        "ExcludedMeterIds": {
+          "description": "An array of meter ids that are excluded from the given offer terms.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
         }
       }
     },
     "RecurringCharge": {
       "x-ms-discriminator-value": "Recurring Charge",
+      "description": "Indicates a recurring charge is present for this offer.",
       "allOf": [
         {
           "$ref": "#/definitions/OfferTermInfo"
