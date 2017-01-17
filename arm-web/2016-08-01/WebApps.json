@@ -4145,8 +4145,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "Successfully restarted app."
           }
         }
       }
@@ -8577,8 +8577,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "Successfully restarted app."
           }
         }
       }
@@ -8954,8 +8954,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "Successfully started app."
           }
         }
       }
@@ -8994,8 +8994,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "Successfully stopped app."
           }
         }
       }
@@ -9927,8 +9927,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "Successfully started app."
           }
         }
       }
@@ -9960,8 +9960,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "Successfully stopped app."
           }
         }
       }
@@ -13152,6 +13152,10 @@
               "description": "Version of Node.js.",
               "type": "string"
             },
+            "linuxFxVersion": {
+              "description": "Linux App Framework and version",
+              "type": "string"
+            },
             "requestTracingEnabled": {
               "description": "<code>true</code> if request tracing is enabled; otherwise, <code>false</code>.",
               "type": "boolean"
@@ -13218,8 +13222,7 @@
             },
             "scmType": {
               "description": "SCM type.",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "use32BitWorkerProcess": {
               "description": "<code>true</code> to use 32-bit worker process; otherwise, <code>false</code>.",
