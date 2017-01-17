@@ -329,7 +329,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The IP address of the peer to retrieve the status of"
+            "description": "The IP address of the peer to retrieve the status of."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -358,7 +358,7 @@
           "VirtualNetworkGateways"
         ],
         "operationId": "VirtualNetworkGateways_GetLearnedRoutes",
-        "description": "The GetLearnedRoutes operation retrieves a list of routes the virtual network gateway has learned, including routes learned from BGP peers.",
+        "description": "This operation retrieves a list of routes the virtual network gateway has learned, including routes learned from BGP peers.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -401,7 +401,7 @@
           "VirtualNetworkGateways"
         ],
         "operationId": "VirtualNetworkGateways_GetAdvertisedRoutes",
-        "description": "The GetLearnedRoutes operation retrieves a list of routes the virtual network gateway is advertising to the specified peer.",
+        "description": "This operation retrieves a list of routes the virtual network gateway is advertising to the specified peer.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1234,7 +1234,7 @@
           "type": "integer",
           "format": "int32",
           "readOnly": true,
-          "description": "The autonomous systen number of the remote BGP peer"
+          "description": "The autonomous system number of the remote BGP peer"
         },
         "state": {
           "type": "string",
@@ -1255,7 +1255,7 @@
         "connectedDuration": {
           "type": "string",
           "readOnly": true,
-          "description": "How long the peering has been up"
+          "description": "For how long the peering has been up"
         },
         "routesReceived": {
           "type": "integer",
@@ -1382,10 +1382,6 @@
             "$ref": "#/definitions/BgpPeerStatus"
           },
           "description": "List of BGP peers"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of results."
         }
       },
       "description": "Response for list BGP peer status API service call"
@@ -1398,10 +1394,6 @@
             "$ref": "#/definitions/GatewayRoute"
           },
           "description": "List of gateway routes"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of results."
         }
       },
       "description": "List of virtual network gateway routes"
