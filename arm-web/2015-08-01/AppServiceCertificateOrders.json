@@ -17,7 +17,6 @@
         "summary": "List all certificate orders in a subscription.",
         "description": "List all certificate orders in a subscription.",
         "operationId": "AppServiceCertificateOrders_List",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
@@ -58,7 +57,6 @@
           "text/xml",
           "application/x-www-form-urlencoded"
         ],
-        "produces": [],
         "parameters": [
           {
             "name": "appServiceCertificateOrder",
@@ -91,17 +89,16 @@
         "summary": "Get certificate orders in a resource group.",
         "description": "Get certificate orders in a resource group.",
         "operationId": "AppServiceCertificateOrders_ListByResourceGroup",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -128,12 +125,14 @@
         "summary": "List all certificates associated with a certificate order.",
         "description": "List all certificates associated with a certificate order.",
         "operationId": "AppServiceCertificateOrders_ListCertificates",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "certificateOrderName",
             "in": "path",
@@ -143,9 +142,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -172,7 +168,6 @@
         "summary": "Get the certificate associated with a certificate order.",
         "description": "Get the certificate associated with a certificate order.",
         "operationId": "AppServiceCertificateOrders_GetCertificate",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -180,6 +175,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "certificateOrderName",
             "in": "path",
@@ -196,9 +194,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -217,8 +212,8 @@
         "tags": [
           "AppServiceCertificateOrders"
         ],
-        "summary": "Associate a Key Vault secret to a certificate store that will be used for storing the certificate once it's ready.",
-        "description": "Associate a Key Vault secret to a certificate store that will be used for storing the certificate once it's ready.",
+        "summary": "Creates or updates a certificate and associates with key vault secret.",
+        "description": "Creates or updates a certificate and associates with key vault secret.",
         "operationId": "AppServiceCertificateOrders_CreateOrUpdateCertificate",
         "consumes": [
           "application/json",
@@ -232,6 +227,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "certificateOrderName",
             "in": "path",
@@ -249,7 +247,7 @@
           {
             "name": "keyVaultCertificate",
             "in": "body",
-            "description": "CSM ID of the Key Vault secret.",
+            "description": "Key vault certificate resource Id.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AppServiceCertificate"
@@ -259,15 +257,18 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "App Service Certificate is created.",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificate"
+            }
+          },
+          "201": {
+            "description": "App Service Certificate creation operation is in progress",
             "schema": {
               "$ref": "#/definitions/AppServiceCertificate"
             }
@@ -282,9 +283,10 @@
         "summary": "Delete the certificate associated with a certificate order.",
         "description": "Delete the certificate associated with a certificate order.",
         "operationId": "AppServiceCertificateOrders_DeleteCertificate",
-        "consumes": [],
-        "produces": [],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "certificateOrderName",
             "in": "path",
@@ -301,9 +303,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -327,7 +326,6 @@
         "summary": "Get a certificate order.",
         "description": "Get a certificate order.",
         "operationId": "AppServiceCertificateOrders_Get",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -335,6 +333,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -344,9 +345,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -381,6 +379,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
             "name": "name",
             "in": "path",
             "description": "Name of the certificate.",
@@ -398,9 +399,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -429,9 +427,10 @@
         "summary": "Delete an existing certificate order.",
         "description": "Delete an existing certificate order.",
         "operationId": "AppServiceCertificateOrders_DeleteCertificateOrder",
-        "consumes": [],
-        "produces": [],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -441,9 +440,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -474,8 +470,10 @@
           "text/xml",
           "application/x-www-form-urlencoded"
         ],
-        "produces": [],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -494,9 +492,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -524,8 +519,10 @@
           "text/xml",
           "application/x-www-form-urlencoded"
         ],
-        "produces": [],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -546,9 +543,6 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -567,9 +561,10 @@
         "summary": "Resend certificate email.",
         "description": "Resend certificate email.",
         "operationId": "AppServiceCertificateOrders_ResendEmail",
-        "consumes": [],
-        "produces": [],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -581,7 +576,53 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/resendRequestEmails": {
+      "post": {
+        "tags": [
+          "AppServiceCertificateOrders"
+        ],
+        "summary": "Verify domain ownership for this certificate order.",
+        "description": "Verify domain ownership for this certificate order.",
+        "operationId": "AppServiceCertificateOrders_ResendRequestEmails",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
             "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Certificate order name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nameIdentifier",
+            "in": "body",
+            "description": "Email address",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NameIdentifier"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -602,7 +643,6 @@
         "summary": "Retrieve the list of certificate actions.",
         "description": "Retrieve the list of certificate actions.",
         "operationId": "AppServiceCertificateOrders_RetrieveCertificateActions",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -610,6 +650,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -619,9 +662,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -645,10 +685,9 @@
         "tags": [
           "AppServiceCertificateOrders"
         ],
-        "summary": "Retrive email histor.",
-        "description": "Retrive email histor.",
+        "summary": "Retrieve email history.",
+        "description": "Retrieve email history.",
         "operationId": "AppServiceCertificateOrders_RetrieveCertificateEmailHistory",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -656,6 +695,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -665,9 +707,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -686,6 +725,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/retrieveSiteSeal": {
+      "post": {
+        "tags": [
+          "AppServiceCertificateOrders"
+        ],
+        "summary": "Verify domain ownership for this certificate order.",
+        "description": "Verify domain ownership for this certificate order.",
+        "operationId": "AppServiceCertificateOrders_RetrieveSiteSeal",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Certificate order name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteSealRequest",
+            "in": "body",
+            "description": "Site seal request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteSealRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteSeal"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/verifyDomainOwnership": {
       "post": {
         "tags": [
@@ -694,9 +791,10 @@
         "summary": "Verify domain ownership for this certificate order.",
         "description": "Verify domain ownership for this certificate order.",
         "operationId": "AppServiceCertificateOrders_VerifyDomainOwnership",
-        "consumes": [],
-        "produces": [],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -706,9 +804,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -829,6 +924,8 @@
               "format": "int32",
               "description": "Duration in years (must be between 1 and 3).",
               "default": 1,
+              "maximum": 3,
+              "minimum": 1,
               "type": "integer",
               "x-ms-mutability": [
                 "create",
@@ -975,65 +1072,54 @@
     "CertificateDetails": {
       "description": "SSL certificate details.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "description": "ARM envelope properties",
-          "properties": {
-            "version": {
-              "format": "int32",
-              "description": "Version.",
-              "type": "integer",
-              "readOnly": true
-            },
-            "serialNumber": {
-              "description": "Serial Number.",
-              "type": "string",
-              "readOnly": true
-            },
-            "thumbprint": {
-              "description": "Thumbprint.",
-              "type": "string",
-              "readOnly": true
-            },
-            "subject": {
-              "description": "Subject.",
-              "type": "string",
-              "readOnly": true
-            },
-            "notBefore": {
-              "format": "date-time",
-              "description": "Valid from.",
-              "type": "string",
-              "readOnly": true
-            },
-            "notAfter": {
-              "format": "date-time",
-              "description": "Valid to.",
-              "type": "string",
-              "readOnly": true
-            },
-            "signatureAlgorithm": {
-              "description": "Signature algorithm.",
-              "type": "string",
-              "readOnly": true
-            },
-            "issuer": {
-              "description": "Issuer.",
-              "type": "string",
-              "readOnly": true
-            },
-            "rawData": {
-              "description": "Raw certificate data.",
-              "type": "string",
-              "readOnly": true
-            }
-          },
-          "x-ms-client-flatten": true
+        "version": {
+          "format": "int32",
+          "description": "Version.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "serialNumber": {
+          "description": "Serial Number.",
+          "type": "string",
+          "readOnly": true
+        },
+        "thumbprint": {
+          "description": "Thumbprint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subject": {
+          "description": "Subject.",
+          "type": "string",
+          "readOnly": true
+        },
+        "notBefore": {
+          "format": "date-time",
+          "description": "Valid from.",
+          "type": "string",
+          "readOnly": true
+        },
+        "notAfter": {
+          "format": "date-time",
+          "description": "Valid to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "signatureAlgorithm": {
+          "description": "Signature algorithm.",
+          "type": "string",
+          "readOnly": true
+        },
+        "issuer": {
+          "description": "Issuer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "rawData": {
+          "description": "Raw certificate data.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1088,6 +1174,9 @@
                 "OrgValidationComplete",
                 "SanDrop",
                 "FraudCleared",
+                "CertificateExpired",
+                "CertificateExpirationWarning",
+                "FraudDocumentationRequired",
                 "Unknown"
               ],
               "type": "string",
@@ -1103,6 +1192,16 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NameIdentifier": {
+      "description": "Identifies an object.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the object.",
+          "type": "string"
         }
       }
     },
@@ -1174,8 +1273,7 @@
     "Resource": {
       "description": "Azure resource.",
       "required": [
-        "location",
-        "name"
+        "location"
       ],
       "properties": {
         "id": {
@@ -1208,6 +1306,34 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "SiteSeal": {
+      "description": "Site seal",
+      "required": [
+        "html"
+      ],
+      "type": "object",
+      "properties": {
+        "html": {
+          "description": "HTML snippet",
+          "type": "string",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SiteSealRequest": {
+      "description": "Site seal request.",
+      "type": "object",
+      "properties": {
+        "lightTheme": {
+          "description": "Theme",
+          "type": "boolean"
+        },
+        "locale": {
+          "description": "Locale",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -1227,7 +1353,7 @@
       "type": "string",
       "maxLength": 90,
       "minLength": 1,
-      "pattern": "^[-\\\\w\\\\._\\\\(\\\\)]+[^\\\\.]$"
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$"
     },
     "apiVersionParameter": {
       "name": "api-version",
