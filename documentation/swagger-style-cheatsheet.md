@@ -16,13 +16,12 @@ Not all Swagger documentation fields (summary, description, title) are supported
 
 * `summary` and `title` fields are appropriate for short-form documentation of 120 characters or less.
 * `description` is for long-form content, and can contain examples of use ("examples" in this context should not to be confused with the [examples](#examples-field-support) field).
-* `title` is **not currently displayed** on [docs.microsoft.com](http://docs.microsoft.com).
 
 ## GitHub-flavored Markdown (GFM)
 
-[GitHub-flavored Markdown](https://help.github.com/articles/github-flavored-markdown) (GFM) is not yet supported in the `description` field.
+[GitHub-flavored Markdown](https://help.github.com/articles/github-flavored-markdown) (GFM) is not yet fully<sup>*</sup> supported in the `description` field.
 
-The Swagger specification itself supports GFM in the `description` field of several object types. However, AutoRest currently passes through GFM formatting tags directly, so `**my bolded text**` (with the asterisks) will end up in your generated clients' docs. Don't use GFM in Swagger spec descriptions **yet**.
+<sup>*</sup> The Swagger specification itself supports GFM in the `description` field of several object types, as does OPS. However, AutoRest currently passes through GFM formatting tags directly, so `**my bolded text**` (*including* the asterisks) will end up in your generated clients' docs. Don't use GFM in Swagger spec descriptions **yet**.
 
 ## HTML
 
@@ -30,7 +29,7 @@ Do **not** put HTML tags in any of the documentation fields.
 
 ## `examples` field
 
-You *should* populate the [examples](http://swagger.io/specification/#exampleObject) field, but it is not yet rendered on docs.microsoft.com.
+You *should* populate the [examples](http://swagger.io/specification/#exampleObject) field for operation responses.
 
 ## Overwrites
 
