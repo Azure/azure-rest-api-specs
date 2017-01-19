@@ -21,7 +21,7 @@ Not all Swagger documentation fields (summary, description, title) are supported
 
 [GitHub-flavored Markdown](https://help.github.com/articles/github-flavored-markdown) (GFM) is not yet fully<sup>*</sup> supported in the `description` field.
 
-<sup>*</sup> The Swagger specification itself supports GFM in the `description` field of several object types, as does OPS. However, AutoRest currently passes through GFM formatting tags directly, so `**my bolded text**` (*including* the asterisks) will end up in your generated clients' docs. Don't use GFM in Swagger spec descriptions **yet**.
+\* The Swagger specification itself supports GFM in the `description` field of several object types, as does OPS. However, AutoRest currently passes through GFM formatting tags directly, so `**my bolded text**` (*including* the asterisks) will end up in your generated clients' docs. Don't use GFM in Swagger spec descriptions **yet**.
 
 ## HTML
 
