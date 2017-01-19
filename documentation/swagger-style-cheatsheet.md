@@ -15,7 +15,7 @@ Not all Swagger documentation fields (summary, description, title) are supported
 | [schema object](http://swagger.io/specification/#schemaObject) |  | X | X |
 
 * `summary` and `title` fields are appropriate for short-form documentation of 120 characters or less.
-* `description` is for long-form content, and can contain examples of use ("examples" in this context should not to be confused with the [examples](#examples-field-support) field).
+* `description` is for long-form content, and can contain examples of use ("examples" in this context should not to be confused with the [examples](#examples-field) field).
 
 ## GitHub-flavored Markdown (GFM)
 
@@ -30,6 +30,11 @@ Do **not** put HTML tags in any of the documentation fields.
 ## `examples` field
 
 You *should* populate the [examples](http://swagger.io/specification/#exampleObject) field for operation responses.
+
+Format it as valid JSON (i.e. *don't* stuff it all into a string with `\n`s) and it'll be rendered as the raw JSON response object on docs. For an example, see the Monitor REST API reference
+
+* Rendered: [Monitor > AlertRules_Get](https://docs.microsoft.com/rest/api/monitor/alertrules#AlertRules_Get) (see Returns section)
+* Source: [insightsManagementClient_AlertRules.json](https://github.com/Azure/azure-rest-api-specs/blob/master/arm-insights/2016-03-01/swagger/insightsManagementClient_AlertRules.json#L184) line 184
 
 ## Overwrites
 
