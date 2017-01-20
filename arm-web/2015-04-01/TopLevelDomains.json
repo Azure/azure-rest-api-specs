@@ -17,7 +17,6 @@
         "summary": "Get all top-level domains supported for registration.",
         "description": "Get all top-level domains supported for registration.",
         "operationId": "TopLevelDomains_List",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
@@ -51,7 +50,6 @@
         "summary": "Get details of a top-level domain.",
         "description": "Get details of a top-level domain.",
         "operationId": "TopLevelDomains_Get",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -144,8 +142,7 @@
     "Resource": {
       "description": "Azure resource.",
       "required": [
-        "location",
-        "name"
+        "location"
       ],
       "properties": {
         "id": {
@@ -181,6 +178,11 @@
     },
     "TldLegalAgreement": {
       "description": "Legal agreement for a top level domain.",
+      "required": [
+        "agreementKey",
+        "title",
+        "content"
+      ],
       "type": "object",
       "properties": {
         "agreementKey": {
@@ -236,12 +238,12 @@
             "name": {
               "description": "Name of the top level domain.",
               "type": "string",
-              "readOnly": true
+              "readOnly": true,
+              "x-ms-client-name": "domainName"
             },
             "privacy": {
               "description": "If <code>true</code>, then the top level domain supports domain privacy; otherwise, <code>false</code>.",
-              "type": "boolean",
-              "readOnly": true
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true
@@ -253,7 +255,7 @@
       "type": "object",
       "properties": {
         "includePrivacy": {
-          "description": "If <code>true</code>, then the list of agreements will inclue agreements for domain privacy as well; otherwise, <code>false</code>.",
+          "description": "If <code>true</code>, then the list of agreements will include agreements for domain privacy as well; otherwise, <code>false</code>.",
           "type": "boolean"
         }
       }
@@ -286,17 +288,6 @@
       "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
       "required": true,
       "type": "string"
-    },
-    "resourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "Name of the resource group to which the resource belongs.",
-      "required": true,
-      "x-ms-parameter-location": "method",
-      "type": "string",
-      "maxLength": 90,
-      "minLength": 1,
-      "pattern": "^[-\\\\w\\\\._\\\\(\\\\)]+[^\\\\.]$"
     },
     "apiVersionParameter": {
       "name": "api-version",
