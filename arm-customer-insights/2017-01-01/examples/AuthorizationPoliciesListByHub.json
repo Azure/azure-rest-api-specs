@@ -1,26 +1,41 @@
 {
-  "parameters": {
-    "hubName": "azSdkTestHub",
-    "resourceGroupName": "TestHubRG",
-    "policyName": "testPolicy4222",	
-    "api-version": "2016-01-01",
-    "subscriptionId": "subid"
-  },
-  "responses": {
-    "200": {
-      "body": {
-        "id": "/subscriptions/subid/resourceGroups//TestHubRG/providers/Microsoft.CustomerInsights/hubs/azSdkTestHub/AuthorizationPolicies/testPolicy4222",
-        "name": "testPolicy4222",
-        "type": "Microsoft.CustomerInsights/hubs/AuthorizationPolicies",
-        "properties": {
-		"permissions": ["Read",
-		"Write",
-		"Manage"],
+	"parameters": {
+		"hubName": "azSdkTestHub",
+		"resourceGroupName": "TestHubRG",
 		"policyName": "testPolicy4222",
-		"primaryKey": "cHJpbWFyeVRlc3RSZWFk",
-		"secondaryKey": "c2Vjb25kYXJ5VGVzdFJlYWQ="
-        }
-      }
-    }
-  }
+		"api-version": "2016-01-01",
+		"subscriptionId": "subid"
+	},
+	"responses": {
+		"200": {
+			"body": {
+				"value": [{
+					"id": "/subscriptions/c909e979-ef71-4def-a970-bc7c154db8c5/resourceGroups/TestHubRG/providers/Microsoft.CustomerInsights/hubs/azSdkTestHub/AuthorizationPolicies/RootManageSharedAccessKey",
+					"name": "azSdkTestHub/RootManageSharedAccessKey",
+					"properties": {
+						"permissions": ["Read",
+						"write",
+						"manage"],
+						"policyName": "RootManageSharedAccessKey",
+						"primaryKey": "KEvPnaBbDbEdSch27GhFx/D5Smu1bZC8bCmG33fHyi4=",
+						"secondaryKey": "wvOahlAtWZh9127MVr1yYX2pPgioqFWGEUtp1ADbfcQ="
+					},
+					"type": "Microsoft.CustomerInsights/hubs/AuthorizationPolicies"
+				},
+				{
+					"id": "/subscriptions/c909e979-ef71-4def-a970-bc7c154db8c5/resourceGroups/TestHubRG/providers/Microsoft.CustomerInsights/hubs/azSdkTestHub/AuthorizationPolicies/testPolicy1125",
+					"name": "azSdkTestHub/testPolicy1125",
+					"properties": {
+						"permissions": ["Read",
+						"write",
+						"manage"],
+						"policyName": "testPolicy1125",
+						"primaryKey": "3Nk5Yce0eQXHY3S+KDuUPKFS5NkOWLqtzNYEadh1WeI=",
+						"secondaryKey": "c2Vjb25kYXJ5VGVzdFJlYWQ="
+					},
+					"type": "Microsoft.CustomerInsights/hubs/AuthorizationPolicies"
+				}]
+			}
+		}
+	}
 }
