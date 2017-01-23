@@ -88,7 +88,7 @@
           {
             "name": "startClusterUpgrade",
             "in": "body",
-            "description": "The upgrade of the start cluster",
+            "description": "The description of the start cluster upgrade",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StartClusterUpgrade"
@@ -2280,7 +2280,7 @@
           {
             "name": "ForceRemove",
             "in": "query",
-            "description": "The force remove",
+            "description": "The force remove flag to skip services check",
             "type": "boolean",
             "required": false
           },
@@ -3504,10 +3504,12 @@
       "description": "The package of the register cluster",
       "properties": {
         "CodeFilePath": {
-          "type": "string"
+          "type": "string",
+          "description": "The path of the code file"
         },
         "ClusterManifestFilePath": {
-          "type": "string"
+          "type": "string",
+          "description": "The relative path of the cluster manifest file"
         }
       }
     },
@@ -3516,10 +3518,12 @@
       "description": "The package of the unregister cluster",
       "properties": {
         "CodeVersion": {
-          "type": "string"
+          "type": "string",
+          "description": "The version of the code"
         },
         "ConfigVersion": {
-          "type": "string"
+          "type": "string",
+          "description": "The version of the config"
         }
       }
     },
@@ -5193,10 +5197,12 @@
       "description": "The upgrade health policy of the cluster",
       "properties": {
         "MaxPercentDeltaUnhealthyNodes": {
-          "type": "integer"
+          "type": "integer",
+          "description": "The max percent of the delta unhealthy nodes, values are [0-100]"
         },
         "MaxPercentUpgradeDomainDeltaUnhealthyNodes": {
-          "type": "integer"
+          "type": "integer",
+          "description": "The max percent of the upgrade domain delta unhealthy nodes, values are [0-100]"
         }
       }
     },
@@ -5226,7 +5232,7 @@
     },
     "StartClusterUpgrade": {
       "type": "object",
-      "description": "The upgrade of the cluster",
+      "description": "The description of the start cluster upgrade",
       "properties": {
         "ConfigVersion": {
           "type": "string"
