@@ -568,44 +568,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/serviceCommunities/{serviceName}": {
-      "get": {
-        "tags": [
-          "ServiceCommunities"
-        ],
-        "operationId": "ServiceCommunities_Get",
-        "x-ms-examples": {
-          "ServiceCommunityGet": { "$ref": "./examples/ServiceCommunityGet.json" }
-        },
-        "description": "Get the specified service communities.",
-        "parameters": [
-          {
-            "name": "serviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the service community."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of ExpressRouteServiceProdiver resources.",
-            "schema": {
-              "$ref": "#/definitions/ServiceCommunity"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/serviceCommunities": {
       "get": {
         "tags": [
