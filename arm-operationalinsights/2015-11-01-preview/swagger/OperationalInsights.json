@@ -844,7 +844,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "The top level Linked service resource container."
@@ -906,7 +906,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Datasources under OMS Workspace."
@@ -1213,8 +1213,38 @@
           "description": "Resource tags"
         }
       },
+      "required": [
+        "location"
+      ],
       "description": "The resource definition.",
       "x-ms-azure-resource": true
+    },
+    "ProxyResource": { 
+      "properties": { 
+        "id": { 
+          "readOnly": true, 
+          "type": "string", 
+          "description": "Resource ID." 
+        }, 
+        "name": { 
+          "readOnly": true, 
+          "type": "string", 
+          "description": "Resource name." 
+        }, 
+        "type": { 
+          "readOnly": true, 
+          "type": "string", 
+          "description": "Resource type." 
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      }, 
+      "description": "Common properties of proxy resource." 
     }
   },
   "parameters": {
