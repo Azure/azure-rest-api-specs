@@ -499,7 +499,6 @@
           {
             "name": "parameters",
             "in": "body",
-            "required": true,
             "schema": {
               "$ref": "#/definitions/AddDataLakeStoreParameters"
             },
@@ -932,9 +931,7 @@
           }
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{name}": {
+      },
       "put": {
         "tags": [
           "Account"
@@ -950,7 +947,7 @@
             "description": "The name of the Azure resource group that contains the Data Lake Analytics account.the account will be associated with."
           },
           {
-            "name": "name",
+            "name": "accountName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1003,7 +1000,7 @@
             "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
           },
           {
-            "name": "name",
+            "name": "accountName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1074,12 +1071,15 @@
       "description": "Azure Storage account properties information to update."
     },
     "StorageAccountInfo": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
       "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the account name associated with the Azure storage account."
-        },
         "properties": {
           "$ref": "#/definitions/StorageAccountProperties",
           "description": "the properties associated with this storage account.",
@@ -1087,24 +1087,6 @@
         }
       },
       "description": "Azure Storage account information."
-    },
-    "CreateStorageAccountInfo": {
-      "required": [
-        "properties",
-        "name"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "the account name associated with the Azure storage account to add to the Data Lake analytics account being created."
-        },
-        "properties": {
-          "$ref": "#/definitions/StorageAccountProperties",
-          "description": "the properties associated with this storage account to add to the Data Lake analytics account being created.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "Azure Storage account information to add to the Data Lake analytics account being created."
     },
     "StorageContainerProperties": {
       "properties": {
@@ -1198,14 +1180,12 @@
       "description": "Data Lake Store account properties information."
     },
     "DataLakeStoreAccountInfo": {
-      "required": [
-        "name"
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
       ],
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "the account name of the Data Lake Store account to add to the Data Lake Analytics account being created."
-        },
         "properties": {
           "$ref": "#/definitions/DataLakeStoreAccountInfoProperties",
           "description": "the properties associated with this Data Lake Store account.",
@@ -1357,6 +1337,45 @@
           "type": "string",
           "readOnly": true,
           "description": "the full CName endpoint for this account."
+        },
+        "newTier": {
+          "type": "string",
+          "enum": [
+            "Consumption",
+            "Commitment_100AUHours",
+            "Commitment_500AUHours",
+            "Commitment_1000AUHours",
+            "Commitment_5000AUHours",
+            "Commitment_10000AUHours",
+            "Commitment_50000AUHours",
+            "Commitment_100000AUHours",
+            "Commitment_500000AUHours"
+          ],
+          "x-ms-enum": {
+            "name": "TierType",
+            "modelAsString": false
+          },
+          "description": "the commitment tier for the next month."
+        },
+        "currentTier": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Consumption",
+            "Commitment_100AUHours",
+            "Commitment_500AUHours",
+            "Commitment_1000AUHours",
+            "Commitment_5000AUHours",
+            "Commitment_10000AUHours",
+            "Commitment_50000AUHours",
+            "Commitment_100000AUHours",
+            "Commitment_500000AUHours"
+          ],
+          "x-ms-enum": {
+            "name": "TierType",
+            "modelAsString": false
+          },
+          "description": "the commitment tier in use for the current month."
         }
       },
       "description": "The account specific properties that are associated with an underlying Data Lake Analytics account."
@@ -1381,14 +1400,30 @@
           "format": "int32",
           "minimum": 1,
           "description": "the maximum supported jobs running under the account at the same time."
+        },
+        "newTier": {
+          "type": "string",
+          "enum": [
+            "Consumption",
+            "Commitment_100AUHours",
+            "Commitment_500AUHours",
+            "Commitment_1000AUHours",
+            "Commitment_5000AUHours",
+            "Commitment_10000AUHours",
+            "Commitment_50000AUHours",
+            "Commitment_100000AUHours",
+            "Commitment_500000AUHours"
+          ],
+          "x-ms-enum": {
+            "name": "TierType",
+            "modelAsString": false
+          },
+          "description": "the commitment tier to use for next month."
         }
       },
       "description": "The properties to update that are associated with an underlying Data Lake Analytics account to."
     },
     "AddDataLakeStoreParameters": {
-      "required": [
-        "properties"
-      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/DataLakeStoreAccountInfoProperties",
@@ -1494,54 +1529,6 @@
       },
       "description": "Generic resource error details information."
     },
-    "InnerError": {
-      "properties": {
-        "trace": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the stack trace for the error"
-        },
-        "context": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the context for the error message"
-        }
-      },
-      "description": "Generic resource inner error information."
-    },
-    "Error": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the HTTP status code or error code associated with this error"
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the error message to display."
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the target of the error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetails"
-          },
-          "readOnly": true,
-          "description": "The list of error details"
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerError",
-          "readOnly": true,
-          "description": "The inner exceptions or errors, if any"
-        }
-      },
-      "description": "Generic resource error information."
-    },
     "Resource": {
       "description": "The Resource model definition.",
       "properties": {
@@ -1576,6 +1563,28 @@
         "location"
       ],
       "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "description": "The Sub Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "required": [
+        "name"
+      ]
     }
   },
   "parameters": {

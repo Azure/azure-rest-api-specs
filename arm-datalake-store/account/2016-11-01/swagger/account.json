@@ -513,9 +513,7 @@
           }
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}": {
+      },
       "delete": {
         "tags": [
           "Account"
@@ -531,7 +529,7 @@
             "description": "The name of the Azure resource group that contains the Data Lake Store account."
           },
           {
-            "name": "accountName",
+            "name": "name",
             "in": "path",
             "required": true,
             "type": "string",
@@ -572,7 +570,7 @@
             "description": "The name of the Azure resource group that contains the Data Lake Store account."
           },
           {
-            "name": "accountName",
+            "name": "name",
             "in": "path",
             "required": true,
             "type": "string",
@@ -846,9 +844,6 @@
           "$ref": "#/definitions/SubResource"
         }
       ],
-      "required": [
-        "properties"
-      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/TrustedIdProviderProperties",
@@ -1093,6 +1088,41 @@
         "defaultGroup": {
           "type": "string",
           "description": "the default owner group for all new folders and files created in the Data Lake Store account."
+        },
+        "newTier": {
+          "type": "string",
+          "enum": [
+            "Consumption",
+            "Commitment_1TB",
+            "Commitment_10TB",
+            "Commitment_100TB",
+            "Commitment_500TB",
+            "Commitment_1PB",
+            "Commitment_5PB"
+          ],
+          "x-ms-enum": {
+            "name": "TierType",
+            "modelAsString": false
+          },
+          "description": "the commitment tier to use for next month."
+        },
+        "currentTier": {
+          "type": "string",
+           "enum": [
+            "Consumption",
+            "Commitment_1TB",
+            "Commitment_10TB",
+            "Commitment_100TB",
+            "Commitment_500TB",
+            "Commitment_1PB",
+            "Commitment_5PB"
+          ],
+          "x-ms-enum": {
+            "name": "TierType",
+            "modelAsString": false
+          },
+          "readOnly": true,
+          "description": "the commitment tier in use for the current month."
         }
       },
       "description": "Data Lake Store account properties information"
@@ -1126,6 +1156,23 @@
         "defaultGroup": {
           "type": "string",
           "description": "the default owner group for all new folders and files created in the Data Lake Store account."
+        },
+        "newTier": {
+          "type": "string",
+           "enum": [
+            "Consumption",
+            "Commitment_1TB",
+            "Commitment_10TB",
+            "Commitment_100TB",
+            "Commitment_500TB",
+            "Commitment_1PB",
+            "Commitment_5PB"
+          ],
+          "x-ms-enum": {
+            "name": "TierType",
+            "modelAsString": false
+          },
+          "description": "the commitment tier to use for next month."
         }
       },
       "description": "Data Lake Store account properties information to be updated."
@@ -1204,54 +1251,6 @@
       },
       "description": "Data Lake Store error details information"
     },
-    "InnerError": {
-      "properties": {
-        "trace": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the stack trace for the error"
-        },
-        "context": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the context for the error message"
-        }
-      },
-      "description": "Data Lake Store inner error information"
-    },
-    "Error": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the HTTP status code or error code associated with this error"
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the error message to display."
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the target of the error."
-        },
-        "details": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/ErrorDetails"
-          },
-          "description": "the list of error details"
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerError",
-          "readOnly": true,
-          "description": "the inner exceptions or errors, if any"
-        }
-      },
-      "description": "Data Lake Store error information"
-    },
     "Resource": {
       "description": "The Resource model definition.",
       "properties": {
@@ -1304,8 +1303,7 @@
           "type": "string",
           "description": "Resource type"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     }
   },
   "parameters": {
