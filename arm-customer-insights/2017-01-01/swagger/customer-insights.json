@@ -59,7 +59,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Hub."
+            "description": "The name of the Hub.",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "name": "parameters",
@@ -337,7 +340,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the profile."
+            "description": "The name of the profile.",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
+            "minLength": 1,
+            "maxLength": 128
           },
           {
             "name": "parameters",
@@ -498,7 +504,7 @@
             "$ref": "../examples/ProfilesListByHub.json"
           }
         },
-        "description": "Gets all profile in teh hub.",
+        "description": "Gets all profile in the hub.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -574,7 +580,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the interaction."
+            "description": "The name of the interaction.",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
+            "minLength": 1,
+            "maxLength": 128
           },
           {
             "name": "parameters",
@@ -750,7 +759,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Relationship."
+            "description": "The name of the Relationship.",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
+            "minLength": 1,
+            "maxLength": 512
           },
           {
             "name": "parameters",
@@ -960,7 +972,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the relationship link."
+            "description": "The name of the relationship link.",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
+            "minLength": 1,
+            "maxLength": 512
           },
           {
             "name": "parameters",
@@ -1138,7 +1153,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/authorizationPolicies/{policyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/authorizationPolicies/{authorizationPolicyName}": {
       "put": {
         "tags": [
           "AuthorizationPolicies"
@@ -1166,11 +1181,14 @@
             "description": "The name of the hub."
           },
           {
-            "name": "policyName",
+            "name": "authorizationPolicyName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the policy."
+            "description": "The name of the policy.",
+            "pattern": "^[A-Za-z0-9]$|^[A-Za-z0-9][\\w-\\.]*[A-Za-z0-9]$",
+            "minLength": 1,
+            "maxLength": 50
           },
           {
             "name": "parameters",
@@ -1230,7 +1248,7 @@
             "description": "The name of the hub."
           },
           {
-            "name": "policyName",
+            "name": "authorizationPolicyName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1300,7 +1318,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/authorizationPolicies/{policyName}/regeneratePrimaryKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/authorizationPolicies/{authorizationPolicyName}/regeneratePrimaryKey": {
       "post": {
         "tags": [
           "AuthorizationPolicies"
@@ -1328,7 +1346,7 @@
             "description": "The name of the hub."
           },
           {
-            "name": "policyName",
+            "name": "authorizationPolicyName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1351,7 +1369,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/authorizationPolicies/{policyName}/regenerateSecondaryKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/authorizationPolicies/{authorizationPolicyName}/regenerateSecondaryKey": {
       "post": {
         "tags": [
           "AuthorizationPolicies"
@@ -1379,7 +1397,7 @@
             "description": "The name of the hub."
           },
           {
-            "name": "policyName",
+            "name": "authorizationPolicyName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1434,7 +1452,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the connector."
+            "description": "The name of the connector.",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
+            "minLength": 1,
+            "maxLength": 128
           },
           {
             "name": "parameters",
@@ -1654,7 +1675,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the connector mapping."
+            "description": "The name of the connector mapping.",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
+            "minLength": 1,
+            "maxLength": 128
           },
           {
             "name": "parameters",
@@ -1886,7 +1910,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the KPI."
+            "description": "The name of the KPI.",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
+            "minLength": 1,
+            "maxLength": 512
           },
           {
             "name": "parameters",
@@ -2296,7 +2323,9 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the view."
+            "description": "The name of the view.",
+            "minLength": 1,
+            "maxLength": 512
           },
           {
             "name": "parameters",
@@ -2465,7 +2494,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the link."
+            "description": "The name of the link.",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
+            "minLength": 1,
+            "maxLength": 512
           },
           {
             "name": "parameters",
@@ -2768,7 +2800,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The assignment name"
+            "description": "The assignment name",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
+            "minLength": 1,
+            "maxLength": 128
           },
           {
             "name": "parameters",
@@ -3049,7 +3084,7 @@
         },
         "tenantFeatures": {
           "type": "integer",
-          "description": "The enabled hub features."
+          "description": "The bit flags for enabled hub features. Bit 0 is set to 1 indicates graph is enabled, or disabled if set to 0. Bit 1 is set to 1 indicates the hub is disabled, or enabled if set to 0."
         },
         "hubBillingInfo": {
           "$ref": "#/definitions/HubBillingInfoFormat"
