@@ -1786,8 +1786,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Gets a snapshot of the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.",
-        "description": "Gets a snapshot of the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.",
+        "summary": "Gets a snapshot of the configuration of an app at a previous point in time.",
+        "description": "Gets a snapshot of the configuration of an app at a previous point in time.",
         "operationId": "WebApps_GetConfigurationSnapshot",
         "produces": [
           "application/json",
@@ -1835,8 +1835,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Gets a snapshot of the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.",
-        "description": "Gets a snapshot of the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.",
+        "summary": "Reverts the configuration of an app to a previous snapshot.",
+        "description": "Reverts the configuration of an app to a previous snapshot.",
         "operationId": "WebApps_RecoverSiteConfigurationSnapshot",
         "parameters": [
           {
@@ -6158,8 +6158,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Gets a snapshot of the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.",
-        "description": "Gets a snapshot of the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.",
+        "summary": "Gets a snapshot of the configuration of an app at a previous point in time.",
+        "description": "Gets a snapshot of the configuration of an app at a previous point in time.",
         "operationId": "WebApps_GetConfigurationSnapshotSlot",
         "produces": [
           "application/json",
@@ -6214,8 +6214,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Gets a snapshot of the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.",
-        "description": "Gets a snapshot of the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.",
+        "summary": "Reverts the configuration of an app to a previous snapshot.",
+        "description": "Reverts the configuration of an app to a previous snapshot.",
         "operationId": "WebApps_RecoverSiteConfigurationSnapshotSlot",
         "parameters": [
           {
@@ -13212,10 +13212,6 @@
           "description": "The RuntimeVersion of the Authentication / Authorization feature in use for the current app.\n The setting in this value can control the behavior of certain features in the Authentication / Authorization module.",
           "type": "string"
         },
-        "httpApiPrefixPath": {
-          "description": "The relative path prefix used by platform HTTP APIs.\n Changing this value is not recommended except for compatibility reasons.",
-          "type": "string"
-        },
         "unauthenticatedClientAction": {
           "description": "The action to take when an unauthenticated client attempts to access the app.",
           "enum": [
@@ -13284,12 +13280,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "aadClientId": {
-          "type": "string"
-        },
-        "openIdIssuer": {
-          "type": "string"
         },
         "googleClientId": {
           "description": "The OpenID Connect Client ID for the Google web application.\n This setting is required for enabling Google Sign-In.\n Google Sign-In documentation: https://developers.google.com/identity/sign-in/web/",
