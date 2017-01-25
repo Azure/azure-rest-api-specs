@@ -1736,6 +1736,140 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/web/snapshots": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a list of web app configuration snapshots identifiers. Each element of the list contains a timestamp and the ID of the snapshot.",
+        "description": "Gets a list of web app configuration snapshots identifiers. Each element of the list contains a timestamp and the ID of the snapshot.",
+        "operationId": "WebApps_ListConfigurationSnapshotInfo",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SiteConfigurationSnapshotInfo"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/web/snapshots/{snapshotId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a snapshot of the configuration of an app at a previous point in time.",
+        "description": "Gets a snapshot of the configuration of an app at a previous point in time.",
+        "operationId": "WebApps_GetConfigurationSnapshot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "snapshotId",
+            "in": "path",
+            "description": "The ID of the snapshot to read.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteConfig"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/web/snapshots/{snapshotId}/recover": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Reverts the configuration of an app to a previous snapshot.",
+        "description": "Reverts the configuration of an app to a previous snapshot.",
+        "operationId": "WebApps_RecoverSiteConfigurationSnapshot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "snapshotId",
+            "in": "path",
+            "description": "The ID of the snapshot to read.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deployments": {
       "get": {
         "tags": [
@@ -3415,9 +3549,9 @@
             "type": "string"
           },
           {
-            "name": "options",
+            "name": "migrationOptions",
             "in": "body",
-            "description": "Migration options",
+            "description": "Migration migrationOptions",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StorageMigrationOptions"
@@ -3989,9 +4123,9 @@
             "type": "string"
           },
           {
-            "name": "options",
+            "name": "publishingProfileOptions",
             "in": "body",
-            "description": "Specifies options for publishing profile. For example, use {\"format\": \"FileZilla3\"} to get a FileZilla publishing profile.",
+            "description": "Specifies publishingProfileOptions for publishing profile. For example, use {\"format\": \"FileZilla3\"} to get a FileZilla publishing profile.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CsmPublishingProfileOptions"
@@ -5963,6 +6097,161 @@
             "schema": {
               "$ref": "#/definitions/SiteConfig"
             }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/web/snapshots": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a list of web app configuration snapshots identifiers. Each element of the list contains a timestamp and the ID of the snapshot.",
+        "description": "Gets a list of web app configuration snapshots identifiers. Each element of the list contains a timestamp and the ID of the snapshot.",
+        "operationId": "WebApps_ListConfigurationSnapshotInfoSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will return configuration for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SiteConfigurationSnapshotInfo"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/web/snapshots/{snapshotId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a snapshot of the configuration of an app at a previous point in time.",
+        "description": "Gets a snapshot of the configuration of an app at a previous point in time.",
+        "operationId": "WebApps_GetConfigurationSnapshotSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "snapshotId",
+            "in": "path",
+            "description": "The ID of the snapshot to read.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will return configuration for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteConfig"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/web/snapshots/{snapshotId}/recover": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Reverts the configuration of an app to a previous snapshot.",
+        "description": "Reverts the configuration of an app to a previous snapshot.",
+        "operationId": "WebApps_RecoverSiteConfigurationSnapshotSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "snapshotId",
+            "in": "path",
+            "description": "The ID of the snapshot to read.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will return configuration for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
           }
         }
       }
@@ -8393,9 +8682,9 @@
             "type": "string"
           },
           {
-            "name": "options",
+            "name": "publishingProfileOptions",
             "in": "body",
-            "description": "Specifies options for publishing profile. For example, use {\"format\": \"FileZilla3\"} to get a FileZilla publishing profile.",
+            "description": "Specifies publishingProfileOptions for publishing profile. For example, use {\"format\": \"FileZilla3\"} to get a FileZilla publishing profile.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CsmPublishingProfileOptions"
@@ -11109,10 +11398,6 @@
           "description": "Point in time in which the app recovery should be attempted.",
           "type": "string"
         },
-        "recoverConfig": {
-          "description": "If <code>true</code>, then the app's configuration will be reverted to its state at <code>SnapshotTime</code>.",
-          "type": "boolean"
-        },
         "siteName": {
           "description": "[Optional] Destination app name into which app should be recovered. This is case when new app should be created instead.",
           "type": "string"
@@ -12923,8 +13208,8 @@
           "description": "<code>true</code> if the Authentication / Authorization feature is enabled for the current app; otherwise, <code>false</code>.",
           "type": "boolean"
         },
-        "httpApiPrefixPath": {
-          "description": "The relative path prefix used by platform HTTP APIs.\n Changing this value is not recommended except for compatibility reasons.",
+        "runtimeVersion": {
+          "description": "The RuntimeVersion of the Authentication / Authorization feature in use for the current app.\n The setting in this value can control the behavior of certain features in the Authentication / Authorization module.",
           "type": "string"
         },
         "unauthenticatedClientAction": {
@@ -12995,12 +13280,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "aadClientId": {
-          "type": "string"
-        },
-        "openIdIssuer": {
-          "type": "string"
         },
         "googleClientId": {
           "description": "The OpenID Connect Client ID for the Google web application.\n This setting is required for enabling Google Sign-In.\n Google Sign-In documentation: https://developers.google.com/identity/sign-in/web/",
@@ -13222,7 +13501,26 @@
             },
             "scmType": {
               "description": "SCM type.",
-              "type": "string"
+              "enum": [
+                "None",
+                "Dropbox",
+                "Tfs",
+                "LocalGit",
+                "GitHub",
+                "CodePlexGit",
+                "CodePlexHg",
+                "BitbucketGit",
+                "BitbucketHg",
+                "ExternalGit",
+                "ExternalHg",
+                "OneDrive",
+                "VSO"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ScmType",
+                "modelAsString": true
+              }
             },
             "use32BitWorkerProcess": {
               "description": "<code>true</code> to use 32-bit worker process; otherwise, <code>false</code>.",
@@ -13341,6 +13639,35 @@
               "items": {
                 "$ref": "#/definitions/IpSecurityRestriction"
               }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SiteConfigurationSnapshotInfo": {
+      "description": "A snapshot of a web app configuration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ARM envelope properties",
+          "properties": {
+            "time": {
+              "format": "date-time",
+              "description": "The time the snapshot was taken.",
+              "type": "string",
+              "readOnly": true
+            },
+            "id": {
+              "format": "int32",
+              "description": "The id of the snapshot",
+              "type": "integer",
+              "readOnly": true
             }
           },
           "x-ms-client-flatten": true
