@@ -3,19 +3,17 @@
   "info": {
     "title": "ComputeManagementClient",
     "description": "The Compute Management Client.",
-    "version": "2015-06-15"
+    "version": "2016-04-30-preview"
   },
   "host": "management.azure.com",
   "schemes": [
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -42,7 +40,7 @@
           "AvailabilitySets"
         ],
         "operationId": "AvailabilitySets_CreateOrUpdate",
-        "description": "The operation to create or update the availability set.",
+        "description": "Create or update an availability set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -56,7 +54,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Parameters supplied to the Create Availability Set operation."
+            "description": "The name of the availability set."
           },
           {
             "name": "parameters",
@@ -76,7 +74,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/AvailabilitySet"
             }
@@ -90,7 +88,7 @@
           "AvailabilitySets"
         ],
         "operationId": "AvailabilitySets_Delete",
-        "description": "The operation to delete the availability set.",
+        "description": "Delete an availability set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -115,10 +113,13 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           }
         }
       },
@@ -127,7 +128,7 @@
           "AvailabilitySets"
         ],
         "operationId": "AvailabilitySets_Get",
-        "description": "The operation to get the availability set.",
+        "description": "Retrieves information about an availability set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -152,7 +153,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/AvailabilitySet"
             }
@@ -166,7 +167,7 @@
           "AvailabilitySets"
         ],
         "operationId": "AvailabilitySets_List",
-        "description": "The operation to list the availability sets.",
+        "description": "Lists all availability sets in a resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -184,7 +185,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/AvailabilitySetListResult"
             }
@@ -226,7 +227,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineSizeListResult"
             }
@@ -278,7 +279,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineExtensionImage"
             }
@@ -315,7 +316,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "type": "array",
               "items": {
@@ -381,7 +382,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "type": "array",
               "items": {
@@ -440,13 +441,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineExtension"
             }
           },
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/VirtualMachineExtension"
             }
@@ -490,11 +491,17 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           }
         },
         "x-ms-long-running-operation": true
@@ -543,7 +550,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineExtension"
             }
@@ -563,31 +570,36 @@
             "name": "location",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The name of a supported Azure region."
           },
           {
             "name": "publisherName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "A valid image publisher."
           },
           {
             "name": "offer",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "A valid image publisher offer."
           },
           {
             "name": "skus",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "A valid image SKU."
           },
           {
             "name": "version",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "A valid image SKU version."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -598,7 +610,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineImage"
             }
@@ -612,31 +624,35 @@
           "VirtualMachineImages"
         ],
         "operationId": "VirtualMachineImages_List",
-        "description": "Gets a list of virtual machine images.",
+        "description": "Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU.",
         "parameters": [
           {
             "name": "location",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The name of a supported Azure region."
           },
           {
             "name": "publisherName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "A valid image publisher."
           },
           {
             "name": "offer",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "A valid image publisher offer."
           },
           {
             "name": "skus",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "A valid image SKU."
           },
           {
             "name": "$filter",
@@ -667,7 +683,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "type": "array",
               "items": {
@@ -685,19 +701,21 @@
           "VirtualMachineImages"
         ],
         "operationId": "VirtualMachineImages_ListOffers",
-        "description": "Gets a list of virtual machine image offers.",
+        "description": "Gets a list of virtual machine image offers for the specified location and publisher.",
         "parameters": [
           {
             "name": "location",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The name of a supported Azure region."
           },
           {
             "name": "publisherName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "A valid image publisher."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -708,7 +726,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "type": "array",
               "items": {
@@ -725,13 +743,14 @@
           "VirtualMachineImages"
         ],
         "operationId": "VirtualMachineImages_ListPublishers",
-        "description": "Gets a list of virtual machine image publishers.",
+        "description": "Gets a list of virtual machine image publishers for the specified Azure location.",
         "parameters": [
           {
             "name": "location",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The name of a supported Azure region."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -742,7 +761,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "type": "array",
               "items": {
@@ -759,25 +778,28 @@
           "VirtualMachineImages"
         ],
         "operationId": "VirtualMachineImages_ListSkus",
-        "description": "Gets a list of virtual machine image skus.",
+        "description": "Gets a list of virtual machine image SKUs for the specified location, publisher, and offer.",
         "parameters": [
           {
             "name": "location",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The name of a supported Azure region."
           },
           {
             "name": "publisherName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "A valid image publisher."
           },
           {
             "name": "offer",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "A valid image publisher offer."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -788,7 +810,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "type": "array",
               "items": {
@@ -805,14 +827,14 @@
           "Usage"
         ],
         "operationId": "Usage_List",
-        "description": "Lists compute usages for a subscription.",
+        "description": "Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription.",
         "parameters": [
           {
             "name": "location",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The location upon which resource usage is queried.",
+            "description": "The location for which resource usage is queried.",
             "pattern": "^[-\\w\\._]+$"
           },
           {
@@ -824,7 +846,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ListUsagesResult"
             }
@@ -860,7 +882,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineSizeListResult"
             }
@@ -868,6 +890,212 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}": {
+      "put": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_CreateOrUpdate",
+        "description": "Create or update an image.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the image."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Image"
+            },
+            "description": "Parameters supplied to the Create Image operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_Delete",
+        "description": "Deletes an Image.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the image."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_Get",
+        "description": "Gets an image.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the image."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images": {
+      "get": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_ListByResourceGroup",
+        "description": "Gets the list of images under a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/images": {
+      "get": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_List",
+        "description": "Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is not null to fetch all the Images.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -911,13 +1139,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineCaptureResult"
             }
           },
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -963,13 +1191,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachine"
             }
           },
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/VirtualMachine"
             }
@@ -1006,11 +1234,17 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           }
         },
         "x-ms-long-running-operation": true
@@ -1020,7 +1254,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Get",
-        "description": "The operation to get a virtual machine.",
+        "description": "Retrieves information about the model view or the instance view of a virtual machine.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1059,7 +1293,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachine"
             }
@@ -1067,13 +1301,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/deallocate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/convertToManagedDisks": {
       "post": {
         "tags": [
           "VirtualMachines"
         ],
-        "operationId": "VirtualMachines_Deallocate",
-        "description": "Shuts down the Virtual Machine and releases the compute resources. You are not billed for the compute resources that this Virtual Machine uses.",
+        "operationId": "VirtualMachines_ConvertToManagedDisks",
+        "description": "Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1097,8 +1331,57 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/deallocate": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Deallocate",
+        "description": "Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1110,7 +1393,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Generalize",
-        "description": "Sets the state of the VM as Generalized.",
+        "description": "Sets the state of the virtual machine to generalized.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1135,7 +1418,10 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
           }
         }
       }
@@ -1146,7 +1432,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_List",
-        "description": "The operation to list virtual machines under a resource group.",
+        "description": "Lists all of the virtual machines in the specified resource group. Use the nextLink property in the response to get the next page of virtual machines.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1164,14 +1450,14 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineListResult"
             }
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1181,7 +1467,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_ListAll",
-        "description": "Gets the list of Virtual Machines in the subscription. Use nextLink property in the response to get the next page of Virtual Machines. Do this till nextLink is not null to fetch all the Virtual Machines.",
+        "description": "Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1192,7 +1478,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineListResult"
             }
@@ -1209,7 +1495,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_ListAvailableSizes",
-        "description": "Lists all available virtual machine sizes it can be resized to for a virtual machine.",
+        "description": "Lists all available virtual machine sizes to which the specified virtual machine can be resized.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1234,7 +1520,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineSizeListResult"
             }
@@ -1251,7 +1537,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_PowerOff",
-        "description": "The operation to power off (stop) a virtual machine.",
+        "description": "The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1275,8 +1561,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1312,8 +1604,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1349,8 +1647,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1386,8 +1690,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1399,7 +1709,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_CreateOrUpdate",
-        "description": "The operation to create or update a virtual machine scale set.",
+        "description": "Create or update a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1413,7 +1723,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Parameters supplied to the Create Virtual Machine Scale Set operation."
+            "description": "The name of the VM scale set to create or update."
           },
           {
             "name": "parameters",
@@ -1422,7 +1732,7 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSet"
             },
-            "description": "Parameters supplied to the Create Virtual Machine Scale Set operation."
+            "description": "The scale set object."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1433,13 +1743,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSet"
             }
           },
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSet"
             }
@@ -1454,7 +1764,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Deallocate",
-        "description": "The operation to deallocate virtual machines in a virtual machine scale set.",
+        "description": "Deallocates specific virtual machines in a VM scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set deallocates.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1468,7 +1778,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "vmInstanceIDs",
@@ -1477,7 +1787,7 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
             },
-            "description": "The list of virtual machine scale set instance IDs."
+            "description": "A list of virtual machine instance IDs from the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1487,8 +1797,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1500,7 +1816,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Delete",
-        "description": "The operation to delete a virtual machine scale set.",
+        "description": "Deletes a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1514,7 +1830,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1525,13 +1841,16 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
           },
           "202": {
-            "description": ""
+            "description": "Accepted"
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           }
         },
         "x-ms-long-running-operation": true
@@ -1541,7 +1860,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Get",
-        "description": "The operation to get a virtual machine scale set.",
+        "description": "Display information about a virtual machine scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1555,7 +1874,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1566,7 +1885,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSet"
             }
@@ -1580,7 +1899,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_DeleteInstances",
-        "description": "The operation to delete virtual machines in a virtual machine scale set.",
+        "description": "Deletes virtual machines in a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1594,7 +1913,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "vmInstanceIDs",
@@ -1603,7 +1922,7 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceRequiredIDs"
             },
-            "description": "The list of virtual machine scale set instance IDs."
+            "description": "A list of virtual machine instance IDs from the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1613,8 +1932,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1626,7 +1951,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_GetInstanceView",
-        "description": "The operation to get a virtual machine scale set instance view.",
+        "description": "Gets the status of a VM scale set instance.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1640,7 +1965,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1651,7 +1976,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetInstanceView"
             }
@@ -1665,7 +1990,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_List",
-        "description": "The operation to list virtual machine scale sets under a resource group.",
+        "description": "Gets a list of all VM scale sets under a resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1683,7 +2008,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetListResult"
             }
@@ -1700,7 +2025,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_ListAll",
-        "description": "Gets the list of Virtual Machine Scale Sets in the subscription. Use nextLink property in the response to get the next page of Virtual Machine Scale Sets. Do this till nextLink is not null to fetch all the Virtual Machine Scale Sets.",
+        "description": "Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is not null to fetch all the VM Scale Sets.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1711,7 +2036,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetListWithLinkResult"
             }
@@ -1728,7 +2053,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_ListSkus",
-        "description": "The operation to list available skus for a virtual machine scale set.",
+        "description": "Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1742,7 +2067,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1753,7 +2078,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetListSkusResult"
             }
@@ -1770,7 +2095,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_PowerOff",
-        "description": "The operation to power off (stop) virtual machines in a virtual machine scale set.",
+        "description": "Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1784,7 +2109,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "vmInstanceIDs",
@@ -1793,7 +2118,7 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
             },
-            "description": "The list of virtual machine scale set instance IDs."
+            "description": "A list of virtual machine instance IDs from the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1803,8 +2128,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1816,7 +2147,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Restart",
-        "description": "The operation to restart virtual machines in a virtual machine scale set.",
+        "description": "Restarts one or more virtual machines in a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1830,7 +2161,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "vmInstanceIDs",
@@ -1839,7 +2170,7 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
             },
-            "description": "The list of virtual machine scale set instance IDs."
+            "description": "A list of virtual machine instance IDs from the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1849,8 +2180,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1862,7 +2199,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Start",
-        "description": "The operation to start virtual machines in a virtual machine scale set.",
+        "description": "Starts one or more virtual machines in a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1876,7 +2213,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "vmInstanceIDs",
@@ -1885,7 +2222,7 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
             },
-            "description": "The list of virtual machine scale set instance IDs."
+            "description": "A list of virtual machine instance IDs from the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1895,8 +2232,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1908,7 +2251,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_UpdateInstances",
-        "description": "The operation to manually upgrade virtual machines in a virtual machine scale set.",
+        "description": "Upgrades one or more virtual machines to the latest SKU set in the VM scale set model.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1922,7 +2265,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "vmInstanceIDs",
@@ -1931,7 +2274,7 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceRequiredIDs"
             },
-            "description": "The list of virtual machine scale set instance IDs."
+            "description": "A list of virtual machine instance IDs from the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1941,8 +2284,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1954,7 +2303,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Reimage",
-        "description": "The operation to re-image virtual machines in a virtual machine scale set.",
+        "description": "Reimages (upgrade the operating system) one or more virtual machines in a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1968,7 +2317,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1978,8 +2327,57 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimageall": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_ReimageAll",
+        "description": "Reimages all the disks ( including data disks ) in the virtual machines in a virtual machine scale set. This operation is only supported for managed disks.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1991,7 +2389,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Reimage",
-        "description": "The operation to re-image a virtual machine scale set instance.",
+        "description": "Reimages (upgrade the operating system) a specific virtual machine in a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2005,14 +2403,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "instanceId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The instance id of the virtual machine."
+            "description": "The instance ID of the virtual machine."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2022,8 +2420,64 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimageall": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSetVMs"
+        ],
+        "operationId": "VirtualMachineScaleSetVMs_ReimageAll",
+        "description": "Allows you to re-image all the disks ( including data disks ) in the a virtual machine scale set instance. This operation is only supported for managed disks.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -2035,7 +2489,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Deallocate",
-        "description": "The operation to deallocate a virtual machine scale set.",
+        "description": "Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2049,14 +2503,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "instanceId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The instance id of the virtual machine."
+            "description": "The instance ID of the virtual machine."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2066,8 +2520,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -2079,7 +2539,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Delete",
-        "description": "The operation to delete a virtual machine scale set.",
+        "description": "Deletes a virtual machine from a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2093,14 +2553,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "instanceId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The instance id of the virtual machine."
+            "description": "The instance ID of the virtual machine."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2111,13 +2571,16 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
           },
           "202": {
-            "description": ""
+            "description": "Accepted"
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           }
         },
         "x-ms-long-running-operation": true
@@ -2127,7 +2590,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Get",
-        "description": "The operation to get a virtual machine scale set virtual machine.",
+        "description": "Gets a virtual machine from a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2141,14 +2604,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "instanceId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The instance id of the virtual machine."
+            "description": "The instance ID of the virtual machine."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2159,7 +2622,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVM"
             }
@@ -2173,7 +2636,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_GetInstanceView",
-        "description": "The operation to get a virtual machine scale set virtual machine.",
+        "description": "Gets the status of a virtual machine from a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2187,14 +2650,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "instanceId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The instance id of the virtual machine."
+            "description": "The instance ID of the virtual machine."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2205,7 +2668,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceView"
             }
@@ -2219,7 +2682,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_List",
-        "description": "The operation to list virtual machine scale sets VMs.",
+        "description": "Gets a list of all virtual machines in a VM scale sets.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2233,14 +2696,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "The filter to apply to the operation."
           },
           {
             "name": "$select",
@@ -2254,7 +2717,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation."
+            "description": "The expand expression to apply to the operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2265,7 +2728,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVMListResult"
             }
@@ -2283,7 +2746,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_PowerOff",
-        "description": "The operation to power off (stop) a virtual machine scale set.",
+        "description": "Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2297,14 +2760,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "instanceId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The instance id of the virtual machine."
+            "description": "The instance ID of the virtual machine."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2314,8 +2777,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -2327,7 +2796,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Restart",
-        "description": "The operation to restart a virtual machine scale set.",
+        "description": "Restarts a virtual machine in a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2341,14 +2810,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "instanceId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The instance id of the virtual machine."
+            "description": "The instance ID of the virtual machine."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2358,8 +2827,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -2371,7 +2846,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Start",
-        "description": "The operation to start a virtual machine scale set.",
+        "description": "Starts a virtual machine in a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2385,14 +2860,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the virtual machine scale set."
+            "description": "The name of the VM scale set."
           },
           {
             "name": "instanceId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The instance id of the virtual machine."
+            "description": "The instance ID of the virtual machine."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2402,8 +2877,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
+          },
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -2415,11 +2896,11 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Gets the status Code."
+          "description": "The status code."
         },
         "level": {
           "type": "string",
-          "description": "Gets or sets the level Code.",
+          "description": "The level code.",
           "enum": [
             "Info",
             "Warning",
@@ -2432,16 +2913,16 @@
         },
         "displayStatus": {
           "type": "string",
-          "description": "Gets or sets the short localizable label for the status."
+          "description": "The short localizable label for the status."
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the detailed Message, including for alerts and error messages."
+          "description": "The detailed status message, including for alerts and error messages."
         },
         "time": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the time of the status."
+          "description": "The time of the status."
         }
       },
       "description": "Instance view status."
@@ -2451,26 +2932,31 @@
         "platformUpdateDomainCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets Update Domain count."
+          "description": "Update Domain count."
         },
         "platformFaultDomainCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets Fault Domain count."
+          "description": "Fault Domain count."
         },
         "virtualMachines": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
           },
-          "description": "Gets or sets a list containing reference to all Virtual Machines  created under this Availability Set."
+          "description": "A list of references to all virtual machines in the availability set."
         },
         "statuses": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "description": "Gets or sets the resource status information."
+          "description": "The resource status information."
+        },
+        "managed": {
+          "type": "boolean",
+          "description": "If the availability set supports managed disks."
         }
       },
       "description": "The instance view of a resource."
@@ -2480,6 +2966,10 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AvailabilitySetProperties"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Sku of the availability set"
         }
       },
       "allOf": [
@@ -2487,7 +2977,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Create or update Availability Set parameters."
+      "description": "Create or update availability set parameters."
     },
     "AvailabilitySetListResult": {
       "properties": {
@@ -2496,7 +2986,7 @@
           "items": {
             "$ref": "#/definitions/AvailabilitySet"
           },
-          "description": "Gets or sets the list of availability sets"
+          "description": "The list of availability sets"
         }
       },
       "description": "The List Availability Set operation response."
@@ -2505,32 +2995,32 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the VM size name."
+          "description": "The name of the virtual machine size."
         },
         "numberOfCores": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Number of cores supported by a VM size."
+          "description": "The number of cores supported by the virtual machine size."
         },
         "osDiskSizeInMB": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the OS disk size allowed by a VM size."
+          "description": "The OS disk size, in MB, allowed by the virtual machine size."
         },
         "resourceDiskSizeInMB": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Resource disk size allowed by a VM size."
+          "description": "The resource disk size, in MB, allowed by the virtual machine size."
         },
         "memoryInMB": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Memory size supported by a VM size."
+          "description": "The amount of memory, in MB, supported by the virtual machine size."
         },
         "maxDataDiskCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Maximum number of data disks allowed by a VM size."
+          "description": "The maximum number of data disks that can be attached to the virtual machine size."
         }
       },
       "description": "Describes the properties of a VM size."
@@ -2542,7 +3032,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineSize"
           },
-          "description": "Gets or sets the list of virtual machine sizes."
+          "description": "The list of virtual machine sizes."
         }
       },
       "description": "The List Virtual Machine operation response."
@@ -2551,23 +3041,23 @@
       "properties": {
         "operatingSystem": {
           "type": "string",
-          "description": "Gets or sets the operating system this extension supports."
+          "description": "The operating system this extension supports."
         },
         "computeRole": {
           "type": "string",
-          "description": "Gets or sets the type of role (IaaS or PaaS) this extension supports."
+          "description": "The type of role (IaaS or PaaS) this extension supports."
         },
         "handlerSchema": {
           "type": "string",
-          "description": "Gets or sets the schema defined by publisher, where extension consumers should provide settings in a matching schema."
+          "description": "The schema defined by publisher, where extension consumers should provide settings in a matching schema."
         },
         "vmScaleSetEnabled": {
           "type": "boolean",
-          "description": "Gets or sets whether the extension can be used on xRP VMScaleSets.By default existing extensions are usable on scalesets, but there might be cases where a publisher wants to explicitly indicate the extension is only enabled for CRP VMs but not VMSS."
+          "description": "Whether the extension can be used on xRP VMScaleSets. By default existing extensions are usable on scalesets, but there might be cases where a publisher wants to explicitly indicate the extension is only enabled for CRP VMs but not VMSS."
         },
         "supportsMultipleExtensions": {
           "type": "boolean",
-          "description": "Gets or sets whether the handler can support multiple extensions."
+          "description": "Whether the handler can support multiple extensions."
         }
       },
       "required": [
@@ -2599,18 +3089,18 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the resource."
+          "description": "The name of the resource."
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the location of the resource."
+          "description": "The supported Azure location of the resource."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the tags attached to the resource."
+          "description": "The tags attached to the resource."
         }
       },
       "required": [
@@ -2628,29 +3118,29 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the virtual machine extension name."
+          "description": "The virtual machine extension name."
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the full type of the extension handler which includes both publisher and type."
+          "description": "The full type of the extension handler which includes both publisher and type."
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Gets or sets the type version of the extension handler."
+          "description": "The type version of the extension handler."
         },
         "substatuses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "description": "Gets or sets the resource status information."
+          "description": "The resource status information."
         },
         "statuses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "description": "Gets or sets the resource status information."
+          "description": "The resource status information."
         }
       },
       "description": "The instance view of a virtual machine extension."
@@ -2659,39 +3149,40 @@
       "properties": {
         "forceUpdateTag": {
           "type": "string",
-          "description": "Gets or sets how the extension handler should be forced to update even if the extension configuration has not changed."
+          "description": "How the extension handler should be forced to update even if the extension configuration has not changed."
         },
         "publisher": {
           "type": "string",
-          "description": "Gets or sets the name of the extension handler publisher."
+          "description": "The name of the extension handler publisher."
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the type of the extension handler."
+          "description": "The type of the extension handler."
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Gets or sets the type version of the extension handler."
+          "description": "The type version of the extension handler."
         },
         "autoUpgradeMinorVersion": {
           "type": "boolean",
-          "description": "Gets or sets whether the extension handler should be automatically upgraded across minor versions."
+          "description": "Whether the extension handler should be automatically upgraded across minor versions."
         },
         "settings": {
           "type": "object",
-          "description": "Gets or sets Json formatted public settings for the extension."
+          "description": "Json formatted public settings for the extension."
         },
         "protectedSettings": {
           "type": "object",
-          "description": "Gets or sets Json formatted protected settings for the extension."
+          "description": "Json formatted protected settings for the extension."
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the provisioning state, which only appears in the response."
+          "description": "The provisioning state, which only appears in the response."
         },
         "instanceView": {
           "$ref": "#/definitions/VirtualMachineExtensionInstanceView",
-          "description": "Gets or sets the virtual machine extension instance view."
+          "description": "The virtual machine extension instance view."
         }
       },
       "description": "Describes the properties of a Virtual Machine Extension."
@@ -2714,15 +3205,15 @@
       "properties": {
         "publisher": {
           "type": "string",
-          "description": "Gets or sets the publisher ID."
+          "description": "The publisher ID."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the plan ID."
+          "description": "The plan ID."
         },
         "product": {
           "type": "string",
-          "description": "Gets or sets the product ID."
+          "description": "The product ID."
         }
       },
       "required": [
@@ -2736,7 +3227,7 @@
       "properties": {
         "operatingSystem": {
           "type": "string",
-          "description": "Gets or sets the operating system of the osDiskImage.",
+          "description": "The operating system of the osDiskImage.",
           "enum": [
             "Windows",
             "Linux"
@@ -2758,7 +3249,7 @@
           "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "description": "Gets the LUN number for a data disk.This value is used to identify data disk image inside the VMImage therefore it must be unique for each data disk.The allowed character for the value is digit."
+          "description": "The LUN number for a data disk. This value is used to identify data disk image inside the VMImage and therefore it must be unique for each data disk."
         }
       },
       "description": "Contains the data disk images information."
@@ -2802,11 +3293,11 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "Gets or sets a string describing the resource name."
+          "description": "The name of the resource."
         },
         "localizedValue": {
           "type": "string",
-          "description": "Gets or sets a localized string describing the resource name."
+          "description": "The localized name of the resource."
         }
       },
       "description": "The Usage Names."
@@ -2815,7 +3306,7 @@
       "properties": {
         "unit": {
           "type": "string",
-          "description": "Gets or sets an enum describing the unit of measurement.",
+          "description": "An enum describing the unit of usage measurement.",
           "enum": [
             "Count"
           ],
@@ -2827,16 +3318,16 @@
         "currentValue": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the current value of the usage."
+          "description": "The current usage of the resource."
         },
         "limit": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the limit of usage."
+          "description": "The maximum permitted usage of the resource."
         },
         "name": {
           "$ref": "#/definitions/UsageName",
-          "description": "Gets or sets the name of the type of usage."
+          "description": "The name of the type of usage."
         }
       },
       "required": [
@@ -2854,24 +3345,31 @@
           "items": {
             "$ref": "#/definitions/Usage"
           },
-          "description": "Gets or sets the list Compute Resource Usages."
+          "description": "The list of compute resource usages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The List Usages operation response."
     },
     "VirtualMachineCaptureParameters": {
       "properties": {
         "vhdPrefix": {
           "type": "string",
-          "description": "Gets or sets the captured VirtualHardDisk's name prefix."
+          "description": "The captured virtual hard disk's name prefix."
         },
         "destinationContainerName": {
           "type": "string",
-          "description": "Gets or sets the destination container name."
+          "description": "The destination container name."
         },
         "overwriteVhds": {
           "type": "boolean",
-          "description": "Gets or sets whether it overwrites destination VirtualHardDisk if true, in case of conflict."
+          "description": "Specifies whether to overwrite the destination virtual hard disk, in case of conflict."
         }
       },
       "required": [
@@ -2908,19 +3406,19 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the plan ID."
+          "description": "The plan ID."
         },
         "publisher": {
           "type": "string",
-          "description": "Gets or sets the publisher ID."
+          "description": "The publisher ID."
         },
         "product": {
           "type": "string",
-          "description": "Gets or sets the offer ID."
+          "description": "The offer ID."
         },
         "promotionCode": {
           "type": "string",
-          "description": "Gets or sets the promotion code."
+          "description": "The promotion code."
         }
       },
       "description": "Plan for the resource."
@@ -2965,6 +3463,7 @@
             "Standard_D12_v2",
             "Standard_D13_v2",
             "Standard_D14_v2",
+            "Standard_D15_v2",
             "Standard_DS1",
             "Standard_DS2",
             "Standard_DS3",
@@ -2973,6 +3472,16 @@
             "Standard_DS12",
             "Standard_DS13",
             "Standard_DS14",
+            "Standard_DS1_v2",
+            "Standard_DS2_v2",
+            "Standard_DS3_v2",
+            "Standard_DS4_v2",
+            "Standard_DS5_v2",
+            "Standard_DS11_v2",
+            "Standard_DS12_v2",
+            "Standard_DS13_v2",
+            "Standard_DS14_v2",
+            "Standard_DS15_v2",
             "Standard_G1",
             "Standard_G2",
             "Standard_G3",
@@ -2996,32 +3505,37 @@
       "properties": {
         "publisher": {
           "type": "string",
-          "description": "Gets or sets the image publisher."
+          "description": "The image publisher."
         },
         "offer": {
           "type": "string",
-          "description": "Gets or sets the image offer."
+          "description": "The image offer."
         },
         "sku": {
           "type": "string",
-          "description": "Gets or sets the image sku."
+          "description": "The image SKU."
         },
         "version": {
           "type": "string",
-          "description": "Gets or sets the image version. The allowed formats are Major.Minor.Build or 'latest'. Major, Minor and Build being decimal numbers. Specify 'latest' to use the latest version of image."
+          "description": "The image version. The allowed formats are Major.Minor.Build or 'latest'. Major, Minor and Build are decimal numbers. Specify 'latest' to use the latest version of the image."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
       "description": "The image reference."
     },
     "KeyVaultSecretReference": {
       "properties": {
         "secretUrl": {
           "type": "string",
-          "description": "Gets or sets the URL referencing a secret in a Key Vault."
+          "description": "The URL referencing a secret in a Key Vault."
         },
         "sourceVault": {
           "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets the Relative URL of the Key Vault containing the secret."
+          "description": "The relative URL of the Key Vault containing the secret."
         }
       },
       "required": [
@@ -3034,11 +3548,11 @@
       "properties": {
         "keyUrl": {
           "type": "string",
-          "description": "Gets or sets the URL referencing a key in a Key Vault."
+          "description": "The URL referencing a key in a Key Vault."
         },
         "sourceVault": {
           "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets the Relative URL of the Key Vault containing the key"
+          "description": "The relative URL of the Key Vault containing the key."
         }
       },
       "required": [
@@ -3051,36 +3565,85 @@
       "properties": {
         "diskEncryptionKey": {
           "$ref": "#/definitions/KeyVaultSecretReference",
-          "description": "Gets or sets the disk encryption key which is a KeyVault Secret."
+          "description": "The disk encryption key which is a Key Vault Secret."
         },
         "keyEncryptionKey": {
           "$ref": "#/definitions/KeyVaultKeyReference",
-          "description": "Gets or sets the key encryption key which is KeyVault Key."
+          "description": "The key encryption key which is Key Vault Key."
         },
         "enabled": {
           "type": "boolean",
-          "description": "Gets or sets whether disk encryption should be enabled on the Virtual Machine."
+          "description": "Specifies whether disk encryption should be enabled on the virtual machine."
         }
       },
-      "required": [
-        "diskEncryptionKey"
-      ],
       "description": "Describes a Encryption Settings for a Disk"
     },
     "VirtualHardDisk": {
       "properties": {
         "uri": {
           "type": "string",
-          "description": "Gets or sets the virtual hard disk's uri. It should be a valid Uri to a virtual hard disk."
+          "description": "The virtual hard disk's URI. Must be a valid URI to a virtual hard disk."
         }
       },
       "description": "Describes the uri of a disk."
+    },
+    "Caching": {
+      "type": "string",
+      "description": "The caching type.",
+      "enum": [
+        "None",
+        "ReadOnly",
+        "ReadWrite"
+      ],
+      "x-ms-enum": {
+        "name": "CachingTypes",
+        "modelAsString": false
+      }
+    },
+    "CreateOption": {
+      "type": "string",
+      "description": "The create option.",
+      "enum": [
+        "fromImage",
+        "empty",
+        "attach"
+      ],
+      "x-ms-enum": {
+        "name": "DiskCreateOptionTypes",
+        "modelAsString": false
+      }
+    },
+    "StorageAccountType": {
+      "type": "string",
+      "description": "The Storage Account type.",
+      "enum": [
+        "Standard_LRS",
+        "Premium_LRS"
+      ],
+      "x-ms-enum": {
+        "name": "StorageAccountTypes",
+        "modelAsString": false
+      }
+    },
+    "ManagedDiskParameters": {
+      "properties": {
+        "storageAccountType": {
+          "$ref": "#/definitions/StorageAccountType",
+          "description": "The Storage Account type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "The parameters of a managed disk."
     },
     "OSDisk": {
       "properties": {
         "osType": {
           "type": "string",
-          "description": "Gets or sets the Operating System type.",
+          "description": "The Operating System type.",
           "enum": [
             "Windows",
             "Linux"
@@ -3092,55 +3655,39 @@
         },
         "encryptionSettings": {
           "$ref": "#/definitions/DiskEncryptionSettings",
-          "description": "Gets or sets the disk encryption settings."
+          "description": "The disk encryption settings."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the disk name."
+          "description": "The disk name."
         },
         "vhd": {
           "$ref": "#/definitions/VirtualHardDisk",
-          "description": "Gets or sets the Virtual Hard Disk."
+          "description": "The virtual hard disk."
         },
         "image": {
           "$ref": "#/definitions/VirtualHardDisk",
-          "description": "Gets or sets the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist."
+          "description": "The source user image virtual hard disk. The virtual hard disk will be copied before using it to attach to the virtual machine. If SourceImage is provided, the destination virtual hard disk must not exist."
         },
         "caching": {
-          "type": "string",
-          "description": "Gets or sets the caching type.",
-          "enum": [
-            "None",
-            "ReadOnly",
-            "ReadWrite"
-          ],
-          "x-ms-enum": {
-            "name": "CachingTypes",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/Caching",
+          "description": "The caching type."
         },
         "createOption": {
-          "type": "string",
-          "description": "Gets or sets the create option.",
-          "enum": [
-            "fromImage",
-            "empty",
-            "attach"
-          ],
-          "x-ms-enum": {
-            "name": "DiskCreateOptionTypes",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/CreateOption",
+          "description": "The create option."
         },
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks."
+          "description": "The initial disk size, in GB, for blank data disks, and the new desired size for resizing existing OS and data disks."
+        },
+        "managedDisk": {
+          "description": "The managed disk parameters.",
+          "$ref": "#/definitions/ManagedDiskParameters"
         }
       },
       "required": [
-        "name",
-        "vhd",
         "createOption"
       ],
       "description": "Describes an Operating System disk."
@@ -3150,56 +3697,40 @@
         "lun": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the logical unit number."
+          "description": "The logical unit number."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the disk name."
+          "description": "The disk name."
         },
         "vhd": {
           "$ref": "#/definitions/VirtualHardDisk",
-          "description": "Gets or sets the Virtual Hard Disk."
+          "description": "The virtual hard disk."
         },
         "image": {
           "$ref": "#/definitions/VirtualHardDisk",
-          "description": "Gets or sets the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist."
+          "description": "The source user image virtual hard disk. This virtual hard disk will be copied before using it to attach to the virtual machine. If SourceImage is provided, the destination virtual hard disk must not exist."
         },
         "caching": {
-          "type": "string",
-          "description": "Gets or sets the caching type.",
-          "enum": [
-            "None",
-            "ReadOnly",
-            "ReadWrite"
-          ],
-          "x-ms-enum": {
-            "name": "CachingTypes",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/Caching",
+          "description": "The caching type."
         },
         "createOption": {
-          "type": "string",
-          "description": "Gets or sets the create option.",
-          "enum": [
-            "fromImage",
-            "empty",
-            "attach"
-          ],
-          "x-ms-enum": {
-            "name": "DiskCreateOptionTypes",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/CreateOption",
+          "description": "The create option."
         },
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks."
+          "description": "The initial disk size in GB for blank data disks, and the new desired size for resizing existing OS and data disks."
+        },
+        "managedDisk": {
+          "description": "The managed disk parameters.",
+          "$ref": "#/definitions/ManagedDiskParameters"
         }
       },
       "required": [
         "lun",
-        "name",
-        "vhd",
         "createOption"
       ],
       "description": "Describes a data disk."
@@ -3208,18 +3739,18 @@
       "properties": {
         "imageReference": {
           "$ref": "#/definitions/ImageReference",
-          "description": "Gets or sets the image reference."
+          "description": "The image reference."
         },
         "osDisk": {
           "$ref": "#/definitions/OSDisk",
-          "description": "Gets or sets the OS disk."
+          "description": "The OS disk."
         },
         "dataDisks": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataDisk"
           },
-          "description": "Gets or sets the data disks."
+          "description": "The data disks."
         }
       },
       "description": "Describes a storage profile."
@@ -3228,7 +3759,7 @@
       "properties": {
         "passName": {
           "type": "string",
-          "description": "Gets or sets the pass name. Currently, the only allowable value is oobeSystem.",
+          "description": "The pass name. Currently, the only allowable value is oobeSystem.",
           "enum": [
             "oobeSystem"
           ],
@@ -3239,7 +3770,7 @@
         },
         "componentName": {
           "type": "string",
-          "description": "Gets or sets the component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup.",
+          "description": "The component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup.",
           "enum": [
             "Microsoft-Windows-Shell-Setup"
           ],
@@ -3250,7 +3781,7 @@
         },
         "settingName": {
           "type": "string",
-          "description": "Gets or sets setting name (e.g. FirstLogonCommands, AutoLogon )",
+          "description": "Setting name (e.g. FirstLogonCommands, AutoLogon )",
           "enum": [
             "AutoLogon",
             "FirstLogonCommands"
@@ -3262,16 +3793,16 @@
         },
         "content": {
           "type": "string",
-          "description": "Gets or sets XML formatted content that is added to the unattend.xml file in the specified pass and component.The XML must be less than 4 KB and must include the root element for the setting or feature that is being inserted."
+          "description": "XML formatted content that is added to the unattend.xml file in the specified pass and component. The XML must be less than 4 KB and must include the root element for the setting or feature that is being inserted."
         }
       },
-      "description": "Gets or sets additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is a applied."
+      "description": "Additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is a applied."
     },
     "WinRMListener": {
       "properties": {
         "protocol": {
           "type": "string",
-          "description": "Gets or sets the Protocol used by WinRM listener. Currently only Http and Https are supported.",
+          "description": "The Protocol used by the WinRM listener. Http and Https are supported.",
           "enum": [
             "Http",
             "Https"
@@ -3283,7 +3814,7 @@
         },
         "certificateUrl": {
           "type": "string",
-          "description": "Gets or sets the Certificate URL in KMS for Https listeners. Should be null for Http listeners."
+          "description": "The Certificate URL in KMS for Https listeners. Should be null for Http listeners."
         }
       },
       "description": "Describes Protocol and thumbprint of Windows Remote Management listener"
@@ -3295,7 +3826,7 @@
           "items": {
             "$ref": "#/definitions/WinRMListener"
           },
-          "description": "Gets or sets the list of Windows Remote Management listeners"
+          "description": "The list of Windows Remote Management listeners"
         }
       },
       "description": "Describes Windows Remote Management configuration of the VM"
@@ -3304,26 +3835,26 @@
       "properties": {
         "provisionVMAgent": {
           "type": "boolean",
-          "description": "Gets or sets whether VM Agent should be provisioned on the Virtual Machine."
+          "description": "Indicates whether the virtual machine agent should be provisioned on the Virtual Machine. If not specified, then the default behavior is to set it to true."
         },
         "enableAutomaticUpdates": {
           "type": "boolean",
-          "description": "Gets or sets whether Windows updates are automatically installed on the VM"
+          "description": "Indicates whether Windows updates are automatically installed on the VM."
         },
         "timeZone": {
           "type": "string",
-          "description": "Gets or sets the Time Zone of the VM"
+          "description": "The time zone of the VM"
         },
         "additionalUnattendContent": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AdditionalUnattendContent"
           },
-          "description": "Gets or sets the additional base-64 encoded XML formatted information that can be included in the Unattend.xml file."
+          "description": "Additional base-64 encoded XML formatted information that can be included in the Unattend.xml file."
         },
         "winRM": {
           "$ref": "#/definitions/WinRMConfiguration",
-          "description": "Gets or sets the Windows Remote Management configuration of the VM"
+          "description": "The Windows Remote Management configuration of the VM"
         }
       },
       "description": "Describes Windows Configuration of the OS Profile."
@@ -3332,11 +3863,11 @@
       "properties": {
         "path": {
           "type": "string",
-          "description": "Gets or sets the full path on the created VM where SSH public key is stored. If the file already exists, the specified key is appended to the file."
+          "description": "Specifies the full path on the created VM where SSH public key is stored. If the file already exists, the specified key is appended to the file."
         },
         "keyData": {
           "type": "string",
-          "description": "Gets or sets Certificate public key used to authenticate with VM through SSH.The certificate must be in Pem format with or without headers."
+          "description": "Certificate public key used to authenticate to the VM through SSH. The certificate must be in Pem format with or without headers."
         }
       },
       "description": "Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed."
@@ -3348,7 +3879,7 @@
           "items": {
             "$ref": "#/definitions/SshPublicKey"
           },
-          "description": "Gets or sets the list of SSH public keys used to authenticate with linux based VMs"
+          "description": "The list of SSH public keys used to authenticate with linux based VMs."
         }
       },
       "description": "SSH configuration for Linux based VMs running on Azure"
@@ -3357,24 +3888,24 @@
       "properties": {
         "disablePasswordAuthentication": {
           "type": "boolean",
-          "description": "Gets or sets whether Authentication using user name and password is allowed or not"
+          "description": "Specifies whether password authentication should be disabled."
         },
         "ssh": {
           "$ref": "#/definitions/SshConfiguration",
-          "description": "Gets or sets the SSH configuration for linux VMs"
+          "description": "The SSH configuration for linux VMs."
         }
       },
-      "description": "Describes Windows Configuration of the OS Profile."
+      "description": "Describes Windows configuration of the OS Profile."
     },
     "VaultCertificate": {
       "properties": {
         "certificateUrl": {
           "type": "string",
-          "description": "Gets or sets the URL referencing a secret in a Key Vault which contains a properly formatted certificate."
+          "description": "The URL referencing a secret in a Key Vault which contains a properly formatted certificate."
         },
         "certificateStore": {
           "type": "string",
-          "description": "Gets or sets the Certificate store in LocalMachine to add the certificate to on Windows, leave empty on Linux."
+          "description": "The Certificate store in LocalMachine to add the certificate to on Windows, leave empty on Linux."
         }
       },
       "description": "Describes a single certificate reference in a Key Vault, and where the certificate should reside on the VM."
@@ -3383,14 +3914,14 @@
       "properties": {
         "sourceVault": {
           "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets the Relative URL of the Key Vault containing all of the certificates in VaultCertificates."
+          "description": "The Relative URL of the Key Vault containing all of the certificates in VaultCertificates."
         },
         "vaultCertificates": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VaultCertificate"
           },
-          "description": "Gets or sets the list of key vault references in SourceVault which contain certificates"
+          "description": "The list of key vault references in SourceVault which contain certificates."
         }
       },
       "description": "Describes a set of certificates which are all in the same Key Vault."
@@ -3399,34 +3930,34 @@
       "properties": {
         "computerName": {
           "type": "string",
-          "description": "Gets or sets the computer name."
+          "description": "Specifies the host OS name of the virtual machine."
         },
         "adminUsername": {
           "type": "string",
-          "description": "Gets or sets the admin user name."
+          "description": "Specifies the name of the administrator account."
         },
         "adminPassword": {
           "type": "string",
-          "description": "Gets or sets the admin user password."
+          "description": "Specifies the password of the administrator account."
         },
         "customData": {
           "type": "string",
-          "description": "Gets or sets a base-64 encoded string of custom data."
+          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes"
         },
         "windowsConfiguration": {
           "$ref": "#/definitions/WindowsConfiguration",
-          "description": "Gets or sets the Windows Configuration of the OS profile."
+          "description": "The Windows configuration of the OS profile."
         },
         "linuxConfiguration": {
           "$ref": "#/definitions/LinuxConfiguration",
-          "description": "Gets or sets the Linux Configuration of the OS profile."
+          "description": "The Linux configuration of the OS profile."
         },
         "secrets": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VaultSecretGroup"
           },
-          "description": "Gets or sets the List of certificates for addition to the VM."
+          "description": "The list of certificates for addition to the VM."
         }
       },
       "description": "Describes an OS profile."
@@ -3435,7 +3966,7 @@
       "properties": {
         "primary": {
           "type": "boolean",
-          "description": "Gets or sets whether this is a primary NIC on a virtual machine"
+          "description": "Specifies the primary network interface in case the virtual machine has more than 1 network interface."
         }
       },
       "description": "Describes a network interface reference properties."
@@ -3461,7 +3992,7 @@
           "items": {
             "$ref": "#/definitions/NetworkInterfaceReference"
           },
-          "description": "Gets or sets the network interfaces."
+          "description": "Specifies the list of resource IDs for the network interfaces associated with the virtual machine."
         }
       },
       "description": "Describes a network profile."
@@ -3470,11 +4001,11 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Gets or sets whether boot diagnostics should be enabled on the Virtual Machine."
+          "description": "Whether boot diagnostics should be enabled on the Virtual Machine."
         },
         "storageUri": {
           "type": "string",
-          "description": "Gets or sets the boot diagnostics storage Uri. It should be a valid Uri"
+          "description": "URI of the storage account to use for placing the console output and screenshot."
         }
       },
       "description": "Describes Boot Diagnostics."
@@ -3483,7 +4014,7 @@
       "properties": {
         "bootDiagnostics": {
           "$ref": "#/definitions/BootDiagnostics",
-          "description": "Gets or sets the boot diagnostics."
+          "description": "Boot Diagnostics is a debugging feature which allows the user to view console output and/or a screenshot of the virtual machine from the hypervisor."
         }
       },
       "description": "Describes a diagnostics profile."
@@ -3492,15 +4023,15 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "Gets or sets full type of the extension handler which includes both publisher and type."
+          "description": "Full type of the extension handler which includes both publisher and type."
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Gets or sets the type version of the extension handler."
+          "description": "The type version of the extension handler."
         },
         "status": {
           "$ref": "#/definitions/InstanceViewStatus",
-          "description": "Gets or sets the extension handler status."
+          "description": "The extension handler status."
         }
       },
       "description": "The instance view of a virtual machine extension handler."
@@ -3509,21 +4040,21 @@
       "properties": {
         "vmAgentVersion": {
           "type": "string",
-          "description": "Gets or sets the VM Agent full version."
+          "description": "The VM Agent full version."
         },
         "extensionHandlers": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineExtensionHandlerInstanceView"
           },
-          "description": "Gets or sets the virtual machine extension handler instance view."
+          "description": "The virtual machine extension handler instance view."
         },
         "statuses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "description": "Gets or sets the resource status information."
+          "description": "The resource status information."
         }
       },
       "description": "The instance view of the VM Agent running on the virtual machine."
@@ -3532,14 +4063,14 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the disk name."
+          "description": "The disk name."
         },
         "statuses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "description": "Gets or sets the resource status information."
+          "description": "The resource status information."
         }
       },
       "description": "The instance view of the disk."
@@ -3548,11 +4079,11 @@
       "properties": {
         "consoleScreenshotBlobUri": {
           "type": "string",
-          "description": "Gets or sets the console screenshot blob Uri."
+          "description": "The console screenshot blob URI."
         },
         "serialConsoleLogBlobUri": {
           "type": "string",
-          "description": "Gets or sets the Linux serial console log blob Uri."
+          "description": "The Linux serial console log blob Uri."
         }
       },
       "description": "The instance view of a virtual machine boot diagnostics."
@@ -3562,45 +4093,45 @@
         "platformUpdateDomain": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Update Domain count."
+          "description": "Specifies the update domain of the virtual machine."
         },
         "platformFaultDomain": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Fault Domain count."
+          "description": "Specifies the fault domain of the virtual machine."
         },
         "rdpThumbPrint": {
           "type": "string",
-          "description": "Gets or sets the Remote desktop certificate thumbprint."
+          "description": "The Remote desktop certificate thumbprint."
         },
         "vmAgent": {
           "$ref": "#/definitions/VirtualMachineAgentInstanceView",
-          "description": "Gets or sets the VM Agent running on the virtual machine."
+          "description": "The VM Agent running on the virtual machine."
         },
         "disks": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiskInstanceView"
           },
-          "description": "Gets or sets the disks information."
+          "description": "The virtual machine disk information."
         },
         "extensions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineExtensionInstanceView"
           },
-          "description": "Gets or sets the extensions information."
+          "description": "The extensions information."
         },
         "bootDiagnostics": {
           "$ref": "#/definitions/BootDiagnosticsInstanceView",
-          "description": "Gets or sets the boot diagnostics."
+          "description": "The boot diagnostics."
         },
         "statuses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "description": "Gets or sets the resource status information."
+          "description": "The resource status information."
         }
       },
       "description": "The instance view of a virtual machine."
@@ -3609,40 +4140,46 @@
       "properties": {
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
-          "description": "Gets or sets the hardware profile."
+          "description": "The hardware profile."
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
-          "description": "Gets or sets the storage profile."
+          "description": "The storage profile."
         },
         "osProfile": {
           "$ref": "#/definitions/OSProfile",
-          "description": "Gets or sets the OS profile."
+          "description": "The OS profile."
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
-          "description": "Gets or sets the network profile."
+          "description": "The network profile."
         },
         "diagnosticsProfile": {
           "$ref": "#/definitions/DiagnosticsProfile",
-          "description": "Gets or sets the diagnostics profile."
+          "description": "The diagnostics profile."
         },
         "availabilitySet": {
           "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets the reference Id of the availability set to which this virtual machine belongs."
+          "description": "The reference Id of the availability set to which the virtual machine belongs."
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the provisioning state, which only appears in the response."
+          "description": "The provisioning state, which only appears in the response."
         },
         "instanceView": {
           "$ref": "#/definitions/VirtualMachineInstanceView",
           "readOnly": true,
-          "description": "Gets the virtual machine instance view."
+          "description": "The virtual machine instance view."
         },
         "licenseType": {
           "type": "string",
-          "description": "Gets or sets the license type, which is for bring your own license scenario."
+          "description": "Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system."
+        },
+        "vmId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands."
         }
       },
       "description": "Describes the properties of a Virtual Machine."
@@ -3651,7 +4188,7 @@
       "properties": {
         "plan": {
           "$ref": "#/definitions/Plan",
-          "description": "Gets or sets the purchase plan when deploying virtual machine from VM Marketplace images."
+          "description": "The purchase plan when deploying virtual machine from VM Marketplace images."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -3663,7 +4200,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineExtension"
           },
-          "description": "Gets the virtual machine child extension resources."
+          "description": "The virtual machine child extension resources."
         }
       },
       "allOf": [
@@ -3680,29 +4217,32 @@
           "items": {
             "$ref": "#/definitions/VirtualMachine"
           },
-          "description": "Gets or sets the list of virtual machines."
+          "description": "The list of virtual machines."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the uri to fetch the next page of VMs. Call ListNext() with this to fetch the next page of Virtual Machines."
+          "description": "The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The List Virtual Machine operation response."
     },
     "Sku": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the sku name."
+          "description": "The sku name."
         },
         "tier": {
           "type": "string",
-          "description": "Gets or sets the sku tier."
+          "description": "The sku tier."
         },
         "capacity": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the sku capacity."
+          "description": "The sku capacity."
         }
       },
       "description": "Describes a virtual machine scale set sku."
@@ -3711,7 +4251,7 @@
       "properties": {
         "mode": {
           "type": "string",
-          "description": "Gets or sets the upgrade mode.",
+          "description": "The upgrade mode.",
           "enum": [
             "Automatic",
             "Manual"
@@ -3724,51 +4264,47 @@
       },
       "description": "Describes an upgrade policy - automatic or manual."
     },
-    "VirtualMachineScaleSetOSProfile": {
+    "ImageOSDisk": {
       "properties": {
-        "computerNamePrefix": {
+        "osType": {
           "type": "string",
-          "description": "Gets or sets the computer name prefix."
+          "description": "The Operating System type.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
+          }
         },
-        "adminUsername": {
+        "osState": {
           "type": "string",
-          "description": "Gets or sets the admin user name."
+          "description": "The OS State.",
+          "enum": [
+            "Generalized",
+            "Specialized"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemStateTypes",
+            "modelAsString": false
+          }
         },
-        "adminPassword": {
+        "snapshot": {
+          "$ref": "#/definitions/SubResource",
+          "description": "The snapshot."
+        },
+        "managedDisk": {
+          "$ref": "#/definitions/SubResource",
+          "description": "The managedDisk."
+        },
+        "blobUri": {
           "type": "string",
-          "description": "Gets or sets the admin user password."
-        },
-        "customData": {
-          "type": "string",
-          "description": "Gets or sets a base-64 encoded string of custom data."
-        },
-        "windowsConfiguration": {
-          "$ref": "#/definitions/WindowsConfiguration",
-          "description": "Gets or sets the Windows Configuration of the OS profile."
-        },
-        "linuxConfiguration": {
-          "$ref": "#/definitions/LinuxConfiguration",
-          "description": "Gets or sets the Linux Configuration of the OS profile."
-        },
-        "secrets": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VaultSecretGroup"
-          },
-          "description": "Gets or sets the List of certificates for addition to the VM."
-        }
-      },
-      "description": "Describes a virtual machine scale set OS profile."
-    },
-    "VirtualMachineScaleSetOSDisk": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the disk name."
+          "description": "The Virtual Hard Disk."
         },
         "caching": {
           "type": "string",
-          "description": "Gets or sets the caching type.",
+          "description": "The caching type.",
           "enum": [
             "None",
             "ReadOnly",
@@ -3779,22 +4315,193 @@
             "modelAsString": false
           }
         },
-        "createOption": {
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The initial managed disk size in GB for blank data disks, and the new desired size for existing OS and Data disks."
+        }
+      },
+      "required": [
+        "osType",
+        "osState"
+      ],
+      "description": "Describes an Operating System disk."
+    },
+    "ImageDataDisk": {
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The logical unit number."
+        },
+        "snapshot": {
+          "$ref": "#/definitions/SubResource",
+          "description": "The snapshot."
+        },
+        "managedDisk": {
+          "$ref": "#/definitions/SubResource",
+          "description": "The managedDisk."
+        },
+        "blobUri": {
           "type": "string",
-          "description": "Gets or sets the create option.",
+          "description": "The Virtual Hard Disk."
+        },
+        "caching": {
+          "type": "string",
+          "description": "The caching type.",
           "enum": [
-            "fromImage",
-            "empty",
-            "attach"
+            "None",
+            "ReadOnly",
+            "ReadWrite"
           ],
           "x-ms-enum": {
-            "name": "DiskCreateOptionTypes",
+            "name": "CachingTypes",
             "modelAsString": false
           }
         },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks."
+        }
+      },
+      "required": [
+        "lun"
+      ],
+      "description": "Describes a data disk."
+    },
+    "ImageStorageProfile": {
+      "properties": {
+        "osDisk": {
+          "$ref": "#/definitions/ImageOSDisk",
+          "description": "The OS disk."
+        },
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageDataDisk"
+          },
+          "description": "The data disks."
+        }
+      },
+      "required": [
+        "osDisk"
+      ],
+      "description": "Describes a storage profile."
+    },
+    "ImageProperties": {
+      "properties": {
+        "sourceVirtualMachine": {
+          "$ref": "#/definitions/SubResource",
+          "description": "The source virtual machine from which Image is created."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/ImageStorageProfile",
+          "description": "The storage profile."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state."
+        }
+      },
+      "description": "Describes the properties of an Image."
+    },
+    "Image": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ImageProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Describes an Image."
+    },
+    "ImageListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Image"
+          },
+          "description": "The list of Images."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of Images. Call ListNext() with this to fetch the next page of Images."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Image operation response."
+    },
+    "VirtualMachineScaleSetOSProfile": {
+      "properties": {
+        "computerNamePrefix": {
+          "type": "string",
+          "description": "The computer name prefix."
+        },
+        "adminUsername": {
+          "type": "string",
+          "description": "The admin user name."
+        },
+        "adminPassword": {
+          "type": "string",
+          "description": "The admin user password."
+        },
+        "customData": {
+          "type": "string",
+          "description": "A base-64 encoded string of custom data."
+        },
+        "windowsConfiguration": {
+          "$ref": "#/definitions/WindowsConfiguration",
+          "description": "The Windows Configuration of the OS profile."
+        },
+        "linuxConfiguration": {
+          "$ref": "#/definitions/LinuxConfiguration",
+          "description": "The Linux Configuration of the OS profile."
+        },
+        "secrets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VaultSecretGroup"
+          },
+          "description": "The List of certificates for addition to the VM."
+        }
+      },
+      "description": "Describes a virtual machine scale set OS profile."
+    },
+    "VirtualMachineScaleSetManagedDiskParameters": {
+      "properties": {
+        "storageAccountType": {
+          "$ref": "#/definitions/StorageAccountType",
+          "description": "The Storage Account type."
+        }
+      },
+      "description": "Describes the parameters of a ScaleSet managed disk."
+    },
+    "VirtualMachineScaleSetOSDisk": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The disk name."
+        },
+        "caching": {
+          "$ref": "#/definitions/Caching",
+          "description": "The caching type."
+        },
+        "createOption": {
+          "$ref": "#/definitions/CreateOption",
+          "description": "The create option."
+        },
         "osType": {
           "type": "string",
-          "description": "Gets or sets the Operating System type.",
+          "description": "The Operating System type.",
           "enum": [
             "Windows",
             "Linux"
@@ -3806,31 +4513,76 @@
         },
         "image": {
           "$ref": "#/definitions/VirtualHardDisk",
-          "description": "Gets or sets the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist."
+          "description": "The Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist."
         },
         "vhdContainers": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the list of virtual hard disk container uris."
+          "description": "The list of virtual hard disk container uris."
+        },
+        "managedDisk": {
+          "description": "The managed disk parameters.",
+          "$ref": "#/definitions/VirtualMachineScaleSetManagedDiskParameters"
         }
       },
       "required": [
-        "name",
         "createOption"
       ],
       "description": "Describes a virtual machine scale set operating system disk."
+    },
+    "VirtualMachineScaleSetDataDisk": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The disk name."
+        },
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The logical unit number."
+        },
+        "caching": {
+          "$ref": "#/definitions/Caching",
+          "description": "The caching type."
+        },
+        "createOption": {
+          "$ref": "#/definitions/CreateOption",
+          "description": "The create option."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks."
+        },
+        "managedDisk": {
+          "description": "The managed disk parameters.",
+          "$ref": "#/definitions/VirtualMachineScaleSetManagedDiskParameters"
+        }
+      },
+      "required": [
+        "lun",
+        "createOption"
+      ],
+      "description": "Describes a virtual machine scale set data disk."
     },
     "VirtualMachineScaleSetStorageProfile": {
       "properties": {
         "imageReference": {
           "$ref": "#/definitions/ImageReference",
-          "description": "Gets or sets the image reference."
+          "description": "The image reference."
         },
         "osDisk": {
           "$ref": "#/definitions/VirtualMachineScaleSetOSDisk",
-          "description": "Gets or sets the OS disk."
+          "description": "The OS disk."
+        },
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineScaleSetDataDisk"
+          },
+          "description": "The data disks."
         }
       },
       "description": "Describes a virtual machine scale set storage profile."
@@ -3839,7 +4591,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets ARM resource id in the form of /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/..."
+          "description": "The ARM resource id in the form of /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/..."
         }
       },
       "description": "The API entity reference."
@@ -3848,21 +4600,28 @@
       "properties": {
         "subnet": {
           "$ref": "#/definitions/ApiEntityReference",
-          "description": "Gets or sets the subnet."
+          "description": "The subnet."
+        },
+        "applicationGatewayBackendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "The application gateway backend address pools."
         },
         "loadBalancerBackendAddressPools": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
           },
-          "description": "Gets or sets the load balancer backend address pools."
+          "description": "The load balancer backend address pools."
         },
         "loadBalancerInboundNatPools": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
           },
-          "description": "Gets or sets the load balancer inbound nat pools."
+          "description": "The load balancer inbound nat pools."
         }
       },
       "required": [
@@ -3874,7 +4633,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the IP configuration name."
+          "description": "The IP configuration name."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -3895,14 +4654,14 @@
       "properties": {
         "primary": {
           "type": "boolean",
-          "description": "Gets or sets whether this is a primary NIC on a virtual machine."
+          "description": "Whether this is a primary NIC on a virtual machine."
         },
         "ipConfigurations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetIPConfiguration"
           },
-          "description": "Gets or sets the virtual machine scale set IP Configuration."
+          "description": "The virtual machine scale set IP Configuration."
         }
       },
       "required": [
@@ -3914,7 +4673,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the network configuration name."
+          "description": "The network configuration name."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -3938,7 +4697,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfiguration"
           },
-          "description": "Gets or sets the list of network configurations."
+          "description": "The list of network configurations."
         }
       },
       "description": "Describes a virtual machine scale set network profile."
@@ -3947,32 +4706,32 @@
       "properties": {
         "publisher": {
           "type": "string",
-          "description": "Gets or sets the name of the extension handler publisher."
+          "description": "The name of the extension handler publisher."
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the type of the extension handler."
+          "description": "The type of the extension handler."
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Gets or sets the type version of the extension handler."
+          "description": "The type version of the extension handler."
         },
         "autoUpgradeMinorVersion": {
           "type": "boolean",
-          "description": "Gets or sets whether the extension handler should be automatically upgraded across minor versions."
+          "description": "Whether the extension handler should be automatically upgraded across minor versions."
         },
         "settings": {
           "type": "object",
-          "description": "Gets or sets Json formatted public settings for the extension."
+          "description": "Json formatted public settings for the extension."
         },
         "protectedSettings": {
           "type": "object",
-          "description": "Gets or sets Json formatted protected settings for the extension."
+          "description": "Json formatted protected settings for the extension."
         },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the provisioning state, which only appears in the response."
+          "description": "The provisioning state, which only appears in the response."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set Extension."
@@ -3981,7 +4740,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the extension."
+          "description": "The name of the extension."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -3990,7 +4749,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/SubResourceReadOnly"
         }
       ],
       "description": "Describes a Virtual Machine Scale Set Extension."
@@ -4002,7 +4761,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetExtension"
           },
-          "description": "Gets the virtual machine scale set child extension resources."
+          "description": "The virtual machine scale set child extension resources."
         }
       },
       "description": "Describes a virtual machine scale set extension profile."
@@ -4011,19 +4770,19 @@
       "properties": {
         "osProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetOSProfile",
-          "description": "Gets or sets the virtual machine scale set OS profile."
+          "description": "The virtual machine scale set OS profile."
         },
         "storageProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetStorageProfile",
-          "description": "Gets or sets the virtual machine scale set storage profile."
+          "description": "The virtual machine scale set storage profile."
         },
         "networkProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetNetworkProfile",
-          "description": "Gets or sets the virtual machine scale set network profile."
+          "description": "The virtual machine scale set network profile."
         },
         "extensionProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetExtensionProfile",
-          "description": "Gets the virtual machine scale set extension profile."
+          "description": "The virtual machine scale set extension profile."
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
@@ -4032,19 +4791,24 @@
       "properties": {
         "upgradePolicy": {
           "$ref": "#/definitions/UpgradePolicy",
-          "description": "Gets or sets the upgrade policy."
+          "description": "The upgrade policy."
         },
         "virtualMachineProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetVMProfile",
-          "description": "Gets or sets the virtual machine profile."
+          "description": "The virtual machine profile."
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the provisioning state, which only appears in the response."
+          "description": "The provisioning state, which only appears in the response."
         },
-        "overProvision": {
+        "overprovision": {
           "type": "boolean",
           "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
+        },
+        "singlePlacementGroup": {
+          "type": "boolean",
+          "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -4053,7 +4817,11 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "Gets or sets the virtual machine scale set sku."
+          "description": "The virtual machine scale set sku."
+        },
+        "plan": {
+          "$ref": "#/definitions/Plan",
+          "description": "The purchase plan when deploying a virtual machine scale set from VM Marketplace images."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -4074,10 +4842,10 @@
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the virtual machine scale set instance ids."
+          "description": "The virtual machine scale set instance ids."
         }
       },
-      "description": "Specifies the list of virtual machine scale set instance IDs."
+      "description": "Specifies a list of virtual machine instance IDs from the VM scale set."
     },
     "VirtualMachineScaleSetVMInstanceRequiredIDs": {
       "properties": {
@@ -4086,26 +4854,26 @@
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the virtual machine scale set instance ids."
+          "description": "The virtual machine scale set instance ids."
         }
       },
       "required": [
         "instanceIds"
       ],
-      "description": "Specifies the list of virtual machine scale set instance IDs."
+      "description": "Specifies a list of virtual machine instance IDs from the VM scale set."
     },
     "VirtualMachineStatusCodeCount": {
       "properties": {
         "code": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the instance view status code."
+          "description": "The instance view status code."
         },
         "count": {
           "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "description": "Gets the number of instances having a particular status code."
+          "description": "The number of instances having a particular status code."
         }
       },
       "description": "The status code and count of the virtual machine scale set instance view status summary."
@@ -4118,7 +4886,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineStatusCodeCount"
           },
-          "description": "Gets the extensions information."
+          "description": "The extensions information."
         }
       },
       "description": "Instance view statuses summary for virtual machines of a virtual machine scale set."
@@ -4128,7 +4896,7 @@
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the extension name."
+          "description": "The extension name."
         },
         "statusesSummary": {
           "readOnly": true,
@@ -4136,7 +4904,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineStatusCodeCount"
           },
-          "description": "Gets the extensions information."
+          "description": "The extensions information."
         }
       },
       "description": "Extensions summary for virtual machines of a virtual machine scale set."
@@ -4146,7 +4914,7 @@
         "virtualMachine": {
           "$ref": "#/definitions/VirtualMachineScaleSetInstanceViewStatusesSummary",
           "readOnly": true,
-          "description": "Gets the instance view status summary for the virtual machine scale set."
+          "description": "The instance view status summary for the virtual machine scale set."
         },
         "extensions": {
           "readOnly": true,
@@ -4154,14 +4922,14 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetVMExtensionsSummary"
           },
-          "description": "Gets the extensions information."
+          "description": "The extensions information."
         },
         "statuses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "description": "Gets or sets the resource status information."
+          "description": "The resource status information."
         }
       },
       "description": "The instance view of a virtual machine scale set."
@@ -4173,9 +4941,16 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSet"
           },
-          "description": "Gets or sets the list of virtual machine scale sets."
+          "description": "The list of virtual machine scale sets."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The List Virtual Machine operation response."
     },
     "VirtualMachineScaleSetListWithLinkResult": {
@@ -4185,13 +4960,16 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSet"
           },
-          "description": "Gets or sets the list of virtual machine scale sets."
+          "description": "The list of virtual machine scale sets."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of Virtual Machine Scale Sets."
+          "description": "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of Virtual Machine Scale Sets."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The List Virtual Machine operation response."
     },
     "VirtualMachineScaleSetSkuCapacity": {
@@ -4200,24 +4978,24 @@
           "readOnly": true,
           "type": "integer",
           "format": "int64",
-          "description": "Gets the minimum capacity."
+          "description": "The minimum capacity."
         },
         "maximum": {
           "readOnly": true,
           "type": "integer",
           "format": "int64",
-          "description": "Gets the maximum capacity that can be set."
+          "description": "The maximum capacity that can be set."
         },
         "defaultCapacity": {
           "readOnly": true,
           "type": "integer",
           "format": "int64",
-          "description": "Gets the default capacity."
+          "description": "The default capacity."
         },
         "scaleType": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the scale type applicable to the sku.",
+          "description": "The scale type applicable to the sku.",
           "enum": [
             "Automatic",
             "None"
@@ -4235,17 +5013,17 @@
         "resourceType": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the type of resource the sku applies to."
+          "description": "The type of resource the sku applies to."
         },
         "sku": {
           "$ref": "#/definitions/Sku",
           "readOnly": true,
-          "description": "Gets the Sku."
+          "description": "The Sku."
         },
         "capacity": {
           "$ref": "#/definitions/VirtualMachineScaleSetSkuCapacity",
           "readOnly": true,
-          "description": "Gets available scaling information."
+          "description": "Available scaling information."
         }
       },
       "description": "Describes an available virtual machine scale set sku."
@@ -4253,14 +5031,20 @@
     "VirtualMachineScaleSetListSkusResult": {
       "properties": {
         "value": {
-          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetSku"
           },
-          "description": "Gets the list of skus available for the virtual machine scale set."
+          "description": "The list of skus available for the virtual machine scale set."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The Virtual Machine Scale Set List Skus operation response."
     },
     "VirtualMachineScaleSetVMProperties": {
@@ -4270,42 +5054,48 @@
           "type": "boolean",
           "description": "Specifies whether the latest model has been applied to the virtual machine."
         },
+        "vmId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Azure VM unique ID."
+        },
         "instanceView": {
           "$ref": "#/definitions/VirtualMachineInstanceView",
           "readOnly": true,
-          "description": "Gets the virtual machine instance view."
+          "description": "The virtual machine instance view."
         },
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
-          "description": "Gets or sets the hardware profile."
+          "description": "The hardware profile."
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
-          "description": "Gets or sets the storage profile."
+          "description": "The storage profile."
         },
         "osProfile": {
           "$ref": "#/definitions/OSProfile",
-          "description": "Gets or sets the OS profile."
+          "description": "The OS profile."
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
-          "description": "Gets or sets the network profile."
+          "description": "The network profile."
         },
         "diagnosticsProfile": {
           "$ref": "#/definitions/DiagnosticsProfile",
-          "description": "Gets or sets the diagnostics profile."
+          "description": "The diagnostics profile."
         },
         "availabilitySet": {
           "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets the reference Id of the availability set to which this virtual machine belongs."
+          "description": "The reference Id of the availability set to which this virtual machine belongs."
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the provisioning state, which only appears in the response."
+          "description": "The provisioning state, which only appears in the response."
         },
         "licenseType": {
           "type": "string",
-          "description": "Gets or sets the license type, which is for bring your own license scenario."
+          "description": "The license type, which is for bring your own license scenario."
         }
       },
       "description": "Describes the properties of a virtual machine scale set virtual machine."
@@ -4315,12 +5105,12 @@
         "instanceId": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the virtual machine instance id."
+          "description": "The virtual machine instance ID."
         },
         "sku": {
           "$ref": "#/definitions/Sku",
           "readOnly": true,
-          "description": "Gets the virtual machine sku."
+          "description": "The virtual machine SKU."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -4328,7 +5118,7 @@
         },
         "plan": {
           "$ref": "#/definitions/Plan",
-          "description": "Gets or sets the purchase plan when deploying virtual machine from VM Marketplace images."
+          "description": "The purchase plan when deploying virtual machine from VM Marketplace images."
         },
         "resources": {
           "readOnly": true,
@@ -4336,7 +5126,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineExtension"
           },
-          "description": "Gets the virtual machine child extension resources."
+          "description": "The virtual machine child extension resources."
         }
       },
       "allOf": [
@@ -4351,45 +5141,49 @@
         "platformUpdateDomain": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Update Domain count."
+          "description": "The Update Domain count."
         },
         "platformFaultDomain": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Fault Domain count."
+          "description": "The Fault Domain count."
         },
         "rdpThumbPrint": {
           "type": "string",
-          "description": "Gets or sets the Remote desktop certificate thumbprint."
+          "description": "The Remote desktop certificate thumbprint."
         },
         "vmAgent": {
           "$ref": "#/definitions/VirtualMachineAgentInstanceView",
-          "description": "Gets or sets the VM Agent running on the virtual machine."
+          "description": "The VM Agent running on the virtual machine."
         },
         "disks": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiskInstanceView"
           },
-          "description": "Gets or sets the disks information."
+          "description": "The disks information."
         },
         "extensions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineExtensionInstanceView"
           },
-          "description": "Gets or sets the extensions information."
+          "description": "The extensions information."
         },
         "bootDiagnostics": {
           "$ref": "#/definitions/BootDiagnosticsInstanceView",
-          "description": "Gets or sets the boot diagnostics."
+          "description": "The boot diagnostics."
         },
         "statuses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "description": "Gets or sets the resource status information."
+          "description": "The resource status information."
+        },
+        "placementGroupId": {
+          "type": "string",
+          "description": "The placement group in which the VM is running. If the VM is deallocated it will not have a placementGroupId."
         }
       },
       "description": "The instance view of a virtual machine scale set VM."
@@ -4401,24 +5195,31 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetVM"
           },
-          "description": "Gets or sets the list of virtual machine scale sets VMs."
+          "description": "The list of virtual machine scale sets VMs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs"
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The List Virtual Machine Scale Set VMs operation response."
     },
     "ApiErrorBase": {
       "properties": {
         "code": {
           "type": "string",
-          "description": "Gets or sets the error code."
+          "description": "The error code."
         },
         "target": {
           "type": "string",
-          "description": "Gets or sets the target of the particular error."
+          "description": "The target of the particular error."
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the error message."
+          "description": "The error message."
         }
       },
       "description": "Api error base."
@@ -4427,11 +5228,11 @@
       "properties": {
         "exceptiontype": {
           "type": "string",
-          "description": "Gets or sets the exception type."
+          "description": "The exception type."
         },
         "errordetail": {
           "type": "string",
-          "description": "Gets or sets the internal error message or exception dump."
+          "description": "The internal error message or exception dump."
         }
       },
       "description": "Inner error details."
@@ -4443,23 +5244,23 @@
           "items": {
             "$ref": "#/definitions/ApiErrorBase"
           },
-          "description": "Gets or sets the Api error details"
+          "description": "The Api error details"
         },
         "innererror": {
           "$ref": "#/definitions/InnerError",
-          "description": "Gets or sets the Api inner error"
+          "description": "The Api inner error"
         },
         "code": {
           "type": "string",
-          "description": "Gets or sets the error code."
+          "description": "The error code."
         },
         "target": {
           "type": "string",
-          "description": "Gets or sets the target of the particular error."
+          "description": "The target of the particular error."
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the error message."
+          "description": "The error message."
         }
       },
       "description": "Api error."
@@ -4516,6 +5317,48 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "SubResourceReadOnly": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "OperationStatusResponse": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation ID"
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation status"
+        },
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the operation"
+        },
+        "endTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the operation"
+        },
+        "error": {
+          "readOnly": true,
+          "$ref": "#/definitions/ApiError",
+          "description": "Api error"
+        }
+      },
+      "description": "Operation status response"
     }
   },
   "parameters": {

@@ -65,7 +65,6 @@
         "summary": "Get all domains in a subscription.",
         "description": "Get all domains in a subscription.",
         "operationId": "Domains_List",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
@@ -99,7 +98,6 @@
         "summary": "Generate a single sign-on request for the domain management portal.",
         "description": "Generate a single sign-on request for the domain management portal.",
         "operationId": "Domains_GetControlCenterSsoRequest",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -181,17 +179,16 @@
         "summary": "Get all domains in a resource group.",
         "description": "Get all domains in a resource group.",
         "operationId": "Domains_ListByResourceGroup",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -218,7 +215,6 @@
         "summary": "Get a domain.",
         "description": "Get a domain.",
         "operationId": "Domains_Get",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -226,6 +222,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "domainName",
             "in": "path",
@@ -235,9 +234,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -256,8 +252,8 @@
         "tags": [
           "Domains"
         ],
-        "summary": "Create a domain.",
-        "description": "Create a domain.",
+        "summary": "Creates or updates a domain.",
+        "description": "Creates or updates a domain.",
         "operationId": "Domains_CreateOrUpdate",
         "consumes": [
           "application/json",
@@ -272,11 +268,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
             "name": "domainName",
             "in": "path",
             "description": "Name of the domain.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
           },
           {
             "name": "domain",
@@ -289,9 +289,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -320,9 +317,10 @@
         "summary": "Delete a domain.",
         "description": "Delete a domain.",
         "operationId": "Domains_Delete",
-        "consumes": [],
-        "produces": [],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "domainName",
             "in": "path",
@@ -338,9 +336,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -364,12 +359,14 @@
         "summary": "Lists domain ownership identifiers.",
         "description": "Lists domain ownership identifiers.",
         "operationId": "Domains_ListOwnershipIdentifiers",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "domainName",
             "in": "path",
@@ -379,9 +376,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -408,7 +402,6 @@
         "summary": "Get ownership identifier for domain",
         "description": "Get ownership identifier for domain",
         "operationId": "Domains_GetOwnershipIdentifier",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -416,6 +409,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "domainName",
             "in": "path",
@@ -432,9 +428,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -469,6 +462,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
             "name": "domainName",
             "in": "path",
             "description": "Name of domain.",
@@ -495,9 +491,6 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -517,9 +510,10 @@
         "summary": "Delete ownership identifier for domain",
         "description": "Delete ownership identifier for domain",
         "operationId": "Domains_DeleteOwnershipIdentifier",
-        "consumes": [],
-        "produces": [],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "domainName",
             "in": "path",
@@ -536,9 +530,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -573,6 +564,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
             "name": "domainName",
             "in": "path",
             "description": "Name of domain.",
@@ -599,9 +593,6 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -614,70 +605,18 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/operationresults/{operationId}": {
-      "get": {
-        "tags": [
-          "Domains"
-        ],
-        "summary": "Get the status of a domain purchase operation.",
-        "description": "Get the status of a domain purchase operation.",
-        "operationId": "Domains_GetOperation",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "domainName",
-            "in": "path",
-            "description": "Name of the domain.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "ID of the domain purchase operation.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Domain purchase is in progress.",
-            "schema": {
-              "$ref": "#/definitions/Domain"
-            }
-          },
-          "200": {
-            "description": "Domain purchase was successful.",
-            "schema": {
-              "$ref": "#/definitions/Domain"
-            }
-          },
-          "500": {
-            "description": "Domain purchase request failed."
-          }
-        }
-      }
     }
   },
   "definitions": {
     "Address": {
       "description": "Address information for domain registration.",
+      "required": [
+        "address1",
+        "city",
+        "country",
+        "postalCode",
+        "state"
+      ],
       "type": "object",
       "properties": {
         "address1": {
@@ -707,7 +646,13 @@
       }
     },
     "Contact": {
-      "description": "Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information is made publicly available through the Whois \r\n            directories as per ICANN requirements.",
+      "description": "Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information is made publicly available through the Whois \n directories as per ICANN requirements.",
+      "required": [
+        "email",
+        "nameFirst",
+        "nameLast",
+        "phone"
+      ],
       "type": "object",
       "properties": {
         "addressMailing": {
@@ -878,7 +823,7 @@
               "type": "boolean"
             },
             "readyForDnsRecordManagement": {
-              "description": "<code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and \r\n            it is hosted on name servers Azure has programmatic access to.",
+              "description": "<code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and \n it is hosted on name servers Azure has programmatic access to.",
               "type": "boolean",
               "readOnly": true
             },
@@ -926,7 +871,7 @@
           "type": "boolean"
         },
         "domainType": {
-          "description": "Domain type.",
+          "description": "Valid values are Regular domain: Azure will charge the full price of domain registration, SoftDeleted: Purchasing this domain will simply restore it and this operation will not cost anything.",
           "enum": [
             "Regular",
             "SoftDeleted"
@@ -965,15 +910,18 @@
       "properties": {
         "url": {
           "description": "URL where the single sign-on request is to be made.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "postParameterKey": {
           "description": "Post parameter key.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "postParameterValue": {
           "description": "Post parameter value. Client should use 'application/x-www-form-urlencoded' encoding for this value.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1145,8 +1093,7 @@
     "Resource": {
       "description": "Azure resource.",
       "required": [
-        "location",
-        "name"
+        "location"
       ],
       "properties": {
         "id": {
@@ -1198,7 +1145,7 @@
       "type": "string",
       "maxLength": 90,
       "minLength": 1,
-      "pattern": "^[-\\\\w\\\\._\\\\(\\\\)]+[^\\\\.]$"
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$"
     },
     "apiVersionParameter": {
       "name": "api-version",
