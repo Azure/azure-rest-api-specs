@@ -94,7 +94,7 @@ The Azure Developer Experience team will continue to deliver rich tools to valid
   - `ListByResourceGroup()` - list all resources in a resource group within a subscription.
   - `ListByParent()` - where "Parent" is a context specific suffix. It lists all resource under a parent.
 
-- [ ] **M1005**: :white_check_mark: Get operations *MUST* use the METHOD name "Get" or METHOD name start with "List"
+- [ ] **M1005**: :white_check_mark: Get operations *MUST* use the METHOD name "Get" or the METHOD name must start with "List"
 
 - [ ] **M1006**: :white_check_mark: PUT operations *MUST* use the METHOD Name "Create"
 
@@ -127,7 +127,7 @@ The Azure Developer Experience team will continue to deliver rich tools to valid
 
 - [ ] **M2004**: :white_check_mark: Long running (asynchronous) operations *MUST* be modeled as [long running operations](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/creating-swagger.md#longrunning) in Swagger.
 
-- [ ] **M2005**: :white_check_mark: A longrunning operation *MUST* have a terminal success status code. At least 
+- [ ] **M2005**: :white_check_mark: A long-running operation *MUST* have a terminal success status code. At least 
    - 200 or 201 for PUT/PATCH
    - 200, 201 or 204  or all of the aforementioned for POST
    - 204 or 200 or both for delete. 
