@@ -566,37 +566,6 @@
                     "nextLinkName": "nextLink"
                 }
             }
-        },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Network/serviceCommunities": {
-            "get": {
-                "tags": [
-                    "ServiceCommunities"
-                ],
-                "operationId": "ServiceCommunities_List",
-                "x-ms-examples": {
-                    "ServiceCommunityList": { "$ref": "../examples/ServiceCommunityList.json" }
-                },
-                "description": "Gets all the available service communities.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Request successful. The operation returns a list of ServiceCommunity resources.",
-                        "schema": {
-                            "$ref": "#/definitions/ServiceCommunityListResult"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
         }
     },
     "definitions": {
