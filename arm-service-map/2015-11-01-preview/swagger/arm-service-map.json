@@ -39,8 +39,8 @@
         "tags": [
           "Machines"
         ],
-        "operationId": "Machines_List",
-        "description": "Returns a collection of machines matching the specified conditions.",
+        "operationId": "Machines_ListByWorkspace",
+        "description": "Returns a collection of machines matching the specified conditions.  The returned collection represents either machines that are active/live during the specified interval  of time (`live=true` and `startTime`/`endTime` are specified) or that are known to have existed at or  some time prior to the specified point in time (`live=false` and `timestamp` is specified).",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -85,6 +85,16 @@
             "type": "string",
             "format": "date-time",
             "description": "UTC date and time specifying a time instance relative to which to evaluate each machine resource. Only applies when `live=false`. When not specified, the service uses DateTime.UtcNow."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 200,
+            "description": "Page size to use. When not specified, the default page size is 100 records."
           }
         ],
         "responses": {
@@ -111,7 +121,7 @@
         "tags": [
           "Machines"
         ],
-        "operationId": "Machines_GetByName",
+        "operationId": "Machines_Get",
         "description": "Returns the specified machine.",
         "parameters": [
           {
@@ -127,11 +137,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Machine resource name."
+            "$ref": "#/parameters/MachineNameParameter"
           },
           {
             "name": "timestamp",
@@ -179,11 +185,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Machine resource name."
+            "$ref": "#/parameters/MachineNameParameter"
           },
           {
             "name": "startTime",
@@ -239,11 +241,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Machine resource name."
+            "$ref": "#/parameters/MachineNameParameter"
           },
           {
             "name": "startTime",
@@ -288,7 +286,7 @@
           "Machines"
         ],
         "operationId": "Machines_ListProcesses",
-        "description": "Returns a collection of processes on the specified machine matching the specified conditions.",
+        "description": "Returns a collection of processes on the specified machine matching the specified conditions. The returned collection represents either processes that are active/live during the specified interval  of time (`live=true` and `startTime`/`endTime` are specified) or that are known to have existed at or  some time prior to the specified point in time (`live=false` and `timestamp` is specified).        ",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -303,11 +301,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Machine resource name."
+            "$ref": "#/parameters/MachineNameParameter"
           },
           {
             "name": "live",
@@ -366,7 +360,7 @@
         "tags": [
           "Processes"
         ],
-        "operationId": "Processes_GetByName",
+        "operationId": "Processes_Get",
         "description": "Returns the specified process.",
         "parameters": [
           {
@@ -382,18 +376,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Machine resource name."
+            "$ref": "#/parameters/MachineNameParameter"
           },
           {
-            "name": "processName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Process resource name."
+            "$ref": "#/parameters/ProcessNameParameter"
           },
           {
             "name": "timestamp",
@@ -441,18 +427,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Machine resource name."
+            "$ref": "#/parameters/MachineNameParameter"
           },
           {
-            "name": "processName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Process resource name."
+            "$ref": "#/parameters/ProcessNameParameter"
           },
           {
             "name": "startTime",
@@ -508,18 +486,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Machine resource name."
+            "$ref": "#/parameters/MachineNameParameter"
           },
           {
-            "name": "processName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Process resource name."
+            "$ref": "#/parameters/ProcessNameParameter"
           },
           {
             "name": "startTime",
@@ -578,18 +548,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Machine resource name."
+            "$ref": "#/parameters/MachineNameParameter"
           },
           {
-            "name": "processName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Process resource name."
+            "$ref": "#/parameters/ProcessNameParameter"
           },
           {
             "name": "startTime",
@@ -634,7 +596,7 @@
           "Ports"
         ],
         "operationId": "Machines_ListPorts",
-        "description": "Returns a collection of ports on the specified machine matching the specified conditions.",
+        "description": "Returns a collection of live ports on the specified machine during the specified time interval.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -649,11 +611,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Machine resource name."
+            "$ref": "#/parameters/MachineNameParameter"
           },
           {
             "name": "startTime",
@@ -696,8 +654,8 @@
         "tags": [
           "Ports"
         ],
-        "operationId": "Ports_GetByName",
-        "description": "Returns the specified port",
+        "operationId": "Ports_Get",
+        "description": "Returns the specified port. The port must be live during the specified time interval. If the port is not live during the interval, status 404 (Not Found) is returned.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -712,18 +670,26 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Machine resource name."
+            "$ref": "#/parameters/MachineNameParameter"
           },
           {
-            "name": "portName",
-            "in": "path",
-            "required": true,
+            "$ref": "#/parameters/PortNameParameter"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "description": "Port resource name."
+            "format": "date-time",
+            "description": "UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow"
           }
         ],
         "responses": {
@@ -763,18 +729,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Machine resource name."
+            "$ref": "#/parameters/MachineNameParameter"
           },
           {
-            "name": "portName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Port resource name."
+            "$ref": "#/parameters/PortNameParameter"
           },
           {
             "name": "startTime",
@@ -831,18 +789,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Machine resource name."
+            "$ref": "#/parameters/MachineNameParameter"
           },
           {
-            "name": "portName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Port resource name."
+            "$ref": "#/parameters/PortNameParameter"
           },
           {
             "name": "startTime",
@@ -858,7 +808,7 @@
             "required": false,
             "type": "string",
             "format": "date-time",
-            "description": "UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow            "
+            "description": "UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow"
           }
         ],
         "responses": {
@@ -901,18 +851,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Machine resource name."
+            "$ref": "#/parameters/MachineNameParameter"
           },
           {
-            "name": "portName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Port resource name."
+            "$ref": "#/parameters/PortNameParameter"
           },
           {
             "name": "startTime",
@@ -950,12 +892,56 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/machineGroups": {
+      "get": {
+        "tags": [
+          "Machines",
+          "MachineGroups"
+        ],
+        "operationId": "Machines_ListMachineGroupMembership",
+        "description": "Returns a collection of machine groups this machine belongs to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MachineNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MachineGroupCollection"
+            }
+          },
+          "default": {
+            "description": "An error occurred while processing the request. See the error.code parameter to identify the specific error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/clientGroups/{clientGroupName}": {
       "get": {
         "tags": [
           "Client Groups"
         ],
-        "operationId": "ClientGroups_GetByName",
+        "operationId": "ClientGroups_Get",
         "description": "Retrieves the specified client group",
         "parameters": [
           {
@@ -971,11 +957,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "clientGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Client Group resource name."
+            "$ref": "#/parameters/ClientGroupNameParameter"
           },
           {
             "name": "startTime",
@@ -1010,66 +992,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/clientGroups/{clientGroupName}/liveness": {
-      "get": {
-        "tags": [
-          "Client Groups"
-        ],
-        "operationId": "ClientGroups_GetLiveness",
-        "description": "Determines if the client group is live during the specified time interval",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "clientGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Client Group resource name."
-          },
-          {
-            "name": "startTime",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time",
-            "description": "UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m"
-          },
-          {
-            "name": "endTime",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time",
-            "description": "UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Liveness"
-            }
-          },
-          "default": {
-            "description": "An error occurred while processing the request. See the error.code parameter to identify the specific error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/clientGroups/{clientGroupName}/membersCount": {
       "get": {
         "tags": [
@@ -1091,11 +1013,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "clientGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Client Group resource name."
+            "$ref": "#/parameters/ClientGroupNameParameter"
           },
           {
             "name": "startTime",
@@ -1151,11 +1069,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "clientGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Client Group resource name."
+            "$ref": "#/parameters/ClientGroupNameParameter"
           },
           {
             "name": "startTime",
@@ -1179,7 +1093,9 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Page size to use"
+            "minimum": 1,
+            "maximum": 200,
+            "description": "Page size to use. When not specified, the default page size is 100 records."
           }
         ],
         "responses": {
@@ -1252,7 +1168,7 @@
         "tags": [
           "Summaries"
         ],
-        "operationId": "Summaries_GetMachinesSummary",
+        "operationId": "Summaries_GetMachines",
         "description": "Returns summary information about the machines in the workspace.",
         "parameters": [
           {
@@ -1299,40 +1215,235 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machineGroups": {
+      "get": {
+        "tags": [
+          "MachineGroups"
+        ],
+        "operationId": "MachineGroups_ListByWorkspace",
+        "description": "Returns all machine groups.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MachineGroupCollection"
+            }
+          },
+          "default": {
+            "description": "An error occurred while processing the request. See the error.code parameter to identify the specific error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "tags": [
+          "MachineGroups"
+        ],
+        "operationId": "MachineGroups_Create",
+        "description": "Creates a new machine group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "machineGroup",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineGroup"
+            },
+            "description": "Machine Group resource to create."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MachineGroup"
+            }
+          },
+          "default": {
+            "description": "An error occurred while processing the request. See the error.code parameter to identify the specific error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machineGroups/{machineGroupName}": {
+      "get": {
+        "tags": [
+          "MachineGroups"
+        ],
+        "operationId": "MachineGroups_Get",
+        "description": "Returns the specified machine group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MachineGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MachineGroup"
+            }
+          },
+          "default": {
+            "description": "An error occurred while processing the request. See the error.code parameter to identify the specific error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MachineGroups"
+        ],
+        "operationId": "MachineGroups_Update",
+        "description": "Updates a machine group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MachineGroupNameParameter"
+          },
+          {
+            "name": "machineGroup",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineGroup"
+            },
+            "description": "Machine Group resource to update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MachineGroup"
+            }
+          },
+          "default": {
+            "description": "An error occurred while processing the request. See the error.code parameter to identify the specific error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MachineGroups"
+        ],
+        "operationId": "MachineGroups_Delete",
+        "description": "Deletes the specified Machine Group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MachineGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The operation completed successfully."
+          },
+          "default": {
+            "description": "An error occurred while processing the request. See the error.code parameter to identify the specific error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
     "Resource": {
-      "description": "Base for all ARM-adressable resources",
+      "description": "Resource model definition.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Resource identifier."
+          "description": "Resource identifier.",
+          "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "Resource type."
+          "description": "Resource type.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "Resource name."
-        },
-        "etag": {
-          "type": "string",
-          "description": "Resource ETAG."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Additional resource type qualifier."
+          "description": "Resource name.",
+          "readOnly": true
         }
       },
-      "x-ms-external": true,
-      "x-ms-azure-resource": true,
-      "required": [
-        "id",
-        "type",
-        "name"
-      ]
+      "x-ms-azure-resource": true
     },
     "ResourceReference": {
       "description": "Represents a reference to another resource.",
@@ -1344,30 +1455,48 @@
         },
         "type": {
           "type": "string",
-          "description": "Additional resource type qualifier.  Always present when retrieving data from the service.  Optional when sending data to the service."
+          "description": "Resource type qualifier.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "Resource name. Always present when retrieving data from the service.  Optional when sending data to the service."
+          "description": "Resource name.",
+          "readOnly": true
         },
         "kind": {
           "type": "string",
-          "description": "Specifies the sub-class of the reference."
+          "description": "Specifies the sub-class of the reference.",
+          "enum": [
+            "ref:machine",
+            "ref:machinewithhints",
+            "ref:process",
+            "ref:port",
+            "ref:onmachine"
+          ]
         }
       },
       "required": [
-        "id"
-      ],
-      "x-ms-azure-resource": true
+        "id",
+        "kind"
+      ]
     },
-    "ResourceOnMachineReference": {
-      "description": "Reference to a resource on a machine.",
+    "MachineReference": {
+      "description": "Reference to a machine.",
       "allOf": [
         {
           "$ref": "#/definitions/ResourceReference"
         }
       ],
-      "x-ms-discriminator-value": "ref:onmachine",
+      "x-ms-discriminator-value": "ref:machine"
+    },
+    "ProcessReference": {
+      "description": "Reference to a process.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceReference"
+        }
+      ],
+      "x-ms-discriminator-value": "ref:process",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1375,12 +1504,72 @@
           "description": "Resource properties.",
           "properties": {
             "machine": {
-              "$ref": "#/definitions/ResourceReference"
+              "$ref": "#/definitions/MachineReference",
+              "description": "Machine hosting the process.",
+              "readOnly": true
             }
-          },
-          "required": [
-            "machine"
-          ]
+          }
+        }
+      }
+    },
+    "PortReference": {
+      "description": "Reference to a port.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceReference"
+        }
+      ],
+      "x-ms-discriminator-value": "ref:port",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "Resource properties.",
+          "properties": {
+            "machine": {
+              "$ref": "#/definitions/MachineReference",
+              "description": "Machine hosting the port.",
+              "readOnly": true
+            },
+            "ipAddress": {
+              "type": "string",
+              "description": "IP address of the port.",
+              "readOnly": true
+            },
+            "portNumber": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Port number."
+            }
+          }
+        }
+      }
+    },
+    "MachineReferenceWithHints": {
+      "description": "A machine reference with a hint of the machine's name and operating system.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceReference"
+        }
+      ],
+      "x-ms-discriminator-value": "ref:machinewithhints",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "Machine reference with name and os hints.",
+          "properties": {
+            "displayNameHint": {
+              "description": "Last known display name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "osFamilyHint": {
+              "description": "Last known operating system family.",
+              "$ref": "#/definitions/OperatingSystemFamily",
+              "readOnly": true
+            }
+          }
         }
       }
     },
@@ -1392,6 +1581,23 @@
         }
       ],
       "discriminator": "kind",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Resource ETAG."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Additional resource type qualifier.",
+          "enum": [
+            "machine",
+            "process",
+            "port",
+            "clientGroup",
+            "machineGroup"
+          ]
+        }
+      },
       "required": [
         "kind"
       ]
@@ -1413,13 +1619,15 @@
             "timestamp": {
               "type": "string",
               "format": "date-time",
-              "description": "UTC date and time when this resource was updated in the system.         "
+              "description": "UTC date and time when this resource was updated in the system."
             },
             "monitoringState": {
-              "$ref": "#/definitions/MonitoringState"
+              "$ref": "#/definitions/MonitoringState",
+              "description": "Specifies whether the machine is actively monitored or discovered."
             },
             "virtualizationState": {
-              "$ref": "#/definitions/VirtualizationState"
+              "$ref": "#/definitions/VirtualizationState",
+              "description": "Specifies whether the machine is virtualized."
             },
             "displayName": {
               "type": "string",
@@ -1439,25 +1647,32 @@
               "description": "UTC date and time when the machine last booted"
             },
             "timezone": {
-              "$ref": "#/definitions/Timezone"
+              "$ref": "#/definitions/Timezone",
+              "description": "Timezone of the machine."
             },
             "agent": {
-              "$ref": "#/definitions/AgentConfiguration"
+              "$ref": "#/definitions/AgentConfiguration",
+              "description": "Dependency Agent configuration."
             },
             "resources": {
-              "$ref": "#/definitions/MachineResourcesConfiguration"
+              "$ref": "#/definitions/MachineResourcesConfiguration",
+              "description": "Machine resources (memory, cpu, etc.)."
             },
             "networking": {
-              "$ref": "#/definitions/NetworkConfiguration"
+              "$ref": "#/definitions/NetworkConfiguration",
+              "description": "Network configuration (ips, gateways, dns, etc.)"
             },
             "operatingSystem": {
-              "$ref": "#/definitions/OperatingSystemConfiguration"
+              "$ref": "#/definitions/OperatingSystemConfiguration",
+              "description": "Operating system information."
             },
             "virtualMachine": {
-              "$ref": "#/definitions/VirtualMachineConfiguration"
+              "$ref": "#/definitions/VirtualMachineConfiguration",
+              "description": "Virtualization-related configuration. Present only when `virtualizationState` is `virtual`."
             },
             "hypervisor": {
-              "$ref": "#/definitions/HypervisorConfiguration"
+              "$ref": "#/definitions/HypervisorConfiguration",
+              "description": "Hypervisor-related configuration. Present only when 'virtualizationState' is `hypervisor`."
             }
           }
         }
@@ -1483,10 +1698,12 @@
               "description": "UTC date and time when this process resource was updated in the system"
             },
             "monitoringState": {
-              "$ref": "#/definitions/MonitoringState"
+              "$ref": "#/definitions/MonitoringState",
+              "description": "Specifies whether the process is actively monitored or discovered."
             },
             "machine": {
-              "$ref": "#/definitions/ResourceReference"
+              "$ref": "#/definitions/ResourceReference",
+              "description": "Machine hosting this process."
             },
             "executableName": {
               "type": "string",
@@ -1502,16 +1719,20 @@
               "description": "UTC date and time when the process started"
             },
             "details": {
-              "$ref": "#/definitions/ProcessDetails"
+              "$ref": "#/definitions/ProcessDetails",
+              "description": "Process metadata (command line, product name, etc.)."
             },
             "user": {
-              "$ref": "#/definitions/ProcessUser"
+              "$ref": "#/definitions/ProcessUser",
+              "description": "Information about the account under which the process is executing."
             },
             "clientOf": {
-              "$ref": "#/definitions/ResourceReference"
+              "$ref": "#/definitions/ResourceReference",
+              "description": "Present only for a discovered process acting as a client of a monitored process/machine/port. References the monitored process/machine/port that this process is a client of."
             },
             "acceptorOf": {
-              "$ref": "#/definitions/ResourceReference"
+              "$ref": "#/definitions/ResourceReference",
+              "description": "Present only for a discovered process acting as a server. References the port on which the discovered process is accepting."
             }
           }
         }
@@ -1532,10 +1753,12 @@
           "description": "Resource properties.",
           "properties": {
             "monitoringState": {
-              "$ref": "#/definitions/MonitoringState"
+              "$ref": "#/definitions/MonitoringState",
+              "description": "Specifies whether the port is actively monitored or discovered."
             },
             "machine": {
-              "$ref": "#/definitions/ResourceReference"
+              "$ref": "#/definitions/ResourceReference",
+              "description": "Machine hosting this port."
             },
             "displayName": {
               "type": "string",
@@ -1569,7 +1792,8 @@
           "description": "Resource properties.",
           "properties": {
             "clientsOf": {
-              "$ref": "#/definitions/ResourceReference"
+              "$ref": "#/definitions/ResourceReference",
+              "description": "Reference to the resource whose clients are represented by this group."
             }
           },
           "required": [
@@ -1596,17 +1820,55 @@
               "description": "IP address."
             },
             "port": {
-              "$ref": "#/definitions/ResourceOnMachineReference",
+              "$ref": "#/definitions/PortReference",
               "description": "Port into which this client connected"
             },
             "processes": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ResourceOnMachineReference"
+                "$ref": "#/definitions/ProcessReference"
               },
-              "description": "Processes accepting on the above port"
+              "description": "Processes accepting on the above port that received connections from this client."
             }
           }
+        }
+      }
+    },
+    "MachineGroup": {
+      "description": "A user-defined logical grouping of machines.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CoreResource"
+        }
+      ],
+      "x-ms-discriminator-value": "machineGroup",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Resource ETAG."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "Resource properties.",
+          "properties": {
+            "displayName": {
+              "type": "string",
+              "description": "User defined name for the group",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "machines": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MachineReferenceWithHints"
+              },
+              "description": "References of the machines in this group. The hints within each reference do not represent the current value of  the corresponding fields. They are a snapshot created during the last time the machine group was updated."
+            }
+          },
+          "required": [
+            "displayName"
+          ]
         }
       }
     },
@@ -1616,7 +1878,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Base for all summaries."
+      "description": "Base for all resource summaries."
     },
     "MachinesSummary": {
       "description": "A summary of the machines in the workspace.",
@@ -1640,6 +1902,16 @@
         }
       ],
       "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Additional resource type qualifier.",
+          "enum": [
+            "rel:connection",
+            "rel:acceptor"
+          ]
+        }
+      },
       "required": [
         "kind"
       ]
@@ -1670,92 +1942,109 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RelationshipProperties"
+          "$ref": "#/definitions/AcceptorProperties"
         }
       }
     },
     "MachineCollection": {
       "type": "object",
-      "description": "Collection of Machine resources",
+      "description": "Collection of Machine resources.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Machine"
           },
-          "description": "collection of Machine Resources"
+          "description": "Collection of Machine resources."
         },
         "nextLink": {
           "type": "string",
-          "description": "the URL to the next set of resources"
+          "description": "The URL to the next set of resources."
         }
       }
     },
     "ProcessCollection": {
       "type": "object",
-      "description": "Collection of Process resources",
+      "description": "Collection of Process resources.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Process"
           },
-          "description": "collection of Process Resources"
+          "description": "Collection of Process resources."
         },
         "nextLink": {
           "type": "string",
-          "description": "the URL to the next set of resources"
+          "description": "The URL to the next set of resources."
         }
       }
     },
     "PortCollection": {
       "type": "object",
-      "description": "Collection of Port resources",
+      "description": "Collection of Port resources.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Port"
           },
-          "description": "collection of Port resources"
+          "description": "Collection of Port resources."
         },
         "nextLink": {
           "type": "string",
-          "description": "the URL to the next set of resources"
+          "description": "The URL to the next set of resources."
         }
       }
     },
     "ClientGroupMembersCollection": {
       "type": "object",
-      "description": "Collection of ClientGroupMember resources",
+      "description": "Collection of ClientGroupMember resources.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientGroupMember"
           },
-          "description": "collection of ClientGroupMember resources"
+          "description": "Collection of ClientGroupMember resources."
         },
         "nextLink": {
           "type": "string",
-          "description": "the URL to the next set of resources"
+          "description": "The URL to the next set of resources."
         }
       }
     },
     "ConnectionCollection": {
       "type": "object",
-      "description": "Collection of Connection resources",
+      "description": "Collection of Connection resources.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Connection"
           },
-          "description": "collection of Connection Resources"
+          "description": "Collection of Connection resources."
         },
         "nextLink": {
           "type": "string",
-          "description": "the URL to the next set of resources"
+          "description": "The URL to the next set of resources."
+        }
+      }
+    },
+    "MachineGroupCollection": {
+      "type": "object",
+      "description": "Collection of Machine Group resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MachineGroup"
+          },
+          "description": "Collection of Machine Group resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to the next set of resources."
         }
       }
     },
@@ -1795,8 +2084,7 @@
       "x-ms-enum": {
         "name": "Bitness",
         "modelAsString": false
-      },
-      "x-ms-external": true
+      }
     },
     "OperatingSystemFamily": {
       "description": "Specifies the operating system family, e.g., Linux, Windows, etc.",
@@ -1868,7 +2156,7 @@
       }
     },
     "ConnectionFailureState": {
-      "description": "Connection failure state:\n * ```ok``` indicates no failures\n * ```failed``` indicates only failures\n * ```mixed``` indicates both failures and successes ",
+      "description": "Connection failure state:\n * ```ok``` indicates no failures\n * ```failed``` indicates only failures\n * ```mixed``` indicates both failures and successes",
       "type": "string",
       "enum": [
         "ok",
@@ -1882,17 +2170,17 @@
     },
     "SummaryProperties": {
       "type": "object",
-      "description": "Base for all summaries. ",
+      "description": "Base for all summaries.",
       "properties": {
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Summary internval start time."
+          "description": "Summary interval start time."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Summary internval end time."
+          "description": "Summary interval end time."
         }
       },
       "required": [
@@ -1940,7 +2228,8 @@
           "description": "Number of live machines."
         },
         "os": {
-          "$ref": "#/definitions/MachineCountsByOperatingSystem"
+          "$ref": "#/definitions/MachineCountsByOperatingSystem",
+          "description": "Machine counts by operating system."
         }
       },
       "required": [
@@ -1953,10 +2242,12 @@
       "description": "Relationship properties.",
       "properties": {
         "source": {
-          "$ref": "#/definitions/ResourceReference"
+          "$ref": "#/definitions/ResourceReference",
+          "description": "Source resource of the relationship."
         },
         "destination": {
-          "$ref": "#/definitions/ResourceReference"
+          "$ref": "#/definitions/ResourceReference",
+          "description": "Destination resource of the relationship."
         },
         "startTime": {
           "type": "string",
@@ -1983,24 +2274,53 @@
       ],
       "properties": {
         "serverPort": {
-          "$ref": "#/definitions/ResourceReference"
+          "$ref": "#/definitions/PortReference",
+          "description": "Reference to the server port via which this connection has been established."
         },
         "failureState": {
-          "$ref": "#/definitions/ConnectionFailureState"
+          "$ref": "#/definitions/ConnectionFailureState",
+          "description": "Specifies whether there are only successful, failed or a mixture of both connections represented by this resource."
         }
       }
+    },
+    "AcceptorProperties": {
+      "description": "Properties for an acceptor relationshi.",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/PortReference",
+          "description": "Port being accepted."
+        },
+        "destination": {
+          "$ref": "#/definitions/ProcessReference",
+          "description": "Accepting process."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Relationship start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Relationship end time."
+        }
+      },
+      "required": [
+        "source",
+        "destination"
+      ]
     },
     "Ipv4NetworkInterface": {
       "description": "Describes an IPv4 network interface.",
       "properties": {
         "ipAddress": {
           "type": "string",
-          "description": "IPv4 address"
+          "description": "IPv4 address."
         },
         "subnetMask": {
           "type": "string",
           "default": "255.255.255.255",
-          "description": "IPv4 subnet mask"
+          "description": "IPv4 subnet mask."
         }
       },
       "required": [
@@ -2012,7 +2332,7 @@
       "properties": {
         "ipAddress": {
           "type": "string",
-          "description": "IPv6 address"
+          "description": "IPv6 address."
         }
       },
       "required": [
@@ -2058,7 +2378,7 @@
             "type": "string",
             "description": "DNS name."
           },
-          "description": "DNS names associated with this machine resource."
+          "description": "DNS names associated with the machine."
         }
       }
     },
@@ -2082,7 +2402,8 @@
           "description": "Dependency Agent revision number."
         },
         "rebootStatus": {
-          "$ref": "#/definitions/MachineRebootStatus"
+          "$ref": "#/definitions/MachineRebootStatus",
+          "description": "Specifies whether the machine has been rebooted since the Dependency Agent installation."
         },
         "clockGranularity": {
           "type": "integer",
@@ -2095,7 +2416,7 @@
       ]
     },
     "Timezone": {
-      "description": "Describes an timezone.",
+      "description": "Describes a timezone.",
       "properties": {
         "fullName": {
           "type": "string",
@@ -2107,14 +2428,16 @@
       "description": "Describes the configuration of the operating system of a machine.",
       "properties": {
         "family": {
-          "$ref": "#/definitions/OperatingSystemFamily"
+          "$ref": "#/definitions/OperatingSystemFamily",
+          "description": "Windows, Linux, etc."
         },
         "fullName": {
           "type": "string",
-          "description": "Operating system full name"
+          "description": "Operating system full name."
         },
         "bitness": {
-          "$ref": "#/definitions/Bitness"
+          "$ref": "#/definitions/Bitness",
+          "description": "Operating system bitness (32-bit or 64-bit)."
         }
       },
       "required": [
@@ -2142,7 +2465,8 @@
           "description": "CPU speed in megahertz (Mhz)."
         },
         "cpuSpeedAccuracy": {
-          "$ref": "#/definitions/Accuracy"
+          "$ref": "#/definitions/Accuracy",
+          "description": "Describes the accuracy of the cpuSpeed field."
         }
       }
     },
@@ -2150,7 +2474,8 @@
       "description": "Describes the virtualizaton-related configuration of a machine.",
       "properties": {
         "virtualMachineType": {
-          "$ref": "#/definitions/VirtualMachineType"
+          "$ref": "#/definitions/VirtualMachineType",
+          "description": "Specifies the virtualization technology used by the machine (hyperv, vmware, etc.)"
         },
         "nativeMachineId": {
           "type": "string",
@@ -2170,7 +2495,8 @@
       "description": "Describes the hypervisor configuration of a machine.",
       "properties": {
         "hypervisorType": {
-          "$ref": "#/definitions/HypervisorType"
+          "$ref": "#/definitions/HypervisorType",
+          "description": "Specifies the virtualization technology used by the hypervisor (hyperv, vmware, etc.)"
         },
         "nativeHostMachineId": {
           "type": "string",
@@ -2196,12 +2522,12 @@
       "properties": {
         "persistentKey": {
           "type": "string",
-          "description": "Process Persistent Key"
+          "description": "A unique indentifier for a process, generally resilient to process restart, computed by Service Map."
         },
         "poolId": {
           "type": "integer",
           "format": "int32",
-          "description": "Process pool identifier."
+          "description": "Represents the identity of the process pool assigned to the process by Dependency Agent. "
         },
         "firstPid": {
           "type": "integer",
@@ -2214,7 +2540,7 @@
         },
         "companyName": {
           "type": "string",
-          "description": "Name of company that created the process executable. "
+          "description": "Name of company that created the process executable."
         },
         "internalName": {
           "type": "string",
@@ -2358,7 +2684,11 @@
         },
         "kind": {
           "type": "string",
-          "description": "The type of map to create."
+          "description": "The type of map to create.",
+          "enum": [
+            "map:single-machine-dependency",
+            "map:machine-group-dependency"
+          ]
         }
       },
       "required": [
@@ -2366,7 +2696,7 @@
       ]
     },
     "SingleMachineDependencyMapRequest": {
-      "description": "Specifies the computation of a single server dependency map.",
+      "description": "Specifies the computation of a single server dependency map. A single server dependency map includes all direct dependencies of a given machine.",
       "allOf": [
         {
           "$ref": "#/definitions/MapRequest"
@@ -2381,6 +2711,28 @@
       },
       "required": [
         "machineId"
+      ]
+    },
+    "MachineGroupMapRequest": {
+      "description": "Specifies the computation of a machine group dependency map. A machine group dependency map includes all direct dependencies of a group of machines.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MapRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "map:machine-group-dependency",
+      "properties": {
+        "machineGroupId": {
+          "type": "string",
+          "description": "URI of machine group resource for which to generate the map."
+        },
+        "filterProcesses": {
+          "type": "boolean",
+          "description": "If true, only processes between grouped machines will be included. Any connections in or out of those processes will be included."
+        }
+      },
+      "required": [
+        "machineGroupId"
       ]
     },
     "MapResponse": {
@@ -2398,7 +2750,8 @@
           "description": "Map interval end time."
         },
         "map": {
-          "$ref": "#/definitions/Map"
+          "$ref": "#/definitions/Map",
+          "description": "The generated map."
         }
       },
       "required": [
@@ -2431,7 +2784,8 @@
           "description": "Number of members in the client group. Use this value together with the value of ```accuracy```. If accuracy is `exact` then the value represents the actual number of members in the cloud. When accuracy is `estimated`, the actual number of members is larger than the value of ```count```."
         },
         "accuracy": {
-          "$ref": "#/definitions/Accuracy"
+          "$ref": "#/definitions/Accuracy",
+          "description": "Accuracy of the reported count."
         }
       },
       "required": [
@@ -2447,7 +2801,8 @@
       "description": "An error response from the API.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Error"
+          "$ref": "#/definitions/Error",
+          "description": "Error information."
         }
       },
       "required": [
@@ -2480,29 +2835,84 @@
       "type": "string",
       "description": "Azure subscription identifier."
     },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Resource group name within the specified subscriptionId.",
-      "maxLength": 10,
-      "minLength": 3,
-      "pattern": "[a-zA-Z0-9]+"
-    },
-    "WorkspaceNameParameter": {
-      "name": "workspaceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "OMS workspace containing the resources of interest."
-    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
       "description": "API version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "type": "string",
+      "description": "Resource group name within the specified subscriptionId.",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "[a-zA-Z0-9_-]+"
+    },
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "type": "string",
+      "description": "OMS workspace containing the resources of interest.",
+      "minLength": 3,
+      "maxLength": 63,
+      "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]+[a-zA-Z0-9_]"
+    },
+    "MachineNameParameter": {
+      "name": "machineName",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "type": "string",
+      "description": "Machine resource name.",
+      "minLength": 3,
+      "maxLength": 64
+    },
+    "ProcessNameParameter": {
+      "name": "processName",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "type": "string",
+      "description": "Process resource name.",
+      "minLength": 3,
+      "maxLength": 128
+    },
+    "PortNameParameter": {
+      "name": "portName",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "type": "string",
+      "description": "Port resource name.",
+      "minLength": 3,
+      "maxLength": 64
+    },
+    "ClientGroupNameParameter": {
+      "name": "clientGroupName",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "type": "string",
+      "description": "Client Group resource name.",
+      "minLength": 3,
+      "maxLength": 256
+    },
+    "MachineGroupNameParameter": {
+      "name": "machineGroupName",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "type": "string",
+      "description": "Machine Group resource name.",
+      "minLength": 36,
+      "maxLength": 36
     }
   }
 }
