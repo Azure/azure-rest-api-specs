@@ -312,42 +312,6 @@
         "x-ms-odata": "#/definitions/PolicyAssignment"
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyassignments": {
-      "get": {
-        "tags": [
-          "PolicyAssignments"
-        ],
-        "operationId": "PolicyAssignments_List",
-        "description": "Gets all the policy assignments for a subscription.",
-        "parameters": [
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns an array of policy assignments.",
-            "schema": {
-              "$ref": "#/definitions/PolicyAssignmentListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/PolicyAssignment"
-      }
-    },
     "/{policyAssignmentId}": {
       "delete": {
         "tags": [
