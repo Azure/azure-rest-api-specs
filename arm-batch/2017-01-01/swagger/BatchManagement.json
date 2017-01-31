@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BatchManagement",
-    "version": "2015-12-01",
+    "version": "2017-01-01",
     "x-ms-code-generation-settings": {
       "name": "BatchManagementClient"
     }
@@ -1115,16 +1115,44 @@
           },
           "description": "The user specified tags associated with the account."
         },
+        "poolAllocationMode": {
+          "type": "string",
+          "description": "The allocation mode to use for creating pools in the Batch account.",
+          "enum": [
+            "BatchService",
+            "UserSubscription"
+          ],
+          "x-ms-enum": {
+            "name": "PoolAllocationMode",
+            "modelAsString": false
+          }
+        },
+        "keyVaultReference": {
+          "$ref": "#/definitions/KeyVaultReference",
+          "description": "A reference to the Azure key vault associated with the Batch account."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BatchAccountBaseProperties",
-          "description": "The properties of the account."
+          "description": "The properties of the Batch account."
         }
       },
       "required": [
         "location"
       ],
       "description": "Parameters supplied to the Create operation."
+    },
+    "KeyVaultReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource ID of the Azure key vault associated with the Batch account."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Identifies the Azure key vault associated with a Batch account."
     },
     "AutoStorageProperties": {
       "properties": {
@@ -1167,9 +1195,25 @@
             "modelAsString": false
           }
         },
+        "poolAllocationMode": {
+          "type": "string",
+          "description": "The allocation mode for creating pools in the Batch account.",
+          "enum": [
+            "BatchService",
+            "UserSubscription"
+          ],
+          "x-ms-enum": {
+            "name": "PoolAllocationMode",
+            "modelAsString": false
+          }
+        },
+        "keyVaultReference": {
+          "$ref": "#/definitions/KeyVaultReference",
+          "description": "A reference to the Azure key vault associated with the Batch account."
+        },
         "autoStorage": {
           "$ref": "#/definitions/AutoStorageProperties",
-          "description": "The properties and status of any auto storage account associated with the account."
+          "description": "The properties and status of any auto storage account associated with the Batch account."
         },
         "coreQuota": {
           "type": "integer",
@@ -1496,7 +1540,7 @@
       "required": true,
       "type": "string",
       "description": "A unique identifier of a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },  
+    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
