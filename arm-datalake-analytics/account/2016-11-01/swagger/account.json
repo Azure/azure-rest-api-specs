@@ -57,7 +57,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Data Lake Analytics account to which to add the firewall rule."
+            "description": "The name of the Data Lake Analytics account to which to add or replace the firewall rule."
           },
           {
             "name": "firewallRuleName",
@@ -85,6 +85,59 @@
         "responses": {
           "200": {
             "description": "Successfully created or updated the specified firewall rule",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Update",
+        "description": "Updates the specified firewall rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Analytics account to which to update the firewall rule."
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule to update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UpdateFirewallRuleParameters"
+            },
+            "description": "Parameters supplied to update the firewall rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified firewall rule",
             "schema": {
               "$ref": "#/definitions/FirewallRule"
             }
@@ -1797,7 +1850,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/OptionalSubResource"
         }
       ],
       "properties": {
@@ -1808,6 +1861,29 @@
         }
       },
       "description": "Data Lake Analytics firewall rule information"
+    },
+    "UpdateFirewallRuleProperties": {
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "the start IP address for the firewall rule."
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "the end IP address for the firewall rule."
+        }
+      },
+      "description": "Data Lake Analytics firewall rule properties information"
+    },
+    "UpdateFirewallRuleParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateFirewallRuleProperties",
+          "description": "the properties of the firewall rule to update.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "Data Lake Analytics firewall rule update parameters"
     },
     "Resource": {
       "description": "The Resource model definition.",
@@ -1843,6 +1919,25 @@
         "location"
       ],
       "x-ms-azure-resource": true
+    },
+    "OptionalSubResource": {
+      "description": "The Resource model definition for a nested resource with no required properties.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      }
     },
     "SubResource": {
       "description": "The Sub Resource model definition.",
