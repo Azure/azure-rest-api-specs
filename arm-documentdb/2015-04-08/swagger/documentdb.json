@@ -626,6 +626,20 @@
       "description": "Parameters to create and update DocumentDB database accounts.",
       "type": "object",
       "properties": {
+        "kind": {
+          "description": "Indicates the type of database account. This can only be set at database account creation.",
+          "type": "string",
+          "default": "GlobalDocumentDB",
+          "enum": [
+            "GlobalDocumentDB",
+            "MongoDB",
+            "Parse"
+          ],
+          "x-ms-enum": {
+            "name": "DatabaseAccountKind",
+            "modelAsString": true
+          }
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
