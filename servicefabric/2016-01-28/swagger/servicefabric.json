@@ -5211,22 +5211,28 @@
       "description": "The application health policy of the cluster",
       "properties": {
         "ConsiderWarningAsError": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "The boolean of the consider warning as error"
         },
         "MaxPercentUnhealthyDeployedApplications": {
-          "type": "integer"
+          "type": "integer",
+          "description": "The max percent of the unhealthy deployed applications"
         },
         "DefaultServiceTypeHealthPolicy": {
-          "type": "integer"
+          "type": "integer",
+          "description": "The policy of the default service type health"
         },
         "MaxPercentUnhealthyServices": {
-          "type": "integer"
+          "type": "integer",
+          "description": "The policy of the default service type health"
         },
         "MaxPercentUnhealthyPartitionsPerService": {
-          "type": "integer"
+          "type": "integer",
+          "description": "The max percent unhealthy partitions per service"
         },
         "MaxPercentUnhealthyReplicasPerPartition": {
-          "type": "integer"
+          "type": "integer",
+          "description": "The max percent unhealthy replicas per partition"
         }
       }
     },
@@ -5235,34 +5241,44 @@
       "description": "The description of the start cluster upgrade",
       "properties": {
         "ConfigVersion": {
-          "type": "string"
+          "type": "string",
+          "description": "The version of the config"
         },
         "CodeVersion": {
-          "type": "string"
+          "type": "string",
+          "description": "The version of the code"
         },
         "UpgradeKind": {
-          "type": "string"
+          "type": "string",
+          "description": "The kind of the upgrade"
         },
         "RollingUpgradeMode": {
-          "$ref": "#/definitions/RollingUpgradeMode"
+          "$ref": "#/definitions/RollingUpgradeMode",
+          "description": "The mode of the rolling upgrade"
         },
         "UpgradeReplicaSetCheckTimeoutInSeconds": {
-          "type": "integer"
+          "type": "integer",
+          "description": "The seconds of the upgrade replica set check timeout"
         },
         "ForceRestart": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "The flag of the force restart"
         },
         "EnableDeltaHealthEvaluation": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "The evaluation of the enable delta health"
         },
         "MonitoringPolicy": {
-          "type": "object"
+          "type": "object",
+          "description": "The policy of the monitoring"
         },
         "ClusterUpgradeHealthPolicy": {
-          "$ref": "#/definitions/ClusterUpgradeHealthPolicy"
+          "$ref": "#/definitions/ClusterUpgradeHealthPolicy",
+          "description": "The policy of the cluster upgrade health"
         },
         "ApplicationHealthPolicyMap": {
-          "$ref": "#/definitions/ApplicationHealthPolicyMap"
+          "$ref": "#/definitions/ApplicationHealthPolicyMap",
+          "description": "The map of the application health policy"
         }
       }
     },
@@ -6222,31 +6238,40 @@
       "description": "The description of the update",
       "properties": {
         "RollingUpgradeMode": {
-          "$ref": "#/definitions/RollingUpgradeMode"
+          "$ref": "#/definitions/RollingUpgradeMode",
+          "description": "The mode of the rolling upgrade"
         },
         "ForceRestart": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "The flag of the force restart"
         },
         "FailureAction": {
-          "type": "string"
+          "type": "string",
+          "description": "The action of the failure"
         },
         "UpgradeReplicaSetCheckTimeoutInSeconds": {
-          "type": "integer"
+          "type": "integer",
+          "description": "The seconds of the upgrade replica set check timeout"
         },
         "HealthCheckWaitDurationInMilliseconds": {
-          "type": "string"
+          "type": "string",
+          "description": "The seconds of the health check wait duration"
         },
         "HealthCheckStableDurationInMilliseconds": {
-          "type": "string"
+          "type": "string",
+          "description": "The seconds of the health check stable duration"
         },
         "HealthCheckRetryTimeoutInMilliseconds": {
-          "type": "string"
+          "type": "string",
+          "description": "The milliseconds of the health check retry timeout"
         },
         "UpgradeTimeoutInMilliseconds": {
-          "type": "string"
+          "type": "string",
+          "description": "The milliseconds of the upgrade timeout"
         },
         "UpgradeDomainTimeoutInMilliseconds": {
-          "type": "string"
+          "type": "string",
+          "description": "The milliseconds of the upgrade domain timeout"
         }
       }
     },
@@ -6255,31 +6280,40 @@
       "description": "The policy of the cluster health",
       "properties": {
         "RollingUpgradeMode": {
-          "$ref": "#/definitions/RollingUpgradeMode"
+          "$ref": "#/definitions/RollingUpgradeMode",
+          "description": "The mode of the rolling upgrade"
         },
         "ForceRestart": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "The flag of the force restart"
         },
         "FailureAction": {
-          "type": "string"
+          "type": "string",
+          "description": "The action of the failure"
         },
         "UpgradeReplicaSetCheckTimeoutInSeconds": {
-          "type": "integer"
+          "type": "integer",
+          "description": "The seconds of the upgrade replica set check timeout"
         },
         "HealthCheckWaitDurationInMilliseconds": {
-          "type": "string"
+          "type": "string",
+          "description": "The milliseconds of the health check wait duration"
         },
         "HealthCheckStableDurationInMilliseconds": {
-          "type": "string"
+          "type": "string",
+          "description": "The milliseconds of the health check stable duration"
         },
         "HealthCheckRetryTimeoutInMilliseconds": {
-          "type": "string"
+          "type": "string",
+          "description": "The milliseconds of the health check retry timeout"
         },
         "UpgradeTimeoutInMilliseconds": {
-          "type": "string"
+          "type": "string",
+          "description": "The milliseconds of the upgrade timeout"
         },
         "UpgradeDomainTimeoutInMilliseconds": {
-          "type": "string"
+          "type": "string",
+          "description": "The milliseconds of the upgrade domain timeout"
         }
       }
     },
@@ -6288,16 +6322,20 @@
       "description": "The description of the update cluster upgrade",
       "properties": {
         "UpgradeKind": {
-          "type": "string"
+          "type": "string",
+          "description": "The kind of the upgrade"
         },
         "UpdateDescription": {
-          "$ref": "#/definitions/UpdateDescription"
+          "$ref": "#/definitions/UpdateDescription",
+          "description": "The description of the update"
         },
         "ClusterHealthPolicy": {
-          "$ref": "#/definitions/ClusterHealthPolicy"
+          "$ref": "#/definitions/ClusterHealthPolicy",
+          "description": "The policy of the cluster health"
         },
         "EnableDeltaHealthEvaluations": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "The evaluations of the enable delta health"
         }
       }
     },
