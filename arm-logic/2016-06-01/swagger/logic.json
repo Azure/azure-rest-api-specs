@@ -2508,7 +2508,8 @@
           "description": "The resource tags."
         }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "description": "The base resource type."
     },
     "SubResource": {
       "properties": {
@@ -2517,7 +2518,8 @@
           "description": "The resource id."
         }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "description": "The sub resource type."
     },
     "Object": {
       "type": "object",
@@ -2540,7 +2542,8 @@
           "readOnly": true,
           "description": "Gets the resource type."
         }
-      }
+      },
+      "description": "The resource reference."
     },
     "Workflow": {
       "type": "object",
@@ -2551,6 +2554,7 @@
           "description": "The workflow properties."
         }
       },
+      "description": "The workflow type.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2610,7 +2614,8 @@
           },
           "description": "The parameters."
         }
-      }
+      },
+      "description": "The workflow properties."
     },
     "WorkflowFilter": {
       "type": "object",
@@ -2619,7 +2624,8 @@
           "$ref": "#/definitions/WorkflowState",
           "description": "The state of workflows."
         }
-      }
+      },
+      "description": "The workflow filter."
     },
     "WorkflowListResult": {
       "type": "object",
@@ -2635,7 +2641,8 @@
           "type": "string",
           "description": "The URL to get the next set of results."
         }
-      }
+      },
+      "description": "The list of workflows."
     },
     "WorkflowVersion": {
       "type": "object",
@@ -2646,6 +2653,7 @@
           "description": "The workflow version properties."
         }
       },
+      "description": "The workflow version.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2700,7 +2708,8 @@
           },
           "description": "The parameters."
         }
-      }
+      },
+      "description": "The workflow version properties."
     },
     "WorkflowVersionListResult": {
       "type": "object",
@@ -2716,7 +2725,8 @@
           "type": "string",
           "description": "The URL to get the next set of results."
         }
-      }
+      },
+      "description": "The list of workflow versions."
     },
     "WorkflowTrigger": {
       "type": "object",
@@ -2737,6 +2747,7 @@
           "description": "Gets the workflow trigger type."
         }
       },
+      "description": "The workflow trigger.",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -2795,7 +2806,8 @@
           "readOnly": true,
           "description": "Gets the reference to workflow."
         }
-      }
+      },
+      "description": "The workflow trigger properties."
     },
     "WorkflowTriggerFilter": {
       "type": "object",
@@ -2804,7 +2816,8 @@
           "$ref": "#/definitions/WorkflowState",
           "description": "The state of workflow trigger."
         }
-      }
+      },
+      "description": "The workflow trigger filter."
     },
     "WorkflowTriggerListResult": {
       "type": "object",
@@ -2820,7 +2833,8 @@
           "type": "string",
           "description": "The URL to get the next set of results."
         }
-      }
+      },
+      "description": "The list of workflow triggers."
     },
     "WorkflowTriggerCallbackUrl": {
       "type": "object",
@@ -2830,7 +2844,8 @@
           "readOnly": true,
           "description": "Gets the workflow trigger callback URL."
         }
-      }
+      },
+      "description": "The workflow trigger callback URL."
     },
     "WorkflowTriggerHistory": {
       "type": "object",
@@ -2851,6 +2866,7 @@
           "description": "Gets the workflow trigger history type."
         }
       },
+      "description": "The workflow trigger history.",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -2916,7 +2932,8 @@
           "readOnly": true,
           "description": "Gets the reference to workflow run."
         }
-      }
+      },
+      "description": "The workflow trigger history properties."
     },
     "WorkflowTriggerHistoryListResult": {
       "type": "object",
@@ -2932,7 +2949,8 @@
           "type": "string",
           "description": "The URL to get the next set of results."
         }
-      }
+      },
+      "description": "The list of workflow trigger histories."
     },
     "WorkflowTriggerHistoryFilter": {
       "type": "object",
@@ -2941,7 +2959,8 @@
           "$ref": "#/definitions/WorkflowStatus",
           "description": "The status of workflow trigger history."
         }
-      }
+      },
+      "description": "The workflow trigger history filter."
     },
     "WorkflowRun": {
       "type": "object",
@@ -2962,6 +2981,7 @@
           "description": "Gets the workflow run type."
         }
       },
+      "description": "The workflow run.",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -3030,7 +3050,8 @@
           "readOnly": true,
           "description": "Gets the response of the flow run."
         }
-      }
+      },
+      "description": "The workflow run properties."
     },
     "WorkflowRunFilter": {
       "type": "object",
@@ -3039,7 +3060,8 @@
           "$ref": "#/definitions/WorkflowStatus",
           "description": "The status of workflow run."
         }
-      }
+      },
+      "description": "The workflow run filter."
     },
     "WorkflowRunListResult": {
       "type": "object",
@@ -3055,7 +3077,8 @@
           "type": "string",
           "description": "The URL to get the next set of results."
         }
-      }
+      },
+      "description": "The list of workflow runs."
     },
     "WorkflowRunAction": {
       "type": "object",
@@ -3076,6 +3099,7 @@
           "description": "Gets the workflow run action type."
         }
       },
+      "description": "The workflow run action.",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -3136,7 +3160,8 @@
           "readOnly": true,
           "description": "Gets the tracked properties."
         }
-      }
+      },
+      "description": "The workflow run action properties."
     },
     "WorkflowRunActionFilter": {
       "type": "object",
@@ -3145,7 +3170,8 @@
           "$ref": "#/definitions/WorkflowStatus",
           "description": "The status of workflow run action."
         }
-      }
+      },
+      "description": "The workflow run action filter."
     },
     "WorkflowRunActionListResult": {
       "type": "object",
@@ -3161,7 +3187,8 @@
           "type": "string",
           "description": "The URL to get the next set of results."
         }
-      }
+      },
+      "description": "The list of workflow run actions."
     },
     "SkuName": {
       "type": "string",
@@ -3176,7 +3203,8 @@
       "x-ms-enum": {
         "name": "SkuName",
         "modelAsString": false
-      }
+      },
+      "description": "The sku name."
     },
     "WorkflowState": {
       "type": "string",
@@ -3256,7 +3284,8 @@
           "$ref": "#/definitions/ResourceReference",
           "description": "The reference to plan."
         }
-      }
+      },
+      "description": "The sku type."
     },
     "ContentLink": {
       "type": "object",
@@ -3282,7 +3311,8 @@
           "$ref": "#/definitions/Object",
           "description": "The metadata."
         }
-      }
+      },
+      "description": "The content link."
     },
     "ContentHash": {
       "type": "object",
@@ -3295,7 +3325,8 @@
           "type": "string",
           "description": "The value."
         }
-      }
+      },
+      "description": "The content hash."
     },
     "Correlation": {
       "type": "object",
@@ -3304,7 +3335,8 @@
           "type": "string",
           "description": "The client tracking id."
         }
-      }
+      },
+      "description": "The correlation property."
     },
     "WorkflowParameter": {
       "type": "object",
@@ -3325,7 +3357,8 @@
           "type": "string",
           "description": "The description."
         }
-      }
+      },
+      "description": "The workflow parameters."
     },
     "WorkflowOutputParameter": {
       "type": "object",
@@ -3336,6 +3369,7 @@
           "description": "Gets the error."
         }
       },
+      "description": "The workflow output parameter.",
       "allOf": [
         {
           "$ref": "#/definitions/WorkflowParameter"
@@ -3413,7 +3447,8 @@
           },
           "description": "The monthly occurrences."
         }
-      }
+      },
+      "description": "The recurrence schedule."
     },
     "RecurrenceScheduleOccurrence": {
       "type": "object",
@@ -3427,7 +3462,8 @@
           "format": "int32",
           "description": "The occurrence."
         }
-      }
+      },
+      "description": "The recurrence schedule occurence."
     },
     "WorkflowTriggerRecurrence": {
       "type": "object",
@@ -3459,7 +3495,8 @@
           "$ref": "#/definitions/RecurrenceSchedule",
           "description": "The recurrence schedule."
         }
-      }
+      },
+      "description": "The workflow trigger recurrence."
     },
     "WorkflowRunTrigger": {
       "type": "object",
@@ -3530,7 +3567,8 @@
           "readOnly": true,
           "description": "Gets the tracked properties."
         }
-      }
+      },
+      "description": "The workflow run trigger."
     },
     "WorkflowTriggerProvisioningState": {
       "type": "string",
@@ -3609,7 +3647,8 @@
           "type": "string",
           "description": "The target schema version."
         }
-      }
+      },
+      "description": "The parameters to generate upgraded definition."
     },
     "IntegrationAccountResource": {
       "properties": {
@@ -3681,20 +3720,22 @@
           "properties": {
           }
         }
-      }
+      },
+      "description": "The integration account content link."
     },
     "IntegrationAccountContentHash": {
       "type": "object",
       "properties": {
         "algorithm": {
           "type": "string",
-          "description": "The conetnt hash algorithm."
+          "description": "The content hash algorithm."
         },
         "value": {
           "type": "string",
           "description": "The content hash value."
         }
-      }
+      },
+      "description": "The integration account content hash details."
     },
     "IntegrationAccount": {
       "type": "object",
@@ -3709,6 +3750,7 @@
           "description": "The sku."
         }
       },
+      "description": "The integration account.",
       "allOf": [
         {
           "$ref": "#/definitions/IntegrationAccountResource"
@@ -3732,7 +3774,8 @@
           "type": "string",
           "description": "The URL to get the next set of results."
         }
-      }
+      },
+      "description": "The list of integration accounts."
     },
     "ListCallbackUrlParameters": {
       "type": "object",
@@ -3746,7 +3789,8 @@
           "$ref": "#/definitions/KeyType",
           "description": "The key type."
         }
-      }
+      },
+      "description": "The callback url parameters."
     },
     "CallbackUrl": {
       "type": "object",
@@ -3755,7 +3799,8 @@
           "type": "string",
           "description": "The URL value."
         }
-      }
+      },
+      "description": "The callback url."
     },
     "IntegrationAccountSchema": {
       "type": "object",
@@ -3766,6 +3811,7 @@
           "description": "The integration account schema properties."
         }
       },
+      "description": "The integration account schema.",
       "allOf": [
         {
           "$ref": "#/definitions/IntegrationAccountResource"
@@ -3824,7 +3870,8 @@
           "readOnly": true,
           "description": "The content link."
         }
-      }
+      },
+      "description": "The integration account schema properties."
     },
     "IntegrationAccountSchemaListResult": {
       "type": "object",
@@ -3840,7 +3887,8 @@
           "type": "string",
           "description": "The URL to get the next set of results."
         }
-      }
+      },
+      "description": "The list of integration account schemas."
     },
     "IntegrationAccountSchemaFilter": {
       "type": "object",
@@ -3849,7 +3897,8 @@
           "$ref": "#/definitions/SchemaType",
           "description": "The schema type of integration account schema."
         }
-      }
+      },
+      "description": "The integration account schema filter for odata query."
     },
     "SchemaType": {
       "type": "string",
@@ -3871,6 +3920,7 @@
           "description": "The integration account map properties."
         }
       },
+      "description": "The integration account map.",
       "allOf": [
         {
           "$ref": "#/definitions/IntegrationAccountResource"
@@ -3891,7 +3941,8 @@
               "type": "string",
               "description": "The reference name."
             }
-          }
+          },
+          "description": "The parameters schema of integration account map."
         },
         "createdTime": {
           "type": "string",
@@ -3926,7 +3977,8 @@
           "properties": {
           }
         }
-      }
+      },
+      "description": "The integration account map."
     },
     "IntegrationAccountMapListResult": {
       "type": "object",
@@ -3942,7 +3994,8 @@
           "type": "string",
           "description": "The URL to get the next set of results."
         }
-      }
+      },
+      "description": "The list of integration account maps."
     },
     "IntegrationAccountMapFilter": {
       "type": "object",
@@ -3951,7 +4004,8 @@
           "$ref": "#/definitions/MapType",
           "description": "The map type of integration account map."
         }
-      }
+      },
+      "description": "The integration account map filter for odata query."
     },
     "MapType": {
       "type": "string",
@@ -3971,7 +4025,8 @@
           "$ref": "#/definitions/IntegrationAccountSkuName",
           "description": "The sku name."
         }
-      }
+      },
+      "description": "The integration account sku."
     },
     "IntegrationAccountPartnerListResult": {
       "type": "object",
@@ -3987,7 +4042,8 @@
           "type": "string",
           "description": "The URL to get the next set of results."
         }
-      }
+      },
+      "description": "The list of integration account partners."
     },
     "IntegrationAccountPartnerFilter": {
       "type": "object",
@@ -3996,7 +4052,8 @@
           "$ref": "#/definitions/PartnerType",
           "description": "The partner type of integration account partner."
         }
-      }
+      },
+      "description": "The integration account partner filter for odata query."
     },
     "IntegrationAccountPartner": {
       "type": "object",
@@ -4007,6 +4064,7 @@
           "description": "The integration account partner properties."
         }
       },
+      "description": "The integration account partner.",
       "allOf": [
         {
           "$ref": "#/definitions/IntegrationAccountResource"
@@ -4042,7 +4100,8 @@
           "$ref": "#/definitions/PartnerContent",
           "description": "The partner content."
         }
-      }
+      },
+      "description": "The integration account partner properties."
     },
     "PartnerType": {
       "type": "string",
@@ -4062,7 +4121,8 @@
           "$ref": "#/definitions/B2BPartnerContent",
           "description": "The B2B partner content."
         }
-      }
+      },
+      "description": "The integration account partner content."
     },
     "B2BPartnerContent": {
       "type": "object",
@@ -4074,7 +4134,8 @@
           },
           "description": "The list of partner business identities."
         }
-      }
+      },
+      "description": "The B2B partner content."
     },
     "BusinessIdentity": {
       "type": "object",
@@ -4087,7 +4148,8 @@
           "type": "string",
           "description": "The business identity value."
         }
-      }
+      },
+      "description": "The integration account partner's business identity."
     },
     "IntegrationAccountAgreementListResult": {
       "type": "object",
@@ -4103,7 +4165,8 @@
           "type": "string",
           "description": "The URL to get the next set of results."
         }
-      }
+      },
+      "description": "The list of integration account agreements."
     },
     "IntegrationAccountAgreementFilter": {
       "type": "object",
@@ -4112,7 +4175,8 @@
           "$ref": "#/definitions/AgreementType",
           "description": "The agreement type of integration account agreement."
         }
-      }
+      },
+      "description": "The integration account agreement filter for odata query."
     },
     "IntegrationAccountAgreement": {
       "type": "object",
@@ -4123,6 +4187,7 @@
           "description": "The integration account agreement properties."
         }
       },
+      "description": "The integration account agreement.",
       "allOf": [
         {
           "$ref": "#/definitions/IntegrationAccountResource"
@@ -4174,7 +4239,8 @@
           "$ref": "#/definitions/AgreementContent",
           "description": "The agreement content."
         }
-      }
+      },
+      "description": "The integration account agreement properties."
     },
     "AgreementType": {
       "type": "string",
@@ -4204,7 +4270,8 @@
           "$ref": "#/definitions/EdifactAgreementContent",
           "description": "The EDIFACT agreement content."
         }
-      }
+      },
+      "description": "The integration account agreement content."
     },
     "AS2AgreementContent": {
       "type": "object",
@@ -4217,7 +4284,8 @@
           "$ref": "#/definitions/AS2OneWayAgreement",
           "description": "The AS2 one-way send agreement."
         }
-      }
+      },
+      "description": "The integration account AS2 agreement content."
     },
     "AS2OneWayAgreement": {
       "type": "object",
@@ -4234,7 +4302,8 @@
           "$ref": "#/definitions/AS2ProtocolSettings",
           "description": "The AS2 protocol settings."
         }
-      }
+      },
+      "description": "The integration account AS2 oneway agreement."
     },
     "AS2ProtocolSettings": {
       "type": "object",
@@ -4267,7 +4336,8 @@
           "$ref": "#/definitions/AS2ErrorSettings",
           "description": "The error settings."
         }
-      }
+      },
+      "description": "The AS2 agreement protocol settings."
     },
     "AS2AcknowledgementConnectionSettings": {
       "type": "object",
@@ -4288,7 +4358,8 @@
           "type": "boolean",
           "description": "The value indicating whether to unfold the HTTP headers."
         }
-      }
+      },
+      "description": "The AS2 agreement acknowledegment connection settings."
     },
     "AS2MessageConnectionSettings": {
       "type": "object",
@@ -4309,7 +4380,8 @@
           "type": "boolean",
           "description": "The value indicating whether to unfold the HTTP headers."
         }
-      }
+      },
+      "description": "The AS2 agreement message connection settings."
     },
     "AS2MdnSettings": {
       "type": "object",
@@ -4350,7 +4422,8 @@
           "$ref": "#/definitions/HashingAlgorithm",
           "description": "The signing or hashing algorithm."
         }
-      }
+      },
+      "description": "The AS2 agreement mdn settings."
     },
     "AS2SecuritySettings": {
       "type": "object",
@@ -4391,7 +4464,8 @@
           "type": "boolean",
           "description": "The value indicating whether to enable NRR for inbound MDN."
         }
-      }
+      },
+      "description": "The AS2 agreement security settings."
     },
     "AS2ValidationSettings": {
       "type": "object",
@@ -4433,7 +4507,8 @@
           "$ref": "#/definitions/EncryptionAlgorithm",
           "description": "The encryption algorithm."
         }
-      }
+      },
+      "description": "The AS2 agreement validation settings."
     },
     "AS2EnvelopeSettings": {
       "type": "object",
@@ -4458,7 +4533,8 @@
           "type": "boolean",
           "description": "The value indicating whether to auto generate file name."
         }
-      }
+      },
+      "description": "The AS2 agreement envelope settings."
     },
     "AS2ErrorSettings": {
       "type": "object",
@@ -4471,7 +4547,8 @@
           "type": "boolean",
           "description": "The value indicating whether to resend message If MDN is not received."
         }
-      }
+      },
+      "description": "The AS2 agreement error settings."
     },
     "X12AgreementContent": {
       "type": "object",
@@ -4484,7 +4561,8 @@
           "$ref": "#/definitions/X12OneWayAgreement",
           "description": "The X12 one-way send agreement."
         }
-      }
+      },
+      "description": "The X12 agreement content."
     },
     "X12OneWayAgreement": {
       "type": "object",
@@ -4501,7 +4579,8 @@
           "$ref": "#/definitions/X12ProtocolSettings",
           "description": "The X12 protocol settings."
         }
-      }
+      },
+      "description": "The X12 oneway agreement."
     },
     "X12ProtocolSettings": {
       "type": "object",
@@ -4569,7 +4648,8 @@
           },
           "description": "The X12 delimiter override settings."
         }
-      }
+      },
+      "description": "The X12 agreement protocol settings."
     },
     "X12ValidationSettings": {
       "type": "object",
@@ -4615,7 +4695,8 @@
           "$ref": "#/definitions/TrailingSeparatorPolicy",
           "description": "The trailing separator policy."
         }
-      }
+      },
+      "description": "The X12 agreement validation settings."
     },
     "X12FramingSettings": {
       "type": "object",
@@ -4652,8 +4733,8 @@
           "$ref": "#/definitions/SegmentTerminatorSuffix",
           "description": "The segment terminator suffix."
         }
-
-      }
+      },
+      "description": "The X12 agreement framing settings."
     },
     "X12EnvelopeSettings": {
       "type": "object",
@@ -4761,7 +4842,8 @@
           "$ref": "#/definitions/UsageIndicator",
           "description": "The usage indicator."
         }
-      }
+      },
+      "description": "The X12 agreement envelope settings."
     },
     "X12AcknowledgementSettings": {
       "type": "object",
@@ -4828,7 +4910,8 @@
           "type": "boolean",
           "description": "The value indicating whether to rollover acknowledgement control number."
         }
-      }
+      },
+      "description": "The X12 agreement acknowledgement settings."
     },
     "X12MessageFilter": {
       "type": "object",
@@ -4837,7 +4920,8 @@
           "$ref": "#/definitions/MessageFilterType",
           "description": "The message filter type."
         }
-      }
+      },
+      "description": "The X12 message filter for odata query."
     },
     "X12SecuritySettings": {
       "type": "object",
@@ -4858,7 +4942,8 @@
           "type": "string",
           "description": "The password value."
         }
-      }
+      },
+      "description": "The X12 agreement security settings."
     },
     "X12ProcessingSettings": {
       "type": "object",
@@ -4887,7 +4972,8 @@
           "type": "boolean",
           "description": "The value indicating whether to use dot as decimal separator."
         }
-      }
+      },
+      "description": "The X12 processing settings."
     },
     "X12EnvelopeOverride": {
       "type": "object",
@@ -4932,7 +5018,8 @@
           "$ref": "#/definitions/X12TimeFormat",
           "description": "The time format."
         }
-      }
+      },
+      "description": "The X12 envelope override settings."
     },
     "X12ValidationOverride": {
       "type": "object",
@@ -4965,7 +5052,8 @@
           "$ref": "#/definitions/TrailingSeparatorPolicy",
           "description": "The trailing separator policy."
         }
-      }
+      },
+      "description": "The X12 validation override settings."
     },
     "X12MessageIdentifier": {
       "type": "object",
@@ -4974,7 +5062,8 @@
           "type": "string",
           "description": "The message id."
         }
-      }
+      },
+      "description": "The X12 message identifier."
     },
     "X12SchemaReference": {
       "type": "object",
@@ -4995,7 +5084,8 @@
           "type": "string",
           "description": "The schema name."
         }
-      }
+      },
+      "description": "The X12 schema reference."
     },
     "X12DelimiterOverrides": {
       "type": "object",
@@ -5040,7 +5130,8 @@
           "type": "string",
           "description": "The target namespace on which this delimiter settings has to be applied."
         }
-      }
+      },
+      "description": "The X12 delimiter override settings."
     },
     "X12CharacterSet": {
       "type": "string",
@@ -5176,7 +5267,8 @@
           "$ref": "#/definitions/EdifactOneWayAgreement",
           "description": "The EDIFACT one-way send agreement."
         }
-      }
+      },
+      "description": "The Edifact agreement content."
     },
     "EdifactOneWayAgreement": {
       "type": "object",
@@ -5193,7 +5285,8 @@
           "$ref": "#/definitions/EdifactProtocolSettings",
           "description": "The EDIFACT protocol settings."
         }
-      }
+      },
+      "description": "The Edifact one way agreement."
     },
     "EdifactProtocolSettings": {
       "type": "object",
@@ -5257,7 +5350,8 @@
           },
           "description": "The EDIFACT delimiter override settings."
         }
-      }
+      },
+      "description": "The Edifact agreement protocol settings."
     },
     "EdifactValidationSettings": {
       "type": "object",
@@ -5303,7 +5397,8 @@
           "$ref": "#/definitions/TrailingSeparatorPolicy",
           "description": "The trailing separator policy."
         }
-      }
+      },
+      "description": "The Edifact agreement validation settings."
     },
     "EdifactFramingSettings": {
       "type": "object",
@@ -5358,7 +5453,8 @@
           "$ref": "#/definitions/SegmentTerminatorSuffix",
           "description": "The EDIFACT frame setting segment terminator suffix."
         }
-      }
+      },
+      "description": "The Edifact agreement framing settings."
     },
     "EdifactEnvelopeSettings": {
       "type": "object",
@@ -5533,7 +5629,8 @@
           "type": "string",
           "description": "The receiver internal sub identification."
         }
-      }
+      },
+      "description": "The Edifact agreement envelope settings."
     },
     "EdifactAcknowledgementSettings": {
       "type": "object",
@@ -5584,7 +5681,8 @@
           "type": "boolean",
           "description": "The value indicating whether to rollover acknowledgement control number."
         }
-      }
+      },
+      "description": "The Edifact agreement acknowledgement settings."
     },
     "EdifactMessageFilter": {
       "type": "object",
@@ -5593,7 +5691,8 @@
           "$ref": "#/definitions/MessageFilterType",
           "description": "The message filter type."
         }
-      }
+      },
+      "description": "The Edifact message filter for odata query."
     },
     "EdifactProcessingSettings": {
       "type": "object",
@@ -5618,7 +5717,8 @@
           "type": "boolean",
           "description": "The value indicating whether to use dot as decimal separator."
         }
-      }
+      },
+      "description": "The Edifact agreement protocol settings."
     },
     "EdifactEnvelopeOverride": {
       "type": "object",
@@ -5684,7 +5784,8 @@
           "type": "string",
           "description": "The application password."
         }
-      }
+      },
+      "description": "The Edifact enevlope override settings."
     },
     "EdifactMessageIdentifier": {
       "type": "object",
@@ -5693,7 +5794,8 @@
           "type": "string",
           "description": "The message id on which this envelope settings has to be applied."
         }
-      }
+      },
+      "description": "The Edifact message identifier."
     },
     "EdifactSchemaReference": {
       "type": "object",
@@ -5726,7 +5828,8 @@
           "type": "string",
           "description": "The schema name."
         }
-      }
+      },
+      "description": "The Edifact schema reference."
     },
     "EdifactValidationOverride": {
       "type": "object",
@@ -5759,7 +5862,8 @@
           "type": "boolean",
           "description": "The value indicating whether to trim leading and trailing spaces and zeroes."
         }
-      }
+      },
+      "description": "The Edifact validation override settings."
     },
     "EdifactDelimiterOverride": {
       "type": "object",
@@ -5817,7 +5921,8 @@
           "type": "string",
           "description": "The target namespace on which this delimiter settings has to be applied."
         }
-      }
+      },
+      "description": "The Edifact delimiter override settings."
     },
     "EdifactCharacterSet": {
       "type": "string",
@@ -5869,7 +5974,8 @@
           "type": "string",
           "description": "The URL to get the next set of results."
         }
-      }
+      },
+      "description": "The list of integration account certificates."
     },
     "IntegrationAccountCertificate": {
       "type": "object",
@@ -5880,6 +5986,7 @@
           "description": "The integration account certificate properties."
         }
       },
+      "description": "The integration account certificate.",
       "allOf": [
         {
           "$ref": "#/definitions/IntegrationAccountResource"
@@ -5915,7 +6022,8 @@
           "type": "string",
           "description": "The public certificate."
         }
-      }
+      },
+      "description": "The integration account certificate properties."
     },
     "KeyVaultKeyReference": {
       "type": "object",
@@ -5948,7 +6056,8 @@
           "type": "string",
           "description": "The private key version in key vault."
         }
-      }
+      },
+      "description": "The reference to the key vault key."
     }
   },
   "parameters": {
