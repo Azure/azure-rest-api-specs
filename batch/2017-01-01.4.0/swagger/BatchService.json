@@ -10407,7 +10407,7 @@
         "previousState": {
           "type": "string",
           "title": "The previous state of the certificate.",
-          "description": "This property is not set if the certificate is in its initial Active state.",
+          "description": "This property is not set if the certificate is in its initial active state.",
           "enum": [
             "active",
             "deleting",
@@ -10772,7 +10772,7 @@
         "scope": {
           "type": "string",
           "title": "The scope for the auto user",
-          "description": "Pool scope specifies that the task runs as the common auto user account which is created on every node in a pool. Task scope specifies that the service should create a new user for the task. The default value is task.",
+          "description": "pool - specifies that the task runs as the common auto user account which is created on every node in a pool. task - specifies that the service should create a new user for the task. The default value is task.",
           "enum": [
             "task",
             "pool"
@@ -10785,7 +10785,7 @@
         "elevationLevel": {
           "type": "string",
           "title": "The elevation level of the auto user",
-          "description": "The possible values are: nonAdmin: The auto user is a standard user without elevated access. admin: The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.",
+          "description": "nonAdmin - The auto user is a standard user without elevated access. admin - The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.",
           "enum": [
             "nonAdmin",
             "admin"
@@ -10800,8 +10800,9 @@
     },
     "UserIdentity": {
       "properties": {
-        "userName": {
+        "username": {
           "type": "string",
+          "x-ms-client-name": "userName",
           "title": "The name of the user identity under which the task is run.",
           "description": "The userName and autoUser properties are mutually exclusive; you must specify one but not both."
         },
@@ -10827,7 +10828,7 @@
         "elevationLevel": {
           "type": "string",
           "title": "The elevation level of the user account.",
-          "description": "The possible values are: nonAdmin: The auto user is a standard user without elevated access. admin: The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.",
+          "description": "nonAdmin - The auto user is a standard user without elevated access. admin - The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.",
           "enum": [
             "nonAdmin",
             "admin"
@@ -11038,7 +11039,7 @@
       "properties": {
         "nodeFillType": {
           "type": "string",
-          "title": "How tasks should be distributed across compute nodes",
+          "title": "How tasks should be distributed across compute nodes.",
           "enum": [
             "spread",
             "pack",
@@ -11849,7 +11850,7 @@
         "onAllTasksComplete": {
           "type": "string",
           "title": "The action the Batch service should take when all tasks in the job are in the completed state.",
-          "description": "Permitted values are: noAction - do nothing. The job remains active unless terminated or disabled by some other means. terminateJob - terminate the job. The job's terminateReason is set to 'AllTasksComplete'. The default is noAction.",
+          "description": "noAction -  do nothing. The job remains active unless terminated or disabled by some other means. terminateJob - terminate the job. The job's terminateReason is set to 'AllTasksComplete'. The default is noAction.",
           "enum": [
             "noAction",
             "terminateJob"
@@ -11862,7 +11863,7 @@
         "onTaskFailure": {
           "type": "string",
           "title": "The action the Batch service should take when any task in the job fails. A task is considered to have failed if it completes with a non-zero exit code and has exhausted its retry count, or if it had a scheduling error.",
-          "description": "Permitted values are: noAction - do nothing. performExitOptionsJobAction - take the action associated with the task exit condition in the task's exitConditions collection. (This may still result in no action being taken, if that is what the task specifies.) The default is noAction.",
+          "description": "noAction - do nothing. performExitOptionsJobAction - take the action associated with the task exit condition in the task's exitConditions collection. (This may still result in no action being taken, if that is what the task specifies.) The default is noAction.",
           "enum": [
             "noAction",
             "performExitOptionsJobAction"
@@ -11955,7 +11956,7 @@
         "onTaskFailure": {
           "type": "string",
           "title": "The action the Batch service should take when any task in the job fails. A task is considered to have failed if it completes with a non-zero exit code and has exhausted its retry count, or if it had a scheduling error.",
-          "description": "Permitted values are: noAction - do nothing. performExitOptionsJobAction - take the action associated with the task exit condition in the task's exitConditions collection. (This may still result in no action being taken, if that is what the task specifies.) The default is noAction.",
+          "description": "noAction - do nothing. performExitOptionsJobAction - take the action associated with the task exit condition in the task's exitConditions collection. (This may still result in no action being taken, if that is what the task specifies.) The default is noAction.",
           "enum": [
             "noAction",
             "performExitOptionsJobAction"
@@ -12048,7 +12049,7 @@
         "state": {
           "type": "string",
           "title": "The current state of the Job Preparation task on the compute node.",
-          "description": "Possible values are: running - the task is currently running (including retrying). completed - the task has exited with exit code 0, or the task has exhausted its retry limit, or the Batch service was unable to start the task due to scheduling errors",
+          "description": "running - the task is currently running (including retrying). completed - the task has exited with exit code 0, or the task has exhausted its retry limit, or the Batch service was unable to start the task due to scheduling errors.",
           "enum": [
             "running",
             "completed"
@@ -12107,7 +12108,7 @@
         "state": {
           "type": "string",
           "title": "The current state of the Job Release task on the compute node.",
-          "description": "Possible values are: running - the task is currently running (including retrying). completed - the task has exited, or the Batch service was unable to start the task due to scheduling errors.",
+          "description": "running - the task is currently running (including retrying). completed - the task has exited, or the Batch service was unable to start the task due to scheduling errors.",
           "enum": [
             "running",
             "completed"
@@ -12301,6 +12302,7 @@
         "caching": {
           "type": "string",
           "title": "The type of caching to enable for the OS disk.",
+          "description": "none - The caching mode for the disk is not enabled. readOnly - The caching mode for the disk is read only. readWrite - The caching mode for the disk is read and write. The default value for caching is none. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.",
           "enum": [
             "none",
             "readOnly",
@@ -12400,7 +12402,7 @@
         "state": {
           "type": "string",
           "title": "The current state of the pool.",
-          "description": "Possible values are: active - The pool is available to run tasks subject to the availability of compute nodes. deleting - The user has requested that the pool be deleted, but the delete operation has not yet completed. upgrading - The user has requested that the operating system of the pool's nodes be upgraded, but the upgrade operation has not yet completed (that is, some nodes in the pool have not yet been upgraded). While upgrading, the pool may be able to run tasks (with reduced capacity) but this is not guaranteed.",
+          "description": "active - The pool is available to run tasks subject to the availability of compute nodes. deleting - The user has requested that the pool be deleted, but the delete operation has not yet completed. upgrading - The user has requested that the operating system of the pool's nodes be upgraded, but the upgrade operation has not yet completed (that is, some nodes in the pool have not yet been upgraded). While upgrading, the pool may be able to run tasks (with reduced capacity) but this is not guaranteed.",
           "enum": [
             "active",
             "deleting",
@@ -12419,7 +12421,7 @@
         "allocationState": {
           "type": "string",
           "title": "Whether the pool is resizing.",
-          "description": "Possible values are: steady - The pool is not resizing. There are no changes to the number of nodes in the pool in progress. A pool enters this state when it is created and when no operations are being performed on the pool to change the number of dedicated nodes. resizing - The pool is resizing; that is, compute nodes are being added to or removed from the pool. stopping - The pool was resizing, but the user has requested that the resize be stopped, but the stop request has not yet been completed.",
+          "description": "steady - The pool is not resizing. There are no changes to the number of nodes in the pool in progress. A pool enters this state when it is created and when no operations are being performed on the pool to change the number of dedicated nodes. resizing - The pool is resizing; that is, compute nodes are being added to or removed from the pool. stopping - The pool was resizing, but the user has requested that the resize be stopped, but the stop request has not yet been completed.",
           "enum": [
             "steady",
             "resizing",
@@ -13342,7 +13344,7 @@
         "state": {
           "type": "string",
           "title": "The state of the start task on the compute node.",
-          "description": "Possible values are: running - The start task is currently running. completed - The start task has exited with exit code 0, or the start task has failed and the retry limit has reached, or the start task process did not run due to scheduling errors.",
+          "description": "running - The start task is currently running. completed - The start task has exited with exit code 0, or the start task has failed and the retry limit has reached, or the start task process did not run due to scheduling errors.",
           "enum": [
             "running",
             "completed"
@@ -13446,7 +13448,7 @@
         "schedulingState": {
           "type": "string",
           "title": "Whether the compute node is available for task scheduling.",
-          "description": "Possible values are: enabled - Tasks can be scheduled on the node. disabled - No new tasks will be scheduled on the node. Tasks already running on the node may still run to completion. All nodes start with scheduling enabled.",
+          "description": "enabled - Tasks can be scheduled on the node. disabled - No new tasks will be scheduled on the node. Tasks already running on the node may still run to completion. All nodes start with scheduling enabled.",
           "enum": [
             "enabled",
             "disabled"
@@ -13648,7 +13650,7 @@
         "disableTasks": {
           "type": "string",
           "title": "What to do with active tasks associated with the job.",
-          "description": "Possible values are: requeue - Terminate running tasks and requeue them. The tasks will run again when the job is enabled. terminate - Terminate running tasks. The tasks will not run again. wait - Allow currently running tasks to complete.",
+          "description": "requeue - Terminate running tasks and requeue them. The tasks will run again when the job is enabled. terminate - Terminate running tasks. The tasks will not run again. wait - Allow currently running tasks to complete.",
           "enum": [
             "requeue",
             "terminate",
