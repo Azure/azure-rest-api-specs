@@ -1,11 +1,31 @@
 {
   "parameters": {
-    "name": "ddb1",
+    "accountName": "ddb1",
     "resourceGroupName": "rg1",
     "api-version": "2015-04-08",
     "subscriptionId": "subid"
   },
   "responses": {
-    "200": {}
+    "200": { "body": {} }
+  }
+},
+{
+  "parameters": {
+    "name": "mongo-ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2015-04-08",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+        "body": {
+          "connectionStrings": [
+            {
+              "connectionString": "connection-string",
+              "description": "description"
+            }
+          ]
+        }
+    }
   }
 }
