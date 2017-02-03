@@ -34,16 +34,16 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/serviceCommunities": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/bgpServiceCommunities": {
       "get": {
         "tags": [
-          "ServiceCommunities"
+          "BgpServiceCommunities"
         ],
-        "operationId": "ServiceCommunities_List",
+        "operationId": "BgpServiceCommunities_List",
         "x-ms-examples": {
           "ServiceCommunityList": { "$ref": "../examples/ServiceCommunityList.json" }
         },
-        "description": "Gets all the available service communities.",
+        "description": "Gets all the available bgp service communities.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -54,9 +54,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of ServiceCommunity resources.",
+            "description": "Request successful. The operation returns a list of BgpServiceCommunity resources.",
             "schema": {
-              "$ref": "#/definitions/ServiceCommunityListResult"
+              "$ref": "#/definitions/BgpServiceCommunityListResult"
             }
           }
         },
@@ -77,7 +77,7 @@
           "type": "string",
           "description": "The name of the bgp community. e.g. Skype."
         },
-        "communityVaule": {
+        "communityValue": {
           "type": "string",
           "description": "The value of the bgp community. For more information: https://docs.microsoft.com/en-us/azure/expressroute/expressroute-routing."
         },
@@ -91,7 +91,7 @@
       },
       "description": "Contains bgp community information offered in Service Community resources."
     },
-    "ServiceCommunityPropertiesFormat": {
+    "BgpServiceCommunityPropertiesFormat": {
       "properties": {
         "communities": {
           "type": "array",
@@ -103,7 +103,7 @@
       },
       "description": "Properties of Service Community."
     },
-    "ServiceCommunity": {
+    "BgpServiceCommunity": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -117,12 +117,12 @@
       ],
       "description": "Service Community Properties."
     },
-    "ServiceCommunityListResult": {
+    "BgpServiceCommunityListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ServiceCommunity"
+            "$ref": "#/definitions/BgpServiceCommunity"
           },
           "description": "A list of service community resources."
         },

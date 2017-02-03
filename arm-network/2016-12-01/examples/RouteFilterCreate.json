@@ -1,31 +1,32 @@
 {
-  "parameters": {
-    "routeFilterName": "filterName",
-    "resourceGroupName": "rg1",
-    "api-version": "2016-12-01",
-    "subscriptionId": "subid",
     "parameters": {
-      "location": "West US",
-      "tags": {
-        "key1": "value1"
-      },
-      "properties": {
-        "rules": [
-          {
-            "name": "ruleName",
+        "routeFilterName": "filterName",
+        "resourceGroupName": "rg1",
+        "api-version": "2016-12-01",
+        "subscriptionId": "subid",
+        "routeFilterParameters": {
+            "location": "West US",
+            "tags": {
+                "key1": "value1"
+            },
             "properties": {
-              "access": "Allow",
-              "routeFilterRuleType": "Community",
-              "communities": [
-                "12076:5030",
-                "12076:5040"
-              ]
+                "rules": [
+                    {
+                        "name": "ruleName",
+                        "properties": {
+                            "access": "Allow",
+                            "routeFilterRuleType": "Community",
+                            "communities": [
+                                "12076:5030",
+                                "12076:5040"
+                            ]
+                        }
+                    }
+                ],
+                "peerings": [ ]
             }
-          }
-        ]
-      }
-    }
-  },
+        }
+    },
   "responses": {
     "201": {
       "body": {
