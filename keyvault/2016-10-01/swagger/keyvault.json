@@ -33,8 +33,7 @@
           "Keys"
         ],
         "operationId": "CreateKey",
-        "summary": "Creates a new key, stores it, then returns key parameters and attributes to the client.", 
-        "description": "The create key operation can be used to create any key type in Azure Key Vault. If the named key already exists, Azure Key Vault creates a new version of the key. Authorization: Requires the keys/create permission.",
+        "description": "Creates a new key, stores it, then returns key parameters and attributes to the client. The create key operation can be used to create any key type in Azure Key Vault. If the named key already exists, Azure Key Vault creates a new version of the key. Authorization: Requires the keys/create permission.",
         "parameters": [
           {
             "name": "key-name",
@@ -80,8 +79,7 @@
           "Keys"
         ],
         "operationId": "ImportKey",
-        "summary": "Imports an externally created key, stores it, and returns key parameters and attributes to the client.", 
-        "description": "The import key operation may be used to import any key type into an Azure Key Vault. If the named key already exists, Azure Key Vault creates a new version of the key. Authorization: requires the keys/import permission. ",
+        "description": "Imports an externally created key, stores it, and returns key parameters and attributes to the client. The import key operation may be used to import any key type into an Azure Key Vault. If the named key already exists, Azure Key Vault creates a new version of the key. Authorization: requires the keys/import permission. ",
         "parameters": [
           {
             "name": "key-name",
@@ -125,8 +123,7 @@
           "Keys"
         ],
         "operationId": "DeleteKey",
-        "summary": "Deletes a key of any type from storage in Azure Key Vault.", 
-        "description": "This operation removes the cryptographic material associated with the key, which means the key is not usable for Sign/Verify, Wrap/Unwrap or Encrypt/Decrypt operations. The delete key operation cannot be used to remove individual versions of a key. Authorization: Requires the keys/delete permission.",
+        "description": "Deletes a key of any type from storage in Azure Key Vault. The delete key operation cannot be used to remove individual versions of a key. This operation removes the cryptographic material associated with the key, which means the key is not usable for Sign/Verify, Wrap/Unwrap or Encrypt/Decrypt operations. Authorization: Requires the keys/delete permission.",
         "parameters": [
           {
             "name": "key-name",
@@ -161,8 +158,7 @@
           "Keys"
         ],
         "operationId": "UpdateKey",
-        "summary": "The update key operation changes specified attributes of a stored key.",
-        "description": "The cryptographic material of a key itself cannot be changed. In order to perform this operation, the key must already exist in the Key Vault. Update key can be applied to any key type and key version stored in Azure Key Vault. Authorization: requires the keys/update permission.",
+        "description": "The update key operation changes specified attributes of a stored key and can be applied to any key type and key version stored in Azure Key Vault. The cryptographic material of a key itself cannot be changed. In order to perform this operation, the key must already exist in the Key Vault. Authorization: requires the keys/update permission.",
         "parameters": [
           {
             "name": "key-name",
@@ -212,8 +208,7 @@
           "Keys"
         ],
         "operationId": "GetKey",
-        "summary": "Gets the public part of a stored key.", 
-        "description": "The get key operation is applicable to all key types. If the requested key is symmetric, then no key material is released in the response. Authorization: Requires the keys/get permission.",
+        "description": "Gets the public part of a stored key. The get key operation is applicable to all key types. If the requested key is symmetric, then no key material is released in the response. Authorization: Requires the keys/get permission.",
         "parameters": [
           {
             "name": "key-name",
@@ -255,8 +250,7 @@
           "Keys"
         ],
         "operationId": "GetKeyVersions",
-        "summary": "Retrieves a list of individual key versions with the same key name.", 
-        "description": "The full key identifier, attributes, and tags are provided in the response. Authorization: Requires the keys/list permission.",
+        "description": "Retrieves a list of individual key versions with the same key name. The full key identifier, attributes, and tags are provided in the response. Authorization: Requires the keys/list permission.",
         "parameters": [
           {
             "name": "key-name",
@@ -304,8 +298,7 @@
           "Keys"
         ],
         "operationId": "GetKeys",
-        "summary": "List keys in the specified vault.",
-        "description": " ", 
+        "description": "List keys in the specified vault.",
         "parameters": [
           {
             "name": "maxresults",
@@ -346,8 +339,7 @@
           "Keys"
         ],
         "operationId": "BackupKey",
-        "summary": "Requests that a backup of the specified key be downloaded to the client.",
-        "description": " ",        
+        "description": "Requests that a backup of the specified key be downloaded to the client.",
         "parameters": [
           {
             "name": "key-name",
@@ -382,8 +374,7 @@
           "Keys"
         ],
         "operationId": "RestoreKey",
-        "summary": "Restores a backed up key to a vault.",
-        "description": " ",
+        "description": "Restores a backed up key to a vault.",
         "parameters": [
           {
             "name": "parameters",
@@ -421,8 +412,7 @@
           "Keys"
         ],
         "operationId": "encrypt",
-        "summary": "Encrypts an arbitrary sequence of bytes using an encryption key that is stored in a key vault.",
-        "description": " ", 
+        "description": "Encrypts an arbitrary sequence of bytes using an encryption key that is stored in a key vault.",
         "parameters": [
           {
             "name": "key-name",
@@ -474,8 +464,7 @@
           "Keys"
         ],
         "operationId": "decrypt",
-        "summary": "Decrypts a single block of encrypted data.",
-        "description": " ",
+        "description": "Decrypts a single block of encrypted data.",
         "parameters": [
           {
             "name": "key-name",
@@ -527,8 +516,7 @@
           "Keys"
         ],
         "operationId": "sign",
-        "summary": "Creates a signature from a digest using the specified key.",
-        "description": " ",
+        "description": "Creates a signature from a digest using the specified key.",
         "parameters": [
           {
             "name": "key-name",
@@ -580,8 +568,7 @@
           "Keys"
         ],
         "operationId": "verify",
-        "summary": "Verifies a signature using a specified key.",
-        "description": " ",
+        "description": "Verifies a signature using a specified key.",
         "parameters": [
           {
             "name": "key-name",
@@ -633,8 +620,7 @@
           "Keys"
         ],
         "operationId": "wrapKey",
-        "summary": "Wraps a symmetric key using a specified key.",
-        "description": " ",
+        "description": "Wraps a symmetric key using a specified key.",
         "parameters": [
           {
             "name": "key-name",
@@ -686,8 +672,7 @@
           "Keys"
         ],
         "operationId": "unwrapKey",
-        "summary": "Unwraps a symmetric key using the specified key that was initially used for wrapping that key.",
-        "description": " ",
+        "description": "Unwraps a symmetric key using the specified key that was initially used for wrapping that key.",
         "parameters": [
           {
             "name": "key-name",
@@ -739,8 +724,7 @@
           "Secrets"
         ],
         "operationId": "SetSecret",
-        "summary": "Sets a secret in a specified key vault.",
-        "description": " ",
+        "description": "Sets a secret in a specified key vault.",
         "parameters": [
           {
             "name": "secret-name",
@@ -784,8 +768,7 @@
           "Secrets"
         ],
         "operationId": "DeleteSecret",
-        "summary": "Deletes a secret from a specified key vault.",
-        "description": " ",
+        "description": "Deletes a secret from a specified key vault.",
         "parameters": [
           {
             "name": "secret-name",
@@ -820,8 +803,7 @@
           "Secrets"
         ],
         "operationId": "UpdateSecret",
-        "summary": "Updates the attributes associated with a specified secret in a given key vault.",
-        "description": " ",
+        "description": "Updates the attributes associated with a specified secret in a given key vault.",
         "parameters": [
           {
             "name": "secret-name",
@@ -871,8 +853,7 @@
           "Secrets"
         ],
         "operationId": "GetSecret",
-        "summary": "Get a specified secret from a given key vault.",
-        "description": " ",
+        "description": "Get a specified secret from a given key vault.",
         "parameters": [
           {
             "name": "secret-name",
@@ -914,8 +895,7 @@
           "Secrets"
         ],
         "operationId": "GetSecrets",
-        "summary": "List secrets in a specified key vault",
-        "description": " ",
+        "description": "List secrets in a specified key vault",
         "parameters": [
           {
             "name": "maxresults",
@@ -956,8 +936,7 @@
           "Secrets"
         ],
         "operationId": "GetSecretVersions",
-        "summary": "List the versions of the specified secret.",
-        "description": " ",
+        "description": "List the versions of the specified secret.",
         "parameters": [
           {
             "name": "secret-name",
@@ -1005,8 +984,7 @@
           "Certificates"
         ],
         "operationId": "GetCertificates",
-        "summary": "List certificates in a specified key vault",
-        "description": " ",
+        "description": "List certificates in a specified key vault",
         "parameters": [
           {
             "name": "maxresults",
@@ -1047,8 +1025,7 @@
           "Certificates"
         ],
         "operationId": "DeleteCertificate",
-        "summary": "Deletes a certificate from a specified key vault.",
-        "description": " ",
+        "description": "Deletes a certificate from a specified key vault.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1083,8 +1060,7 @@
           "Certificates"
         ],
         "operationId": "SetCertificateContacts",
-        "summary": "Sets the certificate contacts for the specified key vault.",
-        "description": " ",
+        "description": "Sets the certificate contacts for the specified key vault.",
         "parameters": [
           {
             "name": "contacts",
@@ -1119,8 +1095,7 @@
           "Certificates"
         ],
         "operationId": "GetCertificateContacts",
-        "summary": "Lists the certificate contacts for a specified key vault.",
-        "description": " ",
+        "description": "Lists the certificate contacts for a specified key vault.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1146,8 +1121,7 @@
           "Certificates"
         ],
         "operationId": "DeleteCertificateContacts",
-        "summary": "Deletes the certificate contacts for a specified key vault.",
-        "description": " ",
+        "description": "Deletes the certificate contacts for a specified key vault.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1175,8 +1149,7 @@
           "Certificates"
         ],
         "operationId": "GetCertificateIssuers",
-        "summary": "List certificate issuers for a specified key vault.",
-        "description": " ",
+        "description": "List certificate issuers for a specified key vault.",
         "parameters": [
           {
             "name": "maxresults",
@@ -1217,8 +1190,7 @@
           "Certificates"
         ],
         "operationId": "SetCertificateIssuer",
-        "summary": "Sets the specified certificate issuer.",
-        "description": " ",
+        "description": "Sets the specified certificate issuer.",
         "parameters": [
           {
             "name": "issuer-name",
@@ -1261,8 +1233,7 @@
           "Certificates"
         ],
         "operationId": "UpdateCertificateIssuer",
-        "summary": "Updates the specified certificate issuer.",
-        "description": " ",
+        "description": "Updates the specified certificate issuer.",
         "parameters": [
           {
             "name": "issuer-name",
@@ -1287,7 +1258,7 @@
         ],
         "responses": {
           "200": {
-            "summary": "The issuer for the key vault certificate.",
+            "description": "The issuer for the key vault certificate.",
             "schema": {
               "$ref": "#/definitions/IssuerBundle"
             }
@@ -1305,8 +1276,7 @@
           "Certificates"
         ],
         "operationId": "GetCertificateIssuer",
-        "summary": "Lists the specified certificate issuer.",
-        "description": " ",
+        "description": "Lists the specified certificate issuer.",
         "parameters": [
           {
             "name": "issuer-name",
@@ -1339,8 +1309,7 @@
           "Certificates"
         ],
         "operationId": "DeleteCertificateIssuer",
-        "summary": "Deletes the specified certificate issuer.",
-        "description": " ",
+        "description": "Deletes the specified certificate issuer.",
         "parameters": [
           {
             "name": "issuer-name",
@@ -1375,8 +1344,7 @@
           "Certificates"
         ],
         "operationId": "CreateCertificate",
-        "summary": "Creates a new certificate. If this is the first version, the certificate resource is created.",
-        "description": " ",
+        "description": "Creates a new certificate. If this is the first version, the certificate resource is created.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1422,8 +1390,7 @@
           "Certificates"
         ],
         "operationId": "ImportCertificate",
-        "summary": "Imports a certificate into a specified key vault.",
-        "description": " ",
+        "description": "Imports a certificate into a specified key vault.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1469,8 +1436,7 @@
           "Certificates"
         ],
         "operationId": "GetCertificateVersions",
-        "summary": "List the versions of a certificate.",
-        "description": " ",
+        "description": "List the versions of a certificate.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1518,8 +1484,7 @@
           "Certificates"
         ],
         "operationId": "GetCertificatePolicy",
-        "summary": "Lists the policy for a certificate.",
-        "description": " ",
+        "description": "Lists the policy for a certificate.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1552,8 +1517,7 @@
           "Certificates"
         ],
         "operationId": "UpdateCertificatePolicy",
-        "summary": "Updates the policy for a certificate. Set specified members in the certificate policy. Leave others as null.",
-        "description": " ",
+        "description": "Updates the policy for a certificate. Set specified members in the certificate policy. Leave others as null.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1597,8 +1561,7 @@
           "Certificates"
         ],
         "operationId": "UpdateCertificate",
-        "summary": "Updates the specified attributes associated with the given certificate.",
-        "description": " ",
+        "description": "Updates the specified attributes associated with the given certificate.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1648,8 +1611,7 @@
           "Certificates"
         ],
         "operationId": "GetCertificate",
-        "summary": "Gets information about a specified certificate.",
-        "description": " ",
+        "description": "Gets information about a specified certificate.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1691,8 +1653,7 @@
           "Certificates"
         ],
         "operationId": "UpdateCertificateOperation",
-        "summary": "Updates a certificate operation.",
-        "description": " ",
+        "description": "Updates a certificate operation.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1735,8 +1696,7 @@
           "Certificates"
         ],
         "operationId": "GetCertificateOperation",
-        "summary": "Gets the operation associated with a specified certificate.",
-        "description": " ",
+        "description": "Gets the operation associated with a specified certificate.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1769,8 +1729,7 @@
           "Certificates"
         ],
         "operationId": "DeleteCertificateOperation",
-        "summary": "Deletes the operation for a specified certificate.",
-        "description": " ",
+        "description": "Deletes the operation for a specified certificate.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1805,8 +1764,7 @@
           "Certificates"
         ],
         "operationId": "MergeCertificate",
-        "summary": "Merges a certificate or a certificate chain with a key pair existing on the server.",
-        "description": " ",
+        "description": "Merges a certificate or a certificate chain with a key pair existing on the server.",
         "parameters": [
           {
             "name": "certificate-name",
