@@ -10387,17 +10387,8 @@
           "title": "The URL of the certificate."
         },
         "state": {
-          "type": "string",
           "title": "The current state of the certificate.",
-          "enum": [
-            "active",
-            "deleting",
-            "deleteFailed"
-          ],
-          "x-ms-enum": {
-            "name": "CertificateState",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/CertificateState"
         },
         "stateTransitionTime": {
           "type": "string",
@@ -10405,18 +10396,9 @@
           "title": "The time at which the certificate entered its current state."
         },
         "previousState": {
-          "type": "string",
           "title": "The previous state of the certificate.",
           "description": "This property is not set if the certificate is in its initial active state.",
-          "enum": [
-            "active",
-            "deleting",
-            "deleteFailed"
-          ],
-          "x-ms-enum": {
-            "name": "CertificateState",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/CertificateState"
         },
         "previousStateTransitionTime": {
           "type": "string",
@@ -10783,17 +10765,9 @@
           }
         },
         "elevationLevel": {
-          "type": "string",
-          "title": "The elevation level of the auto user",
+          "title": "The elevation level of the auto user.",
           "description": "nonAdmin - The auto user is a standard user without elevated access. admin - The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.",
-          "enum": [
-            "nonAdmin",
-            "admin"
-          ],
-          "x-ms-enum": {
-            "name": "ElevationLevel",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ElevationLevel"
         }
       },
       "title": "Specifies the parameters for the auto user that runs a task on the Batch service."
@@ -10826,17 +10800,9 @@
           "title": "The password for the user account."
         },
         "elevationLevel": {
-          "type": "string",
           "title": "The elevation level of the user account.",
           "description": "nonAdmin - The auto user is a standard user without elevated access. admin - The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.",
-          "enum": [
-            "nonAdmin",
-            "admin"
-          ],
-          "x-ms-enum": {
-            "name": "ElevationLevel",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ElevationLevel"
         },
         "sshPrivateKey": {
           "type": "string",
@@ -11336,30 +11302,14 @@
           "title": "The flag that determines if this job will use tasks with dependencies."
         },
         "onAllTasksComplete": {
-          "type": "string",
           "title": "The action the Batch service should take when all tasks in a job created under this schedule are in the completed state.",
           "description": "Note that if a job contains no tasks, then all tasks are considered complete. This option is therefore most commonly used with a Job Manager task; if you want to use automatic job termination without a Job Manager, you should initially set onAllTasksComplete to noAction and update the job properties to set onAllTasksComplete to terminateJob once you have finished adding tasks. The default is noAction.",
-          "enum": [
-            "noAction",
-            "terminateJob"
-          ],
-          "x-ms-enum": {
-            "name": "OnAllTasksComplete",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/OnAllTasksComplete"
         },
         "onTaskFailure": {
-          "type": "string",
           "title": "The action the Batch service should take when any task fails in a job created under this schedule. A task is considered to have failed if it completes with a non-zero exit code and has exhausted its retry count, or if it had a scheduling error.",
           "description": "The default is noAction.",
-          "enum": [
-            "noAction",
-            "performExitOptionsJobAction"
-          ],
-          "x-ms-enum": {
-            "name": "OnTaskFailure",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/OnTaskFailure"
         },
         "constraints": {
           "$ref": "#/definitions/JobConstraints",
@@ -11548,19 +11498,8 @@
           "title": "The creation time of the job schedule."
         },
         "state": {
-          "type": "string",
           "title": "The current state of the job schedule.",
-          "enum": [
-            "active",
-            "completed",
-            "disabled",
-            "terminating",
-            "deleting"
-          ],
-          "x-ms-enum": {
-            "name": "JobScheduleState",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/JobScheduleState"
         },
         "stateTransitionTime": {
           "type": "string",
@@ -11568,20 +11507,9 @@
           "title": "The time at which the job schedule entered the current state."
         },
         "previousState": {
-          "type": "string",
           "title": "The previous state of the job schedule.",
           "description": "This property is not present if the job schedule is in its initial active state.",
-          "enum": [
-            "active",
-            "completed",
-            "disabled",
-            "terminating",
-            "deleting"
-          ],
-          "x-ms-enum": {
-            "name": "JobScheduleState",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/JobScheduleState"
         },
         "previousStateTransitionTime": {
           "type": "string",
@@ -11667,17 +11595,8 @@
     "JobSchedulingError": {
       "properties": {
         "category": {
-          "type": "string",
           "title": "The category of the job scheduling error.",
-          "enum": [
-            "userError",
-            "serverError",
-            "unmapped"
-          ],
-          "x-ms-enum": {
-            "name": "SchedulingErrorCategory",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/SchedulingErrorCategory"
         },
         "code": {
           "type": "string",
@@ -11767,21 +11686,8 @@
           "title": "The creation time of the job."
         },
         "state": {
-          "type": "string",
           "title": "The current state of the job.",
-          "enum": [
-            "active",
-            "disabling",
-            "disabled",
-            "enabling",
-            "terminating",
-            "completed",
-            "deleting"
-          ],
-          "x-ms-enum": {
-            "name": "JobState",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/JobState"
         },
         "stateTransitionTime": {
           "type": "string",
@@ -11789,22 +11695,9 @@
           "title": "The time at which the job entered its current state."
         },
         "previousState": {
-          "type": "string",
           "title": "The previous state of the job.",
           "description": "This property is not set if the job is in its initial Active state.",
-          "enum": [
-            "active",
-            "disabling",
-            "disabled",
-            "enabling",
-            "terminating",
-            "completed",
-            "deleting"
-          ],
-          "x-ms-enum": {
-            "name": "JobState",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/JobState"
         },
         "previousStateTransitionTime": {
           "type": "string",
@@ -11848,30 +11741,14 @@
           "title": "The pool settings associated with the job."
         },
         "onAllTasksComplete": {
-          "type": "string",
           "title": "The action the Batch service should take when all tasks in the job are in the completed state.",
-          "description": "noAction -  do nothing. The job remains active unless terminated or disabled by some other means. terminateJob - terminate the job. The job's terminateReason is set to 'AllTasksComplete'. The default is noAction.",
-          "enum": [
-            "noAction",
-            "terminateJob"
-          ],
-          "x-ms-enum": {
-            "name": "OnAllTasksComplete",
-            "modelAsString": false
-          }
+          "description": "noAction - do nothing. The job remains active unless terminated or disabled by some other means. terminateJob - terminate the job. The job's terminateReason is set to 'AllTasksComplete'. The default is noAction.",
+          "$ref": "#/definitions/OnAllTasksComplete"
         },
         "onTaskFailure": {
-          "type": "string",
           "title": "The action the Batch service should take when any task in the job fails. A task is considered to have failed if it completes with a non-zero exit code and has exhausted its retry count, or if it had a scheduling error.",
           "description": "noAction - do nothing. performExitOptionsJobAction - take the action associated with the task exit condition in the task's exitConditions collection. (This may still result in no action being taken, if that is what the task specifies.) The default is noAction.",
-          "enum": [
-            "noAction",
-            "performExitOptionsJobAction"
-          ],
-          "x-ms-enum": {
-            "name": "OnTaskFailure",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/OnTaskFailure"
         },
         "metadata": {
           "type": "array",
@@ -11941,30 +11818,14 @@
           "title": "The pool on which the Batch service runs the job's tasks."
         },
         "onAllTasksComplete": {
-          "type": "string",
           "title": "The action the Batch service should take when all tasks in the job are in the completed state.",
           "description": "Note that if a job contains no tasks, then all tasks are considered complete. This option is therefore most commonly used with a Job Manager task; if you want to use automatic job termination without a Job Manager, you should initially set onAllTasksComplete to noAction and update the job properties to set onAllTasksComplete to terminateJob once you have finished adding tasks. Permitted values are: noAction - do nothing. The job remains active unless terminated or disabled by some other means. terminateJob - terminate the job. The job's terminateReason is set to 'AllTasksComplete'. The default is noAction.",
-          "enum": [
-            "noAction",
-            "terminateJob"
-          ],
-          "x-ms-enum": {
-            "name": "OnAllTasksComplete",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/OnAllTasksComplete"
         },
         "onTaskFailure": {
-          "type": "string",
           "title": "The action the Batch service should take when any task in the job fails. A task is considered to have failed if it completes with a non-zero exit code and has exhausted its retry count, or if it had a scheduling error.",
           "description": "noAction - do nothing. performExitOptionsJobAction - take the action associated with the task exit condition in the task's exitConditions collection. (This may still result in no action being taken, if that is what the task specifies.) The default is noAction.",
-          "enum": [
-            "noAction",
-            "performExitOptionsJobAction"
-          ],
-          "x-ms-enum": {
-            "name": "OnTaskFailure",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/OnTaskFailure"
         },
         "metadata": {
           "type": "array",
@@ -12001,17 +11862,8 @@
     "TaskSchedulingError": {
       "properties": {
         "category": {
-          "type": "string",
           "title": "The category of the task scheduling error.",
-          "enum": [
-            "userError",
-            "serverError",
-            "unmapped"
-          ],
-          "x-ms-enum": {
-            "name": "SchedulingErrorCategory",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/SchedulingErrorCategory"
         },
         "code": {
           "type": "string",
@@ -12950,18 +12802,8 @@
           "description": "How the Batch service should respond when the task completes."
         },
         "state": {
-          "type": "string",
           "title": "The current state of the task.",
-          "enum": [
-            "active",
-            "preparing",
-            "running",
-            "completed"
-          ],
-          "x-ms-enum": {
-            "name": "TaskState",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/TaskState"
         },
         "stateTransitionTime": {
           "type": "string",
@@ -12969,19 +12811,9 @@
           "title": "The time at which the task entered its current state."
         },
         "previousState": {
-          "type": "string",
           "title": "The previous state of the task.",
           "description": "This property is not set if the task is in its initial Active state.",
-          "enum": [
-            "active",
-            "preparing",
-            "running",
-            "completed"
-          ],
-          "x-ms-enum": {
-            "name": "TaskState",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/TaskState"
         },
         "previousStateTransitionTime": {
           "type": "string",
@@ -13230,17 +13062,8 @@
           "title": "Details of any error encountered scheduling the subtask."
         },
         "state": {
-          "type": "string",
           "title": "The current state of the subtask.",
-          "enum": [
-            "preparing",
-            "running",
-            "completed"
-          ],
-          "x-ms-enum": {
-            "name": "SubtaskState",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/SubtaskState"
         },
         "stateTransitionTime": {
           "type": "string",
@@ -13248,18 +13071,9 @@
           "title": "The time at which the subtask entered its current state."
         },
         "previousState": {
-          "type": "string",
           "title": "The previous state of the subtask.",
           "description": "This property is not set if the subtask is in its initial running state.",
-          "enum": [
-            "preparing",
-            "running",
-            "completed"
-          ],
-          "x-ms-enum": {
-            "name": "SubtaskState",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/SubtaskState"
         },
         "previousStateTransitionTime": {
           "type": "string",
@@ -13318,18 +13132,8 @@
           "title": "The ID of the subtask if the task is a multi-instance task."
         },
         "taskState": {
-          "type": "string",
           "title": "The current state of the task.",
-          "enum": [
-            "active",
-            "preparing",
-            "running",
-            "completed"
-          ],
-          "x-ms-enum": {
-            "name": "TaskState",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/TaskState"
         },
         "executionInfo": {
           "$ref": "#/definitions/TaskExecutionInformation",
@@ -13683,17 +13487,9 @@
           "description": "Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. If omitted, the priority of the job is left unchanged."
         },
         "onAllTasksComplete": {
-          "type": "string",
-          "title": "Specifies an action the Batch service should take when all tasks in the job are in the completed state.",
+          "title": "The action the Batch service should take when all tasks in the job are in the completed state.",
           "description": "If omitted, the completion behavior is left unchanged. You may not change the value from terminateJob to noAction - that is, once you have engaged automatic job termination, you cannot turn it off again. If you try to do this, the request fails with an 'invalid property value' error response; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).",
-          "enum": [
-            "noAction",
-            "terminateJob"
-          ],
-          "x-ms-enum": {
-            "name": "OnAllTasksComplete",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/OnAllTasksComplete"
         },
         "constraints": {
           "$ref": "#/definitions/JobConstraints",
@@ -13743,17 +13539,9 @@
           "description": "If omitted, it takes the default value of an empty list; in effect, any existing metadata is deleted."
         },
         "onAllTasksComplete": {
-          "type": "string",
-          "title": "Specifies an action the Batch service should take when all tasks in the job are in the completed state.",
+          "title": "The action the Batch service should take when all tasks in the job are in the completed state.",
           "description": "If omitted, the completion behavior is set to noAction. If the current value is terminateJob, this is an error because a job's completion behavior may not be changed from terminateJob to noAction.",
-          "enum": [
-            "noAction",
-            "terminateJob"
-          ],
-          "x-ms-enum": {
-            "name": "OnAllTasksComplete",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/OnAllTasksComplete"
         }
       },
       "required": [ "poolInfo" ],
@@ -13800,19 +13588,9 @@
           "description": "The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
         "nodeDeallocationOption": {
-          "type": "string",
-          "title": "When nodes may be removed from the pool, if the pool size is decreasing.",
+          "title": "Determines what to do with a node and its running task(s) if the pool size is decreasing.",
           "description": "The default value is requeue.",
-          "enum": [
-            "requeue",
-            "terminate",
-            "taskCompletion",
-            "retainedData"
-          ],
-          "x-ms-enum": {
-            "name": "ComputeNodeDeallocationOption",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ComputeNodeDeallocationOption"
         }
       },
       "required": [ "targetDedicated" ],
@@ -14004,19 +13782,9 @@
           "description": "The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
         "nodeDeallocationOption": {
-          "type": "string",
-          "title": "When to remove compute nodes and what to do with currently running tasks.",
+          "title": "Determines what to do with a node and its running task(s) after it has been selected for deallocation.",
           "description": "The default value is requeue.",
-          "enum": [
-            "requeue",
-            "terminate",
-            "taskCompletion",
-            "retainedData"
-          ],
-          "x-ms-enum": {
-            "name": "ComputeNodeDeallocationOption",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ComputeNodeDeallocationOption"
         }
       },
       "required": [ "nodeList" ],
@@ -14067,6 +13835,144 @@
         }
       },
       "title": "An error response received from the Azure Batch service."
+    },
+    "CertificateState": {
+      "type": "string",
+      "title": "The state of the certificate.",
+      "enum": [
+        "active",
+        "deleting",
+        "deleteFailed"
+      ],
+      "x-ms-enum": {
+        "name": "CertificateState",
+        "modelAsString": false
+      }
+    },
+    "ElevationLevel": {
+      "type": "string",
+      "title": "The elevation level of the user.",
+      "description": "nonAdmin - The user is a standard user without elevated access. admin - The user is a user with elevated access and operates with full Administrator permissions.",
+      "enum": [
+        "nonAdmin",
+        "admin"
+      ],
+      "x-ms-enum": {
+        "name": "ElevationLevel",
+        "modelAsString": false
+      }
+    },
+    "JobScheduleState": {
+      "type": "string",
+      "title": "The state of the job schedule.",
+      "enum": [
+        "active",
+        "completed",
+        "disabled",
+        "terminating",
+        "deleting"
+      ],
+      "x-ms-enum": {
+        "name": "JobScheduleState",
+        "modelAsString": false
+      }
+    },
+    "JobState": {
+      "type": "string",
+      "title": "The state of the job.",
+      "enum": [
+        "active",
+        "disabling",
+        "disabled",
+        "enabling",
+        "terminating",
+        "completed",
+        "deleting"
+      ],
+      "x-ms-enum": {
+        "name": "JobState",
+        "modelAsString": false
+      }
+    },
+    "OnAllTasksComplete": {
+      "type": "string",
+      "title": "The action the Batch service should take when all tasks in the job are in the completed state.",
+      "description": "noAction - do nothing. The job remains active unless terminated or disabled by some other means. terminateJob - terminate the job. The job's terminateReason is set to 'AllTasksComplete'.",
+      "enum": [
+        "noAction",
+        "terminateJob"
+      ],
+      "x-ms-enum": {
+        "name": "OnAllTasksComplete",
+        "modelAsString": false
+      }
+    },
+    "OnTaskFailure": {
+      "type": "string",
+      "title": "The action the Batch service should take when any task in the job fails. A task is considered to have failed if it completes with a non-zero exit code and has exhausted its retry count, or if it had a scheduling error.",
+      "description": "noAction - do nothing. performExitOptionsJobAction - take the action associated with the task exit condition in the task's exitConditions collection. This may still result in no action being taken, if that is what the task specifies.",
+      "enum": [
+        "noAction",
+        "performExitOptionsJobAction"
+      ],
+      "x-ms-enum": {
+        "name": "OnTaskFailure",
+        "modelAsString": false
+      }
+    },
+    "SchedulingErrorCategory": {
+      "type": "string",
+      "title": "The category of the scheduling error.",
+      "enum": [
+        "userError",
+        "serverError",
+        "unmapped"
+      ],
+      "x-ms-enum": {
+        "name": "SchedulingErrorCategory",
+        "modelAsString": false
+      }
+    },
+    "TaskState": {
+      "type": "string",
+      "title": "The state of the task.",
+      "enum": [
+        "active",
+        "preparing",
+        "running",
+        "completed"
+      ],
+      "x-ms-enum": {
+        "name": "TaskState",
+        "modelAsString": false
+      }
+    },
+    "SubtaskState": {
+      "type": "string",
+      "title": "The state of the subtask.",
+      "enum": [
+        "preparing",
+        "running",
+        "completed"
+      ],
+      "x-ms-enum": {
+        "name": "SubtaskState",
+        "modelAsString": false
+      }
+    },
+    "ComputeNodeDeallocationOption": {
+      "type": "string",
+      "title": "Determines what to do with a node and its running task(s) after it has been selected for deallocation.",
+      "enum": [
+        "requeue",
+        "terminate",
+        "taskCompletion",
+        "retainedData"
+      ],
+      "x-ms-enum": {
+        "name": "ComputeNodeDeallocationOption",
+        "modelAsString": false
+      }
     }
   },
   "parameters": {
