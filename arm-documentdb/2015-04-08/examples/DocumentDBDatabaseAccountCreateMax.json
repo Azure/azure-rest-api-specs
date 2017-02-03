@@ -4,23 +4,29 @@
     "resourceGroupName": "rg1",
     "api-version": "2015-04-08",
     "subscriptionId": "subid",
-    "location": "westus",
-    "databaseAccountOfferType": "Standard",
-    "ipRangeFilter": "10.10.10.10",
-    "locations": [
-      {
-        "failoverPriority": 0,
-        "locationName": "southcentralus"
-      },
-      {
-        "failoverPriority": 1,
-        "locationName": "eastus"
+    "createUpdateParameters": {
+      "location": "westus",
+      "tags": {},
+      "properties": {
+        "kind": "GlobalDocumentDB",
+        "databaseAccountOfferType": "Standard",
+        "ipRangeFilter": "10.10.10.10",
+        "locations": [
+          {
+            "failoverPriority": 0,
+            "locationName": "southcentralus"
+          },
+          {
+            "failoverPriority": 1,
+            "locationName": "eastus"
+          }
+        ],
+        "consistencyPolicy": {
+          "defaultConsistencyLevel": "BoundedStaleness",
+          "maxIntervalInSeconds": 10,
+          "maxStalenessPrefix": 200
+        }
       }
-    ],
-    "consistencyPolicy": {
-      "defaultConsistencyLevel": "BoundedStaleness",
-      "maxIntervalInSeconds": 10,
-      "maxStalenessPrefix": 200
     }
   },
   "responses": {
