@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2016-09-01"
+    "version": "2016-12-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -945,6 +945,7 @@
           "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         }
@@ -1098,6 +1099,10 @@
           "$ref": "#/definitions/ExpressRouteCircuitPeeringConfig",
           "description": "The Microsoft peering configuration."
         },
+        "routeFilter": {
+          "$ref": "./routeFilter.json#/definitions/RouteFilter",
+          "description": "The reference of the RouteFilter resource."
+        },
         "stats": {
           "$ref": "#/definitions/ExpressRouteCircuitStats",
           "description": "Gets peering stats."
@@ -1127,6 +1132,7 @@
           "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         }
@@ -1277,6 +1283,7 @@
           "$ref": "#/definitions/ExpressRouteCircuitPropertiesFormat"
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets a unique read-only string that changes whenever the resource is updated."
         }
