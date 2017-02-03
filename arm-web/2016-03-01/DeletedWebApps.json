@@ -17,7 +17,6 @@
         "summary": "Get all deleted apps for a subscription.",
         "description": "Get all deleted apps for a subscription.",
         "operationId": "DeletedWebApps_List",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
@@ -51,23 +50,16 @@
         "summary": "Gets deleted web apps in subscription.",
         "description": "Gets deleted web apps in subscription.",
         "operationId": "DeletedWebApps_ListByResourceGroup",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
         ],
         "parameters": [
           {
-            "name": "propertiesToInclude",
-            "in": "query",
-            "description": "Additional web app properties included in the response",
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -120,13 +112,13 @@
           "description": "Custom action to be taken."
         },
         "minProcessExecutionTime": {
-          "description": "Minimum time the process must execute\r\n            before taking the action",
+          "description": "Minimum time the process must execute\n before taking the action",
           "type": "string"
         }
       }
     },
     "AutoHealCustomAction": {
-      "description": "Custom action to be executed\r\n            when an auto heal rule is triggered.",
+      "description": "Custom action to be executed\n when an auto heal rule is triggered.",
       "type": "object",
       "properties": {
         "exe": {
@@ -187,7 +179,7 @@
       "type": "object",
       "properties": {
         "correlationId": {
-          "description": "Correlation ID of cloning operation. This ID ties multiple cloning operations\r\n            together to use the same snapshot.",
+          "description": "Correlation ID of cloning operation. This ID ties multiple cloning operations\n together to use the same snapshot.",
           "type": "string"
         },
         "overwrite": {
@@ -203,7 +195,7 @@
           "type": "boolean"
         },
         "sourceWebAppId": {
-          "description": "ARM resource ID of the source app. App resource ID is of the form \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
+          "description": "ARM resource ID of the source app. App resource ID is of the form \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
           "type": "string"
         },
         "hostingEnvironment": {
@@ -211,7 +203,7 @@
           "type": "string"
         },
         "appSettingsOverrides": {
-          "description": "Application setting overrides for cloned app. If specified, these settings override the settings cloned \r\n            from source app. Otherwise, application settings from source app are retained.",
+          "description": "Application setting overrides for cloned app. If specified, these settings override the settings cloned \n from source app. Otherwise, application settings from source app are retained.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -222,7 +214,7 @@
           "type": "boolean"
         },
         "trafficManagerProfileId": {
-          "description": "ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}.",
+          "description": "ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}.",
           "type": "string"
         },
         "trafficManagerProfileName": {
@@ -231,12 +223,46 @@
         }
       }
     },
+    "ConnStringInfo": {
+      "description": "Database connection string information.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of connection string.",
+          "type": "string"
+        },
+        "connectionString": {
+          "description": "Connection string value.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of database.",
+          "enum": [
+            "MySql",
+            "SQLServer",
+            "SQLAzure",
+            "Custom",
+            "NotificationHub",
+            "ServiceBus",
+            "EventHub",
+            "ApiHub",
+            "DocDb",
+            "RedisCache"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ConnectionStringType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
     "CorsSettings": {
       "description": "Cross-Origin Resource Sharing (CORS) settings for the app.",
       "type": "object",
       "properties": {
         "allowedOrigins": {
-          "description": "Gets or sets the list of origins that should be allowed to make cross-origin\r\n            calls (for example: http://example.com:12345). Use \"*\" to allow all.",
+          "description": "Gets or sets the list of origins that should be allowed to make cross-origin\n calls (for example: http://example.com:12345). Use \"*\" to allow all.",
           "type": "array",
           "items": {
             "type": "string"
@@ -258,17 +284,17 @@
           "properties": {
             "deletedTimestamp": {
               "format": "date-time",
-              "description": "Time when the app was deleted.",
+              "description": "Time in UTC when the app was deleted.",
               "type": "string",
               "readOnly": true
             },
             "state": {
-              "description": "Current state of the app. Read-only.",
+              "description": "Current state of the app.",
               "type": "string",
               "readOnly": true
             },
             "hostNames": {
-              "description": "Hostnames associated with the app. Read-only.",
+              "description": "Hostnames associated with the app.",
               "type": "array",
               "items": {
                 "type": "string"
@@ -276,7 +302,7 @@
               "readOnly": true
             },
             "repositorySiteName": {
-              "description": "Name of the repository site. Read-only.",
+              "description": "Name of the repository site.",
               "type": "string",
               "readOnly": true
             },
@@ -298,7 +324,7 @@
               "type": "boolean"
             },
             "enabledHostNames": {
-              "description": "Enabled hostnames for the app. Read-only. Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,\r\n            the app is not served on those hostnames.",
+              "description": "Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,\n the app is not served on those hostnames.",
               "type": "array",
               "items": {
                 "type": "string"
@@ -306,7 +332,7 @@
               "readOnly": true
             },
             "availabilityState": {
-              "description": "Management information availability state for the app. Read-only.",
+              "description": "Management information availability state for the app.",
               "enum": [
                 "Normal",
                 "Limited",
@@ -358,7 +384,7 @@
               "readOnly": true
             },
             "premiumAppDeployed": {
-              "description": "Indicates whether app is deployed as a premium app. Read-only.",
+              "description": "Indicates whether app is deployed as a premium app.",
               "type": "boolean",
               "readOnly": true
             },
@@ -406,7 +432,7 @@
               "type": "boolean"
             },
             "hostNamesDisabled": {
-              "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\r\n            If <code>true</code>, the app is only accessible via API management process.",
+              "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\n If <code>true</code>, the app is only accessible via API management process.",
               "type": "boolean"
             },
             "outboundIpAddresses": {
@@ -432,7 +458,7 @@
             },
             "maxNumberOfWorkers": {
               "format": "int32",
-              "description": "Maximum number of workers.\r\n            This only applies to Functions container.",
+              "description": "Maximum number of workers.\n This only applies to Functions container.",
               "type": "integer",
               "readOnly": true
             },
@@ -449,7 +475,7 @@
               "readOnly": true
             },
             "isDefaultContainer": {
-              "description": "<code>true</code> if the app is a default container; otherwise, <code>false</code>. Read-only.",
+              "description": "<code>true</code> if the app is a default container; otherwise, <code>false</code>.",
               "type": "boolean",
               "readOnly": true
             },
@@ -502,7 +528,7 @@
       }
     },
     "HandlerMapping": {
-      "description": "The IIS handler mappings used to define which handler processes HTTP requests with certain extension. \r\n            For example, it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension.",
+      "description": "The IIS handler mappings used to define which handler processes HTTP requests with certain extension. \n For example, it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension.",
       "type": "object",
       "properties": {
         "extension": {
@@ -563,12 +589,14 @@
           "type": "string"
         },
         "name": {
-          "description": "Name of the App Service Environment (read only).",
-          "type": "string"
+          "description": "Name of the App Service Environment.",
+          "type": "string",
+          "readOnly": true
         },
         "type": {
-          "description": "Resource type of the App Service Environment (read only).",
-          "type": "string"
+          "description": "Resource type of the App Service Environment.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -589,8 +617,25 @@
         }
       }
     },
+    "NameValuePair": {
+      "description": "Name value pair.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Pair name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Pair value.",
+          "type": "string"
+        }
+      }
+    },
     "PushSettings": {
       "description": "Push settings for the App.",
+      "required": [
+        "isPushEnabled"
+      ],
       "type": "object",
       "properties": {
         "isPushEnabled": {
@@ -602,7 +647,7 @@
           "type": "string"
         },
         "tagsRequiringAuth": {
-          "description": "Gets or sets a JSON string containing a list of tags that require user authentication to be used in the push registration endpoint.",
+          "description": "Gets or sets a JSON string containing a list of tags that require user authentication to be used in the push registration endpoint.\n Tags can consist of alphanumeric characters and the following:\n '_', '@', '#', '.', ':', '-'. \n Validation should be performed at the PushRequestHandler.",
           "type": "string"
         },
         "dynamicTagsJson": {
@@ -626,26 +671,26 @@
         },
         "changeStep": {
           "format": "double",
-          "description": "[Optional] In auto ramp up scenario this is the step to to add/remove from <code>ReroutePercentage</code> until it reaches \r\n            <code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specificed in <code>ChangeIntervalInMinutes</code>.\r\n            Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
+          "description": "In auto ramp up scenario this is the step to to add/remove from <code>ReroutePercentage</code> until it reaches \n <code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specificed in <code>ChangeIntervalInMinutes</code>.\n Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
           "type": "number"
         },
         "changeIntervalInMinutes": {
           "format": "int32",
-          "description": "[Optional] Specifies interval in mimuntes to reevaluate ReroutePercentage.",
+          "description": "Specifies interval in mimuntes to reevaluate ReroutePercentage.",
           "type": "integer"
         },
         "minReroutePercentage": {
           "format": "double",
-          "description": "[Optional] Specifies lower boundary above which ReroutePercentage will stay.",
+          "description": "Specifies lower boundary above which ReroutePercentage will stay.",
           "type": "number"
         },
         "maxReroutePercentage": {
           "format": "double",
-          "description": "[Optional] Specifies upper boundary below which ReroutePercentage will stay.",
+          "description": "Specifies upper boundary below which ReroutePercentage will stay.",
           "type": "number"
         },
         "changeDecisionCallbackUrl": {
-          "description": "Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified. See TiPCallback site extension for the scaffold and contracts.\r\n            https://www.siteextensions.net/packages/TiPCallback/",
+          "description": "Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified. See TiPCallback site extension for the scaffold and contracts.\n https://www.siteextensions.net/packages/TiPCallback/",
           "type": "string"
         },
         "name": {
@@ -672,8 +717,7 @@
     "Resource": {
       "description": "Azure resource.",
       "required": [
-        "location",
-        "name"
+        "location"
       ],
       "properties": {
         "id": {
@@ -748,6 +792,10 @@
               "description": "Version of Node.js.",
               "type": "string"
             },
+            "linuxFxVersion": {
+              "description": "Linux App Framework and version",
+              "type": "string"
+            },
             "requestTracingEnabled": {
               "description": "<code>true</code> if request tracing is enabled; otherwise, <code>false</code>.",
               "type": "boolean"
@@ -782,6 +830,20 @@
               "description": "Publishing user name.",
               "type": "string"
             },
+            "appSettings": {
+              "description": "Application settings.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NameValuePair"
+              }
+            },
+            "connectionStrings": {
+              "description": "Connection strings.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ConnStringInfo"
+              }
+            },
             "machineKey": {
               "$ref": "#/definitions/SiteMachineKey",
               "description": "Site MachineKey.",
@@ -800,8 +862,26 @@
             },
             "scmType": {
               "description": "SCM type.",
+              "enum": [
+                "None",
+                "Dropbox",
+                "Tfs",
+                "LocalGit",
+                "GitHub",
+                "CodePlexGit",
+                "CodePlexHg",
+                "BitbucketGit",
+                "BitbucketHg",
+                "ExternalGit",
+                "ExternalHg",
+                "OneDrive",
+                "VSO"
+              ],
               "type": "string",
-              "readOnly": true
+              "x-ms-enum": {
+                "name": "ScmType",
+                "modelAsString": true
+              }
             },
             "use32BitWorkerProcess": {
               "description": "<code>true</code> to use 32-bit worker process; otherwise, <code>false</code>.",
@@ -1097,7 +1177,7 @@
       "type": "string",
       "maxLength": 90,
       "minLength": 1,
-      "pattern": "^[-\\\\w\\\\._\\\\(\\\\)]+[^\\\\.]$"
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$"
     },
     "apiVersionParameter": {
       "name": "api-version",

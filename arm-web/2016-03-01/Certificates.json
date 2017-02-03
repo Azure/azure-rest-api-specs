@@ -17,7 +17,6 @@
         "summary": "Get all certificates for a subscription.",
         "description": "Get all certificates for a subscription.",
         "operationId": "Certificates_List",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
@@ -51,17 +50,16 @@
         "summary": "Get all certificates in a resource group.",
         "description": "Get all certificates in a resource group.",
         "operationId": "Certificates_ListByResourceGroup",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -88,7 +86,6 @@
         "summary": "Get a certificate.",
         "description": "Get a certificate.",
         "operationId": "Certificates_Get",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -96,6 +93,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -105,9 +105,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -142,6 +139,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
             "name": "name",
             "in": "path",
             "description": "Name of the certificate.",
@@ -159,9 +159,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -183,9 +180,10 @@
         "summary": "Delete a certificate.",
         "description": "Delete a certificate.",
         "operationId": "Certificates_Delete",
-        "consumes": [],
-        "produces": [],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -195,9 +193,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -232,6 +227,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
             "name": "name",
             "in": "path",
             "description": "Name of the certificate.",
@@ -249,9 +247,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -274,20 +269,17 @@
         ],
         "summary": "Get all certificate signing requests in a resource group.",
         "description": "Get all certificate signing requests in a resource group.",
-        "operationId": "Certificates_ListCsrs",
-        "consumes": [],
+        "operationId": "Certificates_ListSigningRequestByResourceGroup",
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -297,12 +289,12 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Csr"
-              }
+              "$ref": "#/definitions/CsrCollection"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -313,8 +305,7 @@
         ],
         "summary": "Get a certificate signing request.",
         "description": "Get a certificate signing request.",
-        "operationId": "Certificates_GetCsr",
-        "consumes": [],
+        "operationId": "Certificates_GetSigningRequest",
         "produces": [
           "application/json",
           "text/json",
@@ -322,6 +313,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -331,9 +325,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -354,7 +345,7 @@
         ],
         "summary": "Create or update a certificate signing request.",
         "description": "Create or update a certificate signing request.",
-        "operationId": "Certificates_CreateOrUpdateCsr",
+        "operationId": "Certificates_CreateOrUpdateSigningRequest",
         "consumes": [
           "application/json",
           "text/json",
@@ -367,6 +358,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -385,9 +379,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -408,10 +399,11 @@
         ],
         "summary": "Delete a certificate signing request.",
         "description": "Delete a certificate signing request.",
-        "operationId": "Certificates_DeleteCsr",
-        "consumes": [],
-        "produces": [],
+        "operationId": "Certificates_DeleteSigningRequest",
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -421,9 +413,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -444,7 +433,7 @@
         ],
         "summary": "Create or update a certificate signing request.",
         "description": "Create or update a certificate signing request.",
-        "operationId": "Certificates_UpdateCsr",
+        "operationId": "Certificates_UpdateSigningRequest",
         "consumes": [
           "application/json",
           "text/json",
@@ -457,6 +446,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -475,9 +467,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -528,6 +517,7 @@
               }
             },
             "pfxBlob": {
+              "format": "byte",
               "description": "Pfx blob.",
               "type": "string"
             },
@@ -693,6 +683,26 @@
         }
       }
     },
+    "CsrCollection": {
+      "description": "Collection of CSRs.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Csr"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
     "HostingEnvironmentProfile": {
       "description": "Specification for an App Service Environment to use for this resource.",
       "type": "object",
@@ -702,20 +712,21 @@
           "type": "string"
         },
         "name": {
-          "description": "Name of the App Service Environment (read only).",
-          "type": "string"
+          "description": "Name of the App Service Environment.",
+          "type": "string",
+          "readOnly": true
         },
         "type": {
-          "description": "Resource type of the App Service Environment (read only).",
-          "type": "string"
+          "description": "Resource type of the App Service Environment.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
     "Resource": {
       "description": "Azure resource.",
       "required": [
-        "location",
-        "name"
+        "location"
       ],
       "properties": {
         "id": {
@@ -767,7 +778,7 @@
       "type": "string",
       "maxLength": 90,
       "minLength": 1,
-      "pattern": "^[-\\\\w\\\\._\\\\(\\\\)]+[^\\\\.]$"
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$"
     },
     "apiVersionParameter": {
       "name": "api-version",

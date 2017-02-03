@@ -37,6 +37,244 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/firewallRules/{firewallRuleName}": {
+      "put": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_CreateOrUpdate",
+        "description": "Creates or updates the specified firewall rule. During update, the firewall rule with the specified name will be replaced with this new firewall rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Analytics account to add or replace the firewall rule."
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule to create or update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            },
+            "description": "Parameters supplied to create or update the firewall rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the specified firewall rule",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Update",
+        "description": "Updates the specified firewall rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Analytics account to which to update the firewall rule."
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule to update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UpdateFirewallRuleParameters"
+            },
+            "description": "Parameters supplied to update the firewall rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified firewall rule",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Delete",
+        "description": "Deletes the specified firewall rule from the specified Data Lake Analytics account",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Analytics account from which to delete the firewall rule."
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the specified firewall rule"
+          },
+          "204": {
+            "description": "The specified firewall rule does not exist or was already deleted."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Get",
+        "description": "Gets the specified Data Lake Analytics firewall rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Analytics account from which to get the firewall rule."
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of firewall rules.",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/firewallRules": {
+      "get": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_ListByAccount",
+        "description": "Lists the Data Lake Analytics firewall rules within the specified Data Lake Analytics account.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Analytics account from which to get the firewall rules."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created the firewall rule.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeAnalyticsFirewallRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/{storageAccountName}": {
       "get": {
         "tags": [
@@ -1352,10 +1590,10 @@
             "Commitment_500000AUHours"
           ],
           "x-ms-enum": {
-            "name": "PricingTierType",
+            "name": "TierType",
             "modelAsString": false
           },
-          "description": "the billing tier to use for next month."
+          "description": "the commitment tier for the next month."
         },
         "currentTier": {
           "type": "string",
@@ -1372,10 +1610,41 @@
             "Commitment_500000AUHours"
           ],
           "x-ms-enum": {
-            "name": "PricingTierType",
+            "name": "TierType",
             "modelAsString": false
           },
-          "description": "the billing tier in use for the current month."
+          "description": "the commitment tier in use for the current month."
+        },
+        "firewallState": {
+          "type": "string",
+          "description": "The current state of the IP address firewall for this Data Lake Analytics account.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallState",
+            "modelAsString": false
+          }
+        },
+        "firewallAllowAzureIps": {
+          "type": "string",
+          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallAllowAzureIpsState",
+            "modelAsString": false
+          }
+        },
+        "firewallRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          },
+          "description": "The list of firewall rules associated with this Data Lake Analytics account."
         }
       },
       "description": "The account specific properties that are associated with an underlying Data Lake Analytics account."
@@ -1415,10 +1684,41 @@
             "Commitment_500000AUHours"
           ],
           "x-ms-enum": {
-            "name": "PricingTierType",
+            "name": "TierType",
             "modelAsString": false
           },
-          "description": "the billing tier to use for next month."
+          "description": "the commitment tier to use for next month."
+        },
+        "firewallState": {
+          "type": "string",
+          "description": "The current state of the IP address firewall for this Data Lake Analytics account.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallState",
+            "modelAsString": false
+          }
+        },
+        "firewallAllowAzureIps": {
+          "type": "string",
+          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallAllowAzureIpsState",
+            "modelAsString": false
+          }
+        },
+        "firewallRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          },
+          "description": "The list of firewall rules associated with this Data Lake Analytics account."
         }
       },
       "description": "The properties to update that are associated with an underlying Data Lake Analytics account to."
@@ -1509,25 +1809,81 @@
       },
       "description": "DataLakeAnalytics Account list information."
     },
-    "ErrorDetails": {
+    "DataLakeAnalyticsFirewallRuleListResult": {
       "properties": {
-        "code": {
-          "type": "string",
+        "value": {
+          "type": "array",
           "readOnly": true,
-          "description": "the HTTP status code or error code associated with this error"
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          },
+          "description": "the results of the list operation"
         },
-        "message": {
+        "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "the error message localized based on Accept-Language"
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the target of the particular error (for example, the name of the property in error)."
+          "description": "the link (url) to the next page of results."
         }
       },
-      "description": "Generic resource error details information."
+      "description": "Data Lake Analytics firewall rule list information."
+    },
+    "FirewallRuleProperties": {
+      "required": [
+        "startIpAddress",
+        "endIpAddress"
+      ],
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "the start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "the end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        }
+      },
+      "description": "Data Lake Analytics firewall rule properties information"
+    },
+    "FirewallRule": {
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OptionalSubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FirewallRuleProperties",
+          "description": "the properties of the firewall rule.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "Data Lake Analytics firewall rule information"
+    },
+    "UpdateFirewallRuleProperties": {
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "the start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "the end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        }
+      },
+      "description": "Data Lake Analytics firewall rule properties information"
+    },
+    "UpdateFirewallRuleParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateFirewallRuleProperties",
+          "description": "the properties of the firewall rule to update.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "Data Lake Analytics firewall rule update parameters"
     },
     "Resource": {
       "description": "The Resource model definition.",
@@ -1563,6 +1919,25 @@
         "location"
       ],
       "x-ms-azure-resource": true
+    },
+    "OptionalSubResource": {
+      "description": "The Resource model definition for a nested resource with no required properties.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      }
     },
     "SubResource": {
       "description": "The Sub Resource model definition.",

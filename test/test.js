@@ -10,6 +10,7 @@ var assert = require("assert"),
   z = require('z-schema'),
   request = require('request'),
   async = require('async'),
+  RefParser = require('json-schema-ref-parser'),
   util = require('util');
 
 var extensionSwaggerSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json";
@@ -20,10 +21,11 @@ var exampleSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/
 var compositeSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/composite-swagger.json";
 
 var swaggerSchema, extensionSwaggerSchema, schema4, exampleSchema, compositeSchema,
-    globPath, compositeGlobPath, swaggers, compositeSwaggers, validator;
+    globPath, compositeGlobPath, exampleGlobPath, swaggers, compositeSwaggers, examples, validator;
 
 globPath = path.join(__dirname, '../', '/**/swagger/*.json');
 swaggers = _(glob.sync(globPath));
+
 
 // Useful when debugging a test for a particular swagger. 
 // Just update the regex. That will return an array of filtered items.
@@ -33,6 +35,9 @@ swaggers = _(glob.sync(globPath));
 
 compositeGlobPath = path.join(__dirname, '../', '/**/composite*.json');
 compositeSwaggers = _(glob.sync(compositeGlobPath));
+
+exampleGlobPath = path.join(__dirname, '../', '/**/examples/*.json');
+examples = _(glob.sync(exampleGlobPath));
 
 // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
 // because the buffer-to-string conversion in `fs.readFile()`
@@ -126,8 +131,8 @@ describe('Azure Swagger Schema Validation', function () {
                     docUrl + ' from the documents list. The error is ' + util.inspect(error, { depth: null }));
                 }
                 if (response.statusCode !== 200) {
-                  messages.push('\'File Not Found\': error occurred while accessing the swagger doc ' +
-                    docUrl + ' from the documents list. The received statusCode is: \'' + response.statusCode + '\'.');
+                  messages.push('\'' + response.statusCode + '\': \'File Not Found\'- error occurred while accessing the swagger doc ' +
+                    docUrl + ' from the documents list.');
                 }
                 loopCallback();
               });
@@ -151,6 +156,44 @@ describe('Azure Swagger Schema Validation', function () {
         } else {
           done();
         }
+      });
+    });
+  }).value();
+
+  _(examples).each(function (example) {
+    it('x-ms-examples: ' + example + ' should be a valid x-ms-example.', function (done) {
+      fs.readFile(example, 'utf8', function (err, data) {
+        if (err) { done(err); }
+        var parsedData;
+        try {
+          parsedData = JSON.parse(stripBOM(data));
+        } catch (err) {
+          throw new Error("example file " + example + " is an invalid JSON. " + util.inspect(err, { depth: null }));
+        }
+
+        var valid = validator.validate(parsedData, exampleSchema);
+        if (!valid) {
+          var error = validator.getLastErrors();
+          throw new Error("Schema validation failed: " + util.inspect(error, { depth: null }));
+        }
+        assert(valid === true);
+        done();
+      });
+    });
+  }).value();
+
+});
+
+describe('External file or url references ("$ref") in a swagger spec', function () {
+  _(swaggers).each(function(swagger) {
+    it(swagger + ' should be completely resolvable.', function(done) {
+      RefParser.bundle(swagger, function(bundleErr, bundleResult) {
+        if (bundleErr) {
+          var msg = swagger + ' has references that cannot be resolved. They are as follows: \n' + util.inspect(bundleErr.message, {depth : null});
+          console.log(msg);
+          throw new Error (msg);
+        }
+        done();
       });
     });
   }).value();

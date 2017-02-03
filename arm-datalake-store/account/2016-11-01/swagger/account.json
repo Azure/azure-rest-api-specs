@@ -57,7 +57,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Data Lake Store account to which to add the firewall rule."
+            "description": "The name of the Data Lake Store account to add or replace the firewall rule."
           },
           {
             "name": "firewallRuleName",
@@ -85,6 +85,59 @@
         "responses": {
           "200": {
             "description": "Successfully created or updated the specified firewall rule",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Update",
+        "description": "Updates the specified firewall rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure resource group that contains the Data Lake Store account."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store account to which to update the firewall rule."
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule to update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UpdateFirewallRuleParameters"
+            },
+            "description": "Parameters supplied to update the firewall rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified firewall rule",
             "schema": {
               "$ref": "#/definitions/FirewallRule"
             }
@@ -242,7 +295,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Data Lake Store account to which to add the trusted identity provider."
+            "description": "The name of the Data Lake Store account to add or replace the trusted identity provider."
           },
           {
             "name": "trustedIdProviderName",
@@ -258,7 +311,60 @@
             "schema": {
               "$ref": "#/definitions/TrustedIdProvider"
             },
-            "description": "Parameters supplied to create the create the trusted identity provider."
+            "description": "Parameters supplied to create or replace the trusted identity provider."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully added the trusted identity provider.",
+            "schema": {
+              "$ref": "#/definitions/TrustedIdProvider"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "TrustedIdProviders"
+        ],
+        "operationId": "TrustedIdProviders_Update",
+        "description": "Updates the specified trusted identity provider.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure resource group that contains the Data Lake Store account."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Store account to which to update the trusted identity provider."
+          },
+          {
+            "name": "trustedIdProviderName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the trusted identity provider. This is used for differentiation of providers in the account."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UpdateTrustedIdProviderParameters"
+            },
+            "description": "Parameters supplied to update the trusted identity provider."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -788,6 +894,29 @@
     }
   },
   "definitions": {
+    "UpdateFirewallRuleProperties": {
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "the start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "the end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        }
+      },
+      "description": "Data Lake Analytics firewall rule properties information"
+    },
+    "UpdateFirewallRuleParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateFirewallRuleProperties",
+          "description": "the properties of the firewall rule to update.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "Data Lake Analytics firewall rule update parameters"
+    },
     "FirewallRuleProperties": {
       "required": [
         "startIpAddress",
@@ -796,11 +925,11 @@
       "properties": {
         "startIpAddress": {
           "type": "string",
-          "description": "the start IP address for the firewall rule."
+          "description": "the start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
         },
         "endIpAddress": {
           "type": "string",
-          "description": "the end IP address for the firewall rule."
+          "description": "the end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
         }
       },
       "description": "Data Lake Store firewall rule properties information"
@@ -822,6 +951,25 @@
         }
       },
       "description": "Data Lake Store firewall rule information"
+    },
+    "UpdateTrustedIdProviderProperties": {
+      "properties": {
+        "idProvider": {
+          "type": "string",
+          "description": "The URL of this trusted identity provider"
+        }
+      },
+      "description": "Data Lake Store trusted identity provider property update information"
+    },
+    "UpdateTrustedIdProviderParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateTrustedIdProviderProperties",
+          "description": "the properties of the trusted identity provider to update.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "Data Lake Store Trusted Identity Provider update parameters"
     },
     "TrustedIdProviderProperties": {
       "required": [
@@ -851,7 +999,7 @@
           "x-ms-client-flatten": true
         }
       },
-      "description": "Data Lake Store firewall rule information"
+      "description": "Data Lake Store Trusted Identity Provider information"
     },
     "DataLakeStoreTrustedIdProviderListResult": {
       "properties": {
@@ -1048,6 +1196,18 @@
             "modelAsString": false
           }
         },
+        "firewallAllowAzureIps": {
+          "type": "string",
+          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallAllowAzureIpsState",
+            "modelAsString": false
+          }
+        },
         "firewallRules": {
           "type": "array",
           "items": {
@@ -1101,10 +1261,10 @@
             "Commitment_5PB"
           ],
           "x-ms-enum": {
-            "name": "PricingTierType",
+            "name": "TierType",
             "modelAsString": false
           },
-          "description": "the billing tier to use for next month."
+          "description": "the commitment tier to use for next month."
         },
         "currentTier": {
           "type": "string",
@@ -1118,11 +1278,11 @@
             "Commitment_5PB"
           ],
           "x-ms-enum": {
-            "name": "PricingTierType",
+            "name": "TierType",
             "modelAsString": false
           },
           "readOnly": true,
-          "description": "the billing tier in use for the current month."
+          "description": "the commitment tier in use for the current month."
         }
       },
       "description": "Data Lake Store account properties information"
@@ -1138,6 +1298,18 @@
           ],
           "x-ms-enum": {
             "name": "FirewallState",
+            "modelAsString": false
+          }
+        },
+        "firewallAllowAzureIps": {
+          "type": "string",
+          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallAllowAzureIpsState",
             "modelAsString": false
           }
         },
@@ -1169,10 +1341,10 @@
             "Commitment_5PB"
           ],
           "x-ms-enum": {
-            "name": "PricingTierType",
+            "name": "TierType",
             "modelAsString": false
           },
-          "description": "the billing tier to use for next month."
+          "description": "the commitment tier to use for next month."
         }
       },
       "description": "Data Lake Store account properties information to be updated."
