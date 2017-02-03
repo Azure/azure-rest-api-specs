@@ -80,7 +80,8 @@
           "Keys"
         ],
         "operationId": "ImportKey",
-        "description": "Imports an externally created key, stores it, and returns key parameters and attributes to the client. The import key operation may be used to import any key type into an Azure Key Vault. If the named key already exists, Azure Key Vault creates a new version of the key. Authorization: requires the keys/import permission. ",
+        "summary": "Imports an externally created key, stores it, and returns key parameters and attributes to the client.",
+        "description": "The import key operation may be used to import any key type into an Azure Key Vault. If the named key already exists, Azure Key Vault creates a new version of the key. Authorization: requires the keys/import permission. ",
         "parameters": [
           {
             "name": "key-name",
@@ -124,7 +125,8 @@
           "Keys"
         ],
         "operationId": "DeleteKey",
-        "description": "Deletes a key of any type from storage in Azure Key Vault. The delete key operation cannot be used to remove individual versions of a key. This operation removes the cryptographic material associated with the key, which means the key is not usable for Sign/Verify, Wrap/Unwrap or Encrypt/Decrypt operations. Authorization: Requires the keys/delete permission.",
+        "summary": "Deletes a key of any type from storage in Azure Key Vault.",
+        "description": "The delete key operation cannot be used to remove individual versions of a key. This operation removes the cryptographic material associated with the key, which means the key is not usable for Sign/Verify, Wrap/Unwrap or Encrypt/Decrypt operations. Authorization: Requires the keys/delete permission.",
         "parameters": [
           {
             "name": "key-name",
@@ -159,7 +161,8 @@
           "Keys"
         ],
         "operationId": "UpdateKey",
-        "description": "The update key operation changes specified attributes of a stored key and can be applied to any key type and key version stored in Azure Key Vault. The cryptographic material of a key itself cannot be changed. In order to perform this operation, the key must already exist in the Key Vault. Authorization: requires the keys/update permission.",
+        "summary": "The update key operation changes specified attributes of a stored key and can be applied to any key type and key version stored in Azure Key Vault.",
+        "description": "The cryptographic material of a key itself cannot be changed. In order to perform this operation, the key must already exist in the Key Vault. Authorization: requires the keys/update permission.",
         "parameters": [
           {
             "name": "key-name",
@@ -209,7 +212,8 @@
           "Keys"
         ],
         "operationId": "GetKey",
-        "description": "Gets the public part of a stored key. The get key operation is applicable to all key types. If the requested key is symmetric, then no key material is released in the response. Authorization: Requires the keys/get permission.",
+        "summary": "Gets the public part of a stored key.",
+        "description": " The get key operation is applicable to all key types. If the requested key is symmetric, then no key material is released in the response. Authorization: Requires the keys/get permission.",
         "parameters": [
           {
             "name": "key-name",
@@ -251,7 +255,8 @@
           "Keys"
         ],
         "operationId": "GetKeyVersions",
-        "description": "Retrieves a list of individual key versions with the same key name. The full key identifier, attributes, and tags are provided in the response. Authorization: Requires the keys/list permission.",
+        "summary": "Retrieves a list of individual key versions with the same key name.",
+        "description": "The full key identifier, attributes, and tags are provided in the response. Authorization: Requires the keys/list permission.",
         "parameters": [
           {
             "name": "key-name",
@@ -299,7 +304,8 @@
           "Keys"
         ],
         "operationId": "GetKeys",
-        "description": "List keys in the specified vault.",
+        "summary": "List keys in the specified vault.",
+        "description": " ",
         "parameters": [
           {
             "name": "maxresults",
@@ -340,7 +346,8 @@
           "Keys"
         ],
         "operationId": "BackupKey",
-        "description": "Requests that a backup of the specified key be downloaded to the client.",
+        "summary": "Requests that a backup of the specified key be downloaded to the client.",
+        "description": " ",
         "parameters": [
           {
             "name": "key-name",
@@ -375,7 +382,8 @@
           "Keys"
         ],
         "operationId": "RestoreKey",
-        "description": "Restores a backed up key to a vault.",
+        "summary": "Restores a backed up key to a vault.",
+        "description": "",
         "parameters": [
           {
             "name": "parameters",
