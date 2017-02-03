@@ -1,14 +1,16 @@
 {
-  "parameters": {
-    "accountName": "ddb1",
-    "resourceGroupName": "rg1",
-    "api-version": "2015-04-08",
-    "subscriptionId": "subid",
-    "updateParameters": {
-      "tags": {
-        "dept": "finance"
+    "parameters": {
+      "accountName": "ddb1",
+      "resourceGroupName": "rg1",
+      "api-version": "2015-04-08",
+      "subscriptionId": "subid",
+      "updateParameters": {
+          "properties": {
+          "tags": {
+            "dept": "finance"
+          }
+        }
       }
-    }
   },
   "responses": {
     "200": { 
@@ -20,40 +22,40 @@
         "kind": "GlobalDocumentDB",
         "tags": {},
         "properties": {
-            "provisioningState": "Succeeded",
-            "documentEndpoint": "https://ddb1.documents.azure.com:443/",
-            "ipRangeFilter": "",
-            "databaseAccountOfferType": "Standard",
-            "consistencyPolicy": {
-                "defaultConsistencyLevel": "Session",
-                "maxIntervalInSeconds": 5,
-                "maxStalenessPrefix": 100
-            },
-            "writeLocations": [
-                {
-                    "id": "ddb1-eastus",
-                    "locationName": "East US",
-                    "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
-                    "provisioningState": "Succeeded",
-                    "failoverPriority": 0
-                }
-            ],
-            "readLocations": [
-                {
-                    "id": "ddb1-eastus",
-                    "locationName": "East US",
-                    "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
-                    "provisioningState": "Succeeded",
-                    "failoverPriority": 0
-                }
-            ],
-            "failoverPolicies": [
-                {
-                    "id": "ddb1-eastus",
-                    "locationName": "East US",
-                    "failoverPriority": 0
-                }
-            ]
+          "provisioningState": "Succeeded",
+          "documentEndpoint": "https://ddb1.documents.azure.com:443/",
+          "ipRangeFilter": "",
+          "databaseAccountOfferType": "Standard",
+          "consistencyPolicy": {
+            "defaultConsistencyLevel": "Session",
+            "maxIntervalInSeconds": 5,
+            "maxStalenessPrefix": 100
+          },
+          "writeLocations": [
+            {
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
+              "provisioningState": "Succeeded",
+              "failoverPriority": 0
+            }
+          ],
+          "readLocations": [
+            {
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
+              "provisioningState": "Succeeded",
+              "failoverPriority": 0
+            }
+          ],
+          "failoverPolicies": [
+            {
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "failoverPriority": 0
+            }
+          ]
         }
       }
     }
