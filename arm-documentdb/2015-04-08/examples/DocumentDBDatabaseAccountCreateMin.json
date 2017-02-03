@@ -4,14 +4,18 @@
     "resourceGroupName": "rg1",
     "api-version": "2015-04-08",
     "subscriptionId": "subid",
-    "location": "westus",
-    "databaseAccountOfferType": "Standard",
-    "locations": [
-      {
-        "failoverPriority": 0,
-        "locationName": "southcentralus"
+    "createUpdateParameters": {
+      "location": "westus",
+      "properties": {
+        "databaseAccountOfferType": "Standard",
+        "locations": [
+          {
+            "failoverPriority": 0,
+            "locationName": "southcentralus"
+          }
+        ]
       }
-    ]
+    }
   },
   "responses": {
     "200": { 
