@@ -26,6 +26,7 @@ function clrCmd(cmd) {
  * @returns {Array} list of files to be processed for linting
  */
 function getFilesForLinter() {
+  console.log(prOnly);
   if (prOnly) {
     // TODO: Currently works for PR into master branch only
     var cmd = 'git diff --name-only HEAD $(git merge-base HEAD master)';
