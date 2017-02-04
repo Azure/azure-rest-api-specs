@@ -72,6 +72,7 @@ Where "M" stands for '*MUST*' or '*MUST NOT*' requirement. "S" stands for '*SHOU
 Today, there are tools available for validating a sizable portion of this checklist. Please install these tools on your development machine and use them to validate your Swaggers as you build them. 
 
 -	[AutoRest Linter](https://github.com/Azure/autorest/wiki/linting) – Linter statically analyzes a Swagger for errors and violations of requirements outlined in this checklist. Linter should be run when Swaggers are created or updated. Linter will be continously updated to validate newer requirements.
+  **NOTE**: This checkmark ( :white_check_mark: ) indicates that rule is covered by AutoRest linter tool.
 
 -	[Swagger Model Validator](https://github.com/Azure/openapi-validation-tools) - Model Validator validates models defined for body parameters and responses, and matches them against the expected input and output of an operation. To make this real, test examples are required to be specified in a Swagger for every operation defined in a Swagger. Test examples are integrated into a Swagger using the ["x-ms-examples"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/x-ms-examples.md) extension, which will be used to test against the defined models. Sample test examples for this extension can be found in the [Redis Cache Swagger](https://github.com/Azure/azure-rest-api-specs/blob/master/arm-redis/2016-04-01/swagger/redis.json ). 
 
@@ -81,7 +82,7 @@ The Azure Developer Experience team will continue to deliver rich tools to valid
 
 - [ ] **M1000**: Plural names in parameters and model properties MUST only be used to represent collections.
 
-- [ ] **M1001**: Each operation *MUST* contain an OperationId of the form "RESOURCE_METHOD" a.k.a "NOUN_VERB", where "RESOURCE" represents the resource or object the operation addresses, and METHOD is a short name for the operation being performed "Get, Start, Delete, Create, List", etc.
+- [ ] **M1001**: :white_check_mark: Each operation *MUST* contain an OperationId of the form "RESOURCE_METHOD" a.k.a "NOUN_VERB", where "RESOURCE" represents the resource or object the operation addresses, and METHOD is a short name for the operation being performed "Get, Start, Delete, Create, List", etc.
 
 - [ ] **M1002**: If the NOUN in the OperationId "NOUN_VERB" matches with the name of the Model definition then the NOUN in the operationId *MUST* use the plural form of NOUN to avoid collision in the namespace.
 
@@ -93,15 +94,15 @@ The Azure Developer Experience team will continue to deliver rich tools to valid
   - `ListByResourceGroup()` - list all resources in a resource group within a subscription.
   - `ListByParent()` - where "Parent" is a context specific suffix. It lists all resource under a parent.
 
-- [ ] **M1005**: Get operations *MUST* use the METHOD name "Get"
+- [ ] **M1005**: :white_check_mark: Get operations *MUST* use the METHOD name "Get" or the METHOD name must start with "List"
 
-- [ ] **M1006**: PUT operations *MUST* use the METHOD Name "Create"
+- [ ] **M1006**: :white_check_mark: PUT operations *MUST* use the METHOD Name "Create"
 
-- [ ] **M1007**: PATCH operations *MUST* use the METHOD Name "Update"
+- [ ] **M1007**: :white_check_mark: PATCH operations *MUST* use the METHOD Name "Update"
 
 - [ ] **M1008**: POST operations *MUST* use a METHOD Name that matches the semantic operation on the resource, for example "Start" or "Stop"
 
-- [ ] **M1009**: DELETE operations *MUST* use the METHOD Name "Delete"
+- [ ] **M1009**: :white_check_mark: DELETE operations *MUST* use the METHOD Name "Delete"
 
 - [ ] **M1010**: Terminology in Swagger and Azure Portal *MUST* be the same.
 
@@ -118,15 +119,15 @@ The Azure Developer Experience team will continue to deliver rich tools to valid
 
 - [ ] **M2000**: A Swagger specification *MUST* be accompanied with a document that describes end-to-end management scenarios that can be realized using operations described in the Swagger.
 
-- [ ] **M2001**: Read only parameters and model properties *MUST* be labeled as `"readOnly": true` in Swagger.
+- [ ] **M2001**: Read only parameters of the model properties *MUST* be labeled as `"readOnly": true` in Swagger.
 
 - [ ] **M2002**: Boolean parameters *MUST* be represented as boolean in Swagger. Boolean parameters *MUST* NOT be represented as strings. Similarly, this requirements applies to other primitive data types such as integer, float and double. These primitive data types *MUST* be represented using [Swagger primitive data types](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types).
 
-- [ ] **M2003**: If a format is specified along with a type, it *MUST* be from one of the supported formats - "int64", "int32", "float", "decimal", "double", "byte", "base64url", "unixtime", "date", "date-time", "duration", "date-time-rfc1123", "uuid", otherwise in codegeneration the artifact will be of the specified type and not as per the desired format. 
+- [ ] **M2003**: :white_check_mark: If a format is specified along with a type, it *MUST* be from one of the supported formats - "int64", "int32", "float", "decimal", "double", "byte", "base64url", "unixtime", "date", "date-time", "duration", "date-time-rfc1123", "uuid", otherwise in codegeneration the artifact will be of the specified type and not as per the desired format. 
 
-- [ ] **M2004**: Long running (asynchronous) operations *MUST* be modeled as [long running operations](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/creating-swagger.md#longrunning) in Swagger.
+- [ ] **M2004**: :white_check_mark: Long running (asynchronous) operations *MUST* be modeled as [long running operations](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/creating-swagger.md#longrunning) in Swagger.
 
-- [ ] **M2005**: A longrunning operation *MUST* have a terminal success status code. At least 
+- [ ] **M2005**: :white_check_mark: A long-running operation *MUST* have a terminal success status code. At least 
    - 200 or 201 for PUT/PATCH
    - 200, 201 or 204  or all of the aforementioned for POST
    - 204 or 200 or both for delete. 
@@ -137,7 +138,7 @@ The Azure Developer Experience team will continue to deliver rich tools to valid
 
 - [ ] **M2007**: Required properties of a model definition *MUST* be accurately labeled as `"required": [ "propertyName1" ]` in Swagger.
 
-- [ ] **M2008**: Mutability of properties *MUST* be marked up using [`x-ms-mutability` extension](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-mutability).
+- [ ] **M2008**: :white_check_mark: Mutability of properties *MUST* be marked up using [`x-ms-mutability` extension](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-mutability).
 
 - [ ] **M2009**: Error definitions *MUST* be abstracted, modeled and reused.
 
