@@ -9,7 +9,7 @@ var glob = require('glob'),
 var globPath, swaggers;
 var execSync = require('child_process').execSync;
 var isWindows = (process.platform.lastIndexOf('win') === 0);
-var prOnly = undefined != process.env['PR_ONLY'] ? process.env['PR_ONLY'] : false;
+var prOnly = undefined !== process.env['PR_ONLY'] ? process.env['PR_ONLY'] : 'false';
 globPath = path.join(__dirname, '../', '/**/swagger/*.json');
 swaggers = _(glob.sync(globPath));
 
@@ -26,8 +26,7 @@ function clrCmd(cmd) {
  * @returns {Array} list of files to be processed for linting
  */
 function getFilesForLinter() {
-  console.log(prOnly);
-  if (prOnly) {
+  if (prOnly === 'true') {
     // TODO: Currently works for PR into master branch only
     var cmd = 'git diff --name-only HEAD $(git merge-base HEAD master)';
     let result;
