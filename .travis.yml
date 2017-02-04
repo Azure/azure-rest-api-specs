@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "4"
+  - "6"
 services:
   - docker
 env:
@@ -11,6 +11,8 @@ env:
   - MODE=ruby
   - MODE=linter PR_ONLY=false
   - MODE=linter PR_ONLY=true
+  - MODE=semantic PR_ONLY=false
+  - MODE=semantic PR_ONLY=true
   global:
     secure: IwPVExGJQfL6QpTd6Utv3R/qBz7yApgMspzMLSkrq9cMP6t+NHk1vYg0n2evcWaq2rqNZE9xBMfRZi7Yy/RCUT++qALE89xlNvZ/A94PaDUiK3tYYNj1XxsgRauCHshXz6smmLwQMpTKsEl6lyjXeXpwQMDNRehhTu0Hg2tE7ZikfQVb+jjRNcP41RfzzGQyxEhd3fxF2G1G21WXH0cXtZssOd1MYcXhmXk8dR3DyEEMbPzDV1Bk3auXOvbqS79bnZ/Pi4p/7P/aTOm8O2ACKM0XAvww95vAQ0LcPzKnNe3sNjFVAssBiZbIk0Zs30wULBphlTxVoufHKSZuTf+QEBTKpH99v/+SBDDPu9+0q2esq7TKgf8bvzkeXjh54fECdJUqEo9E2gW08+RQxWCqryMJouOPcY2OMs4lZwSMOXQY68a/CYVRWFaFg5s6jntC8sLHtDxV0qem3xyjc+852v8rUfkyvMhOBoZJjWmnqYVqdamHOOfrzjc7AzPUEzSeiN6OPPVli+SzwLHdip0GxdK46pAISCOcbdyYn11VvTIn1QosE66eWhF6SViVH6lNWgSfVTpcQ2zq/qSKh0/zpwn82Ys+wKDOf3EwQAanndgk26npi7Ik4nIuexZ/TE56rQ7qjZqmHoxFz7QMeTZDiVmLFxtR19cTT3GLxDz8nBQ=
 matrix:
@@ -18,6 +20,8 @@ matrix:
   allow_failures:
     - env: MODE=linter PR_ONLY=false
     - env: MODE=linter PR_ONLY=true
+    - env: MODE=semantic PR_ONLY=false
+    - env: MODE=semantic PR_ONLY=true
 before_install:
   - docker pull lmazuel/swagger-to-sdk
   - python -c "import os; print('\n'.join(v for v in os.environ.keys() if v.startswith('TRAVIS')))" > /tmp/env_file
@@ -40,3 +44,4 @@ script:
   - if [[ $MODE == 'ruby' ]]; then $DOCKER_CMD AutorestCI/azure-sdk-for-ruby --pr-repo-id Azure/azure-sdk-for-ruby -o master -v; fi
   - if [[ $MODE == 'syntax' ]]; then npm test -- test/test.js; fi
   - if [[ $MODE == 'linter' ]]; then npm test -- test/linter.js; fi
+  - if [[ $MODE == 'semantic' ]]; then npm test -- test/semantic.js; fi
