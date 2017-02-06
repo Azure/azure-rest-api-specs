@@ -321,7 +321,17 @@ base type of the success responses. In practice, if the default is considered as
 the common ancestor of success responses and error responses ends up being Object.
 
 ### Negative Responses<a name="NegativeResponses"></a>
-You can describe all the [possible HTTP Response status codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) in the responses section of an operation. AutoRest generated code will deserialize the response for all the described response status codes as per their definition in the swagger. If a response status code is not defined then generated code will align to the default response behavior as described above. For example: If you want to specifically handle `400` and `404` in different way and **not throw an exception**, then you should describe `400` and  `404` response status codes possibly with a schema. In that case, AutoRest generated code will deserialize the `400` and `404` response status codes as defined in Swaggger and not throw an exception.
+You can describe all the [possible HTTP Response status codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) in the responses section of an operation. AutoRest generated code will deserialize the response for all the described response status codes as per their definition in the swagger. If a response status code is not defined then generated code will align to the default response behavior as described above.
+- If **a schema is provided** for the negative response codes then this will have an impact on the return type of the generated method. 
+  - For example: if a schema was provided for 200, and 400 was also described with a schema then,
+    - the **return type** would be the Common Ancestor of both the schemas. In most cases there is nothing common between a positive and a negative response code. Hence the return type will be an `Object`. Note:This may not be very helpful to the customer
+    - an exception ** will NOT be thrown for 400** and the generated method will deserialize the response body as per the schema of "400".
+    - any other negative response code will be treated as per the "default" response status code defined in the swagger for that operation.
+- If **a schema is NOT provided** for the negative response codes then this will **NOT** have an impact on the return type of the generated method.
+  - For example: if a schema was provided for 200 and 404 was described as one of the responses. However, 404 does not have a schema. In this scenario,
+    - the **return type** of the generated method will be based upon the schema defined in "200".
+    - an **exception will NOT be thrown** for 404 response status code
+    - any other negative response code will be treated as per the "default" response status code defined in the swagger for that operation.
 ```json5
 "/users/{userId}": {
   "get": {
