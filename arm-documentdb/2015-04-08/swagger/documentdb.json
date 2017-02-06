@@ -305,6 +305,38 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/listConnectionStrings": {
+      "post": {
+        "operationId": "DatabaseAccounts_ListConnectionStrings",
+        "x-ms-examples": {
+          "DocumentDBDatabaseAccountListConnectionStrings": { "$ref": "../examples/DocumentDBDatabaseAccountListConnectionStrings.json" },
+          "DocumentDBDatabaseAccountListConnectionStringsMongo": { "$ref": "../examples/DocumentDBDatabaseAccountListConnectionStringsMongo.json" }
+        },
+        "description": "Lists the connection strings for the specified Azure DocumentDB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountListConnectionStringsResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/readonlykeys": {
       "get": {
         "operationId": "DatabaseAccounts_ListReadOnlyKeys",
@@ -731,6 +763,33 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountListReadOnlyKeysResult"
+        }
+      }
+    },
+    "DatabaseAccountConnectionString": {
+      "description": "Connection string for the DocumentDB account",
+      "properties": {
+        "connectionString": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Value of the connection string"
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Description of the connection string"
+        }
+      }
+    },
+    "DatabaseAccountListConnectionStringsResult": {
+      "description": "The connection strings for the given database account.",
+      "properties": {
+        "connectionStrings": {
+          "type": "array",
+          "description": "An array that contains the connection strings for the DocumentDB account.",
+          "items": {
+            "$ref": "#/definitions/DatabaseAccountConnectionString"
+          }
         }
       }
     },
