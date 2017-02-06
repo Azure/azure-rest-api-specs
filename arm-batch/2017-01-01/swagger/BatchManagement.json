@@ -1184,6 +1184,8 @@
         },
         "provisioningState": {
           "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
           "description": "The provisioned state of the resource",
           "enum": [
             "Invalid",
@@ -1199,6 +1201,8 @@
           }
         },
         "poolAllocationMode": {
+          "readOnly": true,
+          "x-nullable": false,
           "title": "The allocation mode to use for creating pools in the Batch account.",
           "$ref": "#/definitions/PoolAllocationMode"
         },
@@ -1213,26 +1217,27 @@
           "$ref": "#/definitions/AutoStorageProperties"
         },
         "coreQuota": {
+          "readOnly": true,
+          "x-nullable": false,
           "type": "integer",
           "format": "int32",
           "title": "The core quota for this Batch account."
         },
         "poolQuota": {
+          "readOnly": true,
+          "x-nullable": false,
           "type": "integer",
           "format": "int32",
           "title": "The pool quota for this Batch account."
         },
         "activeJobAndJobScheduleQuota": {
+          "readOnly": true,
+          "x-nullable": false,
           "type": "integer",
           "format": "int32",
           "title": "The active job and job schedule quota for this Batch account."
         }
       },
-      "required": [
-        "coreQuota",
-        "poolQuota",
-        "activeJobAndJobScheduleQuota"
-      ],
       "description": "Account specific properties."
     },
     "BatchAccount": {
@@ -1474,10 +1479,12 @@
           "description": "The type of the resource"
         },
         "location": {
+          "readOnly": true,
           "type": "string",
           "description": "The location of the resource"
         },
         "tags": {
+          "readOnly": true,
           "type": "object",
           "additionalProperties": {
             "type": "string"
