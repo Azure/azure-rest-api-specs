@@ -69,18 +69,37 @@ exports.clrCmd = function clrCmd(cmd) {
 };
 
 /**
- * Gets the name of the current branch to which the PR is sent.
- * @returns {string} branchName The current branch name.
+ * Gets the name of the target branch to which the PR is sent. We are using the environment 
+ * variable provided by travis-ci. It is called TRAVIS_BRANCH. More info can be found here:
+ * https://docs.travis-ci.com/user/environment-variables/#Default-Environment-Variables
+ * If the environment variable is undefined then the method returns 'master' as the default value.
+ * @returns {string} branchName The target branch name.
  */
-exports.getCurrentBranch = function getCurrentBranch() {
+exports.getTargetBranch = function getTargetBranch() {
+  console.log(`@@@@@ process.env['TRAVIS_BRANCH'] - ${process.env['TRAVIS_BRANCH']}`);
+  let result = process.env['TRAVIS_BRANCH'] || 'master';
+  result = result.trim();
+  console.log(`>>>>> The target branch is: "${result}".`);
+  return result;
+};
+
+/**
+ * Gets the name of the source branch from which the PR is sent.
+ * @returns {string} branchName The source branch name.
+ */
+exports.getSourceBranch = function getSourceBranch() {
   let cmd = 'git rev-parse --abbrev-ref HEAD';
-  let result = 'master';
-  try {
-    result = execSync(cmd, { encoding: 'utf8' });
-  } catch (err) {
-    console.log(`An error occurred while getting the current branch ${util.inspect(err, { depth: null })}.`);
+  let result = process.env['TRAVIS_PULL_REQUEST_BRANCH'];
+  console.log(`@@@@@ process.env['TRAVIS_PULL_REQUEST_BRANCH'] - ${process.env['TRAVIS_PULL_REQUEST_BRANCH']}`);
+  if (!result) {
+    try {
+      result = execSync(cmd, { encoding: 'utf8' });
+    } catch (err) {
+      console.log(`An error occurred while getting the current branch ${util.inspect(err, { depth: null })}.`);
+    }
   }
-  console.log(`>>>>> The current branch is: "${result}".`);
+  result = result.trim();
+  console.log(`>>>>> The source branch is: "${result}".`);
   return result;
 };
 
@@ -91,12 +110,12 @@ exports.getCurrentBranch = function getCurrentBranch() {
 exports.getFilesChangedInPR = function getFilesChangedInPR() {
   let result = exports.swaggers;
   if (exports.prOnly === 'true') {
-    let currentBranch, cmd, filesChanged, swaggerFilesInPR;
+    let targetBranch, cmd, filesChanged, swaggerFilesInPR;
     try {
-      currentBranch = exports.getCurrentBranch();
-      cmd = `git diff --name-only HEAD $(git merge-base HEAD ${currentBranch})`;
+      targetBranch = exports.getTargetBranch();
+      cmd = `git diff --name-only HEAD $(git merge-base HEAD ${targetBranch})`;
       filesChanged = execSync(cmd, { encoding: 'utf8' });
-      console.log('>>>>> Files changed in this PR are as follows:');
+      console.log('>>>>> Files changed in this PR are as follows:')
       console.log(filesChanged);
       swaggerFilesInPR = filesChanged.split('\n').filter(function (item) {
         return (item.match(/.*\/swagger\/*/ig) !== null);

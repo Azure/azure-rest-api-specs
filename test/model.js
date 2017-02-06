@@ -6,11 +6,11 @@ var _ = require('lodash'),
   utils = require('./util/utils'),
   oav = require('openapi-validation-tools');
 
-describe('Azure swagger semantic validation:', function () {
+describe('Azure swagger model validation using x-ms-examples and examples in spec', function () {
   let swaggersToProcess = utils.getFilesChangedInPR();
   _(swaggersToProcess).each(function (swagger) {
-    it(swagger + ' should be semantically valid.', function (done) {
-      oav.validateSpec(swagger, false, 'error').catch(function (err) {
+    it(swagger + ' should have valid examples.', function (done) {
+      oav.validateExamples(swagger, null, false, 'error').catch(function (err) {
         console.log(err);
       });
       done();
