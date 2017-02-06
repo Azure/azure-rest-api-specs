@@ -105,7 +105,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -162,7 +162,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -223,7 +223,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -274,7 +274,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -305,7 +305,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -347,7 +347,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -396,7 +396,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -454,7 +454,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -504,7 +504,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -573,7 +573,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -638,7 +638,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -689,7 +689,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -743,7 +743,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -803,7 +803,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -866,7 +866,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -924,7 +924,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -985,7 +985,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1042,7 +1042,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1083,7 +1083,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1126,17 +1126,9 @@
           "description": "The user specified tags associated with the account."
         },
         "poolAllocationMode": {
-          "type": "string",
           "title": "The allocation mode to use for creating pools in the Batch account.",
           "description": "The pool allocation mode also affects how clients may authenticate to the Batch Service API. If the mode is BatchService, clients may authenticate using access keys or Azure Active Directory. If the mode is UserSubscription, clients must use Azure Active Directory. The default is BatchService.",
-          "enum": [
-            "BatchService",
-            "UserSubscription"
-          ],
-          "x-ms-enum": {
-            "name": "PoolAllocationMode",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/PoolAllocationMode"
         },
         "keyVaultReference": {
           "$ref": "#/definitions/KeyVaultReference",
@@ -1207,39 +1199,33 @@
           }
         },
         "poolAllocationMode": {
-          "type": "string",
-          "description": "The allocation mode for creating pools in the Batch account.",
-          "enum": [
-            "BatchService",
-            "UserSubscription"
-          ],
-          "x-ms-enum": {
-            "name": "PoolAllocationMode",
-            "modelAsString": false
-          }
+          "title": "The allocation mode to use for creating pools in the Batch account.",
+          "$ref": "#/definitions/PoolAllocationMode"
         },
         "keyVaultReference": {
-          "$ref": "#/definitions/KeyVaultReference",
-          "description": "A reference to the Azure key vault associated with the Batch account."
+          "title": "A reference to the Azure key vault associated with the Batch account.",
+          "readOnly": true,
+          "$ref": "#/definitions/KeyVaultReference"
         },
         "autoStorage": {
-          "$ref": "#/definitions/AutoStorageProperties",
-          "description": "The properties and status of any auto storage account associated with the Batch account."
+          "title": "The properties and status of any auto storage account associated with the Batch account.",
+          "readOnly": true,
+          "$ref": "#/definitions/AutoStorageProperties"
         },
         "coreQuota": {
           "type": "integer",
           "format": "int32",
-          "description": "The core quota for this Batch account."
+          "title": "The core quota for this Batch account."
         },
         "poolQuota": {
           "type": "integer",
           "format": "int32",
-          "description": "The pool quota for this Batch account."
+          "title": "The pool quota for this Batch account."
         },
         "activeJobAndJobScheduleQuota": {
           "type": "integer",
           "format": "int32",
-          "description": "The active job and job schedule quota for this Batch account."
+          "title": "The active job and job schedule quota for this Batch account."
         }
       },
       "required": [
@@ -1502,24 +1488,20 @@
       "description": "A definition of an Azure resource.",
       "x-ms-azure-resource": true
     },
-    "ErrorDetail": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        }
-      },
-      "description": "Specific detail about an error."
+    "PoolAllocationMode": {
+      "type": "string",
+      "description": "The allocation mode for creating pools in the Batch account.",
+      "enum": [
+        "BatchService",
+        "UserSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "PoolAllocationMode",
+        "modelAsString": false
+      }
     },
-    "ErrorBody": {
+    "CloudError": {
+      "x-ms-external": true,
       "properties": {
         "code": {
           "type": "string",
@@ -1536,7 +1518,7 @@
         "details": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorDetail"
+            "$ref": "#/definitions/CloudError"
           },
           "description": "A list of additional details about the error."
         }
