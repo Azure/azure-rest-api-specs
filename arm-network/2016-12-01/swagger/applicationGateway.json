@@ -785,6 +785,10 @@
             "modelAsString": true
           }
         },
+        "connectionDraining": {
+            "$ref": "#/definitions/ApplicationGatewayConnectionDraining",
+            "description": "Connection draining of the backend http settings resource."
+        },
         "requestTimeout": {
           "type": "integer",
           "format": "int32",
@@ -1284,6 +1288,20 @@
         "enabled"
       ],
       "description": "Application gateway web application firewall configuration."
+    },
+    "ApplicationGatewayConnectionDraining": {
+        "properties": {
+            "enabled": {
+                "type": "boolean",
+                "description": "Defines whether connection draining is enabled or not."
+            },
+            "drainTimeoutInSec": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Defines the number of seconds connection draining is active. Acceptable values are from 1 second to 3600 seconds."
+            }
+        },
+        "description": "Connection draining allows open connections to a backend server to be active for a specified time after the backend server got removed from the configuration."
     }
   },
   "parameters": {
