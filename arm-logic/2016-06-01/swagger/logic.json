@@ -2479,6 +2479,38 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Logic/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+
+        "description": "Lists all of the available Logic REST API operations.",
+        "operationId": "ListOperations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -2486,14 +2518,17 @@
       "properties": {
         "id": {
           "type": "string",
+          "readOnly": true,
           "description": "The resource id."
         },
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "Gets the resource name."
         },
         "type": {
           "type": "string",
+          "readOnly": true,
           "description": "Gets the resource type."
         },
         "location": {
@@ -3275,6 +3310,9 @@
     },
     "Sku": {
       "type": "object",
+      "required": [
+        "name"
+      ],
       "properties": {
         "name": {
           "$ref": "#/definitions/SkuName",
@@ -4020,6 +4058,9 @@
     },
     "IntegrationAccountSku": {
       "type": "object",
+      "required": [
+        "name"
+      ],
       "properties": {
         "name": {
           "$ref": "#/definitions/IntegrationAccountSkuName",
@@ -6058,6 +6099,63 @@
         }
       },
       "description": "The reference to the key vault key."
+    },
+    "Operation": {
+      "description": "Logic REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Logic",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+     "description": "Result of the request to list Logic operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Logic operations supported by the Logic resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error reponse indicates Logic service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
