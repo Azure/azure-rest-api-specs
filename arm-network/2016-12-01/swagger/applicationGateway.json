@@ -1298,9 +1298,17 @@
             "drainTimeoutInSec": {
                 "type": "integer",
                 "format": "int32",
+                "maximum": 3600,
+                "exclusiveMaximum": false,
+                "minimum": 1,
+                "exclusiveMinimum": false,
                 "description": "The number of seconds connection draining is active. Acceptable values are from 1 second to 3600 seconds."
             }
         },
+        "required": [
+            "enabled",
+            "drainTimeoutInSec"
+        ],
         "description": "Connection draining allows open connections to a backend server to be active for a specified time after the backend server got removed from the configuration."
     }
   },
