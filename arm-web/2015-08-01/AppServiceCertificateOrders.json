@@ -318,7 +318,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}": {
       "get": {
         "tags": [
           "AppServiceCertificateOrders"
@@ -337,9 +337,9 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "certificateOrderName",
             "in": "path",
-            "description": "Name of the certificate.",
+            "description": "Name of the certificate order.",
             "required": true,
             "type": "string"
           },
@@ -382,9 +382,9 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "certificateOrderName",
             "in": "path",
-            "description": "Name of the certificate.",
+            "description": "Name of the certificate order.",
             "required": true,
             "type": "string"
           },
@@ -432,9 +432,9 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "certificateOrderName",
             "in": "path",
-            "description": "Name of the certificate.",
+            "description": "Name of the certificate order.",
             "required": true,
             "type": "string"
           },
@@ -455,7 +455,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/reissue": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/reissue": {
       "post": {
         "tags": [
           "AppServiceCertificateOrders"
@@ -475,9 +475,9 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "certificateOrderName",
             "in": "path",
-            "description": "Name of the certificate.",
+            "description": "Name of the certificate order.",
             "required": true,
             "type": "string"
           },
@@ -504,7 +504,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/renew": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/renew": {
       "post": {
         "tags": [
           "AppServiceCertificateOrders"
@@ -524,9 +524,9 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "certificateOrderName",
             "in": "path",
-            "description": "Certificate name",
+            "description": "Name of the certificate order.",
             "required": true,
             "type": "string"
           },
@@ -553,7 +553,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/resendEmail": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/resendEmail": {
       "post": {
         "tags": [
           "AppServiceCertificateOrders"
@@ -566,9 +566,9 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "certificateOrderName",
             "in": "path",
-            "description": "Certificate order name",
+            "description": "Name of the certificate order",
             "required": true,
             "type": "string"
           },
@@ -586,7 +586,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/resendRequestEmails": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/resendRequestEmails": {
       "post": {
         "tags": [
           "AppServiceCertificateOrders"
@@ -606,9 +606,9 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "certificateOrderName",
             "in": "path",
-            "description": "Certificate order name",
+            "description": "Name of the certificate order.",
             "required": true,
             "type": "string"
           },
@@ -635,7 +635,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/retrieveCertificateActions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/retrieveCertificateActions": {
       "post": {
         "tags": [
           "AppServiceCertificateOrders"
@@ -654,9 +654,9 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "certificateOrderName",
             "in": "path",
-            "description": "Certificate order name",
+            "description": "Name of the certificate order.",
             "required": true,
             "type": "string"
           },
@@ -680,7 +680,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/retrieveEmailHistory": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/retrieveEmailHistory": {
       "post": {
         "tags": [
           "AppServiceCertificateOrders"
@@ -699,9 +699,9 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "certificateOrderName",
             "in": "path",
-            "description": "Certificate order name",
+            "description": "Name of the certificate order.",
             "required": true,
             "type": "string"
           },
@@ -725,7 +725,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/retrieveSiteSeal": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/retrieveSiteSeal": {
       "post": {
         "tags": [
           "AppServiceCertificateOrders"
@@ -751,9 +751,9 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "certificateOrderName",
             "in": "path",
-            "description": "Certificate order name",
+            "description": "Name of the certificate order.",
             "required": true,
             "type": "string"
           },
@@ -783,7 +783,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/verifyDomainOwnership": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/verifyDomainOwnership": {
       "post": {
         "tags": [
           "AppServiceCertificateOrders"
@@ -796,9 +796,9 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "certificateOrderName",
             "in": "path",
-            "description": "Certificate order name",
+            "description": "Name of the certificate order.",
             "required": true,
             "type": "string"
           },
