@@ -11182,10 +11182,12 @@
         "frequencyInterval": {
           "format": "int32",
           "description": "How often should be the backup executed (e.g. for weekly backup, this should be set to 7 and FrequencyUnit should be set to Day)",
+          "default": 7,
           "type": "integer"
         },
         "frequencyUnit": {
-          "description": "How often should be the backup executed (e.g. for weekly backup, this should be set to Day and FrequencyInterval should be set to 7)",
+          "description": "The unit of time for how often should be the backup executed (e.g. for weekly backup, this should be set to Day and FrequencyInterval should be set to 7)",
+          "default": "Day",
           "enum": [
             "Day",
             "Hour"
@@ -11198,11 +11200,13 @@
         },
         "keepAtLeastOneBackup": {
           "description": "True if the retention policy should always keep at least one backup in the storage account, regardless how old it is; false otherwise.",
+          "default": true,
           "type": "boolean"
         },
         "retentionPeriodInDays": {
           "format": "int32",
           "description": "After how many days backups should be deleted.",
+          "default": 90,
           "type": "integer"
         },
         "startTime": {

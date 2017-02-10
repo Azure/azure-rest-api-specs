@@ -2063,7 +2063,8 @@
             "defaultFrontEndScaleFactor": {
               "format": "int32",
               "description": "Default Scale Factor for FrontEnds.",
-              "type": "integer"
+              "type": "integer",
+              "readOnly": true
             },
             "apiManagementAccountId": {
               "description": "API Management Account associated with the App Service Environment.",
@@ -3456,6 +3457,10 @@
               "description": "Version of Node.js.",
               "type": "string"
             },
+            "linuxFxVersion": {
+              "description": "Linux App Framework and version",
+              "type": "string"
+            },
             "requestTracingEnabled": {
               "description": "<code>true</code> if request tracing is enabled; otherwise, <code>false</code>.",
               "type": "boolean"
@@ -3522,8 +3527,26 @@
             },
             "scmType": {
               "description": "SCM type.",
+              "enum": [
+                "None",
+                "Dropbox",
+                "Tfs",
+                "LocalGit",
+                "GitHub",
+                "CodePlexGit",
+                "CodePlexHg",
+                "BitbucketGit",
+                "BitbucketHg",
+                "ExternalGit",
+                "ExternalHg",
+                "OneDrive",
+                "VSO"
+              ],
               "type": "string",
-              "readOnly": true
+              "x-ms-enum": {
+                "name": "ScmType",
+                "modelAsString": true
+              }
             },
             "use32BitWorkerProcess": {
               "description": "<code>true</code> to use 32-bit worker process; otherwise, <code>false</code>.",
