@@ -1099,10 +1099,6 @@
           "$ref": "#/definitions/ExpressRouteCircuitPeeringConfig",
           "description": "The Microsoft peering configuration."
         },
-        "routeFilter": {
-          "$ref": "./routeFilter.json#/definitions/RouteFilter",
-          "description": "The reference of the RouteFilter resource."
-        },
         "stats": {
           "$ref": "#/definitions/ExpressRouteCircuitStats",
           "description": "Gets peering stats."
@@ -1116,8 +1112,12 @@
           "description": "The GatewayManager Etag."
         },
         "lastModifiedBy": {
-          "type": "string",
-          "description": "Gets whether the provider or the customer last modified the peering."
+            "type": "string",
+            "description": "Gets whether the provider or the customer last modified the peering."
+        },
+        "routeFilter": {
+          "$ref": "./routeFilter.json#/definitions/RouteFilter",
+          "description": "The reference of the RouteFilter resource."
         }
       }
     },
