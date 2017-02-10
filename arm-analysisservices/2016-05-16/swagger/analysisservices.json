@@ -229,80 +229,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/resume": {
       "post": {
-        "description": "Resumes the specified Analysis Services server instance",
-        "tags": [ "Servers" ],
-        "operationId": "Servers_Resume",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$",
-            "minLength": 3,
-            "maxLength": 63,
-            "description": "Name of the Analysis Services server"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/suspend": {
-      "post": {
-        "description": "Supends operation of the specified Analysis Services server instance.",
-        "tags": [ "Servers" ],
-        "operationId": "Servers_Suspend",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$",
-            "minLength": 3,
-            "maxLength": 63,
-            "description": "The name of the Analysis Services server. It must be at least 3 characters in length, and no more than 63."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK."
-          },
-          "202": {
-            "description": "Accepted."
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/resume": {
-      "post": {
         "description": "Resumes operation of the specified Analysis Services server instance.",
         "tags": [ "Servers" ],
         "operationId": "Servers_Resume",
@@ -484,10 +410,51 @@
       "description": "Properties of Analysis Services resource.",
       "type": "object",
       "properties": {
+        "state": {
+          "type": "string",
+           "enum": [
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Paused",
+            "Suspended",
+            "Provisioning",
+            "Updating",
+            "Suspending",
+            "Pausing",
+            "Resuming",
+            "Preparing",
+            "Scaling"
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current state of Analysis Services resource. The state is to indicate more states outside of resource provisioning."
+        },
         "provisioningState": {
           "type": "string",
+           "enum": [
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Paused",
+            "Suspended",
+            "Provisioning",
+            "Updating",
+            "Suspending",
+            "Pausing",
+            "Resuming",
+            "Preparing",
+            "Scaling"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
           "readOnly": true,
-          "description": "The current deployment state of Analysis Services resource."
+          "description": "The current deployment state of Analysis Services resource. The provisioningState is to indicate states for resource provisioning."
         },
         "serverFullName": {
           "type": "string",

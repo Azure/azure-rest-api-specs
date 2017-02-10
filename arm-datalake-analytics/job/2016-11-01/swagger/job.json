@@ -66,7 +66,7 @@
       }
     },
     "/Jobs/{jobIdentity}/GetDebugDataPath": {
-      "post": {
+      "get": {
         "tags": [
           "Job"
         ],
@@ -700,7 +700,10 @@
           "enum": [
             "Warning",
             "Error",
-            "Info"
+            "Info",
+            "SevereWarning",
+            "Deprecated",
+            "UserWarning"
           ],
           "x-ms-enum": {
             "name": "SeverityTypes",
@@ -782,7 +785,10 @@
           "enum": [
             "Warning",
             "Error",
-            "Info"
+            "Info",
+            "SevereWarning",
+            "Deprecated",
+            "UserWarning"
           ],
           "x-ms-enum": {
             "name": "SeverityTypes",
@@ -818,7 +824,10 @@
           "enum": [
             "Warning",
             "Error",
-            "Info"
+            "Info",
+            "SevereWarning",
+            "Deprecated",
+            "UserWarning"
           ],
           "x-ms-enum": {
             "name": "SeverityTypes",
@@ -912,10 +921,9 @@
         },
         "degreeOfParallelism": {
           "type": "integer",
-          "minimum": 1,
           "default": 1,
           "format": "int32",
-          "description": "the degree of parallelism used for this job. This must be greater than 0."
+          "description": "the degree of parallelism used for this job. This must be greater than 0, if set to less than 0 it will default to 1."
         },
         "priority": {
           "type": "integer",

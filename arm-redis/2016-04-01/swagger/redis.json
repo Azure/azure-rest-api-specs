@@ -42,6 +42,9 @@
           "Redis"
         ],
         "operationId": "Redis_Create",
+        "x-ms-examples": { 
+          "RedisCacheCreate": { "$ref": "../examples/RedisCacheCreate.json" } 
+        },
         "description": "Create or replace (overwrite/recreate, with potential downtime) an existing Redis cache.",
         "x-ms-long-running-operation": true,
         "parameters": [
@@ -95,8 +98,10 @@
           "Redis"
         ],
         "operationId": "Redis_Update",
+        "x-ms-examples": { 
+          "RedisCacheUpdate": { "$ref": "../examples/RedisCacheUpdate.json" } 
+        },
         "description": "Update an existing Redis cache.",
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -142,6 +147,9 @@
           "Redis"
         ],
         "operationId": "Redis_Delete",
+        "x-ms-examples": { 
+          "RedisCacheDelete": { "$ref": "../examples/RedisCacheDelete.json" } 
+        },
         "description": "Deletes a Redis cache.",
         "x-ms-long-running-operation": true,
         "parameters": [
@@ -180,6 +188,9 @@
           "Redis"
         ],
         "operationId": "Redis_Get",
+        "x-ms-examples": { 
+          "RedisCacheGet": { "$ref": "../examples/RedisCacheGet.json" } 
+        },
         "description": "Gets a Redis cache (resource description).",
         "parameters": [
           {
@@ -219,6 +230,9 @@
           "Redis"
         ],
         "operationId": "Redis_ListByResourceGroup",
+        "x-ms-examples": { 
+          "RedisCacheListByResourceGroup": { "$ref": "../examples/RedisCacheListByResourceGroup.json" } 
+        },
         "description": "Lists all Redis caches in a resource group.",
         "parameters": [
           {
@@ -254,6 +268,9 @@
           "Redis"
         ],
         "operationId": "Redis_List",
+        "x-ms-examples": { 
+          "RedisCacheList": { "$ref": "../examples/RedisCacheList.json" } 
+        },
         "description": "Gets all Redis caches in the specified subscription.",
         "parameters": [
           {
@@ -282,6 +299,9 @@
           "Redis"
         ],
         "operationId": "Redis_ListKeys",
+        "x-ms-examples": { 
+          "RedisCacheListKeys": { "$ref": "../examples/RedisCacheListKeys.json" } 
+        },
         "description": "Retrieve a Redis cache's access keys. This operation requires write permission to the cache resource.",
         "parameters": [
           {
@@ -321,6 +341,9 @@
           "Redis"
         ],
         "operationId": "Redis_RegenerateKey",
+        "x-ms-examples": { 
+          "RedisCacheRegenerateKey": { "$ref": "../examples/RedisCacheRegenerateKey.json" } 
+        },
         "description": "Regenerate Redis cache's access keys. This operation requires write permission to the cache resource.",
         "parameters": [
           {
@@ -369,6 +392,9 @@
           "Redis"
         ],
         "operationId": "Redis_ForceReboot",
+        "x-ms-examples": { 
+          "RedisCacheForceReboot": { "$ref": "../examples/RedisCacheForceReboot.json" } 
+        },
         "description": "Reboot specified Redis node(s). This operation requires write permission to the cache resource. There can be potential data loss.",
         "parameters": [
           {
@@ -417,6 +443,9 @@
           "Redis"
         ],
         "operationId": "Redis_ImportData",
+        "x-ms-examples": { 
+          "RedisCacheImport": { "$ref": "../examples/RedisCacheImport.json" } 
+        },
         "x-ms-long-running-operation": true,
         "description": "Import data into Redis cache.",
         "parameters": [
@@ -463,8 +492,11 @@
           "Redis"
         ],
         "operationId": "Redis_ExportData",
+        "x-ms-examples": { 
+          "RedisCacheExport": { "$ref": "../examples/RedisCacheExport.json" } 
+        },
         "x-ms-long-running-operation": true,
-        "description": "Import data into Redis cache.",
+        "description": "Export data from the redis cache to blobs in a container.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -509,7 +541,10 @@
           "Redis"
         ],
         "operationId": "PatchSchedules_CreateOrUpdate",
-        "description": "Create or replace the patching schedule for Redis cache.",
+        "x-ms-examples": { 
+          "RedisCachePatchSchedulesCreateOrUpdate": { "$ref": "../examples/RedisCachePatchSchedulesCreateOrUpdate.json" } 
+        },
+        "description": "Create or replace the patching schedule for Redis cache (requires Premium SKU).",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -532,7 +567,7 @@
             "schema": {
               "$ref": "#/definitions/RedisPatchSchedule"
             },
-            "description": "Parameters to set patch schedules for Redis cache."
+            "description": "Parameters to set the patching schedule for Redis cache."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -555,7 +590,10 @@
           "Redis"
         ],
         "operationId": "PatchSchedules_Delete",
-        "description": "Deletes the patching schedule for Redis cache.",
+        "x-ms-examples": { 
+          "RedisCachePatchSchedulesDelete": { "$ref": "../examples/RedisCachePatchSchedulesDelete.json" } 
+        },
+        "description": "Deletes the patching schedule of a redis cache (requires Premium SKU).",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -569,7 +607,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Redis cache."
+            "description": "The name of the redis cache."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -580,7 +618,10 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Success."
+          },
+          "204": {
+            "description": "Success."
           }
         }
       },
@@ -589,7 +630,10 @@
           "Redis"
         ],
         "operationId": "PatchSchedules_Get",
-        "description": "Gets the patching schedule for Redis cache.",
+        "x-ms-examples": { 
+          "RedisCachePatchSchedulesGet": { "$ref": "../examples/RedisCachePatchSchedulesGet.json" } 
+        },
+        "description": "Gets the patching schedule of a redis cache (requires Premium SKU).",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -603,7 +647,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Redis cache."
+            "description": "The name of the redis cache."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -614,13 +658,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Response of Get patch schedules.",
+            "description": "Response of get patch schedules.",
             "schema": {
               "$ref": "#/definitions/RedisPatchSchedule"
             }
           },
           "404": {
-            "description": "Response if patch schedules does not exist."
+            "description": "Response of get patch schedules if it does not exist."
           }
         }
       }

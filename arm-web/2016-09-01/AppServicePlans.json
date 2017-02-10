@@ -17,7 +17,6 @@
         "summary": "Get all App Service plans for a subcription.",
         "description": "Get all App Service plans for a subcription.",
         "operationId": "AppServicePlans_List",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
@@ -26,7 +25,7 @@
           {
             "name": "detailed",
             "in": "query",
-            "description": "Specify <code>true</code> to return all App Service plan properties. The default is <code>false</code>, which returns a subset of the properties.\r\n            Retrieval of all properties may increase the API latency.",
+            "description": "Specify <code>true</code> to return all App Service plan properties. The default is <code>false</code>, which returns a subset of the properties.\n Retrieval of all properties may increase the API latency.",
             "type": "boolean"
           },
           {
@@ -57,17 +56,16 @@
         "summary": "Get all App Service plans in a resource group.",
         "description": "Get all App Service plans in a resource group.",
         "operationId": "AppServicePlans_ListByResourceGroup",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -94,7 +92,6 @@
         "summary": "Get an App Service plan.",
         "description": "Get an App Service plan.",
         "operationId": "AppServicePlans_Get",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -102,6 +99,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -111,9 +111,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -148,6 +145,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
             "name": "name",
             "in": "path",
             "description": "Name of the App Service plan.",
@@ -164,16 +164,7 @@
             }
           },
           {
-            "name": "allowPendingState",
-            "in": "query",
-            "description": "OBSOLETE: If <code>true</code>, allow pending state for App Service plan.",
-            "type": "boolean"
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -202,9 +193,10 @@
         "summary": "Delete an App Service plan.",
         "description": "Delete an App Service plan.",
         "operationId": "AppServicePlans_Delete",
-        "consumes": [],
-        "produces": [],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -216,15 +208,12 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK."
           }
         }
       }
@@ -237,7 +226,6 @@
         "summary": "List all capabilities of an App Service plan.",
         "description": "List all capabilities of an App Service plan.",
         "operationId": "AppServicePlans_ListCapabilities",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -245,6 +233,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -254,9 +245,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -283,7 +271,6 @@
         "summary": "Retrieve a Hybrid Connection in use in an App Service plan.",
         "description": "Retrieve a Hybrid Connection in use in an App Service plan.",
         "operationId": "AppServicePlans_GetHybridConnection",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -291,6 +278,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -314,77 +304,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HybridConnection"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Update a Hybrid Connection in use in an App Service plan. This operation will fail if the Hybrid Connection does not already exist.",
-        "description": "Update a Hybrid Connection in use in an App Service plan. This operation will fail if the Hybrid Connection does not already exist.",
-        "operationId": "AppServicePlans_UpdateHybridConnection",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "Name of the Service Bus namespace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "relayName",
-            "in": "path",
-            "description": "Name of the Service Bus relay.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connection",
-            "in": "body",
-            "description": "The Hybrid Connection entity.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/HybridConnection"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -406,9 +325,10 @@
         "summary": "Delete a Hybrid Connection in use in an App Service plan.",
         "description": "Delete a Hybrid Connection in use in an App Service plan.",
         "operationId": "AppServicePlans_DeleteHybridConnection",
-        "consumes": [],
-        "produces": [],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -432,9 +352,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -458,7 +375,6 @@
         "summary": "Get the send key name and value of a Hybrid Connection.",
         "description": "Get the send key name and value of a Hybrid Connection.",
         "operationId": "AppServicePlans_ListHybridConnectionKeys",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -466,6 +382,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -491,9 +410,6 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -514,13 +430,15 @@
         ],
         "summary": "Get all apps that use a Hybrid Connection in an App Service Plan.",
         "description": "Get all apps that use a Hybrid Connection in an App Service Plan.",
-        "operationId": "AppServicePlans_ListHybridConnectionWebApps",
-        "consumes": [],
+        "operationId": "AppServicePlans_ListWebAppsByHybridConnection",
         "produces": [
           "application/json",
           "text/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -544,9 +462,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -573,7 +488,6 @@
         "summary": "Get the maximum number of Hybrid Connections allowed in an App Service plan.",
         "description": "Get the maximum number of Hybrid Connections allowed in an App Service plan.",
         "operationId": "AppServicePlans_GetHybridConnectionPlanLimit",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -581,6 +495,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -590,9 +507,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -616,14 +530,14 @@
         "summary": "Retrieve all Hybrid Connections in use in an App Service plan.",
         "description": "Retrieve all Hybrid Connections in use in an App Service plan.",
         "operationId": "AppServicePlans_ListHybridConnections",
-        "consumes": [],
         "produces": [
           "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "text/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -635,9 +549,6 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -645,9 +556,12 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/HybridConnection"
+              "$ref": "#/definitions/HybridConnectionCollection"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -659,12 +573,14 @@
         "summary": "Get metrics that can be queried for an App Service plan, and their definitions.",
         "description": "Get metrics that can be queried for an App Service plan, and their definitions.",
         "operationId": "AppServicePlans_ListMetricDefintions",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -674,9 +590,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -703,12 +616,14 @@
         "summary": "Get metrics for an App Serice plan.",
         "description": "Get metrics for an App Serice plan.",
         "operationId": "AppServicePlans_ListMetrics",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -733,9 +648,6 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -752,56 +664,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/operationresults/{operationId}": {
-      "get": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Get an operation on an App Service plan.",
-        "description": "Get an operation on an App Service plan.",
-        "operationId": "AppServicePlans_GetOperation",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "ID of the operation.&gt;",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AppServicePlan"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/restartSites": {
       "post": {
         "tags": [
@@ -810,9 +672,10 @@
         "summary": "Restart all apps in an App Service plan.",
         "description": "Restart all apps in an App Service plan.",
         "operationId": "AppServicePlans_RestartWebApps",
-        "consumes": [],
-        "produces": [],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -828,9 +691,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -851,12 +711,14 @@
         "summary": "Get all apps associated with an App Service plan.",
         "description": "Get all apps associated with an App Service plan.",
         "operationId": "AppServicePlans_ListWebApps",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -867,7 +729,7 @@
           {
             "name": "$skipToken",
             "in": "query",
-            "description": "Skip to of web apps in a list. If specified, the resulting list will contain web apps starting from (including) the skipToken. Else, the resulting list contains web apps from the start of the list",
+            "description": "Skip to a web app in the list of webapps associated with app service plan. If specified, the resulting list will contain web apps starting from (including) the skipToken. Otherwise, the resulting list contains web apps from the start of the list",
             "type": "string"
           },
           {
@@ -885,9 +747,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -914,7 +773,6 @@
         "summary": "Get all Virtual Networks associated with an App Service plan.",
         "description": "Get all Virtual Networks associated with an App Service plan.",
         "operationId": "AppServicePlans_ListVnets",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -922,6 +780,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -931,9 +792,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -960,7 +818,6 @@
         "summary": "Get a Virtual Network associated with an App Service plan.",
         "description": "Get a Virtual Network associated with an App Service plan.",
         "operationId": "AppServicePlans_GetVnetFromServerFarm",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -968,6 +825,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -984,9 +844,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1013,7 +870,6 @@
         "summary": "Get a Virtual Network gateway.",
         "description": "Get a Virtual Network gateway.",
         "operationId": "AppServicePlans_GetVnetGateway",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -1021,6 +877,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -1044,9 +903,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1081,6 +937,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
             "name": "name",
             "in": "path",
             "description": "Name of the App Service plan.",
@@ -1114,9 +973,6 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1137,8 +993,7 @@
         ],
         "summary": "Get all routes that are associated with a Virtual Network in an App Service plan.",
         "description": "Get all routes that are associated with a Virtual Network in an App Service plan.",
-        "operationId": "AppServicePlans_ListtRoutesForVnet",
-        "consumes": [],
+        "operationId": "AppServicePlans_ListRoutesForVnet",
         "produces": [
           "application/json",
           "text/json",
@@ -1146,6 +1001,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -1162,9 +1020,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1191,7 +1046,6 @@
         "summary": "Get a Virtual Network route in an App Service plan.",
         "description": "Get a Virtual Network route in an App Service plan.",
         "operationId": "AppServicePlans_GetRouteForVnet",
-        "consumes": [],
         "produces": [
           "application/json",
           "text/json",
@@ -1199,6 +1053,9 @@
           "text/xml"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -1222,9 +1079,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1265,6 +1119,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
             "name": "name",
             "in": "path",
             "description": "Name of the App Service plan.",
@@ -1298,9 +1155,6 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1315,7 +1169,7 @@
             "description": "Invalid request. Ensure that required parameters are given, and that addresses and address spaces are valid."
           },
           "404": {
-            "description": "Route not found. This will only occur when using the PATCH verb."
+            "description": "Route not found."
           }
         }
       },
@@ -1326,9 +1180,10 @@
         "summary": "Delete a Virtual Network route in an App Service plan.",
         "description": "Delete a Virtual Network route in an App Service plan.",
         "operationId": "AppServicePlans_DeleteVnetRoute",
-        "consumes": [],
-        "produces": [],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -1352,9 +1207,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1389,6 +1241,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
             "name": "name",
             "in": "path",
             "description": "Name of the App Service plan.",
@@ -1422,9 +1277,6 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -1439,7 +1291,7 @@
             "description": "Invalid request. Ensure that required parameters are given, and that addresses and address spaces are valid."
           },
           "404": {
-            "description": "Route not found. This will only occur when using the PATCH verb."
+            "description": "Route not found."
           }
         }
       }
@@ -1452,9 +1304,10 @@
         "summary": "Reboot a worker machine in an App Service plan.",
         "description": "Reboot a worker machine in an App Service plan.",
         "operationId": "AppServicePlans_RebootWorker",
-        "consumes": [],
-        "produces": [],
         "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -1471,9 +1324,6 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1563,7 +1413,7 @@
               "readOnly": true
             },
             "perSiteScaling": {
-              "description": "If <code>true</code>, apps assigned to this App Service plan can be scaled independently.\r\n            If <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.",
+              "description": "If <code>true</code>, apps assigned to this App Service plan can be scaled independently.\n If <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.",
               "default": false,
               "type": "boolean"
             },
@@ -1577,6 +1427,15 @@
               "description": "Resource group of the App Service plan.",
               "type": "string",
               "readOnly": true
+            },
+            "reserved": {
+              "description": "Reserved.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
             },
             "targetWorkerCount": {
               "format": "int32",
@@ -1654,13 +1513,13 @@
           "description": "Custom action to be taken."
         },
         "minProcessExecutionTime": {
-          "description": "Minimum time the process must execute\r\n            before taking the action",
+          "description": "Minimum time the process must execute\n before taking the action",
           "type": "string"
         }
       }
     },
     "AutoHealCustomAction": {
-      "description": "Custom action to be executed\r\n            when an auto heal rule is triggered.",
+      "description": "Custom action to be executed\n when an auto heal rule is triggered.",
       "type": "object",
       "properties": {
         "exe": {
@@ -1714,7 +1573,7 @@
       }
     },
     "Capability": {
-      "description": "Description of a SKU Capability.",
+      "description": "Describes the capabilities/features allowed for a specific SKU.",
       "type": "object",
       "properties": {
         "name": {
@@ -1739,7 +1598,7 @@
       "type": "object",
       "properties": {
         "correlationId": {
-          "description": "Correlation ID of cloning operation. This ID ties multiple cloning operations\r\n            together to use the same snapshot.",
+          "description": "Correlation ID of cloning operation. This ID ties multiple cloning operations\n together to use the same snapshot.",
           "type": "string"
         },
         "overwrite": {
@@ -1755,7 +1614,7 @@
           "type": "boolean"
         },
         "sourceWebAppId": {
-          "description": "ARM resource ID of the source app. App resource ID is of the form \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
+          "description": "ARM resource ID of the source app. App resource ID is of the form \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
           "type": "string"
         },
         "hostingEnvironment": {
@@ -1763,7 +1622,7 @@
           "type": "string"
         },
         "appSettingsOverrides": {
-          "description": "Application setting overrides for cloned app. If specified, these settings override the settings cloned \r\n            from source app. Otherwise, application settings from source app are retained.",
+          "description": "Application setting overrides for cloned app. If specified, these settings override the settings cloned \n from source app. Otherwise, application settings from source app are retained.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -1774,7 +1633,7 @@
           "type": "boolean"
         },
         "trafficManagerProfileId": {
-          "description": "ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}.",
+          "description": "ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}.",
           "type": "string"
         },
         "trafficManagerProfileName": {
@@ -1783,12 +1642,46 @@
         }
       }
     },
+    "ConnStringInfo": {
+      "description": "Database connection string information.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of connection string.",
+          "type": "string"
+        },
+        "connectionString": {
+          "description": "Connection string value.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of database.",
+          "enum": [
+            "MySql",
+            "SQLServer",
+            "SQLAzure",
+            "Custom",
+            "NotificationHub",
+            "ServiceBus",
+            "EventHub",
+            "ApiHub",
+            "DocDb",
+            "RedisCache"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ConnectionStringType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
     "CorsSettings": {
       "description": "Cross-Origin Resource Sharing (CORS) settings for the app.",
       "type": "object",
       "properties": {
         "allowedOrigins": {
-          "description": "Gets or sets the list of origins that should be allowed to make cross-origin\r\n            calls (for example: http://example.com:12345). Use \"*\" to allow all.",
+          "description": "Gets or sets the list of origins that should be allowed to make cross-origin\n calls (for example: http://example.com:12345). Use \"*\" to allow all.",
           "type": "array",
           "items": {
             "type": "string"
@@ -1810,7 +1703,7 @@
       }
     },
     "HandlerMapping": {
-      "description": "The IIS handler mappings used to define which handler processes HTTP requests with certain extension. \r\n            For example, it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension.",
+      "description": "The IIS handler mappings used to define which handler processes HTTP requests with certain extension. \n For example, it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension.",
       "type": "object",
       "properties": {
         "extension": {
@@ -1871,12 +1764,14 @@
           "type": "string"
         },
         "name": {
-          "description": "Name of the App Service Environment (read only).",
-          "type": "string"
+          "description": "Name of the App Service Environment.",
+          "type": "string",
+          "readOnly": true
         },
         "type": {
-          "description": "Resource type of the App Service Environment (read only).",
-          "type": "string"
+          "description": "Resource type of the App Service Environment.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1926,11 +1821,31 @@
               "type": "string"
             },
             "sendKeyValue": {
-              "description": "The value of the Service Bus key. This is used to authenticate to Service Bus. In ARM this key will not be returned\r\n            normally, use the POST /listKeys API instead.",
+              "description": "The value of the Service Bus key. This is used to authenticate to Service Bus. In ARM this key will not be returned\n normally, use the POST /listKeys API instead.",
               "type": "string"
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "HybridConnectionCollection": {
+      "description": "Collection of hostname bindings.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HybridConnection"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
         }
       }
     },
@@ -2007,8 +1922,25 @@
         }
       }
     },
+    "NameValuePair": {
+      "description": "Name value pair.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Pair name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Pair value.",
+          "type": "string"
+        }
+      }
+    },
     "PushSettings": {
       "description": "Push settings for the App.",
+      "required": [
+        "isPushEnabled"
+      ],
       "type": "object",
       "properties": {
         "isPushEnabled": {
@@ -2020,7 +1952,7 @@
           "type": "string"
         },
         "tagsRequiringAuth": {
-          "description": "Gets or sets a JSON string containing a list of tags that require user authentication to be used in the push registration endpoint.",
+          "description": "Gets or sets a JSON string containing a list of tags that require user authentication to be used in the push registration endpoint.\n Tags can consist of alphanumeric characters and the following:\n '_', '@', '#', '.', ':', '-'. \n Validation should be performed at the PushRequestHandler.",
           "type": "string"
         },
         "dynamicTagsJson": {
@@ -2044,26 +1976,26 @@
         },
         "changeStep": {
           "format": "double",
-          "description": "[Optional] In auto ramp up scenario this is the step to to add/remove from <code>ReroutePercentage</code> until it reaches \r\n            <code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specificed in <code>ChangeIntervalInMinutes</code>.\r\n            Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
+          "description": "In auto ramp up scenario this is the step to to add/remove from <code>ReroutePercentage</code> until it reaches \n <code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specificed in <code>ChangeIntervalInMinutes</code>.\n Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
           "type": "number"
         },
         "changeIntervalInMinutes": {
           "format": "int32",
-          "description": "[Optional] Specifies interval in mimuntes to reevaluate ReroutePercentage.",
+          "description": "Specifies interval in mimuntes to reevaluate ReroutePercentage.",
           "type": "integer"
         },
         "minReroutePercentage": {
           "format": "double",
-          "description": "[Optional] Specifies lower boundary above which ReroutePercentage will stay.",
+          "description": "Specifies lower boundary above which ReroutePercentage will stay.",
           "type": "number"
         },
         "maxReroutePercentage": {
           "format": "double",
-          "description": "[Optional] Specifies upper boundary below which ReroutePercentage will stay.",
+          "description": "Specifies upper boundary below which ReroutePercentage will stay.",
           "type": "number"
         },
         "changeDecisionCallbackUrl": {
-          "description": "Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified. See TiPCallback site extension for the scaffold and contracts.\r\n            https://www.siteextensions.net/packages/TiPCallback/",
+          "description": "Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified. See TiPCallback site extension for the scaffold and contracts.\n https://www.siteextensions.net/packages/TiPCallback/",
           "type": "string"
         },
         "name": {
@@ -2090,8 +2022,7 @@
     "Resource": {
       "description": "Azure resource.",
       "required": [
-        "location",
-        "name"
+        "location"
       ],
       "properties": {
         "id": {
@@ -2410,12 +2341,12 @@
           "description": "ARM envelope properties",
           "properties": {
             "state": {
-              "description": "Current state of the app. Read-only.",
+              "description": "Current state of the app.",
               "type": "string",
               "readOnly": true
             },
             "hostNames": {
-              "description": "Hostnames associated with the app. Read-only.",
+              "description": "Hostnames associated with the app.",
               "type": "array",
               "items": {
                 "type": "string"
@@ -2423,7 +2354,7 @@
               "readOnly": true
             },
             "repositorySiteName": {
-              "description": "Name of the repository site. Read-only.",
+              "description": "Name of the repository site.",
               "type": "string",
               "readOnly": true
             },
@@ -2445,7 +2376,7 @@
               "type": "boolean"
             },
             "enabledHostNames": {
-              "description": "Enabled hostnames for the app. Read-only. Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,\r\n            the app is not served on those hostnames.",
+              "description": "Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,\n the app is not served on those hostnames.",
               "type": "array",
               "items": {
                 "type": "string"
@@ -2453,7 +2384,7 @@
               "readOnly": true
             },
             "availabilityState": {
-              "description": "Management information availability state for the app. Read-only.",
+              "description": "Management information availability state for the app.",
               "enum": [
                 "Normal",
                 "Limited",
@@ -2505,7 +2436,7 @@
               "readOnly": true
             },
             "premiumAppDeployed": {
-              "description": "Indicates whether app is deployed as a premium app. Read-only.",
+              "description": "Indicates whether app is deployed as a premium app.",
               "type": "boolean",
               "readOnly": true
             },
@@ -2553,7 +2484,7 @@
               "type": "boolean"
             },
             "hostNamesDisabled": {
-              "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\r\n            If <code>true</code>, the app is only accessible via API management process.",
+              "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\n If <code>true</code>, the app is only accessible via API management process.",
               "type": "boolean"
             },
             "outboundIpAddresses": {
@@ -2579,7 +2510,7 @@
             },
             "maxNumberOfWorkers": {
               "format": "int32",
-              "description": "Maximum number of workers.\r\n            This only applies to Functions container.",
+              "description": "Maximum number of workers.\n This only applies to Functions container.",
               "type": "integer",
               "readOnly": true
             },
@@ -2596,7 +2527,7 @@
               "readOnly": true
             },
             "isDefaultContainer": {
-              "description": "<code>true</code> if the app is a default container; otherwise, <code>false</code>. Read-only.",
+              "description": "<code>true</code> if the app is a default container; otherwise, <code>false</code>.",
               "type": "boolean",
               "readOnly": true
             },
@@ -2656,6 +2587,10 @@
               "description": "Version of Node.js.",
               "type": "string"
             },
+            "linuxFxVersion": {
+              "description": "Linux App Framework and version",
+              "type": "string"
+            },
             "requestTracingEnabled": {
               "description": "<code>true</code> if request tracing is enabled; otherwise, <code>false</code>.",
               "type": "boolean"
@@ -2690,6 +2625,20 @@
               "description": "Publishing user name.",
               "type": "string"
             },
+            "appSettings": {
+              "description": "Application settings.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NameValuePair"
+              }
+            },
+            "connectionStrings": {
+              "description": "Connection strings.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ConnStringInfo"
+              }
+            },
             "machineKey": {
               "$ref": "#/definitions/SiteMachineKey",
               "description": "Site MachineKey.",
@@ -2708,8 +2657,26 @@
             },
             "scmType": {
               "description": "SCM type.",
+              "enum": [
+                "None",
+                "Dropbox",
+                "Tfs",
+                "LocalGit",
+                "GitHub",
+                "CodePlexGit",
+                "CodePlexHg",
+                "BitbucketGit",
+                "BitbucketHg",
+                "ExternalGit",
+                "ExternalHg",
+                "OneDrive",
+                "VSO"
+              ],
               "type": "string",
-              "readOnly": true
+              "x-ms-enum": {
+                "name": "ScmType",
+                "modelAsString": true
+              }
             },
             "use32BitWorkerProcess": {
               "description": "<code>true</code> to use 32-bit worker process; otherwise, <code>false</code>.",
@@ -3115,7 +3082,7 @@
               "readOnly": true
             },
             "certBlob": {
-              "description": "A certificate file (.cer) blob containing the public key of the private key used to authenticate a \r\n            Point-To-Site VPN connection.",
+              "description": "A certificate file (.cer) blob containing the public key of the private key used to authenticate a \n Point-To-Site VPN connection.",
               "type": "string"
             },
             "routes": {
@@ -3158,7 +3125,8 @@
               "x-ms-mutability": [
                 "create",
                 "read"
-              ]
+              ],
+              "x-ms-client-name": "vnetRouteName"
             },
             "startAddress": {
               "description": "The starting address for this route. This may also include a CIDR notation, in which case the end address must not be specified.",
@@ -3169,8 +3137,17 @@
               "type": "string"
             },
             "routeType": {
-              "description": "The type of route this is:\r\n            DEFAULT - By default, every app has routes to the local address ranges specified by RFC1918\r\n            INHERITED - Routes inherited from the real Virtual Network routes\r\n            STATIC - Static route set on the app only\r\n            \r\n            These values will be used for syncing an app's routes with those from a Virtual Network. This operation will clear all DEFAULT and INHERITED routes and replace them\r\n            with new INHERITED routes.",
-              "type": "string"
+              "description": "The type of route this is:\n DEFAULT - By default, every app has routes to the local address ranges specified by RFC1918\n INHERITED - Routes inherited from the real Virtual Network routes\n STATIC - Static route set on the app only\n \n These values will be used for syncing an app's routes with those from a Virtual Network.",
+              "enum": [
+                "DEFAULT",
+                "INHERITED",
+                "STATIC"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "RouteType",
+                "modelAsString": true
+              }
             }
           },
           "x-ms-client-flatten": true
@@ -3215,7 +3192,7 @@
       "type": "string",
       "maxLength": 90,
       "minLength": 1,
-      "pattern": "^[-\\\\w\\\\._\\\\(\\\\)]+[^\\\\.]$"
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$"
     },
     "apiVersionParameter": {
       "name": "api-version",

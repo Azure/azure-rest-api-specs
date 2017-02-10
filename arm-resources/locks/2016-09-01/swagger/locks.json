@@ -173,6 +173,125 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.Authorization/locks/{lockName}": {
+      "put": {
+        "tags": [
+          "ManagementLocks"
+        ],
+        "operationId": "ManagementLocks_CreateOrUpdateByScope",
+        "description": "Create or update a management lock by scope.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope for the lock. When providing a scope for the assignment, use '/subscriptions/{subscriptionId}' for subscriptions, '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}' for resource groups, and '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePathIfPresent}/{resourceType}/{resourceName}' for resources."
+          },
+          {
+            "name": "lockName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of lock."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagementLockObject"
+            },
+            "description": "Create or update management lock parameters."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+           "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagementLockObject"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ManagementLockObject"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagementLocks"
+        ],
+        "operationId": "ManagementLocks_DeleteByScope",
+        "description": "Delete a management lock by scope.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope for the lock. "
+          },
+          {
+            "name": "lockName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of lock."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ManagementLocks"
+        ],
+        "operationId": "ManagementLocks_GetByScope",
+        "description": "Get a management lock by scope.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope for the lock. "
+          },
+          {
+            "name": "lockName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of lock."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagementLockObject"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/locks/{lockName}": {
       "put": {
         "tags": [
@@ -330,6 +449,76 @@
             "description": "OK"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "ManagementLocks"
+        ],
+        "operationId": "ManagementLocks_GetAtResourceLevel",
+        "description": "Get the management lock of a resource or any level below resource.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. ",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "name": "parentResourcePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "An extra path parameter needed in some services, like SQL Databases.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The type of the resource.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource."
+          },
+          {
+            "name": "lockName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of lock."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagementLockObject"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/locks/{lockName}": {
@@ -414,7 +603,7 @@
         "tags": [
           "ManagementLocks"
         ],
-        "operationId": "ManagementLocks_Get",
+        "operationId": "ManagementLocks_GetAtSubscriptionLevel",
         "description": "Gets a management lock at the subscription level.",
         "parameters": [
           {
