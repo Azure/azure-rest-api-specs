@@ -1437,7 +1437,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ListCallbackUrlParameters"
+              "$ref": "#/definitions/GetCallbackUrlParameters"
             }
           }
         ],
@@ -2548,6 +2548,7 @@
       "properties": {
         "id": {
           "type": "string",
+          "readOnly": true,
           "description": "The resource id."
         }
       },
@@ -2563,6 +2564,7 @@
       "properties": {
         "id": {
           "type": "string",
+          "readOnly": true,
           "description": "The resource id."
         },
         "name": {
@@ -3719,7 +3721,9 @@
       ]
     },
     "IntegrationAccountProperties": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+      }
     },
     "IntegrationAccountListResult": {
       "type": "object",
@@ -3738,7 +3742,7 @@
       },
       "description": "The list of integration accounts."
     },
-    "ListCallbackUrlParameters": {
+    "GetCallbackUrlParameters": {
       "type": "object",
       "properties": {
         "notAfter": {
@@ -3794,7 +3798,7 @@
         },
         "targetNamespace": {
           "type": "string",
-          "description": "The target namespace."
+          "description": "The targetnamespace of the schema."
         },
         "documentName": {
           "type": "string",
@@ -3859,6 +3863,9 @@
     },
     "IntegrationAccountSchemaFilter": {
       "type": "object",
+      "required": [
+        "schemaType"
+      ],
       "properties": {
         "schemaType": {
           "$ref": "#/definitions/SchemaType",
@@ -3972,6 +3979,9 @@
     },
     "IntegrationAccountMapFilter": {
       "type": "object",
+      "required": [
+        "mapType"
+      ],
       "properties": {
         "mapType": {
           "$ref": "#/definitions/MapType",
@@ -4023,6 +4033,9 @@
     },
     "IntegrationAccountPartnerFilter": {
       "type": "object",
+      "required": [
+        "partnerType"
+      ],
       "properties": {
         "partnerType": {
           "$ref": "#/definitions/PartnerType",
@@ -4129,11 +4142,11 @@
       "properties": {
         "qualifier": {
           "type": "string",
-          "description": "The business identity qualifier."
+          "description": "The business identity qualifier e.g. as2identity, ZZ, ZZZ, 31, 32"
         },
         "value": {
           "type": "string",
-          "description": "The business identity value."
+          "description": "The user defined business identity value."
         }
       },
       "description": "The integration account partner's business identity."
@@ -4157,6 +4170,9 @@
     },
     "IntegrationAccountAgreementFilter": {
       "type": "object",
+      "required": [
+        "agreementType"
+      ],
       "properties": {
         "agreementType": {
           "$ref": "#/definitions/AgreementType",
@@ -4219,19 +4235,19 @@
         },
         "hostPartner": {
           "type": "string",
-          "description": "The host partner."
+          "description": "The integration account partner that is set as host partner for this agreement."
         },
         "guestPartner": {
           "type": "string",
-          "description": "The guest partner."
+          "description": "The integration account partner that is set as guest partner for this agreement."
         },
         "hostIdentity": {
           "$ref": "#/definitions/BusinessIdentity",
-          "description": "The host identity."
+          "description": "The business identity of the host partner."
         },
         "guestIdentity": {
           "$ref": "#/definitions/BusinessIdentity",
-          "description": "The guest identity."
+          "description": "The business identity of the guest partner."
         },
         "content": {
           "$ref": "#/definitions/AgreementContent",
