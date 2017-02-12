@@ -9,6 +9,70 @@
     "https"
   ],
   "paths": {
+    "/providers/Microsoft.Web/publishingUsers/web": {
+      "get": {
+        "summary": "Gets publishing user",
+        "description": "Gets publishing user",
+        "operationId": "GetPublishingUser",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates publishing user",
+        "description": "Updates publishing user",
+        "operationId": "UpdatePublishingUser",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "userDetails",
+            "in": "body",
+            "description": "Details of publishing user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Web/sourcecontrols": {
       "get": {
         "summary": "Gets the source controls available for Azure websites.",
@@ -130,7 +194,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/geoRegions": {
-      "post": {
+      "get": {
         "summary": "Get a list of available geographical regions.",
         "description": "Get a list of available geographical regions.",
         "operationId": "ListGeoRegions",
@@ -204,76 +268,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/publishingCredentials": {
-      "get": {
-        "summary": "Get the publishing credentials for the subscription owner.",
-        "description": "Get the publishing credentials for the subscription owner.",
-        "operationId": "GetPublishingCredentials",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        }
-      },
-      "put": {
-        "summary": "Update the publishing credentials for the subscription owner.",
-        "description": "Update the publishing credentials for the subscription owner.",
-        "operationId": "UpdatePublishingCredentials",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "requestMessage",
-            "in": "body",
-            "description": "A request message with the new publishing credentials.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
         }
       }
     },

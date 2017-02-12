@@ -466,8 +466,8 @@
           "BatchAccount"
         ],
         "operationId": "BatchAccount_GetKeys",
-        "description": "Gets the account keys for the specified Batch account.",
-        "summary": "This operation applies only to Batch accounts created with a poolAllocationMode of 'BatchService'. If the Batch account was created with a poolAllocationMode of 'UserSubscription', clients cannot use access to keys to authenticate, and must use Azure Active Directory instead. In this case, getting the keys will fail.",
+        "summary": "Gets the account keys for the specified Batch account.",
+        "description": "This operation applies only to Batch accounts created with a poolAllocationMode of 'BatchService'. If the Batch account was created with a poolAllocationMode of 'UserSubscription', clients cannot use access to keys to authenticate, and must use Azure Active Directory instead. In this case, getting the keys will fail.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1312,10 +1312,12 @@
       "properties": {
         "primary": {
           "type": "string",
+          "readOnly": true,
           "description": "The primary key associated with the account."
         },
         "secondary": {
           "type": "string",
+          "readOnly": true,
           "description": "The secondary key associated with the account."
         }
       },
@@ -1378,14 +1380,17 @@
       "properties": {
         "id": {
           "type": "string",
+          "readOnly": true,
           "description": "The ID of the application."
         },
         "version": {
           "type": "string",
+          "readOnly": true,
           "description": "The version of the application package. "
         },
         "state": {
           "type": "string",
+          "readOnly": true,
           "description": "The current state of the application package.",
           "enum": [
             "pending",
@@ -1399,20 +1404,24 @@
         },
         "format": {
           "type": "string",
+          "readOnly": true,
           "description": "The format of the application package, if the package is active."
         },
         "storageUrl": {
           "type": "string",
+          "readOnly": true,
           "description": "The storage URL at which the application package is stored."
         },
         "storageUrlExpiry": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The UTC time at which the storage URL will expire."
         },
         "lastActivationTime": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The time at which the package was last activated, if the package is active."
         }
       },
@@ -1456,6 +1465,7 @@
         "accountQuota": {
           "type": "integer",
           "format": "int32",
+          "readOnly": true,
           "description": "The number of Batch accounts that may be created under the subscription in the specified region."
         }
       },
