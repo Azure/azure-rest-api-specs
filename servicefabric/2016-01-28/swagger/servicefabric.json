@@ -4786,7 +4786,7 @@
     },
     "ApplicationDescription": {
       "type": "object",
-      "description": "The ",
+      "description": "The description of the application",
       "properties": {
         "Name": {
           "type": "string"
@@ -6209,7 +6209,16 @@
         "Parameters": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "description": "The parameters",
+            "properties": {
+              "Key": {
+                "type": "string"
+              },
+              "Value": {
+                "type": "string"
+              }
+            }
           }
         },
         "UpgradeKind": {
