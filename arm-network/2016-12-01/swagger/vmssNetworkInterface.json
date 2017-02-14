@@ -66,7 +66,18 @@
             "description": "The virtual machine index."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "2016-09-01"
+            ],
+            "x-ms-enum": {
+              "name": "ApiVersion",
+              "modelAsString": true
+            },
+            "description": "Client API version."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -108,7 +119,18 @@
             "description": "The name of the virtual machine scale set."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "2016-09-01"
+            ],
+            "x-ms-enum": {
+              "name": "ApiVersion",
+              "modelAsString": true
+            },
+            "description": "Client API version."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -164,7 +186,18 @@
             "description": "The name of the network interface."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "2016-09-01"
+            ],
+            "x-ms-enum": {
+              "name": "ApiVersion",
+              "modelAsString": true
+            },
+            "description": "Client API version."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -187,7 +220,7 @@
         }
       }
     }
-  },  
+  },
   "parameters": {
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
@@ -195,13 +228,6 @@
       "required": true,
       "type": "string",
       "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version."
     }
   }
 }
