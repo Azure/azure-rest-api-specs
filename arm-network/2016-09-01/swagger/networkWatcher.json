@@ -1006,7 +1006,7 @@
       "properties": {
         "targetResourceGroupName": {
           "type": "string",
-          "description": "The name of the target resource group."
+          "description": "The name of the target resource group to perform topology on."
         }
       },
       "description": "Parameters that define the representation of topology."
@@ -1099,7 +1099,7 @@
       "properties": {
         "targetResourceId": {
           "type": "string",
-          "description": "The resource identifier of the target resource against which the action is to be performed."
+          "description": "The ID of the target resource to perform next-hop on."
         },
         "direction": {
           "type": "string",
@@ -1127,11 +1127,11 @@
         },
         "localPort": {
           "type": "string",
-          "description": "The local port. Acceptable values are single integer (0-65535) or range."
+          "description": "The local port. Acceptable values are a single integer in the range (0-65535). Support for * for the source port, which depends on the direction."
         },
         "remotePort": {
           "type": "string",
-          "description": "The remote port. Acceptable values are single integer (0-65535) or range."
+          "description": "The remote port. Acceptable values are a single integer in the range (0-65535). Support for * for the source port, which depends on the direction."
         },
         "localIPAddress": {
           "type": "string",
@@ -1376,7 +1376,7 @@
         },
         "filePath": {
           "type": "string",
-          "description": "A valid local path on the targeting VM. Must include the name of the capture file (*.cap). Required if no storage ID is provided, otherwise optional."
+          "description": "A valid local path on the targeting VM. Must include the name of the capture file (*.cap). For linux virtual machine it must start with /var/captures. Required if no storage ID is provided, otherwise optional."
         }
       },
       "description": "Describes the storage location for a packet capture session."
@@ -1513,31 +1513,22 @@
           "type": "array",
           "description": "List of errors of packet capture session.",
           "items": {
-            "$ref": "#/definitions/CaptureError"
-          }
-        }
-      },
-      "description": "Status of packet capture session."
-    },
-    "CaptureError": {
-      "properties": {
-        "packetCaptureError": {
-          "type": "string",
-          "description": "List of possible errors of packet capture session.",
-          "enum": [
+            "type": "string",
+            "enum": [
             "InternalError",
             "AgentStopped",
             "CaptureFailed",
             "LocalFileFailed",
             "StorageFailed"
-          ],
-          "x-ms-enum": {
-            "name": "PcError",
-            "modelAsString": true
+            ],
+            "x-ms-enum": {
+              "name": "PcError",
+              "modelAsString": true
+            }
           }
         }
       },
-      "description": "Error of packet capture session."
+      "description": "Status of packet capture session."
     },
     "TroubleshootingParameters": {
       "description": "Parameters that define the resource to troubleshoot.",
@@ -1687,7 +1678,7 @@
       ],
       "properties": {
         "targetResourceId": {
-          "description": "The target resource to capture flow log.",
+          "description": "The target resource where getting the flow logging status.",
           "type": "string"
         }
       }
