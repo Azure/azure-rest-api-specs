@@ -37,6 +37,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}": {
       "get": {
         "operationId": "DatabaseAccounts_Get",
+        "x-ms-examples": {
+          "DocumentDBDatabaseAccountGet": { "$ref": "../examples/DocumentDBDatabaseAccountGet.json" }
+        },
         "description": "Retrieves the properties of an existing Azure DocumentDB database account.",
         "parameters": [
           {
@@ -63,6 +66,9 @@
       },
       "patch": {
         "operationId": "DatabaseAccounts_Patch",
+        "x-ms-examples": {
+          "DocumentDBDatabaseAccountPatch": { "$ref": "../examples/DocumentDBDatabaseAccountPatch.json" }
+        },
         "description": "Patches the properties of an existing Azure DocumentDB database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
@@ -99,6 +105,10 @@
       },
       "put": {
         "operationId": "DatabaseAccounts_CreateOrUpdate",
+        "x-ms-examples": {
+          "DocumentDBDatabaseAccountCreateMin": { "$ref": "../examples/DocumentDBDatabaseAccountCreateMin.json" },
+          "DocumentDBDatabaseAccountCreateMax": { "$ref": "../examples/DocumentDBDatabaseAccountCreateMax.json" }
+        },
         "description": "Creates or updates an Azure DocumentDB database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
@@ -135,6 +145,9 @@
       },
       "delete": {
         "operationId": "DatabaseAccounts_Delete",
+        "x-ms-examples": {
+          "DocumentDBDatabaseAccountDelete": { "$ref": "../examples/DocumentDBDatabaseAccountDelete.json" }
+        },
         "description": "Deletes an existing Azure DocumentDB database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
@@ -164,6 +177,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/failoverPriorityChange": {
       "post": {
         "operationId": "DatabaseAccounts_FailoverPriorityChange",
+        "x-ms-examples": {
+          "DocumentDBDatabaseAccountFailoverPriorityChange": { "$ref": "../examples/DocumentDBDatabaseAccountFailoverPriorityChange.json" }
+        },
         "description": "Changes the failover priority for the Azure DocumentDB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.",
         "x-ms-long-running-operation": true,
         "parameters": [
@@ -202,6 +218,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/databaseAccounts": {
       "get": {
         "operationId": "DatabaseAccounts_List",
+        "x-ms-examples": {
+          "DocumentDBDatabaseAccountList": { "$ref": "../examples/DocumentDBDatabaseAccountList.json" }
+        },
         "description": "Lists all the Azure DocumentDB database accounts available under the subscription.",
         "parameters": [
           {
@@ -227,6 +246,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts": {
       "get": {
         "operationId": "DatabaseAccounts_ListByResourceGroup",
+        "x-ms-examples": {
+          "DocumentDBDatabaseAccountListByResourceGroup": { "$ref": "../examples/DocumentDBDatabaseAccountListByResourceGroup.json" }
+        },
         "description": "Lists all the Azure DocumentDB database accounts available under the given resource group.",
         "parameters": [
           {
@@ -255,6 +277,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/listKeys": {
       "post": {
         "operationId": "DatabaseAccounts_ListKeys",
+        "x-ms-examples": {
+          "DocumentDBDatabaseAccountListKeys": { "$ref": "../examples/DocumentDBDatabaseAccountListKeys.json" }
+        },
         "description": "Lists the access keys for the specified Azure DocumentDB database account.",
         "parameters": [
           {
@@ -280,9 +305,44 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/listConnectionStrings": {
+      "post": {
+        "operationId": "DatabaseAccounts_ListConnectionStrings",
+        "x-ms-examples": {
+          "DocumentDBDatabaseAccountListConnectionStrings": { "$ref": "../examples/DocumentDBDatabaseAccountListConnectionStrings.json" },
+          "DocumentDBDatabaseAccountListConnectionStringsMongo": { "$ref": "../examples/DocumentDBDatabaseAccountListConnectionStringsMongo.json" }
+        },
+        "description": "Lists the connection strings for the specified Azure DocumentDB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountListConnectionStringsResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/readonlykeys": {
       "get": {
         "operationId": "DatabaseAccounts_ListReadOnlyKeys",
+        "x-ms-examples": {
+          "DocumentDBDatabaseAccountListReadOnlyKeys": { "$ref": "../examples/DocumentDBDatabaseAccountListReadOnlyKeys.json" }
+        },
         "description": "Lists the read-only access keys for the specified Azure DocumentDB database account.",
         "parameters": [
           {
@@ -311,6 +371,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/regenerateKey": {
       "post": {
         "operationId": "DatabaseAccounts_RegenerateKey",
+        "x-ms-examples": {
+          "DocumentDBDatabaseAccountRegenerateKey": { "$ref": "../examples/DocumentDBDatabaseAccountRegenerateKey.json" }
+        },
         "description": "Regenerates an access key for the specified Azure DocumentDB database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
@@ -349,6 +412,9 @@
     "/providers/Microsoft.DocumentDB/databaseAccountNames/{accountName}": {
       "head": {
         "operationId": "DatabaseAccounts_CheckNameExists",
+        "x-ms-examples": {
+          "DocumentDBDatabaseAccountCheckNameExists": { "$ref": "../examples/DocumentDBDatabaseAccountCheckNameExists.json" }
+        },
         "description": "Checks that the Azure DocumentDB account name already exists. A valid account name may contain only lowercase letters, numbers, and the '-' character, and must be between 3 and 50 characters.",
         "parameters": [
           {
@@ -626,6 +692,20 @@
       "description": "Parameters to create and update DocumentDB database accounts.",
       "type": "object",
       "properties": {
+        "kind": {
+          "description": "Indicates the type of database account. This can only be set at database account creation.",
+          "type": "string",
+          "default": "GlobalDocumentDB",
+          "enum": [
+            "GlobalDocumentDB",
+            "MongoDB",
+            "Parse"
+          ],
+          "x-ms-enum": {
+            "name": "DatabaseAccountKind",
+            "modelAsString": true
+          }
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
@@ -683,6 +763,33 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountListReadOnlyKeysResult"
+        }
+      }
+    },
+    "DatabaseAccountConnectionString": {
+      "description": "Connection string for the DocumentDB account",
+      "properties": {
+        "connectionString": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Value of the connection string"
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Description of the connection string"
+        }
+      }
+    },
+    "DatabaseAccountListConnectionStringsResult": {
+      "description": "The connection strings for the given database account.",
+      "properties": {
+        "connectionStrings": {
+          "type": "array",
+          "description": "An array that contains the connection strings for the DocumentDB account.",
+          "items": {
+            "$ref": "#/definitions/DatabaseAccountConnectionString"
+          }
         }
       }
     },
