@@ -1,0 +1,1729 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "v1",
+		"title": "Microsoft.Azure.Engineering.Gateway"
+	},
+	"host": "management.azure.com",
+	"schemes": ["https"],
+	"paths": {
+		"/subscriptions/{subscriptionId}/providers/microsoft.Advisor/generaterecommendations": {
+			"post": {
+				"tags": ["GenerateRecommendations"],
+				"operationId": "GenerateRecommendations_POST",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "api-version",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/subscriptions/{subscriptionId}/providers/microsoft.Advisor/generaterecommendations/{operationId}": {
+			"get": {
+				"tags": ["GenerateRecommendations"],
+				"operationId": "GenerateRecommendations_GET",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "operationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "api-version",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/subscriptions/{subscriptionId}/providers/microsoft.Advisor/recommendations": {
+			"get": {
+				"tags": ["GetRecommendations"],
+				"operationId": "GetRecommendations_GetRecomendation",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "query",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResourceRecommendationDetail"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{provider}/{resourcetype}/{resourceName}/providers/Microsoft.Security/securityStatuses/{securityname}/{securitytype}/providers/Microsoft.Advisor/recommendations/{recomendationId}": {
+			"get": {
+				"tags": ["GetRecommendations"],
+				"operationId": "GetRecommendations_GetRecomendation",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "resourceGroup",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "provider",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securityname",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securitytype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResourceRecommendationDetail"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{provider}/{resourcetype}/{resourceName}/{subresourcetype}/{subresourcename}/providers/Microsoft.Security/securityStatuses/{securityname}/providers/Microsoft.Advisor/recommendations/{recomendationId}": {
+			"get": {
+				"tags": ["GetRecommendations"],
+				"operationId": "GetRecommendations_GetRecomendation",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "resourceGroup",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "provider",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "subresourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "subresourcename",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securityname",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResourceRecommendationDetail"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{provider}/{resourcetype}/{resourceName}/providers/Microsoft.Security/securityStatuses/{securityname}/providers/Microsoft.Advisor/recommendations/{recomendationId}": {
+			"get": {
+				"tags": ["GetRecommendations"],
+				"operationId": "GetRecommendations_GetRecomendation",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "resourceGroup",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "provider",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securityname",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResourceRecommendationDetail"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{provider}/{resourcetype}/{resourceName}/providers/Microsoft.Security/securityStatuses/{securityname}/{securitytype}/{securityname2}/providers/Microsoft.Advisor/recommendations/{recomendationId}": {
+			"get": {
+				"tags": ["GetRecommendations"],
+				"operationId": "GetRecommendations_GetRecomendation",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "resourceGroup",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "provider",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securityname",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securitytype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securityname2",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResourceRecommendationDetail"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{provider}/{resourcetype}/{resourceName}/providers/Microsoft.Advisor/recommendations/{recomendationId}": {
+			"get": {
+				"tags": ["GetRecommendations"],
+				"operationId": "GetRecommendations_GetRecomendation",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "resourceGroup",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "provider",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResourceRecommendationDetail"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{provider}/{resourcetype}/{resourceName}/{subresourcetype}/{subresourcename}/providers/Microsoft.Advisor/recommendations/{recomendationId}": {
+			"get": {
+				"tags": ["GetRecommendations"],
+				"operationId": "GetRecommendations_GetRecomendation",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "resourceGroup",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "provider",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "subresourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "subresourcename",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResourceRecommendationDetail"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/subscriptions/{subscriptionId}/providers/microsoft.Advisor/recommendations/{recomendationId}": {
+			"get": {
+				"tags": ["GetRecommendations"],
+				"operationId": "GetRecommendations_GetRecomendation",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResourceRecommendationDetail"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/providers/microsoft.Advisor/operations": {
+			"get": {
+				"tags": ["OperationDiscovery"],
+				"operationId": "OperationDiscovery_GetOperationsForDiscovery",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/CollectionResponse[OperationEntity]"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{provider}/{resourcetype}/{resourceName}/{subresourcetype}/{subresourcename}/providers/Microsoft.Security/securityStatuses/{securityname}/providers/Microsoft.Advisor/recommendations/{recomendationId}/suppressions/{name}": {
+			"put": {
+				"tags": ["Suppression"],
+				"operationId": "Suppression_Suppressions",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "api-version",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceGroup",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "provider",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "subresourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "subresourcename",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securityname",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "name",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"deprecated": false
+			},
+			"delete": {
+				"tags": ["Suppression"],
+				"operationId": "Suppression_Delete",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "name",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "api-version",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceGroup",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "provider",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "subresourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "subresourcename",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securityname",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{provider}/{resourcetype}/{resourceName}/providers/Microsoft.Security/securityStatuses/{securityname}/{securitytype}/{securityname2}/providers/Microsoft.Advisor/recommendations/{recomendationId}/suppressions/{name}": {
+			"put": {
+				"tags": ["Suppression"],
+				"operationId": "Suppression_Suppressions",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "api-version",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceGroup",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "provider",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securityname",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securitytype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securityname2",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "name",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"deprecated": false
+			},
+			"delete": {
+				"tags": ["Suppression"],
+				"operationId": "Suppression_Delete",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "name",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "api-version",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceGroup",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "provider",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securityname",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securitytype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securityname2",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{provider}/{resourcetype}/{resourceName}/providers/Microsoft.Security/securityStatuses/{securityname}/{securitytype}/providers/Microsoft.Advisor/recommendations/{recomendationId}/suppressions/{name}": {
+			"put": {
+				"tags": ["Suppression"],
+				"operationId": "Suppression_Suppressions",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "api-version",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceGroup",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "provider",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securityname",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securitytype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "name",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"deprecated": false
+			},
+			"delete": {
+				"tags": ["Suppression"],
+				"operationId": "Suppression_Delete",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "name",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "api-version",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceGroup",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "provider",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securityname",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securitytype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{provider}/{resourcetype}/{resourceName}/providers/Microsoft.Security/securityStatuses/{securityname}/providers/Microsoft.Advisor/recommendations/{recomendationId}/suppressions/{name}": {
+			"put": {
+				"tags": ["Suppression"],
+				"operationId": "Suppression_Suppressions",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "api-version",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceGroup",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "provider",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securityname",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "name",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"deprecated": false
+			},
+			"delete": {
+				"tags": ["Suppression"],
+				"operationId": "Suppression_Delete",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "name",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "api-version",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceGroup",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "provider",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "securityname",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{provider}/{resourcetype}/{resourceName}/{subresourcetype}/{subresourcename}/providers/Microsoft.Advisor/recommendations/{recomendationId}/suppressions/{name}": {
+			"put": {
+				"tags": ["Suppression"],
+				"operationId": "Suppression_Suppressions",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "api-version",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceGroup",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "provider",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "subresourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "subresourcename",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "name",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"deprecated": false
+			},
+			"delete": {
+				"tags": ["Suppression"],
+				"operationId": "Suppression_Delete",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "name",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "api-version",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceGroup",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "provider",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "subresourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "subresourcename",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{provider}/{resourcetype}/{resourceName}/providers/Microsoft.Advisor/recommendations/{recomendationId}/suppressions/{name}": {
+			"put": {
+				"tags": ["Suppression"],
+				"operationId": "Suppression_Suppressions",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "api-version",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceGroup",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "provider",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "name",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"deprecated": false
+			},
+			"delete": {
+				"tags": ["Suppression"],
+				"operationId": "Suppression_Delete",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "recomendationId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "name",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "api-version",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceGroup",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "provider",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourcetype",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "resourceName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/subscriptions/{subscriptionId}/providers/microsoft.Advisor/suppressions": {
+			"get": {
+				"tags": ["Suppression"],
+				"operationId": "Suppression_GET",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "subscriptionId",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"format": "uuid"
+				},
+				{
+					"name": "api-version",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"deprecated": false
+			}
+		}
+	},
+	"definitions": {
+		"ResourceRecommendationDetail": {
+			"type": "object",
+			"properties": {
+				"actions": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ResourceRecomendationAction"
+					}
+				},
+				"description": {
+					"type": "string"
+				},
+				"label": {
+					"type": "string"
+				},
+				"learnMoreLink": {
+					"type": "string"
+				},
+				"category": {
+					"enum": ["HighAvailability",
+					"Security",
+					"Performance",
+					"Cost"],
+					"type": "string"
+				},
+				"id": {
+					"type": "string"
+				},
+				"impact": {
+					"enum": ["High",
+					"Medium",
+					"Low"],
+					"type": "string"
+				},
+				"impactedName": {
+					"type": "string"
+				},
+				"impactedType": {
+					"type": "string"
+				},
+				"lastUpdated": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"shortDescription": {
+					"$ref": "#/definitions/ShortDescription"
+				},
+				"subscriptionId": {
+					"format": "uuid",
+					"type": "string"
+				}
+			}
+		},
+		"ResourceRecomendationAction": {
+			"type": "object",
+			"properties": {
+				"actionType": {
+					"enum": ["Blade",
+					"Document",
+					"PowerShell",
+					"CLI"],
+					"type": "string"
+				},
+				"caption": {
+					"type": "string"
+				},
+				"description": {
+					"type": "string"
+				},
+				"metadata": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "object"
+					}
+				}
+			}
+		},
+		"ShortDescription": {
+			"type": "object",
+			"properties": {
+				"problem": {
+					"type": "string"
+				},
+				"solution": {
+					"type": "string"
+				}
+			}
+		},
+		"CollectionResponse[OperationEntity]": {
+			"type": "object",
+			"properties": {
+				"nextLink": {
+					"type": "string"
+				},
+				"value": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/OperationEntity"
+					}
+				}
+			}
+		},
+		"OperationEntity": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"display": {
+					"$ref": "#/definitions/OperationDisplayInfo"
+				}
+			}
+		},
+		"OperationDisplayInfo": {
+			"type": "object",
+			"properties": {
+				"description": {
+					"type": "string"
+				},
+				"operation": {
+					"type": "string"
+				},
+				"provider": {
+					"type": "string"
+				},
+				"resource": {
+					"type": "string"
+				}
+			}
+		},
+		"SubscriptionNotificationDefinition": {
+			"type": "object",
+			"properties": {
+				"properties": {
+					"$ref": "#/definitions/SubscriptionNotificationPropertiesDefinition"
+				},
+				"registrationDate": {
+					"type": "string"
+				},
+				"state": {
+					"enum": ["NotDefined",
+					"Registered",
+					"Unregistered",
+					"Warned",
+					"Suspended",
+					"Deleted"],
+					"type": "string"
+				}
+			}
+		},
+		"SubscriptionNotificationPropertiesDefinition": {
+			"type": "object",
+			"properties": {
+				"accountOwner": {
+					"$ref": "#/definitions/SubscriptionAccountOwner"
+				},
+				"locationPlacementId": {
+					"type": "string"
+				},
+				"quotaId": {
+					"type": "string"
+				},
+				"registeredFeatures": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/FeatureDefinition"
+					}
+				},
+				"tenantId": {
+					"type": "string"
+				}
+			}
+		},
+		"SubscriptionAccountOwner": {
+			"type": "object",
+			"properties": {
+				"puid": {
+					"type": "string"
+				}
+			}
+		},
+		"FeatureDefinition": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"state": {
+					"enum": ["NotSpecified",
+					"NotRegistered",
+					"Pending",
+					"Registered"],
+					"type": "string"
+				}
+			}
+		}
+	}
+}
