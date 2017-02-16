@@ -383,19 +383,7 @@
         ],
         "operationId": "RestoreKey",
         "summary": "Restores a backed up key to a vault.",
-        "description": "Imports a previously backed up key into Azure Key Vault, restoring the key, its key identifier, attributes and access control policies.
-
-The RESTORE operation may be used to import a previously backed up key. Individual versions of a key cannot be restored.
-
-The key is restored in its entirety with the same key name as it had when it was backed up. If the key name is not available in the target Key Vault, the RESTORE operation will be rejected. While the key name is retained during restore, the final key identifier will change if the key is restored to a different vault.
-
-Restore will restore all versions and preserve version identifiers.
-
-The RESTORE operation is subject to security constraints:
-
-The target Key Vault must be owned by the same Microsoft Azure Subscription as the source Key Vault
-
-The user must have RESTORE permission in the target Key Vault ",
+        "description": "Imports a previously backed up key into Azure Key Vault, restoring the key, its key identifier, attributes and access control policies. The RESTORE operation may be used to import a previously backed up key. Individual versions of a key cannot be restored. The key is restored in its entirety with the same key name as it had when it was backed up. If the key name is not available in the target Key Vault, the RESTORE operation will be rejected. While the key name is retained during restore, the final key identifier will change if the key is restored to a different vault. Restore will restore all versions and preserve version identifiers. The RESTORE operation is subject to security constraints: The target Key Vault must be owned by the same Microsoft Azure Subscription as the source Key Vault The user must have RESTORE permission in the target Key Vault.",
         "parameters": [
           {
             "name": "parameters",
@@ -434,9 +422,7 @@ The user must have RESTORE permission in the target Key Vault ",
         ],
         "operationId": "encrypt",
         "summary": "Encrypts an arbitrary sequence of bytes using an encryption key that is stored in a key vault.",
-        "description": "The ENCRYPT operation encrypts an arbitrary sequence of bytes using an encryption key that is stored in Azure Key Vault. Note that the ENCRYPT operation only supports a single block of data, the size of which is dependent on the target key and the encryption algorithm to be used.
-
-The ENCRYPT operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material.",
+        "description": "The ENCRYPT operation encrypts an arbitrary sequence of bytes using an encryption key that is stored in Azure Key Vault. Note that the ENCRYPT operation only supports a single block of data, the size of which is dependent on the target key and the encryption algorithm to be used. The ENCRYPT operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material.",
         "parameters": [
           {
             "name": "key-name",
@@ -489,9 +475,7 @@ The ENCRYPT operation is only strictly necessary for symmetric keys stored in Az
         ],
         "operationId": "decrypt",
         "summary": "Decrypts a single block of encrypted data.",
-        "description": "The DECRYPT operation decrypts a well-formed block of ciphertext using the target encryption key and specified algorithm. This operation is the reverse of the ENCRYPT operation; only a single block of data may be decrypted, the size of this block is dependent on the target key and the algorithm to be used.
-
-The DECRYPT operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key.",
+        "description": "The DECRYPT operation decrypts a well-formed block of ciphertext using the target encryption key and specified algorithm. This operation is the reverse of the ENCRYPT operation; only a single block of data may be decrypted, the size of this block is dependent on the target key and the algorithm to be used. The DECRYPT operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key.",
         "parameters": [
           {
             "name": "key-name",
@@ -650,9 +634,7 @@ The DECRYPT operation applies to asymmetric and symmetric keys stored in Azure K
         ],
         "operationId": "wrapKey",
         "summary": "Wraps a symmetric key using a specified key.",
-        "description": "The WRAP operation supports encryption of a symmetric key using a key encryption key that has previously been stored in an Azure Key Vault.
-
-The WRAP operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using the public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material.",
+        "description": "The WRAP operation supports encryption of a symmetric key using a key encryption key that has previously been stored in an Azure Key Vault. The WRAP operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using the public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material.",
         "parameters": [
           {
             "name": "key-name",
@@ -705,9 +687,7 @@ The WRAP operation is only strictly necessary for symmetric keys stored in Azure
         ],
         "operationId": "unwrapKey",
         "summary": "Unwraps a symmetric key using the specified key that was initially used for wrapping that key.",
-        "description": "The UNWRAP operation supports decryption of a symmetric key using the target key encryption key. This operation is the reverse of the WRAP operation.
-
-The UNWRAP operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key.",
+        "description": "The UNWRAP operation supports decryption of a symmetric key using the target key encryption key. This operation is the reverse of the WRAP operation. The UNWRAP operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key.",
         "parameters": [
           {
             "name": "key-name",
