@@ -43,7 +43,8 @@
         ],
         "operationId": "BatchAccount_Create",
         "x-ms-examples": {
-          "BatchAccountCreate_Default": { "$ref": "../examples/BatchAccountCreate_Default.json" }
+          "BatchAccountCreate_Default": { "$ref": "../examples/BatchAccountCreate_Default.json" },
+          "BatchAccountCreate_BYOS": { "$ref": "../examples/BatchAccountCreate_BYOS.json" }
         },
         "description": "Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.",
         "parameters": [
@@ -466,8 +467,8 @@
           "BatchAccount"
         ],
         "operationId": "BatchAccount_GetKeys",
-        "description": "Gets the account keys for the specified Batch account.",
-        "summary": "This operation applies only to Batch accounts created with a poolAllocationMode of 'BatchService'. If the Batch account was created with a poolAllocationMode of 'UserSubscription', clients cannot use access to keys to authenticate, and must use Azure Active Directory instead. In this case, getting the keys will fail.",
+        "summary": "Gets the account keys for the specified Batch account.",
+        "description": "This operation applies only to Batch accounts created with a poolAllocationMode of 'BatchService'. If the Batch account was created with a poolAllocationMode of 'UserSubscription', clients cannot use access to keys to authenticate, and must use Azure Active Directory instead. In this case, getting the keys will fail.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1108,6 +1109,15 @@
         "autoStorage": {
           "$ref": "#/definitions/AutoStorageBaseProperties",
           "description": "The properties related to auto storage account."
+        },
+        "poolAllocationMode": {
+          "title": "The allocation mode to use for creating pools in the Batch account.",
+          "description": "The pool allocation mode also affects how clients may authenticate to the Batch Service API. If the mode is BatchService, clients may authenticate using access keys or Azure Active Directory. If the mode is UserSubscription, clients must use Azure Active Directory. The default is BatchService.",
+          "$ref": "#/definitions/PoolAllocationMode"
+        },
+        "keyVaultReference": {
+          "$ref": "#/definitions/KeyVaultReference",
+          "description": "A reference to the Azure key vault associated with the Batch account."
         }
       },
       "description": "The properties of a Batch account."
@@ -1125,15 +1135,6 @@
           },
           "description": "The user specified tags associated with the account."
         },
-        "poolAllocationMode": {
-          "title": "The allocation mode to use for creating pools in the Batch account.",
-          "description": "The pool allocation mode also affects how clients may authenticate to the Batch Service API. If the mode is BatchService, clients may authenticate using access keys or Azure Active Directory. If the mode is UserSubscription, clients must use Azure Active Directory. The default is BatchService.",
-          "$ref": "#/definitions/PoolAllocationMode"
-        },
-        "keyVaultReference": {
-          "$ref": "#/definitions/KeyVaultReference",
-          "description": "A reference to the Azure key vault associated with the Batch account."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BatchAccountBaseProperties",
@@ -1150,10 +1151,15 @@
         "id": {
           "type": "string",
           "description": "The resource ID of the Azure key vault associated with the Batch account."
+        },
+        "url": {
+          "type": "string",
+          "description": "The Url of the Azure key vault associated with the Batch account."
         }
       },
       "required": [
-        "id"
+        "id",
+        "url"
       ],
       "description": "Identifies the Azure key vault associated with a Batch account."
     },
@@ -1312,10 +1318,12 @@
       "properties": {
         "primary": {
           "type": "string",
+          "readOnly": true,
           "description": "The primary key associated with the account."
         },
         "secondary": {
           "type": "string",
+          "readOnly": true,
           "description": "The secondary key associated with the account."
         }
       },
@@ -1378,14 +1386,17 @@
       "properties": {
         "id": {
           "type": "string",
+          "readOnly": true,
           "description": "The ID of the application."
         },
         "version": {
           "type": "string",
+          "readOnly": true,
           "description": "The version of the application package. "
         },
         "state": {
           "type": "string",
+          "readOnly": true,
           "description": "The current state of the application package.",
           "enum": [
             "pending",
@@ -1399,20 +1410,24 @@
         },
         "format": {
           "type": "string",
+          "readOnly": true,
           "description": "The format of the application package, if the package is active."
         },
         "storageUrl": {
           "type": "string",
+          "readOnly": true,
           "description": "The storage URL at which the application package is stored."
         },
         "storageUrlExpiry": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The UTC time at which the storage URL will expire."
         },
         "lastActivationTime": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The time at which the package was last activated, if the package is active."
         }
       },
@@ -1456,6 +1471,7 @@
         "accountQuota": {
           "type": "integer",
           "format": "int32",
+          "readOnly": true,
           "description": "The number of Batch accounts that may be created under the subscription in the specified region."
         }
       },
