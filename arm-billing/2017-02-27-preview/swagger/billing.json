@@ -3,7 +3,7 @@
   "info": {
     "version": "2017-02-27-preview",
     "title": "BillingClient",
-    "description": "Billing client provides access to billing resources for Azure Web-Direct subscrions. Other subscription types which were not purchased directly through the Azure web portal are not supported through this preview API."
+    "description": "Billing client provides access to billing resources for Azure Web-Direct subscriptions. Other subscription types which were not purchased directly through the Azure web portal are not supported through this preview API."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -40,7 +40,7 @@
           "Invoices"
         ],
         "operationId": "Invoices_List",
-        "description": "Lists the available invoices for a subscritpion in reverse chronological order beginning with the most recent invoice. In preview, invoices are available via this API only for invoice periods which end December 1, 2016 or later",
+        "description": "Lists the available invoices for a subscription in reverse chronological order beginning with the most recent invoice. In preview, invoices are available via this API only for invoice periods which end December 1, 2016 or later",
         "externalDocs": {
           "url": "https://go.microsoft.com/fwlink/?linkid=842057"
         },
@@ -258,11 +258,11 @@
       }      
     },
     "ErrorResponse": {
-      "description": "Error reponse indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "error": {
-           "$ref": "#/definitions/InvoiceProperties"
+           "$ref": "#/definitions/ErrorDetails"
         }
       }
     },
@@ -270,27 +270,16 @@
       "description": "An invoice resource can be used download a PDF version of an invoice.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/InvoiceProperties"
         }
       },
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "InvoicesListResult": {
       "description": "Result of the request to list invoices. It contains a list of available invoices in reverse chronological order.",
@@ -326,6 +315,7 @@
           "readOnly": true
         },
         "downloadUrl": {
+          "description": "A secure link to download the PDF version of an invoice. The link will cease to work after its expiry time is reached.",
           "$ref": "#/definitions/DownloadUrl"
         }
       }
@@ -378,6 +368,27 @@
           "readOnly": true
         }
       }
+    },
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
