@@ -142,6 +142,16 @@
         ],
         "operationId": "Databases_CreateOrUpdate",
         "description": "Creates a new Azure SQL database or updates an existing Azure SQL database. Location is a required property in the request body, and it must be the same as the location of the SQL server.",
+        "x-ms-examples": {
+          "Create a database min": { "$ref": "../examples/DatabaseCreateMin.json" },
+          "Create a database max": { "$ref": "../examples/DatabaseCreateMax.json" },
+          "Create a database as a copy": { "$ref": "../examples/DatabaseCreateCopy.json" },
+          "Create a database as an online secondary": { "$ref": "../examples/DatabaseCreateOnlineSecondary.json" },
+          "Create a database as a non-readable secondary": { "$ref": "../examples/DatabaseCreateNonReadableSecondary.json" },
+          "Update a database's elastic pool'": { "$ref": "../examples/DatabaseUpdateElasticPool.json" },
+          "Update a database max": { "$ref": "../examples/DatabaseUpdateMax.json" },
+          "Update a database min": { "$ref": "../examples/DatabaseUpdateMin.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -200,6 +210,9 @@
         ],
         "operationId": "Databases_Delete",
         "description": "Deletes an Azure SQL database.",
+        "x-ms-examples": {
+          "Delete a database": { "$ref": "../examples/DatabaseDelete.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -236,6 +249,9 @@
         ],
         "operationId": "Databases_Get",
         "description": "Gets information about an Azure SQL database.",
+        "x-ms-examples": {
+          "Get a database": { "$ref": "../examples/DatabaseGet.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -281,6 +297,9 @@
         ],
         "operationId": "Databases_ListByServer",
         "description": "Returns information about an Azure SQL database.",
+        "x-ms-examples": {
+          "List databases by server": { "$ref": "../examples/DatabaseList.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -315,6 +334,9 @@
         ],
         "operationId": "Databases_ListUsages",
         "description": "Returns information about Azure SQL database usages.",
+        "x-ms-examples": {
+          "List database usage metrics": { "$ref": "../examples/DatabaseUsageMetricsList.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -356,6 +378,9 @@
         ],
         "operationId": "Servers_List",
         "description": "Returns information about an Azure SQL server.",
+        "x-ms-examples": {
+          "List servers": { "$ref": "../examples/ServerList.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -383,7 +408,11 @@
           "Servers"
         ],
         "operationId": "Servers_CreateOrUpdate",
-        "description": "Creates a new Azure SQL server.",
+        "description": "Creates or updates a new Azure SQL server.",
+        "x-ms-examples": {
+          "Create server min": { "$ref": "../examples/ServerCreateMin.json" },
+          "Create server max": { "$ref": "../examples/ServerCreateMax.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -428,6 +457,9 @@
         ],
         "operationId": "Servers_Delete",
         "description": "Deletes a SQL server.",
+        "x-ms-examples": {
+          "Delete SQL Server": { "$ref": "../examples/ServerDelete.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -457,6 +489,9 @@
         ],
         "operationId": "Servers_GetByResourceGroup",
         "description": "Gets information about an Azure SQL server.",
+        "x-ms-examples": {
+          "Get Server": { "$ref": "../examples/ServerGet.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -488,6 +523,9 @@
         ],
         "operationId": "Servers_ListByResourceGroup",
         "description": "Returns information about an Azure SQL server.",
+        "x-ms-examples": {
+          "List servers by resource group": { "$ref": "../examples/ServerListByResourceGroup.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -519,6 +557,9 @@
         ],
         "operationId": "Servers_ListUsages",
         "description": "Returns information about Azure SQL server usage.",
+        "x-ms-examples":{
+          "List servers usages": { "$ref": "../examples/ServerUsageMetricsList.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -553,6 +594,12 @@
         ],
         "operationId": "ElasticPools_CreateOrUpdate",
         "description": "Creates a new Azure SQL elastic pool or updates an existing Azure SQL elastic pool.",
+        "x-ms-examples":{
+          "Create elastic pool max": { "$ref": "../examples/ElasticPoolCreateMax.json" },
+          "Create elastic pool min": { "$ref": "../examples/ElasticPoolCreateMin.json" },
+          "Update elastic pool max": { "$ref": "../examples/ElasticPoolUpdateMax.json" },
+          "Update elastic pool min": { "$ref": "../examples/ElasticPoolUpdateMin.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -611,6 +658,9 @@
         ],
         "operationId": "ElasticPools_Delete",
         "description": "Deletes the Azure SQL elastic pool.",
+        "x-ms-examples":{
+          "Delete elastic pool": { "$ref": "../examples/ElasticPoolDelete.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -647,6 +697,9 @@
         ],
         "operationId": "ElasticPools_Get",
         "description": "Gets information about an Azure SQL elastic pool.",
+        "x-ms-examples":{
+          "Get elastic pool": { "$ref": "../examples/ElasticPoolGet.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -685,6 +738,9 @@
         ],
         "operationId": "ElasticPools_ListByServer",
         "description": "Returns information about Azure SQL elastic pools.",
+        "x-ms-examples":{
+          "List elastic pools": { "$ref": "../examples/ElasticPoolList.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -719,6 +775,9 @@
         ],
         "operationId": "ElasticPools_ListActivity",
         "description": "Returns information about Azure SQL elastic pool activities.",
+        "x-ms-examples":{
+          "List Elastic pool activity": { "$ref": "../examples/ElasticPoolActivityList.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -760,6 +819,9 @@
         ],
         "operationId": "ElasticPools_ListDatabaseActivity",
         "description": "Returns information about activity on Azure SQL databases inside of an Azure SQL elastic pool.",
+        "x-ms-examples":{
+          "List elastic pool database activity": { "$ref": "../examples/ElasticPoolDatabaseActivityList.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1408,7 +1470,7 @@
         "dtu": {
           "type": "number",
           "format": "double",
-          "description": "The DTU for the SQL Azure Recommended Elastic Pool."
+          "description": "The DTU for the Azure Sql Recommended Elastic Pool."
         },
         "databaseDtuMin": {
           "type": "number",
@@ -1572,22 +1634,22 @@
         "dtu": {
           "type": "integer",
           "format": "int32",
-          "description": "The total shared DTU for the SQL Azure Database Elastic Pool."
+          "description": "The total shared DTU for the Azure Sql Database Elastic Pool."
         },
         "databaseDtuMax": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum DTU any one SQL Azure Database can consume."
+          "description": "The maximum DTU any one Azure Sql Database can consume."
         },
         "databaseDtuMin": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum DTU all SQL Azure Databases are guaranteed."
+          "description": "The minimum DTU all Azure Sql Databases are guaranteed."
         },
         "storageMB": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets storage limit for the SQL Azure Database Elastic Pool in MB."
+          "description": "Gets storage limit for the Azure Sql Database Elastic Pool in MB."
         }
       },
       "description": "Represents the properties of an Azure SQL Elastic Pool."
@@ -1969,7 +2031,7 @@
             "Drop",
             "Rebuild"
           ],
-          "description": "The proposed index action. You can create a missing index, drop an unused index, or rebuild an existing index to improve its performance. Possible values are 'Create', 'Drop', 'Rebuild'.",
+          "description": "The proposed index action. You can create a missing index, drop an unused index, or rebuild an existing index to improve its performance.",
           "x-ms-enum": {
            "name": "RecommendedIndexActions"
           }
@@ -1990,7 +2052,7 @@
             "Success"
           ],
           "type": "string",
-          "description": "The current recommendation state. Current options are: 'Active', 'Pending', 'Executing', 'Verifying', 'Pending Revert', 'Reverting', 'Reverted', 'Ignored', 'Expired', 'Blocked', 'Success'.",
+          "description": "The current recommendation state.",
           "x-ms-enum": {
            "name": "RecommendedIndexStates"
           }
