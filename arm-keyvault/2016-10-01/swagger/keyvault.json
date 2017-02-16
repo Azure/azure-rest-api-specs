@@ -3,7 +3,7 @@
   "info": {
     "title": "KeyVaultManagementClient",
     "description": "The Azure management API provides a RESTful set of web services that interact with Azure Key Vault.",
-    "version": "2015-06-01"
+    "version": "2016-10-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -184,6 +184,73 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/deletedVaults": {
+      "get": {
+        "tags": [
+          "Vaults"
+        ],
+        "operationId": "Vaults_ListDeleted",
+        "description": "Gets information about the deleted vaults in a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved information about all deleted key vaults in a subscription.",
+            "schema": {
+              "$ref": "#/definitions/DeletedVaultListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}": {
+      "get": {
+        "tags": [
+          "Vaults"
+        ],
+        "operationId": "Vaults_GetDeleted",
+        "description": "Gets the deleted Azure key vault.",
+        "parameters": [
+          {
+            "name": "vaultName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vault."
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the deleted vault."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved information about the deleted vault.",
+            "schema": {
+              "$ref": "#/definitions/DeletedVault"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resources": {
       "get": {
         "tags": [
@@ -295,7 +362,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [ "all", "encrypt", "decrypt", "wrapKey", "unwrapKey", "sign", "verify", "get", "list", "create", "update", "import", "delete", "backup", "restore", "recover", "purge" ],
+            "enum": [ "encrypt", "decrypt", "wrapKey", "unwrapKey", "sign", "verify", "get", "list", "create", "update", "import", "delete", "backup", "restore", "recover", "purge" ],
             "x-ms-enum": {
               "name": "KeyPermissions",
               "modelAsString": true
@@ -307,7 +374,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [ "all", "get", "list", "set", "delete", "backup", "restore", "recover", "purge" ],
+            "enum": [ "get", "list", "set", "delete", "backup", "restore", "recover", "purge" ],
             "x-ms-enum": {
               "name": "SecretPermissions",
               "modelAsString": true
@@ -319,7 +386,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [ "all", "get", "list", "delete", "create", "import", "update", "managecontacts", "getissuers", "listissuers", "setissuers", "deleteissuers", "manageissuers" ],
+            "enum": [ "get", "list", "delete", "create", "import", "update", "managecontacts", "getissuers", "listissuers", "setissuers", "deleteissuers", "manageissuers" ],
             "x-ms-enum": {
               "name": "CertificatePermissions",
               "modelAsString": true
@@ -332,10 +399,6 @@
     },
     "VaultProperties": {
       "properties": {
-        "vaultUri": {
-          "type": "string",
-          "description": "The URI of the vault for performing operations on keys and secrets."
-        },
         "tenantId": {
           "type": "string",
           "format": "uuid",
@@ -353,6 +416,10 @@
           "maxItems": 16,
           "description": "An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID."
         },
+        "vaultUri": {
+          "type": "string",
+          "description": "The URI of the vault for performing operations on keys and secrets."
+        },
         "enabledForDeployment": {
           "type": "boolean",
           "description": "Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault."
@@ -367,15 +434,58 @@
         },
         "enableSoftDelete": {
           "type": "boolean",
-          "description": "Property to specify whether the 'soft delete' functionality is enabled for this key vault."
+          "description": "Property to specify whether the 'soft delete' functionality is enabled for this key vault. It does not accept false value."
+        },
+        "createMode": {
+          "type": "string",
+          "description": "The vault's create mode to indicate whether the vault need to be recovered or not.",
+          "enum": [ "recover", "default" ],
+          "x-ms-enum": {
+            "name": "CreateMode",
+            "modelAsString": false
+          }
         }
       },
       "required": [
         "tenantId",
-        "sku",
-        "accessPolicies"
+        "sku"
       ],
       "description": "Properties of the vault"
+    },
+    "DeletedVaultProperties": {
+      "properties": {
+        "vaultId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource id of the original vault."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The location of the original vault."
+        },
+        "deletionDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The deleted date."
+        },
+        "scheduledPurgeDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The scheduled purged date."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags of the original vault."
+        }
+      },
+      "description": "Properties of the deleted vault."
     },
     "VaultCreateOrUpdateParameters": {
       "properties": {
@@ -388,7 +498,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The tags that will be assigned to the key vault. "
+          "description": "The tags that will be assigned to the key vault."
         },
         "properties": {
           "$ref": "#/definitions/VaultProperties",
@@ -419,6 +529,30 @@
       ],
       "description": "Resource information with extended details."
     },
+    "DeletedVault": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource ID for the deleted key vault."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the key vault."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type of the key vault."
+        },
+        "properties": {
+          "$ref": "#/definitions/DeletedVaultProperties",
+          "description": "Properties of the vault"
+        }
+      },
+      "description": "Deleted vault information with extended details."
+    },
     "VaultListResult": {
       "properties": {
         "value": {
@@ -431,6 +565,22 @@
         "nextLink": {
           "type": "string",
           "description": "Gets or sets the URL to get the next set of vaults."
+        }
+      },
+      "description": "List of vaults"
+    },
+    "DeletedVaultListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedVault"
+          },
+          "description": "The list of deleted vaults."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of deleted vaults."
         }
       },
       "description": "List of vaults"
