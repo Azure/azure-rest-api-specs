@@ -798,7 +798,7 @@
           "DeletedKeys"
         ],
         "operationId": "PurgeDeletedKey",
-        "description": "Deletes the specified key forever. aka purges the key.",
+        "description": "Permanently deletes the specified key. aka purges the key.",
         "parameters": [
           {
             "name": "key-name",
@@ -1199,7 +1199,7 @@
           "DeletedSecrets"
         ],
         "operationId": "PurgeDeletedSecret",
-        "description": "Deletes the specified secret forever. aka purges the secret.",
+        "description": "Permanently deletes the specified secret. aka purges the secret.",
         "parameters": [
           {
             "name": "secret-name",
@@ -2205,6 +2205,14 @@
           "$ref": "#/definitions/Attributes"
         }
       ],
+      "properties": {
+        "purgeDisabled": {
+          "type": "boolean",
+          "readOnly": true,
+          "x-nullable": false,
+          "description": "Reflects the purge protection status of the key. If true, purge is disabled, false, otherwise."
+        }
+      },
       "description": "The attributes of a key managed by the key vault service."
     },
     "KeyBundle": {
