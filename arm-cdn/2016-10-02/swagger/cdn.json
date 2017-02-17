@@ -1388,6 +1388,122 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains/{customDomainName}/disableCustomHttps": {
+      "post": {
+        "tags": [
+          "CustomDomains"
+        ],
+        "description": "Disable https delivery of the custom domain.",
+        "operationId": "CustomDomains_DisableCustomHttps",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customDomainName",
+            "in": "path",
+            "description": "Name of the custom domain within an endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains/{customDomainName}/enableCustomHttps": {
+      "post": {
+        "tags": [
+          "CustomDomains"
+        ],
+        "description": "Enable https delivery of the custom domain.",
+        "operationId": "CustomDomains_EnableCustomHttps",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customDomainName",
+            "in": "path",
+            "description": "Name of the custom domain within an endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Cdn/checkNameAvailability": {
       "post": {
         "tags": [
@@ -1431,7 +1547,7 @@
           "CheckResourceUsage"
         ],
         "description": "Check the quota and actual usage of the CDN profiles under the given subscription.",
-        "operationId": "CheckResourceUsage",
+        "operationId": "ListResourceUsage",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
