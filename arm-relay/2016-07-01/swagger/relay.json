@@ -1,4 +1,4 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
     "title": "Relay API",
@@ -37,7 +37,84 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Relay/namespaces": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListBySubscription",
+        "x-ms-examples": {
+          "RelayNameSpaceListBySubscription": { "$ref": "../examples/NameSpaces/RelayNameSpaceListBySubscription.json" }
+        },
+        "description": "Lists all the available namespaces within the subscription irrespective of the resourceGroups.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespaces returned successfully",
+            "schema": {
+              "$ref": "#/definitions/NamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListByResourceGroup",
+        "x-ms-examples": {
+          "RelayNameSpaceListByResourceGroup": { "$ref": "../examples/NameSpaces/RelayNameSpaceListByResourceGroup.json" }
+        },
+        "description": "Lists all the available namespaces within the ResourceGroup.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespaces by resourcegroup returned successfully",
+            "schema": {
+              "$ref": "#/definitions/NamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}": {
       "put": {
         "tags": [
           "Namespaces"
@@ -50,19 +127,11 @@
 
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
-          },
+		  {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },          
           {
             "name": "parameters",
             "in": "body",
@@ -112,18 +181,10 @@
         "description": "Deletes an existing namespace. This operation also removes all associated resources under the namespace.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -162,18 +223,10 @@
         "description": "Returns the description for the specified namespace.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -198,87 +251,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Relay/namespaces": {
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_ListBySubscription",
-        "x-ms-examples": {
-          "RelayNameSpaceListBySubscription": { "$ref": "../examples/NameSpaces/RelayNameSpaceListBySubscription.json" }
-        },
-        "description": "Lists all the available namespaces within the subscription irrespective of the resourceGroups.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespaces returned successfully",
-            "schema": {
-              "$ref": "#/definitions/NamespaceListResult"
-            }
-          },
-          "default": {
-            "description": "Relay error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces": {
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_ListByResourceGroup",
-        "x-ms-examples": {
-          "RelayNameSpaceListByResourceGroup": { "$ref": "../examples/NameSpaces/RelayNameSpaceListByResourceGroup.json" }
-        },
-        "description": "Lists all the available namespaces within the ResourceGroup.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespaces by resourcegroup returned successfully",
-            "schema": {
-              "$ref": "#/definitions/NamespaceListResult"
-            }
-          },
-          "default": {
-            "description": "Relay error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/AuthorizationRules": {
       "get": {
         "tags": [
@@ -291,18 +263,10 @@
         "description": "Authorization rules for a namespace.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -342,18 +306,10 @@
         "description": "Creates or Updates an authorization rule for a namespace",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "name": "authorizationRuleName",
@@ -404,25 +360,13 @@
         "description": "Deletes a namespace authorization rule",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization Rule Name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -444,7 +388,8 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "get": {
         "tags": [
@@ -457,25 +402,13 @@
         "description": "Authorization rule for a namespace by name.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -512,25 +445,13 @@
         "description": "Primary and Secondary ConnectionStrings to the namespace ",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorizationRule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -567,25 +488,13 @@
         "description": "Regenerats the Primary or Secondary ConnectionStrings to the namespace ",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorizationRule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -618,8 +527,51 @@
           }
         }
       }
+    },    
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/HybridConnections": {
+      "get": {
+        "tags": [
+          "HybridConnections"
+        ],
+        "operationId": "HybridConnections_ListAll",
+        "x-ms-examples": {
+          "RelayHybridConnectionListAll": { "$ref": "../examples/HybridConnection/RelayHybridConnectionListAll.json" }
+        },
+        "description": "Lists the HybridConnection within the namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request to retrieve HybridConnections by NameSpace succeeded",
+            "schema": {
+              "$ref": "#/definitions/HybridConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/HybridConnections/{hybridConnectionName}": {
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/HybridConnections/{hybridConnectionName}": {
       "put": {
         "tags": [
           "HybridConnections"
@@ -631,25 +583,13 @@
         "description": "Creates or Updates a service HybridConnection. This operation is idempotent.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "hybridConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Hybrid Connections name."
+            "$ref": "#/parameters/hybridConnectionNameParameter"
           },
           {
             "name": "parameters",
@@ -693,25 +633,13 @@
         "description": "Deletes a HybridConnection .",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "hybridConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The hybrid Connection name."
+            "$ref": "#/parameters/hybridConnectionNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -746,25 +674,13 @@
         "description": "Returns the description for the specified HybridConnection.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "hybridConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the hybrid connection."
+            "$ref": "#/parameters/hybridConnectionNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -789,57 +705,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/HybridConnections": {
-      "get": {
-        "tags": [
-          "HybridConnections"
-        ],
-        "operationId": "HybridConnections_ListAll",
-        "x-ms-examples": {
-          "RelayHybridConnectionListAll": { "$ref": "../examples/HybridConnection/RelayHybridConnectionListAll.json" }
-        },
-        "description": "Lists the HybridConnection within the namespace.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request to retrieve HybridConnections by NameSpace succeeded",
-            "schema": {
-              "$ref": "#/definitions/HybridConnectionListResult"
-            }
-          },
-          "default": {
-            "description": "Relay error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/HybridConnections/{hybridConnectionName}/authorizationRules": {
       "get": {
         "tags": [
@@ -852,25 +717,13 @@
         "description": "Authorization rules for a HybridConnection.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "hybridConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The HybridConnection name."
+            "$ref": "#/parameters/hybridConnectionNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -904,32 +757,16 @@
         "description": "Creates or Updates an authorization rule for a HybridConnection",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "hybridConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the hybrid connection."
+            "$ref": "#/parameters/hybridConnectionNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization Rule Name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -973,32 +810,16 @@
         "description": "Deletes a HybridConnection authorization rule",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "hybridConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the hybrid connection."
+		    "$ref": "#/parameters/hybridConnectionNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization Rule Name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1039,32 +860,16 @@
         "description": "HybridConnection authorizationRule for a HybridConnection by name.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "hybridConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the hybrid connection."
+		    "$ref": "#/parameters/hybridConnectionNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1101,32 +906,16 @@
         "description": "Primary and Secondary ConnectionStrings to the HybridConnection.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "hybridConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the hybrid connection."
+		    "$ref": "#/parameters/hybridConnectionNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorizationRule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1151,7 +940,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/HybridConnection/{hybridConnectionName}/authorizationRules/{authorizationRuleName}/regenerateKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/HybridConnections/{hybridConnectionName}/authorizationRules/{authorizationRuleName}/regenerateKeys": {
       "post": {
         "tags": [
           "HybridConnections"
@@ -1163,32 +952,16 @@
         "description": "Regenerates the Primary or Secondary ConnectionStrings to the HybridConnection",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "hybridConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the hybrid connection."
+		    "$ref": "#/parameters/hybridConnectionNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorizationRule name"
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -1221,8 +994,51 @@
           }
         }
       }
+    },    
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/WcfRelays": {
+      "get": {
+        "tags": [
+          "WCFRelays"
+        ],
+        "operationId": "WCFRelays_ListAll",
+        "x-ms-examples": {
+          "RelayListAll": { "$ref": "../examples/Relay/RelayListAll.json" }
+        },
+        "description": "Lists the WCFRelays within the namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "WCF Relays returned successfully",
+            "schema": {
+              "$ref": "#/definitions/WcfRelaysListResult"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/WcfRelays/{relayName}": {
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/WcfRelays/{relayName}": {
       "put": {
         "tags": [
           "WCFRelays"
@@ -1234,25 +1050,13 @@
         "description": "Creates or Updates a WCFRelays. This operation is idempotent.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "relayName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the relay."
+            "$ref": "#/parameters/relayNameParameter"
           },
           {
             "name": "parameters",
@@ -1296,25 +1100,13 @@
         "description": "Deletes a WCFRelays .",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "relayName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the relay."
+            "$ref": "#/parameters/relayNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1349,25 +1141,13 @@
         "description": "Returns the description for the specified WCFRelays.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "relayName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the relay."
+            "$ref": "#/parameters/relayNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1398,57 +1178,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/WcfRelays": {
-      "get": {
-        "tags": [
-          "WCFRelays"
-        ],
-        "operationId": "WCFRelays_ListAll",
-        "x-ms-examples": {
-          "RelayListAll": { "$ref": "../examples/Relay/RelayListAll.json" }
-        },
-        "description": "Lists the WCFRelays within the namespace.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "WCF Relays returned successfully",
-            "schema": {
-              "$ref": "#/definitions/WcfRelaysListResult"
-            }
-          },
-          "default": {
-            "description": "Relay error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/WcfRelays/{relayName}/authorizationRules": {
       "get": {
         "tags": [
@@ -1461,25 +1190,13 @@
         "description": "Authorization rules for a WCFRelays.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "relayName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The WCFRelays name."
+            "$ref": "#/parameters/relayNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1500,7 +1217,7 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
+    },	
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/WcfRelays/{relayName}/authorizationRules/{authorizationRuleName}": {
       "put": {
         "tags": [
@@ -1513,32 +1230,16 @@
         "description": "Creates or Updates an authorization rule for a WCFRelays",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "relayName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the relay."
+            "$ref": "#/parameters/relayNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization Rule Name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -1582,32 +1283,16 @@
         "description": "Deletes a WCFRelays authorization rule",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "relayName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the relay."
+            "$ref": "#/parameters/relayNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization Rule Name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1648,32 +1333,16 @@
         "description": "Get authorizationRule for a WCFRelays by name.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "relayName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the relay."
+            "$ref": "#/parameters/relayNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1710,32 +1379,16 @@
         "description": "Primary and Secondary ConnectionStrings to the WCFRelays.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "relayName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the relay."
+            "$ref": "#/parameters/relayNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorizationRule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1772,32 +1425,16 @@
         "description": "Regenerates the Primary or Secondary ConnectionStrings to the WCFRelays",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "relayName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the relay."
+            "$ref": "#/parameters/relayNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorizationRule name"
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -1845,6 +1482,11 @@
           "type": "string",
           "description": "Resource name"
         },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
         "location": {
           "type": "string",
           "description": "Resource location"
@@ -1860,6 +1502,7 @@
       "required": [
         "location"
       ],
+	  "description": "Definition of Resource",
       "x-ms-azure-resource": true
     },
     "HybridConnectionListResult": {
@@ -1880,10 +1523,6 @@
     },
     "HybridConnectionResource": {
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "HybridConnection Resource type"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/HybridConnectionProperties"
@@ -1914,6 +1553,8 @@
           "format": "int32",
           "type": "integer",
           "readOnly": true,
+		  "minLength": 1,
+		  "maxLength": 25,
           "description": "The number of listeners for this HybridConnection. min : 1 and max:25 supported"
         },
         "requiresClientAuthorization": {
@@ -1949,10 +1590,6 @@
     },
     "WcfRelaysResource": {
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "WcfRelays Resource type"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/WcfRelayProperties"
@@ -1976,7 +1613,7 @@
           ],
           "x-ms-enum": {
             "name": "Relaytype",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "createdAt": {
@@ -2015,7 +1652,7 @@
           "description": "usermetadata is a placeholder to store user-defined string data for the HybridConnection endpoint.e.g. it can be used to store  descriptive data, such as list of teams and their contact information also user-defined configuration settings can be stored."
         }
       },
-      "description": "Properties of the Namespace."
+      "description": "Properties of the WcfRelay Properties."
     },
     "NamespaceListResult": {
       "properties": {
@@ -2037,10 +1674,6 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku"
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -2133,10 +1766,6 @@
     },
     "SharedAccessAuthorizationRuleResource": {
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "Resource type"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
@@ -2163,7 +1792,7 @@
             ],
             "x-ms-enum": {
               "name": "AccessRights",
-              "modelAsString": false
+              "modelAsString": true
             }
           },
           "description": "The rights associated with the rule."
@@ -2210,7 +1839,7 @@
           ],
           "x-ms-enum": {
             "name": "Policykey",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -2245,6 +1874,56 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
-    }
+    },
+	"resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string", 
+      "minLength": 1, 
+      "maxLength": 90 ,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Resource group within the Azure subscription."
+    },
+	"namespaceNameParameter": {
+	  "name": "namespaceName",
+	  "in": "path",
+	  "required": true,
+	  "type": "string",
+	  "minLength": 6, 
+      "maxLength": 50,
+	  "x-ms-parameter-location": "method",
+	  "description": "The Namespace Name within the Resource Group"
+	},
+	"hybridConnectionNameParameter": {
+		"name": "hybridConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+			"minLength": 1,
+			"maxLength": 50,
+		"x-ms-parameter-location": "method",			
+            "description": "The name of the hybrid connection."
+	},
+	"authorizationRuleNameParameter": {
+		"name": "authorizationRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+			"minLength": 1,
+			"maxLength": 50,
+		"x-ms-parameter-location": "method",
+            "description": "The authorizationRule name."
+	},
+	"relayNameParameter": {
+		"name": "relayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+			"minLength": 1,
+			"maxLength": 50,
+		"x-ms-parameter-location": "method",
+            "description": "The name of the relay."
+	}
   }
 }
