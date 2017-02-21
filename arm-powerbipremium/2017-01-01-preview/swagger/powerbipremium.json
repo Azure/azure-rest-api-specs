@@ -1,0 +1,445 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-01-01-preview",
+    "title": "PowerBIPremium",
+    "description": "The Power BI Premium Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete Power BI Premium capacities",
+    "x-ms-code-generation-settings": {
+      "name": "PowerBIPremiumManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [ "https" ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBIPremium/capacities/{dedicatedCapacityName}": {
+      "get": {
+        "description": "Gets details about the specified Power BI Premium capacity.",
+        "tags": [ "Capacities" ],
+        "operationId": "Capacities_GetDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dedicatedCapacityName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the Power BI Premium capacity. It must be a minimum of 3 characters, and a maximum of 63."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": { "$ref": "#/definitions/PowerBIPremiumCapacity" }
+          }
+        }
+      },
+      "put": {
+        "description": "Provisions the specified Power BI Premium capacity based on the configuration specified in the request.",
+        "tags": [ "Capacities" ],
+        "operationId": "Capacities_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dedicatedCapacityName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the Power BI Premium capacity. It must be a minimum of 3 characters, and a maximum of 63."
+          },
+          {
+            "name": "capacityParameters",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/PowerBIPremiumCapacity" },
+            "description": "Contains the information used to provision the Power BI Premium capacity."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation completed successfully.",
+            "schema": { "$ref": "#/definitions/PowerBIPremiumCapacity" }
+          },
+          "201": {
+            "description": "InProgress. The operation is still completing.",
+            "schema": { "$ref": "#/definitions/PowerBIPremiumCapacity" }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "description": "Deletes the specified Power BI Premium capacity.",
+        "tags": [ "Capacities" ],
+        "operationId": "Capacities_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dedicatedCapacityName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the Power BI Premium capacity. It must be at least 3 characters in length, and no more than 63."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "202": {
+            "description": "Accepted."
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "description": "Updates the current state of the specified Power BI Premium capacity.",
+        "tags": [ "Capacities" ],
+        "operationId": "Capacities_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dedicatedCapacityName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the Power BI Premium capacity. It must be at least 3 characters in length, and no more than 63."
+          },
+          {
+            "name": "capacityUpdateParameters",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/PowerBIPremiumCapacityUpdateParameters" },
+            "description": "Request object that contains the updated information for the capacity."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/PowerBIPremiumCapacity" }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBIPremium/capacities": {
+      "get": {
+        "description": "Gets all the Power BI capacities for the given resource group.",
+        "tags": [ "Capacities" ],
+        "operationId": "Capacities_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/PowerBIPremiumCapacities" }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PowerBIPremium/capacities": {
+      "get": {
+        "description": "Lists all the Power BI Premium capacities for the given subscription.",
+        "tags": [ "Capacities" ],
+        "operationId": "Capacities_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/PowerBIPremiumCapacities" }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "Represents an instance of an Power BI Premium resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "An identifier that represents the Power BI Premium resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the Power BI Premium resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the Power BI Premium resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the Power BI Premium resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The SKU of the Power BI Premium resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "Key-value pairs of additional resource provisioning properties."
+        }
+      },
+      "required": [
+        "location",
+        "sku"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "PowerBIPremiumCapacity": {
+      "description": "Represents an instance of an Power BI Premium resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PowerBIPremiumCapacityProperties",
+          "description": "Properties of the provision operation request."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "PowerBIPremiumCapacities": {
+      "description": "An array of Power BI Premium resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/PowerBIPremiumCapacity" },
+          "description": "An array of Power BI Premium resources."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PowerBIPremiumCapacityUpdateParameters": {
+      "description": "Provision request specification",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The SKU of the Power BI Premium resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "Key-value pairs of additional provisioning properties."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PowerBIPremiumCapacityMutableProperties",
+          "description": "Properties of the provision operation request."
+        }
+      }
+    },
+    "PowerBIPremiumCapacityProperties": {
+      "description": "Properties of Power BI Premium resource.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+           "enum": [
+            "Succeeded",
+            "Failed",
+            "Provisioning",
+            "Preparing"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current deployment state of the Power BI Premium resource. The provisioningState is to indicate state in resource provisioning."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PowerBIPremiumCapacityMutableProperties"
+        }
+      ]
+    },
+    "ResourceSku": {
+      "description": "Represents the SKU name and Azure pricing tier for Power BI Premium resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "S1",
+            "S2",
+            "S4"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          },
+          "description": "Name of the SKU level for the capacity being provisioned. Possible values are: 'S1', 'S2', and 'S4'."
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          },
+          "description": "The name of the Azure pricing tier to which the SKU applies. Possible values are: 'Standard'."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "PowerBIPremiumCapacityMutableProperties": {
+      "description": "An object that represents a set of mutable Power BI Premium resource properties.",
+      "type": "object",
+      "properties": {
+        "administration": {
+          "$ref": "#/definitions/CapacityAdministrators"
+        }
+      }
+    },
+    "CapacityAdministrators": {
+      "description": "An array of administrator user identities",
+      "type": "object",
+      "properties": {
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The UPN of the user. For example: johnsmith@contoso.com."
+          },
+          "description": "An array of administrator user identities."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "A unique identifier for a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The client API version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$", 
+      "minLength": 1, 
+      "maxLength": 90 ,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the Azure Resource group of which a given Power BI Premium capacity is part. This name must be at least 1 character in length, and no more than 90."
+    }
+  }
+}
