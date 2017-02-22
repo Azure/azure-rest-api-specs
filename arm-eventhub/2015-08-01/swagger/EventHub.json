@@ -1,4 +1,4 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
     "title": "EventHubManagementClient",
@@ -149,6 +149,9 @@
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
             }
+          },
+          "202": {
+            "description": "Namespace create or update request accepted."
           }
         },
         "x-ms-long-running-operation": true
@@ -1317,6 +1320,7 @@
       "required": [
         "location"
       ],
+      "description": "The Resource definition.",
       "x-ms-azure-resource": true
     },
     "NamespaceCreateOrUpdateParameters": {
@@ -1384,29 +1388,6 @@
           "type": "string",
           "description": "Provisioning state of the namespace."
         },
-        "status": {
-          "type": "string",
-          "description": "State of the namespace.",
-          "enum": [
-            "Unknown",
-            "Creating",
-            "Created",
-            "Activating",
-            "Enabling",
-            "Active",
-            "Disabling",
-            "Disabled",
-            "SoftDeleting",
-            "SoftDeleted",
-            "Removing",
-            "Removed",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "NamespaceState",
-            "modelAsString": false
-          }
-        },
         "createdAt": {
           "type": "string",
           "format": "date-time",
@@ -1423,14 +1404,6 @@
           },
           "type": "string",
           "description": "Endpoint you can use to perform Service Bus operations."
-        },
-        "createACSNamespace": {
-          "type": "boolean",
-          "description": "Indicates whether to create an ACS namespace."
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "Specifies whether this instance is enabled."
         }
       },
       "description": "Properties of the namespace."
@@ -1443,8 +1416,7 @@
           "description": "Name of this SKU.",
           "enum": [
             "Basic",
-            "Standard",
-            "Premium"
+            "Standard"
           ],
           "x-ms-enum": {
             "name": "SkuName",
@@ -1550,22 +1522,27 @@
       "properties": {
         "primaryConnectionString": {
           "type": "string",
+          "readOnly": true,
           "description": "Primary connection string of the created namespace authorization rule."
         },
         "secondaryConnectionString": {
           "type": "string",
+          "readOnly": true,
           "description": "Secondary connection string of the created namespace authorization rule."
         },
         "primaryKey": {
           "type": "string",
+          "readOnly": true,
           "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
         },
         "secondaryKey": {
           "type": "string",
+          "readOnly": true,
           "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
         },
         "keyName": {
           "type": "string",
+          "readOnly": true,
           "description": "A string that describes the authorization rule."
         }
       },
@@ -1617,6 +1594,7 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "Exact time the Event Hub was created."
         },
         "messageRetentionInDays": {
@@ -1631,6 +1609,7 @@
         },
         "partitionIds": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "type": "string"
           },
@@ -1657,10 +1636,12 @@
         },
         "updatedAt": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "The exact time the message was updated."
         }
-      }
+      },
+      "description": "Description of a EventHub Properties."
     },
     "EventHubResource": {
       "properties": {
@@ -1721,22 +1702,26 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "Exact time the message was created."
         },
         "eventHubPath": {
           "type": "string",
+          "readOnly": true,
           "description": "The path of the Event Hub."
         },
         "updatedAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The exact time the message was updated."
         },
         "userMetadata": {
           "type": "string",
           "description": "The user metadata."
         }
-      }
+      },
+      "description": "Description of a Consumer Group properties."
     },
     "ConsumerGroupResource": {
       "properties": {
