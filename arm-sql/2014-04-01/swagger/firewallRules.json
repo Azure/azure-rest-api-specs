@@ -80,6 +80,9 @@
         ],
         "operationId": "Servers_DeleteFirewallRule",
         "description": "Deletes an Azure SQL server firewall rule.",
+        "x-ms-examples": {
+          "Delete a firewall rule": { "$ref": "../examples/FirewallRuleDelete.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -116,6 +119,9 @@
         ],
         "operationId": "Servers_GetFirewallRule",
         "description": "Returns an Azure SQL server firewall rule.",
+        "x-ms-examples": {
+          "Get Firewall Rule": { "$ref": "../examples/FirewallRuleGet.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -154,6 +160,9 @@
         ],
         "operationId": "Servers_ListFirewallRules",
         "description": "Returns a list of Azure SQL server firewall rules.",
+        "x-ms-examples": {
+          "List Firewall Rules": { "$ref": "../examples/FirewallRuleList.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -183,6 +192,21 @@
     }
   },
   "definitions": {
+    "AsyncOperationResponse": {
+      "properties": {
+        "operation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of operation that was initiated."
+        },
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Time the operation was initiated, in JSON epoch time format."
+        }
+      },
+      "description": "Represents an async operation response."
+    },
     "ServerFirewallRuleProperties": {
       "properties": {
         "startIpAddress": {
@@ -206,6 +230,11 @@
         "location": {
           "type": "string",
           "description": "Location of the server that contains this firewall rule.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of resource this is.",
           "readOnly": true
         },
         "properties": {

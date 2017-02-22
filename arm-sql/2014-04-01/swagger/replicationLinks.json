@@ -251,8 +251,33 @@
     }
   },
   "definitions": {
+    "AsyncOperationResponse": {
+      "properties": {
+        "operation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of operation that was initiated."
+        },
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Time the operation was initiated, in JSON epoch time format."
+        }
+      },
+      "description": "Represents an async operation response."
+    },
     "ReplicationLinkProperties": {
       "properties": {
+        "isTerminationAllowed": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Legacy value indicating whether termination is allowed.  Currently always returns true."
+        },
+        "replicationMode": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Replication mode of this replication link."
+        },
         "partnerServer": {
           "readOnly": true,
           "type": "string",
@@ -302,7 +327,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The start time for the replication link (ISO8601 format)."
+          "description": "The start time for the replication link."
         },
         "percentComplete": {
           "readOnly": true,
@@ -330,6 +355,16 @@
     },
     "ReplicationLink": {
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location of the server that contains this firewall rule.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of resource this is.",
+          "readOnly": true
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReplicationLinkProperties",

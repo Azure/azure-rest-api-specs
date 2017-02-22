@@ -196,10 +196,7 @@
             }
           },
           "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/Database"
-            }
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -644,10 +641,7 @@
             }
           },
           "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/ElasticPool"
-            }
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1431,6 +1425,21 @@
     }
   },
   "definitions": {
+    "AsyncOperationResponse": {
+      "properties": {
+        "operation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of operation that was initiated."
+        },
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Time the operation was initiated, in JSON epoch time format."
+        }
+      },
+      "description": "Represents an async operation response."
+    },
     "RecommendedElasticPoolMetric": {
       "properties": {
         "dateTime": {
@@ -1660,6 +1669,10 @@
           "$ref": "#/definitions/ElasticPoolProperties",
           "description": "The properties representing the resource.",
           "x-ms-client-flatten": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of elastic pool.  This is metadata used for the Azure portal experience."
         }
       },
       "allOf": [
@@ -1772,6 +1785,30 @@
           "readOnly": true,
           "type": "string",
           "description": "The current state of the operation."
+        },
+        "requestedStorageLimitInMB": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The requested storage limit in MB."
+        },
+        "requestedDatabaseDtuGuarantee": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The requested per Database DTU guarantee."
+        },
+        "requestedDatabaseDtuCap": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The requested per Database DTU cap."
+        },
+        "requestedDtuGuarantee": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The requested DTU guarantee."
         }
       },
       "description": "Represents the properties of an Azure SQL Elastic Pool."
@@ -1940,12 +1977,36 @@
         "administratorLoginPassword": {
           "type": "string",
           "description": "The administrator login password (required for server creation)."
+        },
+        "externalAdministratorSid": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "The ID of the Active Azure Directory object with admin permissions on this server.  Legacy parameter, always null.  To check for Active Directory admin, query .../servers/{serverName}/administrators."
+        },
+        "externalAdministratorLogin": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The display name of the Azure Active Directory object with admin permissions on this server.  Legacy parameter, always null.  To check for Active Directory admin, query .../servers/{serverName}/administrators"
+        },
+        "state": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The state of the server.",
+          "enum": ["Ready", "Disabled"],
+          "x-ms-enum": {
+              "name": "ServerState"
+          }
         }
       },
       "description": "Represents the properties of an Azure SQL server."
     },
     "Server": {
       "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Kind of sql server.  This is metadata used for the Azure portal experience."
+        },
         "properties": {
           "$ref": "#/definitions/ServerProperties",
           "description": "Represents the properties of the resource.",
@@ -2210,7 +2271,13 @@
             "789681b8-ca10-4eb0-bdf2-e0b050601b40",
             "7203483a-c4fb-4304-9e9f-17c71c904f5d",
             "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
-            "a7c4c615-cfb1-464b-b252-925be0a19446"
+            "a7c4c615-cfb1-464b-b252-925be0a19446",
+            "26e021db-f1f9-4c98-84c6-92af8ef433d7",
+            "29dd7459-4a7c-4e56-be22-f0adda49440d",
+            "c99ac918-dbea-463f-a475-16ec020fdc12",
+            "620323bf-2879-4807-b30d-c2e6d7b3b3aa",
+            "33d0db1f-6893-4210-99f9-463fb9b496a4",
+            "da24338c-a6c9-46c2-a4bf-4ac95b496ae4"
             ],
           "description": "The current Service Level Objective ID of the Azure SQL database. This is the ID of the Service Level Objective that is currently active.",
           "x-ms-enum": {
@@ -2261,7 +2328,8 @@
             "Premium",
             "Free",
             "Stretch",
-            "DataWarehouse"
+            "DataWarehouse",
+            "System"
           ],
           "x-ms-enum": {
             "name": "DatabaseEditions",
@@ -2283,7 +2351,13 @@
             "789681b8-ca10-4eb0-bdf2-e0b050601b40",
             "7203483a-c4fb-4304-9e9f-17c71c904f5d",
             "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
-            "a7c4c615-cfb1-464b-b252-925be0a19446"
+            "a7c4c615-cfb1-464b-b252-925be0a19446",
+            "26e021db-f1f9-4c98-84c6-92af8ef433d7",
+            "29dd7459-4a7c-4e56-be22-f0adda49440d",
+            "c99ac918-dbea-463f-a475-16ec020fdc12",
+            "620323bf-2879-4807-b30d-c2e6d7b3b3aa",
+            "33d0db1f-6893-4210-99f9-463fb9b496a4",
+            "da24338c-a6c9-46c2-a4bf-4ac95b496ae4"
             ],
           "description": "The configured Service Level Objective ID of the Azure SQL database. This is the Service Level Objective that is in the process of being applied to the Azure SQL database. Once successfully updated, it will match the value of currentServiceObjectiveId property.",
           "x-ms-enum": {
@@ -2301,7 +2375,16 @@
             "S3",
             "P1",
             "P2",
-            "P3"
+            "P3",
+            "P4",
+            "P6",
+            "P11",
+            "P15",
+            "System",
+            "System1",
+            "System2",
+            "System3",
+            "System4"
             ],
           "x-ms-enum": {
             "modelAsString": true,
@@ -2320,7 +2403,16 @@
             "S3",
             "P1",
             "P2",
-            "P3"
+            "P3",
+            "P4",
+            "P6",
+            "P11",
+            "P15",
+            "System",
+            "System1",
+            "System2",
+            "System3",
+            "System4"
             ],
           "x-ms-enum": {
             "modelAsString": true,
@@ -2378,12 +2470,37 @@
             "$ref": "#/definitions/RecommendedIndex"
           },
           "description": "The recommended indices for this database."
+        },
+        "failoverGroupId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "The id indicating the failover group containing this database."
+        },
+        "readScale": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+            ],
+          "description": "Conditional.  If the database is a geo-secondary, readScale indicates whether read-only connections are allowed to this database or not.",
+          "x-ms-enum": {
+            "name": "ReadScale"
+          }
+        },
+        "sampleName": {
+          "type": "string",
+          "description": "Indicates the name of the sample schema that was applied to this database."
         }
       },
       "description": "Represents the properties of an Azure SQL Database."
     },
     "Database": {
       "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Kind of database.  This is metadata used for the Azure portal experience."
+        },
         "properties": {
           "$ref": "#/definitions/DatabaseProperties",
           "description": "The properties representing the resource.",
@@ -2555,7 +2672,16 @@
             "S3",
             "P1",
             "P2",
-            "P3"
+            "P3",
+            "P4",
+            "P6",
+            "P11",
+            "P15",
+            "System",
+            "System1",
+            "System2",
+            "System3",
+            "System4"
             ],
             "x-ms-enum": {
             "modelAsString": true,
@@ -2574,7 +2700,13 @@
             "789681b8-ca10-4eb0-bdf2-e0b050601b40",
             "7203483a-c4fb-4304-9e9f-17c71c904f5d",
             "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
-            "a7c4c615-cfb1-464b-b252-925be0a19446"
+            "a7c4c615-cfb1-464b-b252-925be0a19446",
+            "26e021db-f1f9-4c98-84c6-92af8ef433d7",
+            "29dd7459-4a7c-4e56-be22-f0adda49440d",
+            "c99ac918-dbea-463f-a475-16ec020fdc12",
+            "620323bf-2879-4807-b30d-c2e6d7b3b3aa",
+            "33d0db1f-6893-4210-99f9-463fb9b496a4",
+            "da24338c-a6c9-46c2-a4bf-4ac95b496ae4"
             ],
             "x-ms-enum": {
             "modelAsString": true,
@@ -2824,7 +2956,12 @@
           "description": "The next reset time for the metric (ISO8601 format)."
         }
       },
-      "description": "Represents Azure SQL Database metrics."
+      "description": "Represents Azure SQL Database metrics.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlSubResource"
+        }
+      ]
     },
     "DatabaseMetricListResult": {
       "properties": {
@@ -2841,6 +2978,11 @@
     },
     "ServerMetric": {
       "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the server usage metric."
+        },
         "resourceName": {
           "readOnly": true,
           "type": "string",
