@@ -2502,7 +2502,15 @@
         },
         "sampleName": {
           "type": "string",
-          "description": "Indicates the name of the sample schema that was applied to this database."
+          "enum": [
+            "AdventureWorksLT"
+            ],
+          "description": "Indicates the name of the sample schema to apply when creating this database. If createMode is not Default, this value is ignored.",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SampleName"
+          },
+          "x-ms-mutability": [ "create", "read" ]
         }
       },
       "description": "Represents the properties of an Azure SQL Database."
