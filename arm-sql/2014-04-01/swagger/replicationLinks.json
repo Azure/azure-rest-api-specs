@@ -248,6 +248,28 @@
           "nextLinkName": null
         }
       }
+    },
+    "/providers/Microsoft.Sql/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available SQL Rest API operations.",
+        "operationId": "ListOperations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -387,6 +409,49 @@
           "readOnly": true,
           "type": "string",
           "description": "The resource ID."
+        }
+      }
+    },
+    "OperationListResult": {
+     "description": "Result of the request to list SQL operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of SQL operations supported by the SQL resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "SQL REST API operation definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display metadata associated with the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft SQL Database.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Server, Database, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Type of operation: get, read, delete, etc.",
+              "type": "string"
+            }
+          }
         }
       }
     }
