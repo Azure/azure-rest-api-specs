@@ -196,13 +196,14 @@
       "properties": {
         "startIpAddress": {
           "type": "string",
-          "description": "The start IP address of the Azure SQL server firewall rule. Must be IPv4 format."
+          "description": "The start IP address of the Azure SQL server firewall rule. Must be IPv4 format. Use value '0.0.0.0' to represent all Azure-internal IP addresses."
         },
         "endIpAddress": {
           "type": "string",
-          "description": "The end IP address of the Azure SQL server firewall rule. Must be IPv4 format."
+          "description": "The end IP address of the Azure SQL server firewall rule. Must be IPv4 format. Must be greater than or equal to startIpAddress. Use value '0.0.0.0' to represent all Azure-internal IP addresses."
         }
       },
+      "required": ["startIpAddress", "endIpAddress"],
       "description": "Represents the properties of an Azure SQL server firewall rule."
     },
     "ServerFirewallRule": {
