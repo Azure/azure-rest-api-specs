@@ -1566,36 +1566,6 @@
       "required": ["value"],
       "description": "Represents the response to a List Azure SQL Recommended Elastic Pool metrics request."
     },
-    "RecommendedDatabaseProperties": {
-      "properties": {
-        "Name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the Azure SQL database being upgraded."
-        },
-        "TargetEdition": {
-          "type": "string",
-          "description": "The target edition for the Azure SQL database being upgraded.",
-          "enum": [
-              "Basic",
-              "Standard",
-              "Premium",
-              "Free",
-              "Stretch",
-              "DataWarehouse"
-          ],
-          "x-ms-enum": {
-              "name": "TargetDatabaseEditions",
-              "modelAsString": true
-          }
-        },
-        "TargetServiceLevelObjective": {
-          "type": "string",
-          "description": "The target Service Level Objective for the Azure SQL database being upgraded."
-        }
-      },
-      "description": "Represents the properties of a recommended Azure SQL Database being upgraded."
-    },
     "ElasticPoolProperties": {
       "properties": {
         "creationDate": {
@@ -2441,11 +2411,6 @@
             "$ref": "#/definitions/ServiceTierAdvisor"
           },
           "description": "The list of service tier advisors for this database. Expanded property"
-        },
-        "upgradeHint": {
-          "$ref": "#/definitions/UpgradeHint",
-          "readOnly": true,
-          "description": "The upgrade hint for this database."
         },
         "schemas": {
           "readOnly": true,
