@@ -2584,6 +2584,12 @@
             "schema": {
               "$ref": "#/definitions/IntegrationAccountSession"
             }
+          },
+          "404": {
+            "description": "Session not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -6666,8 +6672,8 @@
           "description": "The changed time."
         },
         "content": {
-          "type": "string",
-          "description": "The session content, a raw string of JToken."
+          "$ref": "#/definitions/Object",
+          "description": "The session content."
         }
       },
       "description": "The integration account session properties."
