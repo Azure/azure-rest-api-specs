@@ -1426,21 +1426,6 @@
     }
   },
   "definitions": {
-    "AsyncOperationResponse": {
-      "properties": {
-        "operation": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of operation that was initiated."
-        },
-        "startTime": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Time the operation was initiated, in JSON epoch time format."
-        }
-      },
-      "description": "Represents an async operation response."
-    },
     "RecommendedElasticPoolMetric": {
       "properties": {
         "dateTime": {
@@ -1584,6 +1569,7 @@
     "RecommendedDatabaseProperties": {
       "properties": {
         "Name": {
+          "readOnly": true,
           "type": "string",
           "description": "The name of the Azure SQL database being upgraded."
         },
@@ -1672,6 +1658,7 @@
           "x-ms-client-flatten": true
         },
         "kind": {
+          "readOnly": true,
           "type": "string",
           "description": "Kind of elastic pool.  This is metadata used for the Azure portal experience."
         }
@@ -2007,6 +1994,7 @@
     "Server": {
       "properties": {
         "kind": {
+          "readOnly": true,
           "type": "string",
           "description": "Kind of sql server.  This is metadata used for the Azure portal experience."
         },
@@ -2039,6 +2027,7 @@
     "UpgradeRecommendedElasticPoolProperties": {
       "properties": {
         "Name": {
+          "readOnly": true,
           "type": "string",
           "description": "The name of the Azure SQL Recommended Elastic Pool being upgraded."
         },
@@ -2518,6 +2507,7 @@
     "Database": {
       "properties": {
         "kind": {
+          "readOnly": true,
           "type": "string",
           "description": "Kind of database.  This is metadata used for the Azure portal experience."
         },
