@@ -1973,22 +1973,24 @@
         },
         "administratorLogin": {
           "type": "string",
-          "description": "Administrator username for the server. Can only be specified when the server is being created (and is required for creation)."
+          "description": "Administrator username for the server. Can only be specified when the server is being created (and is required for creation).",
+          "x-ms-mutability": [ "create", "read" ]
         },
         "administratorLoginPassword": {
           "type": "string",
-          "description": "The administrator login password (required for server creation)."
+          "description": "The administrator login password (required for server creation).",
+          "x-ms-mutability": [ "create", "update" ]
         },
         "externalAdministratorSid": {
           "readOnly": true,
           "type": "string",
           "format": "uuid",
-          "description": "The ID of the Active Azure Directory object with admin permissions on this server.  Legacy parameter, always null.  To check for Active Directory admin, query .../servers/{serverName}/administrators."
+          "description": "The ID of the Active Azure Directory object with admin permissions on this server. Legacy parameter, always null. To check for Active Directory admin, query .../servers/{serverName}/administrators."
         },
         "externalAdministratorLogin": {
           "readOnly": true,
           "type": "string",
-          "description": "The display name of the Azure Active Directory object with admin permissions on this server.  Legacy parameter, always null.  To check for Active Directory admin, query .../servers/{serverName}/administrators"
+          "description": "The display name of the Azure Active Directory object with admin permissions on this server. Legacy parameter, always null. To check for Active Directory admin, query .../servers/{serverName}/administrators"
         },
         "state": {
           "readOnly": true,
@@ -2246,7 +2248,8 @@
       "properties": {
         "collation": {
           "type": "string",
-          "description": "The collation of the Azure SQL database."
+          "description": "The collation of the Azure SQL database.",
+          "x-ms-mutability": ["create", "read"]
         },
         "creationDate": {
           "readOnly": true,
@@ -2312,16 +2315,19 @@
           "x-ms-enum": {
             "name": "createMode",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [ "create" ]
         },
         "sourceDatabaseId": {
           "type": "string",
-          "description": "Conditional, write-only. If createMode is not set to Default, then this value must be specified. Specifies the resource ID of the source database. If createMode is NonReadableSecondary or  OnlineSecondary, the name of the source database must be the same as this new database. Collation, Edition, and MaxSizeBytes must remain the same while the link is active. Values specified for these parameters will be ignored."
+          "description": "Conditional. If createMode is not set to Default, then this value must be specified. Specifies the resource ID of the source database. If createMode is NonReadableSecondary or OnlineSecondary, the name of the source database must be the same as this new database. Collation, Edition, and MaxSizeBytes must remain the same while the link is active. Values specified for these parameters will be ignored.",
+          "x-ms-mutability": [ "create" ]
         },
         "restorePointInTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Conditional, write-only. If createMode is set to PointInTimeRestore, then this value must be specified. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database. Must be greater than or equal to the source database's earliestRestoreDate value. "
+          "description": "Conditional. If createMode is set to PointInTimeRestore, then this value must be specified. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database. Must be greater than or equal to the source database's earliestRestoreDate value.",
+          "x-ms-mutability": [ "create" ]
         },
         "edition": {
           "type": "string",
