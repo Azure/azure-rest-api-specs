@@ -42,7 +42,7 @@
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Namespaces_ListBySubscription",
+        "operationId": "Namespaces_List",
         "x-ms-examples": {
           "RelayNameSpaceListBySubscription": { "$ref": "../examples/NameSpaces/RelayNameSpaceListBySubscription.json" }
         },
@@ -74,7 +74,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces": {
       "get": {
         "tags": [
           "Namespaces"
@@ -114,7 +114,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}": {
       "put": {
         "tags": [
           "Namespaces"
@@ -129,9 +129,9 @@
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
-		  {
+          {
             "$ref": "#/parameters/namespaceNameParameter"
-          },          
+          },
           {
             "name": "parameters",
             "in": "body",
@@ -527,13 +527,13 @@
           }
         }
       }
-    },    
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/HybridConnections": {
       "get": {
         "tags": [
           "HybridConnections"
         ],
-        "operationId": "HybridConnections_ListAll",
+        "operationId": "HybridConnections_ListByNamespace",
         "x-ms-examples": {
           "RelayHybridConnectionListAll": { "$ref": "../examples/HybridConnection/RelayHybridConnectionListAll.json" }
         },
@@ -571,7 +571,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/HybridConnections/{hybridConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/HybridConnections/{hybridConnectionName}": {
       "put": {
         "tags": [
           "HybridConnections"
@@ -816,7 +816,7 @@
             "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-		    "$ref": "#/parameters/hybridConnectionNameParameter"
+            "$ref": "#/parameters/hybridConnectionNameParameter"
           },
           {
             "$ref": "#/parameters/authorizationRuleNameParameter"
@@ -866,7 +866,7 @@
             "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-		    "$ref": "#/parameters/hybridConnectionNameParameter"
+            "$ref": "#/parameters/hybridConnectionNameParameter"
           },
           {
             "$ref": "#/parameters/authorizationRuleNameParameter"
@@ -912,7 +912,7 @@
             "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-		    "$ref": "#/parameters/hybridConnectionNameParameter"
+            "$ref": "#/parameters/hybridConnectionNameParameter"
           },
           {
             "$ref": "#/parameters/authorizationRuleNameParameter"
@@ -958,7 +958,7 @@
             "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-		    "$ref": "#/parameters/hybridConnectionNameParameter"
+            "$ref": "#/parameters/hybridConnectionNameParameter"
           },
           {
             "$ref": "#/parameters/authorizationRuleNameParameter"
@@ -994,13 +994,13 @@
           }
         }
       }
-    },    
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/WcfRelays": {
       "get": {
         "tags": [
           "WCFRelays"
         ],
-        "operationId": "WCFRelays_ListAll",
+        "operationId": "WCFRelays_ListByNamespace",
         "x-ms-examples": {
           "RelayListAll": { "$ref": "../examples/Relay/RelayListAll.json" }
         },
@@ -1038,7 +1038,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/WcfRelays/{relayName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/WcfRelays/{relayName}": {
       "put": {
         "tags": [
           "WCFRelays"
@@ -1217,7 +1217,7 @@
           "nextLinkName": "nextLink"
         }
       }
-    },	
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/WcfRelays/{relayName}/authorizationRules/{authorizationRuleName}": {
       "put": {
         "tags": [
@@ -1502,7 +1502,7 @@
       "required": [
         "location"
       ],
-	  "description": "Definition of Resource",
+      "description": "Definition of Resource",
       "x-ms-azure-resource": true
     },
     "HybridConnectionListResult": {
@@ -1553,8 +1553,8 @@
           "format": "int32",
           "type": "integer",
           "readOnly": true,
-		  "minLength": 1,
-		  "maxLength": 25,
+          "minLength": 1,
+          "maxLength": 25,
           "description": "The number of listeners for this HybridConnection. min : 1 and max:25 supported"
         },
         "requiresClientAuthorization": {
@@ -1875,55 +1875,55 @@
       "type": "string",
       "description": "Client Api Version."
     },
-	"resourceGroupNameParameter": {
+    "resourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
-      "type": "string", 
-      "minLength": 1, 
-      "maxLength": 90 ,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 90,
       "x-ms-parameter-location": "method",
       "description": "Name of the Resource group within the Azure subscription."
     },
-	"namespaceNameParameter": {
-	  "name": "namespaceName",
-	  "in": "path",
-	  "required": true,
-	  "type": "string",
-	  "minLength": 6, 
+    "namespaceNameParameter": {
+      "name": "namespaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 6,
       "maxLength": 50,
-	  "x-ms-parameter-location": "method",
-	  "description": "The Namespace Name within the Resource Group"
-	},
-	"hybridConnectionNameParameter": {
-		"name": "hybridConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-			"minLength": 1,
-			"maxLength": 50,
-		"x-ms-parameter-location": "method",			
-            "description": "The name of the hybrid connection."
-	},
-	"authorizationRuleNameParameter": {
-		"name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-			"minLength": 1,
-			"maxLength": 50,
-		"x-ms-parameter-location": "method",
-            "description": "The authorizationRule name."
-	},
-	"relayNameParameter": {
-		"name": "relayName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-			"minLength": 1,
-			"maxLength": 50,
-		"x-ms-parameter-location": "method",
-            "description": "The name of the relay."
-	}
+      "x-ms-parameter-location": "method",
+      "description": "The Namespace Name within the Resource Group"
+    },
+    "hybridConnectionNameParameter": {
+      "name": "hybridConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the hybrid connection."
+    },
+    "authorizationRuleNameParameter": {
+      "name": "authorizationRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The authorizationRule name."
+    },
+    "relayNameParameter": {
+      "name": "relayName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the relay."
+    }
   }
 }
